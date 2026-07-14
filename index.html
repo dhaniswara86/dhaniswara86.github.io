@@ -10,12 +10,53 @@
 
   <meta
     name="description"
-    content="Pusat materi pembelajaran perpajakan, Coretax, buku digital, formulir, dan template perpajakan."
+    content="Learning Coretax with Angga Sukma Dhaniswara menyediakan materi perpajakan, buku digital, formulir, template, dan panduan Coretax."
   >
 
-  <title>Learning Tax with Angga Sukma Dhaniswara</title>
+  <meta
+    name="keywords"
+    content="pajak, Coretax, buku pajak, formulir pajak, template pajak, PPh, PPN, SP2DK"
+  >
+
+  <meta name="author" content="Angga Sukma Dhaniswara">
+
+  <meta
+    property="og:title"
+    content="Learning Coretax with Angga Sukma Dhaniswara"
+  >
+
+  <meta
+    property="og:description"
+    content="Pusat materi pembelajaran perpajakan, Coretax, buku digital, formulir, dan template."
+  >
+
+  <meta property="og:type" content="website">
+
+  <meta
+    property="og:url"
+    content="https://dhaniswara86.github.io"
+  >
+
+  <title>
+    Learning Coretax with Angga Sukma Dhaniswara
+  </title>
 
   <style>
+    :root {
+      --navy: #071c35;
+      --navy-light: #0d315c;
+      --blue: #1469b8;
+      --blue-light: #eaf4ff;
+      --sky: #44a4e8;
+      --white: #ffffff;
+      --background: #f5f8fc;
+      --text: #15253d;
+      --text-light: #607089;
+      --border: #dce5ef;
+      --success: #14804a;
+      --shadow: 0 18px 45px rgba(7, 28, 53, 0.09);
+    }
+
     * {
       box-sizing: border-box;
     }
@@ -26,22 +67,74 @@
 
     body {
       margin: 0;
-      background: #f4f7fb;
-      color: #172b4d;
-      font-family: Arial, Helvetica, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      font-family:
+        Inter,
+        Arial,
+        Helvetica,
+        sans-serif;
       line-height: 1.6;
     }
 
-    header {
-      background: #0b2345;
-      color: white;
-      padding: 18px 24px;
+    img {
+      display: block;
+      max-width: 100%;
     }
 
-    .navigation {
-      width: 100%;
-      max-width: 1100px;
+    a {
+      color: inherit;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 40px));
       margin: 0 auto;
+    }
+
+    .section {
+      padding: 80px 0;
+    }
+
+    .section-heading {
+      max-width: 720px;
+      margin: 0 auto 44px;
+      text-align: center;
+    }
+
+    .section-label {
+      display: inline-block;
+      margin-bottom: 12px;
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+    }
+
+    .section-heading h2 {
+      margin: 0 0 14px;
+      color: var(--navy);
+      font-size: clamp(30px, 5vw, 44px);
+      line-height: 1.15;
+    }
+
+    .section-heading p {
+      margin: 0;
+      color: var(--text-light);
+      font-size: 17px;
+    }
+
+    header {
+      position: sticky;
+      z-index: 1000;
+      top: 0;
+      border-bottom: 1px solid rgba(220, 229, 239, 0.8);
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(14px);
+    }
+
+    .navbar {
+      min-height: 74px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -49,174 +142,828 @@
     }
 
     .brand {
-      margin: 0;
-      font-size: 20px;
-      font-weight: 700;
-    }
-
-    nav a {
-      margin-left: 20px;
-      color: white;
-      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--navy);
       text-decoration: none;
     }
 
-    nav a:hover {
-      text-decoration: underline;
-    }
-
-    .hero {
-      padding: 90px 24px;
+    .brand-logo {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      flex-shrink: 0;
+      place-items: center;
+      border-radius: 50%;
       background:
         linear-gradient(
           135deg,
-          #0b2345 0%,
-          #174d85 60%,
-          #2274a5 100%
+          var(--navy-light),
+          var(--blue),
+          var(--sky)
         );
-      color: white;
-      text-align: center;
+      color: var(--white);
+      font-size: 17px;
+      font-weight: 800;
+      box-shadow: 0 8px 20px rgba(20, 105, 184, 0.25);
     }
 
-    .hero-content {
-      width: 100%;
-      max-width: 850px;
-      margin: 0 auto;
+    .brand-text strong {
+      display: block;
+      font-size: 17px;
+      line-height: 1.2;
     }
 
-    .label {
-      display: inline-block;
-      margin-bottom: 20px;
-      padding: 8px 16px;
-      border: 1px solid rgba(255, 255, 255, 0.45);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.12);
+    .brand-text span {
+      display: block;
+      margin-top: 3px;
+      color: var(--text-light);
+      font-size: 12px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+    }
+
+    .nav-links a {
+      color: #31445f;
       font-size: 14px;
-      font-weight: 700;
-    }
-
-    h1 {
-      margin: 0 0 20px;
-      font-size: clamp(36px, 7vw, 64px);
-      line-height: 1.1;
-    }
-
-    .hero p {
-      max-width: 720px;
-      margin: 0 auto 32px;
-      color: #e7eff9;
-      font-size: 18px;
-    }
-
-    .button {
-      display: inline-block;
-      padding: 13px 24px;
-      border-radius: 10px;
-      background: white;
-      color: #0b3a6d;
       font-weight: 700;
       text-decoration: none;
     }
 
-    .button:hover {
-      background: #eef5fc;
+    .nav-links a:hover {
+      color: var(--blue);
     }
 
-    main {
-      width: 100%;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 64px 24px;
+    .menu-button {
+      display: none;
+      padding: 8px;
+      border: 0;
+      background: transparent;
+      color: var(--navy);
+      cursor: pointer;
+      font-size: 25px;
     }
 
-    .section-title {
-      margin: 0 0 10px;
-      text-align: center;
-      font-size: 32px;
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 105px 0 95px;
+      background:
+        radial-gradient(
+          circle at 85% 20%,
+          rgba(68, 164, 232, 0.34),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 10% 80%,
+          rgba(20, 105, 184, 0.24),
+          transparent 30%
+        ),
+        linear-gradient(
+          135deg,
+          #061a31 0%,
+          #0a315a 55%,
+          #126bad 100%
+        );
+      color: var(--white);
     }
 
-    .section-description {
+    .hero::before {
+      position: absolute;
+      top: -180px;
+      right: -160px;
+      width: 420px;
+      height: 420px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .hero::after {
+      position: absolute;
+      right: 90px;
+      bottom: -260px;
+      width: 540px;
+      height: 540px;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      align-items: center;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 64px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 24px;
+      padding: 8px 15px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.1);
+      color: #eef8ff;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .hero-badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #75dcac;
+      box-shadow: 0 0 0 5px rgba(117, 220, 172, 0.15);
+    }
+
+    .hero h1 {
+      max-width: 800px;
+      margin: 0 0 24px;
+      font-size: clamp(42px, 7vw, 72px);
+      letter-spacing: -2.4px;
+      line-height: 1.03;
+    }
+
+    .hero h1 span {
+      color: #8cd4ff;
+    }
+
+    .hero-description {
       max-width: 700px;
-      margin: 0 auto 38px;
-      color: #5e6c84;
-      text-align: center;
+      margin: 0 0 34px;
+      color: #d8e8f6;
+      font-size: 18px;
     }
 
-    .cards {
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 50px;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 12px 22px;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 800;
+      text-decoration: none;
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .button-primary {
+      background: var(--white);
+      color: var(--navy);
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.16);
+    }
+
+    .button-primary:hover {
+      background: #edf7ff;
+    }
+
+    .button-secondary {
+      border-color: rgba(255, 255, 255, 0.36);
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--white);
+    }
+
+    .button-secondary:hover {
+      background: rgba(255, 255, 255, 0.17);
+    }
+
+    .hero-panel {
+      padding: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.19);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.11);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.18);
+      backdrop-filter: blur(12px);
+    }
+
+    .hero-panel-title {
+      margin: 0 0 20px;
+      font-size: 18px;
+    }
+
+    .hero-stat {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 18px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .hero-stat:last-child {
+      border-bottom: 0;
+    }
+
+    .hero-stat-icon {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      flex-shrink: 0;
+      place-items: center;
+      border-radius: 13px;
+      background: rgba(255, 255, 255, 0.13);
+      font-size: 23px;
+    }
+
+    .hero-stat strong {
+      display: block;
+      margin-bottom: 2px;
+      font-size: 16px;
+    }
+
+    .hero-stat span {
+      color: #d2e4f2;
+      font-size: 13px;
+    }
+
+    .feature-strip {
+      position: relative;
+      z-index: 4;
+      margin-top: -34px;
+    }
+
+    .feature-strip-grid {
+      display: grid;
+      overflow: hidden;
+      grid-template-columns: repeat(3, 1fr);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 26px;
+      border-right: 1px solid var(--border);
+    }
+
+    .feature-item:last-child {
+      border-right: 0;
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      flex-shrink: 0;
+      place-items: center;
+      border-radius: 13px;
+      background: var(--blue-light);
+      font-size: 23px;
+    }
+
+    .feature-item strong {
+      display: block;
+      color: var(--navy);
+      font-size: 15px;
+    }
+
+    .feature-item span {
+      display: block;
+      margin-top: 2px;
+      color: var(--text-light);
+      font-size: 13px;
+    }
+
+    .category-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
+      gap: 24px;
     }
 
-    .card {
-      padding: 28px;
-      border: 1px solid #dfe5ec;
+    .category-card {
+      position: relative;
+      overflow: hidden;
+      padding: 30px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: var(--white);
+      box-shadow: 0 10px 30px rgba(7, 28, 53, 0.05);
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+    }
+
+    .category-card:hover {
+      transform: translateY(-6px);
+      border-color: #b5d9f6;
+      box-shadow: var(--shadow);
+    }
+
+    .category-card-icon {
+      width: 58px;
+      height: 58px;
+      display: grid;
+      margin-bottom: 22px;
+      place-items: center;
       border-radius: 16px;
-      background: white;
-      box-shadow: 0 8px 24px rgba(12, 45, 82, 0.06);
+      background:
+        linear-gradient(
+          135deg,
+          var(--blue-light),
+          #d7ebff
+        );
+      font-size: 29px;
     }
 
-    .card-icon {
-      margin-bottom: 18px;
-      font-size: 38px;
-    }
-
-    .card h2 {
-      margin: 0 0 12px;
-      color: #123f70;
-      font-size: 21px;
-    }
-
-    .card p {
-      margin: 0;
-      color: #5e6c84;
-    }
-
-    .notice {
-      margin-top: 48px;
-      padding: 26px;
-      border-left: 5px solid #2274a5;
-      border-radius: 10px;
-      background: #eaf3fb;
-    }
-
-    .notice h2 {
+    .category-card h3 {
       margin: 0 0 10px;
-      font-size: 20px;
+      color: var(--navy);
+      font-size: 22px;
     }
 
-    .notice p {
+    .category-card p {
+      margin: 0 0 22px;
+      color: var(--text-light);
+      font-size: 15px;
+    }
+
+    .category-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--blue);
+      font-size: 14px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .category-link:hover {
+      text-decoration: underline;
+    }
+
+    .latest-section {
+      background: var(--white);
+    }
+
+    .material-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .material-card {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: var(--white);
+      box-shadow: 0 10px 28px rgba(7, 28, 53, 0.05);
+    }
+
+    .material-cover {
+      min-height: 230px;
+      display: flex;
+      align-items: flex-end;
+      padding: 25px;
+      background:
+        radial-gradient(
+          circle at 80% 20%,
+          rgba(140, 212, 255, 0.55),
+          transparent 30%
+        ),
+        linear-gradient(
+          135deg,
+          #071c35,
+          #0d4f86,
+          #2393d1
+        );
+      color: var(--white);
+    }
+
+    .material-cover.form {
+      background:
+        radial-gradient(
+          circle at 15% 20%,
+          rgba(255, 255, 255, 0.22),
+          transparent 30%
+        ),
+        linear-gradient(
+          135deg,
+          #173451,
+          #176c86,
+          #38a2a0
+        );
+    }
+
+    .material-cover.article {
+      background:
+        radial-gradient(
+          circle at 80% 20%,
+          rgba(255, 255, 255, 0.25),
+          transparent 28%
+        ),
+        linear-gradient(
+          135deg,
+          #372255,
+          #5142a5,
+          #258ac0
+        );
+    }
+
+    .cover-label {
+      display: inline-block;
+      margin-bottom: 12px;
+      padding: 6px 11px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+
+    .material-cover h3 {
       margin: 0;
+      font-size: 25px;
+      line-height: 1.2;
     }
 
-    footer {
-      padding: 28px 24px;
-      background: #081a31;
-      color: #d9e5f2;
-      text-align: center;
+    .material-content {
+      padding: 24px;
     }
 
-    footer p {
-      margin: 5px 0;
+    .material-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: var(--blue-light);
+      color: var(--blue);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .material-content p {
+      margin: 0 0 20px;
+      color: var(--text-light);
       font-size: 14px;
     }
 
-    @media (max-width: 800px) {
-      .navigation {
-        align-items: flex-start;
-        flex-direction: column;
+    .material-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .material-link {
+      color: var(--blue);
+      font-size: 14px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .material-link:hover {
+      text-decoration: underline;
+    }
+
+    .coming-soon {
+      color: var(--text-light);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .about-grid {
+      display: grid;
+      align-items: center;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 64px;
+    }
+
+    .profile-box {
+      position: relative;
+      min-height: 410px;
+      display: grid;
+      overflow: hidden;
+      place-items: center;
+      border-radius: 26px;
+      background:
+        radial-gradient(
+          circle at 70% 20%,
+          rgba(140, 212, 255, 0.4),
+          transparent 30%
+        ),
+        linear-gradient(
+          145deg,
+          var(--navy),
+          #0b4d82
+        );
+      color: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .profile-box::before {
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .profile-initials {
+      position: relative;
+      z-index: 2;
+      width: 160px;
+      height: 160px;
+      display: grid;
+      place-items: center;
+      border: 4px solid rgba(255, 255, 255, 0.25);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.12);
+      font-size: 54px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      backdrop-filter: blur(8px);
+    }
+
+    .about-content .section-label {
+      margin-bottom: 10px;
+    }
+
+    .about-content h2 {
+      margin: 0 0 18px;
+      color: var(--navy);
+      font-size: clamp(31px, 5vw, 46px);
+      line-height: 1.15;
+    }
+
+    .about-content p {
+      margin: 0 0 18px;
+      color: var(--text-light);
+      font-size: 16px;
+    }
+
+    .about-points {
+      display: grid;
+      margin: 28px 0 30px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .about-point {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      color: #31445f;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .check {
+      width: 23px;
+      height: 23px;
+      display: grid;
+      flex-shrink: 0;
+      place-items: center;
+      border-radius: 50%;
+      background: #e3f7ed;
+      color: var(--success);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .disclaimer {
+      padding: 34px;
+      border: 1px solid #cfe2f4;
+      border-radius: 20px;
+      background:
+        linear-gradient(
+          135deg,
+          #edf7ff,
+          #f7fbff
+        );
+    }
+
+    .disclaimer h3 {
+      margin: 0 0 12px;
+      color: var(--navy);
+      font-size: 22px;
+    }
+
+    .disclaimer p {
+      margin: 0;
+      color: #50647f;
+      font-size: 14px;
+    }
+
+    .contact-section {
+      padding: 75px 0;
+      background:
+        radial-gradient(
+          circle at 80% 20%,
+          rgba(68, 164, 232, 0.25),
+          transparent 25%
+        ),
+        linear-gradient(
+          135deg,
+          #071c35,
+          #0b3d6d
+        );
+      color: var(--white);
+    }
+
+    .contact-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+    }
+
+    .contact-box h2 {
+      margin: 0 0 12px;
+      font-size: clamp(31px, 5vw, 45px);
+      line-height: 1.15;
+    }
+
+    .contact-box p {
+      max-width: 670px;
+      margin: 0;
+      color: #d6e6f3;
+    }
+
+    footer {
+      padding: 32px 0;
+      background: #041426;
+      color: #b8c9d9;
+    }
+
+    .footer-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .footer-content p {
+      margin: 0;
+      font-size: 13px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 18px;
+    }
+
+    .footer-links a {
+      color: #d5e2ed;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: var(--white);
+    }
+
+    @media (max-width: 950px) {
+      .hero-grid,
+      .about-grid {
+        grid-template-columns: 1fr;
       }
 
-      nav a {
-        margin: 0 18px 0 0;
+      .hero-panel {
+        max-width: 600px;
+      }
+
+      .category-grid,
+      .material-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .feature-strip-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .feature-item {
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .feature-item:last-child {
+        border-bottom: 0;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .container {
+        width: min(100% - 28px, 1120px);
+      }
+
+      .navbar {
+        min-height: 68px;
+      }
+
+      .brand-text span {
+        display: none;
+      }
+
+      .menu-button {
+        display: block;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 68px;
+        right: 14px;
+        left: 14px;
+        display: none;
+        align-items: stretch;
+        padding: 18px;
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        background: var(--white);
+        box-shadow: var(--shadow);
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .nav-links a {
+        padding: 11px 8px;
       }
 
       .hero {
-        padding: 70px 20px;
+        padding: 80px 0 72px;
       }
 
-      .cards {
+      .hero h1 {
+        letter-spacing: -1.5px;
+      }
+
+      .hero-panel {
+        padding: 22px;
+      }
+
+      .section {
+        padding: 64px 0;
+      }
+
+      .category-grid,
+      .material-grid,
+      .about-points {
         grid-template-columns: 1fr;
+      }
+
+      .profile-box {
+        min-height: 330px;
+      }
+
+      .contact-box,
+      .footer-content {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-actions,
+      .button {
+        width: 100%;
+      }
+
+      .material-actions {
+        align-items: flex-start;
+        flex-direction: column;
       }
     }
   </style>
@@ -224,101 +971,517 @@
 
 <body>
   <header>
-    <div class="navigation">
-      <p class="brand">Learning Coretax</p>
+    <div class="container navbar">
+      <a class="brand" href="#beranda">
+        <div class="brand-logo">LC</div>
 
-      <nav aria-label="Navigasi utama">
+        <div class="brand-text">
+          <strong>Learning Coretax</strong>
+          <span>with Angga Sukma Dhaniswara</span>
+        </div>
+      </a>
+
+      <button
+        class="menu-button"
+        type="button"
+        aria-label="Buka menu navigasi"
+        onclick="toggleMenu()"
+      >
+        ☰
+      </button>
+
+      <nav class="nav-links" id="navLinks">
         <a href="#beranda">Beranda</a>
-        <a href="#materi">Materi</a>
+        <a href="#koleksi">Koleksi</a>
+        <a href="#materi-terbaru">Materi Terbaru</a>
+        <a href="#tentang">Tentang</a>
         <a href="#disclaimer">Disclaimer</a>
       </nav>
     </div>
   </header>
 
-  <section class="hero" id="beranda">
-    <div class="hero-content">
-      <span class="label">Website Pembelajaran Perpajakan</span>
-
-      <h1>Learning Coretax</h1>
-
-      <p>
-        Bersama Angga Sukma Dhaniswara. Pusat materi pembelajaran
-        perpajakan, Coretax, buku digital, formulir, template, dan
-        aplikasi pendukung perpajakan.
-      </p>
-
-      <a class="button" href="#materi">
-        Jelajahi Materi
-      </a>
-    </div>
-  </section>
-
   <main>
-    <section id="materi">
-      <h2 class="section-title">Koleksi Pembelajaran</h2>
+    <section class="hero" id="beranda">
+      <div class="container hero-grid">
+        <div>
+          <div class="hero-badge">
+            <span class="hero-badge-dot"></span>
+            Media Pembelajaran Perpajakan
+          </div>
 
-      <p class="section-description">
-        Website ini sedang dikembangkan menjadi perpustakaan digital
-        yang menyediakan materi perpajakan secara praktis, terstruktur,
-        dan mudah dipahami.
-      </p>
+          <h1>
+            Belajar Pajak Lebih
+            <span>Mudah dan Terstruktur</span>
+          </h1>
 
-      <div class="cards">
-        <article class="card">
-          <div class="card-icon" aria-hidden="true">📘</div>
-
-          <h2>Buku Digital</h2>
-
-          <p>
-            Kumpulan modul, e-book, dan petunjuk teknis perpajakan
-            yang dapat dipelajari secara mandiri.
+          <p class="hero-description">
+            Learning Coretax with Angga Sukma Dhaniswara merupakan
+            pusat materi pembelajaran perpajakan, buku digital,
+            formulir, template, dan panduan aplikasi perpajakan yang
+            dapat diakses oleh masyarakat.
           </p>
-        </article>
 
-        <article class="card">
-          <div class="card-icon" aria-hidden="true">📄</div>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#koleksi">
+              Jelajahi Materi
+              <span aria-hidden="true">→</span>
+            </a>
 
-          <h2>Formulir dan Template</h2>
+            <a class="button button-secondary" href="#tentang">
+              Tentang Website
+            </a>
+          </div>
+        </div>
 
-          <p>
-            Contoh formulir, surat, kertas kerja, dan template yang
-            dapat membantu administrasi perpajakan.
-          </p>
-        </article>
+        <aside class="hero-panel">
+          <h2 class="hero-panel-title">
+            Temukan berbagai materi perpajakan
+          </h2>
 
-        <article class="card">
-          <div class="card-icon" aria-hidden="true">💻</div>
+          <div class="hero-stat">
+            <div class="hero-stat-icon" aria-hidden="true">📘</div>
 
-          <h2>Coretax dan Aplikasi</h2>
+            <div>
+              <strong>Buku Digital</strong>
+              <span>Modul dan panduan pembelajaran</span>
+            </div>
+          </div>
 
-          <p>
-            Panduan Coretax, converter, template XML, dan alat bantu
-            pembelajaran perpajakan lainnya.
-          </p>
-        </article>
+          <div class="hero-stat">
+            <div class="hero-stat-icon" aria-hidden="true">📄</div>
+
+            <div>
+              <strong>Formulir dan Template</strong>
+              <span>Dokumen siap digunakan dan dipelajari</span>
+            </div>
+          </div>
+
+          <div class="hero-stat">
+            <div class="hero-stat-icon" aria-hidden="true">💻</div>
+
+            <div>
+              <strong>Coretax dan Aplikasi</strong>
+              <span>Petunjuk teknis dan alat pendukung</span>
+            </div>
+          </div>
+        </aside>
       </div>
     </section>
 
-    <section class="notice" id="disclaimer">
-      <h2>Disclaimer</h2>
+    <div class="feature-strip">
+      <div class="container">
+        <div class="feature-strip-grid">
+          <div class="feature-item">
+            <div class="feature-icon" aria-hidden="true">✓</div>
 
-      <p>
-        Website ini merupakan media pembelajaran pribadi dan tidak
-        mewakili pendapat resmi instansi tertentu. Materi disusun untuk
-        tujuan edukasi dan perlu disesuaikan dengan ketentuan perpajakan
-        terbaru serta kondisi masing-masing wajib pajak.
-      </p>
+            <div>
+              <strong>Materi Praktis</strong>
+              <span>Disusun agar mudah dipahami</span>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon" aria-hidden="true">↻</div>
+
+            <div>
+              <strong>Diperbarui Berkala</strong>
+              <span>Menyesuaikan perkembangan ketentuan</span>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon" aria-hidden="true">↓</div>
+
+            <div>
+              <strong>Mudah Diakses</strong>
+              <span>Materi dapat dibaca dan diunduh</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="section" id="koleksi">
+      <div class="container">
+        <div class="section-heading">
+          <span class="section-label">Koleksi Pembelajaran</span>
+
+          <h2>
+            Semua materi dalam satu tempat
+          </h2>
+
+          <p>
+            Pilih kategori materi sesuai kebutuhan pembelajaran
+            perpajakan Anda.
+          </p>
+        </div>
+
+        <div class="category-grid">
+          <article class="category-card">
+            <div class="category-card-icon" aria-hidden="true">📚</div>
+
+            <h3>Buku dan E-Book</h3>
+
+            <p>
+              Kumpulan buku digital, modul pembelajaran, petunjuk
+              teknis, dan materi perpajakan yang disusun secara
+              sistematis.
+            </p>
+
+            <a class="category-link" href="#materi-terbaru">
+              Lihat koleksi
+              <span aria-hidden="true">→</span>
+            </a>
+          </article>
+
+          <article class="category-card">
+            <div class="category-card-icon" aria-hidden="true">📝</div>
+
+            <h3>Formulir dan Template</h3>
+
+            <p>
+              Contoh formulir, surat, kertas kerja, template Excel,
+              dan dokumen pendukung administrasi perpajakan.
+            </p>
+
+            <a class="category-link" href="#materi-terbaru">
+              Lihat koleksi
+              <span aria-hidden="true">→</span>
+            </a>
+          </article>
+
+          <article class="category-card">
+            <div class="category-card-icon" aria-hidden="true">🖥️</div>
+
+            <h3>Coretax dan Aplikasi</h3>
+
+            <p>
+              Panduan penggunaan Coretax, converter XML, aplikasi
+              perpajakan, dan alat bantu pembelajaran lainnya.
+            </p>
+
+            <a class="category-link" href="#materi-terbaru">
+              Lihat koleksi
+              <span aria-hidden="true">→</span>
+            </a>
+          </article>
+
+          <article class="category-card">
+            <div class="category-card-icon" aria-hidden="true">📰</div>
+
+            <h3>Artikel Pajak</h3>
+
+            <p>
+              Artikel dan penjelasan singkat mengenai PPh, PPN,
+              Coretax, SP2DK, dan topik perpajakan lainnya.
+            </p>
+
+            <a class="category-link" href="#materi-terbaru">
+              Lihat artikel
+              <span aria-hidden="true">→</span>
+            </a>
+          </article>
+
+          <article class="category-card">
+            <div class="category-card-icon" aria-hidden="true">🧮</div>
+
+            <h3>Studi Kasus</h3>
+
+            <p>
+              Contoh kasus penghitungan dan penyelesaian kewajiban
+              perpajakan yang dapat digunakan sebagai bahan latihan.
+            </p>
+
+            <a class="category-link" href="#materi-terbaru">
+              Pelajari kasus
+              <span aria-hidden="true">→</span>
+            </a>
+          </article>
+
+          <article class="category-card">
+            <div class="category-card-icon" aria-hidden="true">🎓</div>
+
+            <h3>Materi Pembelajaran</h3>
+
+            <p>
+              Bahan presentasi, soal latihan, glosarium, dan materi
+              edukasi untuk mendukung proses belajar perpajakan.
+            </p>
+
+            <a class="category-link" href="#materi-terbaru">
+              Mulai belajar
+              <span aria-hidden="true">→</span>
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="section latest-section"
+      id="materi-terbaru"
+    >
+      <div class="container">
+        <div class="section-heading">
+          <span class="section-label">Materi Pilihan</span>
+
+          <h2>
+            Materi yang akan segera tersedia
+          </h2>
+
+          <p>
+            Bagian ini nantinya akan berisi buku, formulir, dan artikel
+            terbaru yang dapat dibaca atau diunduh.
+          </p>
+        </div>
+
+        <div class="material-grid">
+          <article class="material-card">
+            <div class="material-cover">
+              <div>
+                <span class="cover-label">Buku Digital</span>
+
+                <h3>
+                  Petunjuk Teknis Converter Excel ke XML Coretax
+                </h3>
+              </div>
+            </div>
+
+            <div class="material-content">
+              <div class="material-meta">
+                <span class="tag">Coretax</span>
+                <span class="tag">XML</span>
+                <span class="tag">Panduan</span>
+              </div>
+
+              <p>
+                Panduan penggunaan converter untuk membantu menyiapkan
+                data impor ke dalam sistem Coretax.
+              </p>
+
+              <div class="material-actions">
+                <a class="material-link" href="#">
+                  Lihat detail
+                </a>
+
+                <span class="coming-soon">
+                  Segera tersedia
+                </span>
+              </div>
+            </div>
+          </article>
+
+          <article class="material-card">
+            <div class="material-cover form">
+              <div>
+                <span class="cover-label">Formulir</span>
+
+                <h3>
+                  Kumpulan Template Administrasi Perpajakan
+                </h3>
+              </div>
+            </div>
+
+            <div class="material-content">
+              <div class="material-meta">
+                <span class="tag">Template</span>
+                <span class="tag">Excel</span>
+                <span class="tag">Dokumen</span>
+              </div>
+
+              <p>
+                Kumpulan template dan contoh formulir untuk menunjang
+                pembelajaran serta administrasi perpajakan.
+              </p>
+
+              <div class="material-actions">
+                <a class="material-link" href="#">
+                  Lihat detail
+                </a>
+
+                <span class="coming-soon">
+                  Segera tersedia
+                </span>
+              </div>
+            </div>
+          </article>
+
+          <article class="material-card">
+            <div class="material-cover article">
+              <div>
+                <span class="cover-label">Artikel Pajak</span>
+
+                <h3>
+                  Memahami Coretax dengan Bahasa Sederhana
+                </h3>
+              </div>
+            </div>
+
+            <div class="material-content">
+              <div class="material-meta">
+                <span class="tag">Artikel</span>
+                <span class="tag">Coretax</span>
+                <span class="tag">Pemula</span>
+              </div>
+
+              <p>
+                Penjelasan singkat dan sederhana untuk membantu
+                masyarakat mulai memahami penggunaan Coretax.
+              </p>
+
+              <div class="material-actions">
+                <a class="material-link" href="#">
+                  Baca artikel
+                </a>
+
+                <span class="coming-soon">
+                  Segera tersedia
+                </span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="tentang">
+      <div class="container about-grid">
+        <div class="profile-box">
+          <div class="profile-initials">
+            ASD
+          </div>
+        </div>
+
+        <div class="about-content">
+          <span class="section-label">Tentang Pengelola</span>
+
+          <h2>
+            Angga Sukma Dhaniswara
+          </h2>
+
+          <p>
+            Website ini dikembangkan sebagai media berbagi pengetahuan
+            dan materi pembelajaran perpajakan bagi masyarakat,
+            praktisi, pelaku usaha, mahasiswa, dan pihak lain yang
+            ingin memahami perpajakan dengan cara yang lebih mudah.
+          </p>
+
+          <p>
+            Materi akan disajikan dalam bentuk buku digital, artikel,
+            formulir, template, studi kasus, serta panduan penggunaan
+            aplikasi perpajakan.
+          </p>
+
+          <div class="about-points">
+            <div class="about-point">
+              <span class="check">✓</span>
+              Materi disusun secara terstruktur
+            </div>
+
+            <div class="about-point">
+              <span class="check">✓</span>
+              Bahasa mudah dipahami
+            </div>
+
+            <div class="about-point">
+              <span class="check">✓</span>
+              Mendukung pembelajaran mandiri
+            </div>
+
+            <div class="about-point">
+              <span class="check">✓</span>
+              Diperbarui secara berkala
+            </div>
+          </div>
+
+          <a
+            class="button"
+            href="https://github.com/dhaniswara86"
+            target="_blank"
+            rel="noopener noreferrer"
+            style="background: #0b315a; color: white;"
+          >
+            Lihat Profil GitHub
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="disclaimer">
+      <div class="container">
+        <div class="disclaimer">
+          <h3>Disclaimer</h3>
+
+          <p>
+            Website ini merupakan media pembelajaran pribadi dan tidak
+            mewakili pendapat resmi Direktorat Jenderal Pajak,
+            Kementerian Keuangan, atau instansi tertentu. Seluruh
+            materi disusun untuk tujuan edukasi dan harus disesuaikan
+            kembali dengan ketentuan perpajakan terbaru serta kondisi
+            masing-masing wajib pajak. Pengguna bertanggung jawab untuk
+            melakukan verifikasi sebelum menggunakan materi sebagai
+            dasar pelaksanaan kewajiban perpajakan.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-section">
+      <div class="container contact-box">
+        <div>
+          <h2>
+            Mari belajar pajak bersama
+          </h2>
+
+          <p>
+            Website ini akan terus dikembangkan dengan berbagai buku,
+            formulir, artikel, dan alat bantu pembelajaran perpajakan.
+          </p>
+        </div>
+
+        <a
+          class="button button-primary"
+          href="#koleksi"
+        >
+          Lihat Koleksi
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
     </section>
   </main>
 
   <footer>
-    <p>
-      © 2026 Angga Sukma Dhaniswara
-    </p>
+    <div class="container footer-content">
+      <p>
+        © <span id="currentYear"></span>
+        Angga Sukma Dhaniswara. Seluruh hak cipta dilindungi.
+      </p>
 
-    <p>
-      Learning Coretax — Belajar Pajak Lebih Mudah dan Terstruktur
-    </p>
+      <div class="footer-links">
+        <a href="#beranda">Beranda</a>
+        <a href="#tentang">Tentang</a>
+        <a href="#disclaimer">Disclaimer</a>
+      </div>
+    </div>
   </footer>
+
+  <script>
+    function toggleMenu() {
+      const navLinks = document.getElementById("navLinks");
+      navLinks.classList.toggle("active");
+    }
+
+    document.querySelectorAll(".nav-links a").forEach((link) => {
+      link.addEventListener("click", () => {
+        document
+          .getElementById("navLinks")
+          .classList.remove("active");
+      });
+    });
+
+    document.getElementById("currentYear").textContent =
+      new Date().getFullYear();
+  </script>
 </body>
 </html>
