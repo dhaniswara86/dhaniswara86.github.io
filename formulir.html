@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="Kumpulan formulir, template Excel, contoh surat, dan alat bantu perpajakan dari Learning Tax with Angga Sukma Dhaniswara."
+  >
+
+  <meta name="author" content="Angga Sukma Dhaniswara">
+
+  <title>
+    Formulir dan Template | Learning Tax
+  </title>
+
+  <style>
+    :root {
+      --navy: #071c35;
+      --blue: #1469b8;
+      --blue-light: #eaf4ff;
+      --white: #ffffff;
+      --background: #f5f8fc;
+      --text: #15253d;
+      --text-light: #607089;
+      --border: #dce5ef;
+      --green: #14804a;
+      --shadow: 0 16px 40px rgba(7, 28, 53, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      z-index: 100;
+      top: 0;
+      border-bottom: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(12px);
+    }
+
+    .navbar {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--navy);
+      text-decoration: none;
+    }
+
+    .brand-logo {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      flex-shrink: 0;
+      place-items: center;
+      border-radius: 50%;
+      background: linear-gradient(
+        135deg,
+        #0d315c,
+        #1469b8,
+        #44a4e8
+      );
+      color: white;
+      font-weight: 800;
+    }
+
+    .brand strong {
+      display: block;
+      font-size: 17px;
+    }
+
+    .brand span {
+      display: block;
+      color: var(--text-light);
+      font-size: 12px;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 23px;
+    }
+
+    nav a {
+      color: #31445f;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      color: var(--blue);
+    }
+
+    .hero {
+      padding: 80px 0;
+      background:
+        radial-gradient(
+          circle at 85% 20%,
+          rgba(72, 201, 176, 0.28),
+          transparent 28%
+        ),
+        linear-gradient(
+          135deg,
+          #071c35,
+          #0b4d65,
+          #168b8d
+        );
+      color: white;
+    }
+
+    .hero-content {
+      max-width: 800px;
+    }
+
+    .hero-label {
+      display: inline-block;
+      margin-bottom: 16px;
+      padding: 7px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.1);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    h1 {
+      margin: 0 0 18px;
+      font-size: clamp(40px, 7vw, 64px);
+      line-height: 1.08;
+    }
+
+    .hero p {
+      margin: 0;
+      color: #dceef0;
+      font-size: 18px;
+    }
+
+    main {
+      padding: 70px 0;
+    }
+
+    .section-heading {
+      margin-bottom: 32px;
+    }
+
+    .section-heading h2 {
+      margin: 0 0 10px;
+      color: var(--navy);
+      font-size: 34px;
+    }
+
+    .section-heading p {
+      max-width: 720px;
+      margin: 0;
+      color: var(--text-light);
+    }
+
+    .filter {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+
+    .filter-button {
+      padding: 9px 15px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: white;
+      color: #31445f;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .filter-button.active {
+      border-color: var(--blue);
+      background: var(--blue);
+      color: white;
+    }
+
+    .template-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .template-card {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: white;
+      box-shadow: var(--shadow);
+    }
+
+    .template-cover {
+      min-height: 220px;
+      display: flex;
+      align-items: flex-end;
+      padding: 25px;
+      background:
+        radial-gradient(
+          circle at 80% 20%,
+          rgba(255, 255, 255, 0.23),
+          transparent 28%
+        ),
+        linear-gradient(
+          145deg,
+          #123d43,
+          #167078,
+          #38a2a0
+        );
+      color: white;
+    }
+
+    .template-cover.blue {
+      background:
+        radial-gradient(
+          circle at 80% 20%,
+          rgba(255, 255, 255, 0.22),
+          transparent 28%
+        ),
+        linear-gradient(
+          145deg,
+          #071c35,
+          #0d4f86,
+          #2393d1
+        );
+    }
+
+    .template-cover.purple {
+      background:
+        radial-gradient(
+          circle at 80% 20%,
+          rgba(255, 255, 255, 0.22),
+          transparent 28%
+        ),
+        linear-gradient(
+          145deg,
+          #30204f,
+          #5142a5,
+          #258ac0
+        );
+    }
+
+    .file-type {
+      display: inline-block;
+      margin-bottom: 12px;
+      padding: 6px 10px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .template-cover h3 {
+      margin: 0;
+      font-size: 24px;
+      line-height: 1.2;
+    }
+
+    .template-content {
+      padding: 24px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 14px;
+    }
+
+    .tag {
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: var(--blue-light);
+      color: var(--blue);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .template-content p {
+      margin: 0 0 20px;
+      color: var(--text-light);
+      font-size: 14px;
+    }
+
+    .file-info {
+      padding-top: 15px;
+      border-top: 1px solid var(--border);
+    }
+
+    .file-info-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 8px;
+      font-size: 12px;
+    }
+
+    .file-info-row span:first-child {
+      color: var(--text-light);
+    }
+
+    .file-info-row span:last-child {
+      color: var(--navy);
+      font-weight: 700;
+      text-align: right;
+    }
+
+    .template-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 44px;
+      flex: 1;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 16px;
+      border-radius: 9px;
+      font-size: 13px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .button-primary {
+      background: var(--blue);
+      color: white;
+    }
+
+    .button-secondary {
+      border: 1px solid var(--border);
+      background: white;
+      color: var(--navy);
+    }
+
+    .button.disabled {
+      opacity: 0.55;
+      pointer-events: none;
+    }
+
+    .notice {
+      margin-top: 44px;
+      padding: 26px;
+      border-left: 5px solid var(--blue);
+      border-radius: 12px;
+      background: var(--blue-light);
+    }
+
+    .notice h2 {
+      margin: 0 0 8px;
+      color: var(--navy);
+      font-size: 20px;
+    }
+
+    .notice p {
+      margin: 0;
+      color: #50647f;
+      font-size: 14px;
+    }
+
+    footer {
+      padding: 30px 0;
+      background: #041426;
+      color: #b8c9d9;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .footer-content p {
+      margin: 0;
+      font-size: 13px;
+    }
+
+    @media (max-width: 900px) {
+      .template-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 680px) {
+      .container {
+        width: min(100% - 28px, 1120px);
+      }
+
+      .navbar {
+        align-items: flex-start;
+        padding: 14px 0;
+        flex-direction: column;
+      }
+
+      nav {
+        gap: 14px;
+      }
+
+      .template-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-content {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container navbar">
+      <a class="brand" href="index.html">
+        <div class="brand-logo">LT</div>
+
+        <div>
+          <strong>Learning Tax</strong>
+          <span>with Angga Sukma Dhaniswara</span>
+        </div>
+      </a>
+
+      <nav>
+        <a href="index.html">Beranda</a>
+        <a href="buku.html">Buku Digital</a>
+        <a href="formulir.html">Formulir</a>
+        <a href="index.html#tentang">Tentang</a>
+        <a href="index.html#disclaimer">Disclaimer</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-content">
+      <span class="hero-label">
+        Alat Bantu Perpajakan
+      </span>
+
+      <h1>Formulir dan Template</h1>
+
+      <p>
+        Temukan contoh formulir, template Excel, surat, kertas kerja,
+        dan alat bantu yang dapat digunakan sebagai bahan pembelajaran
+        serta pendukung administrasi perpajakan.
+      </p>
+    </div>
+  </section>
+
+  <main>
+    <div class="container">
+      <div class="section-heading">
+        <h2>Koleksi Formulir dan Template</h2>
+
+        <p>
+          Setiap file akan dilengkapi dengan informasi versi, format,
+          tanggal pembaruan, petunjuk penggunaan, dan disclaimer.
+        </p>
+      </div>
+
+      <div class="filter">
+        <span class="filter-button active">Semua</span>
+        <span class="filter-button">Excel</span>
+        <span class="filter-button">Word</span>
+        <span class="filter-button">PDF</span>
+        <span class="filter-button">XML</span>
+      </div>
+
+      <div class="template-grid">
+        <article class="template-card">
+          <div class="template-cover">
+            <div>
+              <span class="file-type">Template Excel</span>
+
+              <h3>
+                Converter Excel ke XML Coretax
+              </h3>
+            </div>
+          </div>
+
+          <div class="template-content">
+            <div class="tags">
+              <span class="tag">Excel</span>
+              <span class="tag">XML</span>
+              <span class="tag">Coretax</span>
+            </div>
+
+            <p>
+              Template untuk membantu menyusun data pada Microsoft
+              Excel dan mengubahnya menjadi format XML.
+            </p>
+
+            <div class="file-info">
+              <div class="file-info-row">
+                <span>Versi</span>
+                <span>Segera tersedia</span>
+              </div>
+
+              <div class="file-info-row">
+                <span>Format</span>
+                <span>XLSM atau XLSX</span>
+              </div>
+
+              <div class="file-info-row">
+                <span>Pembaruan</span>
+                <span>2026</span>
+              </div>
+            </div>
+
+            <div class="template-actions">
+              <a
+                class="button button-secondary disabled"
+                href="#"
+              >
+                Petunjuk
+              </a>
+
+              <a
+                class="button button-primary disabled"
+                href="#"
+              >
+                Unduh
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <article class="template-card">
+          <div class="template-cover blue">
+            <div>
+              <span class="file-type">Contoh Surat</span>
+
+              <h3>
+                Template Tanggapan SP2DK
+              </h3>
+            </div>
+          </div>
+
+          <div class="template-content">
+            <div class="tags">
+              <span class="tag">SP2DK</span>
+              <span class="tag">Word</span>
+              <span class="tag">Surat</span>
+            </div>
+
+            <p>
+              Contoh struktur surat tanggapan SP2DK yang dapat
+              disesuaikan dengan fakta, data, dan kondisi wajib pajak.
+            </p>
+
+            <div class="file-info">
+              <div class="file-info-row">
+                <span>Versi</span>
+                <span>Segera tersedia</span>
+              </div>
+
+              <div class="file-info-row">
+                <span>Format</span>
+                <span>DOCX</span>
+              </div>
+
+              <div class="file-info-row">
+                <span>Pembaruan</span>
+                <span>2026</span>
+              </div>
+            </div>
+
+            <div class="template-actions">
+              <a
+                class="button button-secondary disabled"
+                href="#"
+              >
+                Petunjuk
+              </a>
+
+              <a
+                class="button button-primary disabled"
+                href="#"
+              >
+                Unduh
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <article class="template-card">
+          <div class="template-cover purple">
+            <div>
+              <span class="file-type">Kertas Kerja</span>
+
+              <h3>
+                Template Rekonsiliasi Fiskal
+              </h3>
+            </div>
+          </div>
+
+          <div class="template-content">
+            <div class="tags">
+              <span class="tag">PPh Badan</span>
+              <span class="tag">Excel</span>
+              <span class="tag">Fiskal</span>
+            </div>
+
+            <p>
+              Template sederhana untuk membantu melakukan identifikasi
+              koreksi fiskal positif dan negatif.
+            </p>
+
+            <div class="file-info">
+              <div class="file-info-row">
+                <span>Versi</span>
+                <span>Segera tersedia</span>
+              </div>
+
+              <div class="file-info-row">
+                <span>Format</span>
+                <span>XLSX</span>
+              </div>
+
+              <div class="file-info-row">
+                <span>Pembaruan</span>
+                <span>2026</span>
+              </div>
+            </div>
+
+            <div class="template-actions">
+              <a
+                class="button button-secondary disabled"
+                href="#"
+              >
+                Petunjuk
+              </a>
+
+              <a
+                class="button button-primary disabled"
+                href="#"
+              >
+                Unduh
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <section class="notice">
+        <h2>Perhatian sebelum menggunakan template</h2>
+
+        <p>
+          Template pada website ini merupakan alat bantu pembelajaran.
+          Pengguna tetap perlu memeriksa kesesuaian format, formula,
+          ketentuan, dan data sebelum digunakan dalam pelaksanaan
+          kewajiban perpajakan.
+        </p>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer-content">
+      <p>
+        © <span id="currentYear"></span>
+        Angga Sukma Dhaniswara.
+      </p>
+
+      <p>
+        Learning Tax — Belajar Pajak Lebih Mudah dan Terstruktur
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("currentYear").textContent =
+      new Date().getFullYear();
+  </script>
+</body>
+</html>
