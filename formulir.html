@@ -443,7 +443,216 @@
         flex-direction: column;
       }
     }
-  </style>
+    
+  .form-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 680px;
+  min-height: 48px;
+  padding: 12px 17px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: white;
+  color: var(--text);
+  font: inherit;
+  font-size: 14px;
+  outline: none;
+}
+
+.search-input:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 4px rgba(20, 105, 184, 0.1);
+}
+
+.search-result {
+  flex-shrink: 0;
+  margin: 0;
+  color: var(--text-light);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.folder-list {
+  display: grid;
+  gap: 14px;
+}
+
+.folder-card {
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  background: white;
+  box-shadow: 0 8px 25px rgba(7, 28, 53, 0.05);
+}
+
+.folder-card summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px 22px;
+  color: var(--navy);
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 800;
+  list-style: none;
+}
+
+.folder-card summary::-webkit-details-marker {
+  display: none;
+}
+
+.folder-card summary::after {
+  content: "+";
+  width: 30px;
+  height: 30px;
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--blue-light);
+  color: var(--blue);
+  font-size: 20px;
+}
+
+.folder-card[open] summary::after {
+  content: "−";
+}
+
+.folder-summary-main {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.folder-icon {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  border-radius: 11px;
+  background: var(--blue-light);
+  font-size: 20px;
+}
+
+.folder-count {
+  display: block;
+  margin-top: 2px;
+  color: var(--text-light);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.file-list {
+  padding: 0 22px 20px;
+  border-top: 1px solid var(--border);
+}
+
+.file-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 22px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.file-row:last-child {
+  border-bottom: 0;
+}
+
+.file-main {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.file-type-badge {
+  min-width: 47px;
+  padding: 5px 8px;
+  border-radius: 7px;
+  background: var(--blue-light);
+  color: var(--blue);
+  font-size: 10px;
+  font-weight: 900;
+  text-align: center;
+}
+
+.file-title {
+  color: var(--navy);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.file-number {
+  display: block;
+  margin-bottom: 2px;
+  color: var(--text-light);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.file-button {
+  display: inline-flex;
+  min-height: 38px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 15px;
+  border-radius: 8px;
+  background: var(--blue);
+  color: white;
+  font-size: 12px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.file-button:hover {
+  background: #0f5596;
+}
+
+.empty-folder {
+  padding: 20px 0 2px;
+  color: var(--text-light);
+  font-size: 14px;
+}
+
+.no-result {
+  padding: 35px;
+  border: 1px dashed var(--border);
+  border-radius: 14px;
+  background: white;
+  color: var(--text-light);
+  text-align: center;
+}
+
+@media (max-width: 680px) {
+  .form-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .search-input {
+    max-width: none;
+  }
+
+  .file-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .file-button {
+    width: 100%;
+  }
+}
 </head>
 
 <body>
@@ -495,13 +704,21 @@
         </p>
       </div>
 
-      <div class="filter">
-        <span class="filter-button active">Semua</span>
-        <span class="filter-button">Excel</span>
-        <span class="filter-button">Word</span>
-        <span class="filter-button">PDF</span>
-        <span class="filter-button">XML</span>
-      </div>
+<div class="form-toolbar">
+  <input
+    class="search-input"
+    id="formSearch"
+    type="search"
+    placeholder="Cari formulir, misalnya NPWP, PKP, PBB, atau kuasa..."
+    aria-label="Cari formulir"
+  >
+
+  <p class="search-result" id="searchResult">
+    34 file tersedia
+  </p>
+</div>
+
+<div class="folder-list" id="folderList"></div>
 
       <div class="template-grid">
         <article class="template-card">
@@ -706,8 +923,455 @@
   </footer>
 
   <script>
-    document.getElementById("currentYear").textContent =
-      new Date().getFullYear();
-  </script>
+  const releaseBase =
+    "https://github.com/dhaniswara86/" +
+    "dhaniswara86.github.io/releases/download/" +
+    "formulir-v1.0.0/";
+
+  const folders = [
+    {
+      title: "1. Pendaftaran NPWP",
+      files: [
+        {
+          number: "1.1",
+          title: "Formulir Pendaftaran WP OP dan WBT",
+          type: "PDF",
+          asset: "01-1.1-Form-Pendaftaran-OP-dan-WBT.pdf"
+        },
+        {
+          number: "1.2",
+          title: "Formulir Pendaftaran Badan",
+          type: "PDF",
+          asset: "01-1.2-Form-Pendaftaran-Badan.pdf"
+        },
+        {
+          number: "1.3",
+          title: "Formulir Pendaftaran Instansi",
+          type: "PDF",
+          asset: "01-1.3-Form-Pendaftaran-Instansi.pdf"
+        }
+      ]
+    },
+    {
+      title: "2. Aktivasi Akun Wajib Pajak",
+      files: [
+        {
+          number: "2.1",
+          title: "Formulir Aktivasi Akun Wajib Pajak",
+          type: "PDF",
+          asset: "02-2.1-Form-Aktivasi-Akun-WP.pdf"
+        }
+      ]
+    },
+    {
+      title: "3. Permintaan Kode Otorisasi",
+      files: [
+        {
+          number: "3.1",
+          title: "Formulir Permintaan Kode Otorisasi",
+          type: "PDF",
+          asset: "03-3.1-Form-Permintaan-Kode-Otorisasi.pdf"
+        }
+      ]
+    },
+    {
+      title: "4. Pemberitahuan Sertel PsRE",
+      files: [
+        {
+          number: "4.1",
+          title: "Formulir Pemberitahuan Sertel Penyelenggara Sertel",
+          type: "PDF",
+          asset:
+            "04-4.1-Form-Pemberitahuan-Sertel-Penyelenggara-Sertel.pdf"
+        }
+      ]
+    },
+    {
+      title: "5. Perubahan Data",
+      files: [
+        {
+          number: "5.1",
+          title: "Formulir Perubahan Data Orang Pribadi",
+          type: "PDF",
+          asset: "05-5.1-Form-Perubahan-Data-OP.pdf"
+        },
+        {
+          number: "5.2",
+          title: "Formulir Perubahan Data Badan",
+          type: "PDF",
+          asset: "05-5.2-Form-Perubahan-Data-Badan.pdf"
+        },
+        {
+          number: "5.3",
+          title: "Formulir Perubahan Data Instansi",
+          type: "PDF",
+          asset: "05-5.3-Form-Perubahan-Data Instansi.pdf"
+        },
+        {
+          number: "5.4",
+          title:
+            "Formulir Perubahan Data Pihak yang Dapat " +
+            "Ditunjuk sebagai Kuasa Wajib Pajak",
+          type: "PDF",
+          asset:
+            "05-5.4-Form-Perubahan-Data-Pihak-yang-Dapat-Ditunjuk-Sebagai-Kuasa-Wajib-Pajak.pdf"
+        }
+      ]
+    },
+    {
+      title: "6. Penetapan Wajib Pajak Nonaktif",
+      files: [
+        {
+          number: "6.1",
+          title: "Penetapan Wajib Pajak Nonaktif",
+          type: "PDF",
+          asset: "06-6.1-Penetapan-WP-Nonaktif.pdf"
+        }
+      ]
+    },
+    {
+      title: "7. Pengaktifan Kembali WP Nonaktif",
+      files: [
+        {
+          number: "7.1",
+          title: "Pengaktifan Kembali Wajib Pajak Nonaktif",
+          type: "PDF",
+          asset: "07-7.1-Pengaktifan-Kembali-WP-Nonaktif.pdf"
+        }
+      ]
+    },
+    {
+      title: "8. Penghapusan NPWP",
+      files: [
+        {
+          number: "8.1",
+          title: "Penghapusan NPWP",
+          type: "PDF",
+          asset: "08-8.1-Penghapusan-NPWP.pdf"
+        }
+      ]
+    },
+    {
+      title: "9. Pengukuhan PKP",
+      files: [
+        {
+          number: "9.1",
+          title: "Formulir Pengukuhan PKP",
+          type: "PDF",
+          asset: "09-9.1-Formulir-Pengukuhan-PKP.pdf"
+        },
+        {
+          number: "9.2",
+          title: "Formulir Penetapan PKP Toko Retail",
+          type: "PDF",
+          asset: "09-9.2-Form-Penetapan-PKP-TokoRetail.pdf"
+        },
+        {
+          number: "9.3",
+          title: "Formulir Penetapan PKP DM",
+          type: "PDF",
+          asset: "09-9.3-Form-Penetapan-PKP-DM.pdf"
+        },
+        {
+          number: "9.4",
+          title:
+            "Surat Pernyataan tentang Kegiatan Usaha " +
+            "dan TKU Sebenarnya",
+          type: "PDF",
+          asset:
+            "09-9.4-Surat-Pernyataan-Tentang-Kegiatan-Usaha-dan-TKU-Sebenarnya.pdf"
+        }
+      ]
+    },
+    {
+      title: "10. Pencabutan PKP",
+      files: [
+        {
+          number: "10.1",
+          title: "Formulir Pencabutan PKP",
+          type: "PDF",
+          asset: "10-10.1-Form-Pencabutan-PKP.pdf"
+        },
+        {
+          number: "10.2",
+          title: "Formulir Pencabutan Status PKP Retail",
+          type: "PDF",
+          asset: "10-10.2-Form-Pencabutan-Status-PKP-Retail.pdf"
+        },
+        {
+          number: "10.3",
+          title: "Formulir Pencabutan Status PKP DM",
+          type: "PDF",
+          asset: "10-10.3-Form-Pencabutan-Status-PKP-DM.pdf"
+        }
+      ]
+    },
+    {
+      title: "11. Penetapan Pemungut Bea Meterai",
+      files: [
+        {
+          number: "11.1",
+          title: "Formulir Penetapan Pemungut Bea Meterai",
+          type: "PDF",
+          asset:
+            "11-11.1-Form-Penetapan-Pemungut-Bea-Meterai.pdf"
+        },
+        {
+          number: "11.2",
+          title:
+            "Surat Permohonan untuk Ditetapkan sebagai " +
+            "Pemungut Bea Meterai",
+          type: "PDF",
+          asset:
+            "11-11.2-Surat-Permohonan-Untuk-Ditetapkan-Sebagai-Pemungut-Bea-Meterai.pdf"
+        },
+        {
+          number: "11.3",
+          title:
+            "Surat Pernyataan Kesediaan untuk Ditetapkan " +
+            "sebagai Pemungut Bea Meterai",
+          type: "PDF",
+          asset:
+            "11-11.3-Surat-Pernyataan-Kesediaan-untuk-Ditetapkan-Sebagai-Pemungut-Bea-Meterai.pdf"
+        }
+      ]
+    },
+    {
+      title: "12. Pencabutan Pemungut Bea Meterai",
+      files: [
+        {
+          number: "12.1",
+          title: "Formulir Pencabutan Pemungut Bea Meterai",
+          type: "PDF",
+          asset:
+            "12-01-form-pencabutan-pemungut-bea-meterai.pdf"
+        },
+        {
+          number: "12.2",
+          title:
+            "Surat Permohonan Pencabutan Penetapan " +
+            "Pemungut Bea Meterai",
+          type: "PDF",
+          asset:
+            "12-02-surat-permohonan-pencabutan-" +
+            "pemungut-bea-meterai.pdf"
+        },
+        {
+          number: "12.3",
+          title:
+            "Surat Pernyataan Tidak Lagi Memenuhi Kriteria " +
+            "sebagai Pemungut Bea Meterai",
+          type: "PDF",
+          asset:
+            "12-03-surat-pernyataan-tidak-lagi-memenuhi-" +
+            "kriteria-pemungut-bea-meterai.pdf"
+        }
+      ]
+    },
+    {
+      title: "13. Pajak Bumi dan Bangunan",
+      files: [
+        {
+          number: "13.1",
+          title: "Formulir Pendaftaran Orang Pribadi PBB",
+          type: "PDF",
+          asset: "13-01-form-pendaftaran-op-pbb.pdf"
+        },
+        {
+          number: "13.2",
+          title: "Formulir Perubahan Data Orang Pribadi PBB",
+          type: "PDF",
+          asset: "13-02-form-perubahan-data-op-pbb.pdf"
+        },
+        {
+          number: "13.3",
+          title: "Formulir Pencabutan SKT Orang Pribadi PBB",
+          type: "PDF",
+          asset: "13-03-form-pencabutan-skt-op-pbb.pdf"
+        }
+      ]
+    },
+    {
+      title: "14. Kuasa Wajib Pajak",
+      files: [
+        {
+          number: "14.1",
+          title:
+            "Formulir Penetapan Pihak yang Dapat Ditunjuk " +
+            "sebagai Kuasa Wajib Pajak",
+          type: "PDF",
+          asset: "14-01-form-penetapan-pihak-kuasa-wp.pdf"
+        },
+        {
+          number: "14.2",
+          title:
+            "Formulir Pencabutan Pihak yang Dapat Ditunjuk " +
+            "sebagai Kuasa Wajib Pajak",
+          type: "PDF",
+          asset: "14-02-form-pencabutan-pihak-kuasa-wp.pdf"
+        },
+        {
+          number: "14.3",
+          title: "Surat Kuasa Khusus",
+          type: "PDF",
+          asset: "14-03-surat-kuasa-khusus.pdf"
+        },
+        {
+          number: "14.4",
+          title: "Surat Penunjukan Kuasa",
+          type: "PDF",
+          asset: "14-04-surat-penunjukan-kuasa.pdf"
+        }
+      ]
+    },
+    {
+      title: "15. SPT Tahunan PPh",
+      files: [
+        {
+          number: "15.1",
+          title: "SPT Tahunan Orang Pribadi",
+          type: "XLSX",
+          asset: "15-01-spt-tahunan-orang-pribadi.xlsx"
+        }
+      ]
+    },
+    {
+      title: "16. Formulir PYSTT",
+      files: []
+    }
+  ];
+
+  const folderList = document.getElementById("folderList");
+  const searchInput = document.getElementById("formSearch");
+  const searchResult = document.getElementById("searchResult");
+
+  function renderFolders(searchTerm = "") {
+    const term = searchTerm.trim().toLowerCase();
+    let totalFiles = 0;
+
+    const filteredFolders = folders
+      .map((folder) => {
+        const folderMatches =
+          folder.title.toLowerCase().includes(term);
+
+        const matchedFiles = folderMatches
+          ? folder.files
+          : folder.files.filter((file) => {
+              return (
+                file.title.toLowerCase().includes(term) ||
+                file.number.toLowerCase().includes(term) ||
+                file.type.toLowerCase().includes(term)
+              );
+            });
+
+        return {
+          ...folder,
+          files: matchedFiles
+        };
+      })
+      .filter((folder) => {
+        return (
+          folder.title.toLowerCase().includes(term) ||
+          folder.files.length > 0 ||
+          (!term && folder.title === "16. Formulir PYSTT")
+        );
+      });
+
+    filteredFolders.forEach((folder) => {
+      totalFiles += folder.files.length;
+    });
+
+    searchResult.textContent =
+      totalFiles + " file ditemukan";
+
+    if (filteredFolders.length === 0) {
+      folderList.innerHTML = `
+        <div class="no-result">
+          Formulir yang Anda cari belum ditemukan.
+        </div>
+      `;
+      return;
+    }
+
+    folderList.innerHTML = filteredFolders
+      .map((folder) => {
+        const fileRows = folder.files.length
+          ? folder.files
+              .map((file) => {
+                const fileUrl =
+                  releaseBase + file.asset;
+
+                return `
+                  <div class="file-row">
+                    <div class="file-main">
+                      <span class="file-type-badge">
+                        ${file.type}
+                      </span>
+
+                      <div>
+                        <span class="file-number">
+                          ${file.number}
+                        </span>
+
+                        <div class="file-title">
+                          ${file.title}
+                        </div>
+                      </div>
+                    </div>
+
+                    <a
+                      class="file-button"
+                      href="${fileUrl}"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Unduh
+                    </a>
+                  </div>
+                `;
+              })
+              .join("")
+          : `
+              <div class="empty-folder">
+                File untuk kategori ini belum ditambahkan.
+              </div>
+            `;
+
+        const openAttribute = term ? "open" : "";
+
+        return `
+          <details class="folder-card" ${openAttribute}>
+            <summary>
+              <div class="folder-summary-main">
+                <span class="folder-icon">📁</span>
+
+                <div>
+                  ${folder.title}
+
+                  <span class="folder-count">
+                    ${folder.files.length} file
+                  </span>
+                </div>
+              </div>
+            </summary>
+
+            <div class="file-list">
+              ${fileRows}
+            </div>
+          </details>
+        `;
+      })
+      .join("");
+  }
+
+  searchInput.addEventListener("input", (event) => {
+    renderFolders(event.target.value);
+  });
+
+  document.getElementById("currentYear").textContent =
+    new Date().getFullYear();
+
+  renderFolders();
+</script>
 </body>
 </html>
