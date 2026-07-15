@@ -10,14 +10,14 @@
 
   <meta
     name="description"
-    content="Kabayan by Angga Sukma Dhaniswara menyediakan buku digital, formulir, template, dan materi pembelajaran perpajakan."
+    content="Learning Tax with Angga Sukma Dhaniswara menyediakan buku digital, formulir, template, dan materi pembelajaran perpajakan."
   >
 
   <meta name="author" content="Angga Sukma Dhaniswara">
 
   <meta
     property="og:title"
-    content="Kabayan by Angga Sukma Dhaniswara"
+    content="Learning Tax with Angga Sukma Dhaniswara"
   >
 
   <meta
@@ -32,7 +32,7 @@
 
   <meta property="og:type" content="website">
 
-  <title>Kabayan by Angga Sukma Dhaniswara</title>
+  <title>Learning Tax with Angga Sukma Dhaniswara</title>
 
   <style>
     :root {
@@ -354,112 +354,269 @@
     .hero-visual {
       position: relative;
       z-index: 2;
-      width: min(800px, 92vw);
-      height: 430px;
+      width: min(850px, 94vw);
+      height: 520px;
       display: flex;
       align-items: flex-end;
       justify-content: center;
-      margin: 15px auto 0;
+      margin: 18px auto 0;
     }
 
     .hero-glow {
       position: absolute;
-      bottom: -135px;
+      bottom: -125px;
       left: 50%;
-      width: 640px;
-      height: 360px;
+      width: 680px;
+      height: 350px;
       border-radius: 50%;
       background:
         radial-gradient(
           ellipse,
-          rgba(0, 113, 227, 0.33),
-          rgba(70, 161, 255, 0.12) 38%,
-          transparent 70%
+          rgba(0, 113, 227, 0.30),
+          rgba(70, 161, 255, 0.10) 40%,
+          transparent 72%
         );
-      filter: blur(16px);
+      filter: blur(17px);
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+
+    .hero-book-slider {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      outline: none;
+    }
+
+    .hero-book-viewport {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .hero-book-track {
+      height: 100%;
+      display: flex;
+      transition:
+        transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: transform;
+    }
+
+    .hero-book-slide {
+      min-width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .hero-book-link {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-direction: column;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .hero-book-image {
+      position: relative;
+      width: 100%;
+      height: 360px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .hero-book-image::after {
+      position: absolute;
+      z-index: 0;
+      bottom: 27px;
+      left: 50%;
+      width: 250px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(15, 39, 74, 0.15);
+      filter: blur(17px);
+      content: "";
       transform: translateX(-50%);
     }
 
-    .book-mockup {
+    .hero-book-image img {
       position: relative;
       z-index: 2;
-      width: min(410px, 74vw);
-      height: 390px;
+      width: min(410px, 73vw);
+      height: 350px;
       object-fit: contain;
-      filter: drop-shadow(0 35px 34px rgba(15, 34, 67, 0.27));
+      filter:
+        drop-shadow(0 30px 27px rgba(15, 34, 67, 0.24));
+      transition: transform 0.4s ease;
     }
 
-    .image-fallback {
+    .hero-book-link:hover .hero-book-image img {
+      transform: translateY(-5px) scale(1.02);
+    }
+
+    .slider-fallback {
       position: absolute;
       z-index: 1;
-      bottom: 18px;
+      bottom: 35px;
       left: 50%;
-      width: 245px;
-      height: 315px;
-      overflow: hidden;
+      width: 220px;
+      height: 285px;
+      padding: 48px 28px;
       border-radius: 7px 17px 17px 7px;
       background:
         radial-gradient(
-          circle at 76% 18%,
+          circle at 78% 17%,
           rgba(255, 204, 0, 0.72),
-          transparent 23%
+          transparent 22%
         ),
         linear-gradient(
           145deg,
           #051a3d,
-          #075aac 54%,
+          #075aac 55%,
           #22a6cf
         );
       box-shadow:
-        -14px 16px 0 #092d5d,
-        0 34px 42px rgba(10, 37, 75, 0.26);
-      color: var(--white);
+        -12px 14px 0 #092d5d,
+        0 30px 38px rgba(10, 37, 75, 0.23);
+      color: white;
+      text-align: left;
       transform:
         translateX(-50%)
-        perspective(900px)
-        rotateY(-8deg)
-        rotateZ(-1deg);
+        perspective(850px)
+        rotateY(-8deg);
     }
 
-    .image-fallback::before {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 17px;
-      width: 2px;
-      background: rgba(255, 255, 255, 0.22);
-      content: "";
+    .slider-fallback[hidden] {
+      display: none;
     }
 
-    .fallback-copy {
-      position: absolute;
-      inset: 50px 30px auto 40px;
-      text-align: left;
-    }
-
-    .fallback-copy small {
+    .slider-fallback small {
       display: block;
-      margin-bottom: 13px;
-      color: #a9d8ff;
+      margin-bottom: 14px;
+      color: #b8ddff;
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.09em;
       text-transform: uppercase;
     }
 
-    .fallback-copy strong {
+    .slider-fallback strong {
       display: block;
-      font-size: 29px;
-      letter-spacing: -0.05em;
-      line-height: 1.05;
+      font-size: 25px;
+      letter-spacing: -0.045em;
+      line-height: 1.08;
     }
 
-    .fallback-line {
-      width: 48px;
+    .slider-fallback-line {
+      width: 46px;
       height: 5px;
-      margin-top: 21px;
+      margin-top: 20px;
       border-radius: 99px;
       background: var(--yellow);
+    }
+
+    .hero-book-caption {
+      width: min(630px, calc(100% - 90px));
+      min-height: 145px;
+      padding: 13px 20px 38px;
+      text-align: center;
+    }
+
+    .hero-book-category {
+      color: var(--medium-gray);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .hero-book-caption h2 {
+      margin: 6px 0 7px;
+      color: var(--near-black);
+      font-size: clamp(19px, 2.4vw, 27px);
+      font-weight: 650;
+      letter-spacing: -0.035em;
+      line-height: 1.14;
+    }
+
+    .hero-book-detail {
+      color: var(--blue);
+      font-size: 14px;
+    }
+
+    .slider-arrow {
+      position: absolute;
+      z-index: 10;
+      top: 41%;
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(232, 232, 237, 0.90);
+      color: var(--near-black);
+      cursor: pointer;
+      font-size: 31px;
+      line-height: 1;
+      opacity: 0;
+      transition:
+        opacity 0.2s ease,
+        background 0.2s ease;
+      transform: translateY(-50%);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .hero-book-slider:hover .slider-arrow,
+    .hero-book-slider:focus-within .slider-arrow {
+      opacity: 1;
+    }
+
+    .slider-arrow:hover {
+      background: rgba(214, 214, 219, 0.96);
+    }
+
+    .slider-arrow-prev {
+      left: 7px;
+    }
+
+    .slider-arrow-next {
+      right: 7px;
+    }
+
+    .slider-dots {
+      position: absolute;
+      z-index: 10;
+      right: 0;
+      bottom: 6px;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .slider-dot {
+      width: 7px;
+      height: 7px;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: #b6b6ba;
+      cursor: pointer;
+      transition:
+        width 0.25s ease,
+        border-radius 0.25s ease,
+        background 0.25s ease;
+    }
+
+    .slider-dot.active {
+      width: 24px;
+      border-radius: 99px;
+      background: var(--near-black);
     }
 
     .full-panel {
@@ -1000,24 +1157,38 @@
       }
 
       .hero-visual {
-        height: 355px;
+        width: 100%;
+        height: 490px;
+        margin-top: 18px;
       }
 
-      .book-mockup {
-        height: 325px;
+      .hero-book-image {
+        height: 335px;
       }
 
-      .image-fallback {
-        width: 205px;
-        height: 270px;
+      .hero-book-image img {
+        height: 320px;
       }
 
-      .fallback-copy {
-        inset: 42px 25px auto 34px;
+      .hero-book-caption {
+        width: calc(100% - 54px);
+        min-height: 145px;
+        padding-right: 10px;
+        padding-left: 10px;
       }
 
-      .fallback-copy strong {
-        font-size: 24px;
+      .slider-arrow {
+        width: 39px;
+        height: 39px;
+        opacity: 1;
+      }
+
+      .slider-arrow-prev {
+        left: 0;
+      }
+
+      .slider-arrow-next {
+        right: 0;
       }
 
       .full-panel {
@@ -1137,7 +1308,7 @@
     <div class="nav-inner">
       <a class="nav-brand" href="index.html">
         <span class="brand-symbol">LT</span>
-        <span>dhaniswara86</span>
+        <span>Learning Tax</span>
       </a>
 
       <nav class="desktop-menu" aria-label="Navigasi utama">
@@ -1189,16 +1360,16 @@
 
     <section class="hero">
       <div class="hero-copy">
-        <p class="eyebrow">Katalog Bahan Pembelajaran</p>
+        <p class="eyebrow">Learning Tax</p>
 
         <h1>
           Belajar pajak.
-          <span class="hero-gradient">Mudah. Gratis.</span>
+          <span class="hero-gradient">Lebih sederhana.</span>
         </h1>
 
         <p class="hero-description">
           Buku, formulir, template, dan materi perpajakan dalam satu
-          tempat yang terintegrasi, praktis, dan gratis.
+          tempat yang bersih, praktis, dan mudah dijelajahi.
         </p>
 
         <div class="hero-actions">
@@ -1215,22 +1386,238 @@
       <div class="hero-visual">
         <div class="hero-glow"></div>
 
-        <div class="image-fallback" aria-hidden="true">
-          <div class="fallback-copy">
-            <small>Petunjuk Teknis</small>
-            <strong>
-              Converter Excel ke XML Coretax
-            </strong>
-            <div class="fallback-line"></div>
-          </div>
-        </div>
-
-        <img
-          class="book-mockup"
-          src="images/mockup-converter-excel-xml-unifikasi.webp"
-          alt="Mockup buku Petunjuk Teknis Converter Excel ke XML Coretax"
-          onerror="this.style.display='none'"
+        <section
+          class="hero-book-slider"
+          id="heroBookSlider"
+          aria-label="Katalog buku pilihan"
+          tabindex="0"
         >
+          <div class="hero-book-viewport">
+            <div class="hero-book-track">
+
+              <article class="hero-book-slide">
+                <a
+                  class="hero-book-link"
+                  href="converter-xml-unifikasi.html"
+                >
+                  <div class="hero-book-image">
+                    <div class="slider-fallback">
+                      <small>Petunjuk Teknis</small>
+                      <strong>
+                        Converter Excel ke XML Coretax
+                      </strong>
+                      <div class="slider-fallback-line"></div>
+                    </div>
+
+                    <img
+                      src="images/mockup-converter-excel-xml-unifikasi.webp"
+                      alt="Mockup buku Converter Excel ke XML Coretax Seri PPh Unifikasi"
+                      loading="eager"
+                      onload="this.previousElementSibling.hidden=true"
+                      onerror="this.style.display='none'"
+                    >
+                  </div>
+
+                  <div class="hero-book-caption">
+                    <span class="hero-book-category">
+                      Coretax dan XML
+                    </span>
+
+                    <h2>
+                      Converter Excel ke XML Coretax
+                      Seri PPh Unifikasi
+                    </h2>
+
+                    <span class="hero-book-detail">
+                      Lihat detail ›
+                    </span>
+                  </div>
+                </a>
+              </article>
+
+              <article class="hero-book-slide">
+                <a
+                  class="hero-book-link"
+                  href="converter-xml-2126.html"
+                >
+                  <div class="hero-book-image">
+                    <div class="slider-fallback">
+                      <small>Petunjuk Teknis</small>
+                      <strong>
+                        Converter Excel ke XML PPh 21/26
+                      </strong>
+                      <div class="slider-fallback-line"></div>
+                    </div>
+
+                    <img
+                      src="images/mockup-converter-excel-xml-2126.webp"
+                      alt="Mockup buku Converter Excel ke XML Coretax Seri PPh Pasal 21/26"
+                      loading="lazy"
+                      onload="this.previousElementSibling.hidden=true"
+                      onerror="this.style.display='none'"
+                    >
+                  </div>
+
+                  <div class="hero-book-caption">
+                    <span class="hero-book-category">
+                      Coretax dan PPh 21/26
+                    </span>
+
+                    <h2>
+                      Converter Excel ke XML Coretax
+                      Seri PPh Pasal 21/26
+                    </h2>
+
+                    <span class="hero-book-detail">
+                      Lihat detail ›
+                    </span>
+                  </div>
+                </a>
+              </article>
+
+              <article class="hero-book-slide">
+                <a
+                  class="hero-book-link"
+                  href="list-barang-jasa-faktur.html"
+                >
+                  <div class="hero-book-image">
+                    <div class="slider-fallback">
+                      <small>Referensi PPN</small>
+                      <strong>
+                        Kode Barang dan Jasa Coretax
+                      </strong>
+                      <div class="slider-fallback-line"></div>
+                    </div>
+
+                    <img
+                      src="images/mockup-list-kode-barang-jasa.webp"
+                      alt="Mockup buku Kode Barang dan Jasa di Faktur Pajak Era Coretax"
+                      loading="lazy"
+                      onload="this.previousElementSibling.hidden=true"
+                      onerror="this.style.display='none'"
+                    >
+                  </div>
+
+                  <div class="hero-book-caption">
+                    <span class="hero-book-category">
+                      PPN dan Faktur Pajak
+                    </span>
+
+                    <h2>
+                      Kode Barang dan Jasa di Faktur Pajak
+                      Era Coretax
+                    </h2>
+
+                    <span class="hero-book-detail">
+                      Lihat detail ›
+                    </span>
+                  </div>
+                </a>
+              </article>
+
+              <article class="hero-book-slide">
+                <a
+                  class="hero-book-link"
+                  href="kap-kjs.html"
+                >
+                  <div class="hero-book-image">
+                    <div class="slider-fallback">
+                      <small>Referensi Pembayaran</small>
+                      <strong>
+                        KAP dan KJS Era Coretax
+                      </strong>
+                      <div class="slider-fallback-line"></div>
+                    </div>
+
+                    <img
+                      src="images/mockup-kap-kjs-era-coretax.webp"
+                      alt="Mockup buku KAP dan KJS Era Coretax"
+                      loading="lazy"
+                      onload="this.previousElementSibling.hidden=true"
+                      onerror="this.style.display='none'"
+                    >
+                  </div>
+
+                  <div class="hero-book-caption">
+                    <span class="hero-book-category">
+                      Pembayaran Pajak
+                    </span>
+
+                    <h2>
+                      Kode Akun Pajak dan Kode Jenis Setor
+                      Era Coretax
+                    </h2>
+
+                    <span class="hero-book-detail">
+                      Lihat detail ›
+                    </span>
+                  </div>
+                </a>
+              </article>
+
+              <article class="hero-book-slide">
+                <a
+                  class="hero-book-link"
+                  href="30menit-paham-ebupot.html"
+                >
+                  <div class="hero-book-image">
+                    <div class="slider-fallback">
+                      <small>Panduan e-Bupot</small>
+                      <strong>
+                        30 Menit Paham e-Bupot
+                      </strong>
+                      <div class="slider-fallback-line"></div>
+                    </div>
+
+                    <img
+                      src="images/mockup-30-menit-paham-ebupot.webp"
+                      alt="Mockup buku 30 Menit Paham e-Bupot"
+                      loading="lazy"
+                      onload="this.previousElementSibling.hidden=true"
+                      onerror="this.style.display='none'"
+                    >
+                  </div>
+
+                  <div class="hero-book-caption">
+                    <span class="hero-book-category">
+                      PPh Pasal 23/26
+                    </span>
+
+                    <h2>
+                      30 Menit Paham e-Bupot
+                    </h2>
+
+                    <span class="hero-book-detail">
+                      Lihat detail ›
+                    </span>
+                  </div>
+                </a>
+              </article>
+
+            </div>
+          </div>
+
+          <button
+            class="slider-arrow slider-arrow-prev"
+            type="button"
+            aria-label="Buku sebelumnya"
+          >
+            ‹
+          </button>
+
+          <button
+            class="slider-arrow slider-arrow-next"
+            type="button"
+            aria-label="Buku berikutnya"
+          >
+            ›
+          </button>
+
+          <div
+            class="slider-dots"
+            aria-label="Pilih buku"
+          ></div>
+        </section>
       </div>
     </section>
 
@@ -1277,8 +1664,8 @@
         </h2>
 
         <p class="section-description">
-          Temukan petunjuk pembuatan file XML menggunakan Converter Excel ke XML
-          untuk membuat bukti potong/pungut/faktur secara cepat dan praktis.
+          Temukan petunjuk penggunaan Coretax, converter, XML, dan
+          alat bantu administrasi perpajakan yang praktis.
         </p>
 
         <div class="section-actions">
@@ -1375,7 +1762,7 @@
         </h2>
 
         <p>
-          Kabayan adalah ruang edukasi pribadi untuk membagikan
+          Learning Tax adalah ruang edukasi pribadi untuk membagikan
           pengetahuan, buku digital, formulir, template, dan alat bantu
           perpajakan secara lebih sederhana dan terstruktur.
         </p>
@@ -1401,7 +1788,7 @@
   <footer>
     <div class="disclaimer">
       <strong>Disclaimer:</strong>
-      Kabayan merupakan situs edukasi perpajakan pribadi dan bukan
+      Learning Tax merupakan situs edukasi perpajakan pribadi dan bukan
       situs resmi Direktorat Jenderal Pajak atau instansi pemerintah.
       Materi harus diperiksa kembali dengan ketentuan perpajakan terbaru
       sebelum digunakan.
@@ -1447,6 +1834,221 @@
         menuToggle.textContent = "☰";
       });
     });
+
+
+    const heroSlider =
+      document.getElementById("heroBookSlider");
+
+    if (heroSlider) {
+      const track =
+        heroSlider.querySelector(".hero-book-track");
+
+      const slides = Array.from(
+        heroSlider.querySelectorAll(".hero-book-slide")
+      );
+
+      const previousButton =
+        heroSlider.querySelector(".slider-arrow-prev");
+
+      const nextButton =
+        heroSlider.querySelector(".slider-arrow-next");
+
+      const dotsContainer =
+        heroSlider.querySelector(".slider-dots");
+
+      const reduceMotion =
+        window.matchMedia(
+          "(prefers-reduced-motion: reduce)"
+        ).matches;
+
+      let currentSlide = 0;
+      let autoSlideTimer = null;
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      slides.forEach((slide, index) => {
+        const dot = document.createElement("button");
+
+        dot.type = "button";
+        dot.className = "slider-dot";
+        dot.setAttribute(
+          "aria-label",
+          "Tampilkan buku " + (index + 1)
+        );
+
+        dot.addEventListener("click", () => {
+          goToSlide(index);
+          restartAutoSlide();
+        });
+
+        dotsContainer.appendChild(dot);
+      });
+
+      const dots = Array.from(
+        dotsContainer.querySelectorAll(".slider-dot")
+      );
+
+      function goToSlide(index) {
+        currentSlide =
+          (index + slides.length) % slides.length;
+
+        track.style.transform =
+          "translateX(-" + currentSlide * 100 + "%)";
+
+        slides.forEach((slide, slideIndex) => {
+          const isCurrent =
+            slideIndex === currentSlide;
+
+          slide.setAttribute(
+            "aria-hidden",
+            String(!isCurrent)
+          );
+
+          const link =
+            slide.querySelector(".hero-book-link");
+
+          if (link) {
+            link.tabIndex = isCurrent ? 0 : -1;
+          }
+        });
+
+        dots.forEach((dot, dotIndex) => {
+          const isActive =
+            dotIndex === currentSlide;
+
+          dot.classList.toggle("active", isActive);
+
+          dot.setAttribute(
+            "aria-current",
+            isActive ? "true" : "false"
+          );
+        });
+      }
+
+      function nextSlide() {
+        goToSlide(currentSlide + 1);
+      }
+
+      function previousSlide() {
+        goToSlide(currentSlide - 1);
+      }
+
+      function stopAutoSlide() {
+        if (autoSlideTimer !== null) {
+          window.clearInterval(autoSlideTimer);
+          autoSlideTimer = null;
+        }
+      }
+
+      function startAutoSlide() {
+        if (reduceMotion || slides.length < 2) {
+          return;
+        }
+
+        stopAutoSlide();
+
+        autoSlideTimer = window.setInterval(
+          nextSlide,
+          4500
+        );
+      }
+
+      function restartAutoSlide() {
+        stopAutoSlide();
+        startAutoSlide();
+      }
+
+      previousButton.addEventListener("click", () => {
+        previousSlide();
+        restartAutoSlide();
+      });
+
+      nextButton.addEventListener("click", () => {
+        nextSlide();
+        restartAutoSlide();
+      });
+
+      heroSlider.addEventListener(
+        "mouseenter",
+        stopAutoSlide
+      );
+
+      heroSlider.addEventListener(
+        "mouseleave",
+        startAutoSlide
+      );
+
+      heroSlider.addEventListener(
+        "focusin",
+        stopAutoSlide
+      );
+
+      heroSlider.addEventListener(
+        "focusout",
+        startAutoSlide
+      );
+
+      heroSlider.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowLeft") {
+          event.preventDefault();
+          previousSlide();
+          restartAutoSlide();
+        }
+
+        if (event.key === "ArrowRight") {
+          event.preventDefault();
+          nextSlide();
+          restartAutoSlide();
+        }
+      });
+
+      heroSlider.addEventListener(
+        "touchstart",
+        (event) => {
+          touchStartX =
+            event.changedTouches[0].screenX;
+        },
+        { passive: true }
+      );
+
+      heroSlider.addEventListener(
+        "touchend",
+        (event) => {
+          touchEndX =
+            event.changedTouches[0].screenX;
+
+          const difference =
+            touchStartX - touchEndX;
+
+          if (Math.abs(difference) < 45) {
+            return;
+          }
+
+          if (difference > 0) {
+            nextSlide();
+          } else {
+            previousSlide();
+          }
+
+          restartAutoSlide();
+        },
+        { passive: true }
+      );
+
+      document.addEventListener(
+        "visibilitychange",
+        () => {
+          if (document.hidden) {
+            stopAutoSlide();
+          } else {
+            startAutoSlide();
+          }
+        }
+      );
+
+      goToSlide(0);
+      startAutoSlide();
+    }
 
     document.getElementById("currentYear").textContent =
       new Date().getFullYear();
