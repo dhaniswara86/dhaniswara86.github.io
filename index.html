@@ -10,7 +10,7 @@
 
   <meta
     name="description"
-    content="Kabayan by Angga Sukma Dhaniswara menyediakan buku digital, formulir, template, dan materi pembelajaran perpajakan."
+    content="Kabayan by Angga Sukma Dhaniswara menyediakan buku digital, formulir, aplikasi, template, dan materi pembelajaran perpajakan."
   >
 
   <meta name="author" content="Angga Sukma Dhaniswara">
@@ -22,7 +22,7 @@
 
   <meta
     property="og:description"
-    content="Belajar pajak lebih sederhana melalui buku, formulir, dan materi yang terstruktur."
+    content="Belajar pajak lebih sederhana melalui buku, formulir, aplikasi, dan materi yang terstruktur."
   >
 
   <meta
@@ -865,6 +865,220 @@
       font-size: 12px;
     }
 
+
+    .applications-panel {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(
+          circle at 50% 94%,
+          rgba(0, 113, 227, 0.18),
+          transparent 32%
+        ),
+        linear-gradient(
+          180deg,
+          #ffffff,
+          #f4f7fc
+        );
+    }
+
+    .applications-panel .section-description {
+      max-width: 760px;
+    }
+
+    .application-stage {
+      position: relative;
+      width: min(820px, 94vw);
+      height: 360px;
+      margin: 32px auto 0;
+    }
+
+    .application-window {
+      position: absolute;
+      right: 0;
+      bottom: -18px;
+      left: 0;
+      width: 690px;
+      max-width: 92vw;
+      height: 340px;
+      margin: auto;
+      overflow: hidden;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 26px 26px 10px 10px;
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow:
+        0 34px 78px rgba(26, 49, 87, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    .application-toolbar {
+      height: 45px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 17px;
+      border-bottom: 1px solid var(--soft-gray);
+      background: rgba(245, 245, 247, 0.82);
+    }
+
+    .toolbar-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #d2d2d7;
+    }
+
+    .application-body {
+      height: calc(100% - 45px);
+      display: grid;
+      grid-template-columns: 175px 1fr;
+    }
+
+    .application-sidebar {
+      padding: 19px 15px;
+      border-right: 1px solid var(--soft-gray);
+      background: rgba(245, 245, 247, 0.68);
+      text-align: left;
+    }
+
+    .sidebar-label {
+      display: block;
+      margin: 0 0 12px 8px;
+      color: var(--medium-gray);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .sidebar-item {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      min-height: 37px;
+      padding: 8px 10px;
+      border-radius: 9px;
+      color: #515154;
+      font-size: 12px;
+    }
+
+    .sidebar-item.active {
+      background: rgba(0, 113, 227, 0.11);
+      color: var(--blue);
+      font-weight: 650;
+    }
+
+    .sidebar-icon {
+      width: 21px;
+      height: 21px;
+      display: grid;
+      place-items: center;
+      border-radius: 7px;
+      background: var(--white);
+      box-shadow: 0 2px 7px rgba(0, 0, 0, 0.07);
+      font-size: 9px;
+      font-weight: 750;
+    }
+
+    .application-content {
+      padding: 23px;
+      text-align: left;
+    }
+
+    .application-content-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 16px;
+    }
+
+    .application-content-header strong {
+      display: block;
+      font-size: 19px;
+      letter-spacing: -0.035em;
+    }
+
+    .application-content-header span {
+      color: var(--medium-gray);
+      font-size: 11px;
+    }
+
+    .application-search {
+      width: 145px;
+      min-height: 29px;
+      display: flex;
+      align-items: center;
+      padding: 6px 10px;
+      border-radius: 9px;
+      background: var(--off-white);
+      color: var(--medium-gray);
+      font-size: 10px;
+    }
+
+    .application-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .application-row {
+      display: grid;
+      align-items: center;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      gap: 11px;
+      padding: 10px 12px;
+      border: 1px solid var(--soft-gray);
+      border-radius: 13px;
+      background: var(--white);
+    }
+
+    .application-row-icon {
+      width: 35px;
+      height: 35px;
+      display: grid;
+      place-items: center;
+      border-radius: 11px;
+      background:
+        linear-gradient(
+          145deg,
+          #eaf4ff,
+          #d8ecff
+        );
+      color: var(--blue);
+      font-size: 10px;
+      font-weight: 750;
+    }
+
+    .application-row strong {
+      display: block;
+      font-size: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .application-row small {
+      display: block;
+      margin-top: 2px;
+      color: var(--medium-gray);
+      font-size: 9px;
+    }
+
+    .application-status {
+      padding: 4px 7px;
+      border-radius: 999px;
+      background: #f0ebf7;
+      color: #8944ab;
+      font-size: 8px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .application-status.support {
+      background: #eaf4ff;
+      color: var(--blue);
+    }
+
     .grid-section {
       padding: 12px;
       background: var(--white);
@@ -872,7 +1086,7 @@
 
     .feature-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: 1fr;
       gap: 12px;
     }
 
@@ -880,24 +1094,13 @@
       position: relative;
       min-height: 610px;
       overflow: hidden;
-      padding: 55px 32px 0;
+      padding: 65px 32px 0;
       text-align: center;
     }
 
     .feature-card.light {
       background: var(--off-white);
       color: var(--near-black);
-    }
-
-    .feature-card.dark {
-      background:
-        radial-gradient(
-          circle at 50% 100%,
-          rgba(29, 109, 255, 0.26),
-          transparent 35%
-        ),
-        #000000;
-      color: var(--white);
     }
 
     .feature-card h3 {
@@ -914,10 +1117,6 @@
       color: #515154;
       font-size: 19px;
       line-height: 1.27;
-    }
-
-    .feature-card.dark p {
-      color: #c7c7cc;
     }
 
     .simple-link {
@@ -985,41 +1184,6 @@
       width: 72%;
     }
 
-    .learning-orb {
-      position: absolute;
-      right: 0;
-      bottom: -70px;
-      left: 0;
-      width: 350px;
-      height: 350px;
-      margin: auto;
-      border-radius: 50%;
-      background:
-        radial-gradient(
-          circle at 34% 27%,
-          #7cc7ff,
-          #1355c8 42%,
-          #07122f 75%
-        );
-      box-shadow:
-        0 0 80px rgba(0, 113, 227, 0.38);
-    }
-
-    .learning-orb::before,
-    .learning-orb::after {
-      position: absolute;
-      border: 1px solid rgba(255, 255, 255, 0.32);
-      border-radius: 50%;
-      content: "";
-    }
-
-    .learning-orb::before {
-      inset: 45px;
-    }
-
-    .learning-orb::after {
-      inset: 91px;
-    }
 
     .about {
       padding: 110px 24px;
@@ -1225,6 +1389,47 @@
         height: 205px;
       }
 
+      .application-stage {
+        height: 330px;
+      }
+
+      .application-window {
+        height: 310px;
+      }
+
+      .application-body {
+        grid-template-columns: 132px 1fr;
+      }
+
+      .application-sidebar {
+        padding-right: 9px;
+        padding-left: 9px;
+      }
+
+      .sidebar-item {
+        gap: 6px;
+        padding-right: 7px;
+        padding-left: 7px;
+        font-size: 10px;
+      }
+
+      .application-content {
+        padding: 17px 14px;
+      }
+
+      .application-search {
+        display: none;
+      }
+
+      .application-row {
+        padding: 8px;
+      }
+
+      .application-row-icon {
+        width: 31px;
+        height: 31px;
+      }
+
       .dark-visual {
         height: 310px;
       }
@@ -1272,6 +1477,31 @@
         width: 340px;
       }
 
+      .application-body {
+        grid-template-columns: 94px 1fr;
+      }
+
+      .sidebar-label,
+      .sidebar-item span:not(.sidebar-icon) {
+        display: none;
+      }
+
+      .sidebar-item {
+        justify-content: center;
+      }
+
+      .application-content-header span {
+        display: none;
+      }
+
+      .application-row {
+        grid-template-columns: auto minmax(0, 1fr);
+      }
+
+      .application-status {
+        display: none;
+      }
+
       .screen-card {
         width: 115px;
         padding: 13px;
@@ -1303,7 +1533,7 @@
   </style>
 </head>
 
-<body>
+<body id="top">
   <header class="site-nav">
     <div class="nav-inner">
       <a class="nav-brand" href="index.html">
@@ -1315,6 +1545,7 @@
         <a href="index.html">Beranda</a>
         <a href="buku.html">Buku</a>
         <a href="formulir.html">Formulir</a>
+        <a href="aplikasi.html">Aplikasi</a>
         <a href="#coretax">Coretax</a>
         <a href="#artikel">Artikel</a>
         <a href="#tentang">Tentang</a>
@@ -1347,6 +1578,7 @@
     <a href="index.html">Beranda</a>
     <a href="buku.html">Buku Digital</a>
     <a href="formulir.html">Formulir</a>
+    <a href="aplikasi.html">Aplikasi</a>
     <a href="#coretax">Coretax XML</a>
     <a href="#artikel">Artikel</a>
     <a href="#tentang">Tentang</a>
@@ -1354,8 +1586,8 @@
 
   <main>
     <div class="announcement">
-      Temukan koleksi buku dan formulir perpajakan terbaru.
-      <a href="buku.html">Lihat koleksi ›</a>
+      Temukan buku, formulir, dan aplikasi perpajakan dalam satu tempat.
+      <a href="aplikasi.html">Lihat aplikasi ›</a>
     </div>
 
     <section class="hero">
@@ -1368,8 +1600,8 @@
         </h1>
 
         <p class="hero-description">
-          Buku, formulir, template, dan materi perpajakan dalam satu
-          tempat yang praktis, dan gratis.
+          Buku, formulir, aplikasi, template, dan materi perpajakan
+          dalam satu tempat yang praktis dan gratis.
         </p>
 
         <div class="hero-actions">
@@ -1379,6 +1611,10 @@
 
           <a class="button button-outline" href="formulir.html">
             Lihat formulir
+          </a>
+
+          <a class="button button-outline" href="aplikasi.html">
+            Lihat aplikasi
           </a>
         </div>
       </div>
@@ -1696,14 +1932,131 @@
       </div>
     </section>
 
+
+    <section class="full-panel applications-panel" id="aplikasi">
+      <div class="panel-content">
+        <p class="section-kicker">Aplikasi Perpajakan</p>
+
+        <h2 class="section-title">
+          Installer dan perangkat pendukung.
+        </h2>
+
+        <p class="section-description">
+          Temukan aplikasi e-SPT, e-Faktur, formulir elektronik,
+          dan perangkat pendukung untuk kebutuhan administrasi
+          maupun pengelolaan data perpajakan periode sebelumnya.
+        </p>
+
+        <div class="section-actions">
+          <a class="button button-primary" href="aplikasi.html">
+            Buka portal aplikasi
+          </a>
+
+          <a class="button button-outline" href="buku.html">
+            Lihat petunjuk
+          </a>
+        </div>
+
+        <div class="application-stage" aria-hidden="true">
+          <div class="application-window">
+            <div class="application-toolbar">
+              <span class="toolbar-dot"></span>
+              <span class="toolbar-dot"></span>
+              <span class="toolbar-dot"></span>
+            </div>
+
+            <div class="application-body">
+              <div class="application-sidebar">
+                <span class="sidebar-label">Kategori</span>
+
+                <div class="sidebar-item active">
+                  <span class="sidebar-icon">A</span>
+                  <span>Semua aplikasi</span>
+                </div>
+
+                <div class="sidebar-item">
+                  <span class="sidebar-icon">S</span>
+                  <span>e-SPT</span>
+                </div>
+
+                <div class="sidebar-item">
+                  <span class="sidebar-icon">F</span>
+                  <span>e-Faktur</span>
+                </div>
+
+                <div class="sidebar-item">
+                  <span class="sidebar-icon">P</span>
+                  <span>Pendukung</span>
+                </div>
+              </div>
+
+              <div class="application-content">
+                <div class="application-content-header">
+                  <div>
+                    <strong>Portal Aplikasi</strong>
+                    <span>Installer dan arsip perpajakan</span>
+                  </div>
+
+                  <div class="application-search">
+                    Cari aplikasi...
+                  </div>
+                </div>
+
+                <div class="application-list">
+                  <div class="application-row">
+                    <span class="application-row-icon">EF</span>
+
+                    <span>
+                      <strong>e-Faktur</strong>
+                      <small>Installer dan database</small>
+                    </span>
+
+                    <span class="application-status">
+                      Arsip
+                    </span>
+                  </div>
+
+                  <div class="application-row">
+                    <span class="application-row-icon">21</span>
+
+                    <span>
+                      <strong>e-SPT Masa PPh Pasal 21</strong>
+                      <small>Aplikasi desktop</small>
+                    </span>
+
+                    <span class="application-status">
+                      Arsip
+                    </span>
+                  </div>
+
+                  <div class="application-row">
+                    <span class="application-row-icon">APP</span>
+
+                    <span>
+                      <strong>Aplikasi Pendukung e-SPT</strong>
+                      <small>Komponen prasyarat</small>
+                    </span>
+
+                    <span class="application-status support">
+                      Pendukung
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="grid-section" id="artikel">
       <div class="feature-grid">
         <article class="feature-card light">
           <h3>Artikel Pajak</h3>
 
           <p>
-            Penjelasan yang ringkas untuk membantu memahami topik
-            perpajakan sehari-hari.
+            Penjelasan yang ringkas, aktual, dan mudah dipahami
+            untuk membantu mengenali berbagai topik perpajakan.
           </p>
 
           <a class="simple-link" href="#artikel">
@@ -1728,21 +2081,6 @@
             </div>
           </div>
         </article>
-
-        <article class="feature-card dark">
-          <h3>Materi Pembelajaran</h3>
-
-          <p>
-            Modul, studi kasus, latihan, dan materi pengajaran dalam
-            satu koleksi.
-          </p>
-
-          <a class="simple-link" href="buku.html">
-            Mulai belajar ›
-          </a>
-
-          <div class="learning-orb" aria-hidden="true"></div>
-        </article>
       </div>
     </section>
 
@@ -1757,8 +2095,8 @@
 
         <p>
           <b>Kabayan</b> (Katalog Bahan Pelayanan) adalah ruang edukasi pribadi untuk membagikan
-          pengetahuan, buku digital, formulir, template, dan alat bantu
-          perpajakan secara lebih sederhana dan terstruktur.
+          pengetahuan, buku digital, formulir, aplikasi, template,
+          dan alat bantu perpajakan secara lebih sederhana dan terstruktur.
         </p>
 
         <div class="section-actions">
@@ -1784,8 +2122,8 @@
       <strong>Disclaimer:</strong>
       Kabayan merupakan situs edukasi perpajakan pribadi dan bukan
       situs resmi Direktorat Jenderal Pajak atau instansi pemerintah.
-      Materi harus diperiksa kembali dengan ketentuan perpajakan terbaru
-      sebelum digunakan.
+      Materi dan aplikasi harus diperiksa kembali dengan ketentuan
+      perpajakan terbaru sebelum digunakan.
     </div>
 
     <div class="footer-inner">
@@ -1797,6 +2135,7 @@
       <div class="footer-links">
         <a href="buku.html">Buku</a>
         <a href="formulir.html">Formulir</a>
+        <a href="aplikasi.html">Aplikasi</a>
         <a href="#tentang">Tentang</a>
         <a href="#top">Kembali ke atas</a>
       </div>
