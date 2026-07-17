@@ -1530,7 +1530,7 @@
         transition: none !important;
       }
     }
-  </style>
+</style>
 </head>
 
 <body id="top">
@@ -2112,11 +2112,21 @@
           >
             Profil Instagram
           </a>
+
+          <a
+            class="button button-outline"
+            id="whatsappLink"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Hubungi Angga melalui WhatsApp"
+          >
+            Hubungi via WhatsApp
+          </a>
         </div>
       </div>
     </section>
   </main>
-
   <footer>
     <div class="disclaimer">
       <strong>Disclaimer:</strong>
@@ -2382,6 +2392,44 @@
 
       goToSlide(0);
       startAutoSlide();
+    }
+
+
+    /*
+      GANTI NOMOR WHATSAPP DI BAWAH INI.
+      Gunakan format internasional tanpa tanda +, spasi, atau tanda hubung.
+      Contoh: 6281234567890
+    */
+    const WHATSAPP_NUMBER = "62818168006";
+
+    const WHATSAPP_MESSAGE =
+      "Halo Pak Angga, saya mengunjungi website Kabayan dan ingin bertanya.";
+
+    const whatsappLink =
+      document.getElementById("whatsappLink");
+
+    if (whatsappLink) {
+      const numberIsReady =
+        /^62\d{8,13}$/.test(WHATSAPP_NUMBER);
+
+      if (numberIsReady) {
+        whatsappLink.href =
+          "https://wa.me/" +
+          WHATSAPP_NUMBER +
+          "?text=" +
+          encodeURIComponent(WHATSAPP_MESSAGE);
+      } else {
+        whatsappLink.removeAttribute("target");
+        whatsappLink.setAttribute("aria-disabled", "true");
+
+        whatsappLink.addEventListener("click", (event) => {
+          event.preventDefault();
+
+          window.alert(
+            "Nomor WhatsApp belum diatur. Ganti nilai WHATSAPP_NUMBER di dalam script index.html."
+          );
+        });
+      }
     }
 
     document.getElementById("currentYear").textContent =
