@@ -150,13 +150,13 @@
 
     .field-row {
       display: grid;
-      grid-template-columns: 29mm 4mm minmax(0, 1fr) 8mm;
+      grid-template-columns: 29mm 4mm minmax(0, 1fr);
       align-items: center;
       min-height: 7mm;
     }
 
     .field-row.secondary {
-      grid-template-columns: 30mm 4mm minmax(0, 1fr) 8mm;
+      grid-template-columns: 30mm 4mm minmax(0, 1fr);
       margin-left: 29mm;
       width: calc(100% - 29mm);
     }
@@ -168,12 +168,6 @@
 
     .colon {
       text-align: center;
-    }
-
-    .number {
-      padding-left: 1.5mm;
-      font-size: 9.5pt;
-      white-space: nowrap;
     }
 
     input[type="text"],
@@ -221,14 +215,13 @@
     }
 
     .field-row.address-row .label,
-    .field-row.address-row .colon,
-    .field-row.address-row .number {
+    .field-row.address-row .colon {
       padding-top: 1mm;
     }
 
     .status-row {
       display: grid;
-      grid-template-columns: 29mm 4mm minmax(0, 1fr) 8mm;
+      grid-template-columns: 29mm 4mm minmax(0, 1fr);
       align-items: start;
       min-height: 15mm;
       margin-bottom: 0.8mm;
@@ -305,7 +298,7 @@
 
     .signature-row {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 8mm;
+      grid-template-columns: minmax(0, 1fr);
       align-items: center;
     }
 
@@ -1245,21 +1238,18 @@
           <label class="label" for="namaPenandatangan">Nama</label>
           <span class="colon">:</span>
           <input id="namaPenandatangan" name="nama_penandatangan" type="text" maxlength="100" data-required aria-label="Nama penandatangan" />
-          <span class="number">(1)</span>
         </div>
 
         <div class="field-row">
           <label class="label" for="npwpPenandatangan">NPWP/NIK</label>
           <span class="colon">:</span>
           <input id="npwpPenandatangan" name="npwp_nik_penandatangan" type="text" maxlength="30" data-required inputmode="numeric" aria-label="NPWP atau NIK penandatangan" />
-          <span class="number">(2)</span>
         </div>
 
         <div class="field-row address-row">
           <label class="label" for="alamatPenandatangan">Alamat</label>
           <span class="colon">:</span>
           <textarea id="alamatPenandatangan" name="alamat_penandatangan" rows="3" maxlength="300" data-required aria-label="Alamat penandatangan"></textarea>
-          <span class="number">(3)</span>
         </div>
 
         <div class="status-row">
@@ -1275,7 +1265,6 @@
               <span>Wakil/Kuasa dari Wajib Pajak</span>
             </label>
           </div>
-          <span class="number"></span>
         </div>
       </section>
 
@@ -1284,21 +1273,18 @@
           <label class="label" for="namaWajibPajak">Nama</label>
           <span class="colon">:</span>
           <input id="namaWajibPajak" name="nama_wajib_pajak" type="text" maxlength="100" data-required aria-label="Nama Wajib Pajak" />
-          <span class="number">(4)</span>
         </div>
 
         <div class="field-row secondary">
           <label class="label" for="npwpWajibPajak">NPWP/NIK</label>
           <span class="colon">:</span>
           <input id="npwpWajibPajak" name="npwp_nik_wajib_pajak" type="text" maxlength="30" data-required inputmode="numeric" aria-label="NPWP atau NIK Wajib Pajak" />
-          <span class="number">(5)</span>
         </div>
 
         <div class="field-row secondary address-row">
           <label class="label" for="alamatWajibPajak">Alamat</label>
           <span class="colon">:</span>
           <textarea id="alamatWajibPajak" name="alamat_wajib_pajak" rows="3" maxlength="300" data-required aria-label="Alamat Wajib Pajak"></textarea>
-          <span class="number">(6)</span>
         </div>
       </section>
 
@@ -1317,7 +1303,6 @@
       <section class="signature-block" aria-label="Tempat tanggal dan tanda tangan">
         <div class="signature-row">
           <input id="tempatTanggal" name="tempat_tanggal_surat" type="text" maxlength="100" data-required placeholder="Contoh: Bandung, 17 Juli 2026" aria-label="Tempat dan tanggal surat" />
-          <span class="number">(7)</span>
         </div>
 
         <div class="signature-gap" aria-hidden="true"></div>
@@ -1325,7 +1310,6 @@
 
         <div class="signature-row">
           <input id="namaJelas" name="nama_jelas_penandatangan" type="text" maxlength="100" data-required placeholder="Nama Lengkap" aria-label="Nama lengkap penandatangan" />
-          <span class="number">(8)</span>
         </div>
       </section>
     </form>
