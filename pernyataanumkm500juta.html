@@ -15,8 +15,8 @@
       --muted: #5f6b7a;
       --line: #a3aab3;
       --danger: #b42318;
-      --paper-width: 216mm;
-      --paper-height: 330mm;
+      --paper-width: 210mm;
+      --paper-height: 297mm;
     }
 
     * {
@@ -124,7 +124,7 @@
       width: var(--paper-width);
       min-height: var(--paper-height);
       margin: 0 auto;
-      padding: 36mm 32mm 24mm;
+      padding: 24mm 23mm 18mm;
       background: #fff;
       color: #000;
       box-shadow: 0 18px 50px rgba(15, 23, 42, 0.18);
@@ -346,15 +346,15 @@
     }
 
     @page {
-      size: 216mm 330mm;
-      margin: 0;
+      size: A4 portrait;
+      margin: 0 !important;
     }
 
     @media print {
       html,
       body {
-        width: 216mm;
-        height: 330mm;
+        width: 210mm;
+        height: 297mm;
         margin: 0 !important;
         padding: 0 !important;
         background: #fff !important;
@@ -373,10 +373,10 @@
       }
 
       .paper {
-        width: 216mm;
-        min-height: 330mm;
+        width: 210mm;
+        min-height: 297mm;
         margin: 0;
-        padding: 36mm 32mm 24mm;
+        padding: 24mm 23mm 18mm;
         box-shadow: none;
         page-break-after: avoid;
         break-after: avoid-page;
@@ -880,8 +880,17 @@
       .announcement,
       .form-hero,
       .site-footer,
-      .footer-note {
+      .footer-note,
+      footer,
+      .print-hidden {
         display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        min-height: 0 !important;
+        max-height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: hidden !important;
       }
 
       .site-main,
@@ -890,6 +899,104 @@
         margin: 0 !important;
         padding: 0 !important;
         background: #fff !important;
+      }
+    }
+  </style>
+
+
+  <style id="a4PrintAdjustments">
+    /*
+      Penyesuaian khusus A4.
+      Formulir tetap menggunakan ukuran asli saat dicetak, tanpa scaling CSS.
+    */
+    .paper {
+      font-size: 11.6pt;
+      line-height: 1.12;
+    }
+
+    .document-title {
+      margin-bottom: 6mm;
+      font-size: 13pt;
+    }
+
+    .opening {
+      margin-bottom: 1mm;
+    }
+
+    .field-row {
+      min-height: 6.5mm;
+    }
+
+    .field-row.address-row {
+      min-height: 17mm;
+    }
+
+    textarea {
+      min-height: 16mm;
+    }
+
+    .status-row {
+      min-height: 14mm;
+      margin-bottom: 0.4mm;
+    }
+
+    .status-option {
+      min-height: 5.8mm;
+    }
+
+    .paragraphs {
+      margin-top: 1mm;
+    }
+
+    .paragraphs p {
+      line-height: 1.12;
+    }
+
+    .closing {
+      margin-top: 4mm !important;
+    }
+
+    .signature-block {
+      margin-top: 7mm;
+    }
+
+    .signature-gap {
+      height: 22mm;
+    }
+
+    @media print {
+      html,
+      body {
+        width: 210mm;
+        height: 297mm;
+      }
+
+      .paper {
+        width: 210mm;
+        min-height: 297mm;
+        padding: 24mm 23mm 18mm;
+        font-size: 11.6pt;
+        line-height: 1.12;
+      }
+
+      .document-title {
+        margin-bottom: 6mm;
+      }
+
+      textarea {
+        min-height: 16mm;
+      }
+
+      .field-row.address-row {
+        min-height: 17mm;
+      }
+
+      .signature-block {
+        margin-top: 7mm;
+      }
+
+      .signature-gap {
+        height: 22mm;
       }
     }
   </style>
@@ -972,7 +1079,7 @@
   </header>
 
   <div class="screen-note no-print">
-    Gunakan kertas <strong>Folio 8,5 × 13 inci (216 × 330 mm)</strong>. Pada dialog cetak, pilih skala <strong>100%</strong> atau <strong>Actual Size</strong> dan nonaktifkan header/footer browser.
+    Gunakan kertas <strong>A4 (210 × 297 mm)</strong>. Pada dialog cetak, pilih ukuran kertas <strong>A4</strong> dan skala <strong>100%</strong> atau <strong>Actual Size</strong> dan nonaktifkan header/footer browser.
   </div>
 
   <div class="paper-wrap">
@@ -1081,7 +1188,7 @@
     </div>
   </main>
 
-  <footer class="site-footer no-print">
+  <footer class="site-footer no-print print-hidden" id="siteFooter">
     <div class="footer-inner">
       <p>© <span id="currentYear"></span> Angga Sukma Dhaniswara.</p>
 
@@ -1119,6 +1226,28 @@
 
     document.getElementById("currentYear").textContent =
       new Date().getFullYear();
+
+    const siteFooter = document.getElementById("siteFooter");
+    const footerNote = document.querySelector(".footer-note");
+
+    const hideWebsiteFooterForPrint = () => {
+      [siteFooter, footerNote].forEach((element) => {
+        if (!element) return;
+        element.dataset.previousDisplay = element.style.display || "";
+        element.style.display = "none";
+      });
+    };
+
+    const restoreWebsiteFooterAfterPrint = () => {
+      [siteFooter, footerNote].forEach((element) => {
+        if (!element) return;
+        element.style.display = element.dataset.previousDisplay || "";
+        delete element.dataset.previousDisplay;
+      });
+    };
+
+    window.addEventListener("beforeprint", hideWebsiteFooterForPrint);
+    window.addEventListener("afterprint", restoreWebsiteFooterAfterPrint);
 
     (() => {
       "use strict";
@@ -1203,6 +1332,7 @@
           }
         }
 
+        hideWebsiteFooterForPrint();
         window.print();
       });
 
