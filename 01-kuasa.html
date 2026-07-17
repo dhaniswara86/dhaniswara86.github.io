@@ -4,19 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- GANTI: deskripsi artikel -->
-  <meta name="description" content="Penjelasan mengenai Kuasa Wajib Pajak, Surat Kuasa Khusus, perbedaan wakil dan kuasa, serta kapan pegawai memerlukan surat kuasa.">
+  <title>Apa Itu Kuasa Wajib Pajak dan Kapan Surat Kuasa Khusus Dibutuhkan?</title>
+  <meta name="description" content="Penjelasan sederhana mengenai Kuasa Wajib Pajak, perbedaan kuasa, wakil, dan pegawai, serta kapan Surat Kuasa Khusus dibutuhkan berdasarkan PMK 44 Tahun 2026 dan PMK 15 Tahun 2025.">
   <meta name="author" content="Angga Sukma Dhaniswara">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#071a38">
 
-  <!-- GANTI: metadata artikel -->
-  <meta property="og:title" content="Apa Itu Kuasa Wajib Pajak? | Kabayan">
-  <meta property="og:description" content="Penjelasan mengenai Kuasa Wajib Pajak, Surat Kuasa Khusus, perbedaan wakil dan kuasa, serta kapan pegawai memerlukan surat kuasa.">
-  <meta property="og:url" content="https://dhaniswara86.github.io/artikel.html">
+  <!-- Ganti URL berikut setelah halaman dipublikasikan -->
+  <link rel="canonical" href="https://dhaniswara86.github.io/apa-itu-kuasa-wajib-pajak.html">
+
   <meta property="og:type" content="article">
+  <meta property="og:title" content="Apa Itu Kuasa Wajib Pajak dan Kapan Surat Kuasa Khusus Dibutuhkan?">
+  <meta property="og:description" content="Memahami batas antara pegawai yang memberikan keterangan dan pihak yang bertindak sebagai Kuasa Wajib Pajak.">
+  <meta property="og:locale" content="id_ID">
+  <meta property="og:site_name" content="Kabayan by Angga Sukma Dhaniswara">
 
-  <!-- GANTI: judul halaman -->
-  <title>Apa Itu Kuasa Wajib Pajak? | Kabayan</title>
-
+  
   <style>
     :root {
       --black: #000000;
@@ -29,31 +32,71 @@
       --blue-hover: #0077ed;
       --yellow: #ffcc00;
       --green: #248a3d;
+      --green-soft: #edf8ef;
       --orange: #bf5b00;
-      --max-width: 1180px;
-      --article-width: 760px;
+      --orange-soft: #fff7e8;
+      --red: #d70015;
+      --red-soft: #fff0ee;
       --nav-height: 48px;
+      --max-width: 1180px;
+      --article-width: 790px;
     }
 
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 82px;
+    }
 
     body {
       margin: 0;
       overflow-x: hidden;
       background: var(--white);
       color: var(--near-black);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, Helvetica, sans-serif;
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        Helvetica,
+        sans-serif;
       line-height: 1.6;
       letter-spacing: -0.015em;
+      -webkit-font-smoothing: antialiased;
     }
 
-    body.menu-open { overflow: hidden; }
-    img { display: block; max-width: 100%; }
-    a { color: inherit; }
-    button { font: inherit; }
+    body.menu-open {
+      overflow: hidden;
+    }
 
-    .site-nav {
+    a {
+      color: inherit;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .reading-progress {
+      position: fixed;
+      z-index: 2000;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 3px;
+      background:
+        linear-gradient(
+          90deg,
+          #0071e3,
+          #25a6d9,
+          #ffb800
+        );
+    }
+
+    .site-header {
       position: fixed;
       z-index: 1000;
       top: 0;
@@ -66,7 +109,7 @@
       -webkit-backdrop-filter: saturate(180%) blur(20px);
     }
 
-    .nav-inner {
+    .header-inner {
       width: min(var(--max-width), calc(100% - 36px));
       min-height: var(--nav-height);
       display: flex;
@@ -76,7 +119,7 @@
       margin: 0 auto;
     }
 
-    .nav-brand {
+    .brand {
       display: inline-flex;
       flex-shrink: 0;
       align-items: center;
@@ -87,7 +130,7 @@
       text-decoration: none;
     }
 
-    .brand-symbol {
+    .brand-mark {
       width: 25px;
       height: 25px;
       display: grid;
@@ -98,136 +141,123 @@
       font-size: 9px;
       font-weight: 800;
       letter-spacing: -0.04em;
+      box-shadow: none;
     }
 
-    .desktop-menu {
+    .brand-text {
+      display: block;
+      line-height: 1;
+    }
+
+    .brand-text > span {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .brand-text small {
+      display: none;
+    }
+
+    .main-nav {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 31px;
     }
 
-    .desktop-menu a {
+    .main-nav a {
       color: #424245;
       font-size: 12px;
+      font-weight: 400;
       text-decoration: none;
       white-space: nowrap;
     }
 
-    .desktop-menu a:hover,
-    .desktop-menu a[aria-current="page"] { color: var(--black); }
-
-    .nav-actions {
-      display: flex;
-      flex-shrink: 0;
-      align-items: center;
-      gap: 7px;
+    .main-nav a:hover,
+    .main-nav a[aria-current="page"] {
+      color: var(--black);
     }
 
-    .search-link,
-    .menu-toggle {
+    .menu-button {
       width: 34px;
       height: 34px;
-      display: grid;
+      display: none;
       place-items: center;
       border: 0;
       border-radius: 50%;
       background: transparent;
       color: var(--near-black);
       cursor: pointer;
-      text-decoration: none;
-    }
-
-    .search-link:hover,
-    .menu-toggle:hover { background: rgba(0, 0, 0, 0.055); }
-
-    .menu-toggle {
-      display: none;
       font-size: 18px;
     }
 
-    .mobile-menu {
-      position: fixed;
-      z-index: 999;
-      inset: var(--nav-height) 0 0;
-      display: none;
-      padding: 36px 28px;
-      background: rgba(250, 250, 252, 0.98);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
+    .menu-button:hover {
+      background: rgba(0, 0, 0, 0.055);
     }
 
-    .mobile-menu.active { display: block; }
-
-    .mobile-menu a {
-      display: block;
-      padding: 11px 0;
-      color: var(--near-black);
-      font-size: 28px;
-      font-weight: 650;
-      letter-spacing: -0.04em;
-      text-decoration: none;
+    main {
+      padding-top: var(--nav-height);
     }
 
-    main { padding-top: var(--nav-height); }
-
-    .announcement {
-      padding: 13px 20px;
-      background: var(--off-white);
-      color: #3a3a3c;
-      font-size: 14px;
-      text-align: center;
-    }
-
-    .announcement a {
-      color: var(--blue);
-      text-decoration: none;
-    }
-
-    .announcement a:hover { text-decoration: underline; }
-
-    .article-hero {
+    .hero {
       position: relative;
       overflow: hidden;
-      padding: 94px 20px 74px;
+      padding: 100px 20px 78px;
+      background: var(--white);
+      color: var(--near-black);
       text-align: center;
     }
 
-    .article-hero::before {
+    .hero::before {
       position: absolute;
-      top: -210px;
+      top: -220px;
       left: 50%;
-      width: 860px;
-      height: 560px;
+      width: 870px;
+      height: 580px;
       border-radius: 50%;
-      background: radial-gradient(ellipse, rgba(0, 113, 227, 0.19), rgba(47, 157, 255, 0.07) 45%, transparent 72%);
+      background:
+        radial-gradient(
+          ellipse,
+          rgba(0, 113, 227, 0.19),
+          rgba(47, 157, 255, 0.07) 45%,
+          transparent 72%
+        );
       filter: blur(8px);
       content: "";
       transform: translateX(-50%);
       pointer-events: none;
     }
 
+    .hero::after {
+      display: none;
+    }
+
     .hero-inner {
       position: relative;
       z-index: 1;
-      width: min(980px, 100%);
+      width: min(1020px, 100%);
       margin: 0 auto;
+      padding: 0;
+      text-align: center;
     }
 
-    .article-category {
+    .eyebrow {
       display: inline-flex;
       align-items: center;
       gap: 7px;
-      margin-bottom: 17px;
+      margin-bottom: 18px;
       padding: 7px 12px;
+      border: 0;
       border-radius: 999px;
       background: var(--off-white);
       color: #515154;
       font-size: 12px;
       font-weight: 650;
+      letter-spacing: 0;
+      text-transform: none;
     }
 
-    .article-category::before {
+    .eyebrow::before {
       width: 7px;
       height: 7px;
       border-radius: 50%;
@@ -235,26 +265,34 @@
       content: "";
     }
 
-    h1 {
-      max-width: 980px;
+    .hero h1 {
+      max-width: 1020px;
       margin: 0 auto;
+      color: var(--near-black);
       font-size: clamp(48px, 7vw, 84px);
       font-weight: 700;
       letter-spacing: -0.065em;
       line-height: 0.98;
     }
 
-    .hero-gradient {
+    .hero h1 .gradient-line {
       display: block;
-      background: linear-gradient(90deg, #093b91, #0071e3 42%, #25a6d9 70%, #e9aa00);
+      background:
+        linear-gradient(
+          90deg,
+          #093b91,
+          #0071e3 42%,
+          #25a6d9 70%,
+          #e9aa00
+        );
       background-clip: text;
       -webkit-background-clip: text;
       color: transparent;
     }
 
-    .article-lead {
-      max-width: 780px;
-      margin: 26px auto 0;
+    .hero-lead {
+      max-width: 790px;
+      margin: 27px auto 0;
       color: #515154;
       font-size: clamp(19px, 2.2vw, 25px);
       line-height: 1.35;
@@ -265,12 +303,14 @@
       flex-wrap: wrap;
       justify-content: center;
       gap: 8px 18px;
-      margin-top: 27px;
+      margin-top: 28px;
       color: var(--medium-gray);
       font-size: 13px;
     }
 
-    .article-meta span { position: relative; }
+    .article-meta span {
+      position: relative;
+    }
 
     .article-meta span:not(:last-child)::after {
       position: absolute;
@@ -284,135 +324,180 @@
       transform: translateY(-50%);
     }
 
-    .hero-cover {
-      width: min(var(--max-width), calc(100% - 40px));
-      min-height: 460px;
-      display: grid;
-      place-items: center;
-      overflow: hidden;
-      margin: 0 auto;
-      border-radius: 32px;
-      background:
-        radial-gradient(circle at 72% 25%, rgba(255, 204, 0, 0.34), transparent 19%),
-        radial-gradient(circle at 28% 80%, rgba(0, 113, 227, 0.28), transparent 28%),
-        linear-gradient(145deg, #071a38, #0755a3 54%, #1aa4c7);
-      color: var(--white);
-      text-align: center;
-    }
-
-    .cover-content {
-      width: min(700px, calc(100% - 48px));
-      padding: 70px 20px;
-    }
-
-    .cover-content small {
-      display: block;
-      margin-bottom: 15px;
-      color: #cce9ff;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .cover-content strong {
-      display: block;
-      font-size: clamp(38px, 5.5vw, 68px);
-      letter-spacing: -0.055em;
-      line-height: 1;
-    }
-
-    .cover-line {
-      width: 62px;
-      height: 6px;
-      margin: 25px auto 0;
-      border-radius: 999px;
-      background: var(--yellow);
-    }
-
-    .article-layout {
+    .article-shell {
       width: min(var(--max-width), calc(100% - 40px));
       display: grid;
       align-items: start;
-      grid-template-columns: minmax(0, var(--article-width)) 270px;
+      grid-template-columns: minmax(0, var(--article-width)) 280px;
       justify-content: center;
       gap: 70px;
       margin: 0 auto;
-      padding: 88px 0 105px;
+      padding: 84px 0 105px;
     }
 
-    .article-content { min-width: 0; }
-    .article-content > *:first-child { margin-top: 0; }
-
-    .article-content p,
-    .article-content li {
-      color: #3a3a3c;
-      font-size: 18px;
-      line-height: 1.75;
+    .article-card {
+      min-width: 0;
+      grid-column: 1;
+      grid-row: 1;
+      overflow: visible;
+      border: 0;
+      border-radius: 0;
+      background: var(--white);
+      box-shadow: none;
     }
 
-    .article-content p { margin: 0 0 25px; }
+    article {
+      padding: 0;
+    }
 
-    .article-content h2 {
-      margin: 64px 0 20px;
+    article section {
+      scroll-margin-top: 84px;
+    }
+
+    article section + section {
+      margin-top: 64px;
+      padding-top: 0;
+    }
+
+    article h2 {
+      margin: 0 0 20px;
       color: var(--near-black);
       font-size: clamp(32px, 4vw, 45px);
       font-weight: 700;
       letter-spacing: -0.045em;
       line-height: 1.08;
-      scroll-margin-top: 85px;
     }
 
-    .article-content h3 {
+    article h3 {
       margin: 40px 0 15px;
       color: var(--near-black);
       font-size: 26px;
       font-weight: 650;
       letter-spacing: -0.035em;
       line-height: 1.2;
-      scroll-margin-top: 85px;
     }
 
-    .article-content ul,
-    .article-content ol {
+    article p,
+    article li {
+      color: #3a3a3c;
+      font-size: 18px;
+      line-height: 1.75;
+    }
+
+    article p {
+      margin: 0 0 25px;
+    }
+
+    article ul,
+    article ol {
       margin: 0 0 28px;
       padding-left: 25px;
     }
 
-    .article-content li { margin-bottom: 9px; }
+    article li + li {
+      margin-top: 9px;
+    }
 
-    .article-content a {
+    article a {
       color: var(--blue);
       text-decoration: none;
     }
 
-    .article-content a:hover { text-decoration: underline; }
+    article a:hover {
+      text-decoration: underline;
+    }
 
-    .intro-box {
-      margin-bottom: 42px;
+    .toc {
+      position: sticky;
+      top: 82px;
+      grid-column: 2;
+      grid-row: 1;
+      overflow: visible;
+      border: 0;
+      border-radius: 22px;
+      background: var(--off-white);
+      box-shadow: none;
+    }
+
+    .toc-header {
+      padding: 22px 22px 12px;
+      color: var(--near-black);
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      text-transform: none;
+    }
+
+    .toc nav {
+      display: grid;
+      gap: 7px;
+      padding: 0 13px 18px;
+    }
+
+    .toc a {
+      display: block;
+      padding: 7px 9px;
+      border-radius: 9px;
+      color: #515154;
+      font-size: 13px;
+      line-height: 1.35;
+      text-decoration: none;
+    }
+
+    .toc a:hover,
+    .toc a.active {
+      background: var(--white);
+      color: var(--blue);
+    }
+
+    .summary-card {
+      margin-bottom: 44px;
       padding: 27px 28px;
+      border: 0;
       border-radius: 24px;
       background: var(--off-white);
     }
 
-    .intro-box p {
-      margin: 0;
-      color: #424245;
-      font-size: 19px;
-      line-height: 1.55;
+    .summary-card strong {
+      color: var(--near-black);
+    }
+
+    .definition {
+      margin: 30px 0;
+      padding: 27px 28px;
+      border: 0;
+      border-radius: 22px;
+      background: #eef6ff;
+      color: #164a80;
+      font-size: 20px;
+      font-weight: 650;
+      line-height: 1.5;
     }
 
     .callout {
       margin: 36px 0;
       padding: 25px 27px;
+      border: 0 !important;
       border-radius: 22px;
-      background: #eef6ff;
+      background: #eef6ff !important;
+      color: #424245;
+      font-size: 16px;
+      line-height: 1.55;
     }
 
-    .callout.warning { background: #fff7e8; }
-    .callout.success { background: #edf8ef; }
+    .callout.success {
+      background: var(--green-soft) !important;
+    }
 
-    .callout-label {
+    .callout.warning {
+      background: var(--orange-soft) !important;
+    }
+
+    .callout.danger {
+      background: var(--red-soft) !important;
+    }
+
+    .callout-title {
       display: flex;
       align-items: center;
       gap: 9px;
@@ -422,10 +507,19 @@
       font-weight: 700;
     }
 
-    .callout.warning .callout-label { color: var(--orange); }
-    .callout.success .callout-label { color: var(--green); }
+    .callout.success .callout-title {
+      color: var(--green);
+    }
 
-    .callout-label::before {
+    .callout.warning .callout-title {
+      color: var(--orange);
+    }
+
+    .callout.danger .callout-title {
+      color: var(--red);
+    }
+
+    .callout-title::before {
       width: 9px;
       height: 9px;
       border-radius: 50%;
@@ -433,34 +527,49 @@
       content: "";
     }
 
-    .callout p {
-      margin: 0;
-      color: #424245;
-      font-size: 16px;
-      line-height: 1.55;
-    }
-
-    .example-card {
-      margin: 36px 0;
-      padding: 29px;
-      border: 1px solid var(--soft-gray);
-      border-radius: 24px;
-      background: var(--white);
-      box-shadow: 0 16px 45px rgba(0, 0, 0, 0.05);
-    }
-
-    .example-card h3 { margin-top: 0; }
-
-    .formula {
-      margin: 18px 0;
-      padding: 17px 20px;
-      border-radius: 16px;
+    .principle {
+      margin: 38px 0;
+      padding: 31px;
+      border-radius: 25px;
       background: var(--near-black);
       color: var(--white);
-      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-size: clamp(20px, 2.3vw, 27px);
+      font-weight: 650;
+      letter-spacing: -0.025em;
+      line-height: 1.4;
+      text-align: center;
+    }
+
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin: 32px 0;
+    }
+
+    .comparison-card {
+      padding: 25px;
+      border: 1px solid var(--soft-gray);
+      border-radius: 22px;
+      background: var(--white);
+    }
+
+    .comparison-card.no-kuasa {
+      border-top: 5px solid var(--green);
+    }
+
+    .comparison-card.need-kuasa {
+      border-top: 5px solid var(--red);
+    }
+
+    .comparison-card h3 {
+      margin: 0 0 14px;
+      font-size: 21px;
+    }
+
+    .comparison-card li {
       font-size: 15px;
-      line-height: 1.6;
-      overflow-x: auto;
+      line-height: 1.55;
     }
 
     .table-wrap {
@@ -472,6 +581,7 @@
 
     table {
       width: 100%;
+      min-width: 720px;
       border-collapse: collapse;
       background: var(--white);
       font-size: 15px;
@@ -491,273 +601,184 @@
       font-weight: 650;
     }
 
-    td { color: #515154; }
-    tr:last-child td { border-bottom: 0; }
-
-    blockquote {
-      margin: 36px 0;
-      padding: 4px 0 4px 25px;
-      border-left: 4px solid var(--blue);
-      color: #424245;
-      font-size: 22px;
-      font-weight: 520;
-      letter-spacing: -0.025em;
-      line-height: 1.45;
+    td {
+      color: #515154;
     }
 
-    .faq { margin-top: 58px; }
-    .faq-item { border-top: 1px solid var(--soft-gray); }
-    .faq-item:last-child { border-bottom: 1px solid var(--soft-gray); }
+    tbody tr:last-child td {
+      border-bottom: 0;
+    }
 
-    .faq-question {
-      width: 100%;
-      display: grid;
+    .badge {
+      display: inline-flex;
+      min-height: 25px;
       align-items: center;
-      grid-template-columns: 1fr auto;
-      gap: 20px;
-      padding: 20px 0;
-      border: 0;
-      background: transparent;
-      color: var(--near-black);
-      cursor: pointer;
-      font-size: 18px;
-      font-weight: 620;
-      text-align: left;
+      justify-content: center;
+      padding: 5px 9px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      white-space: nowrap;
     }
 
-    .faq-icon {
-      width: 28px;
-      height: 28px;
+    .badge.no {
+      background: var(--green-soft);
+      color: var(--green);
+    }
+
+    .badge.yes {
+      background: var(--red-soft);
+      color: var(--red);
+    }
+
+    .steps {
+      counter-reset: step;
+      display: grid;
+      gap: 12px;
+      margin: 30px 0;
+    }
+
+    .step {
+      position: relative;
+      padding: 18px 20px 18px 60px;
+      border: 1px solid var(--soft-gray);
+      border-radius: 18px;
+      background: var(--white);
+      color: #424245;
+      font-size: 17px;
+      line-height: 1.55;
+    }
+
+    .step::before {
+      position: absolute;
+      top: 16px;
+      left: 17px;
+      width: 30px;
+      height: 30px;
       display: grid;
       place-items: center;
-      border-radius: 50%;
+      border-radius: 10px;
+      background: #eaf4ff;
+      color: var(--blue);
+      content: counter(step);
+      counter-increment: step;
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    .case {
+      margin: 26px 0;
+      overflow: hidden;
+      border: 1px solid var(--soft-gray);
+      border-radius: 22px;
+      background: var(--white);
+    }
+
+    .case-header {
+      padding: 16px 22px;
       background: var(--off-white);
-      color: #515154;
-      transition: transform 0.2s ease;
+      color: var(--near-black);
+      font-weight: 700;
     }
 
-    .faq-item.open .faq-icon { transform: rotate(45deg); }
-
-    .faq-answer {
-      display: none;
-      padding: 0 46px 22px 0;
+    .case-body {
+      padding: 24px;
     }
 
-    .faq-item.open .faq-answer { display: block; }
+    .case-body p {
+      font-size: 16px;
+      line-height: 1.65;
+    }
 
-    .faq-answer p {
+    .case-result {
+      margin-top: 17px;
+      padding-top: 17px;
+      border-top: 1px solid var(--soft-gray);
+      color: #424245;
+      font-weight: 650;
+      line-height: 1.55;
+    }
+
+    details {
+      margin: 0;
+      overflow: hidden;
+      border-top: 1px solid var(--soft-gray);
+      background: var(--white);
+    }
+
+    details:last-child {
+      border-bottom: 1px solid var(--soft-gray);
+    }
+
+    summary {
+      padding: 20px 0;
+      cursor: pointer;
+      color: var(--near-black);
+      font-size: 18px;
+      font-weight: 620;
+    }
+
+    details p {
+      padding: 0 38px 22px 0;
       margin: 0;
       font-size: 16px;
       line-height: 1.6;
     }
 
-    .article-sidebar {
-      position: sticky;
-      top: 84px;
-    }
-
-    .toc-card {
-      padding: 22px;
+    .sources {
+      padding: 25px 27px;
       border-radius: 22px;
       background: var(--off-white);
     }
 
-    .toc-card h2 {
-      margin: 0 0 13px;
-      color: var(--near-black);
+    .sources ul {
+      margin-bottom: 0;
+    }
+
+    .sources li {
       font-size: 15px;
-      font-weight: 700;
-      letter-spacing: -0.02em;
+      line-height: 1.55;
     }
 
-    .toc-list {
-      display: grid;
-      gap: 8px;
+    .article-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 60px;
+      padding: 26px 0 0;
+      border-top: 1px solid var(--soft-gray);
+      background: transparent;
     }
 
-    .toc-list a {
-      padding: 7px 9px;
-      border-radius: 9px;
-      color: #515154;
-      font-size: 13px;
-      line-height: 1.35;
-      text-decoration: none;
-    }
-
-    .toc-list a:hover,
-    .toc-list a.active {
-      background: var(--white);
-      color: var(--blue);
-    }
-
-    .share-card {
-      margin-top: 14px;
-      padding: 20px;
-      border: 1px solid var(--soft-gray);
-      border-radius: 22px;
-    }
-
-    .share-card strong {
-      display: block;
-      margin-bottom: 11px;
-      font-size: 14px;
-    }
-
-    .copy-link {
-      width: 100%;
-      min-height: 39px;
+    .button {
       display: inline-flex;
+      min-height: 41px;
       align-items: center;
       justify-content: center;
+      gap: 8px;
+      padding: 9px 17px;
       border: 1px solid var(--blue);
       border-radius: 999px;
       background: transparent;
       color: var(--blue);
       cursor: pointer;
       font-size: 13px;
+      font-weight: 400;
+      text-decoration: none;
     }
 
-    .copy-link:hover {
+    .button.primary {
       background: var(--blue);
       color: var(--white);
     }
 
-    .source-note {
-      margin-top: 65px;
-      padding-top: 25px;
-      border-top: 1px solid var(--soft-gray);
-    }
-
-    .source-note h2 {
-      margin-top: 0;
-      font-size: 25px;
-    }
-
-    .source-note p,
-    .source-note li {
-      color: #6e6e73;
-      font-size: 14px;
-      line-height: 1.6;
-    }
-
-    .article-author {
-      display: grid;
-      align-items: center;
-      grid-template-columns: auto 1fr;
-      gap: 17px;
-      margin-top: 58px;
-      padding: 25px;
-      border-radius: 24px;
-      background: var(--off-white);
-    }
-
-    .author-avatar {
-      width: 58px;
-      height: 58px;
-      display: grid;
-      place-items: center;
-      border-radius: 18px;
-      background: linear-gradient(145deg, #071c35, #0b69bd);
+    .button:hover {
+      background: var(--blue-hover);
       color: var(--white);
-      font-size: 13px;
-      font-weight: 800;
     }
 
-    .article-author strong {
-      display: block;
-      font-size: 17px;
-    }
-
-    .article-author p {
-      margin: 5px 0 0;
-      color: #6e6e73;
-      font-size: 14px;
-      line-height: 1.45;
-    }
-
-    .related-section {
-      padding: 95px 20px;
-      background: var(--off-white);
-    }
-
-    .related-inner {
-      width: min(var(--max-width), 100%);
-      margin: 0 auto;
-    }
-
-    .related-heading { margin-bottom: 32px; }
-
-    .related-heading p {
-      margin: 0 0 6px;
-      color: var(--medium-gray);
-      font-size: 16px;
-      font-weight: 600;
-    }
-
-    .related-heading h2 {
-      margin: 0;
-      font-size: clamp(38px, 5vw, 58px);
-      font-weight: 700;
-      letter-spacing: -0.055em;
-      line-height: 1;
-    }
-
-    .related-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .related-card {
-      min-height: 280px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 27px;
-      border-radius: 26px;
-      background: var(--white);
-      text-decoration: none;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .related-card:hover {
-      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.07);
-      transform: translateY(-2px);
-    }
-
-    .related-card small {
-      color: var(--medium-gray);
-      font-size: 12px;
-      font-weight: 600;
-    }
-
-    .related-card h3 {
-      margin: 28px 0 0;
-      font-size: 25px;
-      font-weight: 650;
-      letter-spacing: -0.04em;
-      line-height: 1.08;
-    }
-
-    .related-link {
-      margin-top: 25px;
-      color: var(--blue);
-      font-size: 14px;
-    }
-
-    .disclaimer {
-      width: min(980px, calc(100% - 40px));
-      margin: 0 auto;
-      padding: 24px 0;
-      border-bottom: 1px solid #d2d2d7;
-      color: #6e6e73;
-      font-size: 12px;
-      line-height: 1.5;
-    }
-
-    .disclaimer strong { color: #424245; }
-
-    footer {
+    .site-footer {
       background: var(--off-white);
       color: #6e6e73;
     }
@@ -765,120 +786,233 @@
     .footer-inner {
       width: min(980px, calc(100% - 40px));
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: space-between;
-      gap: 20px;
+      gap: 28px;
       margin: 0 auto;
-      padding: 21px 0 27px;
-      font-size: 12px;
+      padding: 28px 0;
     }
 
-    .footer-inner p { margin: 0; }
+    .footer-title {
+      margin: 0 0 8px;
+      color: #424245;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .footer-inner p {
+      max-width: 650px;
+      margin: 0;
+      color: #6e6e73;
+      font-size: 12px;
+      line-height: 1.5;
+    }
 
     .footer-links {
       display: flex;
       flex-wrap: wrap;
-      gap: 18px;
+      gap: 12px 18px;
     }
 
     .footer-links a {
       color: #424245;
+      font-size: 12px;
       text-decoration: none;
     }
 
-    .footer-links a:hover { text-decoration: underline; }
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
 
     @media (max-width: 980px) {
-      .desktop-menu { display: none; }
-      .menu-toggle { display: grid; }
+      .menu-button {
+        display: grid;
+      }
 
-      .article-layout {
+      .main-nav {
+        position: fixed;
+        z-index: 999;
+        inset: var(--nav-height) 0 0;
+        display: none;
+        align-items: stretch;
+        flex-direction: column;
+        gap: 0;
+        padding: 36px 28px;
+        background: rgba(250, 250, 252, 0.98);
+        box-shadow: none;
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+      }
+
+      .main-nav.open {
+        display: flex;
+      }
+
+      .main-nav a {
+        padding: 11px 0;
+        color: var(--near-black);
+        font-size: 28px;
+        font-weight: 650;
+        letter-spacing: -0.04em;
+      }
+
+      .article-shell {
         grid-template-columns: minmax(0, var(--article-width));
       }
 
-      .article-sidebar {
-        position: static;
-        order: -1;
+      .article-card {
+        grid-column: 1;
+        grid-row: 2;
       }
 
-      .toc-card { padding: 20px; }
-      .toc-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .share-card { display: none; }
-      .related-grid { grid-template-columns: 1fr; }
+      .toc {
+        position: static;
+        grid-column: 1;
+        grid-row: 1;
+      }
+
+      .toc nav {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
 
     @media (max-width: 680px) {
-      .announcement {
-        padding-right: 28px;
-        padding-left: 28px;
-        font-size: 13px;
-      }
-
-      .article-hero {
+      .hero {
         padding-top: 72px;
-        padding-bottom: 55px;
+        padding-bottom: 56px;
       }
 
-      h1 { font-size: 52px; }
-      .article-lead { font-size: 19px; }
-      .article-meta span:not(:last-child)::after { display: none; }
-
-      .hero-cover {
-        min-height: 340px;
-        border-radius: 24px;
+      .hero h1 {
+        font-size: 50px;
       }
 
-      .article-layout {
+      .hero-lead {
+        font-size: 19px;
+      }
+
+      .article-meta span:not(:last-child)::after {
+        display: none;
+      }
+
+      .article-shell {
         width: min(100% - 28px, var(--article-width));
         gap: 40px;
         padding-top: 56px;
         padding-bottom: 75px;
       }
 
-      .article-content p,
-      .article-content li { font-size: 17px; }
+      article p,
+      article li {
+        font-size: 17px;
+      }
 
-      .article-content h2 { margin-top: 52px; }
-      .toc-list { grid-template-columns: 1fr; }
-      .article-author { grid-template-columns: 1fr; }
+      .toc nav,
+      .comparison-grid {
+        grid-template-columns: 1fr;
+      }
 
-      .related-section {
-        padding-top: 70px;
-        padding-bottom: 70px;
+      .article-actions,
+      .button {
+        width: 100%;
       }
 
       .footer-inner {
-        align-items: flex-start;
         flex-direction: column;
       }
     }
 
     @media (max-width: 440px) {
-      .nav-brand span:last-child { display: none; }
-      h1 { font-size: 45px; }
-      .cover-content strong { font-size: 37px; }
+      .brand-text {
+        display: none;
+      }
 
-      .intro-box,
+      .hero h1 {
+        font-size: 44px;
+      }
+
+      .summary-card,
+      .definition,
       .callout,
-      .example-card { padding: 22px; }
+      .principle {
+        padding: 22px;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      * { transition: none !important; }
+      html {
+        scroll-behavior: auto;
+      }
+
+      * {
+        transition: none !important;
+      }
+    }
+
+    @media print {
+      .reading-progress,
+      .site-header,
+      .toc,
+      .article-actions,
+      .site-footer {
+        display: none !important;
+      }
+
+      main {
+        padding-top: 0;
+      }
+
+      .hero {
+        padding: 25px 0;
+      }
+
+      .article-shell {
+        width: 100%;
+        display: block;
+        padding: 35px 0;
+      }
     }
   </style>
+
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Apa Itu Kuasa Wajib Pajak dan Kapan Surat Kuasa Khusus Dibutuhkan?",
+    "description": "Penjelasan mengenai Kuasa Wajib Pajak, perbedaan kuasa, wakil, dan pegawai, serta kapan Surat Kuasa Khusus dibutuhkan.",
+    "author": {
+      "@type": "Person",
+      "name": "Angga Sukma Dhaniswara"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Kabayan by Angga Sukma Dhaniswara"
+    },
+    "datePublished": "2026-07-17",
+    "dateModified": "2026-07-17",
+    "inLanguage": "id-ID"
+  }
+  </script>
 </head>
 
-<body id="top">
-  <header class="site-nav">
-    <div class="nav-inner">
-      <a class="nav-brand" href="index.html">
-        <span class="brand-symbol">ASD</span>
-        <span>dhaniswara86</span>
+<body>
+  <div class="reading-progress" id="readingProgress" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html" aria-label="Kembali ke beranda">
+        <span class="brand-mark">ASD</span>
+        <span class="brand-text">
+          <span>dhaniswara86</span>
+        </span>
       </a>
 
-      <nav class="desktop-menu" aria-label="Navigasi utama">
+      <button class="menu-button" id="menuButton" type="button"
+              aria-label="Buka menu navigasi"
+              aria-expanded="false"
+              aria-controls="mainNavigation">☰</button>
+
+      <nav class="main-nav" id="mainNavigation" aria-label="Navigasi utama">
         <a href="index.html">Beranda</a>
         <a href="buku.html">Buku</a>
         <a href="formulir.html">Formulir</a>
@@ -886,517 +1020,606 @@
         <a href="artikel.html" aria-current="page">Artikel</a>
         <a href="index.html#tentang">Tentang</a>
       </nav>
-
-      <div class="nav-actions">
-        <a class="search-link" href="artikel.html" aria-label="Cari artikel" title="Cari artikel">⌕</a>
-
-        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Buka menu" aria-expanded="false">☰</button>
-      </div>
     </div>
   </header>
 
-  <nav class="mobile-menu" id="mobileMenu">
-    <a href="index.html">Beranda</a>
-    <a href="buku.html">Buku Digital</a>
-    <a href="formulir.html">Formulir</a>
-    <a href="aplikasi.html">Aplikasi</a>
-    <a href="artikel.html">Artikel</a>
-    <a href="index.html#tentang">Tentang</a>
-  </nav>
-
   <main>
-    <div class="announcement">
-      Pelajari perbedaan Wajib Pajak, wakil, kuasa, dan pegawai pelaksana.
-      <a href="#ringkasan">Baca ringkasan ›</a>
-    </div>
-
-    <header class="article-hero">
+    <section class="hero">
       <div class="hero-inner">
-        <span class="article-category">Administrasi Perpajakan</span>
-
+        <span class="eyebrow">Panduan Perpajakan</span>
         <h1>
-          Apa itu Kuasa
-          <span class="hero-gradient">Wajib Pajak?</span>
+          Apa Itu Kuasa Wajib Pajak?
+          <span class="gradient-line">
+            Kapan surat kuasa dibutuhkan?
+          </span>
         </h1>
-
-        <p class="article-lead">
-          Memahami kapan Surat Kuasa Khusus diperlukan, siapa yang dapat
-          menjadi kuasa, dan mengapa pegawai yang hanya menyiapkan dokumen
-          belum tentu berkedudukan sebagai Kuasa Wajib Pajak.
+        <p class="hero-lead">
+          Memahami batas antara pegawai yang sekadar membantu atau memberikan
+          keterangan dan orang yang benar-benar bertindak sebagai Kuasa Wajib Pajak.
         </p>
-
-        <div class="article-meta">
-          <span>Diperbarui Juli 2026</span>
-          <span>10 menit baca</span>
-          <span>Angga Sukma Dhaniswara</span>
-        </div>
-      </div>
-    </header>
-
-    <div class="hero-cover" role="img" aria-label="Ilustrasi Kuasa Wajib Pajak dan Surat Kuasa Khusus">
-      <div class="cover-content">
-        <small>Kuasa Wajib Pajak</small>
-        <strong>Bertindak untuk dan atas nama Wajib Pajak.</strong>
-        <div class="cover-line"></div>
-      </div>
-    </div>
-
-    <div class="article-layout">
-      <article class="article-content">
-        <div class="intro-box" id="ringkasan">
-          <p>
-            <strong>Ringkasan:</strong>
-            Kuasa Wajib Pajak adalah orang yang secara khusus ditunjuk
-            untuk menjalankan hak atau memenuhi kewajiban perpajakan
-            tertentu atas nama Wajib Pajak. Penunjukannya dibuktikan
-            dengan Surat Kuasa Khusus.
-          </p>
-        </div>
-
-        <p>
-          Kuasa bukan sekadar orang yang membantu pekerjaan pajak, tetapi
-          orang yang memperoleh kewenangan hukum untuk bertindak mewakili
-          kepentingan Wajib Pajak dalam urusan tertentu.
-        </p>
-
-        <div class="example-card">
-          <h3>Contoh sederhana</h3>
-          <p>
-            PT ABC sedang diperiksa oleh DJP. Direktur PT ABC tidak dapat
-            mengikuti pembahasan. PT ABC kemudian menunjuk seorang konsultan
-            pajak atau pegawai tertentu melalui Surat Kuasa Khusus untuk
-            menghadiri pembahasan, memberikan keterangan, dan menandatangani
-            dokumen sesuai ruang lingkup kuasa.
-          </p>
-          <p>Orang yang ditunjuk itulah <strong>Kuasa Wajib Pajak</strong>.</p>
-        </div>
-
-        <h2 id="perbedaan">Perbedaan Wajib Pajak, wakil, dan kuasa</h2>
-
-        <p>Keempat kedudukan berikut perlu dibedakan karena dasar kewenangannya tidak sama.</p>
-
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Kedudukan</th>
-                <th>Contoh</th>
-                <th>Dasar bertindak</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Wajib Pajak sendiri</td>
-                <td>Orang pribadi datang mengurus pajaknya</td>
-                <td>Kedudukannya sebagai Wajib Pajak</td>
-              </tr>
-              <tr>
-                <td>Wakil Wajib Pajak</td>
-                <td>Direktur atau pengurus mewakili badan</td>
-                <td>Langsung berdasarkan UU KUP</td>
-              </tr>
-              <tr>
-                <td>Kuasa Wajib Pajak</td>
-                <td>Konsultan pajak, pihak lain, atau keluarga yang ditunjuk</td>
-                <td>Surat Kuasa Khusus</td>
-              </tr>
-              <tr>
-                <td>Pegawai pelaksana</td>
-                <td>Staf membuat perhitungan dan konsep dokumen</td>
-                <td>Hubungan kerja dan penugasan internal</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <p>
-          Untuk Wajib Pajak badan, pengurus merupakan wakil Wajib Pajak.
-          Karena kewenangannya berasal langsung dari undang-undang, pengurus
-          tidak perlu menerima Surat Kuasa Khusus dari badan yang diwakilinya.
-        </p>
-
-        <p>
-          Sebaliknya, orang di luar kedudukan wakil harus memperoleh Surat
-          Kuasa Khusus apabila akan bertindak sebagai kuasa.
-        </p>
-
-        <h2 id="dibutuhkan">Kapan Kuasa Wajib Pajak dibutuhkan?</h2>
-
-        <p>
-          Kuasa dibutuhkan ketika Wajib Pajak ingin agar orang lain yang bukan
-          wakilnya bertindak atas nama Wajib Pajak dalam urusan perpajakan.
-        </p>
-
-        <h3>1. Wajib Pajak tidak dapat mengurus sendiri</h3>
-        <ul>
-          <li>Wajib Pajak sedang berada di luar kota atau luar negeri.</li>
-          <li>Direktur tidak dapat menghadiri pembahasan.</li>
-          <li>Wajib Pajak sedang sakit.</li>
-          <li>Proses perpajakan membutuhkan waktu dan kehadiran yang intensif.</li>
-        </ul>
-
-        <h3>2. Wajib Pajak membutuhkan orang yang memahami perpajakan</h3>
-        <p>Contohnya dalam:</p>
-        <ul>
-          <li>pemeriksaan pajak;</li>
-          <li>pembahasan SP2DK;</li>
-          <li>pembahasan Surat Pemberitahuan Hasil Pemeriksaan;</li>
-          <li>pengajuan keberatan;</li>
-          <li>permohonan pengembalian kelebihan pembayaran pajak;</li>
-          <li>permohonan pembetulan, pengurangan, atau pembatalan ketetapan;</li>
-          <li>proses administrasi perpajakan tertentu; dan</li>
-          <li>pemberian penjelasan formal kepada DJP.</li>
-        </ul>
-
-        <h3>3. Orang lain akan memberikan keterangan resmi</h3>
-        <p>Kuasa diperlukan apabila seseorang akan:</p>
-        <ul>
-          <li>berbicara sebagai pihak yang mewakili Wajib Pajak;</li>
-          <li>memberikan penjelasan atau keterangan resmi;</li>
-          <li>mengambil posisi atau keputusan dalam pembahasan;</li>
-          <li>menandatangani dokumen sebagai kuasa;</li>
-          <li>menerima hasil pembahasan; atau</li>
-          <li>menjalankan hak atau kewajiban perpajakan atas nama Wajib Pajak.</li>
-        </ul>
-
-        <div class="callout warning">
-          <div class="callout-label">Contoh yang perlu diperhatikan</div>
-          <p>
-            Staf pajak datang sendiri menghadiri pembahasan SP2DK dan
-            memberikan penjelasan resmi atas nama perusahaan. Apabila staf
-            tersebut bukan pengurus atau wakil Wajib Pajak, tindakannya pada
-            dasarnya harus dilandasi Surat Kuasa Khusus dan ia harus memenuhi
-            persyaratan sebagai kuasa.
-          </p>
-        </div>
-
-        <h3>4. Orang lain diberi akses elektronik sebagai kuasa</h3>
-        <p>
-          Apabila pelaksanaan kuasa dilakukan secara elektronik, Wajib Pajak
-          juga harus memberikan persetujuan akses kepada kuasa melalui Portal
-          Wajib Pajak. Pemberian akses tersebut mengikuti ruang lingkup hak
-          dan kewajiban yang dikuasakan.
-        </p>
-
-        <h2 id="tidak-diperlukan">Kapan Surat Kuasa Khusus tidak diperlukan?</h2>
-
-        <h3>1. Wajib Pajak mengurus sendiri</h3>
-        <p>
-          Wajib Pajak orang pribadi yang hadir dan menjalankan sendiri hak
-          atau kewajibannya tidak memerlukan surat kuasa.
-        </p>
-
-        <h3>2. Badan diwakili oleh pengurus</h3>
-        <p>
-          Direktur atau pengurus yang sah pada prinsipnya bertindak sebagai
-          wakil badan berdasarkan UU KUP, bukan sebagai kuasa.
-        </p>
-        <ul>
-          <li>Direktur menandatangani tanggapan SP2DK.</li>
-          <li>Direktur menghadiri pembahasan pemeriksaan.</li>
-          <li>Pengurus memberikan penjelasan atas transaksi perusahaan.</li>
-        </ul>
-
-        <h3>3. Pegawai hanya mengerjakan pekerjaan internal</h3>
-        <p>
-          Pegawai tidak otomatis menjadi kuasa hanya karena mengerjakan
-          administrasi perpajakan. Surat Kuasa Khusus tidak diperlukan apabila
-          pegawai hanya:
-        </p>
-        <ul>
-          <li>membuat perhitungan pajak;</li>
-          <li>menyiapkan konsep bukti potong;</li>
-          <li>membuat konsep SPT;</li>
-          <li>menginput data;</li>
-          <li>menyiapkan XML;</li>
-          <li>merekonsiliasi data;</li>
-          <li>menyiapkan dokumen pemeriksaan;</li>
-          <li>membuat konsep surat tanggapan;</li>
-          <li>menjalankan fungsi drafter; atau</li>
-          <li>membantu direktur dalam rapat tanpa bertindak sebagai pihak yang mewakili.</li>
-        </ul>
-
-        <div class="callout success">
-          <div class="callout-label">Batas praktis</div>
-          <p>
-            Dalam keadaan tersebut, keputusan dan tindakan formal tetap
-            dilakukan oleh Wajib Pajak, pengurus, wakil, atau kuasa yang sah.
-          </p>
-        </div>
-
-        <h2 id="siapa">Siapa yang dapat menjadi kuasa?</h2>
-        <p>Berdasarkan PMK 44 Tahun 2026, pihak yang dapat ditunjuk meliputi:</p>
-        <ol>
-          <li><strong>Konsultan Pajak;</strong></li>
-          <li><strong>Pihak Lain;</strong> dan</li>
-          <li><strong>Keluarga.</strong></li>
-        </ol>
-
-        <p>
-          Konsultan Pajak harus memiliki Izin Konsultan Pajak. Pihak Lain harus
-          memiliki SKT, sedangkan keluarga dikecualikan dari persyaratan
-          kompetensi tersebut. Keluarga meliputi suami, istri, serta keluarga
-          sedarah atau semenda sampai derajat kedua.
-        </p>
-
-        <h2 id="surat-khusus">Surat kuasanya harus bersifat khusus</h2>
-        <p>
-          Surat Kuasa Khusus bukan surat kuasa umum yang memberikan kewenangan
-          tanpa batas. Satu Surat Kuasa Khusus hanya berlaku untuk:
-        </p>
-        <ul>
-          <li>satu orang kuasa; dan</li>
-          <li>hak atau kewajiban perpajakan tertentu yang disebutkan di dalam surat.</li>
-        </ul>
-
-        <p>
-          Kuasa hanya boleh bertindak dalam batas yang diberikan dan tidak
-          dapat mengalihkan kuasa tersebut kepada orang lain.
-        </p>
-
-        <div class="example-card">
-          <h3>Contoh ruang lingkup yang jelas</h3>
-          <blockquote>
-            Menghadiri pembahasan dan memberikan penjelasan dalam rangka
-            penyelesaian SP2DK atas PPh Badan Tahun Pajak 2025.
-          </blockquote>
-        </div>
-
-        <div class="callout warning">
-          <div class="callout-label">Contoh yang terlalu umum</div>
-          <p>“Mengurus seluruh persoalan perpajakan perusahaan.”</p>
-        </div>
-
-        <p>
-          Surat Kuasa Khusus sebaiknya menyebut secara jelas jenis proses,
-          jenis pajak, masa atau tahun pajak, tindakan yang boleh dilakukan,
-          serta masa berlakunya.
-        </p>
-
-        <h2 id="tanggung-jawab">Apakah tanggung jawab pajak berpindah kepada kuasa?</h2>
-        <p><strong>Tidak.</strong></p>
-        <p>
-          Walaupun telah menunjuk kuasa, Wajib Pajak tetap bertanggung jawab
-          atas pelaksanaan hak dan pemenuhan kewajiban perpajakan yang
-          dikuasakan. Kuasa hanya bertindak untuk dan atas nama Wajib Pajak
-          sesuai kewenangan yang diberikan.
-        </p>
-        <p>Penunjukan kuasa tidak membebaskan Wajib Pajak dari:</p>
-        <ul>
-          <li>kebenaran isi SPT;</li>
-          <li>pembayaran pajak yang terutang;</li>
-          <li>kebenaran data dan dokumen; dan</li>
-          <li>konsekuensi administrasi atau hukum atas kewajiban perpajakannya.</li>
-        </ul>
-
-        <h2 id="cara-menentukan">Cara praktis menentukan apakah kuasa diperlukan</h2>
-        <p>Gunakan tiga pertanyaan berikut:</p>
-        <ol>
-          <li>Apakah orang tersebut akan bertindak atas nama Wajib Pajak?</li>
-          <li>Apakah ia akan menjalankan hak atau memenuhi kewajiban perpajakan secara formal?</li>
-          <li>Apakah ia bukan Wajib Pajak sendiri dan bukan wakil atau pengurus yang sah?</li>
-        </ol>
-
-        <p>
-          Apabila ketiganya dijawab <strong>ya</strong>, orang tersebut pada
-          prinsipnya perlu ditunjuk sebagai Kuasa Wajib Pajak melalui Surat
-          Kuasa Khusus.
-        </p>
-
-        <p>
-          Sebaliknya, apabila orang tersebut hanya menghitung, mengetik,
-          menyiapkan, menginput, atau membuat konsep dokumen, ia belum tentu
-          menjadi kuasa.
-        </p>
-
-        <div class="callout">
-          <div class="callout-label">Rumus sederhana</div>
-          <p>
-            <strong>Membantu Wajib Pajak belum tentu menjadi kuasa.</strong><br>
-            Bertindak untuk dan atas nama Wajib Pajak dalam tindakan formal
-            berarti menjadi kuasa.
-          </p>
-        </div>
-
-        <section class="source-note" id="referensi">
-          <h2>Sumber dan referensi</h2>
-          <ul>
-            <li>
-              <a href="https://www.pajak.go.id/id/peraturan/persyaratan-untuk-menjadi-kuasa-di-bidang-perpajakan-dan-tata-cara-pelaksanaan-hak-dan" target="_blank" rel="noopener noreferrer">
-                Persyaratan untuk menjadi kuasa di bidang perpajakan dan tata cara pelaksanaannya.
-              </a>
-            </li>
-            <li>
-              <a href="https://www.pajak.go.id/index.php/id/artikel/menakar-posisi-kuasa-wajib-pajak-sejak-berlakunya-uu-hpp" target="_blank" rel="noopener noreferrer">
-                Menakar posisi Kuasa Wajib Pajak sejak berlakunya UU HPP.
-              </a>
-            </li>
-            <li>
-              <a href="https://www.pajak.go.id/sites/default/files/2021-12/Salinan%20UU%20Nomor%207%20Tahun%202021.pdf" target="_blank" rel="noopener noreferrer">
-                Undang-Undang Nomor 7 Tahun 2021.
-              </a>
-            </li>
-          </ul>
-        </section>
-
-        <div class="article-author">
-          <div class="author-avatar">ASD</div>
-          <div>
-            <strong>Angga Sukma Dhaniswara</strong>
-            <p>
-              Penulis dan pengelola Kabayan—Katalog Bahan Pelayanan.
-              Artikel disusun untuk tujuan edukasi perpajakan.
-            </p>
-          </div>
-        </div>
-      </article>
-
-      <aside class="article-sidebar">
-        <div class="toc-card">
-          <h2>Daftar isi</h2>
-          <nav class="toc-list" aria-label="Daftar isi artikel">
-            <a href="#ringkasan">Ringkasan</a>
-            <a href="#perbedaan">Perbedaan kedudukan</a>
-            <a href="#dibutuhkan">Kapan kuasa dibutuhkan</a>
-            <a href="#tidak-diperlukan">Kapan tidak diperlukan</a>
-            <a href="#siapa">Siapa yang dapat menjadi kuasa</a>
-            <a href="#surat-khusus">Surat Kuasa Khusus</a>
-            <a href="#tanggung-jawab">Tanggung jawab pajak</a>
-            <a href="#cara-menentukan">Cara menentukan</a>
-            <a href="#referensi">Referensi</a>
-          </nav>
-        </div>
-
-        <div class="share-card">
-          <strong>Bagikan artikel</strong>
-          <button class="copy-link" id="copyLink" type="button">Salin tautan</button>
-        </div>
-      </aside>
-    </div>
-
-    <section class="related-section">
-      <div class="related-inner">
-        <div class="related-heading">
-          <p>Bacaan selanjutnya</p>
-          <h2>Materi terkait.</h2>
-        </div>
-
-        <div class="related-grid">
-          <a class="related-card" href="aktivasiakunkodjp.html">
-            <div>
-              <small>Coretax</small>
-              <h3>Aktivasi Akun Wajib Pajak dan Registrasi KODJP</h3>
-            </div>
-            <span class="related-link">Lihat panduan ›</span>
-          </a>
-
-          <a class="related-card" href="unifikasi-umum.html">
-            <div>
-              <small>PPh Unifikasi</small>
-              <h3>Panduan penggunaan e-Bupot Unifikasi Umum</h3>
-            </div>
-            <span class="related-link">Lihat panduan ›</span>
-          </a>
-
-          <a class="related-card" href="formulir.html">
-            <div>
-              <small>Formulir</small>
-              <h3>Temukan formulir Surat Kuasa Khusus Wajib Pajak</h3>
-            </div>
-            <span class="related-link">Lihat formulir ›</span>
-          </a>
+        <div class="article-meta" aria-label="Informasi artikel">
+          <span>Oleh Angga Sukma Dhaniswara</span>
+          <span>17 Juli 2026</span>
+          <span>± 10 menit baca</span>
         </div>
       </div>
     </section>
+
+    <div class="article-shell">
+      <aside class="toc" aria-label="Daftar isi">
+        <div class="toc-header">Daftar Isi</div>
+        <nav>
+          <a href="#ringkasan">Ringkasan</a>
+          <a href="#pengertian">Pengertian kuasa</a>
+          <a href="#perbedaan">Perbedaan kedudukan</a>
+          <a href="#kapan-dibutuhkan">Kapan dibutuhkan</a>
+          <a href="#pegawai">Kedudukan pegawai</a>
+          <a href="#pemeriksaan">Dalam pemeriksaan</a>
+          <a href="#contoh">Contoh sederhana</a>
+          <a href="#persyaratan">Persyaratan kuasa</a>
+          <a href="#kesimpulan">Kesimpulan</a>
+          <a href="#faq">Pertanyaan umum</a>
+          <a href="#sumber">Sumber resmi</a>
+        </nav>
+      </aside>
+
+      <div class="article-card">
+        <article>
+          <section id="ringkasan">
+            <div class="summary-card">
+              <strong>Ringkasan:</strong> Surat Kuasa Khusus diperlukan ketika
+              seseorang yang bukan Wajib Pajak sendiri dan bukan Wakil Wajib Pajak
+              diberi kewenangan untuk menjalankan hak atau memenuhi kewajiban
+              perpajakan tertentu atas nama Wajib Pajak. Pegawai yang hanya membantu,
+              menyerahkan data, atau memberikan keterangan berdasarkan pekerjaannya
+              tidak otomatis menjadi kuasa.
+            </div>
+          </section>
+
+          <section id="pengertian">
+            <h2>Apa Itu Kuasa Wajib Pajak?</h2>
+
+            <div class="definition">
+              Kuasa Wajib Pajak adalah orang yang secara khusus ditunjuk oleh
+              Wajib Pajak untuk menjalankan hak dan/atau memenuhi kewajiban
+              perpajakan tertentu atas nama Wajib Pajak.
+            </div>
+
+            <p>
+              Penunjukan tersebut dilakukan melalui <strong>Surat Kuasa Khusus</strong>.
+              Surat ini menjadi dasar kewenangan seseorang untuk bertindak sebagai
+              kuasa dalam urusan perpajakan yang disebutkan secara jelas di dalamnya.
+            </p>
+
+            <p>
+              Karena itu, kuasa bukan sekadar orang yang membantu menghitung pajak,
+              mengetik surat, menginput data, atau menyiapkan dokumen. Kuasa memperoleh
+              kewenangan hukum untuk bertindak bagi dan atas nama Wajib Pajak dalam
+              ruang lingkup tertentu.
+            </p>
+
+            <div class="callout info">
+              <span class="callout-title">Hal penting</span>
+              Penunjukan kuasa tidak memindahkan tanggung jawab perpajakan.
+              Wajib Pajak tetap bertanggung jawab atas pelaksanaan hak dan pemenuhan
+              kewajiban perpajakannya.
+            </div>
+          </section>
+
+          <section id="perbedaan">
+            <h2>Perbedaan Wajib Pajak, Wakil, Kuasa, dan Pegawai</h2>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Kedudukan</th>
+                    <th>Contoh</th>
+                    <th>Dasar bertindak</th>
+                    <th>Surat Kuasa Khusus</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Wajib Pajak sendiri</strong></td>
+                    <td>Orang pribadi mengurus pajaknya sendiri</td>
+                    <td>Kedudukan sebagai Wajib Pajak</td>
+                    <td><span class="badge no">Tidak perlu</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Wakil Wajib Pajak</strong></td>
+                    <td>Direktur atau pengurus mewakili badan</td>
+                    <td>Kewenangan berdasarkan ketentuan perpajakan</td>
+                    <td><span class="badge no">Tidak perlu</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Kuasa Wajib Pajak</strong></td>
+                    <td>Konsultan Pajak, Pihak Lain, atau keluarga yang ditunjuk</td>
+                    <td>Surat Kuasa Khusus</td>
+                    <td><span class="badge yes">Diperlukan</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Pegawai pelaksana</strong></td>
+                    <td>Staf pajak, staf akuntansi, atau admin</td>
+                    <td>Hubungan kerja dan penugasan internal</td>
+                    <td><span class="badge no">Tidak otomatis</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p>
+              Direktur atau pengurus yang sah bertindak sebagai
+              <strong>Wakil Wajib Pajak</strong>, bukan sebagai kuasa. Sebaliknya,
+              orang yang tidak berkedudukan sebagai Wajib Pajak sendiri atau wakilnya
+              memerlukan Surat Kuasa Khusus apabila akan bertindak sebagai kuasa.
+            </p>
+          </section>
+
+          <section id="kapan-dibutuhkan">
+            <h2>Kapan Surat Kuasa Khusus Dibutuhkan?</h2>
+
+            <p>
+              Surat Kuasa Khusus dibutuhkan apabila seseorang yang bukan Wajib Pajak
+              sendiri dan bukan Wakil Wajib Pajak diberi kewenangan untuk
+              <strong>bertindak secara formal atas nama Wajib Pajak</strong>.
+            </p>
+
+            <div class="steps">
+              <div class="step">
+                Orang tersebut akan menjalankan hak atau memenuhi kewajiban
+                perpajakan tertentu milik Wajib Pajak.
+              </div>
+              <div class="step">
+                Orang tersebut akan mengambil posisi, membuat pernyataan, atau
+                menandatangani dokumen atas nama Wajib Pajak.
+              </div>
+              <div class="step">
+                Orang tersebut bukan Wajib Pajak sendiri dan bukan pengurus atau
+                Wakil Wajib Pajak yang sah.
+              </div>
+            </div>
+
+            <p>Contoh tindakan yang pada umumnya membutuhkan kedudukan sebagai kuasa:</p>
+
+            <ul>
+              <li>mengajukan dan menangani keberatan;</li>
+              <li>mengurus permohonan pengembalian kelebihan pembayaran pajak;</li>
+              <li>mengajukan pembetulan, pengurangan, atau pembatalan ketetapan;</li>
+              <li>menghadiri tahapan formal pemeriksaan sebagai pihak yang mewakili Wajib Pajak;</li>
+              <li>menyatakan setuju atau tidak setuju atas koreksi atas nama Wajib Pajak;</li>
+              <li>menandatangani risalah atau berita acara sebagai kuasa; atau</li>
+              <li>menjalankan hak dan kewajiban perpajakan secara elektronik sebagai kuasa.</li>
+            </ul>
+
+            <div class="principle">
+              Membantu pekerjaan pajak belum tentu menjadi kuasa.<br>
+              Bertindak secara formal untuk dan atas nama Wajib Pajak merupakan pelaksanaan kuasa.
+            </div>
+          </section>
+
+          <section id="pegawai">
+            <h2>Apakah Pegawai yang Memberikan Keterangan Memerlukan Surat Kuasa Khusus?</h2>
+
+            <p><strong>Tidak selalu.</strong></p>
+
+            <p>
+              PMK 15 Tahun 2025 membedakan pegawai dari Kuasa Wajib Pajak.
+              Dalam pemeriksaan, Pemeriksa Pajak dapat meminta data, informasi,
+              keterangan, dan/atau penjelasan yang lebih rinci kepada Wajib Pajak,
+              Wakil, Kuasa, pegawai, atau anggota keluarga Wajib Pajak yang telah dewasa.
+            </p>
+
+            <p>
+              Dengan demikian, pegawai dapat memberikan keterangan berdasarkan
+              pekerjaan dan pengetahuan faktualnya tanpa harus terlebih dahulu
+              ditunjuk sebagai Kuasa Wajib Pajak.
+            </p>
+
+            <div class="comparison-grid">
+              <div class="comparison-card no-kuasa">
+                <h3>Tidak memerlukan Surat Kuasa Khusus</h3>
+                <ul>
+                  <li>menjelaskan proses bisnis;</li>
+                  <li>menjelaskan pencatatan transaksi;</li>
+                  <li>menunjukkan atau menyerahkan dokumen;</li>
+                  <li>membantu membuka data elektronik;</li>
+                  <li>menjawab pertanyaan sesuai bidang pekerjaan;</li>
+                  <li>menandatangani berita acara pemberian keterangannya sendiri;</li>
+                  <li>membuat konsep bukti potong, SPT, atau surat tanggapan.</li>
+                </ul>
+              </div>
+
+              <div class="comparison-card need-kuasa">
+                <h3>Memerlukan kedudukan sebagai Wakil atau Kuasa</h3>
+                <ul>
+                  <li>menggantikan pengurus dalam tahapan formal;</li>
+                  <li>menyatakan persetujuan atau penolakan atas koreksi;</li>
+                  <li>mengambil keputusan prosedural atas nama perusahaan;</li>
+                  <li>mengajukan upaya atau permohonan perpajakan;</li>
+                  <li>menandatangani dokumen sebagai pihak yang mewakili Wajib Pajak;</li>
+                  <li>menjalankan hak atau kewajiban perpajakan atas nama Wajib Pajak.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="callout success">
+              <span class="callout-title">Pegawai sebagai sumber keterangan</span>
+              Seorang staf akuntansi boleh menjelaskan alur pencatatan penjualan,
+              penyebab selisih data, atau cara kerja sistem akuntansi tanpa Surat
+              Kuasa Khusus. Ia menjelaskan fakta yang diketahuinya, bukan mengambil
+              keputusan hukum atas nama perusahaan.
+            </div>
+
+            <div class="callout warning">
+              <span class="callout-title">Batas yang perlu diperhatikan</span>
+              Ketika pegawai mulai menyatakan sikap perusahaan, menyetujui atau
+              menolak koreksi, atau menandatangani dokumen sebagai pihak yang
+              mewakili perusahaan, perannya tidak lagi sekadar memberi keterangan.
+            </div>
+          </section>
+
+          <section id="pemeriksaan">
+            <h2>Kedudukan Pegawai dalam Pemeriksaan Pajak</h2>
+
+            <h3>1. Pemberian data dan keterangan</h3>
+            <p>
+              Pegawai dapat memberikan data, informasi, keterangan, dan penjelasan
+              sesuai tugasnya. Keterangan tersebut dapat dituangkan dalam berita
+              acara yang ditandatangani oleh pegawai sebagai pihak yang memberikan
+              keterangan.
+            </p>
+
+            <h3>2. Membantu kelancaran pemeriksaan</h3>
+            <p>
+              Ketika Wajib Pajak, Wakil, atau Kuasa tidak berada di tempat, pegawai
+              yang mempunyai tugas dan fungsi relevan dapat membantu kelancaran
+              pemeriksaan, misalnya menunjukkan dokumen, membantu akses data,
+              atau menjelaskan sistem perusahaan.
+            </p>
+
+            <h3>3. Pertemuan dan pembahasan formal</h3>
+            <p>
+              Pegawai dapat hadir sebagai pendamping atau pemberi penjelasan teknis.
+              Namun, untuk menggantikan Wajib Pajak atau pengurus dalam mengambil
+              posisi dan menandatangani dokumen formal, pegawai harus memiliki
+              kedudukan sebagai Wakil atau Kuasa.
+            </p>
+
+            <h3>4. Pembahasan Akhir Hasil Pemeriksaan</h3>
+            <p>
+              Pada tahap ini dapat terjadi persetujuan atau ketidaksetujuan atas
+              koreksi dan pengambilan keputusan prosedural. Dokumen pembahasan
+              ditandatangani oleh Wajib Pajak, Wakil, atau Kuasa. Pegawai biasa
+              tidak dapat menggantikan ketiganya hanya berdasarkan hubungan kerja.
+            </p>
+          </section>
+
+          <section id="contoh">
+            <h2>Contoh Sederhana</h2>
+
+            <div class="case">
+              <div class="case-header">Contoh 1 — Tidak membutuhkan Surat Kuasa Khusus</div>
+              <div class="case-body">
+                <p>
+                  Pemeriksa bertanya kepada Rina, staf akuntansi PT Maju Jaya,
+                  mengenai alasan perbedaan tanggal antara surat jalan dan invoice.
+                  Rina menjelaskan bahwa invoice diterbitkan setelah barang diterima
+                  pelanggan. Rina kemudian menunjukkan dokumen dan menandatangani
+                  berita acara pemberian keterangan.
+                </p>
+                <div class="case-result">
+                  Kesimpulan: Rina tidak memerlukan Surat Kuasa Khusus karena hanya
+                  memberikan keterangan faktual berdasarkan pekerjaannya.
+                </div>
+              </div>
+            </div>
+
+            <div class="case">
+              <div class="case-header">Contoh 2 — Tidak membutuhkan Surat Kuasa Khusus</div>
+              <div class="case-body">
+                <p>
+                  Budi, staf pajak, membuat konsep tanggapan atas temuan pemeriksa,
+                  menyusun rekonsiliasi, serta menyiapkan bukti transaksi. Konsep
+                  tersebut ditelaah dan ditandatangani oleh direktur.
+                </p>
+                <div class="case-result">
+                  Kesimpulan: Budi tidak memerlukan Surat Kuasa Khusus karena hanya
+                  menjalankan pekerjaan internal.
+                </div>
+              </div>
+            </div>
+
+            <div class="case">
+              <div class="case-header">Contoh 3 — Membutuhkan Surat Kuasa Khusus</div>
+              <div class="case-body">
+                <p>
+                  Direktur tidak dapat hadir dalam Pembahasan Akhir Hasil Pemeriksaan.
+                  Budi diminta datang sendiri, menyatakan apakah perusahaan setuju
+                  atau tidak setuju atas koreksi, mengambil keputusan mengenai
+                  pembahasan lanjutan, dan menandatangani risalah atas nama perusahaan.
+                </p>
+                <div class="case-result">
+                  Kesimpulan: apabila Budi bukan pengurus atau Wakil Wajib Pajak,
+                  ia harus ditunjuk sebagai Kuasa Wajib Pajak melalui Surat Kuasa Khusus
+                  dan memenuhi persyaratan sebagai kuasa.
+                </div>
+              </div>
+            </div>
+
+            <div class="case">
+              <div class="case-header">Contoh 4 — Membutuhkan Surat Kuasa Khusus</div>
+              <div class="case-body">
+                <p>
+                  PT Maju Jaya menunjuk konsultan pajak untuk mengajukan dan menangani
+                  keberatan atas Surat Ketetapan Pajak Kurang Bayar PPh Badan Tahun
+                  Pajak 2025.
+                </p>
+                <div class="case-result">
+                  Kesimpulan: diperlukan Surat Kuasa Khusus yang menyebutkan secara
+                  jelas urusan keberatan, jenis pajak, dan tahun pajak terkait.
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="persyaratan">
+            <h2>Siapa yang Dapat Menjadi Kuasa?</h2>
+
+            <p>
+              Berdasarkan PMK 44 Tahun 2026, pihak yang dapat ditunjuk sebagai kuasa
+              meliputi:
+            </p>
+
+            <ol>
+              <li><strong>Konsultan Pajak;</strong></li>
+              <li><strong>Pihak Lain; dan</strong></li>
+              <li><strong>Keluarga.</strong></li>
+            </ol>
+
+            <p>
+              Konsultan Pajak harus mempunyai Izin Konsultan Pajak. Pihak Lain
+              memenuhi persyaratan kompetensi melalui Surat Keterangan Terdaftar.
+              Keluarga memperoleh pengecualian dari persyaratan kompetensi dengan
+              memenuhi pembuktian hubungan keluarga sesuai ketentuan.
+            </p>
+
+            <div class="callout info">
+              <span class="callout-title">Pegawai yang menjadi kuasa</span>
+              Pegawai perusahaan yang secara formal ditunjuk sebagai kuasa pada
+              prinsipnya termasuk kategori Pihak Lain. Status kepegawaian saja
+              tidak otomatis memberikan kewenangan untuk menjadi kuasa.
+            </div>
+
+            <h3>Isi pokok Surat Kuasa Khusus</h3>
+
+            <p>Surat Kuasa Khusus paling sedikit perlu memuat:</p>
+
+            <ul>
+              <li>identitas dan NPWP pemberi serta penerima kuasa;</li>
+              <li>status penerima kuasa;</li>
+              <li>hak atau kewajiban perpajakan tertentu yang dikuasakan;</li>
+              <li>jenis pajak serta masa atau tahun pajak;</li>
+              <li>tindakan yang boleh dilakukan oleh kuasa;</li>
+              <li>masa berlaku surat kuasa;</li>
+              <li>tanda tangan para pihak; dan</li>
+              <li>pemenuhan ketentuan bea meterai.</li>
+            </ul>
+
+            <p>
+              Surat kuasa harus dibuat secara khusus dan terbatas. Artinya,
+              kewenangan kuasa tidak boleh dirumuskan terlalu umum tanpa menyebut
+              urusan perpajakan yang ditangani.
+            </p>
+          </section>
+
+          <section id="kesimpulan">
+            <h2>Kesimpulan</h2>
+
+            <p>
+              Surat Kuasa Khusus diperlukan ketika seseorang yang bukan Wajib Pajak
+              sendiri dan bukan Wakil Wajib Pajak diberi kewenangan untuk bertindak
+              secara formal atas nama Wajib Pajak dalam menjalankan hak atau
+              memenuhi kewajiban perpajakan tertentu.
+            </p>
+
+            <p>
+              Namun, keterlibatan pegawai dalam urusan perpajakan tidak otomatis
+              menjadikannya sebagai kuasa. Berdasarkan PMK 15 Tahun 2025, pegawai
+              dapat membantu pemeriksaan, menyerahkan data, menjelaskan proses
+              bisnis, menjawab pertanyaan, dan menandatangani berita acara atas
+              keterangannya sendiri tanpa Surat Kuasa Khusus.
+            </p>
+
+            <div class="principle">
+              Menjelaskan fakta karena mengetahui pekerjaan tidak sama dengan menjadi kuasa.<br>
+              Mengambil tindakan formal untuk dan atas nama Wajib Pajak merupakan pelaksanaan kuasa.
+            </div>
+          </section>
+
+          <section id="faq">
+            <h2>Pertanyaan yang Sering Diajukan</h2>
+
+            <details>
+              <summary>Apakah semua staf pajak perusahaan harus memiliki SKT?</summary>
+              <p>
+                Tidak. SKT tidak dibutuhkan hanya karena seseorang bekerja sebagai
+                staf pajak. Persyaratan tersebut relevan apabila pegawai secara
+                formal ditunjuk sebagai Pihak Lain yang bertindak sebagai kuasa.
+              </p>
+            </details>
+
+            <details>
+              <summary>Apakah pegawai boleh menjawab pertanyaan pemeriksa?</summary>
+              <p>
+                Boleh. Pegawai dapat memberikan data, informasi, keterangan, dan
+                penjelasan berdasarkan tugas serta pengetahuan faktualnya tanpa
+                harus menjadi Kuasa Wajib Pajak.
+              </p>
+            </details>
+
+            <details>
+              <summary>Apakah pegawai boleh menandatangani berita acara?</summary>
+              <p>
+                Pegawai dapat menandatangani berita acara atas keterangan yang
+                diberikannya. Namun, penandatanganan dokumen formal sebagai pihak
+                yang mewakili Wajib Pajak harus dilakukan oleh Wajib Pajak, Wakil,
+                atau Kuasa sesuai ketentuan pada masing-masing tahapan.
+              </p>
+            </details>
+
+            <details>
+              <summary>Apakah direktur membutuhkan Surat Kuasa Khusus?</summary>
+              <p>
+                Pada prinsipnya tidak, sepanjang direktur bertindak dalam
+                kedudukannya sebagai pengurus dan Wakil Wajib Pajak badan.
+              </p>
+            </details>
+
+            <details>
+              <summary>Apakah tanggung jawab pajak berpindah kepada kuasa?</summary>
+              <p>
+                Tidak. Wajib Pajak tetap bertanggung jawab atas kebenaran data,
+                pembayaran pajak, dan pemenuhan kewajiban perpajakannya meskipun
+                telah menunjuk seorang kuasa.
+              </p>
+            </details>
+          </section>
+
+          <section id="sumber">
+            <h2>Sumber Resmi</h2>
+
+            <div class="sources">
+              <ul>
+                <li>
+                  <a href="https://jdih.kemenkeu.go.id/dok/pmk-44-tahun-2026"
+                     target="_blank" rel="noopener noreferrer">
+                    PMK Nomor 44 Tahun 2026 tentang Persyaratan untuk Menjadi Kuasa
+                    di Bidang Perpajakan dan Tata Cara Pelaksanaan Hak dan Pemenuhan
+                    Kewajiban Kuasa di Bidang Perpajakan
+                  </a>
+                </li>
+                <li>
+                  <a href="https://jdih.kemenkeu.go.id/dok/pmk-15-tahun-2025"
+                     target="_blank" rel="noopener noreferrer">
+                    PMK Nomor 15 Tahun 2025 tentang Pemeriksaan Pajak
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="callout warning">
+              <span class="callout-title">Catatan</span>
+              Artikel ini merupakan materi edukasi umum dan bukan pendapat hukum
+              atau konsultasi perpajakan untuk kasus tertentu. Penerapan pada suatu
+              kasus perlu mempertimbangkan dokumen, kewenangan, dan tahapan
+              administrasi yang sebenarnya.
+            </div>
+          </section>
+        </article>
+
+        <div class="article-actions">
+          <button class="button primary" type="button" onclick="window.print()">
+            Cetak / Simpan PDF
+          </button>
+          <button class="button" id="copyLinkButton" type="button">
+            Salin Tautan
+          </button>
+          <a class="button" href="#ringkasan">Kembali ke Atas</a>
+        </div>
+      </div>
+    </div>
   </main>
 
-  <footer>
-    <div class="disclaimer">
-      <strong>Disclaimer:</strong>
-      Kabayan merupakan situs edukasi perpajakan pribadi dan bukan situs resmi Direktorat Jenderal Pajak atau instansi pemerintah. Isi artikel harus diperiksa kembali dengan ketentuan perpajakan terbaru sebelum digunakan sebagai dasar pengambilan keputusan.
-    </div>
-
+  <footer class="site-footer">
     <div class="footer-inner">
-      <p>© <span id="currentYear"></span> Angga Sukma Dhaniswara.</p>
+      <div>
+        <p class="footer-title">Kabayan by Angga Sukma Dhaniswara</p>
+        <p>
+          Materi pembelajaran perpajakan yang disusun agar lebih mudah dipahami,
+          terstruktur, dan dapat diterapkan dalam praktik.
+        </p>
+      </div>
+
       <div class="footer-links">
         <a href="index.html">Beranda</a>
         <a href="artikel.html">Artikel</a>
         <a href="buku.html">Buku</a>
+        <a href="formulir.html">Formulir</a>
         <a href="aplikasi.html">Aplikasi</a>
-        <a href="#top">Kembali ke atas</a>
       </div>
     </div>
   </footer>
 
   <script>
-    const menuToggle = document.getElementById("menuToggle");
-    const mobileMenu = document.getElementById("mobileMenu");
+    const menuButton = document.getElementById("menuButton");
+    const mainNavigation = document.getElementById("mainNavigation");
+    const readingProgress = document.getElementById("readingProgress");
+    const copyLinkButton = document.getElementById("copyLinkButton");
+    const tocLinks = [...document.querySelectorAll(".toc a")];
+    const articleSections = [...document.querySelectorAll("article section[id]")];
 
-    menuToggle.addEventListener("click", () => {
-      const isActive = mobileMenu.classList.toggle("active");
-      document.body.classList.toggle("menu-open", isActive);
-      menuToggle.setAttribute("aria-expanded", String(isActive));
-      menuToggle.textContent = isActive ? "×" : "☰";
+    menuButton.addEventListener("click", () => {
+      const isOpen = mainNavigation.classList.toggle("open");
+      menuButton.setAttribute("aria-expanded", String(isOpen));
+      menuButton.textContent = isOpen ? "✕" : "☰";
     });
 
-    document.querySelectorAll(".mobile-menu a").forEach((link) => {
+    mainNavigation.querySelectorAll("a").forEach((link) => {
       link.addEventListener("click", () => {
-        mobileMenu.classList.remove("active");
-        document.body.classList.remove("menu-open");
-        menuToggle.setAttribute("aria-expanded", "false");
-        menuToggle.textContent = "☰";
+        mainNavigation.classList.remove("open");
+        menuButton.setAttribute("aria-expanded", "false");
+        menuButton.textContent = "☰";
       });
     });
 
-    document.querySelectorAll(".faq-question").forEach((button) => {
-      button.addEventListener("click", () => {
-        const item = button.closest(".faq-item");
-        const isOpen = item.classList.toggle("open");
-        button.setAttribute("aria-expanded", String(isOpen));
+    function updateReadingProgress() {
+      const scrollTop = window.scrollY;
+      const scrollableHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
+      const progress = scrollableHeight > 0
+        ? Math.min(100, Math.max(0, (scrollTop / scrollableHeight) * 100))
+        : 0;
+
+      readingProgress.style.width = progress + "%";
+    }
+
+    function updateActiveToc() {
+      const marker = window.scrollY + 145;
+      let activeId = articleSections[0]?.id || "";
+
+      articleSections.forEach((section) => {
+        if (section.offsetTop <= marker) {
+          activeId = section.id;
+        }
       });
-    });
 
-    const copyLink = document.getElementById("copyLink");
+      tocLinks.forEach((link) => {
+        const isActive = link.getAttribute("href") === "#" + activeId;
+        link.classList.toggle("active", isActive);
+      });
+    }
 
-    copyLink.addEventListener("click", async () => {
-      const originalText = copyLink.textContent;
+    window.addEventListener("scroll", () => {
+      updateReadingProgress();
+      updateActiveToc();
+    }, { passive: true });
 
+    copyLinkButton.addEventListener("click", async () => {
       try {
         await navigator.clipboard.writeText(window.location.href);
-        copyLink.textContent = "Tautan disalin";
+        const originalText = copyLinkButton.textContent;
+        copyLinkButton.textContent = "Tautan Disalin";
+        setTimeout(() => {
+          copyLinkButton.textContent = originalText;
+        }, 1800);
       } catch (error) {
-        copyLink.textContent = "Gagal menyalin";
+        window.prompt("Salin tautan berikut:", window.location.href);
       }
-
-      window.setTimeout(() => {
-        copyLink.textContent = originalText;
-      }, 1800);
     });
 
-    const tocLinks = Array.from(document.querySelectorAll(".toc-list a"));
-    const sections = tocLinks
-      .map((link) => document.querySelector(link.getAttribute("href")))
-      .filter(Boolean);
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-
-          tocLinks.forEach((link) => {
-            link.classList.toggle(
-              "active",
-              link.getAttribute("href") === "#" + entry.target.id
-            );
-          });
-        });
-      },
-      { rootMargin: "-25% 0px -65% 0px", threshold: 0 }
-    );
-
-    sections.forEach((section) => observer.observe(section));
-
-    document.getElementById("currentYear").textContent = new Date().getFullYear();
+    updateReadingProgress();
+    updateActiveToc();
   </script>
 </body>
 </html>
