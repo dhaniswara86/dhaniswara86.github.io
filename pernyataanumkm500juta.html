@@ -1256,6 +1256,9 @@
       const printButton = document.getElementById("printButton");
       const resetButton = document.getElementById("resetButton");
       const statusWajibPajak = document.getElementById("statusWajibPajak");
+      const namaJelas = document.getElementById("namaJelas");
+
+      let namaJelasDieditManual = false;
 
       const sourceFields = {
         namaPenandatangan: document.getElementById("namaPenandatangan"),
@@ -1276,10 +1279,34 @@
         targetFields.alamatWajibPajak.value = sourceFields.alamatPenandatangan.value;
       };
 
+      const syncNamaJelas = () => {
+        if (namaJelasDieditManual && namaJelas.value.trim() !== "") return;
+        namaJelas.value = sourceFields.namaPenandatangan.value;
+        namaJelas.classList.remove("is-missing");
+        namaJelas.setAttribute(
+          "aria-invalid",
+          namaJelas.value.trim() === "" ? "true" : "false"
+        );
+      };
+
+      namaJelas.addEventListener("input", () => {
+        namaJelasDieditManual = namaJelas.value.trim() !== "";
+
+        if (namaJelas.value.trim() === "") {
+          namaJelasDieditManual = false;
+          syncNamaJelas();
+        }
+      });
+
       statusWajibPajak.addEventListener("change", copySignerToTaxpayer);
       Object.values(sourceFields).forEach((field) => {
         field.addEventListener("input", copySignerToTaxpayer);
       });
+
+      sourceFields.namaPenandatangan.addEventListener(
+        "input",
+        syncNamaJelas
+      );
 
       form.addEventListener("input", (event) => {
         if (event.target.matches("input[type='text'], textarea")) {
@@ -1341,6 +1368,7 @@
         if (!confirmed) return;
 
         form.reset();
+        namaJelasDieditManual = false;
         form.querySelectorAll(".is-missing").forEach((input) => {
           input.classList.remove("is-missing");
         });
@@ -1349,6 +1377,8 @@
         });
         sourceFields.namaPenandatangan.focus();
       });
+
+      syncNamaJelas();
     })();
   </script>
 </body>
