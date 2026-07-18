@@ -1,4 +1,3 @@
-\
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -2048,6 +2047,435 @@
       }
     }
 
+  
+    /* =====================================================
+       Slider Presentasi Role Akses — Tema Kabayan
+       ===================================================== */
+    .presentation-section {
+      margin: 78px 0 48px;
+      scroll-margin-top: 86px;
+    }
+
+    .presentation-heading {
+      margin-bottom: 25px;
+    }
+
+    .presentation-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 12px;
+      padding: 7px 11px;
+      border-radius: 999px;
+      background: #eef6ff;
+      color: var(--blue);
+      font-size: 11px;
+      font-weight: 750;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .presentation-label::before {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--blue);
+      content: "";
+    }
+
+    .presentation-heading h2 {
+      margin: 0 0 15px;
+      color: var(--near-black);
+      font-size: clamp(32px, 4.5vw, 45px);
+      font-weight: 700;
+      letter-spacing: -0.045em;
+      line-height: 1.08;
+    }
+
+    .presentation-heading p {
+      max-width: 720px;
+      margin: 0;
+      color: #515154;
+      font-size: 17px;
+      line-height: 1.65;
+    }
+
+    .presentation-viewer {
+      width: 100%;
+      max-width: 100%;
+      overflow: hidden;
+      border: 1px solid rgba(0, 0, 0, 0.07);
+      border-radius: 26px;
+      background: #111113;
+      box-shadow:
+        0 26px 70px rgba(20, 43, 76, 0.16),
+        0 4px 15px rgba(0, 0, 0, 0.07);
+      outline: none;
+    }
+
+    .presentation-viewer:focus-visible {
+      box-shadow:
+        0 0 0 4px rgba(0, 113, 227, 0.18),
+        0 26px 70px rgba(20, 43, 76, 0.16);
+    }
+
+    .presentation-viewer:fullscreen {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      border: 0;
+      border-radius: 0;
+      background: #000000;
+    }
+
+    .presentation-viewer:fullscreen .presentation-stage {
+      flex: 1;
+      min-height: 0;
+    }
+
+    .presentation-viewer:fullscreen .presentation-slide {
+      height: 100%;
+    }
+
+    .presentation-viewer:fullscreen .presentation-slide img {
+      max-height: calc(100vh - 180px);
+    }
+
+    .presentation-toolbar {
+      min-height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 10px 14px 10px 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+      background: #1d1d1f;
+      color: #d2d2d7;
+    }
+
+    .presentation-page-info {
+      font-size: 12px;
+    }
+
+    .presentation-page-info strong {
+      color: var(--white);
+    }
+
+    .presentation-toolbar-actions {
+      display: flex;
+      gap: 7px;
+    }
+
+    .presentation-tool-button {
+      min-height: 34px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7px 11px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.07);
+      color: var(--white);
+      cursor: pointer;
+      font-size: 11px;
+      text-decoration: none;
+    }
+
+    .presentation-tool-button:hover {
+      background: rgba(255, 255, 255, 0.14);
+    }
+
+    .presentation-stage {
+      position: relative;
+      min-height: 420px;
+      display: grid;
+      align-items: center;
+      grid-template-columns: 54px minmax(0, 1fr) 54px;
+      background:
+        radial-gradient(
+          circle at 50% 50%,
+          rgba(0, 113, 227, 0.18),
+          transparent 48%
+        ),
+        #08080a;
+      touch-action: pan-y;
+    }
+
+    .presentation-slide {
+      min-width: 0;
+      margin: 0;
+      padding: 23px 6px 15px;
+      text-align: center;
+    }
+
+    .presentation-slide img {
+      width: 100%;
+      max-width: 100%;
+      max-height: 535px;
+      display: block;
+      margin: 0 auto;
+      border-radius: 9px;
+      background: #ffffff;
+      object-fit: contain;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.38);
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    .presentation-slide figcaption {
+      min-height: 32px;
+      margin-top: 13px;
+      color: #a1a1a6;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .presentation-nav {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      justify-self: center;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.09);
+      color: var(--white);
+      cursor: pointer;
+      font-size: 28px;
+      line-height: 1;
+    }
+
+    .presentation-nav:hover {
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    .presentation-nav:disabled {
+      cursor: default;
+      opacity: 0.35;
+    }
+
+    .presentation-thumbnails {
+      display: flex;
+      gap: 9px;
+      max-width: 100%;
+      overflow-x: auto;
+      padding: 12px 14px 15px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      background: #1d1d1f;
+      scrollbar-width: thin;
+      scroll-snap-type: x proximity;
+    }
+
+    .presentation-thumb {
+      position: relative;
+      width: 82px;
+      min-width: 82px;
+      height: 56px;
+      overflow: hidden;
+      padding: 0;
+      border: 2px solid transparent;
+      border-radius: 8px;
+      background: #ffffff;
+      cursor: pointer;
+      opacity: 0.58;
+      scroll-snap-align: center;
+    }
+
+    .presentation-thumb:hover,
+    .presentation-thumb.active {
+      border-color: #52a7ff;
+      opacity: 1;
+    }
+
+    .presentation-thumb img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .presentation-thumb span {
+      position: absolute;
+      right: 4px;
+      bottom: 4px;
+      min-width: 19px;
+      height: 19px;
+      display: grid;
+      place-items: center;
+      padding: 0 4px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.74);
+      color: var(--white);
+      font-size: 9px;
+      font-weight: 700;
+    }
+
+    .presentation-error {
+      padding: 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      background: #3a1518;
+      color: #ffd7d9;
+      font-size: 13px;
+      line-height: 1.55;
+      text-align: center;
+    }
+
+    .presentation-error code {
+      color: var(--white);
+    }
+
+    .presentation-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 11px;
+      margin-top: 22px;
+    }
+
+    .presentation-note {
+      margin-top: 17px;
+      padding: 17px 18px;
+      border: 1px solid #f0dfb9;
+      border-radius: 17px;
+      background: #fff7e8;
+      color: #6d4b14;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .presentation-noscript {
+      padding: 14px;
+      border-radius: 14px;
+      background: var(--white);
+      color: #515154;
+      font-size: 14px;
+    }
+
+    .presentation-noscript a {
+      color: var(--blue);
+    }
+
+    @media (max-width: 760px) {
+      .presentation-section {
+        width: 100%;
+        max-width: 100%;
+        margin-top: 60px;
+        overflow: hidden;
+      }
+
+      .presentation-viewer {
+        border-radius: 21px;
+      }
+
+      .presentation-toolbar {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 11px 13px;
+      }
+
+      .presentation-toolbar-actions {
+        width: 100%;
+      }
+
+      .presentation-tool-button {
+        flex: 1;
+      }
+
+      .presentation-stage {
+        min-height: 275px;
+        grid-template-columns: 40px minmax(0, 1fr) 40px;
+      }
+
+      .presentation-slide {
+        padding: 15px 2px 10px;
+      }
+
+      .presentation-slide img {
+        max-height: 360px;
+        border-radius: 6px;
+      }
+
+      .presentation-slide figcaption {
+        min-height: 43px;
+        margin-top: 9px;
+        padding: 0 5px;
+        font-size: 11px;
+      }
+
+      .presentation-nav {
+        width: 32px;
+        height: 32px;
+        font-size: 23px;
+      }
+
+      .presentation-thumbnails {
+        gap: 7px;
+        padding: 10px 11px 12px;
+      }
+
+      .presentation-thumb {
+        width: 68px;
+        min-width: 68px;
+        height: 47px;
+      }
+
+      .presentation-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      .presentation-actions .button {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .presentation-stage {
+        min-height: 235px;
+        grid-template-columns: 34px minmax(0, 1fr) 34px;
+      }
+
+      .presentation-slide img {
+        max-height: 285px;
+      }
+
+      .presentation-nav {
+        width: 28px;
+        height: 28px;
+        font-size: 20px;
+      }
+    }
+
+    @media print {
+      .presentation-toolbar,
+      .presentation-nav,
+      .presentation-thumbnails,
+      .presentation-actions {
+        display: none !important;
+      }
+
+      .presentation-viewer {
+        border: 1px solid #aaaaaa;
+        background: #ffffff;
+        box-shadow: none;
+      }
+
+      .presentation-stage {
+        display: block;
+        min-height: 0;
+        background: #ffffff;
+      }
+
+      .presentation-slide img {
+        max-height: none;
+        box-shadow: none;
+      }
+
+      .presentation-slide figcaption {
+        color: #000000;
+      }
+    }
+
   </style>
 </head>
 
@@ -3498,6 +3926,358 @@
               </p>
             </section>
 
+
+            <section
+              class="presentation-section"
+              id="presentasi-role-akses"
+              aria-labelledby="judul-presentasi-role"
+            >
+              <div class="presentation-heading">
+                <span class="presentation-label">
+                  Panduan Visual
+                </span>
+
+                <h2 id="judul-presentasi-role">
+                  Tata Cara Pemberian Role Akses bagi Pegawai
+                </h2>
+
+                <p>
+                  Presentasi berikut melengkapi penjelasan dalam artikel.
+                  Gunakan tombol navigasi, thumbnail, tombol panah keyboard,
+                  atau geser layar untuk berpindah halaman.
+                </p>
+              </div>
+
+              <div
+                class="presentation-viewer"
+                id="presentationViewer"
+                tabindex="0"
+              >
+                <div class="presentation-toolbar">
+                  <div class="presentation-page-info" aria-live="polite">
+                    Halaman
+                    <strong id="presentationCurrentPage">1</strong>
+                    dari
+                    <strong>15</strong>
+                  </div>
+
+                  <div class="presentation-toolbar-actions">
+                    <button
+                      class="presentation-tool-button"
+                      id="presentationFullscreen"
+                      type="button"
+                    >
+                      Layar penuh
+                    </button>
+
+                    <a
+                      class="presentation-tool-button"
+                      href="tata-cara-pemberian-role-akses-pegawai.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Buka PDF
+                    </a>
+                  </div>
+                </div>
+
+                <div class="presentation-stage">
+                  <button
+                    class="presentation-nav presentation-nav-prev"
+                    id="presentationPrevious"
+                    type="button"
+                    aria-label="Halaman sebelumnya"
+                  >
+                    ‹
+                  </button>
+
+                  <figure class="presentation-slide">
+                    <img
+                      id="presentationMainImage"
+                      src="assets/roleakses/slide-01.webp"
+                      alt="Sampul: Tata Cara Pemberian Role Akses bagi Pegawai"
+                    >
+
+                    <figcaption id="presentationCaption">
+                      Sampul: Tata Cara Pemberian Role Akses bagi Pegawai
+                    </figcaption>
+                  </figure>
+
+                  <button
+                    class="presentation-nav presentation-nav-next"
+                    id="presentationNext"
+                    type="button"
+                    aria-label="Halaman berikutnya"
+                  >
+                    ›
+                  </button>
+                </div>
+
+                <div
+                  class="presentation-thumbnails"
+                  id="presentationThumbnails"
+                  aria-label="Pilih halaman presentasi"
+                >
+                  
+                  <button
+                    class="presentation-thumb active"
+                    type="button"
+                    data-slide-index="0"
+                    aria-label="Tampilkan halaman 1: Sampul: Tata Cara Pemberian Role Akses bagi Pegawai"
+                     aria-current="true"
+                  >
+                    <img
+                      src="assets/roleakses/slide-01.webp"
+                      alt=""
+                      loading="lazy"
+                    >
+                    <span>1</span>
+                  </button>
+                  <button
+                    class="presentation-thumb"
+                    type="button"
+                    data-slide-index="1"
+                    aria-label="Tampilkan halaman 2: Membuka laman Coretax dan melanjutkan ke halaman login"
+                    
+                  >
+                    <img
+                      src="assets/roleakses/slide-02.webp"
+                      alt=""
+                      loading="lazy"
+                    >
+                    <span>2</span>
+                  </button>
+                  <button
+                    class="presentation-thumb"
+                    type="button"
+                    data-slide-index="2"
+                    aria-label="Tampilkan halaman 3: Mengisi NIK atau NPWP PIC, kata sandi, dan verifikasi"
+                    
+                  >
+                    <img
+                      src="assets/roleakses/slide-03.webp"
+                      alt=""
+                      loading="lazy"
+                    >
+                    <span>3</span>
+                  </button>
+                  <button
+                    class="presentation-thumb"
+                    type="button"
+                    data-slide-index="3"
+                    aria-label="Tampilkan halaman 4: Memilih akun perusahaan atau Wajib Pajak yang diwakili"
+                    
+                  >
+                    <img
+                      src="assets/roleakses/slide-04.webp"
+                      alt=""
+                      loading="lazy"
+                    >
+                    <span>4</span>
+                  </button>
+                  <button
+                    class="presentation-thumb"
+                    type="button"
+                    data-slide-index="4"
+                    aria-label="Tampilkan halaman 5: Membuka Portal Saya dan Profil Saya"
+                    
+                  >
+                    <img
+                      src="assets/roleakses/slide-05.webp"
+                      alt=""
+                      loading="lazy"
+                    >
+                    <span>5</span>
+                  </button>
+                  <button
+                    class="presentation-thumb"
+                    type="button"
+                    data-slide-index="5"
+                    aria-label="Tampilkan halaman 6: Membuka Informasi Umum dan menekan tombol Edit"
+                    
+                  >
+                    <img
+                      src="assets/roleakses/slide-06.webp"
+                      alt=""
+                      loading="lazy"
+                    >
+                    <span>6</span>
+                  </button>
+                  <button
+                    class="presentation-thumb"
+                    type="button"
+                    data-slide-index="6"
+                    aria-label="Tampilkan halaman 7: Memilih bagian Informasi Umum dalam pembaruan data"
+                    
+                  >
+                    <img
+                      src="assets/roleakses/slide-07.webp"
+                      alt=""
+                      loading="lazy"
+                    >
+                    <span>7</span>
+                  </button>
+                  <button
+                    class="presentation-thumb"
+                    type="button"
+                    data-slide-index="7"
+                    aria-label="Tampilkan halaman 8: Mengambil data terbaru dari Ditjen AHU"
+                    
+                  >
+                    <img
+                      src="assets/roleakses/slide-08.webp"
+                      alt=""
+                      loading="lazy"
+                    >
+                    <span>8</span>
+                  </button>
+                  <button
+                    class="presentation-thumb"
+                    type="button"
+                    data-slide-index="8"
+                    aria-label="Tampilkan halaman 9: Menambahkan pegawai pada bagian Pihak Terkait"
+                    
+                  >
+                    <img
+                      src="assets/roleakses/slide-09.webp"
+                      alt=""
+                      loading="lazy"
+                    >
+                    <span>9</span>
+                  </button>
+                  <button
+                    class="presentation-thumb"
+                    type="button"
+                    data-slide-index="9"
+                    aria-label="Tampilkan halaman 10: Memilih jenis pihak terkait Related Person"
+                    
+                  >
+                    <img
+                      src="assets/roleakses/slide-10.webp"
+                      alt=""
+                      loading="lazy"
+                    >
+                    <span>10</span>
+                  </button>
+                  <button
+                    class="presentation-thumb"
+                    type="button"
+                    data-slide-index="10"
+                    aria-label="Tampilkan halaman 11: Mengisi data pegawai dan menyimpan data"
+                    
+                  >
+                    <img
+                      src="assets/roleakses/slide-11.webp"
+                      alt=""
+                      loading="lazy"
+                    >
+                    <span>11</span>
+                  </button>
+                  <button
+                    class="presentation-thumb"
+                    type="button"
+                    data-slide-index="11"
+                    aria-label="Tampilkan halaman 12: Mencentang pernyataan dan menyimpan perubahan"
+                    
+                  >
+                    <img
+                      src="assets/roleakses/slide-12.webp"
+                      alt=""
+                      loading="lazy"
+                    >
+                    <span>12</span>
+                  </button>
+                  <button
+                    class="presentation-thumb"
+                    type="button"
+                    data-slide-index="12"
+                    aria-label="Tampilkan halaman 13: Membuka Wakil atau Kuasa dan memilih Assign Roles"
+                    
+                  >
+                    <img
+                      src="assets/roleakses/slide-13.webp"
+                      alt=""
+                      loading="lazy"
+                    >
+                    <span>13</span>
+                  </button>
+                  <button
+                    class="presentation-thumb"
+                    type="button"
+                    data-slide-index="13"
+                    aria-label="Tampilkan halaman 14: Memilih role akses yang akan diberikan"
+                    
+                  >
+                    <img
+                      src="assets/roleakses/slide-14.webp"
+                      alt=""
+                      loading="lazy"
+                    >
+                    <span>14</span>
+                  </button>
+                  <button
+                    class="presentation-thumb"
+                    type="button"
+                    data-slide-index="14"
+                    aria-label="Tampilkan halaman 15: Proses selesai dan pegawai dapat melakukan impersonate"
+                    
+                  >
+                    <img
+                      src="assets/roleakses/slide-15.webp"
+                      alt=""
+                      loading="lazy"
+                    >
+                    <span>15</span>
+                  </button>
+                </div>
+
+                <div
+                  class="presentation-error"
+                  id="presentationError"
+                  hidden
+                >
+                  Gambar slide belum ditemukan. Pastikan folder
+                  <code>assets/roleakses</code> berisi
+                  <code>slide-01.webp</code> sampai
+                  <code>slide-15.webp</code>.
+                </div>
+              </div>
+
+              <div class="presentation-actions">
+                <a
+                  class="button button-primary"
+                  href="tata-cara-pemberian-role-akses-pegawai.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Buka presentasi lengkap
+                </a>
+
+                <a
+                  class="button"
+                  href="tata-cara-pemberian-role-akses-pegawai.pdf"
+                  download
+                >
+                  Unduh PDF
+                </a>
+              </div>
+
+              <div class="presentation-note">
+                <strong>Catatan:</strong>
+                pemberian hak akses dilakukan melalui akun PIC atau
+                Penanggung Jawab. Tampilan menu Coretax dapat berubah
+                mengikuti pembaruan sistem.
+              </div>
+
+              <noscript>
+                <p class="presentation-noscript">
+                  JavaScript diperlukan untuk menjalankan slider.
+                  <a href="tata-cara-pemberian-role-akses-pegawai.pdf">Buka PDF presentasi</a>.
+                </p>
+              </noscript>
+            </section>
+
+
             <section class="closing-box" id="penutup">
               <h2>Penutup</h2>
 
@@ -3553,6 +4333,7 @@
                 <a href="#minimum-access">Minimum access</a>
                 <a href="#evaluasi">Evaluasi berkala</a>
                 <a href="#bukan-teknis">Bukan sekadar teknis</a>
+                <a href="#presentasi-role-akses">Panduan visual</a>
                 <a href="#penutup">Penutup</a>
               </nav>
             </div>
@@ -3768,6 +4549,213 @@
         }, 1800);
       }
     );
+
+
+    const presentationSlides = ["Sampul: Tata Cara Pemberian Role Akses bagi Pegawai", "Membuka laman Coretax dan melanjutkan ke halaman login", "Mengisi NIK atau NPWP PIC, kata sandi, dan verifikasi", "Memilih akun perusahaan atau Wajib Pajak yang diwakili", "Membuka Portal Saya dan Profil Saya", "Membuka Informasi Umum dan menekan tombol Edit", "Memilih bagian Informasi Umum dalam pembaruan data", "Mengambil data terbaru dari Ditjen AHU", "Menambahkan pegawai pada bagian Pihak Terkait", "Memilih jenis pihak terkait Related Person", "Mengisi data pegawai dan menyimpan data", "Mencentang pernyataan dan menyimpan perubahan", "Membuka Wakil atau Kuasa dan memilih Assign Roles", "Memilih role akses yang akan diberikan", "Proses selesai dan pegawai dapat melakukan impersonate"];
+
+    const presentationMainImage =
+      document.getElementById("presentationMainImage");
+
+    const presentationCaption =
+      document.getElementById("presentationCaption");
+
+    const presentationCurrentPage =
+      document.getElementById("presentationCurrentPage");
+
+    const presentationPrevious =
+      document.getElementById("presentationPrevious");
+
+    const presentationNext =
+      document.getElementById("presentationNext");
+
+    const presentationViewer =
+      document.getElementById("presentationViewer");
+
+    const presentationFullscreen =
+      document.getElementById("presentationFullscreen");
+
+    const presentationError =
+      document.getElementById("presentationError");
+
+    const presentationThumbs = Array.from(
+      document.querySelectorAll(".presentation-thumb")
+    );
+
+    let currentPresentationSlide = 0;
+    let presentationTouchStartX = 0;
+
+    const showPresentationSlide = (index) => {
+      if (!presentationMainImage) {
+        return;
+      }
+
+      currentPresentationSlide = Math.max(
+        0,
+        Math.min(presentationSlides.length - 1, index)
+      );
+
+      const pageNumber = currentPresentationSlide + 1;
+
+      presentationError.hidden = true;
+
+      presentationMainImage.src =
+        "assets/roleakses/slide-" +
+        String(pageNumber).padStart(2, "0") +
+        ".webp";
+
+      presentationMainImage.alt =
+        presentationSlides[currentPresentationSlide];
+
+      presentationCaption.textContent =
+        presentationSlides[currentPresentationSlide];
+
+      presentationCurrentPage.textContent = pageNumber;
+
+      presentationPrevious.disabled =
+        currentPresentationSlide === 0;
+
+      presentationNext.disabled =
+        currentPresentationSlide ===
+        presentationSlides.length - 1;
+
+      presentationThumbs.forEach((thumb, thumbIndex) => {
+        const isActive =
+          thumbIndex === currentPresentationSlide;
+
+        thumb.classList.toggle("active", isActive);
+
+        if (isActive) {
+          thumb.setAttribute("aria-current", "true");
+
+          thumb.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest",
+            inline: "center"
+          });
+        } else {
+          thumb.removeAttribute("aria-current");
+        }
+      });
+    };
+
+    presentationMainImage?.addEventListener(
+      "error",
+      () => {
+        presentationError.hidden = false;
+      }
+    );
+
+    presentationPrevious?.addEventListener(
+      "click",
+      () => {
+        showPresentationSlide(
+          currentPresentationSlide - 1
+        );
+      }
+    );
+
+    presentationNext?.addEventListener(
+      "click",
+      () => {
+        showPresentationSlide(
+          currentPresentationSlide + 1
+        );
+      }
+    );
+
+    presentationThumbs.forEach((thumb) => {
+      thumb.addEventListener("click", () => {
+        showPresentationSlide(
+          Number(thumb.dataset.slideIndex)
+        );
+      });
+    });
+
+    presentationViewer?.addEventListener(
+      "keydown",
+      (event) => {
+        if (event.key === "ArrowLeft") {
+          event.preventDefault();
+          showPresentationSlide(
+            currentPresentationSlide - 1
+          );
+        }
+
+        if (event.key === "ArrowRight") {
+          event.preventDefault();
+          showPresentationSlide(
+            currentPresentationSlide + 1
+          );
+        }
+      }
+    );
+
+    presentationViewer?.addEventListener(
+      "touchstart",
+      (event) => {
+        presentationTouchStartX =
+          event.changedTouches[0].screenX;
+      },
+      { passive: true }
+    );
+
+    presentationViewer?.addEventListener(
+      "touchend",
+      (event) => {
+        const touchEndX =
+          event.changedTouches[0].screenX;
+
+        const difference =
+          presentationTouchStartX - touchEndX;
+
+        if (Math.abs(difference) < 45) {
+          return;
+        }
+
+        showPresentationSlide(
+          currentPresentationSlide +
+          (difference > 0 ? 1 : -1)
+        );
+      },
+      { passive: true }
+    );
+
+    presentationFullscreen?.addEventListener(
+      "click",
+      async () => {
+        if (!presentationViewer) {
+          return;
+        }
+
+        try {
+          if (!document.fullscreenElement) {
+            await presentationViewer.requestFullscreen();
+          } else {
+            await document.exitFullscreen();
+          }
+        } catch (error) {
+          window.open(
+            presentationMainImage.src,
+            "_blank",
+            "noopener"
+          );
+        }
+      }
+    );
+
+    document.addEventListener(
+      "fullscreenchange",
+      () => {
+        if (presentationFullscreen) {
+          presentationFullscreen.textContent =
+            document.fullscreenElement
+              ? "Keluar layar penuh"
+              : "Layar penuh";
+        }
+      }
+    );
+
+    showPresentationSlide(0);
 
     document.getElementById(
       "currentYear"
