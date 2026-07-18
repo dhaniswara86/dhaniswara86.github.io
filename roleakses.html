@@ -2048,6 +2048,172 @@
       }
     }
 
+  
+    /* =====================================================
+       Perbaikan Tampilan Mobile Direktori Role Akses
+       ===================================================== */
+    @media (max-width: 760px) {
+      .role-access-section {
+        width: 100%;
+        max-width: 100%;
+        margin: 58px 0 38px;
+        padding: 0;
+        overflow: visible;
+      }
+
+      .role-access-heading,
+      .role-access-controls,
+      .role-result-info,
+      .role-empty-state,
+      .role-access-note {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .role-access-heading h2,
+      .role-access-heading > p,
+      .role-summary-card,
+      .role-access-controls,
+      .role-access-note {
+        overflow-wrap: anywhere;
+        word-break: normal;
+      }
+
+      .role-access-controls {
+        padding: 13px;
+        border-radius: 18px;
+      }
+
+      .role-access-controls input,
+      .role-access-controls select {
+        min-width: 0;
+        max-width: 100%;
+      }
+
+      .role-table-wrapper {
+        width: 100%;
+        max-width: 100%;
+        overflow: visible !important;
+      }
+
+      .role-access-table {
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        table-layout: fixed;
+      }
+
+      .role-access-table,
+      .role-access-table tbody,
+      .role-access-table tr,
+      .role-access-table td {
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+      }
+
+      .role-access-table tbody tr {
+        display: block !important;
+        overflow: hidden;
+      }
+
+      .role-access-table td {
+        display: grid !important;
+        grid-template-columns: 96px minmax(0, 1fr);
+        align-items: start;
+        gap: 12px;
+        position: static !important;
+        padding: 13px 15px !important;
+        overflow: visible;
+        white-space: normal !important;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+      }
+
+      .role-access-table td::before {
+        position: static !important;
+        width: auto !important;
+        min-width: 0;
+        padding-top: 1px;
+        color: var(--medium-gray);
+        font-size: 10px;
+        font-weight: 750;
+        letter-spacing: 0.04em;
+        line-height: 1.35;
+        text-transform: uppercase;
+      }
+
+      .role-access-table td:nth-child(1),
+      .role-access-table td:nth-child(2),
+      .role-access-table td:nth-child(3),
+      .role-access-table td:nth-child(4) {
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+      }
+
+      .role-access-table td:nth-child(3) strong,
+      .role-access-table td:nth-child(4),
+      .role-badge {
+        max-width: 100%;
+        white-space: normal;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+      }
+
+      .role-number {
+        text-align: left !important;
+      }
+
+      .role-badge {
+        display: inline-flex;
+        width: fit-content;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .role-access-heading h2 {
+        font-size: 31px;
+      }
+
+      .role-summary-grid {
+        gap: 9px;
+      }
+
+      .role-summary-card {
+        min-height: 88px;
+        padding: 15px;
+      }
+
+      .role-access-table td {
+        grid-template-columns: 1fr;
+        gap: 5px;
+        padding: 13px 14px !important;
+      }
+
+      .role-access-table td::before {
+        margin-bottom: 1px;
+      }
+
+      .role-access-note {
+        padding: 15px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .role-access-controls {
+        padding: 11px;
+      }
+
+      .role-access-table td {
+        padding: 12px !important;
+      }
+
+      .role-access-heading h2 {
+        font-size: 28px;
+      }
+    }
+
   </style>
 </head>
 
@@ -2155,10 +2321,13 @@
                 <div class="identity-card">
                   <div class="identity-row">
                     <span class="identity-icon">ID</span>
-                    <span>Login menggunakan NIK atau NPWP pengguna</span>
+                    <span>NIK atau NPWP pengguna</span>
                   </div>
 
-                  
+                  <div class="identity-row">
+                    <span class="identity-icon">U</span>
+                    <span>Kewenangan sesuai tugas</span>
+                  </div>
                 </div>
               </div>
 
@@ -2180,12 +2349,12 @@
                 <div class="identity-card">
                   <div class="identity-row">
                     <span class="identity-icon">D</span>
-                    <span>Drafter atau Signer</span>
+                    <span>Drafter menyiapkan konsep</span>
                   </div>
 
                   <div class="identity-row">
                     <span class="identity-icon">S</span>
-                    <span>Kewenangan lain sesuai penugasan</span>
+                    <span>Signer memberikan persetujuan</span>
                   </div>
                 </div>
               </div>
