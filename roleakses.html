@@ -13,7 +13,7 @@
 
   <meta
     name="description"
-    content="Memahami fungsi role akses Coretax, hubungan dengan impersonate dan PIC, perbedaan drafter dan signer, serta berbagai permasalahan akses yang sering terjadi."
+    content="Memahami fungsi role akses Coretax, hubungan dengan impersonate dan PIC, perbedaan drafter dan signer, direktori 34 role, serta berbagai permasalahan akses yang sering terjadi."
   >
 
   <meta name="author" content="Angga Sukma Dhaniswara">
@@ -1373,6 +1373,681 @@
         transition: none !important;
       }
     }
+
+  .role-access-section {
+    --role-navy: #082f66;
+    --role-blue: #0d5cab;
+    --role-light-blue: #eef6ff;
+    --role-teal: #088f92;
+    --role-text: #172033;
+    --role-muted: #617087;
+    --role-border: #dce5f0;
+    --role-white: #ffffff;
+
+    max-width: 1180px;
+    margin: 48px auto;
+    padding: 0 20px;
+    color: var(--role-text);
+    font-family:
+      Inter,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Arial,
+      sans-serif;
+  }
+
+  .role-access-heading {
+    margin-bottom: 26px;
+  }
+
+  .role-access-label {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: #e7f4ff;
+    color: var(--role-blue);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+  }
+
+  .role-access-heading h2 {
+    margin: 0 0 10px;
+    color: var(--role-navy);
+    font-size: clamp(28px, 4vw, 42px);
+    line-height: 1.15;
+  }
+
+  .role-access-heading p {
+    max-width: 780px;
+    margin: 0;
+    color: var(--role-muted);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  .role-access-controls {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(230px, 1fr);
+    gap: 16px;
+    margin: 26px 0 12px;
+    padding: 18px;
+    border: 1px solid var(--role-border);
+    border-radius: 18px;
+    background: #f8fbff;
+  }
+
+  .role-search-wrapper,
+  .role-filter-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .role-access-controls label {
+    color: var(--role-navy);
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .role-access-controls input,
+  .role-access-controls select {
+    width: 100%;
+    min-height: 46px;
+    box-sizing: border-box;
+    padding: 11px 14px;
+    border: 1px solid #cbd8e6;
+    border-radius: 12px;
+    background: var(--role-white);
+    color: var(--role-text);
+    font: inherit;
+    outline: none;
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .role-access-controls input:focus,
+  .role-access-controls select:focus {
+    border-color: var(--role-blue);
+    box-shadow: 0 0 0 4px rgba(13, 92, 171, 0.12);
+  }
+
+  .role-result-info {
+    margin: 0 0 12px;
+    color: var(--role-muted);
+    font-size: 14px;
+  }
+
+  .role-table-wrapper {
+    overflow-x: auto;
+    border: 1px solid var(--role-border);
+    border-radius: 18px;
+    background: var(--role-white);
+    box-shadow: 0 16px 45px rgba(8, 47, 102, 0.08);
+  }
+
+  .role-access-table {
+    width: 100%;
+    min-width: 900px;
+    border-collapse: collapse;
+  }
+
+  .role-access-table th,
+  .role-access-table td {
+    padding: 17px 18px;
+    border-bottom: 1px solid var(--role-border);
+    text-align: left;
+    vertical-align: top;
+    line-height: 1.55;
+  }
+
+  .role-access-table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: var(--role-navy);
+    color: var(--role-white);
+    font-size: 13px;
+    letter-spacing: 0.02em;
+  }
+
+  .role-access-table tbody tr {
+    transition: background 0.2s ease;
+  }
+
+  .role-access-table tbody tr:nth-child(even) {
+    background: #fbfdff;
+  }
+
+  .role-access-table tbody tr:hover {
+    background: var(--role-light-blue);
+  }
+
+  .role-access-table tbody tr:last-child td {
+    border-bottom: 0;
+  }
+
+  .role-access-table td {
+    font-size: 14px;
+  }
+
+  .role-access-table td:nth-child(3) {
+    min-width: 280px;
+    color: var(--role-navy);
+  }
+
+  .role-access-table td:nth-child(4) {
+    min-width: 330px;
+    color: #425168;
+  }
+
+  .role-number {
+    width: 58px;
+    text-align: center !important;
+    font-weight: 700;
+  }
+
+  .role-badge {
+    display: inline-flex;
+    align-items: center;
+    max-width: 185px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 750;
+    line-height: 1.35;
+  }
+
+  .badge-pelaporan {
+    background: #e7f1ff;
+    color: #0b57a3;
+  }
+
+  .badge-pembayaran {
+    background: #e9f8f4;
+    color: #08766d;
+  }
+
+  .badge-profil {
+    background: #f0edff;
+    color: #5a42a6;
+  }
+
+  .badge-layanan {
+    background: #fff2da;
+    color: #935d00;
+  }
+
+  .badge-khusus {
+    background: #ffecef;
+    color: #a7354c;
+  }
+
+  .role-empty-state {
+    margin-top: 14px;
+    padding: 28px;
+    border: 1px dashed #bfcddd;
+    border-radius: 16px;
+    background: #f8fbff;
+    text-align: center;
+  }
+
+  .role-empty-state strong {
+    color: var(--role-navy);
+    font-size: 18px;
+  }
+
+  .role-empty-state p {
+    margin: 7px 0 0;
+    color: var(--role-muted);
+  }
+
+  .role-access-note {
+    margin-top: 18px;
+    padding: 16px 18px;
+    border-left: 4px solid var(--role-teal);
+    border-radius: 0 12px 12px 0;
+    background: #edfafa;
+    color: #38525e;
+    font-size: 13px;
+    line-height: 1.65;
+  }
+
+  @media (max-width: 720px) {
+    .role-access-section {
+      margin: 32px auto;
+      padding: 0 14px;
+    }
+
+    .role-access-controls {
+      grid-template-columns: 1fr;
+      padding: 14px;
+    }
+
+    .role-table-wrapper {
+      overflow: visible;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .role-access-table {
+      min-width: 0;
+    }
+
+    .role-access-table thead {
+      display: none;
+    }
+
+    .role-access-table,
+    .role-access-table tbody,
+    .role-access-table tr,
+    .role-access-table td {
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .role-access-table tbody {
+      display: grid;
+      gap: 14px;
+    }
+
+    .role-access-table tbody tr {
+      overflow: hidden;
+      border: 1px solid var(--role-border);
+      border-radius: 16px;
+      background: var(--role-white);
+      box-shadow: 0 10px 28px rgba(8, 47, 102, 0.07);
+    }
+
+    .role-access-table tbody tr:nth-child(even),
+    .role-access-table tbody tr:hover {
+      background: var(--role-white);
+    }
+
+    .role-access-table td {
+      min-width: 0 !important;
+      padding: 11px 16px 11px 140px;
+      border-bottom: 1px solid #e8eef5;
+      position: relative;
+    }
+
+    .role-access-table td::before {
+      position: absolute;
+      top: 11px;
+      left: 16px;
+      width: 112px;
+      color: var(--role-muted);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .role-access-table td:nth-child(1)::before {
+      content: "Nomor";
+    }
+
+    .role-access-table td:nth-child(2)::before {
+      content: "Kelompok";
+    }
+
+    .role-access-table td:nth-child(3)::before {
+      content: "Role akses";
+    }
+
+    .role-access-table td:nth-child(4)::before {
+      content: "Fungsi";
+    }
+
+    .role-access-table td:last-child {
+      border-bottom: 0;
+    }
+
+    .role-number {
+      width: 100%;
+      text-align: left !important;
+    }
+
+    .role-badge {
+      max-width: none;
+    }
+  }
+
+  @media (max-width: 460px) {
+    .role-access-table td {
+      padding: 38px 15px 12px;
+    }
+
+    .role-access-table td::before {
+      top: 12px;
+      left: 15px;
+      width: auto;
+    }
+  }
+
+
+    /* Penyesuaian direktori role agar menyatu dengan tema Kabayan */
+    .role-access-section {
+      max-width: none;
+      margin: 76px 0 52px;
+      padding: 0;
+      color: var(--near-black);
+      font-family: inherit;
+      scroll-margin-top: 86px;
+    }
+
+    .role-access-heading {
+      margin-bottom: 25px;
+    }
+
+    .role-access-label {
+      gap: 7px;
+      margin-bottom: 12px;
+      padding: 7px 11px;
+      background: #eef6ff;
+      color: var(--blue);
+      font-size: 11px;
+      font-weight: 750;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .role-access-label::before {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--blue);
+      content: "";
+    }
+
+    .role-access-heading h2 {
+      margin: 0 0 15px;
+      color: var(--near-black);
+      font-size: clamp(32px, 4.5vw, 45px);
+      font-weight: 700;
+      letter-spacing: -0.045em;
+      line-height: 1.08;
+    }
+
+    .role-access-heading p {
+      max-width: 720px;
+      margin: 0;
+      color: #515154;
+      font-size: 17px;
+      line-height: 1.65;
+    }
+
+    .role-access-controls {
+      grid-template-columns: minmax(0, 1.55fr) minmax(220px, 1fr);
+      gap: 12px;
+      margin: 24px 0 12px;
+      padding: 15px;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 21px;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 14px 42px rgba(0, 0, 0, 0.055);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .role-access-controls label {
+      color: #515154;
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .role-access-controls input,
+    .role-access-controls select {
+      min-height: 45px;
+      padding: 10px 13px;
+      border: 1px solid #d2d2d7;
+      border-radius: 13px;
+      background: var(--off-white);
+      color: var(--near-black);
+      font-size: 14px;
+    }
+
+    .role-access-controls input:hover,
+    .role-access-controls select:hover {
+      background: var(--white);
+    }
+
+    .role-access-controls input:focus,
+    .role-access-controls select:focus {
+      border-color: var(--blue);
+      background: var(--white);
+      box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.12);
+    }
+
+    .role-result-info {
+      margin-bottom: 11px;
+      color: var(--medium-gray);
+      font-size: 13px;
+    }
+
+    .role-result-info strong {
+      color: var(--near-black);
+    }
+
+    .role-table-wrapper {
+      border: 1px solid rgba(0, 0, 0, 0.07);
+      border-radius: 22px;
+      background: var(--white);
+      box-shadow: 0 20px 55px rgba(20, 43, 76, 0.08);
+      scrollbar-width: thin;
+    }
+
+    .role-access-table {
+      min-width: 760px;
+    }
+
+    .role-access-table th,
+    .role-access-table td {
+      padding: 15px 14px;
+      border-bottom-color: var(--soft-gray);
+      line-height: 1.5;
+    }
+
+    .role-access-table thead th {
+      background: #111113;
+      color: var(--white);
+      font-size: 11px;
+      font-weight: 680;
+      letter-spacing: 0.035em;
+      text-transform: uppercase;
+    }
+
+    .role-access-table thead th:first-child {
+      border-radius: 21px 0 0 0;
+    }
+
+    .role-access-table thead th:last-child {
+      border-radius: 0 21px 0 0;
+    }
+
+    .role-access-table tbody tr:nth-child(even) {
+      background: #fbfbfd;
+    }
+
+    .role-access-table tbody tr:hover {
+      background: #eef6ff;
+    }
+
+    .role-access-table td {
+      color: #515154;
+      font-size: 13px;
+    }
+
+    .role-access-table td:nth-child(2) {
+      width: 155px;
+    }
+
+    .role-access-table td:nth-child(3) {
+      width: 245px;
+      min-width: 220px;
+      color: var(--near-black);
+    }
+
+    .role-access-table td:nth-child(4) {
+      min-width: 260px;
+      color: #515154;
+    }
+
+    .role-number {
+      width: 48px;
+      color: var(--medium-gray) !important;
+      font-variant-numeric: tabular-nums;
+      font-weight: 650;
+    }
+
+    .role-badge {
+      max-width: 150px;
+      padding: 6px 9px;
+      font-size: 10px;
+      font-weight: 720;
+    }
+
+    .badge-pelaporan {
+      background: #eaf4ff;
+      color: var(--blue);
+    }
+
+    .badge-pembayaran {
+      background: #eaf7ef;
+      color: #237a3b;
+    }
+
+    .badge-profil {
+      background: #f3edf8;
+      color: var(--purple);
+    }
+
+    .badge-layanan {
+      background: #fff5dd;
+      color: #986400;
+    }
+
+    .badge-khusus {
+      background: #fff0ee;
+      color: #b42318;
+    }
+
+    .role-empty-state {
+      border-color: #b9c7d6;
+      border-radius: 20px;
+      background: var(--white);
+    }
+
+    .role-empty-state strong {
+      color: var(--near-black);
+      letter-spacing: -0.025em;
+    }
+
+    .role-empty-state p {
+      color: var(--medium-gray);
+      font-size: 14px;
+    }
+
+    .role-access-note {
+      margin-top: 16px;
+      padding: 17px 18px;
+      border: 1px solid #d9e9f8;
+      border-left: 1px solid #d9e9f8;
+      border-radius: 17px;
+      background: #eef6ff;
+      color: #31536f;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .role-access-note strong {
+      color: #23445f;
+    }
+
+    @media (max-width: 760px) {
+      .role-access-controls {
+        grid-template-columns: 1fr;
+      }
+
+      .role-table-wrapper {
+        overflow: visible;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+      }
+
+      .role-access-table {
+        min-width: 0;
+      }
+
+      .role-access-table tbody tr,
+      .role-access-table tbody tr:nth-child(even),
+      .role-access-table tbody tr:hover {
+        border-color: var(--soft-gray);
+        border-radius: 19px;
+        background: var(--white);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.055);
+      }
+
+      .role-access-table td {
+        padding: 11px 15px 11px 127px;
+        border-bottom-color: var(--soft-gray);
+      }
+
+      .role-access-table td::before {
+        left: 15px;
+        width: 98px;
+        color: var(--medium-gray);
+        font-size: 10px;
+        font-weight: 750;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .role-access-table td {
+        padding: 36px 15px 12px;
+      }
+
+      .role-access-table td::before {
+        top: 11px;
+        left: 15px;
+        width: auto;
+      }
+    }
+
+    @media print {
+      .role-access-controls {
+        display: none !important;
+      }
+
+      .role-table-wrapper {
+        overflow: visible;
+        box-shadow: none;
+      }
+
+      .role-access-table {
+        min-width: 0;
+      }
+
+      .role-access-table thead th {
+        position: static;
+        background: #eeeeee !important;
+        color: #000000 !important;
+      }
+
+      .role-access-table tbody tr[hidden] {
+        display: table-row !important;
+      }
+    }
+
   </style>
 </head>
 
@@ -1442,7 +2117,7 @@
           <div class="article-meta">
             <span>Oleh Angga Sukma Dhaniswara</span>
             <span>•</span>
-            <span>9 menit baca</span>
+            <span>14 menit baca</span>
             <span>•</span>
             <span>Artikel Coretax</span>
           </div>
@@ -1480,7 +2155,7 @@
                 <div class="identity-card">
                   <div class="identity-row">
                     <span class="identity-icon">ID</span>
-                    <span>NIK atau NPWP pengguna</span>
+                    <span>Login menggunakan NIK atau NPWP pengguna</span>
                   </div>
 
                   
@@ -1505,15 +2180,11 @@
                 <div class="identity-card">
                   <div class="identity-row">
                     <span class="identity-icon">D</span>
-                    <span>Drafter menyiapkan konsep</span>
+                    <span>Drafter atau Signer</span>
                   </div>
 
                   <div class="identity-row">
                     <span class="identity-icon">S</span>
-                    <span>Signer memberikan persetujuan</span>
-                  </div>
-					<div class="identity-row">
-                    <span class="identity-icon">U</span>
                     <span>Kewenangan lain sesuai penugasan</span>
                   </div>
                 </div>
@@ -1856,6 +2527,581 @@
                 otomatis dapat diakses.
               </p>
             </section>
+
+<section class="role-access-section" id="daftar-role-akses" aria-labelledby="judul-daftar-role">
+  <div class="role-access-heading">
+    <span class="role-access-label">Direktori Role</span>
+    <h2 id="judul-daftar-role">Daftar Role Akses Coretax</h2>
+    <p>
+      Setiap role memberikan kewenangan yang berbeda kepada pengguna
+      ketika bertindak mewakili Wajib Pajak melalui Coretax.
+    </p>
+  </div>
+
+  <!-- Pencarian dan filter -->
+  <div class="role-access-controls">
+    <div class="role-search-wrapper">
+      <label for="roleSearch">Cari role akses</label>
+      <input
+        type="search"
+        id="roleSearch"
+        placeholder="Contoh: eBupot, SPT Masa, pembayaran..."
+        autocomplete="off"
+      >
+    </div>
+
+    <div class="role-filter-wrapper">
+      <label for="roleCategory">Kelompok role</label>
+      <select id="roleCategory">
+        <option value="semua">Semua kelompok</option>
+        <option value="pelaporan">Pelaporan dan Dokumen</option>
+        <option value="pembayaran">Pembayaran dan Pengembalian</option>
+        <option value="profil">Profil, Data, dan Status</option>
+        <option value="layanan">Layanan Wajib Pajak</option>
+        <option value="khusus">Layanan Khusus</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="role-result-info" aria-live="polite">
+    Menampilkan <strong id="roleVisibleCount">34</strong> role akses
+  </div>
+
+  <!-- Tabel -->
+  <div class="role-table-wrapper">
+    <table class="role-access-table">
+      <thead>
+        <tr>
+          <th scope="col" class="role-number">No.</th>
+          <th scope="col">Kelompok</th>
+          <th scope="col">Role Akses</th>
+          <th scope="col">Fungsi Ringkas</th>
+        </tr>
+      </thead>
+
+      <tbody id="roleTableBody">
+
+        <!-- PELAPORAN DAN DOKUMEN -->
+
+        <tr data-category="pelaporan">
+          <td class="role-number">1</td>
+          <td>
+            <span class="role-badge badge-pelaporan">
+              Pelaporan dan Dokumen
+            </span>
+          </td>
+          <td><strong>Drafter SPT Tahunan</strong></td>
+          <td>
+            Menyiapkan konsep SPT Tahunan beserta induk, lampiran,
+            dan data pendukungnya.
+          </td>
+        </tr>
+
+        <tr data-category="pelaporan">
+          <td class="role-number">2</td>
+          <td>
+            <span class="role-badge badge-pelaporan">
+              Pelaporan dan Dokumen
+            </span>
+          </td>
+          <td><strong>Penandatangan SPT Tahunan</strong></td>
+          <td>
+            Melakukan penandatanganan dan tindakan final atas SPT Tahunan
+            yang telah disiapkan.
+          </td>
+        </tr>
+
+        <tr data-category="pelaporan">
+          <td class="role-number">3</td>
+          <td>
+            <span class="role-badge badge-pelaporan">
+              Pelaporan dan Dokumen
+            </span>
+          </td>
+          <td><strong>Drafter SPT Masa PPh Pasal 21/26</strong></td>
+          <td>
+            Menyiapkan konsep pelaporan SPT Masa PPh Pasal 21/26 untuk
+            suatu masa pajak.
+          </td>
+        </tr>
+
+        <tr data-category="pelaporan">
+          <td class="role-number">4</td>
+          <td>
+            <span class="role-badge badge-pelaporan">
+              Pelaporan dan Dokumen
+            </span>
+          </td>
+          <td><strong>Penandatangan SPT Masa PPh Pasal 21/26</strong></td>
+          <td>
+            Menandatangani dan menyampaikan SPT Masa PPh Pasal 21/26.
+          </td>
+        </tr>
+
+        <tr data-category="pelaporan">
+          <td class="role-number">5</td>
+          <td>
+            <span class="role-badge badge-pelaporan">
+              Pelaporan dan Dokumen
+            </span>
+          </td>
+          <td><strong>Drafter eBupot PPh Masa Pasal 21/26</strong></td>
+          <td>
+            Membuat dan mengisi konsep bukti pemotongan PPh Pasal 21/26.
+          </td>
+        </tr>
+
+        <tr data-category="pelaporan">
+          <td class="role-number">6</td>
+          <td>
+            <span class="role-badge badge-pelaporan">
+              Pelaporan dan Dokumen
+            </span>
+          </td>
+          <td>
+            <strong>Penandatangan eBupot PPh Masa Pasal 21/26</strong>
+          </td>
+          <td>
+            Menandatangani atau menerbitkan bukti pemotongan PPh
+            Pasal 21/26.
+          </td>
+        </tr>
+
+        <tr data-category="pelaporan">
+          <td class="role-number">7</td>
+          <td>
+            <span class="role-badge badge-pelaporan">
+              Pelaporan dan Dokumen
+            </span>
+          </td>
+          <td><strong>Drafter eBupot Unifikasi</strong></td>
+          <td>
+            Menyiapkan konsep bukti pemotongan atau pemungutan PPh
+            dalam modul eBupot Unifikasi.
+          </td>
+        </tr>
+
+        <tr data-category="pelaporan">
+          <td class="role-number">8</td>
+          <td>
+            <span class="role-badge badge-pelaporan">
+              Pelaporan dan Dokumen
+            </span>
+          </td>
+          <td><strong>Penandatangan eBupot Unifikasi</strong></td>
+          <td>
+            Menandatangani atau menerbitkan bukti pemotongan dan
+            pemungutan PPh Unifikasi.
+          </td>
+        </tr>
+
+        <tr data-category="pelaporan">
+          <td class="role-number">9</td>
+          <td>
+            <span class="role-badge badge-pelaporan">
+              Pelaporan dan Dokumen
+            </span>
+          </td>
+          <td>
+            <strong>
+              Drafter SPT Masa selain SPT Masa PPh Pasal 21/26
+            </strong>
+          </td>
+          <td>
+            Menyiapkan konsep SPT Masa selain SPT Masa PPh
+            Pasal 21/26 sesuai modul yang tersedia.
+          </td>
+        </tr>
+
+        <tr data-category="pelaporan">
+          <td class="role-number">10</td>
+          <td>
+            <span class="role-badge badge-pelaporan">
+              Pelaporan dan Dokumen
+            </span>
+          </td>
+          <td>
+            <strong>
+              Penandatangan SPT Masa selain SPT Masa PPh Pasal 21/26
+            </strong>
+          </td>
+          <td>
+            Menandatangani dan menyampaikan SPT Masa selain SPT Masa
+            PPh Pasal 21/26.
+          </td>
+        </tr>
+
+        <tr data-category="pelaporan">
+          <td class="role-number">11</td>
+          <td>
+            <span class="role-badge badge-pelaporan">
+              Pelaporan dan Dokumen
+            </span>
+          </td>
+          <td><strong>Drafter SPT Masa Bea Meterai</strong></td>
+          <td>
+            Menyiapkan konsep SPT Masa Bea Meterai bagi pemungut
+            Bea Meterai.
+          </td>
+        </tr>
+
+        <tr data-category="pelaporan">
+          <td class="role-number">12</td>
+          <td>
+            <span class="role-badge badge-pelaporan">
+              Pelaporan dan Dokumen
+            </span>
+          </td>
+          <td><strong>Penandatangan SPT Masa Bea Meterai</strong></td>
+          <td>
+            Menandatangani dan menyampaikan SPT Masa Bea Meterai.
+          </td>
+        </tr>
+
+        <tr data-category="pelaporan">
+          <td class="role-number">13</td>
+          <td>
+            <span class="role-badge badge-pelaporan">
+              Pelaporan dan Dokumen
+            </span>
+          </td>
+          <td><strong>Drafter eFaktur Pajak</strong></td>
+          <td>
+            Membuat konsep faktur pajak, mengisi data transaksi,
+            dan menyiapkan faktur untuk diproses.
+          </td>
+        </tr>
+
+        <tr data-category="pelaporan">
+          <td class="role-number">14</td>
+          <td>
+            <span class="role-badge badge-pelaporan">
+              Pelaporan dan Dokumen
+            </span>
+          </td>
+          <td><strong>Penandatangan eFaktur Pajak</strong></td>
+          <td>
+            Menandatangani, mengunggah, atau menerbitkan faktur pajak
+            sesuai kewenangannya.
+          </td>
+        </tr>
+
+        <tr data-category="pelaporan">
+          <td class="role-number">15</td>
+          <td>
+            <span class="role-badge badge-pelaporan">
+              Pelaporan dan Dokumen
+            </span>
+          </td>
+          <td><strong>Drafter SPT Masa PPh Unifikasi</strong></td>
+          <td>
+            Menyiapkan konsep SPT Masa PPh Unifikasi berdasarkan
+            bukti potong, pembayaran, dan data terkait.
+          </td>
+        </tr>
+
+        <tr data-category="pelaporan">
+          <td class="role-number">16</td>
+          <td>
+            <span class="role-badge badge-pelaporan">
+              Pelaporan dan Dokumen
+            </span>
+          </td>
+          <td><strong>Penandatangan SPT Masa PPh Unifikasi</strong></td>
+          <td>
+            Menandatangani dan menyampaikan SPT Masa PPh Unifikasi.
+          </td>
+        </tr>
+
+        <tr data-category="pelaporan">
+          <td class="role-number">17</td>
+          <td>
+            <span class="role-badge badge-pelaporan">
+              Pelaporan dan Dokumen
+            </span>
+          </td>
+          <td><strong>Drafter SPT Masa PPN/PPN DM/PPN PUT</strong></td>
+          <td>
+            Menyiapkan konsep SPT Masa PPN sesuai jenis dan kategori
+            pelaporan yang tersedia dalam Coretax.
+          </td>
+        </tr>
+
+        <!-- LAYANAN KHUSUS -->
+
+        <tr data-category="khusus">
+          <td class="role-number">18</td>
+          <td>
+            <span class="role-badge badge-khusus">Layanan Khusus</span>
+          </td>
+          <td>
+            <strong>
+              PPh DPT atas Penghasilan dari Penghapusan Secara Mutlak
+              Piutang Negara Nonpokok
+            </strong>
+          </td>
+          <td>
+            Mengakses proses atau layanan khusus terkait PPh atas
+            penghasilan dari penghapusan secara mutlak piutang negara
+            nonpokok.
+          </td>
+        </tr>
+
+        <tr data-category="khusus">
+          <td class="role-number">19</td>
+          <td>
+            <span class="role-badge badge-khusus">Layanan Khusus</span>
+          </td>
+          <td><strong>Imbalan Bunga</strong></td>
+          <td>
+            Mengakses layanan yang berkaitan dengan permohonan atau
+            administrasi imbalan bunga.
+          </td>
+        </tr>
+
+        <!-- PEMBAYARAN DAN PENGEMBALIAN -->
+
+        <tr data-category="pembayaran">
+          <td class="role-number">20</td>
+          <td>
+            <span class="role-badge badge-pembayaran">
+              Pembayaran dan Pengembalian
+            </span>
+          </td>
+          <td><strong>Kuasa untuk Modul Pembayaran</strong></td>
+          <td>
+            Menjalankan fungsi pembayaran pajak atas nama Wajib Pajak
+            sesuai kewenangan yang diberikan.
+          </td>
+        </tr>
+
+        <tr data-category="pembayaran">
+          <td class="role-number">21</td>
+          <td>
+            <span class="role-badge badge-pembayaran">
+              Pembayaran dan Pengembalian
+            </span>
+          </td>
+          <td><strong>Pemindahbukuan</strong></td>
+          <td>
+            Mengajukan atau mengelola permohonan pemindahbukuan
+            pembayaran pajak.
+          </td>
+        </tr>
+
+        <tr data-category="pembayaran">
+          <td class="role-number">22</td>
+          <td>
+            <span class="role-badge badge-pembayaran">
+              Pembayaran dan Pengembalian
+            </span>
+          </td>
+          <td><strong>Pengembalian</strong></td>
+          <td>
+            Mengakses layanan terkait permohonan pengembalian pembayaran
+            atau kelebihan pembayaran pajak.
+          </td>
+        </tr>
+
+        <!-- PROFIL, DATA, DAN STATUS -->
+
+        <tr data-category="profil">
+          <td class="role-number">23</td>
+          <td>
+            <span class="role-badge badge-profil">
+              Profil, Data, dan Status
+            </span>
+          </td>
+          <td><strong>Perubahan Profil Saya</strong></td>
+          <td>
+            Mengakses dan memperbarui informasi tertentu pada profil
+            Wajib Pajak.
+          </td>
+        </tr>
+
+        <tr data-category="profil">
+          <td class="role-number">24</td>
+          <td>
+            <span class="role-badge badge-profil">
+              Profil, Data, dan Status
+            </span>
+          </td>
+          <td><strong>Perubahan Data</strong></td>
+          <td>
+            Mengajukan atau mengelola perubahan data administrasi
+            dan identitas Wajib Pajak.
+          </td>
+        </tr>
+
+        <tr data-category="profil">
+          <td class="role-number">25</td>
+          <td>
+            <span class="role-badge badge-profil">
+              Profil, Data, dan Status
+            </span>
+          </td>
+          <td><strong>Penghapusan NPWP atau Pencabutan PKP</strong></td>
+          <td>
+            Mengakses permohonan penghapusan NPWP atau pencabutan
+            pengukuhan Pengusaha Kena Pajak.
+          </td>
+        </tr>
+
+        <tr data-category="profil">
+          <td class="role-number">26</td>
+          <td>
+            <span class="role-badge badge-profil">
+              Profil, Data, dan Status
+            </span>
+          </td>
+          <td><strong>Status Pemungut PMSE</strong></td>
+          <td>
+            Mengakses layanan yang berkaitan dengan status pemungut
+            PPN Perdagangan Melalui Sistem Elektronik.
+          </td>
+        </tr>
+
+        <tr data-category="profil">
+          <td class="role-number">27</td>
+          <td>
+            <span class="role-badge badge-profil">
+              Profil, Data, dan Status
+            </span>
+          </td>
+          <td><strong>Perubahan Status: Nonaktif atau Reaktivasi</strong></td>
+          <td>
+            Mengajukan perubahan status menjadi nonaktif atau
+            pengaktifan kembali Wajib Pajak.
+          </td>
+        </tr>
+
+        <tr data-category="profil">
+          <td class="role-number">28</td>
+          <td>
+            <span class="role-badge badge-profil">
+              Profil, Data, dan Status
+            </span>
+          </td>
+          <td>
+            <strong>Status Pemotong atau Pemungut PPh atau PPN</strong>
+          </td>
+          <td>
+            Mengakses proses penetapan atau perubahan status sebagai
+            pemotong atau pemungut PPh maupun PPN.
+          </td>
+        </tr>
+
+        <tr data-category="profil">
+          <td class="role-number">29</td>
+          <td>
+            <span class="role-badge badge-profil">
+              Profil, Data, dan Status
+            </span>
+          </td>
+          <td><strong>Pendaftaran Objek Pajak PBB P5L</strong></td>
+          <td>
+            Mendaftarkan objek Pajak Bumi dan Bangunan sektor P5L
+            beserta data pendukungnya.
+          </td>
+        </tr>
+
+        <tr data-category="profil">
+          <td class="role-number">30</td>
+          <td>
+            <span class="role-badge badge-profil">
+              Profil, Data, dan Status
+            </span>
+          </td>
+          <td>
+            <strong>
+              Status Lembaga Keuangan Pelapor atau Nonpelapor
+            </strong>
+          </td>
+          <td>
+            Mengakses layanan penetapan atau perubahan status lembaga
+            keuangan pelapor maupun nonpelapor.
+          </td>
+        </tr>
+
+        <tr data-category="profil">
+          <td class="role-number">31</td>
+          <td>
+            <span class="role-badge badge-profil">
+              Profil, Data, dan Status
+            </span>
+          </td>
+          <td><strong>Status Pemungut Bea Meterai</strong></td>
+          <td>
+            Mengakses layanan yang berkaitan dengan status sebagai
+            pemungut Bea Meterai.
+          </td>
+        </tr>
+
+        <tr data-category="profil">
+          <td class="role-number">32</td>
+          <td>
+            <span class="role-badge badge-profil">
+              Profil, Data, dan Status
+            </span>
+          </td>
+          <td><strong>Pengukuhan PKP</strong></td>
+          <td>
+            Mengakses dan mengajukan permohonan pengukuhan sebagai
+            Pengusaha Kena Pajak.
+          </td>
+        </tr>
+
+        <!-- LAYANAN WAJIB PAJAK -->
+
+        <tr data-category="layanan">
+          <td class="role-number">33</td>
+          <td>
+            <span class="role-badge badge-layanan">
+              Layanan Wajib Pajak
+            </span>
+          </td>
+          <td><strong>Kuasa untuk Modul Layanan Wajib Pajak</strong></td>
+          <td>
+            Mengakses dan menjalankan fungsi tertentu dalam modul layanan
+            Wajib Pajak.
+          </td>
+        </tr>
+
+        <tr data-category="layanan">
+          <td class="role-number">34</td>
+          <td>
+            <span class="role-badge badge-layanan">
+              Layanan Wajib Pajak
+            </span>
+          </td>
+          <td>
+            <strong>
+              Kuasa untuk Permohonan Layanan Administrasi dan Edukasi
+              Perpajakan
+            </strong>
+          </td>
+          <td>
+            Mengajukan serta memantau permohonan layanan administrasi
+            dan edukasi perpajakan.
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <div id="roleEmptyState" class="role-empty-state" hidden>
+    <strong>Role tidak ditemukan.</strong>
+    <p>Coba gunakan kata kunci atau kelompok role yang berbeda.</p>
+  </div>
+
+  <div class="role-access-note">
+    <strong>Catatan:</strong>
+    fungsi dalam tabel merupakan gambaran ringkas berdasarkan nama role.
+    Menu dan tindakan yang tersedia tetap mengikuti konfigurasi serta
+    kewenangan dalam sistem Coretax.
+  </div>
+</section>
 
             <section id="permasalahan">
               <h2>Permasalahan Role Akses yang Sering Terjadi</h2>
@@ -2301,6 +3547,7 @@
                 <a href="#pic">PIC</a>
                 <a href="#drafter-signer">Drafter dan signer</a>
                 <a href="#cakupan">Cakupan layanan</a>
+                <a href="#daftar-role-akses">Daftar 34 role</a>
                 <a href="#permasalahan">Permasalahan umum</a>
                 <a href="#pengendalian">Pengendalian internal</a>
                 <a href="#minimum-access">Minimum access</a>
@@ -2527,5 +3774,59 @@
     ).textContent =
       new Date().getFullYear();
   </script>
+<script>
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.getElementById("roleSearch");
+    const categorySelect = document.getElementById("roleCategory");
+    const rows = Array.from(
+      document.querySelectorAll("#roleTableBody tr")
+    );
+    const visibleCount = document.getElementById("roleVisibleCount");
+    const emptyState = document.getElementById("roleEmptyState");
+    const tableWrapper = document.querySelector(".role-table-wrapper");
+
+    function normalizeText(text) {
+      return text
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+    }
+
+    function filterRoles() {
+      const keyword = normalizeText(searchInput.value.trim());
+      const selectedCategory = categorySelect.value;
+      let totalVisible = 0;
+
+      rows.forEach(function (row) {
+        const rowText = normalizeText(row.textContent);
+        const rowCategory = row.dataset.category;
+
+        const matchesKeyword =
+          keyword === "" || rowText.includes(keyword);
+
+        const matchesCategory =
+          selectedCategory === "semua" ||
+          rowCategory === selectedCategory;
+
+        const shouldShow = matchesKeyword && matchesCategory;
+
+        row.hidden = !shouldShow;
+
+        if (shouldShow) {
+          totalVisible += 1;
+        }
+      });
+
+      visibleCount.textContent = totalVisible;
+      emptyState.hidden = totalVisible !== 0;
+      tableWrapper.hidden = totalVisible === 0;
+    }
+
+    searchInput.addEventListener("input", filterRoles);
+    categorySelect.addEventListener("change", filterRoles);
+  });
+
+</script>
 </body>
 </html>
