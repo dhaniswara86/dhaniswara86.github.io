@@ -1,0 +1,2531 @@
+\
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Memahami Role Akses Coretax | Kabayan</title>
+
+  <meta
+    name="description"
+    content="Memahami fungsi role akses Coretax, hubungan dengan impersonate dan PIC, perbedaan drafter dan signer, serta berbagai permasalahan akses yang sering terjadi."
+  >
+
+  <meta name="author" content="Angga Sukma Dhaniswara">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#f5f5f7">
+
+  <link
+    rel="canonical"
+    href="https://dhaniswara86.github.io/roleakses.html"
+  >
+
+  <meta property="og:type" content="article">
+
+  <meta
+    property="og:title"
+    content="Memahami Role Akses Coretax: Siapa Boleh Melakukan Apa atas Nama Perusahaan?"
+  >
+
+  <meta
+    property="og:description"
+    content="Panduan konseptual untuk memahami role akses, impersonate, PIC, drafter, signer, dan pembagian kewenangan di Coretax."
+  >
+
+  <meta property="og:locale" content="id_ID">
+
+  <meta
+    property="og:site_name"
+    content="Kabayan by Angga Sukma Dhaniswara"
+  >
+
+  <style>
+    :root {
+      --black: #000000;
+      --near-black: #1d1d1f;
+      --white: #ffffff;
+      --off-white: #f5f5f7;
+      --soft-gray: #e8e8ed;
+      --medium-gray: #86868b;
+      --blue: #0071e3;
+      --blue-hover: #0077ed;
+      --yellow: #ffcc00;
+      --green: #248a3d;
+      --green-soft: #edf8ef;
+      --orange: #bf5b00;
+      --orange-soft: #fff7e8;
+      --red: #d70015;
+      --red-soft: #fff0ee;
+      --purple: #8944ab;
+      --purple-soft: #f5eff9;
+      --nav-height: 48px;
+      --max-width: 1180px;
+      --article-width: 790px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 82px;
+    }
+
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      background: var(--white);
+      color: var(--near-black);
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        Helvetica,
+        sans-serif;
+      line-height: 1.6;
+      letter-spacing: -0.015em;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body.menu-open {
+      overflow: hidden;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .reading-progress {
+      position: fixed;
+      z-index: 2000;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 3px;
+      background:
+        linear-gradient(
+          90deg,
+          #0071e3,
+          #25a6d9,
+          #ffb800
+        );
+    }
+
+    .site-header {
+      position: fixed;
+      z-index: 1000;
+      top: 0;
+      right: 0;
+      left: 0;
+      min-height: var(--nav-height);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      background: rgba(250, 250, 252, 0.82);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+    }
+
+    .header-inner {
+      width: min(var(--max-width), calc(100% - 36px));
+      min-height: var(--nav-height);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+      margin: 0 auto;
+    }
+
+    .brand {
+      display: inline-flex;
+      flex-shrink: 0;
+      align-items: center;
+      gap: 9px;
+      color: var(--near-black);
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      width: 25px;
+      height: 25px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      background: var(--near-black);
+      color: var(--white);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 31px;
+    }
+
+    .main-nav a {
+      color: #424245;
+      font-size: 12px;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .main-nav a:hover,
+    .main-nav a[aria-current="page"] {
+      color: var(--black);
+    }
+
+    .menu-button {
+      width: 34px;
+      height: 34px;
+      display: none;
+      place-items: center;
+      border: 0;
+      border-radius: 50%;
+      background: transparent;
+      color: var(--near-black);
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    .menu-button:hover {
+      background: rgba(0, 0, 0, 0.055);
+    }
+
+    .mobile-menu {
+      position: fixed;
+      z-index: 999;
+      inset: var(--nav-height) 0 0;
+      display: none;
+      padding: 36px 28px;
+      background: rgba(250, 250, 252, 0.98);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+    }
+
+    .mobile-menu.active {
+      display: block;
+    }
+
+    .mobile-menu a {
+      display: block;
+      padding: 11px 0;
+      color: var(--near-black);
+      font-size: 28px;
+      font-weight: 650;
+      letter-spacing: -0.04em;
+      text-decoration: none;
+    }
+
+    main {
+      padding-top: var(--nav-height);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 100px 20px 78px;
+      background: var(--white);
+      color: var(--near-black);
+      text-align: center;
+    }
+
+    .hero::before {
+      position: absolute;
+      top: -225px;
+      left: 50%;
+      width: 900px;
+      height: 610px;
+      border-radius: 50%;
+      background:
+        radial-gradient(
+          ellipse,
+          rgba(0, 113, 227, 0.19),
+          rgba(47, 157, 255, 0.07) 45%,
+          transparent 72%
+        );
+      filter: blur(8px);
+      content: "";
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      width: min(1040px, 100%);
+      margin: 0 auto;
+    }
+
+    .category-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 18px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: var(--off-white);
+      color: #515154;
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .category-pill::before {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--blue);
+      content: "";
+    }
+
+    .hero h1 {
+      max-width: 1000px;
+      margin: 0 auto;
+      font-size: clamp(48px, 7vw, 80px);
+      font-weight: 700;
+      letter-spacing: -0.06em;
+      line-height: 0.99;
+    }
+
+    .gradient-text {
+      display: block;
+      background:
+        linear-gradient(
+          90deg,
+          #083b8f,
+          #0071e3 43%,
+          #26a3cf 72%,
+          #e6aa00
+        );
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-lead {
+      max-width: 770px;
+      margin: 27px auto 0;
+      color: #515154;
+      font-size: clamp(19px, 2.3vw, 25px);
+      line-height: 1.4;
+    }
+
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 9px 20px;
+      margin-top: 27px;
+      color: var(--medium-gray);
+      font-size: 13px;
+    }
+
+    .article-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .button {
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 9px 18px;
+      border: 1px solid var(--blue);
+      border-radius: 999px;
+      background: transparent;
+      color: var(--blue);
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 550;
+      text-decoration: none;
+      transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .button:hover {
+      background: var(--blue);
+      color: var(--white);
+      transform: translateY(-1px);
+    }
+
+    .button-primary {
+      background: var(--blue);
+      color: var(--white);
+    }
+
+    .button-primary:hover {
+      background: var(--blue-hover);
+    }
+
+    .hero-visual {
+      position: relative;
+      width: min(880px, 94vw);
+      height: 315px;
+      margin: 48px auto 0;
+    }
+
+    .access-map {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      align-items: center;
+      grid-template-columns: 1fr 120px 1fr;
+      gap: 18px;
+    }
+
+    .visual-panel {
+      position: relative;
+      min-height: 245px;
+      padding: 27px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 0, 0, 0.07);
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.88);
+      box-shadow:
+        0 25px 65px rgba(19, 53, 92, 0.13),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      text-align: left;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .visual-panel::after {
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background:
+        radial-gradient(
+          circle,
+          rgba(0, 113, 227, 0.14),
+          transparent 68%
+        );
+      content: "";
+      pointer-events: none;
+    }
+
+    .visual-panel.user::after {
+      right: -70px;
+      bottom: -75px;
+    }
+
+    .visual-panel.company::after {
+      top: -75px;
+      left: -70px;
+    }
+
+    .visual-label {
+      display: inline-flex;
+      margin-bottom: 18px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: var(--off-white);
+      color: var(--medium-gray);
+      font-size: 10px;
+      font-weight: 750;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .visual-panel h2 {
+      margin: 0;
+      font-size: 25px;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+    }
+
+    .visual-panel p {
+      margin: 10px 0 0;
+      color: #6e6e73;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .identity-card {
+      display: grid;
+      gap: 9px;
+      margin-top: 21px;
+    }
+
+    .identity-row {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 9px 11px;
+      border-radius: 12px;
+      background: var(--off-white);
+      color: #515154;
+      font-size: 12px;
+    }
+
+    .identity-icon {
+      width: 27px;
+      height: 27px;
+      display: grid;
+      flex: 0 0 27px;
+      place-items: center;
+      border-radius: 8px;
+      background: var(--white);
+      color: var(--blue);
+      font-size: 10px;
+      font-weight: 800;
+      box-shadow: 0 2px 7px rgba(0, 0, 0, 0.06);
+    }
+
+    .role-bridge {
+      position: relative;
+      display: grid;
+      place-items: center;
+    }
+
+    .bridge-line {
+      position: absolute;
+      right: 0;
+      left: 0;
+      height: 2px;
+      background:
+        linear-gradient(
+          90deg,
+          rgba(0, 113, 227, 0.18),
+          var(--blue),
+          rgba(0, 113, 227, 0.18)
+        );
+    }
+
+    .role-token {
+      position: relative;
+      z-index: 1;
+      width: 82px;
+      height: 82px;
+      display: grid;
+      place-items: center;
+      border: 8px solid rgba(255, 255, 255, 0.85);
+      border-radius: 25px;
+      background:
+        linear-gradient(
+          145deg,
+          #0071e3,
+          #21a4cf
+        );
+      box-shadow: 0 17px 36px rgba(0, 113, 227, 0.27);
+      color: var(--white);
+      font-size: 13px;
+      font-weight: 750;
+      text-align: center;
+    }
+
+    .article-shell {
+      padding: 78px 20px 110px;
+      background: var(--off-white);
+    }
+
+    .article-layout {
+      width: min(var(--max-width), 100%);
+      display: grid;
+      align-items: start;
+      grid-template-columns: minmax(0, var(--article-width)) 260px;
+      justify-content: center;
+      gap: 68px;
+      margin: 0 auto;
+    }
+
+    .article-body {
+      min-width: 0;
+    }
+
+    .article-body > p:first-child {
+      margin-top: 0;
+    }
+
+    .article-body p {
+      margin: 0 0 24px;
+      color: #333336;
+      font-size: 18px;
+      line-height: 1.72;
+    }
+
+    .article-body h2 {
+      margin: 72px 0 22px;
+      color: var(--near-black);
+      font-size: clamp(32px, 4.5vw, 45px);
+      font-weight: 700;
+      letter-spacing: -0.045em;
+      line-height: 1.08;
+    }
+
+    .article-body h3 {
+      margin: 42px 0 16px;
+      color: var(--near-black);
+      font-size: 25px;
+      font-weight: 680;
+      letter-spacing: -0.035em;
+      line-height: 1.18;
+    }
+
+    .article-body ul,
+    .article-body ol {
+      margin: 0 0 27px;
+      padding-left: 25px;
+      color: #333336;
+      font-size: 18px;
+      line-height: 1.65;
+    }
+
+    .article-body li + li {
+      margin-top: 8px;
+    }
+
+    .summary-box {
+      margin: 0 0 38px;
+      padding: 27px 29px;
+      border: 1px solid #dce8f5;
+      border-radius: 24px;
+      background:
+        linear-gradient(
+          145deg,
+          #f7fbff,
+          #eef6ff
+        );
+    }
+
+    .summary-box strong {
+      display: block;
+      margin-bottom: 11px;
+      color: var(--near-black);
+      font-size: 17px;
+      letter-spacing: -0.025em;
+    }
+
+    .summary-box p {
+      margin: 0;
+      color: #42566a;
+      font-size: 16px;
+      line-height: 1.58;
+    }
+
+    .question-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 13px;
+      margin: 25px 0 31px;
+    }
+
+    .question-card {
+      min-height: 135px;
+      padding: 22px;
+      border: 1px solid var(--soft-gray);
+      border-radius: 20px;
+      background: var(--white);
+    }
+
+    .question-number {
+      width: 30px;
+      height: 30px;
+      display: grid;
+      margin-bottom: 14px;
+      place-items: center;
+      border-radius: 9px;
+      background: #eaf4ff;
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .question-card p {
+      margin: 0;
+      color: var(--near-black);
+      font-size: 16px;
+      font-weight: 620;
+      line-height: 1.42;
+    }
+
+    .callout {
+      margin: 32px 0;
+      padding: 23px 25px;
+      border-radius: 22px;
+    }
+
+    .callout strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .callout p {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.58;
+    }
+
+    .callout-blue {
+      border: 1px solid #d5e7f8;
+      background: #eef6ff;
+      color: #31536f;
+    }
+
+    .callout-orange {
+      border: 1px solid #f2dfbd;
+      background: var(--orange-soft);
+      color: #6d4b14;
+    }
+
+    .callout-green {
+      border: 1px solid #cfe8d3;
+      background: var(--green-soft);
+      color: #315f3a;
+    }
+
+    .role-comparison {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin: 28px 0 34px;
+    }
+
+    .role-card {
+      position: relative;
+      min-height: 330px;
+      padding: 27px;
+      overflow: hidden;
+      border-radius: 25px;
+    }
+
+    .role-card::after {
+      position: absolute;
+      right: -70px;
+      bottom: -75px;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      content: "";
+    }
+
+    .role-card.drafter {
+      border: 1px solid #d8e8f7;
+      background: #f2f8ff;
+    }
+
+    .role-card.drafter::after {
+      background:
+        radial-gradient(
+          circle,
+          rgba(0, 113, 227, 0.14),
+          transparent 70%
+        );
+    }
+
+    .role-card.signer {
+      border: 1px solid #e4d6ed;
+      background: var(--purple-soft);
+    }
+
+    .role-card.signer::after {
+      background:
+        radial-gradient(
+          circle,
+          rgba(137, 68, 171, 0.13),
+          transparent 70%
+        );
+    }
+
+    .role-icon {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      margin-bottom: 20px;
+      place-items: center;
+      border-radius: 15px;
+      background: var(--white);
+      font-size: 16px;
+      font-weight: 800;
+      box-shadow: 0 7px 20px rgba(0, 0, 0, 0.07);
+    }
+
+    .drafter .role-icon {
+      color: var(--blue);
+    }
+
+    .signer .role-icon {
+      color: var(--purple);
+    }
+
+    .role-card h3 {
+      margin: 0 0 12px;
+      font-size: 27px;
+    }
+
+    .role-card > p {
+      position: relative;
+      z-index: 1;
+      margin: 0 0 16px;
+      font-size: 16px;
+      line-height: 1.55;
+    }
+
+    .role-card ul {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 0;
+      padding-left: 20px;
+      font-size: 15px;
+      line-height: 1.52;
+    }
+
+    .service-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 24px 0 32px;
+    }
+
+    .service-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 13px;
+      border: 1px solid var(--soft-gray);
+      border-radius: 999px;
+      background: var(--white);
+      color: #515154;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .service-chip::before {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--blue);
+      content: "";
+    }
+
+    .problem-list {
+      display: grid;
+      gap: 12px;
+      margin: 29px 0 36px;
+    }
+
+    .problem-item {
+      overflow: hidden;
+      border: 1px solid var(--soft-gray);
+      border-radius: 20px;
+      background: var(--white);
+    }
+
+    .problem-button {
+      width: 100%;
+      display: grid;
+      align-items: center;
+      grid-template-columns: 37px minmax(0, 1fr) 24px;
+      gap: 13px;
+      padding: 19px 21px;
+      border: 0;
+      background: transparent;
+      color: var(--near-black);
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .problem-index {
+      width: 37px;
+      height: 37px;
+      display: grid;
+      place-items: center;
+      border-radius: 11px;
+      background: var(--off-white);
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .problem-title {
+      font-size: 16px;
+      font-weight: 650;
+      letter-spacing: -0.02em;
+      line-height: 1.35;
+    }
+
+    .problem-symbol {
+      color: var(--medium-gray);
+      font-size: 22px;
+      transition: transform 0.2s ease;
+    }
+
+    .problem-item.open .problem-symbol {
+      transform: rotate(45deg);
+    }
+
+    .problem-content {
+      display: none;
+      padding: 0 23px 22px 71px;
+    }
+
+    .problem-item.open .problem-content {
+      display: block;
+    }
+
+    .problem-content p {
+      margin-bottom: 14px;
+      color: #515154;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .problem-content p:last-child {
+      margin-bottom: 0;
+    }
+
+    .control-flow {
+      display: grid;
+      align-items: center;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin: 29px 0 35px;
+    }
+
+    .control-step {
+      position: relative;
+      min-height: 130px;
+      display: grid;
+      align-content: center;
+      padding: 18px 14px;
+      border: 1px solid var(--soft-gray);
+      border-radius: 19px;
+      background: var(--white);
+      text-align: center;
+    }
+
+    .control-step:not(:last-child)::after {
+      position: absolute;
+      top: 50%;
+      right: -15px;
+      z-index: 2;
+      color: #b6b6ba;
+      content: "›";
+      font-size: 25px;
+      transform: translateY(-50%);
+    }
+
+    .control-step strong {
+      display: block;
+      color: var(--near-black);
+      font-size: 15px;
+    }
+
+    .control-step span {
+      display: block;
+      margin-top: 7px;
+      color: var(--medium-gray);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .check-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 11px;
+      margin: 25px 0 33px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .check-list li {
+      position: relative;
+      min-height: 58px;
+      margin: 0;
+      padding: 15px 16px 15px 48px;
+      border: 1px solid var(--soft-gray);
+      border-radius: 16px;
+      background: var(--white);
+      font-size: 15px;
+      line-height: 1.45;
+    }
+
+    .check-list li::before {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      width: 24px;
+      height: 24px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      background: #eaf4ff;
+      color: var(--blue);
+      content: "✓";
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .closing-box {
+      margin-top: 70px;
+      padding: 36px;
+      border-radius: 28px;
+      background:
+        radial-gradient(
+          circle at 90% 10%,
+          rgba(39, 160, 210, 0.17),
+          transparent 30%
+        ),
+        linear-gradient(
+          145deg,
+          #071a38,
+          #0b315e
+        );
+      color: var(--white);
+    }
+
+    .closing-box h2 {
+      margin-top: 0;
+      color: var(--white);
+    }
+
+    .closing-box p {
+      color: #dbe9f7;
+    }
+
+    .closing-box p:last-child {
+      margin-bottom: 0;
+    }
+
+    .article-sidebar {
+      position: sticky;
+      top: 83px;
+    }
+
+    .toc-card {
+      padding: 21px;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.88);
+      box-shadow: 0 16px 45px rgba(0, 0, 0, 0.06);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .toc-card h2 {
+      margin: 0 0 13px;
+      color: var(--near-black);
+      font-size: 13px;
+      font-weight: 750;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .toc-card nav {
+      display: grid;
+      gap: 2px;
+    }
+
+    .toc-card a {
+      display: block;
+      padding: 7px 9px;
+      border-radius: 9px;
+      color: #6e6e73;
+      font-size: 12px;
+      line-height: 1.35;
+      text-decoration: none;
+    }
+
+    .toc-card a:hover,
+    .toc-card a.active {
+      background: #eef6ff;
+      color: var(--blue);
+    }
+
+    .sidebar-note {
+      margin-top: 15px;
+      padding: 17px;
+      border-radius: 18px;
+      background: #fff7e8;
+      color: #75511b;
+      font-size: 12px;
+      line-height: 1.52;
+    }
+
+    .author-section {
+      padding: 70px 20px;
+      background: var(--white);
+    }
+
+    .author-card {
+      width: min(880px, 100%);
+      display: grid;
+      align-items: center;
+      grid-template-columns: 78px minmax(0, 1fr) auto;
+      gap: 22px;
+      margin: 0 auto;
+      padding: 27px;
+      border: 1px solid var(--soft-gray);
+      border-radius: 25px;
+      background: var(--off-white);
+    }
+
+    .author-mark {
+      width: 78px;
+      height: 78px;
+      display: grid;
+      place-items: center;
+      border-radius: 24px;
+      background:
+        linear-gradient(
+          145deg,
+          #071a38,
+          #0071e3
+        );
+      color: var(--white);
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .author-copy strong {
+      display: block;
+      font-size: 20px;
+      letter-spacing: -0.03em;
+    }
+
+    .author-copy p {
+      margin: 6px 0 0;
+      color: #6e6e73;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    footer {
+      background: var(--off-white);
+      color: #6e6e73;
+    }
+
+    .disclaimer {
+      width: min(980px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 23px 0;
+      border-bottom: 1px solid #d2d2d7;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .disclaimer strong {
+      color: #424245;
+    }
+
+    .footer-inner {
+      width: min(980px, calc(100% - 40px));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      margin: 0 auto;
+      padding: 21px 0 27px;
+      font-size: 12px;
+    }
+
+    .footer-inner p {
+      margin: 0;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    .footer-links a {
+      color: #424245;
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 980px) {
+      .main-nav {
+        display: none;
+      }
+
+      .menu-button {
+        display: grid;
+      }
+
+      .article-layout {
+        grid-template-columns: minmax(0, var(--article-width));
+      }
+
+      .article-sidebar {
+        position: static;
+        order: -1;
+      }
+
+      .toc-card nav {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .sidebar-note {
+        display: none;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .hero {
+        padding-top: 76px;
+        padding-bottom: 60px;
+      }
+
+      .hero h1 {
+        font-size: 50px;
+      }
+
+      .hero-visual {
+        height: auto;
+      }
+
+      .access-map {
+        position: relative;
+        grid-template-columns: 1fr;
+      }
+
+      .role-bridge {
+        min-height: 80px;
+      }
+
+      .bridge-line {
+        width: 2px;
+        height: 100%;
+        right: auto;
+        left: 50%;
+      }
+
+      .article-shell {
+        padding-top: 48px;
+      }
+
+      .role-comparison,
+      .question-grid,
+      .check-list {
+        grid-template-columns: 1fr;
+      }
+
+      .control-flow {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .control-step:nth-child(2)::after {
+        display: none;
+      }
+
+      .author-card {
+        grid-template-columns: 65px minmax(0, 1fr);
+      }
+
+      .author-mark {
+        width: 65px;
+        height: 65px;
+        border-radius: 20px;
+      }
+
+      .author-card .button {
+        grid-column: 1 / -1;
+      }
+
+      .footer-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .brand span:last-child {
+        display: none;
+      }
+
+      .hero h1 {
+        font-size: 43px;
+      }
+
+      .article-meta {
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .article-body p,
+      .article-body ul,
+      .article-body ol {
+        font-size: 17px;
+      }
+
+      .toc-card nav {
+        grid-template-columns: 1fr;
+      }
+
+      .problem-button {
+        grid-template-columns: 34px minmax(0, 1fr) 20px;
+        padding: 17px;
+      }
+
+      .problem-content {
+        padding-right: 18px;
+        padding-left: 18px;
+      }
+
+      .control-flow {
+        grid-template-columns: 1fr;
+      }
+
+      .control-step:not(:last-child)::after {
+        top: auto;
+        right: 50%;
+        bottom: -22px;
+        transform: rotate(90deg) translateY(-50%);
+      }
+
+      .closing-box {
+        padding: 27px;
+      }
+    }
+
+    @media print {
+      .site-header,
+      .mobile-menu,
+      .reading-progress,
+      .hero-actions,
+      .article-sidebar,
+      .author-section,
+      footer {
+        display: none !important;
+      }
+
+      main {
+        padding-top: 0;
+      }
+
+      .hero {
+        padding: 35px 20px;
+      }
+
+      .hero-visual {
+        display: none;
+      }
+
+      .article-shell {
+        padding: 20px;
+        background: var(--white);
+      }
+
+      .article-layout {
+        display: block;
+      }
+
+      .problem-content {
+        display: block !important;
+      }
+
+      .article-body p,
+      .article-body li {
+        color: #000000;
+      }
+
+      .closing-box {
+        background: #ffffff;
+        color: #000000;
+        border: 1px solid #bbbbbb;
+      }
+
+      .closing-box h2,
+      .closing-box p {
+        color: #000000;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      * {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body id="top">
+  <div
+    class="reading-progress"
+    id="readingProgress"
+    aria-hidden="true"
+  ></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">ASD</span>
+        <span>dhaniswara86</span>
+      </a>
+
+      <nav class="main-nav" aria-label="Navigasi utama">
+        <a href="index.html">Beranda</a>
+        <a href="buku.html">Buku</a>
+        <a href="formulir.html">Formulir</a>
+        <a href="aplikasi.html">Aplikasi</a>
+        <a href="artikel.html" aria-current="page">Artikel</a>
+        <a href="index.html#tentang">Tentang</a>
+      </nav>
+
+      <button
+        class="menu-button"
+        id="menuButton"
+        type="button"
+        aria-label="Buka menu"
+        aria-expanded="false"
+      >
+        ☰
+      </button>
+    </div>
+  </header>
+
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Beranda</a>
+    <a href="buku.html">Buku Digital</a>
+    <a href="formulir.html">Formulir</a>
+    <a href="aplikasi.html">Aplikasi</a>
+    <a href="artikel.html">Artikel</a>
+    <a href="index.html#tentang">Tentang</a>
+  </nav>
+
+  <main>
+    <article>
+      <header class="hero">
+        <div class="hero-inner">
+          <span class="category-pill">Coretax dan Administrasi</span>
+
+          <h1>
+            Memahami Role Akses Coretax.
+            <span class="gradient-text">
+              Siapa boleh melakukan apa?
+            </span>
+          </h1>
+
+          <p class="hero-lead">
+            Role akses menentukan dokumen apa yang dapat dikerjakan
+            seorang pengguna dan sampai sejauh mana dokumen tersebut
+            boleh diproses atas nama perusahaan.
+          </p>
+
+          <div class="article-meta">
+            <span>Oleh Angga Sukma Dhaniswara</span>
+            <span>•</span>
+            <span>9 menit baca</span>
+            <span>•</span>
+            <span>Artikel Coretax</span>
+          </div>
+
+          <div class="hero-actions">
+            <a class="button button-primary" href="#pengantar">
+              Mulai membaca
+            </a>
+
+            <button
+              class="button"
+              id="copyLinkButton"
+              type="button"
+            >
+              Salin tautan
+            </button>
+
+            <a class="button" href="artikel.html">
+              Semua artikel
+            </a>
+          </div>
+
+          <div class="hero-visual" aria-hidden="true">
+            <div class="access-map">
+              <div class="visual-panel user">
+                <span class="visual-label">Pengguna pribadi</span>
+
+                <h2>Masuk dengan identitas sendiri.</h2>
+
+                <p>
+                  Setiap staf, pengurus, atau pihak yang diberi akses
+                  menggunakan akun Coretax pribadinya.
+                </p>
+
+                <div class="identity-card">
+                  <div class="identity-row">
+                    <span class="identity-icon">ID</span>
+                    <span>NIK atau NPWP pengguna</span>
+                  </div>
+
+                  
+                </div>
+              </div>
+
+              <div class="role-bridge">
+                <div class="bridge-line"></div>
+                <div class="role-token">ROLE<br>AKSES</div>
+              </div>
+
+              <div class="visual-panel company">
+                <span class="visual-label">Wajib Pajak Badan</span>
+
+                <h2>Bertindak atas nama perusahaan.</h2>
+
+                <p>
+                  Menu dan tindakan yang tersedia mengikuti role,
+                  jenis dokumen, dan cakupan akses yang diberikan.
+                </p>
+
+                <div class="identity-card">
+                  <div class="identity-row">
+                    <span class="identity-icon">D</span>
+                    <span>Drafter menyiapkan konsep</span>
+                  </div>
+
+                  <div class="identity-row">
+                    <span class="identity-icon">S</span>
+                    <span>Signer memberikan persetujuan</span>
+                  </div>
+					<div class="identity-row">
+                    <span class="identity-icon">U</span>
+                    <span>Kewenangan lain sesuai penugasan</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="article-shell">
+        <div class="article-layout">
+          <div class="article-body">
+            <section id="pengantar">
+              <div class="summary-box">
+                <strong>Ringkasan cepat</strong>
+
+                <p>
+                  Role akses bukan sekadar menu teknis. Fitur ini
+                  membagi kewenangan berdasarkan pengguna, jenis
+                  dokumen, tahapan pekerjaan, dan dalam kondisi
+                  tertentu lokasi atau tempat kegiatan usaha.
+                </p>
+              </div>
+
+              <p>
+                Implementasi Coretax membawa perubahan besar dalam
+                cara perusahaan mengelola kewajiban perpajakannya.
+                Salah satu perubahan yang paling penting adalah
+                hadirnya mekanisme role akses, yaitu pembagian
+                kewenangan kepada setiap pengguna yang menjalankan
+                administrasi perpajakan atas nama Wajib Pajak Badan
+                atau Instansi Pemerintah.
+              </p>
+
+              <p>
+                Melalui mekanisme ini, staf pajak, staf keuangan,
+                bagian penggajian, konsultan, hingga pengurus
+                perusahaan tidak harus menggunakan satu akun dan
+                kata sandi secara bersama-sama. Setiap orang masuk
+                menggunakan akun Coretax pribadinya, kemudian
+                menjalankan kewenangan sesuai peran yang telah
+                diberikan.
+              </p>
+
+              <p>
+                Konsep tersebut terlihat sederhana. Namun, dalam
+                praktiknya, role akses menjadi salah satu sumber
+                kebingungan yang cukup sering dialami pengguna
+                Coretax. Ada pegawai yang dapat masuk ke akun
+                perusahaan, tetapi tidak menemukan menu yang
+                dibutuhkan. Ada pula pengguna yang berhasil membuat
+                konsep dokumen, tetapi tidak dapat menandatangani
+                atau menyampaikannya.
+              </p>
+
+              <p>
+                Untuk memahami permasalahan tersebut, kita perlu
+                mengenal terlebih dahulu cara kerja role akses di
+                Coretax.
+              </p>
+            </section>
+
+            <section id="pengertian">
+              <h2>Apa yang Dimaksud dengan Role Akses?</h2>
+
+              <p>
+                Role akses merupakan kewenangan yang diberikan kepada
+                seseorang untuk melakukan aktivitas perpajakan
+                tertentu atas nama Wajib Pajak.
+              </p>
+
+              <p>
+                Kewenangan tersebut tidak selalu berlaku untuk seluruh
+                layanan Coretax. Seseorang dapat diberikan akses untuk
+                membuat faktur pajak, tetapi belum tentu dapat membuat
+                bukti potong PPh Pasal 21. Begitu pula seseorang yang
+                dapat menyusun SPT Masa PPN belum tentu mempunyai
+                kewenangan untuk menandatangani dan menyampaikannya.
+              </p>
+
+              <p>
+                Dengan kata lain, role akses menjawab dua pertanyaan
+                penting:
+              </p>
+
+              <div class="question-grid">
+                <div class="question-card">
+                  <span class="question-number">1</span>
+
+                  <p>
+                    Dokumen apa yang boleh dikerjakan oleh pengguna?
+                  </p>
+                </div>
+
+                <div class="question-card">
+                  <span class="question-number">2</span>
+
+                  <p>
+                    Sampai sejauh mana pengguna boleh memproses
+                    dokumen tersebut?
+                  </p>
+                </div>
+              </div>
+
+              <p>
+                Pembatasan ini diperlukan karena setiap pengguna dapat
+                memiliki tanggung jawab yang berbeda di dalam
+                perusahaan.
+              </p>
+            </section>
+
+            <section id="kebutuhan">
+              <h2>Mengapa Role Akses Dibutuhkan?</h2>
+
+              <p>
+                Sebelum penggunaan akses berbasis peran, praktik
+                berbagi akun sering dianggap sebagai cara yang paling
+                mudah. Satu akun perusahaan digunakan oleh beberapa
+                pegawai untuk membuat faktur, bukti potong, dan
+                laporan pajak.
+              </p>
+
+              <p>
+                Namun, praktik tersebut menimbulkan sejumlah risiko.
+                Perusahaan menjadi sulit mengetahui siapa yang
+                sebenarnya membuat, mengubah, atau menyampaikan suatu
+                dokumen. Kata sandi perusahaan juga dapat diketahui
+                oleh terlalu banyak orang. Selain itu, pegawai yang
+                sudah berpindah tugas atau keluar dari perusahaan
+                berpotensi masih mempunyai akses terhadap data
+                perpajakan.
+              </p>
+
+              <p>
+                Role akses membuat kewenangan pengguna menjadi lebih
+                terstruktur. Perusahaan dapat menentukan siapa yang
+                hanya bertugas menyiapkan dokumen dan siapa yang
+                berwenang memberikan persetujuan akhir.
+              </p>
+
+              <div class="callout callout-blue">
+                <strong>Intinya</strong>
+
+                <p>
+                  Role akses bukan sekadar fitur teknis, tetapi juga
+                  bagian dari sistem pengendalian internal perusahaan.
+                </p>
+              </div>
+            </section>
+
+            <section id="impersonate">
+              <h2>Hubungan Role Akses dengan Impersonate</h2>
+
+              <p>
+                Dalam Coretax, pengguna menjalankan kewajiban
+                perpajakan badan melalui mekanisme yang dikenal
+                sebagai impersonate.
+              </p>
+
+              <p>
+                Impersonate bukan berarti menggunakan identitas orang
+                lain secara tidak sah. Dalam konteks Coretax,
+                impersonate berarti pengguna masuk menggunakan akun
+                pribadinya, kemudian beralih untuk bertindak mewakili
+                Wajib Pajak Badan yang telah memberikan kewenangan
+                kepadanya.
+              </p>
+
+              <p>
+                Sebagai contoh, seorang staf pajak masuk menggunakan
+                NIK atau NPWP pribadinya. Setelah login, ia memilih
+                perusahaan yang diwakilinya. Menu dan fungsi yang
+                tersedia kemudian mengikuti role yang telah diberikan
+                oleh perusahaan tersebut.
+              </p>
+
+              <p>
+                Apabila role yang diterima hanya terbatas pada
+                pembuatan konsep faktur pajak, pengguna hanya dapat
+                mengerjakan fungsi tersebut. Ia tidak otomatis
+                memperoleh akses penuh terhadap seluruh administrasi
+                perpajakan perusahaan.
+              </p>
+            </section>
+
+            <section id="pic">
+              <h2>Mengenal PIC atau Penanggung Jawab</h2>
+
+              <p>
+                Dalam pengelolaan akses Coretax, terdapat pihak yang
+                memiliki posisi penting, yaitu PIC atau Penanggung
+                Jawab.
+              </p>
+
+              <p>
+                PIC pada umumnya mempunyai kewenangan yang lebih luas
+                dalam akun Wajib Pajak Badan. PIC dapat bertindak
+                mewakili badan serta mengelola pihak-pihak yang diberi
+                akses terhadap administrasi perpajakan perusahaan.
+              </p>
+
+              <p>
+                Karena kewenangannya luas, penetapan PIC perlu
+                diperhatikan dengan serius. Perusahaan harus
+                memastikan bahwa pihak yang tercatat sebagai PIC
+                memang masih aktif, mempunyai hubungan yang sah
+                dengan badan, dan memahami tanggung jawabnya.
+              </p>
+
+              <div class="callout callout-orange">
+                <strong>Perhatikan data PIC</strong>
+
+                <p>
+                  Apabila pengurus yang seharusnya menjadi PIC tidak
+                  dapat mengakses akun badan, proses pemberian
+                  kewenangan kepada pegawai lain juga dapat terhambat.
+                </p>
+              </div>
+            </section>
+
+            <section id="drafter-signer">
+              <h2>Perbedaan Drafter dan Signer</h2>
+
+              <p>
+                Secara umum, pembagian kewenangan dalam Coretax dapat
+                dipahami melalui dua fungsi utama, yaitu drafter dan
+                signer.
+              </p>
+
+              <div class="role-comparison">
+                <article class="role-card drafter">
+                  <div class="role-icon">D</div>
+
+                  <h3>Drafter</h3>
+
+                  <p>
+                    Pengguna yang diberi kewenangan untuk menyiapkan
+                    atau membuat konsep dokumen perpajakan.
+                  </p>
+
+                  <ul>
+                    <li>Mengisi data transaksi.</li>
+                    <li>Membuat konsep faktur pajak.</li>
+                    <li>Membuat konsep bukti potong.</li>
+                    <li>Mengimpor data melalui file XML.</li>
+                    <li>
+                      Menyusun dan melengkapi konsep sebelum
+                      disampaikan.
+                    </li>
+                  </ul>
+                </article>
+
+                <article class="role-card signer">
+                  <div class="role-icon">S</div>
+
+                  <h3>Signer</h3>
+
+                  <p>
+                    Pengguna yang diberi kewenangan untuk memberikan
+                    persetujuan akhir atas dokumen perpajakan.
+                  </p>
+
+                  <ul>
+                    <li>Menandatangani dokumen.</li>
+                    <li>Menerbitkan atau mengunggah dokumen.</li>
+                    <li>Menyampaikan laporan perpajakan.</li>
+                    <li>Memastikan konsep telah diperiksa.</li>
+                    <li>
+                      Memikul tanggung jawab pada tahap akhir proses.
+                    </li>
+                  </ul>
+                </article>
+              </div>
+
+              <p>
+                Drafter pada dasarnya tidak selalu mempunyai
+                kewenangan untuk memberikan persetujuan akhir. Inilah
+                sebabnya seorang pegawai dapat berhasil membuat
+                dokumen, tetapi tidak menemukan tombol atau fungsi
+                untuk menandatangani dan menyampaikannya.
+              </p>
+
+              <p>
+                Signer bertugas memastikan bahwa dokumen yang telah
+                disusun sudah benar dan layak untuk diproses lebih
+                lanjut. Dalam praktik pengendalian internal, fungsi
+                signer idealnya diberikan kepada pihak yang mempunyai
+                kewenangan dan tanggung jawab lebih tinggi, misalnya
+                supervisor pajak, manajer keuangan, pengurus, atau
+                pihak lain yang ditunjuk perusahaan.
+              </p>
+
+              <div class="callout callout-green">
+                <strong>Pemeriksaan berlapis</strong>
+
+                <p>
+                  Pemisahan drafter dan signer membuat dokumen tidak
+                  langsung disampaikan hanya karena telah selesai
+                  dibuat. Dokumen terlebih dahulu diperiksa oleh pihak
+                  yang berbeda.
+                </p>
+              </div>
+            </section>
+
+            <section id="cakupan">
+              <h2>Satu Role Tidak Berlaku untuk Semua Layanan</h2>
+
+              <p>
+                Salah satu kekeliruan yang sering terjadi adalah
+                menganggap bahwa satu role dapat digunakan untuk
+                seluruh jenis kewajiban perpajakan.
+              </p>
+
+              <p>
+                Padahal, role Coretax dapat dibedakan berdasarkan
+                jenis dokumen atau modul. Misalnya, role untuk membuat
+                faktur pajak berbeda dengan role untuk menyusun SPT
+                Masa PPN. Role untuk e-Bupot PPh Pasal 21 juga dapat
+                berbeda dengan role untuk e-Bupot Unifikasi.
+              </p>
+
+              <p>Seorang staf dapat saja mempunyai akses untuk membuat:</p>
+
+              <div class="service-chips">
+                <span class="service-chip">Faktur pajak keluaran</span>
+                <span class="service-chip">Konsep SPT Masa PPN</span>
+                <span class="service-chip">
+                  Bukti potong PPh Pasal 21
+                </span>
+                <span class="service-chip">
+                  Bukti potong PPh Unifikasi
+                </span>
+              </div>
+
+              <p>
+                Namun, setiap kewenangan tersebut perlu dipahami
+                sebagai akses yang berdiri sendiri. Karena itu,
+                keberhasilan pengguna membuka satu layanan tidak
+                berarti seluruh layanan perpajakan perusahaan
+                otomatis dapat diakses.
+              </p>
+            </section>
+
+            <section id="permasalahan">
+              <h2>Permasalahan Role Akses yang Sering Terjadi</h2>
+
+              <p>
+                Gejala yang terlihat sama belum tentu mempunyai
+                penyebab yang sama. Gunakan bagian berikut untuk
+                membedakan masalah hubungan pengguna, cakupan role,
+                tahapan pekerjaan, dan sesi sistem.
+              </p>
+
+              <div class="problem-list">
+                <article class="problem-item open">
+                  <button
+                    class="problem-button"
+                    type="button"
+                    aria-expanded="true"
+                  >
+                    <span class="problem-index">1</span>
+
+                    <span class="problem-title">
+                      Nama perusahaan tidak muncul saat akan
+                      impersonate
+                    </span>
+
+                    <span class="problem-symbol">+</span>
+                  </button>
+
+                  <div class="problem-content">
+                    <p>
+                      Permasalahan ini biasanya menunjukkan bahwa
+                      hubungan antara pengguna dan perusahaan belum
+                      terbaca dengan benar oleh sistem. Penyebabnya
+                      dapat berasal dari data pihak terkait, masa
+                      berlaku hubungan, akun pengguna, atau
+                      ketidaksesuaian data identitas.
+                    </p>
+
+                    <p>
+                      Apabila perusahaan sama sekali tidak muncul,
+                      kendalanya kemungkinan berada pada hubungan atau
+                      keterkaitan pengguna dengan badan, bukan pada
+                      kewenangan terhadap dokumen tertentu.
+                    </p>
+                  </div>
+                </article>
+
+                <article class="problem-item">
+                  <button
+                    class="problem-button"
+                    type="button"
+                    aria-expanded="false"
+                  >
+                    <span class="problem-index">2</span>
+
+                    <span class="problem-title">
+                      Dapat masuk ke akun badan, tetapi menu tidak
+                      lengkap
+                    </span>
+
+                    <span class="problem-symbol">+</span>
+                  </button>
+
+                  <div class="problem-content">
+                    <p>
+                      Jika pengguna sudah dapat impersonate tetapi
+                      hanya melihat sebagian menu, kemungkinan role
+                      yang diberikan masih terbatas.
+                    </p>
+
+                    <p>
+                      Pengguna mungkin sudah tercatat sebagai pihak
+                      terkait, tetapi belum memperoleh role untuk
+                      layanan yang hendak digunakan. Role juga dapat
+                      dibatasi pada jenis pajak, dokumen, atau tempat
+                      kegiatan usaha tertentu.
+                    </p>
+                  </div>
+                </article>
+
+                <article class="problem-item">
+                  <button
+                    class="problem-button"
+                    type="button"
+                    aria-expanded="false"
+                  >
+                    <span class="problem-index">3</span>
+
+                    <span class="problem-title">
+                      Dapat membuat konsep, tetapi tidak dapat
+                      menandatangani
+                    </span>
+
+                    <span class="problem-symbol">+</span>
+                  </button>
+
+                  <div class="problem-content">
+                    <p>
+                      Kondisi ini umumnya terjadi ketika pengguna hanya
+                      mempunyai role sebagai drafter.
+                    </p>
+
+                    <p>
+                      Pegawai dapat mengisi dan menyelesaikan konsep,
+                      tetapi proses akhir harus dilakukan oleh
+                      pengguna yang memiliki role signer. Kondisi ini
+                      tidak selalu merupakan gangguan sistem.
+                    </p>
+                  </div>
+                </article>
+
+                <article class="problem-item">
+                  <button
+                    class="problem-button"
+                    type="button"
+                    aria-expanded="false"
+                  >
+                    <span class="problem-index">4</span>
+
+                    <span class="problem-title">
+                      Dapat membuat faktur, tetapi tidak dapat
+                      menyampaikan SPT PPN
+                    </span>
+
+                    <span class="problem-symbol">+</span>
+                  </button>
+
+                  <div class="problem-content">
+                    <p>
+                      Membuat faktur pajak dan menyampaikan SPT Masa
+                      PPN merupakan dua aktivitas yang berbeda. Role
+                      faktur belum tentu memberikan akses terhadap
+                      SPT Masa PPN.
+                    </p>
+
+                    <p>
+                      Hal yang sama berlaku pada layanan PPh Pasal 21
+                      dan PPh Unifikasi. Pastikan role sesuai dengan
+                      dokumen yang menjadi tanggung jawab pengguna.
+                    </p>
+                  </div>
+                </article>
+
+                <article class="problem-item">
+                  <button
+                    class="problem-button"
+                    type="button"
+                    aria-expanded="false"
+                  >
+                    <span class="problem-index">5</span>
+
+                    <span class="problem-title">
+                      Role sudah diberikan, tetapi belum muncul
+                    </span>
+
+                    <span class="problem-symbol">+</span>
+                  </button>
+
+                  <div class="problem-content">
+                    <p>
+                      Dalam beberapa keadaan, perubahan role tidak
+                      langsung terlihat pada sesi pengguna yang sedang
+                      aktif.
+                    </p>
+
+                    <p>
+                      Perlu dipastikan bahwa role telah berlaku,
+                      tersimpan, dan diberikan untuk badan maupun
+                      tempat kegiatan usaha yang tepat sebelum
+                      disimpulkan sebagai gangguan aplikasi.
+                    </p>
+                  </div>
+                </article>
+
+                <article class="problem-item">
+                  <button
+                    class="problem-button"
+                    type="button"
+                    aria-expanded="false"
+                  >
+                    <span class="problem-index">6</span>
+
+                    <span class="problem-title">
+                      Akses hanya berlaku pada tempat kegiatan usaha
+                      tertentu
+                    </span>
+
+                    <span class="problem-symbol">+</span>
+                  </button>
+
+                  <div class="problem-content">
+                    <p>
+                      Perusahaan yang mempunyai cabang atau Tempat
+                      Kegiatan Usaha dapat memberikan kewenangan secara
+                      lebih terbatas.
+                    </p>
+
+                    <p>
+                      Seorang pegawai mungkin hanya memperoleh akses
+                      pada NITKU atau lokasi kegiatan usaha tertentu.
+                      Akibatnya, ia dapat mengerjakan transaksi salah
+                      satu cabang, tetapi tidak dapat memproses data
+                      cabang lainnya.
+                    </p>
+                  </div>
+                </article>
+
+                <article class="problem-item">
+                  <button
+                    class="problem-button"
+                    type="button"
+                    aria-expanded="false"
+                  >
+                    <span class="problem-index">7</span>
+
+                    <span class="problem-title">
+                      Pegawai lama masih mempunyai akses
+                    </span>
+
+                    <span class="problem-symbol">+</span>
+                  </button>
+
+                  <div class="problem-content">
+                    <p>
+                      Risiko muncul ketika pegawai pindah unit,
+                      berubah tanggung jawab, atau sudah tidak bekerja
+                      di perusahaan, tetapi aksesnya belum dicabut.
+                    </p>
+
+                    <p>
+                      Penggantian kata sandi perusahaan tidak
+                      menyelesaikan masalah dalam sistem berbasis akun
+                      pribadi. Perusahaan perlu meninjau hubungan
+                      pengguna, masa berlaku akses, dan role yang
+                      pernah diberikan.
+                    </p>
+                  </div>
+                </article>
+              </div>
+            </section>
+
+            <section id="pengendalian">
+              <h2>Role Akses sebagai Pengendalian Internal</h2>
+
+              <p>
+                Role akses sebaiknya tidak dipandang hanya sebagai
+                urusan administrator Coretax. Pembagian kewenangan
+                berkaitan langsung dengan tata kelola dan
+                pengendalian internal perusahaan.
+              </p>
+
+              <div class="control-flow">
+                <div class="control-step">
+                  <strong>Staf pajak</strong>
+                  <span>Menyiapkan konsep sebagai drafter.</span>
+                </div>
+
+                <div class="control-step">
+                  <strong>Supervisor</strong>
+                  <span>Memeriksa data dan kelengkapan.</span>
+                </div>
+
+                <div class="control-step">
+                  <strong>Signer</strong>
+                  <span>Memberikan persetujuan akhir.</span>
+                </div>
+
+                <div class="control-step">
+                  <strong>PIC</strong>
+                  <span>Mengawasi pengelolaan akses.</span>
+                </div>
+              </div>
+
+              <p>
+                Pemisahan tugas tersebut dapat mengurangi risiko salah
+                input, penerbitan dokumen tanpa pemeriksaan,
+                penyalahgunaan akses, maupun pelaporan yang tidak
+                sesuai dengan kebijakan perusahaan.
+              </p>
+
+              <p>
+                Perusahaan juga sebaiknya tidak memberikan role signer
+                kepada terlalu banyak pengguna. Semakin luas
+                kewenangan penandatanganan diberikan, semakin besar
+                pula risiko dokumen diterbitkan tanpa proses
+                verifikasi yang memadai.
+              </p>
+            </section>
+
+            <section id="minimum-access">
+              <h2>Prinsip Minimum Access</h2>
+
+              <p>
+                Prinsip yang baik dalam mengelola role adalah minimum
+                access atau pemberian akses minimum sesuai kebutuhan
+                pekerjaan.
+              </p>
+
+              <p>
+                Artinya, seseorang hanya diberikan kewenangan yang
+                benar-benar diperlukan untuk menjalankan tugasnya.
+                Staf penggajian, misalnya, tidak selalu membutuhkan
+                akses ke faktur pajak. Staf yang menangani PPN belum
+                tentu membutuhkan akses terhadap bukti potong PPh
+                Pasal 21. Demikian pula drafter tidak selalu harus
+                diberikan kewenangan sebagai signer.
+              </p>
+
+              <div class="callout callout-blue">
+                <strong>Prinsip sederhana</strong>
+
+                <p>
+                  Berikan akses secukupnya untuk menjalankan pekerjaan,
+                  bukan akses seluas-luasnya agar pekerjaan terasa
+                  lebih mudah.
+                </p>
+              </div>
+
+              <p>
+                Prinsip ini membantu menjaga kerahasiaan data
+                sekaligus memperkecil risiko kesalahan dan
+                penyalahgunaan akses.
+              </p>
+            </section>
+
+            <section id="evaluasi">
+              <h2>Pentingnya Evaluasi Berkala</h2>
+
+              <p>
+                Role akses bukan sesuatu yang cukup ditetapkan sekali,
+                kemudian dibiarkan selamanya. Perusahaan perlu
+                melakukan evaluasi berkala, khususnya ketika terjadi:
+              </p>
+
+              <ul class="check-list">
+                <li>Pergantian direktur atau pengurus.</li>
+                <li>Mutasi pegawai.</li>
+                <li>Perubahan pembagian tugas.</li>
+                <li>Pergantian konsultan pajak.</li>
+                <li>Pembukaan atau penutupan cabang.</li>
+                <li>Berakhirnya masa kuasa.</li>
+                <li>Pegawai mengundurkan diri.</li>
+                <li>Perubahan proses bisnis perusahaan.</li>
+              </ul>
+
+              <p>
+                Evaluasi tersebut diperlukan untuk memastikan bahwa
+                hanya pihak yang masih berwenang yang dapat mengakses
+                data dan dokumen perpajakan perusahaan.
+              </p>
+            </section>
+
+            <section id="bukan-teknis">
+              <h2>Bukan Sekadar Masalah Teknis</h2>
+
+              <p>
+                Banyak pengguna menganggap masalah role akses hanya
+                sebagai kendala teknis Coretax. Padahal, sebagian
+                permasalahan dapat berkaitan dengan struktur
+                kewenangan di dalam perusahaan.
+              </p>
+
+              <p>
+                Ketika pengguna tidak dapat menyampaikan dokumen,
+                pertanyaannya bukan hanya “mengapa tombolnya tidak
+                muncul?”, tetapi juga:
+              </p>
+
+              <ul>
+                <li>
+                  Apakah pengguna memang berwenang menandatangani
+                  dokumen tersebut?
+                </li>
+                <li>
+                  Apakah kewenangannya hanya sebagai drafter?
+                </li>
+                <li>
+                  Apakah aksesnya berlaku untuk jenis pajak yang
+                  sesuai?
+                </li>
+                <li>
+                  Apakah akses dibatasi pada cabang tertentu?
+                </li>
+                <li>
+                  Apakah hubungan pengguna dengan badan masih aktif?
+                </li>
+              </ul>
+
+              <p>
+                Dengan memahami pertanyaan-pertanyaan tersebut,
+                perusahaan dapat membedakan antara gangguan aplikasi
+                dan pembatasan akses yang memang dirancang oleh
+                sistem.
+              </p>
+            </section>
+
+            <section class="closing-box" id="penutup">
+              <h2>Penutup</h2>
+
+              <p>
+                Role akses merupakan fondasi penting dalam pengelolaan
+                administrasi perpajakan melalui Coretax. Fitur ini
+                memastikan bahwa setiap orang bekerja menggunakan
+                identitasnya sendiri, memiliki kewenangan sesuai
+                tugasnya, dan dapat dimintai pertanggungjawaban atas
+                aktivitas yang dilakukan.
+              </p>
+
+              <p>
+                Pemahaman mengenai PIC, pihak terkait, impersonate,
+                drafter, signer, dan pembagian role per jenis dokumen
+                sangat diperlukan agar proses administrasi pajak
+                perusahaan tidak terganggu.
+              </p>
+
+              <p>
+                Lebih dari itu, role akses memberikan kesempatan bagi
+                perusahaan untuk membangun tata kelola perpajakan yang
+                lebih aman dan terstruktur. Ketika diterapkan dengan
+                baik, fitur ini bukan hanya mempermudah penggunaan
+                Coretax, tetapi juga memperkuat pengendalian internal
+                serta mengurangi risiko kesalahan dalam pemenuhan
+                kewajiban perpajakan.
+              </p>
+
+              <p>
+                Artikel ini dapat dijadikan pengantar sebelum pembaca
+                mempelajari panduan teknis pengaturan role akses
+                Coretax secara lebih terperinci.
+              </p>
+            </section>
+          </div>
+
+          <aside class="article-sidebar">
+            <div class="toc-card">
+              <h2>Dalam artikel ini</h2>
+
+              <nav aria-label="Daftar isi">
+                <a href="#pengantar">Pengantar</a>
+                <a href="#pengertian">Pengertian role akses</a>
+                <a href="#kebutuhan">Mengapa dibutuhkan</a>
+                <a href="#impersonate">Impersonate</a>
+                <a href="#pic">PIC</a>
+                <a href="#drafter-signer">Drafter dan signer</a>
+                <a href="#cakupan">Cakupan layanan</a>
+                <a href="#permasalahan">Permasalahan umum</a>
+                <a href="#pengendalian">Pengendalian internal</a>
+                <a href="#minimum-access">Minimum access</a>
+                <a href="#evaluasi">Evaluasi berkala</a>
+                <a href="#bukan-teknis">Bukan sekadar teknis</a>
+                <a href="#penutup">Penutup</a>
+              </nav>
+            </div>
+
+            <div class="sidebar-note">
+              Artikel ini berfokus pada pemahaman fungsi dan
+              permasalahan role akses, bukan langkah teknis
+              pengaturannya. Tampilan dan alur sistem dapat mengalami
+              perubahan.
+            </div>
+          </aside>
+        </div>
+      </section>
+    </article>
+
+    <section class="author-section">
+      <div class="author-card">
+        <div class="author-mark">ASD</div>
+
+        <div class="author-copy">
+          <strong>Angga Sukma Dhaniswara</strong>
+
+          <p>
+            Berbagi materi perpajakan, formulir, aplikasi, dan alat
+            bantu melalui Kabayan — Katalog Bahan Pelayanan.
+          </p>
+        </div>
+
+        <a class="button button-primary" href="artikel.html">
+          Artikel lainnya
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="disclaimer">
+      <strong>Disclaimer:</strong>
+      Kabayan merupakan situs edukasi perpajakan pribadi dan bukan
+      situs resmi Direktorat Jenderal Pajak atau instansi pemerintah.
+      Informasi dalam artikel perlu diperiksa kembali dengan
+      ketentuan dan tampilan sistem terbaru sebelum digunakan.
+    </div>
+
+    <div class="footer-inner">
+      <p>
+        © <span id="currentYear"></span>
+        Angga Sukma Dhaniswara.
+      </p>
+
+      <div class="footer-links">
+        <a href="index.html">Beranda</a>
+        <a href="buku.html">Buku</a>
+        <a href="formulir.html">Formulir</a>
+        <a href="aplikasi.html">Aplikasi</a>
+        <a href="artikel.html">Artikel</a>
+        <a href="#top">Kembali ke atas</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const menuButton =
+      document.getElementById("menuButton");
+
+    const mobileMenu =
+      document.getElementById("mobileMenu");
+
+    menuButton.addEventListener("click", () => {
+      const isOpen =
+        mobileMenu.classList.toggle("active");
+
+      document.body.classList.toggle(
+        "menu-open",
+        isOpen
+      );
+
+      menuButton.setAttribute(
+        "aria-expanded",
+        String(isOpen)
+      );
+
+      menuButton.textContent =
+        isOpen ? "×" : "☰";
+    });
+
+    document
+      .querySelectorAll(".mobile-menu a")
+      .forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileMenu.classList.remove("active");
+          document.body.classList.remove("menu-open");
+          menuButton.setAttribute(
+            "aria-expanded",
+            "false"
+          );
+          menuButton.textContent = "☰";
+        });
+      });
+
+    const progressBar =
+      document.getElementById("readingProgress");
+
+    const updateReadingProgress = () => {
+      const documentHeight =
+        document.documentElement.scrollHeight -
+        window.innerHeight;
+
+      const progress =
+        documentHeight > 0
+          ? (window.scrollY / documentHeight) * 100
+          : 0;
+
+      progressBar.style.width =
+        Math.min(100, Math.max(0, progress)) + "%";
+    };
+
+    window.addEventListener(
+      "scroll",
+      updateReadingProgress,
+      { passive: true }
+    );
+
+    updateReadingProgress();
+
+    const tocLinks = Array.from(
+      document.querySelectorAll(".toc-card a")
+    );
+
+    const articleSections = tocLinks
+      .map((link) => {
+        const target =
+          document.querySelector(
+            link.getAttribute("href")
+          );
+
+        return target
+          ? { link, target }
+          : null;
+      })
+      .filter(Boolean);
+
+    const updateActiveToc = () => {
+      let activeItem = articleSections[0];
+
+      articleSections.forEach((item) => {
+        if (
+          item.target.getBoundingClientRect().top <=
+          145
+        ) {
+          activeItem = item;
+        }
+      });
+
+      tocLinks.forEach((link) => {
+        link.classList.remove("active");
+      });
+
+      activeItem?.link.classList.add("active");
+    };
+
+    window.addEventListener(
+      "scroll",
+      updateActiveToc,
+      { passive: true }
+    );
+
+    updateActiveToc();
+
+    document
+      .querySelectorAll(".problem-button")
+      .forEach((button) => {
+        button.addEventListener("click", () => {
+          const item =
+            button.closest(".problem-item");
+
+          const isOpen =
+            item.classList.toggle("open");
+
+          button.setAttribute(
+            "aria-expanded",
+            String(isOpen)
+          );
+        });
+      });
+
+    const copyLinkButton =
+      document.getElementById("copyLinkButton");
+
+    copyLinkButton.addEventListener(
+      "click",
+      async () => {
+        const originalText =
+          copyLinkButton.textContent;
+
+        try {
+          await navigator.clipboard.writeText(
+            window.location.href
+          );
+
+          copyLinkButton.textContent =
+            "Tautan tersalin";
+        } catch (error) {
+          window.prompt(
+            "Salin tautan berikut:",
+            window.location.href
+          );
+        }
+
+        window.setTimeout(() => {
+          copyLinkButton.textContent =
+            originalText;
+        }, 1800);
+      }
+    );
+
+    document.getElementById(
+      "currentYear"
+    ).textContent =
+      new Date().getFullYear();
+  </script>
+</body>
+</html>
