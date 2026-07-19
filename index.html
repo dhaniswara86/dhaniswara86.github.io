@@ -1576,7 +1576,7 @@
 
   <nav class="mobile-menu" id="mobileMenu">
     <a href="index.html">Beranda</a>
-    <a href="buku.html">Buku Digital</a>
+    <a href="buku.html">Buku</a>
     <a href="formulir.html">Formulir</a>
     <a href="aplikasi.html">Aplikasi</a>
     <a href="#coretax">Coretax XML</a>
@@ -2115,13 +2115,11 @@
 
           <a
             class="button button-outline"
-            id="whatsappLink"
+            id="emailLink"
             href="#"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Hubungi Angga melalui WhatsApp"
+            aria-label="Hubungi Angga melalui email"
           >
-            Hubungi via WhatsApp
+            Hubungi via Email
           </a>
         </div>
       </div>
@@ -2396,39 +2394,51 @@
 
 
     /*
-      GANTI NOMOR WHATSAPP DI BAWAH INI.
-      Gunakan format internasional tanpa tanda +, spasi, atau tanda hubung.
-      Contoh: 6281234567890
+      GANTI ALAMAT EMAIL DI BAWAH INI.
+      Contoh: namaanda@gmail.com
     */
-    const WHATSAPP_NUMBER = "62818168006";
+    const CONTACT_EMAIL = "angga.dhaniswara@gmail.com";
 
-    const WHATSAPP_MESSAGE =
-      "Halo Pak Angga, saya mengunjungi website Kabayan dan ingin bertanya.";
+    const EMAIL_SUBJECT =
+      "Pertanyaan melalui Website Kabayan";
 
-    const whatsappLink =
-      document.getElementById("whatsappLink");
+    const EMAIL_MESSAGE =
+      "Halo Pak Angga,\r\n\r\nSaya mengunjungi website Kabayan dan ingin bertanya mengenai:\r\n\r\n";
 
-    if (whatsappLink) {
-      const numberIsReady =
-        /^62\d{8,13}$/.test(WHATSAPP_NUMBER);
+    const emailLink =
+      document.getElementById("emailLink");
 
-      if (numberIsReady) {
-        whatsappLink.href =
-          "https://wa.me/" +
-          WHATSAPP_NUMBER +
-          "?text=" +
-          encodeURIComponent(WHATSAPP_MESSAGE);
+    if (emailLink) {
+      const emailIsReady =
+        /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+          CONTACT_EMAIL
+        ) &&
+        CONTACT_EMAIL !== "emailanda@example.com";
+
+      if (emailIsReady) {
+        emailLink.href =
+          "mailto:" +
+          CONTACT_EMAIL +
+          "?subject=" +
+          encodeURIComponent(EMAIL_SUBJECT) +
+          "&body=" +
+          encodeURIComponent(EMAIL_MESSAGE);
       } else {
-        whatsappLink.removeAttribute("target");
-        whatsappLink.setAttribute("aria-disabled", "true");
+        emailLink.setAttribute(
+          "aria-disabled",
+          "true"
+        );
 
-        whatsappLink.addEventListener("click", (event) => {
-          event.preventDefault();
+        emailLink.addEventListener(
+          "click",
+          (event) => {
+            event.preventDefault();
 
-          window.alert(
-            "Nomor WhatsApp belum diatur. Ganti nilai WHATSAPP_NUMBER di dalam script index.html."
-          );
-        });
+            window.alert(
+              "Alamat email belum diatur. Ganti nilai CONTACT_EMAIL di dalam script index.html."
+            );
+          }
+        );
       }
     }
 
