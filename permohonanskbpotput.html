@@ -3,129 +3,700 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Formulir interaktif permohonan Surat Keterangan Bebas Pemotongan dan/atau Pemungutan Pajak Penghasilan." />
-  <title>Permohonan SKB Pemotongan/Pemungutan PPh</title>
+  <meta name="description" content="Formulir interaktif permohonan Surat Keterangan Bebas Pemotongan dan/atau Pemungutan Pajak Penghasilan. Isi langsung lalu cetak atau simpan sebagai PDF." />
+  <meta name="author" content="Angga Sukma Dhaniswara" />
+  <meta name="theme-color" content="#f5f5f7" />
+  <title>Formulir Permohonan SKB PPh | Kabayan</title>
+
   <style>
-    :root{
-      --navy:#172554;--blue:#1d4ed8;--soft:#eef4ff;--ink:#111827;--danger:#b42318;
-      --paper-w:216mm;--paper-h:330mm;
+    :root {
+      --black: #000;
+      --near-black: #1d1d1f;
+      --white: #fff;
+      --off-white: #f5f5f7;
+      --soft-gray: #e8e8ed;
+      --medium-gray: #86868b;
+      --blue: #0071e3;
+      --blue-hover: #0077ed;
+      --blue-soft: #eef6ff;
+      --danger: #d70015;
+      --danger-soft: #fff0ee;
+      --nav-height: 48px;
+      --max-width: 1180px;
+      --paper-w: 216mm;
+      --paper-h: 330mm;
     }
-    *{box-sizing:border-box}
-    body{margin:0;background:#eef2f7;color:var(--ink);font-family:Poppins,Arial,sans-serif}
-    .toolbar{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;gap:18px;align-items:center;padding:14px 22px;background:rgba(23,37,84,.97);color:#fff;box-shadow:0 8px 24px rgba(15,23,42,.16)}
-    .toolbar h1{font-size:17px;margin:0;line-height:1.35}.toolbar p{font-size:12px;margin:4px 0 0;color:#dbeafe}
-    .actions{display:flex;gap:10px;flex-shrink:0}
-    button{min-height:40px;border:0;border-radius:10px;padding:0 16px;font:inherit;font-weight:700;cursor:pointer}.btn-print{background:#fff;color:var(--navy)}.btn-reset{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.3)}
-    .note{width:min(calc(100% - 32px),var(--paper-w));margin:18px auto 0;padding:12px 14px;border:1px solid #bfdbfe;border-radius:12px;background:var(--soft);color:#334155;font-size:13px;line-height:1.55}
-    .paper-wrap{padding:20px 16px 40px;overflow-x:auto}
-    .paper{width:var(--paper-w);min-height:var(--paper-h);margin:0 auto;padding:53mm 22mm 28mm;background:#fff;box-shadow:0 18px 50px rgba(15,23,42,.18);font-family:Arial,Helvetica,sans-serif;font-size:11.2pt;line-height:1.2;color:#000}
-    .form-box{padding:10mm 10mm 8mm;min-height:235mm}
-    .row{display:grid;grid-template-columns:22mm 4mm minmax(0,1fr);align-items:center;min-height:7mm}.row.hal{align-items:start}.row.hal .static{padding-top:.7mm}
-    .label{white-space:nowrap}.colon{text-align:center}
-    input[type=text],textarea,select{width:100%;border:0;border-bottom:.25mm dotted #555;padding:.5mm 1mm;background:#fff;color:#000;font:inherit;outline:none}
-    input[type=text],select{height:6.2mm}textarea{min-height:13mm;resize:vertical;line-height:1.25}select{cursor:pointer}
-    input:focus,textarea:focus,select:focus{background:#eff6ff;box-shadow:inset 0 -1px 0 var(--blue)}.missing{background:#fff1f2!important;box-shadow:inset 0 -1px 0 var(--danger)!important}
-    .recipient{margin:6mm 0 5mm}.recipient-line{display:flex;align-items:baseline;gap:1mm}.recipient-line input{flex:1}
-    .indent{margin-left:10mm}.section-title{margin:0 0 1.5mm}.status-title{margin:4mm 0 1.5mm}
-    .checks{display:grid;gap:2mm}.check-line{display:flex;align-items:center;gap:2.2mm;min-height:7mm}.check-line.inline{gap:11mm}.check-label{display:flex;align-items:center;gap:2.2mm;cursor:pointer}
-    input[type=radio],input[type=checkbox]{appearance:none;width:7mm;height:7mm;margin:0;border:.3mm solid #666;background:#fff;display:grid;place-content:center;flex:0 0 7mm}
-    input[type=radio]::before,input[type=checkbox]::before{content:"✓";font-family:Arial,sans-serif;font-weight:700;font-size:6mm;line-height:1;transform:scale(0)}input[type=radio]:checked::before,input[type=checkbox]:checked::before{transform:scale(1)}
-    .taxpayer-data{margin:2mm 0 3mm 10mm}.taxpayer-data .row{grid-template-columns:22mm 4mm minmax(0,1fr)}
-    .paragraph{margin:3mm 0 0;text-align:justify}.inline-input{display:inline-block;vertical-align:baseline;width:38mm;height:6.2mm!important}.reason{width:74mm}.tax-select{min-width:38mm;padding-right:6mm}
-    .attachment-title{margin:3mm 0 1mm;text-align:justify;text-indent:10mm}.attachment-list{display:grid;gap:2mm;margin-top:1mm}
-    .closing{margin:5mm 0 0 10mm}.signature{width:72mm;margin:13mm 4mm 0 auto}.date-line{display:flex;align-items:baseline}.date-line input{flex:1}.role-line{margin-top:1mm}.sig-space{height:24mm}.name-line input{width:45mm}.screen-help{font-family:Poppins,Arial,sans-serif;font-size:8pt;color:#64748b;text-align:left;margin-top:1mm}
-    .footnotes{margin-top:7mm;font-size:9.3pt;line-height:1.25}.footnote-row{display:grid;grid-template-columns:9mm 1fr}
-    @page{size:216mm 330mm;margin:0}
-    @media(max-width:850px){.toolbar{position:static;align-items:flex-start;flex-direction:column}.actions{width:100%}.actions button{flex:1}}
-    @media print{
-      html,body{width:216mm;height:330mm;margin:0!important;padding:0!important;background:#fff!important}.no-print,.toolbar,.note{display:none!important}.paper-wrap{margin:0;padding:0;overflow:visible}.paper{width:216mm;min-height:330mm;margin:0;padding:53mm 22mm 28mm;box-shadow:none}
-      input,textarea,select{background:#fff!important;box-shadow:none!important}input::placeholder,textarea::placeholder{color:transparent!important}textarea{resize:none!important;overflow:hidden!important}input[type=radio],input[type=checkbox]{-webkit-print-color-adjust:exact;print-color-adjust:exact}.screen-help{display:none!important}
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      background: var(--off-white);
+      color: var(--near-black);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, Helvetica, sans-serif;
+      line-height: 1.5;
+      letter-spacing: -0.015em;
+      -webkit-font-smoothing: antialiased;
+    }
+    body.menu-open { overflow: hidden; }
+    a { color: inherit; }
+    button, input, textarea, select { font: inherit; }
+
+    .site-header {
+      position: fixed;
+      z-index: 1000;
+      inset: 0 0 auto;
+      min-height: var(--nav-height);
+      border-bottom: 1px solid rgba(0,0,0,.06);
+      background: rgba(250,250,252,.82);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+    }
+    .header-inner {
+      width: min(var(--max-width), calc(100% - 36px));
+      min-height: var(--nav-height);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+      margin: 0 auto;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--near-black);
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .brand-mark {
+      width: 25px;
+      height: 25px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      background: var(--near-black);
+      color: var(--white);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: -.04em;
+    }
+    .main-nav { display: flex; align-items: center; gap: 27px; }
+    .main-nav a {
+      color: #424245;
+      font-size: 12px;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .main-nav a:hover, .main-nav a[aria-current="page"] { color: var(--black); }
+    .menu-button {
+      width: 34px;
+      height: 34px;
+      display: none;
+      place-items: center;
+      border: 0;
+      border-radius: 50%;
+      background: transparent;
+      color: var(--near-black);
+      cursor: pointer;
+      font-size: 18px;
+    }
+    .mobile-menu {
+      position: fixed;
+      z-index: 999;
+      inset: var(--nav-height) 0 0;
+      display: none;
+      padding: 36px 28px;
+      background: rgba(250,250,252,.98);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+    }
+    .mobile-menu.active { display: block; }
+    .mobile-menu a {
+      display: block;
+      padding: 11px 0;
+      color: var(--near-black);
+      font-size: 28px;
+      font-weight: 650;
+      letter-spacing: -.04em;
+      text-decoration: none;
+    }
+
+    main { padding-top: var(--nav-height); }
+    .utility-bar {
+      border-bottom: 1px solid rgba(0,0,0,.06);
+      background: #fff;
+    }
+    .utility-inner {
+      width: min(980px, calc(100% - 40px));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin: 0 auto;
+      padding: 14px 0;
+      color: #6e6e73;
+      font-size: 13px;
+    }
+    .utility-inner a { color: var(--blue); text-decoration: none; white-space: nowrap; }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 76px 20px 62px;
+      background:
+        radial-gradient(circle at 50% 100%, rgba(0,113,227,.13), transparent 34%),
+        linear-gradient(180deg, #fff 0%, #fff 66%, #f4f7fc 100%);
+      text-align: center;
+    }
+    .hero::before {
+      position: absolute;
+      top: -250px;
+      left: 50%;
+      width: 900px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(0,113,227,.17), rgba(47,157,255,.05) 47%, transparent 72%);
+      filter: blur(8px);
+      content: "";
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+    .hero-inner { position: relative; z-index: 1; width: min(960px, 100%); margin: 0 auto; }
+    .category-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 18px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: var(--off-white);
+      color: #515154;
+      font-size: 12px;
+      font-weight: 650;
+    }
+    .category-pill::before { width: 7px; height: 7px; border-radius: 50%; background: var(--blue); content: ""; }
+    .hero h1 {
+      max-width: 920px;
+      margin: 0 auto;
+      font-size: clamp(44px, 7vw, 76px);
+      font-weight: 700;
+      letter-spacing: -.06em;
+      line-height: 1;
+    }
+    .gradient-text {
+      display: block;
+      background: linear-gradient(90deg, #083b8f, #0071e3 48%, #26a3cf 78%, #e6aa00);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .hero-lead {
+      max-width: 760px;
+      margin: 25px auto 0;
+      color: #515154;
+      font-size: clamp(18px, 2.2vw, 23px);
+      line-height: 1.45;
+    }
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 9px;
+      margin-top: 25px;
+    }
+    .hero-badge {
+      padding: 7px 11px;
+      border: 1px solid rgba(0,0,0,.07);
+      border-radius: 999px;
+      background: rgba(255,255,255,.88);
+      color: #6e6e73;
+      font-size: 12px;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 11px; margin-top: 28px; }
+    .button {
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 9px 18px;
+      border: 1px solid var(--blue);
+      border-radius: 999px;
+      background: transparent;
+      color: var(--blue);
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 550;
+      text-decoration: none;
+      transition: background .2s ease, color .2s ease, transform .2s ease;
+    }
+    .button:hover { background: var(--blue); color: var(--white); transform: translateY(-1px); }
+    .button-primary { background: var(--blue); color: var(--white); }
+    .button-primary:hover { background: var(--blue-hover); }
+    .button-muted { border-color: #d2d2d7; color: #424245; background: #fff; }
+    .button-muted:hover { border-color: #b7b7bc; background: #f5f5f7; color: #1d1d1f; }
+
+    .form-section { padding: 66px 20px 90px; background: var(--off-white); }
+    .form-intro { width: min(820px, 100%); margin: 0 auto 30px; text-align: center; }
+    .form-intro h2 { margin: 0; font-size: clamp(31px, 4.8vw, 48px); letter-spacing: -.045em; line-height: 1.08; }
+    .form-intro p { margin: 15px auto 0; color: #6e6e73; font-size: 16px; line-height: 1.6; }
+
+    .form-toolbar {
+      width: min(980px, 100%);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin: 0 auto 16px;
+      padding: 15px 17px;
+      border: 1px solid rgba(0,0,0,.07);
+      border-radius: 20px;
+      background: rgba(255,255,255,.9);
+      box-shadow: 0 14px 38px rgba(20,43,76,.07);
+    }
+    .form-toolbar-copy strong { display: block; font-size: 14px; }
+    .form-toolbar-copy span { display: block; margin-top: 3px; color: #6e6e73; font-size: 12px; }
+    .form-actions { display: flex; gap: 9px; flex-shrink: 0; }
+
+    .paper-stage {
+      width: min(100%, calc(var(--paper-w) + 40px));
+      margin: 0 auto;
+      padding: 20px;
+      overflow-x: auto;
+      border: 1px solid rgba(0,0,0,.07);
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at 90% 6%, rgba(0,113,227,.10), transparent 22%),
+        #e9edf2;
+      box-shadow: 0 24px 70px rgba(20,43,76,.10);
+    }
+    .paper {
+      width: var(--paper-w);
+      min-height: var(--paper-h);
+      margin: 0 auto;
+      padding: 53mm 22mm 28mm;
+      background: #fff;
+      color: #000;
+      box-shadow: 0 18px 48px rgba(15,23,42,.16);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 11.2pt;
+      line-height: 1.2;
+    }
+    .form-box { min-height: 235mm; padding: 10mm 10mm 8mm; }
+    .row { display: grid; grid-template-columns: 22mm 4mm minmax(0,1fr); align-items: center; min-height: 7mm; }
+    .row.hal { align-items: start; }
+    .row.hal .static { padding-top: .7mm; }
+    .label { white-space: nowrap; }
+    .colon { text-align: center; }
+    input[type="text"], textarea, select {
+      width: 100%;
+      border: 0;
+      border-bottom: .25mm dotted #555;
+      padding: .5mm 1mm;
+      background: #fff;
+      color: #000;
+      font: inherit;
+      outline: none;
+    }
+    input[type="text"], select { height: 6.2mm; }
+    textarea { min-height: 13mm; resize: vertical; line-height: 1.25; }
+    select { cursor: pointer; }
+    input:focus, textarea:focus, select:focus { background: #eff6ff; box-shadow: inset 0 -1px 0 var(--blue); }
+    .missing { background: var(--danger-soft) !important; box-shadow: inset 0 -1px 0 var(--danger) !important; }
+    .recipient { margin: 6mm 0 5mm; }
+    .recipient-line { display: flex; align-items: baseline; gap: 1mm; }
+    .recipient-line input { flex: 1; }
+    .indent { margin-left: 10mm; }
+    .section-title { margin: 0 0 1.5mm; }
+    .status-title { margin: 4mm 0 1.5mm; }
+    .checks { display: grid; gap: 2mm; }
+    .check-line { display: flex; align-items: center; gap: 2.2mm; min-height: 7mm; }
+    .check-line.inline { gap: 11mm; }
+    .check-label { display: flex; align-items: center; gap: 2.2mm; cursor: pointer; }
+    input[type="radio"], input[type="checkbox"] {
+      appearance: none;
+      width: 7mm;
+      height: 7mm;
+      margin: 0;
+      border: .3mm solid #666;
+      background: #fff;
+      display: grid;
+      place-content: center;
+      flex: 0 0 7mm;
+    }
+    input[type="radio"]::before, input[type="checkbox"]::before {
+      content: "✓";
+      font-family: Arial, sans-serif;
+      font-weight: 700;
+      font-size: 6mm;
+      line-height: 1;
+      transform: scale(0);
+    }
+    input[type="radio"]:checked::before, input[type="checkbox"]:checked::before { transform: scale(1); }
+    .taxpayer-data { margin: 2mm 0 3mm 10mm; }
+    .taxpayer-data .row { grid-template-columns: 22mm 4mm minmax(0,1fr); }
+    .paragraph { margin: 3mm 0 0; text-align: justify; }
+    .inline-input { display: inline-block; vertical-align: baseline; width: 38mm; height: 6.2mm !important; }
+    .reason { width: 74mm; }
+    .tax-select { min-width: 38mm; padding-right: 6mm; }
+    .attachment-title { margin: 3mm 0 1mm; text-align: justify; text-indent: 10mm; }
+    .attachment-list { display: grid; gap: 2mm; margin-top: 1mm; }
+    .closing { margin: 5mm 0 0 10mm; }
+    .signature { width: 72mm; margin: 13mm 4mm 0 auto; }
+    .date-line { display: flex; align-items: baseline; }
+    .date-line input { flex: 1; }
+    .role-line { margin-top: 1mm; }
+    .sig-space { height: 24mm; }
+    .name-line input { width: 45mm; }
+    .screen-help { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-size: 8pt; color: #64748b; text-align: left; margin-top: 1mm; }
+    .footnotes { margin-top: 7mm; font-size: 9.3pt; line-height: 1.25; }
+    .footnote-row { display: grid; grid-template-columns: 9mm 1fr; }
+
+    .privacy-note {
+      width: min(980px, 100%);
+      display: grid;
+      grid-template-columns: 45px minmax(0,1fr);
+      gap: 14px;
+      margin: 18px auto 0;
+      padding: 19px 21px;
+      border: 1px solid #d5e7f8;
+      border-radius: 20px;
+      background: var(--blue-soft);
+      color: #31536f;
+    }
+    .privacy-icon {
+      width: 45px;
+      height: 45px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: #fff;
+      color: var(--blue);
+      font-size: 20px;
+    }
+    .privacy-note strong { display: block; color: #1d1d1f; font-size: 15px; }
+    .privacy-note p { margin: 4px 0 0; font-size: 13px; line-height: 1.55; }
+
+    .site-footer { background: #fff; color: #6e6e73; }
+    .disclaimer {
+      width: min(980px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 24px 0;
+      border-bottom: 1px solid #d2d2d7;
+      font-size: 12px;
+      line-height: 1.55;
+    }
+    .disclaimer strong { color: #424245; }
+    .footer-inner {
+      width: min(980px, calc(100% - 40px));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      margin: 0 auto;
+      padding: 21px 0 27px;
+      font-size: 12px;
+    }
+    .footer-inner p { margin: 0; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 18px; }
+    .footer-links a { color: #424245; text-decoration: none; }
+    .footer-links a:hover { text-decoration: underline; }
+
+    @page { size: 216mm 330mm; margin: 0; }
+
+    @media (max-width: 980px) {
+      .main-nav { display: none; }
+      .menu-button { display: grid; }
+    }
+    @media (max-width: 760px) {
+      .hero { padding-top: 62px; }
+      .hero h1 { font-size: 48px; }
+      .utility-inner { align-items: flex-start; flex-direction: column; gap: 6px; }
+      .form-toolbar { align-items: flex-start; flex-direction: column; }
+      .form-actions { width: 100%; }
+      .form-actions .button { flex: 1; }
+      .paper-stage { padding: 12px; border-radius: 20px; }
+      .footer-inner { align-items: flex-start; flex-direction: column; }
+    }
+    @media (max-width: 520px) {
+      .brand span:last-child { display: none; }
+      .hero h1 { font-size: 42px; }
+      .hero-badges { display: grid; grid-template-columns: 1fr; }
+      .form-section { padding-inline: 10px; }
+    }
+
+    @media print {
+      html, body { width: 216mm; height: 330mm; margin: 0 !important; padding: 0 !important; background: #fff !important; }
+      .no-print, .site-header, .mobile-menu, .utility-bar, .hero, .form-intro, .form-toolbar, .privacy-note, .site-footer { display: none !important; }
+      main, .form-section { margin: 0; padding: 0; background: #fff; }
+      .paper-stage { width: 216mm; margin: 0; padding: 0; overflow: visible; border: 0; border-radius: 0; background: #fff; box-shadow: none; }
+      .paper { width: 216mm; min-height: 330mm; margin: 0; padding: 53mm 22mm 28mm; box-shadow: none; }
+      input, textarea, select { background: #fff !important; box-shadow: none !important; }
+      input::placeholder, textarea::placeholder { color: transparent !important; }
+      textarea { resize: none !important; overflow: hidden !important; }
+      input[type="radio"], input[type="checkbox"] { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .screen-help { display: none !important; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { transition: none !important; }
     }
   </style>
 </head>
-<body>
-  <header class="toolbar no-print">
-    <div><h1>Formulir Permohonan SKB Pemotongan/Pemungutan PPh</h1><p>Isi kolom, pilih opsi yang sesuai, lalu cetak atau simpan sebagai PDF.</p></div>
-    <div class="actions"><button class="btn-reset" id="resetBtn" type="button">Kosongkan</button><button class="btn-print" id="printBtn" type="button">Cetak / Simpan PDF</button></div>
+<body id="top">
+  <header class="site-header no-print">
+    <div class="header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">ASD</span>
+        <span>dhaniswara86</span>
+      </a>
+      <nav class="main-nav" aria-label="Navigasi utama">
+        <a href="index.html">Beranda</a>
+        <a href="buku.html">Buku</a>
+        <a href="formulir.html" aria-current="page">Formulir</a>
+        <a href="aplikasi.html">Aplikasi</a>
+        <a href="presentasi.html">Salindia</a>
+        <a href="artikel.html">Artikel</a>
+        <a href="index.html#tentang">Tentang</a>
+      </nav>
+      <button class="menu-button" id="menuButton" type="button" aria-label="Buka menu" aria-expanded="false">☰</button>
+    </div>
   </header>
-  <div class="note no-print">Gunakan kertas <strong>Folio 8,5 × 13 inci (216 × 330 mm)</strong>, skala <strong>100%</strong>, dan nonaktifkan header/footer browser. Data hanya diproses di perangkat pengguna.</div>
 
-  <main class="paper-wrap">
-    <form class="paper" id="skbForm" autocomplete="off" novalidate>
-      <section class="form-box">
-        <div class="row"><label class="label" for="nomor">Nomor</label><span class="colon">:</span><input id="nomor" type="text" maxlength="60" data-required></div>
-        <div class="row"><label class="label" for="lampiran">Lampiran</label><span class="colon">:</span><input id="lampiran" type="text" maxlength="80" data-required></div>
-        <div class="row hal"><span class="label">Hal</span><span class="colon">:</span><div class="static">Permohonan Surat Keterangan Bebas Pemotongan dan/atau<br>Pemungutan Pajak Penghasilan</div></div>
+  <nav class="mobile-menu no-print" id="mobileMenu">
+    <a href="index.html">Beranda</a>
+    <a href="buku.html">Buku Digital</a>
+    <a href="formulir.html">Formulir</a>
+    <a href="aplikasi.html">Aplikasi</a>
+    <a href="presentasi.html">Katalog Salindia</a>
+    <a href="artikel.html">Artikel</a>
+    <a href="index.html#tentang">Tentang</a>
+  </nav>
 
-        <div class="recipient"><div class="recipient-line"><span>Yth. Kepala Kantor Pelayanan Pajak</span><input id="kpp" type="text" maxlength="100" data-required aria-label="Nama Kantor Pelayanan Pajak"></div></div>
+  <main>
+    <div class="utility-bar no-print">
+      <div class="utility-inner">
+        <span>Isi formulir secara langsung dan cetak tanpa mengunggah data Anda.</span>
+        <a href="formulir.html">Kembali ke koleksi formulir ›</a>
+      </div>
+    </div>
 
-        <div class="indent">
-          <p class="section-title">Yang bertanda tangan di bawah ini:</p>
-          <div class="row"><label class="label" for="namaPenandatangan">Nama</label><span class="colon">:</span><input id="namaPenandatangan" type="text" maxlength="100" data-required></div>
-          <div class="row"><label class="label" for="npwpPenandatangan">NPWP</label><span class="colon">:</span><input id="npwpPenandatangan" type="text" maxlength="30" inputmode="numeric" data-required></div>
-          <div class="row"><label class="label" for="jabatan">Jabatan</label><span class="colon">:</span><input id="jabatan" type="text" maxlength="100" data-required></div>
+    <section class="hero no-print">
+      <div class="hero-inner">
+        <span class="category-pill">Formulir interaktif</span>
+        <h1>
+          Permohonan SKB .
+          <span class="gradient-text">Pemotongan/Pemungutan PPh</span>
+        </h1>
+        <p class="hero-lead">
+          Lengkapi kolom yang tersedia, periksa kembali isinya, kemudian cetak langsung atau simpan sebagai PDF dari browser.
+        </p>
+        
+        <div class="hero-actions">
+          <a class="button button-primary" href="#formulir-skb">Mulai isi formulir</a>
+          <button class="button" id="heroPrintBtn" type="button">Cetak / Simpan PDF</button>
         </div>
+      </div>
+    </section>
 
-        <p class="status-title">Bertindak selaku <sup>*)</sup></p>
-        <div class="checks" role="radiogroup" aria-label="Kedudukan penandatangan">
-          <label class="check-label"><input type="radio" name="status" value="Wajib Pajak" id="statusWp"><span>Wajib Pajak</span></label>
-          <div class="check-line inline">
-            <label class="check-label"><input type="radio" name="status" value="Wakil"><span>Wakil</span></label>
-            <label class="check-label"><input type="radio" name="status" value="Kuasa"><span>Kuasa, dari Wajib Pajak</span></label>
-          </div>
+    <section class="form-section" id="formulir-skb">
+      <div class="form-intro no-print">
+        <h2>Lengkapi data permohonan.</h2>
+        <p>Periksa kembali seluruh isian sebelum mencetak. Gunakan kertas Folio 8,5 × 13 inci, skala 100% atau Actual Size, dan nonaktifkan header serta footer browser.</p>
+      </div>
+
+      <div class="form-toolbar no-print">
+        <div class="form-toolbar-copy">
+          <strong>Formulir Permohonan SKB Pemotongan/Pemungutan PPh</strong>
+          <span>Kolom berwarna merah menandakan bagian yang belum diisi.</span>
         </div>
-
-        <div class="taxpayer-data">
-          <div class="row"><label class="label" for="namaWp">Nama</label><span class="colon">:</span><input id="namaWp" type="text" maxlength="100" data-required></div>
-          <div class="row"><label class="label" for="npwpWp">NPWP</label><span class="colon">:</span><input id="npwpWp" type="text" maxlength="30" inputmode="numeric" data-required></div>
-          <div class="row"><label class="label" for="alamatWp">Alamat</label><span class="colon">:</span><input id="alamatWp" type="text" maxlength="180" data-required></div>
-          <div class="row"><label class="label" for="klu">KLU</label><span class="colon">:</span><input id="klu" type="text" maxlength="20" data-required></div>
-          <div class="row"><span class="label"></span><span class="colon"></span><input id="uraianKlu" type="text" maxlength="160" data-required placeholder="Uraian KLU" aria-label="Uraian KLU"></div>
+        <div class="form-actions">
+          <a class="button button-muted" href="formulir.html">Kembali</a>
+          <button class="button button-muted" id="resetBtn" type="button">Kosongkan</button>
+          <button class="button button-primary" id="printBtn" type="button">Cetak / Simpan PDF</button>
         </div>
+      </div>
 
-        <p class="paragraph">mengajukan permohonan untuk memperoleh Surat Keterangan Bebas Pemotongan dan/atau Pemungutan Pajak Penghasilan <select id="jenisPph" class="inline-input tax-select" data-required aria-label="Jenis Pajak Penghasilan"><option value="">Pilih jenis PPh</option><option value="PPh Pasal 21">PPh Pasal 21</option><option value="PPh Pasal 22">PPh Pasal 22</option><option value="PPh Pasal 22 Impor">PPh Pasal 22 Impor</option><option value="PPh Pasal 23">PPh Pasal 23</option></select>, dengan alasan <input id="alasan" class="inline-input reason" type="text" maxlength="250" data-required aria-label="Alasan permohonan"></p>
+      <div class="paper-stage">
+        <form class="paper" id="skbForm" autocomplete="off" novalidate>
+          <section class="form-box">
+            <div class="row"><label class="label" for="nomor">Nomor</label><span class="colon">:</span><input id="nomor" type="text" maxlength="60" data-required /></div>
+            <div class="row"><label class="label" for="lampiran">Lampiran</label><span class="colon">:</span><input id="lampiran" type="text" maxlength="80" data-required /></div>
+            <div class="row hal"><span class="label">Hal</span><span class="colon">:</span><div class="static">Permohonan Surat Keterangan Bebas Pemotongan dan/atau<br />Pemungutan Pajak Penghasilan</div></div>
 
-        <p class="attachment-title">Untuk kelengkapan permohonan Surat Keterangan Bebas Pemotongan dan/atau Pemungutan Pajak Penghasilan, bersama ini terlampir penghitungan Pajak Penghasilan yang diperkirakan akan terutang untuk tahun pajak berjalan <sup>*)</sup></p>
-        <div class="attachment-list">
-          <label class="check-label"><input id="lampiranHitung" type="checkbox"><span>Penghitungan Pajak Penghasilan yang akan Terutang</span></label>
-          <label class="check-label"><input id="lampiranDokumen" type="checkbox"><span>Dokumen pendukung lainnya</span></label>
+            <div class="recipient"><div class="recipient-line"><span>Yth. Kepala Kantor Pelayanan Pajak</span><input id="kpp" type="text" maxlength="100" data-required aria-label="Nama Kantor Pelayanan Pajak" /></div></div>
+
+            <div class="indent">
+              <p class="section-title">Yang bertanda tangan di bawah ini:</p>
+              <div class="row"><label class="label" for="namaPenandatangan">Nama</label><span class="colon">:</span><input id="namaPenandatangan" type="text" maxlength="100" data-required /></div>
+              <div class="row"><label class="label" for="npwpPenandatangan">NPWP</label><span class="colon">:</span><input id="npwpPenandatangan" type="text" maxlength="30" inputmode="numeric" data-required /></div>
+              <div class="row"><label class="label" for="jabatan">Jabatan</label><span class="colon">:</span><input id="jabatan" type="text" maxlength="100" data-required /></div>
+            </div>
+
+            <p class="status-title">Bertindak selaku <sup>*)</sup></p>
+            <div class="checks" role="radiogroup" aria-label="Kedudukan penandatangan">
+              <label class="check-label"><input type="radio" name="status" value="Wajib Pajak" id="statusWp" /><span>Wajib Pajak</span></label>
+              <div class="check-line inline">
+                <label class="check-label"><input type="radio" name="status" value="Wakil" /><span>Wakil</span></label>
+                <label class="check-label"><input type="radio" name="status" value="Kuasa" /><span>Kuasa, dari Wajib Pajak</span></label>
+              </div>
+            </div>
+
+            <div class="taxpayer-data">
+              <div class="row"><label class="label" for="namaWp">Nama</label><span class="colon">:</span><input id="namaWp" type="text" maxlength="100" data-required /></div>
+              <div class="row"><label class="label" for="npwpWp">NPWP</label><span class="colon">:</span><input id="npwpWp" type="text" maxlength="30" inputmode="numeric" data-required /></div>
+              <div class="row"><label class="label" for="alamatWp">Alamat</label><span class="colon">:</span><input id="alamatWp" type="text" maxlength="180" data-required /></div>
+              <div class="row"><label class="label" for="klu">KLU</label><span class="colon">:</span><input id="klu" type="text" maxlength="20" data-required /></div>
+              <div class="row"><span class="label"></span><span class="colon"></span><input id="uraianKlu" type="text" maxlength="160" data-required placeholder="Uraian KLU" aria-label="Uraian KLU" /></div>
+            </div>
+
+            <p class="paragraph">mengajukan permohonan untuk memperoleh Surat Keterangan Bebas Pemotongan dan/atau Pemungutan Pajak Penghasilan <select id="jenisPph" class="inline-input tax-select" data-required aria-label="Jenis Pajak Penghasilan"><option value="">Pilih jenis PPh</option><option value="PPh Pasal 21">PPh Pasal 21</option><option value="PPh Pasal 22">PPh Pasal 22</option><option value="PPh Pasal 22 Impor">PPh Pasal 22 Impor</option><option value="PPh Pasal 23">PPh Pasal 23</option></select>, dengan alasan <input id="alasan" class="inline-input reason" type="text" maxlength="250" data-required aria-label="Alasan permohonan" /></p>
+
+            <p class="attachment-title">Untuk kelengkapan permohonan Surat Keterangan Bebas Pemotongan dan/atau Pemungutan Pajak Penghasilan, bersama ini terlampir penghitungan Pajak Penghasilan yang diperkirakan akan terutang untuk tahun pajak berjalan <sup>*)</sup></p>
+            <div class="attachment-list">
+              <label class="check-label"><input id="lampiranHitung" type="checkbox" /><span>Penghitungan Pajak Penghasilan yang akan Terutang</span></label>
+              <label class="check-label"><input id="lampiranDokumen" type="checkbox" /><span>Dokumen pendukung lainnya</span></label>
+            </div>
+
+            <p class="closing">Demikian permohonan ini kami sampaikan.</p>
+
+            <section class="signature">
+              <div class="date-line"><input id="tempatTanggal" type="text" maxlength="100" data-required placeholder="Contoh: Bandung, 20 Juli 2026" /></div>
+              <div class="role-line" id="rolePrint">Wajib Pajak/Wakil/Kuasa <sup>**)</sup></div>
+              <div class="sig-space"></div>
+              <div class="name-line"><input id="namaTtd" type="text" maxlength="100" data-required aria-label="Nama penandatangan" /></div>
+              <div class="screen-help no-print">Area tanda tangan</div>
+            </section>
+
+            <div class="footnotes">
+              <div class="footnote-row"><span>*)</span><span>Beri tanda (√) pada kotak yang sesuai</span></div>
+              <div class="footnote-row"><span>**)</span><span>Coret yang tidak perlu</span></div>
+            </div>
+          </section>
+        </form>
+      </div>
+
+      <div class="privacy-note no-print">
+        <div class="privacy-icon" aria-hidden="true">🔒</div>
+        <div>
+          <strong>Data tetap berada di perangkat Anda.</strong>
+          <p>Formulir ini bekerja langsung di browser. Isian tidak dikirim ke server Kabayan. Pastikan isi permohonan dan lampiran telah sesuai dengan kondisi sebenarnya serta ketentuan perpajakan yang berlaku.</p>
         </div>
-
-        <p class="closing">Demikian permohonan ini kami sampaikan.</p>
-
-        <section class="signature">
-          <div class="date-line"><input id="tempatTanggal" type="text" maxlength="100" data-required placeholder="Contoh: Bandung, 20 Juli 2026"></div>
-          <div class="role-line" id="rolePrint">Wajib Pajak/Wakil/Kuasa <sup>**)</sup></div>
-          <div class="sig-space"></div>
-          <div class="name-line"><input id="namaTtd" type="text" maxlength="100" data-required aria-label="Nama penandatangan"></div>
-          <div class="screen-help no-print">Area tanda tangan</div>
-        </section>
-
-        <div class="footnotes">
-          <div class="footnote-row"><span>*)</span><span>Beri tanda (√) pada kotak yang sesuai</span></div>
-          <div class="footnote-row"><span>**)</span><span>Coret yang tidak perlu</span></div>
-        </div>
-      </section>
-    </form>
+      </div>
+    </section>
   </main>
 
+  <footer class="site-footer no-print">
+    <div class="disclaimer"><strong>Disclaimer:</strong> Formulir ini merupakan alat bantu pengisian dokumen secara mandiri. Pengguna tetap bertanggung jawab untuk memastikan kelengkapan, kebenaran data, kewenangan penandatangan, dan kesesuaian permohonan dengan ketentuan yang berlaku. Kabayan bukan situs resmi Direktorat Jenderal Pajak.</div>
+    <div class="footer-inner">
+      <p>© <span id="currentYear"></span> Angga Sukma Dhaniswara.</p>
+      <div class="footer-links">
+        <a href="index.html">Beranda</a>
+        <a href="formulir.html">Formulir</a>
+        <a href="artikel.html">Artikel</a>
+        <a href="aplikasi.html">Aplikasi</a>
+        <a href="#top">Kembali ke atas</a>
+      </div>
+    </div>
+  </footer>
+
   <script>
-    (()=>{
-      'use strict';
-      const form=document.getElementById('skbForm');
-      const statusWp=document.getElementById('statusWp');
-      const signer={nama:document.getElementById('namaPenandatangan'),npwp:document.getElementById('npwpPenandatangan')};
-      const taxpayer={nama:document.getElementById('namaWp'),npwp:document.getElementById('npwpWp')};
-      const namaTtd=document.getElementById('namaTtd');
-      const rolePrint=document.getElementById('rolePrint');
-      function sync(){if(statusWp.checked){taxpayer.nama.value=signer.nama.value;taxpayer.npwp.value=signer.npwp.value;}namaTtd.value=signer.nama.value;}
-      [signer.nama,signer.npwp].forEach(el=>el.addEventListener('input',sync));
-      form.querySelectorAll('input[name="status"]').forEach(r=>r.addEventListener('change',()=>{sync();rolePrint.textContent=r.value==='Wajib Pajak'?'Wajib Pajak':r.value;}));
-      form.addEventListener('input',e=>{if(e.target.matches('input,textarea,select'))e.target.classList.remove('missing')});
-      form.addEventListener('change',e=>{if(e.target.matches('select'))e.target.classList.remove('missing')});
-      function validate(){let count=0,first=null;form.querySelectorAll('[data-required]').forEach(el=>{const empty=!el.value.trim();el.classList.toggle('missing',empty);if(empty){count++;first??=el;}});if(!form.querySelector('input[name="status"]:checked')){count++;first??=form.querySelector('input[name="status"]');}return{count,first};}
-      document.getElementById('printBtn').addEventListener('click',()=>{const {count,first}=validate();if(count&&!confirm(`Masih ada ${count} bagian yang belum diisi. Tetap lanjut mencetak?`)){first?.focus();return;}window.print();});
-      document.getElementById('resetBtn').addEventListener('click',()=>{if(!confirm('Kosongkan seluruh isi formulir?'))return;form.reset();form.querySelectorAll('.missing').forEach(el=>el.classList.remove('missing'));rolePrint.innerHTML='Wajib Pajak/Wakil/Kuasa <sup>**)</sup>';signer.nama.focus();});
+    (() => {
+      "use strict";
+
+      const menuButton = document.getElementById("menuButton");
+      const mobileMenu = document.getElementById("mobileMenu");
+      menuButton.addEventListener("click", () => {
+        const isOpen = mobileMenu.classList.toggle("active");
+        document.body.classList.toggle("menu-open", isOpen);
+        menuButton.setAttribute("aria-expanded", String(isOpen));
+        menuButton.textContent = isOpen ? "×" : "☰";
+      });
+      mobileMenu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileMenu.classList.remove("active");
+          document.body.classList.remove("menu-open");
+          menuButton.setAttribute("aria-expanded", "false");
+          menuButton.textContent = "☰";
+        });
+      });
+
+      const form = document.getElementById("skbForm");
+      const statusWp = document.getElementById("statusWp");
+      const signer = {
+        nama: document.getElementById("namaPenandatangan"),
+        npwp: document.getElementById("npwpPenandatangan")
+      };
+      const taxpayer = {
+        nama: document.getElementById("namaWp"),
+        npwp: document.getElementById("npwpWp")
+      };
+      const namaTtd = document.getElementById("namaTtd");
+      const rolePrint = document.getElementById("rolePrint");
+
+      const sync = () => {
+        if (statusWp.checked) {
+          taxpayer.nama.value = signer.nama.value;
+          taxpayer.npwp.value = signer.npwp.value;
+        }
+        namaTtd.value = signer.nama.value;
+      };
+
+      [signer.nama, signer.npwp].forEach((element) => element.addEventListener("input", sync));
+      form.querySelectorAll('input[name="status"]').forEach((radio) => {
+        radio.addEventListener("change", () => {
+          sync();
+          rolePrint.textContent = radio.value;
+        });
+      });
+      form.addEventListener("input", (event) => {
+        if (event.target.matches("input, textarea, select")) event.target.classList.remove("missing");
+      });
+      form.addEventListener("change", (event) => {
+        if (event.target.matches("select")) event.target.classList.remove("missing");
+      });
+
+      const validate = () => {
+        let count = 0;
+        let first = null;
+        form.querySelectorAll("[data-required]").forEach((element) => {
+          const empty = !element.value.trim();
+          element.classList.toggle("missing", empty);
+          if (empty) {
+            count += 1;
+            first ??= element;
+          }
+        });
+        if (!form.querySelector('input[name="status"]:checked')) {
+          count += 1;
+          first ??= form.querySelector('input[name="status"]');
+        }
+        return { count, first };
+      };
+
+      const printForm = () => {
+        const { count, first } = validate();
+        if (count && !window.confirm(`Masih ada ${count} bagian yang belum diisi. Tetap lanjut mencetak?`)) {
+          first?.focus();
+          return;
+        }
+        window.print();
+      };
+
+      document.getElementById("printBtn").addEventListener("click", printForm);
+      document.getElementById("heroPrintBtn").addEventListener("click", printForm);
+      document.getElementById("resetBtn").addEventListener("click", () => {
+        if (!window.confirm("Kosongkan seluruh isi formulir?")) return;
+        form.reset();
+        form.querySelectorAll(".missing").forEach((element) => element.classList.remove("missing"));
+        rolePrint.innerHTML = "Wajib Pajak/Wakil/Kuasa <sup>**)</sup>";
+        signer.nama.focus();
+      });
+
+      document.getElementById("currentYear").textContent = new Date().getFullYear();
     })();
   </script>
 </body>
