@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Formulir interaktif permohonan Surat Keterangan Bebas Pemotongan dan/atau Pemungutan Pajak Penghasilan." />
+  <title>Permohonan SKB Pemotongan/Pemungutan PPh</title>
+  <style>
+    :root{
+      --navy:#172554;--blue:#1d4ed8;--soft:#eef4ff;--ink:#111827;--danger:#b42318;
+      --paper-w:216mm;--paper-h:330mm;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:#eef2f7;color:var(--ink);font-family:Poppins,Arial,sans-serif}
+    .toolbar{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;gap:18px;align-items:center;padding:14px 22px;background:rgba(23,37,84,.97);color:#fff;box-shadow:0 8px 24px rgba(15,23,42,.16)}
+    .toolbar h1{font-size:17px;margin:0;line-height:1.35}.toolbar p{font-size:12px;margin:4px 0 0;color:#dbeafe}
+    .actions{display:flex;gap:10px;flex-shrink:0}
+    button{min-height:40px;border:0;border-radius:10px;padding:0 16px;font:inherit;font-weight:700;cursor:pointer}.btn-print{background:#fff;color:var(--navy)}.btn-reset{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.3)}
+    .note{width:min(calc(100% - 32px),var(--paper-w));margin:18px auto 0;padding:12px 14px;border:1px solid #bfdbfe;border-radius:12px;background:var(--soft);color:#334155;font-size:13px;line-height:1.55}
+    .paper-wrap{padding:20px 16px 40px;overflow-x:auto}
+    .paper{width:var(--paper-w);min-height:var(--paper-h);margin:0 auto;padding:53mm 22mm 28mm;background:#fff;box-shadow:0 18px 50px rgba(15,23,42,.18);font-family:Arial,Helvetica,sans-serif;font-size:11.2pt;line-height:1.2;color:#000}
+    .form-box{padding:10mm 10mm 8mm;min-height:235mm}
+    .row{display:grid;grid-template-columns:22mm 4mm minmax(0,1fr);align-items:center;min-height:7mm}.row.hal{align-items:start}.row.hal .static{padding-top:.7mm}
+    .label{white-space:nowrap}.colon{text-align:center}
+    input[type=text],textarea,select{width:100%;border:0;border-bottom:.25mm dotted #555;padding:.5mm 1mm;background:#fff;color:#000;font:inherit;outline:none}
+    input[type=text],select{height:6.2mm}textarea{min-height:13mm;resize:vertical;line-height:1.25}select{cursor:pointer}
+    input:focus,textarea:focus,select:focus{background:#eff6ff;box-shadow:inset 0 -1px 0 var(--blue)}.missing{background:#fff1f2!important;box-shadow:inset 0 -1px 0 var(--danger)!important}
+    .recipient{margin:6mm 0 5mm}.recipient-line{display:flex;align-items:baseline;gap:1mm}.recipient-line input{flex:1}
+    .indent{margin-left:10mm}.section-title{margin:0 0 1.5mm}.status-title{margin:4mm 0 1.5mm}
+    .checks{display:grid;gap:2mm}.check-line{display:flex;align-items:center;gap:2.2mm;min-height:7mm}.check-line.inline{gap:11mm}.check-label{display:flex;align-items:center;gap:2.2mm;cursor:pointer}
+    input[type=radio],input[type=checkbox]{appearance:none;width:7mm;height:7mm;margin:0;border:.3mm solid #666;background:#fff;display:grid;place-content:center;flex:0 0 7mm}
+    input[type=radio]::before,input[type=checkbox]::before{content:"✓";font-family:Arial,sans-serif;font-weight:700;font-size:6mm;line-height:1;transform:scale(0)}input[type=radio]:checked::before,input[type=checkbox]:checked::before{transform:scale(1)}
+    .taxpayer-data{margin:2mm 0 3mm 10mm}.taxpayer-data .row{grid-template-columns:22mm 4mm minmax(0,1fr)}
+    .paragraph{margin:3mm 0 0;text-align:justify}.inline-input{display:inline-block;vertical-align:baseline;width:38mm;height:6.2mm!important}.reason{width:74mm}.tax-select{min-width:38mm;padding-right:6mm}
+    .attachment-title{margin:3mm 0 1mm;text-align:justify;text-indent:10mm}.attachment-list{display:grid;gap:2mm;margin-top:1mm}
+    .closing{margin:5mm 0 0 10mm}.signature{width:72mm;margin:13mm 4mm 0 auto}.date-line{display:flex;align-items:baseline}.date-line input{flex:1}.role-line{margin-top:1mm}.sig-space{height:24mm}.name-line input{width:45mm}.screen-help{font-family:Poppins,Arial,sans-serif;font-size:8pt;color:#64748b;text-align:left;margin-top:1mm}
+    .footnotes{margin-top:7mm;font-size:9.3pt;line-height:1.25}.footnote-row{display:grid;grid-template-columns:9mm 1fr}
+    @page{size:216mm 330mm;margin:0}
+    @media(max-width:850px){.toolbar{position:static;align-items:flex-start;flex-direction:column}.actions{width:100%}.actions button{flex:1}}
+    @media print{
+      html,body{width:216mm;height:330mm;margin:0!important;padding:0!important;background:#fff!important}.no-print,.toolbar,.note{display:none!important}.paper-wrap{margin:0;padding:0;overflow:visible}.paper{width:216mm;min-height:330mm;margin:0;padding:53mm 22mm 28mm;box-shadow:none}
+      input,textarea,select{background:#fff!important;box-shadow:none!important}input::placeholder,textarea::placeholder{color:transparent!important}textarea{resize:none!important;overflow:hidden!important}input[type=radio],input[type=checkbox]{-webkit-print-color-adjust:exact;print-color-adjust:exact}.screen-help{display:none!important}
+    }
+  </style>
+</head>
+<body>
+  <header class="toolbar no-print">
+    <div><h1>Formulir Permohonan SKB Pemotongan/Pemungutan PPh</h1><p>Isi kolom, pilih opsi yang sesuai, lalu cetak atau simpan sebagai PDF.</p></div>
+    <div class="actions"><button class="btn-reset" id="resetBtn" type="button">Kosongkan</button><button class="btn-print" id="printBtn" type="button">Cetak / Simpan PDF</button></div>
+  </header>
+  <div class="note no-print">Gunakan kertas <strong>Folio 8,5 × 13 inci (216 × 330 mm)</strong>, skala <strong>100%</strong>, dan nonaktifkan header/footer browser. Data hanya diproses di perangkat pengguna.</div>
+
+  <main class="paper-wrap">
+    <form class="paper" id="skbForm" autocomplete="off" novalidate>
+      <section class="form-box">
+        <div class="row"><label class="label" for="nomor">Nomor</label><span class="colon">:</span><input id="nomor" type="text" maxlength="60" data-required></div>
+        <div class="row"><label class="label" for="lampiran">Lampiran</label><span class="colon">:</span><input id="lampiran" type="text" maxlength="80" data-required></div>
+        <div class="row hal"><span class="label">Hal</span><span class="colon">:</span><div class="static">Permohonan Surat Keterangan Bebas Pemotongan dan/atau<br>Pemungutan Pajak Penghasilan</div></div>
+
+        <div class="recipient"><div class="recipient-line"><span>Yth. Kepala Kantor Pelayanan Pajak</span><input id="kpp" type="text" maxlength="100" data-required aria-label="Nama Kantor Pelayanan Pajak"></div></div>
+
+        <div class="indent">
+          <p class="section-title">Yang bertanda tangan di bawah ini:</p>
+          <div class="row"><label class="label" for="namaPenandatangan">Nama</label><span class="colon">:</span><input id="namaPenandatangan" type="text" maxlength="100" data-required></div>
+          <div class="row"><label class="label" for="npwpPenandatangan">NPWP</label><span class="colon">:</span><input id="npwpPenandatangan" type="text" maxlength="30" inputmode="numeric" data-required></div>
+          <div class="row"><label class="label" for="jabatan">Jabatan</label><span class="colon">:</span><input id="jabatan" type="text" maxlength="100" data-required></div>
+        </div>
+
+        <p class="status-title">Bertindak selaku <sup>*)</sup></p>
+        <div class="checks" role="radiogroup" aria-label="Kedudukan penandatangan">
+          <label class="check-label"><input type="radio" name="status" value="Wajib Pajak" id="statusWp"><span>Wajib Pajak</span></label>
+          <div class="check-line inline">
+            <label class="check-label"><input type="radio" name="status" value="Wakil"><span>Wakil</span></label>
+            <label class="check-label"><input type="radio" name="status" value="Kuasa"><span>Kuasa, dari Wajib Pajak</span></label>
+          </div>
+        </div>
+
+        <div class="taxpayer-data">
+          <div class="row"><label class="label" for="namaWp">Nama</label><span class="colon">:</span><input id="namaWp" type="text" maxlength="100" data-required></div>
+          <div class="row"><label class="label" for="npwpWp">NPWP</label><span class="colon">:</span><input id="npwpWp" type="text" maxlength="30" inputmode="numeric" data-required></div>
+          <div class="row"><label class="label" for="alamatWp">Alamat</label><span class="colon">:</span><input id="alamatWp" type="text" maxlength="180" data-required></div>
+          <div class="row"><label class="label" for="klu">KLU</label><span class="colon">:</span><input id="klu" type="text" maxlength="20" data-required></div>
+          <div class="row"><span class="label"></span><span class="colon"></span><input id="uraianKlu" type="text" maxlength="160" data-required placeholder="Uraian KLU" aria-label="Uraian KLU"></div>
+        </div>
+
+        <p class="paragraph">mengajukan permohonan untuk memperoleh Surat Keterangan Bebas Pemotongan dan/atau Pemungutan Pajak Penghasilan <select id="jenisPph" class="inline-input tax-select" data-required aria-label="Jenis Pajak Penghasilan"><option value="">Pilih jenis PPh</option><option value="PPh Pasal 21">PPh Pasal 21</option><option value="PPh Pasal 22">PPh Pasal 22</option><option value="PPh Pasal 22 Impor">PPh Pasal 22 Impor</option><option value="PPh Pasal 23">PPh Pasal 23</option></select>, dengan alasan <input id="alasan" class="inline-input reason" type="text" maxlength="250" data-required aria-label="Alasan permohonan"></p>
+
+        <p class="attachment-title">Untuk kelengkapan permohonan Surat Keterangan Bebas Pemotongan dan/atau Pemungutan Pajak Penghasilan, bersama ini terlampir penghitungan Pajak Penghasilan yang diperkirakan akan terutang untuk tahun pajak berjalan <sup>*)</sup></p>
+        <div class="attachment-list">
+          <label class="check-label"><input id="lampiranHitung" type="checkbox"><span>Penghitungan Pajak Penghasilan yang akan Terutang</span></label>
+          <label class="check-label"><input id="lampiranDokumen" type="checkbox"><span>Dokumen pendukung lainnya</span></label>
+        </div>
+
+        <p class="closing">Demikian permohonan ini kami sampaikan.</p>
+
+        <section class="signature">
+          <div class="date-line"><input id="tempatTanggal" type="text" maxlength="100" data-required placeholder="Contoh: Bandung, 20 Juli 2026"></div>
+          <div class="role-line" id="rolePrint">Wajib Pajak/Wakil/Kuasa <sup>**)</sup></div>
+          <div class="sig-space"></div>
+          <div class="name-line"><input id="namaTtd" type="text" maxlength="100" data-required aria-label="Nama penandatangan"></div>
+          <div class="screen-help no-print">Area tanda tangan</div>
+        </section>
+
+        <div class="footnotes">
+          <div class="footnote-row"><span>*)</span><span>Beri tanda (√) pada kotak yang sesuai</span></div>
+          <div class="footnote-row"><span>**)</span><span>Coret yang tidak perlu</span></div>
+        </div>
+      </section>
+    </form>
+  </main>
+
+  <script>
+    (()=>{
+      'use strict';
+      const form=document.getElementById('skbForm');
+      const statusWp=document.getElementById('statusWp');
+      const signer={nama:document.getElementById('namaPenandatangan'),npwp:document.getElementById('npwpPenandatangan')};
+      const taxpayer={nama:document.getElementById('namaWp'),npwp:document.getElementById('npwpWp')};
+      const namaTtd=document.getElementById('namaTtd');
+      const rolePrint=document.getElementById('rolePrint');
+      function sync(){if(statusWp.checked){taxpayer.nama.value=signer.nama.value;taxpayer.npwp.value=signer.npwp.value;}namaTtd.value=signer.nama.value;}
+      [signer.nama,signer.npwp].forEach(el=>el.addEventListener('input',sync));
+      form.querySelectorAll('input[name="status"]').forEach(r=>r.addEventListener('change',()=>{sync();rolePrint.textContent=r.value==='Wajib Pajak'?'Wajib Pajak':r.value;}));
+      form.addEventListener('input',e=>{if(e.target.matches('input,textarea,select'))e.target.classList.remove('missing')});
+      form.addEventListener('change',e=>{if(e.target.matches('select'))e.target.classList.remove('missing')});
+      function validate(){let count=0,first=null;form.querySelectorAll('[data-required]').forEach(el=>{const empty=!el.value.trim();el.classList.toggle('missing',empty);if(empty){count++;first??=el;}});if(!form.querySelector('input[name="status"]:checked')){count++;first??=form.querySelector('input[name="status"]');}return{count,first};}
+      document.getElementById('printBtn').addEventListener('click',()=>{const {count,first}=validate();if(count&&!confirm(`Masih ada ${count} bagian yang belum diisi. Tetap lanjut mencetak?`)){first?.focus();return;}window.print();});
+      document.getElementById('resetBtn').addEventListener('click',()=>{if(!confirm('Kosongkan seluruh isi formulir?'))return;form.reset();form.querySelectorAll('.missing').forEach(el=>el.classList.remove('missing'));rolePrint.innerHTML='Wajib Pajak/Wakil/Kuasa <sup>**)</sup>';signer.nama.focus();});
+    })();
+  </script>
+</body>
+</html>
