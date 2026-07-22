@@ -883,7 +883,7 @@
         </label>
 
         <p class="hero-count" id="searchResult">
-          40 dokumen tersedia dalam 20 kategori
+          Memuat koleksi formulir...
         </p>
       </div>
     </section>
@@ -916,12 +916,22 @@
           <strong>Surat Keterangan Bebas</strong>
           <span>1 formulir <b aria-hidden="true">›</b></span>
         </button>
+
+        <button
+          class="quick-card"
+          type="button"
+          data-target="folder-20"
+        >
+          <span class="quick-label">Surat Keterangan Fiskal</span>
+          <strong>Surat Keterangan Fiskal</strong>
+          <span>1 formulir <b aria-hidden="true">›</b></span>
+        </button>
         
         
         <button
           class="quick-card"
           type="button"
-          data-target="folder-19"
+          data-target="folder-14"
         >
           <span class="quick-label">Kuasa</span>
           <strong>Kuasa Wajib Pajak</strong>
@@ -2720,7 +2730,7 @@
           class="folder-card"
           id="folder-18"
           data-folder="18. Surat Pernyataan UMKM di bawah Rp500 juta"
-          data-category="Surat Pernyataan"
+          data-category="permohonan"
         >
           <summary>
             <div class="folder-summary-main">
@@ -2778,8 +2788,8 @@
 			<details
           class="folder-card"
           id="folder-19"
-          data-folder="19. Surat Keterangan Bebas"
-          data-category="Surat Keterangan Bebas"
+          data-folder="19. surat keterangan bebas skb pemotongan pemungutan pajak penghasilan pph"
+          data-category="permohonan"
         >
           <summary>
             <div class="folder-summary-main">
@@ -2803,7 +2813,7 @@
             
               <div
                 class="file-row"
-                data-search="19. Surat Keterangan Bebas Pemotongan/Pemungutan Pajak Penghasilan"
+                data-search="19. surat keterangan bebas skb pemotongan pemungutan pajak penghasilan pph bebas potong pungut"
               >
                 <div class="file-main">
                   <span class="file-type-badge">
@@ -2836,8 +2846,8 @@
 			<details
           class="folder-card"
           id="folder-20"
-          data-folder="20. Surat Keterangan Fiskal"
-          data-category="fiskal"
+          data-folder="20. surat keterangan fiskal skf permohonan fiskal"
+          data-category="permohonan"
         >
           <summary>
             <div class="folder-summary-main">
@@ -2861,7 +2871,7 @@
             
               <div
                 class="file-row"
-                data-search="20. Surat Keterangan Fiskal"
+                data-search="20. surat keterangan fiskal skf permohonan fiskal"
               >
                 <div class="file-main">
                   <span class="file-type-badge">
@@ -2959,31 +2969,63 @@
       });
     });
 
+    const normalizeSearchText = (value) => {
+      return String(value || "")
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9]+/g, " ")
+        .trim();
+    };
+
+    const totalFiles = document.querySelectorAll(
+      ".file-row"
+    ).length;
+
+    const totalFolders = folderCards.length;
+
     function applyFilters() {
-      const term = searchInput.value.trim().toLowerCase();
+      const term = normalizeSearchText(
+        searchInput.value
+      );
+
       let visibleFiles = 0;
       let visibleFolders = 0;
 
       folderCards.forEach((folder) => {
-        const folderText = folder.dataset.folder || "";
-        const folderCategory = folder.dataset.category || "";
+        const folderText = normalizeSearchText(
+          folder.dataset.folder
+        );
+
+        const folderCategory = normalizeSearchText(
+          folder.dataset.category
+        );
+
         const fileRows = Array.from(
           folder.querySelectorAll(".file-row")
         );
 
         const matchesCategory =
           activeFilter === "all" ||
-          folderCategory === activeFilter;
+          folderCategory ===
+            normalizeSearchText(activeFilter);
 
         let folderHasVisibleFile = false;
 
         fileRows.forEach((row) => {
-          const rowText = row.dataset.search || "";
+          const rowText = normalizeSearchText(
+            row.dataset.search
+          );
+
+          const visibleText = normalizeSearchText(
+            row.textContent
+          );
 
           const matchesSearch =
             !term ||
             folderText.includes(term) ||
-            rowText.includes(term);
+            rowText.includes(term) ||
+            visibleText.includes(term);
 
           const showRow =
             matchesCategory && matchesSearch;
@@ -3015,10 +3057,15 @@
       searchResult.textContent =
         term || activeFilter !== "all"
           ? visibleFiles + " dokumen ditemukan"
-          : "40 dokumen tersedia dalam 20 kategori";
+          : totalFiles +
+            " dokumen tersedia dalam " +
+            totalFolders +
+            " kategori";
 
       noResult.style.display =
-        visibleFolders === 0 ? "block" : "none";
+        visibleFolders === 0
+          ? "block"
+          : "none";
     }
 
     filterButtons.forEach((button) => {
@@ -3067,6 +3114,8 @@
         }
       });
     });
+
+    applyFilters();
 
     document.getElementById("currentYear").textContent =
       new Date().getFullYear();
