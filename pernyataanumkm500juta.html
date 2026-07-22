@@ -307,6 +307,42 @@
       cursor: pointer;
     }
 
+    .turnover-phrase {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 1mm;
+      white-space: nowrap;
+      vertical-align: baseline;
+    }
+
+    .turnover-print-text {
+      display: none;
+    }
+
+    .turnover-limit {
+      white-space: nowrap;
+    }
+
+    @media print {
+      .turnover-phrase {
+        display: inline;
+        white-space: nowrap;
+      }
+
+      .turnover-select {
+        display: none !important;
+      }
+
+      .turnover-print-text {
+        display: inline !important;
+      }
+
+      .turnover-limit {
+        display: inline;
+        white-space: nowrap;
+      }
+    }
+
     .meterai-label {
       width: 34mm;
       margin: 2mm auto 1.5mm;
@@ -1328,11 +1364,14 @@
       <section class="paragraphs" aria-label="Isi pernyataan">
         <p>
           dengan ini menyatakan bahwa Wajib Pajak yang disebutkan di atas merupakan Wajib Pajak orang pribadi yang memenuhi kriteria untuk dikenai Pajak Penghasilan yang bersifat final berdasarkan Peraturan Pemerintah Nomor 55 Tahun 2022 dan memiliki peredaran bruto atas penghasilan dari usaha
-          <select id="statusPeredaranBruto" name="status_peredaran_bruto" class="turnover-select" data-required aria-label="Status peredaran bruto">
-            <option value="tidak melebihi">tidak melebihi</option>
-            <option value="melebihi">melebihi</option>
-          </select>
-          Rp500.000.000,00 (lima ratus juta rupiah).
+          <span class="turnover-phrase">
+            <select id="statusPeredaranBruto" name="status_peredaran_bruto" class="turnover-select" data-required aria-label="Status peredaran bruto">
+              <option value="tidak melebihi">tidak melebihi</option>
+              <option value="melebihi">melebihi</option>
+            </select>
+            <span id="statusPeredaranBrutoPrint" class="turnover-print-text" aria-hidden="true">tidak melebihi</span>
+            <span class="turnover-limit">Rp500.000.000,00</span>
+          </span> (lima ratus juta rupiah).
         </p>
         <p>
           Saya bersedia menerima akibat hukum apabila ternyata di kemudian hari Surat Pernyataan ini terbukti tidak benar, termasuk penerapan sanksi sesuai ketentuan peraturan perundang-undangan di bidang perpajakan yang berlaku.
@@ -1417,6 +1456,8 @@
       const statusWajibPajak = document.getElementById("statusWajibPajak");
       const namaJelas = document.getElementById("namaJelas");
       const statusPeredaranBruto = document.getElementById("statusPeredaranBruto");
+      const statusPeredaranBrutoPrint = document.getElementById("statusPeredaranBrutoPrint");
+      
       const heroTurnoverText = document.getElementById("heroTurnoverText");
       const toolbarTurnoverText = document.getElementById("toolbarTurnoverText");
 
@@ -1493,7 +1534,15 @@
         });
       });
 
+      const syncTurnoverPrintText = () => {
+        statusPeredaranBrutoPrint.textContent = statusPeredaranBruto.value;
+      };
+
+      statusPeredaranBruto.addEventListener("change", syncTurnoverPrintText);
+      syncTurnoverPrintText();
+
       const prepareFormForPrint = () => {
+        syncTurnoverPrintText();
         form.querySelectorAll("input[type='text']").forEach((input) => {
           input.setAttribute("value", input.value);
         });
