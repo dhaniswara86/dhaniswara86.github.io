@@ -307,7 +307,7 @@
       cursor: pointer;
     }
 
-    .turnover-phrase {
+    .turnover-screen-phrase {
       display: inline-flex;
       align-items: baseline;
       gap: 1mm;
@@ -315,8 +315,9 @@
       vertical-align: baseline;
     }
 
-    .turnover-print-text {
+    .turnover-print-phrase {
       display: none;
+      white-space: nowrap;
     }
 
     .turnover-limit {
@@ -324,22 +325,13 @@
     }
 
     @media print {
-      .turnover-phrase {
-        display: inline;
-        white-space: nowrap;
-      }
-
-      .turnover-select {
+      .turnover-screen-phrase {
         display: none !important;
       }
 
-      .turnover-print-text {
+      .turnover-print-phrase {
         display: inline !important;
-      }
-
-      .turnover-limit {
-        display: inline;
-        white-space: nowrap;
+        white-space: nowrap !important;
       }
     }
 
@@ -1364,14 +1356,7 @@
       <section class="paragraphs" aria-label="Isi pernyataan">
         <p>
           dengan ini menyatakan bahwa Wajib Pajak yang disebutkan di atas merupakan Wajib Pajak orang pribadi yang memenuhi kriteria untuk dikenai Pajak Penghasilan yang bersifat final berdasarkan Peraturan Pemerintah Nomor 55 Tahun 2022 dan memiliki peredaran bruto atas penghasilan dari usaha
-          <span class="turnover-phrase">
-            <select id="statusPeredaranBruto" name="status_peredaran_bruto" class="turnover-select" data-required aria-label="Status peredaran bruto">
-              <option value="tidak melebihi">tidak melebihi</option>
-              <option value="melebihi">melebihi</option>
-            </select>
-            <span id="statusPeredaranBrutoPrint" class="turnover-print-text" aria-hidden="true">tidak melebihi</span>
-            <span class="turnover-limit">Rp500.000.000,00</span>
-          </span> (lima ratus juta rupiah).
+          <span class="turnover-screen-phrase"><select id="statusPeredaranBruto" name="status_peredaran_bruto" class="turnover-select" data-required aria-label="Status peredaran bruto"><option value="tidak melebihi">tidak melebihi</option><option value="melebihi">melebihi</option></select><span class="turnover-limit">Rp500.000.000,00</span></span><span id="statusPeredaranBrutoPrint" class="turnover-print-phrase" aria-hidden="true">tidak melebihi Rp500.000.000,00</span> (lima ratus juta rupiah).
         </p>
         <p>
           Saya bersedia menerima akibat hukum apabila ternyata di kemudian hari Surat Pernyataan ini terbukti tidak benar, termasuk penerapan sanksi sesuai ketentuan peraturan perundang-undangan di bidang perpajakan yang berlaku.
@@ -1535,7 +1520,7 @@
       });
 
       const syncTurnoverPrintText = () => {
-        statusPeredaranBrutoPrint.textContent = statusPeredaranBruto.value;
+        statusPeredaranBrutoPrint.textContent = `${statusPeredaranBruto.value} Rp500.000.000,00`;
       };
 
       statusPeredaranBruto.addEventListener("change", syncTurnoverPrintText);
