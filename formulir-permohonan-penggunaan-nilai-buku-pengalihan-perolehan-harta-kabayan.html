@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Formulir interaktif permohonan penggunaan nilai buku atas pengalihan dan perolehan harta dalam rangka penggabungan, peleburan, pemekaran, atau pengambilalihan usaha.">
+  <title>Permohonan Penggunaan Nilai Buku atas Pengalihan Harta | Kabayan</title>
+  <style>
+    :root{
+      --ink:#1d1d1f;--white:#fff;--off:#f5f5f7;--soft:#e8e8ed;--muted:#86868b;
+      --blue:#0071e3;--blue2:#0077ed;--red:#d70015;--nav:48px;--max:1240px;
+      --paper-w:210mm;--paper-h:297mm;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;overflow-x:hidden;background:var(--off);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;line-height:1.5;letter-spacing:-.015em}
+    body.menu-open{overflow:hidden}
+    a{color:inherit}
+    button,input,textarea,select{font:inherit}
+    .site-nav{position:fixed;z-index:1000;inset:0 0 auto;min-height:var(--nav);border-bottom:1px solid rgba(0,0,0,.06);background:rgba(250,250,252,.82);backdrop-filter:saturate(180%) blur(20px)}
+    .nav-inner{width:min(var(--max),calc(100% - 36px));min-height:var(--nav);display:flex;align-items:center;justify-content:space-between;gap:28px;margin:auto}
+    .brand{display:inline-flex;align-items:center;gap:9px;text-decoration:none;font-size:14px;font-weight:700}
+    .brand-mark{width:25px;height:25px;display:grid;place-items:center;border-radius:8px;background:var(--ink);color:#fff;font-size:9px;font-weight:800}
+    .desktop-menu{display:flex;gap:27px;align-items:center}
+    .desktop-menu a{font-size:12px;color:#424245;text-decoration:none}
+    .desktop-menu a:hover,.desktop-menu a[aria-current="page"]{color:#000}
+    .menu-btn{display:none;width:34px;height:34px;border:0;border-radius:50%;background:transparent;font-size:18px}
+    .mobile-menu{position:fixed;z-index:999;inset:var(--nav) 0 0;display:none;padding:36px 28px;background:rgba(250,250,252,.98)}
+    .mobile-menu.active{display:block}
+    .mobile-menu a{display:block;padding:11px 0;font-size:28px;font-weight:650;text-decoration:none}
+    main{padding-top:var(--nav)}
+    .announce{padding:13px 20px;background:#fff;text-align:center;font-size:14px;color:#3a3a3c}
+    .announce a{color:var(--blue);text-decoration:none}
+    .hero{position:relative;overflow:hidden;padding:88px 20px 68px;background:#fff;text-align:center}
+    .hero:before{position:absolute;top:-215px;left:50%;width:900px;height:580px;border-radius:50%;background:radial-gradient(ellipse,rgba(0,113,227,.18),rgba(47,157,255,.06) 45%,transparent 72%);filter:blur(8px);content:"";transform:translateX(-50%)}
+    .hero-inner{position:relative;z-index:1;width:min(1020px,100%);margin:auto}
+    .eyebrow{display:inline-flex;align-items:center;gap:7px;margin-bottom:16px;padding:7px 12px;border-radius:999px;background:var(--off);font-size:12px;font-weight:650;color:#515154}
+    .eyebrow:before{width:7px;height:7px;border-radius:50%;background:var(--blue);content:""}
+    .hero h1{margin:0;font-size:clamp(42px,6vw,68px);line-height:1;letter-spacing:-.06em}
+    .gradient{display:block;background:linear-gradient(90deg,#083b8f,#0071e3 42%,#24a0cf 70%,#e6aa00);background-clip:text;-webkit-background-clip:text;color:transparent}
+    .hero p{max-width:880px;margin:24px auto 0;color:#515154;font-size:clamp(18px,2.2vw,23px)}
+    .workspace{padding:52px 20px 90px}
+    .inner{width:min(var(--max),100%);margin:auto}
+    .toolbar{position:sticky;z-index:100;top:64px;width:min(100%,var(--paper-w));display:flex;align-items:center;justify-content:space-between;gap:18px;margin:0 auto 18px;padding:16px 18px;border:1px solid rgba(0,0,0,.06);border-radius:22px;background:rgba(255,255,255,.92);box-shadow:0 15px 45px rgba(0,0,0,.08);backdrop-filter:blur(20px)}
+    .toolbar h2{margin:0;font-size:15px;letter-spacing:-.02em}
+    .toolbar p{margin:4px 0 0;color:var(--muted);font-size:12px}
+    .actions{display:flex;gap:9px;flex-shrink:0}
+    .btn,.back{min-height:40px;display:inline-flex;align-items:center;justify-content:center;padding:9px 17px;border-radius:999px;font-size:13px;font-weight:550;cursor:pointer;text-decoration:none}
+    .btn{border:1px solid #d2d2d7;background:transparent;color:#6e6e73}
+    .btn:hover{border-color:var(--red);background:var(--red);color:#fff}
+    .btn-primary,.back{border:1px solid var(--blue);background:var(--blue);color:#fff}
+    .btn-primary:hover,.back:hover{background:var(--blue2)}
+    .note{width:min(100%,var(--paper-w));margin:0 auto 18px;padding:17px 19px;border-radius:18px;background:#eef6ff;color:#31536f;font-size:13px;line-height:1.55}
+    .paper-wrap{overflow-x:auto}
+    .paper{width:var(--paper-w);margin:auto;background:#fff;color:#000;box-shadow:0 28px 75px rgba(15,23,42,.18);font-family:Arial,Helvetica,sans-serif;font-size:8.9pt;line-height:1.16}
+    .page{min-height:var(--paper-h);padding:15mm 13mm 13mm}
+    .page + .page{border-top:12px solid var(--off)}
+    .row{display:grid;grid-template-columns:43mm 4mm minmax(0,1fr);align-items:center;min-height:5.4mm}
+    .row.hal{align-items:start}
+    .row.hal .static{padding-top:.5mm}
+    .label{white-space:normal}
+    .colon{text-align:center}
+    input[type=text],textarea,select{width:100%;border:0;border-bottom:.22mm dotted #555;border-radius:0;padding:.35mm .8mm;background:#fff;color:#000;outline:none}
+    input[type=text],select{height:5.2mm}
+    textarea{min-height:9mm;resize:vertical;line-height:1.15}
+    input:focus,textarea:focus,select:focus{background:#eff6ff;box-shadow:inset 0 -1px 0 var(--blue)}
+    .missing{background:#fff1f2!important;box-shadow:inset 0 -1px 0 var(--red)!important}
+    .section-title{margin:2mm 0 1mm;font-weight:700}
+    .choice-list{display:grid;gap:1mm;margin:1.5mm 0 2.5mm 8mm}
+    .choice{display:flex;align-items:flex-start;gap:2mm;cursor:pointer}
+    input[type=radio],input[type=checkbox]{appearance:none;width:5.8mm;height:5.8mm;flex:0 0 5.8mm;margin:.1mm 0 0;border:.28mm solid #555;background:#fff;display:grid;place-content:center}
+    input[type=radio]:before,input[type=checkbox]:before{content:"✓";font-weight:700;font-size:5mm;transform:scale(0)}
+    input[type=radio]:checked:before,input[type=checkbox]:checked:before{transform:scale(1)}
+    .recipient{margin:3mm 0}
+    .recipient-line{display:grid;grid-template-columns:1fr;gap:.8mm}
+    .indent{margin-left:8mm}
+    .status-title{margin:2mm 0 1mm}
+    .checks{display:grid;gap:1mm}
+    .check-line{display:flex;align-items:center;gap:2mm;cursor:pointer}
+    .check-line.inline{gap:9mm}
+    .taxpayer-data{margin:1.5mm 0 2mm 8mm}
+    .paragraph{margin:2.2mm 0;text-align:justify}
+    .two-cols{display:grid;grid-template-columns:1fr 1fr;gap:8mm}
+    .list-box textarea{min-height:22mm}
+    .table-wrap{margin:1.5mm 0 3mm;overflow-x:auto}
+    table{width:100%;border-collapse:collapse;table-layout:fixed}
+    th,td{border:.22mm solid #777;padding:1mm;vertical-align:top}
+    th{text-align:center;font-weight:700}
+    td input,td textarea{border:0!important;border-bottom:.18mm dotted #777!important;padding:.2mm!important;font-size:8.4pt}
+    .table-actions{display:flex;gap:8px;margin:8px 0 0}
+    .table-actions button{min-height:32px;border-radius:999px;border:1px solid #d2d2d7;background:#fff;padding:5px 11px;cursor:pointer}
+    .proforma th,.proforma td{font-size:7.6pt}
+    .proforma .entity{width:14%}
+    .assets-table th,.assets-table td{font-size:7.5pt}
+    .share-table th,.share-table td{font-size:8pt}
+    .signature{width:70mm;margin:8mm 3mm 0 auto}
+    .sig-space{height:18mm}
+    .screen-help{font-size:8pt;color:#64748b;margin-top:1mm}
+    .footnotes{margin-top:5mm;font-size:8.5pt;line-height:1.3}
+    .footer-note{width:min(var(--max),calc(100% - 40px));margin:auto;padding:25px 0;font-size:12px;color:#6e6e73}
+    .site-footer{background:#fff;color:#6e6e73}
+    .footer-inner{width:min(var(--max),calc(100% - 40px));display:flex;align-items:center;justify-content:space-between;gap:20px;margin:auto;padding:22px 0 28px;border-top:1px solid #d2d2d7;font-size:12px}
+    .footer-links{display:flex;flex-wrap:wrap;gap:18px}
+    .footer-links a{text-decoration:none;color:#424245}
+    .guide{width:min(var(--max),100%);margin:28px auto 0;padding:28px;border-radius:24px;background:#fff;border:1px solid var(--soft);box-shadow:0 16px 45px rgba(0,0,0,.05)}
+    .guide h2{margin:0 0 14px;font-size:28px}
+    .guide details{margin-top:10px;border:1px solid var(--soft);border-radius:14px;padding:0 16px}
+    .guide summary{cursor:pointer;padding:14px 0;font-weight:650}
+    .guide p{margin:0 0 14px;color:#515154;font-size:14px}
+    .hidden{display:none!important}
+    @media(max-width:980px){.desktop-menu{display:none}.menu-btn{display:grid;place-items:center}}
+    @media(max-width:840px){.hero{padding-top:70px}.toolbar{position:static;align-items:flex-start;flex-direction:column}.actions{width:100%;flex-wrap:wrap}.actions>*{flex:1}.footer-inner{align-items:flex-start;flex-direction:column}}
+    @page{size:A4 portrait;margin:0}
+    @media print{
+      .no-print,.site-nav,.mobile-menu,.announce,.hero,.toolbar,.note,.footer-note,.site-footer,.guide,.table-actions{display:none!important}
+      html,body{width:210mm!important;margin:0!important;padding:0!important;background:#fff!important}
+      .workspace,.inner,.paper-wrap{margin:0!important;padding:0!important;background:#fff!important;overflow:visible!important}
+      .paper{width:210mm!important;margin:0!important;box-shadow:none!important}
+      .page{width:210mm!important;min-height:297mm!important;padding:15mm 13mm 13mm!important;break-after:page;page-break-after:always}
+      .page:last-child{break-after:auto;page-break-after:auto}
+      .page + .page{border-top:0!important}
+      input[type=text],textarea,select{border:0!important;background:transparent!important;box-shadow:none!important;color:#000!important;-webkit-text-fill-color:#000!important}
+      td input,td textarea{border:0!important;background:transparent!important}
+      textarea{resize:none!important;overflow:hidden!important}
+      input::placeholder,textarea::placeholder{color:transparent!important}
+      input[type=radio],input[type=checkbox]{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+      .screen-help{display:none!important}
+    }
+  </style>
+</head>
+<body id="top">
+  <header class="site-nav no-print">
+    <div class="nav-inner">
+      <a class="brand" href="index.html"><span class="brand-mark">ASD</span><span>dhaniswara86</span></a>
+      <nav class="desktop-menu">
+        <a href="index.html">Beranda</a><a href="buku.html">Buku</a><a href="formulir.html" aria-current="page">Formulir</a><a href="aplikasi.html">Aplikasi</a><a href="artikel.html">Artikel</a><a href="index.html#tentang">Tentang</a>
+      </nav>
+      <button class="menu-btn" id="menuBtn" type="button">☰</button>
+    </div>
+  </header>
+
+  <nav class="mobile-menu no-print" id="mobileMenu">
+    <a href="index.html">Beranda</a><a href="buku.html">Buku Digital</a><a href="formulir.html">Formulir</a><a href="aplikasi.html">Aplikasi</a><a href="artikel.html">Artikel</a><a href="index.html#tentang">Tentang</a>
+  </nav>
+
+  <main>
+    <div class="announce no-print">
+      Isi formulir langsung dari browser dan cetak tanpa mengunggah data Anda.
+      <a href="formulir.html">Kembali ke koleksi formulir ›</a>
+    </div>
+
+    <section class="hero no-print">
+      <div class="hero-inner">
+        <span class="eyebrow">Formulir interaktif</span>
+        <h1>Permohonan Penggunaan Nilai Buku.<span class="gradient">Pengalihan dan perolehan harta dalam restrukturisasi usaha.</span></h1>
+        <p>Formulir lengkap untuk penggabungan, peleburan, pemekaran, atau pengambilalihan usaha, termasuk laporan posisi keuangan proforma, daftar harta, dan susunan pemegang saham.</p>
+      </div>
+    </section>
+
+    <section class="workspace">
+      <div class="inner">
+        <header class="toolbar no-print">
+          <div><h2>Permohonan Penggunaan Nilai Buku atas Pengalihan Harta</h2><p>Dokumen cetak terdiri dari tiga halaman A4.</p></div>
+          <div class="actions"><a class="back" href="formulir.html">Kembali</a><button class="btn" id="resetBtn" type="button">Kosongkan</button><button class="btn btn-primary" id="printBtn" type="button">Cetak / Simpan PDF</button></div>
+        </header>
+
+        <div class="note no-print">
+          Gunakan kertas <strong>A4</strong>, skala <strong>100%</strong>, dan nonaktifkan header/footer browser. Bagian jenis pemekaran hanya aktif ketika pilihan <strong>Pemekaran</strong> dipilih.
+        </div>
+
+        <div class="paper-wrap">
+          <form class="paper" id="form" autocomplete="off" novalidate>
+            <section class="page">
+              <div class="row"><label class="label" for="nomor">Nomor</label><span class="colon">:</span><input id="nomor" type="text" data-required></div>
+              <div class="row"><label class="label" for="lampiran">Lampiran</label><span class="colon">:</span><input id="lampiran" type="text" data-required></div>
+              <div class="row hal"><span class="label">Hal</span><span class="colon">:</span><div class="static">Permohonan Penggunaan Nilai Buku atas Pengalihan Harta dalam Rangka:</div></div>
+
+              <div class="choice-list" role="radiogroup" aria-label="Jenis aksi korporasi">
+                <label class="choice"><input type="radio" name="aksi" value="Penggabungan"><span>Penggabungan</span></label>
+                <label class="choice"><input type="radio" name="aksi" value="Peleburan"><span>Peleburan</span></label>
+                <label class="choice"><input type="radio" name="aksi" value="Pemekaran" id="aksiPemekaran"><span>Pemekaran</span></label>
+                <label class="choice"><input type="radio" name="aksi" value="Pengambilalihan Usaha"><span>Pengambilalihan Usaha</span></label>
+              </div>
+
+              <div id="pemekaranBlock">
+                <p class="section-title">Jenis Pemekaran</p>
+                <div class="choice-list" role="radiogroup" aria-label="Jenis pemekaran">
+                  <label class="choice"><input type="radio" name="jenisPemekaran" value="Belum Go Public dan akan IPO"><span>Wajib Pajak yang belum Go Public yang bermaksud melakukan penawaran umum perdana (Initial Public Offering)</span></label>
+                  <label class="choice"><input type="radio" name="jenisPemekaran" value="Telah Go Public dan seluruh hasil pemekaran akan IPO"><span>Wajib Pajak yang telah Go Public sepanjang seluruh badan usaha hasil pemekaran melakukan penawaran umum perdana (Initial Public Offering)</span></label>
+                  <label class="choice"><input type="radio" name="jenisPemekaran" value="Pemisahan unit usaha syariah"><span>Wajib Pajak badan yang melakukan pemisahan unit usaha syariah dalam rangka menjalankan kewajiban pemisahan usaha</span></label>
+                  <label class="choice"><input type="radio" name="jenisPemekaran" value="Tambahan modal asing minimal Rp500 miliar"><span>Wajib Pajak badan dalam negeri sepanjang badan usaha hasil pemekaran mendapatkan tambahan modal dari penanam modal asing paling sedikit Rp500.000.000.000,00</span></label>
+                  <label class="choice"><input type="radio" name="jenisPemekaran" value="BUMN holding"><span>Wajib Pajak BUMN yang menerima tambahan penyertaan modal negara sepanjang pemekaran terkait pembentukan holding BUMN</span></label>
+                </div>
+              </div>
+
+              <div class="recipient">
+                <div class="recipient-line">
+                  <strong>Yth. Kepala Kantor Wilayah DJP</strong>
+                  <input id="namaKanwil" type="text" data-required placeholder="Nama Kantor Wilayah DJP">
+                  <span>Di</span>
+                  <textarea id="alamatKanwil" rows="2" data-required placeholder="Alamat kantor"></textarea>
+                </div>
+              </div>
+
+              <p class="section-title">Dengan ini kami:</p>
+              <div class="indent">
+                <div class="row"><label class="label" for="namaPenandatangan">Nama Wajib Pajak/Wakil/Kuasa</label><span class="colon">:</span><input id="namaPenandatangan" type="text" data-required></div>
+                <div class="row"><label class="label" for="npwpPenandatangan">NPWP Wajib Pajak/Wakil/Kuasa</label><span class="colon">:</span><input id="npwpPenandatangan" type="text" data-required inputmode="numeric"></div>
+                <div class="row"><label class="label" for="jabatan">Jabatan Wakil/Kuasa</label><span class="colon">:</span><input id="jabatan" type="text"></div>
+              </div>
+
+              <p class="status-title">Bertindak selaku *)</p>
+              <div class="checks" role="radiogroup" aria-label="Kedudukan penandatangan">
+                <label class="check-line"><input id="statusWp" type="radio" name="status" value="Wajib Pajak"><span>Wajib Pajak</span></label>
+                <div class="check-line inline">
+                  <label class="check-line"><input type="radio" name="status" value="Wakil"><span>Wakil</span></label>
+                  <label class="check-line"><input type="radio" name="status" value="Kuasa"><span>Kuasa, dari Wajib Pajak</span></label>
+                </div>
+              </div>
+
+              <div class="taxpayer-data">
+                <div class="row"><label class="label" for="namaWp">Nama Wajib Pajak</label><span class="colon">:</span><input id="namaWp" type="text" data-required></div>
+                <div class="row"><label class="label" for="npwpWp">NPWP</label><span class="colon">:</span><input id="npwpWp" type="text" data-required inputmode="numeric"></div>
+                <div class="row"><label class="label" for="alamatWp">Alamat</label><span class="colon">:</span><textarea id="alamatWp" rows="2" data-required></textarea></div>
+                <div class="row"><label class="label" for="klu">KLU</label><span class="colon">:</span><input id="klu" type="text" data-required></div>
+              </div>
+            </section>
+
+            <section class="page">
+              <p class="paragraph">mengajukan permohonan untuk dapat menggunakan nilai buku atas Pengalihan dan Perolehan Harta dalam rangka Penggabungan/Peleburan/Pemekaran/Pengambilalihan Usaha berdasarkan Peraturan Menteri Keuangan Nomor 81 Tahun 2024 tentang Ketentuan Perpajakan dalam Rangka Pelaksanaan Sistem Inti Administrasi Perpajakan, yang meliputi badan-badan usaha sebagai berikut:</p>
+
+              <div class="two-cols">
+                <div class="list-box">
+                  <strong>Badan usaha yang mengalihkan harta:</strong>
+                  <textarea id="badanMengalihkan" rows="5" data-required placeholder="1. Nama badan usaha&#10;2. Nama badan usaha&#10;3. dan seterusnya"></textarea>
+                </div>
+                <div class="list-box">
+                  <strong>Badan usaha yang menerima harta:</strong>
+                  <textarea id="badanMenerima" rows="5" data-required placeholder="1. Nama badan usaha&#10;2. Nama badan usaha&#10;3. dan seterusnya"></textarea>
+                </div>
+              </div>
+
+              <p class="paragraph">Bersama ini kami sampaikan data/informasi sebagai berikut:</p>
+
+              <p class="section-title">1. Laporan Posisi Keuangan Proforma per tanggal <input id="tanggalEfektif" type="text" data-required style="display:inline-block;width:42mm;height:5.2mm;vertical-align:baseline" placeholder="Tanggal efektif"></p>
+
+              <div class="table-wrap">
+                <table class="proforma">
+                  <thead>
+                    <tr>
+                      <th rowspan="2" class="entity">Nama Entitas</th>
+                      <th colspan="3">Aset</th><th rowspan="2">Jumlah Aset</th>
+                      <th colspan="3">Liabilitas</th><th colspan="2">Ekuitas</th><th rowspan="2">Jumlah</th>
+                    </tr>
+                    <tr>
+                      <th>Aset Lancar</th><th>Aset Tetap</th><th>Aset Lain-lain</th>
+                      <th>Utang Jangka Pendek</th><th>Utang Jangka Panjang</th><th>Utang Lain-lain</th>
+                      <th>Modal</th><th>Lain-lain</th>
+                    </tr>
+                  </thead>
+                  <tbody id="proformaBody">
+                    <tr><td><input type="text" data-required></td><td><input type="text" data-required></td><td><input type="text" data-required></td><td><input type="text" data-required></td><td><input type="text" data-required></td><td><input type="text" data-required></td><td><input type="text" data-required></td><td><input type="text" data-required></td><td><input type="text" data-required></td><td><input type="text" data-required></td><td><input type="text" data-required></td></tr>
+                    <tr><td><input type="text" data-required></td><td><input type="text" data-required></td><td><input type="text" data-required></td><td><input type="text" data-required></td><td><input type="text" data-required></td><td><input type="text" data-required></td><td><input type="text" data-required></td><td><input type="text" data-required></td><td><input type="text" data-required></td><td><input type="text" data-required></td><td><input type="text" data-required></td></tr>
+                  </tbody>
+                </table>
+                <div class="table-actions no-print"><button type="button" id="addProformaRow">Tambah baris</button><button type="button" id="removeProformaRow">Hapus baris terakhir</button></div>
+              </div>
+
+              <div class="row"><label class="label" for="penyesuaian">Penjelasan penyesuaian</label><span class="colon">:</span><textarea id="penyesuaian" rows="2" placeholder="Diisi apabila nilai sebelum dan sesudah tidak sama"></textarea></div>
+
+              <p class="section-title">2. Daftar Harta yang Dialihkan</p>
+              <div class="table-wrap">
+                <table class="assets-table">
+                  <thead>
+                    <tr>
+                      <th style="width:5%">No</th><th style="width:12%">Jenis Harta</th><th style="width:10%">Lokasi</th><th style="width:7%">Luas (m²)</th><th style="width:12%">Sertifikat No/Tgl</th><th style="width:10%">a.n.</th><th style="width:8%">Tahun Perolehan</th><th style="width:12%">Harga Perolehan</th><th style="width:12%">Akm. Penyusutan/Amortisasi Fiskal</th><th style="width:12%">Nilai Buku Fiskal</th>
+                    </tr>
+                  </thead>
+                  <tbody id="assetBody">
+                    <tr><td><input type="text" value="1" data-required></td><td><input type="text" data-required></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text" data-required></td><td><input type="text" data-required></td><td><input type="text" data-required></td><td><input type="text" data-required></td></tr>
+                  </tbody>
+                </table>
+                <div class="table-actions no-print"><button type="button" id="addAssetRow">Tambah baris</button><button type="button" id="removeAssetRow">Hapus baris terakhir</button></div>
+              </div>
+            </section>
+
+            <section class="page">
+              <p class="section-title">3. Daftar Pemegang Saham Sebelum dan Sesudah Restrukturisasi</p>
+
+              <div class="table-wrap">
+                <table class="share-table">
+                  <thead>
+                    <tr><th style="width:20%">Badan Usaha</th><th style="width:28%">Pemegang Saham</th><th style="width:16%">Jumlah Lembar Saham</th><th style="width:20%">Jumlah Nilai Nominal</th><th style="width:16%">Persentase Kepemilikan (%)</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><th colspan="5" style="text-align:left">Sebelum Penggabungan/Peleburan/Pemekaran/Pengambilalihan Usaha</th></tr>
+                  </tbody>
+                  <tbody id="beforeShareBody">
+                    <tr><td><input type="text" data-required></td><td><input type="text" data-required></td><td><input type="text" data-required></td><td><input type="text" data-required></td><td><input type="text" data-required></td></tr>
+                  </tbody>
+                  <tbody>
+                    <tr><th colspan="5" style="text-align:left">Sesudah Penggabungan/Peleburan/Pemekaran/Pengambilalihan Usaha **)</th></tr>
+                  </tbody>
+                  <tbody id="afterShareBody">
+                    <tr><td><input type="text" data-required></td><td><input type="text" data-required></td><td><input type="text" data-required></td><td><input type="text" data-required></td><td><input type="text" data-required></td></tr>
+                  </tbody>
+                </table>
+                <div class="table-actions no-print">
+                  <button type="button" id="addBeforeShareRow">Tambah baris sebelum</button>
+                  <button type="button" id="removeBeforeShareRow">Hapus baris sebelum</button>
+                  <button type="button" id="addAfterShareRow">Tambah baris sesudah</button>
+                  <button type="button" id="removeAfterShareRow">Hapus baris sesudah</button>
+                </div>
+              </div>
+
+              <p class="paragraph">Kami menyatakan dengan sesungguhnya bahwa seluruh data, informasi, dan dokumen kelengkapan yang kami sampaikan adalah benar. Demikian kami sampaikan.</p>
+
+              <section class="signature">
+                <input id="tempatTanggal" type="text" data-required placeholder="Contoh: Bandung, 17 Juli 2026">
+                <div id="rolePrint">Wajib Pajak/Wakil/Kuasa ***)</div>
+                <div class="sig-space"></div>
+                <input id="namaTtd" type="text" data-required placeholder="Nama lengkap penandatangan">
+                <div class="screen-help no-print">Area tanda tangan</div>
+              </section>
+
+              <div class="footnotes">
+                <div>*) Beri tanda (√) pada kotak yang disediakan sesuai dengan pihak yang mengajukan permohonan.</div>
+                <div>**) Dalam hal terdapat akta perubahan karena penambahan modal dari penanaman modal asing, diisi dengan daftar pemegang saham per tanggal akta perubahan.</div>
+                <div>***) Coret yang tidak perlu.</div>
+              </div>
+            </section>
+          </form>
+        </div>
+
+        <section class="guide no-print">
+          <h2>Petunjuk pengisian</h2>
+          <details><summary>Jenis aksi korporasi dan pemekaran</summary><p>Pilih satu jenis aksi korporasi. Apabila memilih Pemekaran, pilih pula salah satu jenis pemekaran yang sesuai.</p></details>
+          <details><summary>Laporan posisi keuangan proforma</summary><p>Isi data sebelum dan sesudah restrukturisasi berdasarkan laporan keuangan sampai hari terakhir sebelum tanggal efektif dan laporan proforma per tanggal efektif.</p></details>
+          <details><summary>Daftar harta dan pemegang saham</summary><p>Rinci seluruh harta yang dialihkan serta komposisi pemegang saham sebelum dan sesudah restrukturisasi.</p></details>
+        </section>
+      </div>
+    </section>
+
+    <div class="footer-note no-print">Formulir ini merupakan alat bantu pengisian. Pastikan seluruh data keuangan, harta, pemegang saham, dan dokumen pendukung sesuai keadaan sebenarnya.</div>
+  </main>
+
+  <footer class="site-footer no-print">
+    <div class="footer-inner">
+      <p>© <span id="year"></span> Angga Sukma Dhaniswara.</p>
+      <div class="footer-links"><a href="index.html">Beranda</a><a href="formulir.html">Formulir</a><a href="artikel.html">Artikel</a><a href="#top">Kembali ke atas</a></div>
+    </div>
+  </footer>
+
+  <script>
+    const menuBtn=document.getElementById('menuBtn'),mobileMenu=document.getElementById('mobileMenu');
+    menuBtn.addEventListener('click',()=>{const on=mobileMenu.classList.toggle('active');document.body.classList.toggle('menu-open',on);menuBtn.textContent=on?'×':'☰'});
+    document.querySelectorAll('.mobile-menu a').forEach(a=>a.addEventListener('click',()=>{mobileMenu.classList.remove('active');document.body.classList.remove('menu-open');menuBtn.textContent='☰'}));
+    document.getElementById('year').textContent=new Date().getFullYear();
+
+    (()=> {
+      const form=document.getElementById('form');
+      const reset=document.getElementById('resetBtn');
+      const print=document.getElementById('printBtn');
+      const statusWp=document.getElementById('statusWp');
+      const signerNama=document.getElementById('namaPenandatangan');
+      const signerNpwp=document.getElementById('npwpPenandatangan');
+      const wpNama=document.getElementById('namaWp');
+      const wpNpwp=document.getElementById('npwpWp');
+      const namaTtd=document.getElementById('namaTtd');
+      const rolePrint=document.getElementById('rolePrint');
+      const aksiPemekaran=document.getElementById('aksiPemekaran');
+      const pemekaranBlock=document.getElementById('pemekaranBlock');
+      let manualTtd=false;
+
+      const sync=()=>{
+        if(statusWp.checked){wpNama.value=signerNama.value;wpNpwp.value=signerNpwp.value}
+        if(!manualTtd) namaTtd.value=signerNama.value;
+      };
+
+      const updatePemekaran=()=>{
+        const active=aksiPemekaran.checked;
+        pemekaranBlock.classList.toggle('hidden',!active);
+        if(!active) form.querySelectorAll('input[name="jenisPemekaran"]').forEach(r=>r.checked=false);
+      };
+
+      [signerNama,signerNpwp].forEach(el=>el.addEventListener('input',sync));
+      namaTtd.addEventListener('input',()=>manualTtd=namaTtd.value.trim()!=='');
+      form.querySelectorAll('input[name="status"]').forEach(r=>r.addEventListener('change',()=>{sync();rolePrint.textContent=r.value+' ***)'}));
+      form.querySelectorAll('input[name="aksi"]').forEach(r=>r.addEventListener('change',updatePemekaran));
+      updatePemekaran();
+
+      const addSimpleRow=(body, cells, firstValue='')=>{
+        const tr=document.createElement('tr');
+        tr.innerHTML=Array.from({length:cells},(_,i)=>`<td><input type="text" ${i===0&&firstValue?`value="${firstValue}"`:''} data-required></td>`).join('');
+        body.appendChild(tr);
+      };
+
+      const proformaBody=document.getElementById('proformaBody');
+      document.getElementById('addProformaRow').onclick=()=>addSimpleRow(proformaBody,11);
+      document.getElementById('removeProformaRow').onclick=()=>{if(proformaBody.children.length>1)proformaBody.lastElementChild.remove()};
+
+      const assetBody=document.getElementById('assetBody');
+      document.getElementById('addAssetRow').onclick=()=>{
+        const n=assetBody.children.length+1;
+        const tr=document.createElement('tr');
+        tr.innerHTML=`<td><input type="text" value="${n}" data-required></td><td><input type="text" data-required></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text" data-required></td><td><input type="text" data-required></td><td><input type="text" data-required></td><td><input type="text" data-required></td>`;
+        assetBody.appendChild(tr);
+      };
+      document.getElementById('removeAssetRow').onclick=()=>{if(assetBody.children.length>1)assetBody.lastElementChild.remove()};
+
+      const beforeShareBody=document.getElementById('beforeShareBody');
+      const afterShareBody=document.getElementById('afterShareBody');
+      document.getElementById('addBeforeShareRow').onclick=()=>addSimpleRow(beforeShareBody,5);
+      document.getElementById('removeBeforeShareRow').onclick=()=>{if(beforeShareBody.children.length>1)beforeShareBody.lastElementChild.remove()};
+      document.getElementById('addAfterShareRow').onclick=()=>addSimpleRow(afterShareBody,5);
+      document.getElementById('removeAfterShareRow').onclick=()=>{if(afterShareBody.children.length>1)afterShareBody.lastElementChild.remove()};
+
+      form.addEventListener('input',e=>e.target.classList?.remove('missing'));
+      form.addEventListener('change',e=>e.target.classList?.remove('missing'));
+
+      const validate=()=>{
+        let count=0,first=null;
+        form.querySelectorAll('[data-required]').forEach(el=>{
+          const empty=!String(el.value||'').trim();
+          el.classList.toggle('missing',empty);
+          if(empty){count++;first??=el}
+        });
+        if(!form.querySelector('input[name="aksi"]:checked')){count++;first??=form.querySelector('input[name="aksi"]')}
+        if(aksiPemekaran.checked&&!form.querySelector('input[name="jenisPemekaran"]:checked')){count++;first??=form.querySelector('input[name="jenisPemekaran"]')}
+        if(!form.querySelector('input[name="status"]:checked')){count++;first??=form.querySelector('input[name="status"]')}
+        return {count,first};
+      };
+
+      print.addEventListener('click',()=>{
+        const {count,first}=validate();
+        if(count&&!confirm(`Masih ada ${count} bagian yang belum diisi. Tetap lanjut mencetak?`)){first?.focus();return}
+        window.print();
+      });
+
+      reset.addEventListener('click',()=>{
+        if(!confirm('Kosongkan seluruh isi formulir?')) return;
+        form.reset();manualTtd=false;
+        while(proformaBody.children.length>2)proformaBody.lastElementChild.remove();
+        while(assetBody.children.length>1)assetBody.lastElementChild.remove();
+        while(beforeShareBody.children.length>1)beforeShareBody.lastElementChild.remove();
+        while(afterShareBody.children.length>1)afterShareBody.lastElementChild.remove();
+        form.querySelectorAll('.missing').forEach(el=>el.classList.remove('missing'));
+        rolePrint.textContent='Wajib Pajak/Wakil/Kuasa ***)';
+        updatePemekaran();
+        signerNama.focus();
+      });
+    })();
+  </script>
+</body>
+</html>
