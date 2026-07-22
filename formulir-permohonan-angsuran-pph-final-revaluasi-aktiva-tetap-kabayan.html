@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Formulir interaktif permohonan persetujuan pembayaran PPh Final atas selisih lebih penilaian kembali aktiva tetap secara angsuran.">
+  <title>Permohonan Angsuran PPh Final Revaluasi Aktiva Tetap | Kabayan</title>
+  <style>
+    :root{
+      --ink:#1d1d1f;--white:#fff;--off:#f5f5f7;--soft:#e8e8ed;--muted:#86868b;
+      --blue:#0071e3;--blue2:#0077ed;--red:#d70015;--nav:48px;--max:1180px;
+      --paper-w:210mm;--paper-h:297mm;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;overflow-x:hidden;background:var(--off);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;line-height:1.5;letter-spacing:-.015em}
+    body.menu-open{overflow:hidden}
+    a{color:inherit}
+    button,input,textarea,select{font:inherit}
+    .site-nav{position:fixed;z-index:1000;inset:0 0 auto;min-height:var(--nav);border-bottom:1px solid rgba(0,0,0,.06);background:rgba(250,250,252,.82);backdrop-filter:saturate(180%) blur(20px)}
+    .nav-inner{width:min(var(--max),calc(100% - 36px));min-height:var(--nav);display:flex;align-items:center;justify-content:space-between;gap:28px;margin:auto}
+    .brand{display:inline-flex;align-items:center;gap:9px;text-decoration:none;font-size:14px;font-weight:700}
+    .brand-mark{width:25px;height:25px;display:grid;place-items:center;border-radius:8px;background:var(--ink);color:#fff;font-size:9px;font-weight:800}
+    .desktop-menu{display:flex;gap:27px;align-items:center}
+    .desktop-menu a{font-size:12px;color:#424245;text-decoration:none}
+    .desktop-menu a:hover,.desktop-menu a[aria-current="page"]{color:#000}
+    .menu-btn{display:none;width:34px;height:34px;border:0;border-radius:50%;background:transparent;font-size:18px}
+    .mobile-menu{position:fixed;z-index:999;inset:var(--nav) 0 0;display:none;padding:36px 28px;background:rgba(250,250,252,.98)}
+    .mobile-menu.active{display:block}
+    .mobile-menu a{display:block;padding:11px 0;font-size:28px;font-weight:650;text-decoration:none}
+    main{padding-top:var(--nav)}
+    .announce{padding:13px 20px;background:#fff;text-align:center;font-size:14px;color:#3a3a3c}
+    .announce a{color:var(--blue);text-decoration:none}
+    .hero{position:relative;overflow:hidden;padding:88px 20px 68px;background:#fff;text-align:center}
+    .hero:before{position:absolute;top:-215px;left:50%;width:850px;height:560px;border-radius:50%;background:radial-gradient(ellipse,rgba(0,113,227,.18),rgba(47,157,255,.06) 45%,transparent 72%);filter:blur(8px);content:"";transform:translateX(-50%)}
+    .hero-inner{position:relative;z-index:1;width:min(980px,100%);margin:auto}
+    .eyebrow{display:inline-flex;align-items:center;gap:7px;margin-bottom:16px;padding:7px 12px;border-radius:999px;background:var(--off);font-size:12px;font-weight:650;color:#515154}
+    .eyebrow:before{width:7px;height:7px;border-radius:50%;background:var(--blue);content:""}
+    .hero h1{margin:0;font-size:clamp(42px,6vw,68px);line-height:1;letter-spacing:-.06em}
+    .gradient{display:block;background:linear-gradient(90deg,#083b8f,#0071e3 42%,#24a0cf 70%,#e6aa00);background-clip:text;-webkit-background-clip:text;color:transparent}
+    .hero p{max-width:800px;margin:24px auto 0;color:#515154;font-size:clamp(18px,2.2vw,23px)}
+    .workspace{padding:52px 20px 90px}
+    .inner{width:min(var(--max),100%);margin:auto}
+    .toolbar{position:sticky;z-index:100;top:64px;width:min(100%,var(--paper-w));display:flex;align-items:center;justify-content:space-between;gap:18px;margin:0 auto 18px;padding:16px 18px;border:1px solid rgba(0,0,0,.06);border-radius:22px;background:rgba(255,255,255,.92);box-shadow:0 15px 45px rgba(0,0,0,.08);backdrop-filter:blur(20px)}
+    .toolbar h2{margin:0;font-size:15px;letter-spacing:-.02em}
+    .toolbar p{margin:4px 0 0;color:var(--muted);font-size:12px}
+    .actions{display:flex;gap:9px;flex-shrink:0}
+    .btn,.back{min-height:40px;display:inline-flex;align-items:center;justify-content:center;padding:9px 17px;border-radius:999px;font-size:13px;font-weight:550;cursor:pointer;text-decoration:none}
+    .btn{border:1px solid #d2d2d7;background:transparent;color:#6e6e73}
+    .btn:hover{border-color:var(--red);background:var(--red);color:#fff}
+    .btn-primary,.back{border:1px solid var(--blue);background:var(--blue);color:#fff}
+    .btn-primary:hover,.back:hover{background:var(--blue2)}
+    .note{width:min(100%,var(--paper-w));margin:0 auto 18px;padding:17px 19px;border-radius:18px;background:#eef6ff;color:#31536f;font-size:13px;line-height:1.55}
+    .paper-wrap{overflow-x:auto}
+    .paper{width:var(--paper-w);min-height:var(--paper-h);margin:auto;padding:20mm 20mm 16mm;background:#fff;color:#000;box-shadow:0 28px 75px rgba(15,23,42,.18);font-family:Arial,Helvetica,sans-serif;font-size:10.2pt;line-height:1.2}
+    .row{display:grid;grid-template-columns:31mm 4mm minmax(0,1fr);align-items:center;min-height:6mm}
+    .row.hal{align-items:start}
+    .row.hal .static{padding-top:.6mm}
+    .label{white-space:normal}
+    .colon{text-align:center}
+    input[type=text],textarea,select{width:100%;border:0;border-bottom:.25mm dotted #555;border-radius:0;padding:.45mm 1mm;background:#fff;color:#000;outline:none}
+    input[type=text],select{height:5.7mm}
+    textarea{min-height:11mm;resize:vertical;line-height:1.22}
+    input:focus,textarea:focus,select:focus{background:#eff6ff;box-shadow:inset 0 -1px 0 var(--blue)}
+    .missing{background:#fff1f2!important;box-shadow:inset 0 -1px 0 var(--red)!important}
+    .recipient{margin:5mm 0 4mm}
+    .recipient-line{display:grid;grid-template-columns:1fr;gap:1mm}
+    .section-title{margin:0 0 1.2mm}
+    .indent{margin-left:9mm}
+    .status-title{margin:3mm 0 1mm}
+    .checks{display:grid;gap:1.5mm}
+    .check-line{display:flex;align-items:center;gap:2.3mm;cursor:pointer}
+    .check-line.inline{gap:10mm}
+    input[type=radio],input[type=checkbox]{appearance:none;width:6.5mm;height:6.5mm;flex:0 0 6.5mm;margin:0;border:.3mm solid #666;background:#fff;display:grid;place-content:center}
+    input[type=radio]:before,input[type=checkbox]:before{content:"✓";font-weight:700;font-size:5.5mm;transform:scale(0)}
+    input[type=radio]:checked:before,input[type=checkbox]:checked:before{transform:scale(1)}
+    .taxpayer-data{margin:2mm 0 3mm 9mm}
+    .paragraph{margin:3mm 0;text-align:justify}
+    .inline-field{display:inline-block;vertical-align:baseline;width:42mm!important;height:5.7mm!important}
+    .short{width:22mm!important}
+    .signature{width:72mm;margin:9mm 3mm 0 auto}
+    .sig-space{height:22mm}
+    .screen-help{font-size:8pt;color:#64748b;margin-top:1mm}
+    .footnotes{margin-top:6mm;font-size:9pt;line-height:1.35}
+    .attachment-box{margin-top:4mm;padding:3mm 0;border-top:.25mm solid #aaa}
+    .attachment-item{display:flex;align-items:flex-start;gap:2.5mm}
+    .footer-note{width:min(var(--max),calc(100% - 40px));margin:auto;padding:25px 0;font-size:12px;color:#6e6e73}
+    .site-footer{background:#fff;color:#6e6e73}
+    .footer-inner{width:min(var(--max),calc(100% - 40px));display:flex;align-items:center;justify-content:space-between;gap:20px;margin:auto;padding:22px 0 28px;border-top:1px solid #d2d2d7;font-size:12px}
+    .footer-links{display:flex;flex-wrap:wrap;gap:18px}
+    .footer-links a{text-decoration:none;color:#424245}
+    .guide{width:min(var(--max),100%);margin:28px auto 0;padding:28px;border-radius:24px;background:#fff;border:1px solid var(--soft);box-shadow:0 16px 45px rgba(0,0,0,.05)}
+    .guide h2{margin:0 0 14px;font-size:28px}
+    .guide details{margin-top:10px;border:1px solid var(--soft);border-radius:14px;padding:0 16px}
+    .guide summary{cursor:pointer;padding:14px 0;font-weight:650}
+    .guide p{margin:0 0 14px;color:#515154;font-size:14px}
+    @media(max-width:980px){.desktop-menu{display:none}.menu-btn{display:grid;place-items:center}}
+    @media(max-width:840px){.hero{padding-top:70px}.toolbar{position:static;align-items:flex-start;flex-direction:column}.actions{width:100%;flex-wrap:wrap}.actions>*{flex:1}.footer-inner{align-items:flex-start;flex-direction:column}}
+    @page{size:A4 portrait;margin:0}
+    @media print{
+      .no-print,.site-nav,.mobile-menu,.announce,.hero,.toolbar,.note,.footer-note,.site-footer,.guide{display:none!important}
+      html,body{width:210mm!important;margin:0!important;padding:0!important;background:#fff!important}
+      .workspace,.inner,.paper-wrap{margin:0!important;padding:0!important;background:#fff!important;overflow:visible!important}
+      .paper{width:210mm!important;min-height:297mm!important;margin:0!important;padding:20mm 20mm 16mm!important;box-shadow:none!important}
+      input[type=text],textarea,select{border:0!important;background:transparent!important;box-shadow:none!important;color:#000!important;-webkit-text-fill-color:#000!important}
+      textarea{resize:none!important;overflow:hidden!important}
+      input::placeholder,textarea::placeholder{color:transparent!important}
+      input[type=radio],input[type=checkbox]{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+      .screen-help{display:none!important}
+    }
+  </style>
+</head>
+<body id="top">
+  <header class="site-nav no-print">
+    <div class="nav-inner">
+      <a class="brand" href="index.html"><span class="brand-mark">ASD</span><span>dhaniswara86</span></a>
+      <nav class="desktop-menu">
+        <a href="index.html">Beranda</a><a href="buku.html">Buku</a><a href="formulir.html" aria-current="page">Formulir</a><a href="aplikasi.html">Aplikasi</a><a href="artikel.html">Artikel</a><a href="index.html#tentang">Tentang</a>
+      </nav>
+      <button class="menu-btn" id="menuBtn" type="button">☰</button>
+    </div>
+  </header>
+
+  <nav class="mobile-menu no-print" id="mobileMenu">
+    <a href="index.html">Beranda</a><a href="buku.html">Buku Digital</a><a href="formulir.html">Formulir</a><a href="aplikasi.html">Aplikasi</a><a href="artikel.html">Artikel</a><a href="index.html#tentang">Tentang</a>
+  </nav>
+
+  <main>
+    <div class="announce no-print">
+      Isi formulir langsung dari browser dan cetak tanpa mengunggah data Anda.
+      <a href="formulir.html">Kembali ke koleksi formulir ›</a>
+    </div>
+
+    <section class="hero no-print">
+      <div class="hero-inner">
+        <span class="eyebrow">Formulir interaktif</span>
+        <h1>Permohonan Angsuran PPh Final.<span class="gradient">Selisih lebih revaluasi aktiva tetap.</span></h1>
+        <p>Formulir untuk mengajukan persetujuan pembayaran PPh Final atas selisih lebih penilaian kembali aktiva tetap perusahaan secara angsuran.</p>
+      </div>
+    </section>
+
+    <section class="workspace">
+      <div class="inner">
+        <header class="toolbar no-print">
+          <div><h2>Permohonan Angsuran PPh Final Revaluasi Aktiva Tetap</h2><p>Isi kolom, centang lampiran, lalu cetak atau simpan sebagai PDF.</p></div>
+          <div class="actions"><a class="back" href="formulir.html">Kembali</a><button class="btn" id="resetBtn" type="button">Kosongkan</button><button class="btn btn-primary" id="printBtn" type="button">Cetak / Simpan PDF</button></div>
+        </header>
+
+        <div class="note no-print">
+          Gunakan kertas <strong>A4</strong>, skala <strong>100%</strong> atau <strong>Actual Size</strong>, dan nonaktifkan header/footer browser. Data hanya diproses di perangkat pengguna.
+        </div>
+
+        <div class="paper-wrap">
+          <form class="paper" id="form" autocomplete="off" novalidate>
+            <div class="row"><label class="label" for="nomor">Nomor</label><span class="colon">:</span><input id="nomor" type="text" data-required></div>
+            <div class="row"><label class="label" for="lampiran">Lampiran</label><span class="colon">:</span><input id="lampiran" type="text" data-required></div>
+            <div class="row hal"><span class="label">Perihal</span><span class="colon">:</span><div class="static">Permohonan Persetujuan Pembayaran Pajak Penghasilan yang Bersifat Final atas Selisih Lebih Penilaian Kembali Aktiva Tetap Perusahaan untuk Tujuan Perpajakan secara Angsuran</div></div>
+
+            <div class="recipient">
+              <div class="recipient-line">
+                <strong>Yth. Kepala Kantor Wilayah DJP</strong>
+                <input id="namaKanwil" type="text" data-required placeholder="Nama Kantor Wilayah DJP">
+                <span>Di</span>
+                <textarea id="alamatKanwil" rows="2" data-required placeholder="Alamat kantor"></textarea>
+              </div>
+            </div>
+
+            <p class="section-title">Dengan ini kami:</p>
+            <div class="indent">
+              <div class="row"><label class="label" for="namaPenandatangan">Nama</label><span class="colon">:</span><input id="namaPenandatangan" type="text" data-required></div>
+              <div class="row"><label class="label" for="npwpPenandatangan">NPWP</label><span class="colon">:</span><input id="npwpPenandatangan" type="text" data-required inputmode="numeric"></div>
+              <div class="row"><label class="label" for="jabatan">Jabatan</label><span class="colon">:</span><input id="jabatan" type="text" data-required></div>
+            </div>
+
+            <p class="status-title">Bertindak selaku *)</p>
+            <div class="checks" role="radiogroup" aria-label="Kedudukan penandatangan">
+              <label class="check-line"><input id="statusWp" type="radio" name="status" value="Wajib Pajak"><span>Wajib Pajak</span></label>
+              <div class="check-line inline">
+                <label class="check-line"><input type="radio" name="status" value="Wakil"><span>Wakil</span></label>
+                <label class="check-line"><input type="radio" name="status" value="Kuasa"><span>Kuasa, dari Wajib Pajak</span></label>
+              </div>
+            </div>
+
+            <div class="taxpayer-data">
+              <div class="row"><label class="label" for="namaWp">Nama</label><span class="colon">:</span><input id="namaWp" type="text" data-required></div>
+              <div class="row"><label class="label" for="npwpWp">NPWP</label><span class="colon">:</span><input id="npwpWp" type="text" data-required inputmode="numeric"></div>
+              <div class="row"><label class="label" for="alamatWp">Alamat</label><span class="colon">:</span><textarea id="alamatWp" rows="2" data-required></textarea></div>
+              <div class="row"><label class="label" for="klu">KLU</label><span class="colon">:</span><input id="klu" type="text" data-required></div>
+            </div>
+
+            <p class="paragraph">
+              mengajukan permohonan persetujuan pembayaran Pajak Penghasilan yang bersifat final yang terutang sebesar
+              Rp <input id="pphTerutang" class="inline-field" type="text" data-required inputmode="numeric" aria-label="PPh Final terutang">
+              secara angsuran, berdasarkan permohonan kami untuk penilaian kembali aktiva tetap perusahaan untuk tujuan perpajakan apabila disetujui, karena kondisi keuangan perusahaan yang tidak memungkinkan sebagaimana tercermin pada laporan keuangan 2 (dua) tahun berturut-turut sebelum penilaian kembali aktiva tetap perusahaan untuk tujuan perpajakan (terlampir).
+            </p>
+
+            <p class="paragraph">
+              Kami mohon pembayaran secara angsuran dimaksud dapat dilakukan dalam
+              <input id="jumlahAngsuran" class="inline-field short" type="text" data-required inputmode="numeric" aria-label="Jumlah kali angsuran">
+              kali angsuran dalam
+              <input id="jumlahBulan" class="inline-field short" type="text" data-required inputmode="numeric" aria-label="Jumlah bulan angsuran">
+              bulan.
+            </p>
+
+            <p class="paragraph">Demikian permohonan kami untuk dapat dipertimbangkan.</p>
+
+            <section class="signature">
+              <input id="tempatTanggal" type="text" data-required placeholder="Contoh: Bandung, 17 Juli 2026">
+              <div id="rolePrint">Wajib Pajak/Wakil/Kuasa **)</div>
+              <div class="sig-space"></div>
+              <input id="namaTtd" type="text" data-required placeholder="Nama lengkap penandatangan">
+              <div class="screen-help no-print">Area tanda tangan</div>
+            </section>
+
+            <div class="footnotes">
+              <div>*) Beri tanda (√) pada kotak yang disediakan sesuai dengan pihak yang mengajukan permohonan.</div>
+              <div>**) Coret yang tidak perlu.</div>
+            </div>
+
+            <div class="attachment-box">
+              <strong>Lampiran Permohonan:</strong>
+              <label class="attachment-item">
+                <input id="lampiranLaporan" type="checkbox" data-required-check>
+                <span>Laporan keuangan 2 (dua) tahun berturut-turut sebelum penilaian kembali aktiva tetap perusahaan untuk tujuan perpajakan.</span>
+              </label>
+            </div>
+          </form>
+        </div>
+
+        <section class="guide no-print">
+          <h2>Petunjuk pengisian</h2>
+          <details><summary>Jumlah PPh Final yang terutang</summary><p>Isi jumlah PPh Final yang terutang atas selisih lebih penilaian kembali aktiva tetap perusahaan.</p></details>
+          <details><summary>Jadwal angsuran</summary><p>Isi jumlah kali angsuran dan jangka waktu angsuran. Berdasarkan petunjuk pada dokumen, jangka waktu paling lama 12 bulan.</p></details>
+          <details><summary>Lampiran</summary><p>Centang lampiran laporan keuangan dua tahun berturut-turut sebelum penilaian kembali aktiva tetap.</p></details>
+        </section>
+      </div>
+    </section>
+
+    <div class="footer-note no-print">Formulir ini merupakan alat bantu pengisian. Pastikan jumlah pajak, jangka waktu angsuran, dan dokumen pendukung sesuai kondisi sebenarnya.</div>
+  </main>
+
+  <footer class="site-footer no-print">
+    <div class="footer-inner">
+      <p>© <span id="year"></span> Angga Sukma Dhaniswara.</p>
+      <div class="footer-links"><a href="index.html">Beranda</a><a href="formulir.html">Formulir</a><a href="artikel.html">Artikel</a><a href="#top">Kembali ke atas</a></div>
+    </div>
+  </footer>
+
+  <script>
+    const menuBtn=document.getElementById('menuBtn'),mobileMenu=document.getElementById('mobileMenu');
+    menuBtn.addEventListener('click',()=>{const on=mobileMenu.classList.toggle('active');document.body.classList.toggle('menu-open',on);menuBtn.textContent=on?'×':'☰'});
+    document.querySelectorAll('.mobile-menu a').forEach(a=>a.addEventListener('click',()=>{mobileMenu.classList.remove('active');document.body.classList.remove('menu-open');menuBtn.textContent='☰'}));
+    document.getElementById('year').textContent=new Date().getFullYear();
+
+    (()=> {
+      const form=document.getElementById('form');
+      const reset=document.getElementById('resetBtn');
+      const print=document.getElementById('printBtn');
+      const statusWp=document.getElementById('statusWp');
+      const signerNama=document.getElementById('namaPenandatangan');
+      const signerNpwp=document.getElementById('npwpPenandatangan');
+      const wpNama=document.getElementById('namaWp');
+      const wpNpwp=document.getElementById('npwpWp');
+      const namaTtd=document.getElementById('namaTtd');
+      const rolePrint=document.getElementById('rolePrint');
+      const jumlahBulan=document.getElementById('jumlahBulan');
+      let manualTtd=false;
+
+      const sync=()=>{
+        if(statusWp.checked){wpNama.value=signerNama.value;wpNpwp.value=signerNpwp.value}
+        if(!manualTtd) namaTtd.value=signerNama.value;
+      };
+
+      [signerNama,signerNpwp].forEach(el=>el.addEventListener('input',sync));
+      namaTtd.addEventListener('input',()=>manualTtd=namaTtd.value.trim()!=='');
+      form.querySelectorAll('input[name="status"]').forEach(r=>r.addEventListener('change',()=>{sync();rolePrint.textContent=r.value+' **)'}));
+
+      form.addEventListener('input',e=>e.target.classList?.remove('missing'));
+      form.addEventListener('change',e=>e.target.classList?.remove('missing'));
+
+      const validate=()=>{
+        let count=0,first=null;
+        form.querySelectorAll('[data-required]').forEach(el=>{
+          const empty=!String(el.value||'').trim();
+          el.classList.toggle('missing',empty);
+          if(empty){count++;first??=el}
+        });
+
+        if(!form.querySelector('input[name="status"]:checked')){
+          count++;first??=form.querySelector('input[name="status"]');
+        }
+
+        form.querySelectorAll('[data-required-check]').forEach(el=>{
+          if(!el.checked){count++;first??=el}
+        });
+
+        const bulan=parseInt(jumlahBulan.value,10);
+        if(Number.isFinite(bulan) && bulan>12){
+          jumlahBulan.classList.add('missing');
+          count++;first??=jumlahBulan;
+          alert('Jangka waktu angsuran paling lama 12 bulan.');
+        }
+
+        return {count,first};
+      };
+
+      print.addEventListener('click',()=>{
+        const {count,first}=validate();
+        if(count&&!confirm(`Masih ada ${count} bagian yang belum diisi atau belum sesuai. Tetap lanjut mencetak?`)){first?.focus();return}
+        window.print();
+      });
+
+      reset.addEventListener('click',()=>{
+        if(!confirm('Kosongkan seluruh isi formulir?')) return;
+        form.reset();manualTtd=false;
+        form.querySelectorAll('.missing').forEach(el=>el.classList.remove('missing'));
+        rolePrint.textContent='Wajib Pajak/Wakil/Kuasa **)';
+        signerNama.focus();
+      });
+    })();
+  </script>
+</body>
+</html>
