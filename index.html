@@ -1,40 +1,16 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <meta
-    name="description"
-    content="Kabayan by Angga Sukma Dhaniswara menyediakan buku digital, formulir, aplikasi, template, dan materi pembelajaran perpajakan."
-  >
-
-  <meta name="author" content="Angga Sukma Dhaniswara">
-
-  <meta
-    property="og:title"
-    content="Kabayan by Angga Sukma Dhaniswara"
-  >
-
-  <meta
-    property="og:description"
-    content="Belajar pajak lebih sederhana melalui buku, formulir, aplikasi, dan materi yang terstruktur."
-  >
-
-  <meta
-    property="og:url"
-    content="https://dhaniswara86.github.io"
-  >
-
-  <meta property="og:type" content="website">
-
-  <title>Kabayan by Angga Sukma Dhaniswara</title>
-
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Kabayan by Angga Sukma Dhaniswara menyediakan buku digital, formulir, aplikasi, template, dan materi pembelajaran perpajakan." name="description"/>
+<meta content="Angga Sukma Dhaniswara" name="author"/>
+<meta content="Kabayan by Angga Sukma Dhaniswara" property="og:title"/>
+<meta content="Belajar pajak lebih sederhana melalui buku, formulir, aplikasi, dan materi yang terstruktur." property="og:description"/>
+<meta content="https://dhaniswara86.github.io" property="og:url"/>
+<meta content="website" property="og:type"/>
+<title>Kabayan by Angga Sukma Dhaniswara</title>
+<style>
     :root {
       --black: #000000;
       --near-black: #1d1d1f;
@@ -1531,627 +1507,1084 @@
       }
     }
 </style>
-</head>
+<style>
+.about {
+  position: relative;
+  overflow: hidden;
+  padding: 112px 24px;
+  background:
+    radial-gradient(circle at 84% 50%, rgba(0,113,227,.10), transparent 32%),
+    linear-gradient(180deg, #f5f5f7, #ffffff);
+}
 
+.about-inner {
+  width: min(1120px, 100%);
+  margin: 0 auto;
+  text-align: left;
+}
+
+.about-layout {
+  display: grid;
+  align-items: center;
+  grid-template-columns: minmax(0, 1.08fr) minmax(340px, .92fr);
+  gap: clamp(48px, 7vw, 92px);
+}
+
+.about-copy { min-width: 0; }
+
+.about-kicker {
+  margin: 0 0 12px !important;
+  color: var(--blue) !important;
+  font-size: 15px !important;
+  font-weight: 650;
+}
+
+.about h2 {
+  max-width: 690px;
+  margin: 0;
+  font-size: clamp(44px, 5.5vw, 72px);
+  line-height: .98;
+}
+
+.about-copy > p:not(.about-kicker) {
+  max-width: 690px;
+  margin: 27px 0 0;
+  color: #515154;
+  font-size: clamp(18px, 2vw, 23px);
+  line-height: 1.42;
+}
+
+.about-actions {
+  justify-content: flex-start;
+  margin-top: 31px;
+}
+
+.about-portrait {
+  position: relative;
+  width: min(470px, 100%);
+  justify-self: end;
+  margin: 0;
+}
+
+.about-portrait-glow {
+  position: absolute;
+  z-index: 0;
+  inset: 13% 8% 4%;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, rgba(0,113,227,.22),
+    rgba(37,166,217,.08) 48%, transparent 74%);
+  filter: blur(22px);
+}
+
+.about-portrait img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  filter: drop-shadow(0 28px 34px rgba(20,43,76,.16));
+}
+
+.about-portrait figcaption {
+  position: relative;
+  z-index: 2;
+  margin-top: 15px;
+  color: #424245;
+  font-size: 14px;
+  font-weight: 650;
+  line-height: 1.35;
+  text-align: center;
+}
+
+.about-portrait figcaption span {
+  display: block;
+  margin-top: 3px;
+  color: var(--medium-gray);
+  font-size: 11px;
+  font-weight: 500;
+}
+
+@media (max-width: 900px) {
+  .about { padding: 86px 24px; }
+  .about-layout { grid-template-columns: 1fr; gap: 48px; }
+  .about-copy { text-align: center; }
+  .about h2,
+  .about-copy > p:not(.about-kicker) {
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .about-actions { justify-content: center; }
+  .about-portrait {
+    width: min(430px, 88vw);
+    justify-self: center;
+  }
+}
+
+@media (max-width: 520px) {
+  .about { padding: 72px 20px; }
+  .about h2 { font-size: 45px; }
+  .about-copy > p:not(.about-kicker) { font-size: 18px; }
+  .about-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .about-actions .button { width: 100%; }
+  .about-portrait { width: min(360px, 94vw); }
+}
+</style><style>
+    /* =====================================================
+       Penempatan foto di samping deskripsi Tentang
+       ===================================================== */
+
+    .about-inner {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .about-header {
+      max-width: 850px;
+      margin-bottom: 46px;
+    }
+
+    .about-header .about-kicker {
+      margin: 0 0 12px !important;
+      color: var(--blue) !important;
+      font-size: 15px !important;
+      font-weight: 650;
+    }
+
+    .about-header h2 {
+      margin: 0;
+      font-size: clamp(44px, 5.5vw, 72px);
+      line-height: 0.98;
+    }
+
+    .about-content-row {
+      display: grid;
+      align-items: center;
+      grid-template-columns:
+        minmax(0, 1.18fr)
+        minmax(280px, 0.82fr);
+      gap: clamp(40px, 6vw, 78px);
+    }
+
+    .about-description-block {
+      min-width: 0;
+    }
+
+    .about-description-block > p {
+      max-width: 700px;
+      margin: 0;
+      color: #515154;
+      font-size: clamp(18px, 2vw, 24px);
+      line-height: 1.45;
+    }
+
+    .about-actions {
+      justify-content: flex-start;
+      margin-top: 30px;
+    }
+
+    .about-portrait-inline {
+      width: min(360px, 100%);
+      justify-self: end;
+      margin: 0;
+    }
+
+    .about-portrait-inline img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1 / 1;
+      object-fit: contain;
+    }
+
+    .about-portrait-inline figcaption {
+      display: none;
+    }
+
+    @media (max-width: 900px) {
+      .about-header {
+        margin-right: auto;
+        margin-left: auto;
+        text-align: center;
+      }
+
+      .about-content-row {
+        grid-template-columns: 1fr;
+        gap: 38px;
+      }
+
+      .about-description-block {
+        text-align: center;
+      }
+
+      .about-description-block > p {
+        margin-right: auto;
+        margin-left: auto;
+      }
+
+      .about-actions {
+        justify-content: center;
+      }
+
+      .about-portrait-inline {
+        width: min(350px, 86vw);
+        justify-self: center;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .about-header h2 {
+        font-size: 45px;
+      }
+
+      .about-description-block > p {
+        font-size: 18px;
+      }
+
+      .about-actions {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .about-actions .button {
+        width: 100%;
+      }
+
+      .about-portrait-inline {
+        width: min(320px, 92vw);
+      }
+    }
+</style><style>
+/* =====================================================
+   Interactive upgrade for Tentang section
+   ===================================================== */
+
+.about {
+  position: relative;
+  overflow: hidden;
+  padding: 112px 24px;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(0, 113, 227, 0.10), transparent 26%),
+    radial-gradient(circle at 88% 74%, rgba(64, 156, 255, 0.12), transparent 28%),
+    linear-gradient(180deg, #f5f7fb 0%, #ffffff 52%, #f7fbff 100%);
+}
+
+.about::before,
+.about::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.about::before {
+  top: -120px;
+  right: -80px;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(0, 113, 227, 0.11), transparent 70%);
+  filter: blur(6px);
+}
+
+.about::after {
+  left: -100px;
+  bottom: -120px;
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, rgba(37, 166, 217, 0.10), transparent 68%);
+  filter: blur(8px);
+}
+
+.about-header {
+  max-width: 900px;
+  margin-bottom: 40px;
+}
+
+.about-header h2 {
+  max-width: 900px;
+  margin: 0;
+  font-size: clamp(44px, 5.5vw, 72px);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+}
+
+.about-header .personal-name {
+  display: inline;
+  background: linear-gradient(90deg, #0a66c2 0%, #25a6d9 55%, #1947e5 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.about-content-row {
+  display: grid;
+  align-items: center;
+  grid-template-columns: minmax(0, 1.12fr) minmax(290px, 0.88fr);
+  gap: clamp(34px, 6vw, 78px);
+}
+
+.about-description-block > p {
+  max-width: 720px;
+  margin: 0;
+  color: #515154;
+  font-size: clamp(18px, 2vw, 24px);
+  line-height: 1.48;
+}
+
+.about-feature-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 26px 0 0;
+}
+
+.about-feature-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 7px 14px;
+  border: 1px solid rgba(0, 113, 227, 0.14);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  color: #2b5f93;
+  font-size: 13px;
+  font-weight: 600;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 6px 18px rgba(20, 43, 76, 0.04);
+}
+
+.about-actions {
+  justify-content: flex-start;
+  margin-top: 28px;
+}
+
+.about-note-card {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 20px;
+  padding: 16px 18px;
+  border: 1px solid rgba(0, 113, 227, 0.10);
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.94), rgba(245,251,255,0.96));
+  color: #515154;
+  box-shadow: 0 16px 34px rgba(20, 43, 76, 0.06);
+}
+
+.about-note-card strong {
+  color: #1d1d1f;
+  font-size: 15px;
+}
+
+.about-note-card span {
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.about-portrait-inline {
+  position: relative;
+  width: min(420px, 100%);
+  justify-self: end;
+  margin: 0;
+  padding: 34px 24px 12px;
+  border: 1px solid rgba(0, 113, 227, 0.10);
+  border-radius: 34px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.94), rgba(245,249,255,0.92));
+  box-shadow:
+    0 30px 60px rgba(20, 43, 76, 0.10),
+    inset 0 1px 0 rgba(255,255,255,0.95);
+  backdrop-filter: blur(18px);
+  isolation: isolate;
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.about-portrait-inline:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 36px 72px rgba(20, 43, 76, 0.14),
+    inset 0 1px 0 rgba(255,255,255,0.95);
+}
+
+.about-portrait-glow {
+  position: absolute;
+  z-index: 0;
+  inset: 12% 10% 14%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,113,227,0.18), rgba(37,166,217,0.10) 48%, transparent 72%);
+  filter: blur(26px);
+}
+
+.about-portrait-ring {
+  position: absolute;
+  z-index: 0;
+  top: 6%;
+  left: 50%;
+  width: 92%;
+  aspect-ratio: 1 / 1;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  border: 1px dashed rgba(0, 113, 227, 0.18);
+}
+
+.about-portrait-inline img {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: auto;
+  max-height: 620px;
+  object-fit: contain;
+  filter: drop-shadow(0 26px 28px rgba(20, 43, 76, 0.18));
+  transition: transform 0.35s ease;
+}
+
+.about-portrait-inline:hover img {
+  transform: scale(1.02);
+}
+
+.about-floating-card {
+  position: absolute;
+  z-index: 3;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 13px 14px;
+  border: 1px solid rgba(255,255,255,0.75);
+  border-radius: 18px;
+  background: rgba(255,255,255,0.76);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 16px 34px rgba(20, 43, 76, 0.10);
+  line-height: 1.3;
+}
+
+.about-floating-card-top {
+  top: 18px;
+  left: -28px;
+}
+
+.about-floating-card-bottom {
+  right: -24px;
+  bottom: 58px;
+}
+
+.about-floating-label {
+  color: #0071e3;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.about-floating-card strong {
+  color: #1d1d1f;
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.about-floating-value {
+  color: #1947e5;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.about-floating-card small {
+  color: #6e6e73;
+  font-size: 11px;
+}
+
+.about-portrait-badge {
+  position: relative;
+  z-index: 3;
+  width: fit-content;
+  max-width: 100%;
+  margin: 12px auto 0;
+  padding: 9px 16px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #0071e3, #25a6d9);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 650;
+  text-align: center;
+  box-shadow: 0 12px 24px rgba(0, 113, 227, 0.18);
+}
+
+@media (max-width: 980px) {
+  .about-content-row {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .about-header,
+  .about-description-block {
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .about-description-block > p {
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .about-feature-row,
+  .about-actions {
+    justify-content: center;
+  }
+
+  .about-note-card {
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .about-portrait-inline {
+    width: min(430px, 88vw);
+    justify-self: center;
+  }
+
+  .about-floating-card-top {
+    left: 0;
+  }
+
+  .about-floating-card-bottom {
+    right: 0;
+  }
+}
+
+@media (max-width: 680px) {
+  .about {
+    padding: 84px 20px;
+  }
+
+  .about-header {
+    margin-bottom: 28px;
+  }
+
+  .about-portrait-inline {
+    padding: 26px 18px 12px;
+    border-radius: 28px;
+  }
+
+  .about-floating-card {
+    position: static;
+    display: flex;
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 12px;
+  }
+
+  .about-portrait-ring {
+    top: 10%;
+    width: 88%;
+  }
+}
+
+@media (max-width: 520px) {
+  .about-header h2 {
+    font-size: 44px;
+  }
+
+  .about-description-block > p {
+    font-size: 18px;
+  }
+
+  .about-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .about-actions .button {
+    width: 100%;
+  }
+
+  .about-feature-row {
+    justify-content: center;
+  }
+
+  .about-feature-pill {
+    font-size: 12px;
+  }
+}
+</style></head>
 <body id="top">
-  <header class="site-nav">
-    <div class="nav-inner">
-      <a class="nav-brand" href="index.html">
-        <span class="brand-symbol">ASD</span>
-        <span>dhaniswara86</span>
-      </a>
-
-      <nav class="desktop-menu" aria-label="Navigasi utama">
-        <a href="index.html">Beranda</a>
-        <a href="buku.html">Buku</a>
-        <a href="formulir.html">Formulir</a>
-        <a href="aplikasi.html">Aplikasi</a>
-        <a href="#coretax">Coretax</a>
-        <a href="artikel.html">Artikel</a>
-        <a href="#tentang">Tentang</a>
-      </nav>
-
-      <div class="nav-actions">
-        <a
-          class="search-link"
-          href="formulir.html"
-          aria-label="Cari formulir"
-          title="Cari formulir"
-        >
+<header class="site-nav">
+<div class="nav-inner">
+<a class="nav-brand" href="index.html">
+<span class="brand-symbol">ASD</span>
+<span>dhaniswara86</span>
+</a>
+<nav aria-label="Navigasi utama" class="desktop-menu">
+<a href="index.html">Beranda</a>
+<a href="buku.html">Buku</a>
+<a href="formulir.html">Formulir</a>
+<a href="aplikasi.html">Aplikasi</a>
+<a href="#coretax">Coretax</a>
+<a href="artikel.html">Artikel</a>
+<a href="#tentang">Tentang</a>
+</nav>
+<div class="nav-actions">
+<a aria-label="Cari formulir" class="search-link" href="formulir.html" title="Cari formulir">
           ⌕
         </a>
-
-        <button
-          class="menu-toggle"
-          id="menuToggle"
-          type="button"
-          aria-label="Buka menu"
-          aria-expanded="false"
-        >
+<button aria-expanded="false" aria-label="Buka menu" class="menu-toggle" id="menuToggle" type="button">
           ☰
         </button>
-      </div>
-    </div>
-  </header>
-
-  <nav class="mobile-menu" id="mobileMenu">
-    <a href="index.html">Beranda</a>
-    <a href="buku.html">Buku</a>
-    <a href="formulir.html">Formulir</a>
-    <a href="aplikasi.html">Aplikasi</a>
-    <a href="#coretax">Coretax XML</a>
-    <a href="#artikel">Artikel</a>
-    <a href="#tentang">Tentang</a>
-  </nav>
-
-  <main>
-    <div class="announcement">
+</div>
+</div>
+</header>
+<nav class="mobile-menu" id="mobileMenu">
+<a href="index.html">Beranda</a>
+<a href="buku.html">Buku</a>
+<a href="formulir.html">Formulir</a>
+<a href="aplikasi.html">Aplikasi</a>
+<a href="#coretax">Coretax XML</a>
+<a href="#artikel">Artikel</a>
+<a href="#tentang">Tentang</a>
+</nav>
+<main>
+<div class="announcement">
       Temukan buku, formulir, dan aplikasi perpajakan dalam satu tempat.
       <a href="buku.html">Lihat Buku Digital›</a>
-    </div>
-
-    <section class="hero">
-      <div class="hero-copy">
-        <p class="eyebrow">Katalog Bahan Pelayanan</p>
-
-        <h1>
+</div>
+<section class="hero">
+<div class="hero-copy">
+<p class="eyebrow">Katalog Bahan Pelayanan</p>
+<h1>
           Belajar pajak.
           <span class="hero-gradient">Lebih sederhana.</span>
-        </h1>
-
-        <p class="hero-description">
+</h1>
+<p class="hero-description">
           Buku, formulir, aplikasi, template, dan artikel perpajakan
           dalam satu tempat yang praktis dan gratis.
         </p>
-
-        <div class="hero-actions">
-          <a class="button button-primary" href="buku.html">
+<div class="hero-actions">
+<a class="button button-primary" href="buku.html">
             Mulai belajar
           </a>
-
-          <a class="button button-outline" href="formulir.html">
+<a class="button button-outline" href="formulir.html">
             Lihat formulir
           </a>
-
-          <a class="button button-outline" href="aplikasi.html">
+<a class="button button-outline" href="aplikasi.html">
             Lihat aplikasi
           </a>
-        </div>
-      </div>
-
-      <div class="hero-visual">
-        <div class="hero-glow"></div>
-
-        <section
-          class="hero-book-slider"
-          id="heroBookSlider"
-          aria-label="Katalog buku pilihan"
-          tabindex="0"
-        >
-          <div class="hero-book-viewport">
-            <div class="hero-book-track">
-
-              <article class="hero-book-slide">
-                <a
-                  class="hero-book-link"
-                  href="converter-xml-unifikasi.html"
-                >
-                  <div class="hero-book-image">
-                    <div class="slider-fallback">
-                      <small>Petunjuk Teknis</small>
-                      <strong>
+</div>
+</div>
+<div class="hero-visual">
+<div class="hero-glow"></div>
+<section aria-label="Katalog buku pilihan" class="hero-book-slider" id="heroBookSlider" tabindex="0">
+<div class="hero-book-viewport">
+<div class="hero-book-track">
+<article class="hero-book-slide">
+<a class="hero-book-link" href="converter-xml-unifikasi.html">
+<div class="hero-book-image">
+<div class="slider-fallback">
+<small>Petunjuk Teknis</small>
+<strong>
                         Converter Excel ke XML Coretax
                       </strong>
-                      <div class="slider-fallback-line"></div>
-                    </div>
-
-                    <img
-                      src="images/mockup-converter-excel-xml-unifikasi.webp"
-                      alt="Mockup buku Converter Excel ke XML Coretax Seri PPh Unifikasi"
-                      loading="eager"
-                      onload="this.previousElementSibling.hidden=true"
-                      onerror="this.style.display='none'"
-                    >
-                  </div>
-
-                  <div class="hero-book-caption">
-                    <span class="hero-book-category">
+<div class="slider-fallback-line"></div>
+</div>
+<img alt="Mockup buku Converter Excel ke XML Coretax Seri PPh Unifikasi" loading="eager" onerror="this.style.display='none'" onload="this.previousElementSibling.hidden=true" src="images/mockup-converter-excel-xml-unifikasi.webp"/>
+</div>
+<div class="hero-book-caption">
+<span class="hero-book-category">
                       Coretax PPh Unifikasi dan XML
                     </span>
-
-                    <h2>
+<h2>
                       Converter Excel ke XML Coretax
                       Seri PPh Unifikasi
                     </h2>
-
-                    <span class="hero-book-detail">
+<span class="hero-book-detail">
                       Lihat detail ›
                     </span>
-                  </div>
-                </a>
-              </article>
-
-              <article class="hero-book-slide">
-                <a
-                  class="hero-book-link"
-                  href="converter-xml-2126.html"
-                >
-                  <div class="hero-book-image">
-                    <div class="slider-fallback">
-                      <small>Petunjuk Teknis</small>
-                      <strong>
+</div>
+</a>
+</article>
+<article class="hero-book-slide">
+<a class="hero-book-link" href="converter-xml-2126.html">
+<div class="hero-book-image">
+<div class="slider-fallback">
+<small>Petunjuk Teknis</small>
+<strong>
                         Converter Excel ke XML PPh 21/26
                       </strong>
-                      <div class="slider-fallback-line"></div>
-                    </div>
-
-                    <img
-                      src="images/mockup-converter-excel-xml-2126.webp"
-                      alt="Mockup buku Converter Excel ke XML Coretax Seri PPh Pasal 21/26"
-                      loading="lazy"
-                      onload="this.previousElementSibling.hidden=true"
-                      onerror="this.style.display='none'"
-                    >
-                  </div>
-
-                  <div class="hero-book-caption">
-                    <span class="hero-book-category">
+<div class="slider-fallback-line"></div>
+</div>
+<img alt="Mockup buku Converter Excel ke XML Coretax Seri PPh Pasal 21/26" loading="lazy" onerror="this.style.display='none'" onload="this.previousElementSibling.hidden=true" src="images/mockup-converter-excel-xml-2126.webp"/>
+</div>
+<div class="hero-book-caption">
+<span class="hero-book-category">
                       Coretax PPh Pasal 21/26 dan XML
                     </span>
-
-                    <h2>
+<h2>
                       Converter Excel ke XML Coretax
                       Seri PPh Pasal 21/26
                     </h2>
-
-                    <span class="hero-book-detail">
+<span class="hero-book-detail">
                       Lihat detail ›
                     </span>
-                  </div>
-                </a>
-              </article>
-
-              <article class="hero-book-slide">
-                <a
-                  class="hero-book-link"
-                  href="list-barang-jasa-faktur.html"
-                >
-                  <div class="hero-book-image">
-                    <div class="slider-fallback">
-                      <small>Referensi PPN</small>
-                      <strong>
+</div>
+</a>
+</article>
+<article class="hero-book-slide">
+<a class="hero-book-link" href="list-barang-jasa-faktur.html">
+<div class="hero-book-image">
+<div class="slider-fallback">
+<small>Referensi PPN</small>
+<strong>
                         Kode Barang dan Jasa Coretax
                       </strong>
-                      <div class="slider-fallback-line"></div>
-                    </div>
-
-                    <img
-                      src="images/mockup-list-kode-barang-jasa.webp"
-                      alt="Mockup buku Kode Barang dan Jasa di Faktur Pajak Era Coretax"
-                      loading="lazy"
-                      onload="this.previousElementSibling.hidden=true"
-                      onerror="this.style.display='none'"
-                    >
-                  </div>
-
-                  <div class="hero-book-caption">
-                    <span class="hero-book-category">
+<div class="slider-fallback-line"></div>
+</div>
+<img alt="Mockup buku Kode Barang dan Jasa di Faktur Pajak Era Coretax" loading="lazy" onerror="this.style.display='none'" onload="this.previousElementSibling.hidden=true" src="images/mockup-list-kode-barang-jasa.webp"/>
+</div>
+<div class="hero-book-caption">
+<span class="hero-book-category">
                       PPN dan Faktur Pajak
                     </span>
-
-                    <h2>
+<h2>
                       Kode Barang dan Jasa di Faktur Pajak
                       Era Coretax
                     </h2>
-
-                    <span class="hero-book-detail">
+<span class="hero-book-detail">
                       Lihat detail ›
                     </span>
-                  </div>
-                </a>
-              </article>
-
-              <article class="hero-book-slide">
-                <a
-                  class="hero-book-link"
-                  href="kap-kjs.html"
-                >
-                  <div class="hero-book-image">
-                    <div class="slider-fallback">
-                      <small>Referensi Pembayaran</small>
-                      <strong>
+</div>
+</a>
+</article>
+<article class="hero-book-slide">
+<a class="hero-book-link" href="kap-kjs.html">
+<div class="hero-book-image">
+<div class="slider-fallback">
+<small>Referensi Pembayaran</small>
+<strong>
                         KAP dan KJS Era Coretax
                       </strong>
-                      <div class="slider-fallback-line"></div>
-                    </div>
-
-                    <img
-                      src="images/mockup-kap-kjs-era-coretax.webp"
-                      alt="Mockup buku KAP dan KJS Era Coretax"
-                      loading="lazy"
-                      onload="this.previousElementSibling.hidden=true"
-                      onerror="this.style.display='none'"
-                    >
-                  </div>
-
-                  <div class="hero-book-caption">
-                    <span class="hero-book-category">
+<div class="slider-fallback-line"></div>
+</div>
+<img alt="Mockup buku KAP dan KJS Era Coretax" loading="lazy" onerror="this.style.display='none'" onload="this.previousElementSibling.hidden=true" src="images/mockup-kap-kjs-era-coretax.webp"/>
+</div>
+<div class="hero-book-caption">
+<span class="hero-book-category">
                       Pembayaran Pajak
                     </span>
-
-                    <h2>
+<h2>
                       Kode Akun Pajak dan Kode Jenis Setor
                       Era Coretax
                     </h2>
-
-                    <span class="hero-book-detail">
+<span class="hero-book-detail">
                       Lihat detail ›
                     </span>
-                  </div>
-                </a>
-              </article>
-
-              <article class="hero-book-slide">
-                <a
-                  class="hero-book-link"
-                  href="cermat-2126.html"
-                >
-                  <div class="hero-book-image">
-                    <div class="slider-fallback">
-                      <small>Panduan Pemotongan PPh 21/26</small>
-                      <strong>
+</div>
+</a>
+</article>
+<article class="hero-book-slide">
+<a class="hero-book-link" href="cermat-2126.html">
+<div class="hero-book-image">
+<div class="slider-fallback">
+<small>Panduan Pemotongan PPh 21/26</small>
+<strong>
                         Cermat Pemotongan PPh Pasal 21/26
                       </strong>
-                      <div class="slider-fallback-line"></div>
-                    </div>
-
-                    <img
-                      src="images/mockup-cermat-2126.webp"
-                      alt="Mockup buku cermat pemotongan PPh Pasal 21/26"
-                      loading="lazy"
-                      onload="this.previousElementSibling.hidden=true"
-                      onerror="this.style.display='none'"
-                    >
-                  </div>
-
-                  <div class="hero-book-caption">
-                    <span class="hero-book-category">
+<div class="slider-fallback-line"></div>
+</div>
+<img alt="Mockup buku cermat pemotongan PPh Pasal 21/26" loading="lazy" onerror="this.style.display='none'" onload="this.previousElementSibling.hidden=true" src="images/mockup-cermat-2126.webp"/>
+</div>
+<div class="hero-book-caption">
+<span class="hero-book-category">
                       PPh Pasal 21/26
                     </span>
-
-                    <h2>
+<h2>
                       Cermat Pemotongan PPh Pasal 21/26
                     </h2>
-
-                    <span class="hero-book-detail">
+<span class="hero-book-detail">
                       Lihat detail ›
                     </span>
-                  </div>
-                </a>
-              </article>
-
-            </div>
-          </div>
-
-          <button
-            class="slider-arrow slider-arrow-prev"
-            type="button"
-            aria-label="Buku sebelumnya"
-          >
+</div>
+</a>
+</article>
+</div>
+</div>
+<button aria-label="Buku sebelumnya" class="slider-arrow slider-arrow-prev" type="button">
             ‹
           </button>
-
-          <button
-            class="slider-arrow slider-arrow-next"
-            type="button"
-            aria-label="Buku berikutnya"
-          >
+<button aria-label="Buku berikutnya" class="slider-arrow slider-arrow-next" type="button">
             ›
           </button>
-
-          <div
-            class="slider-dots"
-            aria-label="Pilih buku"
-          ></div>
-        </section>
-      </div>
-    </section>
-
-    <section class="full-panel panel-light">
-      <div class="panel-content">
-        <p class="section-kicker">Buku Digital</p>
-
-        <h2 class="section-title">
+<div aria-label="Pilih buku" class="slider-dots"></div>
+</section>
+</div>
+</section>
+<section class="full-panel panel-light">
+<div class="panel-content">
+<p class="section-kicker">Buku Digital</p>
+<h2 class="section-title">
           Pengetahuan yang lebih terstruktur.
         </h2>
-
-        <p class="section-description">
-          Pelajari perpajakan melalui modul, e-book, petunjuk teknis, <br>
+<p class="section-description">
+          Pelajari perpajakan melalui modul, e-book, petunjuk teknis, <br/>
           yang dirancang untuk pembelajaran mandiri.
         </p>
-
-        <div class="section-actions">
-          <a class="button button-primary" href="buku.html">
+<div class="section-actions">
+<a class="button button-primary" href="buku.html">
             Lihat buku
           </a>
-
-          <a
-            class="button button-outline"
-            href="converter-xml-unifikasi.html"
-          >
+<a class="button button-outline" href="converter-xml-unifikasi.html">
             Materi terbaru
           </a>
-        </div>
-
-        <div class="folder-stage" aria-hidden="true">
-          <div class="folder-back"></div>
-          <div class="document"></div>
-          <div class="folder-front"></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="full-panel panel-dark" id="coretax">
-      <div class="panel-content">
-        <p class="section-kicker">Converter XML Coretax</p>
-
-        <h2 class="section-title">
+</div>
+<div aria-hidden="true" class="folder-stage">
+<div class="folder-back"></div>
+<div class="document"></div>
+<div class="folder-front"></div>
+</div>
+</div>
+</section>
+<section class="full-panel panel-dark" id="coretax">
+<div class="panel-content">
+<p class="section-kicker">Converter XML Coretax</p>
+<h2 class="section-title">
           Hasil cepat . Tanpa Ribet.
         </h2>
-
-        <p class="section-description">
+<p class="section-description">
           Temukan Converter Excel ke XML Coretax, untuk pembuatan bukti potong/pungut dalam jumlah banyak dengan metode skema impor XML yang praktis.
         </p>
-
-        <div class="section-actions">
-          <a
-            class="button button-primary"
-            href="https://www.pajak.go.id/en/node/112031"
-          >
+<div class="section-actions">
+<a class="button button-primary" href="https://www.pajak.go.id/en/node/112031">
             Unduh Converter
           </a>
-
-          
-        </div>
-
-        <div class="dark-visual" aria-hidden="true">
-          <div class="screen">
-            <div class="screen-card one">
-              <div class="screen-icon">⌘</div>
-              <strong>Excel ke XML</strong>
-              <span>Siapkan data lebih terstruktur.</span>
-            </div>
-
-            <div class="screen-card two">
-              <div class="screen-icon">✓</div>
-              <strong>Validasi Data</strong>
-              <span>Periksa sebelum digunakan.</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-
-    <section class="full-panel applications-panel" id="aplikasi">
-      <div class="panel-content">
-        <p class="section-kicker">Aplikasi Perpajakan</p>
-
-        <h2 class="section-title">
+</div>
+<div aria-hidden="true" class="dark-visual">
+<div class="screen">
+<div class="screen-card one">
+<div class="screen-icon">⌘</div>
+<strong>Excel ke XML</strong>
+<span>Siapkan data lebih terstruktur.</span>
+</div>
+<div class="screen-card two">
+<div class="screen-icon">✓</div>
+<strong>Validasi Data</strong>
+<span>Periksa sebelum digunakan.</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="full-panel applications-panel" id="aplikasi">
+<div class="panel-content">
+<p class="section-kicker">Aplikasi Perpajakan</p>
+<h2 class="section-title">
           Installer dan perangkat pendukung.
         </h2>
-
-        <p class="section-description">
+<p class="section-description">
           Temukan aplikasi e-SPT, e-Faktur, formulir elektronik,
           dan perangkat pendukung untuk kebutuhan administrasi
           maupun pengelolaan data perpajakan untuk periode sebelum implementasi Coretax.
         </p>
-
-        <div class="section-actions">
-          <a class="button button-primary" href="aplikasi.html">
+<div class="section-actions">
+<a class="button button-primary" href="aplikasi.html">
             Buka portal aplikasi
           </a>
-
-          <a class="button button-outline" href="buku.html">
+<a class="button button-outline" href="buku.html">
             Lihat petunjuk
           </a>
-        </div>
-
-        <div class="application-stage" aria-hidden="true">
-          <div class="application-window">
-            <div class="application-toolbar">
-              <span class="toolbar-dot"></span>
-              <span class="toolbar-dot"></span>
-              <span class="toolbar-dot"></span>
-            </div>
-
-            <div class="application-body">
-              <div class="application-sidebar">
-                <span class="sidebar-label">Kategori</span>
-
-                <div class="sidebar-item active">
-                  <span class="sidebar-icon">A</span>
-                  <span>Semua aplikasi</span>
-                </div>
-
-                <div class="sidebar-item">
-                  <span class="sidebar-icon">S</span>
-                  <span>e-SPT</span>
-                </div>
-
-                <div class="sidebar-item">
-                  <span class="sidebar-icon">F</span>
-                  <span>e-Faktur</span>
-                </div>
-
-                <div class="sidebar-item">
-                  <span class="sidebar-icon">P</span>
-                  <span>Pendukung</span>
-                </div>
-              </div>
-
-              <div class="application-content">
-                <div class="application-content-header">
-                  <div>
-                    <strong>Portal Aplikasi</strong>
-                    <span>Installer dan arsip perpajakan</span>
-                  </div>
-
-                  <div class="application-search">
+</div>
+<div aria-hidden="true" class="application-stage">
+<div class="application-window">
+<div class="application-toolbar">
+<span class="toolbar-dot"></span>
+<span class="toolbar-dot"></span>
+<span class="toolbar-dot"></span>
+</div>
+<div class="application-body">
+<div class="application-sidebar">
+<span class="sidebar-label">Kategori</span>
+<div class="sidebar-item active">
+<span class="sidebar-icon">A</span>
+<span>Semua aplikasi</span>
+</div>
+<div class="sidebar-item">
+<span class="sidebar-icon">S</span>
+<span>e-SPT</span>
+</div>
+<div class="sidebar-item">
+<span class="sidebar-icon">F</span>
+<span>e-Faktur</span>
+</div>
+<div class="sidebar-item">
+<span class="sidebar-icon">P</span>
+<span>Pendukung</span>
+</div>
+</div>
+<div class="application-content">
+<div class="application-content-header">
+<div>
+<strong>Portal Aplikasi</strong>
+<span>Installer dan arsip perpajakan</span>
+</div>
+<div class="application-search">
                     Cari aplikasi...
                   </div>
-                </div>
-
-                <div class="application-list">
-                  <div class="application-row">
-                    <span class="application-row-icon">EF</span>
-
-                    <span>
-                      <strong>e-Faktur</strong>
-                      <small>Installer dan database</small>
-                    </span>
-
-                    <span class="application-status">
+</div>
+<div class="application-list">
+<div class="application-row">
+<span class="application-row-icon">EF</span>
+<span>
+<strong>e-Faktur</strong>
+<small>Installer dan database</small>
+</span>
+<span class="application-status">
                       Arsip
                     </span>
-                  </div>
-
-                  <div class="application-row">
-                    <span class="application-row-icon">21</span>
-
-                    <span>
-                      <strong>e-SPT Masa PPh Pasal 21</strong>
-                      <small>Aplikasi desktop</small>
-                    </span>
-
-                    <span class="application-status">
+</div>
+<div class="application-row">
+<span class="application-row-icon">21</span>
+<span>
+<strong>e-SPT Masa PPh Pasal 21</strong>
+<small>Aplikasi desktop</small>
+</span>
+<span class="application-status">
                       Arsip
                     </span>
-                  </div>
-
-                  <div class="application-row">
-                    <span class="application-row-icon">APP</span>
-
-                    <span>
-                      <strong>Aplikasi Pendukung e-SPT</strong>
-                      <small>Komponen prasyarat</small>
-                    </span>
-
-                    <span class="application-status support">
+</div>
+<div class="application-row">
+<span class="application-row-icon">APP</span>
+<span>
+<strong>Aplikasi Pendukung e-SPT</strong>
+<small>Komponen prasyarat</small>
+</span>
+<span class="application-status support">
                       Pendukung
                     </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="grid-section" id="artikel">
-      <div class="feature-grid">
-        <article class="feature-card light">
-          <h3>Artikel Pajak</h3>
-
-          <p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="grid-section" id="artikel">
+<div class="feature-grid">
+<article class="feature-card light">
+<h3>Artikel Pajak</h3>
+<p>
             Penjelasan yang ringkas, aktual, dan mudah dipahami
             untuk membantu mengenali berbagai topik perpajakan.
           </p>
-
-          <a class="simple-link" href="artikel.html">
+<a class="simple-link" href="artikel.html">
             Baca artikel ›
           </a>
+<div aria-hidden="true" class="article-stack">
+<div class="article-sheet back">
+<div class="sheet-line title"></div>
+<div class="sheet-line"></div>
+<div class="sheet-line short"></div>
+<div class="sheet-line"></div>
+<div class="sheet-line short"></div>
+</div>
+<div class="article-sheet front">
+<div class="sheet-line title"></div>
+<div class="sheet-line"></div>
+<div class="sheet-line short"></div>
+<div class="sheet-line"></div>
+<div class="sheet-line short"></div>
+</div>
+</div>
+</article>
+</div>
+</section>
+<section class="about" id="tentang">
+<div class="about-inner"><div class="about-header">
+<p class="about-kicker">Tentang Kabayan</p>
+<h2>
+    Dibuat untuk berbagi.
+    <span class="personal-name">
+      Angga Sukma Dhaniswara.
+    </span>
+</h2>
+</div><div class="about-content-row">
+<div class="about-description-block">
+<p>
+<b>Kabayan</b> (Katalog Bahan Pelayanan) adalah ruang edukasi
+      pribadi untuk membagikan pengetahuan, buku digital, formulir,
+      aplikasi, template, dan alat bantu perpajakan secara lebih
+      sederhana dan terstruktur.
+    </p>
 
-          <div class="article-stack" aria-hidden="true">
-            <div class="article-sheet back">
-              <div class="sheet-line title"></div>
-              <div class="sheet-line"></div>
-              <div class="sheet-line short"></div>
-              <div class="sheet-line"></div>
-              <div class="sheet-line short"></div>
-            </div>
+<div aria-label="Fokus Kabayan" class="about-feature-row">
+<span class="about-feature-pill">Buku Digital</span>
+<span class="about-feature-pill">Formulir</span>
+<span class="about-feature-pill">Aplikasi Pajak</span>
+<span class="about-feature-pill">Artikel</span>
+</div>
+<div class="section-actions about-actions">
+<a class="button button-primary" href="buku.html">
+        Jelajahi koleksi
+      </a>
+<a class="button button-outline" href="https://www.instagram.com/dhaniswara86/" rel="noopener noreferrer" target="_blank">
+        Profil Instagram
+      </a>
+<a aria-label="Hubungi Angga melalui email" class="button button-outline" href="#" id="emailLink">
+        Hubungi via Email
+      </a>
+</div>
+<div class="about-note-card">
+<strong>Kabayan membantu belajar pajak lebih praktis.</strong>
+<span>
+        Semua materi disusun agar mudah dicari, nyaman dibaca, dan siap digunakan.
+      </span>
+</div>
 
-            <div class="article-sheet front">
-              <div class="sheet-line title"></div>
-              <div class="sheet-line"></div>
-              <div class="sheet-line short"></div>
-              <div class="sheet-line"></div>
-              <div class="sheet-line short"></div>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
+</div>
+<figure class="about-portrait about-portrait-inline">
 
-    <section class="about" id="tentang">
-      <div class="about-inner">
-        <h2>
-          Dibuat untuk berbagi.
-          <span class="personal-name">
-            Angga Sukma Dhaniswara.
-          </span>
-        </h2>
+<div aria-hidden="true" class="about-portrait-ring"></div><div aria-hidden="true" class="about-floating-card about-floating-card-bottom">
+<span class="about-floating-value">Digital Library</span>
+<small>Buku • Formulir • Aplikasi • Artikel</small>
+</div>
+<div aria-hidden="true" class="about-floating-card about-floating-card-top">
+<span class="about-floating-label">Kabayan</span>
+<strong>Belajar Pajak Lebih Ringkas</strong>
+</div>
 
-        <p>
-          <b>Kabayan</b> (Katalog Bahan Pelayanan) adalah ruang edukasi pribadi untuk membagikan
-          pengetahuan, buku digital, formulir, aplikasi, template,
-          dan alat bantu perpajakan secara lebih sederhana dan terstruktur.
-        </p>
-
-        <div class="section-actions">
-          <a class="button button-primary" href="buku.html">
-            Jelajahi koleksi
-          </a>
-
-          <a
-            class="button button-outline"
-            href="https://www.instagram.com/dhaniswara86/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Profil Instagram
-          </a>
-
-          <a
-            class="button button-outline"
-            id="emailLink"
-            href="#"
-            aria-label="Hubungi Angga melalui email"
-          >
-            Hubungi via Email
-          </a>
-        </div>
-      </div>
-    </section>
-  </main>
-  <footer>
-    <div class="disclaimer">
-      <strong>Disclaimer:</strong>
+<div aria-hidden="true" class="about-portrait-glow"></div>
+<img alt="Foto Angga Sukma Dhaniswara" decoding="async" height="1100" loading="lazy" src="images/tentang-angga-sukma-dhaniswara.webp" width="433"/>
+<div class="about-portrait-badge">Angga Sukma Dhaniswara</div></figure>
+</div></div>
+</section>
+</main>
+<footer>
+<div class="disclaimer">
+<strong>Disclaimer:</strong>
       Kabayan merupakan situs edukasi perpajakan pribadi dan bukan
       situs resmi Direktorat Jenderal Pajak atau instansi pemerintah.
       Materi dan aplikasi harus diperiksa kembali dengan ketentuan
       perpajakan terbaru sebelum digunakan.
     </div>
-
-    <div class="footer-inner">
-      <p>
+<div class="footer-inner">
+<p>
         © <span id="currentYear"></span>
         Angga Sukma Dhaniswara.
       </p>
-
-      <div class="footer-links">
-        <a href="buku.html">Buku</a>
-        <a href="formulir.html">Formulir</a>
-        <a href="aplikasi.html">Aplikasi</a>
-        <a href="artikel.html">Artikel</a>
-        <a href="#tentang">Tentang</a>
-        <a href="#top">Kembali ke atas</a>
-      </div>
-    </div>
-  </footer>
-
-  <script>
+<div class="footer-links">
+<a href="buku.html">Buku</a>
+<a href="formulir.html">Formulir</a>
+<a href="aplikasi.html">Aplikasi</a>
+<a href="artikel.html">Artikel</a>
+<a href="#tentang">Tentang</a>
+<a href="#top">Kembali ke atas</a>
+</div>
+</div>
+</footer>
+<script>
     const menuToggle = document.getElementById("menuToggle");
     const mobileMenu = document.getElementById("mobileMenu");
 
