@@ -10,7 +10,7 @@
   >
   <meta name="author" content="Angga Sukma Dhaniswara">
 
-  <title>Uji Pemungutan PPN Instansi Pemerintah | Kabayan</title>
+  <title>Uji Pemungutan dan Fasilitas PPN Instansi Pemerintah | Kabayan</title>
 
   <style>
     :root {
@@ -728,6 +728,50 @@
     .form-alert-icon {
       flex: 0 0 auto;
       font-size: 16px;
+    }
+
+    .facility-status {
+      grid-column: 1 / -1;
+      display: grid;
+      gap: 4px;
+      padding: 14px 16px;
+      border: 1px solid #d8e9f9;
+      border-radius: 14px;
+      background: #f4f9ff;
+      color: #38536e;
+    }
+
+    .facility-status strong {
+      font-size: 13px;
+    }
+
+    .facility-status span {
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .facility-status.status-exempt {
+      border-color: #cde8d3;
+      background: var(--green-soft);
+      color: #226536;
+    }
+
+    .facility-status.status-not-collected {
+      border-color: #d8cff2;
+      background: var(--purple-soft);
+      color: #5f438d;
+    }
+
+    .facility-status.status-review {
+      border-color: #ffd7a6;
+      background: var(--orange-soft);
+      color: #74410d;
+    }
+
+    .facility-status.status-taxable {
+      border-color: #e0e0e5;
+      background: #fafafa;
+      color: #4c4c51;
     }
 
     .action-row {
@@ -1579,7 +1623,7 @@
         </h1>
 
         <p class="hero-description">
-          Pilih barang atau jasa, masukkan nilai transaksi, lalu Kabayan
+          Pilih barang atau jasa, jawab fakta fasilitas, masukkan nilai transaksi, lalu Kabayan
           membantu menentukan apakah PPN dipungut instansi pemerintah,
           rekanan, Pihak Lain dalam sistem pengadaan, atau tidak terutang.
         </p>
@@ -1930,20 +1974,168 @@
               </div>
             </div>
 
-            <div class="field field-full">
-              <label for="facilityStatus">Fasilitas PPN atas transaksi</label>
+            <div class="conditional-panel" id="facilityAssistantPanel">
+              <h3>Uji fasilitas PPN otomatis</h3>
+              <p class="conditional-description">
+                Bendahara tidak perlu memilih sendiri “dibebaskan” atau “tidak dipungut”.
+                Jawab fakta transaksi berikut dan sistem akan menentukan fasilitas serta
+                dokumen yang harus tersedia.
+              </p>
 
-              <select class="select-control" id="facilityStatus">
-                <option value="none">Tidak ada fasilitas khusus</option>
-                <option value="exempt">PPN dibebaskan</option>
-                <option value="not_collected">PPN tidak dipungut</option>
-                <option value="unknown">Belum diketahui</option>
-              </select>
+              <div class="conditional-grid">
+                <div class="field field-full">
+                  <label for="facilityContext">
+                    Apakah transaksi terkait kondisi khusus?
+                  </label>
+                  <select class="select-control" id="facilityContext">
+                    <option value="ordinary">Tidak, pengadaan biasa</option>
+                    <option value="national_disaster">Penanganan bencana yang ditetapkan sebagai bencana nasional</option>
+                    <option value="foreign_grant_loan">Proyek pemerintah dibiayai hibah atau pinjaman luar negeri</option>
+                    <option value="defense_security">Keperluan pertahanan atau keamanan negara</option>
+                    <option value="special_zone">Transaksi terkait Kawasan Bebas, KEK, atau tempat berfasilitas kepabeanan</option>
+                  </select>
+                  <span class="hint">
+                    Pilih berdasarkan kontrak, sumber anggaran, tujuan pengadaan, dan lokasi penyerahan.
+                  </span>
+                </div>
 
-              <span class="hint">
-                Pilih fasilitas hanya jika terdapat dasar hukum dan dokumen yang
-                sesuai dengan transaksi.
-              </span>
+                <div class="facility-status status-taxable" id="facilityAutoStatus">
+                  <strong id="facilityAutoTitle">Pilih barang atau jasa terlebih dahulu.</strong>
+                  <span id="facilityAutoText">Sistem akan menampilkan status fasilitas secara otomatis.</span>
+                </div>
+
+                <div class="field field-full" id="bookCriteriaField" hidden>
+                  <label for="bookCriteria">Apakah buku memenuhi kriteria buku umum yang mengandung unsur pendidikan?</label>
+                  <select class="select-control" id="bookCriteria">
+                    <option value="">Pilih jawaban</option>
+                    <option value="yes">Ya, memenuhi kriteria dan bukan barang cetakan biasa</option>
+                    <option value="no">Tidak atau belum dapat dibuktikan</option>
+                  </select>
+                </div>
+
+                <div class="field field-full" id="educationLicenseField" hidden>
+                  <label for="educationLicense">Apakah penyelenggara memiliki izin pendidikan formal/nonformal atau izin/pendaftaran lembaga pelatihan kerja?</label>
+                  <select class="select-control" id="educationLicense">
+                    <option value="">Pilih jawaban</option>
+                    <option value="yes">Ya, izin atau bukti pendaftaran tersedia</option>
+                    <option value="no">Tidak atau hanya seminar/workshop komersial biasa</option>
+                  </select>
+                </div>
+
+                <div class="field field-full" id="healthCriteriaField" hidden>
+                  <label for="healthCriteria">Apakah jasa diberikan oleh tenaga/fasilitas kesehatan atau pelayanan veteriner yang memenuhi ketentuan?</label>
+                  <select class="select-control" id="healthCriteria">
+                    <option value="">Pilih jawaban</option>
+                    <option value="yes">Ya, jenis layanan dan penyedianya memenuhi ketentuan</option>
+                    <option value="no">Tidak atau merupakan jasa penunjang/nonmedis biasa</option>
+                  </select>
+                </div>
+
+                <div class="field field-full" id="laborCriteriaField" hidden>
+                  <label for="laborCriteria">Apakah seluruh kriteria jasa penyediaan tenaga kerja murni terpenuhi?</label>
+                  <select class="select-control" id="laborCriteria">
+                    <option value="">Pilih jawaban</option>
+                    <option value="yes">Ya, hanya menempatkan/menyalurkan; tidak membayar upah; tidak bertanggung jawab atas hasil; pekerja masuk struktur pengguna</option>
+                    <option value="no">Tidak, salah satu kriteria tidak terpenuhi</option>
+                  </select>
+                </div>
+
+                <div class="field field-full" id="publicTransportCriteriaField" hidden>
+                  <label for="publicTransportCriteria">Apakah benar merupakan angkutan umum, bukan sewa atau carter kendaraan?</label>
+                  <select class="select-control" id="publicTransportCriteria">
+                    <option value="">Pilih jawaban</option>
+                    <option value="yes">Ya, angkutan umum sesuai izin dan pola pelayanannya</option>
+                    <option value="no">Tidak, berupa sewa/carter atau layanan khusus</option>
+                  </select>
+                </div>
+
+                <div class="field field-full" id="constructionPurposeField" hidden>
+                  <label for="constructionPurpose">Tujuan pekerjaan konstruksi</label>
+                  <select class="select-control" id="constructionPurpose">
+                    <option value="">Pilih tujuan pekerjaan</option>
+                    <option value="ordinary">Bangunan/renovasi biasa</option>
+                    <option value="worship">Pembangunan tempat yang hanya untuk keperluan ibadah</option>
+                    <option value="disaster_housing">Bangunan bagi korban bencana nasional dengan dana APBN/APBD/sumbangan</option>
+                  </select>
+                </div>
+
+                <div class="field field-full" id="electricityCriteriaField" hidden>
+                  <label for="electricityCriteria">Apakah tagihan listrik untuk rumah dengan daya di atas 6.600 VA?</label>
+                  <select class="select-control" id="electricityCriteria">
+                    <option value="">Pilih jawaban</option>
+                    <option value="no">Tidak; untuk kantor/fasilitas instansi atau rumah tidak melebihi 6.600 VA</option>
+                    <option value="yes">Ya, untuk rumah dengan daya di atas 6.600 VA</option>
+                  </select>
+                </div>
+
+                <div class="field field-full" id="socialServiceCriteriaField" hidden>
+                  <label for="socialServiceCriteria">Apakah layanan sosial diselenggarakan pemerintah atau organisasi nirlaba dan termasuk jenis layanan sosial yang ditentukan?</label>
+                  <select class="select-control" id="socialServiceCriteria">
+                    <option value="">Pilih jawaban</option>
+                    <option value="yes">Ya, penyelenggara dan jenis layanan memenuhi ketentuan</option>
+                    <option value="no">Tidak atau merupakan jasa komersial biasa</option>
+                  </select>
+                </div>
+
+                <div class="field field-full" id="broadcastCriteriaField" hidden>
+                  <label for="broadcastCriteria">Apakah berupa pesan layanan masyarakat yang tidak bersifat iklan dan disiarkan lembaga penyiaran?</label>
+                  <select class="select-control" id="broadcastCriteria">
+                    <option value="">Pilih jawaban</option>
+                    <option value="yes">Ya, pesan layanan masyarakat dan bukan iklan komersial</option>
+                    <option value="no">Tidak, berupa iklan/promosi komersial atau produksi media biasa</option>
+                  </select>
+                </div>
+
+                <div class="field field-full" id="agriFisheryCriteriaField" hidden>
+                  <label for="agriFisheryCriteria">Apakah jenis barang dan spesifikasinya tercantum dalam daftar/kriteria barang strategis PP 49 Tahun 2022?</label>
+                  <select class="select-control" id="agriFisheryCriteria">
+                    <option value="">Pilih jawaban</option>
+                    <option value="yes">Ya, jenis dan rinciannya dapat dicocokkan dengan ketentuan/lampiran</option>
+                    <option value="no">Tidak atau spesifikasinya belum dapat dibuktikan</option>
+                  </select>
+                </div>
+
+                <div class="field field-full" id="disasterEligibilityField" hidden>
+                  <label for="disasterEligibility">Apakah seluruh syarat fasilitas bencana nasional terpenuhi?</label>
+                  <select class="select-control" id="disasterEligibility">
+                    <option value="">Pilih jawaban</option>
+                    <option value="yes">Ya, bencana telah ditetapkan nasional dan barang/jasa diterima instansi yang menangani bencana untuk penanganannya</option>
+                    <option value="no">Tidak atau belum terdapat penetapan/dokumen yang cukup</option>
+                  </select>
+                </div>
+
+                <div class="field field-full" id="foreignProjectDocumentsField" hidden>
+                  <label for="foreignProjectDocuments">Apakah transaksi terdaftar dalam proyek dan dokumen fasilitas PPN tersedia?</label>
+                  <select class="select-control" id="foreignProjectDocuments">
+                    <option value="">Pilih kondisi dokumen</option>
+                    <option value="yes">Ya, registrasi BKP/JKP dan Surat Keterangan Tidak Dipungut tersedia</option>
+                    <option value="pending">Proyek memang dibiayai hibah/pinjaman luar negeri, tetapi dokumen belum tersedia</option>
+                    <option value="no">Tidak atau transaksi tidak terdaftar dalam dokumen proyek</option>
+                  </select>
+                </div>
+
+                <div class="field field-full" id="defenseEligibilityField" hidden>
+                  <label for="defenseEligibility">Apakah penerima, jenis BKP/JKP, tujuan penggunaan, dan SKB PPN memenuhi ketentuan pertahanan/keamanan?</label>
+                  <select class="select-control" id="defenseEligibility">
+                    <option value="">Pilih jawaban</option>
+                    <option value="yes">Ya, seluruh syarat dan SKB PPN tersedia sebelum transaksi</option>
+                    <option value="pending">Jenis pengadaan berpotensi memenuhi, tetapi SKB/dokumen belum tersedia</option>
+                    <option value="no">Tidak memenuhi daftar penerima, barang/jasa, atau tujuan penggunaan</option>
+                  </select>
+                </div>
+
+                <div class="field field-full" id="specialZoneDocumentsField" hidden>
+                  <label for="specialZoneDocuments">Apakah tersedia dokumen fasilitas kawasan dan arah pemasukan/penyerahan telah diverifikasi?</label>
+                  <select class="select-control" id="specialZoneDocuments">
+                    <option value="">Pilih kondisi dokumen</option>
+                    <option value="yes">Ya, dokumen fasilitas tersedia</option>
+                    <option value="no">Tidak atau belum diverifikasi</option>
+                  </select>
+                  <span class="hint">
+                    Sistem akan menandai transaksi untuk telaah karena fasilitas kawasan bergantung pada asal/tujuan barang, pelaku, dan dokumen kepabeanan/perpajakan.
+                  </span>
+                </div>
+              </div>
             </div>
 
             <div class="conditional-panel" id="manualProfilePanel" hidden>
@@ -1957,7 +2149,7 @@
                     <option value="">Pilih perlakuan</option>
                     <option value="taxable_general">Terutang PPN umum</option>
                     <option value="non_vat">Bukan objek PPN</option>
-                    <option value="exempt">Dibebaskan dari PPN</option>
+                    <option value="facility_review">Berpotensi mendapat fasilitas — perlu uji lanjutan</option>
                     <option value="special_review">Formula khusus/perlu telaah</option>
                   </select>
                 </div>
@@ -2053,8 +2245,8 @@
             <div class="info-icon" aria-hidden="true">⌘</div>
             <h3>Urutan pengujian</h3>
             <p>
-              Sistem tidak hanya melihat nominal. Status objek PPN, status PKP,
-              isi tagihan, cara pembayaran, pihak penyedia, dan pemecahan
+              Sistem tidak hanya melihat nominal. Status objek PPN, fasilitas otomatis,
+              status PKP, isi tagihan, cara pembayaran, pihak penyedia, dan pemecahan
               transaksi diuji secara berurutan.
             </p>
 
@@ -2069,7 +2261,7 @@
               </div>
               <div class="rule-item">
                 <span class="rule-number">3</span>
-                <span>Apakah terdapat fasilitas atau pengecualian?</span>
+                <span>Apakah fasilitas otomatis terpenuhi dan dokumennya tersedia?</span>
               </div>
               <div class="rule-item">
                 <span class="rule-number">4</span>
@@ -2094,8 +2286,8 @@
             <h3>Rekanan non-PKP</h3>
             <p>
               Bendahara harus melihat invoice atau dokumen tagihan. Jika PPN
-              tercantum, instansi memungut nominal PPN tersebut dan menyetorkannya
-              sebagai PPN tanggung jawab secara renteng dengan KAP 411211 dan
+              tercantum, sistem lebih dahulu menguji fasilitas dan menghitung ulang PPN.
+              Nilai yang benar disetor sebagai tanggung renteng dengan KAP 411211 dan
               KJS 108. Jika PPN tidak tercantum, instansi tidak memungut PPN.
             </p>
           </section>
@@ -2150,11 +2342,35 @@
                 <span>↗</span>
               </a>
               <a
+                href="https://jdih.kemenkeu.go.id/dok/pmk-80-tahun-2024/summary"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span>PMK 80 Tahun 2024 — proyek hibah/pinjaman luar negeri</span>
+                <span>↗</span>
+              </a>
+              <a
+                href="https://jdih.kemenkeu.go.id/dok/pmk-157-tahun-2023/summary"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span>PMK 157 Tahun 2023 s.t.d.d. PMK 45 Tahun 2025</span>
+                <span>↗</span>
+              </a>
+              <a
+                href="https://jdih.kemenkeu.go.id/dok/5-pmk-010-2020"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span>PMK 5/PMK.010/2020 — buku yang dibebaskan</span>
+                <span>↗</span>
+              </a>
+              <a
                 href="https://jdih.kemenkeu.go.id/dok/pmk-11-tahun-2025/view"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <span>PMK 11 Tahun 2025 dan perubahannya</span>
+                <span>PMK 11 Tahun 2025 s.t.d.d. PMK 53/2025 dan PMK 1/2026</span>
                 <span>↗</span>
               </a>
             </div>
@@ -2234,8 +2450,8 @@
             <span class="logic-number">1</span>
             <h3>Barang atau jasa</h3>
             <p>
-              Tentukan apakah objek PPN, bukan objek, dibebaskan, atau memakai
-              formula khusus.
+              Tentukan apakah objek PPN, bukan objek, atau termasuk kategori
+              fasilitas yang dapat diuji otomatis.
             </p>
           </article>
 
@@ -2243,8 +2459,8 @@
             <span class="logic-number">2</span>
             <h3>Status rekanan</h3>
             <p>
-              Untuk PKP berlaku mekanisme pemungut berdasarkan PMK 59/2022.
-              Untuk non-PKP, bendahara memeriksa PPN pada tagihan dan sistem menghitung ulang nilainya.
+              Sistem lebih dahulu menetapkan fasilitas dari fakta transaksi, lalu
+              membedakan jalur PKP dan non-PKP serta menghitung ulang PPN pada tagihan.
             </p>
           </article>
 
@@ -2302,8 +2518,8 @@
       Aplikasi ini merupakan alat bantu edukasi umum dan bukan situs resmi
       Direktorat Jenderal Pajak. Hasil harus dikonfirmasi dengan kontrak,
       faktur/dokumen tagihan, pencantuman PPN, status PKP rekanan dan instansi,
-      karakter barang atau jasa, fasilitas perpajakan, serta ketentuan terbaru sebelum digunakan untuk pemenuhan
-      kewajiban perpajakan.
+      karakter barang atau jasa, tujuan penggunaan, sumber pembiayaan, izin penyedia,
+      dokumen fasilitas, serta ketentuan terbaru sebelum digunakan untuk pemenuhan kewajiban perpajakan.
     </div>
 
     <div class="footer-inner">
@@ -2429,11 +2645,11 @@
       },
       {
         id: "staple_food",
-        name: "Beras, gabah, jagung, sagu, kedelai, garam, daging, telur, susu, buah, atau sayur",
+        name: "Beras, gabah, jagung, sagu, kedelai, garam, gula konsumsi, daging, telur, susu, buah, atau sayur",
         type: "Barang",
         icon: "♧",
         profile: "exempt",
-        keywords: "beras gabah jagung sagu kedelai garam daging telur susu buah sayur kebutuhan pokok",
+        keywords: "beras gabah jagung sagu kedelai garam gula konsumsi daging telur susu buah sayur kebutuhan pokok",
         note: "Kelompok kebutuhan pokok tertentu dibebaskan dari pengenaan PPN."
       },
       {
@@ -2743,6 +2959,192 @@
       }
     ];
 
+    const FACILITY_ADDITIONAL_ITEMS = [
+      {
+        id: "electricity",
+        name: "Listrik, biaya penyambungan, dan biaya beban listrik",
+        type: "Barang",
+        icon: "⚡",
+        profile: "exempt",
+        keywords: "listrik pln sambungan listrik beban listrik rekening listrik",
+        note: "Dibebaskan, kecuali listrik untuk rumah dengan daya di atas 6.600 VA."
+      },
+      {
+        id: "clean_water",
+        name: "Air bersih, biaya pasang/sambung, dan biaya beban tetap",
+        type: "Barang",
+        icon: "◒",
+        profile: "exempt",
+        keywords: "air bersih pdam sambungan air beban tetap air minum",
+        note: "Dibebaskan; tidak termasuk air yang diolah khusus dan dikemas atau air minum isi ulang."
+      },
+      {
+        id: "social_service",
+        name: "Jasa pelayanan sosial tertentu",
+        type: "Jasa",
+        icon: "♥",
+        profile: "exempt",
+        keywords: "panti asuhan panti jompo pemadam kebakaran pertolongan kecelakaan rehabilitasi pemakaman krematorium olahraga sosial",
+        note: "Dibebaskan jika diselenggarakan pemerintah/organisasi nirlaba dan termasuk jenis pelayanan sosial yang ditentukan."
+      },
+      {
+        id: "postage_stamp",
+        name: "Jasa pengiriman surat dengan prangko",
+        type: "Jasa",
+        icon: "✉",
+        profile: "exempt",
+        keywords: "surat prangko pos wesel surat pos",
+        note: "Jasa pengiriman surat dengan prangko atau penggantinya dibebaskan dari PPN."
+      },
+      {
+        id: "public_service_broadcast",
+        name: "Penyiaran pesan layanan masyarakat yang tidak bersifat iklan",
+        type: "Jasa",
+        icon: "◉",
+        profile: "exempt",
+        keywords: "penyiaran layanan masyarakat televisi radio iklan layanan masyarakat",
+        note: "Dibebaskan jika berupa pesan layanan masyarakat, tidak bersifat iklan komersial, dan disiarkan lembaga penyiaran."
+      },
+      {
+        id: "packaged_water",
+        name: "Air minum kemasan atau air minum isi ulang",
+        type: "Barang",
+        icon: "◍",
+        profile: "taxable_general",
+        keywords: "air minum kemasan botol galon isi ulang depot air minum",
+        note: "Tidak termasuk air bersih yang dibebaskan; pada umumnya terutang PPN."
+      },
+      {
+        id: "agri_fishery_strategic",
+        name: "Bibit/benih, ternak, pakan, bahan pakan, atau hasil kelautan/perikanan tertentu",
+        type: "Barang strategis",
+        icon: "♧",
+        profile: "exempt",
+        keywords: "bibit benih ternak pakan ternak pakan ikan bahan pakan hasil kelautan perikanan ikan budidaya pertanian",
+        note: "Dibebaskan hanya jika jenis dan rinciannya termasuk daftar/kriteria barang strategis dalam PP 49 Tahun 2022."
+      },
+      {
+        id: "defense_transport",
+        name: "Alat angkutan air/bawah air/udara/kereta dan alat keselamatannya untuk pertahanan atau keamanan",
+        type: "Barang strategis",
+        icon: "✦",
+        profile: "taxable_general",
+        keywords: "kapal pesawat kereta alat angkutan pertahanan keamanan keselamatan pelayaran penerbangan",
+        note: "Dapat memperoleh fasilitas PPN tidak dipungut untuk penerima, objek, penggunaan, dan dokumen yang memenuhi ketentuan."
+      },
+      {
+        id: "defense_goods",
+        name: "Senjata, amunisi, perlengkapan antipeluru, kendaraan khusus, radar, atau suku cadangnya",
+        type: "Barang strategis",
+        icon: "◈",
+        profile: "taxable_general",
+        keywords: "pertahanan keamanan senjata amunisi helm antipeluru rompi antipeluru kendaraan khusus radar suku cadang",
+        note: "Dapat dibebaskan untuk penerima dan tujuan tertentu dengan SKB PPN sesuai ketentuan pertahanan/keamanan."
+      },
+      {
+        id: "defense_mapping_service",
+        name: "Jasa/peralatan data batas, peta topografi, hidrografi, atau foto udara untuk pertahanan",
+        type: "Barang/Jasa strategis",
+        icon: "⌖",
+        profile: "taxable_general",
+        keywords: "peta topografi hidrografi foto udara data batas pertahanan TNI",
+        note: "Dapat dibebaskan untuk kementerian pertahanan/TNI dengan tujuan dan SKB PPN yang sesuai."
+      }
+    ];
+
+    VAT_ITEMS.splice(VAT_ITEMS.length - 1, 0, ...FACILITY_ADDITIONAL_ITEMS);
+
+    const FACILITY_ITEM_RULES = {
+      education_book: {
+        rule: "auto_exempt",
+        title: "PPN dibebaskan otomatis berdasarkan jenis barang",
+        basis: "PP 49 Tahun 2022 Pasal 3 ayat (1) huruf b dan PMK 5/PMK.010/2020",
+        explanation: "Buku pelajaran umum, kitab suci, dan buku pelajaran agama dibebaskan tanpa SKB PPN."
+      },
+      general_book: {
+        rule: "book_criteria",
+        basis: "PP 49 Tahun 2022 Pasal 3 ayat (1) huruf b dan PMK 5/PMK.010/2020"
+      },
+      staple_food: {
+        rule: "auto_exempt",
+        title: "PPN dibebaskan otomatis berdasarkan jenis barang",
+        basis: "PP 49 Tahun 2022 Pasal 6 ayat (2) huruf q dan Pasal 7",
+        explanation: "Barang kebutuhan pokok tertentu dalam daftar PP 49 Tahun 2022 dibebaskan tanpa SKB PPN."
+      },
+      training_licensed: {
+        rule: "education_license",
+        basis: "PP 49 Tahun 2022 Pasal 10 huruf f dan Pasal 16"
+      },
+      health_service: {
+        rule: "health_criteria",
+        basis: "PP 49 Tahun 2022 Pasal 10 huruf a dan Pasal 11"
+      },
+      labor_supply: {
+        rule: "labor_criteria",
+        basis: "PP 49 Tahun 2022 Pasal 10 huruf i dan Pasal 22"
+      },
+      public_transport: {
+        rule: "public_transport_criteria",
+        basis: "PP 49 Tahun 2022 Pasal 10 huruf h dan Pasal 18 sampai dengan Pasal 21"
+      },
+      financial_service: {
+        rule: "auto_exempt",
+        title: "PPN dibebaskan otomatis berdasarkan jenis jasa",
+        basis: "PP 49 Tahun 2022 Pasal 10 huruf d dan Pasal 14",
+        explanation: "Jasa keuangan yang memenuhi rincian dalam PP 49 Tahun 2022 dibebaskan tanpa SKB PPN."
+      },
+      insurance: {
+        rule: "auto_exempt",
+        title: "PPN dibebaskan otomatis berdasarkan jenis jasa",
+        basis: "PP 49 Tahun 2022 Pasal 10 huruf e dan Pasal 15",
+        explanation: "Jasa asuransi, asuransi jiwa, dan reasuransi dibebaskan; jasa penunjangnya tidak termasuk."
+      },
+      construction: {
+        rule: "construction_purpose",
+        basis: "PP 49 Tahun 2022 Pasal 4"
+      },
+      electricity: {
+        rule: "electricity_criteria",
+        basis: "PP 49 Tahun 2022 Pasal 6 ayat (2) huruf l"
+      },
+      clean_water: {
+        rule: "auto_exempt",
+        title: "PPN dibebaskan otomatis berdasarkan jenis barang",
+        basis: "PP 49 Tahun 2022 Pasal 6 ayat (2) huruf m dan Pasal 8",
+        explanation: "Air bersih beserta biaya pasang/sambung dan beban tetap dibebaskan; air kemasan/isi ulang dikecualikan."
+      },
+      social_service: {
+        rule: "social_service_criteria",
+        basis: "PP 49 Tahun 2022 Pasal 10 huruf b dan Pasal 12"
+      },
+      postage_stamp: {
+        rule: "auto_exempt",
+        title: "PPN dibebaskan otomatis berdasarkan jenis jasa",
+        basis: "PP 49 Tahun 2022 Pasal 10 huruf c dan Pasal 13",
+        explanation: "Jasa pengiriman surat dengan prangko atau penggantinya dibebaskan tanpa SKB PPN."
+      },
+      public_service_broadcast: {
+        rule: "broadcast_criteria",
+        basis: "PP 49 Tahun 2022 Pasal 10 huruf g dan Pasal 17"
+      },
+      agri_fishery_strategic: {
+        rule: "agri_fishery_criteria",
+        basis: "PP 49 Tahun 2022 Pasal 6 sampai dengan Pasal 9 dan Lampirannya"
+      },
+      defense_transport: {
+        rule: "defense_not_collected",
+        basis: "PP 49 Tahun 2022 Pasal 25 sampai dengan Pasal 27 dan ketentuan pelaksanaannya"
+      },
+      defense_goods: {
+        rule: "defense_skb",
+        basis: "PP 49 Tahun 2022 dan PMK 157 Tahun 2023 sebagaimana diubah dengan PMK 45 Tahun 2025"
+      },
+      defense_mapping_service: {
+        rule: "defense_skb",
+        basis: "PP 49 Tahun 2022 dan PMK 157 Tahun 2023 sebagaimana diubah dengan PMK 45 Tahun 2025"
+      }
+    };
+
     const form = document.getElementById("vatForm");
     const itemSearch = document.getElementById("itemSearch");
     const itemOptions = document.getElementById("itemOptions");
@@ -2765,7 +3167,39 @@
     const splitQuestionField = document.getElementById("splitQuestionField");
     const splitPanel = document.getElementById("splitPanel");
     const actualTransactionInput = document.getElementById("actualTransactionInput");
-    const facilityStatus = document.getElementById("facilityStatus");
+    const facilityAssistantPanel = document.getElementById("facilityAssistantPanel");
+    const facilityContext = document.getElementById("facilityContext");
+    const facilityAutoStatus = document.getElementById("facilityAutoStatus");
+    const facilityAutoTitle = document.getElementById("facilityAutoTitle");
+    const facilityAutoText = document.getElementById("facilityAutoText");
+    const bookCriteriaField = document.getElementById("bookCriteriaField");
+    const bookCriteria = document.getElementById("bookCriteria");
+    const educationLicenseField = document.getElementById("educationLicenseField");
+    const educationLicense = document.getElementById("educationLicense");
+    const healthCriteriaField = document.getElementById("healthCriteriaField");
+    const healthCriteria = document.getElementById("healthCriteria");
+    const laborCriteriaField = document.getElementById("laborCriteriaField");
+    const laborCriteria = document.getElementById("laborCriteria");
+    const publicTransportCriteriaField = document.getElementById("publicTransportCriteriaField");
+    const publicTransportCriteria = document.getElementById("publicTransportCriteria");
+    const constructionPurposeField = document.getElementById("constructionPurposeField");
+    const constructionPurpose = document.getElementById("constructionPurpose");
+    const electricityCriteriaField = document.getElementById("electricityCriteriaField");
+    const electricityCriteria = document.getElementById("electricityCriteria");
+    const socialServiceCriteriaField = document.getElementById("socialServiceCriteriaField");
+    const socialServiceCriteria = document.getElementById("socialServiceCriteria");
+    const broadcastCriteriaField = document.getElementById("broadcastCriteriaField");
+    const broadcastCriteria = document.getElementById("broadcastCriteria");
+    const agriFisheryCriteriaField = document.getElementById("agriFisheryCriteriaField");
+    const agriFisheryCriteria = document.getElementById("agriFisheryCriteria");
+    const disasterEligibilityField = document.getElementById("disasterEligibilityField");
+    const disasterEligibility = document.getElementById("disasterEligibility");
+    const foreignProjectDocumentsField = document.getElementById("foreignProjectDocumentsField");
+    const foreignProjectDocuments = document.getElementById("foreignProjectDocuments");
+    const defenseEligibilityField = document.getElementById("defenseEligibilityField");
+    const defenseEligibility = document.getElementById("defenseEligibility");
+    const specialZoneDocumentsField = document.getElementById("specialZoneDocumentsField");
+    const specialZoneDocuments = document.getElementById("specialZoneDocuments");
     const manualProfilePanel = document.getElementById("manualProfilePanel");
     const manualVatProfile = document.getElementById("manualVatProfile");
     const fuelPanel = document.getElementById("fuelPanel");
@@ -2969,6 +3403,460 @@
       buttons[activeOptionIndex].scrollIntoView({ block: "nearest" });
     }
 
+    function hideFacilityQualificationFields() {
+      [
+        bookCriteriaField,
+        educationLicenseField,
+        healthCriteriaField,
+        laborCriteriaField,
+        publicTransportCriteriaField,
+        constructionPurposeField,
+        electricityCriteriaField,
+        socialServiceCriteriaField,
+        broadcastCriteriaField,
+        agriFisheryCriteriaField,
+        disasterEligibilityField,
+        foreignProjectDocumentsField,
+        defenseEligibilityField,
+        specialZoneDocumentsField
+      ].forEach((field) => {
+        field.hidden = true;
+      });
+    }
+
+    function makeFacilityDecision({
+      status = "none",
+      title = "Tidak ada fasilitas PPN khusus yang teridentifikasi",
+      explanation = "Transaksi dilanjutkan ke pengujian pemungutan PPN biasa.",
+      basis = "PMK 59/PMK.03/2022 dan ketentuan PPN umum",
+      effectiveProfile = null,
+      requiredAnswers = [],
+      reasons = [],
+      actions = []
+    } = {}) {
+      return {
+        status,
+        title,
+        explanation,
+        basis,
+        effectiveProfile,
+        requiredAnswers,
+        reasons,
+        actions
+      };
+    }
+
+    function resolveAutomaticFacility(item) {
+      if (!item) {
+        return makeFacilityDecision({
+          status: "review",
+          title: "Pilih barang atau jasa terlebih dahulu",
+          explanation: "Sistem akan menguji fasilitas setelah jenis transaksi dipilih.",
+          requiredAnswers: []
+        });
+      }
+
+      const rawProfile = resolveProfile(item);
+      const context = facilityContext.value;
+      const itemRule = FACILITY_ITEM_RULES[item.id] || null;
+
+      if (rawProfile === "non_vat") {
+        return makeFacilityDecision({
+          status: "not_applicable",
+          title: "Bukan objek PPN — fasilitas tidak diperlukan",
+          explanation: item.note,
+          basis: "UU PPN dan ketentuan pajak daerah yang berlaku",
+          effectiveProfile: "non_vat",
+          reasons: ["Transaksi diklasifikasikan sebagai bukan objek PPN, bukan sebagai transaksi yang memperoleh fasilitas."],
+          actions: ["Pastikan isi transaksi sesuai dengan kategori bukan objek PPN yang dipilih."]
+        });
+      }
+
+      if (context === "national_disaster" && item.id !== "construction") {
+        if (!disasterEligibility.value) {
+          return makeFacilityDecision({
+            status: "review",
+            title: "Jawab syarat fasilitas bencana nasional",
+            explanation: "Pembebasan hanya berlaku jika penetapan, penerima, dan tujuan penggunaan memenuhi ketentuan.",
+            basis: "PP 49 Tahun 2022 Pasal 3 ayat (1) huruf c dan Pasal 4",
+            requiredAnswers: ["disasterEligibility"]
+          });
+        }
+        if (disasterEligibility.value === "yes") {
+          return makeFacilityDecision({
+            status: "exempt",
+            title: "PPN dibebaskan untuk penanganan bencana nasional",
+            explanation: "Barang/jasa diterima instansi yang menangani bencana untuk penanganan bencana yang ditetapkan nasional. Fasilitas ini tidak menggunakan SKB PPN.",
+            basis: "PP 49 Tahun 2022 Pasal 3 sampai dengan Pasal 5",
+            effectiveProfile: rawProfile,
+            reasons: ["Konteks transaksi memenuhi syarat khusus penanganan bencana nasional."],
+            actions: ["Simpan penetapan bencana nasional, dokumen penugasan instansi, kontrak, dan rincian penggunaan barang/jasa."]
+          });
+        }
+      }
+
+      if (context === "foreign_grant_loan") {
+        if (!foreignProjectDocuments.value) {
+          return makeFacilityDecision({
+            status: "review",
+            title: "Konfirmasi dokumen proyek hibah/pinjaman luar negeri",
+            explanation: "Fasilitas tidak dipungut bergantung pada registrasi transaksi dan Surat Keterangan Tidak Dipungut.",
+            basis: "PMK 80 Tahun 2024",
+            requiredAnswers: ["foreignProjectDocuments"]
+          });
+        }
+        if (foreignProjectDocuments.value === "yes") {
+          return makeFacilityDecision({
+            status: "not_collected",
+            title: "PPN tidak dipungut untuk proyek hibah/pinjaman luar negeri",
+            explanation: "Transaksi terdaftar dalam proyek dan dokumen fasilitas tersedia.",
+            basis: "PMK 80 Tahun 2024",
+            effectiveProfile: rawProfile,
+            reasons: ["Perolehan BKP/JKP terkait proyek pemerintah yang dibiayai hibah atau pinjaman luar negeri telah didukung dokumen fasilitas."],
+            actions: ["Cocokkan kontraktor utama, nomor registrasi BKP/JKP, dan Surat Keterangan Tidak Dipungut dengan tagihan."]
+          });
+        }
+        if (foreignProjectDocuments.value === "pending") {
+          return makeFacilityDecision({
+            status: "review",
+            title: "Fasilitas belum dapat digunakan",
+            explanation: "Sumber pembiayaan saja belum cukup. Dokumen registrasi dan Surat Keterangan Tidak Dipungut harus tersedia sesuai ketentuan.",
+            basis: "PMK 80 Tahun 2024",
+            effectiveProfile: rawProfile,
+            reasons: ["Dokumen fasilitas proyek belum tersedia."],
+            actions: ["Tunda penggunaan fasilitas sampai registrasi dan surat keterangan diterbitkan atau perlakukan transaksi sesuai PPN umum."]
+          });
+        }
+      }
+
+      const defenseRule = itemRule && ["defense_skb", "defense_not_collected"].includes(itemRule.rule)
+        ? itemRule.rule
+        : "";
+      const needsDefenseQuestion = Boolean(defenseRule) || context === "defense_security";
+      if (needsDefenseQuestion) {
+        if (!defenseRule) {
+          return makeFacilityDecision({
+            status: "review",
+            title: "Barang/jasa belum teridentifikasi sebagai objek fasilitas pertahanan/keamanan",
+            explanation: "Tujuan pertahanan atau keamanan saja tidak membuat seluruh pembelian dibebaskan atau tidak dipungut PPN.",
+            basis: "PP 49 Tahun 2022",
+            effectiveProfile: rawProfile,
+            reasons: ["Jenis barang/jasa yang dipilih tidak termasuk kategori pertahanan/keamanan yang dipetakan dalam katalog."],
+            actions: ["Pilih kategori barang strategis pertahanan yang lebih spesifik atau telaah daftar objek dalam PP 49 Tahun 2022."]
+          });
+        }
+        if (!defenseEligibility.value) {
+          return makeFacilityDecision({
+            status: "review",
+            title: "Konfirmasi syarat fasilitas pertahanan/keamanan",
+            explanation: "Fasilitas bergantung pada penerima, jenis barang/jasa, tujuan penggunaan, dan dokumen fasilitas.",
+            basis: itemRule.basis,
+            requiredAnswers: ["defenseEligibility"]
+          });
+        }
+        if (defenseEligibility.value === "yes") {
+          const isNotCollected = defenseRule === "defense_not_collected";
+          return makeFacilityDecision({
+            status: isNotCollected ? "not_collected" : "exempt",
+            title: isNotCollected
+              ? "PPN tidak dipungut atas alat angkutan strategis pertahanan/keamanan"
+              : "PPN dibebaskan untuk keperluan pertahanan/keamanan",
+            explanation: isNotCollected
+              ? "Penerima, objek, tujuan penggunaan, dan dokumen fasilitas tidak dipungut dinyatakan terpenuhi."
+              : "Penerima dan objek memenuhi ketentuan serta SKB PPN tersedia sebelum transaksi.",
+            basis: itemRule.basis,
+            effectiveProfile: rawProfile,
+            reasons: ["Seluruh persyaratan substantif dan dokumen fasilitas dinyatakan terpenuhi."],
+            actions: ["Cocokkan nomor dokumen fasilitas, penerima, jenis barang/jasa, nilai, tujuan penggunaan, dan masa berlaku dengan kontrak dan invoice."]
+          });
+        }
+        if (defenseEligibility.value === "pending") {
+          return makeFacilityDecision({
+            status: "review",
+            title: "Dokumen fasilitas belum tersedia",
+            explanation: "Transaksi berpotensi memperoleh fasilitas, tetapi fasilitas belum dapat digunakan sebelum dokumen yang dipersyaratkan tersedia.",
+            basis: itemRule.basis,
+            effectiveProfile: rawProfile,
+            reasons: ["SKB PPN, Surat Keterangan Tidak Dipungut, atau dokumen pendukung belum tersedia."],
+            actions: ["Selesaikan dokumen fasilitas sebelum penyerahan atau perlakukan transaksi sesuai ketentuan PPN umum."]
+          });
+        }
+      }
+
+      if (context === "special_zone") {
+        if (!specialZoneDocuments.value) {
+          return makeFacilityDecision({
+            status: "review",
+            title: "Konfirmasi dokumen fasilitas kawasan",
+            explanation: "Lokasi kawasan saja tidak cukup untuk menetapkan PPN tidak dipungut.",
+            basis: "Ketentuan KPBPB, KEK, dan tempat berfasilitas kepabeanan yang berlaku",
+            requiredAnswers: ["specialZoneDocuments"]
+          });
+        }
+        if (specialZoneDocuments.value === "no") {
+          return makeFacilityDecision({
+            status: "none",
+            title: "Fasilitas kawasan tidak dapat digunakan",
+            explanation: "Dokumen fasilitas kawasan tidak tersedia atau belum memenuhi ketentuan.",
+            basis: "Ketentuan KPBPB, KEK, dan tempat berfasilitas kepabeanan yang berlaku",
+            effectiveProfile: rawProfile,
+            reasons: ["Lokasi kawasan saja tidak cukup untuk memperoleh fasilitas."],
+            actions: ["Lanjutkan pengujian sebagai transaksi PPN biasa atau lengkapi dokumen sebelum transaksi."]
+          });
+        }
+        return makeFacilityDecision({
+          status: "review",
+          title: "Berpotensi memperoleh fasilitas kawasan — perlu verifikasi arah transaksi",
+          explanation: "Asal dan tujuan barang/jasa, status pelaku, endorsement/PPBJ, serta dokumen kepabeanan menentukan apakah PPN tidak dipungut.",
+          basis: "Ketentuan KPBPB, KEK, dan tempat berfasilitas kepabeanan yang berlaku",
+          effectiveProfile: rawProfile,
+          reasons: ["Fasilitas kawasan tidak dapat ditentukan hanya dari nama barang/jasa atau alamat rekanan."],
+          actions: ["Periksa asal/tujuan penyerahan, PPBJ atau dokumen sejenis, endorsement, dan dokumen kepabeanan sebelum menggunakan fasilitas."]
+        });
+      }
+
+      if (!itemRule) {
+        if (rawProfile === "exempt") {
+          return makeFacilityDecision({
+            status: "exempt",
+            title: "PPN dibebaskan berdasarkan kategori barang/jasa",
+            explanation: item.note,
+            basis: "PP 49 Tahun 2022",
+            effectiveProfile: rawProfile,
+            reasons: [item.note],
+            actions: ["Pastikan rincian transaksi sama dengan kategori yang dipilih dan simpan dokumen pendukung."]
+          });
+        }
+        if (rawProfile === "facility_review") {
+          return makeFacilityDecision({
+            status: "review",
+            title: "Fasilitas belum dapat ditentukan otomatis",
+            explanation: "Barang/jasa lainnya memerlukan identifikasi dasar hukum dan dokumen fasilitas yang lebih spesifik.",
+            basis: "Peraturan fasilitas PPN sesuai karakter transaksi",
+            effectiveProfile: "taxable_general",
+            reasons: ["Katalog belum memiliki aturan otomatis untuk transaksi ini."],
+            actions: ["Telaah kontrak, spesifikasi, penerima, tujuan penggunaan, lokasi, dan dokumen fasilitas."]
+          });
+        }
+        return makeFacilityDecision({ effectiveProfile: rawProfile });
+      }
+
+      if (itemRule.rule === "auto_exempt") {
+        return makeFacilityDecision({
+          status: "exempt",
+          title: itemRule.title,
+          explanation: itemRule.explanation,
+          basis: itemRule.basis,
+          effectiveProfile: rawProfile,
+          reasons: [itemRule.explanation],
+          actions: ["Pastikan nama dan spesifikasi pada tagihan benar-benar sesuai dengan kategori fasilitas yang dipilih."]
+        });
+      }
+
+      const conditionalRules = {
+        book_criteria: {
+          element: bookCriteria,
+          fieldId: "bookCriteria",
+          yesExplanation: "Buku memenuhi kriteria buku umum yang mengandung unsur pendidikan.",
+          noExplanation: "Buku tidak memenuhi atau belum dapat dibuktikan memenuhi kriteria pembebasan."
+        },
+        education_license: {
+          element: educationLicense,
+          fieldId: "educationLicense",
+          yesExplanation: "Penyelenggara memiliki izin/pendaftaran yang dipersyaratkan untuk jasa pendidikan atau pelatihan kerja.",
+          noExplanation: "Kegiatan merupakan seminar/workshop komersial atau penyelenggara tidak memiliki izin yang dipersyaratkan."
+        },
+        health_criteria: {
+          element: healthCriteria,
+          fieldId: "healthCriteria",
+          yesExplanation: "Jenis pelayanan dan penyedia memenuhi kriteria jasa kesehatan medis/veteriner.",
+          noExplanation: "Jasa tidak memenuhi kriteria pelayanan kesehatan yang dibebaskan."
+        },
+        labor_criteria: {
+          element: laborCriteria,
+          fieldId: "laborCriteria",
+          yesExplanation: "Seluruh kriteria jasa penyediaan tenaga kerja murni dinyatakan terpenuhi.",
+          noExplanation: "Salah satu kriteria penyediaan tenaga kerja murni tidak terpenuhi."
+        },
+        public_transport_criteria: {
+          element: publicTransportCriteria,
+          fieldId: "publicTransportCriteria",
+          yesExplanation: "Jasa merupakan angkutan umum sesuai ketentuan, bukan sewa atau carter.",
+          noExplanation: "Jasa berupa sewa/carter atau tidak memenuhi kriteria angkutan umum."
+        },
+        social_service_criteria: {
+          element: socialServiceCriteria,
+          fieldId: "socialServiceCriteria",
+          yesExplanation: "Penyelenggara dan jenis pelayanan sosial memenuhi ketentuan pembebasan.",
+          noExplanation: "Penyelenggara atau jenis layanan tidak memenuhi kriteria pelayanan sosial yang dibebaskan."
+        },
+        broadcast_criteria: {
+          element: broadcastCriteria,
+          fieldId: "broadcastCriteria",
+          yesExplanation: "Penyiaran berupa pesan layanan masyarakat yang tidak bersifat iklan.",
+          noExplanation: "Jasa merupakan iklan/promosi komersial atau produksi media biasa."
+        },
+        agri_fishery_criteria: {
+          element: agriFisheryCriteria,
+          fieldId: "agriFisheryCriteria",
+          yesExplanation: "Jenis dan spesifikasi barang dapat dicocokkan dengan daftar/kriteria barang strategis dalam PP 49 Tahun 2022.",
+          noExplanation: "Jenis atau spesifikasi barang belum dapat dibuktikan termasuk daftar barang strategis yang dibebaskan."
+        }
+      };
+
+      if (conditionalRules[itemRule.rule]) {
+        const config = conditionalRules[itemRule.rule];
+        if (!config.element.value) {
+          return makeFacilityDecision({
+            status: "review",
+            title: "Jawab kriteria fasilitas barang/jasa",
+            explanation: "Nama barang/jasa belum cukup; sistem membutuhkan konfirmasi kriteria substantif.",
+            basis: itemRule.basis,
+            requiredAnswers: [config.fieldId]
+          });
+        }
+        if (config.element.value === "yes") {
+          return makeFacilityDecision({
+            status: "exempt",
+            title: "PPN dibebaskan — kriteria terkonfirmasi",
+            explanation: config.yesExplanation,
+            basis: itemRule.basis,
+            effectiveProfile: rawProfile,
+            reasons: [config.yesExplanation],
+            actions: ["Simpan izin, rincian layanan, dan dokumen lain yang membuktikan terpenuhinya kriteria."]
+          });
+        }
+        return makeFacilityDecision({
+          status: "none",
+          title: "Tidak memenuhi fasilitas pembebasan",
+          explanation: config.noExplanation,
+          basis: itemRule.basis,
+          effectiveProfile: "taxable_general",
+          reasons: [config.noExplanation],
+          actions: ["Lanjutkan pengujian pemungutan sebagai transaksi terutang PPN umum."]
+        });
+      }
+
+      if (itemRule.rule === "construction_purpose") {
+        if (!constructionPurpose.value) {
+          return makeFacilityDecision({
+            status: "review",
+            title: "Tentukan tujuan pekerjaan konstruksi",
+            explanation: "Pembebasan hanya berlaku untuk kategori konstruksi tertentu.",
+            basis: itemRule.basis,
+            requiredAnswers: ["constructionPurpose"]
+          });
+        }
+        if (["worship", "disaster_housing"].includes(constructionPurpose.value)) {
+          return makeFacilityDecision({
+            status: "exempt",
+            title: constructionPurpose.value === "worship"
+              ? "PPN dibebaskan untuk pembangunan tempat ibadah"
+              : "PPN dibebaskan untuk bangunan korban bencana nasional",
+            explanation: constructionPurpose.value === "worship"
+              ? "Pekerjaan hanya untuk pembangunan tempat yang digunakan bagi keperluan ibadah."
+              : "Bangunan diperuntukkan bagi korban bencana nasional dan dibiayai APBN, APBD, dan/atau sumbangan.",
+            basis: itemRule.basis,
+            effectiveProfile: rawProfile,
+            reasons: ["Tujuan pekerjaan termasuk kategori konstruksi yang dibebaskan tanpa SKB PPN."],
+            actions: ["Simpan kontrak, spesifikasi penggunaan bangunan, sumber biaya, dan dokumen penetapan bencana jika relevan."]
+          });
+        }
+        return makeFacilityDecision({
+          status: "none",
+          title: "Konstruksi biasa tidak memperoleh pembebasan otomatis",
+          explanation: "Pekerjaan tidak termasuk pembangunan tempat ibadah atau bangunan bagi korban bencana nasional.",
+          basis: itemRule.basis,
+          effectiveProfile: "taxable_general"
+        });
+      }
+
+      if (itemRule.rule === "electricity_criteria") {
+        if (!electricityCriteria.value) {
+          return makeFacilityDecision({
+            status: "review",
+            title: "Konfirmasi jenis pelanggan listrik",
+            explanation: "Pengecualian pembebasan berlaku untuk listrik rumah dengan daya di atas 6.600 VA.",
+            basis: itemRule.basis,
+            requiredAnswers: ["electricityCriteria"]
+          });
+        }
+        if (electricityCriteria.value === "no") {
+          return makeFacilityDecision({
+            status: "exempt",
+            title: "PPN dibebaskan atas listrik",
+            explanation: "Tagihan bukan listrik rumah dengan daya di atas 6.600 VA.",
+            basis: itemRule.basis,
+            effectiveProfile: rawProfile,
+            reasons: ["Listrik termasuk biaya penyambungan dan biaya beban dibebaskan, dengan pengecualian tertentu untuk rumah berdaya tinggi."],
+            actions: ["Simpan rekening/tagihan yang menunjukkan identitas pelanggan dan daya listrik."]
+          });
+        }
+        return makeFacilityDecision({
+          status: "none",
+          title: "Listrik rumah di atas 6.600 VA tidak dibebaskan",
+          explanation: "Transaksi masuk pengecualian dari fasilitas pembebasan listrik.",
+          basis: itemRule.basis,
+          effectiveProfile: "taxable_general"
+        });
+      }
+
+      return makeFacilityDecision({ effectiveProfile: rawProfile });
+    }
+
+    function updateFacilityAssistant(item) {
+      hideFacilityQualificationFields();
+      const rule = item ? FACILITY_ITEM_RULES[item.id] : null;
+      const context = facilityContext.value;
+
+      if (rule) {
+        const fieldMap = {
+          book_criteria: bookCriteriaField,
+          education_license: educationLicenseField,
+          health_criteria: healthCriteriaField,
+          labor_criteria: laborCriteriaField,
+          public_transport_criteria: publicTransportCriteriaField,
+          construction_purpose: constructionPurposeField,
+          electricity_criteria: electricityCriteriaField,
+          social_service_criteria: socialServiceCriteriaField,
+          broadcast_criteria: broadcastCriteriaField,
+          agri_fishery_criteria: agriFisheryCriteriaField,
+          defense_skb: defenseEligibilityField,
+          defense_not_collected: defenseEligibilityField
+        };
+        if (fieldMap[rule.rule]) {
+          fieldMap[rule.rule].hidden = false;
+        }
+      }
+
+      if (context === "national_disaster" && item && item.id !== "construction") {
+        disasterEligibilityField.hidden = false;
+      }
+      if (context === "foreign_grant_loan") {
+        foreignProjectDocumentsField.hidden = false;
+      }
+      if (context === "defense_security") {
+        defenseEligibilityField.hidden = false;
+      }
+      if (context === "special_zone") {
+        specialZoneDocumentsField.hidden = false;
+      }
+
+      const decision = resolveAutomaticFacility(item);
+      facilityAutoStatus.className = "facility-status";
+      if (decision.status === "exempt") {
+        facilityAutoStatus.classList.add("status-exempt");
+      } else if (decision.status === "not_collected") {
+        facilityAutoStatus.classList.add("status-not-collected");
+      } else if (decision.status === "review") {
+        facilityAutoStatus.classList.add("status-review");
+      } else {
+        facilityAutoStatus.classList.add("status-taxable");
+      }
+      facilityAutoTitle.textContent = decision.title;
+      facilityAutoText.textContent = `${decision.explanation} Dasar: ${decision.basis}.`;
+    }
+
     function updateConditionalPanels() {
       const item = getSelectedItem();
       const splitStatus = getRadioValue("splitStatus");
@@ -3025,6 +3913,8 @@
       } else {
         specialRateMessage.textContent = "";
       }
+
+      updateFacilityAssistant(item);
     }
 
     function clearInvalidStates() {
@@ -3111,6 +4001,18 @@
         airlineVendor.classList.add("invalid");
       }
 
+      if (item) {
+        const facilityDecision = resolveAutomaticFacility(item);
+        if (facilityDecision.requiredAnswers.length) {
+          const missingId = facilityDecision.requiredAnswers[0];
+          const missingElement = document.getElementById(missingId);
+          errors.push("Lengkapi pertanyaan fasilitas PPN otomatis yang ditampilkan.");
+          if (missingElement) {
+            missingElement.classList.add("invalid");
+          }
+        }
+      }
+
       if (errors.length) {
         showToast(errors[0]);
         return false;
@@ -3195,7 +4097,9 @@
 
     function evaluateTransaction() {
       const item = getSelectedItem();
-      const profile = resolveProfile(item);
+      const rawProfile = resolveProfile(item);
+      const facilityDecision = resolveAutomaticFacility(item);
+      const profile = facilityDecision.effectiveProfile || rawProfile;
       const rate = resolveRate(item, profile);
       const inputAmount = parseRupiah(amountInput.value);
       const pkpStatus = getRadioValue("pkpStatus");
@@ -3206,16 +4110,16 @@
         ? parseRupiah(invoiceVatAmountInput.value)
         : 0;
 
-      const facility = facilityStatus.value;
+      const facility = facilityDecision.status;
       const canRecalculateNonPkpVat = isNonPkp && invoiceVatStatus === "yes" &&
-        facility !== "unknown" &&
-        !["special_review", "luxury_review"].includes(profile) &&
-        !(profile === "manual" && !manualVatProfile.value);
+        facility !== "review" &&
+        !["special_review", "luxury_review", "facility_review"].includes(profile) &&
+        !(rawProfile === "manual" && !manualVatProfile.value);
 
       let expectedNonPkpRate = rate.value;
       let expectedNonPkpRateLabel = rate.label;
 
-      if (profile === "non_vat" || profile === "exempt" ||
+      if (profile === "non_vat" ||
           facility === "exempt" || facility === "not_collected") {
         expectedNonPkpRate = 0;
         expectedNonPkpRateLabel = profile === "non_vat"
@@ -3258,6 +4162,30 @@
             `Nilai sebelum PPN yang digunakan sistem: ${formatCurrency(baseAmount)}.`
           ];
 
+      if (facility === "review" && !(isNonPkp && invoiceVatStatus === "no")) {
+        return createResult({
+          code: "AUTOMATIC_FACILITY_REVIEW",
+          statusClass: "status-review",
+          badge: "Fasilitas perlu verifikasi",
+          title: facilityDecision.title,
+          lead: facilityDecision.explanation,
+          collector: "Belum dapat ditentukan",
+          baseAmount,
+          rateLabel: rate.label,
+          vatAmount: 0,
+          reasons: [
+            ...baseReasons,
+            ...(facilityDecision.reasons.length
+              ? facilityDecision.reasons
+              : ["Kriteria atau dokumen fasilitas belum cukup untuk menetapkan perlakuan PPN."])
+          ],
+          actions: facilityDecision.actions.length
+            ? facilityDecision.actions
+            : ["Lengkapi dokumen dan ulangi simulasi sebelum pembayaran atau pemungutan PPN."],
+          note: `Dasar pengujian fasilitas: ${facilityDecision.basis}. Jangan menggunakan fasilitas hanya berdasarkan nama proyek, lokasi, atau nama barang/jasa.`
+        });
+      }
+
       if (isNonPkp && invoiceVatStatus === "no") {
         return createResult({
           code: "NON_PKP_INVOICE_NO_VAT",
@@ -3272,7 +4200,10 @@
           reasons: [
             ...baseReasons,
             "Rekanan dinyatakan bukan Pengusaha Kena Pajak.",
-            "Bendahara menyatakan tidak terdapat nominal atau komponen PPN dalam tagihan rekanan."
+            "Bendahara menyatakan tidak terdapat nominal atau komponen PPN dalam tagihan rekanan.",
+            facility === "exempt" || facility === "not_collected"
+              ? `${facilityDecision.title}. Dasar: ${facilityDecision.basis}.`
+              : "Tidak terdapat PPN dalam tagihan yang perlu dipungut sebagai tanggung renteng."
           ],
           actions: [
             `Bayarkan tagihan sesuai nilai yang disetujui sebesar ${formatCurrency(inputAmount)}, setelah memperhitungkan kewajiban pajak lain jika ada.`,
@@ -3413,7 +4344,7 @@
         });
       }
 
-      if (profile === "exempt" || facility === "exempt") {
+      if (facility === "exempt") {
         return createResult({
           code: "VAT_EXEMPT",
           statusClass: "status-none",
@@ -3426,15 +4357,17 @@
           vatAmount: 0,
           reasons: [
             `Transaksi yang dipilih: ${item.name}.`,
-            profile === "exempt" ? item.note : "Pengguna menyatakan transaksi memperoleh fasilitas PPN dibebaskan.",
-            "Pembebasan mengesampingkan pemungutan oleh instansi, termasuk mekanisme Pasal 126 untuk rekanan non-PKP."
+            ...facilityDecision.reasons,
+            "Pembebasan mengesampingkan pemungutan oleh instansi, termasuk penghitungan PPN tanggung renteng atas tagihan non-PKP."
           ],
           actions: [
-            "Pastikan jenis barang/jasa memenuhi rincian dan batasan fasilitas.",
-            "Pastikan dokumen fasilitas tersedia apabila dipersyaratkan.",
+            ...(facilityDecision.actions.length
+              ? facilityDecision.actions
+              : ["Pastikan jenis barang/jasa memenuhi rincian dan batasan fasilitas."]),
+            "Pastikan invoice/faktur mencantumkan keterangan fasilitas yang sesuai apabila dipersyaratkan.",
             "Periksa kewajiban PPh dan pajak lain secara terpisah."
           ],
-          note: "Pembebasan PPN tidak boleh digunakan hanya berdasarkan nama umum barang/jasa. Kriteria teknis dan dokumen pendukung tetap harus diperiksa."
+          note: `Fasilitas ditentukan otomatis dari jawaban pengguna. Dasar: ${facilityDecision.basis}. Simpan bukti yang mendukung setiap jawaban.`
         });
       }
 
@@ -3451,42 +4384,20 @@
           vatAmount: 0,
           reasons: [
             `Transaksi yang dipilih: ${item.name}.`,
-            "Transaksi dengan fasilitas PPN tidak dipungut dikecualikan dari pemungutan oleh instansi pemerintah."
+            ...facilityDecision.reasons,
+            "Transaksi yang sah memperoleh fasilitas PPN tidak dipungut dikecualikan dari pemungutan oleh instansi pemerintah."
           ],
           actions: [
-            "Pastikan dasar hukum fasilitas masih berlaku pada tanggal transaksi.",
-            "Periksa surat keterangan atau dokumen fasilitas apabila dipersyaratkan.",
-            "Cocokkan identitas, jenis barang/jasa, dan tujuan penggunaan dengan dokumen fasilitas."
+            ...(facilityDecision.actions.length
+              ? facilityDecision.actions
+              : ["Periksa surat keterangan dan dokumen fasilitas."]),
+            "Cocokkan identitas, jenis barang/jasa, nilai, tujuan penggunaan, dan masa berlaku dokumen dengan tagihan."
           ],
-          note: "Hasil ini bergantung pada kebenaran pilihan fasilitas. Jika fasilitas tidak sah atau tidak memenuhi syarat, pengujian harus diulang dengan pilihan “Tidak ada fasilitas khusus”."
+          note: `Fasilitas ditentukan otomatis berdasarkan konteks dan dokumen yang dipilih. Dasar: ${facilityDecision.basis}.`
         });
       }
 
-      if (facility === "unknown") {
-        return createResult({
-          code: "FACILITY_REVIEW",
-          statusClass: "status-review",
-          badge: "Perlu konfirmasi",
-          title: "Keputusan belum dapat ditetapkan.",
-          lead: "Status fasilitas PPN belum diketahui dan dapat mengubah pihak yang memungut maupun jumlah PPN.",
-          collector: "Belum dapat ditentukan",
-          baseAmount,
-          rateLabel: rate.label,
-          vatAmount,
-          reasons: [
-            ...baseReasons,
-            "Fasilitas PPN dibebaskan atau tidak dipungut mengesampingkan pemungutan oleh instansi pemerintah."
-          ],
-          actions: [
-            "Konfirmasi apakah terdapat fasilitas PPN pada kontrak atau dokumen rekanan.",
-            "Periksa dokumen fasilitas dan masa berlakunya.",
-            "Ulangi simulasi setelah status fasilitas dipastikan."
-          ],
-          note: "Jangan melakukan pemungutan atau menganggap transaksi bebas PPN hanya berdasarkan dugaan."
-        });
-      }
-
-      if (["special_review", "luxury_review"].includes(profile)) {
+      if (["special_review", "luxury_review", "facility_review"].includes(profile)) {
         return createResult({
           code: "SPECIAL_REVIEW",
           statusClass: "status-review",
@@ -3847,6 +4758,27 @@
 
     form.querySelectorAll('input[name="splitStatus"]').forEach((radio) => {
       radio.addEventListener("change", updateConditionalPanels);
+    });
+
+    [
+      facilityContext,
+      bookCriteria,
+      educationLicense,
+      healthCriteria,
+      laborCriteria,
+      publicTransportCriteria,
+      constructionPurpose,
+      electricityCriteria,
+      socialServiceCriteria,
+      broadcastCriteria,
+      agriFisheryCriteria,
+      disasterEligibility,
+      foreignProjectDocuments,
+      defenseEligibility,
+      specialZoneDocuments,
+      manualVatProfile
+    ].forEach((control) => {
+      control.addEventListener("change", updateConditionalPanels);
     });
 
     form.addEventListener("submit", (event) => {
