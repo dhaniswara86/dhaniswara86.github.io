@@ -6,7 +6,7 @@
 
   <meta
     name="description"
-    content="Alat bantu Kabayan untuk menentukan pemungutan PPN atas pembelian barang atau penggunaan jasa oleh instansi pemerintah."
+    content="Alat bantu Kabayan untuk menentukan pemungutan PPN atas pembelian barang atau penggunaan jasa oleh instansi pemerintah, termasuk transaksi dengan rekanan PKP dan non-PKP."
   >
   <meta name="author" content="Angga Sukma Dhaniswara">
 
@@ -916,6 +916,12 @@
         linear-gradient(135deg, #553491, #7656b8 58%, #9a79d4);
     }
 
+    .result-top.status-joint-liability {
+      background:
+        radial-gradient(circle at 88% 20%, rgba(255, 255, 255, 0.25), transparent 30%),
+        linear-gradient(135deg, #164e63, #0e7490 58%, #22a6b3);
+    }
+
     .result-top.status-review {
       background:
         radial-gradient(circle at 88% 20%, rgba(255, 255, 255, 0.25), transparent 30%),
@@ -1580,7 +1586,7 @@
 
         <div class="hero-pills" aria-label="Fitur utama">
           <span class="hero-pill">Pencarian barang dan jasa</span>
-          <span class="hero-pill">Batas transaksi Rp2 juta</span>
+          <span class="hero-pill">Rekanan PKP dan non-PKP</span>
           <span class="hero-pill">Hitung PPN otomatis</span>
           <span class="hero-pill">Alasan dan dasar hukum</span>
         </div>
@@ -1644,7 +1650,7 @@
             </div>
 
             <div class="field">
-              <label for="amountInput">
+              <label id="amountLabel" for="amountInput">
                 Nilai pembayaran/tagihan yang diuji <span class="required">*</span>
               </label>
 
@@ -1660,14 +1666,14 @@
                 >
               </div>
 
-              <span class="hint">
+              <span class="hint" id="amountHint">
                 Masukkan nilai pembayaran atau tagihan pada tahap ini. Jika pembayaran
                 merupakan cicilan, termin, atau bagian transaksi yang lebih besar,
                 pilih “Ya” pada pertanyaan berikutnya.
               </span>
             </div>
 
-            <div class="field">
+            <div class="field" id="amountBasisField">
               <label for="amountBasis">
                 Nilai tersebut <span class="required">*</span>
               </label>
@@ -1712,7 +1718,7 @@
                   >
                   <label class="choice-card" for="pkpNo">
                     <strong>Bukan PKP</strong>
-                    <small>Rekanan belum atau tidak dikukuhkan sebagai PKP.</small>
+                    <small>Periksa apakah PPN tercantum dalam tagihan rekanan.</small>
                   </label>
                 </div>
 
@@ -1732,7 +1738,108 @@
               </div>
             </div>
 
-            <div class="field field-full">
+            <div class="conditional-panel" id="invoiceVatPanel" hidden>
+              <h3>Periksa tagihan rekanan non-PKP</h3>
+              <p class="conditional-description">
+                Lihat invoice, kuitansi, atau dokumen tagihan. Apakah terdapat
+                komponen atau baris PPN yang dicantumkan secara tersendiri?
+              </p>
+
+              <div class="choice-grid two">
+                <div>
+                  <input
+                    class="choice-input"
+                    id="invoiceVatYes"
+                    name="invoiceVatStatus"
+                    type="radio"
+                    value="yes"
+                  >
+                  <label class="choice-card" for="invoiceVatYes">
+                    <strong>Ya, PPN tercantum</strong>
+                    <small>Instansi memungut PPN tersebut dan menyetorkannya sebagai tanggung renteng.</small>
+                  </label>
+                </div>
+
+                <div>
+                  <input
+                    class="choice-input"
+                    id="invoiceVatNo"
+                    name="invoiceVatStatus"
+                    type="radio"
+                    value="no"
+                  >
+                  <label class="choice-card" for="invoiceVatNo">
+                    <strong>Tidak ada PPN</strong>
+                    <small>Instansi tidak perlu memungut PPN dari tagihan tersebut.</small>
+                  </label>
+                </div>
+              </div>
+
+              <div class="field" id="invoiceVatAmountField" hidden>
+                <label for="invoiceVatAmountInput">
+                  Nilai PPN yang tercantum dalam tagihan
+                  <span class="required">*</span>
+                </label>
+
+                <div class="money-wrap">
+                  <span class="money-prefix">Rp</span>
+                  <input
+                    class="control money-input"
+                    id="invoiceVatAmountInput"
+                    type="text"
+                    inputmode="numeric"
+                    autocomplete="off"
+                    placeholder="0"
+                  >
+                </div>
+
+                <span class="hint">
+                  Salin nominal PPN persis seperti yang tertulis dalam tagihan.
+                  Sistem akan menghitung ulang PPN berdasarkan jenis barang/jasa,
+                  nilai total tagihan, dan formula PPN yang berlaku, kemudian
+                  membandingkannya dengan angka pada invoice.
+                </span>
+              </div>
+            </div>
+
+            <div class="conditional-panel" id="institutionPkpPanel" hidden>
+              <h3>Status PKP instansi pemerintah</h3>
+              <p class="conditional-description">
+                Informasi ini menentukan cara pelaporan setoran PPN tanggung renteng.
+              </p>
+
+              <div class="choice-grid two">
+                <div>
+                  <input
+                    class="choice-input"
+                    id="institutionPkpYes"
+                    name="institutionPkpStatus"
+                    type="radio"
+                    value="yes"
+                  >
+                  <label class="choice-card" for="institutionPkpYes">
+                    <strong>Instansi berstatus PKP</strong>
+                    <small>Setoran dilaporkan dalam SPT Masa PPN bagi PKP.</small>
+                  </label>
+                </div>
+
+                <div>
+                  <input
+                    class="choice-input"
+                    id="institutionPkpNo"
+                    name="institutionPkpStatus"
+                    type="radio"
+                    value="no"
+                  >
+                  <label class="choice-card" for="institutionPkpNo">
+                    <strong>Instansi bukan PKP</strong>
+                    <small>Dianggap melapor sepanjang PPN telah disetor.</small>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="field field-full" id="paymentMethodField">
               <label for="paymentMethod">
                 Cara pembayaran <span class="required">*</span>
               </label>
@@ -1754,7 +1861,7 @@
               </select>
             </div>
 
-            <div class="field field-full">
+            <div class="field field-full" id="splitQuestionField">
               <span class="group-label">
                 Apakah pembayaran merupakan bagian dari transaksi yang lebih besar?
                 <span class="required">*</span>
@@ -1947,8 +2054,8 @@
             <h3>Urutan pengujian</h3>
             <p>
               Sistem tidak hanya melihat nominal. Status objek PPN, status PKP,
-              cara pembayaran, pihak penyedia, dan pemecahan transaksi diuji
-              secara berurutan.
+              isi tagihan, cara pembayaran, pihak penyedia, dan pemecahan
+              transaksi diuji secara berurutan.
             </p>
 
             <div class="rule-list">
@@ -1975,9 +2082,21 @@
             <div class="info-icon" aria-hidden="true">2 jt</div>
             <h3>Batas Rp2 juta</h3>
             <p>
-              Batas dihitung dari jumlah pembayaran sebelum PPN. Batas ini tidak
-              berlaku untuk pembayaran yang dipecah dari transaksi dengan nilai
-              sebenarnya lebih dari Rp2 juta.
+              Batas Rp2 juta digunakan pada jalur rekanan PKP berdasarkan PMK
+              59/2022 dan tidak berlaku untuk pemecahan transaksi. Pada jalur
+              non-PKP, keputusan sistem mengikuti ada atau tidaknya PPN yang
+              tercantum dalam tagihan rekanan.
+            </p>
+          </section>
+
+          <section class="info-card">
+            <div class="info-icon" aria-hidden="true">108</div>
+            <h3>Rekanan non-PKP</h3>
+            <p>
+              Bendahara harus melihat invoice atau dokumen tagihan. Jika PPN
+              tercantum, instansi memungut nominal PPN tersebut dan menyetorkannya
+              sebagai PPN tanggung jawab secara renteng dengan KAP 411211 dan
+              KJS 108. Jika PPN tidak tercantum, instansi tidak memungut PPN.
             </p>
           </section>
 
@@ -1996,6 +2115,14 @@
                 rel="noopener noreferrer"
               >
                 <span>PMK 59/PMK.03/2022</span>
+                <span>↗</span>
+              </a>
+              <a
+                href="https://jdih.kemenkeu.go.id/dok/per-11pj2025"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span>PER-11/PJ/2025 — khususnya Pasal 126</span>
                 <span>↗</span>
               </a>
               <a
@@ -2048,7 +2175,7 @@
           <div class="result-body">
             <div class="result-metrics">
               <div class="metric">
-                <span>Nilai sebelum PPN</span>
+                <span>Nilai dasar penghitungan</span>
                 <strong id="metricBase">—</strong>
               </div>
               <div class="metric">
@@ -2116,8 +2243,8 @@
             <span class="logic-number">2</span>
             <h3>Status rekanan</h3>
             <p>
-              PPN atas belanja pemerintah pada prinsipnya dipungut atas
-              penyerahan oleh PKP rekanan.
+              Untuk PKP berlaku mekanisme pemungut berdasarkan PMK 59/2022.
+              Untuk non-PKP, bendahara memeriksa PPN pada tagihan dan sistem menghitung ulang nilainya.
             </p>
           </article>
 
@@ -2143,8 +2270,9 @@
             <span class="logic-number">5</span>
             <h3>Batas transaksi</h3>
             <p>
-              Jika tidak ada pengecualian, nilai sebelum PPN dibandingkan dengan
-              batas Rp2 juta.
+              Batas Rp2 juta diuji hanya pada jalur PKP. Pada jalur non-PKP,
+              PPN yang tercantum dalam tagihan dihitung ulang untuk memeriksa
+              kesesuaian nominalnya.
             </p>
           </article>
         </div>
@@ -2173,8 +2301,8 @@
       <strong>Disclaimer:</strong>
       Aplikasi ini merupakan alat bantu edukasi umum dan bukan situs resmi
       Direktorat Jenderal Pajak. Hasil harus dikonfirmasi dengan kontrak,
-      faktur/dokumen tagihan, status PKP, karakter barang atau jasa, fasilitas
-      perpajakan, serta ketentuan terbaru sebelum digunakan untuk pemenuhan
+      faktur/dokumen tagihan, pencantuman PPN, status PKP rekanan dan instansi,
+      karakter barang atau jasa, fasilitas perpajakan, serta ketentuan terbaru sebelum digunakan untuk pemenuhan
       kewajiban perpajakan.
     </div>
 
@@ -2624,8 +2752,17 @@
     const selectedItemName = document.getElementById("selectedItemName");
     const selectedItemNote = document.getElementById("selectedItemNote");
     const amountInput = document.getElementById("amountInput");
+    const amountLabel = document.getElementById("amountLabel");
+    const amountHint = document.getElementById("amountHint");
     const amountBasis = document.getElementById("amountBasis");
+    const amountBasisField = document.getElementById("amountBasisField");
+    const invoiceVatPanel = document.getElementById("invoiceVatPanel");
+    const invoiceVatAmountField = document.getElementById("invoiceVatAmountField");
+    const invoiceVatAmountInput = document.getElementById("invoiceVatAmountInput");
+    const institutionPkpPanel = document.getElementById("institutionPkpPanel");
+    const paymentMethodField = document.getElementById("paymentMethodField");
     const paymentMethod = document.getElementById("paymentMethod");
+    const splitQuestionField = document.getElementById("splitQuestionField");
     const splitPanel = document.getElementById("splitPanel");
     const actualTransactionInput = document.getElementById("actualTransactionInput");
     const facilityStatus = document.getElementById("facilityStatus");
@@ -2695,6 +2832,18 @@
         currency: "IDR",
         maximumFractionDigits: 0
       }).format(Math.round(value));
+    }
+
+    function formatPercentage(rate) {
+      if (!Number.isFinite(rate)) {
+        return "—";
+      }
+
+      return new Intl.NumberFormat("id-ID", {
+        style: "percent",
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 2
+      }).format(rate);
     }
 
     function getRadioValue(name) {
@@ -2823,12 +2972,45 @@
     function updateConditionalPanels() {
       const item = getSelectedItem();
       const splitStatus = getRadioValue("splitStatus");
+      const pkpStatus = getRadioValue("pkpStatus");
+      const invoiceVatStatus = getRadioValue("invoiceVatStatus");
+      const isNonPkp = pkpStatus === "no";
+      const invoiceShowsVat = isNonPkp && invoiceVatStatus === "yes";
 
-      splitPanel.hidden = splitStatus !== "yes";
+      invoiceVatPanel.hidden = !isNonPkp;
+      invoiceVatAmountField.hidden = !invoiceShowsVat;
+      institutionPkpPanel.hidden = !invoiceShowsVat;
+      paymentMethodField.hidden = isNonPkp;
+      splitQuestionField.hidden = isNonPkp;
+      splitPanel.hidden = isNonPkp || splitStatus !== "yes";
+
+      if (isNonPkp) {
+        amountBasis.value = "after";
+        amountBasis.disabled = true;
+        amountBasisField.hidden = true;
+        amountLabel.innerHTML =
+          'Nilai keseluruhan tagihan <span class="required">*</span>';
+
+        if (invoiceShowsVat) {
+          amountHint.textContent =
+            "Masukkan total tagihan termasuk PPN. Sistem akan menghitung ulang PPN dari total tersebut dan membandingkannya dengan nilai PPN pada tagihan.";
+        } else {
+          amountHint.textContent =
+            "Masukkan nilai yang tercantum pada tagihan rekanan non-PKP. Keputusan pemungutan mengikuti ada atau tidaknya PPN pada tagihan.";
+        }
+      } else {
+        amountBasis.disabled = false;
+        amountBasisField.hidden = false;
+        amountLabel.innerHTML =
+          'Nilai pembayaran/tagihan yang diuji <span class="required">*</span>';
+        amountHint.textContent =
+          "Masukkan nilai pembayaran atau tagihan pada tahap ini. Jika pembayaran merupakan cicilan, termin, atau bagian transaksi yang lebih besar, pilih “Ya” pada pertanyaan berikutnya.";
+      }
+
       manualProfilePanel.hidden = !(item && item.profile === "manual");
-      fuelPanel.hidden = !(item && item.exception === "fuel");
-      telecomPanel.hidden = !(item && item.exception === "telecom");
-      airlinePanel.hidden = !(item && item.exception === "airline");
+      fuelPanel.hidden = isNonPkp || !(item && item.exception === "fuel");
+      telecomPanel.hidden = isNonPkp || !(item && item.exception === "telecom");
+      airlinePanel.hidden = isNonPkp || !(item && item.exception === "airline");
 
       const showSpecial = item && [
         "taxable_special",
@@ -2858,6 +3040,9 @@
       const item = getSelectedItem();
       const amount = parseRupiah(amountInput.value);
       const pkpStatus = getRadioValue("pkpStatus");
+      const invoiceVatStatus = getRadioValue("invoiceVatStatus");
+      const institutionPkpStatus = getRadioValue("institutionPkpStatus");
+      const invoiceVatAmount = parseRupiah(invoiceVatAmountInput.value);
       const splitStatus = getRadioValue("splitStatus");
 
       if (!item) {
@@ -2874,16 +3059,34 @@
         errors.push("Pilih status PKP rekanan.");
       }
 
-      if (!paymentMethod.value) {
+      if (pkpStatus === "no" && !invoiceVatStatus) {
+        errors.push("Periksa tagihan dan pilih apakah PPN tercantum.");
+      }
+
+      if (pkpStatus === "no" && invoiceVatStatus === "yes" && invoiceVatAmount <= 0) {
+        errors.push("Masukkan nilai PPN yang tercantum dalam tagihan.");
+        invoiceVatAmountInput.classList.add("invalid");
+      }
+
+      if (pkpStatus === "no" && invoiceVatStatus === "yes" && invoiceVatAmount >= amount) {
+        errors.push("Nilai PPN harus lebih kecil dari total tagihan.");
+        invoiceVatAmountInput.classList.add("invalid");
+      }
+
+      if (pkpStatus === "no" && invoiceVatStatus === "yes" && !institutionPkpStatus) {
+        errors.push("Pilih status PKP instansi pemerintah.");
+      }
+
+      if (pkpStatus !== "no" && !paymentMethod.value) {
         errors.push("Pilih cara pembayaran.");
         paymentMethod.classList.add("invalid");
       }
 
-      if (!splitStatus) {
+      if (pkpStatus !== "no" && !splitStatus) {
         errors.push("Tentukan apakah pembayaran bagian dari transaksi yang lebih besar.");
       }
 
-      if (splitStatus === "yes" && parseRupiah(actualTransactionInput.value) <= 0) {
+      if (pkpStatus !== "no" && splitStatus === "yes" && parseRupiah(actualTransactionInput.value) <= 0) {
         errors.push("Masukkan total nilai transaksi sebenarnya sebelum PPN.");
         actualTransactionInput.classList.add("invalid");
       }
@@ -2893,17 +3096,17 @@
         manualVatProfile.classList.add("invalid");
       }
 
-      if (item && item.exception === "fuel" && !fuelVendor.value) {
+      if (pkpStatus !== "no" && item && item.exception === "fuel" && !fuelVendor.value) {
         errors.push("Pilih penyedia bahan bakar.");
         fuelVendor.classList.add("invalid");
       }
 
-      if (item && item.exception === "telecom" && !telecomVendor.value) {
+      if (pkpStatus !== "no" && item && item.exception === "telecom" && !telecomVendor.value) {
         errors.push("Konfirmasi status penyedia jasa telekomunikasi.");
         telecomVendor.classList.add("invalid");
       }
 
-      if (item && item.exception === "airline" && !airlineVendor.value) {
+      if (pkpStatus !== "no" && item && item.exception === "airline" && !airlineVendor.value) {
         errors.push("Konfirmasi status penyedia jasa angkutan udara.");
         airlineVendor.classList.add("invalid");
       }
@@ -2995,24 +3198,195 @@
       const profile = resolveProfile(item);
       const rate = resolveRate(item, profile);
       const inputAmount = parseRupiah(amountInput.value);
-      const baseAmount = calculateBaseAmount(
-        inputAmount,
-        amountBasis.value,
-        rate.value
-      );
+      const pkpStatus = getRadioValue("pkpStatus");
+      const invoiceVatStatus = getRadioValue("invoiceVatStatus");
+      const institutionPkpStatus = getRadioValue("institutionPkpStatus");
+      const isNonPkp = pkpStatus === "no";
+      const invoiceVatAmount = isNonPkp && invoiceVatStatus === "yes"
+        ? parseRupiah(invoiceVatAmountInput.value)
+        : 0;
+
+      const facility = facilityStatus.value;
+      const canRecalculateNonPkpVat = isNonPkp && invoiceVatStatus === "yes" &&
+        facility !== "unknown" &&
+        !["special_review", "luxury_review"].includes(profile) &&
+        !(profile === "manual" && !manualVatProfile.value);
+
+      let expectedNonPkpRate = rate.value;
+      let expectedNonPkpRateLabel = rate.label;
+
+      if (profile === "non_vat" || profile === "exempt" ||
+          facility === "exempt" || facility === "not_collected") {
+        expectedNonPkpRate = 0;
+        expectedNonPkpRateLabel = profile === "non_vat"
+          ? "Bukan objek PPN"
+          : facility === "not_collected"
+            ? "Fasilitas PPN tidak dipungut"
+            : "PPN dibebaskan";
+      }
+
+      const recalculatedNonPkpVat = canRecalculateNonPkpVat
+        ? Math.round(inputAmount * expectedNonPkpRate / (1 + expectedNonPkpRate))
+        : 0;
+      const recalculatedNonPkpBase = canRecalculateNonPkpVat
+        ? inputAmount - recalculatedNonPkpVat
+        : inputAmount - invoiceVatAmount;
+      const invoiceVatDifference = invoiceVatAmount - recalculatedNonPkpVat;
+      const invoiceVatMatches = canRecalculateNonPkpVat &&
+        Math.abs(invoiceVatDifference) <= 1;
+
+      const baseAmount = isNonPkp
+        ? recalculatedNonPkpBase
+        : calculateBaseAmount(inputAmount, amountBasis.value, rate.value);
+
       const splitStatus = getRadioValue("splitStatus");
-      const actualTransactionBase = splitStatus === "yes"
+      const actualTransactionBase = !isNonPkp && splitStatus === "yes"
         ? parseRupiah(actualTransactionInput.value)
         : baseAmount;
-      const pkpStatus = getRadioValue("pkpStatus");
       const payment = paymentMethod.value;
-      const facility = facilityStatus.value;
-      const vatAmount = baseAmount * rate.value;
+      const vatAmount = isNonPkp
+        ? recalculatedNonPkpVat
+        : baseAmount * rate.value;
 
-      const baseReasons = [
-        `Transaksi yang dipilih: ${item.name}.`,
-        `Nilai sebelum PPN yang digunakan sistem: ${formatCurrency(baseAmount)}.`
-      ];
+      const baseReasons = isNonPkp
+        ? [
+            `Transaksi yang dipilih: ${item.name}.`,
+            `Nilai keseluruhan tagihan: ${formatCurrency(inputAmount)}.`
+          ]
+        : [
+            `Transaksi yang dipilih: ${item.name}.`,
+            `Nilai sebelum PPN yang digunakan sistem: ${formatCurrency(baseAmount)}.`
+          ];
+
+      if (isNonPkp && invoiceVatStatus === "no") {
+        return createResult({
+          code: "NON_PKP_INVOICE_NO_VAT",
+          statusClass: "status-none",
+          badge: "PPN tidak tercantum",
+          title: "Instansi pemerintah tidak perlu memungut PPN.",
+          lead: "Rekanan bukan PKP dan pada invoice atau dokumen tagihan tidak terdapat komponen PPN.",
+          collector: "Tidak ada pemungutan PPN oleh instansi",
+          baseAmount: inputAmount,
+          rateLabel: "PPN tidak tercantum dalam tagihan",
+          vatAmount: 0,
+          reasons: [
+            ...baseReasons,
+            "Rekanan dinyatakan bukan Pengusaha Kena Pajak.",
+            "Bendahara menyatakan tidak terdapat nominal atau komponen PPN dalam tagihan rekanan."
+          ],
+          actions: [
+            `Bayarkan tagihan sesuai nilai yang disetujui sebesar ${formatCurrency(inputAmount)}, setelah memperhitungkan kewajiban pajak lain jika ada.`,
+            "Tidak perlu membuat setoran PPN tanggung jawab secara renteng atas tagihan ini.",
+            "Simpan invoice atau dokumen tagihan yang menunjukkan bahwa PPN tidak dicantumkan.",
+            "Periksa kewajiban pemotongan atau pemungutan PPh secara terpisah."
+          ],
+          note: "Keputusan ini mengikuti informasi pada tagihan rekanan non-PKP. Apabila dokumen tagihan diperbaiki dan kemudian mencantumkan PPN, lakukan pengujian ulang."
+        });
+      }
+
+      if (isNonPkp && invoiceVatStatus === "yes") {
+        const reportingAction = institutionPkpStatus === "yes"
+          ? "Laporkan penyetoran tersebut dalam SPT Masa PPN bagi PKP milik instansi pemerintah."
+          : "Setelah penyetoran berhasil, instansi pemerintah yang bukan PKP dianggap telah melaporkan penyetoran PPN tersebut.";
+
+        if (!canRecalculateNonPkpVat) {
+          return createResult({
+            code: "NON_PKP_INVOICE_VAT_RECALCULATION_REVIEW",
+            statusClass: "status-review",
+            badge: "Perlu hitung manual",
+            title: "PPN pada tagihan belum dapat divalidasi otomatis.",
+            lead: "Tagihan rekanan non-PKP mencantumkan PPN, tetapi transaksi menggunakan formula khusus atau memerlukan rincian tambahan sehingga nilai PPN harus dihitung ulang secara manual sebelum dipungut.",
+            collector: "Instansi pemerintah setelah nilai PPN tervalidasi",
+            baseAmount: inputAmount - invoiceVatAmount,
+            rateLabel: "Formula khusus/perlu telaah",
+            vatAmount: invoiceVatAmount,
+            reasons: [
+              ...baseReasons,
+              "Rekanan dinyatakan bukan Pengusaha Kena Pajak.",
+              `PPN yang dicantumkan dalam tagihan: ${formatCurrency(invoiceVatAmount)}.`,
+              item.note
+            ],
+            actions: [
+              "Tentukan terlebih dahulu DPP, tarif, besaran tertentu, atau pembagian komponen transaksi sesuai ketentuan yang berlaku.",
+              "Hitung ulang PPN dan bandingkan dengan nilai yang tercantum pada tagihan.",
+              "Minta klarifikasi atau perbaikan invoice apabila hasil penghitungan ulang berbeda.",
+              "Setelah nilai benar, pungut PPN dan setorkan dengan Kode Akun Pajak 411211 serta Kode Jenis Setoran 108.",
+              reportingAction
+            ],
+            note: "Jangan langsung menyetor nilai PPN pada invoice sebelum formula dan dasar pengenaannya dapat diverifikasi."
+          });
+        }
+
+        if (!invoiceVatMatches) {
+          const differenceDirection = invoiceVatDifference > 0
+            ? "lebih besar"
+            : "lebih kecil";
+
+          return createResult({
+            code: "NON_PKP_INVOICE_VAT_MISMATCH",
+            statusClass: "status-review",
+            badge: "PPN invoice tidak sesuai",
+            title: "Nilai PPN dalam tagihan perlu diperbaiki atau diklarifikasi.",
+            lead: "Sistem telah menghitung ulang PPN dari total tagihan. Nilai PPN yang dicantumkan rekanan berbeda dari hasil penghitungan berdasarkan profil transaksi yang dipilih.",
+            collector: "Instansi pemerintah setelah invoice tervalidasi",
+            baseAmount: recalculatedNonPkpBase,
+            rateLabel: expectedNonPkpRateLabel,
+            vatAmount: recalculatedNonPkpVat,
+            reasons: [
+              ...baseReasons,
+              "Rekanan dinyatakan bukan Pengusaha Kena Pajak.",
+              `PPN pada invoice: ${formatCurrency(invoiceVatAmount)}.`,
+              `PPN hasil hitung ulang: ${formatCurrency(recalculatedNonPkpVat)}.`,
+              `Selisih: ${formatCurrency(Math.abs(invoiceVatDifference))}; angka pada invoice ${differenceDirection} dari hasil sistem.`,
+              expectedNonPkpRate === 0
+                ? `Profil transaksi menunjukkan ${expectedNonPkpRateLabel.toLowerCase()}, sehingga PPN yang seharusnya adalah nihil.`
+                : `Formula verifikasi: total tagihan × ${formatPercentage(expectedNonPkpRate)} ÷ (100% + ${formatPercentage(expectedNonPkpRate)}).`
+            ],
+            actions: [
+              "Jangan langsung membayar atau menyetor berdasarkan nominal PPN yang belum sesuai.",
+              "Minta rekanan menjelaskan DPP, tarif, dan dasar pencantuman PPN atau menerbitkan tagihan yang diperbaiki.",
+              expectedNonPkpRate === 0
+                ? "Apabila klasifikasi barang/jasa dan fasilitas telah benar, minta rekanan menghapus komponen PPN dari tagihan."
+                : `Setelah tagihan diperbaiki, pungut PPN sebesar ${formatCurrency(recalculatedNonPkpVat)} dan bayarkan nilai bersih sebesar ${formatCurrency(recalculatedNonPkpBase)}, dengan tetap memperhitungkan pajak lain jika ada.`,
+              expectedNonPkpRate === 0
+                ? "Tidak perlu membuat setoran PPN tanggung renteng sepanjang hasil verifikasi tetap menunjukkan PPN nihil."
+                : "Setorkan PPN tanggung jawab secara renteng dengan Kode Akun Pajak 411211 dan Kode Jenis Setoran 108.",
+              expectedNonPkpRate === 0
+                ? "Simpan tagihan yang telah diperbaiki dan dokumen pendukung klasifikasi transaksi."
+                : reportingAction
+            ],
+            note: "Perbandingan menggunakan pembulatan ke rupiah penuh dengan toleransi selisih paling banyak Rp1. Hasil tetap bergantung pada ketepatan pemilihan barang/jasa, fasilitas, serta formula PPN."
+          });
+        }
+
+        return createResult({
+          code: "NON_PKP_INVOICE_VAT_JOINT_LIABILITY_VERIFIED",
+          statusClass: "status-joint-liability",
+          badge: "PPN terverifikasi",
+          title: "Instansi pemerintah wajib memungut dan menyetor PPN.",
+          lead: "Rekanan bukan PKP dan PPN tercantum dalam tagihan. Hasil hitung ulang sesuai dengan nominal pada invoice, sehingga PPN dapat dipungut dan disetor sebagai PPN tanggung jawab secara renteng.",
+          collector: "Instansi pemerintah — tanggung renteng",
+          baseAmount: recalculatedNonPkpBase,
+          rateLabel: expectedNonPkpRateLabel,
+          vatAmount: recalculatedNonPkpVat,
+          reasons: [
+            ...baseReasons,
+            "Rekanan dinyatakan bukan Pengusaha Kena Pajak.",
+            `PPN pada invoice: ${formatCurrency(invoiceVatAmount)}.`,
+            `PPN hasil hitung ulang: ${formatCurrency(recalculatedNonPkpVat)}.`,
+            `Nilai dasar setelah mengeluarkan PPN: ${formatCurrency(recalculatedNonPkpBase)}.`,
+            "Selisih hasil verifikasi berada dalam toleransi pembulatan paling banyak Rp1."
+          ],
+          actions: [
+            `Pungut PPN yang telah diverifikasi sebesar ${formatCurrency(recalculatedNonPkpVat)}.`,
+            `Bayarkan nilai bersih kepada rekanan sebesar ${formatCurrency(recalculatedNonPkpBase)}, setelah memperhitungkan kewajiban pajak lain jika ada.`,
+            "Setorkan PPN tanggung jawab secara renteng dengan Kode Akun Pajak 411211 dan Kode Jenis Setoran 108.",
+            reportingAction,
+            "Simpan invoice, hasil verifikasi penghitungan, bukti pembayaran kepada rekanan, kode billing, dan bukti penyetoran sebagai satu rangkaian dokumen."
+          ],
+          note: "Nilai setoran menggunakan hasil hitung ulang yang telah cocok dengan invoice. Penghitungan didasarkan pada total tagihan termasuk PPN dan profil tarif transaksi yang dipilih."
+        });
+      }
 
       if (profile === "non_vat") {
         return createResult({
@@ -3022,13 +3396,13 @@
           title: "Instansi pemerintah tidak memungut PPN.",
           lead: "Barang atau jasa yang dipilih diklasifikasikan sebagai bukan objek PPN sepanjang memenuhi kriteria yang disebutkan.",
           collector: "Tidak ada pemungut PPN",
-          baseAmount,
+          baseAmount: inputAmount,
           rateLabel: "Bukan objek PPN",
           vatAmount: 0,
           reasons: [
-            ...baseReasons,
+            `Transaksi yang dipilih: ${item.name}.`,
             item.note,
-            "Bukan objek PPN berbeda dari transaksi yang terutang PPN tetapi pemungutannya dilakukan oleh pihak lain."
+            "Pasal 126 PER-11/PJ/2025 hanya berlaku atas perolehan Barang Kena Pajak dan/atau Jasa Kena Pajak dari pengusaha non-PKP."
           ],
           actions: [
             "Pastikan transaksi benar-benar memenuhi kriteria objek pajak daerah atau kategori bukan objek PPN.",
@@ -3047,13 +3421,13 @@
           title: "Instansi pemerintah tidak memungut PPN.",
           lead: "Transaksi memperoleh pembebasan PPN apabila seluruh kriteria dan dokumen fasilitas terpenuhi.",
           collector: "Tidak ada PPN yang dipungut",
-          baseAmount,
+          baseAmount: inputAmount,
           rateLabel: "Dibebaskan",
           vatAmount: 0,
           reasons: [
-            ...baseReasons,
+            `Transaksi yang dipilih: ${item.name}.`,
             profile === "exempt" ? item.note : "Pengguna menyatakan transaksi memperoleh fasilitas PPN dibebaskan.",
-            "PMK pemungutan instansi mengecualikan transaksi yang mendapat fasilitas PPN dibebaskan."
+            "Pembebasan mengesampingkan pemungutan oleh instansi, termasuk mekanisme Pasal 126 untuk rekanan non-PKP."
           ],
           actions: [
             "Pastikan jenis barang/jasa memenuhi rincian dan batasan fasilitas.",
@@ -3072,11 +3446,11 @@
           title: "Instansi pemerintah tidak memungut PPN.",
           lead: "Pengguna menyatakan transaksi memperoleh fasilitas PPN tidak dipungut berdasarkan ketentuan khusus.",
           collector: "Tidak dipungut berdasarkan fasilitas",
-          baseAmount,
+          baseAmount: inputAmount,
           rateLabel: "Fasilitas tidak dipungut",
           vatAmount: 0,
           reasons: [
-            ...baseReasons,
+            `Transaksi yang dipilih: ${item.name}.`,
             "Transaksi dengan fasilitas PPN tidak dipungut dikecualikan dari pemungutan oleh instansi pemerintah."
           ],
           actions: [
@@ -3120,17 +3494,17 @@
           title: "Formula PPN belum dapat dihitung otomatis.",
           lead: item.note,
           collector: "Tergantung hasil telaah",
-          baseAmount,
+          baseAmount: inputAmount,
           rateLabel: rate.label,
-          vatAmount: profile === "luxury_review" ? vatAmount : 0,
+          vatAmount: 0,
           reasons: [
-            ...baseReasons,
+            `Transaksi yang dipilih: ${item.name}.`,
             "Katalog menandai transaksi ini sebagai transaksi campuran, formula khusus, atau berpotensi terutang PPnBM."
           ],
           actions: [
             "Periksa kontrak dan rincian tagihan per komponen.",
             "Tentukan DPP, tarif, dan kemungkinan PPnBM berdasarkan jenis/spesifikasi barang atau jasa.",
-            "Setelah formula dipastikan, terapkan kembali logika pihak pemungut berdasarkan PMK 59/2022."
+            "Setelah formula dipastikan, terapkan jalur PKP berdasarkan PMK 59/2022."
           ],
           note: "Untuk paket meeting hotel, freight forwarding, atau barang mewah, nama transaksi saja belum cukup untuk menghasilkan keputusan yang aman."
         });
@@ -3142,14 +3516,14 @@
           statusClass: "status-review",
           badge: "Status PKP belum diketahui",
           title: "Keputusan pemungutan PPN belum dapat ditetapkan.",
-          lead: "Status PKP rekanan merupakan unsur penting untuk menentukan apakah terdapat PPN atas tagihan rekanan pemerintah.",
+          lead: "Status PKP menentukan jalur administrasi. Untuk rekanan non-PKP, bendahara juga harus memeriksa apakah PPN tercantum dalam tagihan.",
           collector: "Belum dapat ditentukan",
           baseAmount,
           rateLabel: rate.label,
           vatAmount,
           reasons: [
             ...baseReasons,
-            "Instansi pemerintah ditunjuk sebagai pemungut atas penyerahan BKP/JKP oleh PKP Rekanan Pemerintah."
+            "Barang/jasa merupakan objek yang berpotensi terutang PPN, tetapi status PKP rekanan belum diketahui."
           ],
           actions: [
             "Konfirmasi status PKP melalui dokumen rekanan dan administrasi perpajakan yang relevan.",
@@ -3160,34 +3534,6 @@
         });
       }
 
-      if (pkpStatus === "no") {
-        const sipWarning = payment === "sip_up"
-          ? " Untuk transaksi pengadaan melalui Pihak Lain, periksa pula kewajiban rekanan untuk dikukuhkan sebagai PKP berdasarkan ketentuan sistem pengadaan."
-          : "";
-
-        return createResult({
-          code: "NON_PKP",
-          statusClass: "status-none",
-          badge: "Rekanan bukan PKP",
-          title: "Instansi pemerintah tidak memungut PPN.",
-          lead: "Rekanan yang bukan PKP pada prinsipnya tidak memungut PPN atas penyerahan barang atau jasa.",
-          collector: "Tidak ada pemungut PPN",
-          baseAmount,
-          rateLabel: "Tidak dihitung oleh rekanan non-PKP",
-          vatAmount: 0,
-          reasons: [
-            ...baseReasons,
-            "Pengguna menyatakan rekanan bukan PKP.",
-            "Pemungutan PPN instansi pemerintah berlaku atas penyerahan BKP/JKP oleh PKP Rekanan Pemerintah."
-          ],
-          actions: [
-            "Pastikan rekanan benar-benar belum/tidak dikukuhkan sebagai PKP.",
-            "Pastikan invoice rekanan tidak mencantumkan pungutan PPN.",
-            "Periksa kewajiban pemotongan atau pemungutan PPh secara terpisah."
-          ],
-          note: `Hasil ini tidak menentukan apakah rekanan seharusnya wajib dikukuhkan sebagai PKP.${sipWarning}`
-        });
-      }
 
       if (payment === "sip_up") {
         return createResult({
@@ -3364,7 +3710,7 @@
             "Pastikan PKP rekanan memungut PPN dalam faktur/dokumen tagihan.",
             "Jangan memotong PPN dari pembayaran kepada rekanan."
           ],
-          note: "Batas Rp2 juta adalah jumlah pembayaran sebelum PPN. PPN tetap terutang dan dipungut oleh PKP rekanan."
+          note: "Batas Rp2 juta adalah jumlah pembayaran sebelum PPN pada jalur PKP rekanan. PPN tetap terutang dan dipungut oleh PKP rekanan."
         });
       }
 
@@ -3374,7 +3720,7 @@
         badge: "Wajib dipungut instansi",
         title: "Instansi pemerintah wajib memungut PPN.",
         lead: "Tidak ditemukan pengecualian pemungutan dan nilai transaksi sebenarnya lebih dari Rp2 juta sebelum PPN.",
-        collector: "Instansi pemerintah",
+        collector: "Instansi pemerintah — pemungut PPN",
         baseAmount,
         rateLabel: rate.label,
         vatAmount,
@@ -3431,7 +3777,7 @@
         `Barang/Jasa: ${getSelectedItem().name}`,
         `Keputusan: ${result.title}`,
         `Penjelasan: ${result.lead}`,
-        `Nilai sebelum PPN: ${formatCurrency(result.baseAmount)}`,
+        `Nilai dasar penghitungan: ${formatCurrency(result.baseAmount)}`,
         `Tarif/Formula: ${result.rateLabel}`,
         `PPN terutang: ${formatCurrency(result.vatAmount)}`,
         `Pihak pemungut: ${result.collector}`,
@@ -3487,8 +3833,16 @@
       }
     });
 
-    [amountInput, actualTransactionInput].forEach((input) => {
+    [amountInput, actualTransactionInput, invoiceVatAmountInput].forEach((input) => {
       input.addEventListener("input", () => formatNumberInput(input));
+    });
+
+    form.querySelectorAll('input[name="pkpStatus"]').forEach((radio) => {
+      radio.addEventListener("change", updateConditionalPanels);
+    });
+
+    form.querySelectorAll('input[name="invoiceVatStatus"]').forEach((radio) => {
+      radio.addEventListener("change", updateConditionalPanels);
     });
 
     form.querySelectorAll('input[name="splitStatus"]').forEach((radio) => {
@@ -3513,6 +3867,7 @@
       itemSearch.value = "";
       amountInput.value = "";
       actualTransactionInput.value = "";
+      invoiceVatAmountInput.value = "";
       resultSection.hidden = true;
       closeItemOptions();
       clearInvalidStates();
