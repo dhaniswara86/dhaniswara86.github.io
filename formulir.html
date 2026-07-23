@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="id">
 <head>
 <meta charset="utf-8"/>
@@ -787,7 +786,36 @@
       }
     }
   </style>
-</head>
+<style>
+    .filters {
+      justify-content: flex-start;
+      gap: 10px;
+    }
+
+    .filters .filter-button {
+      min-width: 132px;
+      font-weight: 600;
+    }
+
+    .filters .filter-button.active {
+      border-color: var(--near-black);
+      background: var(--near-black);
+      color: var(--white);
+    }
+
+    @media (max-width: 520px) {
+      .filters {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        overflow: visible;
+      }
+
+      .filters .filter-button {
+        width: 100%;
+        min-width: 0;
+      }
+    }
+</style></head>
 <body>
 <header class="site-nav">
 <div class="nav-inner">
@@ -877,40 +905,9 @@
 <div class="library-heading">
 <p>Perpustakaan formulir</p>
 <h2>Semua dokumen dalam satu tempat.</h2>
-<div class="subcopy">
-            Pilih kategori atau gunakan pencarian di bagian atas.
-            Klik nama kategori untuk membuka daftar dokumen.
-          </div>
+<div class="subcopy">Gunakan pencarian di bagian atas, atau buka dan tutup seluruh kelompok formulir melalui tombol berikut.</div>
 </div>
-<div aria-label="Filter kategori" class="filters">
-<button class="filter-button active" data-filter="all" type="button">
-            Semua
-          </button>
-<button class="filter-button" data-filter="npwp" type="button">
-            NPWP
-          </button>
-<button class="filter-button" data-filter="akun" type="button">
-            Akun &amp; Sertifikat
-          </button>
-<button class="filter-button" data-filter="pkp" type="button">
-            PKP
-          </button>
-<button class="filter-button" data-filter="pbb" type="button">
-            PBB
-          </button>
-<button class="filter-button" data-filter="kuasa" type="button">
-            Kuasa
-          </button>
-<button class="filter-button" data-filter="meterai" type="button">
-            Bea Meterai
-          </button>
-<button class="filter-button" data-filter="spt" type="button">
-            SPT Tahunan
-          </button>
-<button class="filter-button" data-filter="permohonan" type="button">
-            Permohonan
-          </button>
-</div>
+<div aria-label="Pengaturan kelompok formulir" class="filters"><button class="filter-button" id="openAllFolders" type="button">Buka Semua</button><button class="filter-button" id="closeAllFolders" type="button">Tutup Semua</button></div>
 <div class="folder-list" id="folderList">
 <details class="folder-card" data-category="npwp" data-folder="1. pendaftaran npwp" id="folder-1">
 <summary>
@@ -2025,7 +2022,6 @@
                   Isi Form
                 </a>
 </div>
-
 <div class="file-row" data-search="19 19 2 surat keterangan bebas pajak penghasilan atas penghasilan yang diterima atau diperoleh badan usaha dari pengalihan hak atas tanah dan atau bangunan atau perjanjian pengikatan jual beli atas tanah dan atau bangunan beserta perubahannya di kawasan ekonomi khusus formulir skb pph pengalihan tanah bangunan badan usaha kek kabayan html skb pph tanah bangunan kek badan usaha ppjb">
 <div class="file-main">
 <span class="file-type-badge">
@@ -2044,7 +2040,6 @@
                   Isi Form
                 </a>
 </div>
-
 <div class="file-row" data-search="19 19 3 permohonan surat keterangan bebas pemungutan pajak penghasilan atas penjualan rumah tinggal atau hunian yang tergolong sangat mewah di kawasan ekonomi khusus pariwisata formulir skb pph hunian sangat mewah kek pariwisata kabayan html skb rumah hunian sangat mewah kek pariwisata">
 <div class="file-main">
 <span class="file-type-badge">
@@ -2063,7 +2058,6 @@
                   Isi Form
                 </a>
 </div>
-
 <div class="file-row" data-search="19 19 4 surat keterangan bebas pemotongan pajak penghasilan atas bunga deposito dan tabungan serta diskonto sertifikat bank indonesia formulir skb pph bunga deposito tabungan diskonto sbi kabayan html skb bunga deposito tabungan diskonto sbi">
 <div class="file-main">
 <span class="file-type-badge">
@@ -2082,7 +2076,6 @@
                   Isi Form
                 </a>
 </div>
-
 <div class="file-row" data-search="19 19 5 surat keterangan bebas pemungutan pajak penghasilan atas impor emas batangan formulir skb pph pasal 22 impor emas batangan kabayan html skb pph 22 impor emas batangan">
 <div class="file-main">
 <span class="file-type-badge">
@@ -2101,7 +2094,6 @@
                   Isi Form
                 </a>
 </div>
-
 <div class="file-row" data-search="19 19 6 surat keterangan bebas pajak penghasilan ataspenghasilan dari pengalihan hak atas tanah dan atau bangunan formulir penelitian formal bukti penyetoran pph pengalihan tanah bangunan kabayan v2 html skb pph pengalihan tanah bangunan">
 <div class="file-main">
 <span class="file-type-badge">
@@ -2153,7 +2145,6 @@
                   Isi Form
                 </a>
 </div>
-
 <div class="file-row" data-search="20 20 2 surat permohonan keterangan pemenuhan kewajiban perpajakan bakal calon kepala daerah formulir keterangan pemenuhan kewajiban perpajakan calon kepala daerah kabayan html calon kepala daerah pilkada keterangan fiskal kepatuhan pajak">
 <div class="file-main">
 <span class="file-type-badge">
@@ -2547,20 +2538,19 @@
     const searchInput = document.getElementById("formSearch");
     const searchResult = document.getElementById("searchResult");
     const noResult = document.getElementById("noResult");
+    const openAllFolders =
+      document.getElementById("openAllFolders");
+
+    const closeAllFolders =
+      document.getElementById("closeAllFolders");
 
     const folderCards = Array.from(
       document.querySelectorAll(".folder-card")
     );
 
-    const filterButtons = Array.from(
-      document.querySelectorAll(".filter-button")
-    );
-
     const quickCards = Array.from(
       document.querySelectorAll(".quick-card")
     );
-
-    let activeFilter = "all";
 
     menuToggle.addEventListener("click", () => {
       const isActive = mobileMenu.classList.toggle("active");
@@ -2607,18 +2597,9 @@
           folder.dataset.folder
         );
 
-        const folderCategory = normalizeSearchText(
-          folder.dataset.category
-        );
-
         const fileRows = Array.from(
           folder.querySelectorAll(".file-row")
         );
-
-        const matchesCategory =
-          activeFilter === "all" ||
-          folderCategory ===
-            normalizeSearchText(activeFilter);
 
         let folderHasVisibleFile = false;
 
@@ -2637,27 +2618,21 @@
             rowText.includes(term) ||
             visibleText.includes(term);
 
-          const showRow =
-            matchesCategory && matchesSearch;
+          row.hidden = !matchesSearch;
 
-          row.hidden = !showRow;
-
-          if (showRow) {
+          if (matchesSearch) {
             visibleFiles += 1;
             folderHasVisibleFile = true;
           }
         });
 
-        const showFolder =
-          matchesCategory && folderHasVisibleFile;
+        folder.hidden = !folderHasVisibleFile;
 
-        folder.hidden = !showFolder;
-
-        if (showFolder) {
+        if (folderHasVisibleFile) {
           visibleFolders += 1;
         }
 
-        if (term && showFolder) {
+        if (term && folderHasVisibleFile) {
           folder.open = true;
         } else if (!term) {
           folder.open = false;
@@ -2665,7 +2640,7 @@
       });
 
       searchResult.textContent =
-        term || activeFilter !== "all"
+        term
           ? visibleFiles + " dokumen ditemukan"
           : totalFiles +
             " dokumen tersedia dalam " +
@@ -2678,35 +2653,11 @@
           : "none";
     }
 
-    filterButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        activeFilter = button.dataset.filter;
-
-        filterButtons.forEach((item) => {
-          item.classList.toggle(
-            "active",
-            item === button
-          );
-        });
-
-        applyFilters();
-      });
-    });
-
     searchInput.addEventListener("input", applyFilters);
 
     quickCards.forEach((button) => {
       button.addEventListener("click", () => {
-        activeFilter = "all";
         searchInput.value = "";
-
-        filterButtons.forEach((item) => {
-          item.classList.toggle(
-            "active",
-            item.dataset.filter === "all"
-          );
-        });
-
         applyFilters();
 
         const target = document.getElementById(
@@ -2723,6 +2674,26 @@
           });
         }
       });
+    });
+
+    openAllFolders.addEventListener("click", () => {
+      folderCards.forEach((folder) => {
+        if (!folder.hidden) {
+          folder.open = true;
+        }
+      });
+
+      openAllFolders.classList.add("active");
+      closeAllFolders.classList.remove("active");
+    });
+
+    closeAllFolders.addEventListener("click", () => {
+      folderCards.forEach((folder) => {
+        folder.open = false;
+      });
+
+      closeAllFolders.classList.add("active");
+      openAllFolders.classList.remove("active");
     });
 
     applyFilters();
