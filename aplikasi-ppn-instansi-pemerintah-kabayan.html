@@ -774,6 +774,108 @@
       color: #4c4c51;
     }
 
+    .tax-invoice-preview {
+      grid-column: 1 / -1;
+    }
+
+    .tax-invoice-number {
+      letter-spacing: 0.045em;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .invoice-validation-panel {
+      margin-top: 22px;
+    }
+
+    .invoice-validation-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 13px;
+    }
+
+    .invoice-validation-head h3 {
+      margin: 0;
+    }
+
+    .invoice-validation-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--off-white);
+      color: #55555a;
+      font-size: 10px;
+      font-weight: 750;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .invoice-validation-badge.valid {
+      background: var(--green-soft);
+      color: var(--green);
+    }
+
+    .invoice-validation-badge.invalid {
+      background: var(--red-soft);
+      color: var(--red);
+    }
+
+    .invoice-validation-badge.review {
+      background: var(--orange-soft);
+      color: var(--orange);
+    }
+
+    .invoice-detail-list {
+      display: grid;
+      gap: 9px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .invoice-detail-list li {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 9px;
+      color: #4b4b50;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .invoice-detail-list li::before {
+      width: 20px;
+      height: 20px;
+      display: grid;
+      place-items: center;
+      border-radius: 7px;
+      background: var(--off-white);
+      color: #55555a;
+      content: "•";
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .invoice-detail-list li.ok::before {
+      background: var(--green-soft);
+      color: var(--green);
+      content: "✓";
+    }
+
+    .invoice-detail-list li.error::before {
+      background: var(--red-soft);
+      color: var(--red);
+      content: "!";
+    }
+
+    .invoice-detail-list li.review::before {
+      background: var(--orange-soft);
+      color: var(--orange);
+      content: "?";
+    }
+
     .action-row {
       display: flex;
       flex-wrap: wrap;
@@ -1169,7 +1271,7 @@
 
     .logic-flow {
       display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
+      grid-template-columns: repeat(6, minmax(0, 1fr));
       gap: 11px;
       margin-top: 42px;
     }
@@ -1785,8 +1887,7 @@
             <div class="conditional-panel" id="invoiceVatPanel" hidden>
               <h3>Periksa tagihan rekanan non-PKP</h3>
               <p class="conditional-description">
-                Lihat invoice, kuitansi, atau dokumen tagihan. Apakah terdapat
-                komponen atau baris PPN yang dicantumkan secara tersendiri?
+                Lihat pada invoice, kuitansi, dokumen tagihan, atau kontrak. Apakah terdapat baris yang secara khusus menuliskan nilai PPN?
               </p>
 
               <div class="choice-grid two">
@@ -2226,7 +2327,52 @@
                 <span id="specialRateMessage"></span>
               </div>
             </div>
-          </div>
+
+            <div class="conditional-panel" id="taxInvoicePanel" hidden>
+              <h3>Validasi kode Faktur Pajak rekanan PKP</h3>
+              <p class="conditional-description">
+                Sistem menentukan kode transaksi yang seharusnya berdasarkan
+                status pemungut, fasilitas PPN, nilai transaksi, jenis barang/jasa,
+                dan mekanisme pemungutan. Validasi difokuskan hanya pada ketepatan penggunaan dua digit kode transaksi Faktur Pajak.
+              </p>
+
+              <div class="conditional-grid">
+                <div class="facility-status status-review tax-invoice-preview" id="taxInvoiceExpectedStatus">
+                  <strong id="taxInvoiceExpectedTitle">Lengkapi parameter transaksi.</strong>
+                  <span id="taxInvoiceExpectedText">Kode Faktur Pajak akan ditentukan otomatis.</span>
+                </div>
+
+                <div class="field field-full">
+                  <label for="taxDocumentType">Dokumen pajak yang diberikan rekanan <span class="required">*</span></label>
+                  <select class="select-control" id="taxDocumentType">
+                    <option value="">Pilih dokumen</option>
+                    <option value="efaktur">Faktur Pajak elektronik dengan nomor 17 digit</option>
+                    <option value="equivalent">Dokumen tertentu yang dipersamakan dengan Faktur Pajak</option>
+                    <option value="none">Belum/tidak diberikan dokumen pajak</option>
+                  </select>
+                  <span class="hint">
+                    Tiket atau tagihan tertentu dapat berkedudukan sebagai dokumen yang dipersamakan dengan Faktur Pajak.
+                  </span>
+                </div>
+
+                <div class="field field-full" id="taxInvoiceNumberField" hidden>
+                  <label for="taxInvoiceNumberInput">Kode dan Nomor Seri Faktur Pajak <span class="required">*</span></label>
+                  <input
+                    class="control tax-invoice-number"
+                    id="taxInvoiceNumberInput"
+                    type="text"
+                    inputmode="numeric"
+                    autocomplete="off"
+                    maxlength="24"
+                    placeholder="Contoh: 02002600000000001"
+                  >
+                  <span class="hint">
+                    Masukkan 17 digit: 2 digit kode transaksi + 2 digit kode status + 13 digit NSFP. Tanda titik atau pemisah akan diabaikan.
+                  </span>
+                </div>
+              </div>
+            </div>
+            </div>
 
           <div class="action-row">
             <button class="button button-primary" type="submit">
@@ -2292,6 +2438,17 @@
             </p>
           </section>
 
+          <section class="info-card">
+            <div class="info-icon" aria-hidden="true">02</div>
+            <h3>Kode Faktur Pajak PKP</h3>
+            <p>
+              Sistem menguji prioritas kode 07/08 untuk fasilitas, 02 jika PPN
+              dipungut instansi, 03 jika seluruh PPN dipungut Pihak Lain, serta
+              04, 05, atau 01 jika PPN dipungut sendiri oleh PKP rekanan.
+              Nomor 17 digit juga diperiksa terhadap tahun, status pengganti, DPP, dan PPN.
+            </p>
+          </section>
+
           <section class="info-card legal-card">
             <div class="info-icon" aria-hidden="true">§</div>
             <h3>Dasar hukum utama</h3>
@@ -2339,6 +2496,14 @@
                 rel="noopener noreferrer"
               >
                 <span>PMK 131 Tahun 2024</span>
+                <span>↗</span>
+              </a>
+              <a
+                href="https://www.pajak.go.id/sites/default/files/lampiran/Petunjuk%20Teknis%20Pembuatan%20Faktur%20Pajak%20dan%20Dokumen%20Tertentu%20yang%20Kedudukannya%20Dipersamakan%20dengan%20Faktur%20Pajak%20serta%20Penerapan%20PMK%20131%20Tahun%202024.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span>PER-1/PJ/2025 — kode transaksi dan DPP Faktur Pajak</span>
                 <span>↗</span>
               </a>
               <a
@@ -2420,6 +2585,15 @@
               </section>
             </div>
 
+            <section class="result-panel invoice-validation-panel" id="taxInvoiceResultPanel" hidden>
+              <div class="invoice-validation-head">
+                <h3>Validasi Faktur Pajak/dokumen pajak</h3>
+                <span class="invoice-validation-badge" id="taxInvoiceResultBadge">—</span>
+              </div>
+              <p id="taxInvoiceResultSummary" class="hint"></p>
+              <ul class="invoice-detail-list" id="taxInvoiceResultList"></ul>
+            </section>
+
             <div class="result-note" id="resultNote"></div>
 
             <div class="result-actions">
@@ -2442,7 +2616,7 @@
       <div class="guide-inner">
         <div class="section-heading">
           <p>Logika sistem</p>
-          <h2>Lima lapis pemeriksaan.</h2>
+          <h2>Enam lapis pemeriksaan.</h2>
         </div>
 
         <div class="logic-flow">
@@ -2491,6 +2665,15 @@
               kesesuaian nominalnya.
             </p>
           </article>
+
+          <article class="logic-step">
+            <span class="logic-number">6</span>
+            <h3>Faktur Pajak PKP</h3>
+            <p>
+              Kode transaksi, status normal/pengganti, tahun NSFP, DPP, PPN,
+              kode transaksi Faktur Pajak diuji berdasarkan jenis transaksi, fasilitas, nilai, dan pihak pemungut.
+            </p>
+          </article>
         </div>
       </div>
     </section>
@@ -2517,9 +2700,9 @@
       <strong>Disclaimer:</strong>
       Aplikasi ini merupakan alat bantu edukasi umum dan bukan situs resmi
       Direktorat Jenderal Pajak. Hasil harus dikonfirmasi dengan kontrak,
-      faktur/dokumen tagihan, pencantuman PPN, status PKP rekanan dan instansi,
+      faktur/dokumen tagihan, kode dan nomor Faktur Pajak, pencantuman PPN, status PKP rekanan dan instansi,
       karakter barang atau jasa, tujuan penggunaan, sumber pembiayaan, izin penyedia,
-      dokumen fasilitas, serta ketentuan terbaru sebelum digunakan untuk pemenuhan kewajiban perpajakan.
+      dokumen fasilitas, serta ketentuan terbaru sebelum digunakan untuk pemenuhan kewajiban perpajakan. Validasi pada halaman ini hanya menilai ketepatan penggunaan kode transaksi Faktur Pajak berdasarkan data transaksi yang dimasukkan.
     </div>
 
     <div class="footer-inner">
@@ -3210,6 +3393,13 @@
     const airlineVendor = document.getElementById("airlineVendor");
     const specialRatePanel = document.getElementById("specialRatePanel");
     const specialRateMessage = document.getElementById("specialRateMessage");
+    const taxInvoicePanel = document.getElementById("taxInvoicePanel");
+    const taxInvoiceExpectedStatus = document.getElementById("taxInvoiceExpectedStatus");
+    const taxInvoiceExpectedTitle = document.getElementById("taxInvoiceExpectedTitle");
+    const taxInvoiceExpectedText = document.getElementById("taxInvoiceExpectedText");
+    const taxDocumentType = document.getElementById("taxDocumentType");
+    const taxInvoiceNumberField = document.getElementById("taxInvoiceNumberField");
+    const taxInvoiceNumberInput = document.getElementById("taxInvoiceNumberInput");
     const resultSection = document.getElementById("hasil");
     const resultTop = document.getElementById("resultTop");
     const resultBadge = document.getElementById("resultBadge");
@@ -3221,6 +3411,10 @@
     const metricCollector = document.getElementById("metricCollector");
     const reasonList = document.getElementById("reasonList");
     const actionList = document.getElementById("actionList");
+    const taxInvoiceResultPanel = document.getElementById("taxInvoiceResultPanel");
+    const taxInvoiceResultBadge = document.getElementById("taxInvoiceResultBadge");
+    const taxInvoiceResultSummary = document.getElementById("taxInvoiceResultSummary");
+    const taxInvoiceResultList = document.getElementById("taxInvoiceResultList");
     const resultNote = document.getElementById("resultNote");
     const resetButton = document.getElementById("resetButton");
     const printButton = document.getElementById("printButton");
@@ -3857,6 +4051,382 @@
       facilityAutoText.textContent = `${decision.explanation} Dasar: ${decision.basis}.`;
     }
 
+    const TAX_INVOICE_CODE_DESCRIPTIONS = {
+      "01": "PPN dipungut sendiri oleh PKP dengan DPP harga jual/penggantian biasa",
+      "02": "PPN dipungut oleh pemungut PPN instansi pemerintah",
+      "03": "PPN dipungut oleh pemungut lainnya atau seluruhnya oleh Pihak Lain",
+      "04": "DPP menggunakan nilai lain dan PPN dipungut sendiri oleh PKP",
+      "05": "PPN menggunakan besaran tertentu dan dipungut sendiri oleh PKP",
+      "06": "Penyerahan kepada turis asing untuk pengembalian PPN",
+      "07": "PPN tidak dipungut atau ditanggung pemerintah",
+      "08": "Dibebaskan dari pengenaan PPN/PPnBM",
+      "09": "Penyerahan aktiva Pasal 16D",
+      "10": "Penyerahan dengan tarif selain tarif Pasal 7 ayat (1) UU PPN"
+    };
+
+    function normalizeInvoiceNumber(value) {
+      return String(value || "").replace(/\D/g, "");
+    }
+
+    function getSellerCollectedInvoiceCode(item, rawProfile) {
+      if (rawProfile === "taxable_special") {
+        return {
+          code: "05",
+          explanation: "PPN dipungut sendiri oleh PKP menggunakan besaran tertentu."
+        };
+      }
+
+      if (rawProfile === "luxury_review") {
+        return {
+          code: "01",
+          explanation: "Untuk BKP mewah dengan DPP harga jual dan tarif 12%, PPN dipungut sendiri oleh PKP."
+        };
+      }
+
+      if (rawProfile === "taxable_general" || rawProfile === "manual") {
+        return {
+          code: "04",
+          explanation: "Barang/jasa nonmewah menggunakan DPP nilai lain 11/12 dan PPN dipungut sendiri oleh PKP."
+        };
+      }
+
+      return {
+        code: null,
+        explanation: "Kode transaksi perlu ditelaah dari DPP dan karakter penyerahan."
+      };
+    }
+
+    function getProvisionalExpectedInvoice() {
+      const item = getSelectedItem();
+      const pkpStatus = getRadioValue("pkpStatus");
+
+      if (pkpStatus !== "yes") {
+        return {
+          state: "not_applicable",
+          required: false,
+          code: null,
+          title: "Validasi Faktur Pajak hanya untuk rekanan PKP.",
+          explanation: "Pilih status rekanan PKP untuk mengaktifkan pengujian kode dan nomor Faktur Pajak."
+        };
+      }
+
+      if (!item) {
+        return {
+          state: "review",
+          required: null,
+          code: null,
+          title: "Pilih barang atau jasa terlebih dahulu.",
+          explanation: "Jenis barang/jasa menentukan objek PPN, fasilitas, DPP, dan kode transaksi."
+        };
+      }
+
+      const rawProfile = resolveProfile(item);
+      const facilityDecision = resolveAutomaticFacility(item);
+      const effectiveProfile = facilityDecision.effectiveProfile || rawProfile;
+
+      if (facilityDecision.status === "review" || ["special_review", "facility_review"].includes(effectiveProfile)) {
+        return {
+          state: "review",
+          required: null,
+          code: null,
+          title: "Kode Faktur Pajak belum dapat ditentukan.",
+          explanation: "Lengkapi kriteria fasilitas atau telaah formula transaksi terlebih dahulu."
+        };
+      }
+
+      if (effectiveProfile === "non_vat") {
+        return {
+          state: "no_invoice",
+          required: false,
+          code: null,
+          title: "Tidak seharusnya diterbitkan Faktur Pajak PPN.",
+          explanation: "Transaksi diklasifikasikan sebagai bukan objek PPN."
+        };
+      }
+
+      if (facilityDecision.status === "exempt" || effectiveProfile === "exempt") {
+        return {
+          state: "expected",
+          required: true,
+          code: "08",
+          title: "Kode transaksi yang diharapkan: 08",
+          explanation: "Fasilitas dibebaskan memiliki prioritas atas kode pemungut maupun DPP nilai lain."
+        };
+      }
+
+      if (facilityDecision.status === "not_collected") {
+        return {
+          state: "expected",
+          required: true,
+          code: "07",
+          title: "Kode transaksi yang diharapkan: 07",
+          explanation: "Transaksi memperoleh fasilitas PPN tidak dipungut atau ditanggung pemerintah."
+        };
+      }
+
+      if (!paymentMethod.value) {
+        return {
+          state: "review",
+          required: true,
+          code: null,
+          title: "Pilih cara pembayaran.",
+          explanation: "Cara pembayaran menentukan apakah PPN dipungut instansi, Pihak Lain, atau PKP rekanan."
+        };
+      }
+
+      if (paymentMethod.value === "sip_up") {
+        return {
+          state: "expected",
+          required: true,
+          code: "03",
+          title: "Kode transaksi yang diharapkan: 03",
+          explanation: "Seluruh PPN dipungut oleh Pihak Lain dalam Sistem Informasi Pengadaan."
+        };
+      }
+
+      const sellerCode = getSellerCollectedInvoiceCode(item, rawProfile);
+      if (paymentMethod.value === "government_card") {
+        return {
+          state: "expected",
+          required: true,
+          code: sellerCode.code,
+          title: sellerCode.code ? `Kode transaksi yang diharapkan: ${sellerCode.code}` : "Kode perlu ditelaah",
+          explanation: `Instansi tidak memungut karena menggunakan kartu kredit pemerintah. ${sellerCode.explanation}`
+        };
+      }
+
+      if (item.exception === "land") {
+        return {
+          state: "expected", required: true, code: sellerCode.code,
+          title: sellerCode.code ? `Kode transaksi yang diharapkan: ${sellerCode.code}` : "Kode perlu ditelaah",
+          explanation: `Pemungutan oleh instansi dikecualikan untuk pengadaan tanah. ${sellerCode.explanation}`
+        };
+      }
+
+      if (item.exception === "fuel" && ["pertamina", "patra", "kilang", "elnusa"].includes(fuelVendor.value)) {
+        return {
+          state: "expected", required: true, code: sellerCode.code,
+          title: sellerCode.code ? `Kode transaksi yang diharapkan: ${sellerCode.code}` : "Kode perlu ditelaah",
+          explanation: `PPN dipungut sendiri oleh PKP penyedia bahan bakar. ${sellerCode.explanation}`
+        };
+      }
+
+      if (item.exception === "telecom" && telecomVendor.value === "yes") {
+        return {
+          state: "expected", required: true, code: sellerCode.code,
+          title: sellerCode.code ? `Kode transaksi yang diharapkan: ${sellerCode.code}` : "Kode perlu ditelaah",
+          explanation: `PPN dipungut sendiri oleh perusahaan telekomunikasi. ${sellerCode.explanation}`
+        };
+      }
+
+      if (item.exception === "airline" && airlineVendor.value === "yes") {
+        return {
+          state: "expected", required: true, code: sellerCode.code,
+          title: sellerCode.code ? `Kode transaksi yang diharapkan: ${sellerCode.code}` : "Kode perlu ditelaah",
+          explanation: `PPN dipungut sendiri oleh perusahaan penerbangan. Dokumen tertentu yang dipersamakan dapat digunakan sesuai ketentuan. ${sellerCode.explanation}`
+        };
+      }
+
+      const inputAmount = parseRupiah(amountInput.value);
+      const rate = resolveRate(item, effectiveProfile);
+      const currentBase = calculateBaseAmount(inputAmount, amountBasis.value, rate.value);
+      const actualBase = getRadioValue("splitStatus") === "yes"
+        ? parseRupiah(actualTransactionInput.value)
+        : currentBase;
+
+      if (actualBase > 0 && actualBase <= 2000000) {
+        return {
+          state: "expected", required: true, code: sellerCode.code,
+          title: sellerCode.code ? `Kode transaksi yang diharapkan: ${sellerCode.code}` : "Kode perlu ditelaah",
+          explanation: `Nilai sebelum PPN paling banyak Rp2 juta sehingga instansi tidak memungut. ${sellerCode.explanation}`
+        };
+      }
+
+      if (actualBase <= 0) {
+        return {
+          state: "review",
+          required: true,
+          code: null,
+          title: "Masukkan nominal transaksi.",
+          explanation: "Nominal dan status pemecahan dibutuhkan untuk menguji batas Rp2 juta."
+        };
+      }
+
+      return {
+        state: "expected",
+        required: true,
+        code: "02",
+        title: "Kode transaksi yang diharapkan: 02",
+        explanation: "PPN dipungut oleh instansi pemerintah; kode 02 mengalahkan kode DPP nilai lain atau besaran tertentu."
+      };
+    }
+
+    function updateTaxInvoicePreview() {
+      const expectation = getProvisionalExpectedInvoice();
+      taxInvoiceExpectedStatus.className = "facility-status tax-invoice-preview";
+
+      if (expectation.state === "expected") {
+        taxInvoiceExpectedStatus.classList.add("status-not-collected");
+      } else if (expectation.state === "no_invoice") {
+        taxInvoiceExpectedStatus.classList.add("status-exempt");
+      } else {
+        taxInvoiceExpectedStatus.classList.add("status-review");
+      }
+
+      taxInvoiceExpectedTitle.textContent = expectation.title;
+      taxInvoiceExpectedText.textContent = expectation.explanation;
+    }
+
+    function getExpectedInvoiceFromResult(result) {
+      const item = getSelectedItem();
+      const rawProfile = resolveProfile(item);
+      const sellerCode = getSellerCollectedInvoiceCode(item, rawProfile);
+      const map = {
+        VAT_EXEMPT: "08",
+        VAT_NOT_COLLECTED_FACILITY: "07",
+        THIRD_PARTY_COLLECTS: "03",
+        GOVERNMENT_COLLECTS: "02"
+      };
+
+      if (result.code === "NO_VAT_OBJECT") {
+        return { required: false, code: null, explanation: "Bukan objek PPN." };
+      }
+
+      if (map[result.code]) {
+        return {
+          required: true,
+          code: map[result.code],
+          explanation: TAX_INVOICE_CODE_DESCRIPTIONS[map[result.code]]
+        };
+      }
+
+      if ([
+        "VENDOR_GOV_CARD", "VENDOR_LAND", "VENDOR_FUEL", "VENDOR_TELECOM",
+        "VENDOR_AIRLINE", "VENDOR_SMALL_TRANSACTION"
+      ].includes(result.code)) {
+        return {
+          required: true,
+          code: sellerCode.code,
+          explanation: sellerCode.explanation
+        };
+      }
+
+      return {
+        required: null,
+        code: null,
+        explanation: "Kode belum dapat dipastikan karena transaksi masih memerlukan telaah."
+      };
+    }
+
+
+    function buildTaxInvoiceValidation(result) {
+      if (getRadioValue("pkpStatus") !== "yes") {
+        return null;
+      }
+
+      const expected = getExpectedInvoiceFromResult(result);
+      const documentType = taxDocumentType.value;
+      const checks = [];
+      const issues = [];
+      const reviews = [];
+
+      const add = (kind, text) => {
+        checks.push({ kind, text });
+        if (kind === "error") issues.push(text);
+        if (kind === "review") reviews.push(text);
+      };
+
+      if (expected.required === false) {
+        if (documentType === "none") {
+          add("ok", "Transaksi bukan objek PPN sehingga tidak memerlukan Faktur Pajak PPN.");
+        } else {
+          add("error", "Transaksi diklasifikasikan bukan objek PPN, tetapi rekanan memberikan dokumen PPN.");
+        }
+      } else if (expected.required === true && documentType === "none") {
+        add("error", `Rekanan PKP seharusnya memberikan Faktur Pajak dengan kode transaksi ${expected.code || "yang perlu ditelaah"}.`);
+      } else if (expected.required === null) {
+        add("review", expected.explanation);
+      }
+
+      if (documentType === "equivalent") {
+        add("review", "Dokumen tertentu yang dipersamakan dengan Faktur Pajak tidak menggunakan kode transaksi Faktur Pajak 17 digit. Validasi kode tidak diterapkan pada dokumen ini.");
+      }
+
+      if (documentType === "efaktur") {
+        const digits = normalizeInvoiceNumber(taxInvoiceNumberInput.value);
+
+        if (digits.length !== 17) {
+          add("error", `Nomor Faktur Pajak harus 17 digit; yang terbaca ${digits.length} digit.`);
+        } else {
+          const transactionCode = digits.slice(0, 2);
+          const validTransactionCode = /^(0[1-9]|10)$/.test(transactionCode);
+
+          if (!validTransactionCode) {
+            add("error", `Kode transaksi ${transactionCode} tidak berada dalam rentang 01 sampai dengan 10.`);
+          } else if (expected.code && transactionCode !== expected.code) {
+            add("error", `Kode transaksi pada Faktur adalah ${transactionCode}, sedangkan berdasarkan transaksi seharusnya ${expected.code}.`);
+            add("review", `Kode ${expected.code}: ${TAX_INVOICE_CODE_DESCRIPTIONS[expected.code] || expected.explanation}`);
+          } else if (expected.code) {
+            add("ok", `Kode transaksi ${transactionCode} sudah benar: ${TAX_INVOICE_CODE_DESCRIPTIONS[transactionCode]}.`);
+          } else {
+            add("review", `Kode pada Faktur adalah ${transactionCode}, tetapi kode yang seharusnya belum dapat ditentukan karena transaksi masih memerlukan telaah.`);
+          }
+        }
+      }
+
+      let status = "valid";
+      let badge = "Kode sesuai";
+      let summary = expected.code
+        ? `Kode Faktur Pajak yang seharusnya adalah ${expected.code}.`
+        : expected.explanation;
+
+      if (issues.length) {
+        status = "invalid";
+        badge = "Kode tidak sesuai";
+        summary = expected.code
+          ? `Kode transaksi Faktur Pajak perlu diperbaiki. Kode yang seharusnya adalah ${expected.code}.`
+          : "Kode transaksi Faktur Pajak belum dapat dinyatakan benar.";
+      } else if (reviews.length) {
+        status = "review";
+        badge = "Perlu telaah kode";
+        summary = expected.code
+          ? `Kode yang diharapkan ${expected.code}, tetapi validasi kode belum dapat diselesaikan dari dokumen yang dipilih.`
+          : "Kode transaksi belum dapat ditentukan otomatis.";
+      }
+
+      return {
+        status,
+        badge,
+        summary,
+        checks,
+        expectedCode: expected.code,
+        issues,
+        reviews
+      };
+    }
+
+    function applyTaxInvoiceValidation(result) {
+      const validation = buildTaxInvoiceValidation(result);
+      result.taxInvoiceValidation = validation;
+
+      if (!validation) {
+        return result;
+      }
+
+      if (validation.status === "invalid") {
+        result.statusClass = "status-review";
+        result.badge = "Kode Faktur perlu diperbaiki";
+        result.lead = `${result.lead} Namun, kode transaksi Faktur Pajak belum sesuai hasil pengujian.`;
+        result.actions.unshift("Minta rekanan memperbaiki kode transaksi melalui Faktur Pajak pengganti sebelum dokumen digunakan.");
+      } else if (validation.status === "review") {
+        result.actions.unshift("Pastikan dasar penggunaan kode transaksi Faktur Pajak sebelum administrasi transaksi difinalkan.");
+      } else {
+        result.reasons.push(`Kode transaksi Faktur Pajak sesuai hasil pengujian, yaitu ${validation.expectedCode || "kode yang relevan"}.`);
+      }
+
+      return result;
+    }
+
     function updateConditionalPanels() {
       const item = getSelectedItem();
       const splitStatus = getRadioValue("splitStatus");
@@ -3864,6 +4434,8 @@
       const invoiceVatStatus = getRadioValue("invoiceVatStatus");
       const isNonPkp = pkpStatus === "no";
       const invoiceShowsVat = isNonPkp && invoiceVatStatus === "yes";
+      const isPkp = pkpStatus === "yes";
+      const documentType = taxDocumentType.value;
 
       invoiceVatPanel.hidden = !isNonPkp;
       invoiceVatAmountField.hidden = !invoiceShowsVat;
@@ -3914,7 +4486,11 @@
         specialRateMessage.textContent = "";
       }
 
+      taxInvoicePanel.hidden = !isPkp;
+      taxInvoiceNumberField.hidden = !(isPkp && documentType === "efaktur");
+
       updateFacilityAssistant(item);
+      updateTaxInvoicePreview();
     }
 
     function clearInvalidStates() {
@@ -3947,6 +4523,18 @@
 
       if (!pkpStatus) {
         errors.push("Pilih status PKP rekanan.");
+      }
+
+      if (pkpStatus === "yes" && !taxDocumentType.value) {
+        errors.push("Pilih dokumen pajak yang diberikan rekanan PKP.");
+        taxDocumentType.classList.add("invalid");
+      }
+
+      if (pkpStatus === "yes" && taxDocumentType.value === "efaktur") {
+        if (!taxInvoiceNumberInput.value.trim()) {
+          errors.push("Masukkan kode dan Nomor Seri Faktur Pajak.");
+          taxInvoiceNumberInput.classList.add("invalid");
+        }
       }
 
       if (pkpStatus === "no" && !invoiceVatStatus) {
@@ -4680,6 +5268,24 @@
         actionList.appendChild(item);
       });
 
+      const invoiceValidation = result.taxInvoiceValidation;
+      if (invoiceValidation) {
+        taxInvoiceResultPanel.hidden = false;
+        taxInvoiceResultBadge.className = `invoice-validation-badge ${invoiceValidation.status}`;
+        taxInvoiceResultBadge.textContent = invoiceValidation.badge;
+        taxInvoiceResultSummary.textContent = invoiceValidation.summary;
+        taxInvoiceResultList.innerHTML = "";
+        invoiceValidation.checks.forEach((check) => {
+          const row = document.createElement("li");
+          row.className = check.kind;
+          row.textContent = check.text;
+          taxInvoiceResultList.appendChild(row);
+        });
+      } else {
+        taxInvoiceResultPanel.hidden = true;
+        taxInvoiceResultList.innerHTML = "";
+      }
+
       resultNote.textContent = result.note;
       resultSection.hidden = false;
 
@@ -4692,6 +5298,13 @@
         `Tarif/Formula: ${result.rateLabel}`,
         `PPN terutang: ${formatCurrency(result.vatAmount)}`,
         `Pihak pemungut: ${result.collector}`,
+        ...(result.taxInvoiceValidation
+          ? [
+              `Validasi kode Faktur Pajak: ${result.taxInvoiceValidation.badge}`,
+              `Kode Faktur yang diharapkan: ${result.taxInvoiceValidation.expectedCode || "belum dapat ditentukan"}`,
+              ...result.taxInvoiceValidation.checks.map((check) => `- ${check.text}`)
+            ]
+          : []),
         "",
         "Alasan:",
         ...result.reasons.map((reason, index) => `${index + 1}. ${reason}`),
@@ -4760,6 +5373,14 @@
       radio.addEventListener("change", updateConditionalPanels);
     });
 
+    taxDocumentType.addEventListener("change", updateConditionalPanels);
+    [amountInput, actualTransactionInput, amountBasis, paymentMethod, fuelVendor, telecomVendor, airlineVendor].forEach((control) => {
+      control.addEventListener("change", updateConditionalPanels);
+      if (control.tagName === "INPUT") {
+        control.addEventListener("input", updateTaxInvoicePreview);
+      }
+    });
+
     [
       facilityContext,
       bookCriteria,
@@ -4788,7 +5409,7 @@
         return;
       }
 
-      const result = evaluateTransaction();
+      const result = applyTaxInvoiceValidation(evaluateTransaction());
       renderResult(result);
     });
 
@@ -4800,6 +5421,8 @@
       amountInput.value = "";
       actualTransactionInput.value = "";
       invoiceVatAmountInput.value = "";
+      taxInvoiceNumberInput.value = "";
+      taxInvoiceResultPanel.hidden = true;
       resultSection.hidden = true;
       closeItemOptions();
       clearInvalidStates();
