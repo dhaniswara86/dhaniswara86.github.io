@@ -1725,9 +1725,9 @@
         </h1>
 
         <p class="hero-description">
-          Pilih barang atau jasa, jawab fakta fasilitas, masukkan nilai transaksi, lalu Kabayan
-          membantu menentukan apakah PPN dipungut instansi pemerintah,
-          rekanan, Pihak Lain dalam sistem pengadaan, atau tidak terutang.
+          Pilih barang atau jasa, masukkan nilai transaksi, lalu Kabayan
+          membantu menentukan apakah atas transaksi tersebut PPN dipungut oleh instansi pemerintah,
+          disetor oleh rekanan, dipungut oleh Pihak Lain dalam sistem pengadaan, atau tidak terutang.
         </p>
 
       
@@ -1741,8 +1741,7 @@
             <span class="step-label">Simulasi transaksi</span>
             <h2>Masukkan kondisi transaksi.</h2>
             <p>
-              Pertanyaan tambahan hanya ditampilkan jika dibutuhkan oleh
-              barang, jasa, atau mekanisme pembayaran yang dipilih.
+              Sistem akan menampilkan pertanyaan tambahan sesuai dengan jawaban yang dipilih.
             </p>
           </div>
 
@@ -1844,7 +1843,7 @@
                     value="yes"
                   >
                   <label class="choice-card" for="pkpYes">
-                    <strong>PKP</strong>
+                    <strong>PKP</strong> <br>
                     <small>Rekanan telah dikukuhkan sebagai PKP.</small>
                   </label>
                 </div>
@@ -1858,8 +1857,8 @@
                     value="no"
                   >
                   <label class="choice-card" for="pkpNo">
-                    <strong>Bukan PKP</strong>
-                    <small>Periksa apakah PPN tercantum dalam tagihan rekanan.</small>
+                    <strong>Bukan PKP</strong><br>
+                    <small>Periksa apakah PPN tercantum dalam tagihan.</small>
                   </label>
                 </div>
 
@@ -1872,8 +1871,8 @@
                     value="unknown"
                   >
                   <label class="choice-card" for="pkpUnknown">
-                    <strong>Belum diketahui</strong>
-                    <small>Status rekanan masih perlu dikonfirmasi.</small>
+                    <strong>Belum diketahui</strong><br>
+                    <small>Status masih dikonfirmasi.</small>
                   </label>
                 </div>
               </div>
@@ -1987,16 +1986,16 @@
               <select class="select-control" id="paymentMethod">
                 <option value="">Pilih cara pembayaran</option>
                 <option value="regular">
-                  Pembayaran biasa: LS atau UP di luar Sistem Informasi Pengadaan
+                  Pembayaran biasa: (Mekanisme LS atau UP di luar Sistem Inaproc)
                 </option>
                 <option value="government_card">
                   Kartu kredit pemerintah
                 </option>
                 <option value="sip_up">
-                  Uang Persediaan melalui Pihak Lain dalam Sistem Informasi Pengadaan
+                  Uang Persediaan (UP) melalui Pihak Lain dalam Sistem Inaproc)
                 </option>
                 <option value="sip_direct">
-                  Sistem Informasi Pengadaan dengan Pembayaran Langsung
+                  Langsung (LS) melalui Sistem Inaproc
                 </option>
               </select>
             </div>
@@ -2017,7 +2016,7 @@
                     value="no"
                   >
                   <label class="choice-card" for="splitNo">
-                    <strong>Tidak</strong>
+                    <strong>Tidak</strong><br>
                     <small>Nilai yang dimasukkan adalah seluruh nilai transaksi.</small>
                   </label>
                 </div>
@@ -2031,7 +2030,7 @@
                     value="yes"
                   >
                   <label class="choice-card" for="splitYes">
-                    <strong>Ya</strong>
+                    <strong>Ya</strong> <br>
                     <small>Pembayaran ini adalah termin, cicilan, atau bagian transaksi.</small>
                   </label>
                 </div>
@@ -2073,9 +2072,7 @@
             <div class="conditional-panel" id="facilityAssistantPanel">
               <h3>Uji fasilitas PPN otomatis</h3>
               <p class="conditional-description">
-                Bendahara tidak perlu memilih sendiri “dibebaskan” atau “tidak dipungut”.
-                Jawab fakta transaksi berikut dan sistem akan menentukan fasilitas serta
-                dokumen yang harus tersedia.
+               Jawab pertanyaan berikut untuk mengetahui ada atau tidaknya fasilitas perpajakan atas pengadaan barang/jasa tersebut.
               </p>
 
               <div class="conditional-grid">
