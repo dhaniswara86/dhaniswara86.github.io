@@ -1726,8 +1726,8 @@
 
         <p class="hero-description">
           Pilih barang atau jasa, masukkan nilai transaksi, lalu Kabayan
-          membantu menentukan apakah atas transaksi tersebut PPN dipungut oleh instansi pemerintah,
-          disetor oleh rekanan, dipungut oleh Pihak Lain dalam sistem pengadaan, atau tidak terutang.
+          membantu menentukan apakah PPN-nya harus dipungut oleh instansi pemerintah,
+			disetor oleh rekanan, dipungut oleh pihak lain, atau tidak terutang.
         </p>
 
       
@@ -1808,7 +1808,7 @@
 
               <span class="hint" id="amountHint">
                 Masukkan nilai pembayaran atau tagihan pada tahap ini. Jika pembayaran
-                merupakan cicilan, termin, atau bagian transaksi yang lebih besar,
+                merupakan pembayaran yang dipecah-pecah,
                 pilih “Ya” pada pertanyaan berikutnya.
               </span>
             </div>
@@ -1843,8 +1843,8 @@
                     value="yes"
                   >
                   <label class="choice-card" for="pkpYes">
-                    <strong>PKP</strong> <br>
-                    <small>Rekanan telah dikukuhkan sebagai PKP.</small>
+                    <strong>Pengusaha Kena Pajak</strong> <br>
+                    <small>Pastikan rekanan menyerahkan faktur pajak.</small>
                   </label>
                 </div>
 
@@ -1857,8 +1857,8 @@
                     value="no"
                   >
                   <label class="choice-card" for="pkpNo">
-                    <strong>Bukan PKP</strong><br>
-                    <small>Periksa apakah PPN tercantum dalam tagihan.</small>
+                    <strong>Bukan Pengusaha Kena Pajak</strong><br>
+                    <small>Harap periksa dokumen tagihan terkait pencantuman nilai PPN.</small>
                   </label>
                 </div>
 
@@ -1895,7 +1895,7 @@
                   >
                   <label class="choice-card" for="invoiceVatYes">
                     <strong>Ya, PPN tercantum</strong>
-                    <small>Instansi memungut PPN tersebut dan menyetorkannya sebagai tanggung renteng.</small>
+                    <small>Instansi memungut PPN tersebut dan menyetorkannya sebagai tanggung renteng (kode 411211-108).</small>
                   </label>
                 </div>
 
@@ -1986,23 +1986,23 @@
               <select class="select-control" id="paymentMethod">
                 <option value="">Pilih cara pembayaran</option>
                 <option value="regular">
-                  Pembayaran biasa: (Mekanisme LS atau UP di luar Sistem Inaproc)
+                  Pembayaran biasa (Mekanisme LS atau UP di luar Sistem INAPROC)
                 </option>
                 <option value="government_card">
                   Kartu kredit pemerintah
                 </option>
                 <option value="sip_up">
-                  Uang Persediaan (UP) melalui Pihak Lain dalam Sistem Inaproc)
+                  Uang Persediaan (UP) melalui Pihak Lain dalam Sistem INAPROC
                 </option>
                 <option value="sip_direct">
-                  Langsung (LS) melalui Sistem Inaproc
+                  Langsung (LS) melalui Sistem INAPROC
                 </option>
               </select>
             </div>
 
             <div class="field field-full" id="splitQuestionField">
               <span class="group-label">
-                Apakah pembayaran merupakan bagian dari transaksi yang lebih besar?
+                Apakah pembayaran merupakan transaksi yang dipecah-pecah?
                 <span class="required">*</span>
               </span>
 
@@ -2031,7 +2031,7 @@
                   >
                   <label class="choice-card" for="splitYes">
                     <strong>Ya</strong> <br>
-                    <small>Pembayaran ini adalah termin, cicilan, atau bagian transaksi.</small>
+                    <small>Pembayaran ini merupakan transaksi yang dipecah-pecah</small>
                   </label>
                 </div>
               </div>
@@ -2070,7 +2070,7 @@
             </div>
 
             <div class="conditional-panel" id="facilityAssistantPanel">
-              <h3>Uji fasilitas PPN otomatis</h3>
+              <h3>Uji pemberian fasilitas PPN tidak dipungut/dibebaskan</h3>
               <p class="conditional-description">
                Jawab pertanyaan berikut untuk mengetahui ada atau tidaknya fasilitas perpajakan atas pengadaan barang/jasa tersebut.
               </p>
