@@ -54,14 +54,20 @@
     .paper-wrap{overflow-x:auto}
     .paper{width:var(--paper-w);min-height:var(--paper-h);margin:auto;padding:18mm 18mm 16mm;background:#fff;color:#000;box-shadow:0 28px 75px rgba(15,23,42,.18);font-family:Arial,Helvetica,sans-serif;font-size:10pt;line-height:1.25}
     .title{
-      display:flex;align-items:center;justify-content:center;gap:2.5mm;flex-wrap:wrap;
-      text-align:center;font-size:13pt;font-weight:700;margin-bottom:1mm;line-height:1.35
+      text-align:center;font-size:13pt;font-weight:700;
+      margin-bottom:1mm;line-height:1.45
     }
-    .title-label{white-space:nowrap}
+    .title-line{
+      display:inline-flex;align-items:center;justify-content:center;
+      gap:2mm;max-width:100%;flex-wrap:wrap;text-align:center
+    }
+    .title-label{white-space:normal}
     .title-select{
-      width:auto!important;min-width:52mm;max-width:100%;height:auto!important;
-      padding:1.2mm 8mm 1.2mm 3mm!important;text-align:center;text-align-last:center;
-      font-weight:700;font-size:11pt;border:.25mm solid #888!important;border-radius:2mm!important;
+      width:auto!important;min-width:50mm;max-width:72mm;height:auto!important;
+      padding:1.1mm 8mm 1.1mm 3mm!important;
+      text-align:center;text-align-last:center;
+      font-weight:700;font-size:11pt;
+      border:.25mm solid #888!important;border-radius:2mm!important;
       background:#fff!important
     }
     .date-wrap{display:inline-flex;align-items:center;gap:1.5mm;vertical-align:baseline}
@@ -93,9 +99,26 @@
     .checks{display:grid;gap:1.2mm;margin:1.5mm 0 2mm}
     .check-line{display:flex;align-items:flex-start;gap:2.3mm;cursor:pointer}
     .check-line.inline{display:inline-flex;margin-right:9mm}
-    input[type=radio],input[type=checkbox]{appearance:none;width:6.3mm;height:6.3mm;flex:0 0 6.3mm;margin:0;border:.3mm solid #666;background:#fff;display:grid;place-content:center}
-    input[type=radio]:before,input[type=checkbox]:before{content:"✓";font-weight:700;font-size:5.3mm;transform:scale(0)}
-    input[type=radio]:checked:before,input[type=checkbox]:checked:before{transform:scale}
+    input[type=radio]:focus-visible,input[type=checkbox]:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+    input[type=radio],input[type=checkbox]{
+      -webkit-appearance:none;appearance:none;
+      width:6.3mm;height:6.3mm;flex:0 0 6.3mm;margin:0;
+      border:.3mm solid #555;border-radius:1mm;background:#fff;
+      display:inline-grid;place-content:center;vertical-align:middle;
+      cursor:pointer;position:relative
+    }
+    input[type=radio]::before,input[type=checkbox]::before{
+      content:"✓";
+      display:block;
+      font-family:Arial,Helvetica,sans-serif;
+      font-weight:700;font-size:5mm;line-height:1;
+      color:#000;
+      transform:scale(0);
+      transform-origin:center;
+    }
+    input[type=radio]:checked::before,input[type=checkbox]:checked::before{
+      transform:scale(1)
+    }
     .indent{margin-left:10mm}
     .paragraph{margin:3mm 0;text-align:justify}
     .inline-field{display:inline-block;vertical-align:baseline;width:40mm!important;height:5.7mm!important}
@@ -120,7 +143,7 @@
     .footer-links{display:flex;flex-wrap:wrap;gap:18px}
     .footer-links a{text-decoration:none;color:#424245}
     @media(max-width:980px){.desktop-menu{display:none}.menu-btn{display:grid;place-items:center}}
-    @media(max-width:840px){.title{font-size:11pt}.title-select{min-width:46mm;font-size:10pt}.hero{padding-top:70px}.toolbar{position:static;align-items:flex-start;flex-direction:column}.actions{width:100%;flex-wrap:wrap}.actions>*{flex:1}.footer-inner{align-items:flex-start;flex-direction:column}}
+    @media(max-width:840px){.title{font-size:11pt}.title-line{gap:1.5mm}.title-select{min-width:46mm;max-width:65mm;font-size:10pt}.hero{padding-top:70px}.toolbar{position:static;align-items:flex-start;flex-direction:column}.actions{width:100%;flex-wrap:wrap}.actions>*{flex:1}.footer-inner{align-items:flex-start;flex-direction:column}}
     @page{size:A4 portrait;margin:0}
     @media print{
       .no-print,.site-nav,.mobile-menu,.announce,.hero,.toolbar,.note,.guide,.site-footer{display:none!important}
@@ -130,10 +153,19 @@
       input[type=text],input[type=date],textarea,select{border:0!important;background:transparent!important;box-shadow:none!important;color:#000!important;-webkit-text-fill-color:#000!important}
       textarea{resize:none!important;overflow:hidden!important}
       input::placeholder,textarea::placeholder{color:transparent!important}
-      input[type=radio],input[type=checkbox]{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+      input[type=radio],input[type=checkbox]{
+        -webkit-print-color-adjust:exact!important;
+        print-color-adjust:exact!important;
+        border:.3mm solid #555!important;
+        background:#fff!important
+      }
+      input[type=radio]:checked::before,input[type=checkbox]:checked::before{
+        transform:scale(1)!important;color:#000!important
+      }
       .screen-help{display:none!important}
       .date-input{display:none!important}
       .date-print{display:inline!important}
+      .title-line{display:inline-flex!important;justify-content:center!important;align-items:center!important;flex-wrap:wrap!important}
       .title-select{
         border:0!important;background:transparent!important;padding:0!important;
         appearance:none!important;-webkit-appearance:none!important
@@ -190,13 +222,15 @@
         <div class="paper-wrap">
           <form class="paper" id="form" autocomplete="off" novalidate>
             <div class="title">
-              <span class="title-label">SURAT KUASA KHUSUS WAJIB PAJAK</span>
-              <select id="jenisWp" class="title-select" data-required aria-label="Jenis Wajib Pajak">
-                <option value="">PILIH JENIS WAJIB PAJAK</option>
-                <option value="BADAN">BADAN</option>
-                <option value="ORANG PRIBADI">ORANG PRIBADI</option>
-                <option value="WARISAN BELUM TERBAGI">WARISAN BELUM TERBAGI</option>
-              </select>
+              <div class="title-line">
+                <span class="title-label">SURAT KUASA KHUSUS WAJIB PAJAK</span>
+                <select id="jenisWp" class="title-select" data-required aria-label="Jenis Wajib Pajak">
+                  <option value="">PILIH JENIS WAJIB PAJAK</option>
+                  <option value="BADAN">BADAN</option>
+                  <option value="ORANG PRIBADI">ORANG PRIBADI</option>
+                  <option value="WARISAN BELUM TERBAGI">WARISAN BELUM TERBAGI</option>
+                </select>
+              </div>
             </div>
             <div class="subtitle">Nomor <input id="nomor" class="inline-field" type="text" data-required> &nbsp; Tanggal <span class="date-wrap">
                 <input id="tanggal" class="inline-field date-input" type="date" data-required>
@@ -361,7 +395,7 @@
         if(!input || !output) return;
         if(!input.value){output.textContent='—';return}
         const [year,month,day]=input.value.split('-').map(Number);
-        output.textContent=`${String(day).padStart(2,'0')} ${monthNames[month-1]} ${year}`;
+        output.textContent=`${day} ${monthNames[month-1]} ${year}`;
       };
 
       ['tanggal','mulaiBerlaku','akhirBerlaku'].forEach(id=>{
