@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Formulir interaktif Surat Kuasa Khusus Wajib Pajak sesuai PMK Nomor 44 Tahun 2026.">
+  <title>Surat Kuasa Khusus Wajib Pajak | Kabayan</title>
+  <style>
+    :root{
+      --ink:#1d1d1f;--white:#fff;--off:#f5f5f7;--soft:#e8e8ed;--muted:#86868b;
+      --blue:#0071e3;--blue2:#0077ed;--red:#d70015;--nav:48px;--max:1180px;
+      --paper-w:210mm;--paper-h:297mm;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;overflow-x:hidden;background:var(--off);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;line-height:1.5;letter-spacing:-.015em}
+    body.menu-open{overflow:hidden}
+    a{color:inherit}
+    button,input,textarea,select{font:inherit}
+    .site-nav{position:fixed;z-index:1000;inset:0 0 auto;min-height:var(--nav);border-bottom:1px solid rgba(0,0,0,.06);background:rgba(250,250,252,.82);backdrop-filter:saturate(180%) blur(20px)}
+    .nav-inner{width:min(var(--max),calc(100% - 36px));min-height:var(--nav);display:flex;align-items:center;justify-content:space-between;gap:28px;margin:auto}
+    .brand{display:inline-flex;align-items:center;gap:9px;text-decoration:none;font-size:14px;font-weight:700}
+    .brand-mark{width:25px;height:25px;display:grid;place-items:center;border-radius:8px;background:var(--ink);color:#fff;font-size:9px;font-weight:800}
+    .desktop-menu{display:flex;gap:27px;align-items:center}
+    .desktop-menu a{font-size:12px;color:#424245;text-decoration:none}
+    .desktop-menu a:hover,.desktop-menu a[aria-current="page"]{color:#000}
+    .menu-btn{display:none;width:34px;height:34px;border:0;border-radius:50%;background:transparent;font-size:18px}
+    .mobile-menu{position:fixed;z-index:999;inset:var(--nav) 0 0;display:none;padding:36px 28px;background:rgba(250,250,252,.98)}
+    .mobile-menu.active{display:block}
+    .mobile-menu a{display:block;padding:11px 0;font-size:28px;font-weight:650;text-decoration:none}
+    main{padding-top:var(--nav)}
+    .announce{padding:13px 20px;background:#fff;text-align:center;font-size:14px;color:#3a3a3c}
+    .announce a{color:var(--blue);text-decoration:none}
+    .hero{position:relative;overflow:hidden;padding:88px 20px 68px;background:#fff;text-align:center}
+    .hero:before{position:absolute;top:-215px;left:50%;width:850px;height:560px;border-radius:50%;background:radial-gradient(ellipse,rgba(0,113,227,.18),rgba(47,157,255,.06) 45%,transparent 72%);filter:blur(8px);content:"";transform:translateX(-50%)}
+    .hero-inner{position:relative;z-index:1;width:min(980px,100%);margin:auto}
+    .eyebrow{display:inline-flex;align-items:center;gap:7px;margin-bottom:16px;padding:7px 12px;border-radius:999px;background:var(--off);font-size:12px;font-weight:650;color:#515154}
+    .eyebrow:before{width:7px;height:7px;border-radius:50%;background:var(--blue);content:""}
+    .hero h1{margin:0;font-size:clamp(42px,6vw,68px);line-height:1;letter-spacing:-.06em}
+    .gradient{display:block;background:linear-gradient(90deg,#083b8f,#0071e3 42%,#24a0cf 70%,#e6aa00);background-clip:text;-webkit-background-clip:text;color:transparent}
+    .hero p{max-width:820px;margin:24px auto 0;color:#515154;font-size:clamp(18px,2.2vw,23px)}
+    .workspace{padding:52px 20px 90px}
+    .inner{width:min(var(--max),100%);margin:auto}
+    .toolbar{position:sticky;z-index:100;top:64px;width:min(100%,var(--paper-w));display:flex;align-items:center;justify-content:space-between;gap:18px;margin:0 auto 18px;padding:16px 18px;border:1px solid rgba(0,0,0,.06);border-radius:22px;background:rgba(255,255,255,.92);box-shadow:0 15px 45px rgba(0,0,0,.08);backdrop-filter:blur(20px)}
+    .toolbar h2{margin:0;font-size:15px;letter-spacing:-.02em}
+    .toolbar p{margin:4px 0 0;color:var(--muted);font-size:12px}
+    .actions{display:flex;gap:9px;flex-shrink:0}
+    .btn,.back{min-height:40px;display:inline-flex;align-items:center;justify-content:center;padding:9px 17px;border-radius:999px;font-size:13px;font-weight:550;cursor:pointer;text-decoration:none}
+    .btn{border:1px solid #d2d2d7;background:transparent;color:#6e6e73}
+    .btn:hover{border-color:var(--red);background:var(--red);color:#fff}
+    .btn-primary,.back{border:1px solid var(--blue);background:var(--blue);color:#fff}
+    .btn-primary:hover,.back:hover{background:var(--blue2)}
+    .note{width:min(100%,var(--paper-w));margin:0 auto 18px;padding:17px 19px;border-radius:18px;background:#eef6ff;color:#31536f;font-size:13px;line-height:1.55}
+    .paper-wrap{overflow-x:auto}
+    .paper{width:var(--paper-w);min-height:var(--paper-h);margin:auto;padding:18mm 18mm 16mm;background:#fff;color:#000;box-shadow:0 28px 75px rgba(15,23,42,.18);font-family:Arial,Helvetica,sans-serif;font-size:10pt;line-height:1.25}
+    .title{text-align:center;font-size:13pt;font-weight:700;margin-bottom:1mm}
+    .subtitle{text-align:center;margin-bottom:6mm}
+    .row{display:grid;grid-template-columns:45mm 4mm minmax(0,1fr);align-items:center;min-height:6mm}
+    .label{white-space:normal}
+    .colon{text-align:center}
+    input[type=text],textarea,select{width:100%;border:0;border-bottom:.25mm dotted #555;border-radius:0;padding:.45mm 1mm;background:#fff;color:#000;outline:none}
+    input[type=text],select{height:5.7mm}
+    textarea{min-height:11mm;resize:vertical;line-height:1.22}
+    input:focus,textarea:focus,select:focus{background:#eff6ff;box-shadow:inset 0 -1px 0 var(--blue)}
+    .missing{background:#fff1f2!important;box-shadow:inset 0 -1px 0 var(--red)!important}
+    .section{margin:3mm 0}
+    .checks{display:grid;gap:1.2mm;margin:1.5mm 0 2mm}
+    .check-line{display:flex;align-items:flex-start;gap:2.3mm;cursor:pointer}
+    .check-line.inline{display:inline-flex;margin-right:9mm}
+    input[type=radio],input[type=checkbox]{appearance:none;width:6.3mm;height:6.3mm;flex:0 0 6.3mm;margin:0;border:.3mm solid #666;background:#fff;display:grid;place-content:center}
+    input[type=radio]:before,input[type=checkbox]:before{content:"✓";font-weight:700;font-size:5.3mm;transform:scale(0)}
+    input[type=radio]:checked:before,input[type=checkbox]:checked:before{transform:scale(1)}
+    .indent{margin-left:10mm}
+    .paragraph{margin:3mm 0;text-align:justify}
+    .inline-field{display:inline-block;vertical-align:baseline;width:40mm!important;height:5.7mm!important}
+    .wide{width:58mm!important}
+    .detail-list{display:grid;gap:2mm;margin:2mm 0 3mm 8mm}
+    .detail-row{display:grid;grid-template-columns:7mm minmax(0,1fr);gap:2mm;align-items:start}
+    .detail-row textarea{min-height:8mm}
+    .signature-grid{display:grid;grid-template-columns:1fr 1fr;gap:18mm;margin-top:8mm}
+    .sig-box{text-align:center}
+    .sig-space{height:26mm}
+    .meterai{width:28mm;height:20mm;display:flex;align-items:center;justify-content:center;margin:0 auto 2mm;border:1px dashed #888;font-size:8pt;color:#666}
+    .screen-help{font-size:8pt;color:#64748b;margin-top:1mm}
+    .footnotes{margin-top:6mm;font-size:8.8pt;line-height:1.35}
+    .hidden{display:none!important}
+    .guide{width:min(var(--max),100%);margin:28px auto 0;padding:28px;border-radius:24px;background:#fff;border:1px solid var(--soft);box-shadow:0 16px 45px rgba(0,0,0,.05)}
+    .guide h2{margin:0 0 14px;font-size:28px}
+    .guide details{margin-top:10px;border:1px solid var(--soft);border-radius:14px;padding:0 16px}
+    .guide summary{cursor:pointer;padding:14px 0;font-weight:650}
+    .guide p{margin:0 0 14px;color:#515154;font-size:14px}
+    .site-footer{background:#fff;color:#6e6e73}
+    .footer-inner{width:min(var(--max),calc(100% - 40px));display:flex;align-items:center;justify-content:space-between;gap:20px;margin:auto;padding:22px 0 28px;border-top:1px solid #d2d2d7;font-size:12px}
+    .footer-links{display:flex;flex-wrap:wrap;gap:18px}
+    .footer-links a{text-decoration:none;color:#424245}
+    @media(max-width:980px){.desktop-menu{display:none}.menu-btn{display:grid;place-items:center}}
+    @media(max-width:840px){.hero{padding-top:70px}.toolbar{position:static;align-items:flex-start;flex-direction:column}.actions{width:100%;flex-wrap:wrap}.actions>*{flex:1}.footer-inner{align-items:flex-start;flex-direction:column}}
+    @page{size:A4 portrait;margin:0}
+    @media print{
+      .no-print,.site-nav,.mobile-menu,.announce,.hero,.toolbar,.note,.guide,.site-footer{display:none!important}
+      html,body{width:210mm!important;margin:0!important;padding:0!important;background:#fff!important}
+      .workspace,.inner,.paper-wrap{margin:0!important;padding:0!important;background:#fff!important;overflow:visible!important}
+      .paper{width:210mm!important;min-height:297mm!important;margin:0!important;padding:18mm 18mm 16mm!important;box-shadow:none!important}
+      input[type=text],textarea,select{border:0!important;background:transparent!important;box-shadow:none!important;color:#000!important;-webkit-text-fill-color:#000!important}
+      textarea{resize:none!important;overflow:hidden!important}
+      input::placeholder,textarea::placeholder{color:transparent!important}
+      input[type=radio],input[type=checkbox]{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+      .screen-help{display:none!important}
+      .meterai{border:1px dashed #888!important;color:#666!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    }
+  </style>
+</head>
+<body id="top">
+  <header class="site-nav no-print">
+    <div class="nav-inner">
+      <a class="brand" href="index.html"><span class="brand-mark">ASD</span><span>dhaniswara86</span></a>
+      <nav class="desktop-menu">
+        <a href="index.html">Beranda</a><a href="buku.html">Buku</a><a href="formulir.html" aria-current="page">Formulir</a><a href="aplikasi.html">Aplikasi</a><a href="artikel.html">Artikel</a><a href="index.html#tentang">Tentang</a>
+      </nav>
+      <button class="menu-btn" id="menuBtn" type="button">☰</button>
+    </div>
+  </header>
+
+  <nav class="mobile-menu no-print" id="mobileMenu">
+    <a href="index.html">Beranda</a><a href="buku.html">Buku Digital</a><a href="formulir.html">Formulir</a><a href="aplikasi.html">Aplikasi</a><a href="artikel.html">Artikel</a><a href="index.html#tentang">Tentang</a>
+  </nav>
+
+  <main>
+    <div class="announce no-print">
+      Isi surat kuasa langsung dari browser dan cetak tanpa mengunggah data.
+      <a href="formulir.html">Kembali ke koleksi formulir ›</a>
+    </div>
+
+    <section class="hero no-print">
+      <div class="hero-inner">
+        <span class="eyebrow">Formulir interaktif</span>
+        <h1>Surat Kuasa Khusus Wajib Pajak.<span class="gradient">Sesuai PMK Nomor 44 Tahun 2026.</span></h1>
+        <p>Formulir Kabayan untuk membuat Surat Kuasa Khusus dalam bentuk kertas, lengkap dengan status pemberi kuasa, jenis kuasa, ruang lingkup, masa berlaku, dan area meterai.</p>
+      </div>
+    </section>
+
+    <section class="workspace">
+      <div class="inner">
+        <header class="toolbar no-print">
+          <div><h2>Surat Kuasa Khusus Wajib Pajak</h2><p>Isi kolom, pilih status, lalu cetak atau simpan sebagai PDF.</p></div>
+          <div class="actions">
+            <a class="back" href="formulir.html">Kembali</a>
+            <button class="btn" id="resetBtn" type="button">Kosongkan</button>
+            <button class="btn btn-primary" id="printBtn" type="button">Cetak / Simpan PDF</button>
+          </div>
+        </header>
+
+        <div class="note no-print">
+          Format mengikuti Lampiran Huruf A PMK Nomor 44 Tahun 2026. Satu Surat Kuasa Khusus hanya berlaku untuk satu orang kuasa dan ruang lingkup perpajakan tertentu.
+        </div>
+
+        <div class="paper-wrap">
+          <form class="paper" id="form" autocomplete="off" novalidate>
+            <div class="title">SURAT KUASA KHUSUS WAJIB PAJAK <input id="jenisWp" class="inline-field" type="text" data-required placeholder="BADAN/ORANG PRIBADI/WARISAN YANG BELUM TERBAGI"> (1)</div>
+            <div class="subtitle">Nomor <input id="nomor" class="inline-field" type="text" data-required> (2) &nbsp; Tanggal <input id="tanggal" class="inline-field" type="text" data-required placeholder="Contoh: 17 Juli 2026"> (3)</div>
+
+            <p class="section">Yang bertanda tangan di bawah ini:</p>
+            <div class="row"><label for="namaPemberi">nama</label><span class="colon">:</span><input id="namaPemberi" type="text" data-required> <span>(4)</span></div>
+            <div class="row"><label for="npwpPemberi">NPWP</label><span class="colon">:</span><input id="npwpPemberi" type="text" data-required> <span>(5)</span></div>
+            <div class="row"><label for="jabatanPemberi">jabatan</label><span class="colon">:</span><input id="jabatanPemberi" type="text"> <span>(6)</span></div>
+
+            <p class="section">bertindak selaku: *)</p>
+            <div class="checks">
+              <label class="check-line"><input id="statusWp" type="radio" name="statusPemberi" value="Wajib Pajak"><span>Wajib Pajak</span></label>
+              <label class="check-line"><input id="statusWakil" type="radio" name="statusPemberi" value="Wakil Wajib Pajak"><span>Wakil Wajib Pajak:</span></label>
+            </div>
+
+            <div id="wakilBlock" class="indent hidden">
+              <div class="row"><label for="namaWpDiwakili">nama</label><span class="colon">:</span><input id="namaWpDiwakili" type="text"> <span>(7)</span></div>
+              <div class="row"><label for="npwpWpDiwakili">NPWP</label><span class="colon">:</span><input id="npwpWpDiwakili" type="text"> <span>(8)</span></div>
+            </div>
+
+            <p class="section">dengan ini memberikan kuasa khusus kepada: *)</p>
+            <div class="checks">
+              <label class="check-line"><input type="radio" name="statusKuasa" value="Konsultan Pajak"><span>Konsultan Pajak</span></label>
+              <label class="check-line"><input type="radio" name="statusKuasa" value="Pihak Lain"><span>Pihak Lain</span></label>
+              <label class="check-line"><input type="radio" name="statusKuasa" value="Keluarga Wajib Pajak"><span>keluarga Wajib Pajak,</span></label>
+            </div>
+
+            <div class="indent">
+              <div class="row"><label for="namaKuasa">nama</label><span class="colon">:</span><input id="namaKuasa" type="text" data-required> <span>(9)</span></div>
+              <div class="row"><label for="npwpKuasa">NPWP</label><span class="colon">:</span><input id="npwpKuasa" type="text" data-required> <span>(10)</span></div>
+              <div class="row"><label for="izinSkt">Nomor Izin Konsultan Pajak/SKT</label><span class="colon">:</span><input id="izinSkt" type="text"> <span>(11)</span></div>
+              <div class="row"><label for="hubunganKeluarga">status hubungan keluarga</label><span class="colon">:</span><input id="hubunganKeluarga" type="text"> <span>(12)</span></div>
+            </div>
+
+            <p class="paragraph">
+              untuk melaksanakan hak dan/atau memenuhi kewajiban perpajakan terkait
+              <input id="ruangLingkup" class="inline-field wide" type="text" data-required> (13)
+              berkenaan dengan jenis pajak
+              <input id="jenisPajak" class="inline-field" type="text" data-required> (14)
+              Masa Pajak/Bagian Tahun Pajak/Tahun Pajak **)
+              <input id="periodePajak" class="inline-field" type="text" data-required> (15).
+            </p>
+
+            <p class="paragraph">
+              Surat Kuasa Khusus ini berlaku mulai tanggal
+              <input id="mulaiBerlaku" class="inline-field" type="text" data-required> (16)
+              sampai dengan tanggal
+              <input id="akhirBerlaku" class="inline-field" type="text" data-required> (17).
+            </p>
+
+            <p class="section">Untuk keperluan tersebut, penerima kuasa dikuasakan untuk:</p>
+            <div class="detail-list">
+              <div class="detail-row"><span>a.</span><textarea id="kuasaA" rows="2" data-required></textarea><span>(18)</span></div>
+              <div class="detail-row"><span>b.</span><textarea id="kuasaB" rows="2"></textarea><span>(18)</span></div>
+              <div class="detail-row"><span>c.</span><textarea id="kuasaC" rows="2"></textarea><span>(18)</span></div>
+            </div>
+
+            <p class="paragraph">
+              Dengan ini, pemberi kuasa menyatakan bahwa dalam hal hak dan/atau kewajiban perpajakan yang dikuasakan dilakukan secara elektronik, penerima kuasa berhak untuk mengakses akun elektronik pemberi kuasa pada sistem elektronik Direktorat Jenderal Pajak.
+            </p>
+
+            <p class="paragraph">Demikian surat kuasa khusus ini dibuat untuk dipergunakan sebagaimana mestinya.</p>
+
+            <div class="signature-grid">
+              <div class="sig-box">
+                <div>Penerima kuasa,</div>
+                <div class="sig-space"></div>
+                <input id="namaTtdKuasa" type="text" data-required placeholder="Nama lengkap penerima kuasa">
+                <div>(19)</div>
+                <div class="screen-help no-print">Area tanda tangan</div>
+              </div>
+              <div class="sig-box">
+                <div>Pemberi kuasa,</div>
+                <div class="meterai">Meterai</div>
+                <div class="sig-space" style="height:6mm"></div>
+                <input id="namaTtdPemberi" type="text" data-required placeholder="Nama lengkap pemberi kuasa">
+                <div>(20)</div>
+                <div class="screen-help no-print">Area tanda tangan dan meterai</div>
+              </div>
+            </div>
+
+            <div class="footnotes">
+              <div>*) Beri tanda “√” pada kolom yang sesuai.</div>
+              <div>**) Pilih salah satu yang sesuai.</div>
+            </div>
+          </form>
+        </div>
+
+        <section class="guide no-print">
+          <h2>Petunjuk pengisian</h2>
+          <details><summary>Jenis Wajib Pajak</summary><p>Isi “BADAN”, “ORANG PRIBADI”, atau “WARISAN YANG BELUM TERBAGI” sesuai status pemberi kuasa.</p></details>
+          <details><summary>Status penerima kuasa</summary><p>Pilih Konsultan Pajak, Pihak Lain, atau Keluarga. Nomor izin/SKT diisi untuk Konsultan Pajak atau Pihak Lain. Status hubungan keluarga diisi jika kuasa merupakan keluarga.</p></details>
+          <details><summary>Ruang lingkup kuasa</summary><p>Isi hak atau kewajiban perpajakan, jenis pajak, periode pajak, masa berlaku, dan rincian tindakan yang benar-benar dikuasakan.</p></details>
+          <details><summary>Kuasa elektronik</summary><p>Apabila pelaksanaan kuasa dilakukan secara elektronik, Wajib Pajak tetap perlu memberikan persetujuan akses pada Portal Wajib Pajak.</p></details>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer no-print">
+    <div class="footer-inner">
+      <p>© <span id="year"></span> Angga Sukma Dhaniswara.</p>
+      <div class="footer-links"><a href="index.html">Beranda</a><a href="formulir.html">Formulir</a><a href="artikel.html">Artikel</a><a href="#top">Kembali ke atas</a></div>
+    </div>
+  </footer>
+
+  <script>
+    const menuBtn=document.getElementById('menuBtn'),mobileMenu=document.getElementById('mobileMenu');
+    menuBtn.addEventListener('click',()=>{const on=mobileMenu.classList.toggle('active');document.body.classList.toggle('menu-open',on);menuBtn.textContent=on?'×':'☰'});
+    document.querySelectorAll('.mobile-menu a').forEach(a=>a.addEventListener('click',()=>{mobileMenu.classList.remove('active');document.body.classList.remove('menu-open');menuBtn.textContent='☰'}));
+    document.getElementById('year').textContent=new Date().getFullYear();
+
+    (()=> {
+      const form=document.getElementById('form');
+      const reset=document.getElementById('resetBtn');
+      const print=document.getElementById('printBtn');
+      const statusWakil=document.getElementById('statusWakil');
+      const wakilBlock=document.getElementById('wakilBlock');
+      const namaPemberi=document.getElementById('namaPemberi');
+      const namaKuasa=document.getElementById('namaKuasa');
+      const namaTtdPemberi=document.getElementById('namaTtdPemberi');
+      const namaTtdKuasa=document.getElementById('namaTtdKuasa');
+      const izinSkt=document.getElementById('izinSkt');
+      const hubungan=document.getElementById('hubunganKeluarga');
+      let manualPemberi=false,manualKuasa=false;
+
+      const syncNames=()=>{
+        if(!manualPemberi) namaTtdPemberi.value=namaPemberi.value;
+        if(!manualKuasa) namaTtdKuasa.value=namaKuasa.value;
+      };
+
+      namaPemberi.addEventListener('input',syncNames);
+      namaKuasa.addEventListener('input',syncNames);
+      namaTtdPemberi.addEventListener('input',()=>manualPemberi=namaTtdPemberi.value.trim()!=='');
+      namaTtdKuasa.addEventListener('input',()=>manualKuasa=namaTtdKuasa.value.trim()!=='');
+
+      form.querySelectorAll('input[name="statusPemberi"]').forEach(r=>r.addEventListener('change',()=>{
+        wakilBlock.classList.toggle('hidden',!statusWakil.checked);
+      }));
+
+      form.querySelectorAll('input[name="statusKuasa"]').forEach(r=>r.addEventListener('change',()=>{
+        if(r.value==='Konsultan Pajak'||r.value==='Pihak Lain') hubungan.value='';
+        if(r.value==='Keluarga Wajib Pajak') izinSkt.value='';
+      }));
+
+      form.addEventListener('input',e=>e.target.classList?.remove('missing'));
+      form.addEventListener('change',e=>e.target.classList?.remove('missing'));
+
+      const validate=()=>{
+        let count=0,first=null;
+        form.querySelectorAll('[data-required]').forEach(el=>{
+          const empty=!String(el.value||'').trim();
+          el.classList.toggle('missing',empty);
+          if(empty){count++;first??=el}
+        });
+
+        if(!form.querySelector('input[name="statusPemberi"]:checked')){
+          count++;first??=form.querySelector('input[name="statusPemberi"]');
+        }
+
+        if(statusWakil.checked){
+          for(const id of ['namaWpDiwakili','npwpWpDiwakili']){
+            const el=document.getElementById(id);
+            if(!el.value.trim()){count++;first??=el;el.classList.add('missing')}
+          }
+        }
+
+        const statusKuasa=form.querySelector('input[name="statusKuasa"]:checked');
+        if(!statusKuasa){
+          count++;first??=form.querySelector('input[name="statusKuasa"]');
+        }else if((statusKuasa.value==='Konsultan Pajak'||statusKuasa.value==='Pihak Lain')&&!izinSkt.value.trim()){
+          count++;first??=izinSkt;izinSkt.classList.add('missing');
+        }else if(statusKuasa.value==='Keluarga Wajib Pajak'&&!hubungan.value.trim()){
+          count++;first??=hubungan;hubungan.classList.add('missing');
+        }
+
+        return {count,first};
+      };
+
+      print.addEventListener('click',()=>{
+        const {count,first}=validate();
+        if(count&&!confirm(`Masih ada ${count} bagian yang belum diisi atau dipilih. Tetap lanjut mencetak?`)){first?.focus();return}
+        window.print();
+      });
+
+      reset.addEventListener('click',()=>{
+        if(!confirm('Kosongkan seluruh isi formulir?')) return;
+        form.reset();manualPemberi=false;manualKuasa=false;
+        wakilBlock.classList.add('hidden');
+        form.querySelectorAll('.missing').forEach(el=>el.classList.remove('missing'));
+        namaPemberi.focus();
+      });
+    })();
+  </script>
+</body>
+</html>
