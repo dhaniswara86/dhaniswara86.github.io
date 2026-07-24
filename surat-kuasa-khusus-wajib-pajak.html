@@ -74,11 +74,12 @@
       min-width:0;
       max-width:none;
       height:auto!important;
-      padding:1.1mm 7mm 1.1mm 2.5mm!important;
-      text-align:center;
-      text-align-last:center;
+      padding:1.1mm 8mm 1.1mm 2.5mm!important;
+      text-align:left;
+      text-align-last:left;
       font-weight:700;
-      font-size:11pt;
+      font-size:13pt;
+      line-height:1.2;
       border:.25mm solid #888!important;
       border-radius:2mm!important;
       background:#fff!important;
@@ -89,7 +90,7 @@
       visibility:hidden;
       white-space:pre;
       font-family:Arial,Helvetica,sans-serif;
-      font-size:11pt;
+      font-size:13pt;
       font-weight:700;
       padding:0;
       margin:0;
@@ -98,6 +99,20 @@
     .date-print{display:none;font-weight:400}
     .field-error{display:none;margin-top:.8mm;color:#d70015;font-size:8.5pt;line-height:1.25}
     .field-error.show{display:block}
+    .form-error-summary{
+      display:none;
+      margin:0 0 5mm;
+      padding:3mm 4mm;
+      border:1px solid #d70015;
+      border-radius:3mm;
+      background:#fff1f2;
+      color:#a40012;
+      font-size:9pt;
+      line-height:1.4;
+    }
+    .form-error-summary.show{display:block}
+    .form-error-summary strong{display:block;margin-bottom:1mm}
+    .form-error-summary ul{margin:0;padding-left:5mm}
     .npwp-wrap{min-width:0}
     .dynamic-actions{display:flex;gap:8px;margin:2mm 0 0 9mm}
     .dynamic-actions button{
@@ -153,6 +168,13 @@
     .indent{margin-left:10mm}
     .paragraph{margin:3mm 0;text-align:justify}
     .inline-field{display:inline-block;vertical-align:baseline;width:40mm!important;height:5.7mm!important}
+    .period-type-select{
+      width:43mm!important;
+      text-align:left!important;
+      text-align-last:left!important;
+      padding-left:1.5mm!important;
+      margin-right:1.5mm;
+    }
     .wide{width:58mm!important}
     .detail-list{display:grid;gap:2mm;margin:2mm 0 3mm 8mm}
     .detail-row{display:grid;grid-template-columns:7mm minmax(0,1fr);gap:2mm;align-items:start}
@@ -186,7 +208,7 @@
     .footer-links{display:flex;flex-wrap:wrap;gap:18px}
     .footer-links a{text-decoration:none;color:#424245}
     @media(max-width:980px){.desktop-menu{display:none}.menu-btn{display:grid;place-items:center}}
-    @media(max-width:840px){.title{font-size:11pt}.title-line{gap:1.5mm;white-space:normal;flex-wrap:wrap}.title-label{white-space:normal}.title-select{font-size:10pt}.select-measure{font-size:10pt}.hero{padding-top:70px}.toolbar{position:static;align-items:flex-start;flex-direction:column}.actions{width:100%;flex-wrap:wrap}.actions>*{flex:1}.footer-inner{align-items:flex-start;flex-direction:column}}
+    @media(max-width:840px){.title{font-size:11pt}.title-line{gap:1.5mm;white-space:normal;flex-wrap:wrap}.title-label{white-space:normal}.title-select{font-size:11pt}.select-measure{font-size:11pt}.hero{padding-top:70px}.toolbar{position:static;align-items:flex-start;flex-direction:column}.actions{width:100%;flex-wrap:wrap}.actions>*{flex:1}.footer-inner{align-items:flex-start;flex-direction:column}}
     @page{size:A4 portrait;margin:0}
     @media print{
       .no-print,.site-nav,.mobile-menu,.announce,.hero,.toolbar,.note,.guide,.site-footer{display:none!important}
@@ -222,7 +244,14 @@
       .title-line{display:inline-flex!important;justify-content:center!important;align-items:center!important;width:max-content!important;margin:0 auto!important;flex-wrap:nowrap!important}
       .title-select{
         border:0!important;background:transparent!important;padding:0!important;
-        appearance:none!important;-webkit-appearance:none!important
+        appearance:none!important;-webkit-appearance:none!important;
+        text-align:left!important;text-align-last:left!important;
+        font-size:13pt!important;
+      }
+      .period-type-select{
+        border:0!important;background:transparent!important;
+        appearance:none!important;-webkit-appearance:none!important;
+        text-align:left!important;text-align-last:left!important;
       }
       .field-error,.dynamic-actions,.detail-remove{display:none!important}
       .detail-list.single-purpose .detail-row{
@@ -281,10 +310,11 @@
 
         <div class="paper-wrap">
           <form class="paper" id="form" autocomplete="off" novalidate>
+            <div id="formErrorSummary" class="form-error-summary no-print" role="alert" aria-live="assertive"></div>
             <div class="title">
               <div class="title-line">
                 <span class="title-label">SURAT KUASA KHUSUS WAJIB PAJAK</span>
-                <select id="jenisWp" class="title-select" data-required aria-label="Jenis Wajib Pajak">
+                <select id="jenisWp" data-label="Jenis Wajib Pajak" data-required class="title-select" data-required aria-label="Jenis Wajib Pajak">
                   <option value="">PILIH JENIS WAJIB PAJAK</option>
                   <option value="BADAN">BADAN</option>
                   <option value="ORANG PRIBADI">ORANG PRIBADI</option>
@@ -293,15 +323,15 @@
                 <span id="jenisWpMeasure" class="select-measure" aria-hidden="true"></span>
               </div>
             </div>
-            <div class="subtitle">Nomor <input id="nomor" class="inline-field" type="text" data-required> &nbsp; Tanggal <span class="date-wrap">
-                <input id="tanggal" class="inline-field date-input" type="date" data-required>
+            <div class="subtitle">Nomor <input id="nomor" data-label="Nomor surat" data-required class="inline-field" type="text" data-required> &nbsp; Tanggal <span class="date-wrap">
+                <input id="tanggal" data-label="Tanggal surat" data-required class="inline-field date-input" type="date" data-required>
                 <span id="tanggalPrint" class="date-print">—</span>
               </span></div>
 
             <p class="section">Yang bertanda tangan di bawah ini:</p>
-            <div class="row"><label for="namaPemberi">nama</label><span class="colon">:</span><input id="namaPemberi" type="text" data-required></div>
+            <div class="row"><label for="namaPemberi">nama</label><span class="colon">:</span><input id="namaPemberi" data-label="Nama pemberi kuasa" data-required type="text" data-required></div>
             <div class="row"><label for="npwpPemberi">NPWP</label><span class="colon">:</span><div class="npwp-wrap">
-                  <input id="npwpPemberi" type="text" data-required inputmode="numeric" placeholder="16 digit NPWP" aria-describedby="npwpPemberiError">
+                  <input id="npwpPemberi" data-label="NPWP pemberi kuasa" data-required type="text" data-required inputmode="numeric" placeholder="16 digit NPWP" aria-describedby="npwpPemberiError">
                   <div id="npwpPemberiError" class="field-error" role="alert"></div>
                 </div></div>
             <div class="row"><label for="jabatanPemberi">jabatan</label><span class="colon">:</span><input id="jabatanPemberi" type="text"></div>
@@ -313,9 +343,9 @@
             </div>
 
             <div id="wakilBlock" class="indent hidden">
-              <div class="row"><label for="namaWpDiwakili">nama</label><span class="colon">:</span><input id="namaWpDiwakili" type="text"></div>
+              <div class="row"><label for="namaWpDiwakili">nama</label><span class="colon">:</span><input id="namaWpDiwakili" data-label="Nama Wajib Pajak yang diwakili" type="text"></div>
               <div class="row"><label for="npwpWpDiwakili">NPWP</label><span class="colon">:</span><div class="npwp-wrap">
-                  <input id="npwpWpDiwakili" type="text" inputmode="numeric" placeholder="16 digit NPWP" aria-describedby="npwpWpDiwakiliError">
+                  <input id="npwpWpDiwakili" data-label="NPWP Wajib Pajak yang diwakili" type="text" inputmode="numeric" placeholder="16 digit NPWP" aria-describedby="npwpWpDiwakiliError">
                   <div id="npwpWpDiwakiliError" class="field-error" role="alert"></div>
                 </div></div>
             </div>
@@ -328,46 +358,51 @@
             </div>
 
             <div class="indent">
-              <div class="row"><label for="namaKuasa">nama</label><span class="colon">:</span><input id="namaKuasa" type="text" data-required></div>
+              <div class="row"><label for="namaKuasa">nama</label><span class="colon">:</span><input id="namaKuasa" data-label="Nama penerima kuasa" data-required type="text" data-required></div>
               <div class="row"><label for="npwpKuasa">NPWP</label><span class="colon">:</span><div class="npwp-wrap">
-                  <input id="npwpKuasa" type="text" data-required inputmode="numeric" placeholder="16 digit NPWP" aria-describedby="npwpKuasaError">
+                  <input id="npwpKuasa" data-label="NPWP penerima kuasa" data-required type="text" data-required inputmode="numeric" placeholder="16 digit NPWP" aria-describedby="npwpKuasaError">
                   <div id="npwpKuasaError" class="field-error" role="alert"></div>
                 </div></div>
               <div class="row hidden" id="izinKonsultanRow">
                 <label for="izinKonsultan">Nomor Izin Konsultan</label>
                 <span class="colon">:</span>
-                <input id="izinKonsultan" type="text">
+                <input id="izinKonsultan" data-label="Nomor Izin Konsultan" type="text">
               </div>
               <div class="row hidden" id="sktRow">
                 <label for="nomorSkt">SKT</label>
                 <span class="colon">:</span>
-                <input id="nomorSkt" type="text">
+                <input id="nomorSkt" data-label="SKT" type="text">
               </div>
               <div class="row hidden" id="hubunganKeluargaRow">
                 <label for="hubunganKeluarga">status hubungan keluarga</label>
                 <span class="colon">:</span>
-                <input id="hubunganKeluarga" type="text">
+                <input id="hubunganKeluarga" data-label="Status hubungan keluarga" type="text">
               </div>
             </div>
 
             <p class="paragraph">
               untuk melaksanakan hak dan/atau memenuhi kewajiban perpajakan terkait
-              <input id="ruangLingkup" class="inline-field wide" type="text" data-required>
+              <input id="ruangLingkup" data-label="Hak dan/atau kewajiban perpajakan yang dikuasakan" data-required class="inline-field wide" type="text" data-required>
               berkenaan dengan jenis pajak
-              <input id="jenisPajak" class="inline-field" type="text" data-required>
-              Masa Pajak/Bagian Tahun Pajak/Tahun Pajak **)
-              <input id="periodePajak" class="inline-field" type="text" data-required>.
+              <input id="jenisPajak" data-label="Jenis pajak" data-required class="inline-field" type="text" data-required>
+              <select id="jenisPeriodePajak" data-label="Jenis periode pajak" data-required class="inline-field period-type-select" data-required aria-label="Jenis periode pajak">
+                <option value="">Pilih periode</option>
+                <option value="Masa Pajak">Masa Pajak</option>
+                <option value="Bagian Tahun Pajak">Bagian Tahun Pajak</option>
+                <option value="Tahun Pajak">Tahun Pajak</option>
+              </select>
+              <input id="periodePajak" data-label="Periode pajak" data-required class="inline-field" type="text" data-required placeholder="Contoh: Juli 2026">.
             </p>
 
             <p class="paragraph">
               Surat Kuasa Khusus ini berlaku mulai tanggal
               <span class="date-wrap">
-                <input id="mulaiBerlaku" class="inline-field date-input" type="date" data-required>
+                <input id="mulaiBerlaku" data-label="Tanggal mulai berlaku" data-required class="inline-field date-input" type="date" data-required>
                 <span id="mulaiBerlakuPrint" class="date-print">—</span>
               </span>
               sampai dengan tanggal
               <span class="date-wrap">
-                <input id="akhirBerlaku" class="inline-field date-input" type="date" data-required>
+                <input id="akhirBerlaku" data-label="Tanggal berakhir" data-required class="inline-field date-input" type="date" data-required>
                 <span id="akhirBerlakuPrint" class="date-print">—</span>
               </span>.
             </p>
@@ -395,7 +430,7 @@
               <div class="sig-box">
                 <div>Penerima kuasa,</div>
                 <div class="sig-space"></div>
-                <input id="namaTtdKuasa" type="text" data-required placeholder="Nama lengkap penerima kuasa">
+                <input id="namaTtdKuasa" data-label="Nama penerima kuasa pada tanda tangan" data-required type="text" data-required placeholder="Nama lengkap penerima kuasa">
                 <div></div>
                 <div class="screen-help no-print">Area tanda tangan</div>
               </div>
@@ -403,7 +438,7 @@
                 <div>Pemberi kuasa,</div>
                 <div class="meterai no-print">Meterai</div>
                 <div class="sig-space" style="height:6mm"></div>
-                <input id="namaTtdPemberi" type="text" data-required placeholder="Nama lengkap pemberi kuasa">
+                <input id="namaTtdPemberi" data-label="Nama pemberi kuasa pada tanda tangan" data-required type="text" data-required placeholder="Nama lengkap pemberi kuasa">
                 <div></div>
                 <div class="screen-help no-print">Area tanda tangan dan meterai</div>
               </div>
@@ -442,6 +477,7 @@
 
     (()=> {
       const form=document.getElementById('form');
+      const formErrorSummary=document.getElementById('formErrorSummary');
       const reset=document.getElementById('resetBtn');
       const print=document.getElementById('printBtn');
       const statusWakil=document.getElementById('statusWakil');
@@ -465,7 +501,7 @@
         jenisWpMeasure.textContent=selectedText;
         const measured=Math.ceil(jenisWpMeasure.getBoundingClientRect().width);
         // Tambahan ruang untuk ikon panah dropdown bawaan browser.
-        jenisWp.style.width=`${Math.max(measured + 34, 120)}px`;
+        jenisWp.style.width=`${Math.max(measured + 36, 120)}px`;
       };
 
       jenisWp.addEventListener('change',resizeJenisWp);
@@ -620,24 +656,62 @@
 
       form.addEventListener('input',e=>{
         if(!e.target.id?.startsWith('npwp')) e.target.classList?.remove('missing');
+        clearSummary();
       });
-      form.addEventListener('change',e=>e.target.classList?.remove('missing'));
+      form.addEventListener('change',e=>{
+        e.target.classList?.remove('missing');
+        clearSummary();
+      });
 
-      const validate=()=>{
+      
+      const clearSummary=()=>{
+        formErrorSummary.classList.remove('show');
+        formErrorSummary.innerHTML='';
+      };
+
+      const showSummary=(messages)=>{
+        const unique=[...new Set(messages)];
+        formErrorSummary.innerHTML=
+          `<strong>Formulir belum lengkap.</strong>
+           <ul>${unique.map(msg=>`<li>${msg}</li>`).join('')}</ul>`;
+        formErrorSummary.classList.add('show');
+        formErrorSummary.scrollIntoView({behavior:'smooth',block:'center'});
+      };
+
+      const fieldLabel=(el)=>el?.dataset?.label || el?.getAttribute('aria-label') || 'Kolom wajib';
+
+const validate=()=>{
         let count=0,first=null;
+        const messages=[];
+
+        clearSummary();
+        form.querySelectorAll('.missing').forEach(el=>el.classList.remove('missing'));
+        clearSummary();
+
         form.querySelectorAll('[data-required]').forEach(el=>{
           const empty=!String(el.value||'').trim();
           el.classList.toggle('missing',empty);
-          if(empty){count++;first??=el}
+          if(empty){
+            count++;
+            first??=el;
+            messages.push(`${fieldLabel(el)} belum diisi.`);
+          }
         });
 
         if(!form.querySelector('input[name="statusPemberi"]:checked')){
-          count++;first??=form.querySelector('input[name="statusPemberi"]');
+          count++;
+          first??=form.querySelector('input[name="statusPemberi"]');
+          messages.push('Status pemberi kuasa belum dipilih.');
         }
 
         const validateNpwp=(el,required=true)=>{
           const ok=checkNpwp(el,required);
-          if(!ok){count++;first??=el}
+          if(!ok){
+            count++;
+            first??=el;
+            const text=document.getElementById(el.id+'Error')?.textContent;
+            messages.push(text || `${fieldLabel(el)} belum benar.`);
+          }
         };
 
         validateNpwp(document.getElementById('npwpPemberi'));
@@ -646,7 +720,12 @@
         if(statusWakil.checked){
           for(const id of ['namaWpDiwakili','npwpWpDiwakili']){
             const el=document.getElementById(id);
-            if(!el.value.trim()){count++;first??=el;el.classList.add('missing')}
+            if(!el.value.trim()){
+              count++;
+              first??=el;
+              el.classList.add('missing');
+              messages.push(`${fieldLabel(el)} belum diisi.`);
+            }
           }
           validateNpwp(document.getElementById('npwpWpDiwakili'));
         }
@@ -655,18 +734,22 @@
         if(!statusKuasa){
           count++;
           first??=form.querySelector('input[name="statusKuasa"]');
+          messages.push('Jenis penerima kuasa belum dipilih.');
         }else if(statusKuasa.value==='Konsultan Pajak'&&!izinKonsultan.value.trim()){
           count++;
           first??=izinKonsultan;
           izinKonsultan.classList.add('missing');
+          messages.push('Nomor Izin Konsultan belum diisi.');
         }else if(statusKuasa.value==='Pihak Lain'&&!nomorSkt.value.trim()){
           count++;
           first??=nomorSkt;
           nomorSkt.classList.add('missing');
+          messages.push('SKT belum diisi.');
         }else if(statusKuasa.value==='Keluarga Wajib Pajak'&&!hubungan.value.trim()){
           count++;
           first??=hubungan;
           hubungan.classList.add('missing');
+          messages.push('Status hubungan keluarga belum diisi.');
         }
 
         const tujuanRows=[...tujuanKuasaList.querySelectorAll('textarea')];
@@ -675,14 +758,19 @@
           el.classList.add('missing');
           count++;
           first??=el;
+          messages.push('Tujuan atau tindakan yang dikuasakan belum diisi.');
         }
 
-        return {count,first};
+        if(count) showSummary(messages);
+        return {count,first,messages};
       };
 
       print.addEventListener('click',()=>{
         const {count,first}=validate();
-        if(count&&!confirm(`Masih ada ${count} bagian yang belum diisi atau dipilih. Tetap lanjut mencetak?`)){first?.focus();return}
+        if(count){
+          first?.focus();
+          return;
+        }
         window.print();
       });
 
