@@ -54,21 +54,45 @@
     .paper-wrap{overflow-x:auto}
     .paper{width:var(--paper-w);min-height:var(--paper-h);margin:auto;padding:18mm 18mm 16mm;background:#fff;color:#000;box-shadow:0 28px 75px rgba(15,23,42,.18);font-family:Arial,Helvetica,sans-serif;font-size:10pt;line-height:1.25}
     .title{
-      text-align:center;font-size:13pt;font-weight:700;
+      width:100%;text-align:center;font-size:13pt;font-weight:700;
       margin-bottom:1mm;line-height:1.45
     }
     .title-line{
-      display:inline-flex;align-items:center;justify-content:center;
-      gap:2mm;max-width:100%;flex-wrap:wrap;text-align:center
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:2mm;
+      width:max-content;
+      max-width:100%;
+      margin:0 auto;
+      text-align:center;
+      white-space:nowrap;
     }
-    .title-label{white-space:normal}
+    .title-label{white-space:nowrap}
     .title-select{
-      width:auto!important;min-width:50mm;max-width:72mm;height:auto!important;
-      padding:1.1mm 8mm 1.1mm 3mm!important;
-      text-align:center;text-align-last:center;
-      font-weight:700;font-size:11pt;
-      border:.25mm solid #888!important;border-radius:2mm!important;
-      background:#fff!important
+      width:auto;
+      min-width:0;
+      max-width:none;
+      height:auto!important;
+      padding:1.1mm 7mm 1.1mm 2.5mm!important;
+      text-align:center;
+      text-align-last:center;
+      font-weight:700;
+      font-size:11pt;
+      border:.25mm solid #888!important;
+      border-radius:2mm!important;
+      background:#fff!important;
+      box-sizing:content-box;
+    }
+    .select-measure{
+      position:absolute;
+      visibility:hidden;
+      white-space:pre;
+      font-family:Arial,Helvetica,sans-serif;
+      font-size:11pt;
+      font-weight:700;
+      padding:0;
+      margin:0;
     }
     .date-wrap{display:inline-flex;align-items:center;gap:1.5mm;vertical-align:baseline}
     .date-print{display:none;font-weight:400}
@@ -82,6 +106,13 @@
     }
     .dynamic-actions button:hover{border-color:var(--blue);color:var(--blue)}
     .detail-row{grid-template-columns:7mm minmax(0,1fr) 26mm!important;align-items:start}
+    
+    .detail-list.single-purpose .detail-row{
+      grid-template-columns:minmax(0,1fr) 26mm!important;
+    }
+    .detail-list.single-purpose .detail-label{
+      display:none!important;
+    }
     .detail-remove{
       border:1px solid #d2d2d7;background:#fff;border-radius:999px;
       padding:5px 8px;cursor:pointer;font-size:11px
@@ -127,7 +158,19 @@
     .detail-row{display:grid;grid-template-columns:7mm minmax(0,1fr);gap:2mm;align-items:start}
     .detail-row textarea{min-height:8mm}
     .signature-grid{display:grid;grid-template-columns:1fr 1fr;gap:18mm;margin-top:8mm}
-    .sig-box{text-align:center}
+    .sig-box{
+      text-align:center;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+    }
+    .sig-box input[type=text]{
+      width:72mm;
+      max-width:100%;
+      text-align:center;
+      margin-left:auto;
+      margin-right:auto;
+    }
     .sig-space{height:26mm}
     .meterai{width:28mm;height:20mm;display:flex;align-items:center;justify-content:center;margin:0 auto 2mm;border:1px dashed #888;font-size:8pt;color:#666}
     .screen-help{font-size:8pt;color:#64748b;margin-top:1mm}
@@ -143,7 +186,7 @@
     .footer-links{display:flex;flex-wrap:wrap;gap:18px}
     .footer-links a{text-decoration:none;color:#424245}
     @media(max-width:980px){.desktop-menu{display:none}.menu-btn{display:grid;place-items:center}}
-    @media(max-width:840px){.title{font-size:11pt}.title-line{gap:1.5mm}.title-select{min-width:46mm;max-width:65mm;font-size:10pt}.hero{padding-top:70px}.toolbar{position:static;align-items:flex-start;flex-direction:column}.actions{width:100%;flex-wrap:wrap}.actions>*{flex:1}.footer-inner{align-items:flex-start;flex-direction:column}}
+    @media(max-width:840px){.title{font-size:11pt}.title-line{gap:1.5mm;white-space:normal;flex-wrap:wrap}.title-label{white-space:normal}.title-select{font-size:10pt}.select-measure{font-size:10pt}.hero{padding-top:70px}.toolbar{position:static;align-items:flex-start;flex-direction:column}.actions{width:100%;flex-wrap:wrap}.actions>*{flex:1}.footer-inner{align-items:flex-start;flex-direction:column}}
     @page{size:A4 portrait;margin:0}
     @media print{
       .no-print,.site-nav,.mobile-menu,.announce,.hero,.toolbar,.note,.guide,.site-footer{display:none!important}
@@ -163,15 +206,32 @@
         transform:scale(1)!important;color:#000!important
       }
       .screen-help{display:none!important}
+      .sig-box{
+        text-align:center!important;
+        align-items:center!important;
+      }
+      .sig-box input[type=text]{
+        width:72mm!important;
+        max-width:100%!important;
+        margin-left:auto!important;
+        margin-right:auto!important;
+        text-align:center!important;
+      }
       .date-input{display:none!important}
       .date-print{display:inline!important}
-      .title-line{display:inline-flex!important;justify-content:center!important;align-items:center!important;flex-wrap:wrap!important}
+      .title-line{display:inline-flex!important;justify-content:center!important;align-items:center!important;width:max-content!important;margin:0 auto!important;flex-wrap:nowrap!important}
       .title-select{
         border:0!important;background:transparent!important;padding:0!important;
         appearance:none!important;-webkit-appearance:none!important
       }
       .field-error,.dynamic-actions,.detail-remove{display:none!important}
-      .meterai{border:1px dashed #888!important;color:#666!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+      .detail-list.single-purpose .detail-row{
+        grid-template-columns:minmax(0,1fr)!important;
+      }
+      .detail-list.single-purpose .detail-label{
+        display:none!important;
+      }
+      .meterai{display:none!important}
     }
   </style>
 </head>
@@ -230,6 +290,7 @@
                   <option value="ORANG PRIBADI">ORANG PRIBADI</option>
                   <option value="WARISAN BELUM TERBAGI">WARISAN BELUM TERBAGI</option>
                 </select>
+                <span id="jenisWpMeasure" class="select-measure" aria-hidden="true"></span>
               </div>
             </div>
             <div class="subtitle">Nomor <input id="nomor" class="inline-field" type="text" data-required> &nbsp; Tanggal <span class="date-wrap">
@@ -272,8 +333,21 @@
                   <input id="npwpKuasa" type="text" data-required inputmode="numeric" placeholder="16 digit NPWP" aria-describedby="npwpKuasaError">
                   <div id="npwpKuasaError" class="field-error" role="alert"></div>
                 </div></div>
-              <div class="row"><label for="izinSkt">Nomor Izin Konsultan Pajak/SKT</label><span class="colon">:</span><input id="izinSkt" type="text"></div>
-              <div class="row hidden" id="hubunganKeluargaRow"><label for="hubunganKeluarga">status hubungan keluarga</label><span class="colon">:</span><input id="hubunganKeluarga" type="text"></div>
+              <div class="row hidden" id="izinKonsultanRow">
+                <label for="izinKonsultan">Nomor Izin Konsultan</label>
+                <span class="colon">:</span>
+                <input id="izinKonsultan" type="text">
+              </div>
+              <div class="row hidden" id="sktRow">
+                <label for="nomorSkt">SKT</label>
+                <span class="colon">:</span>
+                <input id="nomorSkt" type="text">
+              </div>
+              <div class="row hidden" id="hubunganKeluargaRow">
+                <label for="hubunganKeluarga">status hubungan keluarga</label>
+                <span class="colon">:</span>
+                <input id="hubunganKeluarga" type="text">
+              </div>
             </div>
 
             <p class="paragraph">
@@ -327,7 +401,7 @@
               </div>
               <div class="sig-box">
                 <div>Pemberi kuasa,</div>
-                <div class="meterai">Meterai</div>
+                <div class="meterai no-print">Meterai</div>
                 <div class="sig-space" style="height:6mm"></div>
                 <input id="namaTtdPemberi" type="text" data-required placeholder="Nama lengkap pemberi kuasa">
                 <div></div>
@@ -376,10 +450,28 @@
       const namaKuasa=document.getElementById('namaKuasa');
       const namaTtdPemberi=document.getElementById('namaTtdPemberi');
       const namaTtdKuasa=document.getElementById('namaTtdKuasa');
-      const izinSkt=document.getElementById('izinSkt');
+      const izinKonsultan=document.getElementById('izinKonsultan');
+      const izinKonsultanRow=document.getElementById('izinKonsultanRow');
+      const nomorSkt=document.getElementById('nomorSkt');
+      const sktRow=document.getElementById('sktRow');
       const hubungan=document.getElementById('hubunganKeluarga');
       const hubunganRow=document.getElementById('hubunganKeluargaRow');
       let manualPemberi=false,manualKuasa=false;
+      const jenisWp=document.getElementById('jenisWp');
+      const jenisWpMeasure=document.getElementById('jenisWpMeasure');
+
+      const resizeJenisWp=()=>{
+        const selectedText=jenisWp.options[jenisWp.selectedIndex]?.text || '';
+        jenisWpMeasure.textContent=selectedText;
+        const measured=Math.ceil(jenisWpMeasure.getBoundingClientRect().width);
+        // Tambahan ruang untuk ikon panah dropdown bawaan browser.
+        jenisWp.style.width=`${Math.max(measured + 34, 120)}px`;
+      };
+
+      jenisWp.addEventListener('change',resizeJenisWp);
+      window.addEventListener('load',resizeJenisWp);
+      requestAnimationFrame(resizeJenisWp);
+
       const tujuanKuasaList=document.getElementById('tujuanKuasaList');
       const addTujuanBtn=document.getElementById('addTujuanBtn');
       const removeTujuanBtn=document.getElementById('removeTujuanBtn');
@@ -406,11 +498,19 @@
 
       const letters='abcdefghijklmnopqrstuvwxyz';
       const relabelTujuanRows=()=>{
-        [...tujuanKuasaList.querySelectorAll('.detail-row')].forEach((row,index)=>{
-          row.querySelector('.detail-label').textContent=(letters[index]||`${index+1}`)+'.';
+        const rows=[...tujuanKuasaList.querySelectorAll('.detail-row')];
+        const multiple=rows.length>1;
+
+        rows.forEach((row,index)=>{
+          const label=row.querySelector('.detail-label');
+          label.textContent=multiple ? (letters[index]||`${index+1}`)+'.' : '';
+          label.setAttribute('aria-hidden', multiple ? 'false' : 'true');
+
           const removeBtn=row.querySelector('.detail-remove');
-          removeBtn.style.visibility=tujuanKuasaList.children.length===1?'hidden':'visible';
+          removeBtn.style.visibility=multiple ? 'visible' : 'hidden';
         });
+
+        tujuanKuasaList.classList.toggle('single-purpose',!multiple);
       };
 
       const addTujuanRow=(focus=true)=>{
@@ -496,11 +596,23 @@
       }));
 
       form.querySelectorAll('input[name="statusKuasa"]').forEach(r=>r.addEventListener('change',()=>{
+        const konsultan = r.value === 'Konsultan Pajak';
+        const pihakLain = r.value === 'Pihak Lain';
         const keluarga = r.value === 'Keluarga Wajib Pajak';
+
+        izinKonsultanRow.classList.toggle('hidden', !konsultan);
+        sktRow.classList.toggle('hidden', !pihakLain);
         hubunganRow.classList.toggle('hidden', !keluarga);
-        if(keluarga){
-          izinSkt.value='';
-        }else{
+
+        if(!konsultan){
+          izinKonsultan.value='';
+          izinKonsultan.classList.remove('missing');
+        }
+        if(!pihakLain){
+          nomorSkt.value='';
+          nomorSkt.classList.remove('missing');
+        }
+        if(!keluarga){
           hubungan.value='';
           hubungan.classList.remove('missing');
         }
@@ -541,11 +653,20 @@
 
         const statusKuasa=form.querySelector('input[name="statusKuasa"]:checked');
         if(!statusKuasa){
-          count++;first??=form.querySelector('input[name="statusKuasa"]');
-        }else if((statusKuasa.value==='Konsultan Pajak'||statusKuasa.value==='Pihak Lain')&&!izinSkt.value.trim()){
-          count++;first??=izinSkt;izinSkt.classList.add('missing');
+          count++;
+          first??=form.querySelector('input[name="statusKuasa"]');
+        }else if(statusKuasa.value==='Konsultan Pajak'&&!izinKonsultan.value.trim()){
+          count++;
+          first??=izinKonsultan;
+          izinKonsultan.classList.add('missing');
+        }else if(statusKuasa.value==='Pihak Lain'&&!nomorSkt.value.trim()){
+          count++;
+          first??=nomorSkt;
+          nomorSkt.classList.add('missing');
         }else if(statusKuasa.value==='Keluarga Wajib Pajak'&&!hubungan.value.trim()){
-          count++;first??=hubungan;hubungan.classList.add('missing');
+          count++;
+          first??=hubungan;
+          hubungan.classList.add('missing');
         }
 
         const tujuanRows=[...tujuanKuasaList.querySelectorAll('textarea')];
@@ -569,12 +690,15 @@
         if(!confirm('Kosongkan seluruh isi formulir?')) return;
         form.reset();manualPemberi=false;manualKuasa=false;
         wakilBlock.classList.add('hidden');
+        izinKonsultanRow.classList.add('hidden');
+        sktRow.classList.add('hidden');
         hubunganRow.classList.add('hidden');
         while(tujuanKuasaList.children.length>1) tujuanKuasaList.lastElementChild.remove();
         tujuanKuasaList.querySelector('textarea').value='';
         relabelTujuanRows();
         npwpFields.forEach(el=>setNpwpError(el,''));
         ['tanggal','mulaiBerlaku','akhirBerlaku'].forEach(formatDateId);
+        resizeJenisWp();
         form.querySelectorAll('.missing').forEach(el=>el.classList.remove('missing'));
         namaPemberi.focus();
       });
