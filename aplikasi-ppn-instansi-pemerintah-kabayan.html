@@ -2321,17 +2321,19 @@
             </div>
 
             <div class="conditional-panel" id="taxInvoicePanel" hidden>
-              <h3>Validasi kode Faktur Pajak rekanan PKP</h3>
+              <h3>Validasi Faktur Pajak atau dokumen yang dipersamakan</h3>
               <p class="conditional-description">
-                Sistem menentukan kode transaksi yang seharusnya berdasarkan
-                status pemungut, fasilitas PPN, nilai transaksi, jenis barang/jasa,
-                dan mekanisme pemungutan. Validasi difokuskan hanya pada ketepatan penggunaan dua digit kode transaksi Faktur Pajak.
+                Sistem menentukan apakah transaksi memerlukan e-Faktur dengan nomor
+                17 digit atau dokumen tertentu yang dipersamakan dengan Faktur Pajak.
+                Untuk pembayaran UP melalui Pihak Lain dalam Sistem Informasi Pengadaan,
+                dokumen yang digunakan adalah dokumen tagihan sesuai PMK 58/2022,
+                bukan e-Faktur berkode transaksi 03.
               </p>
 
               <div class="conditional-grid">
                 <div class="facility-status status-review tax-invoice-preview" id="taxInvoiceExpectedStatus">
                   <strong id="taxInvoiceExpectedTitle">Lengkapi parameter transaksi.</strong>
-                  <span id="taxInvoiceExpectedText">Kode Faktur Pajak akan ditentukan otomatis.</span>
+                  <span id="taxInvoiceExpectedText">Jenis dokumen pajak dan kode yang relevan akan ditentukan otomatis.</span>
                 </div>
 
                 <div class="field field-full">
@@ -2339,11 +2341,13 @@
                   <select class="select-control" id="taxDocumentType">
                     <option value="">Pilih dokumen</option>
                     <option value="efaktur">Faktur Pajak elektronik dengan nomor 17 digit</option>
-                    <option value="equivalent">Dokumen tertentu yang dipersamakan dengan Faktur Pajak</option>
+                    <option value="equivalent">Dokumen tagihan/dokumen tertentu yang dipersamakan dengan Faktur Pajak</option>
                     <option value="none">Belum/tidak diberikan dokumen pajak</option>
                   </select>
                   <span class="hint">
-                    Tiket atau tagihan tertentu dapat berkedudukan sebagai dokumen yang dipersamakan dengan Faktur Pajak.
+                    Pada transaksi UP melalui Pihak Lain dalam Sistem Informasi Pengadaan,
+                    pilih dokumen tagihan yang memuat identitas rekanan, pembeli, Pihak Lain,
+                    jenis barang/jasa, nilai pembayaran, pajak yang dipungut, serta nomor dan tanggal dokumen.
                   </span>
                 </div>
 
@@ -2431,13 +2435,14 @@
           </section>
 
           <section class="info-card">
-            <div class="info-icon" aria-hidden="true">02</div>
-            <h3>Kode Faktur Pajak PKP</h3>
+            <div class="info-icon" aria-hidden="true">Dok</div>
+            <h3>Dokumen pajak rekanan PKP</h3>
             <p>
-              Sistem menguji prioritas kode 07/08 untuk fasilitas, 02 jika PPN
-              dipungut instansi, 03 jika seluruh PPN dipungut Pihak Lain, serta
-              04, 05, atau 01 jika PPN dipungut sendiri oleh PKP rekanan.
-              Nomor 17 digit juga diperiksa terhadap tahun, status pengganti, DPP, dan PPN.
+              Sistem membedakan e-Faktur 17 digit dengan dokumen tertentu yang
+              dipersamakan dengan Faktur Pajak. Untuk UP melalui Pihak Lain dalam
+              Sistem Informasi Pengadaan, dokumen tagihan PMK 58/2022 menjadi dokumen
+              pajaknya; kode transaksi 03 tidak diminta. Kode 02, 04, 05, 07, 08,
+              atau 01 tetap diuji untuk transaksi yang memang menggunakan e-Faktur standar.
             </p>
           </section>
 
@@ -2579,7 +2584,7 @@
 
             <section class="result-panel invoice-validation-panel" id="taxInvoiceResultPanel" hidden>
               <div class="invoice-validation-head">
-                <h3>Validasi Faktur Pajak/dokumen pajak</h3>
+                <h3>Validasi Faktur Pajak atau dokumen yang dipersamakan</h3>
                 <span class="invoice-validation-badge" id="taxInvoiceResultBadge">—</span>
               </div>
               <p id="taxInvoiceResultSummary" class="hint"></p>
@@ -2726,7 +2731,7 @@
         icon: "✎",
         profile: "taxable_general",
         keywords: "pulpen kertas map tinta toner staples alat tulis kantor atk",
-        note: "Pada umumnya merupakan BKP nonmewah dengan PPN efektif 11%."
+        note: "Umumnya tergolong BKP nonmewah dengan DPP PPN Nilai Lain (12% x 11/12)."
       },
       {
         id: "computer",
@@ -2735,7 +2740,7 @@
         icon: "▣",
         profile: "taxable_general",
         keywords: "laptop notebook komputer pc tablet monitor keyboard mouse server",
-        note: "Pada umumnya merupakan BKP nonmewah dengan PPN efektif 11%."
+        note: "Umumnya tergolong BKP nonmewah dengan DPP PPN Nilai Lain (12% x 11/12)."
       },
       {
         id: "printer",
@@ -2744,7 +2749,7 @@
         icon: "▤",
         profile: "taxable_general",
         keywords: "printer scanner fotokopi mesin cetak tinta toner cartridge",
-        note: "Pada umumnya merupakan BKP nonmewah dengan PPN efektif 11%."
+        note: "Umumnya tergolong BKP nonmewah dengan DPP PPN Nilai Lain (12% x 11/12)."
       },
       {
         id: "furniture",
@@ -2753,7 +2758,7 @@
         icon: "▥",
         profile: "taxable_general",
         keywords: "meja kursi lemari furniture furnitur kantor rak kabinet",
-        note: "Pada umumnya merupakan BKP nonmewah dengan PPN efektif 11%."
+        note: "Umumnya tergolong BKP nonmewah dengan DPP PPN Nilai Lain (12% x 11/12)."
       },
       {
         id: "electronics",
@@ -2762,7 +2767,7 @@
         icon: "⌁",
         profile: "taxable_general",
         keywords: "ac pendingin ruangan televisi proyektor elektronik dispenser kulkas",
-        note: "Pada umumnya merupakan BKP nonmewah dengan PPN efektif 11%."
+        note: "Umumnya tergolong BKP nonmewah dengan DPP PPN Nilai Lain (12% x 11/12)."
       },
       {
         id: "uniform",
@@ -2771,7 +2776,7 @@
         icon: "♙",
         profile: "taxable_general",
         keywords: "seragam pakaian kerja baju kain tekstil sepatu",
-        note: "Pada umumnya merupakan BKP nonmewah dengan PPN efektif 11%."
+        note: "Umumnya tergolong BKP nonmewah dengan DPP PPN Nilai Lain (12% x 11/12)."
       },
       {
         id: "building_material",
@@ -2780,7 +2785,7 @@
         icon: "▦",
         profile: "taxable_general",
         keywords: "semen pasir besi cat keramik bahan bangunan renovasi kabel pipa",
-        note: "Pada umumnya merupakan BKP nonmewah dengan PPN efektif 11%."
+        note: "Umumnya tergolong BKP nonmewah dengan DPP PPN Nilai Lain (12% x 11/12)."
       },
       {
         id: "cleaning_goods",
@@ -2789,7 +2794,7 @@
         icon: "✦",
         profile: "taxable_general",
         keywords: "sabun disinfektan tisu sapu pel kebersihan sanitasi",
-        note: "Pada umumnya merupakan BKP nonmewah dengan PPN efektif 11%."
+        note: "Umumnya tergolong BKP nonmewah dengan DPP PPN Nilai Lain (12% x 11/12)."
       },
       {
         id: "packaged_food",
@@ -4046,7 +4051,7 @@
     const TAX_INVOICE_CODE_DESCRIPTIONS = {
       "01": "PPN dipungut sendiri oleh PKP dengan DPP harga jual/penggantian biasa",
       "02": "PPN dipungut oleh pemungut PPN instansi pemerintah",
-      "03": "PPN dipungut oleh pemungut lainnya atau seluruhnya oleh Pihak Lain",
+      "03": "PPN dipungut oleh pemungut PPN lainnya pada transaksi yang menggunakan Faktur Pajak standar; dokumen tagihan khusus PMK 58/2022 menggunakan dokumen yang dipersamakan",
       "04": "DPP menggunakan nilai lain dan PPN dipungut sendiri oleh PKP",
       "05": "PPN menggunakan besaran tertentu dan dipungut sendiri oleh PKP",
       "06": "Penyerahan kepada turis asing untuk pengembalian PPN",
@@ -4136,6 +4141,18 @@
         };
       }
 
+      if (paymentMethod.value === "sip_up") {
+        return {
+          state: "expected_document",
+          required: true,
+          code: null,
+          documentType: "equivalent",
+          documentLabel: "Dokumen tagihan Sistem Informasi Pengadaan yang dipersamakan dengan Faktur Pajak",
+          title: "Dokumen yang diharapkan: dokumen tagihan yang dipersamakan dengan Faktur Pajak",
+          explanation: "PMK 58/2022 menetapkan dokumen tagihan sebagai dokumen tertentu yang kedudukannya dipersamakan dengan Faktur Pajak. Ketentuan dokumen khusus ini tetap digunakan pada transaksi melalui Pihak Lain, termasuk ketika terdapat fasilitas PPN; e-Faktur 17 digit berkode 03, 07, atau 08 tidak menjadi dokumen utama mekanisme ini."
+        };
+      }
+
       if (facilityDecision.status === "exempt" || effectiveProfile === "exempt") {
         return {
           state: "expected",
@@ -4163,16 +4180,6 @@
           code: null,
           title: "Pilih cara pembayaran.",
           explanation: "Cara pembayaran menentukan apakah PPN dipungut instansi, Pihak Lain, atau PKP rekanan."
-        };
-      }
-
-      if (paymentMethod.value === "sip_up") {
-        return {
-          state: "expected",
-          required: true,
-          code: "03",
-          title: "Kode transaksi yang diharapkan: 03",
-          explanation: "Seluruh PPN dipungut oleh Pihak Lain dalam Sistem Informasi Pengadaan."
         };
       }
 
@@ -4257,7 +4264,7 @@
       const expectation = getProvisionalExpectedInvoice();
       taxInvoiceExpectedStatus.className = "facility-status tax-invoice-preview";
 
-      if (expectation.state === "expected") {
+      if (["expected", "expected_document"].includes(expectation.state)) {
         taxInvoiceExpectedStatus.classList.add("status-not-collected");
       } else if (expectation.state === "no_invoice") {
         taxInvoiceExpectedStatus.classList.add("status-exempt");
@@ -4276,18 +4283,37 @@
       const map = {
         VAT_EXEMPT: "08",
         VAT_NOT_COLLECTED_FACILITY: "07",
-        THIRD_PARTY_COLLECTS: "03",
         GOVERNMENT_COLLECTS: "02"
       };
 
       if (result.code === "NO_VAT_OBJECT") {
-        return { required: false, code: null, explanation: "Bukan objek PPN." };
+        return {
+          required: false,
+          code: null,
+          documentType: "none",
+          documentLabel: "Tidak memerlukan Faktur Pajak PPN",
+          explanation: "Bukan objek PPN."
+        };
+      }
+
+      if (paymentMethod.value === "sip_up") {
+        return {
+          required: true,
+          code: null,
+          documentType: "equivalent",
+          documentLabel: "Dokumen tagihan Sistem Informasi Pengadaan yang dipersamakan dengan Faktur Pajak",
+          explanation: result.code === "THIRD_PARTY_COLLECTS"
+            ? "Dokumen tagihan PMK 58/2022 merupakan dokumen tertentu yang kedudukannya dipersamakan dengan Faktur Pajak. Kode transaksi 03 tidak digunakan untuk dokumen khusus ini."
+            : "Walaupun transaksi memiliki fasilitas atau memerlukan telaah formula, bentuk dokumen pada jalur UP melalui Pihak Lain tetap berupa dokumen tagihan Sistem Informasi Pengadaan yang dipersamakan dengan Faktur Pajak."
+        };
       }
 
       if (map[result.code]) {
         return {
           required: true,
           code: map[result.code],
+          documentType: "efaktur",
+          documentLabel: `e-Faktur kode transaksi ${map[result.code]}`,
           explanation: TAX_INVOICE_CODE_DESCRIPTIONS[map[result.code]]
         };
       }
@@ -4299,6 +4325,10 @@
         return {
           required: true,
           code: sellerCode.code,
+          documentType: "efaktur",
+          documentLabel: sellerCode.code
+            ? `e-Faktur kode transaksi ${sellerCode.code}`
+            : "Faktur Pajak yang perlu ditelaah",
           explanation: sellerCode.explanation
         };
       }
@@ -4306,7 +4336,9 @@
       return {
         required: null,
         code: null,
-        explanation: "Kode belum dapat dipastikan karena transaksi masih memerlukan telaah."
+        documentType: null,
+        documentLabel: "Dokumen pajak belum dapat ditentukan",
+        explanation: "Kode atau jenis dokumen belum dapat dipastikan karena transaksi masih memerlukan telaah."
       };
     }
 
@@ -4318,6 +4350,7 @@
 
       const expected = getExpectedInvoiceFromResult(result);
       const documentType = taxDocumentType.value;
+      const expectedDocumentType = expected.documentType || (expected.code ? "efaktur" : null);
       const checks = [];
       const issues = [];
       const reviews = [];
@@ -4334,17 +4367,29 @@
         } else {
           add("error", "Transaksi diklasifikasikan bukan objek PPN, tetapi rekanan memberikan dokumen PPN.");
         }
+      } else if (expected.required === true && expectedDocumentType === "equivalent") {
+        if (documentType === "equivalent") {
+          add("ok", "Dokumen tagihan Sistem Informasi Pengadaan telah dipilih sebagai dokumen tertentu yang dipersamakan dengan Faktur Pajak.");
+          add("ok", "Dokumen khusus PMK 58/2022 tidak menggunakan kode transaksi dan Nomor Seri Faktur Pajak 17 digit.");
+        } else if (documentType === "none") {
+          add("error", "Rekanan/Pihak Lain belum memberikan dokumen tagihan yang dipersamakan dengan Faktur Pajak.");
+        } else if (documentType === "efaktur") {
+          add("error", "Untuk pembayaran UP melalui Pihak Lain, dokumen yang dipersyaratkan adalah dokumen tagihan PMK 58/2022, bukan e-Faktur standar berkode transaksi 03.");
+          add("review", "Kode transaksi 03 tetap dikenal untuk Faktur Pajak standar kepada pemungut PPN lainnya, tetapi tidak menggantikan dokumen tagihan khusus Sistem Informasi Pengadaan.");
+        }
       } else if (expected.required === true && documentType === "none") {
-        add("error", `Rekanan PKP seharusnya memberikan Faktur Pajak dengan kode transaksi ${expected.code || "yang perlu ditelaah"}.`);
+        add("error", expected.code
+          ? `Rekanan PKP seharusnya memberikan Faktur Pajak dengan kode transaksi ${expected.code}.`
+          : "Rekanan PKP seharusnya memberikan dokumen pajak yang sesuai.");
       } else if (expected.required === null) {
         add("review", expected.explanation);
       }
 
-      if (documentType === "equivalent") {
-        add("review", "Dokumen tertentu yang dipersamakan dengan Faktur Pajak tidak menggunakan kode transaksi Faktur Pajak 17 digit. Validasi kode tidak diterapkan pada dokumen ini.");
+      if (expectedDocumentType !== "equivalent" && documentType === "equivalent") {
+        add("review", "Dokumen tertentu yang dipersamakan dengan Faktur Pajak tidak menggunakan kode transaksi Faktur Pajak 17 digit. Pastikan jenis dokumen tersebut memang diakui untuk transaksi yang dipilih.");
       }
 
-      if (documentType === "efaktur") {
+      if (expectedDocumentType !== "equivalent" && documentType === "efaktur") {
         const digits = normalizeInvoiceNumber(taxInvoiceNumberInput.value);
 
         if (digits.length !== 17) {
@@ -4366,24 +4411,31 @@
         }
       }
 
+      const usesEquivalentDocument = expectedDocumentType === "equivalent";
       let status = "valid";
-      let badge = "Kode sesuai";
-      let summary = expected.code
-        ? `Kode Faktur Pajak yang seharusnya adalah ${expected.code}.`
-        : expected.explanation;
+      let badge = usesEquivalentDocument ? "Dokumen sesuai" : "Kode sesuai";
+      let summary = usesEquivalentDocument
+        ? "Dokumen yang seharusnya digunakan adalah dokumen tagihan Sistem Informasi Pengadaan yang dipersamakan dengan Faktur Pajak."
+        : expected.code
+          ? `Kode Faktur Pajak yang seharusnya adalah ${expected.code}.`
+          : expected.explanation;
 
       if (issues.length) {
         status = "invalid";
-        badge = "Kode tidak sesuai";
-        summary = expected.code
-          ? `Kode transaksi Faktur Pajak perlu diperbaiki. Kode yang seharusnya adalah ${expected.code}.`
-          : "Kode transaksi Faktur Pajak belum dapat dinyatakan benar.";
+        badge = usesEquivalentDocument ? "Dokumen tidak sesuai" : "Kode tidak sesuai";
+        summary = usesEquivalentDocument
+          ? "Dokumen pajak transaksi UP melalui Pihak Lain harus berupa dokumen tagihan yang dipersamakan dengan Faktur Pajak."
+          : expected.code
+            ? `Kode transaksi Faktur Pajak perlu diperbaiki. Kode yang seharusnya adalah ${expected.code}.`
+            : "Dokumen atau kode transaksi Faktur Pajak belum dapat dinyatakan benar.";
       } else if (reviews.length) {
         status = "review";
-        badge = "Perlu telaah kode";
-        summary = expected.code
-          ? `Kode yang diharapkan ${expected.code}, tetapi validasi kode belum dapat diselesaikan dari dokumen yang dipilih.`
-          : "Kode transaksi belum dapat ditentukan otomatis.";
+        badge = usesEquivalentDocument ? "Perlu telaah dokumen" : "Perlu telaah kode";
+        summary = usesEquivalentDocument
+          ? "Dokumen tagihan perlu diverifikasi kelengkapan formal dan materialnya."
+          : expected.code
+            ? `Kode yang diharapkan ${expected.code}, tetapi validasi kode belum dapat diselesaikan dari dokumen yang dipilih.`
+            : "Kode atau jenis dokumen belum dapat ditentukan otomatis.";
       }
 
       return {
@@ -4392,6 +4444,8 @@
         summary,
         checks,
         expectedCode: expected.code,
+        expectedDocumentType,
+        expectedDocumentLabel: expected.documentLabel || expected.explanation,
         issues,
         reviews
       };
@@ -4405,13 +4459,25 @@
         return result;
       }
 
+      const expectsEquivalentDocument = validation.expectedDocumentType === "equivalent";
+
       if (validation.status === "invalid") {
         result.statusClass = "status-review";
-        result.badge = "Kode Faktur perlu diperbaiki";
-        result.lead = `${result.lead} Namun, kode transaksi Faktur Pajak belum sesuai hasil pengujian.`;
-        result.actions.unshift("Minta rekanan memperbaiki kode transaksi melalui Faktur Pajak pengganti sebelum dokumen digunakan.");
+        result.badge = expectsEquivalentDocument
+          ? "Dokumen tagihan perlu dilengkapi"
+          : "Kode Faktur perlu diperbaiki";
+        result.lead = expectsEquivalentDocument
+          ? `${result.lead} Namun, jenis dokumen pajak yang dipilih belum sesuai mekanisme PMK 58/2022.`
+          : `${result.lead} Namun, kode transaksi Faktur Pajak belum sesuai hasil pengujian.`;
+        result.actions.unshift(expectsEquivalentDocument
+          ? "Minta rekanan atau Pihak Lain menyediakan dokumen tagihan Sistem Informasi Pengadaan yang memenuhi ketentuan PMK 58/2022."
+          : "Minta rekanan memperbaiki kode transaksi melalui Faktur Pajak pengganti sebelum dokumen digunakan.");
       } else if (validation.status === "review") {
-        result.actions.unshift("Pastikan dasar penggunaan kode transaksi Faktur Pajak sebelum administrasi transaksi difinalkan.");
+        result.actions.unshift(expectsEquivalentDocument
+          ? "Periksa kelengkapan formal dan kebenaran isi dokumen tagihan sebelum administrasi transaksi difinalkan."
+          : "Pastikan dasar penggunaan kode transaksi Faktur Pajak sebelum administrasi transaksi difinalkan.");
+      } else if (expectsEquivalentDocument) {
+        result.reasons.push("Dokumen tagihan Sistem Informasi Pengadaan telah sesuai sebagai dokumen tertentu yang dipersamakan dengan Faktur Pajak.");
       } else {
         result.reasons.push(`Kode transaksi Faktur Pajak sesuai hasil pengujian, yaitu ${validation.expectedCode || "kode yang relevan"}.`);
       }
@@ -4479,7 +4545,7 @@
       }
 
       taxInvoicePanel.hidden = !isPkp;
-      taxInvoiceNumberField.hidden = !(isPkp && documentType === "efaktur");
+      taxInvoiceNumberField.hidden = !(isPkp && documentType === "efaktur" && paymentMethod.value !== "sip_up");
 
       updateFacilityAssistant(item);
       updateTaxInvoicePreview();
@@ -4522,7 +4588,7 @@
         taxDocumentType.classList.add("invalid");
       }
 
-      if (pkpStatus === "yes" && taxDocumentType.value === "efaktur") {
+      if (pkpStatus === "yes" && taxDocumentType.value === "efaktur" && paymentMethod.value !== "sip_up") {
         if (!taxInvoiceNumberInput.value.trim()) {
           errors.push("Masukkan kode dan Nomor Seri Faktur Pajak.");
           taxInvoiceNumberInput.classList.add("invalid");
@@ -5043,11 +5109,12 @@
             "Pembayaran dilakukan dengan mekanisme UP melalui Pihak Lain dalam Sistem Informasi Pengadaan."
           ],
           actions: [
-            "Pastikan dokumen tagihan diterbitkan melalui sarana/sistem Pihak Lain.",
-            "Periksa jumlah PPN yang dipungut dalam dokumen tagihan.",
+            "Pastikan tersedia dokumen tagihan yang dibuat rekanan atau dihasilkan melalui sistem Pihak Lain atas nama rekanan.",
+            "Periksa dokumen tagihan memuat identitas rekanan, pembeli, dan Pihak Lain; jenis barang/jasa; seluruh nilai pembayaran; PPh dan PPN/PPnBM yang dipungut; serta nomor dan tanggal dokumen.",
+            "Gunakan dokumen tagihan tersebut sebagai dokumen tertentu yang dipersamakan dengan Faktur Pajak; jangan meminta e-Faktur 17 digit berkode transaksi 03 untuk transaksi ini.",
             "Jangan memungut kembali PPN yang telah dipungut oleh Pihak Lain."
           ],
-          note: "Pengecualian ini khusus mekanisme Uang Persediaan melalui Pihak Lain. Pembayaran Langsung melalui sistem pengadaan tetap diuji sebagai pemungutan oleh instansi pemerintah."
+          note: "PMK 58/2022 Pasal 10 menetapkan dokumen tagihan sebagai dokumen tertentu yang kedudukannya dipersamakan dengan Faktur Pajak. Kode transaksi 03 berlaku pada Faktur Pajak standar kepada pemungut PPN lainnya, tetapi bukan format dokumen pajak khusus untuk transaksi UP melalui Pihak Lain dalam Sistem Informasi Pengadaan. Pembayaran Langsung melalui sistem tetap diuji sebagai pemungutan oleh instansi pemerintah."
         });
       }
 
@@ -5292,8 +5359,10 @@
         `Pihak pemungut: ${result.collector}`,
         ...(result.taxInvoiceValidation
           ? [
-              `Validasi kode Faktur Pajak: ${result.taxInvoiceValidation.badge}`,
-              `Kode Faktur yang diharapkan: ${result.taxInvoiceValidation.expectedCode || "belum dapat ditentukan"}`,
+              `Validasi dokumen pajak: ${result.taxInvoiceValidation.badge}`,
+              result.taxInvoiceValidation.expectedCode
+                ? `Kode Faktur yang diharapkan: ${result.taxInvoiceValidation.expectedCode}`
+                : `Dokumen pajak yang diharapkan: ${result.taxInvoiceValidation.expectedDocumentLabel || "belum dapat ditentukan"}`,
               ...result.taxInvoiceValidation.checks.map((check) => `- ${check.text}`)
             ]
           : []),
