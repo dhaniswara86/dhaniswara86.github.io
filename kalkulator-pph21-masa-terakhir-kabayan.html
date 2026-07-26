@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Kalkulator PPh Pasal 21 Masa Pajak Terakhir Kabayan berdasarkan PMK 168 Tahun 2023 dan tarif Pasal 17 UU Pajak Penghasilan." name="description"/>
+<meta content="#f5f5f7" name="theme-color"/>
+<title>Kalkulator PPh 21 Masa Pajak Terakhir | Kabayan</title>
+<style>
+    :root{
+      --navy-950:#071427;--navy-900:#0b1f3a;--navy-800:#12345a;
+      --blue-700:#175cd3;--blue-600:#2563eb;--blue-500:#3b82f6;
+      --blue-100:#dbeafe;--blue-50:#eff6ff;--cyan-50:#ecfeff;
+      --green-800:#05603a;--green-700:#087443;--green-100:#d1fadf;
+      --amber-900:#7a2e0e;--amber-800:#93370d;--amber-100:#fef0c7;
+      --red-800:#912018;--red-700:#b42318;--red-100:#fee4e2;
+      --slate-950:#0c111d;--slate-900:#101828;--slate-800:#1d2939;--slate-700:#344054;
+      --slate-600:#475467;--slate-500:#667085;--slate-400:#98a2b3;
+      --slate-300:#d0d5dd;--slate-200:#eaecf0;--slate-100:#f2f4f7;
+      --white:#fff;--radius-xl:28px;--radius-lg:20px;--radius-md:14px;
+      --shadow-card:0 24px 64px rgba(16,24,40,.13);--shadow-soft:0 8px 30px rgba(16,24,40,.08)
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;min-height:100vh;color:var(--slate-900);background:radial-gradient(circle at 4% 0%,rgba(59,130,246,.17),transparent 31%),radial-gradient(circle at 96% 8%,rgba(34,211,238,.12),transparent 27%),linear-gradient(180deg,#f7fbff 0%,#fff 43%,#f6f8fb 100%);font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+    button,input,select{font:inherit}button{cursor:pointer}a{color:inherit}
+    .site-header{position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(208,213,221,.75);background:rgba(255,255,255,.87);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+    .nav-wrap{width:min(1180px,calc(100% - 32px));height:68px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .brand{display:inline-flex;align-items:center;gap:11px;text-decoration:none;font-weight:800;letter-spacing:-.02em}.brand-mark{width:38px;height:38px;display:grid;place-items:center;color:#fff;border-radius:13px;background:linear-gradient(145deg,var(--navy-900),var(--blue-600));box-shadow:0 8px 20px rgba(37,99,235,.28);font-size:13px;letter-spacing:.04em}.brand small{display:block;margin-top:1px;color:var(--slate-500);font-size:11px;font-weight:650;letter-spacing:.02em}
+    .desktop-nav{display:flex;align-items:center;gap:4px}.desktop-nav a{padding:9px 12px;color:var(--slate-600);border-radius:10px;text-decoration:none;font-size:14px;font-weight:650}.desktop-nav a:hover,.desktop-nav a.active{color:var(--navy-900);background:var(--blue-50)}
+    .hero{width:min(1120px,calc(100% - 32px));margin:54px auto 28px;text-align:center}.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:7px 11px;color:var(--blue-700);border:1px solid var(--blue-100);border-radius:999px;background:rgba(239,246,255,.92);font-size:12px;font-weight:780;letter-spacing:.035em;text-transform:uppercase}.eyebrow:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--blue-600);box-shadow:0 0 0 4px rgba(37,99,235,.12)}
+    .hero h1{max-width:960px;margin:18px auto 14px;color:var(--navy-950);font-size:clamp(38px,7vw,68px);line-height:.98;letter-spacing:-.057em}.hero h1 span{background:linear-gradient(105deg,var(--blue-700),#08a4c9);-webkit-background-clip:text;background-clip:text;color:transparent}.hero p{max-width:840px;margin:0 auto;color:var(--slate-600);font-size:clamp(16px,2.4vw,19px);line-height:1.65}
+    .privacy-chip{display:inline-flex;align-items:center;gap:8px;margin-top:17px;color:var(--green-700);font-size:13px;font-weight:690}.privacy-chip svg{width:17px;height:17px}
+    .app-shell{width:min(1160px,calc(100% - 32px));margin:36px auto 72px}.calculator-card{overflow:hidden;border:1px solid rgba(208,213,221,.88);border-radius:var(--radius-xl);background:rgba(255,255,255,.96);box-shadow:var(--shadow-card)}
+    .card-head{padding:25px 30px 22px;border-bottom:1px solid var(--slate-200);background:linear-gradient(135deg,rgba(239,246,255,.9),rgba(255,255,255,.92))}.card-head-top{display:flex;align-items:flex-start;justify-content:space-between;gap:18px}.card-head h2{margin:0;color:var(--navy-950);font-size:24px;letter-spacing:-.025em}.card-head p{max-width:790px;margin:7px 0 0;color:var(--slate-600);font-size:14px;line-height:1.6}.status-badge{display:inline-flex;align-items:center;white-space:nowrap;padding:7px 10px;border:1px solid var(--green-100);border-radius:999px;background:#ecfdf3;color:var(--green-700);font-size:12px;font-weight:760}
+    .scope-note{margin:0;padding:13px 30px;border-bottom:1px solid var(--amber-100);background:#fffaeb;color:var(--amber-800);font-size:12px;line-height:1.55}.scope-note strong{font-weight:800}
+    .calc-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(370px,.8fr)}.form-panel{padding:30px;border-right:1px solid var(--slate-200)}.result-panel{padding:30px;background:linear-gradient(180deg,#fbfdff,#f8fafc)}
+    .section-title{display:flex;align-items:center;gap:10px;margin:4px 0 18px;color:var(--navy-950);font-size:16px;letter-spacing:-.015em}.section-title:not(:first-child){margin-top:30px}.section-title span{width:28px;height:28px;display:grid;place-items:center;border-radius:9px;background:var(--blue-50);color:var(--blue-700);font-size:12px;font-weight:850}
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}.field{margin-bottom:20px}.field label{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:8px;color:var(--slate-700);font-size:14px;font-weight:720}.field label small{color:var(--slate-500);font-size:11px;font-weight:600}
+    .control,.money-wrap input{width:100%;min-height:52px;border:1px solid var(--slate-300);border-radius:13px;background:#fff;color:var(--slate-900);outline:none;transition:.18s ease}.control{padding:0 42px 0 14px;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 24 24'%3E%3Cpath stroke='%23667085' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;background-size:18px}.control[readonly],.control:disabled{padding-right:14px;background:var(--slate-100);background-image:none;color:var(--slate-700)}.control:focus,.money-wrap input:focus{border-color:var(--blue-500);box-shadow:0 0 0 4px rgba(59,130,246,.12)}
+    .money-wrap{position:relative}.money-prefix{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--slate-500);font-weight:760}.money-wrap input{padding:0 15px 0 47px;font-size:16px;font-weight:720;letter-spacing:.005em}.money-wrap input:disabled{background:var(--slate-100);color:var(--slate-600)}
+    .field-help{margin:7px 0 0;color:var(--slate-500);font-size:11px;line-height:1.5}.method-card{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}.method-option{position:relative}.method-option input{position:absolute;opacity:0;pointer-events:none}.method-option label{height:100%;display:block;padding:14px;border:1px solid var(--slate-300);border-radius:14px;background:#fff;cursor:pointer;transition:.18s}.method-option label b{display:block;color:var(--slate-800);font-size:13px}.method-option label span{display:block;margin-top:4px;color:var(--slate-500);font-size:11px;line-height:1.45}.method-option input:checked+label{border-color:var(--blue-500);background:var(--blue-50);box-shadow:0 0 0 3px rgba(59,130,246,.1)}
+    .income-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}.total-strip{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:2px;padding:14px 15px;border:1px solid var(--blue-100);border-radius:14px;background:var(--blue-50)}.total-strip span{color:var(--slate-600);font-size:12px;font-weight:700}.total-strip strong{color:var(--blue-700);font-size:17px;letter-spacing:-.02em}
+    .advanced-box{padding:16px;border:1px solid var(--slate-200);border-radius:16px;background:#fbfcfe}.advanced-box h4{margin:0 0 5px;color:var(--slate-800);font-size:14px}.advanced-box>p{margin:0 0 15px;color:var(--slate-500);font-size:11px;line-height:1.55}
+    .form-actions{display:grid;grid-template-columns:1fr auto;gap:10px;margin-top:24px}.btn{min-height:50px;border:0;border-radius:13px;padding:0 18px;font-weight:760;transition:.18s ease}.btn-primary{color:#fff;background:linear-gradient(135deg,var(--blue-700),var(--blue-600));box-shadow:0 10px 24px rgba(37,99,235,.23)}.btn-primary:hover{transform:translateY(-1px);box-shadow:0 13px 28px rgba(37,99,235,.3)}.btn-secondary{border:1px solid var(--slate-300);background:#fff;color:var(--slate-700)}
+    .error-box{display:none;margin-top:13px;padding:12px 14px;border:1px solid var(--red-100);border-radius:12px;background:#fff4f2;color:var(--red-700);font-size:12px;line-height:1.5}.error-box.show{display:block}
+    .result-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}.result-title{margin:0;color:var(--navy-950);font-size:18px;letter-spacing:-.02em}.result-state{display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border-radius:999px;background:var(--slate-100);color:var(--slate-500);font-size:11px;font-weight:750}.result-state.ready{background:var(--green-100);color:var(--green-700)}.result-state.refund{background:var(--amber-100);color:var(--amber-900)}
+    .tax-highlight{padding:22px;border:1px solid rgba(23,92,211,.18);border-radius:20px;background:linear-gradient(135deg,var(--navy-900),var(--blue-700));color:#fff;box-shadow:0 18px 36px rgba(23,92,211,.2)}.tax-highlight.refund{background:linear-gradient(135deg,#7a2e0e,#b54708)}.tax-highlight span{display:block;color:rgba(255,255,255,.78);font-size:12px;font-weight:690}.tax-highlight strong{display:block;margin:7px 0 5px;font-size:clamp(32px,6vw,47px);line-height:1;letter-spacing:-.05em}.tax-highlight small{display:block;color:rgba(255,255,255,.78);font-size:11px;line-height:1.5}
+    .metric-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}.metric{padding:15px;border:1px solid var(--slate-200);border-radius:15px;background:#fff}.metric span{display:block;color:var(--slate-500);font-size:11px;font-weight:700}.metric strong{display:block;margin:5px 0 2px;color:var(--navy-950);font-size:18px;letter-spacing:-.025em}.metric small{display:block;color:var(--slate-500);font-size:10px;line-height:1.45}
+    .result-section{margin-top:18px}.result-section h4{margin:0 0 9px;color:var(--slate-800);font-size:13px}.result-list{overflow:hidden;border:1px solid var(--slate-200);border-radius:15px;background:#fff}.result-row{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;padding:11px 13px;border-bottom:1px solid var(--slate-200)}.result-row:last-child{border-bottom:0}.result-row span{color:var(--slate-600);font-size:11px;line-height:1.45}.result-row strong{max-width:52%;color:var(--slate-800);font-size:12px;text-align:right;line-height:1.45}.result-row.emphasis{background:var(--blue-50)}.result-row.emphasis strong{color:var(--blue-700)}
+    .formula-box{margin-top:14px;padding:14px;border:1px solid var(--blue-100);border-radius:14px;background:var(--blue-50)}.formula-box b{display:block;margin-bottom:6px;color:var(--blue-700);font-size:11px}.formula-box code{display:block;white-space:normal;color:var(--slate-700);font:600 11px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.result-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}.mini-btn{min-height:43px;border:1px solid var(--slate-300);border-radius:12px;background:#fff;color:var(--slate-700);font-size:12px;font-weight:740}.mini-btn:hover{border-color:var(--blue-500);color:var(--blue-700)}
+    .below-card{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px}.content-card{padding:24px;border:1px solid var(--slate-200);border-radius:20px;background:rgba(255,255,255,.9);box-shadow:var(--shadow-soft)}.content-card h3{margin:0 0 14px;color:var(--navy-950);font-size:17px}.guide-list{margin:0;padding:0;list-style:none;counter-reset:item}.guide-list li{position:relative;padding:0 0 14px 35px;color:var(--slate-600);font-size:13px;line-height:1.55}.guide-list li:last-child{padding-bottom:0}.guide-list li:before{counter-increment:item;content:counter(item);position:absolute;left:0;top:0;width:24px;height:24px;display:grid;place-items:center;border-radius:8px;background:var(--blue-50);color:var(--blue-700);font-size:11px;font-weight:800}
+    .source-list{display:grid;gap:10px}.source-item{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 13px;border:1px solid var(--slate-200);border-radius:13px;background:#fff}.source-item b{display:block;color:var(--slate-800);font-size:12px}.source-item span{display:block;margin-top:3px;color:var(--slate-500);font-size:10px;line-height:1.45}.source-item a{flex:none;padding:7px 9px;border-radius:9px;background:var(--blue-50);color:var(--blue-700);text-decoration:none;font-size:10px;font-weight:760}
+    .disclaimer{margin-top:18px;padding:16px 18px;border:1px solid var(--amber-100);border-radius:15px;background:#fffaeb;color:var(--amber-800);font-size:12px;line-height:1.6}.site-footer{padding:25px 16px 38px;color:var(--slate-500);text-align:center;font-size:12px}.toast{position:fixed;right:20px;bottom:20px;z-index:80;transform:translateY(15px);opacity:0;pointer-events:none;padding:11px 14px;border-radius:12px;background:var(--navy-900);color:#fff;box-shadow:var(--shadow-soft);font-size:12px;transition:.22s}.toast.show{transform:translateY(0);opacity:1}
+    @media(max-width:960px){.calc-grid{grid-template-columns:1fr}.form-panel{border-right:0;border-bottom:1px solid var(--slate-200)}.below-card{grid-template-columns:1fr}.desktop-nav{display:none}}
+    @media(max-width:650px){.hero{margin-top:38px}.hero h1{font-size:42px}.card-head,.form-panel,.result-panel{padding:22px 18px}.scope-note{padding:12px 18px}.card-head-top{display:block}.status-badge{margin-top:13px}.two-col,.three-col,.income-grid,.method-card,.metric-grid{grid-template-columns:1fr}.form-actions{grid-template-columns:1fr}.result-actions{grid-template-columns:1fr}.result-row strong{max-width:48%}}
+    @media print{.site-header,.hero,.below-card,.disclaimer,.site-footer,.form-panel,.result-actions,.scope-note{display:none!important}.app-shell{width:100%;margin:0}.calculator-card{border:0;box-shadow:none}.calc-grid{display:block}.result-panel{padding:0;background:#fff}.tax-highlight,.tax-highlight.refund{color:#000;border:1px solid #aaa;background:#fff;box-shadow:none}.tax-highlight span,.tax-highlight small{color:#444}}
+  </style>
+<style>
+:root{--kb-black:#000;--kb-near-black:#1d1d1f;--kb-white:#fff;--kb-off-white:#f5f5f7;--kb-soft-gray:#e8e8ed;--kb-medium-gray:#86868b;--kb-blue:#0071e3;--kb-blue-hover:#0077ed;--kb-blue-soft:#eef6ff;--kb-navy:#071a38;--kb-cyan:#25a6d9;--kb-nav-height:48px;--kb-max-width:1180px}
+html{scroll-padding-top:76px}
+body{background:radial-gradient(circle at 50% 10%,rgba(0,113,227,.06),transparent 22%),linear-gradient(180deg,#fff 0%,#fff 52%,#f5f7fb 100%);color:var(--kb-near-black);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,Helvetica,sans-serif;letter-spacing:-.015em;-webkit-font-smoothing:antialiased}
+body.menu-open{overflow:hidden}
+.site-header{position:fixed;z-index:1000;inset:0 0 auto;min-height:var(--kb-nav-height);border-bottom:1px solid rgba(0,0,0,.06);background:rgba(250,250,252,.82);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px)}
+.nav-wrap{width:min(var(--kb-max-width),calc(100% - 36px));height:var(--kb-nav-height);margin:0 auto}
+.brand{gap:9px;color:var(--kb-near-black);font-size:14px;font-weight:700}.brand-mark{width:25px;height:25px;border-radius:8px;background:var(--kb-near-black);color:var(--kb-white);box-shadow:none;font-size:9px;letter-spacing:-.04em}
+.desktop-nav{gap:24px}.desktop-nav a{padding:0;border-radius:0;color:#424245;font-size:12px;font-weight:400}.desktop-nav a:hover,.desktop-nav a.active,.desktop-nav a[aria-current="page"]{color:var(--kb-black);background:transparent}
+.menu-toggle{width:34px;height:34px;display:none;place-items:center;border:0;border-radius:50%;background:transparent;color:var(--kb-near-black);font-size:18px}.menu-toggle:hover{background:rgba(0,0,0,.055)}
+.mobile-menu{position:fixed;z-index:999;inset:var(--kb-nav-height) 0 0;display:none;padding:36px 28px;background:rgba(250,250,252,.98);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}.mobile-menu.active{display:block}.mobile-menu a{display:block;padding:11px 0;color:var(--kb-near-black);font-size:28px;font-weight:650;letter-spacing:-.04em;text-decoration:none}
+main{padding-top:var(--kb-nav-height)}
+.hero{width:100%;margin:0;padding:98px 20px 88px;background:radial-gradient(circle at 50% 92%,rgba(0,113,227,.14),transparent 35%),linear-gradient(180deg,#fff 0%,#fff 64%,#f3f7ff 100%)}
+.eyebrow{display:inline-flex;align-items:center;gap:7px;padding:7px 12px;border:0;border-radius:999px;background:var(--kb-off-white);color:#515154;font-size:12px;font-weight:650;letter-spacing:0;text-transform:none}.eyebrow::before{width:7px;height:7px;background:var(--kb-blue);box-shadow:none}
+.hero h1{max-width:1010px;margin:20px auto 18px;color:var(--kb-near-black);font-size:clamp(48px,7vw,82px);font-weight:700;letter-spacing:-.06em;line-height:.98}.hero h1 span{background:linear-gradient(90deg,#093b91,#0071e3 46%,#25a6d9 72%,#e6aa00);background-clip:text;-webkit-background-clip:text;color:transparent}.hero p{max-width:840px;color:#515154;font-size:clamp(18px,2.3vw,24px);line-height:1.42}
+.privacy-card{margin-top:23px;padding:9px 13px;border:1px solid #d9e9f8;border-radius:999px;background:rgba(255,255,255,.84);color:#286d55;box-shadow:0 8px 24px rgba(20,43,76,.05)}
+.app-shell{position:relative;z-index:2;width:min(1120px,calc(100% - 32px));margin:-30px auto 96px}.calculator-card{border:1px solid rgba(0,0,0,.07);border-radius:30px;background:rgba(255,255,255,.97);box-shadow:0 30px 80px rgba(20,43,76,.13),inset 0 1px 0 rgba(255,255,255,.92)}
+.card-head{padding:29px 32px 24px;border-bottom:1px solid var(--kb-soft-gray);background:linear-gradient(145deg,#f8fbff,#fff)}.card-head h2{color:var(--kb-near-black);font-size:27px;letter-spacing:-.035em}.card-head p{color:#6e6e73}.status-badge{border-color:#d7eadc;background:#eff9f1;color:#248a3d}.scope-note{padding:14px 32px;border-color:#f0dfbd;background:#fff7e8;color:#6d4b14}
+.calc-grid{grid-template-columns:minmax(0,1.1fr) minmax(355px,.9fr)}.form-panel{padding:32px;border-right:1px solid var(--kb-soft-gray)}.result-panel{padding:32px;background:linear-gradient(180deg,#fbfdff,#f5f8fc)}
+.section-title{color:var(--kb-near-black);font-size:17px}.section-title span{width:30px;height:30px;border-radius:10px;background:var(--kb-blue-soft);color:var(--kb-blue)}.field label{color:#424245;font-weight:650}
+.control,.money-wrap input{min-height:54px;border:1px solid #d2d2d7;border-radius:14px;color:var(--kb-near-black)}.control:focus,.money-wrap input:focus{border-color:var(--kb-blue);box-shadow:0 0 0 4px rgba(0,113,227,.1)}
+.method-option label{border-color:var(--kb-soft-gray);border-radius:17px;background:#fbfbfd}.method-option input:checked+label{border-color:var(--kb-blue);background:var(--kb-blue-soft);box-shadow:0 0 0 3px rgba(0,113,227,.08)}
+.total-strip{border-color:#d9e9f8;border-radius:17px;background:var(--kb-blue-soft)}.total-strip strong{color:var(--kb-blue)}.advanced-box{border-color:var(--kb-soft-gray);border-radius:18px;background:#fbfbfd}
+.btn{min-height:46px;border-radius:999px;padding:0 20px;font-weight:600}.btn-primary{background:var(--kb-blue);box-shadow:0 10px 24px rgba(0,113,227,.2)}.btn-primary:hover{background:var(--kb-blue-hover)}.btn-secondary{border-color:#d2d2d7;color:#515154}.error-box{border-radius:16px}
+.result-title{color:var(--kb-near-black)}.tax-highlight{border:0;border-radius:24px;background:radial-gradient(circle at 90% 10%,rgba(37,166,217,.22),transparent 30%),linear-gradient(145deg,#071a38,#0b315e);box-shadow:0 22px 48px rgba(7,26,56,.2)}.tax-highlight.refund{background:radial-gradient(circle at 90% 10%,rgba(255,190,92,.18),transparent 30%),linear-gradient(145deg,#7a2e0e,#b54708)}
+.metric{border-color:var(--kb-soft-gray);border-radius:17px}.metric strong{color:var(--kb-near-black)}.result-list{border-color:var(--kb-soft-gray);border-radius:19px}.result-row{border-color:var(--kb-soft-gray)}.formula-box{border-color:#c9d8e7;border-radius:17px;background:rgba(255,255,255,.82)}.formula-box code{color:#0b65b1}.mini-btn{border-radius:999px}
+.below-card{gap:16px;margin-top:20px}.content-card{border-color:rgba(0,0,0,.07);border-radius:24px;background:rgba(255,255,255,.95);box-shadow:0 18px 48px rgba(20,43,76,.07)}.content-card h3{color:var(--kb-near-black);font-size:20px}.guide-list li::before{background:var(--kb-blue-soft);color:var(--kb-blue)}.source-item a{color:var(--kb-blue)}.disclaimer{margin-top:20px;border-color:#f0dfbd;border-radius:18px;background:#fff7e8;color:#6d4b14}
+.site-footer{padding:0;background:var(--kb-off-white);color:#6e6e73;text-align:left}.footer-disclaimer{width:min(980px,calc(100% - 40px));margin:0 auto;padding:23px 0;border-bottom:1px solid #d2d2d7;font-size:12px;line-height:1.5}.footer-disclaimer strong{color:#424245}.footer-inner{width:min(980px,calc(100% - 40px));display:flex;align-items:center;justify-content:space-between;gap:20px;margin:0 auto;padding:21px 0 27px;font-size:12px}.footer-inner p{margin:0}.footer-links{display:flex;flex-wrap:wrap;gap:18px}.footer-links a{color:#424245;text-decoration:none}.footer-links a:hover{text-decoration:underline}.toast{border-radius:999px;background:var(--kb-near-black)}
+@media(max-width:1030px){.desktop-nav{display:none}.menu-toggle{display:grid}}@media(max-width:900px){.calc-grid{grid-template-columns:1fr}.form-panel{border-right:0;border-bottom:1px solid var(--kb-soft-gray)}}@media(max-width:680px){.hero{padding-top:72px;padding-bottom:70px}.app-shell{margin-top:-20px}.card-head,.form-panel,.result-panel{padding:22px}.scope-note{padding-right:22px;padding-left:22px}.footer-inner{align-items:flex-start;flex-direction:column}}@media(max-width:520px){.brand span:last-child{display:none}.hero h1{font-size:44px}.calculator-card{border-radius:24px}.tax-highlight strong{font-size:34px}}@media print{.mobile-menu,.menu-toggle,.footer-disclaimer,.footer-inner{display:none!important}}
+</style></head>
+<body id="top">
+
+<header class="site-header">
+<div class="nav-wrap">
+<a aria-label="Beranda Kabayan" class="brand" href="index.html">
+<span class="brand-mark">ASD</span>
+<span>dhaniswara86</span>
+</a>
+<nav aria-label="Navigasi utama" class="desktop-nav">
+<a href="index.html">Beranda</a>
+<a href="buku.html">Buku</a>
+<a href="formulir.html">Formulir</a>
+<a aria-current="page" href="kalkulator.html">Kalkulator</a>
+<a href="aplikasi.html">Aplikasi</a>
+<a href="presentasi.html">Salindia</a>
+<a href="artikel.html">Artikel</a>
+<a href="index.html#tentang">Tentang</a>
+</nav>
+<button aria-expanded="false" aria-label="Buka menu" class="menu-toggle" id="menuToggle" type="button">☰</button>
+</div>
+</header>
+<nav aria-label="Navigasi seluler" class="mobile-menu" id="mobileMenu">
+<a href="index.html">Beranda</a>
+<a href="buku.html">Buku Digital</a>
+<a href="formulir.html">Formulir</a>
+<a href="kalkulator.html">Kalkulator</a>
+<a href="aplikasi.html">Aplikasi</a>
+<a href="presentasi.html">Katalog Salindia</a>
+<a href="artikel.html">Artikel</a>
+<a href="index.html#tentang">Tentang</a>
+</nav>
+
+<main>
+<section class="hero">
+<span class="eyebrow">Kabayan · Kalkulator Perpajakan</span>
+<h1>Hitung ulang PPh Pasal 21 <span>setahun/masa pajak terakhir.</span></h1>
+<p>Kalkulator untuk Pegawai Tetap dan Pensiunan penerima pensiun berkala pada bulan Desember atau bulan saat hubungan kerja/pensiun berakhir.</p>
+<span class="privacy-chip privacy-card"><svg aria-hidden="true" fill="none" viewbox="0 0 24 24"><path d="M12 3 5 6v5c0 4.8 2.7 8.2 7 10 4.3-1.8 7-5.2 7-10V6l-7-3Z" stroke="currentColor" stroke-width="1.8"></path><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg>Data dihitung langsung di perangkat Anda</span>
+</section>
+<section class="app-shell">
+<article class="calculator-card">
+<div class="card-head">
+<div class="card-head-top">
+<div><h2>Kalkulator PPh Pasal 21 Masa Pajak Terakhir</h2><p>Menghitung PPh Pasal 21 terutang dalam satu tahun atau bagian tahun pajak, kemudian mengurangkannya dengan PPh Pasal 21 yang telah dipotong sebelum Masa Pajak Terakhir.</p></div>
+<span class="status-badge">PMK 168/2023</span>
+</div>
+</div>
+<p class="scope-note"><strong>Ruang lingkup:</strong> Pegawai Tetap atau Pensiunan penerima uang pensiun berkala. Bukan untuk pegawai tidak tetap, bukan pegawai, peserta kegiatan, mantan pegawai, PPh Pasal 26, atau fasilitas PPh 21 DTP.</p>
+<div class="calc-grid">
+<div class="form-panel">
+<form id="yearlyForm" novalidate="">
+<h3 class="section-title"><span>1</span> Data penerima dan masa penghasilan</h3>
+<div class="two-col">
+<div class="field"><label for="employeeType">Status Penerima</label><select class="control" id="employeeType"><option value="employee">Pegawai Tetap</option><option value="pensioner">Pensiunan — pensiun berkala</option></select></div>
+<div class="field"><label for="taxIdStatus">Status NPWP/NIK</label><select class="control" id="taxIdStatus"><option value="yes">Dapat menunjukkan NPWP/NIK</option><option value="no">Tidak dapat menunjukkan NPWP</option></select><p class="field-help">Pilihan tanpa NPWP menerapkan tarif 20% lebih tinggi.</p></div>
+</div>
+<div class="three-col">
+<div class="field"><label for="maritalStatus">Status Perkawinan</label><select class="control" id="maritalStatus"><option value="TK">Tidak Kawin</option><option value="K">Kawin</option></select></div>
+<div class="field"><label for="dependents">Tanggungan</label><select class="control" id="dependents"><option value="0">0 orang</option><option value="1">1 orang</option><option value="2">2 orang</option><option value="3">3 orang</option></select></div>
+<div class="field"><label for="ptkpDisplay">Status PTKP</label><input class="control" id="ptkpDisplay" readonly="" value="TK/0 — Rp54.000.000"/></div>
+</div>
+<div class="field"><label for="femalePtkpRule">Ketentuan khusus karyawati</label><select class="control" id="femalePtkpRule"><option value="general">Tidak menggunakan ketentuan khusus karyawati</option><option value="married_husband_income">Karyawati kawin dan suami berpenghasilan — PTKP TK/0</option></select><p class="field-help">Karyawati kawin pada umumnya memperoleh PTKP untuk dirinya sendiri, kecuali dapat menunjukkan keterangan bahwa suami tidak menerima penghasilan.</p></div>
+<div class="three-col">
+<div class="field"><label for="startMonth">Mulai Penghasilan</label><select class="control" id="startMonth"></select></div>
+<div class="field"><label for="endMonth">Sampai dengan</label><select class="control" id="endMonth"></select></div>
+<div class="field"><label for="monthCount">Jumlah Bulan</label><input class="control" id="monthCount" readonly="" value="12 bulan"/></div>
+</div>
+<div class="field"><label for="subjectiveStatus">Status Kewajiban Pajak Subjektif</label><select class="control" id="subjectiveStatus"><option value="full">Sudah ada sepanjang tahun — tidak disetahunkan</option><option value="begin">Baru dimulai dalam tahun berjalan — disetahunkan</option><option value="end">Berakhir dalam tahun berjalan — disetahunkan</option></select><p class="field-help">Mulai bekerja setelah Januari atau berhenti bekerja sebelum Desember tidak otomatis disetahunkan apabila kewajiban pajak subjektif telah ada sejak awal tahun.</p></div>
+<h3 class="section-title"><span>2</span> Metode pemotongan</h3>
+<div aria-label="Metode pemotongan PPh Pasal 21" class="method-card" role="radiogroup">
+<div class="method-option"><input checked="" id="methodGross" name="method" type="radio" value="gross"/><label for="methodGross"><b>Gross</b><span>PPh Pasal 21 dipotong dari penghasilan. Tunjangan pajak diisi sesuai jumlah yang benar-benar diberikan.</span></label></div>
+<div class="method-option"><input id="methodGrossUp" name="method" type="radio" value="grossup"/><label for="methodGrossUp"><b>Gross-up Masa Terakhir</b><span>Kalkulator mencari tambahan tunjangan PPh pada Masa Pajak Terakhir agar sama dengan PPh yang harus dipotong saat itu.</span></label></div>
+</div>
+<h3 class="section-title"><span>3</span> Penghasilan dari pemberi kerja ini</h3>
+<div class="income-grid">
+<div class="field"><label for="salary"><span id="salaryLabel">Gaji</span><small>Total masa penghasilan</small></label><div class="money-wrap"><span class="money-prefix">Rp</span><input autocomplete="off" class="money-input" id="salary" inputmode="numeric" placeholder="0"/></div></div>
+<div class="field"><label for="taxAllowance"><span id="taxAllowanceLabel">Tunjangan PPh</span><small>Total sebelum gross-up</small></label><div class="money-wrap"><span class="money-prefix">Rp</span><input autocomplete="off" class="money-input" id="taxAllowance" inputmode="numeric" placeholder="0"/></div><p class="field-help" id="taxAllowanceHelp">Masukkan seluruh tunjangan PPh yang telah diberikan dalam masa penghasilan ini.</p></div>
+<div class="field"><label for="otherAllowance">Tunjangan Lain, Lembur, dan Sejenisnya<small>Total</small></label><div class="money-wrap"><span class="money-prefix">Rp</span><input autocomplete="off" class="money-input" id="otherAllowance" inputmode="numeric" placeholder="0"/></div></div>
+<div class="field"><label for="honorarium">Honorarium dan Imbalan Lain Sejenis<small>Total</small></label><div class="money-wrap"><span class="money-prefix">Rp</span><input autocomplete="off" class="money-input" id="honorarium" inputmode="numeric" placeholder="0"/></div></div>
+<div class="field"><label for="insurance">Premi Asuransi Dibayar Pemberi Kerja<small>Total</small></label><div class="money-wrap"><span class="money-prefix">Rp</span><input autocomplete="off" class="money-input" id="insurance" inputmode="numeric" placeholder="0"/></div></div>
+<div class="field"><label for="benefit">Natura/Kenikmatan yang Menjadi Objek<small>Total</small></label><div class="money-wrap"><span class="money-prefix">Rp</span><input autocomplete="off" class="money-input" id="benefit" inputmode="numeric" placeholder="0"/></div></div>
+<div class="field" style="grid-column:1/-1"><label for="irregular">Tantiem, Bonus, Gratifikasi, Jasa Produksi, dan THR<small>Penghasilan tidak teratur</small></label><div class="money-wrap"><span class="money-prefix">Rp</span><input autocomplete="off" class="money-input" id="irregular" inputmode="numeric" placeholder="0"/></div></div>
+</div>
+<div class="total-strip"><span>Penghasilan bruto sementara</span><strong id="liveGross">Rp0</strong></div>
+<h3 class="section-title"><span>4</span> Pengurangan yang diperbolehkan</h3>
+<div class="two-col">
+<div class="field"><label for="autoExpense"><span id="expenseLabel">Biaya Jabatan</span><small>Otomatis</small></label><div class="money-wrap"><span class="money-prefix">Rp</span><input id="autoExpense" readonly="" value="0"/></div><p class="field-help" id="expenseHelp">5% dari bruto, maksimal Rp500.000 × jumlah bulan.</p></div>
+<div class="field"><label for="pensionContribution">Iuran Pensiun/THT/JHT<small>Dibayar pegawai</small></label><div class="money-wrap"><span class="money-prefix">Rp</span><input autocomplete="off" class="money-input" id="pensionContribution" inputmode="numeric" placeholder="0"/></div></div>
+<div class="field" style="grid-column:1/-1"><label for="zakat">Zakat/Sumbangan Keagamaan Wajib<small>Dibayar melalui pemberi kerja</small></label><div class="money-wrap"><span class="money-prefix">Rp</span><input autocomplete="off" class="money-input" id="zakat" inputmode="numeric" placeholder="0"/></div></div>
+</div>
+<h3 class="section-title"><span>5</span> Pemotongan sebelum Masa Pajak Terakhir</h3>
+<div class="advanced-box">
+<h4>Data pemberi kerja sebelumnya</h4><p>Isi hanya apabila bukti pemotongan dari pemberi kerja sebelumnya diperhitungkan oleh pemberi kerja saat ini.</p>
+<div class="two-col">
+<div class="field"><label for="previousNet">Penghasilan Neto Masa Sebelumnya<small>Bukti potong sebelumnya</small></label><div class="money-wrap"><span class="money-prefix">Rp</span><input autocomplete="off" class="money-input" id="previousNet" inputmode="numeric" placeholder="0"/></div></div>
+<div class="field"><label for="previousTax">PPh 21 Dipotong Pemberi Kerja Sebelumnya<small>Kredit pemotongan</small></label><div class="money-wrap"><span class="money-prefix">Rp</span><input autocomplete="off" class="money-input" id="previousTax" inputmode="numeric" placeholder="0"/></div></div>
+</div>
+<div class="field" style="margin-bottom:0"><label for="currentPriorTax">PPh 21 yang Telah Dipotong Pemberi Kerja Ini<small>Sebelum masa terakhir</small></label><div class="money-wrap"><span class="money-prefix">Rp</span><input autocomplete="off" class="money-input" id="currentPriorTax" inputmode="numeric" placeholder="0"/></div></div>
+</div>
+<div class="form-actions"><button class="btn btn-primary" type="submit">Hitung Masa Pajak Terakhir</button><button class="btn btn-secondary" id="resetBtn" type="button">Reset</button></div>
+<div class="error-box" id="errorBox" role="alert"></div>
+</form>
+</div>
+<aside aria-live="polite" class="result-panel">
+<div class="result-top"><h3 class="result-title">Hasil Penghitungan</h3><span class="result-state" id="resultState">Belum dihitung</span></div>
+<div class="tax-highlight" id="taxHighlight"><span id="highlightLabel">PPh Pasal 21 Masa Pajak Terakhir</span><strong id="taxResult">Rp0</strong><small id="taxCaption">Masukkan data penghasilan dan tekan tombol hitung.</small></div>
+<div class="metric-grid">
+<div class="metric"><span>Penghasilan Kena Pajak</span><strong id="pkpMetric">Rp0</strong><small>Dibulatkan ke bawah hingga ribuan rupiah penuh</small></div>
+<div class="metric"><span>PPh 21 Setahun/Bagian Tahun</span><strong id="annualTaxMetric">Rp0</strong><small id="annualTaxNote">Tarif progresif Pasal 17</small></div>
+</div>
+<div class="result-section"><h4>Ringkasan penghasilan</h4><div class="result-list">
+<div class="result-row"><span>Penghasilan bruto pemberi kerja ini</span><strong id="grossResult">Rp0</strong></div>
+<div class="result-row" id="grossUpRow" style="display:none"><span>Tambahan tunjangan PPh gross-up masa terakhir</span><strong id="grossUpResult">Rp0</strong></div>
+<div class="result-row"><span><span id="expenseResultLabel">Biaya jabatan</span></span><strong id="expenseResult">Rp0</strong></div>
+<div class="result-row"><span>Jumlah pengurang</span><strong id="deductionResult">Rp0</strong></div>
+<div class="result-row"><span>Penghasilan neto pemberi kerja ini</span><strong id="currentNetResult">Rp0</strong></div>
+<div class="result-row"><span>Penghasilan neto masa sebelumnya</span><strong id="previousNetResult">Rp0</strong></div>
+<div class="result-row emphasis"><span id="annualNetLabel">Penghasilan neto setahun</span><strong id="annualNetResult">Rp0</strong></div>
+</div></div>
+<div class="result-section"><h4>Penghitungan PPh Pasal 21</h4><div class="result-list">
+<div class="result-row"><span>Penghasilan Tidak Kena Pajak</span><strong id="ptkpResult">Rp0</strong></div>
+<div class="result-row"><span>PPh berdasarkan tarif Pasal 17</span><strong id="baseTaxResult">Rp0</strong></div>
+<div class="result-row" id="noNpwpRow" style="display:none"><span>Tambahan 20% karena tanpa NPWP</span><strong id="noNpwpResult">Rp0</strong></div>
+<div class="result-row emphasis"><span>PPh 21 terutang setahun/bagian tahun</span><strong id="periodTaxResult">Rp0</strong></div>
+<div class="result-row"><span>PPh dipotong pemberi kerja sebelumnya</span><strong id="previousTaxResult">Rp0</strong></div>
+<div class="result-row"><span>PPh dipotong pemberi kerja ini sebelum masa terakhir</span><strong id="currentPriorTaxResult">Rp0</strong></div>
+</div></div>
+<div class="result-section"><h4>Informasi penghasilan teratur dan tidak teratur</h4><div class="result-list">
+<div class="result-row"><span>PKP atas penghasilan teratur</span><strong id="regularPkpResult">Rp0</strong></div>
+<div class="result-row"><span>PPh 21 atas penghasilan teratur</span><strong id="regularTaxResult">Rp0</strong></div>
+<div class="result-row"><span>PPh 21 atas penghasilan tidak teratur</span><strong id="irregularTaxResult">Rp0</strong></div>
+</div></div>
+<div class="formula-box"><b>Rumus utama</b><code id="formulaResult">PPh Masa Pajak Terakhir = PPh terutang setahun/bagian tahun − PPh yang telah dipotong sebelum Masa Pajak Terakhir</code></div>
+<div class="result-actions"><button class="mini-btn" id="copyBtn" type="button">Salin hasil</button><button class="mini-btn" id="printBtn" type="button">Cetak / Simpan PDF</button></div>
+</aside>
+</div>
+</article>
+<div class="below-card">
+<section class="content-card"><h3>Cara menggunakan</h3><ol class="guide-list"><li>Pilih status penerima, PTKP, periode memperoleh penghasilan, dan kondisi kewajiban pajak subjektif.</li><li>Masukkan seluruh penghasilan dari pemberi kerja ini selama periode tersebut, bukan hanya penghasilan pada bulan terakhir.</li><li>Masukkan iuran dan zakat yang memenuhi ketentuan serta PPh yang telah dipotong sebelum Masa Pajak Terakhir.</li><li>Apabila membawa bukti potong dari pemberi kerja sebelumnya, masukkan penghasilan neto dan PPh dari bukti potong tersebut.</li><li>Hasil positif berarti kurang potong; hasil negatif berarti lebih potong yang pada prinsipnya dikembalikan oleh pemotong pajak.</li></ol></section>
+<section class="content-card"><h3>Dasar penghitungan</h3><div class="source-list">
+<div class="source-item"><div><b>PMK Nomor 168 Tahun 2023</b><span>Masa pajak terakhir, pengurang, penyetahunan, dan contoh penghitungan.</span></div><a href="https://jdih.kemenkeu.go.id/api/download/e60a82e0-b218-40f5-9d18-b924aa1e11ce/2023pmkeuangan168.pdf" rel="noopener" target="_blank">Buka</a></div>
+<div class="source-item"><div><b>PP Nomor 58 Tahun 2023</b><span>Tarif efektif untuk masa selain Masa Pajak Terakhir.</span></div><a href="https://jdih.kemenkeu.go.id/dok/pp-58-tahun-2023" rel="noopener" target="_blank">Buka</a></div>
+<div class="source-item"><div><b>UU Pajak Penghasilan s.t.d.t.d. UU HPP</b><span>PTKP dan tarif progresif Pasal 17 untuk orang pribadi.</span></div><a href="https://jdih.kemenkeu.go.id/api/download/a9faab97-aca7-4f87-9fdc-faa8123d1454/7TAHUN2021UU.pdf" rel="noopener" target="_blank">Buka</a></div>
+</div></section>
+</div>
+<div class="disclaimer"><strong>Catatan penting:</strong> kalkulator ini merupakan alat bantu edukasi dan tidak menggantikan bukti pemotongan maupun aplikasi resmi DJP. Periksa kembali status PTKP, penghasilan yang merupakan objek pajak, pengurangan yang memenuhi persyaratan, data pemberi kerja sebelumnya, serta fasilitas khusus yang mungkin berlaku.</div>
+</section>
+</main>
+
+<footer class="site-footer">
+<div class="footer-disclaimer">
+<strong>Disclaimer:</strong>
+    Kalkulator ini merupakan alat bantu edukasi. Hasil penghitungan tetap perlu disesuaikan dengan status penerima penghasilan, bukti pemotongan, fakta transaksi, masa pajak, dan ketentuan perpajakan yang berlaku. Kabayan bukan situs resmi Direktorat Jenderal Pajak.
+  </div>
+<div class="footer-inner">
+<p>© <span id="currentYear"></span> Angga Sukma Dhaniswara.</p>
+<div class="footer-links">
+<a href="index.html">Beranda</a>
+<a href="kalkulator.html">Kalkulator</a>
+<a href="artikel.html">Artikel</a>
+<a href="#top">Kembali ke atas</a>
+</div>
+</div>
+</footer>
+
+<div class="toast" id="toast" role="status"></div>
+<script>
+    const MONTHS = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
+    const IDS = ["salary","taxAllowance","otherAllowance","honorarium","insurance","benefit","irregular","pensionContribution","zakat","previousNet","previousTax","currentPriorTax"];
+    const $ = (id) => document.getElementById(id);
+    const money = (n) => "Rp" + Math.round(Math.abs(Number(n)||0)).toLocaleString("id-ID");
+    const parseMoney = (v) => Number(String(v||"").replace(/[^0-9]/g,"")) || 0;
+    const setMoneyInput = (el,n) => { el.value = n ? Math.round(n).toLocaleString("id-ID") : ""; };
+    const selectedMethod = () => document.querySelector('input[name="method"]:checked').value;
+
+    function setupMonths(){
+      MONTHS.forEach((m,i)=>{
+        $("startMonth").add(new Option(m,String(i+1)));
+        $("endMonth").add(new Option(m,String(i+1)));
+      });
+      $("startMonth").value="1"; $("endMonth").value="12";
+    }
+    function monthCount(){ return Math.max(0, Number($("endMonth").value)-Number($("startMonth").value)+1); }
+    function ptkpInfo(){
+      if($("femalePtkpRule").value === "married_husband_income") return {code:"TK/0",amount:54000000};
+      const status=$("maritalStatus").value, dep=Number($("dependents").value);
+      const amount=54000000+(status==="K"?4500000:0)+(dep*4500000);
+      return {code:`${status}/${dep}`,amount};
+    }
+    function progressiveTax(pkp){
+      let rem=Math.max(0,pkp), tax=0;
+      const brackets=[[60000000,.05],[190000000,.15],[250000000,.25],[4500000000,.30],[Infinity,.35]];
+      for(const [width,rate] of brackets){ const part=Math.min(rem,width); if(part<=0)break; tax+=part*rate; rem-=part; }
+      return tax;
+    }
+    function incomeValues(){
+      const values={}; IDS.forEach(id=>values[id]=parseMoney($(id).value)); return values;
+    }
+    function baseIncome(v){ return v.salary+v.otherAllowance+v.honorarium+v.insurance+v.benefit+v.irregular; }
+    function expenseFor(gross,months,type){ const cap=(type==="employee"?500000:200000)*months; return Math.min(gross*.05,cap); }
+    function calculateCore(extraGrossUp=0){
+      const v=incomeValues();
+      const months=monthCount();
+      const type=$("employeeType").value;
+      const subjective=$("subjectiveStatus").value;
+      const factor=(subjective==="full"?1:months/12);
+      const gross=baseIncome(v)+v.taxAllowance+extraGrossUp;
+      const expense=expenseFor(gross,months,type);
+      const contribution=type==="employee"?v.pensionContribution:0;
+      const deductions=expense+contribution+v.zakat;
+      const currentNet=Math.max(0,gross-deductions);
+      const combinedNet=currentNet+v.previousNet;
+      const annualNet=subjective==="full"?combinedNet:(months?combinedNet*12/months:0);
+      const ptkp=ptkpInfo().amount;
+      const pkp=Math.floor(Math.max(0,annualNet-ptkp)/1000)*1000;
+      const baseAnnualTax=progressiveTax(pkp);
+      const basePeriodTax=baseAnnualTax*factor;
+      const periodTax=basePeriodTax*($("taxIdStatus").value==="no"?1.2:1);
+      const finalTax=periodTax-v.previousTax-v.currentPriorTax;
+
+      const regularGross=Math.max(0,gross-v.irregular);
+      const regularExpense=expenseFor(regularGross,months,type);
+      const regularNet=Math.max(0,regularGross-(regularExpense+contribution+v.zakat))+v.previousNet;
+      const regularAnnualNet=subjective==="full"?regularNet:(months?regularNet*12/months:0);
+      const regularPkp=Math.floor(Math.max(0,regularAnnualNet-ptkp)/1000)*1000;
+      const regularBaseTax=progressiveTax(regularPkp)*factor;
+      const regularTax=regularBaseTax*($("taxIdStatus").value==="no"?1.2:1);
+      const irregularTax=Math.max(0,periodTax-regularTax);
+      return {v,months,type,subjective,factor,gross,expense,contribution,deductions,currentNet,combinedNet,annualNet,ptkp,pkp,baseAnnualTax,basePeriodTax,periodTax,finalTax,regularPkp,regularTax,irregularTax,extraGrossUp};
+    }
+    function solveGrossUp(){
+      let allowance=0;
+      for(let i=0;i<150;i++){
+        const c=calculateCore(allowance);
+        const next=Math.max(0,c.finalTax);
+        if(Math.abs(next-allowance)<.5){ allowance=next; break; }
+        allowance=next;
+      }
+      return calculateCore(Math.round(allowance));
+    }
+    function currentCalculation(){ return selectedMethod()==="grossup"?solveGrossUp():calculateCore(0); }
+
+    function updateDynamic(){
+      const months=monthCount();
+      $("monthCount").value=months>0?`${months} bulan`:"Periode tidak valid";
+      const p=ptkpInfo(); $("ptkpDisplay").value=`${p.code} — ${money(p.amount)}`;
+      const type=$("employeeType").value;
+      $("salaryLabel").textContent=type==="employee"?"Gaji":"Uang Pensiun Berkala";
+      $("expenseLabel").textContent=type==="employee"?"Biaya Jabatan":"Biaya Pensiun";
+      $("expenseResultLabel").textContent=type==="employee"?"Biaya jabatan":"Biaya pensiun";
+      $("expenseHelp").textContent=type==="employee"?"5% dari bruto, maksimal Rp500.000 × jumlah bulan.":"5% dari bruto, maksimal Rp200.000 × jumlah bulan.";
+      $("pensionContribution").disabled=type==="pensioner";
+      if(type==="pensioner") setMoneyInput($("pensionContribution"),0);
+      const method=selectedMethod();
+      $("taxAllowanceLabel").textContent=method==="grossup"?"Tunjangan PPh yang Telah Diberikan":"Tunjangan PPh";
+      $("taxAllowanceHelp").textContent=method==="grossup"?"Masukkan tunjangan PPh yang telah diberikan sebelum Masa Pajak Terakhir. Tambahan gross-up bulan terakhir dihitung otomatis.":"Masukkan seluruh tunjangan PPh yang telah diberikan dalam masa penghasilan ini.";
+      const v=incomeValues(); const gross=baseIncome(v)+v.taxAllowance;
+      $("liveGross").textContent=money(gross);
+      const exp=expenseFor(gross,months,type); setMoneyInput($("autoExpense"),exp);
+    }
+    function validate(){
+      const errors=[]; const months=monthCount(); const v=incomeValues();
+      if(months<=0) errors.push("Bulan akhir tidak boleh lebih awal daripada bulan mulai.");
+      if(baseIncome(v)+v.taxAllowance<=0) errors.push("Masukkan paling sedikit satu komponen penghasilan.");
+      if($("subjectiveStatus").value!=="full" && months===12) errors.push("Status kewajiban pajak subjektif bagian tahun tidak sesuai dengan periode 12 bulan.");
+      if(v.previousTax>0 && v.previousNet===0) errors.push("Masukkan penghasilan neto masa sebelumnya apabila PPh pemberi kerja sebelumnya diperhitungkan.");
+      const box=$("errorBox"); if(errors.length){box.innerHTML=errors.join("<br>");box.classList.add("show");return false;} box.classList.remove("show");return true;
+    }
+    function display(c){
+      const isRefund=c.finalTax<0, amount=Math.abs(c.finalTax);
+      $("resultState").textContent=isRefund?"Lebih potong":c.finalTax>0?"Kurang potong":"Nihil";
+      $("resultState").className="result-state "+(isRefund?"refund":"ready");
+      $("taxHighlight").classList.toggle("refund",isRefund);
+      $("highlightLabel").textContent=isRefund?"PPh Pasal 21 lebih dipotong":"PPh Pasal 21 Masa Pajak Terakhir";
+      $("taxResult").textContent=money(amount);
+      $("taxCaption").textContent=isRefund?"Pada prinsipnya dikembalikan oleh pemotong pajak paling lambat akhir bulan berikutnya setelah Masa Pajak Terakhir.":c.finalTax>0?"Jumlah yang perlu dipotong pada Masa Pajak Terakhir.":"Tidak terdapat kurang atau lebih potong pada Masa Pajak Terakhir.";
+      $("pkpMetric").textContent=money(c.pkp); $("annualTaxMetric").textContent=money(c.periodTax);
+      $("annualTaxNote").textContent=c.subjective==="full"?"Tarif progresif Pasal 17":"Pajak disetahunkan lalu diprorata "+c.months+"/12";
+      $("grossResult").textContent=money(c.gross);
+      $("grossUpRow").style.display=selectedMethod()==="grossup"?"flex":"none"; $("grossUpResult").textContent=money(c.extraGrossUp);
+      $("expenseResult").textContent=money(c.expense); $("deductionResult").textContent=money(c.deductions); $("currentNetResult").textContent=money(c.currentNet); $("previousNetResult").textContent=money(c.v.previousNet);
+      $("annualNetLabel").textContent=c.subjective==="full"?"Penghasilan neto setahun/bagian tahun":"Penghasilan neto disetahunkan"; $("annualNetResult").textContent=money(c.annualNet);
+      $("ptkpResult").textContent=`${ptkpInfo().code} — ${money(c.ptkp)}`; $("baseTaxResult").textContent=money(c.basePeriodTax);
+      $("noNpwpRow").style.display=$("taxIdStatus").value==="no"?"flex":"none"; $("noNpwpResult").textContent=money(c.periodTax-c.basePeriodTax);
+      $("periodTaxResult").textContent=money(c.periodTax); $("previousTaxResult").textContent=money(c.v.previousTax); $("currentPriorTaxResult").textContent=money(c.v.currentPriorTax);
+      $("regularPkpResult").textContent=money(c.regularPkp); $("regularTaxResult").textContent=money(c.regularTax); $("irregularTaxResult").textContent=money(c.irregularTax);
+      $("formulaResult").textContent=`${money(c.periodTax)} − ${money(c.v.previousTax)} − ${money(c.v.currentPriorTax)} = ${isRefund?"lebih potong ":""}${money(amount)}`;
+      window.lastCalculation=c;
+    }
+    function reset(){
+      $("yearlyForm").reset(); IDS.forEach(id=>setMoneyInput($(id),0)); $("startMonth").value="1"; $("endMonth").value="12"; $("errorBox").classList.remove("show");
+      $("resultState").textContent="Belum dihitung"; $("resultState").className="result-state"; $("taxHighlight").classList.remove("refund"); $("highlightLabel").textContent="PPh Pasal 21 Masa Pajak Terakhir"; $("taxResult").textContent="Rp0"; $("taxCaption").textContent="Masukkan data penghasilan dan tekan tombol hitung.";
+      ["pkpMetric","annualTaxMetric","grossResult","grossUpResult","expenseResult","deductionResult","currentNetResult","previousNetResult","annualNetResult","baseTaxResult","noNpwpResult","periodTaxResult","previousTaxResult","currentPriorTaxResult","regularPkpResult","regularTaxResult","irregularTaxResult"].forEach(id=>$(id).textContent="Rp0");
+      $("ptkpResult").textContent="Rp0"; $("grossUpRow").style.display="none"; $("noNpwpRow").style.display="none"; $("formulaResult").textContent="PPh Masa Pajak Terakhir = PPh terutang setahun/bagian tahun − PPh yang telah dipotong sebelum Masa Pajak Terakhir"; window.lastCalculation=null; updateDynamic();
+    }
+    function toast(msg){const t=$("toast");t.textContent=msg;t.classList.add("show");clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.classList.remove("show"),2200)}
+    function copyResult(){
+      if(!window.lastCalculation){toast("Hitung terlebih dahulu");return;}
+      const c=window.lastCalculation,isRefund=c.finalTax<0;
+      const text=["HASIL KALKULATOR PPh PASAL 21 MASA PAJAK TERAKHIR — KABAYAN",`Status: ${isRefund?"Lebih potong":c.finalTax>0?"Kurang potong":"Nihil"}`,`${isRefund?"PPh lebih dipotong":"PPh masa terakhir"}: ${money(Math.abs(c.finalTax))}`,`Penghasilan bruto: ${money(c.gross)}`,`Jumlah pengurang: ${money(c.deductions)}`,`Penghasilan neto setahun/disetahunkan: ${money(c.annualNet)}`,`PTKP: ${ptkpInfo().code} — ${money(c.ptkp)}`,`PKP: ${money(c.pkp)}`,`PPh terutang setahun/bagian tahun: ${money(c.periodTax)}`,`PPh pemberi kerja sebelumnya: ${money(c.v.previousTax)}`,`PPh pemberi kerja ini sebelum masa terakhir: ${money(c.v.currentPriorTax)}`].join("\n");
+      if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(text).then(()=>toast("Hasil disalin"));}else{const ta=document.createElement("textarea");ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand("copy");ta.remove();toast("Hasil disalin");}
+    }
+
+    setupMonths();
+    IDS.forEach(id=>$(id).addEventListener("input",e=>{const n=parseMoney(e.target.value);e.target.value=n?n.toLocaleString("id-ID"):"";updateDynamic()}));
+    ["employeeType","taxIdStatus","maritalStatus","dependents","femalePtkpRule","startMonth","endMonth","subjectiveStatus"].forEach(id=>$(id).addEventListener("change",updateDynamic));
+    document.querySelectorAll('input[name="method"]').forEach(el=>el.addEventListener("change",updateDynamic));
+    $("yearlyForm").addEventListener("submit",e=>{e.preventDefault();if(!validate())return;display(currentCalculation());$("resultState").scrollIntoView({behavior:"smooth",block:"nearest"})});
+    $("resetBtn").addEventListener("click",reset); $("copyBtn").addEventListener("click",copyResult); $("printBtn").addEventListener("click",()=>window.print());
+    updateDynamic();
+  </script>
+<script>
+(() => {
+  const menuToggle = document.getElementById("menuToggle");
+  const mobileMenu = document.getElementById("mobileMenu");
+  if (menuToggle && mobileMenu) {
+    menuToggle.addEventListener("click", () => {
+      const isOpen = mobileMenu.classList.toggle("active");
+      document.body.classList.toggle("menu-open", isOpen);
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      menuToggle.textContent = isOpen ? "×" : "☰";
+    });
+    mobileMenu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        mobileMenu.classList.remove("active");
+        document.body.classList.remove("menu-open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.textContent = "☰";
+      });
+    });
+  }
+  const currentYear = document.getElementById("currentYear");
+  if (currentYear) currentYear.textContent = new Date().getFullYear();
+})();
+</script></body>
+</html>
