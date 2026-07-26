@@ -192,7 +192,95 @@ main{padding-top:var(--nav-height)}
 @media(max-width:680px){.hero{padding-top:72px;padding-bottom:68px}.app-shell{margin-top:-20px}.card-head,.form-panel,.result-panel{padding:22px}.footer-inner{align-items:flex-start;flex-direction:column}}
 @media(max-width:520px){.brand span:last-child{display:none}.hero h1{font-size:45px}.calculator-card{border-radius:24px}.tax-highlight strong{font-size:34px}}
 @media print{.mobile-menu,.menu-toggle,.footer-disclaimer,.footer-inner{display:none!important}}
-</style></head>
+</style>
+<style>
+  .luxury-goods-link {
+    display: none;
+    align-items: flex-start;
+    gap: 12px;
+    margin-top: 12px;
+    padding: 14px 15px;
+    border: 1px solid #d9e9f8;
+    border-radius: 16px;
+    background: linear-gradient(145deg, #f7fbff, #eef6ff);
+    color: #42566a;
+  }
+
+  .luxury-goods-link.show {
+    display: flex;
+  }
+
+  .luxury-goods-link-icon {
+    width: 34px;
+    height: 34px;
+    display: grid;
+    flex: 0 0 auto;
+    place-items: center;
+    border-radius: 11px;
+    background: #ffffff;
+    color: #0071e3;
+    box-shadow: 0 6px 16px rgba(20, 43, 76, 0.08);
+  }
+
+  .luxury-goods-link-icon svg,
+  .luxury-goods-link a svg {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .luxury-goods-link-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .luxury-goods-link-content {
+    min-width: 0;
+  }
+
+  .luxury-goods-link-content > span {
+    display: block;
+    color: #515154;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .luxury-goods-link a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 7px;
+    color: #0071e3;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .luxury-goods-link a:hover {
+    text-decoration: underline;
+  }
+
+  .luxury-goods-link a svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  @media (max-width: 520px) {
+    .luxury-goods-link {
+      padding: 13px;
+    }
+  }
+
+  @media print {
+    .luxury-goods-link {
+      display: none !important;
+    }
+  }
+</style>
+
+</head>
 <body id="top">
 
 <header class="site-header">
@@ -255,6 +343,29 @@ main{padding-top:var(--nav-height)}
 <option value="specific">PPN Besaran Tertentu</option>
 </select>
 <p class="field-help" id="modeHelp">Umumnya digunakan untuk BKP/JKP nonmewah: PPN = 12% × 11/12 × harga jual/penggantian.</p>
+<div class="luxury-goods-link" id="luxuryGoodsLinkBox">
+  <div class="luxury-goods-link-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24">
+      <path d="M5 3h14v18H5z"></path>
+      <path d="M8 7h8M8 11h8M8 15h4"></path>
+    </svg>
+  </div>
+
+  <div class="luxury-goods-link-content">
+    <span>
+      Daftar BKP Mewah dapat dilihat pada tautan berikut.
+    </span>
+
+    <a href="daftar-bkp-mewah.html">
+      Lihat Daftar BKP Mewah
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M7 17 17 7"></path>
+        <path d="M9 7h8v8"></path>
+      </svg>
+    </a>
+  </div>
+</div>
+
 </div>
 <div class="field hidden" id="specificField">
 <label for="specificType">Nama BKP/JKP atau Transaksi</label>
@@ -385,6 +496,7 @@ main{padding-top:var(--nav-height)}
       'use strict';
 
       const modeEl = document.getElementById('mode');
+      const luxuryGoodsLinkBox = document.getElementById('luxuryGoodsLinkBox');
       const specificField = document.getElementById('specificField');
       const specificEl = document.getElementById('specificType');
       const amountEl = document.getElementById('amount');
@@ -562,6 +674,7 @@ main{padding-top:var(--nav-height)}
         const mode = modeEl.value;
         const cfg = modeConfig[mode];
         specificField.classList.toggle('hidden', mode !== 'specific');
+        luxuryGoodsLinkBox.classList.toggle('show', mode === 'general12');
         const lpgSelected = mode === 'specific' && specificEl.value === 'lpg';
         includedField.classList.toggle('hidden', mode === 'otherDpp' || lpgSelected);
         if (mode === 'otherDpp' || lpgSelected) amountIncludedEl.checked = false;
