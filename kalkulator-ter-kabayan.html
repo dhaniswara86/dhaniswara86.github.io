@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Kalkulator PPh Pasal 21 Tarif Efektif Rata-rata (TER) Bulanan Kabayan berdasarkan PP 58 Tahun 2023 dan PMK 168 Tahun 2023." name="description"/>
+<meta content="#f5f5f7" name="theme-color"/>
+<title>Kalkulator TER PPh Pasal 21 | Kabayan</title>
+<style>
+    :root{
+      --navy-950:#071427;--navy-900:#0b1f3a;--navy-800:#12345a;
+      --blue-700:#175cd3;--blue-600:#2563eb;--blue-500:#3b82f6;
+      --blue-100:#dbeafe;--blue-50:#eff6ff;--cyan-50:#ecfeff;
+      --green-700:#087443;--green-100:#d1fadf;--amber-800:#93370d;
+      --amber-100:#fef0c7;--red-700:#b42318;--red-100:#fee4e2;
+      --slate-950:#0c111d;--slate-900:#101828;--slate-700:#344054;
+      --slate-600:#475467;--slate-500:#667085;--slate-400:#98a2b3;
+      --slate-300:#d0d5dd;--slate-200:#eaecf0;--slate-100:#f2f4f7;
+      --white:#fff;--radius-xl:28px;--radius-lg:20px;--radius-md:14px;
+      --shadow-card:0 24px 64px rgba(16,24,40,.13);--shadow-soft:0 8px 30px rgba(16,24,40,.08)
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;min-height:100vh;color:var(--slate-900);background:radial-gradient(circle at 4% 0%,rgba(59,130,246,.17),transparent 31%),radial-gradient(circle at 96% 8%,rgba(34,211,238,.12),transparent 27%),linear-gradient(180deg,#f7fbff 0%,#fff 43%,#f6f8fb 100%);font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+    button,input,select{font:inherit}button{cursor:pointer}a{color:inherit}
+    .site-header{position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(208,213,221,.75);background:rgba(255,255,255,.87);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+    .nav-wrap{width:min(1180px,calc(100% - 32px));height:68px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .brand{display:inline-flex;align-items:center;gap:11px;text-decoration:none;font-weight:800;letter-spacing:-.02em}.brand-mark{width:38px;height:38px;display:grid;place-items:center;color:#fff;border-radius:13px;background:linear-gradient(145deg,var(--navy-900),var(--blue-600));box-shadow:0 8px 20px rgba(37,99,235,.28);font-size:13px;letter-spacing:.04em}.brand small{display:block;margin-top:1px;color:var(--slate-500);font-size:11px;font-weight:650;letter-spacing:.02em}
+    .desktop-nav{display:flex;align-items:center;gap:4px}.desktop-nav a{padding:9px 12px;color:var(--slate-600);border-radius:10px;text-decoration:none;font-size:14px;font-weight:650}.desktop-nav a:hover,.desktop-nav a.active{color:var(--navy-900);background:var(--blue-50)}
+    .hero{width:min(1120px,calc(100% - 32px));margin:54px auto 28px;text-align:center}.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:7px 11px;color:var(--blue-700);border:1px solid var(--blue-100);border-radius:999px;background:rgba(239,246,255,.92);font-size:12px;font-weight:780;letter-spacing:.035em;text-transform:uppercase}.eyebrow:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--blue-600);box-shadow:0 0 0 4px rgba(37,99,235,.12)}
+    .hero h1{max-width:920px;margin:18px auto 14px;color:var(--navy-950);font-size:clamp(38px,7vw,70px);line-height:.98;letter-spacing:-.057em}.hero h1 span{background:linear-gradient(105deg,var(--blue-700),#08a4c9);-webkit-background-clip:text;background-clip:text;color:transparent}.hero p{max-width:820px;margin:0 auto;color:var(--slate-600);font-size:clamp(16px,2.4vw,19px);line-height:1.65}
+    .privacy-chip{display:inline-flex;align-items:center;gap:8px;margin-top:17px;color:var(--green-700);font-size:13px;font-weight:690}.privacy-chip svg{width:17px;height:17px}
+    .app-shell{width:min(1080px,calc(100% - 32px));margin:36px auto 72px}.calculator-card{overflow:hidden;border:1px solid rgba(208,213,221,.88);border-radius:var(--radius-xl);background:rgba(255,255,255,.96);box-shadow:var(--shadow-card)}
+    .card-head{padding:25px 30px 22px;border-bottom:1px solid var(--slate-200);background:linear-gradient(135deg,rgba(239,246,255,.9),rgba(255,255,255,.92))}.card-head-top{display:flex;align-items:flex-start;justify-content:space-between;gap:18px}.card-head h2{margin:0;color:var(--navy-950);font-size:24px;letter-spacing:-.025em}.card-head p{max-width:740px;margin:7px 0 0;color:var(--slate-600);font-size:14px;line-height:1.6}.status-badge{display:inline-flex;align-items:center;white-space:nowrap;padding:7px 10px;border:1px solid var(--green-100);border-radius:999px;background:#ecfdf3;color:var(--green-700);font-size:12px;font-weight:760}
+    .scope-note{margin:0;padding:13px 30px;border-bottom:1px solid var(--amber-100);background:#fffaeb;color:var(--amber-800);font-size:12px;line-height:1.55}.scope-note strong{font-weight:800}
+    .calc-grid{display:grid;grid-template-columns:minmax(0,1.13fr) minmax(350px,.87fr);min-height:740px}.form-panel{padding:30px;border-right:1px solid var(--slate-200)}.result-panel{padding:30px;background:linear-gradient(180deg,#fbfdff,#f8fafc)}
+    .section-title{display:flex;align-items:center;gap:10px;margin:0 0 18px;color:var(--navy-950);font-size:16px;letter-spacing:-.015em}.section-title span{width:28px;height:28px;display:grid;place-items:center;border-radius:9px;background:var(--blue-50);color:var(--blue-700);font-size:12px;font-weight:850}
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{margin-bottom:20px}.field label{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:8px;color:var(--slate-700);font-size:14px;font-weight:720}.field label small{color:var(--slate-500);font-size:11px;font-weight:600}
+    .control,.money-wrap input{width:100%;min-height:52px;border:1px solid var(--slate-300);border-radius:13px;background:#fff;color:var(--slate-900);outline:none;transition:.18s ease}.control{padding:0 42px 0 14px;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 24 24'%3E%3Cpath stroke='%23667085' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;background-size:18px}.control:focus,.money-wrap input:focus{border-color:var(--blue-500);box-shadow:0 0 0 4px rgba(59,130,246,.12)}
+    .money-wrap{position:relative}.money-prefix{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--slate-500);font-weight:760}.money-wrap input{padding:0 15px 0 47px;font-size:17px;font-weight:740;letter-spacing:.005em}.money-wrap input[readonly]{background:var(--slate-100);color:var(--slate-700)}
+    .field-help{margin:7px 0 0;color:var(--slate-500);font-size:11px;line-height:1.5}.method-card{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}.method-option{position:relative}.method-option input{position:absolute;opacity:0;pointer-events:none}.method-option label{height:100%;display:block;padding:14px;border:1px solid var(--slate-300);border-radius:14px;background:#fff;cursor:pointer;transition:.18s}.method-option label b{display:block;color:var(--slate-800);font-size:13px}.method-option label span{display:block;margin-top:4px;color:var(--slate-500);font-size:11px;line-height:1.45}.method-option input:checked+label{border-color:var(--blue-500);background:var(--blue-50);box-shadow:0 0 0 3px rgba(59,130,246,.1)}
+    .income-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}.gross-total{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:2px;padding:14px 15px;border:1px solid var(--blue-100);border-radius:14px;background:var(--blue-50)}.gross-total span{color:var(--slate-600);font-size:12px;font-weight:700}.gross-total strong{color:var(--blue-700);font-size:17px;letter-spacing:-.02em}
+    .form-actions{display:grid;grid-template-columns:1fr auto;gap:10px;margin-top:24px}.btn{min-height:50px;border:0;border-radius:13px;padding:0 18px;font-weight:760;transition:.18s ease}.btn-primary{color:#fff;background:linear-gradient(135deg,var(--blue-700),var(--blue-600));box-shadow:0 10px 24px rgba(37,99,235,.23)}.btn-primary:hover{transform:translateY(-1px);box-shadow:0 13px 28px rgba(37,99,235,.3)}.btn-secondary{border:1px solid var(--slate-300);background:#fff;color:var(--slate-700)}
+    .error-box{display:none;margin-top:13px;padding:12px 14px;border:1px solid var(--red-100);border-radius:12px;background:#fff4f2;color:var(--red-700);font-size:12px;line-height:1.5}.error-box.show{display:block}
+    .result-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}.result-title{margin:0;color:var(--navy-950);font-size:18px;letter-spacing:-.02em}.result-state{display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border-radius:999px;background:var(--slate-100);color:var(--slate-500);font-size:11px;font-weight:750}.result-state.ready{background:var(--green-100);color:var(--green-700)}
+    .tax-highlight{padding:22px;border:1px solid rgba(23,92,211,.18);border-radius:20px;background:linear-gradient(135deg,var(--navy-900),var(--blue-700));color:#fff;box-shadow:0 18px 38px rgba(23,92,211,.18)}.tax-highlight span{display:block;color:rgba(255,255,255,.75);font-size:12px;font-weight:720;text-transform:uppercase;letter-spacing:.055em}.tax-highlight strong{display:block;margin-top:7px;font-size:clamp(30px,5vw,43px);line-height:1.08;letter-spacing:-.04em;word-break:break-word}.tax-highlight small{display:block;margin-top:8px;color:rgba(255,255,255,.78);font-size:12px;line-height:1.5}
+    .metric-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}.metric{padding:13px;border:1px solid var(--slate-200);border-radius:14px;background:#fff}.metric span{display:block;color:var(--slate-500);font-size:11px}.metric strong{display:block;margin-top:5px;color:var(--navy-950);font-size:17px;letter-spacing:-.02em}.metric small{display:block;margin-top:4px;color:var(--slate-500);font-size:10px;line-height:1.35}
+    .result-list{margin:15px 0 0;border:1px solid var(--slate-200);border-radius:17px;background:#fff;overflow:hidden}.result-row{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;padding:13px 15px;border-bottom:1px solid var(--slate-200)}.result-row:last-child{border-bottom:0}.result-row span{color:var(--slate-500);font-size:12px;line-height:1.45}.result-row strong{max-width:62%;color:var(--slate-900);font-size:13px;text-align:right;line-height:1.45;word-break:break-word}
+    .formula-box{margin-top:15px;padding:15px;border:1px dashed var(--slate-300);border-radius:15px;background:rgba(255,255,255,.72)}.formula-box b{display:block;margin-bottom:7px;color:var(--slate-700);font-size:12px}.formula-box code{display:block;color:var(--blue-700);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;line-height:1.6;white-space:normal;word-break:break-word}
+    .result-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:15px}.mini-btn{min-height:42px;border:1px solid var(--slate-300);border-radius:11px;background:#fff;color:var(--slate-700);font-size:12px;font-weight:720}.mini-btn:hover{border-color:var(--blue-100);background:var(--blue-50);color:var(--blue-700)}
+    .below-card{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px}.content-card{border:1px solid var(--slate-200);border-radius:20px;background:rgba(255,255,255,.9);box-shadow:var(--shadow-soft);overflow:hidden}.content-card h3{margin:0;padding:20px 22px 15px;color:var(--navy-950);font-size:18px;letter-spacing:-.02em}.guide-list{margin:0;padding:0 22px 21px;list-style:none}.guide-list li{position:relative;padding:0 0 14px 27px;color:var(--slate-600);font-size:13px;line-height:1.55}.guide-list li:last-child{padding-bottom:0}.guide-list li:before{position:absolute;left:0;top:1px;width:19px;height:19px;display:grid;place-items:center;border-radius:50%;background:var(--blue-50);color:var(--blue-700);font-size:10px;font-weight:800}.guide-list li:nth-child(1):before{content:"1"}.guide-list li:nth-child(2):before{content:"2"}.guide-list li:nth-child(3):before{content:"3"}.guide-list li:nth-child(4):before{content:"4"}
+    .source-list{padding:0 22px 21px}.source-item{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--slate-200)}.source-item:last-child{border-bottom:0}.source-item b{display:block;color:var(--slate-700);font-size:13px}.source-item span{display:block;margin-top:3px;color:var(--slate-500);font-size:11px;line-height:1.4}.source-item a{flex:0 0 auto;color:var(--blue-700);font-size:11px;font-weight:730;text-decoration:none}
+    .disclaimer{margin-top:18px;padding:16px 18px;border:1px solid var(--amber-100);border-radius:15px;background:#fffaeb;color:#7a2e0e;font-size:12px;line-height:1.6}.site-footer{padding:27px 16px 38px;color:var(--slate-500);text-align:center;font-size:12px;line-height:1.6}.toast{position:fixed;left:50%;bottom:24px;z-index:100;transform:translate(-50%,18px);opacity:0;pointer-events:none;padding:11px 15px;border-radius:12px;background:var(--slate-950);color:#fff;box-shadow:0 12px 30px rgba(0,0,0,.22);font-size:12px;font-weight:680;transition:.22s ease}.toast.show{transform:translate(-50%,0);opacity:1}
+    @media(max-width:880px){.desktop-nav{display:none}.hero{margin-top:38px}.calc-grid{grid-template-columns:1fr}.form-panel{border-right:0;border-bottom:1px solid var(--slate-200)}.below-card{grid-template-columns:1fr}.card-head-top{display:block}.status-badge{margin-top:12px}.result-panel,.form-panel{padding:24px}.card-head{padding:23px 24px}.scope-note{padding-left:24px;padding-right:24px}}
+    @media(max-width:620px){.two-col,.income-grid,.method-card,.metric-grid{grid-template-columns:1fr}.nav-wrap,.hero,.app-shell{width:min(100% - 22px,1180px)}.hero h1{font-size:42px}.calculator-card{border-radius:22px}.result-panel,.form-panel{padding:20px}.card-head{padding:21px 20px}.scope-note{padding-left:20px;padding-right:20px}.form-actions,.result-actions{grid-template-columns:1fr}.result-row{display:block}.result-row strong{display:block;max-width:none;margin-top:5px;text-align:left}}
+    @media print{.site-header,.hero,.form-panel,.below-card,.site-footer,.result-actions,.toast,.scope-note{display:none!important}.app-shell{width:100%;margin:0}.calculator-card{box-shadow:none;border:0}.calc-grid{display:block}.result-panel{background:#fff;padding:0}.tax-highlight{color:#000;background:#fff;border:2px solid #000;box-shadow:none}.tax-highlight span,.tax-highlight small{color:#333}.result-state{display:none}}
+  </style>
+<style>
+/* =========================================================
+   Kabayan visual refresh
+   ========================================================= */
+
+:root {
+  --black: #000000;
+  --near-black: #1d1d1f;
+  --white: #ffffff;
+  --off-white: #f5f5f7;
+  --soft-gray: #e8e8ed;
+  --medium-gray: #86868b;
+  --blue: #0071e3;
+  --blue-hover: #0077ed;
+  --navy: #071a38;
+  --nav-height: 48px;
+  --max-width: 1180px;
+}
+
+html {
+  scroll-padding-top: 76px;
+}
+
+body {
+  background: var(--white);
+  color: var(--near-black);
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Arial,
+    Helvetica,
+    sans-serif;
+  letter-spacing: -0.015em;
+  -webkit-font-smoothing: antialiased;
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+
+.site-header {
+  position: fixed;
+  z-index: 1000;
+  inset: 0 0 auto;
+  min-height: var(--nav-height);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  background: rgba(250, 250, 252, 0.82);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+}
+
+.nav-wrap {
+  width: min(var(--max-width), calc(100% - 36px));
+  height: var(--nav-height);
+  margin: 0 auto;
+}
+
+.brand {
+  gap: 9px;
+  color: var(--near-black);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+.brand-mark {
+  width: 25px;
+  height: 25px;
+  border-radius: 8px;
+  background: var(--near-black);
+  box-shadow: none;
+  font-size: 9px;
+  letter-spacing: -0.04em;
+}
+
+.desktop-nav {
+  gap: 27px;
+}
+
+.desktop-nav a {
+  padding: 0;
+  border-radius: 0;
+  color: #424245;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.desktop-nav a:hover,
+.desktop-nav a.active,
+.desktop-nav a[aria-current="page"] {
+  color: var(--black);
+  background: transparent;
+}
+
+.menu-toggle {
+  width: 34px;
+  height: 34px;
+  display: none;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--near-black);
+  font-size: 18px;
+}
+
+.menu-toggle:hover {
+  background: rgba(0, 0, 0, 0.055);
+}
+
+.mobile-menu {
+  position: fixed;
+  z-index: 999;
+  inset: var(--nav-height) 0 0;
+  display: none;
+  padding: 36px 28px;
+  background: rgba(250, 250, 252, 0.98);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+.mobile-menu.active {
+  display: block;
+}
+
+.mobile-menu a {
+  display: block;
+  padding: 11px 0;
+  color: var(--near-black);
+  font-size: 28px;
+  font-weight: 650;
+  letter-spacing: -0.04em;
+  text-decoration: none;
+}
+
+main {
+  padding-top: var(--nav-height);
+}
+
+.hero {
+  width: 100%;
+  margin: 0;
+  padding: 98px 20px 88px;
+  background:
+    radial-gradient(
+      circle at 50% 92%,
+      rgba(0, 113, 227, 0.14),
+      transparent 35%
+    ),
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #ffffff 64%,
+      #f3f7ff 100%
+    );
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 12px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--off-white);
+  color: #515154;
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.eyebrow::before {
+  width: 7px;
+  height: 7px;
+  background: var(--blue);
+  box-shadow: none;
+}
+
+.hero h1 {
+  max-width: 1020px;
+  margin: 20px auto 18px;
+  color: var(--near-black);
+  font-size: clamp(48px, 7vw, 82px);
+  font-weight: 700;
+  letter-spacing: -0.06em;
+  line-height: 0.98;
+}
+
+.hero h1 span {
+  background:
+    linear-gradient(
+      90deg,
+      #093b91,
+      #0071e3 46%,
+      #25a6d9 72%,
+      #e6aa00
+    );
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.hero p {
+  max-width: 840px;
+  color: #515154;
+  font-size: clamp(18px, 2.3vw, 24px);
+  line-height: 1.42;
+}
+
+.privacy-card {
+  margin-top: 23px;
+  padding: 9px 13px;
+  border: 1px solid #d9e9f8;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.84);
+  color: #286d55;
+  box-shadow: 0 8px 24px rgba(20, 43, 76, 0.05);
+}
+
+.app-shell {
+  position: relative;
+  z-index: 2;
+  width: min(1100px, calc(100% - 32px));
+  margin: -30px auto 100px;
+}
+
+.calculator-card {
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow:
+    0 30px 80px rgba(20, 43, 76, 0.13),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.card-head {
+  padding: 29px 32px 24px;
+  border-bottom: 1px solid var(--soft-gray);
+  background: linear-gradient(145deg, #f8fbff, #ffffff);
+}
+
+.card-head h2 {
+  color: var(--near-black);
+  font-size: 27px;
+  letter-spacing: -0.035em;
+}
+
+.card-head p {
+  color: #6e6e73;
+}
+
+.status-badge {
+  border-color: #d7eadc;
+  background: #eff9f1;
+  color: #248a3d;
+}
+
+.scope-note {
+  padding: 14px 32px;
+  border-color: #f0dfbd;
+  background: #fff7e8;
+  color: #6d4b14;
+}
+
+.calc-grid {
+  grid-template-columns:
+    minmax(0, 1.1fr)
+    minmax(355px, 0.9fr);
+}
+
+.form-panel {
+  padding: 32px;
+  border-right: 1px solid var(--soft-gray);
+}
+
+.result-panel {
+  padding: 32px;
+  background: linear-gradient(180deg, #fbfdff, #f5f8fc);
+}
+
+.section-title {
+  color: var(--near-black);
+  font-size: 17px;
+}
+
+.section-title span {
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  background: #eef6ff;
+  color: var(--blue);
+}
+
+.field label {
+  color: #424245;
+  font-weight: 650;
+}
+
+.control,
+.money-wrap input {
+  min-height: 54px;
+  border: 1px solid #d2d2d7;
+  border-radius: 14px;
+  color: var(--near-black);
+}
+
+.control:focus,
+.money-wrap input:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.10);
+}
+
+.method-option label {
+  border-color: var(--soft-gray);
+  border-radius: 17px;
+  background: #fbfbfd;
+}
+
+.method-option input:checked + label {
+  border-color: var(--blue);
+  background: #eef6ff;
+  box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.08);
+}
+
+.gross-total {
+  border-color: #d9e9f8;
+  border-radius: 17px;
+  background: #eef6ff;
+}
+
+.gross-total strong {
+  color: var(--blue);
+}
+
+.btn {
+  min-height: 46px;
+  border-radius: 999px;
+  padding: 0 20px;
+  font-weight: 600;
+}
+
+.btn-primary {
+  background: var(--blue);
+  box-shadow: 0 10px 24px rgba(0, 113, 227, 0.20);
+}
+
+.btn-primary:hover {
+  background: var(--blue-hover);
+}
+
+.btn-secondary {
+  border-color: #d2d2d7;
+  color: #515154;
+}
+
+.error-box {
+  border-radius: 16px;
+}
+
+.result-title {
+  color: var(--near-black);
+}
+
+.tax-highlight {
+  border: 0;
+  border-radius: 24px;
+  background:
+    radial-gradient(
+      circle at 90% 10%,
+      rgba(37, 166, 217, 0.22),
+      transparent 30%
+    ),
+    linear-gradient(
+      145deg,
+      #071a38,
+      #0b315e
+    );
+  box-shadow: 0 22px 48px rgba(7, 26, 56, 0.20);
+}
+
+.metric {
+  border-color: var(--soft-gray);
+  border-radius: 17px;
+}
+
+.metric strong {
+  color: var(--near-black);
+}
+
+.result-list {
+  border-color: var(--soft-gray);
+  border-radius: 19px;
+}
+
+.result-row {
+  border-color: var(--soft-gray);
+}
+
+.formula-box {
+  border-color: #c9d8e7;
+  border-radius: 17px;
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.formula-box code {
+  color: #0b65b1;
+}
+
+.mini-btn {
+  border-radius: 999px;
+}
+
+.below-card {
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.content-card {
+  border-color: rgba(0, 0, 0, 0.07);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 18px 48px rgba(20, 43, 76, 0.07);
+}
+
+.content-card h3 {
+  color: var(--near-black);
+  font-size: 20px;
+}
+
+.guide-list li::before {
+  background: #eef6ff;
+  color: var(--blue);
+}
+
+.source-item a {
+  color: var(--blue);
+}
+
+.disclaimer {
+  margin-top: 20px;
+  border-color: #f0dfbd;
+  border-radius: 18px;
+  background: #fff7e8;
+  color: #6d4b14;
+}
+
+.site-footer {
+  padding: 0;
+  background: var(--off-white);
+  color: #6e6e73;
+  text-align: left;
+}
+
+.footer-disclaimer {
+  width: min(980px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 23px 0;
+  border-bottom: 1px solid #d2d2d7;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.footer-disclaimer strong {
+  color: #424245;
+}
+
+.footer-inner {
+  width: min(980px, calc(100% - 40px));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin: 0 auto;
+  padding: 21px 0 27px;
+  font-size: 12px;
+}
+
+.footer-inner p {
+  margin: 0;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.footer-links a {
+  color: #424245;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+.toast {
+  border-radius: 999px;
+  background: var(--near-black);
+}
+
+@media (max-width: 900px) {
+  .desktop-nav {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: grid;
+  }
+
+  .calc-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-panel {
+    border-right: 0;
+    border-bottom: 1px solid var(--soft-gray);
+  }
+}
+
+@media (max-width: 680px) {
+  .hero {
+    padding-top: 72px;
+    padding-bottom: 70px;
+  }
+
+  .app-shell {
+    margin-top: -20px;
+  }
+
+  .card-head,
+  .form-panel,
+  .result-panel {
+    padding: 22px;
+  }
+
+  .scope-note {
+    padding-right: 22px;
+    padding-left: 22px;
+  }
+
+  .footer-inner {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 520px) {
+  .brand span:last-child {
+    display: none;
+  }
+
+  .hero h1 {
+    font-size: 44px;
+  }
+
+  .calculator-card {
+    border-radius: 24px;
+  }
+
+  .tax-highlight strong {
+    font-size: 34px;
+  }
+}
+
+@media print {
+  .mobile-menu,
+  .menu-toggle,
+  .footer-disclaimer,
+  .footer-inner {
+    display: none !important;
+  }
+}
+</style></head>
+<body id="top">
+
+<header class="site-header">
+<div class="nav-wrap">
+<a aria-label="Beranda Kabayan" class="brand" href="index.html">
+<span class="brand-mark">ASD</span>
+<span>dhaniswara86</span>
+</a>
+<nav aria-label="Navigasi utama" class="desktop-nav">
+<a href="index.html">Beranda</a>
+<a href="buku.html">Buku</a>
+<a href="formulir.html">Formulir</a>
+<a aria-current="page" href="aplikasi.html">Aplikasi</a>
+<a href="presentasi.html">Salindia</a>
+<a href="artikel.html">Artikel</a>
+<a href="index.html#tentang">Tentang</a>
+</nav>
+<button aria-expanded="false" aria-label="Buka menu" class="menu-toggle" id="menuToggle" type="button">
+      ☰
+    </button>
+</div>
+</header>
+<nav aria-label="Navigasi seluler" class="mobile-menu" id="mobileMenu">
+<a href="index.html">Beranda</a>
+<a href="buku.html">Buku Digital</a>
+<a href="formulir.html">Formulir</a>
+<a href="aplikasi.html">Aplikasi</a>
+<a href="presentasi.html">Katalog Salindia</a>
+<a href="artikel.html">Artikel</a>
+<a href="index.html#tentang">Tentang</a>
+</nav>
+
+<main>
+<section class="hero">
+<span class="eyebrow">Kabayan · Kalkulator Perpajakan</span>
+<h1>Hitung PPh 21 Bulanan dengan <span>Tarif Efektif Rata-rata.</span></h1>
+<p>Pilih status PTKP dan metode pemotongan, masukkan seluruh komponen penghasilan bruto bulan berjalan, lalu kalkulator menentukan kategori TER, tarif, dan PPh Pasal 21.</p>
+<div aria-label="Privasi" class="privacy-chip privacy-card">
+<svg aria-hidden="true" fill="none" viewbox="0 0 24 24"><path d="M12 3 5 6v5c0 4.6 2.9 8.9 7 10 4.1-1.1 7-5.4 7-10V6l-7-3Z" stroke="currentColor" stroke-width="1.8"></path><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg>
+        Seluruh perhitungan dilakukan di perangkat Anda.
+      </div>
+</section>
+<section class="app-shell" id="kalkulator">
+<article class="calculator-card">
+<header class="card-head">
+<div class="card-head-top">
+<div>
+<h2>Kalkulator TER Bulanan PPh Pasal 21</h2>
+<p>Versi mandiri Kabayan berdasarkan tabel Tarif Efektif Bulanan kategori A, B, dan C serta mekanisme penghitungan penghasilan bruto bulanan.</p>
+</div>
+<span class="status-badge">PP 58/2023 · PMK 168/2023</span>
+</div>
+</header>
+<p class="scope-note"><strong>Ruang lingkup:</strong> masa pajak selain Masa Pajak Terakhir. Untuk Desember, bulan berhenti bekerja, atau bulan terakhir menerima pensiun berkala, lakukan rekonsiliasi dengan tarif Pasal 17.</p>
+<div class="calc-grid">
+<form class="form-panel" id="terForm" novalidate="">
+<h3 class="section-title"><span>1</span> Data penerima penghasilan</h3>
+<div class="two-col">
+<div class="field">
+<label for="employeeType">Status Penerima</label>
+<select class="control" id="employeeType">
+<option value="employee">Pegawai Tetap</option>
+<option value="pensioner">Pensiunan — pensiun berkala</option>
+</select>
+</div>
+<div class="field">
+<label for="maritalStatus">Status Perkawinan</label>
+<select class="control" id="maritalStatus">
+<option value="TK">Tidak Kawin</option>
+<option value="K">Kawin</option>
+</select>
+</div>
+</div>
+<div class="two-col">
+<div class="field">
+<label for="dependents">Jumlah Tanggungan</label>
+<select class="control" id="dependents">
+<option value="0">0 orang</option><option value="1">1 orang</option><option value="2">2 orang</option><option value="3">3 orang</option>
+</select>
+<p class="field-help">Maksimal tiga orang sesuai ketentuan PTKP.</p>
+</div>
+<div class="field">
+<label for="ptkpDisplay">Status PTKP</label>
+<input class="control" id="ptkpDisplay" readonly="" style="padding-right:14px;background-image:none" value="TK/0 — Kategori A"/>
+<p class="field-help">Kategori TER ditentukan otomatis.</p>
+</div>
+</div>
+<h3 class="section-title"><span>2</span> Metode pemotongan</h3>
+<div aria-label="Metode pemotongan PPh Pasal 21" class="method-card" role="radiogroup">
+<div class="method-option">
+<input checked="" id="methodGross" name="method" type="radio" value="gross"/>
+<label for="methodGross"><b>Gross</b><span>PPh Pasal 21 dipotong dari penghasilan. Tunjangan pajak dapat diisi manual.</span></label>
+</div>
+<div class="method-option">
+<input id="methodGrossUp" name="method" type="radio" value="grossup"/>
+<label for="methodGrossUp"><b>Gross-up</b><span>Kalkulator mencari tunjangan PPh agar nilainya sama dengan PPh terutang.</span></label>
+</div>
+</div>
+<h3 class="section-title"><span>3</span> Komponen penghasilan bruto</h3>
+<div class="income-grid">
+<div class="field">
+<label for="salary"><span id="salaryLabel">Gaji</span><small>Rupiah</small></label>
+<div class="money-wrap"><span class="money-prefix">Rp</span><input autocomplete="off" class="money-input" id="salary" inputmode="numeric" placeholder="0"/></div>
+</div>
+<div class="field">
+<label for="taxAllowance">Tunjangan PPh<small>Rupiah</small></label>
+<div class="money-wrap"><span class="money-prefix">Rp</span><input autocomplete="off" class="money-input" id="taxAllowance" inputmode="numeric" placeholder="0"/></div>
+<p class="field-help" id="taxAllowanceHelp">Isi bila pemberi kerja memberi tunjangan pajak dalam jumlah tertentu.</p>
+</div>
+<div class="field">
+<label for="otherAllowance">Tunjangan Lain, Uang Lembur, dan Sejenisnya<small>Rupiah</small></label>
+<div class="money-wrap"><span class="money-prefix">Rp</span><input autocomplete="off" class="money-input" id="otherAllowance" inputmode="numeric" placeholder="0"/></div>
+</div>
+<div class="field">
+<label for="honorarium">Honorarium dan Imbalan Lain Sejenis<small>Rupiah</small></label>
+<div class="money-wrap"><span class="money-prefix">Rp</span><input autocomplete="off" class="money-input" id="honorarium" inputmode="numeric" placeholder="0"/></div>
+</div>
+<div class="field">
+<label for="insurance">Premi Asuransi Dibayar Pemberi Kerja<small>Rupiah</small></label>
+<div class="money-wrap"><span class="money-prefix">Rp</span><input autocomplete="off" class="money-input" id="insurance" inputmode="numeric" placeholder="0"/></div>
+</div>
+<div class="field">
+<label for="benefit">Natura dan/atau Kenikmatan yang Menjadi Objek<small>Rupiah</small></label>
+<div class="money-wrap"><span class="money-prefix">Rp</span><input autocomplete="off" class="money-input" id="benefit" inputmode="numeric" placeholder="0"/></div>
+</div>
+<div class="field" style="grid-column:1/-1">
+<label for="irregular">Tantiem, Bonus, Gratifikasi, Jasa Produksi, dan THR<small>Rupiah</small></label>
+<div class="money-wrap"><span class="money-prefix">Rp</span><input autocomplete="off" class="money-input" id="irregular" inputmode="numeric" placeholder="0"/></div>
+</div>
+</div>
+<div class="gross-total"><span>Penghasilan bruto sementara</span><strong id="liveGross">Rp0</strong></div>
+<div class="form-actions">
+<button class="btn btn-primary" type="submit">Hitung PPh Pasal 21</button>
+<button class="btn btn-secondary" id="resetBtn" type="button">Reset</button>
+</div>
+<div class="error-box" id="errorBox" role="alert"></div>
+</form>
+<aside aria-live="polite" class="result-panel">
+<div class="result-top"><h3 class="result-title">Hasil Penghitungan</h3><span class="result-state" id="resultState">Belum dihitung</span></div>
+<div class="tax-highlight">
+<span>PPh Pasal 21 terutang bulan ini</span>
+<strong id="taxResult">Rp0</strong>
+<small id="taxCaption">Masukkan data penghasilan dan tekan tombol hitung.</small>
+</div>
+<div class="metric-grid">
+<div class="metric"><span>Kategori TER</span><strong id="categoryResult">—</strong><small id="ptkpResult">Status PTKP belum dipilih</small></div>
+<div class="metric"><span>Tarif Efektif Bulanan</span><strong id="rateResult">0%</strong><small id="rangeResult">Lapisan bruto belum ditentukan</small></div>
+</div>
+<div class="result-list">
+<div class="result-row"><span>Metode</span><strong id="methodResult">Gross</strong></div>
+<div class="result-row"><span>Penghasilan selain tunjangan PPh</span><strong id="baseIncomeResult">Rp0</strong></div>
+<div class="result-row"><span>Tunjangan PPh</span><strong id="allowanceResult">Rp0</strong></div>
+<div class="result-row"><span>Penghasilan bruto bulan ini</span><strong id="grossResult">Rp0</strong></div>
+<div class="result-row"><span>Penghasilan setelah PPh 21</span><strong id="netResult">Rp0</strong></div>
+</div>
+<div class="formula-box"><b>Rumus yang digunakan</b><code id="formulaResult">PPh Pasal 21 = Tarif Efektif Bulanan × Penghasilan Bruto Bulanan</code></div>
+<div class="result-actions"><button class="mini-btn" id="copyBtn" type="button">Salin hasil</button><button class="mini-btn" id="printBtn" type="button">Cetak / Simpan PDF</button></div>
+</aside>
+</div>
+</article>
+<div class="below-card">
+<section class="content-card">
+<h3>Cara menggunakan</h3>
+<ol class="guide-list">
+<li>Pilih jenis penerima, status perkawinan, dan jumlah tanggungan pada awal tahun pajak.</li>
+<li>Pilih metode gross atau gross-up. Pada gross-up, tunjangan PPh dihitung otomatis.</li>
+<li>Masukkan seluruh penghasilan bruto yang diterima dalam satu masa pajak, termasuk bonus atau THR.</li>
+<li>Periksa kategori TER, lapisan bruto, tarif, serta PPh Pasal 21 yang dihasilkan.</li>
+</ol>
+</section>
+<section class="content-card">
+<h3>Dasar penghitungan</h3>
+<div class="source-list">
+<div class="source-item"><div><b>PP Nomor 58 Tahun 2023</b><span>Tabel TER bulanan kategori A, B, dan C.</span></div><a href="https://peraturan.go.id/files/pp-no-58-tahun-2023.pdf" rel="noopener" target="_blank">Buka</a></div>
+<div class="source-item"><div><b>PMK Nomor 168 Tahun 2023</b><span>Pelaksanaan pemotongan PPh Pasal 21 mulai 2024.</span></div><a href="https://jdih.kemenkeu.go.id/dok/pmk-168-tahun-2023" rel="noopener" target="_blank">Buka</a></div>
+<div class="source-item"><div><b>Pasal 17 UU Pajak Penghasilan</b><span>Digunakan pada Masa Pajak Terakhir, bukan pada kalkulator ini.</span></div><a href="https://jdih.kemenkeu.go.id/api/download/a9faab97-aca7-4f87-9fdc-faa8123d1454/7TAHUN2021UU.pdf" rel="noopener" target="_blank">Buka</a></div>
+</div>
+</section>
+</div>
+<div class="disclaimer"><strong>Catatan penting:</strong> kalkulator ini merupakan alat bantu edukasi. Kalkulator tidak menghitung Masa Pajak Terakhir, PPh Pasal 26, TER harian, penghasilan bukan pegawai, fasilitas PPh Pasal 21 ditanggung pemerintah, atau kondisi khusus lain. Pastikan komponen natura/kenikmatan yang dimasukkan memang merupakan objek pajak.</div>
+</section>
+</main>
+
+<footer class="site-footer">
+<div class="footer-disclaimer">
+<strong>Disclaimer:</strong>
+    Kalkulator ini merupakan alat bantu edukasi. Hasil perlu disesuaikan
+    dengan kondisi penerima penghasilan, masa pajak, dokumen, dan
+    ketentuan perpajakan yang berlaku. Kabayan bukan situs resmi
+    Direktorat Jenderal Pajak.
+  </div>
+<div class="footer-inner">
+<p>
+      © <span id="currentYear"></span>
+      Angga Sukma Dhaniswara.
+    </p>
+<div class="footer-links">
+<a href="index.html">Beranda</a>
+<a href="aplikasi.html">Aplikasi</a>
+<a href="artikel.html">Artikel</a>
+<a href="#top">Kembali ke atas</a>
+</div>
+</div>
+</footer>
+
+<div class="toast" id="toast" role="status"></div>
+<script>
+    const TER_TABLES = {
+      A: [
+        [5400000,0],[5650000,0.25],[5950000,0.5],[6300000,0.75],[6750000,1],[7500000,1.25],[8550000,1.5],[9650000,1.75],
+        [10050000,2],[10350000,2.25],[10700000,2.5],[11050000,3],[11600000,3.5],[12500000,4],[13750000,5],[15100000,6],
+        [16950000,7],[19750000,8],[24150000,9],[26450000,10],[28000000,11],[30050000,12],[32400000,13],[35400000,14],
+        [39100000,15],[43850000,16],[47800000,17],[51400000,18],[56300000,19],[62200000,20],[68600000,21],[77500000,22],
+        [89000000,23],[103000000,24],[125000000,25],[157000000,26],[206000000,27],[337000000,28],[454000000,29],[550000000,30],
+        [695000000,31],[910000000,32],[1400000000,33],[Infinity,34]
+      ],
+      B: [
+        [6200000,0],[6500000,0.25],[6850000,0.5],[7300000,0.75],[9200000,1],[10750000,1.5],[11250000,2],[11600000,2.5],
+        [12600000,3],[13600000,4],[14950000,5],[16400000,6],[18450000,7],[21850000,8],[26000000,9],[27700000,10],
+        [29350000,11],[31450000,12],[33950000,13],[37100000,14],[41100000,15],[45800000,16],[49500000,17],[53800000,18],
+        [58500000,19],[64000000,20],[71000000,21],[80000000,22],[93000000,23],[109000000,24],[129000000,25],[163000000,26],
+        [211000000,27],[374000000,28],[459000000,29],[555000000,30],[704000000,31],[957000000,32],[1405000000,33],[Infinity,34]
+      ],
+      C: [
+        [6600000,0],[6950000,0.25],[7350000,0.5],[7800000,0.75],[8850000,1],[9800000,1.25],[10950000,1.5],[11200000,1.75],
+        [12050000,2],[12950000,3],[14150000,4],[15550000,5],[17050000,6],[19500000,7],[22700000,8],[26600000,9],
+        [28100000,10],[30100000,11],[32600000,12],[35400000,13],[38900000,14],[43000000,15],[47400000,16],[51200000,17],
+        [55800000,18],[60400000,19],[66700000,20],[74500000,21],[83200000,22],[95600000,23],[110000000,24],[134000000,25],
+        [169000000,26],[221000000,27],[390000000,28],[463000000,29],[561000000,30],[709000000,31],[965000000,32],[1419000000,33],[Infinity,34]
+      ]
+    };
+
+    const ids = ["salary","taxAllowance","otherAllowance","honorarium","insurance","benefit","irregular"];
+    const el = Object.fromEntries(["employeeType","maritalStatus","dependents","ptkpDisplay","salaryLabel","taxAllowance","taxAllowanceHelp","liveGross","terForm","resetBtn","errorBox","resultState","taxResult","taxCaption","categoryResult","ptkpResult","rateResult","rangeResult","methodResult","baseIncomeResult","allowanceResult","grossResult","netResult","formulaResult","copyBtn","printBtn","toast"].map(id=>[id,document.getElementById(id)]));
+
+    function parseMoney(value){return Number(String(value||"").replace(/[^0-9]/g,""))||0}
+    function formatMoney(value){return new Intl.NumberFormat("id-ID",{style:"currency",currency:"IDR",maximumFractionDigits:0}).format(Math.max(0,Math.floor(value||0)))}
+    function formatInput(input){const n=parseMoney(input.value);input.value=n?new Intl.NumberFormat("id-ID").format(n):""}
+    function formatRate(rate){return Number.isInteger(rate)?rate+"%":String(rate).replace(".",",")+"%"}
+
+    function getPTKP(){
+      const marital=el.maritalStatus.value;
+      let dep=Number(el.dependents.value);
+      if(marital==="TK" && dep>3) dep=3;
+      const status=`${marital}/${dep}`;
+      let category="A";
+      if(status==="TK/2"||status==="TK/3"||status==="K/1"||status==="K/2") category="B";
+      if(status==="K/3") category="C";
+      return {status,category};
+    }
+
+    function getBracket(category,gross){
+      const table=TER_TABLES[category];
+      let lower=0;
+      for(const [upper,rate] of table){
+        if(gross<=upper){return {lower,upper,rate}}
+        lower=upper;
+      }
+      return {lower:table.at(-2)[0],upper:Infinity,rate:34};
+    }
+
+    function rangeText(bracket){
+      if(bracket.lower===0) return `Sampai dengan ${formatMoney(bracket.upper)}`;
+      if(!Number.isFinite(bracket.upper)) return `Di atas ${formatMoney(bracket.lower)}`;
+      return `Di atas ${formatMoney(bracket.lower)} s.d. ${formatMoney(bracket.upper)}`;
+    }
+
+    function method(){return document.querySelector('input[name="method"]:checked').value}
+    function baseIncome(){return ids.filter(id=>id!=="taxAllowance").reduce((sum,id)=>sum+parseMoney(document.getElementById(id).value),0)}
+
+    function grossUp(base,category){
+      let allowance=0;
+      for(let i=0;i<500;i++){
+        const gross=base+allowance;
+        const rate=getBracket(category,gross).rate;
+        const next=Math.floor(gross*rate/100);
+        if(next===allowance) break;
+        allowance=next;
+      }
+      const gross=base+allowance;
+      const bracket=getBracket(category,gross);
+      const tax=Math.floor(gross*bracket.rate/100);
+      if(tax!==allowance){allowance=tax}
+      return {allowance,gross:base+allowance,bracket:getBracket(category,base+allowance),tax:allowance};
+    }
+
+    function syncPTKP(){
+      const p=getPTKP();el.ptkpDisplay.value=`${p.status} — Kategori ${p.category}`;
+    }
+
+    function syncEmployeeType(){
+      const pension=el.employeeType.value==="pensioner";
+      el.salaryLabel.textContent=pension?"Pensiun atau THT/JHT Berkala":"Gaji";
+    }
+
+    function syncMethod(){
+      const isGrossUp=method()==="grossup";
+      el.taxAllowance.readOnly=isGrossUp;
+      if(isGrossUp){el.taxAllowance.value="";el.taxAllowance.placeholder="Dihitung otomatis";el.taxAllowanceHelp.textContent="Tunjangan PPh dihitung otomatis hingga sama dengan PPh Pasal 21 terutang."}
+      else{el.taxAllowance.placeholder="0";el.taxAllowanceHelp.textContent="Isi bila pemberi kerja memberi tunjangan pajak dalam jumlah tertentu."}
+      syncLiveGross();
+    }
+
+    function syncLiveGross(){
+      const p=getPTKP();const base=baseIncome();let gross=base;
+      if(method()==="grossup") gross=grossUp(base,p.category).gross;
+      else gross+=parseMoney(el.taxAllowance.value);
+      el.liveGross.textContent=formatMoney(gross);
+    }
+
+    function calculate(showError=true){
+      const p=getPTKP();const base=baseIncome();
+      if(base<=0 && parseMoney(el.taxAllowance.value)<=0){
+        if(showError){el.errorBox.textContent="Masukkan sedikitnya satu komponen penghasilan bruto.";el.errorBox.classList.add("show")}
+        return null;
+      }
+      el.errorBox.classList.remove("show");
+      let allowance,gross,bracket,tax;
+      if(method()==="grossup"){
+        const g=grossUp(base,p.category);({allowance,gross,bracket,tax}=g);el.taxAllowance.value=allowance?new Intl.NumberFormat("id-ID").format(allowance):"";
+      }else{
+        allowance=parseMoney(el.taxAllowance.value);gross=base+allowance;bracket=getBracket(p.category,gross);tax=Math.floor(gross*bracket.rate/100);
+      }
+      const net=gross-tax;
+      el.resultState.textContent="Selesai";el.resultState.classList.add("ready");el.taxResult.textContent=formatMoney(tax);
+      el.taxCaption.textContent=`Kategori ${p.category} · ${formatRate(bracket.rate)} × ${formatMoney(gross)}`;
+      el.categoryResult.textContent=`Kategori ${p.category}`;el.ptkpResult.textContent=`Status PTKP ${p.status}`;el.rateResult.textContent=formatRate(bracket.rate);el.rangeResult.textContent=rangeText(bracket);
+      el.methodResult.textContent=method()==="grossup"?"Gross-up":"Gross";el.baseIncomeResult.textContent=formatMoney(base);el.allowanceResult.textContent=formatMoney(allowance);el.grossResult.textContent=formatMoney(gross);el.netResult.textContent=formatMoney(net);
+      el.formulaResult.textContent=`PPh Pasal 21 = ${formatRate(bracket.rate)} × ${formatMoney(gross)} = ${formatMoney(tax)}`;
+      el.liveGross.textContent=formatMoney(gross);
+      return {p,base,allowance,gross,bracket,tax,net};
+    }
+
+    function reset(){
+      el.terForm.reset();ids.forEach(id=>document.getElementById(id).value="");el.resultState.textContent="Belum dihitung";el.resultState.classList.remove("ready");el.taxResult.textContent="Rp0";el.taxCaption.textContent="Masukkan data penghasilan dan tekan tombol hitung.";el.categoryResult.textContent="—";el.ptkpResult.textContent="Status PTKP belum dipilih";el.rateResult.textContent="0%";el.rangeResult.textContent="Lapisan bruto belum ditentukan";el.methodResult.textContent="Gross";el.baseIncomeResult.textContent="Rp0";el.allowanceResult.textContent="Rp0";el.grossResult.textContent="Rp0";el.netResult.textContent="Rp0";el.formulaResult.textContent="PPh Pasal 21 = Tarif Efektif Bulanan × Penghasilan Bruto Bulanan";el.errorBox.classList.remove("show");syncEmployeeType();syncPTKP();syncMethod();syncLiveGross();
+    }
+
+    function showToast(text){el.toast.textContent=text;el.toast.classList.add("show");clearTimeout(showToast.t);showToast.t=setTimeout(()=>el.toast.classList.remove("show"),1800)}
+
+    document.querySelectorAll(".money-input").forEach(input=>{input.addEventListener("input",()=>{formatInput(input);syncLiveGross()});input.addEventListener("focus",()=>input.select())});
+    [el.employeeType,el.maritalStatus,el.dependents].forEach(input=>input.addEventListener("change",()=>{syncEmployeeType();syncPTKP();syncLiveGross()}));
+    document.querySelectorAll('input[name="method"]').forEach(r=>r.addEventListener("change",syncMethod));
+    el.terForm.addEventListener("submit",e=>{e.preventDefault();calculate(true)});el.resetBtn.addEventListener("click",reset);el.printBtn.addEventListener("click",()=>window.print());
+    el.copyBtn.addEventListener("click",async()=>{
+      const r=calculate(false);if(!r){showToast("Isi data penghasilan terlebih dahulu");return}
+      const text=["HASIL KALKULATOR TER PPh PASAL 21 — KABAYAN",`Status PTKP: ${r.p.status}`,`Kategori TER: ${r.p.category}`,`Lapisan bruto: ${rangeText(r.bracket)}`,`Tarif TER: ${formatRate(r.bracket.rate)}`,`Metode: ${method()==="grossup"?"Gross-up":"Gross"}`,`Penghasilan selain tunjangan PPh: ${formatMoney(r.base)}`,`Tunjangan PPh: ${formatMoney(r.allowance)}`,`Penghasilan bruto: ${formatMoney(r.gross)}`,`PPh Pasal 21: ${formatMoney(r.tax)}`].join("\n");
+      try{await navigator.clipboard.writeText(text);showToast("Hasil berhasil disalin")}catch{showToast("Browser tidak mengizinkan penyalinan otomatis")}
+    });
+
+    syncEmployeeType();syncPTKP();syncMethod();syncLiveGross();
+  </script>
+<script>
+(() => {
+  const menuToggle = document.getElementById("menuToggle");
+  const mobileMenu = document.getElementById("mobileMenu");
+
+  if (menuToggle && mobileMenu) {
+    menuToggle.addEventListener("click", () => {
+      const isOpen = mobileMenu.classList.toggle("active");
+
+      document.body.classList.toggle("menu-open", isOpen);
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      menuToggle.textContent = isOpen ? "×" : "☰";
+    });
+
+    mobileMenu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        mobileMenu.classList.remove("active");
+        document.body.classList.remove("menu-open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.textContent = "☰";
+      });
+    });
+  }
+
+  const currentYear = document.getElementById("currentYear");
+  if (currentYear) {
+    currentYear.textContent = new Date().getFullYear();
+  }
+})();
+</script></body>
+</html>
