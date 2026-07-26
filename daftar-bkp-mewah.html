@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daftar Barang Kena Pajak Mewah | Kabayan</title>
+  <meta name="description" content="Daftar BKP tergolong mewah dengan fitur pencarian nama barang.">
+  <meta name="theme-color" content="#f5f5f7">
+  <style>
+:root{
+  --black:#000;--ink:#1d1d1f;--white:#fff;--off:#f5f5f7;
+  --line:#e8e8ed;--muted:#6e6e73;--blue:#0071e3;
+  --blue-soft:#eef6ff;--navy:#071a38;--green:#18864b;
+  --max:1180px;--nav:48px;
+  --shadow:0 24px 70px rgba(20,43,76,.11);
+  --soft-shadow:0 14px 38px rgba(20,43,76,.07);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{
+  margin:0;color:var(--ink);
+  background:radial-gradient(circle at 50% 4%,rgba(0,113,227,.07),transparent 23%),
+             linear-gradient(180deg,#fff 0%,#fff 42%,#f5f7fb 100%);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  letter-spacing:-.015em;-webkit-font-smoothing:antialiased;
+}
+body.menu-open{overflow:hidden}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit}button{cursor:pointer}
+.site-header{
+  position:fixed;z-index:1000;inset:0 0 auto;height:var(--nav);
+  border-bottom:1px solid rgba(0,0,0,.06);
+  background:rgba(250,250,252,.82);
+  backdrop-filter:saturate(180%) blur(20px);
+}
+.nav-wrap{
+  width:min(var(--max),calc(100% - 36px));height:var(--nav);
+  display:flex;align-items:center;justify-content:space-between;
+  gap:28px;margin:auto;
+}
+.brand{display:flex;align-items:center;gap:9px;font-size:14px;font-weight:700}
+.brand-mark{
+  width:25px;height:25px;display:grid;place-items:center;
+  border-radius:8px;background:var(--ink);color:#fff;
+  font-size:9px;font-weight:800;
+}
+.desktop-nav{display:flex;gap:24px}
+.desktop-nav a{color:#424245;font-size:12px;white-space:nowrap}
+.desktop-nav a:hover,.desktop-nav a[aria-current=page]{color:#000}
+.menu-toggle{
+  width:34px;height:34px;display:none;place-items:center;
+  border:0;border-radius:50%;background:transparent;font-size:18px;
+}
+.mobile-menu{
+  position:fixed;z-index:999;inset:var(--nav) 0 0;display:none;
+  padding:36px 28px;background:rgba(250,250,252,.98);
+  backdrop-filter:blur(24px);
+}
+.mobile-menu.active{display:block}
+.mobile-menu a{
+  display:block;padding:11px 0;font-size:28px;font-weight:650;
+  letter-spacing:-.04em;
+}
+main{padding-top:var(--nav)}
+.hero{
+  padding:96px 20px 76px;text-align:center;
+  background:radial-gradient(circle at 50% 100%,rgba(0,113,227,.14),transparent 34%),
+             linear-gradient(180deg,#fff 0%,#fff 64%,#f3f7ff 100%);
+}
+.hero-inner{width:min(980px,100%);margin:auto}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:7px;padding:7px 12px;
+  border-radius:999px;background:var(--off);color:#515154;
+  font-size:12px;font-weight:650;
+}
+.eyebrow:before{
+  content:"";width:7px;height:7px;border-radius:50%;background:var(--blue);
+}
+.hero-icon{
+  width:68px;height:68px;display:grid;place-items:center;
+  margin:22px auto 0;border:1px solid #d9e9f8;border-radius:22px;
+  background:linear-gradient(145deg,#fff,#eef6ff);color:var(--blue);
+  box-shadow:0 18px 44px rgba(0,113,227,.12);
+}
+.hero-icon svg,.section-icon svg,.search-icon svg,.no-results-icon svg{
+  fill:none;stroke:currentColor;stroke-width:1.8;
+  stroke-linecap:round;stroke-linejoin:round;
+}
+.hero-icon svg{width:38px;height:38px}
+.hero h1{
+  max-width:920px;margin:20px auto 16px;font-size:clamp(48px,7vw,82px);
+  line-height:.98;letter-spacing:-.06em;
+}
+.hero h1 span{
+  display:block;background:linear-gradient(90deg,#093b91,#0071e3 46%,#25a6d9 72%,#e6aa00);
+  background-clip:text;-webkit-background-clip:text;color:transparent;
+}
+.hero p{
+  max-width:720px;margin:auto;color:#515154;
+  font-size:clamp(18px,2.2vw,23px);line-height:1.45;
+}
+.catalog-shell{
+  width:min(var(--max),calc(100% - 32px));margin:-28px auto 90px;
+}
+.search-panel{
+  position:sticky;z-index:30;top:calc(var(--nav) + 12px);
+  margin-bottom:26px;padding:18px;border:1px solid rgba(0,0,0,.07);
+  border-radius:24px;background:rgba(255,255,255,.91);
+  box-shadow:var(--shadow);backdrop-filter:blur(18px);
+}
+.search-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px}
+.search-box{position:relative}
+.search-icon{
+  position:absolute;top:50%;left:16px;width:20px;height:20px;
+  color:var(--muted);transform:translateY(-50%);
+}
+.search-input{
+  width:100%;min-height:54px;padding:0 52px 0 48px;
+  border:1px solid #d2d2d7;border-radius:16px;background:#fff;
+  color:var(--ink);font-size:16px;outline:none;
+}
+.search-input:focus{
+  border-color:var(--blue);box-shadow:0 0 0 4px rgba(0,113,227,.1);
+}
+.clear-search{
+  position:absolute;top:50%;right:12px;width:32px;height:32px;
+  display:none;place-items:center;border:0;border-radius:50%;
+  background:var(--off);color:var(--muted);transform:translateY(-50%);
+}
+.clear-search.visible{display:grid}
+.filter-tabs{
+  display:flex;gap:8px;padding:5px;border-radius:16px;background:var(--off);
+}
+.filter-button{
+  min-height:44px;padding:0 15px;border:0;border-radius:12px;
+  background:transparent;color:#515154;font-size:12px;
+  font-weight:650;white-space:nowrap;
+}
+.filter-button.active{
+  background:#fff;color:var(--blue);
+  box-shadow:0 5px 16px rgba(20,43,76,.08);
+}
+.search-meta{
+  display:flex;justify-content:space-between;gap:14px;
+  margin-top:12px;padding:0 4px;color:var(--muted);font-size:12px;
+}
+.result-count{font-weight:650}
+.catalog-section{scroll-margin-top:160px;margin-bottom:30px}
+.catalog-section.hidden-section{display:none}
+.catalog-section-inner{width:100%;margin:auto}
+.section-heading{
+  display:flex;align-items:flex-start;gap:16px;margin-bottom:18px;padding:0 5px;
+}
+.section-icon{
+  width:52px;height:52px;display:grid;flex:0 0 auto;place-items:center;
+  border-radius:17px;background:var(--blue-soft);color:var(--blue);
+}
+.section-icon.vehicle{background:#eef9f3;color:var(--green)}
+.section-icon svg{width:26px;height:26px}
+.section-kicker{
+  display:block;margin-bottom:5px;color:var(--blue);
+  font-size:11px;font-weight:750;letter-spacing:.06em;text-transform:uppercase;
+}
+.vehicle-section .section-kicker{color:var(--green)}
+.section-heading h2{
+  margin:0;font-size:clamp(28px,4vw,42px);
+  letter-spacing:-.045em;line-height:1.05;
+}
+.section-heading p{
+  max-width:760px;margin:7px 0 0;color:var(--muted);
+  font-size:14px;line-height:1.55;
+}
+.table-card{
+  overflow-x:auto;border:1px solid rgba(0,0,0,.07);
+  border-radius:24px;background:rgba(255,255,255,.97);
+  box-shadow:var(--soft-shadow);
+}
+.luxury-table{width:100%;min-width:900px;border-collapse:collapse}
+.luxury-table th,.luxury-table td{
+  padding:16px 17px;border-bottom:1px solid var(--line);
+  text-align:left;vertical-align:top;
+}
+.luxury-table th{
+  background:#f7f8fa;color:#424245;font-size:12px;font-weight:700;
+}
+.luxury-table td{color:#424245;font-size:13px;line-height:1.58}
+.luxury-table tbody tr:last-child td{border-bottom:0}
+.luxury-table tr.searchable-row:hover{background:#f8fbff}
+.rate-cell{color:var(--blue)!important;font-weight:750}
+.rate-cell strong{color:inherit!important;font-size:17px}
+.group-row td{
+  padding:12px 17px;background:#eef4fa;color:var(--navy);
+  font-size:12px;font-weight:750;
+}
+.vehicle-table .group-row td{background:#eef8f2;color:#196b42}
+.section-note{
+  display:grid;gap:8px;margin-top:14px;padding:17px 19px;
+  border:1px solid #f0dfbd;border-radius:18px;background:#fff8ea;
+  color:#6d4b14;font-size:12px;line-height:1.6;
+}
+.section-note p{margin:0}.section-note strong{color:#694000}
+.no-results{
+  display:none;padding:46px 24px;border:1px dashed #c7d4e2;
+  border-radius:24px;background:rgba(255,255,255,.78);text-align:center;
+}
+.no-results.visible{display:block}
+.no-results-icon{
+  width:54px;height:54px;display:grid;place-items:center;
+  margin:0 auto 13px;border-radius:18px;background:var(--blue-soft);color:var(--blue);
+}
+.no-results-icon svg{width:27px;height:27px}
+.no-results h3{margin:0;font-size:21px;letter-spacing:-.035em}
+.no-results p{margin:7px 0 0;color:var(--muted);font-size:13px}
+.site-footer{background:var(--off);color:var(--muted)}
+.footer-disclaimer{
+  width:min(980px,calc(100% - 40px));margin:auto;padding:23px 0;
+  border-bottom:1px solid #d2d2d7;font-size:12px;line-height:1.5;
+}
+.footer-disclaimer strong{color:#424245}
+.footer-inner{
+  width:min(980px,calc(100% - 40px));display:flex;
+  align-items:center;justify-content:space-between;gap:20px;
+  margin:auto;padding:21px 0 27px;font-size:12px;
+}
+.footer-inner p{margin:0}.footer-links{display:flex;flex-wrap:wrap;gap:18px}
+.footer-links a{color:#424245}.footer-links a:hover{text-decoration:underline}
+@media(max-width:1030px){
+  .desktop-nav{display:none}.menu-toggle{display:grid}
+  .search-row{grid-template-columns:1fr}.filter-tabs{overflow-x:auto}
+}
+@media(max-width:700px){
+  .hero{padding-top:72px;padding-bottom:68px}.hero h1{font-size:46px}
+  .catalog-shell{margin-top:-20px}.search-panel{position:relative;top:auto;padding:14px}
+  .search-meta{align-items:flex-start;flex-direction:column}
+  .section-heading{align-items:center}.section-icon{width:45px;height:45px}
+  .table-card{overflow:visible;border:0;background:transparent;box-shadow:none}
+  .luxury-table{min-width:0}.luxury-table thead{display:none}
+  .luxury-table,.luxury-table tbody,.luxury-table tr,.luxury-table td{display:block;width:100%}
+  .luxury-table tr.searchable-row{
+    margin-bottom:12px;padding:14px 16px;border:1px solid rgba(0,0,0,.07);
+    border-radius:18px;background:#fff;box-shadow:0 12px 30px rgba(20,43,76,.06);
+  }
+  .luxury-table tr.group-row{margin:20px 0 9px}
+  .luxury-table .group-row td{
+    display:block;padding:10px 13px;border:0;border-radius:12px;
+  }
+  .luxury-table td{
+    display:grid;grid-template-columns:125px minmax(0,1fr);
+    gap:11px;padding:8px 0;border:0;font-size:13px;
+  }
+  .luxury-table td:before{
+    content:attr(data-label);color:var(--muted);font-size:11px;font-weight:700;
+  }
+  .footer-inner{align-items:flex-start;flex-direction:column}
+}
+@media(max-width:460px){
+  .hero h1{font-size:40px}.brand span:last-child{display:none}
+  .section-heading{align-items:flex-start}.section-icon{display:none}
+  .luxury-table td{grid-template-columns:1fr;gap:3px}
+}
+</style>
+</head>
+<body id="top">
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">ASD</span>
+        <span>dhaniswara86</span>
+      </a>
+      <nav class="desktop-nav" aria-label="Navigasi utama">
+        <a href="index.html">Beranda</a>
+        <a href="buku.html">Buku</a>
+        <a href="formulir.html">Formulir</a>
+        <a href="kalkulator.html">Kalkulator</a>
+        <a href="aplikasi.html">Aplikasi</a>
+        <a href="presentasi.html">Salindia</a>
+        <a href="artikel.html" aria-current="page">Artikel</a>
+        <a href="index.html#tentang">Tentang</a>
+      </nav>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Buka menu" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Navigasi seluler">
+    <a href="index.html">Beranda</a>
+    <a href="buku.html">Buku Digital</a>
+    <a href="formulir.html">Formulir</a>
+    <a href="kalkulator.html">Kalkulator</a>
+    <a href="aplikasi.html">Aplikasi</a>
+    <a href="presentasi.html">Katalog Salindia</a>
+    <a href="artikel.html">Artikel</a>
+    <a href="index.html#tentang">Tentang</a>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="hero-inner">
+        <span class="eyebrow">Kabayan · PPN dan PPnBM</span>
+
+        <h1>Cari daftar <span>BKP Mewah.</span></h1>
+        <p>Ketik nama barang atau jenis kendaraan.</p>
+      </div>
+    </section>
+
+    <section class="catalog-shell">
+      <div class="search-panel" role="search">
+        <div class="search-row">
+          <div class="search-box">
+            <span class="search-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <circle cx="11" cy="11" r="7"></circle>
+                <path d="m16.5 16.5 4 4"></path>
+              </svg>
+            </span>
+            <input
+              class="search-input"
+              id="itemSearch"
+              type="search"
+              autocomplete="off"
+              placeholder="Cari rumah mewah, helikopter, hybrid, motor 500 cc..."
+              aria-label="Cari nama barang kena pajak mewah"
+            >
+            <button class="clear-search" id="clearSearch" type="button" aria-label="Hapus pencarian">×</button>
+          </div>
+
+          <div class="filter-tabs" role="group" aria-label="Filter kategori">
+            <button class="filter-button active" type="button" data-filter="all">Semua</button>
+            <button class="filter-button" type="button" data-filter="nonvehicle">Selain Kendaraan</button>
+            <button class="filter-button" type="button" data-filter="vehicle">Kendaraan</button>
+          </div>
+        </div>
+        <div class="search-meta">
+          <span class="result-count" id="resultCount">Menampilkan seluruh daftar</span>
+          <span>Hasil berubah otomatis saat Anda mengetik.</span>
+        </div>
+      </div>
+
+      <div class="no-results" id="noResults">
+        <div class="no-results-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="7"></circle>
+            <path d="m16.5 16.5 4 4M8.5 11h5"></path>
+          </svg>
+        </div>
+        <h3>Barang tidak ditemukan</h3>
+        <p>Coba gunakan nama yang lebih umum atau ubah filter kategori.</p>
+      </div>
+
+      <section class="catalog-section" data-category="nonvehicle" id="bkp-mewah-nonkendaraan">
+<div class="catalog-section-inner">
+<header class="section-heading">
+<div aria-hidden="true" class="section-icon">
+<svg viewbox="0 0 24 24">
+<path d="M5 3h14v18H5z"></path>
+<path d="M8 7h8M8 11h8M8 15h4"></path>
+</svg>
+</div>
+<div>
+<span class="section-kicker">Selain Kendaraan Bermotor</span>
+<h2>BKP Tergolong Mewah Nonkendaraan</h2>
+<p>Daftar kelompok barang dan tarif PPnBM yang dikenakan.</p>
+</div>
+</header>
+<div class="table-card">
+<table class="luxury-table nonvehicle-table">
+<thead>
+<tr>
+<th>Tarif PPnBM</th>
+<th>Kelompok Barang</th>
+<th>Rincian</th>
+<th>Ketentuan</th>
+</tr>
+</thead>
+<tbody>
+<tr class="searchable-row">
+<td class="rate-cell" data-label="Tarif PPnBM">
+<strong>20%</strong>
+</td>
+<td data-label="Kelompok Barang">
+              Hunian mewah
+            </td>
+<td data-label="Rincian">
+              Rumah mewah, apartemen, kondominium,
+              <em>town house</em>, dan hunian sejenis.
+            </td>
+<td data-label="Ketentuan">
+              Harga jual Rp30 miliar atau lebih.
+            </td>
+</tr>
+<tr class="searchable-row">
+<td class="rate-cell" data-label="Tarif PPnBM">
+<strong>40%</strong>
+</td>
+<td data-label="Kelompok Barang">
+              Balon dan pesawat tanpa tenaga penggerak
+            </td>
+<td data-label="Rincian">
+              Balon udara, balon udara yang dapat dikemudikan,
+              serta pesawat udara lainnya tanpa tenaga penggerak.
+            </td>
+<td data-label="Ketentuan">
+              Dikenai PPnBM sesuai klasifikasi barang.
+            </td>
+</tr>
+<tr class="searchable-row">
+<td class="rate-cell" data-label="Tarif PPnBM">
+<strong>40%</strong>
+</td>
+<td data-label="Kelompok Barang">
+              Peluru senjata api
+            </td>
+<td data-label="Rincian">
+              Peluru senjata api dan bagian-bagiannya.
+            </td>
+<td data-label="Ketentuan">
+              Tidak termasuk peluru senapan angin.
+            </td>
+</tr>
+<tr class="searchable-row">
+<td class="rate-cell" data-label="Tarif PPnBM">
+<strong>50%</strong>
+</td>
+<td data-label="Kelompok Barang">
+              Pesawat udara
+            </td>
+<td data-label="Rincian">
+              Helikopter, pesawat udara selain helikopter,
+              dan kendaraan udara lainnya.
+            </td>
+<td data-label="Ketentuan">
+              Pengecualian dapat diberikan untuk keperluan negara
+              atau angkutan udara niaga sesuai persyaratan.
+            </td>
+</tr>
+<tr class="searchable-row">
+<td class="rate-cell" data-label="Tarif PPnBM">
+<strong>50%</strong>
+</td>
+<td data-label="Kelompok Barang">
+              Senjata api
+            </td>
+<td data-label="Rincian">
+              Senjata artileri, revolver, pistol, senjata api lainnya,
+              serta peralatan sejenis yang dioperasikan dengan
+              penembakan bahan peledak.
+            </td>
+<td data-label="Ketentuan">
+              Pengecualian dapat diberikan untuk keperluan negara
+              sesuai persyaratan.
+            </td>
+</tr>
+<tr class="searchable-row">
+<td class="rate-cell" data-label="Tarif PPnBM">
+<strong>75%</strong>
+</td>
+<td data-label="Kelompok Barang">
+              Kapal pesiar dan kendaraan air tertentu
+            </td>
+<td data-label="Rincian">
+              Kapal pesiar, kapal ekskursi, kapal yang dirancang
+              untuk pengangkutan orang, kapal feri, kendaraan air
+              sejenis, dan <em>yacht</em>.
+            </td>
+<td data-label="Ketentuan">
+              Pengecualian dapat diberikan untuk keperluan negara,
+              angkutan umum, atau usaha pariwisata sesuai persyaratan.
+            </td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section-note">
+<p><strong>Catatan:</strong> <br/>
+      Barang seperti: tas bermerek, pakaian bermerek, jam tangan, telepon seluler, emas atau perhiasan, sepeda mahal, dan 
+		sejenisnya tidak berarti menjadi BKP Mewah karena harganya yang tergolong mahal, tetapi penentuan BKP Mewah ditetapkan melalui regulasi . </p>
+<p>
+<strong>Dasar hukum:</strong><br/>
+      PP Nomor 61 Tahun 2020 serta PMK Nomor 96/PMK.03/2021
+      sebagaimana diubah dengan PMK Nomor 15/PMK.03/2023.</p>
+</div>
+</div>
+</section>
+<section class="catalog-section" data-category="vehicle" id="bkp-mewah-kendaraan">
+<div class="catalog-section-inner">
+<header class="section-heading">
+<div aria-hidden="true" class="section-icon vehicle">
+<svg viewbox="0 0 24 24">
+<path d="M3 15h18"></path>
+<path d="m5 15 2-6h10l2 6"></path>
+<circle cx="7" cy="18" r="1.5"></circle>
+<circle cx="17" cy="18" r="1.5"></circle>
+</svg>
+</div>
+<div>
+<span class="section-kicker">Kendaraan Bermotor</span>
+<h2>BKP Mewah Berupa Kendaraan Bermotor</h2>
+<p>Kelompok kendaraan berdasarkan mesin, teknologi, konsumsi bahan bakar, dan emisi.</p>
+</div>
+</header>
+<div class="table-card">
+<table class="luxury-table vehicle-table">
+<thead>
+<tr>
+<th>Kelompok kendaraan</th>
+<th>Kriteria</th>
+<th>Tarif PPnBM</th>
+<th>Keterangan</th>
+</tr>
+</thead>
+<tbody>
+<!-- ANGKUTAN ORANG KURANG DARI 10 ORANG -->
+<tr class="group-row">
+<td colspan="4">
+              Kendaraan angkutan orang kurang dari 10 orang
+            </td>
+</tr>
+<tr class="searchable-row">
+<td data-label="Kelompok kendaraan">Angkutan orang</td>
+<td data-label="Kriteria">
+              Kapasitas mesin sampai dengan 3.000 cc
+            </td>
+<td class="rate-cell" data-label="Tarif PPnBM">
+              15%, 20%, 25%, atau 40%
+            </td>
+<td data-label="Keterangan">
+              Tarif ditentukan berdasarkan konsumsi bahan bakar
+              atau tingkat emisi CO₂.
+            </td>
+</tr>
+<tr class="searchable-row">
+<td data-label="Kelompok kendaraan">Angkutan orang</td>
+<td data-label="Kriteria">
+              Kapasitas mesin lebih dari 3.000 cc sampai dengan
+              4.000 cc
+            </td>
+<td class="rate-cell" data-label="Tarif PPnBM">
+              40%, 50%, 60%, atau 70%
+            </td>
+<td data-label="Keterangan">
+              Tarif ditentukan berdasarkan konsumsi bahan bakar
+              atau tingkat emisi CO₂.
+            </td>
+</tr>
+<tr class="searchable-row">
+<td data-label="Kelompok kendaraan">Angkutan orang listrik</td>
+<td data-label="Kriteria">
+              Pengangkutan kurang dari 10 orang termasuk pengemudi
+              dengan penggerak utama motor listrik
+            </td>
+<td class="rate-cell" data-label="Tarif PPnBM">15%</td>
+<td data-label="Keterangan">
+              Dapat menggunakan DPP PPnBM khusus apabila memenuhi
+              kriteria kendaraan emisi karbon rendah.
+            </td>
+</tr>
+<!-- ANGKUTAN ORANG 10 SAMPAI 15 ORANG -->
+<tr class="group-row">
+<td colspan="4">
+              Kendaraan angkutan orang 10 sampai 15 orang
+            </td>
+</tr>
+<tr class="searchable-row">
+<td data-label="Kelompok kendaraan">Angkutan 10–15 orang</td>
+<td data-label="Kriteria">
+              Kapasitas mesin sampai dengan 3.000 cc
+            </td>
+<td class="rate-cell" data-label="Tarif PPnBM">15% atau 20%</td>
+<td data-label="Keterangan">
+              Termasuk pengemudi.
+            </td>
+</tr>
+<tr class="searchable-row">
+<td data-label="Kelompok kendaraan">Angkutan 10–15 orang</td>
+<td data-label="Kriteria">
+              Kapasitas mesin lebih dari 3.000 cc sampai dengan
+              4.000 cc
+            </td>
+<td class="rate-cell" data-label="Tarif PPnBM">25% atau 30%</td>
+<td data-label="Keterangan">
+              Termasuk pengemudi.
+            </td>
+</tr>
+<tr class="searchable-row">
+<td data-label="Kelompok kendaraan">Angkutan listrik 10–15 orang</td>
+<td data-label="Kriteria">
+              Penggerak utama menggunakan motor listrik
+            </td>
+<td class="rate-cell" data-label="Tarif PPnBM">15%</td>
+<td data-label="Keterangan">
+              Termasuk pengemudi.
+            </td>
+</tr>
+<!-- KABIN GANDA -->
+<tr class="group-row">
+<td colspan="4">Kendaraan kabin ganda</td>
+</tr>
+<tr class="searchable-row">
+<td data-label="Kelompok kendaraan">Kabin ganda</td>
+<td data-label="Kriteria">
+              Kapasitas mesin sampai dengan 3.000 cc
+            </td>
+<td class="rate-cell" data-label="Tarif PPnBM">
+              10%, 12%, atau 15%
+            </td>
+<td data-label="Keterangan">
+              Tarif ditentukan berdasarkan konsumsi bahan bakar
+              atau tingkat emisi CO₂.
+            </td>
+</tr>
+<tr class="searchable-row">
+<td data-label="Kelompok kendaraan">Kabin ganda</td>
+<td data-label="Kriteria">
+              Kapasitas mesin lebih dari 3.000 cc sampai dengan
+              4.000 cc
+            </td>
+<td class="rate-cell" data-label="Tarif PPnBM">
+              20%, 25%, atau 30%
+            </td>
+<td data-label="Keterangan">
+              Tarif ditentukan berdasarkan konsumsi bahan bakar
+              atau tingkat emisi CO₂.
+            </td>
+</tr>
+<tr class="searchable-row">
+<td data-label="Kelompok kendaraan">Kabin ganda listrik</td>
+<td data-label="Kriteria">
+              Penggerak utama menggunakan motor listrik
+            </td>
+<td class="rate-cell" data-label="Tarif PPnBM">10%</td>
+<td data-label="Keterangan">
+              Berlaku berdasarkan klasifikasi kendaraan dalam
+              lampiran peraturan.
+            </td>
+</tr>
+<!-- KENDARAAN EMISI KARBON RENDAH -->
+<tr class="group-row">
+<td colspan="4">
+              Kendaraan roda empat emisi karbon rendah
+            </td>
+</tr>
+<tr class="searchable-row">
+<td data-label="Kelompok kendaraan">
+              Kendaraan hemat energi dan harga terjangkau
+            </td>
+<td data-label="Kriteria">
+              Kendaraan dalam program LCGC yang memenuhi persyaratan
+              kapasitas mesin, konsumsi bahan bakar, dan emisi
+            </td>
+<td class="rate-cell" data-label="Tarif PPnBM">15%</td>
+<td data-label="Keterangan">
+              DPP PPnBM 20% dari harga jual sehingga PPnBM efektif
+              sebesar 3%.
+            </td>
+</tr>
+<tr class="searchable-row">
+<td data-label="Kelompok kendaraan"><em>Full hybrid</em></td>
+<td data-label="Kriteria">
+              Kapasitas mesin sampai dengan 3.000 cc
+            </td>
+<td class="rate-cell" data-label="Tarif PPnBM">15%</td>
+<td data-label="Keterangan">
+              DPP PPnBM sebesar 40%, 46⅔%, atau 53⅓% dari harga
+              jual, sesuai konsumsi bahan bakar atau emisi.
+            </td>
+</tr>
+<tr class="searchable-row">
+<td data-label="Kelompok kendaraan"><em>Mild hybrid</em></td>
+<td data-label="Kriteria">
+              Kapasitas mesin sampai dengan 3.000 cc
+            </td>
+<td class="rate-cell" data-label="Tarif PPnBM">15%</td>
+<td data-label="Keterangan">
+              DPP PPnBM sebesar 53⅓%, 66⅔%, atau 80% dari harga
+              jual, sesuai konsumsi bahan bakar atau emisi.
+            </td>
+</tr>
+<tr class="searchable-row">
+<td data-label="Kelompok kendaraan">
+<em>Full hybrid</em> atau <em>mild hybrid</em>
+</td>
+<td data-label="Kriteria">
+              Kapasitas mesin lebih dari 3.000 cc sampai dengan
+              4.000 cc
+            </td>
+<td class="rate-cell" data-label="Tarif PPnBM">
+              20%, 25%, atau 30%
+            </td>
+<td data-label="Keterangan">
+              Tarif ditentukan berdasarkan konsumsi bahan bakar
+              atau tingkat emisi CO₂.
+            </td>
+</tr>
+<tr class="searchable-row">
+<td data-label="Kelompok kendaraan"><em>Flexy engine</em></td>
+<td data-label="Kriteria">
+              Kendaraan yang dapat menggunakan bahan bakar
+              Bio Fuel 100
+            </td>
+<td class="rate-cell" data-label="Tarif PPnBM">15%</td>
+<td data-label="Keterangan">
+              DPP PPnBM 53⅓% dari harga jual. Berlaku apabila
+              Bio Fuel 100 tersedia secara nasional dan mudah
+              diakses masyarakat.
+            </td>
+</tr>
+<tr class="searchable-row">
+<td data-label="Kelompok kendaraan">
+<em>Battery electric vehicle</em> atau
+              <em>fuel cell electric vehicle</em>
+</td>
+<td data-label="Kriteria">
+              Kendaraan listrik berbasis baterai atau sel bahan bakar
+            </td>
+<td class="rate-cell" data-label="Tarif PPnBM">15%</td>
+<td data-label="Keterangan">
+              DPP PPnBM 0% dari harga jual sehingga PPnBM efektif
+              sebesar 0%.
+            </td>
+</tr>
+<tr class="searchable-row">
+<td data-label="Kelompok kendaraan">
+<em>Plug-in hybrid electric vehicle</em>
+</td>
+<td data-label="Kriteria">
+              Konsumsi bahan bakar lebih dari 28 km per liter
+              atau emisi CO₂ paling tinggi 100 gram per kilometer
+            </td>
+<td class="rate-cell" data-label="Tarif PPnBM">15%</td>
+<td data-label="Keterangan">
+              DPP PPnBM 33⅓% dari harga jual sehingga PPnBM
+              efektif sebesar 5%.
+            </td>
+</tr>
+<!-- KENDARAAN LAINNYA -->
+<tr class="group-row">
+<td colspan="4">Kendaraan bermotor lainnya</td>
+</tr>
+<tr class="searchable-row">
+<td data-label="Kelompok kendaraan">Kendaraan golf</td>
+<td data-label="Kriteria">
+              Kendaraan khusus yang dibuat untuk golf
+            </td>
+<td class="rate-cell" data-label="Tarif PPnBM">50%</td>
+<td data-label="Keterangan">—</td>
+</tr>
+<tr class="searchable-row">
+<td data-label="Kelompok kendaraan">Sepeda motor atau kendaraan roda tiga</td>
+<td data-label="Kriteria">
+              Kapasitas mesin lebih dari 250 cc sampai dengan
+              500 cc
+            </td>
+<td class="rate-cell" data-label="Tarif PPnBM">60%</td>
+<td data-label="Keterangan">—</td>
+</tr>
+<tr class="searchable-row">
+<td data-label="Kelompok kendaraan">Kendaraan medan khusus</td>
+<td data-label="Kriteria">
+              Kendaraan yang dibuat untuk perjalanan di atas salju,
+              pantai, gunung, atau kendaraan sejenis
+            </td>
+<td class="rate-cell" data-label="Tarif PPnBM">60%</td>
+<td data-label="Keterangan">—</td>
+</tr>
+<tr class="searchable-row">
+<td data-label="Kelompok kendaraan">Kendaraan bermotor berkapasitas besar</td>
+<td data-label="Kriteria">
+              Kapasitas mesin lebih dari 4.000 cc
+            </td>
+<td class="rate-cell" data-label="Tarif PPnBM">95%</td>
+<td data-label="Keterangan">—</td>
+</tr>
+<tr class="searchable-row">
+<td data-label="Kelompok kendaraan">Sepeda motor atau kendaraan roda tiga</td>
+<td data-label="Kriteria">
+              Kapasitas mesin lebih dari 500 cc
+            </td>
+<td class="rate-cell" data-label="Tarif PPnBM">95%</td>
+<td data-label="Keterangan">—</td>
+</tr>
+<tr class="searchable-row">
+<td data-label="Kelompok kendaraan">Karavan</td>
+<td data-label="Kriteria">
+              Trailer atau semi-trailer tipe karavan untuk
+              perumahan atau berkemah
+            </td>
+<td class="rate-cell" data-label="Tarif PPnBM">95%</td>
+<td data-label="Keterangan">—</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section-note">
+<p>
+<strong>Catatan:</strong>
+        penentuan tarif PPnBM kendaraan tidak hanya berdasarkan merek,
+        tipe, atau harga kendaraan. Tarif harus ditentukan menggunakan
+        kapasitas mesin, konsumsi bahan bakar, tingkat emisi CO₂,
+        teknologi kendaraan, serta laporan atau sertifikat uji tipe.
+      </p>
+<p>
+        Tabel ini menampilkan tarif dasar berdasarkan regulasi dan tidak
+        memasukkan insentif PPnBM ditanggung pemerintah yang bersifat
+        sementara untuk tahun anggaran tertentu.
+      </p>
+<p>
+<strong>Dasar hukum:</strong>
+        PP Nomor 73 Tahun 2019 sebagaimana diubah dengan PP Nomor 74
+        Tahun 2021 serta PMK Nomor 141/PMK.010/2021 sebagaimana diubah
+        dengan PMK Nomor 42/PMK.010/2022.
+      </p>
+</div>
+</div>
+</section>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-disclaimer">
+      <strong>Disclaimer:</strong>
+      Daftar ini merupakan alat bantu edukasi. Penentuan PPnBM tetap
+      perlu disesuaikan dengan klasifikasi barang, spesifikasi teknis,
+      dokumen transaksi, dan ketentuan perpajakan yang berlaku.
+      Kabayan bukan situs resmi Direktorat Jenderal Pajak.
+    </div>
+    <div class="footer-inner">
+      <p>© <span id="currentYear"></span> Angga Sukma Dhaniswara.</p>
+      <div class="footer-links">
+        <a href="index.html">Beranda</a>
+        <a href="artikel.html">Artikel</a>
+        <a href="#top">Kembali ke atas</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+const searchInput=document.getElementById("itemSearch");
+const clearButton=document.getElementById("clearSearch");
+const filterButtons=document.querySelectorAll(".filter-button");
+const sections=document.querySelectorAll(".catalog-section");
+const noResults=document.getElementById("noResults");
+const resultCount=document.getElementById("resultCount");
+let activeFilter="all";
+
+function normalizeText(value){
+  return String(value||"")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g,"")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g," ")
+    .trim();
+}
+
+function updateGroups(section){
+  const rows=[...section.querySelectorAll("tbody tr")];
+  let group=null;
+  let hasVisible=false;
+
+  function commit(){
+    if(group) group.hidden=!hasVisible;
+  }
+
+  rows.forEach(row=>{
+    if(row.classList.contains("group-row")){
+      commit();
+      group=row;
+      hasVisible=false;
+    }else if(row.classList.contains("searchable-row")&&!row.hidden){
+      hasVisible=true;
+    }
+  });
+  commit();
+}
+
+function applySearch(){
+  const query=normalizeText(searchInput.value);
+  let total=0;
+
+  sections.forEach(section=>{
+    const category=section.dataset.category;
+    const allowed=activeFilter==="all"||activeFilter===category;
+
+    if(!allowed){
+      section.classList.add("hidden-section");
+      return;
+    }
+
+    let matches=0;
+    section.querySelectorAll(".searchable-row").forEach(row=>{
+      const match=!query||normalizeText(row.textContent).includes(query);
+      row.hidden=!match;
+      if(match){matches++;total++;}
+    });
+
+    if(category==="vehicle") updateGroups(section);
+    section.classList.toggle("hidden-section",matches===0);
+  });
+
+  clearButton.classList.toggle("visible",Boolean(searchInput.value));
+  noResults.classList.toggle("visible",total===0);
+  resultCount.textContent=
+    !query&&activeFilter==="all"
+      ?"Menampilkan seluruh daftar"
+      :`${total} baris sesuai pencarian`;
+}
+
+searchInput.addEventListener("input",applySearch);
+clearButton.addEventListener("click",()=>{
+  searchInput.value="";
+  searchInput.focus();
+  applySearch();
+});
+filterButtons.forEach(button=>{
+  button.addEventListener("click",()=>{
+    activeFilter=button.dataset.filter;
+    filterButtons.forEach(item=>item.classList.toggle("active",item===button));
+    applySearch();
+  });
+});
+
+const menuToggle=document.getElementById("menuToggle");
+const mobileMenu=document.getElementById("mobileMenu");
+if(menuToggle&&mobileMenu){
+  menuToggle.addEventListener("click",()=>{
+    const open=mobileMenu.classList.toggle("active");
+    document.body.classList.toggle("menu-open",open);
+    menuToggle.setAttribute("aria-expanded",String(open));
+    menuToggle.textContent=open?"×":"☰";
+  });
+  mobileMenu.querySelectorAll("a").forEach(link=>{
+    link.addEventListener("click",()=>{
+      mobileMenu.classList.remove("active");
+      document.body.classList.remove("menu-open");
+      menuToggle.setAttribute("aria-expanded","false");
+      menuToggle.textContent="☰";
+    });
+  });
+}
+document.getElementById("currentYear").textContent=new Date().getFullYear();
+applySearch();
+</script>
+</body>
+</html>
