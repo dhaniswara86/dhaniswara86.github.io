@@ -1,13 +1,12 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kalkulator Perpajakan | Kabayan Dark Mode</title>
+  <title>Kalkulator Perpajakan | Kabayan</title>
   <meta
     name="description"
-    content="Halaman khusus kalkulator perpajakan Kabayan dengan tampilan dark mode ala Apple."
+    content="Katalog kalkulator perpajakan Kabayan dengan tampilan premium dan pilihan kalkulator bergaya Apple."
   >
   <meta name="theme-color" content="#000000">
 
@@ -17,25 +16,26 @@
       --surface: #0a0a0a;
       --surface-2: #111111;
       --surface-3: #1b1b1d;
-      --surface-4: #232326;
       --white: #f5f5f7;
+      --white-2: #fbfbfd;
       --gray: #a1a1a6;
       --gray-soft: #6e6e73;
-      --border: rgba(255, 255, 255, 0.10);
+      --gray-line: rgba(255,255,255,0.10);
+      --dark-line: rgba(0,0,0,0.08);
       --blue: #2997ff;
       --blue-hover: #56adff;
       --cyan: #4fd4ff;
       --gold: #ffcc4d;
       --green: #49c980;
+      --indigo: #9ca9ff;
       --max-width: 1240px;
       --nav-height: 48px;
       --shadow-lg: 0 26px 70px rgba(0, 0, 0, 0.45);
       --shadow-md: 0 16px 40px rgba(0, 0, 0, 0.28);
+      --shadow-soft: 0 18px 40px rgba(17, 17, 17, 0.08);
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     html {
       scroll-behavior: smooth;
@@ -48,37 +48,17 @@
         radial-gradient(circle at top, rgba(41, 151, 255, 0.08), transparent 24%),
         linear-gradient(180deg, #000000 0%, #050505 100%);
       color: var(--white);
-      font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Arial,
-        Helvetica,
-        sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, Helvetica, sans-serif;
       line-height: 1.45;
       letter-spacing: -0.015em;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
     }
 
-    body.menu-open {
-      overflow: hidden;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
-    button {
-      font: inherit;
-      cursor: pointer;
-    }
+    body.menu-open { overflow: hidden; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    button { font: inherit; cursor: pointer; }
 
     .site-header {
       position: fixed;
@@ -153,9 +133,7 @@
       font-size: 18px;
     }
 
-    .menu-toggle:hover {
-      background: rgba(255, 255, 255, 0.08);
-    }
+    .menu-toggle:hover { background: rgba(255, 255, 255, 0.08); }
 
     .mobile-menu {
       position: fixed;
@@ -168,9 +146,7 @@
       -webkit-backdrop-filter: blur(24px);
     }
 
-    .mobile-menu.active {
-      display: block;
-    }
+    .mobile-menu.active { display: block; }
 
     .mobile-menu a {
       display: block;
@@ -181,48 +157,12 @@
       letter-spacing: -0.04em;
     }
 
-    main {
-      padding-top: var(--nav-height);
-    }
-
-    .top-services {
-      width: min(1100px, calc(100% - 40px));
-      display: grid;
-      grid-template-columns: repeat(5, minmax(120px, 1fr));
-      gap: 14px;
-      margin: 28px auto 0;
-      padding: 0 6px;
-    }
-
-    .service-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 9px;
-      text-align: center;
-      color: rgba(245, 245, 247, 0.82);
-      font-size: 13px;
-    }
-
-    .service-icon {
-      width: 46px;
-      height: 46px;
-      display: grid;
-      place-items: center;
-      border-radius: 16px;
-      background: linear-gradient(145deg, #1a1a1d, #0d0d10);
-      border: 1px solid rgba(255, 255, 255, 0.10);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
-      color: #ffffff;
-      font-weight: 700;
-      font-size: 14px;
-    }
+    main { padding-top: var(--nav-height); }
 
     .hero {
       position: relative;
       overflow: hidden;
-      padding: 42px 20px 84px;
-      background: transparent;
+      padding: 46px 20px 72px;
       text-align: center;
     }
 
@@ -233,13 +173,7 @@
       width: 920px;
       height: 680px;
       border-radius: 50%;
-      background:
-        radial-gradient(
-          ellipse,
-          rgba(41, 151, 255, 0.16),
-          rgba(79, 212, 255, 0.06) 48%,
-          transparent 72%
-        );
+      background: radial-gradient(ellipse, rgba(41, 151, 255, 0.16), rgba(79, 212, 255, 0.06) 48%, transparent 72%);
       content: "";
       transform: translateX(-50%);
       filter: blur(10px);
@@ -275,9 +209,9 @@
     }
 
     .hero h1 {
-      max-width: 1050px;
+      max-width: 960px;
       margin: 26px auto 0;
-      font-size: clamp(52px, 8vw, 96px);
+      font-size: clamp(48px, 8vw, 90px);
       font-weight: 700;
       letter-spacing: -0.065em;
       line-height: 0.96;
@@ -285,10 +219,10 @@
     }
 
     .hero p {
-      max-width: 920px;
+      max-width: 880px;
       margin: 24px auto 0;
       color: rgba(245,245,247,0.82);
-      font-size: clamp(19px, 2.4vw, 27px);
+      font-size: clamp(18px, 2.2vw, 26px);
       line-height: 1.38;
     }
 
@@ -312,11 +246,7 @@
       border-radius: 999px;
       font-size: 14px;
       font-weight: 600;
-      transition:
-        transform 0.2s ease,
-        background 0.2s ease,
-        color 0.2s ease,
-        border-color 0.2s ease;
+      transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
     }
 
     .btn-primary {
@@ -341,8 +271,90 @@
       transform: translateY(-1px);
     }
 
+    /* Apple-like selector section */
+    .picker-section {
+      padding: 0 20px 42px;
+    }
+
+    .picker-shell {
+      width: min(var(--max-width), 100%);
+      margin: 0 auto;
+      padding: clamp(34px, 5vw, 58px) clamp(20px, 4vw, 48px);
+      border-radius: 38px;
+      background: linear-gradient(180deg, #f7f7f8 0%, #f1f1f3 100%);
+      color: #1d1d1f;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .picker-title {
+      max-width: 980px;
+      margin: 0 auto;
+      text-align: center;
+      font-size: clamp(38px, 7vw, 88px);
+      line-height: 0.96;
+      letter-spacing: -0.065em;
+      font-weight: 700;
+    }
+
+    .picker-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: clamp(34px, 4vw, 54px);
+    }
+
+    .picker-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 18px;
+      padding: 14px 10px 10px;
+      border-radius: 24px;
+      color: #1d1d1f;
+      transition: transform 0.2s ease, background 0.2s ease;
+      text-align: center;
+    }
+
+    .picker-item:hover {
+      background: rgba(255,255,255,0.72);
+      transform: translateY(-3px);
+    }
+
+    .picker-icon {
+      width: 84px;
+      height: 84px;
+      display: grid;
+      place-items: center;
+    }
+
+    .picker-icon svg {
+      width: 76px;
+      height: 76px;
+      stroke: #000000;
+      fill: none;
+      stroke-width: 1.9;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .picker-item h3 {
+      margin: 0;
+      font-size: clamp(18px, 2vw, 25px);
+      line-height: 1.15;
+      letter-spacing: -0.04em;
+      font-weight: 600;
+    }
+
+    .picker-item p {
+      margin: 0;
+      color: #4d4d52;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
     .showcase {
-      padding: 0 20px 100px;
+      padding: 8px 20px 100px;
     }
 
     .showcase-inner {
@@ -387,13 +399,10 @@
       justify-content: space-between;
       padding: 30px;
       border-radius: 30px;
-      background:
-        linear-gradient(180deg, #121214, #0a0a0c);
+      background: linear-gradient(180deg, #121214, #0a0a0c);
       border: 1px solid rgba(255,255,255,0.08);
       box-shadow: var(--shadow-lg);
-      transition:
-        transform 0.28s ease,
-        box-shadow 0.28s ease;
+      transition: transform 0.28s ease, box-shadow 0.28s ease;
       isolation: isolate;
     }
 
@@ -403,27 +412,23 @@
     }
 
     .calc-card.blue {
-      background:
-        radial-gradient(circle at 88% 12%, rgba(41, 151, 255, 0.18), transparent 24%),
-        linear-gradient(180deg, #0d1521, #080c12);
+      background: radial-gradient(circle at 88% 12%, rgba(41, 151, 255, 0.18), transparent 24%), linear-gradient(180deg, #0d1521, #080c12);
     }
 
     .calc-card.cyan {
-      background:
-        radial-gradient(circle at 88% 12%, rgba(79, 212, 255, 0.16), transparent 24%),
-        linear-gradient(180deg, #091418, #06090c);
+      background: radial-gradient(circle at 88% 12%, rgba(79, 212, 255, 0.16), transparent 24%), linear-gradient(180deg, #091418, #06090c);
     }
 
     .calc-card.gold {
-      background:
-        radial-gradient(circle at 88% 12%, rgba(255, 204, 77, 0.14), transparent 24%),
-        linear-gradient(180deg, #18140b, #0d0a06);
+      background: radial-gradient(circle at 88% 12%, rgba(255, 204, 77, 0.14), transparent 24%), linear-gradient(180deg, #18140b, #0d0a06);
     }
 
     .calc-card.green {
-      background:
-        radial-gradient(circle at 88% 12%, rgba(73, 201, 128, 0.14), transparent 24%),
-        linear-gradient(180deg, #0c1710, #070b08);
+      background: radial-gradient(circle at 88% 12%, rgba(73, 201, 128, 0.14), transparent 24%), linear-gradient(180deg, #0c1710, #070b08);
+    }
+
+    .calc-card.indigo {
+      background: radial-gradient(circle at 88% 12%, rgba(156, 169, 255, 0.16), transparent 24%), linear-gradient(180deg, #111327, #090b16);
     }
 
     .calc-card::after {
@@ -432,8 +437,7 @@
       width: 180px;
       height: 180px;
       border-radius: 50%;
-      background:
-        radial-gradient(circle, rgba(255, 255, 255, 0.08), transparent 70%);
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.08), transparent 70%);
       content: "";
       z-index: -1;
       pointer-events: none;
@@ -508,17 +512,12 @@
       width: min(100%, 360px);
       border-radius: 18px;
       background: #111318;
-      box-shadow:
-        0 18px 30px rgba(0, 0, 0, 0.24),
-        0 8px 14px rgba(0, 0, 0, 0.12);
+      box-shadow: 0 18px 30px rgba(0, 0, 0, 0.24), 0 8px 14px rgba(0, 0, 0, 0.12);
       transform: rotateX(6deg) rotateY(-8deg);
       overflow: hidden;
     }
 
-    .device.laptop {
-      padding: 10px 10px 13px;
-    }
-
+    .device.laptop { padding: 10px 10px 13px; }
     .device.tablet {
       width: min(100%, 300px);
       padding: 12px;
@@ -529,21 +528,11 @@
       position: relative;
       overflow: hidden;
       border-radius: 11px;
-      background:
-        linear-gradient(
-          180deg,
-          #f7f9fd 0,
-          #eff3fb 100%
-        );
+      background: linear-gradient(180deg, #f7f9fd 0, #eff3fb 100%);
     }
 
-    .device.laptop .device-screen {
-      aspect-ratio: 16 / 10;
-    }
-
-    .device.tablet .device-screen {
-      aspect-ratio: 10 / 7;
-    }
+    .device.laptop .device-screen { aspect-ratio: 16 / 10; }
+    .device.tablet .device-screen { aspect-ratio: 10 / 7; }
 
     .browser-bar {
       height: 22px;
@@ -562,10 +551,7 @@
       background: #d2d6df;
     }
 
-    .ui {
-      padding: 10px 11px 12px;
-    }
-
+    .ui { padding: 10px 11px 12px; }
     .ui-header {
       width: 55%;
       height: 9px;
@@ -584,16 +570,13 @@
     .ui-field,
     .ui-card,
     .ui-pill,
-    .ui-button,
-    .ui-table-line {
+    .ui-button {
       border-radius: 8px;
       background: #ffffff;
       box-shadow: inset 0 0 0 1px rgba(14, 23, 38, 0.05);
     }
 
-    .ui-field {
-      height: 24px;
-    }
+    .ui-field { height: 24px; }
 
     .ui-card {
       height: 54px;
@@ -667,13 +650,8 @@
       background: #dae5f6;
     }
 
-    .ui-panel .line.short {
-      width: 56%;
-    }
-
-    .ui-panel .line.mid {
-      width: 75%;
-    }
+    .ui-panel .line.short { width: 56%; }
+    .ui-panel .line.mid { width: 75%; }
 
     .ui-result {
       min-height: 95px;
@@ -690,9 +668,7 @@
       background: rgba(255, 255, 255, 0.22);
     }
 
-    .ui-result .line.short {
-      width: 52%;
-    }
+    .ui-result .line.short { width: 52%; }
 
     .ui-result .big {
       width: 70%;
@@ -743,9 +719,7 @@
       color: #000000;
       font-size: 14px;
       font-weight: 600;
-      transition:
-        transform 0.2s ease,
-        background 0.2s ease;
+      transition: transform 0.2s ease, background 0.2s ease;
     }
 
     .card-link:hover {
@@ -768,9 +742,7 @@
       margin: 0 auto;
       padding: 42px;
       border-radius: 32px;
-      background:
-        radial-gradient(circle at 85% 18%, rgba(41, 151, 255, 0.12), transparent 25%),
-        linear-gradient(145deg, #111111, #080808);
+      background: radial-gradient(circle at 85% 18%, rgba(41, 151, 255, 0.12), transparent 25%), linear-gradient(145deg, #111111, #080808);
       border: 1px solid rgba(255,255,255,0.08);
       box-shadow: var(--shadow-md);
     }
@@ -799,10 +771,7 @@
       margin-top: 24px;
     }
 
-    .site-footer {
-      background: transparent;
-      color: var(--gray);
-    }
+    .site-footer { background: transparent; color: var(--gray); }
 
     .footer-disclaimer {
       width: min(980px, calc(100% - 40px));
@@ -813,9 +782,7 @@
       line-height: 1.5;
     }
 
-    .footer-disclaimer strong {
-      color: #ffffff;
-    }
+    .footer-disclaimer strong { color: #ffffff; }
 
     .footer-inner {
       width: min(980px, calc(100% - 40px));
@@ -828,9 +795,7 @@
       font-size: 12px;
     }
 
-    .footer-inner p {
-      margin: 0;
-    }
+    .footer-inner p { margin: 0; }
 
     .footer-links {
       display: flex;
@@ -838,117 +803,48 @@
       gap: 18px;
     }
 
-    .footer-links a {
-      color: rgba(245,245,247,0.86);
-    }
-
-    .footer-links a:hover {
-      text-decoration: underline;
-    }
+    .footer-links a { color: rgba(245,245,247,0.86); }
+    .footer-links a:hover { text-decoration: underline; }
 
     @media (max-width: 1060px) {
-      .cards-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .calc-card {
-        min-height: 0;
-      }
-
-      .top-services {
-        grid-template-columns: repeat(3, minmax(110px, 1fr));
-      }
+      .cards-grid { grid-template-columns: 1fr; }
+      .calc-card { min-height: 0; }
+      .picker-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     }
 
     @media (max-width: 900px) {
-      .desktop-nav {
-        display: none;
-      }
-
-      .menu-toggle {
-        display: grid;
-      }
+      .desktop-nav { display: none; }
+      .menu-toggle { display: grid; }
     }
 
     @media (max-width: 680px) {
-      .top-services {
-        grid-template-columns: repeat(2, minmax(100px, 1fr));
-        gap: 16px 10px;
-      }
-
-      .hero {
-        padding-top: 34px;
-        padding-bottom: 68px;
-      }
-
-      .hero h1 {
-        font-size: 50px;
-      }
-
-      .calc-card {
-        padding: 24px;
-        border-radius: 26px;
-      }
-
-      .showcase {
-        padding-bottom: 76px;
-      }
-
-      .bottom-cta {
-        padding-bottom: 76px;
-      }
-
-      .bottom-cta-inner {
-        padding: 28px 24px;
-        border-radius: 26px;
-      }
-
-      .footer-inner {
-        flex-direction: column;
-        align-items: flex-start;
-      }
+      .hero { padding-top: 34px; padding-bottom: 54px; }
+      .hero h1 { font-size: 50px; }
+      .picker-shell { border-radius: 28px; }
+      .picker-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+      .picker-item { gap: 14px; padding: 12px 6px 10px; }
+      .picker-icon { width: 68px; height: 68px; }
+      .picker-icon svg { width: 62px; height: 62px; }
+      .calc-card { padding: 24px; border-radius: 26px; }
+      .showcase, .bottom-cta { padding-bottom: 76px; }
+      .bottom-cta-inner { padding: 28px 24px; border-radius: 26px; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
     }
 
     @media (max-width: 520px) {
-      .brand span:last-child {
-        display: none;
-      }
-
-      .hero h1 {
-        font-size: 42px;
-      }
-
-      .hero p {
-        font-size: 18px;
-      }
-
-      .card-meta h3 {
-        font-size: 28px;
-      }
-
-      .card-meta p {
-        font-size: 15px;
-      }
-
-      .device {
-        width: min(100%, 300px);
-        transform: rotateX(4deg) rotateY(-5deg);
-      }
-
-      .device.tablet {
-        width: min(100%, 250px);
-        transform: rotateX(4deg) rotateY(5deg);
-      }
+      .brand span:last-child { display: none; }
+      .hero h1 { font-size: 42px; }
+      .hero p { font-size: 18px; }
+      .section-intro h2 { font-size: 32px; }
+      .card-meta h3 { font-size: 28px; }
+      .card-meta p { font-size: 15px; }
+      .device { width: min(100%, 300px); transform: rotateX(4deg) rotateY(-5deg); }
+      .device.tablet { width: min(100%, 250px); transform: rotateX(4deg) rotateY(5deg); }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-
-      * {
-        transition: none !important;
-      }
+      html { scroll-behavior: auto; }
+      * { transition: none !important; }
     }
   </style>
 </head>
@@ -976,9 +872,7 @@
         type="button"
         aria-label="Buka menu"
         aria-expanded="false"
-      >
-        ☰
-      </button>
+      >☰</button>
     </div>
   </header>
 
@@ -993,25 +887,106 @@
   </nav>
 
   <main>
-    
-
     <section class="hero">
       <div class="hero-inner">
         <span class="eyebrow">Kabayan · Katalog Bahan Pelayanan</span>
-
-        <h1> Hitung Pajak. Lebih Mudah. </h1>
-<p>
-        Gunakan kalkulator pajak ini untuk memundahkan penghitungan pajakmu.
-      </p>
+        <h1>Hitung pajak. Lebih mudah.</h1>
+        <p>
+          Pilih kalkulator yang Anda butuhkan dalam satu halaman.
+        </p>
 
         <div class="hero-actions">
-          <a class="btn btn-primary" href="#koleksi">
-            Lihat Kalkulator
-            <span aria-hidden="true">↓</span>
+          <a class="btn btn-primary" href="#pilihan-kalkulator">
+            Pilih Kalkulator <span aria-hidden="true">↓</span>
           </a>
-
           <a class="btn btn-secondary" href="index.html">
             Kembali ke Beranda
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="picker-section" id="pilihan-kalkulator">
+      <div class="picker-shell">
+        <h2 class="picker-title">
+          Pilih kalkulator pada perangkat kegemaran Anda.
+        </h2>
+
+        <div class="picker-grid">
+          <a class="picker-item" data-link="ppn" href="#">
+            <div class="picker-icon" aria-hidden="true">
+              <svg viewBox="0 0 64 64">
+                <rect x="15" y="7" width="34" height="50" rx="7"></rect>
+                <path d="M24 16h16"></path>
+                <path d="M24 24h16"></path>
+                <path d="M24 32h16"></path>
+                <path d="M24 40h7"></path>
+                <circle cx="40" cy="45" r="3"></circle>
+              </svg>
+            </div>
+            <h3>PPN</h3>
+            <p>Kalkulator PPN umum</p>
+          </a>
+
+          <a class="picker-item" data-link="pph21Regular" href="#">
+            <div class="picker-icon" aria-hidden="true">
+              <svg viewBox="0 0 64 64">
+                <path d="M12 45h40"></path>
+                <path d="M19 20h26a4 4 0 0 1 4 4v17H15V24a4 4 0 0 1 4-4z"></path>
+                <path d="M28 20v-2h8v2"></path>
+                <path d="M25 28h14"></path>
+                <path d="M25 33h10"></path>
+              </svg>
+            </div>
+            <h3>PPh Pasal 21 (TER)</h3>
+          <p>Selain masa terakhir</p>
+          </a>
+
+          <a class="picker-item" data-link="pph21Final" href="#">
+            <div class="picker-icon" aria-hidden="true">
+              <svg viewBox="0 0 64 64">
+                <rect x="16" y="7" width="32" height="50" rx="7"></rect>
+                <path d="M23 18h18"></path>
+                <path d="M23 26h18"></path>
+                <path d="M23 34h12"></path>
+                <path d="M26 48l4 4 8-10"></path>
+              </svg>
+            </div>
+            <h3>PPh Pasal 21<br>
+              Masa Terakhir</h3>
+<p>PPh Pasal 21 finalisasi</p>
+          </a>
+
+          <a class="picker-item" data-link="governmentSpending" href="#">
+            <div class="picker-icon" aria-hidden="true">
+              <svg viewBox="0 0 64 64">
+                <path d="M11 25h42"></path>
+                <path d="M14 25V18l18-7 18 7v7"></path>
+                <path d="M18 25v18"></path>
+                <path d="M27 25v18"></path>
+                <path d="M37 25v18"></path>
+                <path d="M46 25v18"></path>
+                <path d="M12 46h40"></path>
+              </svg>
+            </div>
+            <h3>PPh Belanja Instansi</h3>
+            <p>Potong dan pungut PPh</p>
+          </a>
+
+          <a class="picker-item" data-link="governmentVat" href="#">
+            <div class="picker-icon" aria-hidden="true">
+              <svg viewBox="0 0 64 64">
+                <rect x="13" y="11" width="38" height="42" rx="6"></rect>
+                <path d="M23 21h18"></path>
+                <path d="M23 29h18"></path>
+                <path d="M23 37h8"></path>
+                <circle cx="42" cy="41" r="5"></circle>
+                <path d="M42 38v6"></path>
+                <path d="M39 41h6"></path>
+              </svg>
+            </div>
+            <h3>PPN Belanja Instansi</h3>
+            <p>Pemungutan PPN Instansi</p>
           </a>
         </div>
       </div>
@@ -1020,14 +995,12 @@
     <section class="showcase" id="koleksi">
       <div class="showcase-inner">
         <div class="section-intro">
-          <p>Lima alat bantu utama</p>
-          <h2>
-            Pilih kalkulator yang paling sesuai dengan kebutuhan Anda.
-          </h2>
+          <p>Alat bantu utama</p>
+          <h2>Pilih kalkulator yang paling sesuai dengan kebutuhan Anda.</h2>
         </div>
 
         <div class="cards-grid">
-          <article class="calc-card blue">
+          <article class="calc-card blue" id="card-ppn">
             <div>
               <div class="card-top">
                 <span class="card-badge">PPN</span>
@@ -1049,48 +1022,26 @@
 
               <div class="card-actions">
                 <a class="card-link" data-link="ppn" href="#">
-                  Buka Kalkulator
-                  <span aria-hidden="true">›</span>
+                  Buka Kalkulator <span aria-hidden="true">›</span>
                 </a>
-
-                <span class="link-subtle">
-                  Untuk transaksi barang dan jasa
-                </span>
+                <span class="link-subtle">Untuk transaksi barang dan jasa</span>
               </div>
             </div>
 
             <div class="mockup-stage" aria-hidden="true">
               <div class="device laptop">
                 <div class="device-screen">
-                  <div class="browser-bar">
-                    <span class="browser-dot"></span>
-                    <span class="browser-dot"></span>
-                    <span class="browser-dot"></span>
-                  </div>
+                  <div class="browser-bar"><span class="browser-dot"></span><span class="browser-dot"></span><span class="browser-dot"></span></div>
                   <div class="ui">
                     <div class="ui-header"></div>
-                    <div class="ui-row">
-                      <div class="ui-field"></div>
-                      <div class="ui-field"></div>
-                    </div>
-                    <div class="ui-pills">
-                      <div class="ui-pill"></div>
-                      <div class="ui-pill"></div>
-                      <div class="ui-pill"></div>
-                    </div>
+                    <div class="ui-row"><div class="ui-field"></div><div class="ui-field"></div></div>
+                    <div class="ui-pills"><div class="ui-pill"></div><div class="ui-pill"></div><div class="ui-pill"></div></div>
                     <div class="ui-sidebar-layout">
                       <div class="ui-panel">
-                        <div class="line"></div>
-                        <div class="line short"></div>
-                        <div class="line mid"></div>
-                        <div class="line"></div>
-                        <div class="line short"></div>
+                        <div class="line"></div><div class="line short"></div><div class="line mid"></div><div class="line"></div><div class="line short"></div>
                       </div>
                       <div class="ui-result">
-                        <div class="line"></div>
-                        <div class="line short"></div>
-                        <div class="line"></div>
-                        <div class="big"></div>
+                        <div class="line"></div><div class="line short"></div><div class="line"></div><div class="big"></div>
                       </div>
                     </div>
                   </div>
@@ -1100,57 +1051,31 @@
             </div>
           </article>
 
-          <article class="calc-card cyan">
+          <article class="calc-card cyan" id="card-pph21Regular">
             <div>
-              <div class="card-top">
-                <span class="card-badge">PPh Pasal 21 Reguler</span>
-              </div>
-
+              <div class="card-top"><span class="card-badge">PPh Pasal 21 Reguler</span></div>
               <div class="card-meta">
                 <h3>Kalkulator PPh Pasal 21 Selain Masa Pajak Terakhir</h3>
                 <p>
-                  Digunakan untuk menghitung PPh Pasal 21 bulanan
-                  pada masa pajak selain masa pajak terakhir (dengan dasar Tarif Efektif Rata-rata).
+                  Digunakan untuk menghitung PPh Pasal 21 bulanan pada masa
+                  pajak selain masa pajak terakhir dengan dasar Tarif Efektif Rata-rata.
                 </p>
               </div>
-
-              <div class="card-tags">
-                <span>TER</span>
-                <span>Gross</span>
-                <span>Gross-up</span>
-              </div>
-
+              <div class="card-tags"><span>TER</span><span>Gross</span><span>Gross-up</span></div>
               <div class="card-actions">
-                <a class="card-link" data-link="pph21Regular" href="kalkulator-ter-kabayan.html">
-                  Buka Kalkulator
-                  <span aria-hidden="true">›</span>
-                </a>
+                <a class="card-link" data-link="pph21Regular" href="#">Buka Kalkulator <span aria-hidden="true">›</span></a>
               </div>
             </div>
-
             <div class="mockup-stage" aria-hidden="true">
               <div class="device tablet">
                 <div class="device-screen">
-                  <div class="browser-bar">
-                    <span class="browser-dot"></span>
-                    <span class="browser-dot"></span>
-                    <span class="browser-dot"></span>
-                  </div>
+                  <div class="browser-bar"><span class="browser-dot"></span><span class="browser-dot"></span><span class="browser-dot"></span></div>
                   <div class="ui">
                     <div class="ui-header" style="width:62%;"></div>
-                    <div class="ui-row">
-                      <div class="ui-field"></div>
-                      <div class="ui-field"></div>
-                    </div>
-                    <div class="ui-row">
-                      <div class="ui-field"></div>
-                      <div class="ui-field"></div>
-                    </div>
+                    <div class="ui-row"><div class="ui-field"></div><div class="ui-field"></div></div>
+                    <div class="ui-row"><div class="ui-field"></div><div class="ui-field"></div></div>
                     <div class="ui-card"></div>
-                    <div class="ui-button-row">
-                      <div class="ui-button"></div>
-                      <div class="ui-button primary"></div>
-                    </div>
+                    <div class="ui-button-row"><div class="ui-button"></div><div class="ui-button primary"></div></div>
                   </div>
                 </div>
               </div>
@@ -1158,12 +1083,9 @@
             </div>
           </article>
 
-          <article class="calc-card">
+          <article class="calc-card indigo" id="card-pph21Final">
             <div>
-              <div class="card-top">
-                <span class="card-badge">PPh 21 Finalisasi</span>
-              </div>
-
+              <div class="card-top"><span class="card-badge">PPh 21 Finalisasi</span></div>
               <div class="card-meta">
                 <h3>Kalkulator PPh Pasal 21 Masa Pajak Terakhir</h3>
                 <p>
@@ -1171,44 +1093,20 @@
                   termasuk penyesuaian dan rekonsiliasi penghitungan tahunan.
                 </p>
               </div>
-
-              <div class="card-tags">
-                <span>Masa Terakhir</span>
-                <span>Rekonsiliasi</span>
-                <span>Pasal 17</span>
-              </div>
-
+              <div class="card-tags"><span>Masa Terakhir</span><span>Rekonsiliasi</span><span>Pasal 17</span></div>
               <div class="card-actions">
-                <a class="card-link" data-link="pph21Final" href="#">
-                  Buka Kalkulator
-                  <span aria-hidden="true">›</span>
-                </a>
+                <a class="card-link" data-link="pph21Final" href="#">Buka Kalkulator <span aria-hidden="true">›</span></a>
               </div>
             </div>
-
             <div class="mockup-stage" aria-hidden="true">
               <div class="device laptop">
                 <div class="device-screen">
-                  <div class="browser-bar">
-                    <span class="browser-dot"></span>
-                    <span class="browser-dot"></span>
-                    <span class="browser-dot"></span>
-                  </div>
+                  <div class="browser-bar"><span class="browser-dot"></span><span class="browser-dot"></span><span class="browser-dot"></span></div>
                   <div class="ui">
                     <div class="ui-header" style="width:48%;"></div>
                     <div class="ui-sidebar-layout">
-                      <div class="ui-panel">
-                        <div class="line mid"></div>
-                        <div class="line"></div>
-                        <div class="line short"></div>
-                        <div class="line"></div>
-                      </div>
-                      <div class="ui-panel">
-                        <div class="line"></div>
-                        <div class="line short"></div>
-                        <div class="line"></div>
-                        <div class="line mid"></div>
-                      </div>
+                      <div class="ui-panel"><div class="line mid"></div><div class="line"></div><div class="line short"></div><div class="line"></div></div>
+                      <div class="ui-panel"><div class="line"></div><div class="line short"></div><div class="line"></div><div class="line mid"></div></div>
                     </div>
                     <div class="ui-card"></div>
                   </div>
@@ -1218,54 +1116,31 @@
             </div>
           </article>
 
-          <article class="calc-card gold">
+          <article class="calc-card gold" id="card-governmentSpending">
             <div>
-              <div class="card-top">
-                <span class="card-badge">Belanja Pemerintah</span>
-              </div>
-
+              <div class="card-top"><span class="card-badge">Belanja Pemerintah</span></div>
               <div class="card-meta">
                 <h3>Kalkulator Belanja Instansi Pemerintah</h3>
                 <p>
-                  Membantu identifikasi kewajiban potong dan pungut
-                  atas transaksi belanja pemerintah secara lebih sistematis.
+                  Membantu identifikasi kewajiban potong dan pungut atas transaksi
+                  belanja pemerintah secara lebih sistematis.
                 </p>
               </div>
-
               <div class="card-tags">
-                <span>PPh Pasal 21</span>
-                <span>PPh Pasal 22</span>
-                <span>PPh Pasal 23</span>
-                <span>PPh Final Pasal 4 ayat (2)</span>
+                <span>PPh Pasal 21</span><span>PPh Pasal 22</span><span>PPh Pasal 23</span><span>PPh Final Pasal 4 ayat (2)</span>
               </div>
-
               <div class="card-actions">
-                <a class="card-link" data-link="governmentSpending" href="#">
-                  Buka Kalkulator
-                  <span aria-hidden="true">›</span>
-                </a>
+                <a class="card-link" data-link="governmentSpending" href="#">Buka Kalkulator <span aria-hidden="true">›</span></a>
               </div>
             </div>
-
             <div class="mockup-stage" aria-hidden="true">
               <div class="device tablet">
                 <div class="device-screen">
-                  <div class="browser-bar">
-                    <span class="browser-dot"></span>
-                    <span class="browser-dot"></span>
-                    <span class="browser-dot"></span>
-                  </div>
+                  <div class="browser-bar"><span class="browser-dot"></span><span class="browser-dot"></span><span class="browser-dot"></span></div>
                   <div class="ui">
                     <div class="ui-header" style="width:58%;"></div>
-                    <div class="ui-row">
-                      <div class="ui-field"></div>
-                      <div class="ui-field"></div>
-                    </div>
-                    <div class="ui-pills">
-                      <div class="ui-pill"></div>
-                      <div class="ui-pill"></div>
-                      <div class="ui-pill" style="width:68px;"></div>
-                    </div>
+                    <div class="ui-row"><div class="ui-field"></div><div class="ui-field"></div></div>
+                    <div class="ui-pills"><div class="ui-pill"></div><div class="ui-pill"></div><div class="ui-pill" style="width:68px;"></div></div>
                     <div class="ui-card"></div>
                     <div class="ui-card" style="height:42px;"></div>
                   </div>
@@ -1275,60 +1150,32 @@
             </div>
           </article>
 
-          <article class="calc-card green">
+          <article class="calc-card green" id="card-governmentVat">
             <div>
-              <div class="card-top">
-                <span class="card-badge">PPN Pemerintah</span>
-              </div>
-
+              <div class="card-top"><span class="card-badge">PPN Pemerintah</span></div>
               <div class="card-meta">
                 <h3>Kalkulator PPN Instansi Pemerintah</h3>
                 <p>
-                  Dirancang untuk membantu pemungutan PPN oleh instansi
-                  pemerintah sesuai status PKP, tagihan, dan dokumen pendukung.
+                  Dirancang untuk membantu pemungutan PPN oleh instansi pemerintah
+                  sesuai status PKP, tagihan, dan dokumen pendukung.
                 </p>
               </div>
-
-              <div class="card-tags">
-                <span>PKP/Non-PKP</span>
-                <span>Kode Faktur</span>
-                <span>Fasilitas PPN</span>
-              </div>
-
+              <div class="card-tags"><span>PKP/Non-PKP</span><span>Kode Faktur</span><span>Fasilitas PPN</span></div>
               <div class="card-actions">
-                <a class="card-link" data-link="governmentVat" href="#">
-                  Buka Kalkulator
-                  <span aria-hidden="true">›</span>
-                </a>
+                <a class="card-link" data-link="governmentVat" href="#">Buka Kalkulator <span aria-hidden="true">›</span></a>
               </div>
             </div>
-
             <div class="mockup-stage" aria-hidden="true">
               <div class="device laptop">
                 <div class="device-screen">
-                  <div class="browser-bar">
-                    <span class="browser-dot"></span>
-                    <span class="browser-dot"></span>
-                    <span class="browser-dot"></span>
-                  </div>
+                  <div class="browser-bar"><span class="browser-dot"></span><span class="browser-dot"></span><span class="browser-dot"></span></div>
                   <div class="ui">
                     <div class="ui-header" style="width:52%;"></div>
-                    <div class="ui-row">
-                      <div class="ui-field"></div>
-                      <div class="ui-field"></div>
-                    </div>
+                    <div class="ui-row"><div class="ui-field"></div><div class="ui-field"></div></div>
                     <div class="ui-card"></div>
                     <div class="ui-sidebar-layout">
-                      <div class="ui-panel">
-                        <div class="line"></div>
-                        <div class="line mid"></div>
-                        <div class="line short"></div>
-                      </div>
-                      <div class="ui-panel">
-                        <div class="line"></div>
-                        <div class="line short"></div>
-                        <div class="line"></div>
-                      </div>
+                      <div class="ui-panel"><div class="line"></div><div class="line mid"></div><div class="line short"></div></div>
+                      <div class="ui-panel"><div class="line"></div><div class="line short"></div><div class="line"></div></div>
                     </div>
                   </div>
                 </div>
@@ -1342,20 +1189,15 @@
 
     <section class="bottom-cta">
       <div class="bottom-cta-inner">
-        <h2>
-          Ingin menambah kalkulator lain di masa depan?
-        </h2>
+        <h2>Ingin menambah kalkulator lain di masa depan?</h2>
         <p>
-          Kirimkan masukanmu kepada Angga Sukma Dhaniswara melalui email berikut.
+          Struktur halaman ini sudah dibuat fleksibel. Anda cukup menggandakan
+          blok pilihan dan kartu kalkulator, lalu menyesuaikan judul,
+          deskripsi, ikon, dan tautannya.
         </p>
-
         <div class="bottom-cta-actions">
-          <a class="btn btn-primary" href="aplikasi.html">
-            Kirim masukan
-          </a>
-          <a class="btn btn-secondary" href="index.html">
-            Kembali ke Beranda
-          </a>
+          <a class="btn btn-primary" href="aplikasi.html">Lihat Halaman Aplikasi</a>
+          <a class="btn btn-secondary" href="index.html">Kembali ke Beranda</a>
         </div>
       </div>
     </section>
@@ -1371,11 +1213,7 @@
     </div>
 
     <div class="footer-inner">
-      <p>
-        © <span id="currentYear"></span>
-        Angga Sukma Dhaniswara.
-      </p>
-
+      <p>© <span id="currentYear"></span> Angga Sukma Dhaniswara.</p>
       <div class="footer-links">
         <a href="index.html">Beranda</a>
         <a href="kalkulator.html">Kalkulator</a>
@@ -1387,62 +1225,40 @@
 
   <script>
     const CALCULATOR_PAGES = {
-      ppn: "kalkulator-ppn.html",
-      pph21Regular: "kalkulator-ter.html",
+      ppn: "kalkulator-ppn-gaya-kabayan.html",
+      pph21Regular: "kalkulator-ter-gaya-kabayan.html",
       pph21Final: "kalkulator-pph21-masa-pajak-terakhir.html",
-      governmentSpending:
-        "kalkulator-belanja-instansi-pemerintah.html",
-      governmentVat:
-        "kalkulator-ppn-instansi-pemerintah.html"
+      governmentSpending: "kalkulator-belanja-instansi-pemerintah.html",
+      governmentVat: "kalkulator-ppn-instansi-pemerintah.html"
     };
 
-    document
-      .querySelectorAll("[data-link]")
-      .forEach((link) => {
-        const key = link.dataset.link;
-        link.href = CALCULATOR_PAGES[key] || "#";
-      });
+    document.querySelectorAll("[data-link]").forEach((link) => {
+      const key = link.dataset.link;
+      link.href = CALCULATOR_PAGES[key] || "#";
+    });
 
-    const menuToggle =
-      document.getElementById("menuToggle");
-    const mobileMenu =
-      document.getElementById("mobileMenu");
+    const menuToggle = document.getElementById("menuToggle");
+    const mobileMenu = document.getElementById("mobileMenu");
 
     if (menuToggle && mobileMenu) {
       menuToggle.addEventListener("click", () => {
-        const isOpen =
-          mobileMenu.classList.toggle("active");
-
-        document.body.classList.toggle(
-          "menu-open",
-          isOpen
-        );
-
-        menuToggle.setAttribute(
-          "aria-expanded",
-          String(isOpen)
-        );
-
+        const isOpen = mobileMenu.classList.toggle("active");
+        document.body.classList.toggle("menu-open", isOpen);
+        menuToggle.setAttribute("aria-expanded", String(isOpen));
         menuToggle.textContent = isOpen ? "×" : "☰";
       });
 
-      mobileMenu
-        .querySelectorAll("a")
-        .forEach((link) => {
-          link.addEventListener("click", () => {
-            mobileMenu.classList.remove("active");
-            document.body.classList.remove("menu-open");
-            menuToggle.setAttribute(
-              "aria-expanded",
-              "false"
-            );
-            menuToggle.textContent = "☰";
-          });
+      mobileMenu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileMenu.classList.remove("active");
+          document.body.classList.remove("menu-open");
+          menuToggle.setAttribute("aria-expanded", "false");
+          menuToggle.textContent = "☰";
         });
+      });
     }
 
-    document.getElementById("currentYear").textContent =
-      new Date().getFullYear();
+    document.getElementById("currentYear").textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
