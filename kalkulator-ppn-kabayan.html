@@ -494,6 +494,29 @@ main{padding-top:var(--nav-height)}
   </div>
 </div>
 
+<div class="dpp-list-link" id="specificListLinkBox">
+  <div class="dpp-list-link-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24">
+      <path d="M5 3h14v18H5z"></path>
+      <path d="M8 7h8M8 11h8M8 15h4"></path>
+    </svg>
+  </div>
+
+  <div class="dpp-list-link-content">
+    <span>
+      Daftar PPN Besaran Tertentu dapat dilihat pada tautan berikut.
+    </span>
+
+    <a href="ppn-list-besarantertentu.html">
+      Lihat Daftar PPN Besaran Tertentu
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M7 17 17 7"></path>
+        <path d="M9 7h8v8"></path>
+      </svg>
+    </a>
+  </div>
+</div>
+
 </div>
 <div class="field hidden" id="specificField">
 <label for="specificType">Nama BKP/JKP atau Transaksi</label>
@@ -627,6 +650,7 @@ main{padding-top:var(--nav-height)}
       const luxuryGoodsLinkBox = document.getElementById('luxuryGoodsLinkBox');
       const pmk131ListLinkBox = document.getElementById('pmk131ListLinkBox');
       const nonPmk131ListLinkBox = document.getElementById('nonPmk131ListLinkBox');
+      const specificListLinkBox = document.getElementById('specificListLinkBox');
       const specificField = document.getElementById('specificField');
       const specificEl = document.getElementById('specificType');
       const amountEl = document.getElementById('amount');
@@ -807,6 +831,7 @@ main{padding-top:var(--nav-height)}
         luxuryGoodsLinkBox.classList.toggle('show', mode === 'general12');
         pmk131ListLinkBox.classList.toggle('show', mode === 'pmk131');
         nonPmk131ListLinkBox.classList.toggle('show', mode === 'otherDpp');
+        specificListLinkBox.classList.toggle('show', mode === 'specific');
         const lpgSelected = mode === 'specific' && specificEl.value === 'lpg';
         includedField.classList.toggle('hidden', mode === 'otherDpp' || lpgSelected);
         if (mode === 'otherDpp' || lpgSelected) amountIncludedEl.checked = false;
