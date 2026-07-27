@@ -376,6 +376,20 @@ main{padding-top:var(--nav)}
     font-size:10px;
   }
 }
+
+
+/* Variasi pembatas BKP mewah selain kendaraan */
+.nonvehicle-divider{
+  margin-top:8px;
+}
+.nonvehicle-divider .category-divider-label{
+  border-color:#dfe3e8;
+  background:#f7f8fa;
+  color:#5b5b60;
+}
+.nonvehicle-divider.hidden-divider{
+  display:none !important;
+}
 </style>
 </head>
 <body id="top">
@@ -444,7 +458,7 @@ main{padding-top:var(--nav)}
 <h3>Barang tidak ditemukan</h3>
 <p>Coba gunakan nama yang lebih umum atau ubah filter kategori.</p>
 </div>
-<section class="catalog-section" data-category="nonvehicle" data-parent-category="nonvehicle" id="bkp-mewah-nonkendaraan">
+<div aria-hidden="true" class="category-divider nonvehicle-divider"><span class="category-divider-line"></span><span class="category-divider-label">Selain Kendaraan Bermotor</span><span class="category-divider-line"></span></div><section class="catalog-section" data-category="nonvehicle" data-parent-category="nonvehicle" id="bkp-mewah-nonkendaraan">
 <div class="catalog-section-inner">
 <header class="section-heading">
 <div aria-hidden="true" class="section-icon">
@@ -578,7 +592,7 @@ main{padding-top:var(--nav)}
 </div>
 </div>
 </section>
-<div aria-hidden="true" class="category-divider"><span class="category-divider-line"></span><span class="category-divider-label">Kendaraan Bermotor</span><span class="category-divider-line"></span></div><header class="section-heading vehicle-main-heading vehicle-heading-block" data-parent-category="vehicle"><div aria-hidden="true" class="section-icon vehicle"><svg viewbox="0 0 24 24">
+<div aria-hidden="true" class="category-divider vehicle-divider"><span class="category-divider-line"></span><span class="category-divider-label">Kendaraan Bermotor</span><span class="category-divider-line"></span></div><header class="section-heading vehicle-main-heading vehicle-heading-block" data-parent-category="vehicle"><div aria-hidden="true" class="section-icon vehicle"><svg viewbox="0 0 24 24">
 <path d="M3 15h18"></path>
 <path d="m5 15 2-6h10l2 6"></path>
 <circle cx="7" cy="18" r="1.5"></circle>
@@ -1300,6 +1314,8 @@ const resultCount=document.getElementById("resultCount");
 const vehicleInfoBlocks=document.querySelectorAll(".vehicle-info-block");
 const vehicleHeadingBlocks=document.querySelectorAll(".vehicle-heading-block");
 const categoryDividers=document.querySelectorAll(".category-divider");
+const nonvehicleDividers=document.querySelectorAll(".nonvehicle-divider");
+const vehicleDividers=document.querySelectorAll(".vehicle-divider");
 
 let activeFilter="all";
 
@@ -1330,6 +1346,14 @@ function updateVehicleInfoVisibility(){
   });
 
   categoryDividers.forEach(divider=>{
+    divider.classList.remove("hidden-divider");
+  });
+
+  nonvehicleDividers.forEach(divider=>{
+    divider.classList.toggle("hidden-divider",activeFilter==="vehicle");
+  });
+
+  vehicleDividers.forEach(divider=>{
     divider.classList.toggle("hidden-divider",activeFilter!=="all");
   });
 }
