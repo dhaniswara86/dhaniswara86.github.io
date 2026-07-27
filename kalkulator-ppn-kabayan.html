@@ -280,6 +280,94 @@ main{padding-top:var(--nav-height)}
   }
 </style>
 
+
+<style>
+  .dpp-list-link {
+    display: none;
+    align-items: flex-start;
+    gap: 12px;
+    margin-top: 12px;
+    padding: 14px 15px;
+    border: 1px solid #d9e9f8;
+    border-radius: 16px;
+    background: linear-gradient(145deg, #f7fbff, #eef6ff);
+    color: #42566a;
+  }
+
+  .dpp-list-link.show {
+    display: flex;
+  }
+
+  .dpp-list-link-icon {
+    width: 34px;
+    height: 34px;
+    display: grid;
+    flex: 0 0 auto;
+    place-items: center;
+    border-radius: 11px;
+    background: #ffffff;
+    color: #0071e3;
+    box-shadow: 0 6px 16px rgba(20, 43, 76, 0.08);
+  }
+
+  .dpp-list-link-icon svg,
+  .dpp-list-link a svg {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .dpp-list-link-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .dpp-list-link-content {
+    min-width: 0;
+  }
+
+  .dpp-list-link-content > span {
+    display: block;
+    color: #515154;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .dpp-list-link a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 7px;
+    color: #0071e3;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .dpp-list-link a:hover {
+    text-decoration: underline;
+  }
+
+  .dpp-list-link a svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  @media (max-width: 520px) {
+    .dpp-list-link {
+      padding: 13px;
+    }
+  }
+
+  @media print {
+    .dpp-list-link {
+      display: none !important;
+    }
+  }
+</style>
+
 </head>
 <body id="top">
 
@@ -354,6 +442,50 @@ main{padding-top:var(--nav-height)}
 
     <a href="daftar-bkp-mewah.html">
       Lihat Daftar BKP Mewah
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M7 17 17 7"></path>
+        <path d="M9 7h8v8"></path>
+      </svg>
+    </a>
+  </div>
+</div>
+
+<div class="dpp-list-link" id="pmk131ListLinkBox">
+  <div class="dpp-list-link-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24">
+      <path d="M5 3h14v18H5z"></path>
+      <path d="M8 7h8M8 11h8M8 15h4"></path>
+    </svg>
+  </div>
+  <div class="dpp-list-link-content">
+    <span>
+      Daftar DPP Nilai Lain berdasarkan PMK 131/2024
+      dapat dilihat pada tautan berikut.
+    </span>
+    <a href="ppn-list-pmk131.html">
+      Lihat Daftar DPP Nilai Lain PMK 131/2024
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M7 17 17 7"></path>
+        <path d="M9 7h8v8"></path>
+      </svg>
+    </a>
+  </div>
+</div>
+
+<div class="dpp-list-link" id="nonPmk131ListLinkBox">
+  <div class="dpp-list-link-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24">
+      <path d="M5 3h14v18H5z"></path>
+      <path d="M8 7h8M8 11h8M8 15h4"></path>
+    </svg>
+  </div>
+  <div class="dpp-list-link-content">
+    <span>
+      Daftar DPP Nilai Lain selain PMK 131/2024
+      dapat dilihat pada tautan berikut.
+    </span>
+    <a href="ppn-list-nonpmk131.html">
+      Lihat Daftar DPP Nilai Lain Selain PMK 131/2024
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <path d="M7 17 17 7"></path>
         <path d="M9 7h8v8"></path>
@@ -493,6 +625,8 @@ main{padding-top:var(--nav-height)}
 
       const modeEl = document.getElementById('mode');
       const luxuryGoodsLinkBox = document.getElementById('luxuryGoodsLinkBox');
+      const pmk131ListLinkBox = document.getElementById('pmk131ListLinkBox');
+      const nonPmk131ListLinkBox = document.getElementById('nonPmk131ListLinkBox');
       const specificField = document.getElementById('specificField');
       const specificEl = document.getElementById('specificType');
       const amountEl = document.getElementById('amount');
@@ -671,6 +805,8 @@ main{padding-top:var(--nav-height)}
         const cfg = modeConfig[mode];
         specificField.classList.toggle('hidden', mode !== 'specific');
         luxuryGoodsLinkBox.classList.toggle('show', mode === 'general12');
+        pmk131ListLinkBox.classList.toggle('show', mode === 'pmk131');
+        nonPmk131ListLinkBox.classList.toggle('show', mode === 'otherDpp');
         const lpgSelected = mode === 'specific' && specificEl.value === 'lpg';
         includedField.classList.toggle('hidden', mode === 'otherDpp' || lpgSelected);
         if (mode === 'otherDpp' || lpgSelected) amountIncludedEl.checked = false;
