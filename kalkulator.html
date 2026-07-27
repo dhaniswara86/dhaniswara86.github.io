@@ -294,7 +294,7 @@
 
     .picker-grid {
       display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
+      grid-template-columns: repeat(6, minmax(0, 1fr));
       gap: 18px;
       margin-top: clamp(34px, 4vw, 54px);
     }
@@ -425,6 +425,16 @@
 
     .calc-card.indigo {
       background: radial-gradient(circle at 88% 12%, rgba(156, 169, 255, 0.16), transparent 24%), linear-gradient(180deg, #111327, #090b16);
+    }
+
+    .calc-card.rose {
+      background:
+        radial-gradient(
+          circle at 88% 12%,
+          rgba(255, 111, 145, 0.16),
+          transparent 24%
+        ),
+        linear-gradient(180deg, #1a0e15, #0d080b);
     }
 
     .calc-card::after {
@@ -944,8 +954,10 @@
 </svg>
 </div>
 <h3>PPh Pasal 21 (TER)</h3>
-<p>Selain masa terakhir</p>
+<p>Pegawai Tetap <br> Selain masa terakhir</p>
 </a>
+
+
 <a class="picker-item" data-link="pph21Final" href="#">
 <div aria-hidden="true" class="picker-icon">
 <svg viewbox="0 0 64 64">
@@ -958,8 +970,25 @@
 </div>
 <h3>PPh Pasal 21<br/>
               Masa Terakhir</h3>
-<p>PPh Pasal 21 finalisasi</p>
+<p>Pegawai Tetap <br> Masa Pajak Terakhir</p>
 </a>
+	<a class="picker-item" data-link="pph21NonPermanent" href="#">
+<div aria-hidden="true" class="picker-icon">
+<svg viewbox="0 0 64 64">
+<path d="M14 48h36"></path>
+<path d="M19 18h26v26H19z"></path>
+<path d="M25 25h14"></path>
+<path d="M25 32h9"></path>
+<path d="M25 39h7"></path>
+<path d="M42 38v10"></path>
+<path d="M37 43h10"></path>
+</svg>
+</div>
+<h3>PPh Pasal 21<br/>
+              Pegawai Tidak Tetap</h3>
+<p>Harian, mingguan, satuan, borongan, dan bulanan</p>
+</a>
+	
 <a class="picker-item" data-link="governmentSpending" href="#">
 <div aria-hidden="true" class="picker-icon">
 <svg viewbox="0 0 64 64">
@@ -1071,6 +1100,75 @@
 <div class="ui-row"><div class="ui-field"></div><div class="ui-field"></div></div>
 <div class="ui-card"></div>
 <div class="ui-button-row"><div class="ui-button"></div><div class="ui-button primary"></div></div>
+</div>
+</div>
+</div>
+<div class="tablet-shadow"></div>
+</div>
+</article>
+
+<article class="calc-card rose" id="card-pph21NonPermanent">
+<div>
+<div class="card-top">
+<span class="card-badge">PPh Pasal 21 Pegawai Tidak Tetap</span>
+</div>
+<div class="card-meta">
+<h3>Kalkulator PPh Pasal 21 Pegawai Tidak Tetap</h3>
+<p>
+                  Membantu menghitung PPh Pasal 21 atas pegawai tidak tetap
+                  yang menerima upah harian, mingguan, satuan, borongan,
+                  atau penghasilan yang dibayarkan secara bulanan.
+                </p>
+</div>
+<div class="card-tags">
+<span>TER Harian</span>
+<span>TER Bulanan</span>
+<span>Upah Borongan</span>
+<span>Upah Satuan</span>
+</div>
+<div class="card-actions">
+<a class="card-link" data-link="pph21NonPermanent"
+   href="kalkulator-pph21-pegawai-tidak-tetap.html">
+  Buka Kalkulator <span aria-hidden="true">›</span>
+</a>
+<span class="link-subtle">Khusus Pegawai Tidak Tetap</span>
+</div>
+</div>
+<div aria-hidden="true" class="mockup-stage">
+<div class="device tablet">
+<div class="device-screen">
+<div class="browser-bar">
+<span class="browser-dot"></span>
+<span class="browser-dot"></span>
+<span class="browser-dot"></span>
+</div>
+<div class="ui">
+<div class="ui-header" style="width:66%;"></div>
+<div class="ui-row">
+<div class="ui-field"></div>
+<div class="ui-field"></div>
+</div>
+<div class="ui-row">
+<div class="ui-field"></div>
+<div class="ui-field"></div>
+</div>
+<div class="ui-pills">
+<div class="ui-pill"></div>
+<div class="ui-pill"></div>
+<div class="ui-pill" style="width:72px;"></div>
+</div>
+<div class="ui-sidebar-layout">
+<div class="ui-panel">
+<div class="line"></div>
+<div class="line short"></div>
+<div class="line mid"></div>
+</div>
+<div class="ui-result">
+<div class="line"></div>
+<div class="line short"></div>
+<div class="big"></div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -1219,6 +1317,7 @@
     const CALCULATOR_PAGES = {
       ppn: "kalkulator-ppn-kabayan.html",
       pph21Regular: "kalkulator-ter-kabayan.html",
+      pph21NonPermanent: "kalkulator-pph21-pegawai-tidak-tetap.html",
       pph21Final: "kalkulator-pph21-masa-terakhir-kabayan.html",
       governmentSpending: "aplikasi-pph-instansi-pemerintah-kabayan.html",
       governmentVat: "aplikasi-ppn-instansi-pemerintah-kabayan.html"
