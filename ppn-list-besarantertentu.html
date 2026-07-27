@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daftar PPN Besaran Tertentu | Kabayan</title>
+  <meta name="description" content="Daftar PPN besaran tertentu berdasarkan PMK 11 Tahun 2025 beserta perubahan dan regulasi terkait yang berlaku.">
+  <meta name="theme-color" content="#f5f5f7">
+  <style>
+:root{
+  --ink:#1d1d1f;--white:#fff;--off:#f5f5f7;--line:#e8e8ed;
+  --muted:#6e6e73;--blue:#0071e3;--blue-soft:#eef6ff;
+  --navy:#071a38;--green:#18864b;--amber:#9a6700;
+  --red:#b42318;--red-soft:#fff1f0;--max:1180px;--nav:48px;
+  --shadow:0 24px 70px rgba(20,43,76,.11);
+  --soft-shadow:0 14px 38px rgba(20,43,76,.07);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{
+  margin:0;color:var(--ink);
+  background:radial-gradient(circle at 50% 4%,rgba(0,113,227,.07),transparent 23%),
+             linear-gradient(180deg,#fff 0%,#fff 42%,#f5f7fb 100%);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  letter-spacing:-.015em;-webkit-font-smoothing:antialiased;
+}
+body.menu-open{overflow:hidden}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit}button{cursor:pointer}
+.site-header{
+  position:fixed;z-index:1000;inset:0 0 auto;height:var(--nav);
+  border-bottom:1px solid rgba(0,0,0,.06);
+  background:rgba(250,250,252,.82);
+  backdrop-filter:saturate(180%) blur(20px);
+}
+.nav-wrap{
+  width:min(var(--max),calc(100% - 36px));height:var(--nav);
+  display:flex;align-items:center;justify-content:space-between;gap:28px;margin:auto;
+}
+.brand{display:flex;align-items:center;gap:9px;font-size:14px;font-weight:700}
+.brand-mark{
+  width:25px;height:25px;display:grid;place-items:center;
+  border-radius:8px;background:var(--ink);color:#fff;font-size:9px;font-weight:800;
+}
+.desktop-nav{display:flex;gap:24px}
+.desktop-nav a{color:#424245;font-size:12px;white-space:nowrap}
+.desktop-nav a:hover{color:#000}
+.menu-toggle{
+  width:34px;height:34px;display:none;place-items:center;border:0;
+  border-radius:50%;background:transparent;font-size:18px;
+}
+.mobile-menu{
+  position:fixed;z-index:999;inset:var(--nav) 0 0;display:none;
+  padding:36px 28px;background:rgba(250,250,252,.98);backdrop-filter:blur(24px);
+}
+.mobile-menu.active{display:block}
+.mobile-menu a{display:block;padding:11px 0;font-size:28px;font-weight:650;letter-spacing:-.04em}
+main{padding-top:var(--nav)}
+.hero{
+  padding:96px 20px 82px;text-align:center;
+  background:radial-gradient(circle at 50% 100%,rgba(0,113,227,.14),transparent 34%),
+             linear-gradient(180deg,#fff 0%,#fff 64%,#f3f7ff 100%);
+}
+.hero-inner{width:min(980px,100%);margin:auto}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:7px;padding:7px 12px;
+  border-radius:999px;background:var(--off);color:#515154;font-size:12px;font-weight:650;
+}
+.eyebrow:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--blue)}
+.hero h1{
+  max-width:940px;margin:22px auto 16px;font-size:clamp(48px,7vw,80px);
+  line-height:.98;letter-spacing:-.06em;
+}
+.hero h1 span{
+  display:block;background:linear-gradient(90deg,#093b91,#0071e3 46%,#25a6d9 72%,#e6aa00);
+  background-clip:text;-webkit-background-clip:text;color:transparent;
+}
+.hero p{max-width:780px;margin:auto;color:#515154;font-size:clamp(18px,2.2vw,22px);line-height:1.5}
+.hero-rule{
+  max-width:860px;margin:26px auto 0;padding:15px 18px;border:1px solid #d9e9f8;
+  border-radius:18px;background:rgba(255,255,255,.82);color:#34506f;font-size:13px;line-height:1.6;
+}
+.catalog-shell{width:min(var(--max),calc(100% - 32px));margin:-28px auto 90px}
+.search-panel{
+  position:sticky;z-index:30;top:calc(var(--nav) + 12px);
+  margin-bottom:26px;padding:18px;border:1px solid rgba(0,0,0,.07);
+  border-radius:24px;background:rgba(255,255,255,.92);
+  box-shadow:var(--shadow);backdrop-filter:blur(18px);
+}
+.search-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px}
+.search-box{position:relative}
+.search-icon{
+  position:absolute;top:50%;left:16px;width:20px;height:20px;
+  color:var(--muted);transform:translateY(-50%);
+}
+.search-icon svg,.no-results svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.search-input{
+  width:100%;min-height:54px;padding:0 52px 0 48px;
+  border:1px solid #d2d2d7;border-radius:16px;background:#fff;
+  color:var(--ink);font-size:16px;outline:none;
+}
+.search-input:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(0,113,227,.1)}
+.clear-search{
+  position:absolute;top:50%;right:12px;width:32px;height:32px;
+  display:none;place-items:center;border:0;border-radius:50%;
+  background:var(--off);color:var(--muted);transform:translateY(-50%);
+}
+.clear-search.visible{display:grid}
+.filter-tabs{display:flex;gap:8px;padding:5px;border-radius:16px;background:var(--off);overflow-x:auto}
+.filter-button{
+  min-height:44px;padding:0 15px;border:0;border-radius:12px;
+  background:transparent;color:#515154;font-size:12px;font-weight:650;white-space:nowrap;
+}
+.filter-button.active{background:#fff;color:var(--blue);box-shadow:0 5px 16px rgba(20,43,76,.08)}
+.search-meta{display:flex;justify-content:space-between;gap:14px;margin-top:12px;padding:0 4px;color:var(--muted);font-size:12px}
+.result-count{font-weight:650}
+.status-card{
+  display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;
+  margin-bottom:28px;padding:18px 20px;border:1px solid #d7e9dc;border-radius:20px;
+  background:#f2faf5;color:#245c3b;font-size:13px;line-height:1.65;
+}
+.status-dot{width:10px;height:10px;margin-top:6px;border-radius:50%;background:var(--green);box-shadow:0 0 0 5px rgba(24,134,75,.11)}
+.status-card p{margin:0}.status-card strong{color:#174d31}
+.catalog-section{scroll-margin-top:160px;margin-bottom:30px}
+.catalog-section.hidden-section{display:none}
+.section-heading{display:flex;align-items:flex-start;gap:16px;margin-bottom:18px;padding:0 5px}
+.section-icon{
+  width:52px;height:52px;display:grid;flex:0 0 auto;place-items:center;
+  border-radius:17px;background:var(--blue-soft);color:var(--blue);font-size:22px;font-weight:800;
+}
+.section-kicker{display:block;margin-bottom:5px;color:var(--blue);font-size:11px;font-weight:750;letter-spacing:.06em;text-transform:uppercase}
+.section-heading h2{margin:0;font-size:clamp(28px,4vw,42px);letter-spacing:-.045em;line-height:1.05}
+.section-heading p{max-width:790px;margin:7px 0 0;color:var(--muted);font-size:14px;line-height:1.55}
+.table-card{overflow-x:auto;border:1px solid rgba(0,0,0,.07);border-radius:24px;background:rgba(255,255,255,.97);box-shadow:var(--soft-shadow)}
+.value-table{width:100%;min-width:1080px;border-collapse:collapse}
+.value-table th,.value-table td{padding:16px 17px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.value-table th{background:#f7f8fa;color:#424245;font-size:12px;font-weight:700}
+.value-table td{color:#424245;font-size:13px;line-height:1.58}
+.value-table tbody tr:last-child td{border-bottom:0}
+.value-table tr.searchable-row:hover{background:#f8fbff}
+.number-cell{width:62px;color:var(--muted)!important;font-weight:700}
+.formula-cell{color:var(--blue)!important;font-weight:720}
+.basis-cell{color:#515154!important;font-size:12px!important;font-weight:650}
+.condition{color:#6d4b14}
+.section-note{
+  display:grid;gap:8px;margin-top:14px;padding:17px 19px;
+  border:1px solid #f0dfbd;border-radius:18px;background:#fff8ea;
+  color:#6d4b14;font-size:12px;line-height:1.6;
+}
+.section-note p{margin:0}.section-note strong{color:#694000}
+.exclusion-card{
+  margin-top:34px;padding:22px;border:1px solid #f0c9c5;border-radius:22px;
+  background:var(--red-soft);color:#7a271a;font-size:13px;line-height:1.65;
+}
+.exclusion-card h3{margin:0 0 8px;font-size:21px;letter-spacing:-.03em;color:#6f1d14}
+.exclusion-card p{margin:0 0 9px}.exclusion-card p:last-child{margin-bottom:0}
+.source-card{
+  margin-top:18px;padding:20px;border:1px solid #d9e9f8;border-radius:22px;background:#f7fbff;
+  color:#34506f;font-size:12px;line-height:1.65;
+}
+.source-card h3{margin:0 0 8px;color:var(--navy);font-size:18px;letter-spacing:-.025em}
+.source-card p{margin:6px 0}.source-card a{color:var(--blue);font-weight:650}.source-card a:hover{text-decoration:underline}
+.no-results{display:none;padding:46px 24px;border:1px dashed #c7d4e2;border-radius:24px;background:rgba(255,255,255,.78);text-align:center}
+.no-results.visible{display:block}
+.no-results-icon{width:54px;height:54px;display:grid;place-items:center;margin:0 auto 13px;border-radius:18px;background:var(--blue-soft);color:var(--blue)}
+.no-results-icon svg{width:27px;height:27px}
+.no-results h3{margin:0;font-size:21px;letter-spacing:-.035em}
+.no-results p{margin:7px 0 0;color:var(--muted);font-size:13px}
+.site-footer{background:var(--off);color:var(--muted)}
+.footer-disclaimer{width:min(980px,calc(100% - 40px));margin:auto;padding:23px 0;border-bottom:1px solid #d2d2d7;font-size:12px;line-height:1.5}
+.footer-disclaimer strong{color:#424245}
+.footer-inner{width:min(980px,calc(100% - 40px));display:flex;align-items:center;justify-content:space-between;gap:20px;margin:auto;padding:21px 0 27px;font-size:12px}
+.footer-inner p{margin:0}.footer-links{display:flex;flex-wrap:wrap;gap:18px}.footer-links a{color:#424245}.footer-links a:hover{text-decoration:underline}
+@media(max-width:1030px){.desktop-nav{display:none}.menu-toggle{display:grid}.search-row{grid-template-columns:1fr}}
+@media(max-width:700px){
+  .hero{padding-top:72px;padding-bottom:68px}.hero h1{font-size:45px}
+  .catalog-shell{margin-top:-20px}.search-panel{position:relative;top:auto;padding:14px}
+  .search-meta{align-items:flex-start;flex-direction:column}.status-card{grid-template-columns:1fr}.status-dot{display:none}
+  .section-heading{align-items:center}.section-icon{width:45px;height:45px}
+  .table-card{overflow:visible;border:0;background:transparent;box-shadow:none}.value-table{min-width:0}.value-table thead{display:none}
+  .value-table,.value-table tbody,.value-table tr,.value-table td{display:block;width:100%}
+  .value-table tr.searchable-row{margin-bottom:12px;padding:14px 16px;border:1px solid rgba(0,0,0,.07);border-radius:18px;background:#fff;box-shadow:0 12px 30px rgba(20,43,76,.06)}
+  .value-table td{display:grid;grid-template-columns:135px minmax(0,1fr);gap:11px;padding:8px 0;border:0;font-size:13px}
+  .value-table td:before{content:attr(data-label);color:var(--muted);font-size:11px;font-weight:700}
+  .footer-inner{align-items:flex-start;flex-direction:column}
+}
+@media(max-width:460px){.hero h1{font-size:39px}.brand span:last-child{display:none}.section-heading{align-items:flex-start}.section-icon{display:none}.value-table td{grid-template-columns:1fr;gap:3px}}
+  </style>
+</head>
+<body id="top">
+<header class="site-header">
+  <div class="nav-wrap">
+    <a class="brand" href="index.html"><span class="brand-mark">ASD</span><span>dhaniswara86</span></a>
+    <nav class="desktop-nav" aria-label="Navigasi utama">
+      <a href="index.html">Beranda</a><a href="buku.html">Buku</a><a href="formulir.html">Formulir</a>
+      <a href="kalkulator.html">Kalkulator</a><a href="aplikasi.html">Aplikasi</a><a href="artikel.html">Artikel</a><a href="index.html#tentang">Tentang</a>
+    </nav>
+    <button class="menu-toggle" id="menuToggle" type="button" aria-label="Buka menu" aria-expanded="false">☰</button>
+  </div>
+</header>
+
+<nav class="mobile-menu" id="mobileMenu" aria-label="Navigasi seluler">
+  <a href="index.html">Beranda</a><a href="buku.html">Buku Digital</a><a href="formulir.html">Formulir</a>
+  <a href="kalkulator.html">Kalkulator</a><a href="aplikasi.html">Aplikasi</a><a href="artikel.html">Artikel</a><a href="index.html#tentang">Tentang</a>
+</nav>
+
+<main>
+  <section class="hero">
+    <div class="hero-inner">
+      <span class="eyebrow">Kabayan · Pajak Pertambahan Nilai</span>
+      <h1>Cari daftar <span>PPN Besaran Tertentu.</span></h1>
+      <p>Daftar objek, formula, syarat, dan dasar hukum PPN besaran tertentu berdasarkan regulasi yang berlaku.</p>
+      <div class="hero-rule">
+        <strong>Penting:</strong> besaran tertentu adalah jumlah PPN yang dihitung dengan formula khusus.
+        Jangan mencampurkannya dengan DPP Nilai Lain atau menganggap seluruh transaksi dalam satu jenis usaha otomatis memakai formula ini.
+      </div>
+    </div>
+  </section>
+
+  <section class="catalog-shell">
+    <div class="search-panel" role="search">
+      <div class="search-row">
+        <div class="search-box">
+          <span class="search-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="m16.5 16.5 4 4"></path></svg>
+          </span>
+          <input class="search-input" id="itemSearch" type="search" autocomplete="off"
+                 placeholder="Cari LPG, kendaraan bekas, freight forwarding, emas, asuransi..."
+                 aria-label="Cari ketentuan PPN besaran tertentu">
+          <button class="clear-search" id="clearSearch" type="button" aria-label="Hapus pencarian">×</button>
+        </div>
+        <div class="filter-tabs" role="group" aria-label="Filter kategori">
+          <button class="filter-button active" type="button" data-filter="all">Semua</button>
+          <button class="filter-button" type="button" data-filter="lpg">LPG</button>
+          <button class="filter-button" type="button" data-filter="barang">Barang</button>
+          <button class="filter-button" type="button" data-filter="jasa">Jasa</button>
+          <button class="filter-button" type="button" data-filter="agunan">Agunan</button>
+          <button class="filter-button" type="button" data-filter="emas">Emas</button>
+          <button class="filter-button" type="button" data-filter="asuransi">Asuransi</button>
+          <button class="filter-button" type="button" data-filter="kms">KMS</button>
+        </div>
+      </div>
+      <div class="search-meta">
+        <span class="result-count" id="resultCount">Menampilkan seluruh daftar</span>
+        <span>Hasil berubah otomatis saat Anda mengetik.</span>
+      </div>
+    </div>
+
+    <div class="status-card">
+      <span class="status-dot" aria-hidden="true"></span>
+      <p>
+        <strong>Status regulasi diperiksa sampai 27 Juli 2026.</strong>
+        Daftar mengacu pada Bab III PMK 11 Tahun 2025, PMK 53 Tahun 2025, serta peraturan khusus yang disebut dalam masing-masing kelompok.
+      </p>
+    </div>
+
+    <div class="no-results" id="noResults">
+      <div class="no-results-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="m16.5 16.5 4 4M8.5 11h5"></path></svg>
+      </div>
+      <h3>Ketentuan tidak ditemukan</h3>
+      <p>Coba gunakan istilah yang lebih umum atau ubah filter kategori.</p>
+    </div>
+
+    
+    <section class="catalog-section" data-category="lpg" id="lpg">
+      <header class="section-heading">
+        <div class="section-icon" aria-hidden="true">L</div>
+        <div>
+          <span class="section-kicker">LPG Tertentu</span>
+          <h2>Penyerahan LPG Tertentu</h2>
+          <p>Besaran tertentu hanya pada titik serah Agen dan Pangkalan. Penyerahan pada titik serah Badan Usaha menggunakan DPP Nilai Lain.</p>
+        </div>
+      </header>
+      <div class="table-card">
+        <table class="value-table">
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>Transaksi</th>
+              <th>PPN Besaran Tertentu</th>
+              <th>Syarat / Catatan</th>
+              <th>Dasar hukum</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+      <tr class="searchable-row">
+        <td class="number-cell" data-label="No.">1</td>
+        <td data-label="Transaksi">Penyerahan LPG Tertentu pada titik serah Agen</td>
+        <td class="formula-cell" data-label="PPN Besaran Tertentu">1,1/101,1 × selisih lebih antara Harga Jual Agen dan Harga Jual Eceran</td>
+        <td class="condition" data-label="Syarat / Catatan">PPN sudah termasuk dalam selisih harga tersebut.</td>
+        <td class="basis-cell" data-label="Dasar hukum">PMK 62/2022 Pasal 6 jo. PMK 11/2025 Pasal 14</td>
+      </tr>
+
+      <tr class="searchable-row">
+        <td class="number-cell" data-label="No.">2</td>
+        <td data-label="Transaksi">Penyerahan LPG Tertentu pada titik serah Pangkalan</td>
+        <td class="formula-cell" data-label="PPN Besaran Tertentu">1,1/101,1 × selisih lebih antara Harga Jual Pangkalan dan Harga Jual Agen</td>
+        <td class="condition" data-label="Syarat / Catatan">PPN sudah termasuk dalam selisih harga tersebut.</td>
+        <td class="basis-cell" data-label="Dasar hukum">PMK 62/2022 Pasal 6 jo. PMK 11/2025 Pasal 14</td>
+      </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="section-note">
+        <p><strong>Catatan:</strong> Jangan menerapkan rumus Agen atau Pangkalan pada penyerahan LPG di titik serah Badan Usaha. Bagian harga yang tidak disubsidi pada titik serah Badan Usaha masuk kelompok DPP Nilai Lain.</p>
+      </div>
+    </section>
+
+    <section class="catalog-section" data-category="barang" id="barang">
+      <header class="section-heading">
+        <div class="section-icon" aria-hidden="true">B</div>
+        <div>
+          <span class="section-kicker">Barang Tertentu</span>
+          <h2>Barang Hasil Pertanian dan Kendaraan Bekas</h2>
+          <p>Besaran tertentu berlaku hanya apabila objek dan pelaku memenuhi ketentuan khusus dalam regulasi masing-masing.</p>
+        </div>
+      </header>
+      <div class="table-card">
+        <table class="value-table">
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>Transaksi</th>
+              <th>PPN Besaran Tertentu</th>
+              <th>Syarat / Catatan</th>
+              <th>Dasar hukum</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+      <tr class="searchable-row">
+        <td class="number-cell" data-label="No.">3</td>
+        <td data-label="Transaksi">Penyerahan Barang Hasil Pertanian Tertentu</td>
+        <td class="formula-cell" data-label="PPN Besaran Tertentu">1,1% × Harga Jual</td>
+        <td class="condition" data-label="Syarat / Catatan">Hanya untuk jenis barang dalam Lampiran PMK 64/2022 dan PKP yang menggunakan skema besaran tertentu sesuai ketentuan.</td>
+        <td class="basis-cell" data-label="Dasar hukum">PMK 64/2022 Pasal 3 jo. PMK 11/2025 Pasal 15</td>
+      </tr>
+
+      <tr class="searchable-row">
+        <td class="number-cell" data-label="No.">4</td>
+        <td data-label="Transaksi">Penyerahan kendaraan bermotor bekas oleh PKP pedagang kendaraan bermotor bekas</td>
+        <td class="formula-cell" data-label="PPN Besaran Tertentu">1,1% × Harga Jual</td>
+        <td class="condition" data-label="Syarat / Catatan">Bukan penjualan aktiva yang menurut tujuan semula tidak untuk diperjualbelikan.</td>
+        <td class="basis-cell" data-label="Dasar hukum">PMK 65/2022 Pasal 2 jo. PMK 11/2025 Pasal 16</td>
+      </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="section-note">
+        <p><strong>Catatan:</strong> Barang hasil pertanian tertentu bukan seluruh hasil pertanian. Daftar komoditas harus diperiksa langsung pada Lampiran PMK 64/2022.</p>
+      </div>
+    </section>
+
+    <section class="catalog-section" data-category="jasa" id="jasa">
+      <header class="section-heading">
+        <div class="section-icon" aria-hidden="true">J</div>
+        <div>
+          <span class="section-kicker">Jasa Kena Pajak Tertentu</span>
+          <h2>Jasa dengan PPN Besaran Tertentu</h2>
+          <p>Daftar jasa ini bersifat khusus dan tidak dapat diperluas ke jasa lain yang tidak disebut dalam PMK 71/2022.</p>
+        </div>
+      </header>
+      <div class="table-card">
+        <table class="value-table">
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>Transaksi</th>
+              <th>PPN Besaran Tertentu</th>
+              <th>Syarat / Catatan</th>
+              <th>Dasar hukum</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+      <tr class="searchable-row">
+        <td class="number-cell" data-label="No.">5</td>
+        <td data-label="Transaksi">Jasa pengiriman paket sesuai ketentuan di bidang pos</td>
+        <td class="formula-cell" data-label="PPN Besaran Tertentu">1,1% × Penggantian</td>
+        <td class="condition" data-label="Syarat / Catatan">Berlaku untuk jasa pengiriman paket yang memenuhi ketentuan di bidang pos.</td>
+        <td class="basis-cell" data-label="Dasar hukum">PMK 71/2022 Pasal 2–3 jo. PMK 11/2025 Pasal 17</td>
+      </tr>
+
+      <tr class="searchable-row">
+        <td class="number-cell" data-label="No.">6</td>
+        <td data-label="Transaksi">Jasa biro perjalanan wisata dan/atau agen perjalanan wisata</td>
+        <td class="formula-cell" data-label="PPN Besaran Tertentu">1,1% × Harga Jual paket wisata, sarana angkutan, dan akomodasi</td>
+        <td class="condition" data-label="Syarat / Catatan">Berupa paket wisata, pemesanan angkutan, dan/atau akomodasi yang tidak didasarkan pada komisi/imbalan jasa perantara penjualan.</td>
+        <td class="basis-cell" data-label="Dasar hukum">PMK 71/2022 Pasal 2–3 jo. PMK 11/2025 Pasal 17</td>
+      </tr>
+
+      <tr class="searchable-row">
+        <td class="number-cell" data-label="No.">7</td>
+        <td data-label="Transaksi">Jasa pengurusan transportasi (freight forwarding) yang tagihannya mengandung freight charges</td>
+        <td class="formula-cell" data-label="PPN Besaran Tertentu">1,1% × jumlah yang ditagih atau seharusnya ditagih</td>
+        <td class="condition" data-label="Syarat / Catatan">Tagihan harus mengandung biaya transportasi (freight charges).</td>
+        <td class="basis-cell" data-label="Dasar hukum">PMK 71/2022 Pasal 2–4 jo. PMK 11/2025 Pasal 17</td>
+      </tr>
+
+      <tr class="searchable-row">
+        <td class="number-cell" data-label="No.">8</td>
+        <td data-label="Transaksi">Perjalanan ibadah keagamaan yang juga mencakup perjalanan ke tempat lain — tagihan dirinci</td>
+        <td class="formula-cell" data-label="PPN Besaran Tertentu">1,1% × Harga Jual paket perjalanan ke tempat lain</td>
+        <td class="condition" data-label="Syarat / Catatan">Tagihan perjalanan ibadah dan perjalanan ke tempat lain dipisahkan.</td>
+        <td class="basis-cell" data-label="Dasar hukum">PMK 71/2022 Pasal 2–3 jo. PMK 11/2025 Pasal 17</td>
+      </tr>
+
+      <tr class="searchable-row">
+        <td class="number-cell" data-label="No.">9</td>
+        <td data-label="Transaksi">Perjalanan ibadah keagamaan yang juga mencakup perjalanan ke tempat lain — tagihan tidak dirinci</td>
+        <td class="formula-cell" data-label="PPN Besaran Tertentu">0,55% × Harga Jual keseluruhan paket perjalanan</td>
+        <td class="condition" data-label="Syarat / Catatan">Tagihan perjalanan ibadah dan perjalanan ke tempat lain tidak dipisahkan.</td>
+        <td class="basis-cell" data-label="Dasar hukum">PMK 71/2022 Pasal 2–3 jo. PMK 11/2025 Pasal 17</td>
+      </tr>
+
+      <tr class="searchable-row">
+        <td class="number-cell" data-label="No.">10</td>
+        <td data-label="Transaksi">Jasa pemasaran dengan media voucer, layanan transaksi pembayaran terkait distribusi voucer, atau program loyalitas/penghargaan pelanggan</td>
+        <td class="formula-cell" data-label="PPN Besaran Tertentu">1,1% × Harga Jual voucer</td>
+        <td class="condition" data-label="Syarat / Catatan">Penyerahan tidak didasarkan pada pemberian komisi dan tidak terdapat selisih (margin).</td>
+        <td class="basis-cell" data-label="Dasar hukum">PMK 71/2022 Pasal 2–3 jo. PMK 11/2025 Pasal 17</td>
+      </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="section-note">
+        <p><strong>Catatan:</strong> Pajak Masukan yang berhubungan dengan penyerahan JKP tertentu dalam kelompok ini tidak dapat dikreditkan sesuai Pasal 5 PMK 71/2022.</p>
+      </div>
+    </section>
+
+    <section class="catalog-section" data-category="agunan" id="agunan">
+      <header class="section-heading">
+        <div class="section-icon" aria-hidden="true">A</div>
+        <div>
+          <span class="section-kicker">Agunan Diambil Alih</span>
+          <h2>Penyerahan Agunan oleh Kreditur</h2>
+          <p>PPN dipungut oleh Kreditur pada saat menerima pembayaran dari Pembeli Agunan.</p>
+        </div>
+      </header>
+      <div class="table-card">
+        <table class="value-table">
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>Transaksi</th>
+              <th>PPN Besaran Tertentu</th>
+              <th>Syarat / Catatan</th>
+              <th>Dasar hukum</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+      <tr class="searchable-row">
+        <td class="number-cell" data-label="No.">11</td>
+        <td data-label="Transaksi">Penyerahan Agunan yang diambil alih oleh Kreditur kepada Pembeli Agunan</td>
+        <td class="formula-cell" data-label="PPN Besaran Tertentu">1,1% × Harga Jual Agunan</td>
+        <td class="condition" data-label="Syarat / Catatan">Pemungutan dilakukan pada saat Kreditur menerima pembayaran dari Pembeli Agunan.</td>
+        <td class="basis-cell" data-label="Dasar hukum">PMK 41/2023 Pasal 3 jo. PMK 11/2025 Pasal 18</td>
+      </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="section-note">
+        <p><strong>Catatan:</strong> Pastikan transaksi memenuhi definisi dan mekanisme Agunan yang diambil alih dalam PMK 41 Tahun 2023.</p>
+      </div>
+    </section>
+
+    <section class="catalog-section" data-category="emas" id="emas">
+      <header class="section-heading">
+        <div class="section-icon" aria-hidden="true">E</div>
+        <div>
+          <span class="section-kicker">Emas dan Perhiasan</span>
+          <h2>Emas Perhiasan dan Transaksi Terkait</h2>
+          <p>Tarif bergantung pada pelaku, tujuan penyerahan, jenis barang/jasa, dan keberadaan Faktur Pajak atau dokumen impor.</p>
+        </div>
+      </header>
+      <div class="table-card">
+        <table class="value-table">
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>Transaksi</th>
+              <th>PPN Besaran Tertentu</th>
+              <th>Syarat / Catatan</th>
+              <th>Dasar hukum</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+      <tr class="searchable-row">
+        <td class="number-cell" data-label="No.">12</td>
+        <td data-label="Transaksi">Emas Perhiasan hasil produksi sendiri oleh PKP Pabrikan kepada Pabrikan lain dan/atau Pedagang Emas Perhiasan</td>
+        <td class="formula-cell" data-label="PPN Besaran Tertentu">1,1% × Harga Jual</td>
+        <td class="condition" data-label="Syarat / Catatan">Penjual merupakan PKP Pabrikan Emas Perhiasan.</td>
+        <td class="basis-cell" data-label="Dasar hukum">PMK 48/2023 Pasal 14 jo. PMK 11/2025 Pasal 19</td>
+      </tr>
+
+      <tr class="searchable-row">
+        <td class="number-cell" data-label="No.">13</td>
+        <td data-label="Transaksi">Emas Perhiasan hasil produksi sendiri oleh PKP Pabrikan kepada Konsumen Akhir</td>
+        <td class="formula-cell" data-label="PPN Besaran Tertentu">1,65% × Harga Jual</td>
+        <td class="condition" data-label="Syarat / Catatan">Penjual merupakan PKP Pabrikan Emas Perhiasan.</td>
+        <td class="basis-cell" data-label="Dasar hukum">PMK 48/2023 Pasal 14 jo. PMK 11/2025 Pasal 19</td>
+      </tr>
+
+      <tr class="searchable-row">
+        <td class="number-cell" data-label="No.">14</td>
+        <td data-label="Transaksi">Emas Perhiasan oleh PKP Pedagang kepada Pedagang lain dan/atau Konsumen Akhir — memiliki Faktur Pajak perolehan atau dokumen impor</td>
+        <td class="formula-cell" data-label="PPN Besaran Tertentu">1,1% × Harga Jual</td>
+        <td class="condition" data-label="Syarat / Catatan">Dokumen perolehan atau dokumen impor harus memenuhi ketentuan sebagai Faktur Pajak/dokumen yang dipersamakan.</td>
+        <td class="basis-cell" data-label="Dasar hukum">PMK 48/2023 Pasal 14 jo. PMK 11/2025 Pasal 19</td>
+      </tr>
+
+      <tr class="searchable-row">
+        <td class="number-cell" data-label="No.">15</td>
+        <td data-label="Transaksi">Emas Perhiasan oleh PKP Pedagang kepada Pedagang lain dan/atau Konsumen Akhir — tidak memiliki Faktur Pajak perolehan atau dokumen impor</td>
+        <td class="formula-cell" data-label="PPN Besaran Tertentu">1,65% × Harga Jual</td>
+        <td class="condition" data-label="Syarat / Catatan">Berlaku apabila bukti perolehan yang dipersyaratkan tidak dimiliki.</td>
+        <td class="basis-cell" data-label="Dasar hukum">PMK 48/2023 Pasal 14 jo. PMK 11/2025 Pasal 19</td>
+      </tr>
+
+      <tr class="searchable-row">
+        <td class="number-cell" data-label="No.">16</td>
+        <td data-label="Transaksi">Emas Perhiasan oleh PKP Pedagang kepada Pabrikan Emas Perhiasan</td>
+        <td class="formula-cell" data-label="PPN Besaran Tertentu">0% × Harga Jual</td>
+        <td class="condition" data-label="Syarat / Catatan">Tujuan penyerahan harus kepada Pabrikan Emas Perhiasan.</td>
+        <td class="basis-cell" data-label="Dasar hukum">PMK 48/2023 Pasal 14 jo. PMK 11/2025 Pasal 19</td>
+      </tr>
+
+      <tr class="searchable-row">
+        <td class="number-cell" data-label="No.">17</td>
+        <td data-label="Transaksi">Jasa yang terkait dengan Emas Perhiasan, emas batangan, perhiasan bukan emas, batu permata, dan/atau batu lain sejenis oleh PKP Pabrikan/Pedagang Emas Perhiasan</td>
+        <td class="formula-cell" data-label="PPN Besaran Tertentu">1,1% × Penggantian</td>
+        <td class="condition" data-label="Syarat / Catatan">Penyedia jasa merupakan PKP Pabrikan Emas Perhiasan atau PKP Pedagang Emas Perhiasan yang dimaksud dalam ketentuan.</td>
+        <td class="basis-cell" data-label="Dasar hukum">PMK 48/2023 Pasal 14 jo. PMK 11/2025 Pasal 19</td>
+      </tr>
+
+      <tr class="searchable-row">
+        <td class="number-cell" data-label="No.">18</td>
+        <td data-label="Transaksi">Perhiasan yang seluruh bahannya bukan dari emas dan/atau batu permata atau batu lain sejenis oleh PKP Pabrikan/Pedagang Emas Perhiasan</td>
+        <td class="formula-cell" data-label="PPN Besaran Tertentu">1,1% × Harga Jual</td>
+        <td class="condition" data-label="Syarat / Catatan">Termasuk kondisi tertentu saat diserahkan sebagai bahan baku untuk menghasilkan Emas Perhiasan.</td>
+        <td class="basis-cell" data-label="Dasar hukum">PMK 48/2023 Pasal 15 jo. PMK 11/2025 Pasal 19</td>
+      </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="section-note">
+        <p><strong>Catatan:</strong> PMK 52 Tahun 2025 hanya mengubah ketentuan PPh Pasal 22 dalam Pasal 5 PMK 48/2023; tarif PPN besaran tertentu pada Pasal 14 dan Pasal 15 di atas tidak diubah.</p>
+      </div>
+    </section>
+
+    <section class="catalog-section" data-category="asuransi" id="asuransi">
+      <header class="section-heading">
+        <div class="section-icon" aria-hidden="true">I</div>
+        <div>
+          <span class="section-kicker">Jasa Asuransi</span>
+          <h2>Agen dan Pialang Asuransi</h2>
+          <p>Dasar penghitungan berupa komisi atau imbalan sebelum dipotong PPh atau pungutan lainnya.</p>
+        </div>
+      </header>
+      <div class="table-card">
+        <table class="value-table">
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>Transaksi</th>
+              <th>PPN Besaran Tertentu</th>
+              <th>Syarat / Catatan</th>
+              <th>Dasar hukum</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+      <tr class="searchable-row">
+        <td class="number-cell" data-label="No.">19</td>
+        <td data-label="Transaksi">Jasa Agen Asuransi</td>
+        <td class="formula-cell" data-label="PPN Besaran Tertentu">1,1% × komisi atau imbalan yang dibayarkan kepada Agen Asuransi</td>
+        <td class="condition" data-label="Syarat / Catatan">Termasuk komisi/imbalan kepada Agen Asuransi berdasarkan penerimaan agen yang berada di bawah manajemennya.</td>
+        <td class="basis-cell" data-label="Dasar hukum">PMK 81/2024 Pasal 313 jo. PMK 11/2025 Pasal 20 dan PMK 53/2025</td>
+      </tr>
+
+      <tr class="searchable-row">
+        <td class="number-cell" data-label="No.">20</td>
+        <td data-label="Transaksi">Jasa perusahaan pialang asuransi atau perusahaan pialang reasuransi</td>
+        <td class="formula-cell" data-label="PPN Besaran Tertentu">2,2% × komisi atau imbalan yang diterima</td>
+        <td class="condition" data-label="Syarat / Catatan">Komisi atau imbalan dihitung sebelum pemotongan PPh atau pungutan lainnya.</td>
+        <td class="basis-cell" data-label="Dasar hukum">PMK 81/2024 Pasal 313 jo. PMK 11/2025 Pasal 20 dan PMK 53/2025</td>
+      </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="section-note">
+        <p><strong>Catatan:</strong> PMK 53 Tahun 2025 menegaskan kembali rumus Pasal 313 dengan faktor 11/12 dari tarif PPN.</p>
+      </div>
+    </section>
+
+    <section class="catalog-section" data-category="kms" id="kms">
+      <header class="section-heading">
+        <div class="section-icon" aria-hidden="true">K</div>
+        <div>
+          <span class="section-kicker">Kegiatan Membangun Sendiri</span>
+          <h2>PPN atas Kegiatan Membangun Sendiri</h2>
+          <p>Pengenaan dilakukan hanya setelah kegiatan memenuhi seluruh kriteria Kegiatan Membangun Sendiri.</p>
+        </div>
+      </header>
+      <div class="table-card">
+        <table class="value-table">
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>Transaksi</th>
+              <th>PPN Besaran Tertentu</th>
+              <th>Syarat / Catatan</th>
+              <th>Dasar hukum</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+      <tr class="searchable-row">
+        <td class="number-cell" data-label="No.">21</td>
+        <td data-label="Transaksi">Kegiatan Membangun Sendiri yang memenuhi kriteria</td>
+        <td class="formula-cell" data-label="PPN Besaran Tertentu">2,2% × jumlah biaya pembangunan</td>
+        <td class="condition" data-label="Syarat / Catatan">Biaya dihitung per Masa Pajak sampai bangunan selesai dan tidak termasuk biaya perolehan tanah.</td>
+        <td class="basis-cell" data-label="Dasar hukum">PMK 81/2024 Pasal 323–324 jo. PMK 11/2025 Pasal 20 dan PMK 53/2025</td>
+      </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="section-note">
+        <p><strong>Catatan:</strong> Jangan menentukan KMS hanya karena ada pembangunan. Periksa tujuan kegiatan, pelaksana, karakter bangunan, luas, serta jangka waktu pembangunan sesuai PMK 81/2024.</p>
+      </div>
+    </section>
+
+    <div class="exclusion-card">
+      <h3>Aset kripto tidak dimasukkan</h3>
+      <p>
+        PMK 53 Tahun 2025 menghapus Pasal 343 dan Pasal 354 PMK 81 Tahun 2024.
+        Karena itu, PPN besaran tertentu atas perdagangan aset kripto dan jasa penambangan aset kripto yang sebelumnya tercantum dalam PMK 11 Tahun 2025 tidak berlaku sejak 1 Agustus 2025.
+      </p>
+    </div>
+
+    <div class="source-card">
+      <h3>Dasar hukum utama</h3>
+      <p><a href="https://jdih.kemenkeu.go.id/dok/pmk-11-tahun-2025" target="_blank" rel="noopener">PMK 11 Tahun 2025</a> — Bab III PPN Besaran Tertentu.</p>
+      <p><a href="https://jdih.kemenkeu.go.id/dok/pmk-53-tahun-2025" target="_blank" rel="noopener">PMK 53 Tahun 2025</a> — perubahan ketentuan PMK 11/2025 dan penghapusan skema PPN aset kripto.</p>
+      <p><a href="https://jdih.kemenkeu.go.id/dok/pmk-81-tahun-2024" target="_blank" rel="noopener">PMK 81 Tahun 2024</a> — ketentuan Agen/Pialang Asuransi dan Kegiatan Membangun Sendiri sebagaimana telah diubah.</p>
+      <p><a href="https://jdih.kemenkeu.go.id/dok/pmk-52-tahun-2025" target="_blank" rel="noopener">PMK 52 Tahun 2025</a> — perubahan aspek PPh Pasal 22 emas; tidak mengubah tarif PPN besaran tertentu pada daftar emas di halaman ini.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-disclaimer">
+    <strong>Disclaimer:</strong>
+    Halaman ini merupakan alat bantu edukasi. Penentuan PPN tetap harus disesuaikan dengan status PKP,
+    identitas pelaku, jenis transaksi, dokumen, periode transaksi, dan seluruh syarat dalam peraturan terkait.
+    Kabayan bukan situs resmi Direktorat Jenderal Pajak.
+  </div>
+  <div class="footer-inner">
+    <p>© <span id="currentYear"></span> Angga Sukma Dhaniswara.</p>
+    <div class="footer-links"><a href="index.html">Beranda</a><a href="#top">Kembali ke atas</a></div>
+  </div>
+</footer>
+
+<script>
+const searchInput=document.getElementById("itemSearch");
+const clearButton=document.getElementById("clearSearch");
+const filterButtons=document.querySelectorAll(".filter-button");
+const sections=document.querySelectorAll(".catalog-section");
+const noResults=document.getElementById("noResults");
+const resultCount=document.getElementById("resultCount");
+let activeFilter="all";
+
+function normalizeText(value){
+  return String(value||"")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g,"")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g," ")
+    .trim();
+}
+
+function applySearch(){
+  const query=normalizeText(searchInput.value);
+  let total=0;
+
+  sections.forEach(section=>{
+    const category=section.dataset.category;
+    const allowed=activeFilter==="all"||activeFilter===category;
+
+    if(!allowed){
+      section.classList.add("hidden-section");
+      return;
+    }
+
+    let matches=0;
+    section.querySelectorAll(".searchable-row").forEach(row=>{
+      const match=!query||normalizeText(row.textContent).includes(query);
+      row.hidden=!match;
+      if(match){matches++;total++;}
+    });
+
+    section.classList.toggle("hidden-section",matches===0);
+  });
+
+  clearButton.classList.toggle("visible",Boolean(searchInput.value));
+  noResults.classList.toggle("visible",total===0);
+  resultCount.textContent=
+    !query&&activeFilter==="all"
+      ?"Menampilkan seluruh daftar"
+      :`${total} ketentuan sesuai pencarian`;
+}
+
+searchInput.addEventListener("input",applySearch);
+clearButton.addEventListener("click",()=>{
+  searchInput.value="";
+  searchInput.focus();
+  applySearch();
+});
+filterButtons.forEach(button=>{
+  button.addEventListener("click",()=>{
+    activeFilter=button.dataset.filter;
+    filterButtons.forEach(item=>item.classList.toggle("active",item===button));
+    applySearch();
+  });
+});
+
+const menuToggle=document.getElementById("menuToggle");
+const mobileMenu=document.getElementById("mobileMenu");
+if(menuToggle&&mobileMenu){
+  menuToggle.addEventListener("click",()=>{
+    const open=mobileMenu.classList.toggle("active");
+    document.body.classList.toggle("menu-open",open);
+    menuToggle.setAttribute("aria-expanded",String(open));
+    menuToggle.textContent=open?"×":"☰";
+  });
+  mobileMenu.querySelectorAll("a").forEach(link=>{
+    link.addEventListener("click",()=>{
+      mobileMenu.classList.remove("active");
+      document.body.classList.remove("menu-open");
+      menuToggle.setAttribute("aria-expanded","false");
+      menuToggle.textContent="☰";
+    });
+  });
+}
+
+document.getElementById("currentYear").textContent=new Date().getFullYear();
+applySearch();
+</script>
+</body>
+</html>
