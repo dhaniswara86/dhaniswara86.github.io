@@ -293,6 +293,26 @@ main{padding-top:var(--nav)}
     min-width:0;
   }
 }
+
+
+/* Informasi regulasi ditempatkan di bagian paling bawah */
+.status-card.bottom-info{
+  margin-top:36px;
+}
+.warning-card.bottom-info{
+  margin-bottom:18px;
+}
+
+
+/* Filter utama tiga kategori */
+.filter-tabs{
+  min-width:390px;
+}
+@media(max-width:700px){
+  .filter-tabs{
+    min-width:0;
+  }
+}
 </style>
 </head>
 <body id="top">
@@ -328,7 +348,7 @@ main{padding-top:var(--nav)}
 <div class="hero-inner">
 <span class="eyebrow">Kabayan · PPN dan PPnBM</span>
 <h1>Cari daftar <span>BKP Mewah.</span></h1>
-<p>Temukan BKP tergolong mewah baik kendaraan maupun non kendaraan sesuai regulasi terkini.</p>
+<p>Cari BKP mewah selain kendaraan serta kendaraan bermotor berdasarkan tarif, spesifikasi teknis, dan Pos Tarif/HS Code.</p>
 </div>
 </section>
 <section class="catalog-shell">
@@ -344,10 +364,10 @@ main{padding-top:var(--nav)}
 <input aria-label="Cari daftar barang kena pajak mewah" autocomplete="off" class="search-input" id="itemSearch" placeholder="Cari rumah mewah, helikopter, diesel, kabin ganda, motor 500 cc, HS 8703..." type="search"/>
 <button aria-label="Hapus pencarian" class="clear-search" id="clearSearch" type="button">×</button>
 </div>
-<div aria-label="Filter kategori" class="filter-tabs" role="group"><button class="filter-button active" data-filter="nonvehicle" type="button">Selain Kendaraan</button><button class="filter-button" data-filter="vehicle" type="button">Kendaraan</button></div>
+<div aria-label="Filter kategori" class="filter-tabs" role="group"><button class="filter-button active" data-filter="all" type="button">Semua</button><button class="filter-button" data-filter="nonvehicle" type="button">Selain Kendaraan</button><button class="filter-button" data-filter="vehicle" type="button">Kendaraan</button></div>
 </div>
 <div class="search-meta">
-<span class="result-count" id="resultCount">Menampilkan daftar selain kendaraan</span>
+<span class="result-count" id="resultCount">Menampilkan seluruh daftar</span>
 <span>Hasil berubah otomatis saat Anda mengetik.</span>
 </div>
 </div>
@@ -494,7 +514,8 @@ main{padding-top:var(--nav)}
       sebagaimana diubah dengan PMK Nomor 15/PMK.03/2023.</p>
 </div>
 </div>
-
+</section>
+<section class="catalog-section" data-category="under10" data-parent-category="vehicle" id="under10">
 <header class="section-heading">
 <div class="section-icon">A</div>
 <div>
@@ -1172,19 +1193,18 @@ main{padding-top:var(--nav)}
 </article>
 </div>
 </section>
-<div class="source-card">
+<div class="status-card bottom-info"><span class="status-dot"></span><p><strong>Status dasar hukum:</strong> PMK 141/PMK.010/2021 sebagaimana diubah dengan PMK 42/PMK.010/2022 masih dicatat berlaku pada JDIH Kementerian Keuangan. Daftar ini menampilkan tarif dasar, bukan insentif sementara tahun anggaran tertentu.</p></div><div class="warning-card bottom-info"><span class="warning-dot"></span><div><p><strong>Catatan harmonisasi regulasi:</strong> Lampiran PMK 42/2022 memuat beberapa tanda batas yang tidak konsisten dengan PP 73/2019.</p>
+<ul>
+<li>Untuk diesel dengan emisi di atas 250 gram/km, lampiran tercetak “&gt; 10,5 km/liter”; PP 73/2019 menyatakan “kurang dari 10,5 km/liter”.</li>
+<li>Untuk kabin ganda diesel, lampiran mencetak rentang tengah sampai 15,5 km/liter; PP 73/2019 menetapkan sampai 17,5 km/liter.</li>
+<li>Batas bawah/atas pada kabin ganda diselaraskan agar tidak tumpang tindih, mengikuti rumusan PP 73/2019.</li>
+</ul><p>Karena PP berkedudukan lebih tinggi, halaman ini menggunakan kriteria substantif PP 73/2019 dan menggunakan Pos Tarif/HS Code dari Lampiran PMK 42/2022.</p></div></div><div class="source-card">
 <h3>Dasar hukum dan batas penggunaan</h3>
 <p><a href="https://jdih.kemenkeu.go.id/dok/42-pmk-010-2022" rel="noopener" target="_blank">PMK 42/PMK.010/2022</a> — Lampiran I mengenai jenis kendaraan dan Pos Tarif/HS Code.</p>
 <p><a href="https://jdih.kemenkeu.go.id/dok/141-pmk-010-2021" rel="noopener" target="_blank">PMK 141/PMK.010/2021</a> — peraturan induk mengenai pengenaan, pembebasan, dan pengembalian PPnBM kendaraan.</p>
 <p><a href="https://jdih.kemenkeu.go.id/dok/pp-73-tahun-2019" rel="noopener" target="_blank">PP 73 Tahun 2019</a> sebagaimana diubah dengan <a href="https://jdih.kemenkeu.go.id/dok/pp-74-tahun-2021" rel="noopener" target="_blank">PP 74 Tahun 2021</a> — kelompok, tarif, serta kriteria konsumsi bahan bakar dan emisi.</p>
 <p>Penetapan akhir harus memperhatikan klasifikasi HS, spesifikasi teknis, hasil uji konsumsi bahan bakar atau emisi, teknologi kendaraan, fasilitas pembebasan, DPP khusus kendaraan rendah emisi, dan insentif yang berlaku pada periode transaksi.</p>
-</div>
-<div class="status-card"><span class="status-dot"></span><p><strong>Status dasar hukum:</strong> PMK 141/PMK.010/2021 sebagaimana diubah dengan PMK 42/PMK.010/2022 masih dicatat berlaku pada JDIH Kementerian Keuangan. Daftar ini menampilkan tarif dasar, bukan insentif sementara tahun anggaran tertentu.</p></div><div class="warning-card"><span class="warning-dot"></span><div><p><strong>Catatan harmonisasi regulasi:</strong> Lampiran PMK 42/2022 memuat beberapa tanda batas yang tidak konsisten dengan PP 73/2019.</p>
-<ul>
-<li>Untuk diesel dengan emisi di atas 250 gram/km, lampiran tercetak “&gt; 10,5 km/liter”; PP 73/2019 menyatakan “kurang dari 10,5 km/liter”.</li>
-<li>Untuk kabin ganda diesel, lampiran mencetak rentang tengah sampai 15,5 km/liter; PP 73/2019 menetapkan sampai 17,5 km/liter.</li>
-<li>Batas bawah/atas pada kabin ganda diselaraskan agar tidak tumpang tindih, mengikuti rumusan PP 73/2019.</li>
-</ul><p>Karena PP berkedudukan lebih tinggi, halaman ini menggunakan kriteria substantif PP 73/2019 dan menggunakan Pos Tarif/HS Code dari Lampiran PMK 42/2022.</p></div></div><section class="catalog-section" data-category="under10" data-parent-category="vehicle" id="under10">
+</div></section>
 </main>
 <footer class="site-footer">
 <div class="footer-disclaimer">
@@ -1210,7 +1230,7 @@ const sections=document.querySelectorAll(".catalog-section");
 const noResults=document.getElementById("noResults");
 const resultCount=document.getElementById("resultCount");
 
-let activeFilter="nonvehicle";
+let activeFilter="all";
 
 function normalizeText(value){
   return String(value||"")
@@ -1222,7 +1242,9 @@ function normalizeText(value){
 }
 
 function getFilterLabel(){
-  return activeFilter==="vehicle" ? "kendaraan" : "selain kendaraan";
+  if(activeFilter==="vehicle") return "kendaraan";
+  if(activeFilter==="nonvehicle") return "selain kendaraan";
+  return "seluruh daftar";
 }
 
 function applySearch(){
@@ -1231,7 +1253,9 @@ function applySearch(){
 
   sections.forEach(section=>{
     const parentCategory=section.dataset.parentCategory;
-    const allowed=activeFilter===parentCategory;
+    const allowed=
+      activeFilter==="all" ||
+      activeFilter===parentCategory;
 
     if(!allowed){
       section.classList.add("hidden-section");
@@ -1243,6 +1267,7 @@ function applySearch(){
     section.querySelectorAll(".searchable-row").forEach(row=>{
       const match=!query||normalizeText(row.textContent).includes(query);
       row.hidden=!match;
+
       if(match){
         matches++;
         total++;
@@ -1250,9 +1275,12 @@ function applySearch(){
     });
 
     section.querySelectorAll(".searchable-card").forEach(card=>{
-      const haystack=normalizeText((card.dataset.search||"")+" "+card.textContent);
+      const haystack=normalizeText(
+        (card.dataset.search||"")+" "+card.textContent
+      );
       const match=!query||haystack.includes(query);
       card.classList.toggle("hidden-card",!match);
+
       if(match){
         matches++;
         total++;
@@ -1266,9 +1294,15 @@ function applySearch(){
   noResults.classList.toggle("visible",total===0);
 
   if(!query){
-    resultCount.textContent=`Menampilkan daftar ${getFilterLabel()}`;
+    resultCount.textContent=
+      activeFilter==="all"
+        ?"Menampilkan seluruh daftar"
+        :`Menampilkan daftar ${getFilterLabel()}`;
   }else{
-    resultCount.textContent=`${total} hasil pada kategori ${getFilterLabel()}`;
+    resultCount.textContent=
+      activeFilter==="all"
+        ?`${total} hasil pada seluruh daftar`
+        :`${total} hasil pada kategori ${getFilterLabel()}`;
   }
 }
 
