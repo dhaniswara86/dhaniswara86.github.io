@@ -1656,6 +1656,26 @@
       }
     }
   </style>
+
+<style>
+  /* Judul pertanyaan menggunakan biru yang sama dengan tombol utama */
+  .question-blue {
+    color: #0071e3 !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.01em;
+  }
+
+  .question-blue .required {
+    color: var(--red) !important;
+  }
+
+  @media print {
+    .question-blue {
+      color: #000000 !important;
+    }
+  }
+</style>
+
 </head>
 
 <body id="top">
@@ -1747,7 +1767,7 @@
 
           <div class="form-grid">
             <div class="field field-full search-box">
-              <label for="itemSearch">
+              <label class="question-blue" for="itemSearch">
                 Nama barang atau jasa <span class="required">*</span>
               </label>
 
@@ -1790,7 +1810,7 @@
             </div>
 
             <div class="field">
-              <label id="amountLabel" for="amountInput">
+              <label class="question-blue" id="amountLabel" for="amountInput">
                 Nilai pembayaran/tagihan yang diuji <span class="required">*</span>
               </label>
 
@@ -1814,7 +1834,7 @@
             </div>
 
             <div class="field" id="amountBasisField">
-              <label for="amountBasis">
+              <label class="question-blue" for="amountBasis">
                 Nilai tersebut <span class="required">*</span>
               </label>
 
@@ -1829,7 +1849,7 @@
             </div>
 
             <div class="field field-full">
-              <span class="group-label">
+              <span class="group-label question-blue">
                 Status PKP rekanan <span class="required">*</span>
               </span>
 
@@ -1979,7 +1999,7 @@
             </div>
 
             <div class="field field-full" id="paymentMethodField">
-              <label for="paymentMethod">
+              <label class="question-blue" for="paymentMethod">
                 Cara pembayaran <span class="required">*</span>
               </label>
 
@@ -2001,7 +2021,7 @@
             </div>
 
             <div class="field field-full" id="splitQuestionField">
-              <span class="group-label">
+              <span class="group-label question-blue">
                 Apakah pembayaran merupakan transaksi yang dipecah-pecah?
                 <span class="required">*</span>
               </span>
@@ -2070,7 +2090,9 @@
             </div>
 
             <div class="conditional-panel" id="facilityAssistantPanel">
-              <h3>Uji pemberian fasilitas PPN tidak dipungut/dibebaskan</h3>
+              <h3 class="question-blue">
+                Uji pemberian fasilitas PPN tidak dipungut/dibebaskan
+              </h3>
               <p class="conditional-description">
                Jawab pertanyaan berikut untuk mengetahui ada atau tidaknya fasilitas perpajakan atas pengadaan barang/jasa tersebut.
               </p>
