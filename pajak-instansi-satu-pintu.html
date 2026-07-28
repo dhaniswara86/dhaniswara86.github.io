@@ -2253,13 +2253,13 @@
 <div class="pph-preview" id="pphConstructionPreview">Pilih jenis layanan dan dokumen sertifikasi.</div>
 </div></div><div class="conditional-panel field-full integrated-detail-panel" hidden="" id="pphForeignPanel"><h3>Rincian transaksi luar negeri</h3><p class="conditional-description">Lengkapi karakter penghasilan dan dokumen P3B untuk menentukan perlakuan pajaknya.</p><div class="pph-grid"><div class="field"><label for="pphForeignIncomeType">Karakter penghasilan</label><select class="select-control" id="pphForeignIncomeType"><option value="">Pilih karakter</option><option value="goods">Pembelian barang murni</option><option value="service">Jasa/pekerjaan/kegiatan</option><option value="royalty">Royalti/lisensi</option><option value="rent">Sewa/penggunaan harta</option><option value="prize">Hadiah</option><option value="shipping_air">Pelayaran/penerbangan</option><option value="business_profit_other">Laba usaha/penghasilan lain</option></select></div><div class="field"><label for="pphTreatyDocument">Penerapan P3B</label><select class="select-control" id="pphTreatyDocument"><option value="no">Tidak digunakan/tidak memenuhi</option><option value="yes">Dokumen dan syarat P3B telah diverifikasi</option><option value="uncertain">Belum diverifikasi</option></select></div><div class="field" hidden="" id="pphTreatyRateField"><label for="pphTreatyRate">Tarif P3B</label><div class="money-wrap"><span class="money-prefix">%</span><input class="control money-input" id="pphTreatyRate" max="20" min="0" placeholder="10" step="0.01" type="number"/></div></div></div></div><div class="conditional-panel" hidden="" id="invoiceVatPanel">
 <h3>Tagihan rekanan non-PKP</h3>
-<p class="conditional-description">Pilih kondisi yang benar-benar tercantum pada invoice atau dokumen pembayaran.</p>
+<p class="conditional-description">Perhatikan pada tagihan, invoice, atau kontrak. Apakah tercantum baris khusus yang secara spesifik menuliskan unsur PPN di dalamnya?</p>
 <div class="field field-full compact-select-field">
 <label for="invoiceVatStatusSelect">Periksa tagihan <span class="required">*</span></label>
 <select class="select-control" id="invoiceVatStatusSelect" name="invoiceVatStatus">
 <option value="">Pilih kondisi tagihan</option>
-<option value="yes">PPN tercantum secara terpisah</option>
-<option value="no">PPN tidak tercantum</option>
+<option value="yes">Ya, mencantumkan secara jelas baris PPN</option>
+<option value="no">Tidak tercantum sama sekali baris terkait PPN</option>
 </select>
 </div>
 <div class="field" hidden="" id="invoiceVatAmountField">
@@ -2312,11 +2312,11 @@
                 </option>
 </select>
 </div><div class="field field-full" id="splitQuestionField">
-<label class="question-blue" for="splitStatusSelect">Transaksi dipecah-pecah? <span class="required">*</span></label>
+<label class="question-blue" for="splitStatusSelect">Apakah pengadaan ini merupakan bagian dari transaksi yang dipecah-pecah? <span class="required">*</span></label>
 <select class="select-control" id="splitStatusSelect" name="splitStatus">
 <option value="">Pilih kondisi transaksi</option>
 <option value="no">Tidak, nilai ini merupakan seluruh transaksi</option>
-<option value="yes">Ya, nilai ini bagian dari transaksi yang sama</option>
+<option value="yes">Ya, merupakan bagian dari pengadaan yang dipecah-pecah</option>
 </select>
 <span class="hint">Digunakan untuk menguji batas nilai transaksi pada PPN dan PPh Pasal 22.</span>
 </div><div class="conditional-panel" hidden="" id="splitPanel">
@@ -2337,7 +2337,7 @@
 <span>Batas Rp2 juta tidak berlaku untuk transaksi yang sengaja dipecah.</span>
 </div>
 </div>
-</div><div class="field field-full wizard-facility-gate" id="wizardFacilityGateField"><label for="wizardFacilityGate">Apakah transaksi memiliki fasilitas atau kondisi khusus? <span class="required">*</span></label><select class="select-control" id="wizardFacilityGate"><option value="">Pilih fasilitas atau kondisi</option><option value="ordinary">Tidak memiliki fasilitas atau kondisi khusus</option><option value="national_disaster">Penanganan bencana yang ditetapkan sebagai bencana nasional</option><option value="foreign_grant_loan">Proyek pemerintah yang dibiayai hibah atau pinjaman luar negeri</option><option value="defense_security">Keperluan pertahanan atau keamanan negara</option><option value="special_zone">Transaksi terkait Kawasan Bebas, KEK, atau tempat berfasilitas kepabeanan</option></select><span class="hint">Pilih kondisi yang sesuai dengan kontrak, sumber anggaran, tujuan pengadaan, dan lokasi penyerahan.</span></div></div></section><section class="wizard-stage" data-wizard-stage="facility" id="wizardStageFacility"><header class="wizard-stage-head"><span class="wizard-stage-kicker">Tahap 4</span><h3>Dokumen pajak dan fasilitas</h3><p>Dokumen PPh dan dokumen PPN dipisahkan agar fungsi setiap dokumen lebih mudah dipahami.</p></header><div class="wizard-stage-error" data-wizard-error="" hidden="" role="alert"></div><div class="wizard-stage-grid"><div class="conditional-panel field-full tax-document-group" id="pphDocumentPanel"><h3>Dokumen PPh</h3><p class="conditional-description">Dokumen pada bagian ini hanya digunakan untuk menentukan pemotongan, pemungutan, atau fasilitas PPh.</p><div class="conditional-grid" id="pphDocumentGrid"><div class="field field-full" hidden="" id="foreignProjectPphCertificateField">
+</div><div class="field field-full wizard-facility-gate" id="wizardFacilityGateField"><label for="wizardFacilityGate">Apakah transaksi memiliki fasilitas atau kondisi khusus? <span class="required">*</span></label><select class="select-control" id="wizardFacilityGate"><option value="">Pilih fasilitas atau kondisi</option><option value="ordinary">Tidak memiliki fasilitas atau kondisi khusus</option><option value="national_disaster">Penanganan bencana yang ditetapkan sebagai bencana nasional</option><option value="foreign_grant_loan">Proyek pemerintah yang dibiayai hibah atau pinjaman luar negeri</option><option value="defense_security">Keperluan pertahanan atau keamanan negara</option><option value="special_zone">Transaksi terkait Kawasan Bebas, KEK, atau tempat berfasilitas kepabeanan</option></select><span class="hint">Pilih kondisi yang sesuai dengan kontrak, sumber anggaran, tujuan pengadaan, dan lokasi penyerahan.</span></div></div></section><section class="wizard-stage" data-wizard-stage="facility" id="wizardStageFacility"><header class="wizard-stage-head"><span class="wizard-stage-kicker">Tahap 4</span><h3>Kepemilikan dokumen dan fasilitas perpajakan</h3><p>Dokumen PPh dan dokumen PPN dipisahkan agar fungsi setiap dokumen lebih mudah dipahami.</p></header><div class="wizard-stage-error" data-wizard-error="" hidden="" role="alert"></div><div class="wizard-stage-grid"><div class="conditional-panel field-full tax-document-group" id="pphDocumentPanel"><h3>Dokumen PPh</h3><p class="conditional-description">Dokumen pada bagian ini hanya digunakan untuk menentukan pemotongan, pemungutan, atau fasilitas PPh.</p><div class="conditional-grid" id="pphDocumentGrid"><div class="field field-full" hidden="" id="foreignProjectPphCertificateField">
 <label for="foreignProjectPphCertificate">Apakah rekanan menyerahkan Surat Keterangan Fasilitas PPh untuk PPh ditanggung pemerintah? <span class="required">*</span></label>
 <select class="select-control" id="foreignProjectPphCertificate">
 <option value="">Pilih jawaban</option>
@@ -6037,7 +6037,7 @@
       transaction: {percent:20, label:'Tahap 1 · Transaksi'},
       vendor: {percent:40, label:'Tahap 2 · Rekanan'},
       payment: {percent:60, label:'Tahap 3 · Pembayaran'},
-      facility: {percent:80, label:'Tahap 4 · Dokumen pajak'},
+      facility: {percent:80, label:'Tahap 4 · Dokumen dan fasilitas'},
       result: {percent:100, label:'Pengisian selesai'}
     }[stage] || {percent:20, label:'Tahap 1 · Transaksi'};
     if (progressText) progressText.textContent = progress.label;
