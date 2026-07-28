@@ -1,18 +1,13 @@
 <!DOCTYPE html>
+
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <meta
-    name="description"
-    content="Alat bantu Kabayan untuk menentukan pemungutan PPN atas pembelian barang atau penggunaan jasa oleh instansi pemerintah, termasuk transaksi dengan rekanan PKP dan non-PKP."
-  >
-  <meta name="author" content="Angga Sukma Dhaniswara">
-
-  <title>Uji Pemungutan dan Fasilitas PPN Instansi Pemerintah | Kabayan</title>
-
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Kalkulator Kabayan untuk menentukan pihak pemungut PPN, DPP, tarif, fasilitas, dan dokumen pajak transaksi instansi pemerintah." name="description"/>
+<meta content="Angga Sukma Dhaniswara" name="author"/>
+<title>Kalkulator PPN Instansi Pemerintah | Kabayan</title>
+<style>
     :root {
       --black: #000000;
       --near-black: #1d1d1f;
@@ -1655,8 +1650,63 @@
         transition: none !important;
       }
     }
-  </style>
 
+    .dpp-preview {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 18px;
+      padding: 15px 17px;
+      border: 1px solid #cfe5ff;
+      border-radius: 16px;
+      background: #f5faff;
+      color: #315b89;
+    }
+
+    .dpp-preview-copy strong {
+      display: block;
+      color: #174f88;
+      font-size: 13px;
+    }
+
+    .dpp-preview-copy span {
+      display: block;
+      margin-top: 3px;
+      font-size: 11px;
+      line-height: 1.45;
+    }
+
+    .dpp-preview-value {
+      color: var(--blue);
+      font-size: clamp(20px, 3vw, 28px);
+      font-weight: 720;
+      letter-spacing: -0.035em;
+      white-space: nowrap;
+    }
+
+    .dpp-preview.review {
+      border-color: #ffd7a6;
+      background: var(--orange-soft);
+      color: #74410d;
+    }
+
+    .dpp-preview.review .dpp-preview-copy strong,
+    .dpp-preview.review .dpp-preview-value {
+      color: #8a4300;
+    }
+
+    @media (max-width: 700px) {
+      .dpp-preview {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .dpp-preview-value {
+        white-space: normal;
+      }
+    }
+  </style>
 <style>
   /* Judul pertanyaan menggunakan biru yang sama dengan tombol utama */
   .question-blue {
@@ -1675,1074 +1725,785 @@
     }
   }
 </style>
+<style>
+  /* Apple-inspired refinement: hierarchy, whitespace, progressive disclosure */
+  :root {
+    --apple-bg:#f5f5f7;
+    --apple-card:rgba(255,255,255,.88);
+    --apple-text:#1d1d1f;
+    --apple-secondary:#6e6e73;
+    --apple-blue:#0071e3;
+    --apple-border:rgba(0,0,0,.08);
+  }
+  body{background:var(--apple-bg);color:var(--apple-text)}
+  .site-nav{background:rgba(250,250,252,.78);border-bottom:1px solid rgba(0,0,0,.05)}
+  .hero{padding:86px 22px 104px;background:radial-gradient(circle at 50% 105%,rgba(0,113,227,.18),transparent 34%),linear-gradient(180deg,#fff 0%,#f5f7fb 100%)}
+  .hero-inner{width:min(980px,100%)}
+  .eyebrow{margin-bottom:14px;color:var(--apple-blue);font-size:14px;font-weight:650}
+  .hero h1{font-size:clamp(54px,8.2vw,96px);line-height:.94;letter-spacing:-.072em}
+  .hero h1 .gradient-text{margin-top:4px}
+  .hero-description{max-width:680px;margin-top:24px;color:#515154;font-size:clamp(18px,2vw,23px);line-height:1.42}
+  .hero-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:30px}
+  .hero-cta{min-height:46px;display:inline-flex;align-items:center;justify-content:center;padding:0 21px;border-radius:999px;font-size:15px;font-weight:600;text-decoration:none;transition:.2s ease}
+  .hero-cta-primary{background:var(--apple-blue);color:#fff}.hero-cta-primary:hover{background:#0077ed;transform:translateY(-1px)}
+  .hero-cta-secondary{border:1px solid #b8b8bd;background:rgba(255,255,255,.68);color:#1d1d1f}.hero-cta-secondary:hover{background:#fff}
+  .app-section{padding:0 20px 108px;background:var(--apple-bg)}
+  .app-shell{position:relative;z-index:3;grid-template-columns:minmax(0,1.48fr) minmax(270px,.52fr);gap:22px;margin-top:-42px;align-items:start}
+  .app-card,.info-card{border:1px solid rgba(255,255,255,.75);background:var(--apple-card);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px)}
+  .app-card{padding:40px;border-radius:34px;box-shadow:0 34px 90px rgba(29,29,31,.12)}
+  .card-heading{margin-bottom:26px;padding-bottom:24px;border-bottom:1px solid var(--apple-border)}
+  .card-heading h2{font-size:clamp(30px,4vw,44px)}
+  .card-heading p{max-width:560px;margin-top:9px;font-size:14px}
+  .compact-steps{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+  .compact-steps span{display:inline-flex;align-items:center;gap:6px;padding:7px 11px;border-radius:999px;background:#f0f0f2;color:#515154;font-size:11px;font-weight:650}
+  .compact-steps b{width:19px;height:19px;display:grid;place-items:center;border-radius:50%;background:#fff;color:var(--apple-blue);font-size:10px}
+  .form-grid{gap:18px}
+  .field label,.group-label{margin-bottom:9px;font-size:13px}
+  .question-blue{color:#1d1d1f!important;font-weight:650!important}
+  .control,.select-control,.search-input{min-height:56px;border-color:transparent;border-radius:15px;background:#f5f5f7;font-size:15px}
+  .control:hover,.select-control:hover,.search-input:hover{background:#f0f0f2}
+  .control:focus,.select-control:focus,.search-input:focus{border-color:var(--apple-blue);background:#fff;box-shadow:0 0 0 4px rgba(0,113,227,.10)}
+  .hint{margin-top:6px;color:#86868b;font-size:11px;line-height:1.38}
+  .search-options{border:0;border-radius:20px;box-shadow:0 28px 70px rgba(0,0,0,.16)}
+  .search-option{padding:10px 11px}.option-copy small{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .selected-item{border:0;border-radius:16px;background:#eef6ff}
+  .choice-grid{gap:10px}
+  .choice-card{min-height:72px;border-color:transparent;border-radius:17px;background:#f5f5f7;padding:13px 14px}
+  .choice-card:hover{border-color:rgba(0,113,227,.22);background:#f0f5fb}
+  .choice-card strong{font-size:13px}.choice-card small{font-size:10px}
+  .choice-input:checked + .choice-card{border-color:var(--apple-blue);background:#eef6ff;box-shadow:0 0 0 3px rgba(0,113,227,.08)}
+  .conditional-panel{padding:20px;border:0;border-radius:22px;background:#f5f5f7}
+  .conditional-panel h3{font-size:15px}.conditional-description{margin:0 0 15px;color:#6e6e73;font-size:12px}
+  .facility-status{border:0;border-radius:17px}
+  .dpp-preview{border:0;border-radius:20px;background:linear-gradient(135deg,#071a38,#0b315e);color:#fff;box-shadow:0 18px 40px rgba(7,26,56,.15)}
+  .dpp-preview-copy strong,.dpp-preview-copy span,.dpp-preview-value{color:#fff!important}
+  .dpp-preview-copy span{opacity:.72}
+  .action-row{position:static;margin:30px 0 0;padding:0;border:0;background:transparent;box-shadow:none}
+  .button{min-height:48px;border-radius:999px}.button-primary{flex:1}.button-secondary{background:transparent}
+  .info-column{position:sticky;top:70px;gap:14px}
+  .info-card{padding:21px;border-radius:24px;box-shadow:0 14px 38px rgba(29,29,31,.07)}
+  .compact-info-card .info-icon{width:38px;height:38px;margin-bottom:13px;border-radius:12px;font-size:13px;font-weight:750}
+  .compact-info-card h3{font-size:17px}.compact-info-card p{margin-top:7px;font-size:12px;line-height:1.45}
+  .legal-details{margin-top:14px}.legal-details summary{cursor:pointer;color:var(--apple-blue);font-size:12px;font-weight:650;list-style:none}.legal-details summary::-webkit-details-marker{display:none}
+  .legal-details summary::after{content:' +';}.legal-details[open] summary::after{content:' −'}
+  .legal-links{margin-top:11px}.legal-links a{background:#f5f5f7}
+  .result-section{padding:0 20px 108px;background:var(--apple-bg)}
+  .result-card{border:0;border-radius:34px;box-shadow:0 32px 86px rgba(29,29,31,.12)}
+  .result-top{padding:42px;background:radial-gradient(circle at 85% 0,rgba(255,255,255,.23),transparent 30%),linear-gradient(135deg,#071a38,#0b5cab 58%,#168faf)}
+  .result-body{padding:36px 40px 40px}
+  .metric{border:0;border-radius:19px;background:#f5f5f7}
+  .result-panel{border:0;border-radius:22px;background:#f5f5f7}
+  .guide-section{padding:100px 20px;background:#fff}
+  .logic-flow{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;max-width:980px;margin-inline:auto}
+  .logic-step{min-height:220px;padding:26px;border:0;border-radius:28px;background:#f5f5f7;box-shadow:none}
+  .logic-step:not(:last-child)::after{display:none}.logic-step h3{font-size:20px}.logic-step p{font-size:13px}
+  .author-section{padding:54px 20px;background:#fff}.author-card{border:0;border-radius:26px;background:#f5f5f7}
+  footer{background:#f5f5f7}
+  @media(max-width:1040px){.app-shell{grid-template-columns:1fr}.info-column{position:static;grid-template-columns:repeat(2,minmax(0,1fr))}.legal-card{grid-column:auto}}
+  @media(max-width:700px){.hero{padding:68px 20px 86px}.hero h1{font-size:51px}.app-shell{margin-top:-28px}.app-card{padding:24px 18px;border-radius:26px}.action-row{margin-top:24px}.info-column{grid-template-columns:1fr}.logic-flow{grid-template-columns:1fr}.logic-step{min-height:auto}.result-top,.result-body{padding:25px 20px}}
+  @media print{.hero-actions,.compact-steps{display:none!important}.action-row{position:static;border:0;box-shadow:none}}
+</style>
+<style>
+  /* Kolom input putih semi-transparan agar bersih dan tetap mudah dikenali */
+  :root {
+    --user-input-bg: rgba(255,255,255,.76);
+    --user-input-hover: rgba(255,255,255,.96);
+    --user-input-border: rgba(29,29,31,.16);
+    --user-input-focus: #0071e3;
+  }
 
-</head>
+  .input-color-key {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 13px;
+    color: #6e6e73;
+    font-size: 11px;
+    font-weight: 600;
+  }
 
+  .input-color-key > span {
+    width: 16px;
+    height: 16px;
+    border: 1px solid var(--user-input-border);
+    border-radius: 5px;
+    background: var(--user-input-bg);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.8);
+  }
+
+  .app-card .control:not(:disabled),
+  .app-card .select-control:not(:disabled),
+  .app-card .search-input:not(:disabled) {
+    border-color: var(--user-input-border);
+    background-color: var(--user-input-bg);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.82);
+  }
+
+  .app-card .control:not(:disabled):hover,
+  .app-card .select-control:not(:disabled):hover,
+  .app-card .search-input:not(:disabled):hover {
+    border-color: rgba(0,113,227,.45);
+    background-color: var(--user-input-hover);
+  }
+
+  .app-card .control:not(:disabled):focus,
+  .app-card .select-control:not(:disabled):focus,
+  .app-card .search-input:not(:disabled):focus {
+    border-color: var(--user-input-focus);
+    background-color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(0,113,227,.11);
+  }
+
+  .app-card .choice-card {
+    border-color: var(--user-input-border);
+    background: var(--user-input-bg);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.82);
+  }
+
+  .app-card .choice-card:hover {
+    border-color: rgba(0,113,227,.45);
+    background: var(--user-input-hover);
+  }
+
+  .app-card .choice-input:checked + .choice-card {
+    border-color: var(--apple-blue);
+    background: #eef6ff;
+    box-shadow: 0 0 0 3px rgba(0,113,227,.10);
+  }
+
+  .app-card .control:disabled,
+  .app-card .select-control:disabled,
+  .app-card .search-input:disabled {
+    border-color: #e2e2e7;
+    background: #f5f5f7;
+    color: #86868b;
+    box-shadow: none;
+    cursor: not-allowed;
+    opacity: 1;
+  }
+
+  .app-card .control.invalid,
+  .app-card .select-control.invalid,
+  .app-card .search-input.invalid {
+    border-color: var(--red);
+    background: #fff5f4;
+    box-shadow: 0 0 0 4px rgba(201,52,47,.10);
+  }
+
+  @media print {
+    .input-color-key { display: none !important; }
+    .app-card .control,
+    .app-card .select-control,
+    .app-card .search-input,
+    .app-card .choice-card {
+      border-color: #b8b8bd !important;
+      background: #ffffff !important;
+      box-shadow: none !important;
+    }
+  }
+</style></head>
 <body id="top">
-  <header class="site-nav">
-    <div class="nav-inner">
-      <a class="nav-brand" href="index.html">
-        <span class="brand-symbol">ASD</span>
-        <span>dhaniswara86</span>
-      </a>
-
-      <nav class="desktop-menu" aria-label="Navigasi utama">
-        <a href="index.html">Beranda</a>
-        <a href="buku.html">Buku</a>
-        <a href="formulir.html">Formulir</a>
-		<a href="aplikasi.html">Aplikasi</a>
-        <a href="kalkulator.html" aria-current="page">Kalkulator</a>
-        <a href="artikel.html">Artikel</a>
-        <a href="index.html#tentang">Tentang</a>
-      </nav>
-
-      <div class="nav-actions">
-        <a
-          class="search-link"
-          href="#simulator"
-          aria-label="Mulai simulasi"
-          title="Mulai simulasi"
-        >
+<header class="site-nav">
+<div class="nav-inner">
+<a class="nav-brand" href="index.html">
+<span class="brand-symbol">ASD</span>
+<span>dhaniswara86</span>
+</a>
+<nav aria-label="Navigasi utama" class="desktop-menu">
+<a href="index.html">Beranda</a>
+<a href="buku.html">Buku</a>
+<a href="formulir.html">Formulir</a>
+<a href="aplikasi.html">Aplikasi</a>
+<a aria-current="page" href="kalkulator.html">Kalkulator</a>
+<a href="artikel.html">Artikel</a>
+<a href="index.html#tentang">Tentang</a>
+</nav>
+<div class="nav-actions">
+<a aria-label="Mulai simulasi" class="search-link" href="#simulator" title="Mulai simulasi">
           ⌕
         </a>
-
-        <button
-          class="menu-toggle"
-          id="menuToggle"
-          type="button"
-          aria-label="Buka menu"
-          aria-expanded="false"
-        >
+<button aria-expanded="false" aria-label="Buka menu" class="menu-toggle" id="menuToggle" type="button">
           ☰
         </button>
-      </div>
-    </div>
-  </header>
+</div>
+</div>
+</header>
+<nav aria-label="Navigasi seluler" class="mobile-menu" id="mobileMenu">
+<a href="index.html">Beranda</a>
+<a href="buku.html">Buku</a>
+<a href="formulir.html">Formulir</a>
+<a href="aplikasi.html">Aplikasi</a>
+<a href="kalkulator.html#coretax">Kalkulator</a>
+<a href="artikel.html">Artikel</a>
+<a href="index.html#tentang">Tentang</a>
+</nav>
+<main>
 
-  <nav class="mobile-menu" id="mobileMenu" aria-label="Navigasi seluler">
-    <a href="index.html">Beranda</a>
-    <a href="buku.html">Buku</a>
-    <a href="formulir.html">Formulir</a>
-    <a href="aplikasi.html">Aplikasi</a>
-    <a href="kalkulator.html#coretax">Kalkulator</a>
-    <a href="artikel.html">Artikel</a>
-    <a href="index.html#tentang">Tentang</a>
-  </nav>
-
-  <main>
-    <div class="announcement">
-      Kabayan — Katalog Bahan Pelayanan.
-      <a href="#simulator">Uji transaksi sekarang ›</a>
-    </div>
-
-    <section class="hero">
-      <div class="hero-inner">
-        <p class="eyebrow">Kalkulator PPN Khusus Instansi Pemerintah</p>
-
-        <h1>
-          Siapa yang memungut PPN?
-          <span class="gradient-text">Periksa dalam beberapa langkah.</span>
-        </h1>
-
-        <p class="hero-description">
-          Pilih barang atau jasa, masukkan nilai transaksi, lalu Kabayan
-          membantu menentukan apakah PPN-nya harus dipungut oleh instansi pemerintah,
-			disetor oleh rekanan, dipungut oleh pihak lain, atau tidak terutang.
-        </p>
-
-      
-      </div>
-    </section>
-
-    <section class="app-section" id="simulator">
-      <div class="app-shell">
-        <form class="app-card" id="vatForm" novalidate>
-          <div class="card-heading">
-            <span class="step-label">Simulasi transaksi</span>
-            <h2>Masukkan kondisi transaksi.</h2>
-            <p>
-              Sistem akan menampilkan pertanyaan tambahan sesuai dengan jawaban yang dipilih.
-            </p>
-          </div>
-
-          <div class="form-grid">
-            <div class="field field-full search-box">
-              <label class="question-blue" for="itemSearch">
+<section class="hero">
+<div class="hero-inner">
+<p class="eyebrow">Kabayan · Kalkulator PPN</p>
+<h1>PPN instansi,<span class="gradient-text">lebih sederhana.</span></h1>
+<p class="hero-description">Masukkan transaksi. Kabayan menghitung DPP, PPN, dan menentukan siapa yang memungut.</p>
+<div class="hero-actions"><a class="hero-cta hero-cta-primary" href="#simulator">Mulai periksa</a><a class="hero-cta hero-cta-secondary" href="#cara-kerja">Lihat cara kerja</a></div></div>
+</section>
+<section class="app-section" id="simulator">
+<div class="app-shell">
+<form class="app-card" id="vatForm" novalidate="">
+<div class="card-heading">
+<h2>Detail transaksi</h2>
+<p>Jawab yang muncul. Pertanyaan lain akan menyesuaikan otomatis.</p>
+<div aria-label="Tahapan pemeriksaan" class="compact-steps"><span><b>1</b> Transaksi</span><span><b>2</b> Rekanan</span><span><b>3</b> Pemungutan</span></div><div class="input-color-key" aria-label="Petunjuk warna kolom"><span aria-hidden="true"></span>Kolom putih diisi pengguna</div></div>
+<div class="form-grid">
+<div class="field field-full search-box">
+<label class="question-blue" for="itemSearch">
                 Nama barang atau jasa <span class="required">*</span>
-              </label>
-
-              <div class="search-input-wrap">
-                <input
-                  class="search-input"
-                  id="itemSearch"
-                  type="search"
-                  autocomplete="off"
-                  placeholder="Contoh: laptop, katering, internet, konsultan..."
-                  aria-autocomplete="list"
-                  aria-controls="itemOptions"
-                  aria-expanded="false"
-                >
-                <span class="search-icon" aria-hidden="true">⌕</span>
-              </div>
-
-              <div
-                class="search-options"
-                id="itemOptions"
-                role="listbox"
-                aria-label="Pilihan barang dan jasa"
-                hidden
-              ></div>
-
-              <input id="selectedItemId" type="hidden">
-
-              <div class="selected-item" id="selectedItemCard" hidden>
-                <span class="selected-item-mark" id="selectedItemIcon">✓</span>
-                <div class="selected-item-copy">
-                  <strong id="selectedItemName"></strong>
-                  <span id="selectedItemNote"></span>
-                </div>
-              </div>
-
-              <span class="hint">
-                Pilih hasil yang paling sesuai. Gunakan “Barang/jasa lainnya”
-                jika belum tersedia dalam katalog.
-              </span>
-            </div>
-
-            <div class="field">
-              <label class="question-blue" id="amountLabel" for="amountInput">
-                Nilai pembayaran/tagihan yang diuji <span class="required">*</span>
-              </label>
-
-              <div class="money-wrap">
-                <span class="money-prefix">Rp</span>
-                <input
-                  class="control money-input"
-                  id="amountInput"
-                  type="text"
-                  inputmode="numeric"
-                  autocomplete="off"
-                  placeholder="0"
-                >
-              </div>
-
-              <span class="hint" id="amountHint">
-                Masukkan nilai pembayaran atau tagihan pada tahap ini. Jika pembayaran
-                merupakan pembayaran yang dipecah-pecah,
-                pilih “Ya” pada pertanyaan berikutnya.
-              </span>
-            </div>
-
-            <div class="field" id="amountBasisField">
-              <label class="question-blue" for="amountBasis">
-                Nilai tersebut <span class="required">*</span>
-              </label>
-
-              <select class="select-control" id="amountBasis">
-                <option value="before">Belum termasuk PPN</option>
-                <option value="after">Sudah termasuk PPN</option>
-              </select>
-
-              <span class="hint">
-                Sistem akan mengonversi nilai termasuk PPN ke nilai sebelum PPN.
-              </span>
-            </div>
-
-            <div class="field field-full">
-              <span class="group-label question-blue">
+</label>
+<div class="search-input-wrap">
+<input aria-autocomplete="list" aria-controls="itemOptions" aria-expanded="false" autocomplete="off" class="search-input" id="itemSearch" placeholder="Contoh: laptop, katering, internet, konsultan..." type="search"/>
+<span aria-hidden="true" class="search-icon">⌕</span>
+</div>
+<div aria-label="Pilihan barang dan jasa" class="search-options" hidden="" id="itemOptions" role="listbox"></div>
+<input id="selectedItemId" type="hidden"/>
+<div class="selected-item" hidden="" id="selectedItemCard">
+<span class="selected-item-mark" id="selectedItemIcon">✓</span>
+<div class="selected-item-copy">
+<strong id="selectedItemName"></strong>
+<span id="selectedItemNote"></span>
+</div>
+</div>
+<span class="hint">Tidak menemukan pilihan? Gunakan “Barang atau jasa lainnya”.</span>
+</div>
+<div class="field">
+<label class="question-blue" for="amountInput" id="amountLabel">Nilai tagihan <span class="required">*</span></label>
+<div class="money-wrap">
+<span class="money-prefix">Rp</span>
+<input autocomplete="off" class="control money-input" id="amountInput" inputmode="numeric" placeholder="0" type="text"/>
+</div>
+<span class="hint" id="amountHint">Masukkan nilai pada invoice atau tagihan.</span>
+</div>
+<div class="field" id="amountBasisField">
+<label class="question-blue" for="amountBasis">Status nilai <span class="required">*</span></label>
+<select class="select-control" id="amountBasis">
+<option value="before">Belum termasuk PPN</option>
+<option value="after">Sudah termasuk PPN</option>
+</select>
+<span class="hint">DPP dihitung otomatis untuk harga termasuk PPN.</span>
+</div>
+<div aria-live="polite" class="dpp-preview" hidden="" id="dppPreview">
+<div class="dpp-preview-copy">
+<strong id="dppPreviewTitle">Dasar Pengenaan Pajak (DPP)</strong>
+<span id="dppPreviewText">Dihitung otomatis dari harga termasuk PPN.</span>
+</div>
+<div class="dpp-preview-value" id="dppPreviewValue">—</div>
+</div>
+<div class="field field-full">
+<span class="group-label question-blue">
                 Status PKP rekanan <span class="required">*</span>
-              </span>
-
-              <div class="choice-grid">
-                <div>
-                  <input
-                    class="choice-input"
-                    id="pkpYes"
-                    name="pkpStatus"
-                    type="radio"
-                    value="yes"
-                  >
-                  <label class="choice-card" for="pkpYes">
-                    <strong>Pengusaha Kena Pajak</strong> <br>
-                    <small>Pastikan rekanan menyerahkan faktur pajak.</small>
-                  </label>
-                </div>
-
-                <div>
-                  <input
-                    class="choice-input"
-                    id="pkpNo"
-                    name="pkpStatus"
-                    type="radio"
-                    value="no"
-                  >
-                  <label class="choice-card" for="pkpNo">
-                    <strong>Bukan Pengusaha Kena Pajak</strong><br>
-                    <small>Harap periksa dokumen tagihan terkait pencantuman nilai PPN.</small>
-                  </label>
-                </div>
-
-                <div>
-                  <input
-                    class="choice-input"
-                    id="pkpUnknown"
-                    name="pkpStatus"
-                    type="radio"
-                    value="unknown"
-                  >
-                  <label class="choice-card" for="pkpUnknown">
-                    <strong>Belum diketahui</strong><br>
-                    <small>Status masih dikonfirmasi.</small>
-                  </label>
-                </div>
-              </div>
-            </div>
-
-            <div class="conditional-panel" id="invoiceVatPanel" hidden>
-              <h3>Periksa tagihan rekanan non-PKP</h3>
-              <p class="conditional-description">
-                Lihat pada invoice, kuitansi, dokumen tagihan, atau kontrak. Apakah terdapat baris yang secara khusus menuliskan nilai PPN?
-              </p>
-
-              <div class="choice-grid two">
-                <div>
-                  <input
-                    class="choice-input"
-                    id="invoiceVatYes"
-                    name="invoiceVatStatus"
-                    type="radio"
-                    value="yes"
-                  >
-                  <label class="choice-card" for="invoiceVatYes">
-                    <strong>Ya, PPN tercantum</strong>
-                    <small>Instansi memungut PPN tersebut dan menyetorkannya sebagai tanggung renteng (kode 411211-108).</small>
-                  </label>
-                </div>
-
-                <div>
-                  <input
-                    class="choice-input"
-                    id="invoiceVatNo"
-                    name="invoiceVatStatus"
-                    type="radio"
-                    value="no"
-                  >
-                  <label class="choice-card" for="invoiceVatNo">
-                    <strong>Tidak ada PPN</strong>
-                    <small>Instansi tidak perlu memungut PPN dari tagihan tersebut.</small>
-                  </label>
-                </div>
-              </div>
-
-              <div class="field" id="invoiceVatAmountField" hidden>
-                <label for="invoiceVatAmountInput">
+</span>
+<div class="choice-grid">
+<div>
+<input class="choice-input" id="pkpYes" name="pkpStatus" type="radio" value="yes"/>
+<label class="choice-card" for="pkpYes">
+<strong>Pengusaha Kena Pajak</strong> <br/>
+<small>Menerbitkan Faktur Pajak.</small>
+</label>
+</div>
+<div>
+<input class="choice-input" id="pkpNo" name="pkpStatus" type="radio" value="no"/>
+<label class="choice-card" for="pkpNo">
+<strong>Bukan Pengusaha Kena Pajak</strong><br/>
+<small>Periksa PPN pada tagihan.</small>
+</label>
+</div>
+<div>
+<input class="choice-input" id="pkpUnknown" name="pkpStatus" type="radio" value="unknown"/>
+<label class="choice-card" for="pkpUnknown">
+<strong>Belum diketahui</strong><br/>
+<small>Konfirmasi terlebih dahulu.</small>
+</label>
+</div>
+</div>
+</div>
+<div class="conditional-panel" hidden="" id="invoiceVatPanel">
+<h3>Periksa tagihan rekanan non-PKP</h3>
+<p class="conditional-description">Apakah tagihan mencantumkan PPN secara terpisah?</p>
+<div class="choice-grid two">
+<div>
+<input class="choice-input" id="invoiceVatYes" name="invoiceVatStatus" type="radio" value="yes"/>
+<label class="choice-card" for="invoiceVatYes">
+<strong>Ya, PPN tercantum</strong>
+<small>PPN tertulis pada tagihan.</small>
+</label>
+</div>
+<div>
+<input class="choice-input" id="invoiceVatNo" name="invoiceVatStatus" type="radio" value="no"/>
+<label class="choice-card" for="invoiceVatNo">
+<strong>Tidak ada PPN</strong>
+<small>Tidak ada komponen PPN.</small>
+</label>
+</div>
+</div>
+<div class="field" hidden="" id="invoiceVatAmountField">
+<label for="invoiceVatAmountInput">
                   Nilai PPN yang tercantum dalam tagihan
                   <span class="required">*</span>
-                </label>
-
-                <div class="money-wrap">
-                  <span class="money-prefix">Rp</span>
-                  <input
-                    class="control money-input"
-                    id="invoiceVatAmountInput"
-                    type="text"
-                    inputmode="numeric"
-                    autocomplete="off"
-                    placeholder="0"
-                  >
-                </div>
-
-                <span class="hint">
-                  Salin nominal PPN persis seperti yang tertulis dalam tagihan.
-                  Sistem akan menghitung ulang PPN berdasarkan jenis barang/jasa,
-                  nilai total tagihan, dan formula PPN yang berlaku, kemudian
-                  membandingkannya dengan angka pada invoice.
-                </span>
-              </div>
-            </div>
-
-            <div class="conditional-panel" id="institutionPkpPanel" hidden>
-              <h3>Status PKP instansi pemerintah</h3>
-              <p class="conditional-description">
-                Informasi ini menentukan cara pelaporan setoran PPN tanggung renteng.
-              </p>
-
-              <div class="choice-grid two">
-                <div>
-                  <input
-                    class="choice-input"
-                    id="institutionPkpYes"
-                    name="institutionPkpStatus"
-                    type="radio"
-                    value="yes"
-                  >
-                  <label class="choice-card" for="institutionPkpYes">
-                    <strong>Instansi berstatus PKP</strong>
-                    <small>Setoran dilaporkan dalam SPT Masa PPN bagi PKP.</small>
-                  </label>
-                </div>
-
-                <div>
-                  <input
-                    class="choice-input"
-                    id="institutionPkpNo"
-                    name="institutionPkpStatus"
-                    type="radio"
-                    value="no"
-                  >
-                  <label class="choice-card" for="institutionPkpNo">
-                    <strong>Instansi bukan PKP</strong>
-                    <small>Dianggap melapor sepanjang PPN telah disetor.</small>
-                  </label>
-                </div>
-              </div>
-            </div>
-
-            <div class="field field-full" id="paymentMethodField">
-              <label class="question-blue" for="paymentMethod">
+</label>
+<div class="money-wrap">
+<span class="money-prefix">Rp</span>
+<input autocomplete="off" class="control money-input" id="invoiceVatAmountInput" inputmode="numeric" placeholder="0" type="text"/>
+</div>
+<span class="hint">Masukkan nominal PPN persis seperti pada tagihan.</span>
+</div>
+</div>
+<div class="conditional-panel" hidden="" id="institutionPkpPanel">
+<h3>Status PKP instansi pemerintah</h3>
+<p class="conditional-description">Menentukan cara pelaporan setoran.</p>
+<div class="choice-grid two">
+<div>
+<input class="choice-input" id="institutionPkpYes" name="institutionPkpStatus" type="radio" value="yes"/>
+<label class="choice-card" for="institutionPkpYes">
+<strong>Instansi berstatus PKP</strong>
+<small>Dilaporkan dalam SPT Masa PPN.</small>
+</label>
+</div>
+<div>
+<input class="choice-input" id="institutionPkpNo" name="institutionPkpStatus" type="radio" value="no"/>
+<label class="choice-card" for="institutionPkpNo">
+<strong>Instansi bukan PKP</strong>
+<small>Cukup disetor sesuai ketentuan.</small>
+</label>
+</div>
+</div>
+</div>
+<div class="field field-full" id="paymentMethodField">
+<label class="question-blue" for="paymentMethod">
                 Cara pembayaran <span class="required">*</span>
-              </label>
-
-              <select class="select-control" id="paymentMethod">
-                <option value="">Pilih cara pembayaran</option>
-                <option value="regular">
+</label>
+<select class="select-control" id="paymentMethod">
+<option value="">Pilih cara pembayaran</option>
+<option value="regular">
                   Pembayaran biasa (Mekanisme LS atau UP di luar Sistem INAPROC)
                 </option>
-                <option value="government_card">
+<option value="government_card">
                   Kartu kredit pemerintah
                 </option>
-                <option value="sip_up">
+<option value="sip_up">
                   Uang Persediaan (UP) melalui Pihak Lain dalam Sistem INAPROC
                 </option>
-                <option value="sip_direct">
+<option value="sip_direct">
                   Langsung (LS) melalui Sistem INAPROC
                 </option>
-              </select>
-            </div>
-
-            <div class="field field-full" id="splitQuestionField">
-              <span class="group-label question-blue">
-                Apakah pembayaran merupakan transaksi yang dipecah-pecah?
+</select>
+</div>
+<div class="field field-full" id="splitQuestionField">
+<span class="group-label question-blue">
+                Apakah transaksi dipecah?
                 <span class="required">*</span>
-              </span>
-
-              <div class="choice-grid two">
-                <div>
-                  <input
-                    class="choice-input"
-                    id="splitNo"
-                    name="splitStatus"
-                    type="radio"
-                    value="no"
-                  >
-                  <label class="choice-card" for="splitNo">
-                    <strong>Tidak</strong><br>
-                    <small>Nilai yang dimasukkan adalah seluruh nilai transaksi.</small>
-                  </label>
-                </div>
-
-                <div>
-                  <input
-                    class="choice-input"
-                    id="splitYes"
-                    name="splitStatus"
-                    type="radio"
-                    value="yes"
-                  >
-                  <label class="choice-card" for="splitYes">
-                    <strong>Ya</strong> <br>
-                    <small>Pembayaran ini merupakan transaksi yang dipecah-pecah</small>
-                  </label>
-                </div>
-              </div>
-            </div>
-
-            <div class="conditional-panel" id="splitPanel" hidden>
-              <h3>Nilai transaksi sebenarnya</h3>
-              <div class="conditional-grid">
-                <div class="field">
-                  <label for="actualTransactionInput">
+</span>
+<div class="choice-grid two">
+<div>
+<input class="choice-input" id="splitNo" name="splitStatus" type="radio" value="no"/>
+<label class="choice-card" for="splitNo">
+<strong>Tidak</strong><br/>
+<small>Nilai ini seluruh transaksi.</small>
+</label>
+</div>
+<div>
+<input class="choice-input" id="splitYes" name="splitStatus" type="radio" value="yes"/>
+<label class="choice-card" for="splitYes">
+<strong>Ya</strong> <br/>
+<small>Bagian dari transaksi yang sama.</small>
+</label>
+</div>
+</div>
+</div>
+<div class="conditional-panel" hidden="" id="splitPanel">
+<h3>Nilai transaksi sebenarnya</h3>
+<div class="conditional-grid">
+<div class="field">
+<label for="actualTransactionInput">
                     Total nilai transaksi sebelum PPN
                     <span class="required">*</span>
-                  </label>
-                  <div class="money-wrap">
-                    <span class="money-prefix">Rp</span>
-                    <input
-                      class="control money-input"
-                      id="actualTransactionInput"
-                      type="text"
-                      inputmode="numeric"
-                      autocomplete="off"
-                      placeholder="0"
-                    >
-                  </div>
-                </div>
-
-                <div class="form-alert">
-                  <span class="form-alert-icon" aria-hidden="true">⚠</span>
-                  <span>
-                    Batas Rp2 juta tidak dapat digunakan apabila pembayaran
-                    merupakan pemecahan dari transaksi yang nilai sebenarnya
-                    lebih dari Rp2 juta.
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <div class="conditional-panel" id="facilityAssistantPanel">
-              <h3 class="question-blue">
-                Uji pemberian fasilitas PPN tidak dipungut/dibebaskan
+</label>
+<div class="money-wrap">
+<span class="money-prefix">Rp</span>
+<input autocomplete="off" class="control money-input" id="actualTransactionInput" inputmode="numeric" placeholder="0" type="text"/>
+</div>
+</div>
+<div class="form-alert">
+<span aria-hidden="true" class="form-alert-icon">⚠</span>
+<span>Batas Rp2 juta tidak berlaku untuk transaksi yang sengaja dipecah.</span>
+</div>
+</div>
+</div>
+<div class="conditional-panel" id="facilityAssistantPanel">
+<h3 class="question-blue">
+                Fasilitas PPN
               </h3>
-              <p class="conditional-description">
-               Jawab pertanyaan berikut untuk mengetahui ada atau tidaknya fasilitas perpajakan atas pengadaan barang/jasa tersebut.
-              </p>
-
-              <div class="conditional-grid">
-                <div class="field field-full">
-                  <label for="facilityContext">
-                    Apakah transaksi terkait kondisi khusus?
+<p class="conditional-description">Pilih kondisi transaksi untuk menguji fasilitas.</p>
+<div class="conditional-grid">
+<div class="field field-full">
+<label for="facilityContext">
+                    Kondisi khusus
                   </label>
-                  <select class="select-control" id="facilityContext">
-                    <option value="ordinary">Tidak, pengadaan biasa</option>
-                    <option value="national_disaster">Penanganan bencana yang ditetapkan sebagai bencana nasional</option>
-                    <option value="foreign_grant_loan">Proyek pemerintah dibiayai hibah atau pinjaman luar negeri</option>
-                    <option value="defense_security">Keperluan pertahanan atau keamanan negara</option>
-                    <option value="special_zone">Transaksi terkait Kawasan Bebas, KEK, atau tempat berfasilitas kepabeanan</option>
-                  </select>
-                  <span class="hint">
+<select class="select-control" id="facilityContext">
+<option value="ordinary">Tidak, pengadaan biasa</option>
+<option value="national_disaster">Penanganan bencana yang ditetapkan sebagai bencana nasional</option>
+<option value="foreign_grant_loan">Proyek pemerintah dibiayai hibah atau pinjaman luar negeri</option>
+<option value="defense_security">Keperluan pertahanan atau keamanan negara</option>
+<option value="special_zone">Transaksi terkait Kawasan Bebas, KEK, atau tempat berfasilitas kepabeanan</option>
+</select>
+<span class="hint">
                     Pilih berdasarkan kontrak, sumber anggaran, tujuan pengadaan, dan lokasi penyerahan.
                   </span>
-                </div>
-
-                <div class="facility-status status-taxable" id="facilityAutoStatus">
-                  <strong id="facilityAutoTitle">Pilih barang atau jasa terlebih dahulu.</strong>
-                  <span id="facilityAutoText">Sistem akan menampilkan status fasilitas secara otomatis.</span>
-                </div>
-
-                <div class="field field-full" id="bookCriteriaField" hidden>
-                  <label for="bookCriteria">Apakah buku memenuhi kriteria buku umum yang mengandung unsur pendidikan?</label>
-                  <select class="select-control" id="bookCriteria">
-                    <option value="">Pilih jawaban</option>
-                    <option value="yes">Ya, memenuhi kriteria dan bukan barang cetakan biasa</option>
-                    <option value="no">Tidak atau belum dapat dibuktikan</option>
-                  </select>
-                </div>
-
-                <div class="field field-full" id="educationLicenseField" hidden>
-                  <label for="educationLicense">Apakah penyelenggara memiliki izin pendidikan formal/nonformal atau izin/pendaftaran lembaga pelatihan kerja?</label>
-                  <select class="select-control" id="educationLicense">
-                    <option value="">Pilih jawaban</option>
-                    <option value="yes">Ya, izin atau bukti pendaftaran tersedia</option>
-                    <option value="no">Tidak atau hanya seminar/workshop komersial biasa</option>
-                  </select>
-                </div>
-
-                <div class="field field-full" id="healthCriteriaField" hidden>
-                  <label for="healthCriteria">Apakah jasa diberikan oleh tenaga/fasilitas kesehatan atau pelayanan veteriner yang memenuhi ketentuan?</label>
-                  <select class="select-control" id="healthCriteria">
-                    <option value="">Pilih jawaban</option>
-                    <option value="yes">Ya, jenis layanan dan penyedianya memenuhi ketentuan</option>
-                    <option value="no">Tidak atau merupakan jasa penunjang/nonmedis biasa</option>
-                  </select>
-                </div>
-
-                <div class="field field-full" id="laborCriteriaField" hidden>
-                  <label for="laborCriteria">Apakah seluruh kriteria jasa penyediaan tenaga kerja murni terpenuhi?</label>
-                  <select class="select-control" id="laborCriteria">
-                    <option value="">Pilih jawaban</option>
-                    <option value="yes">Ya, hanya menempatkan/menyalurkan; tidak membayar upah; tidak bertanggung jawab atas hasil; pekerja masuk struktur pengguna</option>
-                    <option value="no">Tidak, salah satu kriteria tidak terpenuhi</option>
-                  </select>
-                </div>
-
-                <div class="field field-full" id="publicTransportCriteriaField" hidden>
-                  <label for="publicTransportCriteria">Apakah benar merupakan angkutan umum, bukan sewa atau carter kendaraan?</label>
-                  <select class="select-control" id="publicTransportCriteria">
-                    <option value="">Pilih jawaban</option>
-                    <option value="yes">Ya, angkutan umum sesuai izin dan pola pelayanannya</option>
-                    <option value="no">Tidak, berupa sewa/carter atau layanan khusus</option>
-                  </select>
-                </div>
-
-                <div class="field field-full" id="constructionPurposeField" hidden>
-                  <label for="constructionPurpose">Tujuan pekerjaan konstruksi</label>
-                  <select class="select-control" id="constructionPurpose">
-                    <option value="">Pilih tujuan pekerjaan</option>
-                    <option value="ordinary">Bangunan/renovasi biasa</option>
-                    <option value="worship">Pembangunan tempat yang hanya untuk keperluan ibadah</option>
-                    <option value="disaster_housing">Bangunan bagi korban bencana nasional dengan dana APBN/APBD/sumbangan</option>
-                  </select>
-                </div>
-
-                <div class="field field-full" id="electricityCriteriaField" hidden>
-                  <label for="electricityCriteria">Apakah tagihan listrik untuk rumah dengan daya di atas 6.600 VA?</label>
-                  <select class="select-control" id="electricityCriteria">
-                    <option value="">Pilih jawaban</option>
-                    <option value="no">Tidak; untuk kantor/fasilitas instansi atau rumah tidak melebihi 6.600 VA</option>
-                    <option value="yes">Ya, untuk rumah dengan daya di atas 6.600 VA</option>
-                  </select>
-                </div>
-
-                <div class="field field-full" id="socialServiceCriteriaField" hidden>
-                  <label for="socialServiceCriteria">Apakah layanan sosial diselenggarakan pemerintah atau organisasi nirlaba dan termasuk jenis layanan sosial yang ditentukan?</label>
-                  <select class="select-control" id="socialServiceCriteria">
-                    <option value="">Pilih jawaban</option>
-                    <option value="yes">Ya, penyelenggara dan jenis layanan memenuhi ketentuan</option>
-                    <option value="no">Tidak atau merupakan jasa komersial biasa</option>
-                  </select>
-                </div>
-
-                <div class="field field-full" id="broadcastCriteriaField" hidden>
-                  <label for="broadcastCriteria">Apakah berupa pesan layanan masyarakat yang tidak bersifat iklan dan disiarkan lembaga penyiaran?</label>
-                  <select class="select-control" id="broadcastCriteria">
-                    <option value="">Pilih jawaban</option>
-                    <option value="yes">Ya, pesan layanan masyarakat dan bukan iklan komersial</option>
-                    <option value="no">Tidak, berupa iklan/promosi komersial atau produksi media biasa</option>
-                  </select>
-                </div>
-
-                <div class="field field-full" id="agriFisheryCriteriaField" hidden>
-                  <label for="agriFisheryCriteria">Apakah jenis barang dan spesifikasinya tercantum dalam daftar/kriteria barang strategis PP 49 Tahun 2022?</label>
-                  <select class="select-control" id="agriFisheryCriteria">
-                    <option value="">Pilih jawaban</option>
-                    <option value="yes">Ya, jenis dan rinciannya dapat dicocokkan dengan ketentuan/lampiran</option>
-                    <option value="no">Tidak atau spesifikasinya belum dapat dibuktikan</option>
-                  </select>
-                </div>
-
-                <div class="field field-full" id="disasterEligibilityField" hidden>
-                  <label for="disasterEligibility">Apakah seluruh syarat fasilitas bencana nasional terpenuhi?</label>
-                  <select class="select-control" id="disasterEligibility">
-                    <option value="">Pilih jawaban</option>
-                    <option value="yes">Ya, bencana telah ditetapkan nasional dan barang/jasa diterima instansi yang menangani bencana untuk penanganannya</option>
-                    <option value="no">Tidak atau belum terdapat penetapan/dokumen yang cukup</option>
-                  </select>
-                </div>
-
-                <div class="field field-full" id="foreignProjectDocumentsField" hidden>
-                  <label for="foreignProjectDocuments">Apakah transaksi terdaftar dalam proyek dan dokumen fasilitas PPN tersedia?</label>
-                  <select class="select-control" id="foreignProjectDocuments">
-                    <option value="">Pilih kondisi dokumen</option>
-                    <option value="yes">Ya, registrasi BKP/JKP dan Surat Keterangan Tidak Dipungut tersedia</option>
-                    <option value="pending">Proyek memang dibiayai hibah/pinjaman luar negeri, tetapi dokumen belum tersedia</option>
-                    <option value="no">Tidak atau transaksi tidak terdaftar dalam dokumen proyek</option>
-                  </select>
-                </div>
-
-                <div class="field field-full" id="defenseEligibilityField" hidden>
-                  <label for="defenseEligibility">Apakah penerima, jenis BKP/JKP, tujuan penggunaan, dan SKB PPN memenuhi ketentuan pertahanan/keamanan?</label>
-                  <select class="select-control" id="defenseEligibility">
-                    <option value="">Pilih jawaban</option>
-                    <option value="yes">Ya, seluruh syarat dan SKB PPN tersedia sebelum transaksi</option>
-                    <option value="pending">Jenis pengadaan berpotensi memenuhi, tetapi SKB/dokumen belum tersedia</option>
-                    <option value="no">Tidak memenuhi daftar penerima, barang/jasa, atau tujuan penggunaan</option>
-                  </select>
-                </div>
-
-                <div class="field field-full" id="specialZoneDocumentsField" hidden>
-                  <label for="specialZoneDocuments">Apakah tersedia dokumen fasilitas kawasan dan arah pemasukan/penyerahan telah diverifikasi?</label>
-                  <select class="select-control" id="specialZoneDocuments">
-                    <option value="">Pilih kondisi dokumen</option>
-                    <option value="yes">Ya, dokumen fasilitas tersedia</option>
-                    <option value="no">Tidak atau belum diverifikasi</option>
-                  </select>
-                  <span class="hint">
+</div>
+<div class="facility-status status-taxable" id="facilityAutoStatus">
+<strong id="facilityAutoTitle">Pilih barang atau jasa terlebih dahulu.</strong>
+<span id="facilityAutoText">Sistem akan menampilkan status fasilitas secara otomatis.</span>
+</div>
+<div class="field field-full" hidden="" id="bookCriteriaField">
+<label for="bookCriteria">Apakah buku memenuhi kriteria buku umum yang mengandung unsur pendidikan?</label>
+<select class="select-control" id="bookCriteria">
+<option value="">Pilih jawaban</option>
+<option value="yes">Ya, memenuhi kriteria dan bukan barang cetakan biasa</option>
+<option value="no">Tidak atau belum dapat dibuktikan</option>
+</select>
+</div>
+<div class="field field-full" hidden="" id="educationLicenseField">
+<label for="educationLicense">Apakah penyelenggara memiliki izin pendidikan formal/nonformal atau izin/pendaftaran lembaga pelatihan kerja?</label>
+<select class="select-control" id="educationLicense">
+<option value="">Pilih jawaban</option>
+<option value="yes">Ya, izin atau bukti pendaftaran tersedia</option>
+<option value="no">Tidak atau hanya seminar/workshop komersial biasa</option>
+</select>
+</div>
+<div class="field field-full" hidden="" id="healthCriteriaField">
+<label for="healthCriteria">Apakah jasa diberikan oleh tenaga/fasilitas kesehatan atau pelayanan veteriner yang memenuhi ketentuan?</label>
+<select class="select-control" id="healthCriteria">
+<option value="">Pilih jawaban</option>
+<option value="yes">Ya, jenis layanan dan penyedianya memenuhi ketentuan</option>
+<option value="no">Tidak atau merupakan jasa penunjang/nonmedis biasa</option>
+</select>
+</div>
+<div class="field field-full" hidden="" id="laborCriteriaField">
+<label for="laborCriteria">Apakah seluruh kriteria jasa penyediaan tenaga kerja murni terpenuhi?</label>
+<select class="select-control" id="laborCriteria">
+<option value="">Pilih jawaban</option>
+<option value="yes">Ya, hanya menempatkan/menyalurkan; tidak membayar upah; tidak bertanggung jawab atas hasil; pekerja masuk struktur pengguna</option>
+<option value="no">Tidak, salah satu kriteria tidak terpenuhi</option>
+</select>
+</div>
+<div class="field field-full" hidden="" id="publicTransportCriteriaField">
+<label for="publicTransportCriteria">Apakah benar merupakan angkutan umum, bukan sewa atau carter kendaraan?</label>
+<select class="select-control" id="publicTransportCriteria">
+<option value="">Pilih jawaban</option>
+<option value="yes">Ya, angkutan umum sesuai izin dan pola pelayanannya</option>
+<option value="no">Tidak, berupa sewa/carter atau layanan khusus</option>
+</select>
+</div>
+<div class="field field-full" hidden="" id="constructionPurposeField">
+<label for="constructionPurpose">Tujuan pekerjaan konstruksi</label>
+<select class="select-control" id="constructionPurpose">
+<option value="">Pilih tujuan pekerjaan</option>
+<option value="ordinary">Bangunan/renovasi biasa</option>
+<option value="worship">Pembangunan tempat yang hanya untuk keperluan ibadah</option>
+<option value="disaster_housing">Bangunan bagi korban bencana nasional dengan dana APBN/APBD/sumbangan</option>
+</select>
+</div>
+<div class="field field-full" hidden="" id="electricityCriteriaField">
+<label for="electricityCriteria">Apakah tagihan listrik untuk rumah dengan daya di atas 6.600 VA?</label>
+<select class="select-control" id="electricityCriteria">
+<option value="">Pilih jawaban</option>
+<option value="no">Tidak; untuk kantor/fasilitas instansi atau rumah tidak melebihi 6.600 VA</option>
+<option value="yes">Ya, untuk rumah dengan daya di atas 6.600 VA</option>
+</select>
+</div>
+<div class="field field-full" hidden="" id="socialServiceCriteriaField">
+<label for="socialServiceCriteria">Apakah layanan sosial diselenggarakan pemerintah atau organisasi nirlaba dan termasuk jenis layanan sosial yang ditentukan?</label>
+<select class="select-control" id="socialServiceCriteria">
+<option value="">Pilih jawaban</option>
+<option value="yes">Ya, penyelenggara dan jenis layanan memenuhi ketentuan</option>
+<option value="no">Tidak atau merupakan jasa komersial biasa</option>
+</select>
+</div>
+<div class="field field-full" hidden="" id="broadcastCriteriaField">
+<label for="broadcastCriteria">Apakah berupa pesan layanan masyarakat yang tidak bersifat iklan dan disiarkan lembaga penyiaran?</label>
+<select class="select-control" id="broadcastCriteria">
+<option value="">Pilih jawaban</option>
+<option value="yes">Ya, pesan layanan masyarakat dan bukan iklan komersial</option>
+<option value="no">Tidak, berupa iklan/promosi komersial atau produksi media biasa</option>
+</select>
+</div>
+<div class="field field-full" hidden="" id="agriFisheryCriteriaField">
+<label for="agriFisheryCriteria">Apakah jenis barang dan spesifikasinya tercantum dalam daftar/kriteria barang strategis PP 49 Tahun 2022?</label>
+<select class="select-control" id="agriFisheryCriteria">
+<option value="">Pilih jawaban</option>
+<option value="yes">Ya, jenis dan rinciannya dapat dicocokkan dengan ketentuan/lampiran</option>
+<option value="no">Tidak atau spesifikasinya belum dapat dibuktikan</option>
+</select>
+</div>
+<div class="field field-full" hidden="" id="disasterEligibilityField">
+<label for="disasterEligibility">Apakah seluruh syarat fasilitas bencana nasional terpenuhi?</label>
+<select class="select-control" id="disasterEligibility">
+<option value="">Pilih jawaban</option>
+<option value="yes">Ya, bencana telah ditetapkan nasional dan barang/jasa diterima instansi yang menangani bencana untuk penanganannya</option>
+<option value="no">Tidak atau belum terdapat penetapan/dokumen yang cukup</option>
+</select>
+</div>
+<div class="field field-full" hidden="" id="foreignProjectDocumentsField">
+<label for="foreignProjectDocuments">Apakah transaksi terdaftar dalam proyek dan dokumen fasilitas PPN tersedia?</label>
+<select class="select-control" id="foreignProjectDocuments">
+<option value="">Pilih kondisi dokumen</option>
+<option value="yes">Ya, registrasi BKP/JKP dan Surat Keterangan Tidak Dipungut tersedia</option>
+<option value="pending">Proyek memang dibiayai hibah/pinjaman luar negeri, tetapi dokumen belum tersedia</option>
+<option value="no">Tidak atau transaksi tidak terdaftar dalam dokumen proyek</option>
+</select>
+</div>
+<div class="field field-full" hidden="" id="defenseEligibilityField">
+<label for="defenseEligibility">Apakah penerima, jenis BKP/JKP, tujuan penggunaan, dan SKB PPN memenuhi ketentuan pertahanan/keamanan?</label>
+<select class="select-control" id="defenseEligibility">
+<option value="">Pilih jawaban</option>
+<option value="yes">Ya, seluruh syarat dan SKB PPN tersedia sebelum transaksi</option>
+<option value="pending">Jenis pengadaan berpotensi memenuhi, tetapi SKB/dokumen belum tersedia</option>
+<option value="no">Tidak memenuhi daftar penerima, barang/jasa, atau tujuan penggunaan</option>
+</select>
+</div>
+<div class="field field-full" hidden="" id="specialZoneDocumentsField">
+<label for="specialZoneDocuments">Apakah tersedia dokumen fasilitas kawasan dan arah pemasukan/penyerahan telah diverifikasi?</label>
+<select class="select-control" id="specialZoneDocuments">
+<option value="">Pilih kondisi dokumen</option>
+<option value="yes">Ya, dokumen fasilitas tersedia</option>
+<option value="no">Tidak atau belum diverifikasi</option>
+</select>
+<span class="hint">
                     Sistem akan menandai transaksi untuk telaah karena fasilitas kawasan bergantung pada asal/tujuan barang, pelaku, dan dokumen kepabeanan/perpajakan.
                   </span>
-                </div>
-              </div>
-            </div>
-
-            <div class="conditional-panel" id="manualProfilePanel" hidden>
-              <h3>Klasifikasi PPN barang atau jasa lainnya</h3>
-              <div class="conditional-grid">
-                <div class="field">
-                  <label for="manualVatProfile">
+</div>
+</div>
+</div>
+<div class="conditional-panel" hidden="" id="manualProfilePanel">
+<h3>Klasifikasi PPN barang atau jasa lainnya</h3>
+<div class="conditional-grid">
+<div class="field">
+<label for="manualVatProfile">
                     Perlakuan PPN <span class="required">*</span>
-                  </label>
-                  <select class="select-control" id="manualVatProfile">
-                    <option value="">Pilih perlakuan</option>
-                    <option value="taxable_general">Terutang PPN umum</option>
-                    <option value="non_vat">Bukan objek PPN</option>
-                    <option value="facility_review">Berpotensi mendapat fasilitas — perlu uji lanjutan</option>
-                    <option value="special_review">Formula khusus/perlu telaah</option>
-                  </select>
-                </div>
-
-                <div class="form-alert">
-                  <span class="form-alert-icon" aria-hidden="true">i</span>
-                  <span>
+</label>
+<select class="select-control" id="manualVatProfile">
+<option value="">Pilih perlakuan</option>
+<option value="taxable_general">Terutang PPN umum</option>
+<option value="non_vat">Bukan objek PPN</option>
+<option value="facility_review">Berpotensi mendapat fasilitas — perlu uji lanjutan</option>
+<option value="special_review">Formula khusus/perlu telaah</option>
+</select>
+</div>
+<div class="form-alert">
+<span aria-hidden="true" class="form-alert-icon">i</span>
+<span>
                     Klasifikasi manual sebaiknya digunakan setelah memastikan
                     sifat barang/jasa dan ketentuan fasilitas yang berlaku.
                   </span>
-                </div>
-              </div>
-            </div>
-
-            <div class="conditional-panel" id="fuelPanel" hidden>
-              <h3>Penyedia bahan bakar</h3>
-              <div class="field">
-                <label for="fuelVendor">
+</div>
+</div>
+</div>
+<div class="conditional-panel" hidden="" id="fuelPanel">
+<h3>Penyedia bahan bakar</h3>
+<div class="field">
+<label for="fuelVendor">
                   Bahan bakar dibeli dari <span class="required">*</span>
-                </label>
-                <select class="select-control" id="fuelVendor">
-                  <option value="">Pilih penyedia</option>
-                  <option value="pertamina">
+</label>
+<select class="select-control" id="fuelVendor">
+<option value="">Pilih penyedia</option>
+<option value="pertamina">
                     PT Pertamina (Persero)
                   </option>
-                  <option value="patra">
+<option value="patra">
                     PT Pertamina Patra Niaga
                   </option>
-                  <option value="kilang">
+<option value="kilang">
                     PT Kilang Pertamina Internasional
                   </option>
-                  <option value="elnusa">
+<option value="elnusa">
                     PT Elnusa Petrofin
                   </option>
-                  <option value="other">Penyedia lainnya</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="conditional-panel" id="telecomPanel" hidden>
-              <h3>Penyedia jasa telekomunikasi</h3>
-              <div class="field">
-                <label for="telecomVendor">
+<option value="other">Penyedia lainnya</option>
+</select>
+</div>
+</div>
+<div class="conditional-panel" hidden="" id="telecomPanel">
+<h3>Penyedia jasa telekomunikasi</h3>
+<div class="field">
+<label for="telecomVendor">
                   Apakah jasa diserahkan oleh perusahaan telekomunikasi?
                   <span class="required">*</span>
-                </label>
-                <select class="select-control" id="telecomVendor">
-                  <option value="">Pilih jawaban</option>
-                  <option value="yes">Ya</option>
-                  <option value="no">Tidak</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="conditional-panel" id="airlinePanel" hidden>
-              <h3>Penyedia jasa angkutan udara</h3>
-              <div class="field">
-                <label for="airlineVendor">
+</label>
+<select class="select-control" id="telecomVendor">
+<option value="">Pilih jawaban</option>
+<option value="yes">Ya</option>
+<option value="no">Tidak</option>
+</select>
+</div>
+</div>
+<div class="conditional-panel" hidden="" id="airlinePanel">
+<h3>Penyedia jasa angkutan udara</h3>
+<div class="field">
+<label for="airlineVendor">
                   Apakah jasa diserahkan oleh perusahaan penerbangan?
                   <span class="required">*</span>
-                </label>
-                <select class="select-control" id="airlineVendor">
-                  <option value="">Pilih jawaban</option>
-                  <option value="yes">Ya</option>
-                  <option value="no">Tidak</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="conditional-panel" id="specialRatePanel" hidden>
-              <h3>Transaksi menggunakan formula PPN khusus</h3>
-              <div class="form-alert">
-                <span class="form-alert-icon" aria-hidden="true">i</span>
-                <span id="specialRateMessage"></span>
-              </div>
-            </div>
-
-            <div class="conditional-panel" id="taxInvoicePanel" hidden>
-              <h3>Validasi Faktur Pajak atau dokumen yang dipersamakan</h3>
-              <p class="conditional-description">
-                Sistem menentukan apakah transaksi memerlukan e-Faktur dengan nomor
-                17 digit atau dokumen tertentu yang dipersamakan dengan Faktur Pajak.
-                Untuk pembayaran UP melalui Pihak Lain dalam Sistem Informasi Pengadaan,
-                dokumen yang digunakan adalah dokumen tagihan sesuai PMK 58/2022,
-                bukan e-Faktur berkode transaksi 03.
-              </p>
-
-              <div class="conditional-grid">
-                <div class="facility-status status-review tax-invoice-preview" id="taxInvoiceExpectedStatus">
-                  <strong id="taxInvoiceExpectedTitle">Lengkapi parameter transaksi.</strong>
-                  <span id="taxInvoiceExpectedText">Jenis dokumen pajak dan kode yang relevan akan ditentukan otomatis.</span>
-                </div>
-
-                <div class="field field-full">
-                  <label for="taxDocumentType">Dokumen pajak yang diberikan rekanan <span class="required">*</span></label>
-                  <select class="select-control" id="taxDocumentType">
-                    <option value="">Pilih dokumen</option>
-                    <option value="efaktur">Faktur Pajak elektronik dengan nomor 17 digit</option>
-                    <option value="equivalent">Dokumen tagihan/dokumen tertentu yang dipersamakan dengan Faktur Pajak</option>
-                    <option value="none">Belum/tidak diberikan dokumen pajak</option>
-                  </select>
-                  <span class="hint">
-                    Pada transaksi UP melalui Pihak Lain dalam Sistem Informasi Pengadaan,
-                    pilih dokumen tagihan yang memuat identitas rekanan, pembeli, Pihak Lain,
-                    jenis barang/jasa, nilai pembayaran, pajak yang dipungut, serta nomor dan tanggal dokumen.
-                  </span>
-                </div>
-
-                <div class="field field-full" id="taxInvoiceNumberField" hidden>
-                  <label for="taxInvoiceNumberInput">Kode dan Nomor Seri Faktur Pajak <span class="required">*</span></label>
-                  <input
-                    class="control tax-invoice-number"
-                    id="taxInvoiceNumberInput"
-                    type="text"
-                    inputmode="numeric"
-                    autocomplete="off"
-                    maxlength="24"
-                    placeholder="Contoh: 02002600000000001"
-                  >
-                  <span class="hint">
-                    Masukkan 17 digit: 2 digit kode transaksi + 2 digit kode status + 13 digit NSFP. Tanda titik atau pemisah akan diabaikan.
-                  </span>
-                </div>
-              </div>
-            </div>
-            </div>
-
-          <div class="action-row">
-            <button class="button button-primary" type="submit">
+</label>
+<select class="select-control" id="airlineVendor">
+<option value="">Pilih jawaban</option>
+<option value="yes">Ya</option>
+<option value="no">Tidak</option>
+</select>
+</div>
+</div>
+<div class="conditional-panel" hidden="" id="specialRatePanel">
+<h3>Transaksi menggunakan formula PPN khusus</h3>
+<div class="form-alert">
+<span aria-hidden="true" class="form-alert-icon">i</span>
+<span id="specialRateMessage"></span>
+</div>
+</div>
+<div class="conditional-panel" hidden="" id="taxInvoicePanel">
+<h3>Validasi Faktur Pajak atau dokumen yang dipersamakan</h3>
+<p class="conditional-description">Sistem menentukan jenis dokumen dan kode yang relevan.</p>
+<div class="conditional-grid">
+<div class="facility-status status-review tax-invoice-preview" id="taxInvoiceExpectedStatus">
+<strong id="taxInvoiceExpectedTitle">Lengkapi parameter transaksi.</strong>
+<span id="taxInvoiceExpectedText">Jenis dokumen pajak dan kode yang relevan akan ditentukan otomatis.</span>
+</div>
+<div class="field field-full">
+<label for="taxDocumentType">Dokumen pajak yang diberikan rekanan <span class="required">*</span></label>
+<select class="select-control" id="taxDocumentType">
+<option value="">Pilih dokumen</option>
+<option value="efaktur">Faktur Pajak elektronik dengan nomor 17 digit</option>
+<option value="equivalent">Dokumen tagihan/dokumen tertentu yang dipersamakan dengan Faktur Pajak</option>
+<option value="none">Belum/tidak diberikan dokumen pajak</option>
+</select>
+<span class="hint">Pilih dokumen yang benar-benar diterima dari rekanan.</span>
+</div>
+<div class="field field-full" hidden="" id="taxInvoiceNumberField">
+<label for="taxInvoiceNumberInput">Kode dan Nomor Seri Faktur Pajak <span class="required">*</span></label>
+<input autocomplete="off" class="control tax-invoice-number" id="taxInvoiceNumberInput" inputmode="numeric" maxlength="24" placeholder="Contoh: 02002600000000001" type="text"/>
+<span class="hint">Masukkan 17 digit tanpa titik atau tanda pemisah.</span>
+</div>
+</div>
+</div>
+</div>
+<div class="action-row">
+<button class="button button-primary" type="submit">
               Periksa kewajiban PPN
               <span aria-hidden="true">→</span>
-            </button>
-
-            <button class="button button-secondary" id="resetButton" type="button">
+</button>
+<button class="button button-secondary" id="resetButton" type="button">
               Ulangi dari awal
             </button>
-          </div>
-        </form>
-
-        <aside class="info-column">
-          <section class="info-card">
-            <div class="info-icon" aria-hidden="true">⌘</div>
-            <h3>Urutan pengujian</h3>
-            <p>
-              Sistem tidak hanya melihat nominal. Status objek PPN, fasilitas otomatis,
-              status PKP, isi tagihan, cara pembayaran, pihak penyedia, dan pemecahan
-              transaksi diuji secara berurutan.
-            </p>
-
-            <div class="rule-list">
-              <div class="rule-item">
-                <span class="rule-number">1</span>
-                <span>Apakah barang atau jasa terutang PPN?</span>
-              </div>
-              <div class="rule-item">
-                <span class="rule-number">2</span>
-                <span>Apakah rekanan berstatus PKP?</span>
-              </div>
-              <div class="rule-item">
-                <span class="rule-number">3</span>
-                <span>Apakah fasilitas otomatis terpenuhi dan dokumennya tersedia?</span>
-              </div>
-              <div class="rule-item">
-                <span class="rule-number">4</span>
-                <span>Siapa yang wajib memungut dan berapa PPN-nya?</span>
-              </div>
-            </div>
-          </section>
-
-          <section class="info-card">
-            <div class="info-icon" aria-hidden="true">2 jt</div>
-            <h3>Batas Rp2 juta</h3>
-            <p>
-              Batas Rp2 juta digunakan pada jalur rekanan PKP berdasarkan PMK
-              59/2022 dan tidak berlaku untuk pemecahan transaksi. Pada jalur
-              non-PKP, keputusan sistem mengikuti ada atau tidaknya PPN yang
-              tercantum dalam tagihan rekanan.
-            </p>
-          </section>
-
-          <section class="info-card">
-            <div class="info-icon" aria-hidden="true">108</div>
-            <h3>Rekanan non-PKP</h3>
-            <p>
-              Bendahara harus melihat invoice atau dokumen tagihan. Jika PPN
-              tercantum, sistem lebih dahulu menguji fasilitas dan menghitung ulang PPN.
-              Nilai yang benar disetor sebagai tanggung renteng dengan KAP 411211 dan
-              KJS 108. Jika PPN tidak tercantum, instansi tidak memungut PPN.
-            </p>
-          </section>
-
-          <section class="info-card">
-            <div class="info-icon" aria-hidden="true">Dok</div>
-            <h3>Dokumen pajak rekanan PKP</h3>
-            <p>
-              Sistem membedakan e-Faktur 17 digit dengan dokumen tertentu yang
-              dipersamakan dengan Faktur Pajak. Untuk UP melalui Pihak Lain dalam
-              Sistem Informasi Pengadaan, dokumen tagihan PMK 58/2022 menjadi dokumen
-              pajaknya; kode transaksi 03 tidak diminta. Kode 02, 04, 05, 07, 08,
-              atau 01 tetap diuji untuk transaksi yang memang menggunakan e-Faktur standar.
-            </p>
-          </section>
-
-          <section class="info-card legal-card">
-            <div class="info-icon" aria-hidden="true">§</div>
-            <h3>Dasar hukum utama</h3>
-            <p>
-              Mesin keputusan disusun terutama berdasarkan ketentuan pemungutan
-              PPN instansi pemerintah dan fasilitas PPN yang masih berlaku.
-            </p>
-
-            <div class="legal-links">
-              <a
-                href="https://jdih.kemenkeu.go.id/dok/59-pmk-03-2022/view"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span>PMK 59/PMK.03/2022</span>
-                <span>↗</span>
-              </a>
-              <a
-                href="https://jdih.kemenkeu.go.id/dok/per-11pj2025"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span>PER-11/PJ/2025 — khususnya Pasal 126</span>
-                <span>↗</span>
-              </a>
-              <a
-                href="https://jdih.kemenkeu.go.id/dok/58-pmk-03-2022/summary"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span>PMK 58/PMK.03/2022</span>
-                <span>↗</span>
-              </a>
-              <a
-                href="https://jdih.kemenkeu.go.id/dok/pp-49-tahun-2022/view"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span>PP 49 Tahun 2022</span>
-                <span>↗</span>
-              </a>
-              <a
-                href="https://jdih.kemenkeu.go.id/dok/pmk-131-tahun-2024/view"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span>PMK 131 Tahun 2024</span>
-                <span>↗</span>
-              </a>
-              <a
-                href="https://www.pajak.go.id/sites/default/files/lampiran/Petunjuk%20Teknis%20Pembuatan%20Faktur%20Pajak%20dan%20Dokumen%20Tertentu%20yang%20Kedudukannya%20Dipersamakan%20dengan%20Faktur%20Pajak%20serta%20Penerapan%20PMK%20131%20Tahun%202024.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span>PER-1/PJ/2025 — kode transaksi dan DPP Faktur Pajak</span>
-                <span>↗</span>
-              </a>
-              <a
-                href="https://jdih.kemenkeu.go.id/dok/pmk-80-tahun-2024/summary"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span>PMK 80 Tahun 2024 — proyek hibah/pinjaman luar negeri</span>
-                <span>↗</span>
-              </a>
-              <a
-                href="https://jdih.kemenkeu.go.id/dok/pmk-157-tahun-2023/summary"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span>PMK 157 Tahun 2023 s.t.d.d. PMK 45 Tahun 2025</span>
-                <span>↗</span>
-              </a>
-              <a
-                href="https://jdih.kemenkeu.go.id/dok/5-pmk-010-2020"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span>PMK 5/PMK.010/2020 — buku yang dibebaskan</span>
-                <span>↗</span>
-              </a>
-              <a
-                href="https://jdih.kemenkeu.go.id/dok/pmk-11-tahun-2025/view"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span>PMK 11 Tahun 2025 s.t.d.d. PMK 53/2025 dan PMK 1/2026</span>
-                <span>↗</span>
-              </a>
-            </div>
-          </section>
-        </aside>
-      </div>
-    </section>
-
-    <section class="result-section" id="hasil" hidden>
-      <div class="result-shell">
-        <article class="result-card">
-          <div class="result-top" id="resultTop">
-            <span class="result-badge" id="resultBadge"></span>
-            <h2 id="resultTitle"></h2>
-            <p class="result-lead" id="resultLead"></p>
-          </div>
-
-          <div class="result-body">
-            <div class="result-metrics">
-              <div class="metric">
-                <span>Nilai dasar penghitungan</span>
-                <strong id="metricBase">—</strong>
-              </div>
-              <div class="metric">
-                <span>Tarif/formula</span>
-                <strong id="metricRate">—</strong>
-              </div>
-              <div class="metric">
-                <span>PPN terutang</span>
-                <strong id="metricVat">—</strong>
-              </div>
-              <div class="metric">
-                <span>Pihak pemungut</span>
-                <strong id="metricCollector">—</strong>
-              </div>
-            </div>
-
-            <div class="result-grid">
-              <section class="result-panel">
-                <h3>Mengapa hasilnya demikian?</h3>
-                <ul class="reason-list" id="reasonList"></ul>
-              </section>
-
-              <section class="result-panel">
-                <h3>Hal yang perlu dilakukan</h3>
-                <ul class="check-list" id="actionList"></ul>
-              </section>
-            </div>
-
-            <section class="result-panel invoice-validation-panel" id="taxInvoiceResultPanel" hidden>
-              <div class="invoice-validation-head">
-                <h3>Validasi Faktur Pajak atau dokumen yang dipersamakan</h3>
-                <span class="invoice-validation-badge" id="taxInvoiceResultBadge">—</span>
-              </div>
-              <p id="taxInvoiceResultSummary" class="hint"></p>
-              <ul class="invoice-detail-list" id="taxInvoiceResultList"></ul>
-            </section>
-
-            <div class="result-note" id="resultNote"></div>
-
-            <div class="result-actions">
-              <button class="button print-button" id="printButton" type="button">
+</div>
+</form>
+<aside class="info-column"><section class="info-card compact-info-card"><div aria-hidden="true" class="info-icon">01</div><h3>Urutan singkat</h3><p>Objek PPN → status PKP → cara bayar → pihak pemungut.</p></section><section class="info-card compact-info-card"><div aria-hidden="true" class="info-icon">2 jt</div><h3>Batas transaksi</h3><p>Berlaku pada jalur PKP dan bukan untuk transaksi yang dipecah.</p></section><section class="info-card compact-info-card"><div aria-hidden="true" class="info-icon">108</div><h3>Rekanan non-PKP</h3><p>PPN yang tertulis pada tagihan diuji dan dapat disetor sebagai tanggung renteng.</p></section><section class="info-card legal-card compact-info-card"><div aria-hidden="true" class="info-icon">§</div><h3>Dasar hukum</h3><p>Referensi utama kalkulator.</p><details class="legal-details"><summary>Lihat regulasi</summary><div class="legal-links"><a href="https://jdih.kemenkeu.go.id/dok/59-pmk-03-2022/view" rel="noopener noreferrer" target="_blank"><span>PMK 59/2022</span><span>↗</span></a><a href="https://jdih.kemenkeu.go.id/dok/58-pmk-03-2022/summary" rel="noopener noreferrer" target="_blank"><span>PMK 58/2022</span><span>↗</span></a><a href="https://jdih.kemenkeu.go.id/dok/pp-49-tahun-2022/view" rel="noopener noreferrer" target="_blank"><span>PP 49/2022</span><span>↗</span></a><a href="https://jdih.kemenkeu.go.id/dok/pmk-131-tahun-2024/view" rel="noopener noreferrer" target="_blank"><span>PMK 131/2024</span><span>↗</span></a><a href="https://jdih.kemenkeu.go.id/dok/per-11pj2025" rel="noopener noreferrer" target="_blank"><span>PER-11/PJ/2025</span><span>↗</span></a></div></details></section></aside>
+</div>
+</section>
+<section class="result-section" hidden="" id="hasil">
+<div class="result-shell">
+<article class="result-card">
+<div class="result-top" id="resultTop">
+<span class="result-badge" id="resultBadge"></span>
+<h2 id="resultTitle"></h2>
+<p class="result-lead" id="resultLead"></p>
+</div>
+<div class="result-body">
+<div class="result-metrics">
+<div class="metric">
+<span>DPP</span>
+<strong id="metricBase">—</strong>
+</div>
+<div class="metric">
+<span>Tarif/formula</span>
+<strong id="metricRate">—</strong>
+</div>
+<div class="metric">
+<span>PPN terutang</span>
+<strong id="metricVat">—</strong>
+</div>
+<div class="metric">
+<span>Pihak pemungut</span>
+<strong id="metricCollector">—</strong>
+</div>
+</div>
+<div class="result-grid">
+<section class="result-panel">
+<h3>Mengapa hasilnya demikian?</h3>
+<ul class="reason-list" id="reasonList"></ul>
+</section>
+<section class="result-panel">
+<h3>Hal yang perlu dilakukan</h3>
+<ul class="check-list" id="actionList"></ul>
+</section>
+</div>
+<section class="result-panel invoice-validation-panel" hidden="" id="taxInvoiceResultPanel">
+<div class="invoice-validation-head">
+<h3>Validasi Faktur Pajak atau dokumen yang dipersamakan</h3>
+<span class="invoice-validation-badge" id="taxInvoiceResultBadge">—</span>
+</div>
+<p class="hint" id="taxInvoiceResultSummary"></p>
+<ul class="invoice-detail-list" id="taxInvoiceResultList"></ul>
+</section>
+<div class="result-note" id="resultNote"></div>
+<div class="result-actions">
+<button class="button print-button" id="printButton" type="button">
                 Cetak hasil
               </button>
-              <button class="button copy-button" id="copyButton" type="button">
+<button class="button copy-button" id="copyButton" type="button">
                 Salin ringkasan
               </button>
-              <button class="button copy-button" id="backToFormButton" type="button">
+<button class="button copy-button" id="backToFormButton" type="button">
                 Ubah jawaban
               </button>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="guide-section">
-      <div class="guide-inner">
-        <div class="section-heading">
-          <p>Logika sistem</p>
-          <h2>Enam lapis pemeriksaan.</h2>
-        </div>
-
-        <div class="logic-flow">
-          <article class="logic-step">
-            <span class="logic-number">1</span>
-            <h3>Barang atau jasa</h3>
-            <p>
-              Tentukan apakah objek PPN, bukan objek, atau termasuk kategori
-              fasilitas yang dapat diuji otomatis.
-            </p>
-          </article>
-
-          <article class="logic-step">
-            <span class="logic-number">2</span>
-            <h3>Status rekanan</h3>
-            <p>
-              Sistem lebih dahulu menetapkan fasilitas dari fakta transaksi, lalu
-              membedakan jalur PKP dan non-PKP serta menghitung ulang PPN pada tagihan.
-            </p>
-          </article>
-
-          <article class="logic-step">
-            <span class="logic-number">3</span>
-            <h3>Cara pembayaran</h3>
-            <p>
-              Kartu kredit pemerintah dan UP melalui Pihak Lain mempunyai
-              perlakuan berbeda.
-            </p>
-          </article>
-
-          <article class="logic-step">
-            <span class="logic-number">4</span>
-            <h3>Pengecualian khusus</h3>
-            <p>
-              Tanah, BBM tertentu, telekomunikasi, dan angkutan udara diuji
-              secara khusus.
-            </p>
-          </article>
-
-          <article class="logic-step">
-            <span class="logic-number">5</span>
-            <h3>Batas transaksi</h3>
-            <p>
-              Batas Rp2 juta diuji hanya pada jalur PKP. Pada jalur non-PKP,
-              PPN yang tercantum dalam tagihan dihitung ulang untuk memeriksa
-              kesesuaian nominalnya.
-            </p>
-          </article>
-
-          <article class="logic-step">
-            <span class="logic-number">6</span>
-            <h3>Faktur Pajak PKP</h3>
-            <p>
-              Kode transaksi, status normal/pengganti, tahun NSFP, DPP, PPN,
-              kode transaksi Faktur Pajak diuji berdasarkan jenis transaksi, fasilitas, nilai, dan pihak pemungut.
-            </p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="author-section">
-      <div class="author-card">
-        <div class="author-mark">ASD</div>
-        <div class="author-copy">
-          <strong>Angga Sukma Dhaniswara</strong>
-          <p>
-            Berbagi materi perpajakan, formulir, aplikasi, dan alat bantu melalui
-            Kabayan — Katalog Bahan Pelayanan.
-          </p>
-        </div>
-        <a class="button button-primary" href="aplikasi.html">
+</div>
+</div>
+</article>
+</div>
+</section>
+<section class="guide-section" id="cara-kerja">
+<div class="guide-inner">
+<div class="section-heading">
+<p>Cara kerja</p>
+<h2>Tiga langkah.</h2>
+</div>
+<div class="logic-flow"><article class="logic-step"><span class="logic-number">1</span><h3>Pilih transaksi</h3><p>Cari barang atau jasa dan masukkan nilai tagihan.</p></article><article class="logic-step"><span class="logic-number">2</span><h3>Jawab kondisi</h3><p>Status PKP, cara bayar, fasilitas, dan dokumen muncul sesuai kebutuhan.</p></article><article class="logic-step"><span class="logic-number">3</span><h3>Lihat keputusan</h3><p>Kabayan menampilkan DPP, PPN, pihak pemungut, dan tindak lanjut.</p></article></div>
+</div>
+</section>
+<section class="author-section">
+<div class="author-card">
+<div class="author-mark">ASD</div>
+<div class="author-copy">
+<strong>Angga Sukma Dhaniswara</strong>
+<p>Materi dan alat bantu perpajakan dalam satu tempat.</p>
+</div>
+<a class="button button-primary" href="aplikasi.html">
           Aplikasi lainnya
         </a>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="disclaimer">
-      <strong>Disclaimer:</strong>
-      Aplikasi ini merupakan alat bantu edukasi umum dan bukan situs resmi
-      Direktorat Jenderal Pajak. Hasil harus dikonfirmasi dengan kontrak,
-      faktur/dokumen tagihan, kode dan nomor Faktur Pajak, pencantuman PPN, status PKP rekanan dan instansi,
-      karakter barang atau jasa, tujuan penggunaan, sumber pembiayaan, izin penyedia,
-      dokumen fasilitas, serta ketentuan terbaru sebelum digunakan untuk pemenuhan kewajiban perpajakan. Validasi pada halaman ini hanya menilai ketepatan penggunaan kode transaksi Faktur Pajak berdasarkan data transaksi yang dimasukkan.
-    </div>
-
-    <div class="footer-inner">
-      <p>
+</div>
+</section>
+</main>
+<footer>
+<div class="disclaimer"><strong>Disclaimer: </strong>Alat bantu edukasi, bukan situs resmi DJP. Cocokkan hasil dengan kontrak, tagihan, dokumen pajak, dan ketentuan terbaru.</div>
+<div class="footer-inner">
+<p>
         © <span id="currentYear"></span> Angga Sukma Dhaniswara.
       </p>
-
-      <div class="footer-links">
-        <a href="index.html">Beranda</a>
-        <a href="buku.html">Buku</a>
-        <a href="formulir.html">Formulir</a>
-        <a href="aplikasi.html">Aplikasi</a>
-        <a href="artikel.html">Artikel</a>
-        <a href="#top">Kembali ke atas</a>
-      </div>
-    </div>
-  </footer>
-
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
-
-  <script>
+<div class="footer-links">
+<a href="index.html">Beranda</a>
+<a href="buku.html">Buku</a>
+<a href="formulir.html">Formulir</a>
+<a href="aplikasi.html">Aplikasi</a>
+<a href="artikel.html">Artikel</a>
+<a href="#top">Kembali ke atas</a>
+</div>
+</div>
+</footer>
+<div aria-live="polite" class="toast" id="toast" role="status"></div>
+<script>
     "use strict";
 
     const VAT_ITEMS = [
@@ -3360,6 +3121,10 @@
     const amountHint = document.getElementById("amountHint");
     const amountBasis = document.getElementById("amountBasis");
     const amountBasisField = document.getElementById("amountBasisField");
+    const dppPreview = document.getElementById("dppPreview");
+    const dppPreviewTitle = document.getElementById("dppPreviewTitle");
+    const dppPreviewText = document.getElementById("dppPreviewText");
+    const dppPreviewValue = document.getElementById("dppPreviewValue");
     const invoiceVatPanel = document.getElementById("invoiceVatPanel");
     const invoiceVatAmountField = document.getElementById("invoiceVatAmountField");
     const invoiceVatAmountInput = document.getElementById("invoiceVatAmountInput");
@@ -4529,7 +4294,7 @@
         amountBasis.disabled = true;
         amountBasisField.hidden = true;
         amountLabel.innerHTML =
-          'Nilai keseluruhan tagihan <span class="required">*</span>';
+          'Total tagihan <span class="required">*</span>';
 
         if (invoiceShowsVat) {
           amountHint.textContent =
@@ -4542,9 +4307,9 @@
         amountBasis.disabled = false;
         amountBasisField.hidden = false;
         amountLabel.innerHTML =
-          'Nilai pembayaran/tagihan yang diuji <span class="required">*</span>';
+          'Nilai tagihan <span class="required">*</span>';
         amountHint.textContent =
-          "Masukkan nilai pembayaran atau tagihan yang diuji.";
+          "Masukkan nilai pada invoice atau tagihan.";
       }
 
       manualProfilePanel.hidden = !(item && item.profile === "manual");
@@ -4571,6 +4336,7 @@
 
       updateFacilityAssistant(item);
       updateTaxInvoicePreview();
+      updateDppPreview();
     }
 
     function clearInvalidStates() {
@@ -4731,6 +4497,74 @@
       }
 
       return inputAmount;
+    }
+
+    function updateDppPreview() {
+      const item = getSelectedItem();
+      const inputAmount = parseRupiah(amountInput.value);
+      const usesIncludedVat = amountBasis.value === "after";
+
+      dppPreview.hidden = !usesIncludedVat || inputAmount <= 0;
+      dppPreview.classList.remove("review");
+
+      if (dppPreview.hidden) {
+        dppPreviewValue.textContent = "—";
+        return;
+      }
+
+      if (!item) {
+        dppPreview.classList.add("review");
+        dppPreviewTitle.textContent = "DPP belum dapat dihitung";
+        dppPreviewText.textContent = "Pilih barang atau jasa terlebih dahulu agar formula PPN dapat ditentukan.";
+        dppPreviewValue.textContent = "Perlu pilihan barang/jasa";
+        return;
+      }
+
+      const rawProfile = resolveProfile(item);
+      const facilityDecision = resolveAutomaticFacility(item);
+      const profile = facilityDecision.effectiveProfile || rawProfile;
+      const rate = resolveRate(item, profile);
+
+      if (facilityDecision.status === "review" ||
+          ["special_review", "facility_review"].includes(profile) ||
+          (rawProfile === "manual" && !manualVatProfile.value)) {
+        dppPreview.classList.add("review");
+        dppPreviewTitle.textContent = "DPP memerlukan telaah";
+        dppPreviewText.textContent = "Formula PPN belum dapat ditentukan otomatis dari data yang tersedia.";
+        dppPreviewValue.textContent = "Belum dapat dihitung";
+        return;
+      }
+
+      if (profile === "non_vat") {
+        dppPreview.classList.add("review");
+        dppPreviewTitle.textContent = "Bukan objek PPN";
+        dppPreviewText.textContent = "Dasar Pengenaan Pajak PPN tidak berlaku untuk transaksi yang bukan objek PPN.";
+        dppPreviewValue.textContent = "Tidak berlaku";
+        return;
+      }
+
+      if (facilityDecision.status === "exempt" ||
+          facilityDecision.status === "not_collected" ||
+          profile === "exempt") {
+        dppPreviewTitle.textContent = "Dasar Pengenaan Pajak (DPP)";
+        dppPreviewText.textContent = "Transaksi memperoleh fasilitas; PPN yang dipungut pada simulasi ini nihil.";
+        dppPreviewValue.textContent = formatCurrency(inputAmount);
+        return;
+      }
+
+      if (!(rate.value > 0)) {
+        dppPreview.classList.add("review");
+        dppPreviewTitle.textContent = "DPP belum dapat dihitung";
+        dppPreviewText.textContent = "Tarif atau formula PPN belum tersedia untuk transaksi ini.";
+        dppPreviewValue.textContent = "Belum dapat dihitung";
+        return;
+      }
+
+      const baseAmount = calculateBaseAmount(inputAmount, "after", rate.value);
+      const vatAmount = inputAmount - baseAmount;
+      dppPreviewTitle.textContent = "Dasar Pengenaan Pajak (DPP)";
+      dppPreviewText.textContent = `Harga termasuk PPN ${formatCurrency(inputAmount)} dikurangi PPN ${formatCurrency(vatAmount)} dengan formula ${rate.label}.`;
+      dppPreviewValue.textContent = formatCurrency(baseAmount);
     }
 
     function createResult({
@@ -5375,7 +5209,7 @@
         `Barang/Jasa: ${getSelectedItem().name}`,
         `Keputusan: ${result.title}`,
         `Penjelasan: ${result.lead}`,
-        `Nilai dasar penghitungan: ${formatCurrency(result.baseAmount)}`,
+        `Dasar Pengenaan Pajak (DPP): ${formatCurrency(result.baseAmount)}`,
         `Tarif/Formula: ${result.rateLabel}`,
         `PPN terutang: ${formatCurrency(result.vatAmount)}`,
         `Pihak pemungut: ${result.collector}`,
@@ -5441,7 +5275,12 @@
     });
 
     [amountInput, actualTransactionInput, invoiceVatAmountInput].forEach((input) => {
-      input.addEventListener("input", () => formatNumberInput(input));
+      input.addEventListener("input", () => {
+        formatNumberInput(input);
+        if (input === amountInput) {
+          updateDppPreview();
+        }
+      });
     });
 
     form.querySelectorAll('input[name="pkpStatus"]').forEach((radio) => {
@@ -5506,6 +5345,8 @@
       invoiceVatAmountInput.value = "";
       taxInvoiceNumberInput.value = "";
       taxInvoiceResultPanel.hidden = true;
+      dppPreview.hidden = true;
+      dppPreviewValue.textContent = "—";
       resultSection.hidden = true;
       closeItemOptions();
       clearInvalidStates();
