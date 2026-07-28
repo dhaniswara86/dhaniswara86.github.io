@@ -2092,7 +2092,22 @@
   #pphTaxIdField[hidden],#pphTurnoverField[hidden]{display:none!important}
   @media print{.wizard-percentage-progress,.wizard-result-complete{display:none!important}}
 </style>
-</head>
+<style id="kabayan-unified-document-style">
+  #pphSkbFieldLegacy,
+  #pphTurnoverField,
+  #pphBelow500Field,
+  #facilityContextField {
+    display: none !important;
+  }
+</style>
+<style id="kabayan-document-separation-style">
+  #pkpStatusField[hidden], #pphDocumentChoiceField[hidden] { display: none !important; }
+  .tax-document-group { border-color: #e5e7eb !important; background: #fff !important; }
+  .tax-document-group > h3 { margin-bottom: 6px; }
+  #pphResultWrap { scroll-margin-top: 88px; outline: none; }
+  #pphResultWrap:focus-visible { box-shadow: 0 0 0 3px rgba(0,113,227,.18); }
+  @media (max-width:700px){ #pphResultWrap{scroll-margin-top:72px;} }
+</style></head>
 <body id="top">
 <header class="site-nav">
 <div class="nav-inner">
@@ -2214,7 +2229,7 @@
 <span id="dppPreviewText">Dihitung otomatis dari harga termasuk PPN.</span>
 </div>
 <div class="dpp-preview-value" id="dppPreviewValue">—</div>
-</div></div></section><section class="wizard-stage" data-wizard-stage="vendor" id="wizardStageVendor"><header class="wizard-stage-head"><span class="wizard-stage-kicker">Tahap 2</span><h3>Profil rekanan</h3><p>Lengkapi bentuk, identitas perpajakan, status PKP, dan dokumen rekanan.</p></header><div class="wizard-stage-error" data-wizard-error="" hidden="" role="alert"></div><div class="wizard-stage-grid"><div class="conditional-panel field-full integrated-profile-panel" id="vendorProfilePanel"><h3>Profil rekanan</h3><p class="conditional-description">Data ini dipakai sekaligus untuk menentukan pihak pemungut PPN, tarif PPh, serta dokumen yang diperlukan.</p><div class="conditional-grid"><div class="field field-full">
+</div></div></section><section class="wizard-stage" data-wizard-stage="vendor" id="wizardStageVendor"><header class="wizard-stage-head"><span class="wizard-stage-kicker">Tahap 2</span><h3>Profil rekanan</h3><p>Lengkapi bentuk dan identitas rekanan. Status PKP hanya ditanyakan untuk rekanan dalam negeri.</p></header><div class="wizard-stage-error" data-wizard-error="" hidden="" role="alert"></div><div class="wizard-stage-grid"><div class="conditional-panel field-full integrated-profile-panel" id="vendorProfilePanel"><h3>Profil rekanan</h3><p class="conditional-description">Data ini dipakai sekaligus untuk menentukan pihak pemungut PPN, tarif PPh, serta dokumen yang diperlukan.</p><div class="conditional-grid"><div class="field field-full">
 <label class="question-blue" for="pphVendorTypeSelect">Bentuk rekanan <span class="required">*</span></label>
 <select class="select-control" id="pphVendorTypeSelect" name="pphVendorType">
 <option value="">Pilih bentuk rekanan</option>
@@ -2223,7 +2238,7 @@
 <option value="foreign">Luar negeri non-BUT</option>
 </select>
 <span class="hint">Digunakan untuk menentukan PPh Pasal 21, 23, 26, atau ketentuan khusus.</span>
-</div><div class="field" id="pphTaxIdField"><label for="pphTaxIdStatus" id="pphTaxIdLabel">Status NPWP/NIK <span class="required">*</span></label><select class="select-control" id="pphTaxIdStatus"><option value="">Pilih bentuk rekanan terlebih dahulu</option></select></div><div class="field field-full">
+</div><div class="field" id="pphTaxIdField"><label for="pphTaxIdStatus" id="pphTaxIdLabel">Status NPWP/NIK <span class="required">*</span></label><select class="select-control" id="pphTaxIdStatus"><option value="">Pilih bentuk rekanan terlebih dahulu</option></select></div><div class="field field-full" id="pkpStatusField">
 <label class="question-blue" for="pkpStatusSelect">Status rekanan <span class="required">*</span></label>
 <select class="select-control" id="pkpStatusSelect" name="pkpStatus">
 <option value="">Pilih status rekanan</option>
@@ -2232,7 +2247,7 @@
 <option value="unknown">Belum diketahui</option>
 </select>
 <span class="hint">Status PKP menentukan Faktur Pajak dan mekanisme pemungutan PPN.</span>
-</div><div class="field"><label for="pphSkbStatus">SKB pemotongan/pemungutan PPh</label><select class="select-control" id="pphSkbStatus"><option value="no">Tidak ada</option><option value="yes">Ada, berlaku, dan mencakup transaksi</option><option value="uncertain">Ada, tetapi belum diverifikasi</option></select></div><div class="field" id="pphTurnoverField"><label for="pphTurnoverCertificate">Surat Keterangan PPh Final omzet tertentu</label><select class="select-control" id="pphTurnoverCertificate"><option value="no">Tidak ada</option><option value="yes">Ada dan kelayakan subjek/transaksi telah dipastikan</option><option value="uncertain">Ada, tetapi kelayakannya belum diverifikasi</option></select></div><div class="field field-full" hidden="" id="pphBelow500Field"><label for="pphBelow500Statement">Pernyataan omzet OP belum Rp500 juta</label><select class="select-control" id="pphBelow500Statement"><option value="no">Tidak diserahkan</option><option value="yes">Diserahkan dan valid</option><option value="uncertain">Belum diverifikasi</option></select></div></div></div><div class="conditional-panel field-full integrated-detail-panel" hidden="" id="pphConstructionPanel"><h3>Klasifikasi jasa konstruksi</h3><p>Jenis layanan mengikuti UU 2 Tahun 2017; tarif PPh Final mengikuti PP 9 Tahun 2022. Panel muncul otomatis dari pilihan transaksi.</p><div class="pph-grid">
+</div><div class="field" hidden="" id="pphSkbFieldLegacy"><label for="pphSkbStatus">SKB pemotongan/pemungutan PPh</label><select class="select-control" id="pphSkbStatus"><option value="no">Tidak ada</option><option value="yes">Ada, berlaku, dan mencakup transaksi</option><option value="uncertain">Ada, tetapi belum diverifikasi</option></select></div><div class="field" hidden="" id="pphTurnoverField"><label for="pphTurnoverCertificate">Surat Keterangan PPh Final omzet tertentu</label><select class="select-control" id="pphTurnoverCertificate"><option value="no">Tidak ada</option><option value="yes">Ada dan kelayakan subjek/transaksi telah dipastikan</option><option value="uncertain">Ada, tetapi kelayakannya belum diverifikasi</option></select></div><div class="field field-full" hidden="" id="pphBelow500Field"><label for="pphBelow500Statement">Pernyataan omzet OP belum Rp500 juta</label><select class="select-control" id="pphBelow500Statement"><option value="no">Tidak diserahkan</option><option value="yes">Diserahkan dan valid</option><option value="uncertain">Belum diverifikasi</option></select></div></div></div><div class="conditional-panel field-full integrated-detail-panel" hidden="" id="pphConstructionPanel"><h3>Klasifikasi jasa konstruksi</h3><p>Jenis layanan mengikuti UU 2 Tahun 2017; tarif PPh Final mengikuti PP 9 Tahun 2022. Panel muncul otomatis dari pilihan transaksi.</p><div class="pph-grid">
 <div class="field"><label for="pphConstructionType">Jenis layanan <span class="required">*</span></label><select class="select-control" id="pphConstructionType"><option value="">Pilih jenis layanan</option><option value="work">Pekerjaan konstruksi</option><option value="integrated">Pekerjaan konstruksi terintegrasi</option><option value="consulting">Jasa konsultansi konstruksi</option></select></div>
 <div class="field"><label for="pphConstructionCertificate" id="pphConstructionCertificateLabel">SBU/SKK <span class="required">*</span></label><select class="select-control" id="pphConstructionCertificate"><option value="">Pilih jenis layanan dan penerima dahulu</option></select></div>
 <div class="pph-preview" id="pphConstructionPreview">Pilih jenis layanan dan dokumen sertifikasi.</div>
@@ -2322,13 +2337,18 @@
 <span>Batas Rp2 juta tidak berlaku untuk transaksi yang sengaja dipecah.</span>
 </div>
 </div>
-</div><div class="field field-full wizard-facility-gate" id="wizardFacilityGateField"><label for="wizardFacilityGate">Apakah transaksi memiliki fasilitas atau kondisi khusus? <span class="required">*</span></label><select class="select-control" id="wizardFacilityGate"><option value="">Pilih jawaban</option><option value="no">Tidak, pengadaan biasa</option><option value="yes">Ya, perlu pemeriksaan fasilitas</option></select><span class="hint">Tahap fasilitas akan dilewati apabila tidak relevan dengan transaksi.</span></div></div></section><section class="wizard-stage" data-wizard-stage="facility" id="wizardStageFacility"><header class="wizard-stage-head"><span class="wizard-stage-kicker">Tahap 4</span><h3>Fasilitas dan dokumen</h3><p>Lengkapi kondisi khusus dan dokumen pajak yang hanya muncul bila diperlukan.</p></header><div class="wizard-stage-error" data-wizard-error="" hidden="" role="alert"></div><div class="wizard-stage-grid"><div class="conditional-panel" id="facilityAssistantPanel">
-<h3 class="question-blue">
-                Fasilitas PPN
-              </h3>
-<p class="conditional-description">Pilih kondisi transaksi untuk menguji fasilitas.</p>
+</div><div class="field field-full wizard-facility-gate" id="wizardFacilityGateField"><label for="wizardFacilityGate">Apakah transaksi memiliki fasilitas atau kondisi khusus? <span class="required">*</span></label><select class="select-control" id="wizardFacilityGate"><option value="">Pilih fasilitas atau kondisi</option><option value="ordinary">Tidak memiliki fasilitas atau kondisi khusus</option><option value="national_disaster">Penanganan bencana yang ditetapkan sebagai bencana nasional</option><option value="foreign_grant_loan">Proyek pemerintah yang dibiayai hibah atau pinjaman luar negeri</option><option value="defense_security">Keperluan pertahanan atau keamanan negara</option><option value="special_zone">Transaksi terkait Kawasan Bebas, KEK, atau tempat berfasilitas kepabeanan</option></select><span class="hint">Pilih kondisi yang sesuai dengan kontrak, sumber anggaran, tujuan pengadaan, dan lokasi penyerahan.</span></div></div></section><section class="wizard-stage" data-wizard-stage="facility" id="wizardStageFacility"><header class="wizard-stage-head"><span class="wizard-stage-kicker">Tahap 4</span><h3>Dokumen pajak dan fasilitas</h3><p>Dokumen PPh dan dokumen PPN dipisahkan agar fungsi setiap dokumen lebih mudah dipahami.</p></header><div class="wizard-stage-error" data-wizard-error="" hidden="" role="alert"></div><div class="wizard-stage-grid"><div class="conditional-panel field-full tax-document-group" id="pphDocumentPanel"><h3>Dokumen PPh</h3><p class="conditional-description">Dokumen pada bagian ini hanya digunakan untuk menentukan pemotongan, pemungutan, atau fasilitas PPh.</p><div class="conditional-grid" id="pphDocumentGrid"><div class="field field-full" hidden="" id="foreignProjectPphCertificateField">
+<label for="foreignProjectPphCertificate">Apakah rekanan menyerahkan Surat Keterangan Fasilitas PPh untuk PPh ditanggung pemerintah? <span class="required">*</span></label>
+<select class="select-control" id="foreignProjectPphCertificate">
+<option value="">Pilih jawaban</option>
+<option value="yes">Ya, surat berlaku dan mencakup proyek/transaksi ini</option>
+<option value="no">Tidak menyerahkan Surat Keterangan Fasilitas PPh</option>
+</select>
+</div><div class="field field-full" id="pphDocumentChoiceField"><label for="pphDocumentChoice">Dokumen PPh umum yang diserahkan <span class="required">*</span></label><select class="select-control" id="pphDocumentChoice"><option value="">Pilih dokumen yang diserahkan</option><option value="none">Tidak menyerahkan surat keterangan/pernyataan apa pun</option><option value="skb">SKB Pemotongan/Pemungutan PPh</option><option value="turnover">Surat Keterangan PPh Final Omzet Tertentu</option></select></div></div></div><div class="conditional-panel field-full tax-document-group" id="facilityAssistantPanel">
+<h3 class="question-blue">Dokumen dan fasilitas PPN</h3>
+<p class="conditional-description">Bagian ini hanya menentukan pembebasan, PPN tidak dipungut, atau persyaratan fasilitas PPN.</p>
 <div class="conditional-grid">
-<div class="field field-full">
+<div class="field field-full" hidden="" id="facilityContextField">
 <label for="facilityContext">
                     Kondisi khusus
                   </label>
@@ -2436,13 +2456,13 @@
 <option value="no">Tidak atau belum terdapat penetapan/dokumen yang cukup</option>
 </select>
 </div>
+
 <div class="field field-full" hidden="" id="foreignProjectDocumentsField">
-<label for="foreignProjectDocuments">Apakah transaksi terdaftar dalam proyek dan dokumen fasilitas PPN tersedia?</label>
+<label for="foreignProjectDocuments">Apakah rekanan menyerahkan Surat Keterangan Tidak Dipungut (SKTD) PPN atau PPN dan PPnBM? <span class="required">*</span></label>
 <select class="select-control" id="foreignProjectDocuments">
-<option value="">Pilih kondisi dokumen</option>
-<option value="yes">Ya, registrasi BKP/JKP dan Surat Keterangan Tidak Dipungut tersedia</option>
-<option value="pending">Proyek memang dibiayai hibah/pinjaman luar negeri, tetapi dokumen belum tersedia</option>
-<option value="no">Tidak atau transaksi tidak terdaftar dalam dokumen proyek</option>
+<option value="">Pilih jawaban</option>
+<option value="yes">Ya, SKTD berlaku dan mencakup BKP/JKP dalam transaksi ini</option>
+<option value="no">Tidak menyerahkan SKTD atau SKTD tidak mencakup transaksi</option>
 </select>
 </div>
 <div class="field field-full" hidden="" id="defenseEligibilityField">
@@ -2544,8 +2564,8 @@
 <span aria-hidden="true" class="form-alert-icon">i</span>
 <span id="specialRateMessage"></span>
 </div>
-</div><div class="conditional-panel" hidden="" id="taxInvoicePanel">
-<h3>Validasi Faktur Pajak atau dokumen yang dipersamakan</h3>
+</div><div class="conditional-panel field-full tax-document-group" hidden="" id="taxInvoicePanel">
+<h3>Dokumen PPN — Faktur Pajak atau dokumen yang dipersamakan</h3>
 <p class="conditional-description">Sistem menentukan jenis dokumen dan kode yang relevan.</p>
 <div class="conditional-grid">
 <div class="facility-status status-review tax-invoice-preview" id="taxInvoiceExpectedStatus">
@@ -2571,12 +2591,12 @@
 </div></div></section></div>
 <div class="action-row"><button class="button button-secondary wizard-back" id="wizardBackButton" type="button">Kembali</button><button class="button button-primary wizard-next" id="wizardNextButton" type="button">Lanjutkan</button><button class="button button-primary wizard-submit" hidden="" id="wizardSubmitButton" type="submit">Tampilkan hasil PPh dan PPN</button><button class="button button-tertiary wizard-reset" id="resetButton" type="button">Ulangi dari awal</button></div>
 </form>
-<aside class="info-column"><section class="info-card compact-info-card"><div aria-hidden="true" class="info-icon">1×</div><h3>Input sekali</h3><p>Nama barang/jasa, nilai, rekanan, dan cara bayar digunakan bersama untuk menghitung PPN dan PPh.</p></section><section class="info-card compact-info-card"><div aria-hidden="true" class="info-icon">01</div><h3>Urutan singkat</h3><p>Transaksi → PPN → PPh → tindak lanjut.</p></section><section class="info-card compact-info-card"><div aria-hidden="true" class="info-icon">2 jt</div><h3>Batas transaksi</h3><p>Berlaku pada jalur PKP dan bukan untuk transaksi yang dipecah.</p></section><section class="info-card compact-info-card"><div aria-hidden="true" class="info-icon">108</div><h3>Rekanan non-PKP</h3><p>PPN yang tertulis pada tagihan diuji dan dapat disetor sebagai tanggung renteng.</p></section><section class="info-card legal-card compact-info-card"><div aria-hidden="true" class="info-icon">§</div><h3>Dasar hukum</h3><p>Referensi utama kalkulator.</p><details class="legal-details"><summary>Lihat regulasi</summary><div class="legal-links"><a href="https://jdih.kemenkeu.go.id/dok/59-pmk-03-2022/view" rel="noopener noreferrer" target="_blank"><span>PMK 59/2022</span><span>↗</span></a><a href="https://jdih.kemenkeu.go.id/dok/58-pmk-03-2022/summary" rel="noopener noreferrer" target="_blank"><span>PMK 58/2022</span><span>↗</span></a><a href="https://jdih.kemenkeu.go.id/dok/pp-49-tahun-2022/view" rel="noopener noreferrer" target="_blank"><span>PP 49/2022</span><span>↗</span></a><a href="https://jdih.kemenkeu.go.id/dok/pmk-131-tahun-2024/view" rel="noopener noreferrer" target="_blank"><span>PMK 131/2024</span><span>↗</span></a><a href="https://jdih.kemenkeu.go.id/dok/per-11pj2025" rel="noopener noreferrer" target="_blank"><span>PER-11/PJ/2025</span><span>↗</span></a></div></details></section></aside>
+<aside class="info-column"><section class="info-card compact-info-card"><div aria-hidden="true" class="info-icon">1×</div><h3>Input sekali</h3><p>Nama barang/jasa, nilai, rekanan, dan cara bayar digunakan bersama untuk menghitung PPN dan PPh.</p></section><section class="info-card compact-info-card"><div aria-hidden="true" class="info-icon">01</div><h3>Urutan singkat</h3><p>Transaksi → PPN → PPh → tindak lanjut.</p></section><section class="info-card compact-info-card"><div aria-hidden="true" class="info-icon">2 jt</div><h3>Batas transaksi</h3><p>Berlaku pada jalur PKP dan bukan untuk transaksi yang dipecah.</p></section><section class="info-card compact-info-card"><div aria-hidden="true" class="info-icon">108</div><h3>Rekanan non-PKP</h3><p>PPN yang tertulis pada tagihan diuji dan dapat disetor sebagai tanggung renteng.</p></section><section class="info-card legal-card compact-info-card"><div aria-hidden="true" class="info-icon">§</div><h3>Dasar hukum</h3><p>Referensi utama kalkulator.</p><details class="legal-details"><summary>Lihat regulasi</summary><div class="legal-links"><a href="https://jdih.kemenkeu.go.id/dok/59-pmk-03-2022/view" rel="noopener noreferrer" target="_blank"><span>PMK 59/2022</span><span>↗</span></a><a href="https://jdih.kemenkeu.go.id/dok/58-pmk-03-2022/summary" rel="noopener noreferrer" target="_blank"><span>PMK 58/2022</span><span>↗</span></a><a href="https://jdih.kemenkeu.go.id/dok/pp-49-tahun-2022/view" rel="noopener noreferrer" target="_blank"><span>PP 49/2022</span><span>↗</span></a><a href="https://jdih.kemenkeu.go.id/dok/pmk-131-tahun-2024/view" rel="noopener noreferrer" target="_blank"><span>PMK 131/2024</span><span>↗</span></a><a href="https://jdih.kemenkeu.go.id/dok/pmk-80-tahun-2024" rel="noopener noreferrer" target="_blank"><span>PMK 80/2024</span><span>↗</span></a><a href="https://jdih.kemenkeu.go.id/dok/per-11pj2025" rel="noopener noreferrer" target="_blank"><span>PER-11/PJ/2025</span><span>↗</span></a></div></details></section></aside>
 </div>
 </section>
 <section class="result-section" hidden="" id="hasil">
 <div class="wizard-result-intro"><div class="wizard-result-complete"><span>Progres pengisian</span><strong>100%</strong></div><span>Hasil</span><h2>Hasil pengujian transaksi</h2><p id="wizardResultSummary">Ringkasan transaksi akan ditampilkan setelah perhitungan.</p></div><div class="result-shell">
-<section class="pph-result-wrap" hidden="" id="pphResultWrap">
+<section aria-label="Hasil PPh" class="pph-result-wrap" hidden="" id="pphResultWrap" tabindex="-1">
 <div class="pph-result-top" id="pphResultTop">
 <span class="result-badge" id="pphResultBadge">Hasil PPh</span>
 <h3 class="pph-result-title" id="pphResultTitle">—</h3>
@@ -3344,6 +3364,8 @@
     const agriFisheryCriteria = document.getElementById("agriFisheryCriteria");
     const disasterEligibilityField = document.getElementById("disasterEligibilityField");
     const disasterEligibility = document.getElementById("disasterEligibility");
+    const foreignProjectPphCertificateField = document.getElementById("foreignProjectPphCertificateField");
+    const foreignProjectPphCertificate = document.getElementById("foreignProjectPphCertificate");
     const foreignProjectDocumentsField = document.getElementById("foreignProjectDocumentsField");
     const foreignProjectDocuments = document.getElementById("foreignProjectDocuments");
     const defenseEligibilityField = document.getElementById("defenseEligibilityField");
@@ -3579,6 +3601,7 @@
         broadcastCriteriaField,
         agriFisheryCriteriaField,
         disasterEligibilityField,
+        foreignProjectPphCertificateField,
         foreignProjectDocumentsField,
         defenseEligibilityField,
         specialZoneDocumentsField
@@ -3662,8 +3685,8 @@
         if (!foreignProjectDocuments.value) {
           return makeFacilityDecision({
             status: "review",
-            title: "Konfirmasi dokumen proyek hibah/pinjaman luar negeri",
-            explanation: "Fasilitas tidak dipungut bergantung pada registrasi transaksi dan Surat Keterangan Tidak Dipungut.",
+            title: "Konfirmasi SKTD proyek hibah/pinjaman luar negeri",
+            explanation: "Fasilitas PPN tidak dipungut hanya dapat digunakan ketika SKTD berlaku dan mencakup BKP/JKP dalam transaksi.",
             basis: "PMK 80 Tahun 2024",
             requiredAnswers: ["foreignProjectDocuments"]
           });
@@ -3672,11 +3695,11 @@
           return makeFacilityDecision({
             status: "not_collected",
             title: "PPN tidak dipungut untuk proyek hibah/pinjaman luar negeri",
-            explanation: "Transaksi terdaftar dalam proyek dan dokumen fasilitas tersedia.",
+            explanation: "Rekanan menyerahkan SKTD yang berlaku dan mencakup BKP/JKP dalam transaksi.",
             basis: "PMK 80 Tahun 2024",
             effectiveProfile: rawProfile,
-            reasons: ["Perolehan BKP/JKP terkait proyek pemerintah yang dibiayai hibah atau pinjaman luar negeri telah didukung dokumen fasilitas."],
-            actions: ["Cocokkan kontraktor utama, nomor registrasi BKP/JKP, dan Surat Keterangan Tidak Dipungut dengan tagihan."]
+            reasons: ["Perolehan BKP/JKP terkait proyek pemerintah yang dibiayai hibah atau pinjaman luar negeri didukung SKTD yang berlaku."],
+            actions: ["Cocokkan identitas kontraktor utama, nomor register, uraian BKP/JKP, masa berlaku, dan nomor SKTD dengan Faktur Pajak atau tagihan."]
           });
         }
         if (foreignProjectDocuments.value === "pending") {
@@ -3996,6 +4019,7 @@
         disasterEligibilityField.hidden = false;
       }
       if (context === "foreign_grant_loan") {
+        foreignProjectPphCertificateField.hidden = false;
         foreignProjectDocumentsField.hidden = false;
       }
       if (context === "defense_security") {
@@ -4461,6 +4485,7 @@
       const item = getSelectedItem();
       const splitStatus = getRadioValue("splitStatus");
       const pkpStatus = getRadioValue("pkpStatus");
+      const isForeignNonBut = document.getElementById("pphVendorTypeSelect")?.value === "foreign";
       const invoiceVatStatus = getRadioValue("invoiceVatStatus");
       const isNonPkp = pkpStatus === "no";
       const invoiceShowsVat = isNonPkp && invoiceVatStatus === "yes";
@@ -4537,6 +4562,7 @@
       const item = getSelectedItem();
       const amount = parseRupiah(amountInput.value);
       const pkpStatus = getRadioValue("pkpStatus");
+      const isForeignNonBut = document.getElementById("pphVendorTypeSelect")?.value === "foreign";
       const invoiceVatStatus = getRadioValue("invoiceVatStatus");
       const institutionPkpStatus = getRadioValue("institutionPkpStatus");
       const invoiceVatAmount = parseRupiah(invoiceVatAmountInput.value);
@@ -4552,7 +4578,7 @@
         amountInput.classList.add("invalid");
       }
 
-      if (!pkpStatus) {
+      if (!pkpStatus && !isForeignNonBut) {
         errors.push("Pilih status PKP rekanan.");
       }
 
@@ -4790,6 +4816,7 @@
       const rate = resolveRate(item, profile);
       const inputAmount = parseRupiah(amountInput.value);
       const pkpStatus = getRadioValue("pkpStatus");
+      const isForeignNonBut = document.getElementById("pphVendorTypeSelect")?.value === "foreign";
       const invoiceVatStatus = getRadioValue("invoiceVatStatus");
       const institutionPkpStatus = getRadioValue("institutionPkpStatus");
       const isNonPkp = pkpStatus === "no";
@@ -5064,7 +5091,7 @@
           statusClass: "status-none",
           badge: "Fasilitas PPN tidak dipungut",
           title: "Instansi pemerintah tidak memungut PPN.",
-          lead: "Pengguna menyatakan transaksi memperoleh fasilitas PPN tidak dipungut berdasarkan ketentuan khusus.",
+          lead: facilityContext.value === "foreign_grant_loan" ? "Rekanan menyerahkan SKTD yang berlaku sehingga instansi tidak memungut PPN atas transaksi yang tercakup." : "Pengguna menyatakan transaksi memperoleh fasilitas PPN tidak dipungut berdasarkan ketentuan khusus.",
           collector: "Tidak dipungut berdasarkan fasilitas",
           baseAmount: inputAmount,
           rateLabel: "Fasilitas tidak dipungut",
@@ -5105,6 +5132,32 @@
             "Setelah formula dipastikan, terapkan jalur PKP berdasarkan PMK 59/2022."
           ],
           note: "Untuk paket meeting hotel, freight forwarding, atau barang mewah, nama transaksi saja belum cukup untuk menghasilkan keputusan yang aman."
+        });
+      }
+
+
+      if (isForeignNonBut) {
+        return createResult({
+          code: "FOREIGN_NON_BUT_VAT_REVIEW",
+          statusClass: "status-review",
+          badge: "PPN transaksi luar negeri",
+          title: "Status PKP rekanan tidak digunakan.",
+          lead: "Transaksi dengan rekanan luar negeri non-BUT harus diuji sebagai impor atau pemanfaatan BKP tidak berwujud dan/atau JKP dari luar Daerah Pabean.",
+          collector: "Mekanisme impor atau pemanfaatan",
+          baseAmount,
+          rateLabel: "Perlu klasifikasi",
+          vatAmount: 0,
+          reasons: [
+            ...baseReasons,
+            "Rekanan luar negeri non-BUT tidak diuji menggunakan status PKP atau non-PKP rekanan dalam negeri.",
+            "Mekanisme pemungutan PPN oleh instansi pemerintah dalam PMK 59/2022 ditujukan atas penyerahan oleh PKP Rekanan Pemerintah."
+          ],
+          actions: [
+            "Tentukan apakah transaksi merupakan impor barang berwujud, pemanfaatan BKP tidak berwujud, atau pemanfaatan JKP dari luar Daerah Pabean.",
+            "Periksa dokumen impor, kontrak, lokasi pemanfaatan, serta mekanisme penyetoran PPN yang relevan.",
+            "Jangan menggunakan jalur Faktur Pajak rekanan PKP dalam negeri untuk transaksi ini."
+          ],
+          note: "Status PKP rekanan sengaja tidak ditanyakan. Perlakuan PPN transaksi luar negeri memerlukan pengujian mekanisme impor atau pemanfaatan tersendiri."
         });
       }
 
@@ -5420,7 +5473,7 @@
       ].join("\n");
 
       window.setTimeout(() => {
-        resultSection.scrollIntoView({ behavior: "smooth", block: "start" });
+        document.getElementById("pphResultWrap")?.scrollIntoView({ behavior: "smooth", block: "start" });
       }, 50);
     }
 
@@ -5524,6 +5577,10 @@
       const foreignPanel = el('pphForeignPanel'), foreignIncome = el('pphForeignIncomeType'), treatyDocument = el('pphTreatyDocument'), treatyRateField = el('pphTreatyRateField'), treatyRate = el('pphTreatyRate');
       let currentVatResult = null, lastPphResult = null;
       const radio = (name) => { const s = form.querySelector(`select[name="${name}"]`); if (s) return s.value; const x = form.querySelector(`input[name="${name}"]:checked`); return x ? x.value : ''; };
+      const rawVendorType = () => radio('pphVendorType');
+      const ownerNikAsIndividual = () => rawVendorType() === 'entity' && taxId.value === 'owner_nik';
+      const effectiveVendorType = () => ownerNikAsIndividual() ? 'individual' : rawVendorType();
+      const effectiveTaxIdStatus = () => taxId.value === 'owner_nik' ? 'valid' : taxId.value;
       const money = (x) => parseRupiah(x && x.value);
       const fmt = formatCurrency;
       const ordinaryService = (t) => ['service_professional','service_maintenance','service_catering'].includes(t);
@@ -5545,18 +5602,18 @@
         update();
       }
       function setOptions(select, options, placeholder){ const prev=select.value; select.innerHTML=`<option value="">${placeholder}</option>`; options.forEach(([v,l])=>{const o=document.createElement('option');o.value=v;o.textContent=l;select.appendChild(o)}); if(options.some(x=>x[0]===prev)) select.value=prev; }
-      function constructionRate(){ const t=constructionType.value,c=constructionCertificate.value,v=radio('pphVendorType'); if(!t||!c||!v)return {rate:0,label:'—'}; if(c==='uncertain')return {review:'SBU/SKK belum diverifikasi.'}; if(v==='foreign')return {review:'Status BUT dan P3B harus diuji.'}; if(t==='work'){if(v==='individual')return c==='skk'?{rate:.0175,label:'1,75%'}:{rate:.04,label:'4%'}; if(c==='sbu_small')return{rate:.0175,label:'1,75%'}; if(c==='sbu_other')return{rate:.0265,label:'2,65%'}; return{rate:.04,label:'4%'};} if(t==='integrated'){if(v==='individual')return{review:'Pekerjaan terintegrasi oleh usaha perseorangan perlu telaah legalitas.'};return c==='sbu'?{rate:.0265,label:'2,65%'}:{rate:.04,label:'4%'};} if(t==='consulting')return ['sbu','skk'].includes(c)?{rate:.035,label:'3,5%'}:{rate:.06,label:'6%'}; return{review:'Kombinasi belum dapat dipetakan.'}; }
-      function updateConstruction(){ const t=constructionType.value,v=radio('pphVendorType');let opts=[],label='SBU/SKK'; if(t==='work'&&v==='entity'){label='SBU pekerjaan konstruksi';opts=[['sbu_small','SBU kualifikasi kecil'],['sbu_other','SBU selain kecil'],['none','Tidak memiliki SBU'],['uncertain','Belum diverifikasi']]} else if(t==='work'&&v==='individual'){label='SKK perseorangan';opts=[['skk','SKK sesuai dan berlaku'],['none','Tidak memiliki SKK'],['uncertain','Belum diverifikasi']]} else if(t==='integrated'&&v==='entity'){label='SBU terintegrasi';opts=[['sbu','SBU sesuai dan berlaku'],['none','Tidak memiliki SBU'],['uncertain','Belum diverifikasi']]} else if(t==='integrated'&&v==='individual'){opts=[['individual_review','Perlu telaah legalitas'],['uncertain','Belum diverifikasi']]} else if(t==='consulting'&&v==='entity'){label='SBU konsultansi';opts=[['sbu','SBU sesuai dan berlaku'],['none','Tidak memiliki SBU'],['uncertain','Belum diverifikasi']]} else if(t==='consulting'&&v==='individual'){label='SKK konsultansi';opts=[['skk','SKK sesuai dan berlaku'],['none','Tidak memiliki SKK'],['uncertain','Belum diverifikasi']]}; constructionLabel.innerHTML=`${label} <span class="required">*</span>`;setOptions(constructionCertificate,opts,'Pilih kondisi dokumen');const r=constructionRate();constructionPreview.innerHTML=r.review?`<strong>Perlu telaah.</strong> ${r.review}`:r.rate?`<strong>Tarif PPh Final ${r.label}</strong> atas pembayaran sebelum PPN.`:'Pilih jenis layanan dan dokumen sertifikasi.'; }
+      function constructionRate(){ const t=constructionType.value,c=constructionCertificate.value,v=effectiveVendorType(); if(!t||!c||!v)return {rate:0,label:'—'}; if(c==='uncertain')return {review:'SBU/SKK belum diverifikasi.'}; if(v==='foreign')return {review:'Status BUT dan P3B harus diuji.'}; if(t==='work'){if(v==='individual')return c==='skk'?{rate:.0175,label:'1,75%'}:{rate:.04,label:'4%'}; if(c==='sbu_small')return{rate:.0175,label:'1,75%'}; if(c==='sbu_other')return{rate:.0265,label:'2,65%'}; return{rate:.04,label:'4%'};} if(t==='integrated'){if(v==='individual')return{review:'Pekerjaan terintegrasi oleh usaha perseorangan perlu telaah legalitas.'};return c==='sbu'?{rate:.0265,label:'2,65%'}:{rate:.04,label:'4%'};} if(t==='consulting')return ['sbu','skk'].includes(c)?{rate:.035,label:'3,5%'}:{rate:.06,label:'6%'}; return{review:'Kombinasi belum dapat dipetakan.'}; }
+      function updateConstruction(){ const t=constructionType.value,v=effectiveVendorType();let opts=[],label='SBU/SKK'; if(t==='work'&&v==='entity'){label='SBU pekerjaan konstruksi';opts=[['sbu_small','SBU kualifikasi kecil'],['sbu_other','SBU selain kecil'],['none','Tidak memiliki SBU'],['uncertain','Belum diverifikasi']]} else if(t==='work'&&v==='individual'){label='SKK perseorangan';opts=[['skk','SKK sesuai dan berlaku'],['none','Tidak memiliki SKK'],['uncertain','Belum diverifikasi']]} else if(t==='integrated'&&v==='entity'){label='SBU terintegrasi';opts=[['sbu','SBU sesuai dan berlaku'],['none','Tidak memiliki SBU'],['uncertain','Belum diverifikasi']]} else if(t==='integrated'&&v==='individual'){opts=[['individual_review','Perlu telaah legalitas'],['uncertain','Belum diverifikasi']]} else if(t==='consulting'&&v==='entity'){label='SBU konsultansi';opts=[['sbu','SBU sesuai dan berlaku'],['none','Tidak memiliki SBU'],['uncertain','Belum diverifikasi']]} else if(t==='consulting'&&v==='individual'){label='SKK konsultansi';opts=[['skk','SKK sesuai dan berlaku'],['none','Tidak memiliki SKK'],['uncertain','Belum diverifikasi']]}; constructionLabel.innerHTML=`${label} <span class="required">*</span>`;setOptions(constructionCertificate,opts,'Pilih kondisi dokumen');const r=constructionRate();constructionPreview.innerHTML=r.review?`<strong>Perlu telaah.</strong> ${r.review}`:r.rate?`<strong>Tarif PPh Final ${r.label}</strong> atas pembayaran sebelum PPN.`:'Pilih jenis layanan dan dokumen sertifikasi.'; }
       function base(){ if(currentVatResult && Number.isFinite(currentVatResult.baseAmount))return currentVatResult.baseAmount; const item=getSelectedItem(); if(!item)return parseRupiah(amountInput.value); const profile=resolveAutomaticFacility(item).effectiveProfile||resolveProfile(item); const rate=resolveRate(item,profile); return calculateBaseAmount(parseRupiah(amountInput.value),amountBasis.value,rate.value); }
-      function excluded(){ if(type.value==='service_catering'||serviceCostStatus.value!=='documented')return 0; return money(material)+money(labor)+money(third)+(radio('pphVendorType')==='entity'?money(reimbursement):0); }
+      function excluded(){ if(type.value==='service_catering'||serviceCostStatus.value!=='documented')return 0; return money(material)+money(labor)+money(third)+(effectiveVendorType()==='entity'?money(reimbursement):0); }
       function gross(){return Math.max(0,base()-excluded())}
       function progressive(dpp){const brackets=[[60000000,.05],[250000000,.15],[500000000,.25],[5000000000,.30],[Infinity,.35]];let tax=0,prev=0;for(const [limit,rate] of brackets){if(dpp<=prev)break;tax+=(Math.min(dpp,limit)-prev)*rate;prev=limit;}return tax}
-      function multiplier(kind){if(taxId.value==='valid')return 1;if(taxId.value==='invalid')return kind==='pph21'?1.2:2;return null}
-      function res(d={}){return Object.assign({status:'',badge:'Hasil PPh',title:'',lead:'',tax:'—',base:0,rate:'—',amount:0,reasons:[],actions:[],note:''},d)}
+      function multiplier(kind){const status=effectiveTaxIdStatus();if(status==='valid')return 1;if(status==='invalid')return kind==='pph21'?1.2:2;return null}
+      function res(d={}){const result=Object.assign({status:'',badge:'Hasil PPh',title:'',lead:'',tax:'—',base:0,rate:'—',amount:0,reasons:[],actions:[],note:''},d);if(ownerNikAsIndividual()){result.reasons=['NPWP Badan tidak diserahkan; NIK pemilik digunakan sehingga logic PPh diperlakukan sebagai orang pribadi.',...(result.reasons||[])];}return result}
       function review(title,lead,baseAmount=base()){return res({status:'review',badge:'Perlu telaah',title,lead,tax:'Belum ditentukan',base:baseAmount,rate:'—',amount:0,reasons:['Fakta atau dokumen belum cukup untuk menetapkan PPh secara aman.'],actions:['Lengkapi dan verifikasi dokumen transaksi, lalu ulangi simulasi.'],note:'Kabayan tidak memaksakan pasal atau tarif ketika klasifikasi belum cukup jelas.'})}
-      function validate(){ const errors=[],t=type.value,v=radio('pphVendorType'); if(!t)errors.push('Nama barang/jasa belum menghasilkan klasifikasi PPh. Lengkapi rincian transaksi yang muncul.');if(v==='individual'&&taxId.value==='invalid'&&!['service_professional','service_maintenance','service_catering','construction','shipping_domestic','air_charter_domestic','shipping_air_foreign','rent_vehicle_with_driver','rent_machine_with_operator','foreign_service'].includes(t))errors.push('Transaksi tidak dapat dilanjutkan jika rekanan tidak menyerahkan NPWP/NIK.');if(v==='entity'&&taxId.value!=='valid')errors.push('Transaksi tidak dapat dilanjutkan jika rekanan tidak menyerahkan NPWP.');if(!v)errors.push('Pilih bentuk rekanan.');if(!paymentMethod.value)errors.push('Pilih cara pembayaran.');if(goods(t)&&!getRadioValue('splitStatus'))errors.push('Tentukan apakah transaksi merupakan bagian dari transaksi yang lebih besar.');if(v&&v!=='foreign'&&!taxId.value)errors.push('Pilih kondisi NPWP/NIK penerima penghasilan.');if(t==='construction'&&(!constructionType.value||!constructionCertificate.value))errors.push('Lengkapi klasifikasi jasa konstruksi.');if(rentWithService(t)){if(!rentalSeparation.value)errors.push('Tentukan pemisahan sewa dan jasa.');if(rentalSeparation.value==='separated'){if(money(rentalAsset)<=0||money(rentalService)<=0)errors.push('Masukkan nilai sewa dan jasa.');if(Math.abs(money(rentalAsset)+money(rentalService)-base())>1)errors.push('Jumlah sewa dan jasa harus sama dengan DPP/nilai sebelum PPN.')}}if(t==='property_transfer'&&(!propertyType.value||!propertyBasis.value))errors.push('Lengkapi klasifikasi pengalihan tanah/bangunan.');if((v==='foreign'||t==='foreign_service')&&!foreignIncome.value)errors.push('Pilih karakter penghasilan luar negeri.');if(treatyDocument.value==='yes'&&(Number(treatyRate.value)<0||Number(treatyRate.value)>20||treatyRate.value===''))errors.push('Masukkan tarif P3B 0% sampai 20%.');if(servicePanel.hidden===false&&serviceCostStatus.value==='documented'&&excluded()>=base())errors.push('Komponen langsung harus lebih kecil dari DPP/nilai sebelum PPN.');if(errors.length){showToast(errors[0]);return false}return true}
-      function evaluate(vatResult){currentVatResult=vatResult;const t=type.value,v=radio('pphVendorType'),pay=paymentMethod.value,b=base();if(skb.value==='uncertain'||turnover.value==='uncertain'||below500.value==='uncertain')return review('Dokumen fasilitas PPh belum dapat digunakan.','Ruang lingkup, masa berlaku, atau kelayakan dokumen belum diverifikasi.',b);if(below500.value==='yes'&&v==='individual'&&umkmEligible(t,v))return res({badge:'PPh nihil',title:'Instansi tidak memotong atau memungut PPh.',lead:'Penerima orang pribadi menyerahkan pernyataan omzet kumulatif belum Rp500 juta.',tax:'PPh Final omzet tertentu — nihil',base:b,rate:'0%',amount:0,reasons:['Transaksi diklasifikasikan sebagai penghasilan usaha yang dapat menggunakan skema omzet tertentu.'],actions:['Terbitkan bukti potong/pungut nihil dan simpan pernyataan omzet.'],note:'Tidak berlaku untuk pekerjaan bebas dan penghasilan final khusus.'});if(skb.value==='yes')return res({badge:'SKB berlaku',title:'Instansi tidak memotong atau memungut PPh.',lead:'SKB dinyatakan berlaku dan mencakup transaksi ini.',tax:'PPh nihil berdasarkan SKB',base:b,rate:'0%',amount:0,reasons:['Identitas, jenis pajak, transaksi, dan masa berlaku SKB telah dikonfirmasi.'],actions:['Simpan dan cocokkan SKB dengan dokumen pembayaran.'],note:'SKB hanya berlaku dalam ruang lingkupnya.'});if(turnover.value==='yes'&&umkmEligible(t,v)){const tax=b*.005;return res({badge:'PPh Final 0,5%',title:'Instansi memotong atau memungut PPh Final 0,5%.',lead:'Surat Keterangan omzet tertentu dinyatakan valid dan transaksi memenuhi syarat.',tax:'PPh Final Pasal 4 ayat (2)',base:b,rate:'0,5%',amount:tax,reasons:['Skema omzet tertentu digunakan menggantikan pemotongan PPh umum atas transaksi yang memenuhi syarat.'],actions:[`Potong/pungut ${fmt(tax)} dan terbitkan bukti.`],note:'Kelayakan subjek, omzet, masa transisi, dan pilihan tarif umum harus telah diverifikasi.'})}if(pay==='sip_up'&&(goods(t)||ordinaryService(t)||pureRent(t)||rentWithService(t)||['construction','rent_land_building','property_transfer','shipping_domestic','air_charter_domestic','shipping_air_foreign'].includes(t))){const tax=b*.005;return res({badge:'Dipungut Pihak Lain',title:'Pihak Lain memungut PPh Pasal 22 sebesar 0,5%.',lead:'Pembayaran UP dilakukan melalui Pihak Lain dalam sistem pengadaan.',tax:'PPh Pasal 22 oleh Pihak Lain',base:b,rate:'0,5%',amount:tax,reasons:['Mekanisme UP melalui Pihak Lain dipilih.'],actions:[`Pastikan sistem memungut ${fmt(tax)} dan instansi tidak memungut kembali.`],note:'Untuk penghasilan final, perlakuan pelunasan dan kemungkinan selisih mengikuti ketentuan transaksi yang bersangkutan.'})}if(t==='construction'){const r=constructionRate();if(r.review)return review('Tarif jasa konstruksi belum dapat ditetapkan.',r.review,b);const tax=b*r.rate;return res({badge:'PPh Final konstruksi',title:'Instansi memotong PPh Final jasa konstruksi.',lead:'Tarif mengikuti jenis layanan dan SBU/SKK penyedia.',tax:'PPh Final Pasal 4 ayat (2)',base:b,rate:r.label,amount:tax,reasons:[`Jenis layanan: ${constructionType.options[constructionType.selectedIndex].text}.`,`Dokumen: ${constructionCertificate.options[constructionCertificate.selectedIndex].text}.`],actions:[`Potong ${fmt(tax)} dan terbitkan bukti potong.`],note:'Pastikan SBU/SKK sesuai dan berlaku saat transaksi.'})}if(t==='rent_land_building'){const tax=b*.10;return res({badge:'PPh Final sewa',title:'Instansi memotong PPh Final 10%.',lead:'Pembayaran merupakan sewa tanah dan/atau bangunan.',tax:'PPh Final Pasal 4 ayat (2)',base:b,rate:'10%',amount:tax,reasons:['Objek sewa berupa tanah dan/atau bangunan.'],actions:[`Potong ${fmt(tax)}.`],note:'Jumlah bruto mencakup biaya terkait persewaan sesuai ketentuan.'})}if(['shipping_domestic','air_charter_domestic','shipping_air_foreign'].includes(t)){const map={shipping_domestic:[.012,'1,2%','PPh Pasal 15 Final'],air_charter_domestic:[.018,'1,8%','PPh Pasal 15 tidak final'],shipping_air_foreign:[.0264,'2,64%','PPh Pasal 15 Final']};const [rate,label,name]=map[t],tax=b*rate;return res({badge:'PPh Pasal 15',title:'Instansi memotong PPh Pasal 15.',lead:'Tarif mengikuti jenis usaha pelayaran/penerbangan.',tax:name,base:b,rate:label,amount:tax,reasons:[`Jenis belanja otomatis: ${type.options[type.selectedIndex].text}.`],actions:[`Potong ${fmt(tax)}.`],note:'Pastikan substansi transaksi sesuai definisi pelayaran atau charter.'})}if(v==='foreign'||t==='foreign_service'){if(foreignIncome.value==='goods')return review('Pembelian barang luar negeri tidak otomatis dipotong PPh Pasal 26.','Periksa importir, PIB, PPh Pasal 22 Impor, serta unsur jasa/lisensi.',b);if(['shipping_air','business_profit_other'].includes(foreignIncome.value))return review('PPh luar negeri memerlukan uji BUT dan P3B.','Karakter penghasilan tidak aman dihitung otomatis.',b);if(treatyDocument.value==='uncertain')return review('Tarif P3B belum dapat ditetapkan.','Dokumen DGT, beneficial owner, dan pasal P3B belum diverifikasi.',b);const rate=treatyDocument.value==='yes'?Number(treatyRate.value)/100:.20,tax=b*rate;return res({badge:treatyDocument.value==='yes'?'Simulasi P3B':'PPh Pasal 26',title:`Instansi memotong PPh sebesar ${rate*100}%.`,lead:'Penerima merupakan Wajib Pajak luar negeri non-BUT.',tax:'PPh Pasal 26/P3B',base:b,rate:`${rate*100}%`,amount:tax,reasons:[`Karakter penghasilan: ${foreignIncome.options[foreignIncome.selectedIndex].text}.`],actions:[`Potong ${fmt(tax)} setelah verifikasi dokumen.`],note:'Pembelian barang murni dan laba usaha telah dipisahkan ke jalur telaah.'})}if(t==='property_transfer'){if(propertyBasis.value!=='yes')return review('Dasar nilai pengalihan belum terkonfirmasi.','Cocokkan nilai dengan dokumen resmi.',b);if(propertyType.value==='general'){const tax=b*.025;return res({badge:'PPh Final pengalihan',title:'Instansi memungut PPh Final 2,5%.',lead:'Pengalihan biasa kepada pemerintah.',tax:'PPh Final Pasal 4 ayat (2)',base:b,rate:'2,5%',amount:tax,reasons:['Kategori pengalihan biasa.'],actions:[`Pungut ${fmt(tax)}.`],note:'Dasar mengikuti nilai yang ditentukan sesuai dokumen pengalihan.'})}if(propertyType.value==='simple'){if(propertySpecial.value!=='yes')return review('Tarif 1% belum dapat digunakan.','Syarat rumah sederhana/rusun sederhana belum diverifikasi.',b);const tax=b*.01;return res({badge:'PPh Final pengalihan',title:'Instansi memungut PPh Final 1%.',lead:'Kategori khusus telah diverifikasi.',tax:'PPh Final Pasal 4 ayat (2)',base:b,rate:'1%',amount:tax,reasons:['Kategori rumah sederhana/rusun sederhana terpenuhi.'],actions:[`Pungut ${fmt(tax)}.`],note:'Simpan dokumen pembuktian kategori.'})}if(propertyType.value==='public_interest'&&propertySpecial.value==='yes')return res({badge:'Tarif 0%',title:'PPh Final pengalihan bertarif 0%.',lead:'Pengadaan tanah kepentingan umum memenuhi persyaratan.',tax:'PPh Final Pasal 4 ayat (2)',base:b,rate:'0%',amount:0,reasons:['Syarat kategori tarif 0% telah diverifikasi.'],actions:['Simpan dokumen pengadaan tanah.'],note:'Tarif 0% tidak berlaku untuk setiap pembelian tanah.'});return review('Pengecualian atau tarif khusus belum dapat digunakan.','Verifikasi syarat substantif dan SKB bila dipersyaratkan.',b)}if(t==='mixed_contract')return review('Kontrak campuran harus diuji per komponen.','Pisahkan nilai barang, jasa, sewa, royalti, atau konstruksi.',b);if(goods(t)){if(paymentMethod.value==='government_card'||['goods_fuel_utilities','goods_bos','goods_rice'].includes(t))return res({badge:'PPh 22 tidak dipungut',title:'Instansi tidak memungut PPh Pasal 22.',lead:'Transaksi termasuk pengecualian.',tax:'PPh Pasal 22',base:b,rate:'0%',amount:0,reasons:[paymentMethod.value==='government_card'?'Dibayar dengan kartu kredit pemerintah.':'Jenis barang/sumber dana termasuk pengecualian.'],actions:['Simpan bukti transaksi dan dasar pengecualian.'],note:'Pastikan kondisi pengecualian benar-benar terpenuhi.'});const actual=getRadioValue('splitStatus')==='yes'?parseRupiah(actualTransactionInput.value):b;if(b<=2000000&&actual<=2000000)return res({badge:'Transaksi ≤ Rp2 juta',title:'Instansi tidak memungut PPh Pasal 22.',lead:'Nilai pembayaran dan seluruh transaksi paling banyak Rp2 juta sebelum PPN.',tax:'PPh Pasal 22',base:b,rate:'0%',amount:0,reasons:[`Pembayaran ${fmt(b)}.`,`Seluruh transaksi ${fmt(actual)}.`],actions:['Simpan dokumen yang membuktikan nilai transaksi.'],note:'Batas tidak berlaku bila transaksi sebenarnya melebihi Rp2 juta.'});const m=multiplier('pph22');if(m===null)return review('Jumlah PPh Pasal 22 belum dapat ditetapkan.','NPWP/NIK belum diverifikasi.',b);const tax=b*.015*m;return res({badge:'Wajib dipungut',title:'Instansi memungut PPh Pasal 22.',lead:'Pengecualian tidak terpenuhi.',tax:'PPh Pasal 22',base:b,rate:m===2?'3%':'1,5%',amount:tax,reasons:[m===2?'Penerima tidak memiliki identitas pajak yang dapat digunakan.':'Identitas pajak valid.'],actions:[`Pungut ${fmt(tax)}.`],note:'PPh termin dihitung atas pembayaran termin sebelum PPN.'})}if(pureRent(t)){const m=multiplier('pph23');if(m===null)return review('PPh sewa belum dapat ditetapkan.','NPWP/NIK belum diverifikasi.',b);const tax=b*.02*m;return res({badge:'Wajib dipotong',title:'Instansi memotong PPh Pasal 23 atas sewa harta.',lead:'Objek utama adalah hak menggunakan harta selain tanah/bangunan.',tax:'PPh Pasal 23',base:b,rate:m===2?'4%':'2%',amount:tax,reasons:['Sewa harta selain tanah/bangunan.'],actions:[`Potong ${fmt(tax)}.`],note:'Sewa guna usaha dengan hak opsi dan kontrak yang substansinya jasa perlu diuji terpisah.'})}if(rentWithService(t)){if(rentalSeparation.value!=='separated')return review('Sewa dan jasa belum dipisahkan.','Nilai tidak boleh langsung dianggap seluruhnya sewa atau jasa.',b);const rb=money(rentalAsset),sb=money(rentalService),m23=multiplier('pph23');if(m23===null)return review('Jumlah PPh belum dapat ditetapkan.','NPWP/NIK belum diverifikasi.',b);const rentTax=rb*.02*m23;let serviceTax,serviceName,serviceRate;if(v==='individual'){const dpp=sb*.5,m21=multiplier('pph21');if(m21===null)return review('PPh jasa pengemudi/operator belum dapat ditetapkan.','NPWP/NIK belum diverifikasi.',sb*.5);serviceTax=progressive(dpp)*m21;serviceName='PPh Pasal 21';serviceRate=m21===1.2?'Pasal 17 × 50% bruto +20%':'Pasal 17 × 50% bruto'}else{serviceTax=sb*.02*m23;serviceName='PPh Pasal 23';serviceRate=m23===2?'4%':'2%'}const total=rentTax+serviceTax;return res({badge:'Sewa dan jasa dipisahkan',title:'Instansi memotong PPh atas setiap komponen.',lead:'Komponen sewa dan jasa diuji terpisah.',tax:v==='individual'?'PPh Pasal 23 + PPh Pasal 21':'PPh Pasal 23',base:b,rate:`Sewa ${m23===2?'4%':'2%'}; jasa ${serviceRate}`,amount:total,reasons:[`Sewa ${fmt(rb)}: ${fmt(rentTax)}.`,`Jasa ${fmt(sb)} (${serviceName}): ${fmt(serviceTax)}.`],actions:[`Potong total ${fmt(total)} dan terbitkan bukti sesuai jenis pajak.`],note:'Pemisahan harus didukung kontrak dan tagihan.'})}if(t==='rent_ship_aircraft')return review('Sewa kapal/pesawat perlu klasifikasi.','Uji apakah sewa murni, charter, jasa angkutan, PPh Pasal 15, atau P3B.',b);if(t==='royalty'){const m=multiplier('pph23');if(m===null)return review('PPh royalti belum dapat ditetapkan.','NPWP/NIK belum diverifikasi.',b);const tax=b*.15*m;return res({badge:'Wajib dipotong',title:'Instansi memotong PPh Pasal 23 atas royalti.',lead:'Pembayaran merupakan royalti/lisensi hak dalam negeri.',tax:'PPh Pasal 23',base:b,rate:m===2?'30%':'15%',amount:tax,reasons:['Penghasilan diklasifikasikan sebagai royalti.'],actions:[`Potong ${fmt(tax)}.`],note:'Software, SaaS, cloud, dan implementasi dapat memerlukan pemisahan.'})}if(t==='prize_lottery'){const tax=b*.25;return res({badge:'PPh Final hadiah undian',title:'Potong/pungut PPh Final 25%.',lead:'Penghasilan berupa hadiah undian.',tax:'PPh Final Pasal 4 ayat (2)',base:b,rate:'25%',amount:tax,reasons:['Jenis hadiah adalah undian.'],actions:[`Potong/pungut ${fmt(tax)}.`],note:'Hadiah kegiatan menggunakan jalur berbeda.'})}if(t==='prize_activity_individual'){if(v!=='individual')return review('Penerima hadiah tidak sesuai klasifikasi.','Kategori ini khusus orang pribadi peserta kegiatan.',b);const m=multiplier('pph21');if(m===null)return review('PPh hadiah belum dapat ditetapkan.','NPWP/NIK belum diverifikasi.',b);const tax=progressive(b)*m;return res({badge:'PPh Pasal 21',title:'Instansi memotong PPh Pasal 21 atas hadiah kegiatan.',lead:'Tarif progresif diterapkan atas seluruh bruto.',tax:'PPh Pasal 21 peserta kegiatan',base:b,rate:m===1.2?'Pasal 17 +20%':'Tarif Pasal 17',amount:tax,reasons:['Penerima orang pribadi peserta kegiatan.'],actions:[`Potong ${fmt(tax)}.`],note:'Hadiah undian menggunakan PPh Final 25%.'})}if(t==='prize_entity'){if(v!=='entity')return review('Penerima hadiah tidak sesuai klasifikasi.','Kategori ini ditujukan kepada badan.',b);const m=multiplier('pph23');if(m===null)return review('PPh hadiah belum dapat ditetapkan.','NPWP/NIK belum diverifikasi.',b);const tax=b*.15*m;return res({badge:'PPh Pasal 23',title:'Instansi memotong PPh Pasal 23 atas hadiah kepada badan.',lead:'Hadiah tidak termasuk penghasilan yang telah dipotong PPh Pasal 21.',tax:'PPh Pasal 23',base:b,rate:m===2?'30%':'15%',amount:tax,reasons:['Penerima merupakan badan dalam negeri/BUT.'],actions:[`Potong ${fmt(tax)}.`],note:'Hadiah undian menggunakan PPh Final 25%.'})}if(ordinaryService(t)){const g=gross(),ex=excluded();if(v==='individual'){const dpp=g*.5,m=multiplier('pph21');if(m===null)return review('PPh Pasal 21 belum dapat ditetapkan.','NPWP/NIK belum diverifikasi.',dpp);const tax=progressive(dpp)*m;return res({badge:'Wajib dipotong',title:'Instansi memotong PPh Pasal 21.',lead:'Jasa diberikan oleh orang pribadi sebagai bukan pegawai.',tax:'PPh Pasal 21 bukan pegawai',base:dpp,rate:m===1.2?'Pasal 17 × 50% bruto +20%':'Pasal 17 × 50% bruto',amount:tax,reasons:[`Jumlah bruto jasa ${fmt(g)}.`,ex?`Komponen didukung bukti dikeluarkan ${fmt(ex)}.`:'Seluruh pembayaran sebelum PPN digunakan.'],actions:[`Potong ${fmt(tax)}.`],note:'Katering menggunakan seluruh pembayaran; pengurangan jasa lain harus didukung bukti.'})}const m=multiplier('pph23');if(m===null)return review('PPh Pasal 23 belum dapat ditetapkan.','NPWP/NIK belum diverifikasi.',g);const tax=g*.02*m;return res({badge:'Wajib dipotong',title:'Instansi memotong PPh Pasal 23.',lead:'Jasa diberikan oleh badan dalam negeri/BUT.',tax:'PPh Pasal 23',base:g,rate:m===2?'4%':'2%',amount:tax,reasons:[`Jumlah bruto jasa ${fmt(g)}.`,ex?`Komponen didukung bukti dikeluarkan ${fmt(ex)}.`:'Seluruh pembayaran sebelum PPN digunakan.'],actions:[`Potong ${fmt(tax)}.`],note:'Komponen langsung hanya dikeluarkan bila memenuhi syarat bukti.'})}return review('Jenis PPh belum dapat ditentukan otomatis.','Periksa substansi kontrak dan lengkapi rincian transaksi yang muncul.',b)}
-      function update(){const t=type.value,v=radio('pphVendorType');taxId.parentElement.hidden=!v||v==='foreign';const turnoverField=el('pphTurnoverField');if(turnoverField)turnoverField.hidden=v==='foreign';if(v==='foreign')turnover.value='no';below500Field.hidden=!(v==='individual'&&umkmEligible(t,v));servicePanel.hidden=!ordinaryService(t);constructionPanel.hidden=t!=='construction';rentalPanel.hidden=!rentWithService(t);propertyPanel.hidden=t!=='property_transfer';foreignPanel.hidden=!(v==='foreign'||t==='foreign_service');propertySpecialField.hidden=!['simple','public_interest','exception'].includes(propertyType.value);treatyRateField.hidden=treatyDocument.value!=='yes';const showCosts=!servicePanel.hidden&&t!=='service_catering'&&serviceCostStatus.value==='documented';materialField.hidden=laborField.hidden=thirdField.hidden=!showCosts;reimbursementField.hidden=!(showCosts&&v==='entity');if(t==='service_catering')serviceCostStatus.value='full';rentalAssetField.hidden=rentalServiceField.hidden=!(rentWithService(t)&&rentalSeparation.value==='separated');if(!servicePanel.hidden)servicePreview.innerHTML=`<strong>Jumlah bruto jasa: ${fmt(gross())}</strong><br>${excluded()?`Komponen didukung bukti dikurangi ${fmt(excluded())}.`:'Seluruh DPP/nilai sebelum PPN digunakan.'}`;if(!rentalPanel.hidden)rentalPreview.innerHTML=rentalSeparation.value==='separated'?`<strong>Sewa ${fmt(money(rentalAsset))} · jasa ${fmt(money(rentalService))}</strong>`:rentalSeparation.value==='not_separated'?'<strong>Perlu telaah.</strong> Nilai belum dipisahkan.':'Nilai yang tidak dipisahkan menghasilkan status perlu telaah.';updateConstruction()}
+      function validate(){ const errors=[],t=type.value,rawV=rawVendorType(),v=effectiveVendorType(); if(!t)errors.push('Nama barang/jasa belum menghasilkan klasifikasi PPh. Lengkapi rincian transaksi yang muncul.');if(rawV==='individual'&&taxId.value==='invalid'&&!['service_professional','service_maintenance','service_catering','construction','shipping_domestic','air_charter_domestic','shipping_air_foreign','rent_vehicle_with_driver','rent_machine_with_operator','foreign_service'].includes(t))errors.push('Transaksi tidak dapat dilanjutkan jika rekanan tidak menyerahkan NPWP/NIK.');if(rawV==='entity'&&taxId.value==='invalid')errors.push('Transaksi tidak dapat dilanjutkan jika rekanan tidak menyerahkan NPWP.');if(!rawV)errors.push('Pilih bentuk rekanan.');if(!paymentMethod.value)errors.push('Pilih cara pembayaran.');if(goods(t)&&!getRadioValue('splitStatus'))errors.push('Tentukan apakah transaksi merupakan bagian dari transaksi yang lebih besar.');if(rawV&&rawV!=='foreign'&&!taxId.value)errors.push('Pilih kondisi NPWP/NIK penerima penghasilan.');if(t==='construction'&&(!constructionType.value||!constructionCertificate.value))errors.push('Lengkapi klasifikasi jasa konstruksi.');if(rentWithService(t)){if(!rentalSeparation.value)errors.push('Tentukan pemisahan sewa dan jasa.');if(rentalSeparation.value==='separated'){if(money(rentalAsset)<=0||money(rentalService)<=0)errors.push('Masukkan nilai sewa dan jasa.');if(Math.abs(money(rentalAsset)+money(rentalService)-base())>1)errors.push('Jumlah sewa dan jasa harus sama dengan DPP/nilai sebelum PPN.')}}if(t==='property_transfer'&&(!propertyType.value||!propertyBasis.value))errors.push('Lengkapi klasifikasi pengalihan tanah/bangunan.');if((v==='foreign'||t==='foreign_service')&&!foreignIncome.value)errors.push('Pilih karakter penghasilan luar negeri.');if(treatyDocument.value==='yes'&&(Number(treatyRate.value)<0||Number(treatyRate.value)>20||treatyRate.value===''))errors.push('Masukkan tarif P3B 0% sampai 20%.');if(servicePanel.hidden===false&&serviceCostStatus.value==='documented'&&excluded()>=base())errors.push('Komponen langsung harus lebih kecil dari DPP/nilai sebelum PPN.');if(errors.length){showToast(errors[0]);return false}return true}
+      function evaluate(vatResult){currentVatResult=vatResult;const t=type.value,v=effectiveVendorType(),pay=paymentMethod.value,b=base();if(skb.value==='uncertain'||turnover.value==='uncertain'||below500.value==='uncertain')return review('Dokumen fasilitas PPh belum dapat digunakan.','Ruang lingkup, masa berlaku, atau kelayakan dokumen belum diverifikasi.',b);if(below500.value==='yes'&&v==='individual'&&umkmEligible(t,v))return res({badge:'PPh nihil',title:'Instansi tidak memotong atau memungut PPh.',lead:'Penerima orang pribadi menyerahkan pernyataan omzet kumulatif belum Rp500 juta.',tax:'PPh Final omzet tertentu — nihil',base:b,rate:'0%',amount:0,reasons:['Transaksi diklasifikasikan sebagai penghasilan usaha yang dapat menggunakan skema omzet tertentu.'],actions:['Terbitkan bukti potong/pungut nihil dan simpan pernyataan omzet.'],note:'Tidak berlaku untuk pekerjaan bebas dan penghasilan final khusus.'});if(skb.value==='yes')return res({badge:'SKB berlaku',title:'Instansi tidak memotong atau memungut PPh.',lead:'SKB dinyatakan berlaku dan mencakup transaksi ini.',tax:'PPh nihil berdasarkan SKB',base:b,rate:'0%',amount:0,reasons:['Identitas, jenis pajak, transaksi, dan masa berlaku SKB telah dikonfirmasi.'],actions:['Simpan dan cocokkan SKB dengan dokumen pembayaran.'],note:'SKB hanya berlaku dalam ruang lingkupnya.'});if(turnover.value==='yes'&&umkmEligible(t,v)){const tax=b*.005;return res({badge:'PPh Final 0,5%',title:'Instansi memotong atau memungut PPh Final 0,5%.',lead:'Surat Keterangan omzet tertentu dinyatakan valid dan transaksi memenuhi syarat.',tax:'PPh Final Pasal 4 ayat (2)',base:b,rate:'0,5%',amount:tax,reasons:['Skema omzet tertentu digunakan menggantikan pemotongan PPh umum atas transaksi yang memenuhi syarat.'],actions:[`Potong/pungut ${fmt(tax)} dan terbitkan bukti.`],note:'Kelayakan subjek, omzet, masa transisi, dan pilihan tarif umum harus telah diverifikasi.'})}if(pay==='sip_up'&&(goods(t)||ordinaryService(t)||pureRent(t)||rentWithService(t)||['construction','rent_land_building','property_transfer','shipping_domestic','air_charter_domestic','shipping_air_foreign'].includes(t))){const tax=b*.005;return res({badge:'Dipungut Pihak Lain',title:'Pihak Lain memungut PPh Pasal 22 sebesar 0,5%.',lead:'Pembayaran UP dilakukan melalui Pihak Lain dalam sistem pengadaan.',tax:'PPh Pasal 22 oleh Pihak Lain',base:b,rate:'0,5%',amount:tax,reasons:['Mekanisme UP melalui Pihak Lain dipilih.'],actions:[`Pastikan sistem memungut ${fmt(tax)} dan instansi tidak memungut kembali.`],note:'Untuk penghasilan final, perlakuan pelunasan dan kemungkinan selisih mengikuti ketentuan transaksi yang bersangkutan.'})}if(t==='construction'){const r=constructionRate();if(r.review)return review('Tarif jasa konstruksi belum dapat ditetapkan.',r.review,b);const tax=b*r.rate;return res({badge:'PPh Final konstruksi',title:'Instansi memotong PPh Final jasa konstruksi.',lead:'Tarif mengikuti jenis layanan dan SBU/SKK penyedia.',tax:'PPh Final Pasal 4 ayat (2)',base:b,rate:r.label,amount:tax,reasons:[`Jenis layanan: ${constructionType.options[constructionType.selectedIndex].text}.`,`Dokumen: ${constructionCertificate.options[constructionCertificate.selectedIndex].text}.`],actions:[`Potong ${fmt(tax)} dan terbitkan bukti potong.`],note:'Pastikan SBU/SKK sesuai dan berlaku saat transaksi.'})}if(t==='rent_land_building'){const tax=b*.10;return res({badge:'PPh Final sewa',title:'Instansi memotong PPh Final 10%.',lead:'Pembayaran merupakan sewa tanah dan/atau bangunan.',tax:'PPh Final Pasal 4 ayat (2)',base:b,rate:'10%',amount:tax,reasons:['Objek sewa berupa tanah dan/atau bangunan.'],actions:[`Potong ${fmt(tax)}.`],note:'Jumlah bruto mencakup biaya terkait persewaan sesuai ketentuan.'})}if(['shipping_domestic','air_charter_domestic','shipping_air_foreign'].includes(t)){const map={shipping_domestic:[.012,'1,2%','PPh Pasal 15 Final'],air_charter_domestic:[.018,'1,8%','PPh Pasal 15 tidak final'],shipping_air_foreign:[.0264,'2,64%','PPh Pasal 15 Final']};const [rate,label,name]=map[t],tax=b*rate;return res({badge:'PPh Pasal 15',title:'Instansi memotong PPh Pasal 15.',lead:'Tarif mengikuti jenis usaha pelayaran/penerbangan.',tax:name,base:b,rate:label,amount:tax,reasons:[`Jenis belanja otomatis: ${type.options[type.selectedIndex].text}.`],actions:[`Potong ${fmt(tax)}.`],note:'Pastikan substansi transaksi sesuai definisi pelayaran atau charter.'})}if(v==='foreign'||t==='foreign_service'){if(foreignIncome.value==='goods')return review('Pembelian barang luar negeri tidak otomatis dipotong PPh Pasal 26.','Periksa importir, PIB, PPh Pasal 22 Impor, serta unsur jasa/lisensi.',b);if(['shipping_air','business_profit_other'].includes(foreignIncome.value))return review('PPh luar negeri memerlukan uji BUT dan P3B.','Karakter penghasilan tidak aman dihitung otomatis.',b);if(treatyDocument.value==='uncertain')return review('Tarif P3B belum dapat ditetapkan.','Dokumen DGT, beneficial owner, dan pasal P3B belum diverifikasi.',b);const rate=treatyDocument.value==='yes'?Number(treatyRate.value)/100:.20,tax=b*rate;return res({badge:treatyDocument.value==='yes'?'Simulasi P3B':'PPh Pasal 26',title:`Instansi memotong PPh sebesar ${rate*100}%.`,lead:'Penerima merupakan Wajib Pajak luar negeri non-BUT.',tax:'PPh Pasal 26/P3B',base:b,rate:`${rate*100}%`,amount:tax,reasons:[`Karakter penghasilan: ${foreignIncome.options[foreignIncome.selectedIndex].text}.`],actions:[`Potong ${fmt(tax)} setelah verifikasi dokumen.`],note:'Pembelian barang murni dan laba usaha telah dipisahkan ke jalur telaah.'})}if(t==='property_transfer'){if(propertyBasis.value!=='yes')return review('Dasar nilai pengalihan belum terkonfirmasi.','Cocokkan nilai dengan dokumen resmi.',b);if(propertyType.value==='general'){const tax=b*.025;return res({badge:'PPh Final pengalihan',title:'Instansi memungut PPh Final 2,5%.',lead:'Pengalihan biasa kepada pemerintah.',tax:'PPh Final Pasal 4 ayat (2)',base:b,rate:'2,5%',amount:tax,reasons:['Kategori pengalihan biasa.'],actions:[`Pungut ${fmt(tax)}.`],note:'Dasar mengikuti nilai yang ditentukan sesuai dokumen pengalihan.'})}if(propertyType.value==='simple'){if(propertySpecial.value!=='yes')return review('Tarif 1% belum dapat digunakan.','Syarat rumah sederhana/rusun sederhana belum diverifikasi.',b);const tax=b*.01;return res({badge:'PPh Final pengalihan',title:'Instansi memungut PPh Final 1%.',lead:'Kategori khusus telah diverifikasi.',tax:'PPh Final Pasal 4 ayat (2)',base:b,rate:'1%',amount:tax,reasons:['Kategori rumah sederhana/rusun sederhana terpenuhi.'],actions:[`Pungut ${fmt(tax)}.`],note:'Simpan dokumen pembuktian kategori.'})}if(propertyType.value==='public_interest'&&propertySpecial.value==='yes')return res({badge:'Tarif 0%',title:'PPh Final pengalihan bertarif 0%.',lead:'Pengadaan tanah kepentingan umum memenuhi persyaratan.',tax:'PPh Final Pasal 4 ayat (2)',base:b,rate:'0%',amount:0,reasons:['Syarat kategori tarif 0% telah diverifikasi.'],actions:['Simpan dokumen pengadaan tanah.'],note:'Tarif 0% tidak berlaku untuk setiap pembelian tanah.'});return review('Pengecualian atau tarif khusus belum dapat digunakan.','Verifikasi syarat substantif dan SKB bila dipersyaratkan.',b)}if(t==='mixed_contract')return review('Kontrak campuran harus diuji per komponen.','Pisahkan nilai barang, jasa, sewa, royalti, atau konstruksi.',b);if(goods(t)){if(paymentMethod.value==='government_card'||['goods_fuel_utilities','goods_bos','goods_rice'].includes(t))return res({badge:'PPh 22 tidak dipungut',title:'Instansi tidak memungut PPh Pasal 22.',lead:'Transaksi termasuk pengecualian.',tax:'PPh Pasal 22',base:b,rate:'0%',amount:0,reasons:[paymentMethod.value==='government_card'?'Dibayar dengan kartu kredit pemerintah.':'Jenis barang/sumber dana termasuk pengecualian.'],actions:['Simpan bukti transaksi dan dasar pengecualian.'],note:'Pastikan kondisi pengecualian benar-benar terpenuhi.'});const actual=getRadioValue('splitStatus')==='yes'?parseRupiah(actualTransactionInput.value):b;if(b<=2000000&&actual<=2000000)return res({badge:'Transaksi ≤ Rp2 juta',title:'Instansi tidak memungut PPh Pasal 22.',lead:'Nilai pembayaran dan seluruh transaksi paling banyak Rp2 juta sebelum PPN.',tax:'PPh Pasal 22',base:b,rate:'0%',amount:0,reasons:[`Pembayaran ${fmt(b)}.`,`Seluruh transaksi ${fmt(actual)}.`],actions:['Simpan dokumen yang membuktikan nilai transaksi.'],note:'Batas tidak berlaku bila transaksi sebenarnya melebihi Rp2 juta.'});const m=multiplier('pph22');if(m===null)return review('Jumlah PPh Pasal 22 belum dapat ditetapkan.','NPWP/NIK belum diverifikasi.',b);const tax=b*.015*m;return res({badge:'Wajib dipungut',title:'Instansi memungut PPh Pasal 22.',lead:'Pengecualian tidak terpenuhi.',tax:'PPh Pasal 22',base:b,rate:m===2?'3%':'1,5%',amount:tax,reasons:[m===2?'Penerima tidak memiliki identitas pajak yang dapat digunakan.':'Identitas pajak valid.'],actions:[`Pungut ${fmt(tax)}.`],note:'PPh termin dihitung atas pembayaran termin sebelum PPN.'})}if(pureRent(t)){const m=multiplier('pph23');if(m===null)return review('PPh sewa belum dapat ditetapkan.','NPWP/NIK belum diverifikasi.',b);const tax=b*.02*m;return res({badge:'Wajib dipotong',title:'Instansi memotong PPh Pasal 23 atas sewa harta.',lead:'Objek utama adalah hak menggunakan harta selain tanah/bangunan.',tax:'PPh Pasal 23',base:b,rate:m===2?'4%':'2%',amount:tax,reasons:['Sewa harta selain tanah/bangunan.'],actions:[`Potong ${fmt(tax)}.`],note:'Sewa guna usaha dengan hak opsi dan kontrak yang substansinya jasa perlu diuji terpisah.'})}if(rentWithService(t)){if(rentalSeparation.value!=='separated')return review('Sewa dan jasa belum dipisahkan.','Nilai tidak boleh langsung dianggap seluruhnya sewa atau jasa.',b);const rb=money(rentalAsset),sb=money(rentalService),m23=multiplier('pph23');if(m23===null)return review('Jumlah PPh belum dapat ditetapkan.','NPWP/NIK belum diverifikasi.',b);const rentTax=rb*.02*m23;let serviceTax,serviceName,serviceRate;if(v==='individual'){const dpp=sb*.5,m21=multiplier('pph21');if(m21===null)return review('PPh jasa pengemudi/operator belum dapat ditetapkan.','NPWP/NIK belum diverifikasi.',sb*.5);serviceTax=progressive(dpp)*m21;serviceName='PPh Pasal 21';serviceRate=m21===1.2?'Pasal 17 × 50% bruto +20%':'Pasal 17 × 50% bruto'}else{serviceTax=sb*.02*m23;serviceName='PPh Pasal 23';serviceRate=m23===2?'4%':'2%'}const total=rentTax+serviceTax;return res({badge:'Sewa dan jasa dipisahkan',title:'Instansi memotong PPh atas setiap komponen.',lead:'Komponen sewa dan jasa diuji terpisah.',tax:v==='individual'?'PPh Pasal 23 + PPh Pasal 21':'PPh Pasal 23',base:b,rate:`Sewa ${m23===2?'4%':'2%'}; jasa ${serviceRate}`,amount:total,reasons:[`Sewa ${fmt(rb)}: ${fmt(rentTax)}.`,`Jasa ${fmt(sb)} (${serviceName}): ${fmt(serviceTax)}.`],actions:[`Potong total ${fmt(total)} dan terbitkan bukti sesuai jenis pajak.`],note:'Pemisahan harus didukung kontrak dan tagihan.'})}if(t==='rent_ship_aircraft')return review('Sewa kapal/pesawat perlu klasifikasi.','Uji apakah sewa murni, charter, jasa angkutan, PPh Pasal 15, atau P3B.',b);if(t==='royalty'){const m=multiplier('pph23');if(m===null)return review('PPh royalti belum dapat ditetapkan.','NPWP/NIK belum diverifikasi.',b);const tax=b*.15*m;return res({badge:'Wajib dipotong',title:'Instansi memotong PPh Pasal 23 atas royalti.',lead:'Pembayaran merupakan royalti/lisensi hak dalam negeri.',tax:'PPh Pasal 23',base:b,rate:m===2?'30%':'15%',amount:tax,reasons:['Penghasilan diklasifikasikan sebagai royalti.'],actions:[`Potong ${fmt(tax)}.`],note:'Software, SaaS, cloud, dan implementasi dapat memerlukan pemisahan.'})}if(t==='prize_lottery'){const tax=b*.25;return res({badge:'PPh Final hadiah undian',title:'Potong/pungut PPh Final 25%.',lead:'Penghasilan berupa hadiah undian.',tax:'PPh Final Pasal 4 ayat (2)',base:b,rate:'25%',amount:tax,reasons:['Jenis hadiah adalah undian.'],actions:[`Potong/pungut ${fmt(tax)}.`],note:'Hadiah kegiatan menggunakan jalur berbeda.'})}if(t==='prize_activity_individual'){if(v!=='individual')return review('Penerima hadiah tidak sesuai klasifikasi.','Kategori ini khusus orang pribadi peserta kegiatan.',b);const m=multiplier('pph21');if(m===null)return review('PPh hadiah belum dapat ditetapkan.','NPWP/NIK belum diverifikasi.',b);const tax=progressive(b)*m;return res({badge:'PPh Pasal 21',title:'Instansi memotong PPh Pasal 21 atas hadiah kegiatan.',lead:'Tarif progresif diterapkan atas seluruh bruto.',tax:'PPh Pasal 21 peserta kegiatan',base:b,rate:m===1.2?'Pasal 17 +20%':'Tarif Pasal 17',amount:tax,reasons:['Penerima orang pribadi peserta kegiatan.'],actions:[`Potong ${fmt(tax)}.`],note:'Hadiah undian menggunakan PPh Final 25%.'})}if(t==='prize_entity'){if(v!=='entity')return review('Penerima hadiah tidak sesuai klasifikasi.','Kategori ini ditujukan kepada badan.',b);const m=multiplier('pph23');if(m===null)return review('PPh hadiah belum dapat ditetapkan.','NPWP/NIK belum diverifikasi.',b);const tax=b*.15*m;return res({badge:'PPh Pasal 23',title:'Instansi memotong PPh Pasal 23 atas hadiah kepada badan.',lead:'Hadiah tidak termasuk penghasilan yang telah dipotong PPh Pasal 21.',tax:'PPh Pasal 23',base:b,rate:m===2?'30%':'15%',amount:tax,reasons:['Penerima merupakan badan dalam negeri/BUT.'],actions:[`Potong ${fmt(tax)}.`],note:'Hadiah undian menggunakan PPh Final 25%.'})}if(ordinaryService(t)){const g=gross(),ex=excluded();if(v==='individual'){const dpp=g*.5,m=multiplier('pph21');if(m===null)return review('PPh Pasal 21 belum dapat ditetapkan.','NPWP/NIK belum diverifikasi.',dpp);const tax=progressive(dpp)*m;return res({badge:'Wajib dipotong',title:'Instansi memotong PPh Pasal 21.',lead:'Jasa diberikan oleh orang pribadi sebagai bukan pegawai.',tax:'PPh Pasal 21 bukan pegawai',base:dpp,rate:m===1.2?'Pasal 17 × 50% bruto +20%':'Pasal 17 × 50% bruto',amount:tax,reasons:[`Jumlah bruto jasa ${fmt(g)}.`,ex?`Komponen didukung bukti dikeluarkan ${fmt(ex)}.`:'Seluruh pembayaran sebelum PPN digunakan.'],actions:[`Potong ${fmt(tax)}.`],note:'Katering menggunakan seluruh pembayaran; pengurangan jasa lain harus didukung bukti.'})}const m=multiplier('pph23');if(m===null)return review('PPh Pasal 23 belum dapat ditetapkan.','NPWP/NIK belum diverifikasi.',g);const tax=g*.02*m;return res({badge:'Wajib dipotong',title:'Instansi memotong PPh Pasal 23.',lead:'Jasa diberikan oleh badan dalam negeri/BUT.',tax:'PPh Pasal 23',base:g,rate:m===2?'4%':'2%',amount:tax,reasons:[`Jumlah bruto jasa ${fmt(g)}.`,ex?`Komponen didukung bukti dikeluarkan ${fmt(ex)}.`:'Seluruh pembayaran sebelum PPN digunakan.'],actions:[`Potong ${fmt(tax)}.`],note:'Komponen langsung hanya dikeluarkan bila memenuhi syarat bukti.'})}return review('Jenis PPh belum dapat ditentukan otomatis.','Periksa substansi kontrak dan lengkapi rincian transaksi yang muncul.',b)}
+      function update(){const t=type.value,rawV=rawVendorType(),v=effectiveVendorType();taxId.parentElement.hidden=!rawV||rawV==='foreign';const turnoverField=el('pphTurnoverField');if(turnoverField)turnoverField.hidden=rawV==='foreign';if(rawV==='foreign')turnover.value='no';below500Field.hidden=!(v==='individual'&&umkmEligible(t,v));servicePanel.hidden=!ordinaryService(t);const serviceCostQuestionField=serviceCostStatus.closest('.field');if(serviceCostQuestionField)serviceCostQuestionField.hidden=t==='service_catering';constructionPanel.hidden=t!=='construction';rentalPanel.hidden=!rentWithService(t);propertyPanel.hidden=t!=='property_transfer';foreignPanel.hidden=!(rawV==='foreign'||t==='foreign_service');propertySpecialField.hidden=!['simple','public_interest','exception'].includes(propertyType.value);treatyRateField.hidden=treatyDocument.value!=='yes';const showCosts=!servicePanel.hidden&&t!=='service_catering'&&serviceCostStatus.value==='documented';materialField.hidden=laborField.hidden=thirdField.hidden=!showCosts;reimbursementField.hidden=!(showCosts&&v==='entity');if(t==='service_catering')serviceCostStatus.value='full';rentalAssetField.hidden=rentalServiceField.hidden=!(rentWithService(t)&&rentalSeparation.value==='separated');if(!servicePanel.hidden)servicePreview.innerHTML=`<strong>Jumlah bruto jasa: ${fmt(gross())}</strong><br>${excluded()?`Komponen didukung bukti dikurangi ${fmt(excluded())}.`:'Seluruh DPP/nilai sebelum PPN digunakan.'}`;if(!rentalPanel.hidden)rentalPreview.innerHTML=rentalSeparation.value==='separated'?`<strong>Sewa ${fmt(money(rentalAsset))} · jasa ${fmt(money(rentalService))}</strong>`:rentalSeparation.value==='not_separated'?'<strong>Perlu telaah.</strong> Nilai belum dipisahkan.':'Nilai yang tidak dipisahkan menghasilkan status perlu telaah.';updateConstruction()}
       function render(r){lastPphResult=r;const wrap=el('pphResultWrap');wrap.hidden=false;wrap.className='pph-result-wrap';const statusText=`${r.badge} ${r.title} ${r.tax}`.toLowerCase();if(r.status==='review'||/perlu telaah|belum dapat|belum ditentukan/.test(statusText)){wrap.classList.add('pph-status-review')}else if(/pihak lain/.test(statusText)){wrap.classList.add('pph-status-third')}else if(r.amount<=0||/nihil|tidak memotong|tidak memungut|tidak dipotong|tidak dipungut/.test(statusText)){wrap.classList.add('pph-status-none')}else{wrap.classList.add('pph-status-tax')}el('pphResultBadge').textContent=r.badge;el('pphResultTitle').textContent=r.title;el('pphResultLead').textContent=r.lead;el('pphMetricTax').textContent=r.tax;el('pphMetricBase').textContent=fmt(r.base);el('pphMetricRate').textContent=r.rate;el('pphMetricAmount').textContent=fmt(r.amount);const rs=el('pphReasonList'),as=el('pphActionList');rs.innerHTML='';as.innerHTML='';r.reasons.forEach(x=>{const li=document.createElement('li');li.textContent=x;rs.appendChild(li)});r.actions.forEach(x=>{const li=document.createElement('li');li.textContent=x;as.appendChild(li)});el('pphResultNote').textContent=r.note;el('combinedInvoice').textContent=fmt(parseRupiah(amountInput.value));el('combinedBase').textContent=fmt(currentVatResult?.baseAmount||base());el('combinedVat').textContent=fmt(currentVatResult?.vatAmount||0);el('combinedPph').textContent=fmt(r.amount)}
       function summary(r){return ['HASIL UJI PPh INSTANSI PEMERINTAH — KABAYAN',`Jenis belanja otomatis: ${type.options[type.selectedIndex]?.text||'—'}`,`Keputusan: ${r.title}`,`Jenis PPh: ${r.tax}`,`Dasar PPh: ${fmt(r.base)}`,`Tarif: ${r.rate}`,`PPh: ${fmt(r.amount)}`,'','Alasan:',...r.reasons.map((x,i)=>`${i+1}. ${x}`),'','Tindak lanjut:',...r.actions.map((x,i)=>`${i+1}. ${x}`),'',`Catatan: ${r.note}`].join('\n')}
       function reset(){currentVatResult=null;lastPphResult=null;el('pphResultWrap').hidden=true;suggestion.textContent='Pilih nama barang atau jasa. Sistem akan menentukan klasifikasi PPh secara otomatis.';[material,labor,third,reimbursement,rentalAsset,rentalService].forEach(x=>x.value='');update()}
@@ -5926,7 +5983,7 @@
     'bookCriteriaField','educationLicenseField','healthCriteriaField','laborCriteriaField',
     'publicTransportCriteriaField','constructionPurposeField','electricityCriteriaField',
     'socialServiceCriteriaField','broadcastCriteriaField','agriFisheryCriteriaField',
-    'disasterEligibilityField','foreignProjectDocumentsField','defenseEligibilityField','specialZoneDocumentsField'
+    'disasterEligibilityField','foreignProjectPphCertificateField','foreignProjectDocumentsField','defenseEligibilityField','specialZoneDocumentsField'
   ];
   const optionalPanelIds = ['manualProfilePanel','fuelPanel','telecomPanel','airlinePanel','specialRatePanel','taxInvoicePanel'];
 
@@ -5939,13 +5996,12 @@
   }
 
   function needsFacilityStage(){
-    if (gate.value === 'yes') return true;
-    if (intrinsicFacilityVisible()) return true;
-    return optionalPanelIds.some(id => isOwnVisible(document.getElementById(id)));
+    // Tahap terakhir selalu ditampilkan karena memuat pertanyaan dokumen PPh.
+    return true;
   }
 
   function syncFacilityPanel(){
-    const mustShowAssistant = gate.value === 'yes' || intrinsicFacilityVisible();
+    const mustShowAssistant = Boolean(gate.value && gate.value !== 'ordinary') || intrinsicFacilityVisible();
     if (facilityPanel && facilityPanel.hidden === mustShowAssistant) facilityPanel.hidden = !mustShowAssistant;
     const facilityStep = progressButtons.find(btn => btn.dataset.wizardTarget === 'facility');
     if (facilityStep) facilityStep.classList.toggle('is-skipped', !needsFacilityStage());
@@ -5981,7 +6037,7 @@
       transaction: {percent:20, label:'Tahap 1 · Transaksi'},
       vendor: {percent:40, label:'Tahap 2 · Rekanan'},
       payment: {percent:60, label:'Tahap 3 · Pembayaran'},
-      facility: {percent:80, label:'Tahap 4 · Fasilitas'},
+      facility: {percent:80, label:'Tahap 4 · Dokumen pajak'},
       result: {percent:100, label:'Pengisian selesai'}
     }[stage] || {percent:20, label:'Tahap 1 · Transaksi'};
     if (progressText) progressText.textContent = progress.label;
@@ -6023,6 +6079,8 @@
     const select = document.getElementById('pphTaxIdStatus');
     const turnoverField = document.getElementById('pphTurnoverField');
     const turnover = document.getElementById('pphTurnoverCertificate');
+    const pkpField = document.getElementById('pkpStatusField');
+    const pkpSelect = document.getElementById('pkpStatusSelect');
     if (!vendor || !field || !label || !select) return;
 
     const vendorChanged = select.dataset.vendorType !== vendor.value;
@@ -6051,8 +6109,14 @@
     if (select.value !== previousValue) select.dispatchEvent(new Event('change',{bubbles:true}));
 
     const foreign = vendor.value === 'foreign';
+    if (pkpField) pkpField.hidden = foreign;
+    if (pkpSelect && foreign && pkpSelect.value) {
+      pkpSelect.value = '';
+      pkpSelect.dispatchEvent(new Event('change',{bubbles:true}));
+    }
     if (turnoverField) turnoverField.hidden = foreign;
     if (foreign && turnover) turnover.value = 'no';
+    window.PPH_UNIFIED?.update?.();
   }
 
   function validateVendorIdentity(stage){
@@ -6062,7 +6126,7 @@
     if (vendor.value === 'individual' && taxId.value === 'invalid' && !isIndividualServiceTransaction()) {
       return stageError(stage,'Transaksi tidak dapat dilanjutkan jika rekanan tidak menyerahkan NPWP/NIK.',taxId);
     }
-    if (vendor.value === 'entity' && taxId.value !== 'valid') {
+    if (vendor.value === 'entity' && taxId.value === 'invalid') {
       return stageError(stage,'Transaksi tidak dapat dilanjutkan jika rekanan tidak menyerahkan NPWP.',taxId);
     }
     return true;
@@ -6112,7 +6176,8 @@
       const vendor = document.getElementById('pphVendorTypeSelect');
       if (!vendor.value) return stageError(stage,'Pilih bentuk rekanan.',vendor);
       const pkp = document.getElementById('pkpStatusSelect');
-      if (!pkp.value) return stageError(stage,'Pilih status rekanan.',pkp);
+      const foreignNonBut = vendor.value === 'foreign';
+      if (!foreignNonBut && !pkp.value) return stageError(stage,'Pilih status rekanan.',pkp);
       const taxId = document.getElementById('pphTaxIdStatus');
       if (visibleInside(stage,'pphTaxIdStatus') && !taxId.value) return stageError(stage,'Pilih status identitas rekanan.',taxId);
       if (!validateVendorIdentity(stage)) return false;
@@ -6131,8 +6196,9 @@
       if (!gate.value) return stageError(stage,'Tentukan apakah transaksi memiliki fasilitas atau kondisi khusus.',gate);
     }
     if (stage === 'facility'){
-      if (gate.value === 'yes' && facilityContext && facilityContext.value === 'ordinary'){
-        return stageError(stage,'Pilih kondisi khusus yang sesuai dengan transaksi.',facilityContext);
+      if (gate.value && facilityContext && facilityContext.value !== gate.value){
+        facilityContext.value = gate.value;
+        facilityContext.dispatchEvent(new Event('change',{bubbles:true}));
       }
     }
     return validateRequiredInStage(stage);
@@ -6175,6 +6241,12 @@
       button.disabled = key === 'result';
     });
     updateSummary();
+    window.requestAnimationFrame(() => {
+      const pphTarget = document.getElementById('pphResultWrap');
+      if (!pphTarget) return;
+      pphTarget.scrollIntoView({behavior:'smooth', block:'start'});
+      window.setTimeout(() => pphTarget.focus({preventScroll:true}), 350);
+    });
   }
 
   function goNext(){
@@ -6205,9 +6277,16 @@
     clearStageError('vendor');
   });
 
+  document.getElementById('pphTaxIdStatus')?.addEventListener('change', () => {
+    syncVendorIdentityOptions();
+    clearStageError('vendor');
+  });
+
   gate.addEventListener('change', () => {
-    if (gate.value === 'no' && facilityContext) facilityContext.value = 'ordinary';
-    if (gate.value === 'yes' && facilityContext && facilityContext.value !== 'ordinary') facilityContext.dispatchEvent(new Event('change',{bubbles:true}));
+    if (facilityContext && gate.value) {
+      facilityContext.value = gate.value;
+      facilityContext.dispatchEvent(new Event('change',{bubbles:true}));
+    }
     syncFacilityPanel();
     updateSummary();
   });
@@ -6259,5 +6338,194 @@
   syncFacilityPanel();
   window.KABAYAN_WIZARD = {setStage,needsFacilityStage,updateSummary,updateProgress,syncVendorIdentityOptions};
 })();
-</script></body>
+</script>
+<script id="kabayan-unified-pph-document-script">
+(function(){
+  "use strict";
+  const form = document.getElementById('vatForm');
+  const vendor = document.getElementById('pphVendorTypeSelect');
+  const choice = document.getElementById('pphDocumentChoice');
+  const skb = document.getElementById('pphSkbStatus');
+  const turnover = document.getElementById('pphTurnoverCertificate');
+  const below500 = document.getElementById('pphBelow500Statement');
+  const choiceField = document.getElementById('pphDocumentChoiceField');
+  const legacyFields = [
+    document.getElementById('pphSkbFieldLegacy'),
+    document.getElementById('pphTurnoverField'),
+    document.getElementById('pphBelow500Field')
+  ];
+  if (!form || !vendor || !choice || !skb || !turnover || !below500) return;
+
+  legacyFields.forEach(field => {
+    if (!field) return;
+    field.hidden = true;
+    field.style.setProperty('display','none','important');
+    field.setAttribute('aria-hidden','true');
+  });
+
+  function setOptions(){
+    const previous = choice.value;
+    const foreign = vendor.value === 'foreign';
+    if (choiceField) choiceField.hidden = foreign;
+
+    const options = [
+      ['', 'Pilih dokumen PPh umum'],
+      ['none', 'Tidak menyerahkan dokumen PPh umum lainnya']
+    ];
+    if (!foreign) {
+      options.push(['skb', 'SKB Pemotongan/Pemungutan PPh']);
+      options.push(['turnover', 'Surat Keterangan PPh Final Omzet Tertentu']);
+      if (vendor.value === 'individual') {
+        options.push(['below500', 'Surat Pernyataan Omzet kurang dari Rp500 juta']);
+      }
+    }
+    choice.innerHTML = '';
+    options.forEach(([value,label]) => {
+      const option = document.createElement('option');
+      option.value = value;
+      option.textContent = label;
+      choice.appendChild(option);
+    });
+    if (foreign) {
+      choice.value = 'none';
+    } else {
+      choice.value = options.some(([value]) => value === previous) ? previous : '';
+    }
+    syncLegacyValues();
+  }
+
+  function dispatch(select){
+    select.dispatchEvent(new Event('change',{bubbles:true}));
+  }
+
+  function syncLegacyValues(){
+    skb.value = choice.value === 'skb' ? 'yes' : 'no';
+    turnover.value = choice.value === 'turnover' ? 'yes' : 'no';
+    below500.value = choice.value === 'below500' && vendor.value === 'individual' ? 'yes' : 'no';
+    dispatch(skb);
+    dispatch(turnover);
+    dispatch(below500);
+    window.PPH_UNIFIED?.update?.();
+  }
+
+  choice.addEventListener('change', syncLegacyValues);
+  vendor.addEventListener('change', setOptions);
+  form.addEventListener('reset', () => setTimeout(setOptions, 0));
+
+  setOptions();
+  window.KABAYAN_SYNC_PPH_DOCUMENT = syncLegacyValues;
+})();
+</script>
+<script id="kabayan-pmk80-phln-script">
+(function(){
+  "use strict";
+  const form = document.getElementById('vatForm');
+  const gate = document.getElementById('wizardFacilityGate');
+  const facilityContext = document.getElementById('facilityContext');
+  const pphField = document.getElementById('foreignProjectPphCertificateField');
+  const pphCertificate = document.getElementById('foreignProjectPphCertificate');
+  const sktdField = document.getElementById('foreignProjectDocumentsField');
+  const sktd = document.getElementById('foreignProjectDocuments');
+  const documentChoiceField = document.getElementById('pphDocumentChoiceField');
+  const facilityGrid = document.querySelector('#wizardStageFacility .wizard-stage-grid');
+  const pphDocumentGrid = document.getElementById('pphDocumentGrid');
+  if (!form || !gate || !pphField || !pphCertificate || !sktdField || !sktd) return;
+
+  // Dokumen PPh ditempatkan dalam kelompok PPh, terpisah dari dokumen PPN.
+  if (pphDocumentGrid && documentChoiceField) pphDocumentGrid.appendChild(documentChoiceField);
+
+  function isPhln(){
+    return gate.value === 'foreign_grant_loan' || facilityContext?.value === 'foreign_grant_loan';
+  }
+
+  function syncPhlnQuestions(){
+    const show = isPhln();
+    pphField.hidden = !show;
+    sktdField.hidden = !show;
+    if (!show){
+      pphCertificate.value = '';
+      sktd.value = '';
+    }
+  }
+
+  gate.addEventListener('change', syncPhlnQuestions);
+  facilityContext?.addEventListener('change', syncPhlnQuestions);
+  form.addEventListener('reset', () => setTimeout(syncPhlnQuestions, 0));
+  syncPhlnQuestions();
+
+  if (!window.PPH_UNIFIED || window.PPH_UNIFIED.__pmk80Wrapped) return;
+  const originalEvaluate = window.PPH_UNIFIED.evaluate.bind(window.PPH_UNIFIED);
+  const originalRender = window.PPH_UNIFIED.render.bind(window.PPH_UNIFIED);
+  const originalSummary = window.PPH_UNIFIED.summary.bind(window.PPH_UNIFIED);
+
+  function isFinalPph(result){
+    const type = document.getElementById('pphTransactionType')?.value || '';
+    const finalTypes = new Set([
+      'construction','rent_land_building','property_transfer','shipping_domestic',
+      'shipping_air_foreign','prize_lottery'
+    ]);
+    const text = `${result.tax || ''} ${result.badge || ''}`.toLowerCase();
+    return finalTypes.has(type) || text.includes('final') || text.includes('pasal 26');
+  }
+
+  function applyPmk80(result){
+    if (!isPhln() || pphCertificate.value !== 'yes') return result;
+    if (!result || result.status === 'review' || !(Number(result.amount) > 0)) return result;
+
+    const finalPph = isFinalPph(result);
+    const reasons = [
+      'Transaksi merupakan bagian proyek pemerintah yang dibiayai hibah atau pinjaman luar negeri.',
+      'Rekanan menyerahkan Surat Keterangan Fasilitas PPh yang berlaku sebelum penghasilan diterima atau diperoleh.',
+      ...(result.reasons || [])
+    ];
+
+    const actions = finalPph
+      ? [
+          `Hitung PPh terutang sebesar ${new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',maximumFractionDigits:0}).format(result.amount)} sebagai PPh ditanggung pemerintah.`,
+          'Buat dan serahkan bukti pemotongan atau pemungutan sesuai jenis PPh final.',
+          'Laporkan bukti pemotongan atau pemungutan dalam SPT Masa dan pastikan rekanan menyampaikan Laporan Realisasi Fasilitas PPh.'
+        ]
+      : [
+          'Berikan pembebasan dari pemotongan atau pemungutan PPh berdasarkan Surat Keterangan Fasilitas PPh.',
+          'Tetap buat, serahkan, dan laporkan bukti pemotongan atau pemungutan atas penghasilan yang dibebaskan sesuai PMK 80 Tahun 2024.',
+          'Pastikan rekanan menyampaikan Laporan Realisasi Fasilitas PPh.'
+        ];
+
+    return {
+      ...result,
+      badge: 'PPh ditanggung pemerintah',
+      title: 'PPh terutang ditanggung pemerintah.',
+      lead: finalPph
+        ? 'PPh final tetap dihitung dan diadministrasikan, tetapi memperoleh fasilitas PPh ditanggung pemerintah.'
+        : 'Penghasilan tidak final dibebaskan dari pemotongan atau pemungutan dan PPh terutangnya memperoleh fasilitas ditanggung pemerintah.',
+      tax: `${String(result.tax || 'PPh').replace(/\s+—\s+DTP$/i,'')} — DTP`,
+      reasons,
+      actions,
+      note: finalPph
+        ? 'Dasar: Pasal 6 ayat (5) sampai dengan ayat (9), Pasal 19, dan Pasal 20 PMK 80 Tahun 2024.'
+        : 'Dasar: Pasal 6 ayat (5) sampai dengan ayat (9) dan Pasal 22 PMK 80 Tahun 2024.'
+    };
+  }
+
+  window.PPH_UNIFIED.evaluate = function(vatResult){
+    return applyPmk80(originalEvaluate(vatResult));
+  };
+
+  window.PPH_UNIFIED.render = function(result){
+    originalRender(result);
+    const amountLabel = document.querySelector('#pphMetricAmount')?.previousElementSibling;
+    const combinedLabel = document.querySelector('#combinedPph')?.previousElementSibling;
+    const isDtp = /— DTP$/i.test(result?.tax || '');
+    if (amountLabel) amountLabel.textContent = isDtp ? 'PPh terutang/DTP' : 'PPh dipotong/dipungut';
+    if (combinedLabel) combinedLabel.textContent = isDtp ? 'PPh terutang/DTP' : 'PPh dipotong/dipungut';
+  };
+
+  window.PPH_UNIFIED.summary = function(result){
+    return originalSummary(result).replace('PPh:', /— DTP$/i.test(result?.tax || '') ? 'PPh terutang/DTP:' : 'PPh:');
+  };
+
+  window.PPH_UNIFIED.__pmk80Wrapped = true;
+})();
+</script>
+</body>
 </html>
