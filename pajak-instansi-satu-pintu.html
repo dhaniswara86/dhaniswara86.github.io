@@ -2188,9 +2188,9 @@
 <main>
 <section class="hero">
 <div class="hero-inner">
-<p class="eyebrow">Kabayan · Kalkulator Pajak Transaksi</p>
-<h1>Satu transaksi.<span class="gradient-text">PPN dan PPh otomatis.</span></h1>
-<p class="hero-description">Pilih transaksi dan isi data utama. Kabayan langsung menghitung PPh dan PPN.</p>
+<p class="eyebrow">Kabayan · Kalkulator Pajak Instansi Pemerintah</p>
+<h1>Input transaksi.<span class="gradient-text">PPN dan PPh otomatis.</span></h1>
+<p class="hero-description">Isikan detail transaksi pada kolom yang tersedia. Sistem menghitung PPh dan PPN secara otomatis </p>
 <div class="hero-actions"><a class="hero-cta hero-cta-primary" href="#simulator">Mulai periksa</a><a class="hero-cta hero-cta-secondary" href="#cara-kerja">Lihat cara kerja</a></div></div>
 </section>
 <section class="app-section" id="simulator">
@@ -2201,7 +2201,7 @@
 <div aria-hidden="true" class="wizard-percentage-track"><span id="wizardProgressFill" style="width:20%"></span></div>
 </section>
 <div class="form-grid">
-<section class="wizard-stage" data-wizard-stage="transaction" id="wizardStageTransaction"><header class="wizard-stage-head"><div class="wizard-stage-copy"><span class="wizard-stage-kicker">Tahap 1</span><h3>Jenis pengadaan dan nilai</h3><p>Pilih barang atau jasa, lalu lengkapi nilai dan rincian tagihannya.</p><span class="wizard-stage-note">Mulai dari transaksi yang tercantum pada tagihan atau kontrak.</span></div><div aria-hidden="true" class="wizard-stage-visual visual-transaction"><div class="visual-grid"></div><span class="visual-chip">Tagihan</span><div class="visual-card main"><span class="line"></span><span class="line short"></span><span class="line tiny"></span></div><div class="visual-card side">Rp</div></div></header><div class="wizard-stage-error" data-wizard-error="" hidden="" role="alert"></div><div class="wizard-stage-grid"><div class="field field-full search-box">
+<section class="wizard-stage" data-wizard-stage="transaction" id="wizardStageTransaction"><header class="wizard-stage-head"><div class="wizard-stage-copy"><span class="wizard-stage-kicker">Tahap 1</span><h3>Jenis pengadaan dan nilai</h3><p>Pilih barang atau jasa, lalu lengkapi nilai dan rincian tagihannya.</p><span class="wizard-stage-note">Pengecekan detail transaksi yang tercantum pada tagihan atau kontrak.</span></div><div aria-hidden="true" class="wizard-stage-visual visual-transaction"><div class="visual-grid"></div><span class="visual-chip">Tagihan</span><div class="visual-card main"><span class="line"></span><span class="line short"></span><span class="line tiny"></span></div><div class="visual-card side">Rp</div></div></header><div class="wizard-stage-error" data-wizard-error="" hidden="" role="alert"></div><div class="wizard-stage-grid"><div class="field field-full search-box">
 <label class="question-blue" for="itemSearch">
                 Nama barang atau jasa <span class="required">*</span>
 </label>
@@ -2271,13 +2271,16 @@
 <span id="dppPreviewText">Dihitung otomatis dari harga termasuk PPN.</span>
 </div>
 <div class="dpp-preview-value" id="dppPreviewValue">—</div>
-</div></div></section><section class="wizard-stage" data-wizard-stage="vendor" id="wizardStageVendor"><header class="wizard-stage-head"><div class="wizard-stage-copy"><span class="wizard-stage-kicker">Tahap 2</span><h3>Profil rekanan</h3><p>Lengkapi bentuk dan identitas rekanan. Status PKP hanya ditanyakan untuk rekanan dalam negeri.</p><span class="wizard-stage-note">Profil rekanan menentukan jalur PPh dan perlakuan PPN.</span></div><div aria-hidden="true" class="wizard-stage-visual visual-vendor"><div class="visual-grid"></div><span class="visual-chip">Rekanan</span><div class="visual-card main"><div class="avatar"></div><span class="line short"></span><span class="line tiny"></span></div><div class="visual-card side"><div class="pill">NPWP</div><span class="line short" style="margin-top:10px"></span><span class="line tiny"></span></div></div></header><div class="wizard-stage-error" data-wizard-error="" hidden="" role="alert"></div><div class="wizard-stage-grid"><div class="conditional-panel field-full integrated-profile-panel" id="vendorProfilePanel"><h3>Profil rekanan</h3><p class="conditional-description">Data ini dipakai sekaligus untuk menentukan pihak pemungut PPN, tarif PPh, serta dokumen yang diperlukan.</p><div class="conditional-grid"><div class="field field-full">
-<label class="question-blue" for="pphVendorTypeSelect">Bentuk rekanan <span class="required">*</span></label>
+</div></div></section><section class="wizard-stage" data-wizard-stage="vendor" id="wizardStageVendor"><header class="wizard-stage-head"><div class="wizard-stage-copy"><span class="wizard-stage-kicker">Tahap 2</span><h3>Profil rekanan</h3><p>Lengkapi jenis dan kepemilikan identitas rekanan.</p>
+  <span class="wizard-stage-note">Profil rekanan menentukan jalur PPh dan perlakuan PPN.</span></div><div aria-hidden="true" class="wizard-stage-visual visual-vendor"><div class="visual-grid"></div><span class="visual-chip">Rekanan</span><div class="visual-card main"><div class="avatar"></div><span class="line short"></span><span class="line tiny"></span></div><div class="visual-card side"><div class="pill">NPWP</div><span class="line short" style="margin-top:10px"></span><span class="line tiny"></span></div></div></header><div class="wizard-stage-error" data-wizard-error="" hidden="" role="alert"></div><div class="wizard-stage-grid"><div class="conditional-panel field-full integrated-profile-panel" id="vendorProfilePanel"><h3>Profil rekanan</h3><p class="conditional-description">Data ini digunakan untuk menentukan tarif pajak, pihak pemotong/pemungut dan dokumen yang diperlukan.</p>
+  <div class="conditional-grid">
+    <div class="field field-full">
+<label class="question-blue" for="pphVendorTypeSelect">Jenis rekanan <span class="required">*</span></label>
 <select class="select-control" id="pphVendorTypeSelect" name="pphVendorType">
-<option value="">Pilih bentuk rekanan</option>
-<option value="individual">Orang pribadi dalam negeri</option>
-<option value="entity">Badan dalam negeri/BUT — PT, CV, Koperasi, BUMN, BUMD, dan badan lainnya</option>
-<option value="foreign">Luar negeri non-BUT</option>
+<option value="">Pilih jenis rekanan</option>
+<option value="individual">Orang Pribadi Dalam negeri</option>
+<option value="entity">Badan dalam negeri (PT, CV, Koperasi, BUMN, BUMD, dan badan lainnya) atau Bentuk Usaha Tetap</option>
+<option value="foreign">Orang Pribadi atau Badan Luar negeri non-BUT</option>
 </select>
 <span class="hint">Digunakan untuk menentukan PPh Pasal 21, 23, 26, atau ketentuan khusus.</span>
 </div><div class="field" id="pphTaxIdField"><label for="pphTaxIdStatus" id="pphTaxIdLabel">Status NPWP/NIK <span class="required">*</span></label><select class="select-control" id="pphTaxIdStatus"><option value="">Pilih bentuk rekanan terlebih dahulu</option></select></div><div class="field field-full" id="pkpStatusField">
@@ -2357,7 +2360,7 @@
 <label class="question-blue" for="splitStatusSelect">Apakah pengadaan ini merupakan bagian dari transaksi yang dipecah-pecah? <span class="required">*</span></label>
 <select class="select-control" id="splitStatusSelect" name="splitStatus">
 <option value="">Pilih kondisi transaksi</option>
-<option value="no">Tidak, nilai ini merupakan seluruh transaksi</option>
+<option value="no">Tidak, nilai ini merupakan seluruh transaksi dan tidak dipecah-pecah</option>
 <option value="yes">Ya, merupakan bagian dari pengadaan yang dipecah-pecah</option>
 </select>
 <span class="hint">Digunakan untuk menguji batas nilai transaksi pada PPN dan PPh Pasal 22.</span>
