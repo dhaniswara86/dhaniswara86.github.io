@@ -2726,7 +2726,7 @@
 </section>
 </main>
 <footer>
-<div class="disclaimer"><strong>Disclaimer: </strong>Alat bantu edukasi untuk transaksi sejak 1 Januari 2026 berdasarkan regulasi yang diperbarui sampai 29 Juli 2026. Cocokkan hasil dengan kontrak, tagihan, dokumen pajak, dan perubahan ketentuan terbaru sebelum digunakan sebagai dasar pemotongan, pemungutan, atau penyetoran.</div>
+<div class="disclaimer"><strong>Disclaimer: </strong>Alat bantu edukasi untuk transaksi sejak 1 Januari 2026 berdasarkan regulasi yang diperbarui sampai 30 Juli 2026. Cocokkan hasil dengan kontrak, tagihan, dokumen pajak, dan perubahan ketentuan terbaru sebelum digunakan sebagai dasar pemotongan, pemungutan, atau penyetoran.</div>
 <div class="footer-inner">
 <p>
         © <span id="currentYear"></span> Angga Sukma Dhaniswara.
@@ -6656,7 +6656,7 @@
 (function(){
   "use strict";
 
-  const LAW_SNAPSHOT_DATE = "2026-07-29";
+  const LAW_SNAPSHOT_DATE = "2026-07-30";
   const SUPPORTED_START = "1 Januari 2026";
   const form = document.getElementById("vatForm");
   if (!form) return;
@@ -7309,5 +7309,369 @@
   sync2026Fields();
 })();
 </script>
+<script id="kabayan-confirmed-corrections-20260730">
+(function(){
+  "use strict";
+
+  const byId = (id) => document.getElementById(id);
+  const form = byId("vatForm");
+  if (!form || !window.PPH_UNIFIED || typeof VAT_ITEMS === "undefined") return;
+
+  const pphType = byId("pphTransactionType");
+  const vendorType = byId("pphVendorTypeSelect");
+  const payment = byId("paymentMethod");
+  const facilityGate = byId("wizardFacilityGate");
+  const facilityContextEl = byId("facilityContext");
+  const foreignPphCertificate = byId("foreignProjectPphCertificate");
+
+  function createResult({
+    status = "",
+    badge = "Hasil PPh",
+    title = "",
+    lead = "",
+    tax = "—",
+    base = 0,
+    rate = "—",
+    amount = 0,
+    reasons = [],
+    actions = [],
+    note = ""
+  }){
+    return {status,badge,title,lead,tax,base,rate,amount,reasons,actions,note};
+  }
+
+  function selectedItem(){
+    return typeof getSelectedItem === "function" ? getSelectedItem() : null;
+  }
+
+  function isForeignGrantProject(){
+    return facilityGate?.value === "foreign_grant_loan" || facilityContextEl?.value === "foreign_grant_loan";
+  }
+
+  function selectedItemIsGeneralGoods(){
+    const item = selectedItem();
+    if (!item) return false;
+    const mapped = item.incomeTaxProfile || pphType?.value || "";
+    return mapped === "goods_general" || pphType?.value === "goods_general";
+  }
+
+  // 1. Pisahkan gabah/beras dari kelompok kebutuhan pokok lainnya.
+  const stapleItem = VAT_ITEMS.find((item) => item.id === "staple_food");
+  if (stapleItem){
+    stapleItem.name = "Jagung, sagu, kedelai, garam, gula konsumsi, daging, telur, susu, buah, atau sayur";
+    stapleItem.keywords = "jagung sagu kedelai garam gula konsumsi daging telur susu buah sayur kebutuhan pokok";
+  }
+
+  if (!VAT_ITEMS.some((item) => item.id === "rice_grain")){
+    const riceItem = {
+      id: "rice_grain",
+      name: "Gabah dan/atau beras",
+      type: "Barang",
+      icon: "♧",
+      profile: "exempt",
+      incomeTaxProfile: "goods_rice",
+      keywords: "gabah beras padi kebutuhan pokok",
+      note: "PPN dibebaskan sesuai ketentuan kebutuhan pokok; pembelian gabah dan/atau beras dikecualikan dari pemungutan PPh Pasal 22 oleh instansi pemerintah."
+    };
+    const index = Math.max(0, VAT_ITEMS.findIndex((item) => item.id === "staple_food"));
+    VAT_ITEMS.splice(index, 0, riceItem);
+  }
+
+  // 2. Pisahkan pembelian benda pos dari jasa pengiriman surat dengan prangko.
+  const postageService = VAT_ITEMS.find((item) => item.id === "postage_stamp");
+  if (postageService){
+    postageService.name = "Jasa pengiriman surat dengan prangko atau penggantinya";
+    postageService.incomeTaxProfile = "service_maintenance";
+    postageService.keywords = "jasa pengiriman surat prangko perangko pos wesel surat pos";
+    postageService.note = "Jasa pengiriman surat dengan prangko dibebaskan dari PPN, tetapi perlakuan PPh tetap mengikuti pembayaran jasa dan bentuk rekanan.";
+  }
+
+  if (!VAT_ITEMS.some((item) => item.id === "postal_goods")){
+    const postalGoods = {
+      id: "postal_goods",
+      name: "Benda pos atau prangko",
+      type: "Barang khusus",
+      icon: "✉",
+      profile: "special_review",
+      incomeTaxProfile: "goods_fuel_utilities",
+      keywords: "benda pos prangko perangko meterai pos",
+      note: "Pembelian benda pos dikecualikan dari pemungutan PPh Pasal 22 oleh instansi pemerintah. Perlakuan PPN perlu disesuaikan dengan jenis benda pos yang dibeli."
+    };
+    const index = Math.max(0, VAT_ITEMS.findIndex((item) => item.id === "postage_stamp"));
+    VAT_ITEMS.splice(index, 0, postalGoods);
+  }
+
+  // 3. Pertanyaan sumber dana BOS/BOP untuk pembelian barang umum.
+  const transactionGrid = document.querySelector("#wizardStageTransaction .wizard-stage-grid");
+  let bosFundingPanel = byId("bosFundingPanel");
+  if (transactionGrid && !bosFundingPanel){
+    bosFundingPanel = document.createElement("div");
+    bosFundingPanel.className = "conditional-panel field-full";
+    bosFundingPanel.id = "bosFundingPanel";
+    bosFundingPanel.hidden = true;
+    bosFundingPanel.innerHTML = `
+      <h3>Sumber dana pembelian barang</h3>
+      <p class="conditional-description">Digunakan untuk menguji pengecualian PPh Pasal 22 atas pembelian barang yang menggunakan dana bantuan operasional pendidikan.</p>
+      <div class="field field-full">
+        <label for="bosFundingStatus">Apakah pembelian barang menggunakan dana BOS, BOP PAUD, atau bantuan operasional pendidikan lainnya sesuai ketentuan pendidikan? <span class="required">*</span></label>
+        <select class="select-control" id="bosFundingStatus">
+          <option value="">Pilih jawaban</option>
+          <option value="yes">Ya, sumber dana dan penggunaannya memenuhi ketentuan</option>
+          <option value="no">Tidak</option>
+          <option value="unknown">Belum dapat dipastikan</option>
+        </select>
+        <span class="hint">Pengecualian hanya digunakan jika sumber dana dan penggunaan barang dapat dibuktikan.</span>
+      </div>`;
+    const amountField = byId("amountInput")?.closest(".field");
+    transactionGrid.insertBefore(bosFundingPanel, amountField || null);
+  }
+  const bosFundingStatus = byId("bosFundingStatus");
+
+  // 4. Peserta Kegiatan yang merupakan Pegawai Tetap pemberi penghasilan tidak dihitung sebagai Peserta Kegiatan.
+  const vendorGrid = document.querySelector("#wizardStageVendor .wizard-stage-grid");
+  let participantEmploymentPanel = byId("participantEmploymentPanel");
+  if (vendorGrid && !participantEmploymentPanel){
+    participantEmploymentPanel = document.createElement("div");
+    participantEmploymentPanel.className = "conditional-panel field-full";
+    participantEmploymentPanel.id = "participantEmploymentPanel";
+    participantEmploymentPanel.hidden = true;
+    participantEmploymentPanel.innerHTML = `
+      <h3>Status penerima imbalan kegiatan</h3>
+      <p class="conditional-description">PMK 168/2023 membedakan Peserta Kegiatan dari Pegawai Tetap yang menerima imbalan kegiatan dari pemberi kerja yang sama.</p>
+      <div class="field field-full">
+        <label for="participantEmploymentStatus">Apakah penerima merupakan Pegawai Tetap dari instansi/pemberi penghasilan yang sama? <span class="required">*</span></label>
+        <select class="select-control" id="participantEmploymentStatus">
+          <option value="">Pilih jawaban</option>
+          <option value="no">Tidak, penerima bukan Pegawai Tetap pemberi penghasilan</option>
+          <option value="yes">Ya, penerima merupakan Pegawai Tetap pemberi penghasilan</option>
+          <option value="unknown">Belum diketahui</option>
+        </select>
+      </div>`;
+    const vendorProfile = byId("vendorProfilePanel");
+    if (vendorProfile?.nextSibling) vendorGrid.insertBefore(participantEmploymentPanel, vendorProfile.nextSibling);
+    else vendorGrid.appendChild(participantEmploymentPanel);
+  }
+  const participantEmploymentStatus = byId("participantEmploymentStatus");
+
+  // 5. Validasi Kontraktor Utama untuk fasilitas PPh PMK 80/2024.
+  const pphDocumentGrid = byId("pphDocumentGrid");
+  let mainContractorField = byId("mainContractorField");
+  if (pphDocumentGrid && !mainContractorField){
+    mainContractorField = document.createElement("div");
+    mainContractorField.className = "field field-full";
+    mainContractorField.id = "mainContractorField";
+    mainContractorField.hidden = true;
+    mainContractorField.innerHTML = `
+      <label for="mainContractorStatus">Apakah rekanan merupakan Kontraktor Utama yang terdaftar untuk proyek hibah/pinjaman luar negeri ini? <span class="required">*</span></label>
+      <select class="select-control" id="mainContractorStatus">
+        <option value="">Pilih jawaban</option>
+        <option value="yes">Ya, status Kontraktor Utama dan proyek telah diverifikasi</option>
+        <option value="no">Tidak, rekanan bukan Kontraktor Utama</option>
+        <option value="unknown">Belum dapat diverifikasi</option>
+      </select>
+      <span class="hint">Fasilitas PPh PMK 80/2024 diberikan atas penghasilan Kontraktor Utama yang terkait dengan proyek.</span>`;
+    const foreignField = byId("foreignProjectPphCertificateField");
+    if (foreignField?.parentElement === pphDocumentGrid) pphDocumentGrid.insertBefore(mainContractorField, foreignField);
+    else pphDocumentGrid.prepend(mainContractorField);
+  }
+  const mainContractorStatus = byId("mainContractorStatus");
+
+  // 6. Perbaiki pertanyaan pembayaran bertahap agar mencakup uang muka, termin, dan cicilan.
+  const splitLabel = document.querySelector('label[for="splitStatusSelect"]');
+  if (splitLabel){
+    splitLabel.innerHTML = 'Apakah pembayaran ini merupakan uang muka, termin, cicilan, atau bagian dari satu kontrak/transaksi yang total nilainya melebihi Rp2.000.000? <span class="required">*</span>';
+  }
+  const splitSelect = byId("splitStatusSelect");
+  if (splitSelect){
+    const noOption = splitSelect.querySelector('option[value="no"]');
+    const yesOption = splitSelect.querySelector('option[value="yes"]');
+    if (noOption) noOption.textContent = "Tidak, pembayaran ini merupakan keseluruhan transaksi";
+    if (yesOption) yesOption.textContent = "Ya, merupakan uang muka, termin, cicilan, atau bagian transaksi";
+    if (!splitSelect.querySelector('option[value="unknown"]')){
+      const option = document.createElement("option");
+      option.value = "unknown";
+      option.textContent = "Belum diketahui";
+      splitSelect.appendChild(option);
+    }
+  }
+
+  function syncConfirmedFields(){
+    const item = selectedItem();
+    const type = pphType?.value || item?.incomeTaxProfile || "";
+
+    const showBos = Boolean(item && (type === "goods_general" || item.incomeTaxProfile === "goods_general"));
+    if (bosFundingPanel) bosFundingPanel.hidden = !showBos;
+    if (!showBos && bosFundingStatus) bosFundingStatus.value = "";
+
+    const showParticipant = type === "prize_activity_individual" && vendorType?.value === "individual";
+    if (participantEmploymentPanel) participantEmploymentPanel.hidden = !showParticipant;
+    if (!showParticipant && participantEmploymentStatus) participantEmploymentStatus.value = "";
+
+    const showMainContractor = isForeignGrantProject();
+    if (mainContractorField) mainContractorField.hidden = !showMainContractor;
+    if (!showMainContractor && mainContractorStatus) mainContractorStatus.value = "";
+  }
+
+  const priorAutoClassify = window.PPH_UNIFIED.autoClassify.bind(window.PPH_UNIFIED);
+  window.PPH_UNIFIED.autoClassify = function(item){
+    priorAutoClassify(item);
+    syncConfirmedFields();
+  };
+
+  const priorUpdate = window.PPH_UNIFIED.update.bind(window.PPH_UNIFIED);
+  window.PPH_UNIFIED.update = function(){
+    priorUpdate();
+    syncConfirmedFields();
+  };
+
+  const priorValidate = window.PPH_UNIFIED.validate.bind(window.PPH_UNIFIED);
+  window.PPH_UNIFIED.validate = function(){
+    if (!priorValidate()) return false;
+
+    if (bosFundingPanel && !bosFundingPanel.hidden){
+      if (!bosFundingStatus?.value || bosFundingStatus.value === "unknown"){
+        bosFundingStatus?.classList.add("invalid");
+        if (typeof showToast === "function") showToast("Pastikan sumber dana BOS/BOP pembelian barang.");
+        bosFundingStatus?.focus();
+        return false;
+      }
+    }
+
+    if (participantEmploymentPanel && !participantEmploymentPanel.hidden){
+      if (!participantEmploymentStatus?.value || participantEmploymentStatus.value === "unknown"){
+        participantEmploymentStatus?.classList.add("invalid");
+        if (typeof showToast === "function") showToast("Pastikan apakah penerima merupakan Pegawai Tetap pemberi penghasilan yang sama.");
+        participantEmploymentStatus?.focus();
+        return false;
+      }
+    }
+
+    if (mainContractorField && !mainContractorField.hidden && foreignPphCertificate?.value === "yes"){
+      if (!mainContractorStatus?.value || mainContractorStatus.value === "unknown"){
+        mainContractorStatus?.classList.add("invalid");
+        if (typeof showToast === "function") showToast("Status Kontraktor Utama harus diverifikasi sebelum menggunakan fasilitas PPh.");
+        mainContractorStatus?.focus();
+        return false;
+      }
+    }
+    return true;
+  };
+
+  const priorEvaluate = window.PPH_UNIFIED.evaluate.bind(window.PPH_UNIFIED);
+  window.PPH_UNIFIED.evaluate = function(vatResult){
+    const item = selectedItem();
+    const type = pphType?.value || "";
+    const vendor = vendorType?.value || "";
+    const pay = payment?.value || "";
+
+    // Jika rekanan bukan Kontraktor Utama, fasilitas PPh PMK 80 tidak digunakan.
+    let result;
+    if (isForeignGrantProject() && foreignPphCertificate?.value === "yes" && mainContractorStatus?.value === "no"){
+      const originalValue = foreignPphCertificate.value;
+      foreignPphCertificate.value = "no";
+      try {
+        result = priorEvaluate(vatResult);
+      } finally {
+        foreignPphCertificate.value = originalValue;
+      }
+      result = {
+        ...result,
+        reasons: [
+          "Rekanan dinyatakan bukan Kontraktor Utama sehingga fasilitas PPh PMK 80/2024 tidak digunakan.",
+          ...(result?.reasons || [])
+        ],
+        note: `${result?.note || ""} Perlakuan PPh normal diterapkan karena fasilitas PPh proyek hibah/pinjaman luar negeri hanya diberikan atas penghasilan Kontraktor Utama yang terkait proyek.`.trim()
+      };
+    } else {
+      result = priorEvaluate(vatResult);
+    }
+
+    // Pembelian barang dengan dana BOS/BOP: pengecualian PPh 22 oleh instansi pemerintah.
+    // Pengecualian ini tidak meniadakan pungutan 0,5% oleh Pihak Lain dalam SIP-UP karena PMK 58/2022 memiliki daftar pengecualian tersendiri.
+    if (bosFundingStatus?.value === "yes" && selectedItemIsGeneralGoods() && pay !== "sip_up"){
+      const base = Number(result?.base) || 0;
+      return createResult({
+        status:"none",
+        badge:"PPh Pasal 22 tidak dipungut",
+        title:"Instansi tidak memungut PPh Pasal 22.",
+        lead:"Pembelian barang menggunakan dana BOS/BOP pendidikan yang dinyatakan memenuhi ketentuan.",
+        tax:"PPh Pasal 22",
+        base,
+        rate:"0%",
+        amount:0,
+        reasons:["Pembelian barang berhubungan dengan penggunaan dana bantuan operasional pendidikan sesuai ketentuan pendidikan."],
+        actions:["Simpan dokumen sumber dana, bukti penggunaan dana, kontrak, dan invoice sebagai dasar pengecualian."],
+        note:"Dasar: PMK 59/2022 Pasal 12 ayat (2) huruf d."
+      });
+    }
+
+    // PMK 58/2022: jasa angkutan umum oleh orang pribadi melalui Pihak Lain tidak dipungut PPh 22.
+    if (item?.id === "public_transport" && vendor === "individual" && pay === "sip_up" && byId("publicTransportCriteria")?.value === "yes"){
+      const base = Number(result?.base) || 0;
+      return createResult({
+        status:"none",
+        badge:"Dikecualikan dari pungutan Pihak Lain",
+        title:"Pihak Lain tidak memungut PPh Pasal 22.",
+        lead:"Jasa angkutan umum diberikan oleh rekanan orang pribadi melalui Pihak Lain dalam Sistem Informasi Pengadaan.",
+        tax:"PPh Pasal 22 oleh Pihak Lain",
+        base,
+        rate:"0%",
+        amount:0,
+        reasons:["Rekanan merupakan orang pribadi yang menyerahkan jasa angkutan umum melalui Pihak Lain."],
+        actions:["Pastikan layanan benar-benar merupakan angkutan umum, bukan sewa atau carter kendaraan.","Simpan dokumen transaksi dan bukti karakter layanan angkutan umum."],
+        note:"Dasar: PMK 58/2022 Pasal 5 ayat (5) huruf a."
+      });
+    }
+
+    // Pegawai Tetap pemberi penghasilan yang menerima imbalan kegiatan bukan Peserta Kegiatan.
+    if (type === "prize_activity_individual" && vendor === "individual" && participantEmploymentStatus?.value === "yes"){
+      const base = Number(result?.base) || 0;
+      return createResult({
+        status:"review",
+        badge:"Gunakan mekanisme Pegawai Tetap",
+        title:"Imbalan kegiatan tidak dihitung sebagai penghasilan Peserta Kegiatan.",
+        lead:"Penerima merupakan Pegawai Tetap dari pemberi penghasilan yang sama. Imbalan kegiatan merupakan penghasilan Pegawai Tetap dan harus masuk penghitungan PPh Pasal 21 Pegawai Tetap pada Masa Pajak terkait.",
+        tax:"PPh Pasal 21 Pegawai Tetap",
+        base,
+        rate:"Sesuai mekanisme Pegawai Tetap",
+        amount:0,
+        reasons:["Definisi Peserta Kegiatan tidak mencakup imbalan kegiatan yang diterima Pegawai Tetap dari pemberi kerja yang sama."],
+        actions:["Gabungkan imbalan kegiatan dengan penghasilan Pegawai Tetap pada Masa Pajak diterimanya penghasilan.","Hitung melalui modul PPh Pasal 21 Pegawai Tetap, bukan modul Peserta Kegiatan."],
+        note:"Dasar: PMK 168/2023 Pasal 1 angka 15 dan Pasal 5 ayat (3) huruf c. Nominal tidak dihitung di modul ini karena data penghasilan Pegawai Tetap tidak tersedia."
+      });
+    }
+
+    return result;
+  };
+
+  [bosFundingStatus, participantEmploymentStatus, mainContractorStatus, vendorType, pphType, payment, facilityGate, facilityContextEl, foreignPphCertificate, byId("publicTransportCriteria")]
+    .filter(Boolean)
+    .forEach((element) => element.addEventListener("change", () => {
+      syncConfirmedFields();
+      try { priorUpdate(); } catch (_) {}
+    }));
+
+  form.addEventListener("reset", () => setTimeout(() => {
+    if (bosFundingStatus) bosFundingStatus.value = "";
+    if (participantEmploymentStatus) participantEmploymentStatus.value = "";
+    if (mainContractorStatus) mainContractorStatus.value = "";
+    syncConfirmedFields();
+  }, 0));
+
+  // Tambahkan referensi PMK 164/2023 tanpa mengubah logic yang masih memerlukan verifikasi dokumen.
+  const legalLinks = document.querySelector(".legal-links");
+  if (legalLinks && !Array.from(legalLinks.querySelectorAll("a")).some((a) => /PMK 164\/2023/i.test(a.textContent))){
+    const link = document.createElement("a");
+    link.href = "https://jdih.kemenkeu.go.id/dok/pmk-164-tahun-2023";
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.innerHTML = "<span>PMK 164/2023</span><span>↗</span>";
+    legalLinks.appendChild(link);
+  }
+
+  syncConfirmedFields();
+})();
+</script>
+
 </body>
 </html>
