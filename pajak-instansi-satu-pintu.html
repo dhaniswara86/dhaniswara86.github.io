@@ -2004,7 +2004,7 @@
     white-space: normal;
     line-height: 1.35;
   }
-  #selectedItemNote { display: none !important; }
+  #selectedItemNote { display: block !important; }
 </style>
 <style id="kabayan-adaptive-wizard-style">
   .calculator-layout{display:block!important;max-width:980px;margin-inline:auto}
@@ -2051,7 +2051,7 @@
   .wizard-result-intro h2{font-size:clamp(28px,4vw,44px);letter-spacing:-.035em;margin:5px 0 8px}
   .wizard-result-intro p{margin:0;color:#6e6e73;line-height:1.55}
   #automaticTaxPanel{display:none!important}
-  .selected-item-note,#selectedItemNote{display:none!important}
+  .selected-item-note{display:none!important}#selectedItemNote{display:block!important;color:#50677e;font-size:12px;font-weight:600;margin-top:4px}
   .wizard-facility-gate{padding-top:2px}
   .wizard-stage-grid .hint{font-size:12px;color:#86868b}
   .guide-section .logic-flow{grid-template-columns:repeat(5,minmax(0,1fr))}
@@ -2173,7 +2173,7 @@
 <span class="selected-item-mark" id="selectedItemIcon">✓</span>
 <div class="selected-item-copy">
 <strong id="selectedItemName"></strong>
-<span hidden="" id="selectedItemNote"></span>
+<span id="selectedItemNote"></span>
 </div>
 </div>
 </div><div class="conditional-panel field-full automatic-tax-panel" id="automaticTaxPanel">
@@ -2337,7 +2337,7 @@
 <span>Batas Rp2 juta tidak berlaku untuk transaksi yang sengaja dipecah.</span>
 </div>
 </div>
-</div><div class="field field-full wizard-facility-gate" id="wizardFacilityGateField"><label for="wizardFacilityGate">Apakah transaksi memiliki fasilitas atau kondisi khusus? <span class="required">*</span></label><select class="select-control" id="wizardFacilityGate"><option value="">Pilih fasilitas atau kondisi</option><option value="ordinary">Tidak memiliki fasilitas atau kondisi khusus</option><option value="national_disaster">Penanganan bencana yang ditetapkan sebagai bencana nasional</option><option value="foreign_grant_loan">Proyek pemerintah yang dibiayai hibah atau pinjaman luar negeri</option><option value="defense_security">Keperluan pertahanan atau keamanan negara</option><option value="special_zone">Transaksi terkait Kawasan Bebas, KEK, atau tempat berfasilitas kepabeanan</option></select><span class="hint">Pilih kondisi yang sesuai dengan kontrak, sumber anggaran, tujuan pengadaan, dan lokasi penyerahan.</span></div></div></section><section class="wizard-stage" data-wizard-stage="facility" id="wizardStageFacility"><header class="wizard-stage-head"><span class="wizard-stage-kicker">Tahap 4</span><h3>Kepemilikan dokumen dan fasilitas perpajakan</h3><p>Dokumen PPh dan dokumen PPN dipisahkan agar fungsi setiap dokumen lebih mudah dipahami.</p></header><div class="wizard-stage-error" data-wizard-error="" hidden="" role="alert"></div><div class="wizard-stage-grid"><div class="conditional-panel field-full tax-document-group" id="pphDocumentPanel"><h3>Dokumen PPh</h3><p class="conditional-description">Dokumen pada bagian ini hanya digunakan untuk menentukan pemotongan, pemungutan, atau fasilitas PPh.</p><div class="conditional-grid" id="pphDocumentGrid"><div class="field field-full" hidden="" id="foreignProjectPphCertificateField">
+</div><div class="field field-full wizard-facility-gate" id="wizardFacilityGateField"><label for="wizardFacilityGate">Apakah transaksi memiliki fasilitas atau kondisi khusus? <span class="required">*</span></label><select class="select-control" id="wizardFacilityGate"><option value="">Pilih fasilitas atau kondisi</option><option value="ordinary">Pengadaan biasa (tidak terdapat fasilitas/kondisi khusus)</option><option value="national_disaster">Penanganan bencana yang ditetapkan sebagai bencana nasional</option><option value="foreign_grant_loan">Proyek pemerintah yang dibiayai hibah atau pinjaman luar negeri</option><option value="defense_security">Keperluan pertahanan atau keamanan negara</option><option value="special_zone">Transaksi terkait Kawasan Bebas, KEK, atau tempat berfasilitas kepabeanan</option></select><span class="hint">Pilih kondisi yang sesuai dengan kontrak, sumber anggaran, tujuan pengadaan, dan lokasi penyerahan.</span></div></div></section><section class="wizard-stage" data-wizard-stage="facility" id="wizardStageFacility"><header class="wizard-stage-head"><span class="wizard-stage-kicker">Tahap 4</span><h3>Kepemilikan dokumen dan fasilitas perpajakan</h3><p>Dokumen PPh dan dokumen PPN dipisahkan agar fungsi setiap dokumen lebih mudah dipahami.</p></header><div class="wizard-stage-error" data-wizard-error="" hidden="" role="alert"></div><div class="wizard-stage-grid"><div class="conditional-panel field-full tax-document-group" id="pphDocumentPanel"><h3>Kepemilikan Surat terkait fasilitas perpajakan</h3><p class="conditional-description">Dokumen pada bagian ini hanya digunakan untuk menentukan pemotongan, pemungutan, atau fasilitas PPh.</p><div class="conditional-grid" id="pphDocumentGrid"><div class="field field-full" hidden="" id="foreignProjectPphCertificateField">
 <label for="foreignProjectPphCertificate">Apakah rekanan menyerahkan Surat Keterangan Fasilitas PPh untuk PPh ditanggung pemerintah? <span class="required">*</span></label>
 <select class="select-control" id="foreignProjectPphCertificate">
 <option value="">Pilih jawaban</option>
@@ -5723,6 +5723,30 @@
   const pphLabel = document.getElementById("incomeTaxProfileLabel");
   const confidence = document.getElementById("classificationConfidence");
   const panel = document.getElementById("automaticTaxPanel");
+  const selectedItemNoteHint = document.getElementById("selectedItemNote");
+
+  function simpleSpendingCategory(type){
+    if (["goods_general","goods_fuel_utilities","goods_bos","goods_rice"].includes(type)) return "Belanja barang";
+    if (type === "construction") return "Belanja konstruksi";
+    if (["rent_land_building","rent_vehicle_no_driver","rent_machine_no_operator","rent_vehicle_with_driver","rent_machine_with_operator","rent_ship_aircraft","rent_other"].includes(type)) return "Belanja sewa";
+    if (["prize_activity_individual"].includes(type)) return "Belanja pegawai";
+    if (["service_professional","service_maintenance","service_catering","shipping_domestic","air_charter_domestic","shipping_air_foreign"].includes(type)) return "Belanja jasa";
+    return "Belanja lainnya";
+  }
+
+  function preliminaryCategoryForItem(item){
+    if (!item) return "Belanja lainnya";
+    if (item.id === "construction") return "Belanja konstruksi";
+    if (item.id === "vehicle_rental") return "Belanja sewa";
+    if (item.type === "Barang") return "Belanja barang";
+    if (item.type === "Jasa") return "Belanja jasa";
+    return "Belanja lainnya";
+  }
+
+  function updateSelectedItemHint(category){
+    if (!selectedItemNoteHint) return;
+    selectedItemNoteHint.textContent = `Klasifikasi: ${category}`;
+  }
 
   const TYPE_META = {
     goods_general: { spendingCategory: "Pembelian barang", incomeTaxProfile: "Uji PPh Pasal 22" },
@@ -5876,6 +5900,7 @@
   function setAutomaticType(value, sourceText){
     const safeValue = value || "other";
     hiddenType.value = safeValue;
+    updateSelectedItemHint(simpleSpendingCategory(safeValue));
     updateCards(
       safeValue,
       safeValue === "other" ? "review" : "ready",
@@ -5919,6 +5944,7 @@
     if (!item) return;
     const followUp = item.followUp && FOLLOW_UP[item.followUp];
     if (followUp){
+      updateSelectedItemHint(preliminaryCategoryForItem(item));
       showNature(followUp);
       return;
     }
@@ -5936,6 +5962,8 @@
       confidence.className = "classification-confidence review";
       confidence.textContent = "Perlu jawaban";
       suggestion.innerHTML = "<strong>Rincian transaksi belum lengkap.</strong><br>Pilih karakter transaksi yang sesuai kontrak atau tagihan.";
+      const currentItem = VAT_ITEMS.find((item) => item.id === document.getElementById("selectedItemId").value);
+      updateSelectedItemHint(preliminaryCategoryForItem(currentItem));
       if (window.PPH_UNIFIED) window.PPH_UNIFIED.update();
       return;
     }
