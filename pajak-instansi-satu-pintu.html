@@ -2188,9 +2188,9 @@
 <main>
 <section class="hero">
 <div class="hero-inner">
-<p class="eyebrow">Kabayan · Kalkulator Pajak Instansi Pemerintah</p>
-<h1>Input transaksi.<span class="gradient-text">PPN dan PPh otomatis.</span></h1>
-<p class="hero-description">Isikan detail transaksi pada kolom yang tersedia. Sistem menghitung PPh dan PPN secara otomatis </p>
+<p class="eyebrow">Kabayan · Katalog Bahan Pelayanan</p>
+<h1>Input transaksi.<span class="gradient-text">Hitung pajak otomatis.</span></h1>
+<p class="hero-description">Kalkulator ini dikhususkan untuk para bendahara instansi pemerintah. </p>
 <div class="hero-actions"><a class="hero-cta hero-cta-primary" href="#simulator">Mulai periksa</a><a class="hero-cta hero-cta-secondary" href="#cara-kerja">Lihat cara kerja</a></div></div>
 </section>
 <section class="app-section" id="simulator">
@@ -2275,20 +2275,20 @@
 <span class="wizard-stage-note">Profil rekanan menentukan jalur PPh dan perlakuan PPN.</span></div><div aria-hidden="true" class="wizard-stage-visual visual-vendor"><div class="visual-grid"></div><span class="visual-chip">Rekanan</span><div class="visual-card main"><div class="avatar"></div><span class="line short"></span><span class="line tiny"></span></div><div class="visual-card side"><div class="pill">NPWP</div><span class="line short" style="margin-top:10px"></span><span class="line tiny"></span></div></div></header><div class="wizard-stage-error" data-wizard-error="" hidden="" role="alert"></div><div class="wizard-stage-grid"><div class="conditional-panel field-full integrated-profile-panel" id="vendorProfilePanel"><h3>Profil rekanan</h3><p class="conditional-description">Data ini digunakan untuk menentukan tarif pajak, pihak pemotong/pemungut dan dokumen yang diperlukan.</p>
 <div class="conditional-grid">
 <div class="field field-full">
-<label class="question-blue" for="pphVendorTypeSelect">Jenis rekanan <span class="required">*</span></label>
+<label class="question-blue" for="pphVendorTypeSelect">Kategori rekanan <span class="required">*</span></label>
 <select class="select-control" id="pphVendorTypeSelect" name="pphVendorType">
-<option value="">Pilih jenis rekanan</option>
-<option value="individual">Orang Pribadi Dalam negeri</option>
-<option value="entity">Badan dalam negeri (PT, CV, Koperasi, BUMN, BUMD, dan badan lainnya) atau Bentuk Usaha Tetap</option>
+<option value="">Pilih kategori rekanan</option>
+<option value="individual">Orang Pribadi Dalam Negeri</option>
+<option value="entity">Badan Dalam negeri (PT, CV, Koperasi, BUMN, BUMD, dan badan lainnya) atau Bentuk Usaha Tetap</option>
 <option value="foreign">Orang Pribadi atau Badan Luar negeri non-BUT</option>
 </select>
 <span class="hint">Digunakan untuk menentukan PPh Pasal 21, 23, 26, atau ketentuan khusus.</span>
 </div><div class="field" id="pphTaxIdField"><label for="pphTaxIdStatus" id="pphTaxIdLabel">Status NPWP/NIK <span class="required">*</span></label><select class="select-control" id="pphTaxIdStatus"><option value="">Pilih bentuk rekanan terlebih dahulu</option></select></div><div class="field field-full" id="pkpStatusField">
-<label class="question-blue" for="pkpStatusSelect">Status rekanan <span class="required">*</span></label>
+<label class="question-blue" for="pkpStatusSelect">Apakah rekanan berstatus Pengusaha Kena Pajak? <span class="required">*</span></label>
 <select class="select-control" id="pkpStatusSelect" name="pkpStatus">
-<option value="">Pilih status rekanan</option>
-<option value="yes">Pengusaha Kena Pajak (PKP)</option>
-<option value="no">Bukan Pengusaha Kena Pajak (non-PKP)</option>
+<option value="">Pilih jawaban</option>
+<option value="yes">Ya, Pengusaha Kena Pajak</option>
+<option value="no">Tidak, bukan Pengusaha Kena Pajak</option>
 <option value="unknown">Belum diketahui</option>
 </select>
 <span class="hint">Status PKP menentukan Faktur Pajak dan mekanisme pemungutan PPN.</span>
@@ -2297,14 +2297,14 @@
 <div class="field"><label for="pphConstructionCertificate" id="pphConstructionCertificateLabel">SBU/SKK <span class="required">*</span></label><select class="select-control" id="pphConstructionCertificate"><option value="">Pilih jenis layanan dan penerima dahulu</option></select></div>
 <div class="pph-preview" id="pphConstructionPreview">Pilih jenis layanan dan dokumen sertifikasi.</div>
 </div></div><div class="conditional-panel field-full integrated-detail-panel" hidden="" id="pphForeignPanel"><h3>Rincian transaksi luar negeri</h3><p class="conditional-description">Lengkapi karakter penghasilan dan dokumen P3B untuk menentukan perlakuan pajaknya.</p><div class="pph-grid"><div class="field"><label for="pphForeignIncomeType">Karakter penghasilan</label><select class="select-control" id="pphForeignIncomeType"><option value="">Pilih karakter</option><option value="goods">Pembelian barang murni</option><option value="service">Jasa/pekerjaan/kegiatan</option><option value="royalty">Royalti/lisensi</option><option value="rent">Sewa/penggunaan harta</option><option value="prize">Hadiah</option><option value="shipping_air">Pelayaran/penerbangan</option><option value="business_profit_other">Laba usaha/penghasilan lain</option></select></div><div class="field"><label for="pphTreatyDocument">Penerapan P3B</label><select class="select-control" id="pphTreatyDocument"><option value="no">Tidak digunakan/tidak memenuhi</option><option value="yes">Dokumen dan syarat P3B telah diverifikasi</option><option value="uncertain">Belum diverifikasi</option></select></div><div class="field" hidden="" id="pphTreatyRateField"><label for="pphTreatyRate">Tarif P3B</label><div class="money-wrap"><span class="money-prefix">%</span><input class="control money-input" id="pphTreatyRate" max="20" min="0" placeholder="10" step="0.01" type="number"/></div></div></div></div><div class="conditional-panel" hidden="" id="invoiceVatPanel">
-<h3>Tagihan rekanan non-PKP</h3>
-<p class="conditional-description">Perhatikan pada tagihan, invoice, atau kontrak. Apakah tercantum baris khusus yang secara spesifik menuliskan unsur PPN di dalamnya?</p>
+<h3>Apakah total nilai yang dibayarkan mencakup PPN?</h3>
+<p class="conditional-description">Pilih berdasarkan struktur harga dalam kontrak, tagihan, atau invoice rekanan non-PKP.</p>
 <div class="field field-full compact-select-field">
-<label for="invoiceVatStatusSelect">Periksa tagihan <span class="required">*</span></label>
+<label for="invoiceVatStatusSelect">Pilih jawaban <span class="required">*</span></label>
 <select class="select-control" id="invoiceVatStatusSelect" name="invoiceVatStatus">
-<option value="">Pilih kondisi tagihan</option>
-<option value="yes">Ya, mencantumkan secara jelas baris PPN</option>
-<option value="no">Tidak tercantum sama sekali baris terkait PPN</option>
+<option value="">Pilih jawaban</option>
+<option value="included">Ya, harga tagihan mencakup PPN</option>
+<option value="before">Tidak, harga tagihan tidak memperhitungkan PPN</option>
 </select>
 </div>
 <div class="field" hidden="" id="invoiceVatAmountField">
@@ -2318,24 +2318,16 @@
 </div>
 <span class="hint">Masukkan nominal PPN persis seperti pada tagihan.</span>
 </div>
-</div><div class="conditional-panel" hidden="" id="institutionPkpPanel">
-<h3>Status PKP instansi pemerintah</h3>
+</div><div class="conditional-panel field-full" hidden="" id="institutionPkpPanel">
+<h3>Apakah Instansi Pemerintah berstatus sebagai PKP?</h3>
 <p class="conditional-description">Menentukan cara pelaporan setoran.</p>
-<div class="choice-grid two">
-<div>
-<input class="choice-input" id="institutionPkpYes" name="institutionPkpStatus" type="radio" value="yes"/>
-<label class="choice-card" for="institutionPkpYes">
-<strong>Instansi berstatus PKP</strong>
-<small>Dilaporkan dalam SPT Masa PPN.</small>
-</label>
-</div>
-<div>
-<input class="choice-input" id="institutionPkpNo" name="institutionPkpStatus" type="radio" value="no"/>
-<label class="choice-card" for="institutionPkpNo">
-<strong>Instansi bukan PKP</strong>
-<small>Cukup disetor sesuai ketentuan.</small>
-</label>
-</div>
+<div class="field field-full compact-select-field">
+<label class="visually-hidden" for="institutionPkpStatusSelect">Apakah Instansi Pemerintah berstatus sebagai PKP? <span class="required">*</span></label>
+<select class="select-control" id="institutionPkpStatusSelect" name="institutionPkpStatus">
+<option value="">Pilih jawaban</option>
+<option value="yes">Ya, instansi merupakan PKP</option>
+<option value="no">Tidak, instansi bukan PKP</option>
+</select>
 </div>
 </div></div></section><section class="wizard-stage" data-wizard-stage="payment" id="wizardStagePayment"><header class="wizard-stage-head"><div class="wizard-stage-copy"><span class="wizard-stage-kicker">Tahap 3</span><h3>Cara pembayaran</h3><p>Tentukan mekanisme pembayaran dan apakah transaksi merupakan bagian dari transaksi yang sama.</p><span class="wizard-stage-note">Tahap ini menguji mekanisme pembayaran dan pemecahan transaksi.</span></div><div aria-hidden="true" class="wizard-stage-visual visual-payment"><div class="visual-grid"></div><span class="visual-chip">Pembayaran</span><div class="flow"></div><span class="dot one"></span><span class="dot two"></span><span class="dot three"></span><div class="visual-card left">LS / UP</div><div class="visual-card right">INAPROC</div></div></header><div class="wizard-stage-error" data-wizard-error="" hidden="" role="alert"></div><div class="wizard-stage-grid"><div class="field field-full" id="paymentMethodField">
 <label class="question-blue" for="paymentMethod">
@@ -6245,15 +6237,15 @@
     }
     if (stage === 'vendor'){
       const vendor = document.getElementById('pphVendorTypeSelect');
-      if (!vendor.value) return stageError(stage,'Pilih bentuk rekanan.',vendor);
+      if (!vendor.value) return stageError(stage,'Pilih kategori rekanan.',vendor);
       const pkp = document.getElementById('pkpStatusSelect');
       const foreignNonBut = vendor.value === 'foreign';
-      if (!foreignNonBut && !pkp.value) return stageError(stage,'Pilih status rekanan.',pkp);
+      if (!foreignNonBut && !pkp.value) return stageError(stage,'Tentukan apakah rekanan berstatus Pengusaha Kena Pajak.',pkp);
       const taxId = document.getElementById('pphTaxIdStatus');
       if (visibleInside(stage,'pphTaxIdStatus') && !taxId.value) return stageError(stage,'Pilih status identitas rekanan.',taxId);
       if (!validateVendorIdentity(stage)) return false;
       const invoiceStatus = document.getElementById('invoiceVatStatusSelect');
-      if (visibleInside(stage,'invoiceVatStatusSelect') && !invoiceStatus.value) return stageError(stage,'Periksa tagihan dan pilih kondisi PPN.',invoiceStatus);
+      if (visibleInside(stage,'invoiceVatStatusSelect') && !invoiceStatus.value) return stageError(stage,'Tentukan apakah total nilai yang dibayarkan mencakup PPN.',invoiceStatus);
       const invoiceAmount = document.getElementById('invoiceVatAmountInput');
       if (visibleInside(stage,'invoiceVatAmountInput') && parseMoney(invoiceAmount.value) <= 0) return stageError(stage,'Masukkan nilai PPN yang tercantum dalam tagihan.',invoiceAmount);
     }
@@ -6679,15 +6671,9 @@
     return false;
   };
 
-  // 1) Lock the calculator to a clearly disclosed current-law snapshot.
-  const heading = form.querySelector(".card-heading");
-  if (heading && !byId("auditSnapshotNotice")) {
-    const notice = document.createElement("div");
-    notice.id = "auditSnapshotNotice";
-    notice.className = "audit-snapshot";
-    notice.innerHTML = '<strong>Versi regulasi transaksi sejak 1 Januari 2026 · diperbarui 29 Juli 2026</strong>Tanggal transaksi tidak perlu diisi. Untuk PPh Final omzet tertentu, aplikasi hanya meminta periode regulasi ketika dokumen tersebut dipilih. Ketentuan setelah tanggal pembaruan harus ditelaah kembali apabila terdapat perubahan regulasi.';
-    heading.appendChild(notice);
-  }
+  // Notice versi/disclaimer pada bagian atas formulir sengaja tidak ditampilkan.
+  const auditSnapshotNotice = byId("auditSnapshotNotice");
+  if (auditSnapshotNotice) auditSnapshotNotice.remove();
 
   const transactionGrid = byId("wizardStageTransaction")?.querySelector(".wizard-stage-grid");
 
@@ -6760,14 +6746,13 @@
     const title = invoicePanel.querySelector("h3");
     const desc = invoicePanel.querySelector(".conditional-description");
     const label = invoicePanel.querySelector(`label[for="invoiceVatStatusSelect"]`);
-    if (title) title.textContent = "Struktur nilai pengadaan dari rekanan non-PKP";
-    if (desc) desc.textContent = "Pasal 126 PER-11/PJ/2025 mewajibkan instansi memungut PPN yang menjadi bagian nilai pengadaan BKP/JKP dari non-PKP. Ada atau tidaknya baris PPN pada invoice bukan penentu kewajiban.";
-    if (label) label.innerHTML = 'Status nilai yang dimasukkan <span class="required">*</span>';
+    if (title) title.textContent = "Apakah total nilai yang dibayarkan mencakup PPN?";
+    if (desc) desc.textContent = "Pilih berdasarkan struktur harga dalam kontrak, tagihan, atau invoice rekanan non-PKP.";
+    if (label) label.innerHTML = 'Pilih jawaban <span class="required">*</span>';
     invoiceBasis.innerHTML = `
-      <option value="">Pilih struktur nilai</option>
-      <option value="included">Nilai input merupakan total pengadaan termasuk PPN</option>
-      <option value="before">Nilai input merupakan nilai sebelum PPN</option>
-      <option value="uncertain">Struktur nilai belum dapat dipastikan</option>`;
+      <option value="">Pilih jawaban</option>
+      <option value="included">Ya, harga tagihan mencakup PPN</option>
+      <option value="before">Tidak, harga tagihan tidak memperhitungkan PPN</option>`;
     if (invoiceVatAmountField) {
       invoiceVatAmountField.hidden = true;
       invoiceVatAmountField.setAttribute("aria-hidden", "true");
@@ -6859,8 +6844,8 @@
       }
       const pkp = byId("pkpStatusSelect")?.value || "";
       if (pkp === "no") {
-        if (!invoiceBasis?.value) return showError("Pilih struktur nilai pengadaan rekanan non-PKP.", invoiceBasis);
-        if (!document.querySelector('input[name="institutionPkpStatus"]:checked')) return showError("Pilih status PKP instansi untuk pelaporan setoran PPN.", byId("institutionPkpYes"));
+        if (!invoiceBasis?.value) return showError("Tentukan apakah total nilai yang dibayarkan mencakup PPN.", invoiceBasis);
+        if (!getRadioValue("institutionPkpStatus")) return showError("Pilih status PKP instansi untuk pelaporan setoran PPN.", byId("institutionPkpStatusSelect"));
       }
       const payment = byId("paymentMethod");
       const split = byId("splitStatusSelect");
@@ -6896,7 +6881,7 @@
     const rate = resolveRate(item, profile);
     const input = parseRupiah(byId("amountInput")?.value);
     const structure = invoiceBasis?.value || "";
-    const institutionStatus = document.querySelector('input[name="institutionPkpStatus"]:checked')?.value || "";
+    const institutionStatus = getRadioValue("institutionPkpStatus");
     const baseReasons = [
       `Transaksi yang dipilih: ${item.name}.`,
       "Rekanan dinyatakan bukan Pengusaha Kena Pajak.",
@@ -7117,9 +7102,7 @@
   if (!form) return;
 
   const notice = byId("auditSnapshotNotice");
-  if (notice) {
-    notice.innerHTML = '<strong>Disclaimer:</strong> Kalkulator ini hanyalah alat bantu untuk memetakan PPh dan PPN terutang yang disusun sesuai regulasi yang berlaku pada saat aplikasi dibuat. Diharapkan tetap mengacu kepada ketentuan yang berlaku dan berkoordinasi dengan petugas pajak untuk memeroleh kepastian hukum.';
-  }
+  if (notice) notice.remove();
 
   // Bentuk badan dibuat cukup rinci agar PPh Final omzet tertentu tidak diterapkan otomatis kepada seluruh badan.
   if (entitySubtype) {
