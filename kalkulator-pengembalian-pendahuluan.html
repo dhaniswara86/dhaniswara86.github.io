@@ -564,6 +564,18 @@ input:focus,select:focus{border-color:var(--blue);background:#fff;box-shadow:0 0
   .btn,.hero-cta{width:100%}
   .wizard-actions>div{display:none}
 }
+.print-only{display:none}
+.print-summary{margin-bottom:28px}
+.print-summary-title{font-size:30px;font-weight:800;letter-spacing:-.03em;margin:0 0 6px;color:#1d1d1f}
+.print-summary-subtitle{font-size:13px;color:#6e6e73;margin:0 0 22px}
+.print-stage{margin:0 0 20px;padding:18px;border:1px solid #d2d2d7;border-radius:16px;background:#fff;break-inside:avoid}
+.print-stage h3{margin:0 0 12px;font-size:17px;color:#1d1d1f}
+.print-table{width:100%;border-collapse:collapse;font-size:12px}
+.print-table th,.print-table td{padding:8px 7px;border-bottom:1px solid #e8e8ed;text-align:left;vertical-align:top}
+.print-table th{width:48%;font-weight:700;color:#3a3a3c}
+.print-table td{color:#1d1d1f}
+.print-table tr:last-child th,.print-table tr:last-child td{border-bottom:0}
+.print-divider{height:1px;background:#d2d2d7;margin:24px 0}
 @media print{
   body{background:#fff}
   .site-nav,.announcement,.hero,.info-column,.progress-wrap,.wizard-actions,.legal-section,.site-footer,.error-box{display:none!important}
@@ -573,7 +585,15 @@ input:focus,select:focus{border-color:var(--blue);background:#fff;box-shadow:0 0
   .wizard{border:0;box-shadow:none}
   .step{display:none!important;padding:0}
   #step-5{display:block!important}
-  .route-card,.result-box,.result-hero{break-inside:avoid;box-shadow:none}
+  .print-only{display:block!important}
+  .step-head{display:none!important}
+  .result-hero,.route-card,.result-box,.notice{box-shadow:none!important}
+  .route-card,.result-box,.result-hero,.print-stage{break-inside:avoid}
+  .result-columns{display:block}
+  .result-box{margin-bottom:14px}
+  .component-table{font-size:10.5px}
+  .component-table th,.component-table td{padding:6px}
+  @page{size:A4;margin:14mm}
 }
 </style></head>
 <body><header class="site-nav">
@@ -829,15 +849,15 @@ input:focus,select:focus{border-color:var(--blue);background:#fff;box-shadow:0 0
 <div class="conditional" id="ppnEvidenceBlock">
 <div class="section-card" style="margin-top:0">
 <h3>Rincian Pajak Masukan yang dikreditkan atau dibayar sendiri</h3>
-<div class="notice info" style="margin-top:0">Pilih <strong>Ya</strong> apabila jenis Pajak Masukan tersebut digunakan dalam SPT Masa PPN dan telah memenuhi validasi administrasi. Pilih <strong>Tidak</strong> apabila jenis tersebut tidak digunakan. Apabila digunakan tetapi belum memenuhi validasi, perbaiki terlebih dahulu sebelum melanjutkan.</div>
+<div class="notice info" style="margin-top:0">Pilih <strong>Ya</strong> apabila Pajak Masukan dimiliki, digunakan dalam SPT Masa PPN, dan memenuhi validasi administrasi. Pilih <strong>Tidak</strong> apabila Pajak Masukan dimiliki atau digunakan tetapi belum memenuhi validasi. Pilih <strong>Tidak memiliki</strong> apabila jenis Pajak Masukan tersebut memang tidak dimiliki dan tidak digunakan dalam SPT Masa PPN.</div>
 <div class="question-list">
-<div class="yn-row"><div><strong>Apakah mengkreditkan Faktur Pajak dari PKP penjual?</strong><small>Faktur Pajak telah dilaporkan dalam SPT Masa PPN PKP yang membuat Faktur Pajak.</small></div><div class="segmented"><label><input name="ppnTaxInvoiceEvidence" type="radio" value="yes"/>Ya</label><label><input name="ppnTaxInvoiceEvidence" type="radio" value="no"/>Tidak</label></div></div>
-<div class="yn-row"><div><strong>Apakah mengkreditkan dokumen tertentu yang dipersamakan dengan Faktur Pajak dan dibuat oleh penerbit dokumen?</strong><small>Dokumen telah dilaporkan dalam SPT Masa PPN pihak yang membuat dokumen tersebut.</small></div><div class="segmented"><label><input name="ppnEquivalentIssuerEvidence" type="radio" value="yes"/>Ya</label><label><input name="ppnEquivalentIssuerEvidence" type="radio" value="no"/>Tidak</label></div></div>
-<div class="yn-row"><div><strong>Apakah mengkreditkan dokumen tertentu yang dilaporkan pihak lain berdasarkan Pasal 32A UU KUP?</strong><small>Dokumen telah dilaporkan oleh pihak lain dalam SPT Masa PPN sesuai ketentuan.</small></div><div class="segmented"><label><input name="ppnThirdPartyEvidence" type="radio" value="yes"/>Ya</label><label><input name="ppnThirdPartyEvidence" type="radio" value="no"/>Tidak</label></div></div>
-<div class="yn-row"><div><strong>Apakah mengkreditkan Pajak Masukan berdasarkan dokumen pemberitahuan impor barang?</strong><small>Telah dipertukarkan secara elektronik dengan DJP, atau diunggah oleh pemohon dengan mencantumkan NTPN.</small></div><div class="segmented"><label><input name="ppnImportEvidence" type="radio" value="yes"/>Ya</label><label><input name="ppnImportEvidence" type="radio" value="no"/>Tidak</label></div></div>
-<div class="yn-row"><div><strong>Apakah mengkreditkan Pajak Masukan berdasarkan dokumen penetapan pembayaran atas impor barang kiriman?</strong><small>Harus mencantumkan NTPN, terdapat dalam sistem DJBC, dipertukarkan secara elektronik dengan DJP, dan dibayar oleh pemohon melalui penyelenggara pos.</small></div><div class="segmented"><label><input name="ppnPostalImportEvidence" type="radio" value="yes"/>Ya</label><label><input name="ppnPostalImportEvidence" type="radio" value="no"/>Tidak</label></div></div>
-<div class="yn-row"><div><strong>Apakah terdapat Pajak Masukan yang dibayar sendiri menggunakan SSP?</strong><small>Pembayaran telah divalidasi dengan NTPN.</small></div><div class="segmented"><label><input name="ppnSelfPaidSspEvidence" type="radio" value="yes"/>Ya</label><label><input name="ppnSelfPaidSspEvidence" type="radio" value="no"/>Tidak</label></div></div>
-<div class="yn-row"><div><strong>Apakah terdapat Pajak Masukan yang dibayar sendiri menggunakan sarana administrasi lain yang disamakan dengan SSP?</strong><small>Pembayaran telah tervalidasi dalam sistem administrasi DJP, termasuk pelunasan PPN yang semula memperoleh fasilitas apabila dapat dikreditkan.</small></div><div class="segmented"><label><input name="ppnSelfPaidOtherEvidence" type="radio" value="yes"/>Ya</label><label><input name="ppnSelfPaidOtherEvidence" type="radio" value="no"/>Tidak</label></div></div>
+<div class="yn-row"><div><strong>Apakah mengkreditkan Faktur Pajak dari PKP penjual?</strong><small>Faktur Pajak telah dilaporkan dalam SPT Masa PPN PKP yang membuat Faktur Pajak.</small></div><div class="segmented"><label><input name="ppnTaxInvoiceEvidence" type="radio" value="yes"/>Ya</label><label><input name="ppnTaxInvoiceEvidence" type="radio" value="no"/>Tidak</label><label><input name="ppnTaxInvoiceEvidence" type="radio" value="none"/>Tidak memiliki</label></div></div>
+<div class="yn-row"><div><strong>Apakah mengkreditkan dokumen tertentu yang dipersamakan dengan Faktur Pajak dan dibuat oleh penerbit dokumen?</strong><small>Dokumen telah dilaporkan dalam SPT Masa PPN pihak yang membuat dokumen tersebut.</small></div><div class="segmented"><label><input name="ppnEquivalentIssuerEvidence" type="radio" value="yes"/>Ya</label><label><input name="ppnEquivalentIssuerEvidence" type="radio" value="no"/>Tidak</label><label><input name="ppnEquivalentIssuerEvidence" type="radio" value="none"/>Tidak memiliki</label></div></div>
+<div class="yn-row"><div><strong>Apakah mengkreditkan dokumen tertentu yang dilaporkan pihak lain berdasarkan Pasal 32A UU KUP?</strong><small>Dokumen telah dilaporkan oleh pihak lain dalam SPT Masa PPN sesuai ketentuan.</small></div><div class="segmented"><label><input name="ppnThirdPartyEvidence" type="radio" value="yes"/>Ya</label><label><input name="ppnThirdPartyEvidence" type="radio" value="no"/>Tidak</label><label><input name="ppnThirdPartyEvidence" type="radio" value="none"/>Tidak memiliki</label></div></div>
+<div class="yn-row"><div><strong>Apakah mengkreditkan Pajak Masukan berdasarkan dokumen pemberitahuan impor barang?</strong><small>Telah dipertukarkan secara elektronik dengan DJP, atau diunggah oleh pemohon dengan mencantumkan NTPN.</small></div><div class="segmented"><label><input name="ppnImportEvidence" type="radio" value="yes"/>Ya</label><label><input name="ppnImportEvidence" type="radio" value="no"/>Tidak</label><label><input name="ppnImportEvidence" type="radio" value="none"/>Tidak memiliki</label></div></div>
+<div class="yn-row"><div><strong>Apakah mengkreditkan Pajak Masukan berdasarkan dokumen penetapan pembayaran atas impor barang kiriman?</strong><small>Harus mencantumkan NTPN, terdapat dalam sistem DJBC, dipertukarkan secara elektronik dengan DJP, dan dibayar oleh pemohon melalui penyelenggara pos.</small></div><div class="segmented"><label><input name="ppnPostalImportEvidence" type="radio" value="yes"/>Ya</label><label><input name="ppnPostalImportEvidence" type="radio" value="no"/>Tidak</label><label><input name="ppnPostalImportEvidence" type="radio" value="none"/>Tidak memiliki</label></div></div>
+<div class="yn-row"><div><strong>Apakah terdapat Pajak Masukan yang dibayar sendiri menggunakan SSP?</strong><small>Pembayaran telah divalidasi dengan NTPN.</small></div><div class="segmented"><label><input name="ppnSelfPaidSspEvidence" type="radio" value="yes"/>Ya</label><label><input name="ppnSelfPaidSspEvidence" type="radio" value="no"/>Tidak</label><label><input name="ppnSelfPaidSspEvidence" type="radio" value="none"/>Tidak memiliki</label></div></div>
+<div class="yn-row"><div><strong>Apakah terdapat Pajak Masukan yang dibayar sendiri menggunakan sarana administrasi lain yang disamakan dengan SSP?</strong><small>Pembayaran telah tervalidasi dalam sistem administrasi DJP, termasuk pelunasan PPN yang semula memperoleh fasilitas apabila dapat dikreditkan.</small></div><div class="segmented"><label><input name="ppnSelfPaidOtherEvidence" type="radio" value="yes"/>Ya</label><label><input name="ppnSelfPaidOtherEvidence" type="radio" value="no"/>Tidak</label><label><input name="ppnSelfPaidOtherEvidence" type="radio" value="none"/>Tidak memiliki</label></div></div>
 <div class="yn-row"><div><strong>Seluruh Pajak Masukan yang diminta telah dikreditkan dalam SPT Masa PPN</strong><small>Pajak Masukan yang memenuhi syarat tetapi tidak dikreditkan dalam SPT tidak diperhitungkan sebagai bagian dari lebih bayar.</small></div><div class="segmented"><label><input name="ppnAllCredited" type="radio" value="yes"/>Ya</label><label><input name="ppnAllCredited" type="radio" value="no"/>Tidak</label></div></div>
 </div>
 </div>
@@ -845,7 +865,7 @@ input:focus,select:focus{border-color:var(--blue);background:#fff;box-shadow:0 0
 <div class="question-list" style="margin-top:18px">
 <div class="yn-row"><div><strong>Penghitungan dalam SPT telah diperiksa kembali</strong><small>Penjumlahan, pengurangan, perkalian, pembagian, dan pengisian kredit pajak konsisten.</small></div><div class="segmented"><label><input name="calculationReady" type="radio" value="yes"/>Ya</label><label><input name="calculationReady" type="radio" value="no"/>Tidak</label></div></div>
 </div>
-<div class="notice warn">Tahap ini tidak menggantikan penelitian DJP. Jawaban “Ya” pada rincian kredit berarti jenis kredit digunakan dan telah memenuhi validasi administrasi. Apabila kredit yang digunakan belum memenuhi validasi, perbaiki terlebih dahulu sebelum SPT disampaikan.</div>
+<div class="notice warn">Tahap ini tidak menggantikan penelitian DJP. Jawaban “Ya” berarti bukti atau kredit dimiliki, digunakan, dan memenuhi validasi administrasi. Jawaban “Tidak” berarti bukti atau kredit dimiliki atau digunakan tetapi belum memenuhi validasi. Jawaban “Tidak memiliki” berarti jenis bukti atau kredit tersebut tidak dimiliki dan tidak digunakan dalam SPT.</div>
 </section>
 <section class="step" data-step="5" id="step-5">
 <div class="step-head">
@@ -1094,7 +1114,7 @@ input:focus,select:focus{border-color:var(--blue);background:#fff;box-shadow:0 0
     if (step === 4 && !isBeforeNewRule()){
       const type = getVal('taxType');
       const evidenceFields = type === 'ppn' ? ppnEvidenceFields : pphEvidenceFields;
-      if (evidenceFields.some(([name]) => !radio(name))) return showError(type === 'ppn' ? 'Jawab Ya atau Tidak untuk seluruh jenis Pajak Masukan.' : 'Jawab Ya, Tidak, atau Tidak memiliki untuk seluruh jenis kredit PPh.'), false;
+      if (evidenceFields.some(([name]) => !radio(name))) return showError(type === 'ppn' ? 'Jawab Ya, Tidak, atau Tidak memiliki untuk seluruh jenis Pajak Masukan.' : 'Jawab Ya, Tidak, atau Tidak memiliki untuk seluruh jenis kredit PPh.'), false;
       if (type === 'ppn' && missingRadio('ppnAllCredited')) return showError('Konfirmasi apakah seluruh Pajak Masukan yang diminta telah dikreditkan dalam SPT Masa PPN.'), false;
       if (type !== 'ppn' && missingRadio('pphAllCredited')) return showError('Konfirmasi apakah seluruh kredit PPh yang diminta telah dicantumkan dalam SPT.'), false;
       if (missingRadio('calculationReady')) return showError('Konfirmasi pemeriksaan kembali penghitungan SPT.'), false;
@@ -1108,20 +1128,17 @@ input:focus,select:focus{border-color:var(--blue);background:#fff;box-shadow:0 0
   function applyEvidenceLogic(result, type){
     const fields = type === 'ppn' ? ppnEvidenceFields : pphEvidenceFields;
     const used = fields.filter(([name]) => radio(name) === 'yes');
-    const invalid = type === 'ppn' ? [] : fields.filter(([name]) => radio(name) === 'no');
-    const notOwned = type === 'ppn' ? [] : fields.filter(([name]) => radio(name) === 'none');
+    const invalid = fields.filter(([name]) => radio(name) === 'no');
+    const notOwned = fields.filter(([name]) => radio(name) === 'none');
     const allCreditedName = type === 'ppn' ? 'ppnAllCredited' : 'pphAllCredited';
     const creditLabel = type === 'ppn' ? 'Pajak Masukan' : 'kredit PPh';
 
-    if (type === 'ppn' && used.length === 0){
-      result.warnings.push('Tidak ada kategori Pajak Masukan yang dinyatakan digunakan. Rekonsiliasi kembali sumber nilai lebih bayar dalam SPT.');
-    }
-    if (type !== 'ppn' && invalid.length){
+    if (invalid.length){
       const labels = invalid.map(([,label]) => label).join('; ');
-      result.warnings.push(`Terdapat kredit PPh yang dimiliki atau digunakan tetapi belum memenuhi validasi administrasi: ${labels}. Kredit tersebut tidak diperhitungkan sebagai bagian dari lebih bayar sampai memenuhi ketentuan.`);
+      result.warnings.push(`Terdapat ${creditLabel} yang dimiliki atau digunakan tetapi belum memenuhi validasi administrasi: ${labels}. Komponen tersebut tidak diperhitungkan sebagai bagian dari lebih bayar sampai memenuhi ketentuan.`);
     }
-    if (type !== 'ppn' && used.length === 0 && invalid.length === 0 && notOwned.length === fields.length){
-      result.warnings.push('Seluruh jenis kredit PPh dipilih “Tidak memiliki”. Rekonsiliasi kembali sumber nilai lebih bayar PPh dalam SPT.');
+    if (used.length === 0 && invalid.length === 0 && notOwned.length === fields.length){
+      result.warnings.push(`Seluruh jenis ${creditLabel} dipilih “Tidak memiliki”. Rekonsiliasi kembali sumber nilai lebih bayar dalam SPT.`);
     }
     if (radio(allCreditedName) === 'no') result.warnings.push(`Terdapat ${creditLabel} yang memenuhi ketentuan tetapi belum dikreditkan dalam SPT. Nilai yang tidak dikreditkan tidak diperhitungkan dalam pengembalian pendahuluan.`);
   }
@@ -1304,6 +1321,114 @@ input:focus,select:focus{border-color:var(--blue);background:#fff;box-shadow:0 0
     return {status:'warn',title:'Jalur permohonan lama belum dipilih',subtitle:'Pilih jenis jalur sebelum 1 Mei 2026 untuk menentukan aturan transisi yang digunakan.',routes:[],warnings:['Identifikasi apakah permohonan diajukan sebagai WP Kriteria Tertentu, WP Persyaratan Tertentu, atau PKP Berisiko Rendah.'],failures:[],notes:[]};
   }
 
+  const criteriaFormalSummaryFields = [
+    ['criteriaActive','SK Penetapan WP Kriteria Tertentu masih berlaku dan belum dicabut'],
+    ['criteriaSptAnnual','SPT Tahunan disampaikan tepat waktu'],
+    ['criteriaSptTwoConsecutive','Tidak terlambat menyampaikan SPT Masa untuk 2 Masa Pajak berturut-turut'],
+    ['criteriaSptThreeInYear','Tidak terlambat menyampaikan SPT Masa untuk 3 Masa Pajak dalam 1 tahun'],
+    ['criteriaSptBeforeNextDeadline','SPT Masa yang terlambat disampaikan sebelum batas SPT Masa berikutnya'],
+    ['criteriaDebt','Tidak memiliki utang pajak jatuh tempo yang belum dilunasi'],
+    ['criteriaFinancialAudited','Laporan keuangan setelah penetapan telah diaudit'],
+    ['criteriaFinancialWtp','Laporan keuangan memperoleh opini Wajar Tanpa Pengecualian'],
+    ['criteriaFinancialNoRestatement','Laporan keuangan bukan hasil penyajian kembali karena kesalahan atau manipulasi'],
+    ['criteriaFinancialAuditorLimit','Auditor memenuhi batas pemberian jasa audit'],
+    ['criteriaFinancialFiscalExplanation','Kewajiban penjelasan data fiskal telah dipenuhi'],
+    ['criteriaNoAudit','Tidak sedang dilakukan pemeriksaan atas masa/tahun yang dimohonkan'],
+    ['criteriaNoBukper','Tidak pernah dilakukan bukti permulaan terbuka atau penyidikan setelah penetapan']
+  ];
+
+  const lowRiskFormalSummaryFields = [
+    ['lowActive','SK Penetapan PKP Berisiko Rendah masih berlaku'],
+    ['lowSpt','SPT Masa PPN 12 bulan terakhir disampaikan tepat waktu'],
+    ['lowNoAudit','Tidak sedang dilakukan pemeriksaan atas Masa Pajak yang dimohonkan'],
+    ['lowNoBukper','Tidak sedang dilakukan bukti permulaan terbuka dan/atau penyidikan'],
+    ['lowNoCrime','Tidak pernah dipidana karena tindak pidana perpajakan dalam 5 tahun terakhir']
+  ];
+
+  const answerText = value => ({yes:'Ya',no:'Tidak',none:'Tidak memiliki'}[value] || '-');
+  const selectedOptionText = id => {
+    const el = document.getElementById(id);
+    return el?.selectedOptions?.[0]?.textContent?.trim() || '-';
+  };
+  const formatDateID = value => {
+    if (!value) return '-';
+    const date = new Date(`${value}T00:00:00`);
+    return Number.isNaN(date.getTime()) ? value : date.toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'});
+  };
+  const printRows = rows => rows.map(([label,value]) => `<tr><th>${escapeHTML(label)}</th><td>${escapeHTML(value ?? '-')}</td></tr>`).join('');
+  const printStage = (title,rows) => `<section class="print-stage"><h3>${escapeHTML(title)}</h3><table class="print-table"><tbody>${printRows(rows)}</tbody></table></section>`;
+
+  function buildPrintSummary(){
+    const type = getVal('taxType');
+    const typeLabel = {badan:'SPT Tahunan PPh Badan',op:'SPT Tahunan PPh Orang Pribadi',ppn:'SPT Masa PPN'}[type] || '-';
+    const stage1 = [
+      ['Jenis SPT yang menyatakan lebih bayar',typeLabel],
+      ['Tanggal permohonan melalui SPT',formatDateID(getVal('applicationDate'))]
+    ];
+    if (isBeforeNewRule()){
+      stage1.push(['Jalur yang digunakan saat permohonan diajukan',selectedOptionText('oldRoute')]);
+      if (getVal('oldRoute') === 'criteria') stage1.push(['SPMKP telah diterbitkan sebelum 1 Mei 2026',answerText(radio('spmkpStatus'))]);
+    }
+
+    const stage2 = [];
+    if (type === 'badan'){
+      stage2.push(
+        ['Jumlah peredaran usaha',rupiah.format(getNum('turnoverBadan'))],
+        ['Jumlah lebih bayar PPh Badan',rupiah.format(getNum('overpaymentBadan'))],
+        ['Memiliki SK Penetapan WP Kriteria Tertentu',answerText(radio('criteriaStatusBadan'))]
+      );
+    } else if (type === 'op'){
+      stage2.push(
+        ['Menjalankan usaha atau pekerjaan bebas',answerText(radio('opBusiness'))],
+        ['Jumlah lebih bayar PPh Orang Pribadi',rupiah.format(getNum('overpaymentOP'))],
+        ['Memiliki SK Penetapan WP Kriteria Tertentu',answerText(radio('criteriaStatusOP'))]
+      );
+    } else if (type === 'ppn'){
+      const calc = calculatePpnActivity();
+      stage2.push(
+        ['Jumlah penyerahan dalam Masa Pajak',rupiah.format(getNum('suppliesPPN'))],
+        ['Jumlah lebih bayar PPN',rupiah.format(getNum('overpaymentPPN'))],
+        ['Masa Pajak merupakan akhir tahun buku',answerText(radio('bookYearEnd'))],
+        ['PKP belum melakukan penyerahan/ekspor sebagaimana Pasal 9 ayat (2a) UU PPN',answerText(radio('preProduction'))],
+        ['Memiliki SK Penetapan WP Kriteria Tertentu',answerText(radio('criteriaStatusPPN'))],
+        ['Memiliki SK Penetapan PKP Berisiko Rendah',answerText(radio('lowRiskStatus'))],
+        ...ppnActivityFields.numerator.map(([id,label]) => [label,rupiah.format(getNum(id))]),
+        ...ppnActivityFields.denominatorOnly.map(([id,label]) => [label,rupiah.format(getNum(id))]),
+        ...ppnActivityFields.excluded.map(([id,label]) => [label,rupiah.format(getNum(id))]),
+        ['Rasio kegiatan tertentu',`${calc.ratio.toLocaleString('id-ID',{maximumFractionDigits:2})}%`]
+      );
+    }
+
+    const stage3 = [];
+    if (isBeforeNewRule()){
+      stage3.push(['Uji kewajiban formal','Tidak diterapkan pada mesin ketentuan baru karena permohonan termasuk ketentuan transisi']);
+    } else {
+      const criteriaShown = document.getElementById('criteriaFormalBlock')?.classList.contains('show');
+      const lowShown = document.getElementById('lowRiskFormalBlock')?.classList.contains('show');
+      if (criteriaShown) criteriaFormalSummaryFields.forEach(([name,label]) => stage3.push([label,answerText(radio(name))]));
+      if (lowShown) lowRiskFormalSummaryFields.forEach(([name,label]) => stage3.push([label,answerText(radio(name))]));
+      if (!criteriaShown && !lowShown) stage3.push(['Uji kewajiban formal','Tidak memerlukan keputusan penetapan aktif berdasarkan jalur yang diuji']);
+    }
+
+    const evidenceFields = type === 'ppn' ? ppnEvidenceFields : pphEvidenceFields;
+    const stage4 = evidenceFields.map(([name,label]) => [label,answerText(radio(name))]);
+    stage4.push([
+      type === 'ppn' ? 'Seluruh Pajak Masukan yang diminta telah dikreditkan dalam SPT Masa PPN' : 'Seluruh kredit PPh yang diminta telah dicantumkan dalam SPT',
+      answerText(radio(type === 'ppn' ? 'ppnAllCredited' : 'pphAllCredited'))
+    ]);
+    stage4.push(['Penghitungan dalam SPT telah diperiksa kembali',answerText(radio('calculationReady'))]);
+
+    return `<div class="print-only print-summary">
+      <h1 class="print-summary-title">KABAYAN — Hasil Pemetaan Pengembalian Pendahuluan</h1>
+      <p class="print-summary-subtitle">Ringkasan pilihan pengguna dari Tahap 1 sampai Tahap 4. Kesimpulan dan rincian hasil tercantum setelah ringkasan ini.</p>
+      ${printStage('Tahap 1 — Jenis permohonan',stage1)}
+      ${printStage('Tahap 2 — Profil dan batas nilai',stage2.length ? stage2 : [['Data profil','Tidak tersedia']])}
+      ${printStage('Tahap 3 — Uji kewajiban formal',stage3)}
+      ${printStage('Tahap 4 — Kesiapan penelitian kredit pajak',stage4)}
+      <div class="print-divider"></div>
+    </div>`;
+  }
+
   function renderResult(){
     const data = evaluate();
     const typeLabel = {badan:'SPT Tahunan PPh Badan',op:'SPT Tahunan PPh Orang Pribadi',ppn:'SPT Masa PPN'}[getVal('taxType')] || '';
@@ -1343,9 +1468,10 @@ input:focus,select:focus{border-color:var(--blue);background:#fff;box-shadow:0 0
       ${evidenceFields.map(([name,label])=>`<tr><td>${escapeHTML(label)}</td><td>${escapeHTML(evidenceStatusLabel[radio(name)] || '-')}</td></tr>`).join('')}
       <tr class="total"><td>Seluruh kredit yang diminta telah dikreditkan dalam SPT</td><td>${escapeHTML({yes:'Ya',no:'Tidak'}[radio(allCreditedName)] || '-')}</td></tr>
       </tbody></table>
-      <p class="hint">Logic mengikuti PMK 28/2026 dengan referensi teknis PER-6/PJ/2025 sebagaimana diubah dengan PER-16/PJ/2025. Untuk kredit PPh, jawaban “Ya” berarti dimiliki, digunakan, dan memenuhi validasi; “Tidak” berarti dimiliki atau digunakan tetapi belum memenuhi validasi; dan “Tidak memiliki” berarti jenis kredit tersebut tidak dimiliki serta tidak digunakan. Untuk Pajak Masukan, pilihan tetap Ya atau Tidak sesuai keterangan pada formulir.</p></div>`;
+      <p class="hint">Logic mengikuti PMK 28/2026 dengan referensi teknis PER-6/PJ/2025 sebagaimana diubah dengan PER-16/PJ/2025. Jawaban “Ya” berarti bukti atau kredit dimiliki, digunakan, dan memenuhi validasi; “Tidak” berarti dimiliki atau digunakan tetapi belum memenuhi validasi; dan “Tidak memiliki” berarti jenis bukti atau kredit tersebut tidak dimiliki serta tidak digunakan dalam SPT.</p></div>`;
 
     document.getElementById('resultContainer').innerHTML = `
+      ${buildPrintSummary()}
       <div class="result-hero ${data.status}">
         <div class="result-kicker">Kesimpulan indikatif</div>
         <div class="result-title">${escapeHTML(data.title)}</div>
