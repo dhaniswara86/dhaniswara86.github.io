@@ -6,7 +6,7 @@
   <meta name="description" content="Kalkulator PPh Pasal 21 Pegawai Tidak Tetap Kabayan berdasarkan PP 58 Tahun 2023 dan PMK 168 Tahun 2023, disertai pemeriksaan persyaratan PPh Pasal 21 DTP 2026 berdasarkan PMK 105 Tahun 2025." />
   <meta name="theme-color" content="#0b1f3a" />
   <title>Kalkulator PPh 21 Pegawai Tidak Tetap | Kabayan</title>
-  <meta name="version" content="6.1.0" />
+  <meta name="version" content="6.2.0" />
   <style>
     :root{
       --navy-950:#071427;--navy-900:#0b1f3a;--navy-800:#12345a;
@@ -170,7 +170,7 @@ main{padding-top:var(--nav-height)}
                   </div>
                   <div id="sameDailyFields" class="two-col">
                     <div class="field"><label for="dailyWage">Upah bruto per hari<small>Rupiah</small></label><div class="money-wrap"><span class="money-prefix">Rp</span><input class="money-input" id="dailyWage" inputmode="numeric" autocomplete="off" placeholder="0" /></div></div>
-                    <div class="field"><label for="dailyDays">Jumlah hari dibayar<small>Hari</small></label><input class="number-input" id="dailyDays" type="number" min="1" max="31" step="1" value="1" /></div>
+                    <div class="field"><label for="dailyDays">Jumlah hari yang dibayar<small>Hari</small></label><input class="number-input" id="dailyDays" type="number" min="1" step="1" value="1" /></div>
                   </div>
                   <div id="differentDailyFields" class="hidden">
                     <div class="field">
@@ -184,7 +184,7 @@ main{padding-top:var(--nav-height)}
                 <div id="periodFields" class="hidden">
                   <div class="two-col">
                     <div class="field"><label for="periodGross"><span id="periodGrossLabel">Jumlah upah bruto</span><small>Rupiah</small></label><div class="money-wrap"><span class="money-prefix">Rp</span><input class="money-input" id="periodGross" inputmode="numeric" autocomplete="off" placeholder="0" /></div></div>
-                    <div class="field"><label for="periodDays">Jumlah hari kerja terkait pembayaran<small>Hari</small></label><input class="number-input" id="periodDays" type="number" min="1" max="31" step="1" value="1" /></div>
+                    <div class="field"><label for="periodDays">Jumlah hari kerja yang berkaitan dengan pembayaran ini<small>Hari</small></label><input class="number-input" id="periodDays" type="number" min="1" step="1" value="1" /></div>
                   </div>
                 </div>
 
@@ -192,10 +192,11 @@ main{padding-top:var(--nav-height)}
                   <div class="three-col">
                     <div class="field"><label for="unitRate">Upah per unit<small>Rupiah</small></label><div class="money-wrap"><span class="money-prefix">Rp</span><input class="money-input" id="unitRate" inputmode="numeric" autocomplete="off" placeholder="0" /></div></div>
                     <div class="field"><label for="unitCount">Jumlah unit<small>Unit</small></label><input class="number-input" id="unitCount" type="number" min="1" max="1000000" step="1" value="1" /></div>
-                    <div class="field"><label for="unitDays">Jumlah hari kerja<small>Hari</small></label><input class="number-input" id="unitDays" type="number" min="1" max="31" step="1" value="1" /></div>
+                    <div class="field"><label for="unitDays">Jumlah hari kerja yang berkaitan dengan pembayaran ini<small>Hari</small></label><input class="number-input" id="unitDays" type="number" min="1" step="1" value="1" /></div>
                   </div>
                 </div>
 
+                <p class="subtle-note">Masukkan seluruh penghasilan bruto yang menjadi objek PPh Pasal 21, termasuk natura dan/atau kenikmatan yang merupakan objek pajak apabila diberikan dalam pembayaran ini.</p>
               </div>
 
               <div class="dynamic-box hidden" id="monthlyBox">
@@ -252,9 +253,9 @@ main{padding-top:var(--nav-height)}
                   <div class="field"><label for="identityIntegrated">Apakah pegawai memiliki NPWP dan/atau NIK Dukcapil yang telah terintegrasi dengan sistem administrasi DJP?</label><select class="control" id="identityIntegrated"><option value="">Pilih jawaban</option><option value="yes">Ya</option><option value="no">Tidak</option></select></div>
                   <div class="field"><label for="otherDtp">Apakah pegawai menerima fasilitas PPh Pasal 21 DTP berdasarkan ketentuan lainnya?</label><select class="control" id="otherDtp"><option value="">Pilih jawaban</option><option value="no">Tidak</option><option value="yes">Ya</option></select></div>
                   <div class="field"><label for="finalIncome">Apakah penghasilan yang dimasukkan telah dikenai PPh yang bersifat final berdasarkan ketentuan tersendiri?</label><select class="control" id="finalIncome"><option value="">Pilih jawaban</option><option value="no">Tidak</option><option value="yes">Ya</option></select></div>
-                  <div class="field"><label for="useDtp">Apakah pemberi kerja memilih memanfaatkan fasilitas DTP untuk pembayaran ini?</label><select class="control" id="useDtp"><option value="">Pilih jawaban</option><option value="yes">Ya</option><option value="no">Tidak</option></select></div>
-                  <div class="field"><label for="adminReady">Apakah pemberi kerja siap membayarkan nilai DTP secara tunai kepada pegawai, membuat bukti pemotongan, dan melaporkannya dalam SPT Masa PPh 21/26?</label><select class="control" id="adminReady"><option value="">Pilih jawaban</option><option value="yes">Ya</option><option value="no">Tidak</option></select></div>
-                  <p class="subtle-note warning-note">Kesesuaian KLU utama dan integrasi NPWP/NIK harus dipastikan menggunakan data administrasi DJP. Panduan ini tidak menggantikan verifikasi tersebut.</p>
+                  <div class="field"><label for="useDtp">Apakah pemberi kerja bermaksud memanfaatkan fasilitas DTP untuk pembayaran ini?</label><select class="control" id="useDtp"><option value="">Pilih jawaban</option><option value="yes">Ya</option><option value="no">Tidak</option></select></div>
+                  <div class="field"><label for="adminReady">Apakah pemberi kerja akan membayarkan nilai DTP secara tunai kepada pegawai, membuat bukti pemotongan, serta melaporkan atau membetulkan SPT Masa PPh 21/26 paling lambat 31 Januari 2027?</label><select class="control" id="adminReady"><option value="">Pilih jawaban</option><option value="yes">Ya</option><option value="no">Tidak</option></select><p class="field-help">Jawaban “Ya” merupakan konfirmasi rencana pelaksanaan. Fasilitas aktual tetap bergantung pada pembayaran tunai, bukti pemotongan, dan pelaporan yang benar serta tepat waktu.</p></div>
+                  <p class="subtle-note warning-note">Kesesuaian KLU utama dan integrasi NPWP/NIK harus dipastikan menggunakan data administrasi DJP. Panduan ini tidak menggantikan verifikasi tersebut. Pelaporan atau pembetulan SPT Masa Januari–Desember 2026 untuk pemanfaatan fasilitas harus dilakukan paling lambat 31 Januari 2027.</p>
                 </div>
                 <p class="dtp-source-note">Acuan: PMK 105 Tahun 2025. <a href="https://jdih.kemenkeu.go.id/dok/pmk-105-tahun-2025" target="_blank" rel="noopener">Buka ketentuan resmi</a></p>
               </div>
@@ -274,7 +275,7 @@ main{padding-top:var(--nav-height)}
             <div class="tax-highlight"><span>PPh Pasal 21 terutang</span><strong id="taxResult">Rp0</strong><small id="taxCaption">Masukkan data lalu tekan tombol hitung.</small></div>
             <div class="metric-grid">
               <div class="metric"><span>Metode tarif</span><strong id="methodResult">—</strong><small id="methodDetail">Belum ditentukan</small></div>
-              <div class="metric"><span>PPh dipotong dari pegawai</span><strong id="withheldResult">Rp0</strong><small id="withheldDetail">Sebelum mempertimbangkan fasilitas</small></div>
+              <div class="metric"><span>PPh Pasal 21 dalam bukti pemotongan</span><strong id="withheldResult">Rp0</strong><small id="withheldDetail">Nilai PPh yang dihitung</small></div>
             </div>
             <div class="dtp-result" id="dtpResultBox"><b id="dtpResultTitle">Pemeriksaan DTP</b><p id="dtpResultText">—</p></div>
             <div class="result-list">
@@ -284,8 +285,9 @@ main{padding-top:var(--nav-height)}
               <div class="result-row" id="averageRow"><span>Bruto sehari / rata-rata sehari</span><strong id="averageResult">Rp0</strong></div>
               <div class="result-row"><span>Dasar pengenaan/pemotongan</span><strong id="baseResult">Rp0</strong></div>
               <div class="result-row"><span>Tarif yang digunakan</span><strong id="rateResult">—</strong></div>
-              <div class="result-row"><span>PPh Pasal 21 DTP</span><strong id="dtpAmountResult">Rp0</strong></div>
-              <div class="result-row"><span>Penghasilan setelah pengurangan PPh Pasal 21 saja</span><strong id="takeHomeResult">Rp0</strong></div>
+              <div class="result-row"><span>PPh Pasal 21 DTP berdasarkan simulasi</span><strong id="dtpAmountResult">Rp0</strong></div>
+              <div class="result-row"><span>Beban ekonomis PPh Pasal 21 pegawai</span><strong id="economicBurdenResult">Rp0</strong></div>
+              <div class="result-row"><span>Penghasilan setelah PPh yang menjadi beban pegawai</span><strong id="takeHomeResult">Rp0</strong></div>
             </div>
             <div class="formula-box"><b>Rumus yang digunakan</b><code id="formulaResult">Rumus akan ditampilkan setelah penghitungan.</code></div>
             <div class="result-actions"><button class="mini-btn" type="button" id="copyBtn">Salin hasil</button><button class="mini-btn" type="button" id="printBtn">Cetak / Simpan PDF</button></div>
@@ -294,11 +296,11 @@ main{padding-top:var(--nav-height)}
       </article>
 
       <div class="below-card">
-        <section class="content-card"><h3>Logika penghitungan</h3><ol class="guide-list"><li>Upah harian dihitung berdasarkan bruto masing-masing hari. Upah mingguan, satuan, dan borongan menggunakan rata-rata bruto sehari.</li><li>Sampai Rp450.000 sehari menggunakan TER harian 0%.</li><li>Di atas Rp450.000 sampai Rp2.500.000 sehari menggunakan TER harian 0,5%.</li><li>Di atas Rp2.500.000 sehari menggunakan tarif Pasal 17 atas 50% bruto sehari atau rata-rata bruto sehari.</li><li>Penghasilan yang dibayar bulanan menggunakan TER bulanan kategori A, B, atau C.</li><li>DTP 2026 hanya diterapkan apabila seluruh kriteria material dan konfirmasi pemanfaatan serta administrasinya terpenuhi.</li></ol></section>
+        <section class="content-card"><h3>Logika penghitungan</h3><ol class="guide-list"><li>Upah harian dihitung berdasarkan bruto masing-masing hari. Upah mingguan, satuan, dan borongan menggunakan rata-rata bruto sehari.</li><li>Sampai Rp450.000 sehari menggunakan TER harian 0%.</li><li>Di atas Rp450.000 sampai Rp2.500.000 sehari menggunakan TER harian 0,5%.</li><li>Di atas Rp2.500.000 sehari menggunakan tarif Pasal 17 atas 50% bruto sehari atau rata-rata bruto sehari.</li><li>Penghasilan yang dibayar bulanan menggunakan TER bulanan kategori A, B, atau C.</li><li>Hasil DTP 2026 merupakan simulasi berdasarkan konfirmasi pengguna. Pemanfaatan aktual tetap mensyaratkan pembayaran tunai kepada pegawai, pembuatan bukti pemotongan, dan pelaporan yang benar serta tepat waktu.</li></ol></section>
         <section class="content-card"><h3>Dasar hukum</h3><div class="source-list"><div class="source-item"><div><b>PP Nomor 58 Tahun 2023</b><span>Tarif efektif harian dan bulanan PPh Pasal 21.</span></div><a href="https://jdih.kemenkeu.go.id/dok/pp-58-tahun-2023" target="_blank" rel="noopener">Buka</a></div><div class="source-item"><div><b>PMK Nomor 168 Tahun 2023</b><span>Dasar pengenaan dan tata cara penghitungan Pegawai Tidak Tetap.</span></div><a href="https://jdih.kemenkeu.go.id/dok/pmk-168-tahun-2023" target="_blank" rel="noopener">Buka</a></div><div class="source-item"><div><b>PMK Nomor 105 Tahun 2025</b><span>Insentif PPh Pasal 21 DTP 2026 untuk KLU utama pada sektor industri alas kaki, tekstil dan pakaian jadi, furnitur, kulit dan barang dari kulit, serta pariwisata.</span></div><a href="https://jdih.kemenkeu.go.id/dok/pmk-105-tahun-2025" target="_blank" rel="noopener">Buka</a></div></div></section>
       </div>
 
-      <div class="disclaimer"><strong>Ruang lingkup:</strong> kalkulator ini menggunakan <strong>PP Nomor 58 Tahun 2023</strong> dan <strong>PMK Nomor 168 Tahun 2023</strong>. Gunakan hanya untuk Pegawai Tidak Tetap yang merupakan wajib pajak orang pribadi dalam negeri. Fitur DTP 2026 mengacu pada <strong>PMK Nomor 105 Tahun 2025</strong>. Hasil pemeriksaan DTP bergantung pada kebenaran konfirmasi pengguna dan tidak menggantikan verifikasi data administrasi DJP.</div>
+      <div class="disclaimer"><strong>Ruang lingkup:</strong> kalkulator ini menggunakan <strong>PP Nomor 58 Tahun 2023</strong> dan <strong>PMK Nomor 168 Tahun 2023</strong>. Gunakan hanya untuk Pegawai Tidak Tetap yang merupakan wajib pajak orang pribadi dalam negeri. Fitur DTP 2026 mengacu pada <strong>PMK Nomor 105 Tahun 2025</strong>. Hasil pemeriksaan DTP merupakan simulasi berdasarkan jawaban pengguna, tidak membuktikan pemanfaatan aktual, dan tidak menggantikan verifikasi data administrasi DJP maupun pemenuhan kewajiban pembayaran tunai, bukti pemotongan, serta pelaporan.</div>
     </section>
   </main>
   <footer class="site-footer">
@@ -329,7 +331,7 @@ main{padding-top:var(--nav-height)}
     const PTKP_CATEGORY = {"TK/0":"A","TK/1":"A","K/0":"A","TK/2":"B","TK/3":"B","K/1":"B","K/2":"B","K/3":"C"};
     const TAX_PERIOD_LABELS = {"01":"Januari 2026","02":"Februari 2026","03":"Maret 2026","04":"April 2026","05":"Mei 2026","06":"Juni 2026","07":"Juli 2026","08":"Agustus 2026","09":"September 2026","10":"Oktober 2026","11":"November 2026","12":"Desember 2026"};
     const $ = id => document.getElementById(id);
-    const el = Object.fromEntries(["paymentType","nonMonthlyBox","monthlyBox","dailyFields","dailyPattern","sameDailyFields","differentDailyFields","dailyWageList","periodFields","unitFields","nonMonthlyTitle","periodGrossLabel","dailyWage","dailyDays","periodGross","periodDays","unitRate","unitCount","unitDays","monthlyGross","ptkpStatus","checkDtp","dtpGuideIntro","startDtpGuide","directDtpCheck","skipDtpCheck","dtpGuideWizard","guideProgressText","guideProgressPercent","guideProgressBar","guideQuestionTitle","guideQuestionHelp","guideAnswers","guideBackBtn","dtpGuideResult","dtpGuideResultBadge","dtpGuideResultTitle","dtpGuideResultText","dtpGuideReasons","continueDtpCheck","regularOnlyBtn","restartDtpGuide","cancelDtpCheck","dtpFields","taxPeriod","eligibleSector","kluRecorded","identityIntegrated","otherDtp","finalIncome","useDtp","adminReady","liveGross","liveAverage","liveAverageLabel","taxForm","resetBtn","errorBox","resultState","taxResult","taxCaption","methodResult","methodDetail","withheldResult","withheldDetail","dtpResultBox","dtpResultTitle","dtpResultText","paymentResult","grossResult","daysRow","daysResult","averageRow","averageResult","baseResult","rateResult","dtpAmountResult","takeHomeResult","formulaResult","copyBtn","printBtn","toast"].map(id=>[id,$(id)]));
+    const el = Object.fromEntries(["paymentType","nonMonthlyBox","monthlyBox","dailyFields","dailyPattern","sameDailyFields","differentDailyFields","dailyWageList","periodFields","unitFields","nonMonthlyTitle","periodGrossLabel","dailyWage","dailyDays","periodGross","periodDays","unitRate","unitCount","unitDays","monthlyGross","ptkpStatus","checkDtp","dtpGuideIntro","startDtpGuide","directDtpCheck","skipDtpCheck","dtpGuideWizard","guideProgressText","guideProgressPercent","guideProgressBar","guideQuestionTitle","guideQuestionHelp","guideAnswers","guideBackBtn","dtpGuideResult","dtpGuideResultBadge","dtpGuideResultTitle","dtpGuideResultText","dtpGuideReasons","continueDtpCheck","regularOnlyBtn","restartDtpGuide","cancelDtpCheck","dtpFields","taxPeriod","eligibleSector","kluRecorded","identityIntegrated","otherDtp","finalIncome","useDtp","adminReady","liveGross","liveAverage","liveAverageLabel","taxForm","resetBtn","errorBox","resultState","taxResult","taxCaption","methodResult","methodDetail","withheldResult","withheldDetail","dtpResultBox","dtpResultTitle","dtpResultText","paymentResult","grossResult","daysRow","daysResult","averageRow","averageResult","baseResult","rateResult","dtpAmountResult","economicBurdenResult","takeHomeResult","formulaResult","copyBtn","printBtn","toast"].map(id=>[id,$(id)]));
 
     let lastResult = null;
     let dtpGuideIndex = 0;
@@ -346,7 +348,21 @@ main{padding-top:var(--nav-height)}
     ];
 
     function parseMoney(value){ return Number(String(value||"").replace(/[^0-9]/g,"")) || 0; }
-    function parseDailyAmounts(value){ return String(value||"").split(/[\n,;]+/).map(parseMoney).filter(n=>n>0); }
+    function parseDailyAmounts(value){
+      const amounts=[];
+      const invalidLines=[];
+      String(value||"").split(/\r?\n/).forEach((line,index)=>{
+        const trimmed=line.trim();
+        if(!trimmed) return;
+        const normalized=trimmed.replace(/^rp\s*/i,"").replace(/[.\s,]/g,"");
+        if(!/^\d+$/.test(normalized) || Number(normalized)<=0){
+          invalidLines.push(index+1);
+          return;
+        }
+        amounts.push(Number(normalized));
+      });
+      return {amounts,invalidLines};
+    }
     function roundRupiah(value){ return Math.round(Number(value)||0); }
     function rupiah(value){ return new Intl.NumberFormat("id-ID",{style:"currency",currency:"IDR",maximumFractionDigits:0}).format(Math.max(0,roundRupiah(value))); }
     function numberID(value){ return new Intl.NumberFormat("id-ID").format(Math.max(0,roundRupiah(value))); }
@@ -382,15 +398,15 @@ main{padding-top:var(--nav-height)}
       const type=el.paymentType.value;
       if(type==="daily"){
         if(el.dailyPattern.value==="different"){
-          const dailyAmounts=parseDailyAmounts(el.dailyWageList.value);
-          const gross=dailyAmounts.reduce((sum,n)=>sum+n,0);
-          const days=dailyAmounts.length;
-          return {type,days,gross,average:days?gross/days:0,dailyAmounts,dailyPattern:"different"};
+          const parsed=parseDailyAmounts(el.dailyWageList.value);
+          const gross=parsed.amounts.reduce((sum,n)=>sum+n,0);
+          const days=parsed.amounts.length;
+          return {type,days,gross,average:days?gross/days:0,dailyAmounts:parsed.amounts,invalidDailyLines:parsed.invalidLines,dailyPattern:"different"};
         }
         const days=Number(el.dailyDays.value)||0;
         const daily=parseMoney(el.dailyWage.value);
         const gross=daily*days;
-        return {type,days,gross,average:daily,dailyAmounts:Array.from({length:Math.max(0,days)},()=>daily),dailyPattern:"same"};
+        return {type,days,gross,average:daily,dailyAmount:daily,dailyPattern:"same"};
       }
       if(type==="weekly" || type==="piecework"){
         const days=Number(el.periodDays.value)||0;
@@ -417,20 +433,21 @@ main{padding-top:var(--nav-height)}
         return {tax,base:data.gross,method:`TER Bulanan Kategori ${category}`,detail:`Status PTKP ${status}`,rate:rateText(bracket.rate),formula:`PPh Pasal 21 = ${rateText(bracket.rate)} × ${rupiah(data.gross)} = ${rupiah(tax)}`,bracket,status,category};
       }
       if(data.type==="daily"){
+        if(data.dailyPattern==="same"){
+          const row=calculateOneDayTax(data.dailyAmount);
+          const tax=row.tax*data.days;
+          const formula=row.method==="TER Harian"
+            ? `PPh per hari = ${row.rate} × ${rupiah(data.dailyAmount)} = ${rupiah(row.tax)}; total ${data.days} hari = ${rupiah(tax)}`
+            : `PPh per hari = (${article17Breakdown(row.base)}) atas 50% × ${rupiah(data.dailyAmount)} = ${rupiah(row.tax)}; total ${data.days} hari = ${rupiah(tax)}`;
+          return {tax,base:row.base,method:row.method,detail:"Jumlah bruto sama setiap hari",rate:row.rate,formula};
+        }
         const rows=data.dailyAmounts.map(calculateOneDayTax);
         const tax=rows.reduce((sum,row)=>sum+row.tax,0);
         const methods=[...new Set(rows.map(row=>row.method))];
         const rates=[...new Set(rows.map(row=>row.rate))];
-        const detail=data.dailyPattern==="different"?"Dihitung berdasarkan bruto masing-masing hari":"Jumlah bruto sama setiap hari";
-        let formula;
-        if(data.dailyPattern==="same"){
-          const row=rows[0]||calculateOneDayTax(0);
-          formula=row.method==="TER Harian" ? `PPh per hari = ${row.rate} × ${rupiah(data.average)} = ${rupiah(row.tax)}; total ${data.days} hari = ${rupiah(tax)}` : `PPh per hari = (${article17Breakdown(row.base)}) atas 50% × ${rupiah(data.average)} = ${rupiah(row.tax)}; total ${data.days} hari = ${rupiah(tax)}`;
-        } else {
-          formula=`PPh dihitung per hari dan dijumlahkan: ${rows.map((row,i)=>`Hari ${i+1} ${rupiah(data.dailyAmounts[i])} → ${rupiah(row.tax)}`).join("; ")}. Total = ${rupiah(tax)}`;
-        }
-        const allSameBase=rows.every(row=>row.base===(rows[0]?.base));
-        return {tax,base:allSameBase?(rows[0]?.base||0):null,method:methods.length===1?methods[0]:"Kombinasi TER Harian/Pasal 17",detail,rate:rates.length===1?rates[0]:"Berbeda menurut bruto harian",formula,dailyRows:rows};
+        const formula=`PPh dihitung per hari dan dijumlahkan: ${rows.map((row,i)=>`Hari ${i+1} ${rupiah(data.dailyAmounts[i])} → ${rupiah(row.tax)}`).join("; ")}. Total = ${rupiah(tax)}`;
+        const allSameBase=rows.length>0 && rows.every(row=>row.base===rows[0].base);
+        return {tax,base:allSameBase?rows[0].base:null,method:methods.length===1?methods[0]:"Kombinasi TER Harian/Pasal 17",detail:"Dihitung berdasarkan bruto masing-masing hari",rate:rates.length===1?rates[0]:"Berbeda menurut bruto harian",formula,dailyRows:rows};
       }
       const avg=data.average;
       const row=calculateOneDayTax(avg);
@@ -441,6 +458,7 @@ main{padding-top:var(--nav-height)}
     }
 
     function startDtpGuideFlow(){
+      invalidateResult();
       el.checkDtp.value="no";
       syncDtp();
       dtpGuideIndex=0;
@@ -469,6 +487,7 @@ main{padding-top:var(--nav-height)}
         button.className="guide-answer"+(dtpGuideAnswers[step.key]===answer.value?" selected":"");
         button.textContent=answer.label;
         button.addEventListener("click",()=>{
+          invalidateResult();
           dtpGuideAnswers[step.key]=answer.value;
           if(dtpGuideIndex<DTP_GUIDE_STEPS.length-1){
             dtpGuideIndex+=1;
@@ -555,6 +574,7 @@ main{padding-top:var(--nav-height)}
     }
 
     function openDtpDetails(prefill=false){
+      invalidateResult();
       el.checkDtp.value="yes";
       if(prefill) prefillDtpDetails();
       syncDtp();
@@ -562,6 +582,7 @@ main{padding-top:var(--nav-height)}
     }
 
     function chooseRegularOnly(){
+      invalidateResult();
       dtpGuideOutcome=null;
       el.checkDtp.value="no";
       syncDtp();
@@ -569,6 +590,7 @@ main{padding-top:var(--nav-height)}
     }
 
     function resetDtpGuideUI(){
+      invalidateResult();
       dtpGuideIndex=0;
       dtpGuideAnswers={};
       dtpGuideOutcome=null;
@@ -598,7 +620,7 @@ main{padding-top:var(--nav-height)}
       const wantsUse=el.useDtp.value==="yes";
       const adminReady=el.adminReady.value==="yes";
       if(criteriaMet && !wantsUse) warnings.push("pemberi kerja tidak memilih memanfaatkan fasilitas untuk pembayaran ini");
-      if(criteriaMet && wantsUse && !adminReady) warnings.push("kesiapan pembayaran tunai, bukti pemotongan, dan pelaporan belum dikonfirmasi");
+      if(criteriaMet && wantsUse && !adminReady) warnings.push("rencana pembayaran tunai, pembuatan bukti pemotongan, serta pelaporan atau pembetulan SPT Masa paling lambat 31 Januari 2027 belum dikonfirmasi");
       const applied=criteriaMet && wantsUse && adminReady;
       return {active,criteriaMet,applied,amount:applied?standard.tax:0,reasons,warnings,period:TAX_PERIOD_LABELS[el.taxPeriod.value]||"—"};
     }
@@ -606,11 +628,12 @@ main{padding-top:var(--nav-height)}
     function validate(data){
       const errors=[];
       if(data.gross<=0) errors.push("Penghasilan bruto harus lebih dari Rp0.");
-      if(data.type!=="monthly"){
-        if(!Number.isInteger(data.days)||data.days<=0) errors.push("Jumlah hari kerja harus berupa bilangan bulat lebih dari 0.");
-        if(data.days>31) errors.push("Jumlah hari dalam satu Masa Pajak tidak boleh melebihi 31.");
+      if(data.type!=="monthly" && (!Number.isSafeInteger(data.days)||data.days<=0)) errors.push("Jumlah hari kerja harus berupa bilangan bulat lebih dari 0.");
+      if(data.type==="daily" && el.dailyPattern.value==="different"){
+        if(data.dailyAmounts.length===0) errors.push("Masukkan upah bruto untuk setiap hari, satu nominal per baris.");
+        if(data.invalidDailyLines?.length) errors.push(`Periksa nominal pada baris ${data.invalidDailyLines.join(", ")}. Gunakan satu nominal rupiah yang valid per baris.`);
+        if(data.dailyAmounts.length>10000) errors.push("Daftar upah harian melebihi batas teknis 10.000 baris. Pecah data menjadi beberapa penghitungan.");
       }
-      if(data.type==="daily" && el.dailyPattern.value==="different" && data.dailyAmounts.length===0) errors.push("Masukkan upah bruto untuk setiap hari, satu nominal per baris.");
       if(data.type==="unit" && (!Number.isInteger(data.units)||data.units<=0||data.units>1000000)) errors.push("Jumlah unit harus berupa bilangan bulat antara 1 dan 1.000.000.");
       if(el.checkDtp.value==="yes"){
         const required=["taxPeriod","eligibleSector","kluRecorded","identityIntegrated","otherDtp","finalIncome","useDtp","adminReady"];
@@ -645,33 +668,53 @@ main{padding-top:var(--nav-height)}
 
     function render(result){
       const {data,standard,dtp}=result;
-      const withheld=dtp.applied?0:standard.tax;
-      const afterPph=data.gross-withheld;
+      const pphInWithholdingSlip=standard.tax;
+      const economicBurden=dtp.applied?0:standard.tax;
+      const afterPph=data.gross-economicBurden;
       el.resultState.textContent="Selesai";el.resultState.classList.add("ready");
       el.taxResult.textContent=rupiah(standard.tax);
       el.taxCaption.textContent=`${standard.method} · ${standard.rate}`;
       el.methodResult.textContent=standard.method;el.methodDetail.textContent=standard.detail;
-      el.withheldResult.textContent=rupiah(withheld);el.withheldDetail.textContent=dtp.applied?"PPh dihitung tetapi tidak dibebankan kepada pegawai karena DTP":"Dipotong dari penghasilan pegawai";
+      el.withheldResult.textContent=rupiah(pphInWithholdingSlip);el.withheldDetail.textContent=dtp.applied?"Disimulasikan sebagai DTP dan wajib dibayarkan tunai kepada pegawai":"Menjadi PPh yang dipotong dan dibebankan kepada pegawai";
       el.paymentResult.textContent=PAYMENT_LABELS[data.type];el.grossResult.textContent=rupiah(data.gross);
       el.daysRow.classList.toggle("hidden",data.type==="monthly");el.averageRow.classList.toggle("hidden",data.type==="monthly");
       el.daysResult.textContent=data.type==="monthly"?"—":`${data.days} hari`;el.averageResult.textContent=rupiah(data.average);
       if(data.type==="monthly") el.baseResult.textContent=rupiah(standard.base);
       else if(data.type==="daily" && standard.base===null) el.baseResult.textContent="Berbeda untuk masing-masing hari";
       else el.baseResult.textContent=standard.method.includes("Pasal 17")?`${rupiah(standard.base)} per hari (50% bruto)`: `${rupiah(standard.base)} per hari`;
-      el.rateResult.textContent=standard.rate;el.dtpAmountResult.textContent=rupiah(dtp.amount);el.takeHomeResult.textContent=rupiah(afterPph);el.formulaResult.textContent=standard.formula;
+      el.rateResult.textContent=standard.rate;el.dtpAmountResult.textContent=rupiah(dtp.amount);el.economicBurdenResult.textContent=rupiah(economicBurden);el.takeHomeResult.textContent=rupiah(afterPph);el.formulaResult.textContent=standard.formula;
       el.dtpResultBox.classList.remove("show","not-eligible");
       if(dtp.active){
         el.dtpResultBox.classList.add("show");
         if(dtp.applied){
-          el.dtpResultTitle.textContent="Kriteria dan konfirmasi pemanfaatan DTP terpenuhi";
-          el.dtpResultText.textContent=`Untuk ${dtp.period}, PPh Pasal 21 sebesar ${rupiah(dtp.amount)} diperlakukan sebagai DTP berdasarkan jawaban pengguna. Nilai tersebut wajib dibayarkan secara tunai kepada pegawai, dibuatkan bukti pemotongan, dan dilaporkan sesuai PMK 105 Tahun 2025.`;
+          el.dtpResultTitle.textContent="Simulasi persyaratan DTP terpenuhi";
+          el.dtpResultText.textContent=`Berdasarkan konfirmasi pengguna, pembayaran untuk ${dtp.period} memenuhi simulasi persyaratan DTP sebesar ${rupiah(dtp.amount)}. PPh tetap dihitung dan dicantumkan dalam bukti pemotongan, sedangkan jumlah DTP wajib dibayarkan secara tunai kepada pegawai. Pemanfaatan aktual baru sah apabila seluruh kewajiban dilaksanakan dan SPT Masa dilaporkan atau dibetulkan paling lambat 31 Januari 2027.`;
         } else {
           el.dtpResultBox.classList.add("not-eligible");
-          el.dtpResultTitle.textContent=dtp.criteriaMet?"Kriteria awal DTP terpenuhi, tetapi belum diterapkan":"Fasilitas DTP belum dapat diterapkan";
+          el.dtpResultTitle.textContent=dtp.criteriaMet?"Kriteria awal DTP terpenuhi, tetapi simulasi belum lengkap":"Fasilitas DTP belum dapat disimulasikan";
           const notes=[...dtp.reasons,...dtp.warnings];
-          el.dtpResultText.textContent=`Penyebab: ${notes.join("; ") || "fasilitas tidak dipilih"}. PPh Pasal 21 tetap dipotong dari pegawai.`;
+          el.dtpResultText.textContent=`Penyebab: ${notes.join("; ") || "fasilitas tidak dipilih"}. PPh Pasal 21 tetap dihitung dan menjadi beban pegawai dalam simulasi ini.`;
         }
       }
+    }
+
+    function invalidateResult(){
+      if(!lastResult) return;
+      lastResult=null;
+      el.resultState.textContent="Perlu dihitung ulang";
+      el.resultState.classList.remove("ready");
+      el.taxResult.textContent="—";
+      el.taxCaption.textContent="Data berubah. Tekan tombol hitung untuk memperoleh hasil terbaru.";
+      el.methodResult.textContent="—";
+      el.methodDetail.textContent="Perlu dihitung ulang";
+      el.withheldResult.textContent="—";
+      el.withheldDetail.textContent="Perlu dihitung ulang";
+      el.dtpResultBox.classList.remove("show","not-eligible");
+      ["grossResult","averageResult","baseResult","dtpAmountResult","economicBurdenResult","takeHomeResult"].forEach(id=>el[id].textContent="—");
+      el.paymentResult.textContent="—";
+      el.daysResult.textContent="—";
+      el.rateResult.textContent="—";
+      el.formulaResult.textContent="Data telah berubah. Lakukan penghitungan ulang.";
     }
 
     function calculate(showError=true){
@@ -685,16 +728,16 @@ main{padding-top:var(--nav-height)}
     function resetAll(){
       el.taxForm.reset();el.dailyDays.value="1";el.periodDays.value="1";el.unitCount.value="1";el.unitDays.value="1";el.dailyWageList.value="";
       document.querySelectorAll(".money-input").forEach(input=>input.value="");el.resultState.textContent="Belum dihitung";el.resultState.classList.remove("ready");
-      el.taxResult.textContent="Rp0";el.taxCaption.textContent="Masukkan data lalu tekan tombol hitung.";el.methodResult.textContent="—";el.methodDetail.textContent="Belum ditentukan";el.withheldResult.textContent="Rp0";el.withheldDetail.textContent="Sebelum mempertimbangkan fasilitas";
-      el.dtpResultBox.classList.remove("show","not-eligible");["grossResult","averageResult","baseResult","dtpAmountResult","takeHomeResult"].forEach(id=>$(id).textContent="Rp0");el.paymentResult.textContent="—";el.daysResult.textContent="—";el.rateResult.textContent="—";el.formulaResult.textContent="Rumus akan ditampilkan setelah penghitungan.";
+      el.taxResult.textContent="Rp0";el.taxCaption.textContent="Masukkan data lalu tekan tombol hitung.";el.methodResult.textContent="—";el.methodDetail.textContent="Belum ditentukan";el.withheldResult.textContent="Rp0";el.withheldDetail.textContent="Nilai PPh yang dihitung";
+      el.dtpResultBox.classList.remove("show","not-eligible");["grossResult","averageResult","baseResult","dtpAmountResult","economicBurdenResult","takeHomeResult"].forEach(id=>$(id).textContent="Rp0");el.paymentResult.textContent="—";el.daysResult.textContent="—";el.rateResult.textContent="—";el.formulaResult.textContent="Rumus akan ditampilkan setelah penghitungan.";
       el.errorBox.classList.remove("show");lastResult=null;syncDailyPattern();resetDtpGuideUI();syncPaymentType();
     }
     function showToast(text){el.toast.textContent=text;el.toast.classList.add("show");clearTimeout(showToast.timer);showToast.timer=setTimeout(()=>el.toast.classList.remove("show"),1800)}
 
-    document.querySelectorAll(".money-input").forEach(input=>{input.addEventListener("input",()=>{formatMoneyInput(input);syncLive()});input.addEventListener("focus",()=>input.select())});
-    document.querySelectorAll(".number-input").forEach(input=>input.addEventListener("input",syncLive));
-    el.dailyWageList.addEventListener("input",syncLive);
-    el.dailyPattern.addEventListener("change",syncDailyPattern);
+    document.querySelectorAll(".money-input").forEach(input=>{input.addEventListener("input",()=>{formatMoneyInput(input);invalidateResult();syncLive()});input.addEventListener("focus",()=>input.select())});
+    document.querySelectorAll(".number-input").forEach(input=>input.addEventListener("input",()=>{invalidateResult();syncLive()}));
+    el.dailyWageList.addEventListener("input",()=>{invalidateResult();syncLive()});
+    el.dailyPattern.addEventListener("change",()=>{invalidateResult();syncDailyPattern()});
     el.startDtpGuide.addEventListener("click",startDtpGuideFlow);
     el.directDtpCheck.addEventListener("click",()=>{dtpGuideOutcome=null;el.dtpGuideIntro.classList.add("hidden");el.dtpGuideWizard.classList.add("hidden");el.dtpGuideResult.classList.add("hidden");openDtpDetails(false)});
     el.skipDtpCheck.addEventListener("click",chooseRegularOnly);
@@ -702,15 +745,16 @@ main{padding-top:var(--nav-height)}
     el.continueDtpCheck.addEventListener("click",()=>openDtpDetails(true));
     el.regularOnlyBtn.addEventListener("click",chooseRegularOnly);
     el.restartDtpGuide.addEventListener("click",startDtpGuideFlow);
-    el.cancelDtpCheck.addEventListener("click",()=>{dtpGuideOutcome=null;el.checkDtp.value="no";syncDtp();el.dtpGuideIntro.classList.remove("hidden");el.dtpGuideWizard.classList.add("hidden");el.dtpGuideResult.classList.add("hidden")});
-    el.paymentType.addEventListener("change",syncPaymentType);
+    el.cancelDtpCheck.addEventListener("click",()=>{invalidateResult();dtpGuideOutcome=null;el.checkDtp.value="no";syncDtp();el.dtpGuideIntro.classList.remove("hidden");el.dtpGuideWizard.classList.add("hidden");el.dtpGuideResult.classList.add("hidden")});
+    el.paymentType.addEventListener("change",()=>{invalidateResult();syncPaymentType()});
+    [el.ptkpStatus,el.taxPeriod,el.eligibleSector,el.kluRecorded,el.identityIntegrated,el.otherDtp,el.finalIncome,el.useDtp,el.adminReady].forEach(input=>input.addEventListener("change",invalidateResult));
     el.taxForm.addEventListener("submit",event=>{event.preventDefault();calculate(true)});el.resetBtn.addEventListener("click",resetAll);
     el.copyBtn.addEventListener("click",async()=>{
-      const r=lastResult||calculate(false);if(!r){showToast("Lengkapi data terlebih dahulu");return;}
-      const withheld=r.dtp.applied?0:r.standard.tax;const text=["HASIL KALKULATOR PPh 21 PEGAWAI TIDAK TETAP — KABAYAN",`Jenis pembayaran: ${PAYMENT_LABELS[r.data.type]}`,`Penghasilan bruto: ${rupiah(r.data.gross)}`,r.data.type!=="monthly"?`Jumlah hari: ${r.data.days}`:null,r.data.type!=="monthly"?`Bruto/rata-rata sehari: ${rupiah(r.data.average)}`:null,`Metode tarif: ${r.standard.method}`,`Tarif: ${r.standard.rate}`,`PPh Pasal 21 terutang: ${rupiah(r.standard.tax)}`,`PPh Pasal 21 DTP diterapkan: ${rupiah(r.dtp.amount)}`,`PPh dipotong dari pegawai: ${rupiah(withheld)}`].filter(Boolean).join("\n");
+      const r=calculate(false);if(!r){showToast("Lengkapi data terlebih dahulu");return;}
+      const economicBurden=r.dtp.applied?0:r.standard.tax;const text=["HASIL KALKULATOR PPh 21 PEGAWAI TIDAK TETAP — KABAYAN",`Jenis pembayaran: ${PAYMENT_LABELS[r.data.type]}`,`Penghasilan bruto: ${rupiah(r.data.gross)}`,r.data.type!=="monthly"?`Jumlah hari: ${r.data.days}`:null,r.data.type!=="monthly"?`Bruto/rata-rata sehari: ${rupiah(r.data.average)}`:null,`Metode tarif: ${r.standard.method}`,`Tarif: ${r.standard.rate}`,`PPh Pasal 21 dalam bukti pemotongan: ${rupiah(r.standard.tax)}`,r.dtp.active?`PPh Pasal 21 DTP berdasarkan simulasi: ${rupiah(r.dtp.amount)}`:null,`Beban ekonomis PPh pegawai: ${rupiah(economicBurden)}`,r.dtp.active?`Catatan DTP: Pemanfaatan aktual bergantung pada pembayaran tunai, bukti pemotongan, dan pelaporan atau pembetulan SPT Masa paling lambat 31 Januari 2027.`:null].filter(Boolean).join("\n");
       try{await navigator.clipboard.writeText(text);showToast("Hasil berhasil disalin")}catch(e){const ta=document.createElement("textarea");ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand("copy");ta.remove();showToast("Hasil berhasil disalin")}
     });
-    el.printBtn.addEventListener("click",()=>{if(!lastResult&&!calculate(false)){showToast("Lengkapi data terlebih dahulu");return;}window.print()});
+    el.printBtn.addEventListener("click",()=>{if(!calculate(false)){showToast("Lengkapi data terlebih dahulu");return;}window.print()});
     syncDailyPattern();resetDtpGuideUI();syncPaymentType();
   </script>
 
