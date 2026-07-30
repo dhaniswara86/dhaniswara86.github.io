@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light" />
+  <title>KABAYAN — Pengembalian Pendahuluan PMK 28 Tahun 2026</title>
+  <style>
+    :root{
+      --bg:#f5f7fb;
+      --surface:rgba(255,255,255,.90);
+      --surface-strong:#fff;
+      --text:#10213d;
+      --muted:#66748b;
+      --line:#dce3ee;
+      --blue:#1368e8;
+      --blue-dark:#0b4fad;
+      --blue-soft:#eaf3ff;
+      --green:#11845b;
+      --green-soft:#e8f7f1;
+      --amber:#a86400;
+      --amber-soft:#fff4dc;
+      --red:#c93333;
+      --red-soft:#fff0f0;
+      --shadow:0 18px 60px rgba(24,46,87,.10);
+      --radius:24px;
+      --radius-sm:16px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 10% 0%, rgba(19,104,232,.10), transparent 30%),
+        radial-gradient(circle at 90% 20%, rgba(57,183,139,.08), transparent 28%),
+        var(--bg);
+    }
+
+    button,input,select{font:inherit}
+    button{cursor:pointer}
+    a{color:var(--blue);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .app-shell{max-width:1180px;margin:0 auto;padding:24px 20px 72px}
+    .topbar{
+      position:sticky;top:12px;z-index:20;
+      display:flex;align-items:center;justify-content:space-between;gap:16px;
+      padding:14px 18px;margin-bottom:24px;
+      border:1px solid rgba(255,255,255,.8);
+      border-radius:20px;
+      background:rgba(255,255,255,.82);
+      backdrop-filter:blur(20px) saturate(130%);
+      box-shadow:0 12px 35px rgba(20,45,88,.08);
+    }
+    .brand{display:flex;align-items:center;gap:12px;min-width:0}
+    .brand-mark{
+      width:42px;height:42px;border-radius:13px;
+      display:grid;place-items:center;
+      background:linear-gradient(145deg,var(--blue),#51a1ff);
+      color:#fff;font-weight:800;letter-spacing:.04em;
+      box-shadow:0 8px 18px rgba(19,104,232,.25);
+    }
+    .brand-copy{min-width:0}
+    .brand-title{font-weight:800;letter-spacing:.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .brand-subtitle{font-size:.78rem;color:var(--muted);margin-top:2px}
+    .top-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+
+    .hero{
+      display:grid;grid-template-columns:1.35fr .65fr;gap:20px;
+      margin-bottom:20px;
+    }
+    .hero-main,.hero-note,.wizard,.legal-panel{
+      background:var(--surface);
+      border:1px solid rgba(255,255,255,.9);
+      box-shadow:var(--shadow);
+    }
+    .hero-main{padding:38px;border-radius:var(--radius)}
+    .eyebrow{font-size:.78rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--blue)}
+    h1{font-size:clamp(2rem,4vw,3.7rem);line-height:1.04;margin:12px 0 16px;letter-spacing:-.045em}
+    .hero-main p{margin:0;max-width:760px;font-size:1.03rem;line-height:1.7;color:var(--muted)}
+    .hero-badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+    .badge{padding:8px 12px;border-radius:999px;font-size:.78rem;font-weight:750;background:var(--blue-soft);color:var(--blue-dark)}
+    .hero-note{padding:24px;border-radius:var(--radius);display:flex;flex-direction:column;justify-content:space-between}
+    .hero-note h2{font-size:1.05rem;margin:0 0 10px}
+    .hero-note p{margin:0;color:var(--muted);line-height:1.55;font-size:.9rem}
+    .rule-date{font-size:2.25rem;font-weight:850;letter-spacing:-.04em;margin:18px 0 4px;color:var(--blue-dark)}
+
+    .wizard{border-radius:var(--radius);overflow:hidden}
+    .progress-wrap{padding:20px 24px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.78)}
+    .progress-meta{display:flex;justify-content:space-between;gap:12px;font-size:.78rem;color:var(--muted);font-weight:700;margin-bottom:9px}
+    .progress-track{height:10px;background:#e7edf5;border-radius:999px;overflow:hidden}
+    .progress-bar{height:100%;width:20%;background:linear-gradient(90deg,var(--blue),#54a1ff);border-radius:inherit;transition:width .28s ease}
+
+    .step{display:none;padding:32px 30px 22px}
+    .step.active{display:block;animation:fadeIn .22s ease}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+    .step-head{display:flex;align-items:flex-start;gap:14px;margin-bottom:26px}
+    .step-number{flex:0 0 auto;width:40px;height:40px;border-radius:13px;display:grid;place-items:center;background:var(--blue-soft);color:var(--blue-dark);font-weight:850}
+    .step h2{margin:0;font-size:1.55rem;letter-spacing:-.02em}
+    .step-head p{margin:7px 0 0;color:var(--muted);line-height:1.55}
+
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+    .grid.one{grid-template-columns:1fr}
+    .grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .field{display:flex;flex-direction:column;gap:8px}
+    .field.full{grid-column:1/-1}
+    .label{font-weight:760;font-size:.92rem;color:#243653}
+    .hint{font-size:.78rem;line-height:1.5;color:var(--muted)}
+    input[type="date"],input[type="number"],input[type="text"],select{
+      width:100%;min-height:52px;padding:0 14px;
+      border:1.5px solid var(--line);border-radius:14px;
+      background:rgba(255,255,255,.88);color:var(--text);
+      outline:none;transition:border-color .15s,box-shadow .15s,background .15s;
+    }
+    input:focus,select:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(19,104,232,.10);background:#fff}
+
+    .choice-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+    .choice-grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .choice-grid.one{grid-template-columns:1fr}
+    .choice{
+      position:relative;display:block;padding:16px;border:1.5px solid var(--line);border-radius:16px;
+      background:rgba(255,255,255,.78);transition:.16s ease;min-height:100%;
+    }
+    .choice:hover{border-color:#a9c5ed;transform:translateY(-1px)}
+    .choice input{position:absolute;opacity:0;pointer-events:none}
+    .choice:has(input:checked){border-color:var(--blue);background:var(--blue-soft);box-shadow:0 0 0 3px rgba(19,104,232,.08)}
+    .choice-title{font-weight:800;display:block;line-height:1.3}
+    .choice-desc{display:block;color:var(--muted);font-size:.79rem;line-height:1.48;margin-top:5px}
+
+    .section-card{border:1px solid var(--line);border-radius:18px;padding:18px;background:rgba(255,255,255,.60);margin-top:18px}
+    .section-card h3{margin:0 0 14px;font-size:1rem}
+    .conditional{display:none}
+    .conditional.show{display:block;animation:fadeIn .18s ease}
+
+    .question-list{display:grid;gap:10px}
+    .yn-row{display:grid;grid-template-columns:1fr 260px;gap:14px;align-items:center;padding:13px 14px;border:1px solid var(--line);border-radius:14px;background:#fff}
+    .yn-row strong{display:block;font-size:.9rem;line-height:1.45}
+    .yn-row small{display:block;color:var(--muted);font-size:.75rem;line-height:1.4;margin-top:4px}
+    .segmented{
+      display:flex;align-items:center;gap:22px;flex-wrap:wrap;
+      min-height:52px;padding:12px 14px;
+      border:1.5px solid var(--line);border-radius:14px;background:#fff;
+    }
+    .segmented label{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:0;font-size:.88rem;font-weight:750;color:#34445c;cursor:pointer;
+    }
+    .segmented input[type="radio"]{
+      position:static;opacity:1;pointer-events:auto;
+      width:18px;height:18px;margin:0;accent-color:var(--blue);cursor:pointer;
+    }
+    .segmented label:has(input:checked){color:var(--blue-dark)}
+    .currency-control{
+      display:flex;align-items:center;min-height:52px;overflow:hidden;
+      border:1.5px solid var(--line);border-radius:14px;background:rgba(255,255,255,.88);
+      transition:border-color .15s,box-shadow .15s,background .15s;
+    }
+    .currency-control:focus-within{border-color:var(--blue);box-shadow:0 0 0 4px rgba(19,104,232,.10);background:#fff}
+    .currency-prefix{align-self:stretch;display:flex;align-items:center;padding:0 13px;background:#f1f5fa;border-right:1px solid var(--line);font-weight:800;color:#40516a}
+    .currency-control .rupiah-input{border:0!important;border-radius:0;box-shadow:none!important;background:transparent!important;font-variant-numeric:tabular-nums;letter-spacing:.01em}
+
+    .notice{border-radius:15px;padding:14px 16px;line-height:1.55;font-size:.86rem;margin:16px 0}
+    .notice.info{background:var(--blue-soft);color:#174b87;border:1px solid #cae0ff}
+    .notice.warn{background:var(--amber-soft);color:#744600;border:1px solid #f2d79d}
+    .notice.danger{background:var(--red-soft);color:#8e2020;border:1px solid #f0c0c0}
+    .notice.success{background:var(--green-soft);color:#176547;border:1px solid #bce7d6}
+
+    .wizard-actions{display:flex;justify-content:space-between;gap:12px;padding:20px 30px 28px;border-top:1px solid var(--line);background:rgba(255,255,255,.65)}
+    .btn{min-height:46px;padding:0 18px;border-radius:13px;border:0;font-weight:800;transition:.16s ease}
+    .btn:hover{transform:translateY(-1px)}
+    .btn-primary{background:var(--blue);color:#fff;box-shadow:0 8px 20px rgba(19,104,232,.22)}
+    .btn-primary:hover{background:var(--blue-dark)}
+    .btn-secondary{background:#edf2f8;color:#34445c}
+    .btn-ghost{background:transparent;color:var(--blue);border:1px solid #c9dbf3}
+    .btn-danger{background:var(--red);color:#fff}
+    .hidden{display:none!important}
+
+    .result-hero{border-radius:20px;padding:24px;margin-bottom:18px}
+    .result-hero.success{background:linear-gradient(145deg,#e8f8f1,#f8fffc);border:1px solid #bce8d6}
+    .result-hero.warn{background:linear-gradient(145deg,#fff3d9,#fffaf0);border:1px solid #f0d69d}
+    .result-hero.danger{background:linear-gradient(145deg,#ffeded,#fff8f8);border:1px solid #edbcbc}
+    .result-kicker{font-size:.76rem;font-weight:850;letter-spacing:.1em;text-transform:uppercase}
+    .result-title{font-size:1.65rem;font-weight:850;letter-spacing:-.025em;margin:7px 0 8px}
+    .result-subtitle{color:var(--muted);line-height:1.55}
+    .route-list{display:grid;gap:13px;margin-top:16px}
+    .route-card{border:1px solid var(--line);border-radius:17px;padding:18px;background:#fff}
+    .route-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+    .route-name{font-weight:850;font-size:1.06rem}
+    .route-time{white-space:nowrap;font-size:.75rem;font-weight:800;padding:7px 10px;border-radius:999px;background:var(--blue-soft);color:var(--blue-dark)}
+    .route-card p{margin:8px 0 0;color:var(--muted);line-height:1.55;font-size:.88rem}
+    .route-card ul,.result-list{margin:12px 0 0;padding-left:20px;color:#3e4d63;line-height:1.6;font-size:.86rem}
+    .result-columns{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .result-box{border:1px solid var(--line);border-radius:17px;padding:18px;background:rgba(255,255,255,.75)}
+    .result-box h3{margin:0 0 10px;font-size:1rem}
+    .ratio-display{font-size:2rem;font-weight:850;color:var(--blue-dark);letter-spacing:-.04em}
+    .activity-group{margin-top:16px;padding:16px;border:1px solid var(--line);border-radius:16px;background:#fff}
+    .activity-group-title{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:12px}
+    .activity-group-title h4{margin:0;font-size:.94rem;color:#243653}
+    .activity-group-title span{font-size:.74rem;font-weight:800;padding:5px 9px;border-radius:999px;background:var(--blue-soft);color:var(--blue-dark);white-space:nowrap}
+    .activity-group.excluded .activity-group-title span{background:#f1f3f7;color:#59677b}
+    .activity-inputs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+    .activity-inputs .field{padding:12px;border:1px solid #e4eaf2;border-radius:13px;background:#fbfcfe}
+    .formula-panel{margin-top:16px;border:1px solid #c9dcf5;border-radius:17px;overflow:hidden;background:#f8fbff}
+    .formula-line{display:flex;justify-content:space-between;gap:14px;padding:13px 15px;border-bottom:1px solid #dce8f6;font-size:.84rem;line-height:1.45}
+    .formula-line strong{white-space:nowrap;color:#153f73}
+    .formula-line.excluded{background:#f7f8fa;color:#657186}
+    .formula-result{padding:17px 15px;background:#eaf3ff}
+    .formula-result-label{font-size:.75rem;font-weight:850;letter-spacing:.08em;text-transform:uppercase;color:#41658f}
+    .formula-result-value{font-size:2rem;font-weight:900;letter-spacing:-.04em;color:var(--blue-dark);margin-top:3px}
+    .formula-result-note{font-size:.8rem;color:#52657e;line-height:1.5;margin-top:4px}
+    .component-table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.8rem}
+    .component-table th,.component-table td{padding:9px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+    .component-table th:last-child,.component-table td:last-child{text-align:right;white-space:nowrap}
+    .component-table tr.total td{font-weight:850;color:#173f70;border-top:2px solid #c9dcf5}
+
+    .legal-panel{margin-top:22px;border-radius:var(--radius);padding:26px}
+    .legal-panel summary{cursor:pointer;font-weight:850;font-size:1.05rem}
+    .legal-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:18px}
+    .legal-card{padding:16px;border:1px solid var(--line);border-radius:16px;background:#fff}
+    .legal-card h3{font-size:.92rem;margin:0 0 8px}
+    .legal-card p,.legal-card li{font-size:.78rem;color:var(--muted);line-height:1.55}
+    .legal-card ul{margin:0;padding-left:18px}
+    .footer{padding:28px 4px 0;color:var(--muted);font-size:.75rem;line-height:1.6;text-align:center}
+
+    .error-box{display:none;margin:0 30px 4px;padding:13px 15px;border-radius:13px;background:var(--red-soft);border:1px solid #efc4c4;color:#922b2b;font-size:.85rem;line-height:1.5}
+    .error-box.show{display:block}
+
+    @media(max-width:900px){
+      .hero{grid-template-columns:1fr}
+      .grid,.grid.three,.choice-grid,.choice-grid.two,.legal-grid,.result-columns,.activity-inputs{grid-template-columns:1fr}
+      .yn-row{grid-template-columns:1fr}
+      .topbar{position:relative;top:auto;align-items:flex-start}
+      .top-actions{display:none}
+    }
+    @media(max-width:620px){
+      .app-shell{padding:12px 10px 45px}
+      .hero-main{padding:27px 20px}
+      .hero-note{padding:20px}
+      .step{padding:25px 18px 18px}
+      .wizard-actions{padding:16px 18px 22px}
+      .progress-wrap{padding:17px 18px}
+      .error-box{margin:0 18px 4px}
+      .route-top{flex-direction:column}
+      h1{font-size:2.15rem}
+    }
+
+    @media print{
+      body{background:#fff}
+      .topbar,.hero,.progress-wrap,.wizard-actions,.legal-panel,.footer,.error-box{display:none!important}
+      .app-shell{max-width:none;padding:0}
+      .wizard{box-shadow:none;border:0}
+      .step{display:none!important;padding:0}
+      #step-5{display:block!important}
+      .route-card,.result-box,.result-hero{break-inside:avoid;box-shadow:none}
+    }
+  </style>
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">K</div>
+        <div class="brand-copy">
+          <div class="brand-title">KABAYAN</div>
+          <div class="brand-subtitle">Pemetaan pengembalian pendahuluan</div>
+        </div>
+      </div>
+      <div class="top-actions">
+        <button class="btn btn-ghost" type="button" onclick="document.getElementById('dasar-hukum').scrollIntoView()">Dasar hukum</button>
+        <button class="btn btn-secondary" type="button" onclick="resetApp()">Ulangi</button>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-main">
+        <div class="eyebrow">PMK 28 Tahun 2026 · PER-6/PJ/2025 jo. PER-16/PJ/2025</div>
+        <h1>Periksa jalur pengembalian pendahuluan lebih bayar.</h1>
+        <p>Aplikasi ini memetakan jalur Wajib Pajak dengan Kriteria Tertentu, Wajib Pajak yang Memenuhi Persyaratan Tertentu, dan Pengusaha Kena Pajak Berisiko Rendah untuk SPT Tahunan PPh Badan, SPT Tahunan PPh Orang Pribadi, serta SPT Masa PPN.</p>
+        <div class="hero-badges">
+          <span class="badge">Berlaku 1 Mei 2026</span>
+          <span class="badge">Penelitian, bukan pemeriksaan</span>
+          <span class="badge">Hasil bersifat pemetaan awal</span>
+          <span class="badge">Validasi kredit pajak terperinci</span>
+        </div>
+      </div>
+      <aside class="hero-note">
+        <div>
+          <h2>Tanggal berlaku ketentuan baru</h2>
+          <div class="rule-date">1 Mei 2026</div>
+          <p>Permohonan sebelum tanggal tersebut harus diuji dengan ketentuan peralihan Pasal 25 PMK 28/2026.</p>
+        </div>
+        <div class="notice warn" style="margin-bottom:0">Keputusan final tetap berada pada Direktorat Jenderal Pajak berdasarkan hasil penelitian data administrasi.</div>
+      </aside>
+    </section>
+
+    <section class="wizard" aria-live="polite">
+      <div class="progress-wrap">
+        <div class="progress-meta"><span id="progress-label">Tahap 1 dari 5</span><span id="progress-percent">20%</span></div>
+        <div class="progress-track"><div class="progress-bar" id="progress-bar"></div></div>
+      </div>
+
+      <form id="eligibility-form" novalidate>
+        <section class="step active" id="step-1" data-step="1">
+          <div class="step-head">
+            <div class="step-number">1</div>
+            <div><h2>Jenis permohonan</h2><p>Tentukan jenis SPT dan tanggal permohonan untuk memilih rezim yang berlaku.</p></div>
+          </div>
+
+          <div class="grid">
+            <div class="field">
+              <label class="label" for="taxType">Jenis SPT yang menyatakan lebih bayar</label>
+              <select id="taxType" name="taxType">
+                <option value="">Pilih jenis SPT</option>
+                <option value="badan">SPT Tahunan PPh Badan</option>
+                <option value="op">SPT Tahunan PPh Orang Pribadi</option>
+                <option value="ppn">SPT Masa PPN</option>
+              </select>
+            </div>
+            <div class="field">
+              <label class="label" for="applicationDate">Tanggal permohonan melalui SPT</label>
+              <input id="applicationDate" name="applicationDate" type="date" />
+              <span class="hint">Tanggal diperlukan karena ketentuan transisi berbeda untuk permohonan sebelum 1 Mei 2026.</span>
+            </div>
+          </div>
+          <div class="notice info">Kalkulator ini digunakan khusus untuk SPT yang menyatakan lebih bayar dan telah memilih pengembalian pendahuluan.</div>
+
+          <div id="transitionFields" class="section-card conditional">
+            <h3>Ketentuan transisi untuk permohonan sebelum 1 Mei 2026</h3>
+            <div class="grid">
+              <div class="field">
+                <label class="label" for="oldRoute">Jalur yang digunakan saat permohonan diajukan</label>
+                <select id="oldRoute" name="oldRoute">
+                  <option value="">Pilih jalur</option>
+                  <option value="criteria">Wajib Pajak dengan Kriteria Tertentu</option>
+                  <option value="requirements">Wajib Pajak yang Memenuhi Persyaratan Tertentu</option>
+                  <option value="lowrisk">PKP Berisiko Rendah</option>
+                </select>
+              </div>
+              <div class="field conditional" id="spmkpField">
+                <span class="label">Apakah SPMKP telah diterbitkan sebelum 1 Mei 2026?</span>
+                <div class="segmented">
+                  <label><input type="radio" name="spmkpStatus" value="yes">Ya</label>
+                  <label><input type="radio" name="spmkpStatus" value="no">Tidak</label>
+                </div>
+                <span class="hint">Pertanyaan ini khusus jalur WP Kriteria Tertentu untuk menerapkan Pasal 25 huruf c.</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="step" id="step-2" data-step="2">
+          <div class="step-head">
+            <div class="step-number">2</div>
+            <div><h2>Profil dan batas nilai</h2><p>Isi data nominal dan status yang menentukan jalur pengembalian pendahuluan.</p></div>
+          </div>
+
+          <div id="profileBadan" class="conditional">
+            <div class="grid">
+              <div class="field"><label class="label" for="turnoverBadan">Jumlah peredaran usaha</label><input type="number" min="0" step="1" id="turnoverBadan" name="turnoverBadan" placeholder="Contoh: 25000000000"><span class="hint">Gunakan angka peredaran usaha pada tahun atau bagian tahun pajak yang dimohonkan.</span></div>
+              <div class="field"><label class="label" for="overpaymentBadan">Jumlah lebih bayar PPh Badan</label><input type="number" min="0" step="1" id="overpaymentBadan" name="overpaymentBadan" placeholder="Contoh: 750000000"></div>
+            </div>
+            <div class="section-card">
+              <h3>Status penetapan WP dengan Kriteria Tertentu</h3>
+              <div class="segmented">
+                <label><input type="radio" name="criteriaStatusBadan" value="yes">Ya</label>
+                <label><input type="radio" name="criteriaStatusBadan" value="no">Tidak</label>
+              </div>
+              <span class="hint">Pilih Ya hanya apabila terdapat keputusan penetapan yang masih berlaku berdasarkan PMK 28/2026.</span>
+              <div class="notice warn">Keputusan WP Kriteria Tertentu yang diterbitkan berdasarkan PMK 39/2018 dinyatakan tidak berlaku sejak PMK 28/2026 berlaku.</div>
+            </div>
+          </div>
+
+          <div id="profileOP" class="conditional">
+            <div class="field full">
+              <span class="label">Apakah orang pribadi menjalankan usaha atau pekerjaan bebas?</span>
+              <div class="segmented">
+                <label><input type="radio" name="opBusiness" value="yes">Ya</label>
+                <label><input type="radio" name="opBusiness" value="no">Tidak</label>
+              </div>
+            </div>
+            <div class="grid" style="margin-top:18px">
+              <div class="field"><label class="label" for="overpaymentOP">Jumlah lebih bayar PPh Orang Pribadi</label><input type="number" min="0" step="1" id="overpaymentOP" name="overpaymentOP" placeholder="Contoh: 75000000"></div>
+              <div class="field"><span class="label">Apakah memiliki penetapan WP Kriteria Tertentu yang masih berlaku?</span><div class="segmented"><label><input type="radio" name="criteriaStatusOP" value="yes">Ya</label><label><input type="radio" name="criteriaStatusOP" value="no">Tidak</label></div><span class="hint">Status ini baru relevan ketika OP menjalankan usaha/pekerjaan bebas dan lebih bayar di atas Rp100 juta.</span></div>
+            </div>
+            <div class="notice info">Orang pribadi yang tidak menjalankan usaha atau pekerjaan bebas termasuk WP Persyaratan Tertentu tanpa batas nominal lebih bayar dalam Pasal 9 ayat (2) huruf a.</div>
+          </div>
+
+          <div id="profilePPN" class="conditional">
+            <div class="grid">
+              <div class="field">
+                <label class="label" for="suppliesPPN">Jumlah penyerahan dalam Masa Pajak</label>
+                <div class="currency-control">
+                  <span class="currency-prefix">Rp</span>
+                  <input type="text" inputmode="numeric" autocomplete="off" class="rupiah-input" id="suppliesPPN" name="suppliesPPN" placeholder="3.500.000.000">
+                </div>
+                <span class="hint">Sistem memisahkan jutaan, ribuan, dan rupiah secara otomatis, misalnya Rp 3.500.000.000.</span>
+              </div>
+              <div class="field"><label class="label" for="overpaymentPPN">Jumlah lebih bayar PPN</label><input type="number" min="0" step="1" id="overpaymentPPN" name="overpaymentPPN" placeholder="Contoh: 800000000"></div>
+            </div>
+            <div class="grid" style="margin-top:18px">
+              <div class="field"><span class="label">Apakah Masa Pajak merupakan akhir tahun buku?</span><div class="segmented"><label><input type="radio" name="bookYearEnd" value="yes">Ya</label><label><input type="radio" name="bookYearEnd" value="no">Tidak</label></div></div>
+              <div class="field"><span class="label">Apakah PKP belum melakukan penyerahan/ekspor sebagaimana Pasal 9 ayat (2a) UU PPN?</span><div class="segmented"><label><input type="radio" name="preProduction" value="yes">Ya</label><label><input type="radio" name="preProduction" value="no">Tidak</label></div></div>
+            </div>
+            <div class="grid" style="margin-top:18px">
+              <div class="field"><span class="label">Apakah memiliki penetapan WP Kriteria Tertentu yang masih berlaku?</span><div class="segmented"><label><input type="radio" name="criteriaStatusPPN" value="yes">Ya</label><label><input type="radio" name="criteriaStatusPPN" value="no">Tidak</label></div></div>
+              <div class="field"><span class="label">Apakah memiliki penetapan PKP Berisiko Rendah yang masih berlaku?</span><div class="segmented"><label><input type="radio" name="lowRiskStatus" value="yes">Ya</label><label><input type="radio" name="lowRiskStatus" value="no">Tidak</label></div></div>
+            </div>
+
+            <div class="section-card">
+              <h3>Rincian pembilang dan penyebut kegiatan tertentu</h3>
+              <div class="notice info" style="margin-top:0">
+                Isi nilai transaksi pada Masa Pajak yang dimohonkan. Sistem menjumlahkan lima kegiatan tertentu sebagai <strong>pembilang</strong>. Penyebut mencakup seluruh penyerahan BKP/JKP yang diperhitungkan dan seluruh ekspor, dengan mengecualikan penyerahan yang dibebaskan dari PPN serta penyerahan barang/jasa yang tidak terutang PPN.
+              </div>
+
+              <div class="activity-group">
+                <div class="activity-group-title"><h4>A. Kegiatan tertentu — masuk pembilang dan penyebut</h4><span>Pembilang + Penyebut</span></div>
+                <div class="activity-inputs">
+                  <div class="field"><label class="label" for="ppnExportTangible">Ekspor BKP berwujud</label><input type="number" min="0" step="1" id="ppnExportTangible" name="ppnExportTangible" value="0" placeholder="0"><span class="hint">Nilai ekspor Barang Kena Pajak berwujud.</span></div>
+                  <div class="field"><label class="label" for="ppnToCollector">Penyerahan BKP/JKP kepada pemungut PPN</label><input type="number" min="0" step="1" id="ppnToCollector" name="ppnToCollector" value="0" placeholder="0"><span class="hint">Gabungkan nilai penyerahan BKP dan/atau JKP kepada pemungut PPN.</span></div>
+                  <div class="field"><label class="label" for="ppnNotCollected">Penyerahan BKP/JKP yang PPN-nya tidak dipungut</label><input type="number" min="0" step="1" id="ppnNotCollected" name="ppnNotCollected" value="0" placeholder="0"><span class="hint">Hanya fasilitas tidak dipungut, bukan penyerahan yang dibebaskan.</span></div>
+                  <div class="field"><label class="label" for="ppnExportIntangible">Ekspor BKP tidak berwujud</label><input type="number" min="0" step="1" id="ppnExportIntangible" name="ppnExportIntangible" value="0" placeholder="0"></div>
+                  <div class="field"><label class="label" for="ppnExportServices">Ekspor JKP</label><input type="number" min="0" step="1" id="ppnExportServices" name="ppnExportServices" value="0" placeholder="0"></div>
+                </div>
+              </div>
+
+              <div class="activity-group">
+                <div class="activity-group-title"><h4>B. Penyerahan lainnya — hanya masuk penyebut</h4><span>Penyebut</span></div>
+                <div class="activity-inputs">
+                  <div class="field"><label class="label" for="ppnDomesticOther">Penyerahan BKP/JKP dalam negeri lainnya yang diperhitungkan</label><input type="number" min="0" step="1" id="ppnDomesticOther" name="ppnDomesticOther" value="0" placeholder="0"><span class="hint">Contohnya penyerahan terutang PPN yang dipungut sendiri. Jangan masukkan kembali transaksi pada bagian A.</span></div>
+                </div>
+              </div>
+
+              <div class="activity-group excluded">
+                <div class="activity-group-title"><h4>C. Nilai kontrol — otomatis dikeluarkan dari penyebut</h4><span>Tidak masuk penyebut</span></div>
+                <div class="activity-inputs">
+                  <div class="field"><label class="label" for="ppnExempt">Penyerahan BKP/JKP yang dibebaskan dari pengenaan PPN</label><input type="number" min="0" step="1" id="ppnExempt" name="ppnExempt" value="0" placeholder="0"><span class="hint">Dicatat untuk kontrol, tetapi tidak masuk pembilang maupun penyebut.</span></div>
+                  <div class="field"><label class="label" for="ppnNonTaxable">Penyerahan barang dan/atau jasa yang tidak terutang PPN</label><input type="number" min="0" step="1" id="ppnNonTaxable" name="ppnNonTaxable" value="0" placeholder="0"><span class="hint">Dicatat untuk kontrol, tetapi tidak masuk pembilang maupun penyebut.</span></div>
+                </div>
+              </div>
+
+              <div class="formula-panel" aria-live="polite">
+                <div class="formula-line"><span>Pembilang: total lima kegiatan tertentu</span><strong id="activityNumeratorValue">Rp0</strong></div>
+                <div class="formula-line"><span>Penyebut: pembilang + penyerahan BKP/JKP dalam negeri lainnya yang diperhitungkan</span><strong id="activityDenominatorValue">Rp0</strong></div>
+                <div class="formula-line excluded"><span>Dikeluarkan dari penyebut: dibebaskan + tidak terutang PPN</span><strong id="activityExcludedValue">Rp0</strong></div>
+                <div class="formula-result">
+                  <div class="formula-result-label">Rasio kegiatan tertentu</div>
+                  <div class="formula-result-value" id="activityRatioValue">0%</div>
+                  <div class="formula-result-note" id="activityRatioStatus">Isi rincian nilai untuk memperoleh hasil otomatis.</div>
+                </div>
+              </div>
+              <div id="ratioPreview" class="notice info">Keberadaan kegiatan tertentu dan rasio 80% akan ditentukan otomatis dari kolom di atas.</div>
+              <div class="notice warn"><strong>Hindari penghitungan ganda.</strong> Setiap transaksi hanya boleh dimasukkan ke satu kategori. Penyerahan kepada pemungut PPN atau yang PPN-nya tidak dipungut tidak boleh dimasukkan lagi sebagai penyerahan dalam negeri lainnya.</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="step" id="step-3" data-step="3">
+          <div class="step-head">
+            <div class="step-number">3</div>
+            <div><h2>Uji kewajiban formal</h2><p>Pertanyaan ini muncul untuk jalur yang membutuhkan penetapan aktif.</p></div>
+          </div>
+
+          <div id="criteriaFormalBlock" class="conditional">
+            <div class="notice info">Jawab berdasarkan kondisi setelah penetapan WP Kriteria Tertentu dan kondisi pada saat permohonan.</div>
+            <div class="question-list">
+              <div class="yn-row"><div><strong>Keputusan penetapan masih berlaku dan belum dicabut</strong><small>Keputusan lama berdasarkan PMK 39/2018 tidak dapat dipakai sebagai keputusan aktif baru.</small></div><div class="segmented" data-required-group="criteriaActive"><label><input type="radio" name="criteriaActive" value="yes">Ya</label><label><input type="radio" name="criteriaActive" value="no">Tidak</label></div></div>
+              <div class="yn-row"><div><strong>Tidak terdapat keterlambatan SPT yang menjadi dasar pencabutan</strong><small>Tidak terlambat SPT Tahunan; tidak terlambat SPT Masa 2 masa berturut-turut, 3 masa dalam satu tahun, atau melewati batas masa berikutnya.</small></div><div class="segmented"><label><input type="radio" name="criteriaSpt" value="yes">Ya</label><label><input type="radio" name="criteriaSpt" value="no">Tidak</label></div></div>
+              <div class="yn-row"><div><strong>Tidak memiliki utang pajak jatuh tempo yang belum dilunasi</strong><small>Kecuali memperoleh izin penundaan/pengangsuran dan pembayarannya tidak terlambat.</small></div><div class="segmented"><label><input type="radio" name="criteriaDebt" value="yes">Ya</label><label><input type="radio" name="criteriaDebt" value="no">Tidak</label></div></div>
+              <div class="yn-row"><div><strong>Laporan keuangan setelah penetapan tetap memenuhi ketentuan</strong><small>Diaudit, WTP murni, bukan restatement akibat kesalahan/manipulasi, auditor memenuhi batas jasa audit, dan kewajiban penjelasan data fiskal dipenuhi.</small></div><div class="segmented"><label><input type="radio" name="criteriaAudit" value="yes">Ya</label><label><input type="radio" name="criteriaAudit" value="no">Tidak</label></div></div>
+              <div class="yn-row"><div><strong>Tidak sedang dilakukan pemeriksaan atas masa/tahun yang dimohonkan</strong></div><div class="segmented"><label><input type="radio" name="criteriaNoAudit" value="yes">Ya</label><label><input type="radio" name="criteriaNoAudit" value="no">Tidak</label></div></div>
+              <div class="yn-row"><div><strong>Tidak pernah dilakukan bukti permulaan terbuka atau penyidikan setelah penetapan</strong></div><div class="segmented"><label><input type="radio" name="criteriaNoBukper" value="yes">Ya</label><label><input type="radio" name="criteriaNoBukper" value="no">Tidak</label></div></div>
+            </div>
+          </div>
+
+          <div id="lowRiskFormalBlock" class="conditional" style="margin-top:18px">
+            <div class="notice info">Uji kewajiban formal PKP Berisiko Rendah berdasarkan Pasal 16 ayat (2).</div>
+            <div class="question-list">
+              <div class="yn-row"><div><strong>Keputusan penetapan PKP Berisiko Rendah masih berlaku</strong></div><div class="segmented"><label><input type="radio" name="lowActive" value="yes">Ya</label><label><input type="radio" name="lowActive" value="no">Tidak</label></div></div>
+              <div class="yn-row"><div><strong>SPT Masa PPN 12 bulan terakhir disampaikan tepat waktu</strong></div><div class="segmented"><label><input type="radio" name="lowSpt" value="yes">Ya</label><label><input type="radio" name="lowSpt" value="no">Tidak</label></div></div>
+              <div class="yn-row"><div><strong>Tidak sedang dilakukan pemeriksaan atas Masa Pajak yang dimohonkan</strong></div><div class="segmented"><label><input type="radio" name="lowNoAudit" value="yes">Ya</label><label><input type="radio" name="lowNoAudit" value="no">Tidak</label></div></div>
+              <div class="yn-row"><div><strong>Tidak sedang dilakukan bukti permulaan terbuka dan/atau penyidikan</strong></div><div class="segmented"><label><input type="radio" name="lowNoBukper" value="yes">Ya</label><label><input type="radio" name="lowNoBukper" value="no">Tidak</label></div></div>
+              <div class="yn-row"><div><strong>Tidak pernah dipidana karena tindak pidana perpajakan dalam 5 tahun terakhir</strong></div><div class="segmented"><label><input type="radio" name="lowNoCrime" value="yes">Ya</label><label><input type="radio" name="lowNoCrime" value="no">Tidak</label></div></div>
+            </div>
+          </div>
+
+          <div id="noFormalNeeded" class="notice success conditional">Berdasarkan data profil, jalur yang sedang diuji tidak mensyaratkan keputusan penetapan terlebih dahulu. Tahap berikutnya tetap menguji kesiapan bukti kredit pajak.</div>
+        </section>
+
+        <section class="step" id="step-4" data-step="4">
+          <div class="step-head">
+            <div class="step-number">4</div>
+            <div><h2>Kesiapan penelitian kredit pajak</h2><p>Rinci setiap jenis bukti atau Pajak Masukan yang dikreditkan. Komponen yang tidak memenuhi validasi tidak diperhitungkan sebagai bagian dari lebih bayar.</p></div>
+          </div>
+
+          <div class="notice warn" style="margin-top:0"><strong>Hierarki aturan:</strong> validasi teknis pada tahap ini mengadopsi substansi PER-6/PJ/2025 sebagaimana diubah dengan PER-16/PJ/2025 yang telah diselaraskan ke PMK 28/2026. Ketentuan PER yang masih merujuk PMK 39/2018 tidak digunakan apabila berbeda dengan PMK 28/2026.</div>
+
+          <div id="pphEvidenceBlock" class="conditional">
+            <div class="section-card" style="margin-top:0">
+              <h3>Rincian kredit Pajak Penghasilan</h3>
+              <div class="notice info" style="margin-top:0">Pilih <strong>Ya</strong> apabila jenis kredit tersebut digunakan dalam SPT dan telah memenuhi validasi administrasi. Pilih <strong>Tidak</strong> apabila jenis kredit tersebut tidak digunakan. Apabila digunakan tetapi belum memenuhi validasi, perbaiki terlebih dahulu sebelum melanjutkan.</div>
+              <div class="question-list">
+                <div class="yn-row"><div><strong>Apakah menggunakan bukti pemotongan atau pemungutan PPh yang diterbitkan melalui sistem administrasi DJP?</strong><small>Contohnya bukti potong/pungut elektronik yang telah terbit dalam sistem DJP.</small></div><div class="segmented"><label><input type="radio" name="pphSystemEvidence" value="yes">Ya</label><label><input type="radio" name="pphSystemEvidence" value="no">Tidak</label></div></div>
+                <div class="yn-row"><div><strong>Apakah menggunakan dokumen yang dipersamakan dengan bukti potong/pungut dan diterbitkan di luar sistem DJP?</strong><small>Dokumen harus telah tervalidasi dalam sistem administrasi DJP.</small></div><div class="segmented"><label><input type="radio" name="pphEquivalentEvidence" value="yes">Ya</label><label><input type="radio" name="pphEquivalentEvidence" value="no">Tidak</label></div></div>
+                <div class="yn-row"><div><strong>Apakah menggunakan bukti pembayaran PPh tahun berjalan yang dibayar sendiri?</strong><small>SSP harus tervalidasi dengan NTPN; sarana administrasi lain yang disamakan dengan SSP harus tervalidasi dalam sistem DJP.</small></div><div class="segmented"><label><input type="radio" name="pphSelfPaidEvidence" value="yes">Ya</label><label><input type="radio" name="pphSelfPaidEvidence" value="no">Tidak</label></div></div>
+                <div class="yn-row"><div><strong>Seluruh kredit PPh yang diminta telah dicantumkan sebagai kredit pajak dalam SPT</strong><small>Bukti yang memenuhi validasi tetapi tidak dikreditkan dalam SPT tidak diperhitungkan sebagai bagian dari lebih bayar.</small></div><div class="segmented"><label><input type="radio" name="pphAllCredited" value="yes">Ya</label><label><input type="radio" name="pphAllCredited" value="no">Tidak</label></div></div>
+              </div>
+            </div>
+          </div>
+
+          <div id="ppnEvidenceBlock" class="conditional">
+            <div class="section-card" style="margin-top:0">
+              <h3>Rincian Pajak Masukan yang dikreditkan atau dibayar sendiri</h3>
+              <div class="notice info" style="margin-top:0">Pilih <strong>Ya</strong> apabila jenis Pajak Masukan tersebut digunakan dalam SPT Masa PPN dan telah memenuhi validasi administrasi. Pilih <strong>Tidak</strong> apabila jenis tersebut tidak digunakan. Apabila digunakan tetapi belum memenuhi validasi, perbaiki terlebih dahulu sebelum melanjutkan.</div>
+              <div class="question-list">
+                <div class="yn-row"><div><strong>Apakah mengkreditkan Faktur Pajak dari PKP penjual?</strong><small>Faktur Pajak telah dilaporkan dalam SPT Masa PPN PKP yang membuat Faktur Pajak.</small></div><div class="segmented"><label><input type="radio" name="ppnTaxInvoiceEvidence" value="yes">Ya</label><label><input type="radio" name="ppnTaxInvoiceEvidence" value="no">Tidak</label></div></div>
+                <div class="yn-row"><div><strong>Apakah mengkreditkan dokumen tertentu yang dipersamakan dengan Faktur Pajak dan dibuat oleh penerbit dokumen?</strong><small>Dokumen telah dilaporkan dalam SPT Masa PPN pihak yang membuat dokumen tersebut.</small></div><div class="segmented"><label><input type="radio" name="ppnEquivalentIssuerEvidence" value="yes">Ya</label><label><input type="radio" name="ppnEquivalentIssuerEvidence" value="no">Tidak</label></div></div>
+                <div class="yn-row"><div><strong>Apakah mengkreditkan dokumen tertentu yang dilaporkan pihak lain berdasarkan Pasal 32A UU KUP?</strong><small>Dokumen telah dilaporkan oleh pihak lain dalam SPT Masa PPN sesuai ketentuan.</small></div><div class="segmented"><label><input type="radio" name="ppnThirdPartyEvidence" value="yes">Ya</label><label><input type="radio" name="ppnThirdPartyEvidence" value="no">Tidak</label></div></div>
+                <div class="yn-row"><div><strong>Apakah mengkreditkan Pajak Masukan berdasarkan dokumen pemberitahuan impor barang?</strong><small>Telah dipertukarkan secara elektronik dengan DJP, atau diunggah oleh pemohon dengan mencantumkan NTPN.</small></div><div class="segmented"><label><input type="radio" name="ppnImportEvidence" value="yes">Ya</label><label><input type="radio" name="ppnImportEvidence" value="no">Tidak</label></div></div>
+                <div class="yn-row"><div><strong>Apakah mengkreditkan Pajak Masukan berdasarkan dokumen penetapan pembayaran atas impor barang kiriman?</strong><small>Harus mencantumkan NTPN, terdapat dalam sistem DJBC, dipertukarkan secara elektronik dengan DJP, dan dibayar oleh pemohon melalui penyelenggara pos.</small></div><div class="segmented"><label><input type="radio" name="ppnPostalImportEvidence" value="yes">Ya</label><label><input type="radio" name="ppnPostalImportEvidence" value="no">Tidak</label></div></div>
+                <div class="yn-row"><div><strong>Apakah terdapat Pajak Masukan yang dibayar sendiri menggunakan SSP?</strong><small>Pembayaran telah divalidasi dengan NTPN.</small></div><div class="segmented"><label><input type="radio" name="ppnSelfPaidSspEvidence" value="yes">Ya</label><label><input type="radio" name="ppnSelfPaidSspEvidence" value="no">Tidak</label></div></div>
+                <div class="yn-row"><div><strong>Apakah terdapat Pajak Masukan yang dibayar sendiri menggunakan sarana administrasi lain yang disamakan dengan SSP?</strong><small>Pembayaran telah tervalidasi dalam sistem administrasi DJP, termasuk pelunasan PPN yang semula memperoleh fasilitas apabila dapat dikreditkan.</small></div><div class="segmented"><label><input type="radio" name="ppnSelfPaidOtherEvidence" value="yes">Ya</label><label><input type="radio" name="ppnSelfPaidOtherEvidence" value="no">Tidak</label></div></div>
+                <div class="yn-row"><div><strong>Seluruh Pajak Masukan yang diminta telah dikreditkan dalam SPT Masa PPN</strong><small>Pajak Masukan yang memenuhi syarat tetapi tidak dikreditkan dalam SPT tidak diperhitungkan sebagai bagian dari lebih bayar.</small></div><div class="segmented"><label><input type="radio" name="ppnAllCredited" value="yes">Ya</label><label><input type="radio" name="ppnAllCredited" value="no">Tidak</label></div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="question-list" style="margin-top:18px">
+            <div class="yn-row"><div><strong>Penghitungan dalam SPT telah diperiksa kembali</strong><small>Penjumlahan, pengurangan, perkalian, pembagian, dan pengisian kredit pajak konsisten.</small></div><div class="segmented"><label><input type="radio" name="calculationReady" value="yes">Ya</label><label><input type="radio" name="calculationReady" value="no">Tidak</label></div></div>
+          </div>
+          <div class="notice warn">Tahap ini tidak menggantikan penelitian DJP. Jawaban “Ya” pada rincian kredit berarti jenis kredit digunakan dan telah memenuhi validasi administrasi. Apabila kredit yang digunakan belum memenuhi validasi, perbaiki terlebih dahulu sebelum SPT disampaikan.</div>
+        </section>
+
+        <section class="step" id="step-5" data-step="5">
+          <div class="step-head">
+            <div class="step-number">5</div>
+            <div><h2>Hasil pemetaan</h2><p id="resultTimestamp"></p></div>
+          </div>
+          <div id="resultContainer"></div>
+        </section>
+
+        <div class="error-box" id="errorBox"></div>
+        <div class="wizard-actions">
+          <button type="button" class="btn btn-secondary hidden" id="backBtn">Kembali</button>
+          <div></div>
+          <button type="button" class="btn btn-primary" id="nextBtn">Lanjutkan</button>
+          <button type="button" class="btn btn-primary hidden" id="printBtn" onclick="window.print()">Cetak hasil</button>
+        </div>
+      </form>
+    </section>
+
+    <details class="legal-panel" id="dasar-hukum">
+      <summary>Dasar hukum dan batasan penggunaan</summary>
+      <div class="legal-grid">
+        <article class="legal-card"><h3>PMK 28 Tahun 2026</h3><p>Dasar utama tata cara pengembalian pendahuluan kelebihan pembayaran pajak. Berlaku mulai 1 Mei 2026 dan mencabut PMK 39/2018 beserta seluruh perubahannya.</p><p><a href="https://jdih.kemenkeu.go.id/dok/pmk-28-tahun-2026" target="_blank" rel="noopener">Buka JDIH Kementerian Keuangan</a></p></article>
+        <article class="legal-card"><h3>PER-6/PJ/2025 jo. PER-16/PJ/2025</h3><p>Digunakan sebagai referensi teknis validasi bukti dan Pajak Masukan sepanjang substansinya selaras dengan PMK 28/2026. Rujukan PER kepada PMK 39/2018 tidak dipakai apabila berbeda dengan aturan baru.</p><p><a href="https://www.pajak.go.id/id/peraturan/pelaksanaan-pengembalian-pendahuluan-kelebihan-pembayaran-pajak-terhadap-wajib-pajak" target="_blank" rel="noopener">Buka PER-6/PJ/2025</a></p></article>
+        <article class="legal-card"><h3>Tiga jalur</h3><ul><li>WP dengan Kriteria Tertentu — Pasal 17C UU KUP.</li><li>WP yang Memenuhi Persyaratan Tertentu — Pasal 17D UU KUP.</li><li>PKP Berisiko Rendah — Pasal 9 ayat (4c) UU PPN.</li></ul></article>
+        <article class="legal-card"><h3>Prinsip pengeluaran kredit</h3><p>Kredit yang dicantumkan tetapi tidak memenuhi validasi tidak diperhitungkan. Kredit yang memenuhi validasi tetapi tidak dikreditkan dalam SPT juga tidak diperhitungkan dalam pengembalian pendahuluan.</p></article>
+        <article class="legal-card"><h3>Ketentuan yang tidak diadopsi</h3><p>Ambang lama, rujukan PMK 39/2018, dan batas pengajuan kembali tiga tahun pada PER-6 tidak digunakan. Untuk selisih yang belum dikembalikan, aplikasi mengikuti PMK 28/2026.</p></article>
+        <article class="legal-card"><h3>Batas aplikasi</h3><p>Aplikasi tidak menerbitkan keputusan hukum, tidak mengakses data DJP, dan tidak memastikan validitas bukti kredit pajak. Hasil harus diverifikasi terhadap SPT, keputusan penetapan, dan data pada portal DJP.</p></article>
+      </div>
+    </details>
+
+    <footer class="footer">KABAYAN — alat bantu pemetaan. Disusun berdasarkan PMK 28 Tahun 2026 dengan referensi teknis PER-6/PJ/2025 jo. PER-16/PJ/2025. Pembaruan logika: 30 Juli 2026.</footer>
+  </main>
+
+<script>
+(() => {
+  'use strict';
+
+  const form = document.getElementById('eligibility-form');
+  const steps = [...document.querySelectorAll('.step')];
+  const nextBtn = document.getElementById('nextBtn');
+  const backBtn = document.getElementById('backBtn');
+  const printBtn = document.getElementById('printBtn');
+  const errorBox = document.getElementById('errorBox');
+  const progressBar = document.getElementById('progress-bar');
+  const progressLabel = document.getElementById('progress-label');
+  const progressPercent = document.getElementById('progress-percent');
+  let currentStep = 1;
+
+  const rupiah = new Intl.NumberFormat('id-ID', {style:'currency', currency:'IDR', maximumFractionDigits:0});
+  const getVal = name => form.elements[name]?.value || '';
+  const parseNumeric = value => Number(String(value ?? '').replace(/[^0-9]/g,'')) || 0;
+  const getNum = name => parseNumeric(getVal(name));
+  const radio = name => form.querySelector(`input[name="${name}"]:checked`)?.value || '';
+  const show = (id, visible) => document.getElementById(id)?.classList.toggle('show', !!visible);
+  const isBeforeNewRule = () => getVal('applicationDate') && getVal('applicationDate') < '2026-05-01';
+
+  function setTodayDefault(){
+    const el = document.getElementById('applicationDate');
+    if (!el.value) el.value = new Date().toISOString().slice(0,10);
+  }
+
+  function updateConditionalFields(){
+    const taxType = getVal('taxType');
+    show('transitionFields', isBeforeNewRule());
+    show('spmkpField', isBeforeNewRule() && getVal('oldRoute') === 'criteria');
+    show('profileBadan', taxType === 'badan');
+    show('profileOP', taxType === 'op');
+    show('profilePPN', taxType === 'ppn');
+
+    const hasCriteria = (taxType === 'badan' && radio('criteriaStatusBadan') === 'yes') ||
+                        (taxType === 'op' && radio('criteriaStatusOP') === 'yes') ||
+                        (taxType === 'ppn' && radio('criteriaStatusPPN') === 'yes');
+    const hasLowRisk = taxType === 'ppn' && radio('lowRiskStatus') === 'yes';
+    show('criteriaFormalBlock', hasCriteria && !isBeforeNewRule());
+    show('lowRiskFormalBlock', hasLowRisk && !isBeforeNewRule());
+    show('noFormalNeeded', !hasCriteria && !hasLowRisk && !isBeforeNewRule());
+
+    show('pphEvidenceBlock', taxType === 'badan' || taxType === 'op');
+    show('ppnEvidenceBlock', taxType === 'ppn');
+    updateRatioPreview();
+  }
+
+  const ppnActivityFields = {
+    numerator: [
+      ['ppnExportTangible','Ekspor BKP berwujud'],
+      ['ppnToCollector','Penyerahan BKP/JKP kepada pemungut PPN'],
+      ['ppnNotCollected','Penyerahan BKP/JKP yang PPN-nya tidak dipungut'],
+      ['ppnExportIntangible','Ekspor BKP tidak berwujud'],
+      ['ppnExportServices','Ekspor JKP']
+    ],
+    denominatorOnly: [
+      ['ppnDomesticOther','Penyerahan BKP/JKP dalam negeri lainnya yang diperhitungkan']
+    ],
+    excluded: [
+      ['ppnExempt','Penyerahan BKP/JKP yang dibebaskan dari pengenaan PPN'],
+      ['ppnNonTaxable','Penyerahan barang/jasa yang tidak terutang PPN']
+    ]
+  };
+
+  const pphEvidenceFields = [
+    ['pphSystemEvidence','Bukti potong/pungut yang diterbitkan melalui sistem DJP'],
+    ['pphEquivalentEvidence','Dokumen yang dipersamakan dan diterbitkan di luar sistem DJP'],
+    ['pphSelfPaidEvidence','Bukti pembayaran PPh tahun berjalan yang dibayar sendiri']
+  ];
+
+  const ppnEvidenceFields = [
+    ['ppnTaxInvoiceEvidence','Faktur Pajak dari PKP penjual'],
+    ['ppnEquivalentIssuerEvidence','Dokumen tertentu dari penerbit dokumen'],
+    ['ppnThirdPartyEvidence','Dokumen tertentu yang dilaporkan pihak lain berdasarkan Pasal 32A UU KUP'],
+    ['ppnImportEvidence','Dokumen pemberitahuan impor barang'],
+    ['ppnPostalImportEvidence','Dokumen penetapan pembayaran atas impor barang kiriman'],
+    ['ppnSelfPaidSspEvidence','Pajak Masukan dibayar sendiri menggunakan SSP'],
+    ['ppnSelfPaidOtherEvidence','Pajak Masukan dibayar sendiri menggunakan sarana administrasi lain']
+  ];
+
+  const evidenceStatusLabel = {
+    yes:'Ya — digunakan dan memenuhi validasi',
+    no:'Tidak — tidak digunakan'
+  };
+
+  function calculatePpnActivity(){
+    const values = {};
+    [...ppnActivityFields.numerator, ...ppnActivityFields.denominatorOnly, ...ppnActivityFields.excluded].forEach(([id]) => values[id] = getNum(id));
+    const numerator = ppnActivityFields.numerator.reduce((sum,[id]) => sum + values[id], 0);
+    const denominatorOnly = ppnActivityFields.denominatorOnly.reduce((sum,[id]) => sum + values[id], 0);
+    const excluded = ppnActivityFields.excluded.reduce((sum,[id]) => sum + values[id], 0);
+    const denominator = numerator + denominatorOnly;
+    const totalDetailed = denominator + excluded;
+    const ratio = denominator > 0 ? numerator / denominator * 100 : 0;
+    return {values,numerator,denominatorOnly,denominator,excluded,totalDetailed,ratio,hasActivity:numerator > 0};
+  }
+
+  function updateRatioPreview(){
+    const calc = calculatePpnActivity();
+    const box = document.getElementById('ratioPreview');
+    const numeratorEl = document.getElementById('activityNumeratorValue');
+    const denominatorEl = document.getElementById('activityDenominatorValue');
+    const excludedEl = document.getElementById('activityExcludedValue');
+    const ratioEl = document.getElementById('activityRatioValue');
+    const statusEl = document.getElementById('activityRatioStatus');
+    if (numeratorEl) numeratorEl.textContent = rupiah.format(calc.numerator);
+    if (denominatorEl) denominatorEl.textContent = rupiah.format(calc.denominator);
+    if (excludedEl) excludedEl.textContent = rupiah.format(calc.excluded);
+    if (ratioEl) ratioEl.textContent = `${calc.ratio.toLocaleString('id-ID',{maximumFractionDigits:2})}%`;
+    if (!box || !statusEl) return;
+
+    if (calc.denominator > 0){
+      const passes = calc.ratio >= 80;
+      statusEl.textContent = `${passes ? 'Memenuhi' : 'Belum memenuhi'} ambang minimal 80% untuk jalur PKP Berisiko Rendah.`;
+      box.textContent = calc.hasActivity
+        ? `Terdapat kegiatan tertentu sebesar ${rupiah.format(calc.numerator)}. Rasio otomatis ${calc.ratio.toLocaleString('id-ID',{maximumFractionDigits:2})}% dari penyebut ${rupiah.format(calc.denominator)}.`
+        : 'Tidak terdapat nilai kegiatan tertentu pada pembilang.';
+      box.className = `notice ${passes && calc.hasActivity ? 'success' : 'warn'}`;
+    } else {
+      statusEl.textContent = 'Isi rincian nilai untuk memperoleh hasil otomatis.';
+      box.textContent = 'Keberadaan kegiatan tertentu dan rasio 80% akan ditentukan otomatis dari kolom di atas.';
+      box.className = 'notice info';
+    }
+  }
+
+  function showStep(step){
+    currentStep = Math.max(1, Math.min(5, step));
+    steps.forEach(s => s.classList.toggle('active', Number(s.dataset.step) === currentStep));
+    const pct = currentStep * 20;
+    progressBar.style.width = `${pct}%`;
+    progressLabel.textContent = `Tahap ${currentStep} dari 5`;
+    progressPercent.textContent = `${pct}%`;
+    backBtn.classList.toggle('hidden', currentStep === 1);
+    nextBtn.classList.toggle('hidden', currentStep === 5);
+    printBtn.classList.toggle('hidden', currentStep !== 5);
+    nextBtn.textContent = currentStep === 4 ? 'Lihat hasil' : 'Lanjutkan';
+    hideError();
+    updateConditionalFields();
+    window.scrollTo({top: document.querySelector('.wizard').offsetTop - 14, behavior:'smooth'});
+  }
+
+  function showError(message){
+    errorBox.textContent = message;
+    errorBox.classList.add('show');
+  }
+  function hideError(){errorBox.classList.remove('show');errorBox.textContent='';}
+
+  function missingRadio(name){return !radio(name)}
+  function validateStep(step){
+    hideError();
+    if (step === 1){
+      if (!getVal('taxType')) return showError('Pilih jenis SPT yang menyatakan lebih bayar.'), false;
+      if (!getVal('applicationDate')) return showError('Isi tanggal permohonan melalui SPT.'), false;
+      if (isBeforeNewRule() && !getVal('oldRoute')) return showError('Pilih jalur permohonan yang digunakan sebelum 1 Mei 2026.'), false;
+      if (isBeforeNewRule() && getVal('oldRoute') === 'criteria' && missingRadio('spmkpStatus')) return showError('Konfirmasi status penerbitan SPMKP untuk menerapkan ketentuan transisi.'), false;
+    }
+    if (step === 2 && !isBeforeNewRule()){
+      const type = getVal('taxType');
+      if (type === 'badan'){
+        if (getVal('turnoverBadan') === '' || getVal('overpaymentBadan') === '') return showError('Isi peredaran usaha dan jumlah lebih bayar PPh Badan.'), false;
+        if (missingRadio('criteriaStatusBadan')) return showError('Pilih status penetapan WP Kriteria Tertentu.'), false;
+      }
+      if (type === 'op'){
+        if (missingRadio('opBusiness')) return showError('Konfirmasi apakah orang pribadi menjalankan usaha atau pekerjaan bebas.'), false;
+        if (getVal('overpaymentOP') === '') return showError('Isi jumlah lebih bayar PPh Orang Pribadi.'), false;
+        if (missingRadio('criteriaStatusOP')) return showError('Pilih status WP Kriteria Tertentu.'), false;
+      }
+      if (type === 'ppn'){
+        if (getVal('suppliesPPN') === '' || getVal('overpaymentPPN') === '' || ['bookYearEnd','preProduction','criteriaStatusPPN','lowRiskStatus'].some(missingRadio)) return showError('Lengkapi nilai penyerahan, lebih bayar, akhir tahun buku, status belum berproduksi, dan status penetapan.'), false;
+        const activityInputNames = [...ppnActivityFields.numerator, ...ppnActivityFields.denominatorOnly, ...ppnActivityFields.excluded].map(([id]) => id);
+        if (activityInputNames.some(n => getVal(n) === '')) return showError('Lengkapi seluruh rincian pembilang, penyebut, dan nilai yang dikeluarkan. Isi 0 apabila tidak ada transaksi pada kategori tersebut.'), false;
+        const activityCalc = calculatePpnActivity();
+        if (radio('lowRiskStatus') === 'yes' && activityCalc.denominator <= 0) return showError('Total penyebut harus lebih dari Rp0 untuk menguji rasio 80% PKP Berisiko Rendah.'), false;
+      }
+    }
+    if (step === 3 && !isBeforeNewRule()){
+      const type = getVal('taxType');
+      const criteriaShown = document.getElementById('criteriaFormalBlock').classList.contains('show');
+      const lowShown = document.getElementById('lowRiskFormalBlock').classList.contains('show');
+      const criteriaFields = ['criteriaActive','criteriaSpt','criteriaDebt','criteriaAudit','criteriaNoAudit','criteriaNoBukper'];
+      const lowFields = ['lowActive','lowSpt','lowNoAudit','lowNoBukper','lowNoCrime'];
+      if (criteriaShown && criteriaFields.some(missingRadio)) return showError('Lengkapi seluruh uji kewajiban formal WP Kriteria Tertentu.'), false;
+      if (lowShown && lowFields.some(missingRadio)) return showError('Lengkapi seluruh uji kewajiban formal PKP Berisiko Rendah.'), false;
+    }
+    if (step === 4 && !isBeforeNewRule()){
+      const type = getVal('taxType');
+      const evidenceFields = type === 'ppn' ? ppnEvidenceFields : pphEvidenceFields;
+      if (evidenceFields.some(([name]) => !radio(name))) return showError(`Jawab Ya atau Tidak untuk seluruh ${type === 'ppn' ? 'jenis Pajak Masukan' : 'jenis kredit PPh'}.`), false;
+      if (type === 'ppn' && missingRadio('ppnAllCredited')) return showError('Konfirmasi apakah seluruh Pajak Masukan yang diminta telah dikreditkan dalam SPT Masa PPN.'), false;
+      if (type !== 'ppn' && missingRadio('pphAllCredited')) return showError('Konfirmasi apakah seluruh kredit PPh yang diminta telah dicantumkan dalam SPT.'), false;
+      if (missingRadio('calculationReady')) return showError('Konfirmasi pemeriksaan kembali penghitungan SPT.'), false;
+    }
+    return true;
+  }
+
+  function allYes(names){return names.every(n => radio(n) === 'yes')}
+  function anyNo(names){return names.some(n => radio(n) === 'no')}
+
+  function applyEvidenceLogic(result, type){
+    const fields = type === 'ppn' ? ppnEvidenceFields : pphEvidenceFields;
+    const used = fields.filter(([name]) => radio(name) === 'yes');
+    const allCreditedName = type === 'ppn' ? 'ppnAllCredited' : 'pphAllCredited';
+    const creditLabel = type === 'ppn' ? 'Pajak Masukan' : 'kredit PPh';
+
+    if (used.length === 0) result.warnings.push(`Tidak ada kategori ${creditLabel} yang dinyatakan digunakan. Rekonsiliasi kembali sumber nilai lebih bayar dalam SPT.`);
+    if (radio(allCreditedName) === 'no') result.warnings.push(`Terdapat ${creditLabel} yang memenuhi ketentuan tetapi belum dikreditkan dalam SPT. Nilai yang tidak dikreditkan tidak diperhitungkan dalam pengembalian pendahuluan.`);
+  }
+
+  function route(name,time,basis,detail,checks=[]){return {name,time,basis,detail,checks}}
+
+  function evaluate(){
+    const type = getVal('taxType');
+    const result = {status:'success', title:'Terdapat jalur yang berpotensi digunakan', subtitle:'Hasil ini masih bergantung pada penelitian DJP dan validitas data administrasi.', routes:[], warnings:[], failures:[], notes:[]};
+
+
+    if (isBeforeNewRule()) return evaluateTransition();
+
+    const criteriaFields = ['criteriaActive','criteriaSpt','criteriaDebt','criteriaAudit','criteriaNoAudit','criteriaNoBukper'];
+    const lowFields = ['lowActive','lowSpt','lowNoAudit','lowNoBukper','lowNoCrime'];
+    const criteriaFormalOK = allYes(criteriaFields);
+    const criteriaFormalNo = anyNo(criteriaFields);
+    const lowFormalOK = allYes(lowFields);
+    const lowFormalNo = anyNo(lowFields);
+
+    if (type === 'badan'){
+      const turnover = getNum('turnoverBadan');
+      const lb = getNum('overpaymentBadan');
+      const criteria = radio('criteriaStatusBadan');
+      const requirementOK = turnover > 0 && turnover <= 50000000000 && lb > 0 && lb <= 1000000000;
+
+      if (criteria === 'yes' && criteriaFormalOK){
+        result.routes.push(route('WP dengan Kriteria Tertentu','Paling lama 3 bulan','Pasal 3–8 PMK 28/2026','Dapat digunakan untuk lebih bayar PPh tanpa batas nominal khusus dalam PMK 28/2026.',[
+          'Keputusan penetapan aktif berdasarkan PMK 28/2026.',
+          'Seluruh kewajiban formal yang ditanyakan dijawab terpenuhi.'
+        ]));
+      } else if (criteria === 'yes' && criteriaFormalNo){
+        result.failures.push('Jalur WP Kriteria Tertentu tidak memenuhi kewajiban formal karena terdapat jawaban “Tidak”.');
+      }
+
+      if (requirementOK){
+        result.routes.push(route('WP yang Memenuhi Persyaratan Tertentu','Paling lama 1 bulan','Pasal 9–12 PMK 28/2026',`Peredaran usaha ${rupiah.format(turnover)} dan lebih bayar ${rupiah.format(lb)} berada dalam batas Pasal 9 ayat (2) huruf c.`,[
+          'Peredaran usaha di atas Rp0 sampai dengan Rp50 miliar.',
+          'Lebih bayar paling banyak Rp1 miliar.'
+        ]));
+      } else {
+        if (!(turnover > 0 && turnover <= 50000000000)) result.failures.push('Peredaran usaha tidak berada di atas Rp0 sampai dengan Rp50 miliar untuk jalur WP Persyaratan Tertentu.');
+        if (!(lb > 0 && lb <= 1000000000)) result.failures.push('Lebih bayar PPh Badan melebihi Rp1 miliar atau tidak lebih dari Rp0 untuk jalur WP Persyaratan Tertentu.');
+      }
+
+      if (result.routes.length > 1) result.warnings.push('PMK 28/2026 tidak mengatur prioritas eksplisit ketika PPh Badan sekaligus memenuhi jalur WP Kriteria Tertentu dan WP Persyaratan Tertentu. Pemilihan jalur pada SPT/Coretax perlu dikonfirmasi.');
+    }
+
+    if (type === 'op'){
+      const business = radio('opBusiness');
+      const lb = getNum('overpaymentOP');
+      const criteria = radio('criteriaStatusOP');
+      if (business === 'no' && lb > 0){
+        result.routes.push(route('WP yang Memenuhi Persyaratan Tertentu','Paling lama 15 hari kerja','Pasal 9–12 PMK 28/2026','Orang pribadi yang tidak menjalankan usaha atau pekerjaan bebas termasuk jalur ini tanpa batas nominal lebih bayar khusus.',[
+          'SPT Tahunan PPh Orang Pribadi menyatakan lebih bayar.',
+          'Tidak menjalankan usaha atau pekerjaan bebas.'
+        ]));
+      } else if (business === 'yes' && lb > 0 && lb <= 100000000){
+        result.routes.push(route('WP yang Memenuhi Persyaratan Tertentu','Paling lama 15 hari kerja','Pasal 9–12 dan Pasal 19 ayat (3) PMK 28/2026',`Lebih bayar ${rupiah.format(lb)} tidak melebihi Rp100 juta.`,[
+          'Menjalankan usaha atau pekerjaan bebas.',
+          'Lebih bayar paling banyak Rp100 juta.'
+        ]));
+      } else if (business === 'yes' && lb > 100000000){
+        if (criteria === 'yes' && criteriaFormalOK){
+          result.routes.push(route('WP dengan Kriteria Tertentu','Paling lama 3 bulan','Pasal 3–8 PMK 28/2026',`Lebih bayar ${rupiah.format(lb)} melebihi batas jalur WP Persyaratan Tertentu, tetapi terdapat keputusan WP Kriteria Tertentu yang dinyatakan aktif.`,[
+            'Keputusan penetapan aktif berdasarkan PMK 28/2026.',
+            'Seluruh kewajiban formal yang ditanyakan dijawab terpenuhi.'
+          ]));
+        } else {
+          result.failures.push('OP yang menjalankan usaha/pekerjaan bebas dengan lebih bayar di atas Rp100 juta tidak memenuhi jalur WP Persyaratan Tertentu.');
+          if (criteria === 'no') result.failures.push('Tidak terdapat keputusan aktif WP Kriteria Tertentu sebagai jalur alternatif pengembalian pendahuluan.');
+          if (criteriaFormalNo) result.failures.push('Kewajiban formal WP Kriteria Tertentu tidak seluruhnya terpenuhi berdasarkan jawaban pengguna.');
+        }
+      }
+    }
+
+    if (type === 'ppn'){
+      const supplies = getNum('suppliesPPN');
+      const lb = getNum('overpaymentPPN');
+      const yearEnd = radio('bookYearEnd') === 'yes';
+      const preProduction = radio('preProduction') === 'yes';
+      const criteria = radio('criteriaStatusPPN');
+      const low = radio('lowRiskStatus');
+      const activityCalc = calculatePpnActivity();
+      const hasActivity = activityCalc.hasActivity;
+      const base = activityCalc.denominator;
+      const ratio = activityCalc.ratio;
+      const requirementOK = supplies > 0 && supplies <= 4200000000 && lb > 0 && lb <= 1000000000 && !preProduction && (yearEnd || hasActivity);
+      const criteriaOK = criteria === 'yes' && criteriaFormalOK && (yearEnd || hasActivity);
+      const lowOK = low === 'yes' && lowFormalOK && hasActivity && ratio >= 80;
+
+      if (criteria === 'yes' && low === 'yes'){
+        if (yearEnd){
+          if (criteriaOK) result.routes.push(route('WP dengan Kriteria Tertentu','Paling lama 1 bulan','Pasal 19 ayat (1) huruf b jo. Pasal 3–8 PMK 28/2026','Karena masa yang dimohonkan merupakan akhir tahun buku dan WP sekaligus berstatus PKP Berisiko Rendah, PMK menentukan penggunaan jalur WP Kriteria Tertentu.',[]));
+          else result.failures.push('Prioritas masa akhir tahun buku adalah jalur WP Kriteria Tertentu, tetapi kewajiban formalnya belum seluruhnya terpenuhi atau terverifikasi.');
+        } else {
+          if (lowOK) result.routes.push(route('PKP Berisiko Rendah','Paling lama 1 bulan','Pasal 19 ayat (1) huruf a jo. Pasal 13–18 PMK 28/2026',`Karena bukan masa akhir tahun buku dan WP juga berstatus WP Kriteria Tertentu, PMK menentukan jalur PKP Berisiko Rendah. Rasio kegiatan tertentu ${ratio.toLocaleString('id-ID',{maximumFractionDigits:2})}%.`,[]));
+          else result.failures.push('Prioritas masa selain akhir tahun buku adalah jalur PKP Berisiko Rendah, tetapi syarat formal, kegiatan tertentu, atau rasio minimal 80% belum terpenuhi.');
+        }
+      } else {
+        if (criteriaOK){
+          result.routes.push(route('WP dengan Kriteria Tertentu','Paling lama 1 bulan','Pasal 3–8 PMK 28/2026',yearEnd ? 'Permohonan PPN diajukan pada masa akhir tahun buku.' : 'Terdapat kegiatan tertentu pada masa selain akhir tahun buku.',[]));
+        } else if (criteria === 'yes'){
+          if (!yearEnd && !hasActivity) result.failures.push('Jalur WP Kriteria Tertentu untuk PPN masa selain akhir tahun buku membutuhkan kegiatan tertentu pada masa yang dimohonkan.');
+          if (criteriaFormalNo) result.failures.push('Kewajiban formal WP Kriteria Tertentu tidak seluruhnya terpenuhi.');
+        }
+
+        if (lowOK){
+          result.routes.push(route('PKP Berisiko Rendah','Paling lama 1 bulan','Pasal 13–18 PMK 28/2026',`Rasio kegiatan tertentu ${ratio.toLocaleString('id-ID',{maximumFractionDigits:2})}% dan memenuhi ambang minimal 80%.`,[
+            'Keputusan PKP Berisiko Rendah aktif.',
+            'Rasio 80% tetap diuji termasuk pada masa akhir tahun buku.'
+          ]));
+        } else if (low === 'yes'){
+          if (!hasActivity) result.failures.push('Jalur PKP Berisiko Rendah mensyaratkan kegiatan tertentu.');
+          if (base <= 0) result.warnings.push('Total pembagi rasio 80% belum dapat digunakan.');
+          else if (ratio < 80) result.failures.push(`Rasio kegiatan tertentu ${ratio.toLocaleString('id-ID',{maximumFractionDigits:2})}% masih di bawah 80%.`);
+          if (lowFormalNo) result.failures.push('Kewajiban formal PKP Berisiko Rendah tidak seluruhnya terpenuhi.');
+        }
+      }
+
+      const hasExplicitPriority = criteria === 'yes' && low === 'yes';
+      if (!hasExplicitPriority){
+        if (requirementOK){
+          result.routes.push(route('WP yang Memenuhi Persyaratan Tertentu','Paling lama 1 bulan','Pasal 9–12 PMK 28/2026',`Penyerahan ${rupiah.format(supplies)} dan lebih bayar ${rupiah.format(lb)} berada dalam batas Pasal 9 ayat (2) huruf d.`,[
+            'Penyerahan di atas Rp0 sampai dengan Rp4,2 miliar.',
+            'Lebih bayar paling banyak Rp1 miliar.',
+            yearEnd ? 'Masa merupakan akhir tahun buku.' : 'Terdapat kegiatan tertentu pada masa selain akhir tahun buku.',
+            'Bukan PKP yang belum melakukan penyerahan/ekspor sebagaimana Pasal 9 ayat (2a) UU PPN.'
+          ]));
+        } else {
+          if (!(supplies > 0 && supplies <= 4200000000)) result.failures.push('Penyerahan tidak berada di atas Rp0 sampai dengan Rp4,2 miliar untuk jalur WP Persyaratan Tertentu.');
+          if (!(lb > 0 && lb <= 1000000000)) result.failures.push('Lebih bayar PPN melebihi Rp1 miliar atau tidak lebih dari Rp0 untuk jalur WP Persyaratan Tertentu.');
+          if (preProduction) result.failures.push('PKP yang belum melakukan penyerahan/ekspor sebagaimana Pasal 9 ayat (2a) UU PPN dikecualikan dari jalur WP Persyaratan Tertentu.');
+          if (!yearEnd && !hasActivity) result.failures.push('Permohonan PPN pada masa selain akhir tahun buku membutuhkan kegiatan tertentu untuk jalur WP Persyaratan Tertentu.');
+        }
+      }
+
+      const routeNames = result.routes.map(r => r.name);
+      if (!hasExplicitPriority && routeNames.length > 1) result.warnings.push('Lebih dari satu jalur tampak memenuhi. Selain kombinasi WP Kriteria Tertentu dan PKP Berisiko Rendah yang diatur Pasal 19 ayat (1), PMK 28/2026 tidak menetapkan prioritas eksplisit untuk seluruh kemungkinan tumpang tindih. Konfirmasi pilihan jalur pada SPT/Coretax.');
+      if (supplies > 0 && activityCalc.totalDetailed > 0 && Math.abs(supplies - activityCalc.totalDetailed) > 1){
+        result.warnings.push(`Jumlah penyerahan yang diisi untuk uji batas Rp4,2 miliar (${rupiah.format(supplies)}) berbeda dengan total seluruh rincian transaksi (${rupiah.format(activityCalc.totalDetailed)}). Rekonsiliasi dengan SPT Masa PPN dan pastikan tidak ada kategori yang terlewat atau dihitung ganda.`);
+      }
+    }
+
+    applyEvidenceLogic(result, type);
+    if (radio('calculationReady') === 'no') result.warnings.push('Penghitungan SPT belum diperiksa kembali.');
+
+    if (result.routes.length === 0){
+      result.status = result.warnings.length ? 'warn' : 'danger';
+      result.title = result.warnings.length ? 'Belum dapat dipastikan memenuhi pengembalian pendahuluan' : 'Tidak ditemukan jalur pengembalian pendahuluan yang memenuhi';
+      result.subtitle = 'Permohonan dapat beralih ke mekanisme pengembalian kelebihan pembayaran pajak melalui pemeriksaan sesuai Pasal 17B UU KUP, sepanjang tetap terdapat permohonan pengembalian.';
+    } else if (result.warnings.length){
+      result.status = 'warn';
+      result.title = 'Terdapat jalur potensial, tetapi masih ada hal yang wajib diverifikasi';
+    }
+
+    result.notes.push('DJP dapat melakukan pemeriksaan setelah pengembalian pendahuluan diberikan dan menerbitkan surat ketetapan pajak berdasarkan hasil pemeriksaan.');
+    result.notes.push('Kredit yang dicantumkan tetapi tidak memenuhi validasi, serta kredit yang memenuhi validasi tetapi tidak dikreditkan dalam SPT, tidak diperhitungkan sebagai bagian dari lebih bayar.');
+    result.notes.push('PER-6/PJ/2025 jo. PER-16/PJ/2025 digunakan terbatas sebagai referensi teknis yang selaras; apabila berbeda, PMK 28/2026 menjadi acuan utama.');
+    result.notes.push('Apabila hasil penelitian tidak menerbitkan SKPPKP, permohonan ditindaklanjuti melalui mekanisme Pasal 17B UU KUP sesuai PMK 28/2026.');
+    return result;
+  }
+
+  function evaluateTransition(){
+    const routeOld = getVal('oldRoute');
+    if (routeOld === 'criteria'){
+      const spmkp = radio('spmkpStatus');
+      if (spmkp === 'no'){
+        return {status:'warn',title:'Permohonan lama diproses berdasarkan PMK 28 Tahun 2026',subtitle:'Permohonan WP Kriteria Tertentu disampaikan sebelum 1 Mei 2026 dan belum diterbitkan SPMKP.',routes:[route('Ketentuan transisi WP Kriteria Tertentu','Ikuti jangka waktu sesuai jalur PMK 28/2026','Pasal 25 huruf c PMK 28/2026','Permohonan atas SPT atau selisih lebih bayar yang belum dikembalikan dan belum diterbitkan SPMKP diselesaikan berdasarkan PMK 28/2026.',[])],warnings:['Keputusan penetapan WP Kriteria Tertentu lama berdasarkan PMK 39/2018 dinyatakan tidak berlaku. Status penetapan baru harus diverifikasi.'],failures:[],notes:[]};
+      }
+      if (spmkp === 'yes'){
+        return {status:'success',title:'Proses pengembalian pendahuluan telah mencapai tahap penerbitan SPMKP sebelum aturan baru',subtitle:'Ketentuan transisi Pasal 25 huruf c hanya menyebut permohonan yang belum diterbitkan SPMKP.',routes:[],warnings:['Periksa dokumen pembayaran dan status penyelesaian aktual pada portal DJP.'],failures:[],notes:[]};
+      }
+      return {status:'warn',title:'Status transisi belum dapat dipastikan',subtitle:'Status penerbitan SPMKP belum dipilih.',routes:[],warnings:['Periksa apakah SPMKP telah diterbitkan sebelum 1 Mei 2026.'],failures:[],notes:[]};
+    }
+    if (routeOld === 'requirements' || routeOld === 'lowrisk'){
+      return {status:'warn',title:'Permohonan diselesaikan berdasarkan ketentuan lama',subtitle:'PMK 39/2018 sebagaimana terakhir diubah dengan PMK 119/2024 tetap digunakan untuk permohonan ini.',routes:[route(routeOld === 'requirements' ? 'WP yang Memenuhi Persyaratan Tertentu — aturan lama' : 'PKP Berisiko Rendah — aturan lama','Mengikuti ketentuan lama','Pasal 25 huruf d PMK 28/2026','Mesin PMK 28/2026 tidak digunakan untuk mengubah hasil permohonan lama tersebut.',[])],warnings:['Aplikasi ini sengaja tidak menghitung ulang kelayakan aturan lama agar tidak mencampur ambang dan persyaratan yang telah dicabut. Lakukan pemeriksaan dengan PMK 39/2018 jo. PMK 117/2019 jo. PMK 209/2021 jo. PMK 119/2024.'],failures:[],notes:[]};
+    }
+    return {status:'warn',title:'Jalur permohonan lama belum dipilih',subtitle:'Pilih jenis jalur sebelum 1 Mei 2026 untuk menentukan aturan transisi yang digunakan.',routes:[],warnings:['Identifikasi apakah permohonan diajukan sebagai WP Kriteria Tertentu, WP Persyaratan Tertentu, atau PKP Berisiko Rendah.'],failures:[],notes:[]};
+  }
+
+  function renderResult(){
+    const data = evaluate();
+    const typeLabel = {badan:'SPT Tahunan PPh Badan',op:'SPT Tahunan PPh Orang Pribadi',ppn:'SPT Masa PPN'}[getVal('taxType')] || '';
+    const when = new Date().toLocaleString('id-ID',{dateStyle:'long',timeStyle:'short'});
+    document.getElementById('resultTimestamp').textContent = `${typeLabel} · hasil dibuat ${when}`;
+
+    const routeHtml = data.routes.length ? `<div class="route-list">${data.routes.map(r => `
+      <article class="route-card">
+        <div class="route-top"><div><div class="route-name">${escapeHTML(r.name)}</div><p><strong>Dasar:</strong> ${escapeHTML(r.basis)}</p></div><span class="route-time">${escapeHTML(r.time)}</span></div>
+        <p>${escapeHTML(r.detail)}</p>
+        ${r.checks?.length ? `<ul>${r.checks.map(x=>`<li>${escapeHTML(x)}</li>`).join('')}</ul>`:''}
+      </article>`).join('')}</div>` : '';
+
+    const warnings = data.warnings.length ? `<div class="result-box"><h3>Perlu verifikasi</h3><ul class="result-list">${data.warnings.map(x=>`<li>${escapeHTML(x)}</li>`).join('')}</ul></div>` : '';
+    const failures = data.failures.length ? `<div class="result-box"><h3>Hal yang tidak memenuhi</h3><ul class="result-list">${[...new Set(data.failures)].map(x=>`<li>${escapeHTML(x)}</li>`).join('')}</ul></div>` : '';
+    const notes = data.notes.length ? `<div class="result-box"><h3>Catatan hukum</h3><ul class="result-list">${data.notes.map(x=>`<li>${escapeHTML(x)}</li>`).join('')}</ul></div>` : '';
+
+    const activityCalc = calculatePpnActivity();
+    const activityRows = [
+      ...ppnActivityFields.numerator.map(([id,label]) => [label, activityCalc.values[id], 'Pembilang dan penyebut']),
+      ...ppnActivityFields.denominatorOnly.map(([id,label]) => [label, activityCalc.values[id], 'Penyebut saja']),
+      ...ppnActivityFields.excluded.map(([id,label]) => [label, activityCalc.values[id], 'Dikeluarkan'])
+    ];
+    const ratioBlock = getVal('taxType') === 'ppn' ? `<div class="result-box" style="grid-column:1/-1"><h3>Perhitungan kegiatan tertentu</h3>
+      <table class="component-table"><thead><tr><th>Variabel</th><th>Perlakuan</th><th>Nilai</th></tr></thead><tbody>
+      ${activityRows.map(([label,value,treatment])=>`<tr><td>${escapeHTML(label)}</td><td>${escapeHTML(treatment)}</td><td>${rupiah.format(value)}</td></tr>`).join('')}
+      <tr class="total"><td>Pembilang</td><td>Total lima kegiatan tertentu</td><td>${rupiah.format(activityCalc.numerator)}</td></tr>
+      <tr class="total"><td>Penyebut</td><td>Pembilang + penyerahan lainnya yang diperhitungkan</td><td>${rupiah.format(activityCalc.denominator)}</td></tr>
+      </tbody></table>
+      <div class="ratio-display" style="margin-top:14px">${activityCalc.ratio.toLocaleString('id-ID',{maximumFractionDigits:2})}%</div>
+      <p class="hint">Rumus: pembilang ÷ penyebut × 100%. Ambang 80% hanya digunakan untuk menguji jalur PKP Berisiko Rendah. Nilai dibebaskan dan tidak terutang PPN tidak masuk penyebut.</p></div>` : '';
+
+    const evidenceFields = getVal('taxType') === 'ppn' ? ppnEvidenceFields : pphEvidenceFields;
+    const allCreditedName = getVal('taxType') === 'ppn' ? 'ppnAllCredited' : 'pphAllCredited';
+    const evidenceBlock = `<div class="result-box" style="grid-column:1/-1"><h3>Rincian validasi kredit pajak</h3>
+      <table class="component-table"><thead><tr><th>Jenis bukti/kredit</th><th>Status yang dipilih</th></tr></thead><tbody>
+      ${evidenceFields.map(([name,label])=>`<tr><td>${escapeHTML(label)}</td><td>${escapeHTML(evidenceStatusLabel[radio(name)] || '-')}</td></tr>`).join('')}
+      <tr class="total"><td>Seluruh kredit yang diminta telah dikreditkan dalam SPT</td><td>${escapeHTML({yes:'Ya',no:'Tidak'}[radio(allCreditedName)] || '-')}</td></tr>
+      </tbody></table>
+      <p class="hint">Logic mengikuti PMK 28/2026 dengan referensi teknis PER-6/PJ/2025 sebagaimana diubah dengan PER-16/PJ/2025. Jawaban “Ya” berarti jenis kredit digunakan dan memenuhi validasi administrasi; jawaban “Tidak” berarti jenis kredit tersebut tidak digunakan dalam SPT.</p></div>`;
+
+    document.getElementById('resultContainer').innerHTML = `
+      <div class="result-hero ${data.status}">
+        <div class="result-kicker">Kesimpulan indikatif</div>
+        <div class="result-title">${escapeHTML(data.title)}</div>
+        <div class="result-subtitle">${escapeHTML(data.subtitle)}</div>
+      </div>
+      ${routeHtml}
+      <div class="result-columns" style="margin-top:16px">${warnings}${failures}${notes}${ratioBlock}${evidenceBlock}</div>
+      <div class="notice info" style="margin-top:18px"><strong>Langkah pengajuan:</strong> permohonan pengembalian pendahuluan diajukan dengan mengisi kolom yang tersedia dalam SPT. Pastikan setiap kredit yang diminta telah dikreditkan dalam SPT dan memenuhi validasi administrasi sebelum SPT disampaikan.</div>
+    `;
+  }
+
+  function escapeHTML(value){
+    return String(value).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+  }
+
+  nextBtn.addEventListener('click', () => {
+    if (!validateStep(currentStep)) return;
+    if (currentStep === 4) renderResult();
+    showStep(currentStep + 1);
+  });
+  backBtn.addEventListener('click', () => showStep(currentStep - 1));
+  form.addEventListener('change', updateConditionalFields);
+  form.addEventListener('input', event => {
+    if (event.target.classList?.contains('rupiah-input')){
+      const digits = String(event.target.value).replace(/[^0-9]/g,'');
+      event.target.value = digits ? Number(digits).toLocaleString('id-ID') : '';
+    }
+    updateRatioPreview();
+  });
+
+  window.resetApp = function(){
+    form.reset();
+    setTodayDefault();
+    showStep(1);
+    updateConditionalFields();
+  };
+
+  setTodayDefault();
+  updateConditionalFields();
+})();
+</script>
+</body>
+</html>
