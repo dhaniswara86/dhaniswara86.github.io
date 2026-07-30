@@ -629,7 +629,107 @@ main {
     display: none !important;
   }
 }
-</style></head>
+</style>
+<style id="kabayan-dtp-guide-style">
+  .dtp-guide-panel{
+    margin:-3px 0 20px;
+    padding:18px;
+    border:1px solid #d9e9f8;
+    border-radius:18px;
+    background:linear-gradient(180deg,#f8fbff,#ffffff);
+  }
+  .dtp-guide-head{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:16px;
+    margin-bottom:16px;
+  }
+  .dtp-guide-head h4{
+    margin:0;
+    color:#1d1d1f;
+    font-size:16px;
+    letter-spacing:-.02em;
+  }
+  .dtp-guide-head p{
+    margin:5px 0 0;
+    color:#6e6e73;
+    font-size:12px;
+    line-height:1.5;
+  }
+  .dtp-guide-badge{
+    flex:0 0 auto;
+    padding:6px 9px;
+    border-radius:999px;
+    background:#eef6ff;
+    color:#0071e3;
+    font-size:10px;
+    font-weight:750;
+    white-space:nowrap;
+  }
+  .dtp-guide-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:0 14px;
+  }
+  .dtp-guide-grid .field-full{grid-column:1/-1}
+  .dtp-guide-result{
+    margin-top:2px;
+    padding:14px 15px;
+    border:1px solid #f0dfbd;
+    border-radius:15px;
+    background:#fff7e8;
+    color:#6d4b14;
+    font-size:12px;
+    line-height:1.5;
+  }
+  .dtp-guide-result strong{
+    display:block;
+    margin-bottom:4px;
+    font-size:13px;
+  }
+  .dtp-guide-result.status-eligible{
+    border-color:#cde8d3;
+    background:#edf8f0;
+    color:#226536;
+  }
+  .dtp-guide-result.status-ineligible{
+    border-color:#f0c5c2;
+    background:#fff0ef;
+    color:#9b2723;
+  }
+  .dtp-guide-result.status-review{
+    border-color:#f0dfbd;
+    background:#fff7e8;
+    color:#6d4b14;
+  }
+  .dtp-klu-status{
+    margin-top:7px;
+    font-size:11px;
+    font-weight:650;
+    line-height:1.45;
+  }
+  .dtp-klu-status.match{color:#248a3d}
+  .dtp-klu-status.no-match{color:#c9342f}
+  .dtp-klu-status.review{color:#9a6700}
+  .dtp-reference-note{
+    margin-top:10px;
+    padding:11px 12px;
+    border-radius:13px;
+    background:#f5f5f7;
+    color:#515154;
+    font-size:11px;
+    line-height:1.5;
+  }
+  @media(max-width:620px){
+    .dtp-guide-grid{grid-template-columns:1fr}
+    .dtp-guide-grid .field-full{grid-column:auto}
+    .dtp-guide-head{display:block}
+    .dtp-guide-badge{display:inline-flex;margin-top:9px}
+  }
+  @media print{.dtp-guide-panel{display:none!important}}
+</style>
+</head>
 <body id="top">
 
 <header class="site-header">
@@ -683,39 +783,179 @@ main {
 <span class="status-badge">PP 58/2023 · PMK 168/2023</span>
 </div>
 </header>
-<p class="scope-note"><strong>Ruang lingkup:</strong> masa pajak selain Masa Pajak Terakhir. Untuk Desember, bulan berhenti bekerja, atau bulan terakhir menerima pensiun berkala, lakukan rekonsiliasi dengan tarif Pasal 17.</p>
+<p class="scope-note"><strong>Ruang lingkup:</strong> hanya untuk Masa Pajak selain Masa Pajak Terakhir. Jika belum mengetahui apakah memperoleh PPh Pasal 21 DTP tahun 2026, gunakan panduan interaktif pada bagian fasilitas. Desember, bulan berhenti bekerja, atau bulan terakhir menerima pensiun berkala tetap harus dihitung melalui rekonsiliasi tarif Pasal 17.</p>
 <div class="calc-grid">
 <form class="form-panel" id="terForm" novalidate="">
-<h3 class="section-title"><span>1</span> Data penerima penghasilan</h3>
+<h3 class="section-title"><span>1</span> Ruang lingkup dan data penerima</h3>
 <div class="two-col">
 <div class="field">
-<label for="employeeType">Status Penerima</label>
+<label for="taxMonth">Masa Pajak</label>
+<select class="control" id="taxMonth">
+<option value="">Pilih bulan</option>
+<option value="1">Januari</option><option value="2">Februari</option><option value="3">Maret</option><option value="4">April</option><option value="5">Mei</option><option value="6">Juni</option><option value="7">Juli</option><option value="8">Agustus</option><option value="9">September</option><option value="10">Oktober</option><option value="11">November</option><option value="12">Desember</option>
+</select>
+<p class="field-help">Desember merupakan Masa Pajak Terakhir bagi penerima yang masih bekerja atau menerima pensiun berkala sampai akhir tahun.</p>
+</div>
+<div class="field">
+<label for="lastTaxPeriod">Apakah ini Masa Pajak Terakhir?</label>
+<select class="control" id="lastTaxPeriod">
+<option value="">Pilih jawaban</option>
+<option value="no">Tidak</option>
+<option value="yes">Ya, bulan berhenti bekerja atau bulan terakhir menerima pensiun berkala</option>
+</select>
+</div>
+</div>
+<div class="two-col">
+<div class="field">
+<label for="domesticSubject">Status subjek pajak</label>
+<select class="control" id="domesticSubject">
+<option value="">Pilih status</option>
+<option value="yes">Subjek Pajak Dalam Negeri</option>
+<option value="no">Subjek Pajak Luar Negeri</option>
+<option value="unknown">Belum dapat ditentukan</option>
+</select>
+<p class="field-help">TER bulanan ini hanya untuk penerima yang merupakan Subjek Pajak Dalam Negeri.</p>
+</div>
+<div class="field">
+<label for="samePayer">Sumber penghasilan dalam input</label>
+<select class="control" id="samePayer">
+<option value="">Pilih kondisi</option>
+<option value="yes">Seluruhnya dari satu pemberi kerja atau satu pembayar pensiun yang sama</option>
+<option value="no">Berasal dari lebih dari satu pemberi kerja atau pembayar</option>
+</select>
+</div>
+</div>
+<div class="two-col">
+<div class="field">
+<label for="dtpStatus">Fasilitas PPh Pasal 21</label>
+<select class="control" id="dtpStatus">
+<option value="">Pilih kondisi</option>
+<option value="check">Belum tahu — bantu periksa fasilitas DTP 2026</option>
+<option value="no">Sudah dipastikan tidak menggunakan PPh Pasal 21 DTP</option>
+<option value="pmk105">Sudah dipastikan menggunakan DTP PMK 105/2025</option>
+<option value="other">Menggunakan DTP/ditanggung pemerintah lainnya</option>
+</select>
+<p class="field-help">Panduan memeriksa DTP stimulus 2026 berdasarkan PMK 105/2025. DTP bagi PNS/TNI/Polri/pejabat negara atau pensiunannya diperiksa terpisah.</p>
+</div>
+<div class="field">
+<label for="employeeType">Status penerima</label>
 <select class="control" id="employeeType">
 <option value="employee">Pegawai Tetap</option>
-<option value="pensioner">Pensiunan — pensiun berkala</option>
+<option value="pensioner">Pensiunan — menerima penghasilan pensiun berkala</option>
+</select>
+</div>
+</div>
+<section class="dtp-guide-panel" id="dtpGuidePanel" hidden>
+<div class="dtp-guide-head">
+<div>
+<h4>Panduan kelayakan PPh Pasal 21 DTP 2026</h4>
+<p>Jawab berdasarkan data pemberi kerja dan kondisi pegawai. Panduan ini memeriksa PMK 105 Tahun 2025 untuk Pegawai Tetap.</p>
+</div>
+<span class="dtp-guide-badge">PMK 105/2025</span>
+</div>
+<div class="dtp-guide-grid">
+<div class="field field-full">
+<label for="dtpKluInput">KLU utama pemberi kerja</label>
+<input class="control" id="dtpKluInput" inputmode="numeric" maxlength="5" list="dtpKluOptions" placeholder="Masukkan 5 digit KLU, contoh 13111" style="padding-right:14px;background-image:none"/>
+<datalist id="dtpKluOptions"></datalist>
+<p class="field-help">Gunakan KLU utama pada basis data administrasi DJP per 1 Januari 2026, atau pada tanggal pemberi kerja terdaftar jika baru terdaftar setelah 1 Januari 2026. Minta bagian payroll/HR/keuangan memeriksanya jika Anda tidak mengetahui KLU tersebut.</p>
+<div class="dtp-klu-status review" id="dtpKluStatus">Masukkan KLU utama pemberi kerja untuk mencocokkan dengan 133 KLU dalam Lampiran A PMK 105/2025.</div>
+</div>
+<div class="field">
+<label for="dtpIdentityStatus">NIK/NPWP terintegrasi dengan sistem DJP</label>
+<select class="control" id="dtpIdentityStatus">
+<option value="">Pilih kondisi</option>
+<option value="yes">Ya, telah terintegrasi</option>
+<option value="no">Tidak/belum terintegrasi</option>
+<option value="unknown">Belum diketahui</option>
 </select>
 </div>
 <div class="field">
-<label for="maritalStatus">Status Perkawinan</label>
+<label for="dtpStartTiming">Waktu mulai bekerja</label>
+<select class="control" id="dtpStartTiming">
+<option value="">Pilih kondisi</option>
+<option value="before2026">Sudah bekerja sebelum Januari 2026</option>
+<option value="during2026">Baru mulai bekerja pada tahun 2026</option>
+</select>
+</div>
+<div class="field">
+<label for="dtpReferenceGross" id="dtpReferenceGrossLabel">Penghasilan bruto tetap dan teratur pada bulan acuan</label>
+<div class="money-wrap"><span class="money-prefix">Rp</span><input autocomplete="off" class="dtp-money-input" id="dtpReferenceGross" inputmode="numeric" placeholder="0"/></div>
+<p class="field-help" id="dtpReferenceGrossHelp">Untuk pegawai lama gunakan Januari 2026; untuk pegawai baru gunakan bulan pertama bekerja pada 2026.</p>
+</div>
+<div class="field">
+<label for="dtpOtherIncentive">Menerima insentif PPh Pasal 21 DTP lainnya</label>
+<select class="control" id="dtpOtherIncentive">
+<option value="">Pilih kondisi</option>
+<option value="no">Tidak menerima DTP lainnya</option>
+<option value="yes">Ya, menerima DTP lainnya</option>
+<option value="unknown">Belum diketahui</option>
+</select>
+</div>
+<div class="field field-full">
+<label for="dtpEmployerConfirmation">Konfirmasi pemberi kerja/payroll</label>
+<select class="control" id="dtpEmployerConfirmation">
+<option value="">Pilih kondisi</option>
+<option value="yes">Telah dikonfirmasi: fasilitas dimanfaatkan, PPh DTP dibayarkan tunai, dan dilaporkan dalam SPT Masa</option>
+<option value="no">Pemberi kerja menyatakan tidak memanfaatkan fasilitas</option>
+<option value="unknown">Belum dikonfirmasi kepada pemberi kerja/payroll</option>
+</select>
+<p class="field-help">Pemenuhan syarat pegawai belum otomatis berarti fasilitas benar-benar diterima. Pemberi kerja harus memanfaatkan, membayar DTP secara tunai kepada pegawai, membuat bukti potong, dan melaporkannya.</p>
+</div>
+</div>
+<input id="dtpGuideOutcome" type="hidden" value="review"/>
+<div aria-live="polite" class="dtp-guide-result status-review" id="dtpGuideResult">
+<strong>Lengkapi panduan DTP.</strong>
+<span>Hasil akan menunjukkan apakah fasilitas tidak berlaku, berpotensi berlaku, atau telah dikonfirmasi.</span>
+</div>
+<div class="dtp-reference-note">Panduan ini tidak menentukan DTP bagi Pejabat Negara, PNS, anggota TNI, anggota Polri, atau pensiunannya atas penghasilan yang menjadi beban APBN/APBD. Untuk kondisi tersebut pilih “DTP/ditanggung pemerintah lainnya” dan konfirmasikan kepada bendahara/pembayar penghasilan.</div>
+</section>
+<div class="two-col">
+<div class="field">
+<label for="gender">Jenis kelamin</label>
+<select class="control" id="gender">
+<option value="male">Laki-laki</option>
+<option value="female">Perempuan</option>
+</select>
+</div>
+<div class="field">
+<label for="maritalStatus">Status perkawinan</label>
 <select class="control" id="maritalStatus">
 <option value="TK">Tidak Kawin</option>
 <option value="K">Kawin</option>
 </select>
 </div>
 </div>
+<div class="field" hidden id="husbandCertificateField">
+<label for="husbandNoIncomeCertificate">Surat keterangan suami tidak berpenghasilan</label>
+<select class="control" id="husbandNoIncomeCertificate">
+<option value="">Pilih kondisi</option>
+<option value="yes">Ada dan berlaku</option>
+<option value="no">Tidak ada</option>
+</select>
+<p class="field-help">Untuk karyawati kawin, status kawin dan tanggungan digunakan apabila tersedia surat keterangan pemerintah daerah bahwa suami tidak menerima atau memperoleh penghasilan.</p>
+</div>
 <div class="two-col">
 <div class="field">
-<label for="dependents">Jumlah Tanggungan</label>
+<label for="dependents">Jumlah tanggungan</label>
 <select class="control" id="dependents">
 <option value="0">0 orang</option><option value="1">1 orang</option><option value="2">2 orang</option><option value="3">3 orang</option>
 </select>
 <p class="field-help">Maksimal tiga orang sesuai ketentuan PTKP.</p>
 </div>
 <div class="field">
-<label for="ptkpDisplay">Status PTKP</label>
-<input class="control" id="ptkpDisplay" readonly="" style="padding-right:14px;background-image:none" value="TK/0 — Kategori A"/>
-<p class="field-help">Kategori TER ditentukan otomatis.</p>
+<label for="ptkpTiming">Dasar waktu penentuan PTKP</label>
+<select class="control" id="ptkpTiming">
+<option value="start_year">Keadaan pada awal tahun kalender</option>
+<option value="new_resident">Keadaan pada awal bulan saat mulai menjadi Subjek Pajak Dalam Negeri dalam tahun berjalan</option>
+</select>
+<p class="field-help">Pilihan kedua digunakan hanya bagi penerima yang baru datang dan menetap di Indonesia dalam tahun berjalan.</p>
 </div>
+</div>
+<div class="field">
+<label for="ptkpDisplay">Status PTKP yang digunakan</label>
+<input class="control" id="ptkpDisplay" readonly="" style="padding-right:14px;background-image:none" value="TK/0 — Kategori A"/>
+<p class="field-help" id="ptkpHelp">Kategori TER ditentukan otomatis.</p>
 </div>
 <h3 class="section-title"><span>2</span> Metode pemotongan</h3>
 <div aria-label="Metode pemotongan PPh Pasal 21" class="method-card" role="radiogroup">
@@ -737,27 +977,42 @@ main {
 <div class="field">
 <label for="taxAllowance">Tunjangan PPh<small>Rupiah</small></label>
 <div class="money-wrap"><span class="money-prefix">Rp</span><input autocomplete="off" class="money-input" id="taxAllowance" inputmode="numeric" placeholder="0"/></div>
-<p class="field-help" id="taxAllowanceHelp">Isi bila pemberi kerja memberi tunjangan pajak dalam jumlah tertentu.</p>
+<p class="field-help" id="taxAllowanceHelp">Isi bila pemberi kerja atau pembayar pensiun memberi tunjangan pajak dalam jumlah tertentu.</p>
 </div>
-<div class="field">
-<label for="otherAllowance">Tunjangan Lain, Uang Lembur, dan Sejenisnya<small>Rupiah</small></label>
+<div class="field employee-only-field">
+<label for="otherAllowance">Tunjangan lain, uang lembur, dan sejenisnya<small>Rupiah</small></label>
 <div class="money-wrap"><span class="money-prefix">Rp</span><input autocomplete="off" class="money-input" id="otherAllowance" inputmode="numeric" placeholder="0"/></div>
 </div>
-<div class="field">
-<label for="honorarium">Honorarium dan Imbalan Lain Sejenis<small>Rupiah</small></label>
+<div class="field employee-only-field">
+<label for="honorarium">Honorarium dan imbalan lain dari pemberi kerja yang sama<small>Rupiah</small></label>
 <div class="money-wrap"><span class="money-prefix">Rp</span><input autocomplete="off" class="money-input" id="honorarium" inputmode="numeric" placeholder="0"/></div>
 </div>
-<div class="field">
-<label for="insurance">Premi Asuransi Dibayar Pemberi Kerja<small>Rupiah</small></label>
-<div class="money-wrap"><span class="money-prefix">Rp</span><input autocomplete="off" class="money-input" id="insurance" inputmode="numeric" placeholder="0"/></div>
+<div class="field employee-only-field">
+<label for="jkk">Iuran JKK dibayar pemberi kerja<small>Rupiah</small></label>
+<div class="money-wrap"><span class="money-prefix">Rp</span><input autocomplete="off" class="money-input" id="jkk" inputmode="numeric" placeholder="0"/></div>
 </div>
-<div class="field">
-<label for="benefit">Natura dan/atau Kenikmatan yang Menjadi Objek<small>Rupiah</small></label>
+<div class="field employee-only-field">
+<label for="jkm">Iuran JKM dibayar pemberi kerja<small>Rupiah</small></label>
+<div class="money-wrap"><span class="money-prefix">Rp</span><input autocomplete="off" class="money-input" id="jkm" inputmode="numeric" placeholder="0"/></div>
+</div>
+<div class="field employee-only-field">
+<label for="healthContribution">Iuran jaminan kesehatan dibayar pemberi kerja<small>Rupiah</small></label>
+<div class="money-wrap"><span class="money-prefix">Rp</span><input autocomplete="off" class="money-input" id="healthContribution" inputmode="numeric" placeholder="0"/></div>
+</div>
+<div class="field employee-only-field">
+<label for="taxableInsurance">Premi asuransi lain yang menjadi objek<small>Rupiah</small></label>
+<div class="money-wrap"><span class="money-prefix">Rp</span><input autocomplete="off" class="money-input" id="taxableInsurance" inputmode="numeric" placeholder="0"/></div>
+<p class="field-help">Jangan masukkan iuran pensiun atau JHT yang dibayar pemberi kerja kepada lembaga yang memenuhi ketentuan.</p>
+</div>
+<div class="field employee-only-field">
+<label for="benefit">Natura dan/atau kenikmatan yang telah dipastikan menjadi objek<small>Rupiah</small></label>
 <div class="money-wrap"><span class="money-prefix">Rp</span><input autocomplete="off" class="money-input" id="benefit" inputmode="numeric" placeholder="0"/></div>
+<p class="field-help">Masukkan hanya nilai natura/kenikmatan yang telah ditentukan sebagai objek dan dinilai sesuai ketentuan.</p>
 </div>
 <div class="field" style="grid-column:1/-1">
-<label for="irregular">Tantiem, Bonus, Gratifikasi, Jasa Produksi, dan THR<small>Rupiah</small></label>
+<label for="irregular"><span id="irregularLabel">Tantiem, bonus, gratifikasi, jasa produksi, dan THR</span><small>Rupiah</small></label>
 <div class="money-wrap"><span class="money-prefix">Rp</span><input autocomplete="off" class="money-input" id="irregular" inputmode="numeric" placeholder="0"/></div>
+<p class="field-help" id="irregularHelp">Masukkan penghasilan tidak teratur yang dibayarkan oleh pemberi kerja yang sama dalam Masa Pajak ini.</p>
 </div>
 </div>
 <div class="gross-total"><span>Penghasilan bruto sementara</span><strong id="liveGross">Rp0</strong></div>
@@ -783,7 +1038,7 @@ main {
 <div class="result-row"><span>Penghasilan selain tunjangan PPh</span><strong id="baseIncomeResult">Rp0</strong></div>
 <div class="result-row"><span>Tunjangan PPh</span><strong id="allowanceResult">Rp0</strong></div>
 <div class="result-row"><span>Penghasilan bruto bulan ini</span><strong id="grossResult">Rp0</strong></div>
-<div class="result-row"><span>Penghasilan setelah PPh 21</span><strong id="netResult">Rp0</strong></div>
+<div class="result-row"><span>Penghasilan bruto dikurangi PPh Pasal 21 saja</span><strong id="netResult">Rp0</strong></div>
 </div>
 <div class="formula-box"><b>Rumus yang digunakan</b><code id="formulaResult">PPh Pasal 21 = Tarif Efektif Bulanan × Penghasilan Bruto Bulanan</code></div>
 <div class="result-actions"><button class="mini-btn" id="copyBtn" type="button">Salin hasil</button><button class="mini-btn" id="printBtn" type="button">Cetak / Simpan PDF</button></div>
@@ -794,9 +1049,9 @@ main {
 <section class="content-card">
 <h3>Cara menggunakan</h3>
 <ol class="guide-list">
-<li>Pilih jenis penerima, status perkawinan, dan jumlah tanggungan pada awal tahun pajak.</li>
-<li>Pilih metode gross atau gross-up. Pada gross-up, tunjangan PPh dihitung otomatis.</li>
-<li>Masukkan seluruh penghasilan bruto yang diterima dalam satu masa pajak, termasuk bonus atau THR.</li>
+<li>Pilih Masa Pajak, pastikan bukan Masa Pajak Terakhir, lalu gunakan panduan interaktif jika status fasilitas PPh Pasal 21 DTP belum diketahui.</li>
+<li>Tentukan status PTKP yang sah. Untuk karyawati kawin, jawab ketersediaan surat keterangan suami tidak berpenghasilan.</li>
+<li>Pilih metode gross atau gross-up, lalu masukkan penghasilan bruto yang dibayarkan oleh satu pemberi kerja atau satu pembayar pensiun yang sama.</li>
 <li>Periksa kategori TER, lapisan bruto, tarif, serta PPh Pasal 21 yang dihasilkan.</li>
 </ol>
 </section>
@@ -804,12 +1059,12 @@ main {
 <h3>Dasar penghitungan</h3>
 <div class="source-list">
 <div class="source-item"><div><b>PP Nomor 58 Tahun 2023</b><span>Tabel TER bulanan kategori A, B, dan C.</span></div><a href="https://peraturan.go.id/files/pp-no-58-tahun-2023.pdf" rel="noopener" target="_blank">Buka</a></div>
-<div class="source-item"><div><b>PMK Nomor 168 Tahun 2023</b><span>Pelaksanaan pemotongan PPh Pasal 21 mulai 2024.</span></div><a href="https://jdih.kemenkeu.go.id/dok/pmk-168-tahun-2023" rel="noopener" target="_blank">Buka</a></div>
+<div class="source-item"><div><b>PMK Nomor 168 Tahun 2023</b><span>Pelaksanaan pemotongan PPh Pasal 21 mulai 2024.</span></div><a href="https://jdih.kemenkeu.go.id/dok/pmk-168-tahun-2023" rel="noopener" target="_blank">Buka</a></div><div class="source-item"><div><b>PMK Nomor 66 Tahun 2023</b><span>Penilaian dan pengecualian natura dan/atau kenikmatan.</span></div><a href="https://jdih.kemenkeu.go.id/dok/pmk-66-tahun-2023" rel="noopener" target="_blank">Buka</a></div><div class="source-item"><div><b>PMK Nomor 105 Tahun 2025</b><span>Fasilitas PPh Pasal 21 ditanggung pemerintah untuk kondisi tertentu pada 2026; tidak dihitung oleh kalkulator ini.</span></div><a href="https://jdih.kemenkeu.go.id/dok/pmk-105-tahun-2025" rel="noopener" target="_blank">Buka</a></div>
 <div class="source-item"><div><b>Pasal 17 UU Pajak Penghasilan</b><span>Digunakan pada Masa Pajak Terakhir, bukan pada kalkulator ini.</span></div><a href="https://jdih.kemenkeu.go.id/api/download/a9faab97-aca7-4f87-9fdc-faa8123d1454/7TAHUN2021UU.pdf" rel="noopener" target="_blank">Buka</a></div>
 </div>
 </section>
 </div>
-<div class="disclaimer"><strong>Catatan penting:</strong> kalkulator ini merupakan alat bantu edukasi. Kalkulator tidak menghitung Masa Pajak Terakhir, PPh Pasal 26, TER harian, penghasilan bukan pegawai, fasilitas PPh Pasal 21 ditanggung pemerintah, atau kondisi khusus lain. Pastikan komponen natura/kenikmatan yang dimasukkan memang merupakan objek pajak.</div>
+<div class="disclaimer"><strong>Catatan penting:</strong> kalkulator ini merupakan alat bantu edukasi. Panduan DTP hanya memeriksa syarat awal PMK 105 Tahun 2025 berdasarkan jawaban pengguna dan daftar 133 KLU resmi. Kepastian pemanfaatan tetap harus dikonfirmasi kepada pemberi kerja/payroll. Sistem menolak Masa Pajak Terakhir, penerima yang bukan Subjek Pajak Dalam Negeri, penghasilan dari lebih dari satu pemberi kerja/pembayar, serta kondisi DTP yang berlaku atau belum dapat dipastikan. Kalkulator juga tidak menghitung TER harian, penghasilan Bukan Pegawai, atau kondisi khusus lain.</div>
 </section>
 </main>
 
@@ -860,23 +1115,160 @@ main {
       ]
     };
 
-    const ids = ["salary","taxAllowance","otherAllowance","honorarium","insurance","benefit","irregular"];
-    const el = Object.fromEntries(["employeeType","maritalStatus","dependents","ptkpDisplay","salaryLabel","taxAllowance","taxAllowanceHelp","liveGross","terForm","resetBtn","errorBox","resultState","taxResult","taxCaption","categoryResult","ptkpResult","rateResult","rangeResult","methodResult","baseIncomeResult","allowanceResult","grossResult","netResult","formulaResult","copyBtn","printBtn","toast"].map(id=>[id,document.getElementById(id)]));
+    const DTP_KLU_2026 = [{"code":"13111","name":"Industri Persiapan Serat Tekstil","category":"C"},{"code":"13112","name":"Industri Pemintalan Benang","category":"C"},{"code":"13113","name":"Industri Pemintalan Benang Jahit","category":"C"},{"code":"13121","name":"Industri Pertenunan (Bukan Pertenunan Karung Goni dan Karung Lainnya)","category":"C"},{"code":"13122","name":"Industri Kain Tenun Ikat","category":"C"},{"code":"13123","name":"Industri Bulu Tiruan Tenunan","category":"C"},{"code":"13131","name":"Industri Penyempurnaan Benang","category":"C"},{"code":"13132","name":"Industri Penyempurnaan Kain","category":"C"},{"code":"13133","name":"Industri Pencetakan Kain","category":"C"},{"code":"13134","name":"Industri Batik","category":"C"},{"code":"13911","name":"Industri Kain Rajutan","category":"C"},{"code":"13912","name":"Industri Kain Sulaman","category":"C"},{"code":"13913","name":"Industri Bulu Tiruan Rajutan","category":"C"},{"code":"13921","name":"Industri Barang Jadi Tekstil untuk Keperluan Rumah Tangga","category":"C"},{"code":"13922","name":"Industri Barang Jadi Tekstil Sulaman","category":"C"},{"code":"13923","name":"Industri Bantal dan Sejenisnya","category":"C"},{"code":"13924","name":"Industri Barang Jadi Rajutan dan Sulaman","category":"C"},{"code":"13925","name":"Industri Karung Goni","category":"C"},{"code":"13926","name":"Industri Karung Bukan Goni","category":"C"},{"code":"13929","name":"Industri Barang Jadi Tekstil Lainnya","category":"C"},{"code":"13930","name":"Industri Karpet dan Permadani","category":"C"},{"code":"13941","name":"Industri Tali","category":"C"},{"code":"13942","name":"Industri Barang dari Tali","category":"C"},{"code":"13991","name":"Industri Kain Pita (Narrow Fabric)","category":"C"},{"code":"13992","name":"Industri yang Menghasilkan Kain Keperluan Industri","category":"C"},{"code":"13993","name":"Industri Non Woven (Bukan Tenunan)","category":"C"},{"code":"13994","name":"Industri Kain Ban","category":"C"},{"code":"13995","name":"Industri Kapuk","category":"C"},{"code":"13996","name":"Industri Kain Tulle dan Kain Jaring","category":"C"},{"code":"13999","name":"Industri Tekstil Lainnya YTDL","category":"C"},{"code":"14111","name":"Industri Pakaian Jadi (Konveksi) dari Tekstil","category":"C"},{"code":"14112","name":"Industri Pakaian Jadi (Konveksi) dari Kulit","category":"C"},{"code":"14120","name":"Penjahitan dan Pembuatan Pakaian Sesuai Pesanan","category":"C"},{"code":"14131","name":"Industri Perlengkapan Pakaian dari Tekstil","category":"C"},{"code":"14132","name":"Industri Perlengkapan Pakaian dari Kulit","category":"C"},{"code":"14200","name":"Industri Pakaian Jadi dan Barang dari Kulit Berbulu","category":"C"},{"code":"14301","name":"Industri Pakaian Jadi Rajutan","category":"C"},{"code":"14302","name":"Industri Pakaian Jadi Sulaman/Bordir","category":"C"},{"code":"14303","name":"Industri Rajutan Kaos Kaki dan Sejenisnya","category":"C"},{"code":"15111","name":"Industri Pengawetan Kulit","category":"C"},{"code":"15112","name":"Industri Penyamakan Kulit","category":"C"},{"code":"15113","name":"Industri Pencelupan Kulit Bulu","category":"C"},{"code":"15114","name":"Industri Kulit Komposisi","category":"C"},{"code":"15121","name":"Industri Barang dari Kulit dan Kulit Komposisi untuk Keperluan Pribadi","category":"C"},{"code":"15122","name":"Industri Barang dari Kulit dan Kulit Komposisi untuk Keperluan Teknik/Industri","category":"C"},{"code":"15123","name":"Industri Barang dari Kulit dan Kulit Komposisi untuk Keperluan Hewan","category":"C"},{"code":"15129","name":"Industri Barang dari Kulit dan Kulit Komposisi untuk Keperluan Lainnya","category":"C"},{"code":"15201","name":"Industri Alas Kaki untuk Keperluan Sehari-Hari","category":"C"},{"code":"15202","name":"Industri Sepatu Olahraga","category":"C"},{"code":"15203","name":"Industri Sepatu Teknik Lapangan/Keperluan Industri","category":"C"},{"code":"15209","name":"Industri Alas Kaki Lainnya","category":"C"},{"code":"31001","name":"Industri Furnitur dari Kayu","category":"C"},{"code":"31002","name":"Industri Furnitur dari Rotan dan atau Bambu","category":"C"},{"code":"31003","name":"Industri Furnitur dari Plastik","category":"C"},{"code":"31004","name":"Industri Furnitur dari Logam","category":"C"},{"code":"31009","name":"Industri Furnitur Lainnya","category":"C"},{"code":"49425","name":"Angkutan Darat Wisata","category":"H"},{"code":"50113","name":"Angkutan Laut Dalam Negeri Untuk Wisata","category":"H"},{"code":"50122","name":"Angkutan Laut Luar Negeri Untuk Wisata","category":"H"},{"code":"55110","name":"Hotel Bintang","category":"I"},{"code":"55120","name":"Hotel Melati","category":"I"},{"code":"55130","name":"Pondok Wisata","category":"I"},{"code":"55191","name":"Penginapan Remaja (Youth Hostel)","category":"I"},{"code":"55192","name":"Bumi Perkemahan, Persinggahan Karavan dan Taman Karavan","category":"I"},{"code":"55193","name":"Vila","category":"I"},{"code":"55194","name":"Apartemen Hotel","category":"I"},{"code":"55199","name":"Penyediaan Akomodasi Jangka Pendek Lainnya","category":"I"},{"code":"55900","name":"Penyediaan Akomodasi Lainnya","category":"I"},{"code":"56101","name":"Restoran","category":"I"},{"code":"56102","name":"Rumah/Warung Makan","category":"I"},{"code":"56103","name":"Kedai Makanan","category":"I"},{"code":"56104","name":"Penyediaan Makanan Keliling/Tempat Tidak Tetap","category":"I"},{"code":"56109","name":"Restoran dan Penyediaan Makanan Keliling Lainnya","category":"I"},{"code":"56210","name":"Jasa Boga Untuk Suatu Event Tertentu (Event Catering)","category":"I"},{"code":"56290","name":"Penyediaan Jasa Boga Periode Tertentu","category":"I"},{"code":"56301","name":"Bar","category":"I"},{"code":"56302","name":"Kelab Malam atau Diskotek yang Utamanya Menyediakan Minuman","category":"I"},{"code":"56303","name":"Rumah Minum/Kafe","category":"I"},{"code":"56304","name":"Kedai Minuman","category":"I"},{"code":"56306","name":"Penyediaan Minuman Keliling/Tempat Tidak Tetap","category":"I"},{"code":"68112","name":"Penyewaan Venue Penyelenggaraan Aktivitas MICE dan Event Khusus","category":"L"},{"code":"68120","name":"Kawasan Pariwisata","category":"L"},{"code":"70201","name":"Aktivitas Konsultansi Pariwisata","category":"M"},{"code":"79111","name":"Aktivitas Agen Perjalanan Wisata","category":"N"},{"code":"79119","name":"Aktivitas Agen Perjalanan Lainnya","category":"N"},{"code":"79121","name":"Aktivitas Biro Perjalanan Wisata","category":"N"},{"code":"79129","name":"Aktivitas Biro Perjalanan Lainnya","category":"N"},{"code":"79911","name":"Jasa Informasi Pariwisata","category":"N"},{"code":"79912","name":"Jasa Informasi Daya Tarik Wisata","category":"N"},{"code":"79921","name":"Jasa Pramuwisata","category":"N"},{"code":"79922","name":"Jasa Interpreter Wisata","category":"N"},{"code":"79990","name":"Jasa Reservasi Lainnya YBDI YTDL","category":"N"},{"code":"82301","name":"Jasa Penyelenggara Pertemuan, Perjalanan Insentif, Konferensi dan Pameran (MICE)","category":"N"},{"code":"82302","name":"Jasa Penyelenggara Event Khusus (Special Event)","category":"N"},{"code":"90030","name":"Aktivitas Impresariat Bidang Seni dan Festival Seni","category":"R"},{"code":"90040","name":"Aktivitas Operasional Fasilitas Seni","category":"R"},{"code":"91022","name":"Museum yang Dikelola Swasta","category":"R"},{"code":"91024","name":"Peninggalan Sejarah/Cagar Budaya yang Dikelola Swasta","category":"R"},{"code":"91029","name":"Wisata Budaya Lainnya","category":"R"},{"code":"93111","name":"Fasilitas Stadion","category":"R"},{"code":"93112","name":"Fasilitas Sirkuit","category":"R"},{"code":"93113","name":"Fasilitas Gelanggang/Arena","category":"R"},{"code":"93114","name":"Fasilitas Lapangan","category":"R"},{"code":"93115","name":"Fasilitas Olahraga Beladiri","category":"R"},{"code":"93116","name":"Fasilitas Pusat Kebugaran/Fitness Center","category":"R"},{"code":"93119","name":"Pengelolaan Fasilitas Olah Raga Lainnya","category":"R"},{"code":"93191","name":"Promotor Kegiatan Olahraga","category":"R"},{"code":"93193","name":"Aktivitas Perburuan","category":"R"},{"code":"93195","name":"Aktivitas Olahraga Tradisional","category":"R"},{"code":"93211","name":"Taman Rekreasi","category":"R"},{"code":"93219","name":"Aktivitas Taman Bertema atau Taman Hiburan Lainnya","category":"R"},{"code":"93221","name":"Pemandian Alam","category":"R"},{"code":"93222","name":"Wisata Gua","category":"R"},{"code":"93223","name":"Wisata Petualangan Alam","category":"R"},{"code":"93224","name":"Wisata Pantai","category":"R"},{"code":"93229","name":"Daya Tarik Wisata Alam Lainnya","category":"R"},{"code":"93231","name":"Wisata Agro","category":"R"},{"code":"93239","name":"Daya Tarik Wisata Buatan/Binaan Manusia Lainnya","category":"R"},{"code":"93241","name":"Arung Jeram","category":"R"},{"code":"93242","name":"Wisata Selam","category":"R"},{"code":"93243","name":"Dermaga Marina","category":"R"},{"code":"93244","name":"Kolam Pemancingan","category":"R"},{"code":"93245","name":"Wisata Memancing","category":"R"},{"code":"93246","name":"Aktivitas Wisata Air","category":"R"},{"code":"93249","name":"Wisata Tirta Lainnya","category":"R"},{"code":"93291","name":"Klub Malam","category":"R"},{"code":"93292","name":"Karaoke","category":"R"},{"code":"93293","name":"Usaha Arena Permainan","category":"R"},{"code":"93294","name":"Diskotek","category":"R"},{"code":"93299","name":"Aktivitas Hiburan dan Rekreasi Lainnya YTDL","category":"R"},{"code":"96121","name":"Rumah Pijat","category":"S"},{"code":"96122","name":"Aktivitas Spa (Sante Par Aqua)","category":"S"},{"code":"96129","name":"Aktivitas Kebugaran Lainnya","category":"S"}];
+    const DTP_KLU_MAP = new Map(DTP_KLU_2026.map(item=>[item.code,item]));
+
+    const ids = ["salary","taxAllowance","otherAllowance","honorarium","jkk","jkm","healthContribution","taxableInsurance","benefit","irregular"];
+    const el = Object.fromEntries(["taxMonth","lastTaxPeriod","domesticSubject","samePayer","dtpStatus","dtpGuidePanel","dtpKluInput","dtpKluOptions","dtpKluStatus","dtpIdentityStatus","dtpStartTiming","dtpReferenceGross","dtpReferenceGrossLabel","dtpReferenceGrossHelp","dtpOtherIncentive","dtpEmployerConfirmation","dtpGuideOutcome","dtpGuideResult","employeeType","gender","maritalStatus","husbandCertificateField","husbandNoIncomeCertificate","dependents","ptkpTiming","ptkpDisplay","ptkpHelp","salaryLabel","irregularLabel","irregularHelp","taxAllowance","taxAllowanceHelp","liveGross","terForm","resetBtn","errorBox","resultState","taxResult","taxCaption","categoryResult","ptkpResult","rateResult","rangeResult","methodResult","baseIncomeResult","allowanceResult","grossResult","netResult","formulaResult","copyBtn","printBtn","toast"].map(id=>[id,document.getElementById(id)]));
 
     function parseMoney(value){return Number(String(value||"").replace(/[^0-9]/g,""))||0}
     function formatMoney(value){return new Intl.NumberFormat("id-ID",{style:"currency",currency:"IDR",maximumFractionDigits:0}).format(Math.max(0,Math.floor(value||0)))}
     function formatInput(input){const n=parseMoney(input.value);input.value=n?new Intl.NumberFormat("id-ID").format(n):""}
     function formatRate(rate){return Number.isInteger(rate)?rate+"%":String(rate).replace(".",",")+"%"}
 
+    function populateDtpKluOptions(){
+      el.dtpKluOptions.innerHTML="";
+      DTP_KLU_2026.forEach(item=>{
+        const option=document.createElement("option");
+        option.value=item.code;
+        option.label=`${item.code} — ${item.name}`;
+        el.dtpKluOptions.appendChild(option);
+      });
+    }
+
+    function normalizeKlu(value){
+      return String(value||"").replace(/\D/g,"").slice(0,5);
+    }
+
+    function updateDtpReferenceLabel(){
+      if(el.dtpStartTiming.value==="before2026"){
+        el.dtpReferenceGrossLabel.textContent="Penghasilan bruto tetap dan teratur Januari 2026";
+        el.dtpReferenceGrossHelp.textContent="Gunakan gaji dan tunjangan tetap/teratur Januari 2026, termasuk natura/kenikmatan yang bersifat tetap dan teratur.";
+      }else if(el.dtpStartTiming.value==="during2026"){
+        el.dtpReferenceGrossLabel.textContent="Penghasilan bruto tetap dan teratur bulan pertama bekerja";
+        el.dtpReferenceGrossHelp.textContent="Gunakan gaji dan tunjangan tetap/teratur pada bulan pertama mulai bekerja di tahun 2026.";
+      }else{
+        el.dtpReferenceGrossLabel.textContent="Penghasilan bruto tetap dan teratur pada bulan acuan";
+        el.dtpReferenceGrossHelp.textContent="Untuk pegawai lama gunakan Januari 2026; untuk pegawai baru gunakan bulan pertama bekerja pada 2026.";
+      }
+    }
+
+    function getDtpGuideDecision(){
+      if(el.employeeType.value!=="employee"){
+        return {
+          outcome:"review",
+          title:"PMK 105/2025 tidak ditujukan kepada Pensiunan.",
+          detail:"Pensiunan dapat memiliki skema PPh Pasal 21 ditanggung pemerintah lain, terutama atas penghasilan tertentu yang menjadi beban APBN/APBD. Konfirmasikan kepada pembayar pensiun dan pilih kategori DTP lainnya bila berlaku."
+        };
+      }
+
+      const klu=normalizeKlu(el.dtpKluInput.value);
+      const kluItem=DTP_KLU_MAP.get(klu);
+      const identity=el.dtpIdentityStatus.value;
+      const start=el.dtpStartTiming.value;
+      const referenceGross=parseMoney(el.dtpReferenceGross.value);
+      const other=el.dtpOtherIncentive.value;
+      const employer=el.dtpEmployerConfirmation.value;
+
+      if(klu.length===5&&!kluItem){
+        return {
+          outcome:"no",
+          title:"KLU utama pemberi kerja tidak termasuk daftar PMK 105/2025.",
+          detail:"Fasilitas stimulus PPh Pasal 21 DTP 2026 tidak dapat digunakan berdasarkan KLU yang dimasukkan."
+        };
+      }
+      if(identity==="no"){
+        return {
+          outcome:"no",
+          title:"Syarat identitas tidak terpenuhi.",
+          detail:"Pegawai harus memiliki NPWP dan/atau NIK yang telah terintegrasi dengan sistem administrasi DJP."
+        };
+      }
+      if(referenceGross>10000000){
+        return {
+          outcome:"no",
+          title:"Batas penghasilan tetap dan teratur terlampaui.",
+          detail:"Untuk Pegawai Tetap, penghasilan bruto tetap dan teratur pada Januari 2026 atau bulan pertama bekerja harus tidak lebih dari Rp10.000.000."
+        };
+      }
+      if(other==="yes"){
+        return {
+          outcome:"no",
+          title:"Tidak dapat menerima insentif DTP PMK 105/2025.",
+          detail:"Pegawai yang menerima insentif PPh Pasal 21 DTP lainnya tidak memenuhi kriteria PMK 105/2025."
+        };
+      }
+      if(employer==="no"){
+        return {
+          outcome:"no",
+          title:"Pemberi kerja tidak memanfaatkan fasilitas.",
+          detail:"Walaupun syarat awal mungkin terpenuhi, fasilitas tidak diterapkan apabila pemberi kerja menyatakan tidak memanfaatkannya."
+        };
+      }
+
+      const incomplete=!kluItem||!identity||identity==="unknown"||!start||referenceGross<=0||!other||other==="unknown"||!employer||employer==="unknown";
+      if(incomplete){
+        return {
+          outcome:"review",
+          title:"Kelayakan DTP belum dapat dipastikan.",
+          detail:"Lengkapi KLU utama, integrasi NIK/NPWP, bulan acuan penghasilan, nominal penghasilan tetap dan teratur, status DTP lain, serta konfirmasi pemberi kerja/payroll."
+        };
+      }
+
+      return {
+        outcome:"yes",
+        title:"Memenuhi kriteria awal DTP PMK 105/2025 dan telah dikonfirmasi pemberi kerja.",
+        detail:`KLU ${klu} — ${kluItem.name} tercantum dalam Lampiran A, identitas terintegrasi, penghasilan bulan acuan tidak melebihi Rp10.000.000, dan tidak menerima DTP lain. PPh DTP harus dibayarkan tunai kepada pegawai serta dilaporkan oleh pemberi kerja.`
+      };
+    }
+
+    function updateDtpGuide(){
+      const show=el.dtpStatus.value==="check";
+      el.dtpGuidePanel.hidden=!show;
+      if(!show){
+        el.dtpGuideOutcome.value="review";
+        return;
+      }
+
+      const klu=normalizeKlu(el.dtpKluInput.value);
+      if(el.dtpKluInput.value!==klu) el.dtpKluInput.value=klu;
+      const kluItem=DTP_KLU_MAP.get(klu);
+      el.dtpKluStatus.className="dtp-klu-status";
+      if(!klu){
+        el.dtpKluStatus.classList.add("review");
+        el.dtpKluStatus.textContent="Masukkan KLU utama pemberi kerja untuk mencocokkan dengan 133 KLU dalam Lampiran A PMK 105/2025.";
+      }else if(klu.length<5){
+        el.dtpKluStatus.classList.add("review");
+        el.dtpKluStatus.textContent="KLU harus terdiri dari 5 digit.";
+      }else if(kluItem){
+        el.dtpKluStatus.classList.add("match");
+        el.dtpKluStatus.textContent=`KLU cocok: ${klu} — ${kluItem.name}.`;
+      }else{
+        el.dtpKluStatus.classList.add("no-match");
+        el.dtpKluStatus.textContent=`KLU ${klu} tidak ditemukan dalam daftar 133 KLU PMK 105/2025.`;
+      }
+
+      updateDtpReferenceLabel();
+      const decision=getDtpGuideDecision();
+      el.dtpGuideOutcome.value=decision.outcome;
+      el.dtpGuideResult.className="dtp-guide-result";
+      if(decision.outcome==="yes") el.dtpGuideResult.classList.add("status-eligible");
+      else if(decision.outcome==="no") el.dtpGuideResult.classList.add("status-ineligible");
+      else el.dtpGuideResult.classList.add("status-review");
+      el.dtpGuideResult.innerHTML=`<strong>${decision.title}</strong><span>${decision.detail}</span>`;
+    }
+
     function getPTKP(){
-      const marital=el.maritalStatus.value;
-      let dep=Number(el.dependents.value);
-      if(marital==="TK" && dep>3) dep=3;
+      let marital=el.maritalStatus.value;
+      let dep=Math.min(3,Number(el.dependents.value));
+      const marriedWoman=el.gender.value==="female"&&marital==="K";
+      const certificateAvailable=el.husbandNoIncomeCertificate.value==="yes";
+      if(marriedWoman&&!certificateAvailable){marital="TK";dep=0}
       const status=`${marital}/${dep}`;
       let category="A";
       if(status==="TK/2"||status==="TK/3"||status==="K/1"||status==="K/2") category="B";
       if(status==="K/3") category="C";
-      return {status,category};
+      return {status,category,marriedWoman,certificateAvailable};
     }
 
     function getBracket(category,gross){
@@ -915,19 +1307,58 @@ main {
     }
 
     function syncPTKP(){
-      const p=getPTKP();el.ptkpDisplay.value=`${p.status} — Kategori ${p.category}`;
+      const p=getPTKP();
+      const needsCertificate=el.gender.value==="female"&&el.maritalStatus.value==="K";
+      el.husbandCertificateField.hidden=!needsCertificate;
+      el.ptkpDisplay.value=`${p.status} — Kategori ${p.category}`;
+      if(needsCertificate&&!p.certificateAvailable){
+        el.ptkpHelp.textContent="Tanpa surat keterangan suami tidak berpenghasilan, kalkulator menggunakan PTKP TK/0.";
+      }else if(el.ptkpTiming.value==="new_resident"){
+        el.ptkpHelp.textContent="Status PTKP digunakan berdasarkan keadaan pada awal bulan saat mulai menjadi Subjek Pajak Dalam Negeri.";
+      }else{
+        el.ptkpHelp.textContent="Status PTKP digunakan berdasarkan keadaan pada awal tahun kalender.";
+      }
     }
 
     function syncEmployeeType(){
       const pension=el.employeeType.value==="pensioner";
-      el.salaryLabel.textContent=pension?"Pensiun atau THT/JHT Berkala":"Gaji";
+      el.salaryLabel.textContent=pension?"Uang pensiun atau penghasilan berkala sejenis":"Gaji";
+      el.irregularLabel.textContent=pension?"THR, tunjangan ke-13, atau rapel pensiun berkala":"Tantiem, bonus, gratifikasi, jasa produksi, dan THR";
+      el.irregularHelp.textContent=pension?"Masukkan hanya pembayaran dari pembayar pensiun berkala yang sama.":"Masukkan penghasilan tidak teratur yang dibayarkan oleh pemberi kerja yang sama dalam Masa Pajak ini.";
+      document.querySelectorAll(".employee-only-field").forEach(field=>{
+        field.hidden=pension;
+        if(pension){field.querySelectorAll("input").forEach(input=>input.value="")}
+      });
+    }
+
+    function validateScope(showError=true){
+      let message="";
+      if(!el.taxMonth.value) message="Pilih Masa Pajak yang dihitung.";
+      else if(el.taxMonth.value==="12") message="Desember merupakan Masa Pajak Terakhir. Gunakan penghitungan rekonsiliasi dengan tarif Pasal 17, bukan TER bulanan.";
+      else if(!el.lastTaxPeriod.value) message="Konfirmasi apakah bulan ini merupakan Masa Pajak Terakhir.";
+      else if(el.lastTaxPeriod.value==="yes") message="Kalkulator TER bulanan tidak dapat digunakan pada bulan berhenti bekerja atau bulan terakhir menerima pensiun berkala.";
+      else if(!el.domesticSubject.value) message="Pilih status subjek pajak penerima penghasilan.";
+      else if(el.domesticSubject.value!=="yes") message="Kalkulator ini hanya untuk Subjek Pajak Dalam Negeri. Penerima luar negeri harus diuji berdasarkan PPh Pasal 26.";
+      else if(!el.samePayer.value) message="Konfirmasi bahwa seluruh penghasilan berasal dari satu pemberi kerja atau satu pembayar pensiun yang sama.";
+      else if(el.samePayer.value!=="yes") message="Jangan menjumlahkan penghasilan dari beberapa pemberi kerja atau pembayar dalam satu penghitungan TER.";
+      else if(!el.dtpStatus.value) message="Pilih kondisi fasilitas PPh Pasal 21 atau gunakan panduan DTP.";
+      else if(el.dtpStatus.value==="pmk105") message="Penerima telah dipastikan menggunakan DTP PMK 105/2025. Kalkulator TER biasa ini tidak boleh menampilkan PPh sebagai potongan dari penghasilan.";
+      else if(el.dtpStatus.value==="other") message="Penerima menggunakan DTP/ditanggung pemerintah lainnya. Lakukan penghitungan dan pelaporan sesuai skema DTP yang berlaku.";
+      else if(el.dtpStatus.value==="check"&&el.dtpGuideOutcome.value==="yes") message="Panduan menunjukkan DTP PMK 105/2025 berlaku dan telah dikonfirmasi pemberi kerja. Gunakan penghitungan DTP, bukan pemotongan biasa.";
+      else if(el.dtpStatus.value==="check"&&el.dtpGuideOutcome.value!=="no") message="Kelayakan DTP belum dapat dipastikan. Lengkapi panduan atau konfirmasikan kepada pemberi kerja/payroll sebelum menghitung pemotongan biasa.";
+      else if(el.gender.value==="female"&&el.maritalStatus.value==="K"&&!el.husbandNoIncomeCertificate.value) message="Pilih ketersediaan surat keterangan suami tidak berpenghasilan untuk menentukan PTKP karyawati kawin.";
+      if(message){
+        if(showError){el.errorBox.textContent=message;el.errorBox.classList.add("show")}
+        return false;
+      }
+      return true;
     }
 
     function syncMethod(){
       const isGrossUp=method()==="grossup";
       el.taxAllowance.readOnly=isGrossUp;
       if(isGrossUp){el.taxAllowance.value="";el.taxAllowance.placeholder="Dihitung otomatis";el.taxAllowanceHelp.textContent="Tunjangan PPh dihitung otomatis hingga sama dengan PPh Pasal 21 terutang."}
-      else{el.taxAllowance.placeholder="0";el.taxAllowanceHelp.textContent="Isi bila pemberi kerja memberi tunjangan pajak dalam jumlah tertentu."}
+      else{el.taxAllowance.placeholder="0";el.taxAllowanceHelp.textContent="Isi bila pemberi kerja atau pembayar pensiun memberi tunjangan pajak dalam jumlah tertentu."}
       syncLiveGross();
     }
 
@@ -939,6 +1370,7 @@ main {
     }
 
     function calculate(showError=true){
+      if(!validateScope(showError)) return null;
       const p=getPTKP();const base=baseIncome();
       if(base<=0 && parseMoney(el.taxAllowance.value)<=0){
         if(showError){el.errorBox.textContent="Masukkan sedikitnya satu komponen penghasilan bruto.";el.errorBox.classList.add("show")}
@@ -953,7 +1385,7 @@ main {
       }
       const net=gross-tax;
       el.resultState.textContent="Selesai";el.resultState.classList.add("ready");el.taxResult.textContent=formatMoney(tax);
-      el.taxCaption.textContent=`Kategori ${p.category} · ${formatRate(bracket.rate)} × ${formatMoney(gross)}`;
+      el.taxCaption.textContent=`Masa Pajak ${el.taxMonth.options[el.taxMonth.selectedIndex].text} · Kategori ${p.category} · ${formatRate(bracket.rate)} × ${formatMoney(gross)}`;
       el.categoryResult.textContent=`Kategori ${p.category}`;el.ptkpResult.textContent=`Status PTKP ${p.status}`;el.rateResult.textContent=formatRate(bracket.rate);el.rangeResult.textContent=rangeText(bracket);
       el.methodResult.textContent=method()==="grossup"?"Gross-up":"Gross";el.baseIncomeResult.textContent=formatMoney(base);el.allowanceResult.textContent=formatMoney(allowance);el.grossResult.textContent=formatMoney(gross);el.netResult.textContent=formatMoney(net);
       el.formulaResult.textContent=`PPh Pasal 21 = ${formatRate(bracket.rate)} × ${formatMoney(gross)} = ${formatMoney(tax)}`;
@@ -962,22 +1394,26 @@ main {
     }
 
     function reset(){
-      el.terForm.reset();ids.forEach(id=>document.getElementById(id).value="");el.resultState.textContent="Belum dihitung";el.resultState.classList.remove("ready");el.taxResult.textContent="Rp0";el.taxCaption.textContent="Masukkan data penghasilan dan tekan tombol hitung.";el.categoryResult.textContent="—";el.ptkpResult.textContent="Status PTKP belum dipilih";el.rateResult.textContent="0%";el.rangeResult.textContent="Lapisan bruto belum ditentukan";el.methodResult.textContent="Gross";el.baseIncomeResult.textContent="Rp0";el.allowanceResult.textContent="Rp0";el.grossResult.textContent="Rp0";el.netResult.textContent="Rp0";el.formulaResult.textContent="PPh Pasal 21 = Tarif Efektif Bulanan × Penghasilan Bruto Bulanan";el.errorBox.classList.remove("show");syncEmployeeType();syncPTKP();syncMethod();syncLiveGross();
+      el.terForm.reset();ids.forEach(id=>document.getElementById(id).value="");el.resultState.textContent="Belum dihitung";el.resultState.classList.remove("ready");el.taxResult.textContent="Rp0";el.taxCaption.textContent="Masukkan data penghasilan dan tekan tombol hitung.";el.categoryResult.textContent="—";el.ptkpResult.textContent="Status PTKP belum dipilih";el.rateResult.textContent="0%";el.rangeResult.textContent="Lapisan bruto belum ditentukan";el.methodResult.textContent="Gross";el.baseIncomeResult.textContent="Rp0";el.allowanceResult.textContent="Rp0";el.grossResult.textContent="Rp0";el.netResult.textContent="Rp0";el.formulaResult.textContent="PPh Pasal 21 = Tarif Efektif Bulanan × Penghasilan Bruto Bulanan";el.errorBox.classList.remove("show");syncEmployeeType();syncPTKP();syncMethod();syncLiveGross();updateDtpGuide();
     }
 
     function showToast(text){el.toast.textContent=text;el.toast.classList.add("show");clearTimeout(showToast.t);showToast.t=setTimeout(()=>el.toast.classList.remove("show"),1800)}
 
     document.querySelectorAll(".money-input").forEach(input=>{input.addEventListener("input",()=>{formatInput(input);syncLiveGross()});input.addEventListener("focus",()=>input.select())});
-    [el.employeeType,el.maritalStatus,el.dependents].forEach(input=>input.addEventListener("change",()=>{syncEmployeeType();syncPTKP();syncLiveGross()}));
+    el.dtpReferenceGross.addEventListener("input",()=>{formatInput(el.dtpReferenceGross);updateDtpGuide()});
+    el.dtpReferenceGross.addEventListener("focus",()=>el.dtpReferenceGross.select());
+    el.dtpKluInput.addEventListener("input",updateDtpGuide);
+    [el.dtpStatus,el.dtpIdentityStatus,el.dtpStartTiming,el.dtpOtherIncentive,el.dtpEmployerConfirmation].forEach(input=>input.addEventListener("change",updateDtpGuide));
+    [el.employeeType,el.gender,el.maritalStatus,el.husbandNoIncomeCertificate,el.dependents,el.ptkpTiming].forEach(input=>input.addEventListener("change",()=>{syncEmployeeType();syncPTKP();syncLiveGross();updateDtpGuide()}));
     document.querySelectorAll('input[name="method"]').forEach(r=>r.addEventListener("change",syncMethod));
     el.terForm.addEventListener("submit",e=>{e.preventDefault();calculate(true)});el.resetBtn.addEventListener("click",reset);el.printBtn.addEventListener("click",()=>window.print());
     el.copyBtn.addEventListener("click",async()=>{
       const r=calculate(false);if(!r){showToast("Isi data penghasilan terlebih dahulu");return}
-      const text=["HASIL KALKULATOR TER PPh PASAL 21 — KABAYAN",`Status PTKP: ${r.p.status}`,`Kategori TER: ${r.p.category}`,`Lapisan bruto: ${rangeText(r.bracket)}`,`Tarif TER: ${formatRate(r.bracket.rate)}`,`Metode: ${method()==="grossup"?"Gross-up":"Gross"}`,`Penghasilan selain tunjangan PPh: ${formatMoney(r.base)}`,`Tunjangan PPh: ${formatMoney(r.allowance)}`,`Penghasilan bruto: ${formatMoney(r.gross)}`,`PPh Pasal 21: ${formatMoney(r.tax)}`].join("\n");
+      const text=["HASIL KALKULATOR TER PPh PASAL 21 — KABAYAN",`Masa Pajak: ${el.taxMonth.options[el.taxMonth.selectedIndex].text}`,"Sumber penghasilan: satu pemberi kerja/pembayar yang sama",`Status PTKP: ${r.p.status}`,`Kategori TER: ${r.p.category}`,`Lapisan bruto: ${rangeText(r.bracket)}`,`Tarif TER: ${formatRate(r.bracket.rate)}`,`Metode: ${method()==="grossup"?"Gross-up":"Gross"}`,`Penghasilan selain tunjangan PPh: ${formatMoney(r.base)}`,`Tunjangan PPh: ${formatMoney(r.allowance)}`,`Penghasilan bruto: ${formatMoney(r.gross)}`,`PPh Pasal 21: ${formatMoney(r.tax)}`].join("\n");
       try{await navigator.clipboard.writeText(text);showToast("Hasil berhasil disalin")}catch{showToast("Browser tidak mengizinkan penyalinan otomatis")}
     });
 
-    syncEmployeeType();syncPTKP();syncMethod();syncLiveGross();
+    populateDtpKluOptions();syncEmployeeType();syncPTKP();syncMethod();syncLiveGross();updateDtpGuide();
   </script>
 <script>
 (() => {
