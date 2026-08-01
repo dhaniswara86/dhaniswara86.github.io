@@ -414,7 +414,7 @@
 
     .picker-grid {
       display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 14px;
       margin-top: 56px;
     }
@@ -899,10 +899,6 @@
         grid-template-columns: repeat(3, minmax(0, 1fr));
       }
 
-      .picker-item:last-child {
-        grid-column: 2;
-      }
-
       .calc-card.featured {
         grid-template-columns: 1fr;
       }
@@ -994,14 +990,9 @@
         gap: 12px;
       }
 
-      .picker-item,
-      .picker-item:last-child {
+      .picker-item {
         min-height: 240px;
         grid-column: auto;
-      }
-
-      .picker-item:last-child {
-        grid-column: 1 / -1;
       }
 
       .calc-card,
@@ -1092,10 +1083,6 @@
 
       .picker-grid {
         grid-template-columns: 1fr;
-      }
-
-      .picker-item:last-child {
-        grid-column: auto;
       }
 
       .section-title {
@@ -1284,6 +1271,20 @@
             <p>Pemetaan PPh, PPN, dan kondisi khusus belanja instansi.</p>
             <span class="picker-arrow">Buka ›</span>
           </a>
+
+          <a class="picker-item" data-link="preliminaryRefund" href="https://dhaniswara86.github.io/kalkulator-pengembalian-pendahuluan.html">
+            <div class="picker-icon" aria-hidden="true">
+              <svg viewBox="0 0 64 64">
+                <rect x="15" y="7" width="34" height="50" rx="7"></rect>
+                <path d="M23 17h18M23 25h13M23 33h10"></path>
+                <path d="M38 40a8 8 0 1 1-6.2 3"></path>
+                <path d="m31 39 1 5 5-1"></path>
+              </svg>
+            </div>
+            <h3>Pengembalian Pendahuluan</h3>
+            <p>Pemetaan jalur, persyaratan formal, dan penelitian kredit pajak.</p>
+            <span class="picker-arrow">Buka ›</span>
+          </a>
         </div>
       </div>
     </section>
@@ -1426,6 +1427,42 @@
             </div>
           </article>
 
+          <article class="calc-card featured" id="card-preliminaryRefund">
+            <div>
+              <span class="card-badge">Pengembalian Pendahuluan</span>
+              <div class="card-meta">
+                <h3>Petakan kelayakan pengembalian pendahuluan.</h3>
+                <p>Membantu menguji jalur WP Kriteria Tertentu, WP Persyaratan Tertentu, dan PKP Berisiko Rendah berdasarkan profil SPT, nilai lebih bayar, kewajiban formal, serta kesiapan kredit pajak.</p>
+              </div>
+              <div class="card-tags">
+                <span>PMK 28 Tahun 2026</span>
+                <span>WP Kriteria Tertentu</span>
+                <span>WP Persyaratan Tertentu</span>
+                <span>PKP Berisiko Rendah</span>
+                <span>Pasal 19</span>
+              </div>
+              <div class="card-actions">
+                <a class="card-link" data-link="preliminaryRefund" href="https://dhaniswara86.github.io/kalkulator-pengembalian-pendahuluan.html">Buka kalkulator <span aria-hidden="true">›</span></a>
+                <span class="link-subtle">PPh dan PPN dalam alur terpandu</span>
+              </div>
+            </div>
+
+            <div class="feature-visual" aria-hidden="true">
+              <div class="feature-orbit"></div>
+              <div class="feature-center">
+                <svg viewBox="0 0 64 64">
+                  <rect x="15" y="7" width="34" height="50" rx="7"></rect>
+                  <path d="M23 17h18M23 25h13M23 33h10"></path>
+                  <path d="M38 40a8 8 0 1 1-6.2 3"></path>
+                  <path d="m31 39 1 5 5-1"></path>
+                </svg>
+              </div>
+              <span class="feature-chip one">PPh</span>
+              <span class="feature-chip two">PPN</span>
+              <span class="feature-chip three">PMK 28/2026</span>
+            </div>
+          </article>
+
           <article class="calc-card featured" id="card-governmentTax">
             <div>
               <span class="card-badge">Pajak Instansi Pemerintah</span>
@@ -1503,7 +1540,8 @@
       pph21Regular: "kalkulator-ter-kabayan.html",
       pph21NonPermanent: "kalkulator-pph21-pegawai-tidak-tetap.html",
       pph21Final: "kalkulator-pph21-masa-terakhir-kabayan.html",
-      governmentTax: "https://dhaniswara86.github.io/pajak-instansi-satu-pintu.html"
+      governmentTax: "https://dhaniswara86.github.io/pajak-instansi-satu-pintu.html",
+      preliminaryRefund: "https://dhaniswara86.github.io/kalkulator-pengembalian-pendahuluan.html"
     };
 
     document.querySelectorAll("[data-link]").forEach((link) => {
