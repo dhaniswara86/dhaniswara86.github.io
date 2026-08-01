@@ -758,7 +758,7 @@ input:focus,select:focus{border-color:var(--blue);background:#fff;box-shadow:0 0
 <div class="field"><span class="label">Apakah PKP belum melakukan penyerahan/ekspor sebagaimana Pasal 9 ayat (2a) UU PPN?</span><div class="segmented"><label><input name="preProduction" type="radio" value="yes"/>Ya</label><label><input name="preProduction" type="radio" value="no"/>Tidak</label></div></div>
 </div>
 <div class="grid" style="margin-top:18px">
-<div class="field"><span class="label">Apakah memiliki SK Penetapan WP Kriteria Tertentu?</span><div class="segmented"><label><input name="criteriaStatusPPN" type="radio" value="yes"/>Ya</label><label><input name="criteriaStatusPPN" type="radio" value="no"/>Tidak</label></div></div>
+<div class="field"><span class="label">Apakah memiliki SK Penetapan WP Kriteria Tertentu yang masih berlaku?</span><div class="segmented"><label><input name="criteriaStatusPPN" type="radio" value="yes"/>Ya</label><label><input name="criteriaStatusPPN" type="radio" value="no"/>Tidak</label></div></div>
 <div class="field"><span class="label">Apakah memiliki penetapan PKP Berisiko Rendah yang masih berlaku?</span><div class="segmented"><label><input name="lowRiskStatus" type="radio" value="yes"/>Ya</label><label><input name="lowRiskStatus" type="radio" value="no"/>Tidak</label></div></div>
 </div>
 <div class="section-card">
@@ -809,6 +809,7 @@ input:focus,select:focus{border-color:var(--blue);background:#fff;box-shadow:0 0
 <div class="step-number">3</div>
 <div><h2>Uji kewajiban formal</h2><p>Pertanyaan ini muncul untuk jalur yang membutuhkan penetapan aktif.</p></div>
 </div>
+<div class="notice info conditional" id="pasal19PriorityNotice"></div>
 <div class="conditional" id="criteriaFormalBlock">
 <div class="notice info">Jawab berdasarkan kondisi setelah penetapan WP Kriteria Tertentu dan kondisi pada saat permohonan.</div>
 <div class="question-list">
@@ -982,11 +983,31 @@ input:focus,select:focus{border-color:var(--blue);background:#fff;box-shadow:0 0
                         (taxType === 'op' && radio('criteriaStatusOP') === 'yes') ||
                         (taxType === 'ppn' && radio('criteriaStatusPPN') === 'yes');
     const hasLowRisk = taxType === 'ppn' && radio('lowRiskStatus') === 'yes';
+    const dualPpnStatus = taxType === 'ppn' && hasCriteria && hasLowRisk;
+    const bookYearEnd = radio('bookYearEnd');
     const opPseudo = isOpPseudoOverpayment();
-    show('criteriaFormalBlock', hasCriteria && !isBeforeNewRule() && !opPseudo);
-    show('lowRiskFormalBlock', hasLowRisk && !isBeforeNewRule());
+
+    // Pasal 19 ayat (1): ketika kedua status dimiliki, hanya jalur prioritas
+    // yang diuji. Selain akhir tahun buku menggunakan PKP Berisiko Rendah;
+    // akhir tahun buku menggunakan WP Kriteria Tertentu.
+    const criteriaFormalNeeded = hasCriteria && !isBeforeNewRule() && !opPseudo &&
+      (!dualPpnStatus || bookYearEnd === 'yes');
+    const lowRiskFormalNeeded = hasLowRisk && !isBeforeNewRule() &&
+      (!dualPpnStatus || bookYearEnd === 'no');
+
+    show('criteriaFormalBlock', criteriaFormalNeeded);
+    show('lowRiskFormalBlock', lowRiskFormalNeeded);
     show('noFormalNeeded', !hasCriteria && !hasLowRisk && !isBeforeNewRule() && !opPseudo);
     show('opPseudoStopNotice', opPseudo && !isBeforeNewRule());
+
+    const priorityNotice = document.getElementById('pasal19PriorityNotice');
+    const priorityResolved = dualPpnStatus && (bookYearEnd === 'yes' || bookYearEnd === 'no') && !isBeforeNewRule();
+    show('pasal19PriorityNotice', priorityResolved);
+    if (priorityNotice && priorityResolved){
+      priorityNotice.innerHTML = bookYearEnd === 'yes'
+        ? '<strong>Prioritas Pasal 19 ayat (1) huruf b:</strong> karena permohonan diajukan pada Masa Pajak akhir tahun buku, hanya kewajiban formal WP Kriteria Tertentu yang diuji.'
+        : '<strong>Prioritas Pasal 19 ayat (1) huruf a:</strong> karena permohonan diajukan selain Masa Pajak akhir tahun buku, hanya kewajiban formal PKP Berisiko Rendah yang diuji.';
+    }
 
     show('pphEvidenceBlock', (taxType === 'badan' || taxType === 'op') && !opPseudo);
     show('ppnEvidenceBlock', taxType === 'ppn');
@@ -1291,9 +1312,9 @@ input:focus,select:focus{border-color:var(--blue);background:#fff;box-shadow:0 0
       const requirementOK = supplies > 0 && supplies <= 4200000000 && lb > 0 && lb <= 1000000000 && !preProduction && (yearEnd || hasActivity);
       const criteriaOK = criteria === 'yes' && criteriaFormalOK && (yearEnd || hasActivity);
       const lowOK = low === 'yes' && lowFormalOK && hasActivity && ratio >= 80;
-      const criteriaDecisionActive = criteria === 'yes' && radio('criteriaActive') === 'yes';
-      const lowDecisionActive = low === 'yes' && radio('lowActive') === 'yes';
-      const dualStatusActive = criteriaDecisionActive && lowDecisionActive;
+      // Kedua jawaban status pada Tahap 2 menyatakan keputusan masih berlaku.
+      // Pasal 19 kemudian memilih satu jalur formal berdasarkan akhir tahun buku.
+      const dualStatusActive = criteria === 'yes' && low === 'yes';
 
       if (dualStatusActive){
         if (yearEnd){
@@ -1468,8 +1489,8 @@ input:focus,select:focus{border-color:var(--blue);background:#fff;box-shadow:0 0
         ['Jumlah lebih bayar PPN',rupiah.format(getNum('overpaymentPPN'))],
         ['Masa Pajak merupakan akhir tahun buku',answerText(radio('bookYearEnd'))],
         ['PKP belum melakukan penyerahan/ekspor sebagaimana Pasal 9 ayat (2a) UU PPN',answerText(radio('preProduction'))],
-        ['Memiliki SK Penetapan WP Kriteria Tertentu',answerText(radio('criteriaStatusPPN'))],
-        ['Memiliki SK Penetapan PKP Berisiko Rendah',answerText(radio('lowRiskStatus'))],
+        ['Memiliki SK Penetapan WP Kriteria Tertentu yang masih berlaku',answerText(radio('criteriaStatusPPN'))],
+        ['Memiliki SK Penetapan PKP Berisiko Rendah yang masih berlaku',answerText(radio('lowRiskStatus'))],
         ...ppnActivityFields.numerator.map(([id,label]) => [label,rupiah.format(getNum(id))]),
         ...ppnActivityFields.denominatorOnly.map(([id,label]) => [label,rupiah.format(getNum(id))]),
         ...ppnActivityFields.excluded.map(([id,label]) => [label,rupiah.format(getNum(id))]),
