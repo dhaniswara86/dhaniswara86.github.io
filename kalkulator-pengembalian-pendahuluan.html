@@ -433,6 +433,7 @@ input:focus,select:focus{border-color:var(--blue);background:#fff;box-shadow:0 0
 .section-card h3{margin:0 0 16px;font-size:18px;letter-spacing:-.03em}
 .conditional{display:none}
 .conditional.show{display:block;animation:fadeIn .18s ease}
+#calculationReadyBlock:not(.show){display:none}
 .question-list{display:grid;gap:10px}
 .yn-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(250px,auto);gap:16px;align-items:center;padding:15px 16px;border:1px solid var(--soft-gray);border-radius:16px;background:#fff}
 .yn-row strong{display:block;color:#303034;font-size:13px;line-height:1.45}
@@ -721,6 +722,18 @@ input:focus,select:focus{border-color:var(--blue);background:#fff;box-shadow:0 0
 <div class="field"><span class="label">Apakah memiliki SK Penetapan WP Kriteria Tertentu?</span><div class="segmented"><label><input name="criteriaStatusOP" type="radio" value="yes"/>Ya</label><label><input name="criteriaStatusOP" type="radio" value="no"/>Tidak</label></div><span class="hint">Status ini baru relevan ketika OP menjalankan usaha/pekerjaan bebas dan lebih bayar di atas Rp100.000.000.</span></div>
 </div>
 <div class="notice info">Orang pribadi yang tidak menjalankan usaha atau pekerjaan bebas termasuk WP Persyaratan Tertentu tanpa batas nominal lebih bayar dalam Pasal 9 ayat (2) huruf a.</div>
+<div class="section-card" id="opPseudoBlock">
+<h3>Uji sumber nilai lebih bayar Orang Pribadi</h3>
+<div class="notice warn" style="margin-top:0">Pasal 19 ayat (6) sampai dengan ayat (8) membedakan nilai lebih bayar dalam SPT dengan kelebihan pembayaran pajak yang benar-benar dapat dimohonkan pengembalian. Jawab seluruh pertanyaan berikut berdasarkan sumber nilai lebih bayar.</div>
+<div class="question-list">
+<div class="yn-row"><div><strong>Nilai lebih bayar hanya disebabkan perbedaan pembulatan penghitungan pajak dalam sistem administrasi DJP</strong></div><div class="segmented"><label><input name="opPseudoRounding" type="radio" value="yes"/>Ya</label><label><input name="opPseudoRounding" type="radio" value="no"/>Tidak</label></div></div>
+<div class="yn-row"><div><strong>Nilai lebih bayar berasal dari Pajak Penghasilan yang ditanggung pemerintah</strong></div><div class="segmented"><label><input name="opPseudoDtp" type="radio" value="yes"/>Ya</label><label><input name="opPseudoDtp" type="radio" value="no"/>Tidak</label></div></div>
+<div class="yn-row"><div><strong>Terdapat kesalahan pencantuman PPh Pasal 21 terutang atas penghasilan sehubungan dengan pekerjaan yang dikreditkan</strong></div><div class="segmented"><label><input name="opPseudoPph21" type="radio" value="yes"/>Ya</label><label><input name="opPseudoPph21" type="radio" value="no"/>Tidak</label></div></div>
+<div class="yn-row"><div><strong>Terdapat kredit pajak dari penghasilan sehubungan dengan pekerjaan dan/atau penghasilan dalam negeri lainnya tanpa pencantuman penghasilan terkait</strong></div><div class="segmented"><label><input name="opPseudoNoIncome" type="radio" value="yes"/>Ya</label><label><input name="opPseudoNoIncome" type="radio" value="no"/>Tidak</label></div></div>
+<div class="yn-row"><div><strong>Terdapat kredit pajak bersifat final yang diperhitungkan terhadap penghasilan nonfinal, termasuk kredit pajak istri dengan penghasilan dari satu pemberi kerja</strong></div><div class="segmented"><label><input name="opPseudoFinalMismatch" type="radio" value="yes"/>Ya</label><label><input name="opPseudoFinalMismatch" type="radio" value="no"/>Tidak</label></div></div>
+<div class="yn-row"><div><strong>Nilai lebih bayar berasal dari kondisi khusus PNS, anggota TNI/Polri, atau pejabat negara yang hanya menerima penghasilan dari APBN/APBD dan PPh terutang menurut Wajib Pajak lebih kecil daripada PPh Pasal 21 pada bukti pemotongan</strong></div><div class="segmented"><label><input name="opPseudoStateOfficial" type="radio" value="yes"/>Ya</label><label><input name="opPseudoStateOfficial" type="radio" value="no"/>Tidak</label></div></div>
+</div>
+</div>
 </div>
 <div class="conditional" id="profilePPN">
 <div class="grid">
@@ -827,13 +840,15 @@ input:focus,select:focus{border-color:var(--blue);background:#fff;box-shadow:0 0
 </div>
 </div>
 <div class="notice success conditional" id="noFormalNeeded">Berdasarkan data profil, jalur yang sedang diuji tidak mensyaratkan keputusan penetapan terlebih dahulu. Tahap berikutnya tetap menguji kesiapan bukti kredit pajak.</div>
+<div class="notice danger conditional" id="opPseudoStopNotice"><strong>Nilai lebih bayar terindikasi bukan kelebihan pembayaran pajak.</strong> Berdasarkan Pasal 19 ayat (6) sampai dengan ayat (8), jalur pengembalian pendahuluan dan pemeriksaan Pasal 17B tidak dilanjutkan untuk kondisi ini.</div>
 </section>
 <section class="step" data-step="4" id="step-4">
 <div class="step-head">
 <div class="step-number">4</div>
 <div><h2>Kesiapan penelitian kredit pajak</h2><p>Rinci setiap jenis bukti atau Pajak Masukan yang dikreditkan. Komponen yang tidak memenuhi validasi tidak diperhitungkan sebagai bagian dari lebih bayar.</p></div>
 </div>
-<div class="notice warn" style="margin-top:0"><strong>Hierarki aturan:</strong> validasi teknis pada tahap ini mengadopsi substansi PER-6/PJ/2025 sebagaimana diubah dengan PER-16/PJ/2025 yang telah diselaraskan ke PMK 28/2026. Ketentuan PER yang masih merujuk PMK 39/2018 tidak digunakan apabila berbeda dengan PMK 28/2026.</div>
+<div class="notice danger conditional" id="opPseudoEvidenceNotice"><strong>Penelitian kredit pajak tidak dilanjutkan.</strong> Jawaban pada tahap sebelumnya menunjukkan nilai lebih bayar termasuk kondisi Pasal 19 ayat (6) dan ayat (7). SPT tersebut tidak ditindaklanjuti dengan penelitian pengembalian pendahuluan maupun pemeriksaan Pasal 17B.</div>
+<div class="notice warn conditional" id="evidenceHierarchyNotice" style="margin-top:0"><strong>Hierarki aturan:</strong> validasi teknis pada tahap ini mengadopsi substansi PER-6/PJ/2025 sebagaimana diubah dengan PER-16/PJ/2025 yang telah diselaraskan ke PMK 28/2026. Ketentuan PER yang masih merujuk PMK 39/2018 tidak digunakan apabila berbeda dengan PMK 28/2026.</div>
 <div class="conditional" id="pphEvidenceBlock">
 <div class="section-card" style="margin-top:0">
 <h3>Rincian kredit Pajak Penghasilan</h3>
@@ -862,10 +877,10 @@ input:focus,select:focus{border-color:var(--blue);background:#fff;box-shadow:0 0
 </div>
 </div>
 </div>
-<div class="question-list" style="margin-top:18px">
+<div class="question-list conditional" id="calculationReadyBlock" style="margin-top:18px">
 <div class="yn-row"><div><strong>Penghitungan dalam SPT telah diperiksa kembali</strong><small>Penjumlahan, pengurangan, perkalian, pembagian, dan pengisian kredit pajak konsisten.</small></div><div class="segmented"><label><input name="calculationReady" type="radio" value="yes"/>Ya</label><label><input name="calculationReady" type="radio" value="no"/>Tidak</label></div></div>
 </div>
-<div class="notice warn">Tahap ini tidak menggantikan penelitian DJP. Jawaban “Ya” berarti bukti atau kredit dimiliki, digunakan, dan memenuhi validasi administrasi. Jawaban “Tidak” berarti bukti atau kredit dimiliki atau digunakan tetapi belum memenuhi validasi. Jawaban “Tidak memiliki” berarti jenis bukti atau kredit tersebut tidak dimiliki dan tidak digunakan dalam SPT.</div>
+<div class="notice warn conditional" id="evidenceDisclaimerNotice">Tahap ini tidak menggantikan penelitian DJP. Jawaban “Ya” berarti bukti atau kredit dimiliki, digunakan, dan memenuhi validasi administrasi. Jawaban “Tidak” berarti bukti atau kredit dimiliki atau digunakan tetapi belum memenuhi validasi. Jawaban “Tidak memiliki” berarti jenis bukti atau kredit tersebut tidak dimiliki dan tidak digunakan dalam SPT.</div>
 </section>
 <section class="step" data-step="5" id="step-5">
 <div class="step-head">
@@ -952,6 +967,9 @@ input:focus,select:focus{border-color:var(--blue);background:#fff;box-shadow:0 0
     if (!el.value) el.value = new Date().toISOString().slice(0,10);
   }
 
+  const anyYes = names => names.some(name => radio(name) === 'yes');
+  const isOpPseudoOverpayment = () => getVal('taxType') === 'op' && anyYes(opPseudoFields);
+
   function updateConditionalFields(){
     const taxType = getVal('taxType');
     show('transitionFields', isBeforeNewRule());
@@ -964,12 +982,18 @@ input:focus,select:focus{border-color:var(--blue);background:#fff;box-shadow:0 0
                         (taxType === 'op' && radio('criteriaStatusOP') === 'yes') ||
                         (taxType === 'ppn' && radio('criteriaStatusPPN') === 'yes');
     const hasLowRisk = taxType === 'ppn' && radio('lowRiskStatus') === 'yes';
-    show('criteriaFormalBlock', hasCriteria && !isBeforeNewRule());
+    const opPseudo = isOpPseudoOverpayment();
+    show('criteriaFormalBlock', hasCriteria && !isBeforeNewRule() && !opPseudo);
     show('lowRiskFormalBlock', hasLowRisk && !isBeforeNewRule());
-    show('noFormalNeeded', !hasCriteria && !hasLowRisk && !isBeforeNewRule());
+    show('noFormalNeeded', !hasCriteria && !hasLowRisk && !isBeforeNewRule() && !opPseudo);
+    show('opPseudoStopNotice', opPseudo && !isBeforeNewRule());
 
-    show('pphEvidenceBlock', taxType === 'badan' || taxType === 'op');
+    show('pphEvidenceBlock', (taxType === 'badan' || taxType === 'op') && !opPseudo);
     show('ppnEvidenceBlock', taxType === 'ppn');
+    show('opPseudoEvidenceNotice', opPseudo && !isBeforeNewRule());
+    show('evidenceHierarchyNotice', !opPseudo);
+    show('calculationReadyBlock', !opPseudo);
+    show('evidenceDisclaimerNotice', !opPseudo);
     updateRatioPreview();
   }
 
@@ -1005,6 +1029,20 @@ input:focus,select:focus{border-color:var(--blue);background:#fff;box-shadow:0 0
     ['ppnSelfPaidSspEvidence','Pajak Masukan dibayar sendiri menggunakan SSP'],
     ['ppnSelfPaidOtherEvidence','Pajak Masukan dibayar sendiri menggunakan sarana administrasi lain']
   ];
+
+  const opPseudoFields = [
+    'opPseudoRounding','opPseudoDtp','opPseudoPph21','opPseudoNoIncome',
+    'opPseudoFinalMismatch','opPseudoStateOfficial'
+  ];
+
+  const opPseudoLabels = {
+    opPseudoRounding:'Perbedaan pembulatan penghitungan pajak dalam sistem administrasi DJP',
+    opPseudoDtp:'PPh yang ditanggung pemerintah',
+    opPseudoPph21:'Kesalahan pencantuman PPh Pasal 21 terutang atas penghasilan sehubungan dengan pekerjaan',
+    opPseudoNoIncome:'Kredit pajak tanpa pencantuman penghasilan terkait',
+    opPseudoFinalMismatch:'Kredit pajak final diperhitungkan terhadap penghasilan nonfinal, termasuk kredit pajak istri dari satu pemberi kerja',
+    opPseudoStateOfficial:'Kondisi khusus PNS/TNI/Polri/pejabat negara sebagaimana Pasal 19 ayat (7) huruf c angka 4'
+  };
 
   const evidenceStatusLabel = {
     yes:'Ya — dimiliki, digunakan, dan memenuhi validasi',
@@ -1093,6 +1131,7 @@ input:focus,select:focus{border-color:var(--blue);background:#fff;box-shadow:0 0
         if (missingRadio('opBusiness')) return showError('Konfirmasi apakah orang pribadi menjalankan usaha atau pekerjaan bebas.'), false;
         if (getVal('overpaymentOP') === '') return showError('Isi jumlah lebih bayar PPh Orang Pribadi.'), false;
         if (missingRadio('criteriaStatusOP')) return showError('Pilih jawaban atas kepemilikan SK Penetapan WP Kriteria Tertentu.'), false;
+        if (opPseudoFields.some(missingRadio)) return showError('Lengkapi seluruh uji sumber nilai lebih bayar Orang Pribadi.'), false;
       }
       if (type === 'ppn'){
         if (getVal('suppliesPPN') === '' || getVal('overpaymentPPN') === '' || ['bookYearEnd','preProduction','criteriaStatusPPN','lowRiskStatus'].some(missingRadio)) return showError('Lengkapi nilai penyerahan, lebih bayar, akhir tahun buku, status belum berproduksi, dan status penetapan.'), false;
@@ -1113,6 +1152,7 @@ input:focus,select:focus{border-color:var(--blue);background:#fff;box-shadow:0 0
     }
     if (step === 4 && !isBeforeNewRule()){
       const type = getVal('taxType');
+      if (type === 'op' && isOpPseudoOverpayment()) return true;
       const evidenceFields = type === 'ppn' ? ppnEvidenceFields : pphEvidenceFields;
       if (evidenceFields.some(([name]) => !radio(name))) return showError(type === 'ppn' ? 'Jawab Ya, Tidak, atau Tidak memiliki untuk seluruh jenis Pajak Masukan.' : 'Jawab Ya, Tidak, atau Tidak memiliki untuk seluruh jenis kredit PPh.'), false;
       if (type === 'ppn' && missingRadio('ppnAllCredited')) return showError('Konfirmasi apakah seluruh Pajak Masukan yang diminta telah dikreditkan dalam SPT Masa PPN.'), false;
@@ -1145,12 +1185,31 @@ input:focus,select:focus{border-color:var(--blue);background:#fff;box-shadow:0 0
 
   function route(name,time,basis,detail,checks=[]){return {name,time,basis,detail,checks}}
 
+  function evaluateOpPseudo(){
+    const selected = opPseudoFields.filter(name => radio(name) === 'yes').map(name => opPseudoLabels[name]);
+    return {
+      status:'danger',
+      title:'Tidak terdapat kelebihan pembayaran pajak yang dapat dimohonkan',
+      subtitle:'Nilai lebih bayar dalam SPT termasuk kondisi Pasal 19 ayat (6) dan ayat (7) PMK 28 Tahun 2026 sehingga bukan permohonan pengembalian pendahuluan kelebihan pembayaran pajak.',
+      routes:[],
+      warnings:[],
+      failures:selected.map(label => `Sumber nilai lebih bayar: ${label}.`),
+      notes:[
+        'Permohonan pengembalian kelebihan pembayaran pajak tidak dapat diajukan untuk kondisi ini.',
+        'SPT tidak ditindaklanjuti dengan penelitian pengembalian pendahuluan dan/atau pemeriksaan berdasarkan Pasal 17B UU KUP.',
+        'DJP menerbitkan surat pemberitahuan bahwa SPT tidak terdapat kelebihan pembayaran pajak.'
+      ],
+      noArticle17B:true
+    };
+  }
+
   function evaluate(){
     const type = getVal('taxType');
     const result = {status:'success', title:'Memenuhi syarat untuk diberikan pengembalian pendahuluan', subtitle:'Berdasarkan data yang diisi, terdapat jalur pengembalian pendahuluan yang memenuhi. Hasil tetap bergantung pada penelitian DJP dan validitas data administrasi.', routes:[], warnings:[], failures:[], notes:[]};
 
 
     if (isBeforeNewRule()) return evaluateTransition();
+    if (type === 'op' && isOpPseudoOverpayment()) return evaluateOpPseudo();
 
     const criteriaFields = ['criteriaActive','criteriaSptAnnual','criteriaSptTwoConsecutive','criteriaSptThreeInYear','criteriaSptBeforeNextDeadline','criteriaDebt','criteriaFinancialAudited','criteriaFinancialWtp','criteriaFinancialNoRestatement','criteriaFinancialAuditorLimit','criteriaFinancialFiscalExplanation','criteriaNoAudit','criteriaNoBukper'];
     const lowFields = ['lowActive','lowSpt','lowNoAudit','lowNoBukper','lowNoCrime'];
@@ -1192,7 +1251,7 @@ input:focus,select:focus{border-color:var(--blue);background:#fff;box-shadow:0 0
       const lb = getNum('overpaymentOP');
       const criteria = radio('criteriaStatusOP');
       if (business === 'no' && lb > 0){
-        result.routes.push(route('WP yang Memenuhi Persyaratan Tertentu','Paling lama 15 hari kerja','Pasal 9–12 PMK 28/2026','Orang pribadi yang tidak menjalankan usaha atau pekerjaan bebas termasuk jalur ini tanpa batas nominal lebih bayar khusus.',[
+        result.routes.push(route('WP yang Memenuhi Persyaratan Tertentu','Paling lama 15 hari kerja',lb <= 100000000 ? 'Pasal 9–12 jo. Pasal 19 ayat (3) PMK 28/2026' : 'Pasal 9–12 PMK 28/2026','Orang pribadi yang tidak menjalankan usaha atau pekerjaan bebas termasuk jalur ini tanpa batas nominal lebih bayar khusus.',[
           'SPT Tahunan PPh Orang Pribadi menyatakan lebih bayar.',
           'Tidak menjalankan usaha atau pekerjaan bebas.'
         ]));
@@ -1213,6 +1272,9 @@ input:focus,select:focus{border-color:var(--blue);background:#fff;box-shadow:0 0
           if (criteriaFormalNo) result.failures.push('Kewajiban formal WP Kriteria Tertentu tidak seluruhnya terpenuhi berdasarkan jawaban pengguna.');
         }
       }
+      if (lb > 0 && lb <= 100000000){
+        result.notes.push('Pasal 19 ayat (4): apabila SPT Orang Pribadi sebagaimana ayat (3) diperiksa dan diterbitkan SKPKB, pengurangan sanksi administratif diberikan menjadi sebesar bunga berdasarkan Pasal 13 ayat (2) UU KUP sesuai ketentuan Pasal 36 ayat (1) huruf a UU KUP.');
+      }
     }
 
     if (type === 'ppn'){
@@ -1229,8 +1291,11 @@ input:focus,select:focus{border-color:var(--blue);background:#fff;box-shadow:0 0
       const requirementOK = supplies > 0 && supplies <= 4200000000 && lb > 0 && lb <= 1000000000 && !preProduction && (yearEnd || hasActivity);
       const criteriaOK = criteria === 'yes' && criteriaFormalOK && (yearEnd || hasActivity);
       const lowOK = low === 'yes' && lowFormalOK && hasActivity && ratio >= 80;
+      const criteriaDecisionActive = criteria === 'yes' && radio('criteriaActive') === 'yes';
+      const lowDecisionActive = low === 'yes' && radio('lowActive') === 'yes';
+      const dualStatusActive = criteriaDecisionActive && lowDecisionActive;
 
-      if (criteria === 'yes' && low === 'yes'){
+      if (dualStatusActive){
         if (yearEnd){
           if (criteriaOK) result.routes.push(route('WP dengan Kriteria Tertentu','Paling lama 1 bulan','Pasal 19 ayat (1) huruf b jo. Pasal 3–8 PMK 28/2026','Karena masa yang dimohonkan merupakan akhir tahun buku dan WP sekaligus berstatus PKP Berisiko Rendah, PMK menentukan penggunaan jalur WP Kriteria Tertentu.',[]));
           else result.failures.push('Prioritas masa akhir tahun buku adalah jalur WP Kriteria Tertentu, tetapi kewajiban formalnya belum seluruhnya terpenuhi atau terverifikasi.');
@@ -1259,7 +1324,7 @@ input:focus,select:focus{border-color:var(--blue);background:#fff;box-shadow:0 0
         }
       }
 
-      const hasExplicitPriority = criteria === 'yes' && low === 'yes';
+      const hasExplicitPriority = dualStatusActive;
       if (!hasExplicitPriority){
         if (requirementOK){
           result.routes.push(route('WP yang Memenuhi Persyaratan Tertentu','Paling lama 1 bulan','Pasal 9–12 PMK 28/2026',`Penyerahan ${rupiah.format(supplies)} dan lebih bayar ${rupiah.format(lb)} berada dalam batas Pasal 9 ayat (2) huruf d.`,[
@@ -1278,6 +1343,9 @@ input:focus,select:focus{border-color:var(--blue);background:#fff;box-shadow:0 0
 
       const routeNames = result.routes.map(r => r.name);
       if (!hasExplicitPriority && routeNames.length > 1) result.warnings.push('Lebih dari satu jalur tampak memenuhi. Selain kombinasi WP Kriteria Tertentu dan PKP Berisiko Rendah yang diatur Pasal 19 ayat (1), PMK 28/2026 tidak menetapkan prioritas eksplisit untuk seluruh kemungkinan tumpang tindih. Konfirmasi pilihan jalur pada SPT/Coretax.');
+      if (dualStatusActive){
+        result.notes.push('Pasal 19 ayat (2): apabila atas SPT status ganda telah diterbitkan SKPPKP, kemudian dilakukan pemeriksaan dan diterbitkan SKPKB, dikenai sanksi administratif berdasarkan Pasal 13 ayat (2) UU KUP.');
+      }
       if (supplies > 0 && activityCalc.totalDetailed > 0 && Math.abs(supplies - activityCalc.totalDetailed) > 1){
         result.warnings.push(`Jumlah penyerahan yang diisi untuk uji batas Rp4.200.000.000 (${rupiah.format(supplies)}) berbeda dengan total seluruh rincian transaksi (${rupiah.format(activityCalc.totalDetailed)}). Rekonsiliasi dengan SPT Masa PPN dan pastikan tidak ada kategori yang terlewat atau dihitung ganda.`);
       }
@@ -1345,6 +1413,15 @@ input:focus,select:focus{border-color:var(--blue);background:#fff;box-shadow:0 0
     ['lowNoCrime','Tidak pernah dipidana karena tindak pidana perpajakan dalam 5 tahun terakhir']
   ];
 
+  const opPseudoSummaryFields = [
+    ['opPseudoRounding','Lebih bayar hanya karena perbedaan pembulatan sistem DJP'],
+    ['opPseudoDtp','Lebih bayar berasal dari PPh ditanggung pemerintah'],
+    ['opPseudoPph21','Kesalahan pencantuman PPh Pasal 21 terutang'],
+    ['opPseudoNoIncome','Kredit pajak tanpa penghasilan terkait'],
+    ['opPseudoFinalMismatch','Kredit pajak final diperhitungkan terhadap penghasilan nonfinal'],
+    ['opPseudoStateOfficial','Kondisi khusus PNS/TNI/Polri/pejabat negara']
+  ];
+
   const answerText = value => ({yes:'Ya',no:'Tidak',none:'Tidak memiliki'}[value] || '-');
   const selectedOptionText = id => {
     const el = document.getElementById(id);
@@ -1383,6 +1460,7 @@ input:focus,select:focus{border-color:var(--blue);background:#fff;box-shadow:0 0
         ['Jumlah lebih bayar PPh Orang Pribadi',rupiah.format(getNum('overpaymentOP'))],
         ['Memiliki SK Penetapan WP Kriteria Tertentu',answerText(radio('criteriaStatusOP'))]
       );
+      opPseudoSummaryFields.forEach(([name,label]) => stage2.push([label,answerText(radio(name))]));
     } else if (type === 'ppn'){
       const calc = calculatePpnActivity();
       stage2.push(
@@ -1411,12 +1489,17 @@ input:focus,select:focus{border-color:var(--blue);background:#fff;box-shadow:0 0
     }
 
     const evidenceFields = type === 'ppn' ? ppnEvidenceFields : pphEvidenceFields;
-    const stage4 = evidenceFields.map(([name,label]) => [label,answerText(radio(name))]);
-    stage4.push([
-      type === 'ppn' ? 'Seluruh Pajak Masukan yang diminta telah dikreditkan dalam SPT Masa PPN' : 'Seluruh kredit PPh yang diminta telah dicantumkan dalam SPT',
-      answerText(radio(type === 'ppn' ? 'ppnAllCredited' : 'pphAllCredited'))
-    ]);
-    stage4.push(['Penghitungan dalam SPT telah diperiksa kembali',answerText(radio('calculationReady'))]);
+    const stage4 = [];
+    if (type === 'op' && isOpPseudoOverpayment()){
+      stage4.push(['Penelitian kredit pajak','Tidak dilanjutkan karena nilai lebih bayar termasuk Pasal 19 ayat (6) sampai dengan ayat (8)']);
+    } else {
+      evidenceFields.forEach(([name,label]) => stage4.push([label,answerText(radio(name))]));
+      stage4.push([
+        type === 'ppn' ? 'Seluruh Pajak Masukan yang diminta telah dikreditkan dalam SPT Masa PPN' : 'Seluruh kredit PPh yang diminta telah dicantumkan dalam SPT',
+        answerText(radio(type === 'ppn' ? 'ppnAllCredited' : 'pphAllCredited'))
+      ]);
+      stage4.push(['Penghitungan dalam SPT telah diperiksa kembali',answerText(radio('calculationReady'))]);
+    }
 
     return `<div class="print-only print-summary">
       <h1 class="print-summary-title">KABAYAN — Hasil Pemetaan Pengembalian Pendahuluan</h1>
@@ -1463,7 +1546,8 @@ input:focus,select:focus{border-color:var(--blue);background:#fff;box-shadow:0 0
 
     const evidenceFields = getVal('taxType') === 'ppn' ? ppnEvidenceFields : pphEvidenceFields;
     const allCreditedName = getVal('taxType') === 'ppn' ? 'ppnAllCredited' : 'pphAllCredited';
-    const evidenceBlock = `<div class="result-box" style="grid-column:1/-1"><h3>Rincian validasi kredit pajak</h3>
+    const opPseudoResult = getVal('taxType') === 'op' && isOpPseudoOverpayment();
+    const evidenceBlock = opPseudoResult ? '' : `<div class="result-box" style="grid-column:1/-1"><h3>Rincian validasi kredit pajak</h3>
       <table class="component-table"><thead><tr><th>Jenis bukti/kredit</th><th>Status yang dipilih</th></tr></thead><tbody>
       ${evidenceFields.map(([name,label])=>`<tr><td>${escapeHTML(label)}</td><td>${escapeHTML(evidenceStatusLabel[radio(name)] || '-')}</td></tr>`).join('')}
       <tr class="total"><td>Seluruh kredit yang diminta telah dikreditkan dalam SPT</td><td>${escapeHTML({yes:'Ya',no:'Tidak'}[radio(allCreditedName)] || '-')}</td></tr>
@@ -1479,7 +1563,9 @@ input:focus,select:focus{border-color:var(--blue);background:#fff;box-shadow:0 0
       </div>
       ${routeHtml}
       <div class="result-columns" style="margin-top:16px">${warnings}${failures}${notes}${ratioBlock}${evidenceBlock}</div>
-      <div class="notice info" style="margin-top:18px"><strong>Langkah pengajuan:</strong> permohonan pengembalian pendahuluan diajukan dengan mengisi kolom yang tersedia dalam SPT. Pastikan setiap kredit yang diminta telah dikreditkan dalam SPT dan memenuhi validasi administrasi sebelum SPT disampaikan.</div>
+      ${opPseudoResult
+        ? '<div class="notice danger" style="margin-top:18px"><strong>Tindak lanjut:</strong> periksa dan koreksi sumber nilai lebih bayar dalam SPT. Kondisi Pasal 19 ayat (6) sampai dengan ayat (8) tidak diproses sebagai permohonan pengembalian dan tidak dialihkan ke pemeriksaan Pasal 17B.</div>'
+        : '<div class="notice info" style="margin-top:18px"><strong>Langkah pengajuan:</strong> permohonan pengembalian pendahuluan diajukan dengan mengisi kolom yang tersedia dalam SPT. Pastikan setiap kredit yang diminta telah dikreditkan dalam SPT dan memenuhi validasi administrasi sebelum SPT disampaikan.</div>'}
     `;
   }
 
