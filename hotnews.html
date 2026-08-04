@@ -25,7 +25,7 @@
 
   <link
     rel="canonical"
-    href="https://dhaniswara86.id/hot-news.html"
+    href="https://dhaniswara86.id/hotnews.html"
   >
 
   <meta
@@ -1053,7 +1053,7 @@
         <a href="artikel.html">Artikel</a>
 
         <a
-          href="hot-news.html"
+          href="hotnews.html"
           aria-current="page"
         >
           Hot News
@@ -1096,7 +1096,7 @@
     <a href="kalkulator.html">Kalkulator</a>
     <a href="aplikasi.html">Aplikasi</a>
     <a href="artikel.html">Artikel</a>
-    <a href="hot-news.html">Hot News</a>
+    <a href="hotnews.html">Hot News</a>
     <a href="index.html#tentang">Tentang</a>
   </nav>
 
@@ -1129,10 +1129,11 @@
           <div class="hotnews-hero-actions">
             <a
               class="hotnews-button primary"
+              id="latestHotNewsButton"
               href="#hotnewsList"
             >
               Lihat Hot News
-              <span aria-hidden="true">↓</span>
+              <span aria-hidden="true">›</span>
             </a>
 
             <a
@@ -1261,7 +1262,7 @@
         <a href="kalkulator.html">Kalkulator</a>
         <a href="aplikasi.html">Aplikasi</a>
         <a href="artikel.html">Artikel</a>
-        <a href="hot-news.html">Hot News</a>
+        <a href="hotnews.html">Hot News</a>
         <a href="#top">Kembali ke atas</a>
       </div>
     </div>
@@ -1271,15 +1272,8 @@
     Data harus dimuat lebih dahulu, kemudian script daftar.
     Atribut defer menjaga urutan eksekusi sesuai urutan penulisan.
   -->
-  <script
-    src="assets/js/hotnews-data.js"
-    defer
-  ></script>
-
-  <script
-    src="assets/js/hotnews-list.js"
-    defer
-  ></script>
+  <script src="assets/js/hotnews-data.js"></script>
+  <script src="assets/js/hotnews-list.js"></script>
 
   <script>
     const menuToggle =
@@ -1343,6 +1337,47 @@
     if (currentYear) {
       currentYear.textContent =
         new Date().getFullYear();
+    }
+
+    /*
+     * Tombol utama membuka artikel Hot News terbaru.
+     * Jika data belum tersedia, tombol tetap menggulir ke daftar berita.
+     */
+    const latestHotNewsButton =
+      document.getElementById("latestHotNewsButton");
+
+    if (
+      latestHotNewsButton &&
+      Array.isArray(window.KABAYAN_HOTNEWS) &&
+      window.KABAYAN_HOTNEWS.length > 0
+    ) {
+      const latestArticle = [
+        ...window.KABAYAN_HOTNEWS
+      ]
+        .filter((item) => {
+          return item && item.id;
+        })
+        .sort((a, b) => {
+          const dateA =
+            Date.parse(a.dateISO) || 0;
+
+          const dateB =
+            Date.parse(b.dateISO) || 0;
+
+          return dateB - dateA;
+        })[0];
+
+      if (latestArticle) {
+        latestHotNewsButton.href =
+          "hotnews-detail.html?id=" +
+          encodeURIComponent(latestArticle.id);
+
+        latestHotNewsButton.setAttribute(
+          "aria-label",
+          "Buka Hot News terbaru: " +
+            String(latestArticle.title || "")
+        );
+      }
     }
   </script>
 </body>
