@@ -1,0 +1,543 @@
+/* =========================================================
+   HOT NEWS — PERBAIKAN RESPONSIVE PONSEL
+   File: assets/css/hotnews-mobile-fix.css
+
+   Muat SETELAH hotnews-katalog.css.
+   ========================================================= */
+
+/* Mencegah elemen grid/flex mendorong halaman melebar */
+.kabayan-news-hero-inner,
+.kabayan-news-copy,
+.kabayan-news-visual,
+.kabayan-news-device,
+.hotnews-featured-card,
+.hotnews-featured-copy,
+.hotnews-featured-visual,
+.hotnews-section-inner,
+.hotnews-archive-inner,
+.hotnews-catalog-footer-inner {
+  min-width: 0;
+}
+
+.kabayan-news-device,
+.hotnews-featured-card,
+.hotnews-article-card,
+.hotnews-search-panel {
+  max-width: 100%;
+}
+
+@media (max-width: 1100px) {
+  .kabayan-news-hero-inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .kabayan-news-copy {
+    text-align: center;
+  }
+
+  .kabayan-news-kicker,
+  .kabayan-news-actions {
+    justify-content: center;
+  }
+
+  .kabayan-news-description {
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .kabayan-news-visual {
+    width: min(620px, 100%);
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .kabayan-news-device {
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+@media (max-width: 980px) {
+  .hotnews-catalog-menu {
+    display: none;
+  }
+
+  .hotnews-catalog-menu-button {
+    display: grid;
+  }
+
+  .hotnews-featured-card {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hotnews-article-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hotnews-archive-inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 680px) {
+  html,
+  body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* Navigasi */
+
+  .hotnews-catalog-nav-inner {
+    width: calc(100% - 28px);
+    min-height: 48px;
+    gap: 12px;
+  }
+
+  .hotnews-catalog-brand {
+    min-width: 0;
+  }
+
+  .hotnews-catalog-brand > span:last-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .hotnews-catalog-mobile-menu {
+    inset: 48px 0 0;
+    padding: 25px 20px 48px;
+    overscroll-behavior: contain;
+  }
+
+  .hotnews-catalog-mobile-menu a {
+    padding: 9px 0;
+    font-size: 24px;
+    line-height: 1.2;
+  }
+
+  /* Announcement */
+
+  .hotnews-announcement {
+    padding: 10px 18px;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  .hotnews-announcement a {
+    display: inline;
+  }
+
+  /* Hero */
+
+  .kabayan-news-hero {
+    min-height: auto;
+    padding: 34px 16px 30px;
+  }
+
+  .kabayan-news-hero-inner {
+    width: 100%;
+    gap: 30px;
+  }
+
+  .kabayan-news-copy {
+    width: 100%;
+  }
+
+  .kabayan-news-kicker {
+    justify-content: center;
+    margin-bottom: 16px;
+    font-size: 12px;
+  }
+
+  .kabayan-news-kicker span {
+    width: 8px;
+    height: 8px;
+  }
+
+  .kabayan-news-title {
+    max-width: 100%;
+    font-size: clamp(39px, 11.5vw, 49px);
+    line-height: 1.02;
+    letter-spacing: -0.055em;
+    overflow-wrap: break-word;
+  }
+
+  /*
+   * HTML lama memasang <br> paksa.
+   * Pada ponsel, biarkan browser menentukan pergantian baris.
+   */
+  .kabayan-news-title br {
+    display: none;
+  }
+
+  .kabayan-news-title-dark,
+  .kabayan-news-title-gradient {
+    display: block;
+  }
+
+  .kabayan-news-description {
+    max-width: 34rem;
+    margin-top: 20px;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  .kabayan-news-actions {
+    width: 100%;
+    margin-top: 22px;
+    align-items: stretch;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .kabayan-news-button {
+    width: 100%;
+    min-height: 46px;
+    padding: 10px 17px;
+    font-size: 14px;
+  }
+
+  .kabayan-news-topics {
+    width: calc(100% + 32px);
+    margin: 20px -16px 0;
+    padding: 0 16px 6px;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .kabayan-news-topics::-webkit-scrollbar {
+    display: none;
+  }
+
+  .kabayan-news-topics button {
+    flex: 0 0 auto;
+    min-height: 34px;
+    scroll-snap-align: start;
+    white-space: nowrap;
+  }
+
+  /* Mockup kanan */
+
+  .kabayan-news-visual {
+    width: 100%;
+    padding: 0;
+  }
+
+  .kabayan-news-device {
+    width: 100%;
+    max-width: 380px;
+    margin: 0 auto;
+    padding: 18px 13px 15px;
+    border-width: 5px;
+    border-radius: 20px 20px 5px 5px;
+    transform: none;
+    box-shadow: 0 20px 42px rgba(10, 43, 76, 0.16);
+  }
+
+  .kabayan-news-device-header {
+    gap: 10px;
+    margin-bottom: 12px;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+  }
+
+  .kabayan-news-latest {
+    flex-shrink: 0;
+  }
+
+  .kabayan-news-screen-feature {
+    padding: 19px 16px;
+    border-radius: 16px;
+  }
+
+  .kabayan-news-screen-label {
+    padding: 5px 9px;
+    font-size: 9px;
+  }
+
+  .kabayan-news-screen-feature strong {
+    margin-top: 13px;
+    font-size: 21px;
+    line-height: 1.12;
+  }
+
+  .kabayan-news-screen-feature p {
+    font-size: 12px;
+  }
+
+  .kabayan-news-screen-list {
+    gap: 7px;
+    margin-top: 9px;
+  }
+
+  .kabayan-news-screen-item {
+    min-height: 62px;
+    padding: 9px 11px;
+    grid-template-columns: 36px minmax(0, 1fr);
+    gap: 10px;
+    border-radius: 13px;
+  }
+
+  .kabayan-news-number {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    font-size: 10px;
+  }
+
+  .kabayan-news-screen-item strong {
+    font-size: 13px;
+  }
+
+  .kabayan-news-screen-item small {
+    margin-top: 3px;
+    font-size: 9px;
+  }
+
+  /* Pencarian */
+
+  .hotnews-search-panel {
+    width: calc(100% - 24px);
+    margin: 24px auto 42px;
+    padding: 10px;
+    border-radius: 19px;
+  }
+
+  .hotnews-search-input {
+    min-height: 48px;
+    padding: 12px 42px;
+    border-radius: 14px;
+
+    /*
+     * 16px mencegah Safari iPhone melakukan zoom otomatis
+     * saat kolom pencarian disentuh.
+     */
+    font-size: 16px;
+  }
+
+  .hotnews-search-icon {
+    left: 15px;
+    font-size: 18px;
+  }
+
+  .hotnews-clear-search {
+    right: 10px;
+    width: 30px;
+    height: 30px;
+  }
+
+  .hotnews-filter-row {
+    width: calc(100% + 20px);
+    margin-right: -10px;
+    margin-left: -10px;
+    padding: 0 10px 3px;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .hotnews-filter-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hotnews-filter-button {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+
+  /* Berita unggulan */
+
+  .hotnews-featured-section {
+    padding: 8px 12px 58px;
+  }
+
+  .hotnews-section-heading,
+  .hotnews-catalog-top {
+    margin-bottom: 24px;
+    padding: 0 4px;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .hotnews-section-heading h2,
+  .hotnews-catalog-top h2 {
+    font-size: 31px;
+    line-height: 1.06;
+  }
+
+  .hotnews-featured-card {
+    min-height: 0;
+    grid-template-columns: minmax(0, 1fr);
+    border-radius: 23px;
+  }
+
+  .hotnews-featured-copy {
+    padding: 29px 22px 33px;
+  }
+
+  .hotnews-featured-category {
+    margin-bottom: 15px;
+  }
+
+  .hotnews-featured-copy h3 {
+    max-width: 100%;
+    font-size: clamp(27px, 8vw, 33px);
+    line-height: 1.08;
+    letter-spacing: -0.045em;
+    overflow-wrap: break-word;
+  }
+
+  .hotnews-featured-summary {
+    margin-top: 15px;
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .hotnews-featured-meta {
+    gap: 6px 12px;
+    margin-top: 18px;
+  }
+
+  .hotnews-featured-link {
+    width: 100%;
+    margin-top: 22px;
+  }
+
+  .hotnews-featured-visual {
+    min-height: 245px;
+  }
+
+  .hotnews-featured-document {
+    width: 172px;
+    height: 218px;
+    padding: 25px 21px;
+    transform:
+      translate(-50%, -48%)
+      rotateZ(-2deg);
+  }
+
+  .hotnews-featured-document strong {
+    margin-top: 13px;
+    font-size: 22px;
+  }
+
+  .hotnews-document-line {
+    margin-top: 24px;
+  }
+
+  .hotnews-document-accent {
+    margin-top: 73px;
+  }
+
+  /* Katalog */
+
+  .hotnews-catalog-section-new {
+    padding: 58px 12px;
+  }
+
+  .hotnews-result-count {
+    white-space: normal;
+  }
+
+  .hotnews-article-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hotnews-article-card {
+    min-height: 0;
+    padding: 23px 21px;
+    border-radius: 22px;
+  }
+
+  .hotnews-article-card h3 {
+    margin: 27px 0 12px;
+    font-size: 24px;
+    overflow-wrap: break-word;
+  }
+
+  .hotnews-card-footer-new {
+    margin-top: 28px;
+  }
+
+  .hotnews-empty-new {
+    padding: 50px 18px;
+    border-radius: 22px;
+  }
+
+  .hotnews-empty-new h3 {
+    font-size: 25px;
+  }
+
+  /* Arsip */
+
+  .hotnews-archive-section {
+    padding: 58px 18px;
+  }
+
+  .hotnews-archive-inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 25px;
+  }
+
+  .hotnews-archive-inner h2 {
+    font-size: 33px;
+    line-height: 1.07;
+  }
+
+  .hotnews-archive-link {
+    width: 100%;
+    white-space: normal;
+    text-align: center;
+  }
+
+  /* Footer */
+
+  .hotnews-catalog-disclaimer,
+  .hotnews-catalog-footer-inner {
+    width: calc(100% - 32px);
+  }
+
+  .hotnews-catalog-footer-inner {
+    padding-top: 19px;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .hotnews-catalog-footer-links {
+    width: 100%;
+    gap: 10px 16px;
+  }
+}
+
+@media (max-width: 390px) {
+  .hotnews-catalog-brand > span:last-child {
+    max-width: 145px;
+  }
+
+  .kabayan-news-title {
+    font-size: 39px;
+  }
+
+  .kabayan-news-device {
+    max-width: 350px;
+  }
+
+  .hotnews-featured-copy h3 {
+    font-size: 27px;
+  }
+
+  .hotnews-archive-inner h2 {
+    font-size: 30px;
+  }
+}
