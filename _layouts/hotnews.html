@@ -1,0 +1,1046 @@
+---
+---
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="{{ page.excerpt | default: site.description | strip_html | normalize_whitespace | escape }}"
+  >
+
+  <meta
+    name="author"
+    content="{{ page.author | default: site.author.name | escape }}"
+  >
+
+  <meta
+    name="robots"
+    content="index, follow"
+  >
+
+  <meta
+    name="theme-color"
+    content="#f5f5f7"
+  >
+
+  <link
+    rel="canonical"
+    href="{{ page.url | absolute_url }}"
+  >
+
+  <!-- Open Graph -->
+  <meta
+    property="og:type"
+    content="article"
+  >
+
+  <meta
+    property="og:title"
+    content="{{ page.title | escape }}"
+  >
+
+  <meta
+    property="og:description"
+    content="{{ page.excerpt | default: site.description | strip_html | normalize_whitespace | escape }}"
+  >
+
+  <meta
+    property="og:url"
+    content="{{ page.url | absolute_url }}"
+  >
+
+  <meta
+    property="og:locale"
+    content="id_ID"
+  >
+
+  <meta
+    property="og:site_name"
+    content="{{ site.title | escape }}"
+  >
+
+  {% if page.image %}
+    <meta
+      property="og:image"
+      content="{{ page.image | absolute_url }}"
+    >
+  {% endif %}
+
+  <!-- Metadata artikel -->
+  <meta
+    property="article:published_time"
+    content="{{ page.date | date_to_xmlschema }}"
+  >
+
+  {% if page.date_modified %}
+    <meta
+      property="article:modified_time"
+      content="{{ page.date_modified | date_to_xmlschema }}"
+    >
+  {% endif %}
+
+  {% if page.category %}
+    <meta
+      property="article:section"
+      content="{{ page.category | escape }}"
+    >
+  {% endif %}
+
+  {% for tag in page.tags %}
+    <meta
+      property="article:tag"
+      content="{{ tag | escape }}"
+    >
+  {% endfor %}
+
+  <title>
+    {{ page.title | escape }} | Kabayan Hot News
+  </title>
+
+  <link
+    rel="stylesheet"
+    href="{{ '/assets/css/hotnews.css' | relative_url }}"
+  >
+
+  <link
+    rel="stylesheet"
+    href="{{ '/assets/css/hotnews-article.css' | relative_url }}"
+  >
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": {{ page.title | jsonify }},
+    "description": {{ page.excerpt | default: site.description | strip_html | normalize_whitespace | jsonify }},
+    "datePublished": {{ page.date | date_to_xmlschema | jsonify }},
+    "dateModified": {{ page.date_modified | default: page.date | date_to_xmlschema | jsonify }},
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": {{ page.url | absolute_url | jsonify }}
+    },
+    "author": {
+      "@type": "Person",
+      "name": {{ page.author | default: site.author.name | jsonify }}
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Kabayan"
+    }
+    {% if page.image %},
+    "image": [
+      {{ page.image | absolute_url | jsonify }}
+    ]
+    {% endif %}
+  }
+  </script>
+</head>
+
+<body>
+  {% assign months =
+    "Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember"
+    | split: ","
+  %}
+
+  {% assign month_number =
+    page.date
+    | date: "%-m"
+    | minus: 1
+  %}
+
+  {% assign display_author =
+    page.author
+    | default: site.author.name
+  %}
+
+  <!-- Garis progres membaca -->
+  <div
+    id="readingProgress"
+    class="reading-progress"
+    aria-hidden="true"
+  ></div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a
+        class="brand"
+        href="{{ '/' | relative_url }}"
+        aria-label="Kabayan — Kembali ke beranda"
+      >
+        <span
+          class="brand-mark"
+          aria-hidden="true"
+        >
+          ASD
+        </span>
+
+        <span class="brand-name">
+          Kabayan
+        </span>
+      </a>
+
+      <nav
+        class="main-nav"
+        aria-label="Navigasi utama"
+      >
+        <a href="{{ '/' | relative_url }}">
+          Beranda
+        </a>
+
+        <a href="{{ '/buku.html' | relative_url }}">
+          Buku
+        </a>
+
+        <a href="{{ '/formulir.html' | relative_url }}">
+          Formulir
+        </a>
+
+        <a href="{{ '/aplikasi.html' | relative_url }}">
+          Aplikasi
+        </a>
+
+        <a
+          href="{{ '/hotnews.html' | relative_url }}"
+          aria-current="page"
+        >
+          Hot News
+        </a>
+
+        <a href="{{ '/tentang.html' | relative_url }}">
+          Tentang
+        </a>
+      </nav>
+
+      <button
+        id="menuButton"
+        class="menu-button"
+        type="button"
+        aria-label="Buka menu navigasi"
+        aria-expanded="false"
+        aria-controls="mobileMenu"
+      >
+        <span aria-hidden="true">
+          ☰
+        </span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Navigasi seluler -->
+  <nav
+    id="mobileMenu"
+    class="mobile-menu"
+    aria-label="Navigasi seluler"
+    hidden
+  >
+    <a href="{{ '/' | relative_url }}">
+      Beranda
+    </a>
+
+    <a href="{{ '/buku.html' | relative_url }}">
+      Buku Digital
+    </a>
+
+    <a href="{{ '/formulir.html' | relative_url }}">
+      Formulir
+    </a>
+
+    <a href="{{ '/aplikasi.html' | relative_url }}">
+      Aplikasi
+    </a>
+
+    <a
+      href="{{ '/hotnews.html' | relative_url }}"
+      aria-current="page"
+    >
+      Hot News
+    </a>
+
+    <a href="{{ '/tentang.html' | relative_url }}">
+      Tentang
+    </a>
+  </nav>
+
+  <main id="mainContent">
+    <!-- Hero artikel -->
+    <section class="hotnews-article-hero">
+      <div class="hotnews-hero-inner">
+        <span class="hotnews-article-kicker">
+          {{ page.category | default: "Kabayan Hot News" }}
+        </span>
+
+        <h1 class="hotnews-detail-title">
+          {{ page.title }}
+        </h1>
+
+        {% if page.excerpt %}
+          <p class="hotnews-detail-excerpt">
+            {{ page.excerpt }}
+          </p>
+        {% endif %}
+
+        <div class="hotnews-detail-meta">
+          <span>
+            Oleh {{ display_author }}
+          </span>
+
+          <span
+            class="hotnews-meta-separator"
+            aria-hidden="true"
+          >
+            •
+          </span>
+
+          <time datetime="{{ page.date | date_to_xmlschema }}">
+            {{ page.date | date: "%-d" }}
+            {{ months[month_number] }}
+            {{ page.date | date: "%Y" }}
+          </time>
+
+          {% if page.reading_time %}
+            <span
+              class="hotnews-meta-separator"
+              aria-hidden="true"
+            >
+              •
+            </span>
+
+            <span>
+              {{ page.reading_time }}
+            </span>
+          {% endif %}
+        </div>
+
+        <div class="hotnews-hero-actions">
+          <a
+            class="
+              hotnews-button
+              hotnews-button-primary
+            "
+            href="#articleContent"
+          >
+            Mulai membaca
+          </a>
+
+          <button
+            id="copyArticleLink"
+            class="
+              hotnews-button
+              hotnews-button-secondary
+            "
+            type="button"
+          >
+            Salin tautan
+          </button>
+
+          <a
+            class="
+              hotnews-button
+              hotnews-button-secondary
+            "
+            href="{{ '/hotnews.html' | relative_url }}"
+          >
+            Semua Hot News
+          </a>
+        </div>
+
+        {% if page.visual_type == "role-comparison" %}
+          <div
+            class="hotnews-role-visual"
+            aria-label="Perbandingan hak akses role"
+          >
+            <section
+              class="
+                role-visual-card
+                role-visual-card-highlight
+              "
+            >
+              <span class="role-visual-label">
+                Akses terbatas
+              </span>
+
+              <h2>
+                Hanya Induk
+              </h2>
+
+              <p>
+                Untuk pimpinan atau pejabat yang hanya
+                memerlukan kewenangan menandatangani SPT.
+              </p>
+
+              <ul>
+                <li>
+                  Melihat Induk SPT
+                </li>
+
+                <li>
+                  Menandatangani SPT
+                </li>
+
+                <li class="is-disabled">
+                  Melihat Lampiran I-A
+                </li>
+
+                <li class="is-disabled">
+                  Melihat Lampiran I-B
+                </li>
+
+                <li class="is-disabled">
+                  Melihat Lampiran II dan III
+                </li>
+              </ul>
+            </section>
+
+            <div
+              class="role-visual-center"
+              aria-hidden="true"
+            >
+              <div class="role-shield">
+                DATA
+                <br>
+                GAJI
+              </div>
+
+              <span>
+                Role akses
+              </span>
+            </div>
+
+            <section class="role-visual-card">
+              <span class="role-visual-label">
+                Akses lengkap
+              </span>
+
+              <h2>
+                Akses Penuh
+              </h2>
+
+              <p>
+                Untuk tim HR, payroll, finance,
+                atau perpajakan.
+              </p>
+
+              <ul>
+                <li>
+                  Melihat Induk SPT
+                </li>
+
+                <li>
+                  Melihat Lampiran I-A
+                </li>
+
+                <li>
+                  Melihat Lampiran I-B
+                </li>
+
+                <li>
+                  Melihat Lampiran II dan III
+                </li>
+
+                <li>
+                  Menandatangani SPT
+                </li>
+              </ul>
+            </section>
+          </div>
+
+        {% elsif page.image %}
+          <figure class="hotnews-featured-image">
+            <img
+              src="{{ page.image | relative_url }}"
+              alt="{{ page.image_alt | default: page.title | escape }}"
+            >
+
+            {% if page.image_caption %}
+              <figcaption>
+                {{ page.image_caption }}
+              </figcaption>
+            {% endif %}
+          </figure>
+        {% endif %}
+      </div>
+    </section>
+
+    <!-- Isi artikel -->
+    <section
+      id="articleContent"
+      class="hotnews-article-section"
+    >
+      <div class="hotnews-article-layout">
+        <div class="hotnews-article-main">
+          {% if page.excerpt %}
+            <div class="hotnews-summary-box">
+              <span class="hotnews-summary-label">
+                Ringkasan cepat
+              </span>
+
+              <p>
+                {{ page.excerpt }}
+              </p>
+            </div>
+          {% endif %}
+
+          <article
+            id="articleBody"
+            class="hotnews-article-body"
+          >
+            {{ content }}
+          </article>
+
+          {% if page.source_label and page.source_url %}
+            <div class="hotnews-source">
+              <span>
+                Sumber materi:
+              </span>
+
+              <a
+                href="{{ page.source_url }}"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {{ page.source_label }}
+              </a>
+            </div>
+          {% endif %}
+
+          {% if page.date_modified %}
+            {% assign modified_month_number =
+              page.date_modified
+              | date: "%-m"
+              | minus: 1
+            %}
+
+            <div class="hotnews-source">
+              <span>
+                Terakhir diperbarui:
+              </span>
+
+              <time
+                datetime="{{ page.date_modified | date_to_xmlschema }}"
+              >
+                {{ page.date_modified | date: "%-d" }}
+                {{ months[modified_month_number] }}
+                {{ page.date_modified | date: "%Y" }}
+              </time>
+            </div>
+          {% endif %}
+
+          <section
+            class="hotnews-author-card"
+            aria-label="Informasi penulis"
+          >
+            <div
+              class="hotnews-author-avatar"
+              aria-hidden="true"
+            >
+              ASD
+            </div>
+
+            <div class="hotnews-author-content">
+              <h2>
+                {{ display_author }}
+              </h2>
+
+              <p>
+                Pengelola Kabayan dan penyusun media
+                edukasi perpajakan.
+              </p>
+
+              <a href="{{ '/tentang.html' | relative_url }}">
+                Mengenal Kabayan
+              </a>
+            </div>
+          </section>
+
+          <footer class="hotnews-article-footer">
+            <a
+              class="hotnews-back-link"
+              href="{{ '/hotnews.html' | relative_url }}"
+            >
+              <span aria-hidden="true">
+                ←
+              </span>
+
+              Kembali ke Hot News
+            </a>
+          </footer>
+        </div>
+
+        <aside
+          id="articleSidebar"
+          class="hotnews-article-sidebar"
+          aria-label="Daftar isi artikel"
+        >
+          <h2>
+            Dalam artikel ini
+          </h2>
+
+          <nav
+            id="articleToc"
+            class="hotnews-toc"
+            aria-label="Daftar isi"
+          ></nav>
+
+          <p class="hotnews-sidebar-note">
+            Pilih judul bagian untuk langsung menuju
+            pembahasan yang dibutuhkan.
+          </p>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a
+          class="brand"
+          href="{{ '/' | relative_url }}"
+        >
+          <span
+            class="brand-mark"
+            aria-hidden="true"
+          >
+            ASD
+          </span>
+
+          <span>
+            Kabayan
+          </span>
+        </a>
+
+        <p>
+          Katalog Bahan Pelayanan dan media edukasi
+          perpajakan oleh Angga Sukma Dhaniswara.
+        </p>
+      </div>
+
+      <nav
+        class="footer-nav"
+        aria-label="Navigasi footer"
+      >
+        <a href="{{ '/' | relative_url }}">
+          Beranda
+        </a>
+
+        <a href="{{ '/hotnews.html' | relative_url }}">
+          Semua Hot News
+        </a>
+
+        <a href="{{ '/hotnews-arsip.html' | relative_url }}">
+          Arsip Hot News
+        </a>
+
+        <a href="{{ '/tentang.html' | relative_url }}">
+          Tentang
+        </a>
+
+        <a href="#mainContent">
+          Kembali ke atas
+        </a>
+      </nav>
+    </div>
+
+    <div class="footer-disclaimer">
+      <p>
+        <strong>Disclaimer:</strong>
+        Kabayan merupakan situs edukasi perpajakan pribadi
+        dan bukan situs resmi Direktorat Jenderal Pajak atau
+        instansi pemerintah. Informasi perlu diperiksa kembali
+        dengan ketentuan dan tampilan sistem terbaru sebelum
+        digunakan.
+      </p>
+    </div>
+
+    <div class="footer-bottom">
+      <p>
+        © Angga Sukma Dhaniswara.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      "use strict";
+
+      const progressElement =
+        document.getElementById("readingProgress");
+
+      const menuButton =
+        document.getElementById("menuButton");
+
+      const mobileMenu =
+        document.getElementById("mobileMenu");
+
+      const copyButton =
+        document.getElementById("copyArticleLink");
+
+      const articleBody =
+        document.getElementById("articleBody");
+
+      const articleToc =
+        document.getElementById("articleToc");
+
+      const articleSidebar =
+        document.getElementById("articleSidebar");
+
+      /*
+       * Garis progres membaca.
+       */
+      function updateReadingProgress() {
+        if (!progressElement) {
+          return;
+        }
+
+        const scrollHeight =
+          document.documentElement.scrollHeight -
+          window.innerHeight;
+
+        const progress =
+          scrollHeight > 0
+            ? (window.scrollY / scrollHeight) * 100
+            : 0;
+
+        progressElement.style.width =
+          Math.min(
+            100,
+            Math.max(0, progress)
+          ) + "%";
+      }
+
+      window.addEventListener(
+        "scroll",
+        updateReadingProgress,
+        {
+          passive: true
+        }
+      );
+
+      window.addEventListener(
+        "resize",
+        updateReadingProgress
+      );
+
+      updateReadingProgress();
+
+      /*
+       * Navigasi seluler.
+       */
+      function closeMobileMenu() {
+        if (
+          !menuButton ||
+          !mobileMenu
+        ) {
+          return;
+        }
+
+        mobileMenu.hidden = true;
+
+        menuButton.setAttribute(
+          "aria-expanded",
+          "false"
+        );
+
+        menuButton.setAttribute(
+          "aria-label",
+          "Buka menu navigasi"
+        );
+
+        document.body.classList.remove(
+          "menu-open"
+        );
+      }
+
+      if (
+        menuButton &&
+        mobileMenu
+      ) {
+        menuButton.addEventListener(
+          "click",
+          function () {
+            const isOpen =
+              menuButton.getAttribute(
+                "aria-expanded"
+              ) === "true";
+
+            if (isOpen) {
+              closeMobileMenu();
+
+              return;
+            }
+
+            mobileMenu.hidden = false;
+
+            menuButton.setAttribute(
+              "aria-expanded",
+              "true"
+            );
+
+            menuButton.setAttribute(
+              "aria-label",
+              "Tutup menu navigasi"
+            );
+
+            document.body.classList.add(
+              "menu-open"
+            );
+          }
+        );
+
+        mobileMenu.addEventListener(
+          "click",
+          function (event) {
+            if (event.target.closest("a")) {
+              closeMobileMenu();
+            }
+          }
+        );
+
+        document.addEventListener(
+          "keydown",
+          function (event) {
+            if (event.key === "Escape") {
+              closeMobileMenu();
+            }
+          }
+        );
+
+        window.addEventListener(
+          "resize",
+          function () {
+            if (window.innerWidth > 980) {
+              closeMobileMenu();
+            }
+          }
+        );
+      }
+
+      /*
+       * Salin alamat artikel.
+       */
+      if (copyButton) {
+        copyButton.addEventListener(
+          "click",
+          async function () {
+            const originalText =
+              copyButton.textContent.trim();
+
+            try {
+              await navigator.clipboard.writeText(
+                window.location.href
+              );
+
+              copyButton.textContent =
+                "Tautan tersalin";
+            } catch (error) {
+              copyButton.textContent =
+                "Gagal menyalin";
+            }
+
+            window.setTimeout(
+              function () {
+                copyButton.textContent =
+                  originalText;
+              },
+              1800
+            );
+          }
+        );
+      }
+
+      /*
+       * Membuat slug heading.
+       */
+      function createSlug(value) {
+        return String(value || "")
+          .normalize("NFD")
+          .replace(
+            /[\u0300-\u036f]/g,
+            ""
+          )
+          .toLowerCase()
+          .replace(
+            /[^a-z0-9]+/g,
+            "-"
+          )
+          .replace(
+            /^-+|-+$/g,
+            ""
+          );
+      }
+
+      /*
+       * Daftar isi otomatis dari H2.
+       */
+      if (
+        articleBody &&
+        articleToc &&
+        articleSidebar
+      ) {
+        const headings =
+          Array.from(
+            articleBody.querySelectorAll("h2")
+          );
+
+        if (!headings.length) {
+          articleSidebar.hidden = true;
+        } else {
+          const usedIds =
+            new Set();
+
+          headings.forEach(
+            function (heading, index) {
+              let baseId =
+                heading.id ||
+                createSlug(
+                  heading.textContent
+                ) ||
+                "bagian-" + (index + 1);
+
+              let headingId =
+                baseId;
+
+              let duplicateNumber =
+                2;
+
+              while (
+                usedIds.has(headingId) ||
+                (
+                  document.getElementById(
+                    headingId
+                  ) &&
+                  document.getElementById(
+                    headingId
+                  ) !== heading
+                )
+              ) {
+                headingId =
+                  baseId +
+                  "-" +
+                  duplicateNumber;
+
+                duplicateNumber += 1;
+              }
+
+              heading.id =
+                headingId;
+
+              usedIds.add(
+                headingId
+              );
+
+              const link =
+                document.createElement("a");
+
+              link.href =
+                "#" + headingId;
+
+              link.textContent =
+                heading.textContent.trim();
+
+              link.dataset.target =
+                headingId;
+
+              articleToc.appendChild(
+                link
+              );
+            }
+          );
+
+          const tocLinks =
+            Array.from(
+              articleToc.querySelectorAll("a")
+            );
+
+          function setActiveLink(id) {
+            tocLinks.forEach(
+              function (link) {
+                const isActive =
+                  link.dataset.target === id;
+
+                link.classList.toggle(
+                  "is-active",
+                  isActive
+                );
+
+                if (isActive) {
+                  link.setAttribute(
+                    "aria-current",
+                    "location"
+                  );
+                } else {
+                  link.removeAttribute(
+                    "aria-current"
+                  );
+                }
+              }
+            );
+          }
+
+          setActiveLink(
+            headings[0].id
+          );
+
+          if (
+            "IntersectionObserver" in window
+          ) {
+            const observer =
+              new IntersectionObserver(
+                function (entries) {
+                  const visible =
+                    entries
+                      .filter(
+                        function (entry) {
+                          return entry.isIntersecting;
+                        }
+                      )
+                      .sort(
+                        function (a, b) {
+                          return (
+                            a.boundingClientRect.top -
+                            b.boundingClientRect.top
+                          );
+                        }
+                      );
+
+                  if (visible.length) {
+                    setActiveLink(
+                      visible[0].target.id
+                    );
+                  }
+                },
+                {
+                  rootMargin:
+                    "-18% 0px -68% 0px",
+
+                  threshold: [
+                    0,
+                    1
+                  ]
+                }
+              );
+
+            headings.forEach(
+              function (heading) {
+                observer.observe(
+                  heading
+                );
+              }
+            );
+          }
+        }
+      }
+    })();
+  </script>
+</body>
+</html>
