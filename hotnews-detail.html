@@ -9,35 +9,293 @@
   >
 
   <meta
+    id="metaDescription"
     name="description"
-    content="Artikel Kabayan Hot News"
+    content="Artikel terbaru dan informasi perpajakan dari Kabayan Hot News."
+  >
+
+  <meta
+    name="author"
+    content="Angga Sukma Dhaniswara"
+  >
+
+  <meta
+    name="robots"
+    content="index, follow"
+  >
+
+  <meta
+    name="theme-color"
+    content="#f5f5f7"
+  >
+
+  <link
+    id="canonicalLink"
+    rel="canonical"
+    href="https://dhaniswara86.id/hotnews-detail.html"
+  >
+
+  <!-- Open Graph -->
+  <meta
+    property="og:type"
+    content="article"
+  >
+
+  <meta
+    id="ogTitle"
+    property="og:title"
+    content="Kabayan Hot News"
+  >
+
+  <meta
+    id="ogDescription"
+    property="og:description"
+    content="Artikel terbaru dan informasi perpajakan dari Kabayan Hot News."
+  >
+
+  <meta
+    id="ogUrl"
+    property="og:url"
+    content="https://dhaniswara86.id/hotnews-detail.html"
+  >
+
+  <meta
+    property="og:locale"
+    content="id_ID"
+  >
+
+  <meta
+    property="og:site_name"
+    content="Kabayan by Angga Sukma Dhaniswara"
   >
 
   <title>Hot News | Kabayan</title>
 
+  <!-- CSS halaman daftar Hot News -->
   <link
     rel="stylesheet"
     href="assets/css/hotnews.css"
   >
+
+  <!-- CSS khusus halaman artikel -->
+  <link
+    rel="stylesheet"
+    href="assets/css/hotnews-article.css"
+  >
 </head>
 
 <body>
-  <!-- Salin header Kabayan Anda ke sini -->
+  <!-- Garis progres membaca -->
+  <div
+    id="readingProgress"
+    class="reading-progress"
+    aria-hidden="true"
+  ></div>
 
-  <main class="hotnews-detail-page">
-    <article
-      id="hotnewsArticle"
-      class="hotnews-article"
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a
+        class="brand"
+        href="index.html"
+        aria-label="Kabayan - Kembali ke beranda"
+      >
+        <span
+          class="brand-mark"
+          aria-hidden="true"
+        >
+          ASD
+        </span>
+
+        <span class="brand-name">
+          Kabayan
+        </span>
+      </a>
+
+      <!-- Navigasi desktop -->
+      <nav
+        class="main-nav"
+        aria-label="Navigasi utama"
+      >
+        <a href="index.html">
+          Beranda
+        </a>
+
+        <a href="buku.html">
+          Buku
+        </a>
+
+        <a href="formulir.html">
+          Formulir
+        </a>
+
+        <a href="aplikasi.html">
+          Aplikasi
+        </a>
+
+        <a
+          href="hotnews.html"
+          aria-current="page"
+        >
+          Hot News
+        </a>
+
+        <a href="tentang.html">
+          Tentang
+        </a>
+      </nav>
+
+      <!-- Tombol menu seluler -->
+      <button
+        id="menuButton"
+        class="menu-button"
+        type="button"
+        aria-label="Buka menu navigasi"
+        aria-expanded="false"
+        aria-controls="mobileMenu"
+      >
+        <span aria-hidden="true">
+          ☰
+        </span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Menu seluler -->
+  <nav
+    id="mobileMenu"
+    class="mobile-menu"
+    aria-label="Navigasi seluler"
+    hidden
+  >
+    <a href="index.html">
+      Beranda
+    </a>
+
+    <a href="buku.html">
+      Buku Digital
+    </a>
+
+    <a href="formulir.html">
+      Formulir
+    </a>
+
+    <a href="aplikasi.html">
+      Aplikasi
+    </a>
+
+    <a
+      href="hotnews.html"
+      aria-current="page"
     >
-      <div class="hotnews-loading">
-        Memuat artikel...
-      </div>
-    </article>
+      Hot News
+    </a>
+
+    <a href="tentang.html">
+      Tentang
+    </a>
+  </nav>
+
+  <!-- Konten utama -->
+  <main id="mainContent">
+    <!--
+      Seluruh hero dan isi artikel akan dimasukkan
+      secara otomatis oleh hotnews-detail.js.
+    -->
+    <div
+      id="hotnewsArticle"
+      class="hotnews-article-root"
+      aria-live="polite"
+    >
+      <section class="hotnews-loading">
+        <div
+          class="loading-spinner"
+          aria-hidden="true"
+        ></div>
+
+        <p>
+          Memuat artikel Kabayan Hot News...
+        </p>
+      </section>
+    </div>
   </main>
 
-  <!-- Salin footer Kabayan Anda ke sini -->
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a
+          class="brand"
+          href="index.html"
+        >
+          <span
+            class="brand-mark"
+            aria-hidden="true"
+          >
+            ASD
+          </span>
 
-  <script src="assets/js/hotnews-data.js"></script>
-  <script src="assets/js/hotnews-detail.js"></script>
+          <span>
+            Kabayan
+          </span>
+        </a>
+
+        <p>
+          Katalog Bahan Pelayanan dan media edukasi
+          perpajakan oleh Angga Sukma Dhaniswara.
+        </p>
+      </div>
+
+      <nav
+        class="footer-nav"
+        aria-label="Navigasi footer"
+      >
+        <a href="index.html">
+          Beranda
+        </a>
+
+        <a href="hotnews.html">
+          Semua Hot News
+        </a>
+
+        <a href="tentang.html">
+          Tentang
+        </a>
+
+        <a href="#mainContent">
+          Kembali ke atas
+        </a>
+      </nav>
+    </div>
+
+    <div class="footer-disclaimer">
+      <p>
+        <strong>Disclaimer:</strong>
+        Kabayan merupakan situs edukasi perpajakan pribadi
+        dan bukan situs resmi Direktorat Jenderal Pajak atau
+        instansi pemerintah. Informasi perlu diperiksa kembali
+        dengan ketentuan dan tampilan sistem terbaru sebelum
+        digunakan.
+      </p>
+    </div>
+
+    <div class="footer-bottom">
+      <p>
+        © Angga Sukma Dhaniswara.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Data seluruh Hot News -->
+  <script
+    src="assets/js/hotnews-data.js"
+    defer
+  ></script>
+
+  <!-- Pengolah halaman detail Hot News -->
+  <script
+    src="assets/js/hotnews-detail.js"
+    defer
+  ></script>
 </body>
 </html>
