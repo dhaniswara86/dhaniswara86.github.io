@@ -1063,7 +1063,7 @@
 
     .feature-grid {
       display: grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 12px;
     }
 
@@ -1159,6 +1159,763 @@
 
     .sheet-line.short {
       width: 72%;
+    }
+
+
+    .article-card {
+      background: linear-gradient(180deg, #f5f5f7 0%, #ffffff 100%);
+    }
+
+    .hot-news-card {
+      position: relative;
+      isolation: isolate;
+      background:
+        radial-gradient(circle at 78% 86%, rgba(255, 78, 64, 0.18), transparent 31%),
+        linear-gradient(160deg, #fff7f5 0%, #ffffff 54%, #f5f7ff 100%);
+      color: var(--near-black);
+    }
+
+    .hot-news-card::before {
+      position: absolute;
+      z-index: -1;
+      top: -110px;
+      right: -90px;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 59, 48, 0.12), transparent 69%);
+      content: "";
+    }
+
+    .hot-news-copy {
+      position: relative;
+      z-index: 3;
+    }
+
+    .hot-news-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 15px;
+      padding: 7px 11px;
+      border: 1px solid rgba(255, 59, 48, 0.16);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.78);
+      color: #d92d20;
+      font-size: 12px;
+      font-weight: 750;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .hot-news-pulse {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ff3b30;
+      box-shadow: 0 0 0 0 rgba(255, 59, 48, 0.34);
+      animation: hotNewsPulse 2s infinite;
+    }
+
+    .hot-news-card p { max-width: 520px; }
+    .hot-news-link { color: #d92d20; }
+    .hot-news-link:hover { color: #b42318; }
+
+    .hot-news-visual {
+      position: absolute;
+      right: 0;
+      bottom: -8px;
+      left: 0;
+      height: 350px;
+      display: grid;
+      place-items: end center;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .news-device {
+      width: min(520px, 86%);
+      min-height: 310px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 24px 24px 7px 7px;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 30px 70px rgba(47, 37, 51, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      transform: perspective(900px) rotateX(4deg);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .news-device-bar {
+      min-height: 43px;
+      display: grid;
+      align-items: center;
+      grid-template-columns: 20px 1fr 20px;
+      gap: 8px;
+      padding: 0 16px;
+      border-bottom: 1px solid var(--soft-gray);
+      background: #f7f7f9;
+      color: #515154;
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      text-align: center;
+    }
+
+    .news-device-bar > span:first-child {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: #d2d2d7;
+    }
+
+    .news-live-dot {
+      width: 9px;
+      height: 9px;
+      justify-self: end;
+      border-radius: 50%;
+      background: #ff3b30;
+    }
+
+    .news-main-card {
+      margin: 17px 17px 10px;
+      padding: 19px;
+      border-radius: 17px;
+      background: linear-gradient(135deg, #2d0a0a, #9e201a 58%, #ef4e3f);
+      color: var(--white);
+      text-align: left;
+    }
+
+    .news-breaking {
+      display: inline-block;
+      margin-bottom: 12px;
+      padding: 5px 8px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.16);
+      color: #ffd8d4;
+      font-size: 8px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+    }
+
+    .news-main-card strong {
+      display: block;
+      font-size: 20px;
+      letter-spacing: -0.035em;
+      line-height: 1.1;
+    }
+
+    .news-main-card small {
+      display: block;
+      margin-top: 8px;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 10px;
+    }
+
+    .news-list {
+      display: grid;
+      gap: 7px;
+      padding: 0 17px 18px;
+    }
+
+    .news-row {
+      display: grid;
+      align-items: center;
+      grid-template-columns: 34px minmax(0, 1fr);
+      gap: 11px;
+      padding: 10px 11px;
+      border: 1px solid var(--soft-gray);
+      border-radius: 13px;
+      background: var(--white);
+      text-align: left;
+    }
+
+    .news-row-icon {
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      background: #fff0ee;
+      color: #d92d20;
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .news-row strong {
+      display: block;
+      font-size: 11px;
+      letter-spacing: -0.02em;
+    }
+
+    .news-row small {
+      display: block;
+      margin-top: 2px;
+      color: var(--medium-gray);
+      font-size: 8px;
+    }
+
+    @keyframes hotNewsPulse {
+      0% { box-shadow: 0 0 0 0 rgba(255, 59, 48, 0.34); }
+      65% { box-shadow: 0 0 0 8px rgba(255, 59, 48, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 59, 48, 0); }
+    }
+
+
+    /* =========================================================
+       Panel Artikel & Hot News
+       ========================================================= */
+
+    .showcase-section {
+      padding: 12px;
+      background: var(--white);
+    }
+
+    .showcase-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .showcase-card {
+      position: relative;
+      min-height: 680px;
+      overflow: hidden;
+      padding: 64px 38px 0;
+      text-align: center;
+    }
+
+    .article-showcase {
+      background:
+        radial-gradient(
+          circle at 50% 88%,
+          rgba(0, 113, 227, 0.10),
+          transparent 31%
+        ),
+        #f5f5f7;
+      color: var(--near-black);
+    }
+
+    .hotnews-showcase {
+      background:
+        radial-gradient(
+          circle at 50% 100%,
+          rgba(255, 255, 255, 0.50),
+          transparent 28%
+        ),
+        linear-gradient(
+          160deg,
+          #bdeeff 0%,
+          #d8f5ff 36%,
+          #eefbff 72%,
+          #ffffff 100%
+        );
+      color: var(--near-black);
+    }
+
+    .showcase-copy {
+      position: relative;
+      z-index: 5;
+      width: min(620px, 100%);
+      margin: 0 auto;
+    }
+
+    .showcase-kicker {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 10px;
+      color: var(--medium-gray);
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .showcase-kicker.hot {
+      color: #d92d20;
+    }
+
+    .hot-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #ff3b30;
+      box-shadow:
+        0 0 0 0 rgba(255, 59, 48, 0.32);
+      animation: showcasePulse 2s infinite;
+    }
+
+    .showcase-card h3 {
+      margin: 0;
+      font-size: clamp(39px, 4.2vw, 58px);
+      font-weight: 700;
+      letter-spacing: -0.055em;
+      line-height: 1;
+    }
+
+    .showcase-card p {
+      max-width: 550px;
+      margin: 16px auto 0;
+      color: #515154;
+      font-size: 19px;
+      line-height: 1.3;
+    }
+
+    .showcase-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .showcase-button {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 21px;
+      border: 1px solid var(--blue);
+      border-radius: 999px;
+      font-size: 16px;
+      text-decoration: none;
+      transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        color 0.2s ease;
+    }
+
+    .showcase-button:hover {
+      transform: translateY(-1px);
+    }
+
+    .showcase-button.primary {
+      background: var(--blue);
+      color: var(--white);
+    }
+
+    .showcase-button.primary:hover {
+      background: var(--blue-hover);
+    }
+
+    .showcase-button.secondary {
+      background: transparent;
+      color: var(--blue);
+    }
+
+    .showcase-button.secondary:hover {
+      background: var(--blue);
+      color: var(--white);
+    }
+
+    .showcase-visual {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: 390px;
+      pointer-events: none;
+    }
+
+    .article-visual {
+      display: grid;
+      place-items: end center;
+    }
+
+    .article-glow {
+      position: absolute;
+      bottom: -110px;
+      left: 50%;
+      width: 590px;
+      height: 310px;
+      border-radius: 50%;
+      background:
+        radial-gradient(
+          ellipse,
+          rgba(0, 113, 227, 0.22),
+          rgba(70, 161, 255, 0.06) 46%,
+          transparent 72%
+        );
+      filter: blur(17px);
+      transform: translateX(-50%);
+    }
+
+    .editorial-card {
+      position: absolute;
+      bottom: -28px;
+      width: 270px;
+      height: 350px;
+      padding: 28px;
+      border-radius: 18px 18px 0 0;
+      background: var(--white);
+      box-shadow:
+        0 30px 60px rgba(28, 40, 61, 0.18);
+      text-align: left;
+    }
+
+    .editorial-card-back {
+      left: calc(50% - 230px);
+      background:
+        linear-gradient(
+          160deg,
+          #082d66,
+          #0b6cbe 62%,
+          #43b5d2
+        );
+      color: var(--white);
+      transform:
+        rotate(-8deg)
+        scale(0.93);
+    }
+
+    .editorial-card-front {
+      z-index: 2;
+      left: calc(50% - 55px);
+      transform: rotate(6deg);
+    }
+
+    .editorial-top {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 30px;
+      color: var(--medium-gray);
+      font-size: 9px;
+      font-weight: 750;
+      letter-spacing: 0.08em;
+    }
+
+    .editorial-chip {
+      display: inline-block;
+      margin-bottom: 19px;
+      padding: 5px 8px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.15);
+      color: #d8efff;
+      font-size: 9px;
+      font-weight: 750;
+      text-transform: uppercase;
+    }
+
+    .editorial-chip.blue {
+      background: #eaf4ff;
+      color: var(--blue);
+    }
+
+    .editorial-card strong {
+      display: block;
+      max-width: 210px;
+      margin-bottom: 28px;
+      font-size: 24px;
+      letter-spacing: -0.04em;
+      line-height: 1.08;
+    }
+
+    .editorial-line {
+      width: 100%;
+      height: 8px;
+      display: block;
+      margin-top: 13px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.28);
+    }
+
+    .editorial-card-front .editorial-line {
+      background: #d8d8dd;
+    }
+
+    .editorial-line.dark {
+      width: 64%;
+      height: 11px;
+      background: var(--near-black) !important;
+    }
+
+    .editorial-line.short {
+      width: 72%;
+    }
+
+    .hotnews-visual {
+      display: grid;
+      place-items: end center;
+    }
+
+    .news-orbit {
+      position: absolute;
+      border: 1px solid rgba(0, 113, 227, 0.14);
+      border-radius: 50%;
+    }
+
+    .orbit-one {
+      right: -65px;
+      bottom: -105px;
+      width: 470px;
+      height: 470px;
+    }
+
+    .orbit-two {
+      bottom: -140px;
+      left: -90px;
+      width: 390px;
+      height: 390px;
+    }
+
+    .news-screen {
+      position: relative;
+      z-index: 2;
+      width: min(570px, 88%);
+      min-height: 340px;
+      overflow: hidden;
+      padding: 20px;
+      border: 8px solid rgba(16, 22, 31, 0.94);
+      border-bottom-width: 17px;
+      border-radius: 28px 28px 8px 8px;
+      background:
+        linear-gradient(
+          180deg,
+          #f9fcff,
+          #eef8ff
+        );
+      box-shadow:
+        0 35px 75px rgba(16, 81, 133, 0.25);
+      transform:
+        perspective(1100px)
+        rotateX(4deg);
+    }
+
+    .news-screen-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 3px 2px 15px;
+      color: #51606d;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+    }
+
+    .news-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: #d92d20;
+    }
+
+    .news-status span {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #ff3b30;
+    }
+
+    .news-headline-card {
+      padding: 21px;
+      border-radius: 18px;
+      background:
+        linear-gradient(
+          135deg,
+          #062c65,
+          #0870c4 58%,
+          #22a8d0
+        );
+      color: var(--white);
+      text-align: left;
+    }
+
+    .news-headline-card > span {
+      display: inline-block;
+      margin-bottom: 12px;
+      padding: 5px 8px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+      color: #d7f0ff;
+      font-size: 9px;
+      font-weight: 750;
+    }
+
+    .news-headline-card strong {
+      display: block;
+      max-width: 380px;
+      font-size: 23px;
+      letter-spacing: -0.035em;
+      line-height: 1.08;
+    }
+
+    .news-headline-card small {
+      display: block;
+      margin-top: 8px;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 10px;
+    }
+
+    .news-mini-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 9px;
+      margin-top: 11px;
+    }
+
+    .news-mini-card {
+      min-height: 88px;
+      padding: 12px;
+      border: 1px solid #dfe7ee;
+      border-radius: 14px;
+      background: var(--white);
+      text-align: left;
+    }
+
+    .news-mini-card span {
+      display: block;
+      margin-bottom: 11px;
+      color: var(--blue);
+      font-size: 9px;
+      font-weight: 800;
+    }
+
+    .news-mini-card strong {
+      display: block;
+      font-size: 11px;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    @keyframes showcasePulse {
+      0% {
+        box-shadow:
+          0 0 0 0 rgba(255, 59, 48, 0.32);
+      }
+
+      65% {
+        box-shadow:
+          0 0 0 9px rgba(255, 59, 48, 0);
+      }
+
+      100% {
+        box-shadow:
+          0 0 0 0 rgba(255, 59, 48, 0);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .showcase-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .showcase-card {
+        min-height: 650px;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .showcase-section {
+        padding: 8px;
+      }
+
+      .showcase-grid {
+        gap: 8px;
+      }
+
+      .showcase-card {
+        min-height: 620px;
+        padding: 48px 20px 0;
+      }
+
+      .showcase-card h3 {
+        font-size: 40px;
+      }
+
+      .showcase-card p {
+        font-size: 17px;
+      }
+
+      .showcase-actions {
+        gap: 9px;
+      }
+
+      .showcase-button {
+        font-size: 14px;
+      }
+
+      .showcase-visual {
+        height: 355px;
+      }
+
+      .editorial-card {
+        width: 215px;
+        height: 305px;
+        padding: 22px;
+      }
+
+      .editorial-card-back {
+        left: calc(50% - 185px);
+      }
+
+      .editorial-card-front {
+        left: calc(50% - 40px);
+      }
+
+      .editorial-card strong {
+        font-size: 20px;
+      }
+
+      .news-screen {
+        width: 92%;
+        min-height: 310px;
+        padding: 14px;
+      }
+
+      .news-headline-card {
+        padding: 17px;
+      }
+
+      .news-headline-card strong {
+        font-size: 19px;
+      }
+
+      .news-mini-card {
+        min-height: 78px;
+        padding: 9px;
+      }
+
+      .news-mini-card strong {
+        font-size: 9px;
+      }
+    }
+
+    @media (max-width: 440px) {
+      .showcase-actions {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .showcase-button {
+        width: 100%;
+      }
+
+      .editorial-card-back {
+        left: calc(50% - 155px);
+      }
+
+      .editorial-card-front {
+        left: calc(50% - 55px);
+      }
+
+      .news-mini-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .news-mini-card {
+        min-height: 54px;
+      }
+
+      .news-screen {
+        min-height: 325px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hot-dot {
+        animation: none !important;
+      }
     }
 
 
@@ -1270,6 +2027,10 @@
 
       .feature-card {
         min-height: 570px;
+      }
+
+      .hot-news-visual {
+        height: 335px;
       }
     }
 
@@ -1429,6 +2190,18 @@
         padding-top: 47px;
       }
 
+      .hot-news-card {
+        min-height: 590px;
+      }
+
+      .hot-news-visual {
+        height: 345px;
+      }
+
+      .news-device {
+        width: min(470px, 90%);
+      }
+
       .footer-inner {
         align-items: flex-start;
         flex-direction: column;
@@ -1505,6 +2278,10 @@
 
       * {
         transition: none !important;
+      }
+
+      .hot-news-pulse {
+        animation: none !important;
       }
     }
 </style>
@@ -1813,7 +2590,7 @@ body.mega-menu-open {
 <a href="formulir.html">Formulir</a>
 <a href="aplikasi.html">Aplikasi</a>
 <a href="kalkulator.html">Kalkulator</a>
-<a href="artikel.html">Artikel</a>
+<a href="artikel.html">Artikel</a><a href="hot-news.html">Hot News</a>
 <a href="#tentang">Tentang</a>
 </nav>
 <div class="nav-actions">
@@ -1858,7 +2635,7 @@ body.mega-menu-open {
 <a href="artikel.html">
 <span>Artikel Pajak</span>
 <small>Penjelasan ringkas dan panduan praktis.</small>
-</a>
+</a><a href="hot-news.html"><span>Hot News</span><small>Informasi perpajakan terbaru dan isu yang perlu segera diketahui.</small></a>
 </nav>
 </section>
 <section class="mega-column">
@@ -1919,14 +2696,13 @@ body.mega-menu-open {
 </div>
 </div>
 </section>
-
 <nav class="mobile-menu" id="mobileMenu">
 <a href="index.html">Beranda</a>
 <a href="buku.html">Buku</a>
 <a href="formulir.html">Formulir</a>
 <a href="aplikasi.html">Aplikasi</a>
 <a href="kalkulator.html">Kalkulator</a>
-<a href="#artikel">Artikel</a>
+<a href="#artikel">Artikel</a><a href="hot-news.html">Hot News</a>
 <a href="#tentang">Tentang</a>
 </nav>
 <main>
@@ -2252,31 +3028,105 @@ body.mega-menu-open {
 </div>
 </div>
 </section>
-<section class="grid-section" id="artikel">
-<div class="feature-grid">
-<article class="feature-card light">
-<h3>Artikel Pajak</h3>
+<section class="showcase-section" id="artikel">
+<div class="showcase-grid">
+<article class="showcase-card article-showcase">
+<div class="showcase-copy">
+<span class="showcase-kicker">Artikel Pajak</span>
+<h3>Penjelasan pajak.<br/>Lebih mudah dipahami.</h3>
 <p>
-            Penjelasan yang ringkas, aktual, dan mudah dipahami
-            untuk membantu mengenali berbagai topik perpajakan.
-          </p>
-<a class="simple-link" href="artikel.html">
-            Baca artikel ›
+          Temukan pembahasan perpajakan yang ringkas, terstruktur,
+          dan relevan untuk membantu memahami ketentuan secara praktis.
+        </p>
+<div class="showcase-actions">
+<a class="showcase-button primary" href="artikel.html">
+            Baca artikel
           </a>
-<div aria-hidden="true" class="article-stack">
-<div class="article-sheet back">
-<div class="sheet-line title"></div>
-<div class="sheet-line"></div>
-<div class="sheet-line short"></div>
-<div class="sheet-line"></div>
-<div class="sheet-line short"></div>
+<a class="showcase-button secondary" href="per8pj2026.html">
+            Artikel terbaru
+          </a>
 </div>
-<div class="article-sheet front">
-<div class="sheet-line title"></div>
-<div class="sheet-line"></div>
-<div class="sheet-line short"></div>
-<div class="sheet-line"></div>
-<div class="sheet-line short"></div>
+</div>
+<div aria-hidden="true" class="showcase-visual article-visual">
+<div class="article-glow"></div>
+<div class="editorial-card editorial-card-back">
+<span class="editorial-chip">PPh</span>
+<strong>Panduan perpajakan yang lebih sederhana.</strong>
+<span class="editorial-line"></span>
+<span class="editorial-line short"></span>
+<span class="editorial-line"></span>
+</div>
+<div class="editorial-card editorial-card-front">
+<div class="editorial-top">
+<span>KABAYAN</span>
+<span>ARTIKEL</span>
+</div>
+<span class="editorial-chip blue">Terbaru</span>
+<strong>
+            PER-8/PJ/2026:
+            Apa yang berubah?
+          </strong>
+<span class="editorial-line dark"></span>
+<span class="editorial-line short"></span>
+<span class="editorial-line"></span>
+<span class="editorial-line short"></span>
+</div>
+</div>
+</article>
+<article class="showcase-card hotnews-showcase" id="hot-news">
+<div class="showcase-copy">
+<span class="showcase-kicker hot">
+<span aria-hidden="true" class="hot-dot"></span>
+          Hot News
+        </span>
+<h3>Informasi terbaru.<br/>Lebih cepat diketahui.</h3>
+<p>
+          Ikuti pembaruan regulasi, pengumuman penting,
+          dan isu perpajakan yang perlu segera diperhatikan.
+        </p>
+<div class="showcase-actions">
+<a class="showcase-button primary" href="hot-news.html">
+            Lihat Hot News
+          </a>
+<a class="showcase-button secondary" href="artikel.html">
+            Semua informasi
+          </a>
+</div>
+</div>
+<div aria-hidden="true" class="showcase-visual hotnews-visual">
+<div class="news-orbit orbit-one"></div>
+<div class="news-orbit orbit-two"></div>
+<div class="news-screen">
+<div class="news-screen-top">
+<span class="news-brand">KABAYAN NEWS</span>
+<span class="news-status">
+<span></span>
+              TERBARU
+            </span>
+</div>
+<div class="news-headline-card">
+<span>Hot News</span>
+<strong>
+              Pembaruan perpajakan dalam satu halaman.
+            </strong>
+<small>
+              Ringkas, aktual, dan mudah dipahami.
+            </small>
+</div>
+<div class="news-mini-grid">
+<div class="news-mini-card">
+<span>01</span>
+<strong>Regulasi terbaru</strong>
+</div>
+<div class="news-mini-card">
+<span>02</span>
+<strong>Pengumuman penting</strong>
+</div>
+<div class="news-mini-card">
+<span>03</span>
+<strong>Isu perpajakan</strong>
+</div>
+</div>
 </div>
 </div>
 </article>
@@ -2326,7 +3176,7 @@ body.mega-menu-open {
 <a href="buku.html">Buku</a>
 <a href="formulir.html">Formulir</a>
 <a href="aplikasi.html">Aplikasi</a>
-<a href="artikel.html">Artikel</a>
+<a href="artikel.html">Artikel</a><a href="hot-news.html">Hot News</a>
 <a href="#tentang">Tentang</a>
 <a href="#top">Kembali ke atas</a>
 </div>
