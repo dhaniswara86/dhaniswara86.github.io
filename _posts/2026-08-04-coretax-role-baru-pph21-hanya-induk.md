@@ -314,74 +314,179 @@ telah diberikan kepada pihak terkait. Pastikan tidak ada pihak
 yang memperoleh akses lebih luas daripada yang dibutuhkan
 untuk menjalankan tugasnya.
 
-## Panduan Visual Penambahan Akses
-
 <section
-  class="hotnews-pdf-guide"
-  aria-labelledby="pdfGuideTitle"
+  class="hotnews-presentation-section"
+  id="panduan-visual-role-induk"
+  aria-labelledby="judul-panduan-visual-role-induk"
 >
-  <div class="hotnews-pdf-guide__intro">
-    <div class="hotnews-pdf-guide__copy">
-      <span class="hotnews-pdf-guide__eyebrow">
-        Panduan PDF · 7 halaman
-      </span>
+  <div class="hotnews-presentation-heading">
+    <span class="hotnews-presentation-label">
+      Panduan Visual
+    </span>
 
-      <h3 id="pdfGuideTitle">
-        Tata Cara Penambahan Akses Penandatangan Induk SPT
-      </h3>
+    <h2 id="judul-panduan-visual-role-induk">
+      Tata Cara Penambahan Akses Penandatangan Induk SPT
+    </h2>
 
-      <p>
-        Ikuti langkah mulai dari masuk ke Coretax, memilih akun
-        Wajib Pajak yang diwakili, membuka menu Wakil/Kuasa,
-        menetapkan role, hingga menyimpan perubahan.
-      </p>
-    </div>
-
-    <a
-      class="hotnews-pdf-guide__button"
-      href="{{ '/assets/pdf/tata-cara-penambahan-akses-penandatangan-induk-spt.pdf' | relative_url }}"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      Buka PDF
-      <span aria-hidden="true">↗</span>
-    </a>
+    <p>
+      Panduan berikut menjelaskan proses mulai dari masuk ke
+      Coretax, memilih akun Wajib Pajak yang diwakili, membuka
+      Wakil/Kuasa, menetapkan role, sampai menyimpan perubahan.
+      Gunakan tombol navigasi, thumbnail, tombol panah keyboard,
+      atau geser layar untuk berpindah halaman.
+    </p>
   </div>
 
-  <div class="hotnews-pdf-guide__viewer">
-    <object
-      data="{{ '/assets/pdf/tata-cara-penambahan-akses-penandatangan-induk-spt.pdf' | relative_url }}#view=FitH"
-      type="application/pdf"
-      aria-label="Panduan Tata Cara Penambahan Akses Penandatangan Induk SPT"
-    >
-      <p>
-        Browser Anda tidak dapat menampilkan PDF secara langsung.
+  <div
+    class="hotnews-presentation-viewer"
+    id="hotnewsPresentationViewer"
+    tabindex="0"
+    data-slide-base="{{ '/assets/role-induk/slide-' | relative_url }}"
+    data-slide-count="7"
+  >
+    <div class="hotnews-presentation-toolbar">
+      <div
+        class="hotnews-presentation-page-info"
+        aria-live="polite"
+      >
+        Halaman
+        <strong id="hotnewsPresentationCurrentPage">
+          1
+        </strong>
+        dari
+        <strong>7</strong>
+      </div>
+
+      <div class="hotnews-presentation-toolbar-actions">
+        <button
+          class="hotnews-presentation-tool-button"
+          id="hotnewsPresentationFullscreen"
+          type="button"
+        >
+          Layar penuh
+        </button>
 
         <a
+          class="hotnews-presentation-tool-button"
           href="{{ '/assets/pdf/tata-cara-penambahan-akses-penandatangan-induk-spt.pdf' | relative_url }}"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Buka PDF pada tab baru.
+          Buka PDF
         </a>
-      </p>
-    </object>
+      </div>
+    </div>
+
+    <div class="hotnews-presentation-stage">
+      <button
+        class="hotnews-presentation-nav"
+        id="hotnewsPresentationPrevious"
+        type="button"
+        aria-label="Halaman sebelumnya"
+      >
+        ‹
+      </button>
+
+      <figure class="hotnews-presentation-slide">
+        <img
+          id="hotnewsPresentationMainImage"
+          src="{{ '/assets/role-induk/slide-01.webp' | relative_url }}"
+          alt="Membuka laman Coretax dan melanjutkan ke halaman login"
+        >
+
+        <figcaption id="hotnewsPresentationCaption">
+          Membuka laman Coretax dan melanjutkan ke halaman login
+        </figcaption>
+      </figure>
+
+      <button
+        class="hotnews-presentation-nav"
+        id="hotnewsPresentationNext"
+        type="button"
+        aria-label="Halaman berikutnya"
+      >
+        ›
+      </button>
+    </div>
+
+    <div
+      class="hotnews-presentation-thumbnails"
+      aria-label="Pilih halaman panduan"
+    >
+      {% assign slide_captions =
+        "Membuka laman Coretax dan melanjutkan ke halaman login|Mengisi NIK atau NPWP PIC, kata sandi, verifikasi, dan masuk|Memilih akun perusahaan atau Wajib Pajak yang diwakili|Membuka Portal Saya dan memilih Profil Saya|Memilih Wakil/Kuasa dan menekan Assign Roles|Memilih role akses yang diberikan dan menyimpan perubahan|Proses selesai dan pegawai dapat melakukan impersonate"
+        | split: "|"
+      %}
+
+      {% for slide_caption in slide_captions %}
+        {% assign slide_number = forloop.index %}
+        {% if slide_number < 10 %}
+          {% assign slide_file = "0" | append: slide_number %}
+        {% else %}
+          {% assign slide_file = slide_number %}
+        {% endif %}
+
+        <button
+          class="hotnews-presentation-thumb{% if forloop.first %} active{% endif %}"
+          type="button"
+          data-slide-index="{{ forloop.index0 }}"
+          aria-label="Tampilkan halaman {{ slide_number }}: {{ slide_caption }}"
+          {% if forloop.first %}
+            aria-current="true"
+          {% endif %}
+        >
+          <img
+            src="{{ '/assets/role-induk/slide-' | append: slide_file | append: '.webp' | relative_url }}"
+            alt=""
+            loading="lazy"
+          >
+
+          <span>
+            {{ slide_number }}
+          </span>
+        </button>
+      {% endfor %}
+    </div>
+
+    <div
+      class="hotnews-presentation-error"
+      id="hotnewsPresentationError"
+      hidden
+    >
+      Gambar slide belum ditemukan. Pastikan folder
+      <code>assets/role-induk</code> berisi
+      <code>slide-01.webp</code> sampai
+      <code>slide-07.webp</code>.
+    </div>
   </div>
 
-  <div class="hotnews-pdf-guide__footer">
-    <span>
-      Dokumen dapat dibuka pada tab baru atau disimpan ke perangkat.
-    </span>
+  <div class="hotnews-presentation-actions">
+    <a
+      class="hotnews-presentation-action"
+      href="{{ '/assets/pdf/tata-cara-penambahan-akses-penandatangan-induk-spt.pdf' | relative_url }}"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Buka presentasi lengkap
+    </a>
 
     <a
+      class="hotnews-presentation-action"
       href="{{ '/assets/pdf/tata-cara-penambahan-akses-penandatangan-induk-spt.pdf' | relative_url }}"
       download
     >
       Unduh PDF
-      <span aria-hidden="true">↓</span>
     </a>
   </div>
+
+  <div class="hotnews-presentation-note">
+    <strong>Catatan:</strong>
+    pemberian hak akses dilakukan melalui akun PIC atau
+    Penanggung Jawab. Tampilan dan susunan menu Coretax dapat
+    berubah mengikuti pembaruan sistem.
+  </div>
 </section>
+
 <div class="hotnews-note">
   <strong>Catatan Kabayan</strong>
 
