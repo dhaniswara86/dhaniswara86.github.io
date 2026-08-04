@@ -1,6 +1,6 @@
 ---
 title: "Kabayan Hot News"
-description: "Kumpulan artikel, pembaruan Coretax, regulasi, dan informasi perpajakan dari Kabayan."
+description: "Pembaruan Coretax, regulasi, layanan, dan informasi perpajakan terbaru dari Kabayan."
 permalink: /hotnews.html
 ---
 
@@ -34,6 +34,7 @@ permalink: /hotnews.html
     href="{{ page.url | absolute_url }}"
   >
 
+  <!-- Open Graph -->
   <meta
     property="og:type"
     content="website"
@@ -68,19 +69,11 @@ permalink: /hotnews.html
     {{ page.title }} | Kabayan
   </title>
 
+  <!-- CSS khusus katalog Hot News -->
   <link
     rel="stylesheet"
-    href="{{ '/assets/css/hotnews.css' | relative_url }}"
+    href="{{ '/assets/css/hotnews-katalog.css' | relative_url }}"
   >
-
-  <link
-    rel="stylesheet"
-    href="{{ '/assets/css/hotnews-article.css' | relative_url }}"
-  >
-  <link
-  rel="stylesheet"
-  href="{{ '/assets/css/hotnews-index.css' | relative_url }}"
->
 </head>
 
 <body>
@@ -94,6 +87,16 @@ permalink: /hotnews.html
     | size
   %}
 
+  {% assign featured_post =
+    site.posts
+    | first
+  %}
+
+  {% assign remaining_count =
+    article_count
+    | minus: 1
+  %}
+
   {% assign hotnews_categories =
     site.posts
     | map: "category"
@@ -101,28 +104,31 @@ permalink: /hotnews.html
     | sort
   %}
 
-  <!-- Header -->
-  <header class="site-header">
-    <div class="header-inner">
+  <!-- =====================================================
+       NAVIGASI
+       ===================================================== -->
+
+  <header class="hotnews-catalog-nav">
+    <div class="hotnews-catalog-nav-inner">
       <a
-        class="brand"
+        class="hotnews-catalog-brand"
         href="{{ '/' | relative_url }}"
         aria-label="Kabayan — Kembali ke beranda"
       >
         <span
-          class="brand-mark"
+          class="hotnews-catalog-brand-symbol"
           aria-hidden="true"
         >
           ASD
         </span>
 
-        <span class="brand-name">
-          Kabayan
+        <span>
+          dhaniswara86
         </span>
       </a>
 
       <nav
-        class="main-nav"
+        class="hotnews-catalog-menu"
         aria-label="Navigasi utama"
       >
         <a href="{{ '/' | relative_url }}">
@@ -141,6 +147,14 @@ permalink: /hotnews.html
           Aplikasi
         </a>
 
+        <a href="{{ '/kalkulator.html' | relative_url }}">
+          Kalkulator
+        </a>
+
+        <a href="{{ '/artikel.html' | relative_url }}">
+          Artikel
+        </a>
+
         <a
           href="{{ '/hotnews.html' | relative_url }}"
           aria-current="page"
@@ -154,33 +168,31 @@ permalink: /hotnews.html
       </nav>
 
       <button
-        id="menuButton"
-        class="menu-button"
+        id="catalogMenuButton"
+        class="hotnews-catalog-menu-button"
         type="button"
         aria-label="Buka menu navigasi"
         aria-expanded="false"
-        aria-controls="mobileMenu"
+        aria-controls="catalogMobileMenu"
       >
-        <span aria-hidden="true">
-          ☰
-        </span>
+        ☰
       </button>
     </div>
   </header>
 
   <!-- Navigasi seluler -->
+
   <nav
-    id="mobileMenu"
-    class="mobile-menu"
+    id="catalogMobileMenu"
+    class="hotnews-catalog-mobile-menu"
     aria-label="Navigasi seluler"
-    hidden
   >
     <a href="{{ '/' | relative_url }}">
       Beranda
     </a>
 
     <a href="{{ '/buku.html' | relative_url }}">
-      Buku Digital
+      Buku
     </a>
 
     <a href="{{ '/formulir.html' | relative_url }}">
@@ -189,6 +201,14 @@ permalink: /hotnews.html
 
     <a href="{{ '/aplikasi.html' | relative_url }}">
       Aplikasi
+    </a>
+
+    <a href="{{ '/kalkulator.html' | relative_url }}">
+      Kalkulator
+    </a>
+
+    <a href="{{ '/artikel.html' | relative_url }}">
+      Artikel
     </a>
 
     <a
@@ -203,141 +223,298 @@ permalink: /hotnews.html
     </a>
   </nav>
 
+  <!-- =====================================================
+       KONTEN UTAMA
+       ===================================================== -->
+
   <main
     id="mainContent"
-    class="hotnews-page"
+    class="hotnews-catalog-main"
   >
-    <!-- Hero -->
-    <section class="hotnews-hero">
-      <div class="hotnews-hero-inner">
-        <span class="hotnews-kicker">
-          Kabayan Hot News
-        </span>
+    <!-- Announcement bar -->
 
-        <h1>
-          Informasi Perpajakan Terkini
-        </h1>
+    <div class="hotnews-announcement">
+      Pembaruan perpajakan terbaru, ringkas,
+      dan mudah dipahami.
 
-        <p>
-          Ikuti pembaruan Coretax, regulasi, layanan,
-          administrasi, dan informasi perpajakan yang
-          disajikan secara ringkas dan mudah dipahami.
+      <a href="#hotnewsCatalog">
+        Lihat seluruh Hot News ›
+      </a>
+    </div>
+
+    <!-- ===================================================
+         HERO
+         =================================================== -->
+
+    <section class="hotnews-catalog-hero">
+      <div class="hotnews-catalog-hero-inner">
+        <p class="hotnews-catalog-eyebrow">
+          Kabayan — Informasi Perpajakan Terkini
         </p>
 
-        <div class="hotnews-hero-actions">
-          <a
-            class="
-              hotnews-button
-              hotnews-button-primary
-            "
-            href="#articleArchive"
-          >
-            Lihat artikel
-          </a>
+        <h1 class="hotnews-catalog-title">
+          Hot News.
 
-          <a
-            class="
-              hotnews-button
-              hotnews-button-secondary
-            "
-            href="hotnews-arsip.html"
-          >
-            Arsip berdasarkan tahun
-          </a>
+          <span class="hotnews-catalog-gradient">
+            Perpajakan.
+          </span>
+        </h1>
+
+        <p class="hotnews-catalog-description">
+          Ikuti pembaruan Coretax, regulasi, layanan,
+          administrasi, dan informasi perpajakan dalam
+          penjelasan yang ringkas, terstruktur, dan mudah
+          dipahami.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================================================
+         PENCARIAN DAN FILTER
+         =================================================== -->
+
+    <section
+      class="hotnews-search-panel"
+      aria-label="Pencarian Hot News"
+    >
+      <div class="hotnews-search-wrap">
+        <span
+          class="hotnews-search-icon"
+          aria-hidden="true"
+        >
+          ⌕
+        </span>
+
+        <label
+          for="hotnewsSearch"
+          class="visually-hidden"
+        >
+          Cari Hot News
+        </label>
+
+        <input
+          id="hotnewsSearch"
+          class="hotnews-search-input"
+          type="search"
+          placeholder="Cari judul, topik, atau kata kunci Hot News..."
+          autocomplete="off"
+        >
+
+        <button
+          id="clearHotnewsSearch"
+          class="hotnews-clear-search"
+          type="button"
+          aria-label="Hapus pencarian"
+        >
+          ×
+        </button>
+      </div>
+
+      <div
+        id="hotnewsFilterRow"
+        class="hotnews-filter-row"
+        aria-label="Filter kategori Hot News"
+      >
+        <button
+          class="hotnews-filter-button active"
+          type="button"
+          data-category-filter=""
+          aria-pressed="true"
+        >
+          Semua
+        </button>
+
+        {% for category_item in hotnews_categories %}
+          {% if category_item %}
+            <button
+              class="hotnews-filter-button"
+              type="button"
+              data-category-filter="{{ category_item | downcase | escape }}"
+              aria-pressed="false"
+            >
+              {{ category_item }}
+            </button>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </section>
+
+    <!-- Kondisi tidak ada hasil -->
+
+    <section
+      id="hotnewsNoResult"
+      class="hotnews-catalog-section-new"
+      hidden
+    >
+      <div class="hotnews-section-inner">
+        <div class="hotnews-empty-new visible">
+          <h3>
+            Hot News tidak ditemukan.
+          </h3>
+
+          <p>
+            Coba gunakan kata kunci lain atau pilih
+            kategori berbeda.
+          </p>
         </div>
       </div>
     </section>
 
-    <!-- Katalog artikel -->
+    <!-- ===================================================
+         HOT NEWS UNGGULAN
+         =================================================== -->
+
+    {% if featured_post %}
+      {% assign featured_month_number =
+        featured_post.date
+        | date: "%-m"
+        | minus: 1
+      %}
+
+      {% capture featured_search_text %}
+        {{ featured_post.title }}
+        {{ featured_post.excerpt }}
+        {{ featured_post.category }}
+        {{ featured_post.tags | join: " " }}
+      {% endcapture %}
+
+      <section
+        id="featuredSection"
+        class="hotnews-featured-section"
+        data-featured-section
+      >
+        <div class="hotnews-section-inner">
+          <header class="hotnews-section-heading">
+            <div>
+              <p>
+                Pilihan terbaru
+              </p>
+
+              <h2>
+                Hot News unggulan.
+              </h2>
+            </div>
+          </header>
+
+          <article
+            class="hotnews-featured-card"
+            data-hotnews-item
+            data-featured-item
+            data-category="{{ featured_post.category | default: 'Hot News' | downcase | escape }}"
+            data-search="{{ featured_search_text | strip_html | normalize_whitespace | downcase | escape }}"
+          >
+            <div class="hotnews-featured-copy">
+              <span class="hotnews-featured-category">
+                {{ featured_post.category | default: "Hot News" }}
+              </span>
+
+              <h3>
+                {{ featured_post.title }}
+              </h3>
+
+              {% if featured_post.excerpt %}
+                <p class="hotnews-featured-summary">
+                  {{ featured_post.excerpt }}
+                </p>
+              {% endif %}
+
+              <div class="hotnews-featured-meta">
+                <time
+                  datetime="{{ featured_post.date | date_to_xmlschema }}"
+                >
+                  {{ featured_post.date | date: "%-d" }}
+                  {{ months[featured_month_number] }}
+                  {{ featured_post.date | date: "%Y" }}
+                </time>
+
+                {% if featured_post.reading_time %}
+                  <span>
+                    {{ featured_post.reading_time }}
+                  </span>
+                {% endif %}
+
+                {% if featured_post.author %}
+                  <span>
+                    {{ featured_post.author }}
+                  </span>
+                {% endif %}
+              </div>
+
+              <a
+                class="hotnews-featured-link"
+                href="{{ featured_post.url | relative_url }}"
+              >
+                Baca Hot News
+              </a>
+            </div>
+
+            <div
+              class="hotnews-featured-visual"
+              aria-hidden="true"
+            >
+              <div class="hotnews-featured-document">
+                <small>
+                  Kabayan Hot News
+                </small>
+
+                <strong>
+                  {% if featured_post.visual_type == "role-comparison" %}
+                    Role
+                    <br>
+                    Akses
+                  {% else %}
+                    Informasi
+                    <br>
+                    Pajak
+                  {% endif %}
+                </strong>
+
+                <div class="hotnews-document-line"></div>
+
+                <div class="hotnews-document-accent"></div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+    {% endif %}
+
+    <!-- ===================================================
+         KATALOG HOT NEWS LAINNYA
+         =================================================== -->
+
     <section
-      id="articleArchive"
-      class="hotnews-catalog-section"
+      id="hotnewsCatalog"
+      class="hotnews-catalog-section-new"
+      data-catalog-section
     >
-      <div class="hotnews-catalog-container">
-        <header class="hotnews-section-header">
+      <div class="hotnews-section-inner">
+        <header class="hotnews-catalog-top">
           <div>
-            <span class="hotnews-section-kicker">
-              Kumpulan artikel
-            </span>
+            <p>
+              Katalog
+            </p>
 
             <h2>
-              Seluruh Hot News
+              Hot News lainnya.
             </h2>
-
-            <p>
-              Artikel disusun berdasarkan tanggal publikasi,
-              mulai dari informasi terbaru.
-            </p>
           </div>
 
-          <p
-            id="hotnewsCount"
-            class="hotnews-count"
+          <span
+            id="hotnewsResultCount"
+            class="hotnews-result-count"
             aria-live="polite"
           >
-            {{ article_count }}
-            {% if article_count == 1 %}
-              artikel
-            {% else %}
-              artikel
-            {% endif %}
-          </p>
+            {{ article_count }} artikel tersedia
+          </span>
         </header>
 
-        <!-- Pencarian dan filter -->
-        <div class="hotnews-toolbar">
-          <div class="hotnews-search-field">
-            <label for="articleSearch">
-              Cari artikel
-            </label>
-
-            <input
-              id="articleSearch"
-              type="search"
-              placeholder="Cari judul, kategori, atau topik..."
-              autocomplete="off"
-            >
-          </div>
-
-          <div class="hotnews-filter-field">
-            <label for="categoryFilter">
-              Kategori
-            </label>
-
-            <select id="categoryFilter">
-              <option value="">
-                Semua kategori
-              </option>
-
-              {% for category_item in hotnews_categories %}
-                {% if category_item %}
-                  <option
-                    value="{{ category_item | downcase | escape }}"
-                  >
-                    {{ category_item }}
-                  </option>
-                {% endif %}
-              {% endfor %}
-            </select>
-          </div>
-
-          <button
-            id="resetArticleFilter"
-            class="hotnews-reset-button"
-            type="button"
+        {% if remaining_count > 0 %}
+          <div
+            id="hotnewsArticleGrid"
+            class="hotnews-article-grid"
           >
-            Atur ulang
-          </button>
-        </div>
-
-        <!-- Daftar artikel -->
-        <div
-          id="hotnewsList"
-          class="hotnews-list"
-        >
-          {% if site.posts.size > 0 %}
-
-            {% for post in site.posts %}
+            {% for post in site.posts offset: 1 %}
               {% assign post_month_number =
                 post.date
                 | date: "%-m"
@@ -352,54 +529,47 @@ permalink: /hotnews.html
               {% endcapture %}
 
               <article
-                class="hotnews-card"
-                data-hotnews-card
-                data-search="{{ post_search_text | strip_html | normalize_whitespace | downcase | escape }}"
+                class="hotnews-article-card"
+                data-hotnews-item
+                data-catalog-card
                 data-category="{{ post.category | default: 'Hot News' | downcase | escape }}"
+                data-search="{{ post_search_text | strip_html | normalize_whitespace | downcase | escape }}"
               >
-                <div class="hotnews-card-meta">
-                  <span class="hotnews-card-category">
-                    {{ post.category | default: "Hot News" }}
-                  </span>
+                <div>
+                  <div class="hotnews-card-top">
+                    <span class="hotnews-category-chip">
+                      {{ post.category | default: "Hot News" }}
+                    </span>
+                  </div>
 
-                  <time
-                    datetime="{{ post.date | date_to_xmlschema }}"
-                  >
-                    {{ post.date | date: "%-d" }}
-                    {{ months[post_month_number] }}
-                    {{ post.date | date: "%Y" }}
-                  </time>
+                  <h3>
+                    <a href="{{ post.url | relative_url }}">
+                      {{ post.title }}
+                    </a>
+                  </h3>
+
+                  {% if post.excerpt %}
+                    <p class="hotnews-card-summary">
+                      {{ post.excerpt }}
+                    </p>
+                  {% else %}
+                    <p class="hotnews-card-summary">
+                      {{ post.content | strip_html | truncatewords: 27 }}
+                    </p>
+                  {% endif %}
                 </div>
 
-                <h3 class="hotnews-card-title">
-                  <a href="{{ post.url | relative_url }}">
-                    {{ post.title }}
-                  </a>
-                </h3>
-
-                {% if post.excerpt %}
-                  <p class="hotnews-card-excerpt">
-                    {{ post.excerpt }}
-                  </p>
-                {% else %}
-                  <p class="hotnews-card-excerpt">
-                    {{ post.content | strip_html | truncatewords: 28 }}
-                  </p>
-                {% endif %}
-
-                <div class="hotnews-card-footer">
-                  <div class="hotnews-card-info">
-                    {% if post.author %}
-                      <span>
-                        {{ post.author }}
-                      </span>
-                    {% endif %}
+                <footer class="hotnews-card-footer-new">
+                  <div class="hotnews-card-meta-new">
+                    <time
+                      datetime="{{ post.date | date_to_xmlschema }}"
+                    >
+                      {{ post.date | date: "%-d" }}
+                      {{ months[post_month_number] }}
+                      {{ post.date | date: "%Y" }}
+                    </time>
 
                     {% if post.reading_time %}
-                      <span aria-hidden="true">
-                        •
-                      </span>
-
                       <span>
                         {{ post.reading_time }}
                       </span>
@@ -407,98 +577,95 @@ permalink: /hotnews.html
                   </div>
 
                   <a
-                    class="hotnews-card-link"
+                    class="hotnews-card-link-new"
                     href="{{ post.url | relative_url }}"
-                    aria-label="Baca artikel: {{ post.title | escape }}"
                   >
-                    Baca selengkapnya
-                    <span aria-hidden="true">
-                      →
-                    </span>
+                    Baca Hot News ›
                   </a>
-                </div>
-
-                {% if post.tags and post.tags.size > 0 %}
-                  <div
-                    class="hotnews-card-tags"
-                    aria-label="Topik artikel"
-                  >
-                    {% for tag in post.tags limit: 4 %}
-                      <span>
-                        {{ tag }}
-                      </span>
-                    {% endfor %}
-                  </div>
-                {% endif %}
+                </footer>
               </article>
             {% endfor %}
+          </div>
+        {% endif %}
 
-          {% else %}
-            <div class="hotnews-empty-state">
-              <h3>
-                Belum ada artikel
-              </h3>
-
-              <p>
-                Artikel Hot News akan tampil otomatis setelah
-                ditambahkan ke folder
-                <code>_posts</code>.
-              </p>
-            </div>
-          {% endif %}
-        </div>
-
-        <!-- Tidak ada hasil pencarian -->
         <div
-          id="hotnewsNoResult"
-          class="hotnews-empty-state"
-          hidden
+          id="hotnewsCatalogEmpty"
+          class="
+            hotnews-empty-new
+            {% if remaining_count <= 0 %}
+              visible
+            {% endif %}
+          "
         >
-          <h3>
-            Artikel tidak ditemukan
+          <h3 id="hotnewsCatalogEmptyTitle">
+            Belum ada Hot News lainnya.
           </h3>
 
-          <p>
-            Coba gunakan kata kunci lain atau tampilkan
-            kembali seluruh kategori.
+          <p id="hotnewsCatalogEmptyDescription">
+            Artikel terbaru berikutnya akan tampil otomatis
+            setelah ditambahkan ke folder
+            <code>_posts</code>.
           </p>
         </div>
       </div>
     </section>
+
+    <!-- ===================================================
+         AJAKAN MEMBUKA ARSIP
+         =================================================== -->
+
+    <section class="hotnews-archive-section">
+      <div class="hotnews-archive-inner">
+        <div>
+          <p>
+            Perpustakaan Kabayan
+          </p>
+
+          <h2>
+            Temukan kembali Hot News berdasarkan tahun
+            dan bulan publikasinya.
+          </h2>
+        </div>
+
+        <a
+          class="hotnews-archive-link"
+          href="{{ '/hotnews-arsip.html' | relative_url }}"
+        >
+          Buka arsip Hot News
+        </a>
+      </div>
+    </section>
   </main>
 
-  <!-- Footer -->
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <a
-          class="brand"
-          href="{{ '/' | relative_url }}"
-        >
-          <span
-            class="brand-mark"
-            aria-hidden="true"
-          >
-            ASD
-          </span>
+  <!-- =====================================================
+       FOOTER
+       ===================================================== -->
 
-          <span>
-            Kabayan
-          </span>
-        </a>
+  <footer class="hotnews-catalog-footer">
+    <div class="hotnews-catalog-disclaimer">
+      <strong>Disclaimer:</strong>
+      Kabayan merupakan situs edukasi perpajakan pribadi
+      dan bukan situs resmi Direktorat Jenderal Pajak atau
+      instansi pemerintah. Informasi perlu diperiksa kembali
+      dengan ketentuan dan tampilan sistem terbaru sebelum
+      digunakan.
+    </div>
 
-        <p>
-          Katalog Bahan Pelayanan dan media edukasi
-          perpajakan oleh Angga Sukma Dhaniswara.
-        </p>
-      </div>
+    <div class="hotnews-catalog-footer-inner">
+      <p>
+        © Angga Sukma Dhaniswara.
+      </p>
 
       <nav
-        class="footer-nav"
+        class="hotnews-catalog-footer-links"
         aria-label="Navigasi footer"
       >
         <a href="{{ '/' | relative_url }}">
           Beranda
+        </a>
+
+        <a href="{{ '/artikel.html' | relative_url }}">
+          Artikel
         </a>
 
         <a href="{{ '/hotnews.html' | relative_url }}">
@@ -506,11 +673,11 @@ permalink: /hotnews.html
         </a>
 
         <a href="{{ '/hotnews-arsip.html' | relative_url }}">
-          Arsip Hot News
+          Arsip
         </a>
 
-        <a href="{{ '/tentang.html' | relative_url }}">
-          Tentang
+        <a href="{{ '/buku.html' | relative_url }}">
+          Buku
         </a>
 
         <a href="#mainContent">
@@ -518,59 +685,107 @@ permalink: /hotnews.html
         </a>
       </nav>
     </div>
-
-    <div class="footer-disclaimer">
-      <p>
-        <strong>Disclaimer:</strong>
-        Kabayan merupakan situs edukasi perpajakan pribadi
-        dan bukan situs resmi Direktorat Jenderal Pajak atau
-        instansi pemerintah. Informasi perlu diperiksa kembali
-        dengan ketentuan dan tampilan sistem terbaru sebelum
-        digunakan.
-      </p>
-    </div>
-
-    <div class="footer-bottom">
-      <p>
-        © Angga Sukma Dhaniswara.
-      </p>
-    </div>
   </footer>
+
+  <!-- =====================================================
+       JAVASCRIPT
+       ===================================================== -->
 
   <script>
     (function () {
       "use strict";
 
       const searchInput =
-        document.getElementById("articleSearch");
+        document.getElementById(
+          "hotnewsSearch"
+        );
 
-      const categoryFilter =
-        document.getElementById("categoryFilter");
+      const clearSearchButton =
+        document.getElementById(
+          "clearHotnewsSearch"
+        );
 
-      const resetButton =
-        document.getElementById("resetArticleFilter");
-
-      const countElement =
-        document.getElementById("hotnewsCount");
-
-      const noResultElement =
-        document.getElementById("hotnewsNoResult");
-
-      const cards =
+      const filterButtons =
         Array.from(
           document.querySelectorAll(
-            "[data-hotnews-card]"
+            "[data-category-filter]"
           )
         );
 
+      const hotnewsItems =
+        Array.from(
+          document.querySelectorAll(
+            "[data-hotnews-item]"
+          )
+        );
+
+      const catalogCards =
+        Array.from(
+          document.querySelectorAll(
+            "[data-catalog-card]"
+          )
+        );
+
+      const featuredSection =
+        document.querySelector(
+          "[data-featured-section]"
+        );
+
+      const featuredItem =
+        document.querySelector(
+          "[data-featured-item]"
+        );
+
+      const catalogSection =
+        document.querySelector(
+          "[data-catalog-section]"
+        );
+
+      const articleGrid =
+        document.getElementById(
+          "hotnewsArticleGrid"
+        );
+
+      const catalogEmpty =
+        document.getElementById(
+          "hotnewsCatalogEmpty"
+        );
+
+      const catalogEmptyTitle =
+        document.getElementById(
+          "hotnewsCatalogEmptyTitle"
+        );
+
+      const catalogEmptyDescription =
+        document.getElementById(
+          "hotnewsCatalogEmptyDescription"
+        );
+
+      const resultCount =
+        document.getElementById(
+          "hotnewsResultCount"
+        );
+
+      const noResultSection =
+        document.getElementById(
+          "hotnewsNoResult"
+        );
+
       const menuButton =
-        document.getElementById("menuButton");
+        document.getElementById(
+          "catalogMenuButton"
+        );
 
       const mobileMenu =
-        document.getElementById("mobileMenu");
+        document.getElementById(
+          "catalogMobileMenu"
+        );
+
+      let selectedCategory =
+        "";
 
       /*
-       * Normalisasi teks pencarian.
+       * Normalisasi teks untuk pencarian.
        */
       function normalizeText(value) {
         return String(value || "")
@@ -584,10 +799,27 @@ permalink: /hotnews.html
       }
 
       /*
-       * Filter artikel berdasarkan kata kunci
-       * dan kategori.
+       * Tampilkan atau sembunyikan tombol
+       * penghapus pencarian.
        */
-      function filterArticles() {
+      function updateClearButton() {
+        if (
+          !searchInput ||
+          !clearSearchButton
+        ) {
+          return;
+        }
+
+        clearSearchButton.classList.toggle(
+          "visible",
+          searchInput.value.length > 0
+        );
+      }
+
+      /*
+       * Menjalankan pencarian dan filter.
+       */
+      function filterHotnews() {
         const keyword =
           normalizeText(
             searchInput
@@ -595,94 +827,203 @@ permalink: /hotnews.html
               : ""
           );
 
-        const selectedCategory =
-          normalizeText(
-            categoryFilter
-              ? categoryFilter.value
-              : ""
-          );
-
         let visibleCount =
           0;
 
-        cards.forEach(
-          function (card) {
+        let visibleCatalogCount =
+          0;
+
+        hotnewsItems.forEach(
+          function (item) {
             const searchableText =
               normalizeText(
-                card.dataset.search
+                item.dataset.search
               );
 
-            const cardCategory =
+            const itemCategory =
               normalizeText(
-                card.dataset.category
+                item.dataset.category
               );
 
             const matchesKeyword =
               !keyword ||
-              searchableText.includes(keyword);
+              searchableText.includes(
+                keyword
+              );
 
             const matchesCategory =
               !selectedCategory ||
-              cardCategory === selectedCategory;
+              itemCategory ===
+                selectedCategory;
 
             const isVisible =
               matchesKeyword &&
               matchesCategory;
 
-            card.hidden =
+            item.hidden =
               !isVisible;
 
             if (isVisible) {
               visibleCount += 1;
+
+              if (
+                item.hasAttribute(
+                  "data-catalog-card"
+                )
+              ) {
+                visibleCatalogCount += 1;
+              }
             }
           }
         );
 
-        if (countElement) {
-          countElement.textContent =
-            visibleCount + " artikel";
+        /*
+         * Tampilkan featured section hanya
+         * apabila artikel unggulan cocok.
+         */
+        if (
+          featuredSection &&
+          featuredItem
+        ) {
+          featuredSection.hidden =
+            featuredItem.hidden;
         }
 
-        if (noResultElement) {
-          noResultElement.hidden =
+        /*
+         * Tampilkan kondisi katalog kosong
+         * jika tidak ada kartu artikel lain.
+         */
+        if (articleGrid) {
+          articleGrid.hidden =
+            visibleCatalogCount === 0;
+        }
+
+        if (catalogEmpty) {
+          catalogEmpty.classList.toggle(
+            "visible",
+            visibleCatalogCount === 0 &&
+            visibleCount > 0
+          );
+        }
+
+        if (
+          catalogEmptyTitle &&
+          catalogEmptyDescription
+        ) {
+          const hasActiveFilter =
+            Boolean(
+              keyword ||
+              selectedCategory
+            );
+
+          if (hasActiveFilter) {
+            catalogEmptyTitle.textContent =
+              "Tidak ada Hot News lainnya.";
+
+            catalogEmptyDescription.textContent =
+              "Artikel unggulan cocok dengan pencarian, tetapi tidak ada artikel lain pada kategori atau kata kunci tersebut.";
+          } else {
+            catalogEmptyTitle.textContent =
+              "Belum ada Hot News lainnya.";
+
+            catalogEmptyDescription.textContent =
+              "Artikel terbaru berikutnya akan tampil otomatis setelah ditambahkan ke folder _posts.";
+          }
+        }
+
+        /*
+         * Jika seluruh artikel tidak cocok,
+         * sembunyikan featured dan katalog.
+         */
+        if (noResultSection) {
+          noResultSection.hidden =
             visibleCount !== 0;
         }
+
+        if (catalogSection) {
+          catalogSection.hidden =
+            visibleCount === 0;
+        }
+
+        if (resultCount) {
+          resultCount.textContent =
+            visibleCount +
+            (
+              visibleCount === 1
+                ? " artikel ditemukan"
+                : " artikel ditemukan"
+            );
+        }
+
+        updateClearButton();
       }
 
+      /*
+       * Pencarian.
+       */
       if (searchInput) {
         searchInput.addEventListener(
           "input",
-          filterArticles
+          filterHotnews
         );
       }
 
-      if (categoryFilter) {
-        categoryFilter.addEventListener(
-          "change",
-          filterArticles
-        );
-      }
-
-      if (resetButton) {
-        resetButton.addEventListener(
+      /*
+       * Hapus pencarian.
+       */
+      if (
+        clearSearchButton &&
+        searchInput
+      ) {
+        clearSearchButton.addEventListener(
           "click",
           function () {
-            if (searchInput) {
-              searchInput.value = "";
-            }
+            searchInput.value =
+              "";
 
-            if (categoryFilter) {
-              categoryFilter.value = "";
-            }
+            filterHotnews();
 
-            filterArticles();
-
-            if (searchInput) {
-              searchInput.focus();
-            }
+            searchInput.focus();
           }
         );
       }
+
+      /*
+       * Filter kategori.
+       */
+      filterButtons.forEach(
+        function (button) {
+          button.addEventListener(
+            "click",
+            function () {
+              selectedCategory =
+                normalizeText(
+                  button.dataset
+                    .categoryFilter
+                );
+
+              filterButtons.forEach(
+                function (otherButton) {
+                  const isActive =
+                    otherButton === button;
+
+                  otherButton.classList.toggle(
+                    "active",
+                    isActive
+                  );
+
+                  otherButton.setAttribute(
+                    "aria-pressed",
+                    String(isActive)
+                  );
+                }
+              );
+
+              filterHotnews();
+            }
+          );
+        }
+      );
 
       /*
        * Menu seluler.
@@ -695,7 +1036,9 @@ permalink: /hotnews.html
           return;
         }
 
-        mobileMenu.hidden = true;
+        mobileMenu.classList.remove(
+          "active"
+        );
 
         menuButton.setAttribute(
           "aria-expanded",
@@ -706,6 +1049,9 @@ permalink: /hotnews.html
           "aria-label",
           "Buka menu navigasi"
         );
+
+        menuButton.textContent =
+          "☰";
 
         document.body.classList.remove(
           "menu-open"
@@ -720,9 +1066,9 @@ permalink: /hotnews.html
           "click",
           function () {
             const isOpen =
-              menuButton.getAttribute(
-                "aria-expanded"
-              ) === "true";
+              mobileMenu.classList.contains(
+                "active"
+              );
 
             if (isOpen) {
               closeMobileMenu();
@@ -730,8 +1076,9 @@ permalink: /hotnews.html
               return;
             }
 
-            mobileMenu.hidden =
-              false;
+            mobileMenu.classList.add(
+              "active"
+            );
 
             menuButton.setAttribute(
               "aria-expanded",
@@ -743,6 +1090,9 @@ permalink: /hotnews.html
               "Tutup menu navigasi"
             );
 
+            menuButton.textContent =
+              "×";
+
             document.body.classList.add(
               "menu-open"
             );
@@ -752,7 +1102,9 @@ permalink: /hotnews.html
         mobileMenu.addEventListener(
           "click",
           function (event) {
-            if (event.target.closest("a")) {
+            if (
+              event.target.closest("a")
+            ) {
               closeMobileMenu();
             }
           }
@@ -761,7 +1113,9 @@ permalink: /hotnews.html
         document.addEventListener(
           "keydown",
           function (event) {
-            if (event.key === "Escape") {
+            if (
+              event.key === "Escape"
+            ) {
               closeMobileMenu();
             }
           }
@@ -770,14 +1124,16 @@ permalink: /hotnews.html
         window.addEventListener(
           "resize",
           function () {
-            if (window.innerWidth > 980) {
+            if (
+              window.innerWidth > 980
+            ) {
               closeMobileMenu();
             }
           }
         );
       }
 
-      filterArticles();
+      filterHotnews();
     })();
   </script>
 </body>
