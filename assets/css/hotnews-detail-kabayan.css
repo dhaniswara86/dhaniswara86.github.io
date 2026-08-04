@@ -1,0 +1,493 @@
+/* =========================================================
+   DETAIL HOT NEWS — GAYA KABAYAN
+   ========================================================= */
+
+:root {
+  --kabayan-navy: #173b67;
+  --kabayan-navy-dark: #102f55;
+  --kabayan-gold: #d6a63c;
+  --kabayan-gold-soft: #fff7e5;
+
+  --kabayan-text: #172b45;
+  --kabayan-text-soft: #536273;
+  --kabayan-muted: #6b7787;
+
+  --kabayan-white: #ffffff;
+  --kabayan-background: #f6f8fb;
+  --kabayan-border: rgba(23, 59, 103, 0.12);
+}
+
+/* Dasar halaman */
+
+body {
+  color: var(--kabayan-text);
+  background: var(--kabayan-white);
+}
+
+/* Header lebih ringan */
+
+.site-header {
+  border-bottom:
+    1px solid rgba(23, 59, 103, 0.08);
+
+  background:
+    rgba(255, 255, 255, 0.94);
+}
+
+.header-inner {
+  min-height: 60px;
+}
+
+.brand-mark {
+  width: 34px;
+  height: 34px;
+
+  border-radius: 10px;
+
+  background:
+    linear-gradient(
+      145deg,
+      var(--kabayan-navy),
+      var(--kabayan-navy-dark)
+    );
+
+  box-shadow: none;
+}
+
+.brand-name {
+  color: var(--kabayan-text);
+
+  font-size: 0.92rem;
+}
+
+.main-nav {
+  gap: 3px;
+}
+
+.main-nav a {
+  min-height: 36px;
+  padding: 0 11px;
+
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+/* Hero artikel */
+
+.hotnews-article-hero {
+  padding:
+    clamp(58px, 7vw, 88px)
+    20px
+    clamp(58px, 7vw, 82px);
+
+  background:
+    radial-gradient(
+      circle at 12% 14%,
+      rgba(214, 166, 60, 0.12),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 88% 10%,
+      rgba(23, 59, 103, 0.09),
+      transparent 31%
+    ),
+    linear-gradient(
+      180deg,
+      #ffffff,
+      #f6f8fb
+    );
+}
+
+.hotnews-hero-inner {
+  width: min(1120px, 100%);
+}
+
+.hotnews-article-kicker {
+  margin-bottom: 18px;
+  padding: 7px 12px;
+
+  border: 0;
+
+  color: var(--kabayan-navy);
+  background: #edf3fa;
+
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+}
+
+.hotnews-detail-title {
+  max-width: 900px;
+  margin-bottom: 20px;
+
+  font-size:
+    clamp(
+      2.4rem,
+      5.3vw,
+      4.6rem
+    );
+
+  line-height: 1.04;
+  letter-spacing: -0.052em;
+
+  color: var(--kabayan-text);
+}
+
+.hotnews-detail-title::after {
+  display: block;
+  width: 62px;
+  height: 4px;
+  margin: 24px auto 0;
+
+  border-radius: 999px;
+
+  background: var(--kabayan-gold);
+
+  content: "";
+}
+
+.hotnews-detail-excerpt {
+  max-width: 760px;
+  margin-bottom: 22px;
+
+  color: var(--kabayan-text-soft);
+
+  font-size:
+    clamp(
+      1rem,
+      1.8vw,
+      1.18rem
+    );
+
+  line-height: 1.7;
+}
+
+.hotnews-detail-meta {
+  margin-bottom: 24px;
+
+  color: var(--kabayan-muted);
+
+  font-size: 0.82rem;
+}
+
+/* Tombol */
+
+.hotnews-hero-actions {
+  margin-bottom: 40px;
+}
+
+.hotnews-button {
+  min-height: 43px;
+  padding: 0 17px;
+
+  font-size: 0.82rem;
+}
+
+.hotnews-button-primary {
+  background: var(--kabayan-navy);
+
+  box-shadow:
+    0 10px 23px rgba(23, 59, 103, 0.18);
+}
+
+.hotnews-button-primary:hover {
+  background: var(--kabayan-navy-dark);
+}
+
+/* Visual perbandingan role */
+
+.hotnews-role-visual {
+  max-width: 880px;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    105px
+    minmax(0, 1fr);
+
+  gap: 17px;
+}
+
+.role-visual-card {
+  min-height: 275px;
+  padding: 25px;
+
+  border-radius: 21px;
+
+  box-shadow:
+    0 13px 36px rgba(23, 43, 70, 0.07);
+}
+
+.role-visual-card-highlight {
+  border-color:
+    rgba(214, 166, 60, 0.35);
+
+  background:
+    linear-gradient(
+      145deg,
+      var(--kabayan-gold-soft),
+      #ffffff
+    );
+}
+
+.role-visual-card h2 {
+  font-size: 1.28rem;
+}
+
+.role-visual-card p,
+.role-visual-card li {
+  font-size: 0.85rem;
+}
+
+.role-visual-center {
+  min-height: 275px;
+}
+
+.role-shield {
+  width: 76px;
+  height: 88px;
+
+  background:
+    linear-gradient(
+      145deg,
+      var(--kabayan-gold),
+      #9b711e
+    );
+}
+
+/* Isi artikel */
+
+.hotnews-article-section {
+  padding:
+    65px
+    20px
+    95px;
+}
+
+.hotnews-article-layout {
+  width: min(1080px, 100%);
+
+  grid-template-columns:
+    minmax(0, 740px)
+    minmax(215px, 250px);
+
+  gap: 66px;
+}
+
+.hotnews-summary-box {
+  margin-bottom: 34px;
+  padding: 23px 25px 23px 29px;
+
+  border-radius: 17px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #f2f6fb,
+      #ffffff
+    );
+}
+
+.hotnews-summary-box::before {
+  background:
+    linear-gradient(
+      180deg,
+      var(--kabayan-gold),
+      var(--kabayan-navy)
+    );
+}
+
+.hotnews-summary-box p {
+  font-size: 0.98rem;
+}
+
+.hotnews-article-body {
+  color: #34465a;
+
+  font-size: 1rem;
+  line-height: 1.83;
+}
+
+.hotnews-article-body h2 {
+  margin-top: 52px;
+
+  font-size:
+    clamp(
+      1.55rem,
+      2.8vw,
+      2rem
+    );
+
+  color: var(--kabayan-text);
+}
+
+.hotnews-article-body h3 {
+  font-size: 1.18rem;
+
+  color: var(--kabayan-navy);
+}
+
+/* Tabel */
+
+.hotnews-table-wrapper {
+  border-radius: 16px;
+
+  box-shadow:
+    0 8px 24px rgba(23, 43, 70, 0.05);
+}
+
+.hotnews-table th {
+  background: var(--kabayan-navy);
+}
+
+/* Langkah */
+
+.hotnews-step {
+  border-radius: 16px;
+
+  box-shadow:
+    0 6px 18px rgba(23, 43, 70, 0.04);
+}
+
+.hotnews-step::before {
+  background: var(--kabayan-navy);
+}
+
+/* Jalur menu */
+
+.hotnews-menu-path {
+  border-color:
+    rgba(214, 166, 60, 0.28);
+
+  background: var(--kabayan-gold-soft);
+}
+
+/* Catatan Kabayan */
+
+.hotnews-note {
+  border-radius: 16px;
+
+  border-color:
+    rgba(214, 166, 60, 0.35);
+
+  background:
+    linear-gradient(
+      145deg,
+      var(--kabayan-gold-soft),
+      #fffdf9
+    );
+}
+
+/* Daftar isi */
+
+.hotnews-article-sidebar {
+  top: 82px;
+  padding: 20px;
+
+  border-radius: 16px;
+
+  background: #f8fafc;
+
+  box-shadow: none;
+}
+
+.hotnews-article-sidebar h2 {
+  color: var(--kabayan-text);
+}
+
+.hotnews-toc a.is-active {
+  border-left-color: var(--kabayan-gold);
+
+  color: var(--kabayan-navy);
+  background: #edf3fa;
+}
+
+/* Profil penulis */
+
+.hotnews-author-card {
+  padding: 22px;
+
+  border-radius: 17px;
+
+  background: #f8fafc;
+}
+
+.hotnews-author-avatar {
+  width: 52px;
+  height: 52px;
+
+  flex-basis: 52px;
+
+  border-radius: 15px;
+
+  background:
+    linear-gradient(
+      145deg,
+      var(--kabayan-navy),
+      var(--kabayan-navy-dark)
+    );
+}
+
+/* Footer */
+
+.site-footer {
+  color: #cbd7e4;
+  background: var(--kabayan-navy-dark);
+}
+
+.footer-brand .brand-mark {
+  background:
+    linear-gradient(
+      145deg,
+      var(--kabayan-gold),
+      #9b711e
+    );
+}
+
+/* Responsif */
+
+@media (max-width: 980px) {
+  .hotnews-article-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .hotnews-role-visual {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .role-visual-center {
+    display: none;
+  }
+}
+
+@media (max-width: 680px) {
+  .hotnews-article-hero {
+    padding:
+      50px
+      17px
+      55px;
+  }
+
+  .hotnews-detail-title {
+    font-size:
+      clamp(
+        2.1rem,
+        10vw,
+        3.2rem
+      );
+  }
+
+  .hotnews-role-visual {
+    grid-template-columns: 1fr;
+  }
+
+  .role-visual-card {
+    min-height: auto;
+  }
+
+  .hotnews-article-section {
+    padding:
+      45px
+      17px
+      72px;
+  }
+}
