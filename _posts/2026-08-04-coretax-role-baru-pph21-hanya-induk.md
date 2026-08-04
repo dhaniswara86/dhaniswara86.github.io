@@ -12,7 +12,7 @@ tags:
   - Hak Akses
   - Kerahasiaan Data
 
-excerpt: "Role baru memungkinkan pimpinan atau pejabat perusahaan menandatangani SPT Masa PPh Pasal 21/26 tanpa melihat rincian penghasilan setiap pegawai."
+excerpt: "Role baru "Hanya Induk" memungkinkan pimpinan atau pejabat perusahaan menandatangani SPT Masa PPh Pasal 21/26 tanpa melihat rincian penghasilan setiap pegawai."
 
 reading_time: "6 menit baca"
 visual_type: "role-comparison"
