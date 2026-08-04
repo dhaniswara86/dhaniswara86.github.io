@@ -314,6 +314,74 @@ telah diberikan kepada pihak terkait. Pastikan tidak ada pihak
 yang memperoleh akses lebih luas daripada yang dibutuhkan
 untuk menjalankan tugasnya.
 
+## Panduan Visual Penambahan Akses
+
+<section
+  class="hotnews-pdf-guide"
+  aria-labelledby="pdfGuideTitle"
+>
+  <div class="hotnews-pdf-guide__intro">
+    <div class="hotnews-pdf-guide__copy">
+      <span class="hotnews-pdf-guide__eyebrow">
+        Panduan PDF · 7 halaman
+      </span>
+
+      <h3 id="pdfGuideTitle">
+        Tata Cara Penambahan Akses Penandatangan Induk SPT
+      </h3>
+
+      <p>
+        Ikuti langkah mulai dari masuk ke Coretax, memilih akun
+        Wajib Pajak yang diwakili, membuka menu Wakil/Kuasa,
+        menetapkan role, hingga menyimpan perubahan.
+      </p>
+    </div>
+
+    <a
+      class="hotnews-pdf-guide__button"
+      href="{{ '/assets/pdf/tata-cara-penambahan-akses-penandatangan-induk-spt.pdf' | relative_url }}"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Buka PDF
+      <span aria-hidden="true">↗</span>
+    </a>
+  </div>
+
+  <div class="hotnews-pdf-guide__viewer">
+    <object
+      data="{{ '/assets/pdf/tata-cara-penambahan-akses-penandatangan-induk-spt.pdf' | relative_url }}#view=FitH"
+      type="application/pdf"
+      aria-label="Panduan Tata Cara Penambahan Akses Penandatangan Induk SPT"
+    >
+      <p>
+        Browser Anda tidak dapat menampilkan PDF secara langsung.
+
+        <a
+          href="{{ '/assets/pdf/tata-cara-penambahan-akses-penandatangan-induk-spt.pdf' | relative_url }}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Buka PDF pada tab baru.
+        </a>
+      </p>
+    </object>
+  </div>
+
+  <div class="hotnews-pdf-guide__footer">
+    <span>
+      Dokumen dapat dibuka pada tab baru atau disimpan ke perangkat.
+    </span>
+
+    <a
+      href="{{ '/assets/pdf/tata-cara-penambahan-akses-penandatangan-induk-spt.pdf' | relative_url }}"
+      download
+    >
+      Unduh PDF
+      <span aria-hidden="true">↓</span>
+    </a>
+  </div>
+</section>
 <div class="hotnews-note">
   <strong>Catatan Kabayan</strong>
 
