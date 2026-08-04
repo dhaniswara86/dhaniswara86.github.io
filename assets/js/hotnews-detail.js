@@ -1,10 +1,15 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const articleContainer =
-    document.getElementById("hotnews-article");
+(function () {
+  "use strict";
 
-  if (!articleContainer) {
+  const articleElement =
+    document.getElementById("hotnewsArticle");
+
+  if (
+    !articleElement ||
+    !Array.isArray(window.KABAYAN_HOTNEWS)
+  ) {
     console.error(
-      "Elemen dengan ID hotnews-article tidak ditemukan."
+      "Data Hot News atau elemen #hotnewsArticle tidak ditemukan."
     );
 
     return;
@@ -14,35 +19,24 @@ document.addEventListener("DOMContentLoaded", function () {
     window.location.search
   );
 
-  const slug = params.get("slug");
+  const articleId = params.get("id");
 
-  if (!slug) {
-    tampilkanArtikelTidakDitemukan(
-      articleContainer,
-      "Alamat artikel tidak memiliki slug."
+  if (!articleId) {
+    showNotFound(
+      "Alamat artikel tidak memiliki ID."
     );
 
     return;
   }
 
-  if (!Array.isArray(window.hotNewsData)) {
-    tampilkanArtikelTidakDitemukan(
-      articleContainer,
-      "Data Hot News tidak dapat dimuat."
-    );
-
-    return;
-  }
-
-  const article = window.hotNewsData.find(
+  const article = window.KABAYAN_HOTNEWS.find(
     function (item) {
-      return item.slug === slug;
+      return String(item.id) === String(articleId);
     }
   );
 
   if (!article) {
-    tampilkanArtikelTidakDitemukan(
-      articleContainer,
+    showNotFound(
       "Artikel yang Anda cari tidak ditemukan."
     );
 
@@ -52,18 +46,18 @@ document.addEventListener("DOMContentLoaded", function () {
   document.title =
     article.title + " | Kabayan Hot News";
 
-  const descriptionMeta = document.querySelector(
+  const metaDescription = document.querySelector(
     'meta[name="description"]'
   );
 
-  if (descriptionMeta && article.excerpt) {
-    descriptionMeta.setAttribute(
+  if (metaDescription && article.excerpt) {
+    metaDescription.setAttribute(
       "content",
       article.excerpt
     );
   }
 
-  articleContainer.innerHTML = `
+  articleElement.innerHTML = `
     <nav
       class="hotnews-breadcrumb"
       aria-label="Breadcrumb"
@@ -72,17 +66,13 @@ document.addEventListener("DOMContentLoaded", function () {
         Beranda
       </a>
 
-      <span aria-hidden="true">
-        /
-      </span>
+      <span aria-hidden="true">/</span>
 
       <a href="hotnews.html">
         Hot News
       </a>
 
-      <span aria-hidden="true">
-        /
-      </span>
+      <span aria-hidden="true">/</span>
 
       <span>
         Artikel
@@ -91,46 +81,37 @@ document.addEventListener("DOMContentLoaded", function () {
 
     <header class="hotnews-article-header">
       <span class="hotnews-article-category">
-        ${article.category || "Hot News"}
+        ${escapeHTML(article.category || "Hot News")}
       </span>
 
       <h1>
-        ${article.title}
+        ${escapeHTML(article.title)}
       </h1>
 
-      ${
-        article.excerpt
-          ? `
-            <p class="hotnews-article-excerpt">
-              ${article.excerpt}
-            </p>
-          `
-          : ""
-      }
+      <p class="hotnews-article-excerpt">
+        ${escapeHTML(article.excerpt)}
+      </p>
 
       <div class="hotnews-article-meta">
-        ${
-          article.dateLabel
-            ? `<span>${article.dateLabel}</span>`
-            : ""
-        }
-
-        ${
-          article.dateLabel && article.readingTime
-            ? `<span aria-hidden="true">•</span>`
-            : ""
-        }
+        <time datetime="${escapeHTML(article.dateISO)}">
+          ${escapeHTML(article.date)}
+        </time>
 
         ${
           article.readingTime
-            ? `<span>${article.readingTime}</span>`
+            ? `
+              <span aria-hidden="true">•</span>
+              <span>
+                ${escapeHTML(article.readingTime)}
+              </span>
+            `
             : ""
         }
       </div>
     </header>
 
     <div class="hotnews-article-body">
-      ${article.content}
+      ${article.content || ""}
     </div>
 
     <footer class="hotnews-article-footer">
@@ -143,35 +124,41 @@ document.addEventListener("DOMContentLoaded", function () {
       </a>
     </footer>
   `;
-});
 
-function tampilkanArtikelTidakDitemukan(
-  container,
-  message
-) {
-  document.title =
-    "Artikel Tidak Ditemukan | Kabayan";
+  function showNotFound(message) {
+    document.title =
+      "Artikel Tidak Ditemukan | Kabayan";
 
-  container.innerHTML = `
-    <div class="hotnews-not-found">
-      <span class="hotnews-not-found-code">
-        404
-      </span>
+    articleElement.innerHTML = `
+      <div class="hotnews-not-found">
+        <span class="hotnews-not-found-code">
+          404
+        </span>
 
-      <h1>
-        Artikel Tidak Ditemukan
-      </h1>
+        <h1>
+          Artikel Tidak Ditemukan
+        </h1>
 
-      <p>
-        ${message}
-      </p>
+        <p>
+          ${escapeHTML(message)}
+        </p>
 
-      <a
-        class="hotnews-back-link"
-        href="hotnews.html"
-      >
-        Kembali ke Hot News
-      </a>
-    </div>
-  `;
-}
+        <a
+          class="hotnews-back-link"
+          href="hotnews.html"
+        >
+          Kembali ke Hot News
+        </a>
+      </div>
+    `;
+  }
+
+  function escapeHTML(value) {
+    return String(value ?? "")
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+  }
+})();
