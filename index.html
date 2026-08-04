@@ -4089,6 +4089,13 @@ body.mega-menu-open {
   }
 })();
 </script>
+<!-- Pelacak kunjungan GoatCounter -->
+<script
+  data-goatcounter="https://dhaniswara86.goatcounter.com/count"
+  defer
+  src="https://gc.zgo.at/count.js"
+></script>
+
 <script>
 (function () {
   "use strict";
@@ -4104,23 +4111,28 @@ body.mega-menu-open {
   const metrics = [
     {
       elementId: "visitorTotal",
-      url:
-        counterBase +
-        "/TOTAL.json"
+      urls: [
+        counterBase + "/TOTAL.json"
+      ]
     },
     {
       elementId: "visitorMonth",
-      url:
-        counterBase +
-        "/TOTAL.json?start=month"
+      urls: [
+        counterBase + "/TOTAL.json?start=month"
+      ]
     },
     {
       elementId: "visitorHome",
-      url:
-        counterBase +
-        "/" +
-        encodeURIComponent("/") +
-        ".json"
+      urls: [
+        /* Bentuk URL root sesuai dokumentasi GoatCounter. */
+        counterBase + "//.json",
+
+        /* Cadangan apabila path disimpan sebagai encoded slash. */
+        counterBase + "/%2F.json",
+
+        /* Cadangan apabila GoatCounter mencatat /index.html. */
+        counterBase + "/%2Findex.html.json"
+      ]
     }
   ];
 
@@ -4140,6 +4152,46 @@ body.mega-menu-open {
     );
   }
 
+  async function fetchFirstAvailable(urls) {
+    let lastError = null;
+
+    for (const url of urls) {
+      try {
+        const response =
+          await fetch(
+            url,
+            {
+              cache: "no-store",
+              mode: "cors"
+            }
+          );
+
+        if (response.status === 404) {
+          /*
+           * Path belum tercatat. Coba alamat cadangan.
+           */
+          lastError =
+            new Error("HTTP 404");
+
+          continue;
+        }
+
+        if (!response.ok) {
+          throw new Error(
+            "HTTP " + response.status
+          );
+        }
+
+        return await response.json();
+      } catch (error) {
+        lastError = error;
+      }
+    }
+
+    throw lastError ||
+      new Error("Data tidak tersedia");
+  }
+
   async function loadMetric(metric) {
     const element =
       document.getElementById(
@@ -4147,88 +4199,85 @@ body.mega-menu-open {
       );
 
     if (!element) {
+      return false;
+    }
+
+    try {
+      const data =
+        await fetchFirstAvailable(
+          metric.urls
+        );
+
+      element.textContent =
+        formatCount(data.count);
+
+      return true;
+    } catch (error) {
+      console.error(
+        "GoatCounter " + metric.elementId + ":",
+        error
+      );
+
+      element.textContent = "—";
+
+      return false;
+    }
+  }
+
+  async function loadDashboard() {
+    const results =
+      await Promise.all(
+        metrics.map(loadMetric)
+      );
+
+    const successCount =
+      results.filter(Boolean).length;
+
+    if (!statusElement) {
       return;
     }
 
-    const response =
-      await fetch(
-        metric.url,
-        {
-          cache: "no-store",
-          mode: "cors"
-        }
-      );
+    statusElement.classList.remove(
+      "is-ready",
+      "is-error"
+    );
 
-    if (!response.ok) {
-      throw new Error(
-        "HTTP " + response.status
-      );
-    }
-
-    const data =
-      await response.json();
-
-    element.textContent =
-      formatCount(data.count);
-  }
-
-  Promise.all(
-    metrics.map(loadMetric)
-  )
-    .then(function () {
-      if (!statusElement) {
-        return;
-      }
-
+    if (successCount === metrics.length) {
       statusElement.textContent =
         "Statistik diperbarui secara berkala.";
 
       statusElement.classList.add(
         "is-ready"
       );
-    })
-    .catch(function (error) {
-      console.error(
-        "Dashboard GoatCounter:",
-        error
-      );
 
-      metrics.forEach(
-        function (metric) {
-          const element =
-            document.getElementById(
-              metric.elementId
-            );
+      return;
+    }
 
-          if (
-            element &&
-            element.textContent === "…"
-          ) {
-            element.textContent = "—";
-          }
-        }
-      );
-
-      if (!statusElement) {
-        return;
-      }
-
+    if (successCount > 0) {
       statusElement.textContent =
-        "Statistik belum dapat ditampilkan. Aktifkan izin visitor counter pada pengaturan GoatCounter.";
+        "Sebagian statistik belum tersedia. Data akan muncul setelah path tercatat dan cache GoatCounter diperbarui.";
 
-      statusElement.classList.add(
-        "is-error"
-      );
-    });
+      return;
+    }
+
+    statusElement.textContent =
+      "Statistik belum dapat dimuat. Pastikan izin visitor counter aktif dan pemblokir iklan tidak memblokir GoatCounter.";
+
+    statusElement.classList.add(
+      "is-error"
+    );
+  }
+
+  /*
+   * Beri waktu kepada count.js untuk mencatat kunjungan
+   * halaman beranda sebelum endpoint statistik dibaca.
+   */
+  window.setTimeout(
+    loadDashboard,
+    1800
+  );
 })();
 </script>
-
-<!-- Pelacak kunjungan GoatCounter -->
-<script
-  data-goatcounter="https://dhaniswara86.goatcounter.com/count"
-  async
-  src="https://gc.zgo.at/count.js"
-></script>
 
 </body>
 </html>
