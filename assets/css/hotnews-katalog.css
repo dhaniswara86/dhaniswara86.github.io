@@ -1325,20 +1325,508 @@ a {
    TEKS KHUSUS PEMBACA LAYAR
    ========================================================= */
 
-.visually-hidden {
-  position: absolute !important;
+/* =========================================================
+   HERO KABAYAN HOT NEWS
+   ========================================================= */
 
-  width: 1px !important;
-  height: 1px !important;
-  padding: 0 !important;
-  margin: -1px !important;
+.kabayan-news-hero {
+  position: relative;
+  min-height: calc(100vh - 48px);
+  padding: 54px 42px 24px;
+  overflow: hidden;
 
-  overflow: hidden !important;
+  background:
+    radial-gradient(
+      circle at 84% 17%,
+      rgba(93, 221, 235, 0.2),
+      transparent 31%
+    ),
+    radial-gradient(
+      circle at 8% 95%,
+      rgba(0, 113, 227, 0.16),
+      transparent 32%
+    ),
+    linear-gradient(
+      115deg,
+      #ffffff 0%,
+      #f7fbff 44%,
+      #edf8ff 100%
+    );
+}
 
-  clip: rect(0, 0, 0, 0) !important;
-  clip-path: inset(50%) !important;
+.kabayan-news-hero-inner {
+  display: grid;
+  width: min(1440px, 100%);
+  margin: 0 auto;
 
-  white-space: nowrap !important;
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(500px, 0.98fr);
 
-  border: 0 !important;
+  gap: clamp(45px, 7vw, 105px);
+  align-items: center;
+}
+
+/* Kolom kiri */
+
+.kabayan-news-copy {
+  min-width: 0;
+}
+
+.kabayan-news-kicker {
+  display: flex;
+  gap: 11px;
+  align-items: center;
+
+  margin-bottom: 29px;
+
+  color: #f11420;
+
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.kabayan-news-kicker span {
+  width: 11px;
+  height: 11px;
+
+  border-radius: 50%;
+  background: #f11420;
+}
+
+.kabayan-news-title {
+  margin: 0;
+
+  font-size:
+    clamp(
+      65px,
+      7.5vw,
+      116px
+    );
+
+  font-weight: 750;
+  line-height: 0.97;
+  letter-spacing: -0.075em;
+}
+
+.kabayan-news-title-dark {
+  display: block;
+  color: #19191b;
+}
+
+.kabayan-news-title-gradient {
+  display: block;
+
+  color: transparent;
+
+  background:
+    linear-gradient(
+      90deg,
+      #0752b8 0%,
+      #0876df 52%,
+      #14a8de 100%
+    );
+
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.kabayan-news-description {
+  max-width: 750px;
+  margin: 39px 0 0;
+
+  color: #55575c;
+
+  font-size:
+    clamp(
+      19px,
+      2vw,
+      29px
+    );
+
+  line-height: 1.48;
+  letter-spacing: -0.025em;
+}
+
+.kabayan-news-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 13px;
+
+  margin-top: 34px;
+}
+
+.kabayan-news-button {
+  display: inline-flex;
+  min-height: 53px;
+  padding: 0 25px;
+
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+
+  border: 2px solid #0878e8;
+  border-radius: 999px;
+
+  font-size: 16px;
+  font-weight: 650;
+
+  text-decoration: none;
+
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.kabayan-news-button:hover {
+  transform: translateY(-2px);
+}
+
+.kabayan-news-button-primary {
+  color: #ffffff;
+  background: #0878e8;
+
+  box-shadow:
+    0 13px 28px rgba(0, 113, 227, 0.2);
+}
+
+.kabayan-news-button-primary:hover {
+  background: #006ad4;
+}
+
+.kabayan-news-button-secondary {
+  color: #0878e8;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.kabayan-news-button-secondary:hover {
+  background: #ffffff;
+}
+
+.kabayan-news-topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+
+  margin-top: 31px;
+}
+
+.kabayan-news-topics button {
+  min-height: 38px;
+  padding: 0 15px;
+
+  border:
+    1px solid rgba(30, 42, 56, 0.11);
+  border-radius: 999px;
+
+  color: #6d7076;
+  background: rgba(255, 255, 255, 0.84);
+
+  font-size: 13px;
+  font-weight: 650;
+
+  cursor: pointer;
+}
+
+.kabayan-news-topics button:hover {
+  color: #0878e8;
+
+  border-color:
+    rgba(0, 113, 227, 0.25);
+
+  background: #ffffff;
+}
+
+/* Kolom kanan */
+
+.kabayan-news-visual {
+  position: relative;
+  padding: 35px 4px 25px;
+}
+
+.kabayan-news-device {
+  position: relative;
+
+  width: 100%;
+  padding: 40px 31px 35px;
+
+  border: 9px solid #171719;
+  border-radius: 34px 34px 8px 8px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #f8fcff,
+      #eaf8ff
+    );
+
+  box-shadow:
+    0 35px 75px rgba(10, 43, 76, 0.19);
+
+  transform:
+    perspective(1400px)
+    rotateY(-1.8deg)
+    rotateZ(-0.4deg);
+}
+
+.kabayan-news-device-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 20px;
+
+  color: #597087;
+
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.kabayan-news-latest {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+
+  color: #f11420;
+}
+
+.kabayan-news-latest i {
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+  background: #f11420;
+}
+
+.kabayan-news-screen-feature {
+  padding: 32px 27px 28px;
+
+  border-radius: 24px;
+
+  color: #ffffff;
+
+  background:
+    linear-gradient(
+      125deg,
+      #064088,
+      #0075c9 57%,
+      #05b1d5
+    );
+}
+
+.kabayan-news-screen-label {
+  display: inline-flex;
+  padding: 7px 12px;
+
+  border-radius: 999px;
+
+  color: #b9e2ff;
+  background:
+    rgba(255, 255, 255, 0.1);
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.kabayan-news-screen-feature strong {
+  display: block;
+  max-width: 470px;
+  margin-top: 20px;
+
+  font-size:
+    clamp(
+      24px,
+      2.4vw,
+      34px
+    );
+
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+}
+
+.kabayan-news-screen-feature p {
+  margin: 13px 0 0;
+
+  color: #a9ddff;
+
+  font-size: 13px;
+}
+
+.kabayan-news-screen-list {
+  display: grid;
+  gap: 10px;
+
+  margin-top: 15px;
+}
+
+.kabayan-news-screen-item {
+  display: grid;
+  min-height: 79px;
+  padding: 13px 17px;
+
+  grid-template-columns:
+    48px
+    minmax(0, 1fr);
+
+  gap: 15px;
+  align-items: center;
+
+  border:
+    1px solid rgba(34, 74, 107, 0.11);
+  border-radius: 17px;
+
+  background: rgba(255, 255, 255, 0.94);
+
+  box-shadow:
+    0 4px 12px rgba(30, 66, 96, 0.035);
+}
+
+.kabayan-news-number {
+  display: grid;
+  width: 43px;
+  height: 43px;
+
+  place-items: center;
+
+  border-radius: 13px;
+
+  color: #0878e8;
+  background: #e9f5ff;
+
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.kabayan-news-screen-item strong {
+  display: block;
+
+  color: #26272a;
+
+  font-size: 14px;
+}
+
+.kabayan-news-screen-item small {
+  display: block;
+  margin-top: 5px;
+
+  color: #95999f;
+
+  font-size: 10px;
+}
+
+/* =========================================================
+   RESPONSIVE HERO
+   ========================================================= */
+
+@media (max-width: 1100px) {
+  .kabayan-news-hero-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .kabayan-news-copy {
+    text-align: center;
+  }
+
+  .kabayan-news-kicker,
+  .kabayan-news-actions,
+  .kabayan-news-topics {
+    justify-content: center;
+  }
+
+  .kabayan-news-description {
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .kabayan-news-visual {
+    width: min(720px, 100%);
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 680px) {
+  .kabayan-news-hero {
+    padding:
+      47px
+      18px
+      40px;
+  }
+
+  .kabayan-news-title {
+    font-size:
+      clamp(
+        54px,
+        16vw,
+        76px
+      );
+  }
+
+  .kabayan-news-description {
+    margin-top: 28px;
+
+    font-size: 18px;
+  }
+
+  .kabayan-news-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .kabayan-news-button {
+    width: 100%;
+  }
+
+  .kabayan-news-topics {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+
+    padding-bottom: 5px;
+    overflow-x: auto;
+
+    scrollbar-width: none;
+  }
+
+  .kabayan-news-topics::-webkit-scrollbar {
+    display: none;
+  }
+
+  .kabayan-news-topics button {
+    flex: 0 0 auto;
+  }
+
+  .kabayan-news-visual {
+    padding-top: 15px;
+  }
+
+  .kabayan-news-device {
+    padding: 25px 17px 21px;
+
+    border-width: 6px;
+    border-radius: 25px 25px 6px 6px;
+
+    transform: none;
+  }
+
+  .kabayan-news-screen-feature {
+    padding: 25px 21px;
+
+    border-radius: 19px;
+  }
+
+  .kabayan-news-screen-item {
+    grid-template-columns:
+      43px
+      minmax(0, 1fr);
+
+    padding:
+      12px
+      13px;
+  }
 }
