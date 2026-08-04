@@ -1,6 +1,6 @@
 ---
 title: "Arsip Hot News"
-description: "Arsip artikel perpajakan Kabayan yang dikelompokkan berdasarkan tahun dan bulan publikasi."
+description: "Arsip Hot News Kabayan yang dikelompokkan berdasarkan tahun dan bulan publikasi."
 permalink: /hotnews-arsip.html
 ---
 
@@ -20,6 +20,11 @@ permalink: /hotnews-arsip.html
   >
 
   <meta
+    name="author"
+    content="Angga Sukma Dhaniswara"
+  >
+
+  <meta
     name="robots"
     content="index, follow"
   >
@@ -34,6 +39,2075 @@ permalink: /hotnews-arsip.html
     href="{{ page.url | absolute_url }}"
   >
 
+  <meta
+    property="og:type"
+    content="website"
+  >
+
+  <meta
+    property="og:title"
+    content="{{ page.title | escape }}"
+  >
+
+  <meta
+    property="og:description"
+    content="{{ page.description | escape }}"
+  >
+
+  <meta
+    property="og:url"
+    content="{{ page.url | absolute_url }}"
+  >
+
+  <meta
+    property="og:locale"
+    content="id_ID"
+  >
+
+  <meta
+    property="og:site_name"
+    content="Kabayan by Angga Sukma Dhaniswara"
+  >
+
+  <title>
+    {{ page.title }} | Kabayan
+  </title>
+
+  <style>
+    :root {
+      --black: #000000;
+      --text: #1d1d1f;
+      --text-soft: #424245;
+      --secondary: #6e6e73;
+      --tertiary: #86868b;
+
+      --white: #ffffff;
+      --page: #f5f5f7;
+      --soft: #e8e8ed;
+      --line: rgba(0, 0, 0, 0.09);
+
+      --blue: #0071e3;
+      --blue-hover: #0077ed;
+      --blue-soft: #eaf4ff;
+
+      --red: #d92d20;
+      --red-hover: #b42318;
+      --red-soft: #fff0ee;
+
+      --yellow: #ffcc00;
+
+      --nav-height: 48px;
+      --max-width: 1180px;
+      --archive-width: 1040px;
+
+      --shadow-soft:
+        0 2px 8px rgba(0, 0, 0, 0.035),
+        0 22px 58px rgba(0, 0, 0, 0.065);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top:
+        calc(
+          var(--nav-height) + 24px
+        );
+    }
+
+    body {
+      margin: 0;
+      overflow-x: hidden;
+
+      color: var(--text);
+      background: var(--white);
+
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      line-height: 1.47059;
+      letter-spacing: -0.015em;
+
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    body.menu-open {
+      overflow: hidden;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    /* =====================================================
+       HEADER KABAYAN
+       ===================================================== */
+
+    .site-nav {
+      position: fixed;
+      z-index: 1000;
+
+      top: 0;
+      right: 0;
+      left: 0;
+
+      min-height: var(--nav-height);
+
+      border-bottom:
+        1px solid rgba(0, 0, 0, 0.06);
+
+      background:
+        rgba(250, 250, 252, 0.84);
+
+      backdrop-filter:
+        saturate(180%)
+        blur(20px);
+
+      -webkit-backdrop-filter:
+        saturate(180%)
+        blur(20px);
+    }
+
+    .nav-inner {
+      display: flex;
+
+      width:
+        min(
+          var(--max-width),
+          calc(100% - 36px)
+        );
+
+      min-height: var(--nav-height);
+      margin: 0 auto;
+
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 28px;
+    }
+
+    .nav-brand {
+      display: inline-flex;
+      flex-shrink: 0;
+
+      align-items: center;
+      gap: 9px;
+
+      color: var(--text);
+
+      font-size: 14px;
+      font-weight: 700;
+
+      text-decoration: none;
+    }
+
+    .brand-symbol {
+      display: grid;
+
+      width: 25px;
+      height: 25px;
+
+      place-items: center;
+
+      border-radius: 8px;
+
+      color: var(--white);
+      background: var(--text);
+
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .desktop-menu {
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      gap: 29px;
+    }
+
+    .desktop-menu a {
+      display: inline-flex;
+
+      align-items: center;
+      gap: 5px;
+
+      color: var(--text-soft);
+
+      font-size: 12px;
+      font-weight: 400;
+
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .desktop-menu a:hover,
+    .desktop-menu a[aria-current="page"] {
+      color: var(--black);
+    }
+
+    .nav-hotnews-icon {
+      display: inline-block;
+
+      font-size: 13px;
+      line-height: 1;
+
+      transform:
+        translateY(-1px);
+    }
+
+    .nav-actions {
+      display: flex;
+      flex-shrink: 0;
+
+      align-items: center;
+      gap: 8px;
+    }
+
+    .search-button,
+    .menu-toggle {
+      display: grid;
+
+      width: 34px;
+      height: 34px;
+
+      place-items: center;
+
+      border: 0;
+      border-radius: 50%;
+
+      color: var(--text);
+      background: transparent;
+
+      text-decoration: none;
+    }
+
+    .search-button:hover,
+    .menu-toggle:hover {
+      background:
+        rgba(0, 0, 0, 0.055);
+    }
+
+    .menu-toggle {
+      display: none;
+
+      font-size: 18px;
+    }
+
+    /* Menu ponsel */
+
+    .mobile-menu {
+      position: fixed;
+      z-index: 999;
+
+      inset:
+        var(--nav-height)
+        0
+        0;
+
+      display: none;
+      padding:
+        34px
+        28px
+        60px;
+
+      overflow-y: auto;
+
+      background:
+        rgba(250, 250, 252, 0.985);
+
+      backdrop-filter:
+        blur(24px);
+
+      -webkit-backdrop-filter:
+        blur(24px);
+    }
+
+    .mobile-menu.active {
+      display: block;
+    }
+
+    .mobile-menu a {
+      display: flex;
+
+      padding: 10px 0;
+
+      align-items: center;
+      gap: 10px;
+
+      color: var(--text);
+
+      font-size: 28px;
+      font-weight: 650;
+      line-height: 1.2;
+      letter-spacing: -0.04em;
+
+      text-decoration: none;
+    }
+
+    .mobile-menu .nav-hotnews-icon {
+      font-size: 22px;
+
+      transform: none;
+    }
+
+    /* =====================================================
+       MAIN DAN ANNOUNCEMENT
+       ===================================================== */
+
+    main {
+      padding-top: var(--nav-height);
+    }
+
+    .announcement {
+      padding:
+        12px
+        20px;
+
+      color: #3a3a3c;
+      background: var(--page);
+
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .announcement a {
+      color: var(--blue);
+
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .announcement a:hover {
+      text-decoration: underline;
+    }
+
+    /* =====================================================
+       HERO ARSIP
+       ===================================================== */
+
+    .archive-hero {
+      position: relative;
+
+      padding:
+        82px
+        20px
+        88px;
+
+      overflow: hidden;
+
+      border-bottom:
+        1px solid rgba(0, 0, 0, 0.06);
+
+      background:
+        radial-gradient(
+          circle at 82% 21%,
+          rgba(255, 59, 48, 0.10),
+          transparent 24%
+        ),
+        radial-gradient(
+          circle at 15% 84%,
+          rgba(0, 113, 227, 0.12),
+          transparent 28%
+        ),
+        linear-gradient(
+          180deg,
+          #ffffff 0%,
+          #f7f9fd 100%
+        );
+
+      text-align: center;
+    }
+
+    .archive-hero::before {
+      position: absolute;
+      top: -210px;
+      left: 50%;
+
+      width: 920px;
+      height: 560px;
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          ellipse,
+          rgba(0, 113, 227, 0.11),
+          rgba(66, 183, 213, 0.04) 48%,
+          transparent 72%
+        );
+
+      content: "";
+
+      transform:
+        translateX(-50%);
+
+      pointer-events: none;
+    }
+
+    .archive-hero-inner {
+      position: relative;
+      z-index: 1;
+
+      width:
+        min(
+          960px,
+          100%
+        );
+
+      margin: 0 auto;
+    }
+
+    .archive-kicker {
+      display: inline-flex;
+
+      margin-bottom: 16px;
+
+      align-items: center;
+      gap: 8px;
+
+      color: var(--secondary);
+
+      font-size: 17px;
+      font-weight: 650;
+    }
+
+    .archive-kicker::before {
+      width: 9px;
+      height: 9px;
+
+      border-radius: 50%;
+
+      background: #ff3b30;
+
+      box-shadow:
+        0 0 0 0 rgba(255, 59, 48, 0.32);
+
+      animation:
+        archivePulse 2s infinite;
+
+      content: "";
+    }
+
+    .archive-hero h1 {
+      margin: 0;
+
+      color: var(--text);
+
+      font-size:
+        clamp(
+          52px,
+          7.2vw,
+          86px
+        );
+
+      font-weight: 720;
+      line-height: 0.98;
+      letter-spacing: -0.064em;
+    }
+
+    .archive-gradient {
+      display: block;
+
+      color: transparent;
+
+      background:
+        linear-gradient(
+          90deg,
+          #093b91 2%,
+          #0071e3 42%,
+          #25a6d9 68%,
+          #d89c00 100%
+        );
+
+      background-clip: text;
+      -webkit-background-clip: text;
+    }
+
+    .archive-hero-description {
+      max-width: 760px;
+      margin:
+        25px
+        auto
+        0;
+
+      color: #515154;
+
+      font-size:
+        clamp(
+          19px,
+          2vw,
+          24px
+        );
+
+      line-height: 1.42;
+    }
+
+    .archive-summary {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+
+      justify-content: center;
+
+      margin-top: 28px;
+    }
+
+    .archive-summary-item {
+      display: inline-flex;
+
+      min-height: 38px;
+      padding:
+        0
+        13px;
+
+      align-items: center;
+      gap: 6px;
+
+      border:
+        1px solid rgba(0, 0, 0, 0.075);
+      border-radius: 999px;
+
+      color: #515154;
+      background:
+        rgba(255, 255, 255, 0.78);
+
+      font-size: 12px;
+      font-weight: 600;
+
+      backdrop-filter:
+        blur(10px);
+
+      -webkit-backdrop-filter:
+        blur(10px);
+    }
+
+    .archive-summary-item strong {
+      color: var(--text);
+    }
+
+    @keyframes archivePulse {
+      0% {
+        box-shadow:
+          0 0 0 0
+          rgba(255, 59, 48, 0.32);
+      }
+
+      65% {
+        box-shadow:
+          0 0 0 9px
+          rgba(255, 59, 48, 0);
+      }
+
+      100% {
+        box-shadow:
+          0 0 0 0
+          rgba(255, 59, 48, 0);
+      }
+    }
+
+    /* =====================================================
+       AREA ARSIP
+       ===================================================== */
+
+    .archive-content {
+      padding:
+        76px
+        20px
+        104px;
+
+      background: var(--white);
+    }
+
+    .archive-container {
+      width:
+        min(
+          var(--archive-width),
+          100%
+        );
+
+      margin: 0 auto;
+    }
+
+    .archive-intro {
+      display: flex;
+
+      margin-bottom: 28px;
+
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    .archive-intro-label {
+      display: block;
+
+      margin-bottom: 8px;
+
+      color: var(--secondary);
+
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .archive-intro h2 {
+      margin:
+        0
+        0
+        9px;
+
+      color: var(--text);
+
+      font-size:
+        clamp(
+          34px,
+          4.2vw,
+          50px
+        );
+
+      font-weight: 710;
+      line-height: 1.04;
+      letter-spacing: -0.048em;
+    }
+
+    .archive-intro p {
+      max-width: 650px;
+      margin: 0;
+
+      color: #515154;
+
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    .archive-back-link {
+      display: inline-flex;
+      flex:
+        0
+        0
+        auto;
+
+      min-height: 42px;
+      padding:
+        0
+        17px;
+
+      align-items: center;
+      justify-content: center;
+
+      border:
+        1px solid var(--blue);
+      border-radius: 999px;
+
+      color: var(--blue);
+      background: transparent;
+
+      font-size: 14px;
+      font-weight: 600;
+
+      text-decoration: none;
+    }
+
+    .archive-back-link:hover {
+      color: var(--white);
+      background: var(--blue);
+    }
+
+    /* Toolbar pencarian */
+
+    .archive-toolbar {
+      display: grid;
+
+      margin-bottom: 52px;
+      padding: 16px;
+
+      grid-template-columns:
+        minmax(0, 1fr)
+        minmax(170px, 220px)
+        auto;
+
+      align-items: end;
+      gap: 12px;
+
+      border:
+        1px solid var(--line);
+      border-radius: 24px;
+
+      background:
+        rgba(245, 245, 247, 0.78);
+
+      box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.04);
+
+      backdrop-filter:
+        blur(18px);
+
+      -webkit-backdrop-filter:
+        blur(18px);
+    }
+
+    .archive-field {
+      display: grid;
+
+      gap: 7px;
+    }
+
+    .archive-field label {
+      padding-left: 3px;
+
+      color: var(--text-soft);
+
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .archive-field input,
+    .archive-field select {
+      width: 100%;
+      min-height: 48px;
+      padding:
+        0
+        14px;
+
+      border:
+        1px solid #d2d2d7;
+      border-radius: 14px;
+
+      color: var(--text);
+      background: var(--white);
+
+      font-size: 15px;
+
+      outline: none;
+    }
+
+    .archive-field input:focus,
+    .archive-field select:focus {
+      border-color: var(--blue);
+
+      box-shadow:
+        0 0 0 4px
+        rgba(0, 113, 227, 0.12);
+    }
+
+    .archive-reset {
+      min-height: 48px;
+      padding:
+        0
+        17px;
+
+      border:
+        1px solid #d2d2d7;
+      border-radius: 14px;
+
+      color: var(--text);
+      background: var(--white);
+
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .archive-reset:hover {
+      background: var(--soft);
+    }
+
+    /* Tahun */
+
+    .archive-year {
+      margin-bottom: 66px;
+    }
+
+    .archive-year-header {
+      display: flex;
+
+      margin-bottom: 26px;
+
+      align-items: center;
+      gap: 16px;
+    }
+
+    .archive-year-title {
+      margin: 0;
+
+      color: var(--text);
+
+      font-size:
+        clamp(
+          42px,
+          6vw,
+          64px
+        );
+
+      font-weight: 720;
+      line-height: 1;
+      letter-spacing: -0.058em;
+    }
+
+    .archive-year-line {
+      height: 1px;
+      flex: 1;
+
+      background:
+        linear-gradient(
+          90deg,
+          rgba(0, 0, 0, 0.18),
+          transparent
+        );
+    }
+
+    .archive-year-count {
+      color: var(--secondary);
+
+      font-size: 12px;
+      font-weight: 600;
+
+      white-space: nowrap;
+    }
+
+    /* Bulan */
+
+    .archive-month {
+      margin-bottom: 38px;
+    }
+
+    .archive-month-title {
+      display: inline-flex;
+
+      margin:
+        0
+        0
+        14px;
+
+      padding:
+        6px
+        10px;
+
+      border-radius: 999px;
+
+      color: var(--blue);
+      background: var(--blue-soft);
+
+      font-size: 11px;
+      font-weight: 750;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .archive-list {
+      display: grid;
+
+      margin: 0;
+      padding: 0;
+
+      gap: 12px;
+
+      list-style: none;
+    }
+
+    .archive-item {
+      overflow: hidden;
+
+      border:
+        1px solid var(--line);
+      border-radius: 20px;
+
+      background: var(--white);
+
+      box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.025);
+
+      transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+
+    .archive-item:hover {
+      border-color:
+        rgba(0, 113, 227, 0.22);
+
+      box-shadow:
+        var(--shadow-soft);
+
+      transform:
+        translateY(-2px);
+    }
+
+    .archive-item-link {
+      display: grid;
+
+      padding:
+        19px
+        20px;
+
+      grid-template-columns:
+        66px
+        minmax(0, 1fr)
+        auto;
+
+      align-items: center;
+      gap: 18px;
+
+      color: inherit;
+
+      text-decoration: none;
+    }
+
+    .archive-item-date {
+      display: grid;
+
+      text-align: center;
+    }
+
+    .archive-item-day {
+      color: var(--text);
+
+      font-size: 25px;
+      font-weight: 760;
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
+    .archive-item-month {
+      margin-top: 4px;
+
+      color: var(--secondary);
+
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+
+    .archive-item-content {
+      min-width: 0;
+    }
+
+    .archive-item-category {
+      display: inline-flex;
+
+      width: fit-content;
+      margin-bottom: 7px;
+      padding:
+        5px
+        8px;
+
+      border-radius: 999px;
+
+      color: var(--red);
+      background: var(--red-soft);
+
+      font-size: 9px;
+      font-weight: 750;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .archive-item-title {
+      display: block;
+
+      color: var(--text);
+
+      font-size:
+        clamp(
+          17px,
+          2vw,
+          20px
+        );
+
+      font-weight: 680;
+      line-height: 1.32;
+      letter-spacing: -0.025em;
+    }
+
+    .archive-item-arrow {
+      display: grid;
+
+      width: 34px;
+      height: 34px;
+
+      place-items: center;
+
+      border-radius: 50%;
+
+      color: var(--blue);
+      background: var(--blue-soft);
+
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .archive-item:hover
+    .archive-item-arrow {
+      color: var(--white);
+      background: var(--blue);
+    }
+
+    /* Empty state */
+
+    .archive-no-result,
+    .archive-empty {
+      padding:
+        54px
+        24px;
+
+      border:
+        1px dashed #c7c7cc;
+      border-radius: 24px;
+
+      color: var(--secondary);
+      background: var(--page);
+
+      text-align: center;
+    }
+
+    .archive-no-result h2 {
+      margin:
+        0
+        0
+        8px;
+
+      color: var(--text);
+
+      font-size: 26px;
+      letter-spacing: -0.035em;
+    }
+
+    .archive-no-result p {
+      margin: 0;
+
+      line-height: 1.6;
+    }
+
+    /* =====================================================
+       FOOTER KABAYAN
+       ===================================================== */
+
+    footer {
+      color: var(--secondary);
+      background: var(--page);
+    }
+
+    .disclaimer {
+      width:
+        min(
+          980px,
+          calc(100% - 40px)
+        );
+
+      margin: 0 auto;
+      padding:
+        26px
+        0;
+
+      border-bottom:
+        1px solid #d2d2d7;
+
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .disclaimer strong {
+      color: var(--text-soft);
+    }
+
+    .footer-inner {
+      display: flex;
+
+      width:
+        min(
+          980px,
+          calc(100% - 40px)
+        );
+
+      margin: 0 auto;
+      padding:
+        22px
+        0
+        29px;
+
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+
+      font-size: 12px;
+    }
+
+    .footer-inner p {
+      margin: 0;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    .footer-links a {
+      color: var(--text-soft);
+
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+
+    /* =====================================================
+       RESPONSIVE
+       ===================================================== */
+
+    @media (max-width: 900px) {
+      .desktop-menu {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: grid;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .announcement {
+        padding-right: 24px;
+        padding-left: 24px;
+
+        font-size: 13px;
+      }
+
+      .archive-hero {
+        padding:
+          62px
+          17px
+          68px;
+      }
+
+      .archive-hero h1 {
+        font-size:
+          clamp(
+            47px,
+            13vw,
+            62px
+          );
+      }
+
+      .archive-hero-description {
+        font-size: 18px;
+      }
+
+      .archive-summary {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .archive-summary-item {
+        justify-content: center;
+      }
+
+      .archive-content {
+        padding:
+          56px
+          15px
+          78px;
+      }
+
+      .archive-intro {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .archive-back-link {
+        width: 100%;
+      }
+
+      .archive-toolbar {
+        grid-template-columns: 1fr;
+
+        padding: 13px;
+
+        border-radius: 20px;
+      }
+
+      .archive-field input,
+      .archive-field select {
+        font-size: 16px;
+      }
+
+      .archive-reset {
+        width: 100%;
+      }
+
+      .archive-year {
+        margin-bottom: 54px;
+      }
+
+      .archive-year-header {
+        align-items: flex-end;
+      }
+
+      .archive-item-link {
+        grid-template-columns:
+          52px
+          minmax(0, 1fr);
+
+        gap: 13px;
+
+        padding:
+          17px
+          15px;
+      }
+
+      .archive-item-arrow {
+        display: none;
+      }
+
+      .footer-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 440px) {
+      .nav-brand span:last-child {
+        display: none;
+      }
+
+      .archive-kicker {
+        font-size: 15px;
+      }
+
+      .archive-hero h1 {
+        font-size: 47px;
+      }
+
+      .archive-intro h2 {
+        font-size: 36px;
+      }
+
+      .archive-year-title {
+        font-size: 45px;
+      }
+
+      .archive-year-count {
+        font-size: 11px;
+      }
+
+      .archive-item-date {
+        text-align: left;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      * {
+        transition: none !important;
+      }
+
+      .archive-kicker::before {
+        animation: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body id="top">
+  {% assign months =
+    "Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember"
+    | split: ","
+  %}
+
+  {% assign short_months =
+    "Jan,Feb,Mar,Apr,Mei,Jun,Jul,Agu,Sep,Okt,Nov,Des"
+    | split: ","
+  %}
+
+  {% assign hotnews_posts =
+    site.posts
+    | where_exp:
+      "post",
+      "post.layout contains 'hotnews'"
+  %}
+
+  {% assign posts_by_year =
+    hotnews_posts
+    | group_by_exp:
+      "post",
+      "post.date | date: '%Y'"
+  %}
+
+  {% assign article_count =
+    hotnews_posts
+    | size
+  %}
+
+  {% assign year_count =
+    posts_by_year
+    | size
+  %}
+
+  <!-- Header -->
+  <header class="site-nav">
+    <div class="nav-inner">
+      <a
+        class="nav-brand"
+        href="{{ '/' | relative_url }}"
+        aria-label="Beranda dhaniswara86"
+      >
+        <span
+          class="brand-symbol"
+          aria-hidden="true"
+        >
+          ASD
+        </span>
+
+        <span>
+          dhaniswara86
+        </span>
+      </a>
+
+      <nav
+        class="desktop-menu"
+        aria-label="Navigasi utama"
+      >
+        <a href="{{ '/' | relative_url }}">
+          Beranda
+        </a>
+
+        <a href="{{ '/buku.html' | relative_url }}">
+          Buku
+        </a>
+
+        <a href="{{ '/formulir.html' | relative_url }}">
+          Formulir
+        </a>
+
+        <a href="{{ '/aplikasi.html' | relative_url }}">
+          Aplikasi
+        </a>
+
+        <a href="{{ '/kalkulator.html' | relative_url }}">
+          Kalkulator
+        </a>
+
+        <a href="{{ '/artikel.html' | relative_url }}">
+          Artikel
+        </a>
+
+        <a
+          class="nav-hotnews"
+          href="{{ '/hotnews.html' | relative_url }}"
+          aria-current="page"
+        >
+          <span
+            class="nav-hotnews-icon"
+            aria-hidden="true"
+          >
+            🔥
+          </span>
+
+          <span>
+            Hot News
+          </span>
+        </a>
+
+        <a href="{{ '/tentang.html' | relative_url }}">
+          Tentang
+        </a>
+      </nav>
+
+      <div class="nav-actions">
+        <button
+          id="focusArchiveSearch"
+          class="search-button"
+          type="button"
+          aria-label="Cari dalam arsip"
+          title="Cari dalam arsip"
+        >
+          ⌕
+        </button>
+
+        <button
+          id="menuToggle"
+          class="menu-toggle"
+          type="button"
+          aria-label="Buka menu"
+          aria-expanded="false"
+          aria-controls="mobileMenu"
+        >
+          ☰
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Menu seluler -->
+  <nav
+    id="mobileMenu"
+    class="mobile-menu"
+    aria-label="Navigasi seluler"
+  >
+    <a href="{{ '/' | relative_url }}">
+      Beranda
+    </a>
+
+    <a href="{{ '/buku.html' | relative_url }}">
+      Buku
+    </a>
+
+    <a href="{{ '/formulir.html' | relative_url }}">
+      Formulir
+    </a>
+
+    <a href="{{ '/aplikasi.html' | relative_url }}">
+      Aplikasi
+    </a>
+
+    <a href="{{ '/kalkulator.html' | relative_url }}">
+      Kalkulator
+    </a>
+
+    <a href="{{ '/artikel.html' | relative_url }}">
+      Artikel
+    </a>
+
+    <a
+      class="nav-hotnews"
+      href="{{ '/hotnews.html' | relative_url }}"
+      aria-current="page"
+    >
+      <span
+        class="nav-hotnews-icon"
+        aria-hidden="true"
+      >
+        🔥
+      </span>
+
+      <span>
+        Hot News
+      </span>
+    </a>
+
+    <a href="{{ '/tentang.html' | relative_url }}">
+      Tentang
+    </a>
+  </nav>
+
+  <main>
+    <div class="announcement">
+      Kabayan — Katalog Bahan Pelayanan.
+      <a href="{{ '/hotnews.html' | relative_url }}">
+        Lihat Hot News terbaru ›
+      </a>
+    </div>
+
+    <!-- Hero -->
+    <section class="archive-hero">
+      <div class="archive-hero-inner">
+        <div class="archive-kicker">
+          Perpustakaan Hot News
+        </div>
+
+        <h1>
+          Temukan kembali.
+          <span class="archive-gradient">
+            Informasi penting.
+          </span>
+        </h1>
+
+        <p class="archive-hero-description">
+          Jelajahi kembali pembaruan Coretax, regulasi,
+          administrasi, serta informasi perpajakan berdasarkan
+          tahun dan bulan publikasinya.
+        </p>
+
+        <div class="archive-summary">
+          <span class="archive-summary-item">
+            <strong>
+              {{ article_count }}
+            </strong>
+
+            Hot News tersimpan
+          </span>
+
+          <span class="archive-summary-item">
+            <strong>
+              {{ year_count }}
+            </strong>
+
+            tahun publikasi
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Isi arsip -->
+    <section class="archive-content">
+      <div class="archive-container">
+        <header class="archive-intro">
+          <div>
+            <span class="archive-intro-label">
+              Arsip Kabayan
+            </span>
+
+            <h2>
+              Artikel berdasarkan waktu.
+            </h2>
+
+            <p>
+              Gunakan pencarian atau pilih tahun untuk
+              mempersempit daftar Hot News yang ditampilkan.
+            </p>
+          </div>
+
+          <a
+            class="archive-back-link"
+            href="{{ '/hotnews.html' | relative_url }}"
+          >
+            Kembali ke Hot News
+          </a>
+        </header>
+
+        <!-- Pencarian -->
+        <div
+          id="archiveToolbar"
+          class="archive-toolbar"
+        >
+          <div class="archive-field">
+            <label for="archiveSearch">
+              Cari Hot News
+            </label>
+
+            <input
+              id="archiveSearch"
+              type="search"
+              placeholder="Cari judul, kategori, atau topik..."
+              autocomplete="off"
+            >
+          </div>
+
+          <div class="archive-field">
+            <label for="archiveYearFilter">
+              Tahun
+            </label>
+
+            <select id="archiveYearFilter">
+              <option value="">
+                Semua tahun
+              </option>
+
+              {% for year_group in posts_by_year %}
+                <option value="{{ year_group.name }}">
+                  {{ year_group.name }}
+                </option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <button
+            id="archiveReset"
+            class="archive-reset"
+            type="button"
+          >
+            Atur ulang
+          </button>
+        </div>
+
+        {% if hotnews_posts.size > 0 %}
+          <div id="archiveGroups">
+            {% for year_group in posts_by_year %}
+              <section
+                class="archive-year"
+                data-archive-year-group
+                data-year="{{ year_group.name }}"
+              >
+                <header class="archive-year-header">
+                  <h2 class="archive-year-title">
+                    {{ year_group.name }}
+                  </h2>
+
+                  <span
+                    class="archive-year-line"
+                    aria-hidden="true"
+                  ></span>
+
+                  <span class="archive-year-count">
+                    {{ year_group.items | size }}
+                    Hot News
+                  </span>
+                </header>
+
+                {% assign posts_by_month =
+                  year_group.items
+                  | group_by_exp:
+                    "post",
+                    "post.date | date: '%Y-%m'"
+                %}
+
+                {% for month_group in posts_by_month %}
+                  {% assign first_month_post =
+                    month_group.items
+                    | first
+                  %}
+
+                  {% assign month_number =
+                    first_month_post.date
+                    | date: "%-m"
+                    | minus: 1
+                  %}
+
+                  <section
+                    class="archive-month"
+                    data-archive-month-group
+                  >
+                    <h3 class="archive-month-title">
+                      {{ months[month_number] }}
+                    </h3>
+
+                    <ul class="archive-list">
+                      {% for post in month_group.items %}
+                        {% assign post_month_number =
+                          post.date
+                          | date: "%-m"
+                          | minus: 1
+                        %}
+
+                        {% capture search_text %}
+                          {{ post.title }}
+                          {{ post.excerpt }}
+                          {{ post.category }}
+                          {{ post.tags | join: " " }}
+                        {% endcapture %}
+
+                        <li
+                          class="archive-item"
+                          data-archive-item
+                          data-year="{{ post.date | date: '%Y' }}"
+                          data-search="{{ search_text | strip_html | normalize_whitespace | downcase | escape }}"
+                        >
+                          <a
+                            class="archive-item-link"
+                            href="{{ post.url | relative_url }}"
+                          >
+                            <time
+                              class="archive-item-date"
+                              datetime="{{ post.date | date_to_xmlschema }}"
+                            >
+                              <span class="archive-item-day">
+                                {{ post.date | date: "%-d" }}
+                              </span>
+
+                              <span class="archive-item-month">
+                                {{ short_months[post_month_number] }}
+                              </span>
+                            </time>
+
+                            <span class="archive-item-content">
+                              <span class="archive-item-category">
+                                {{ post.category | default: "Hot News" }}
+                              </span>
+
+                              <span class="archive-item-title">
+                                {{ post.title }}
+                              </span>
+                            </span>
+
+                            <span
+                              class="archive-item-arrow"
+                              aria-hidden="true"
+                            >
+                              →
+                            </span>
+                          </a>
+                        </li>
+                      {% endfor %}
+                    </ul>
+                  </section>
+                {% endfor %}
+              </section>
+            {% endfor %}
+          </div>
+
+          <div
+            id="archiveNoResult"
+            class="archive-no-result"
+            hidden
+          >
+            <h2>
+              Hot News tidak ditemukan
+            </h2>
+
+            <p>
+              Gunakan kata kunci lain atau tampilkan kembali
+              seluruh tahun.
+            </p>
+          </div>
+        {% else %}
+          <div class="archive-empty">
+            Belum ada Hot News yang tersimpan dalam arsip.
+          </div>
+        {% endif %}
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="disclaimer">
+      <strong>Disclaimer:</strong>
+      Kabayan merupakan situs edukasi perpajakan pribadi dan
+      bukan situs resmi Direktorat Jenderal Pajak atau instansi
+      pemerintah. Informasi perlu diperiksa kembali dengan
+      ketentuan dan tampilan sistem terbaru sebelum digunakan.
+    </div>
+
+    <div class="footer-inner">
+      <p>
+        © <span id="currentYear"></span>
+        Angga Sukma Dhaniswara.
+      </p>
+
+      <div class="footer-links">
+        <a href="{{ '/' | relative_url }}">
+          Beranda
+        </a>
+
+        <a href="{{ '/artikel.html' | relative_url }}">
+          Artikel
+        </a>
+
+        <a href="{{ '/hotnews.html' | relative_url }}">
+          Hot News
+        </a>
+
+        <a href="#top">
+          Kembali ke atas
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      "use strict";
+
+      const searchInput =
+        document.getElementById("archiveSearch");
+
+      const yearFilter =
+        document.getElementById("archiveYearFilter");
+
+      const resetButton =
+        document.getElementById("archiveReset");
+
+      const noResultElement =
+        document.getElementById("archiveNoResult");
+
+      const focusArchiveSearch =
+        document.getElementById("focusArchiveSearch");
+
+      const menuToggle =
+        document.getElementById("menuToggle");
+
+      const mobileMenu =
+        document.getElementById("mobileMenu");
+
+      const archiveItems =
+        Array.from(
+          document.querySelectorAll(
+            "[data-archive-item]"
+          )
+        );
+
+      const monthGroups =
+        Array.from(
+          document.querySelectorAll(
+            "[data-archive-month-group]"
+          )
+        );
+
+      const yearGroups =
+        Array.from(
+          document.querySelectorAll(
+            "[data-archive-year-group]"
+          )
+        );
+
+      function normalizeText(value) {
+        return String(value || "")
+          .normalize("NFD")
+          .replace(
+            /[\u0300-\u036f]/g,
+            ""
+          )
+          .toLowerCase()
+          .trim();
+      }
+
+      function updateGroupVisibility() {
+        monthGroups.forEach(
+          function (monthGroup) {
+            const visibleItems =
+              monthGroup.querySelectorAll(
+                "[data-archive-item]:not([hidden])"
+              );
+
+            monthGroup.hidden =
+              visibleItems.length === 0;
+          }
+        );
+
+        yearGroups.forEach(
+          function (yearGroup) {
+            const visibleItems =
+              yearGroup.querySelectorAll(
+                "[data-archive-item]:not([hidden])"
+              );
+
+            yearGroup.hidden =
+              visibleItems.length === 0;
+          }
+        );
+      }
+
+      function filterArchive() {
+        const keyword =
+          normalizeText(
+            searchInput
+              ? searchInput.value
+              : ""
+          );
+
+        const selectedYear =
+          yearFilter
+            ? yearFilter.value
+            : "";
+
+        let visibleCount = 0;
+
+        archiveItems.forEach(
+          function (item) {
+            const searchableText =
+              normalizeText(
+                item.dataset.search
+              );
+
+            const itemYear =
+              item.dataset.year || "";
+
+            const matchesKeyword =
+              !keyword ||
+              searchableText.includes(keyword);
+
+            const matchesYear =
+              !selectedYear ||
+              itemYear === selectedYear;
+
+            const isVisible =
+              matchesKeyword &&
+              matchesYear;
+
+            item.hidden =
+              !isVisible;
+
+            if (isVisible) {
+              visibleCount += 1;
+            }
+          }
+        );
+
+        updateGroupVisibility();
+
+        if (noResultElement) {
+          noResultElement.hidden =
+            visibleCount !== 0;
+        }
+      }
+
+      if (searchInput) {
+        searchInput.addEventListener(
+          "input",
+          filterArchive
+        );
+      }
+
+      if (yearFilter) {
+        yearFilter.addEventListener(
+          "change",
+          filterArchive
+        );
+      }
+
+      if (resetButton) {
+        resetButton.addEventListener(
+          "click",
+          function () {
+            if (searchInput) {
+              searchInput.value = "";
+            }
+
+            if (yearFilter) {
+              yearFilter.value = "";
+            }
+
+            filterArchive();
+
+            if (searchInput) {
+              searchInput.focus();
+            }
+          }
+        );
+      }
+
+      if (
+        focusArchiveSearch &&
+        searchInput
+      ) {
+        focusArchiveSearch.addEventListener(
+          "click",
+          function () {
+            searchInput.scrollIntoView({
+              behavior: "smooth",
+              block: "center"
+            });
+
+            window.setTimeout(
+              function () {
+                searchInput.focus();
+              },
+              450
+            );
+          }
+        );
+      }
+
+      function closeMobileMenu() {
+        if (
+          !menuToggle ||
+          !mobileMenu
+        ) {
+          return;
+        }
+
+        mobileMenu.classList.remove("active");
+        document.body.classList.remove("menu-open");
+
+        menuToggle.setAttribute(
+          "aria-expanded",
+          "false"
+        );
+
+        menuToggle.setAttribute(
+          "aria-label",
+          "Buka menu"
+        );
+
+        menuToggle.textContent = "☰";
+      }
+
+      if (
+        menuToggle &&
+        mobileMenu
+      ) {
+        menuToggle.addEventListener(
+          "click",
+          function () {
+            const isOpen =
+              mobileMenu.classList.toggle("active");
+
+            document.body.classList.toggle(
+              "menu-open",
+              isOpen
+            );
+
+            menuToggle.setAttribute(
+              "aria-expanded",
+              String(isOpen)
+            );
+
+            menuToggle.setAttribute(
+              "aria-label",
+              isOpen
+                ? "Tutup menu"
+                : "Buka menu"
+            );
+
+            menuToggle.textContent =
+              isOpen
+                ? "×"
+                : "☰";
+          }
+        );
+
+        mobileMenu
+          .querySelectorAll("a")
+          .forEach(
+            function (link) {
+              link.addEventListener(
+                "click",
+                closeMobileMenu
+              );
+            }
+          );
+
+        document.addEventListener(
+          "keydown",
+          function (event) {
+            if (event.key === "Escape") {
+              closeMobileMenu();
+            }
+          }
+        );
+
+        window.addEventListener(
+          "resize",
+          function () {
+            if (window.innerWidth > 900) {
+              closeMobileMenu();
+            }
+          }
+        );
+      }
+
+      const currentYear =
+        document.getElementById("currentYear");
+
+      if (currentYear) {
+        currentYear.textContent =
+          new Date().getFullYear();
+      }
+
+      filterArchive();
+    })();
+  </script>
+</body>
+</html>
   <meta
     property="og:type"
     content="website"
