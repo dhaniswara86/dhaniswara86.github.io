@@ -1,10 +1,10 @@
 ---
 layout: hotnews-editorial
-title: "Coretax Tambah Role Penandatangan SPT PPh 21/26, Data Gaji Pegawai Lebih Terjaga"
+title: "Coretax Tambah Role Penandatangan SPT Masa PPh 21/26, Data Gaji Pegawai Lebih Terjaga"
 date: 2026-08-04 09:00:00 +0700
 date_modified: 2026-08-04 09:00:00 +0700
 author: "Angga Sukma Dhaniswara"
-category: "Coretax dan Administrasi"
+category: "Coretax"
 
 tags:
   - Coretax
@@ -17,7 +17,7 @@ excerpt: "Role baru memungkinkan pimpinan atau pejabat perusahaan menandatangani
 reading_time: "6 menit baca"
 visual_type: "role-comparison"
 
-source_label: "FAQ Coretax"
+source_label: "Telegram: t.me/FAQ Coretax"
 source_url: "https://t.me/FAQCoretax"
 
 hero_eyebrow: "Kabayan Hot News"
@@ -33,17 +33,16 @@ hero_visual_title: "Role Hanya Induk"
     “Penandatangan SPT Masa PPh Pasal 21/26
     (Hanya Induk)”.
   </strong>
-  Melalui role ini, pimpinan atau pejabat perusahaan tetap
-  dapat menandatangani SPT tanpa memperoleh akses terhadap
-  rincian penghasilan setiap pegawai.
 </p>
 
-Pembaruan ini menjadi kabar baik bagi Wajib Pajak pemotong
+  Melalui role ini, pimpinan atau pejabat perusahaan tetap
+  dapat menandatangani SPT tanpa memperoleh akses terhadap
+  rincian penghasilan setiap pegawai. <br> Pembaruan ini menjadi angin segar bagi Wajib Pajak pemotong
 PPh Pasal 21 yang ingin memperkuat kerahasiaan data
 penghasilan dan gaji pegawai.
 
-Dengan adanya role baru tersebut, perusahaan dapat memisahkan
-kewenangan antara pihak yang menyiapkan data payroll dan pihak
+Dengan adanya role baru ini, perusahaan dapat memisahkan
+kewenangan antara pihak yang menyiapkan data payroll dengan pihak
 yang hanya bertugas memberikan persetujuan serta
 menandatangani SPT.
 
@@ -197,7 +196,7 @@ role Hanya Induk dan role dengan akses penuh.
 
 ## Siapa yang Sebaiknya Menggunakan Role Hanya Induk?
 
-Role Hanya Induk dapat dipertimbangkan untuk pihak yang:
+Role "Hanya Induk" dapat diberikan untuk pihak yang:
 
 - memiliki kewenangan menandatangani SPT;
 - tidak terlibat langsung dalam pengelolaan payroll;
@@ -250,34 +249,6 @@ saat ini memperoleh akses ke akun Coretax perusahaan.
   </section>
 </div>
 
-### Jalur Menu Penyesuaian Role
-
-PIC atau pihak yang berwenang dapat melakukan impersonate ke
-akun Wajib Pajak, kemudian mengakses:
-
-<div class="hotnews-menu-path">
-  <span>Portal Saya</span>
-  <span class="path-arrow" aria-hidden="true">→</span>
-  <span>Profil Saya</span>
-  <span class="path-arrow" aria-hidden="true">→</span>
-  <span>Wakil/Kuasa Saya</span>
-  <span class="path-arrow" aria-hidden="true">→</span>
-  <span>Assign Role</span>
-</div>
-
-Untuk pimpinan yang hanya perlu menandatangani SPT, role yang
-dapat dipilih adalah:
-
-<div class="hotnews-menu-path">
-  <span>
-    Penandatangan SPT Masa PPh Pasal 21/26
-    (Hanya Induk)
-  </span>
-</div>
-
-Sementara itu, petugas yang mengelola rincian SPT dapat tetap
-menggunakan role **“Penandatangan SPT Masa PPh Pasal 21/26”**
-dengan akses penuh.
 
 ## Mengapa Penyesuaian Role Ini Penting?
 
@@ -325,7 +296,7 @@ untuk menjalankan tugasnya.
     </span>
 
     <h2 id="judul-panduan-visual-role-induk">
-      Tata Cara Penambahan Akses Penandatangan Induk SPT
+      Tata Cara Penyesuaian Role Akses Coretax
     </h2>
 
     <p>
