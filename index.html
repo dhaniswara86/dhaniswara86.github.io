@@ -2602,7 +2602,346 @@ body.mega-menu-open {
     transition: none !important;
   }
 }
-</style></head>
+</style>
+<style>
+/* =========================================================
+   DASHBOARD PENGUNJUNG KABAYAN
+   Ditempatkan sebelum bagian "Dibuat untuk berbagi"
+   ========================================================= */
+
+.visitor-dashboard {
+  position: relative;
+  overflow: hidden;
+  padding: 96px 24px;
+  border-top: 1px solid rgba(0, 0, 0, 0.055);
+  background:
+    radial-gradient(
+      circle at 88% 18%,
+      rgba(0, 113, 227, 0.11),
+      transparent 25%
+    ),
+    radial-gradient(
+      circle at 10% 90%,
+      rgba(255, 204, 0, 0.12),
+      transparent 25%
+    ),
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #f5f8fc 100%
+    );
+}
+
+.visitor-dashboard::before {
+  position: absolute;
+  top: -190px;
+  left: 50%;
+  width: 900px;
+  height: 470px;
+  border-radius: 50%;
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(0, 113, 227, 0.10),
+      rgba(66, 183, 213, 0.035) 48%,
+      transparent 72%
+    );
+  content: "";
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.visitor-dashboard-inner {
+  position: relative;
+  z-index: 1;
+  width: min(1080px, 100%);
+  margin: 0 auto;
+}
+
+.visitor-dashboard-heading {
+  max-width: 760px;
+  margin: 0 auto 42px;
+  text-align: center;
+}
+
+.visitor-dashboard-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 11px;
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.visitor-dashboard-kicker::before {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--blue);
+  box-shadow:
+    0 0 0 0 rgba(0, 113, 227, 0.26);
+  content: "";
+  animation: visitorPulse 2.2s infinite;
+}
+
+.visitor-dashboard-heading h2 {
+  margin: 0;
+  color: var(--near-black);
+  font-size:
+    clamp(
+      42px,
+      5.6vw,
+      66px
+    );
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.055em;
+}
+
+.visitor-dashboard-heading p {
+  max-width: 650px;
+  margin: 19px auto 0;
+  color: #515154;
+  font-size: 19px;
+  line-height: 1.5;
+}
+
+.visitor-stat-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(
+      3,
+      minmax(0, 1fr)
+    );
+  gap: 14px;
+}
+
+.visitor-stat-card {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  padding: 28px 27px 27px;
+  border: 1px solid rgba(0, 0, 0, 0.075);
+  border-radius: 25px;
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow:
+    0 18px 50px rgba(25, 51, 83, 0.07);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.visitor-stat-card::after {
+  position: absolute;
+  top: -42px;
+  right: -42px;
+  width: 125px;
+  height: 125px;
+  border-radius: 50%;
+  background: rgba(0, 113, 227, 0.055);
+  content: "";
+}
+
+.visitor-stat-card:nth-child(3)::after {
+  background: rgba(217, 45, 32, 0.055);
+}
+
+.visitor-stat-top {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.visitor-stat-icon {
+  width: 43px;
+  height: 43px;
+  display: grid;
+  flex: 0 0 43px;
+  place-items: center;
+  border-radius: 14px;
+  color: var(--blue);
+  background: #eaf4ff;
+  font-size: 18px;
+  font-weight: 750;
+}
+
+.visitor-stat-card:nth-child(3)
+.visitor-stat-icon {
+  color: #d92d20;
+  background: #fff0ee;
+}
+
+.visitor-stat-label {
+  display: block;
+  color: #6e6e73;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+}
+
+.visitor-stat-number {
+  position: relative;
+  z-index: 1;
+  display: block;
+  margin-top: 22px;
+  overflow: hidden;
+  color: var(--near-black);
+  font-size:
+    clamp(
+      42px,
+      5vw,
+      60px
+    );
+  font-weight: 720;
+  line-height: 1;
+  letter-spacing: -0.06em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.visitor-stat-card:nth-child(2)
+.visitor-stat-number {
+  color: var(--blue);
+}
+
+.visitor-stat-card:nth-child(3)
+.visitor-stat-number {
+  color: #d92d20;
+}
+
+.visitor-stat-card small {
+  position: relative;
+  z-index: 1;
+  display: block;
+  margin-top: 13px;
+  color: #86868b;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.visitor-dashboard-status {
+  display: flex;
+  min-height: 22px;
+  margin: 20px 0 0;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  color: #86868b;
+  font-size: 12px;
+  text-align: center;
+}
+
+.visitor-dashboard-status::before {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #86868b;
+  content: "";
+}
+
+.visitor-dashboard-status.is-ready::before {
+  background: #30a46c;
+}
+
+.visitor-dashboard-status.is-error {
+  color: #b42318;
+}
+
+.visitor-dashboard-status.is-error::before {
+  background: #d92d20;
+}
+
+.visitor-dashboard-link {
+  display: flex;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+.visitor-dashboard-link a {
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.visitor-dashboard-link a:hover {
+  text-decoration: underline;
+}
+
+@keyframes visitorPulse {
+  0% {
+    box-shadow:
+      0 0 0 0
+      rgba(0, 113, 227, 0.26);
+  }
+
+  70% {
+    box-shadow:
+      0 0 0 9px
+      rgba(0, 113, 227, 0);
+  }
+
+  100% {
+    box-shadow:
+      0 0 0 0
+      rgba(0, 113, 227, 0);
+  }
+}
+
+@media (max-width: 860px) {
+  .visitor-stat-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .visitor-stat-card {
+    text-align: center;
+  }
+
+  .visitor-stat-top {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .visitor-dashboard {
+    padding: 70px 17px;
+  }
+
+  .visitor-dashboard-heading {
+    margin-bottom: 32px;
+  }
+
+  .visitor-dashboard-heading h2 {
+    font-size: 43px;
+  }
+
+  .visitor-dashboard-heading p {
+    font-size: 17px;
+  }
+
+  .visitor-stat-card {
+    padding: 24px 21px;
+    border-radius: 21px;
+  }
+
+  .visitor-stat-number {
+    font-size: 46px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .visitor-dashboard-kicker::before {
+    animation: none !important;
+  }
+}
+</style>
+
+</head>
 <body id="top">
 <header class="site-nav">
 <div class="nav-inner">
@@ -3166,6 +3505,133 @@ body.mega-menu-open {
 </article>
 </div>
 </section>
+
+<!-- =========================================================
+     DASHBOARD PENGUNJUNG KABAYAN
+     ========================================================= -->
+<section
+  class="visitor-dashboard"
+  aria-labelledby="visitorDashboardTitle"
+>
+  <div class="visitor-dashboard-inner">
+    <header class="visitor-dashboard-heading">
+      <span class="visitor-dashboard-kicker">
+        Kabayan dalam angka
+      </span>
+
+      <h2 id="visitorDashboardTitle">
+        Terima kasih telah berkunjung.
+      </h2>
+
+      <p>
+        Statistik berikut menunjukkan jumlah kunjungan ke
+        website Kabayan sejak pencatatan GoatCounter dimulai.
+      </p>
+    </header>
+
+    <div class="visitor-stat-grid">
+      <article class="visitor-stat-card">
+        <div class="visitor-stat-top">
+          <span
+            class="visitor-stat-icon"
+            aria-hidden="true"
+          >
+            ◎
+          </span>
+
+          <span class="visitor-stat-label">
+            Seluruh situs
+          </span>
+        </div>
+
+        <strong
+          id="visitorTotal"
+          class="visitor-stat-number"
+          aria-live="polite"
+        >
+          …
+        </strong>
+
+        <small>
+          Total kunjungan semua halaman
+        </small>
+      </article>
+
+      <article class="visitor-stat-card">
+        <div class="visitor-stat-top">
+          <span
+            class="visitor-stat-icon"
+            aria-hidden="true"
+          >
+            30
+          </span>
+
+          <span class="visitor-stat-label">
+            Satu bulan terakhir
+          </span>
+        </div>
+
+        <strong
+          id="visitorMonth"
+          class="visitor-stat-number"
+          aria-live="polite"
+        >
+          …
+        </strong>
+
+        <small>
+          Kunjungan semua halaman dalam satu bulan terakhir
+        </small>
+      </article>
+
+      <article class="visitor-stat-card">
+        <div class="visitor-stat-top">
+          <span
+            class="visitor-stat-icon"
+            aria-hidden="true"
+          >
+            ⌂
+          </span>
+
+          <span class="visitor-stat-label">
+            Halaman beranda
+          </span>
+        </div>
+
+        <strong
+          id="visitorHome"
+          class="visitor-stat-number"
+          aria-live="polite"
+        >
+          …
+        </strong>
+
+        <small>
+          Total kunjungan khusus ke halaman utama
+        </small>
+      </article>
+    </div>
+
+    <p
+      id="visitorDashboardStatus"
+      class="visitor-dashboard-status"
+      role="status"
+    >
+      Memuat statistik kunjungan...
+    </p>
+
+    <div class="visitor-dashboard-link">
+      <a
+        href="https://dhaniswara86.goatcounter.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Statistik oleh GoatCounter
+      </a>
+    </div>
+  </div>
+</section>
+
 <section class="about" id="tentang">
 <div class="about-inner">
 <h2>
@@ -3622,5 +4088,147 @@ body.mega-menu-open {
     });
   }
 })();
-</script></body>
+</script>
+<script>
+(function () {
+  "use strict";
+
+  const counterBase =
+    "https://dhaniswara86.goatcounter.com/counter";
+
+  const statusElement =
+    document.getElementById(
+      "visitorDashboardStatus"
+    );
+
+  const metrics = [
+    {
+      elementId: "visitorTotal",
+      url:
+        counterBase +
+        "/TOTAL.json"
+    },
+    {
+      elementId: "visitorMonth",
+      url:
+        counterBase +
+        "/TOTAL.json?start=month"
+    },
+    {
+      elementId: "visitorHome",
+      url:
+        counterBase +
+        "/" +
+        encodeURIComponent("/") +
+        ".json"
+    }
+  ];
+
+  function formatCount(value) {
+    const digits =
+      String(value || "")
+        .replace(/[^\d]/g, "");
+
+    if (!digits) {
+      return "0";
+    }
+
+    return new Intl.NumberFormat(
+      "id-ID"
+    ).format(
+      Number(digits)
+    );
+  }
+
+  async function loadMetric(metric) {
+    const element =
+      document.getElementById(
+        metric.elementId
+      );
+
+    if (!element) {
+      return;
+    }
+
+    const response =
+      await fetch(
+        metric.url,
+        {
+          cache: "no-store",
+          mode: "cors"
+        }
+      );
+
+    if (!response.ok) {
+      throw new Error(
+        "HTTP " + response.status
+      );
+    }
+
+    const data =
+      await response.json();
+
+    element.textContent =
+      formatCount(data.count);
+  }
+
+  Promise.all(
+    metrics.map(loadMetric)
+  )
+    .then(function () {
+      if (!statusElement) {
+        return;
+      }
+
+      statusElement.textContent =
+        "Statistik diperbarui secara berkala.";
+
+      statusElement.classList.add(
+        "is-ready"
+      );
+    })
+    .catch(function (error) {
+      console.error(
+        "Dashboard GoatCounter:",
+        error
+      );
+
+      metrics.forEach(
+        function (metric) {
+          const element =
+            document.getElementById(
+              metric.elementId
+            );
+
+          if (
+            element &&
+            element.textContent === "…"
+          ) {
+            element.textContent = "—";
+          }
+        }
+      );
+
+      if (!statusElement) {
+        return;
+      }
+
+      statusElement.textContent =
+        "Statistik belum dapat ditampilkan. Aktifkan izin visitor counter pada pengaturan GoatCounter.";
+
+      statusElement.classList.add(
+        "is-error"
+      );
+    });
+})();
+</script>
+
+<!-- Pelacak kunjungan GoatCounter -->
+<script
+  data-goatcounter="https://dhaniswara86.goatcounter.com/count"
+  async
+  src="https://gc.zgo.at/count.js"
+></script>
+
+</body>
 </html>
