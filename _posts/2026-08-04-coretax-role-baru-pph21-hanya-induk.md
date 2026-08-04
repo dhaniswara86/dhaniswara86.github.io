@@ -12,7 +12,7 @@ tags:
   - Hak Akses
   - Kerahasiaan Data
 
-excerpt: "Role baru memungkinkan pimpinan atau pejabat perusahaan menandatangani SPT Masa PPh Pasal 21/26 tanpa melihat rincian penghasilan setiap pegawai."
+excerpt: "Role baru "Hanya Induk" memungkinkan pimpinan atau pejabat perusahaan menandatangani SPT Masa PPh Pasal 21/26 tanpa melihat rincian penghasilan setiap pegawai."
 
 reading_time: "6 menit baca"
 visual_type: "role-comparison"
@@ -37,7 +37,9 @@ hero_visual_title: "Role Hanya Induk"
 
   Melalui role ini, pimpinan atau pejabat perusahaan tetap
   dapat menandatangani SPT tanpa memperoleh akses terhadap
-  rincian penghasilan setiap pegawai. <br> Pembaruan ini menjadi angin segar bagi Wajib Pajak pemotong
+  rincian penghasilan setiap pegawai.
+  
+  Pembaruan ini menjadi angin segar bagi Wajib Pajak pemotong
 PPh Pasal 21 yang ingin memperkuat kerahasiaan data
 penghasilan dan gaji pegawai.
 
@@ -68,45 +70,6 @@ Perbedaan utama kedua role tersebut terletak pada bagian SPT
 dan data yang dapat dilihat oleh pemegang role.
 
 ## Dua Pilihan Role Penandatangan
-
-<div class="role-access-grid">
-  <section class="role-access-card is-recommended">
-    <h3>Hanya Induk</h3>
-
-    <p>
-      Diperuntukkan bagi pihak yang berwenang menandatangani
-      SPT, tetapi tidak memerlukan akses terhadap rincian
-      penghasilan pegawai.
-    </p>
-
-    <ul>
-      <li>Dapat melihat Induk SPT.</li>
-      <li>Dapat menandatangani SPT.</li>
-      <li>Tidak dapat melihat Lampiran I-A.</li>
-      <li>Tidak dapat melihat Lampiran I-B.</li>
-      <li>Tidak dapat melihat Lampiran II dan III.</li>
-      <li>Tidak dapat melihat rincian data pegawai.</li>
-    </ul>
-  </section>
-
-  <section class="role-access-card">
-    <h3>Akses Penuh</h3>
-
-    <p>
-      Diperuntukkan bagi pihak yang menyiapkan, memeriksa,
-      atau mengelola rincian SPT Masa PPh Pasal 21/26.
-    </p>
-
-    <ul>
-      <li>Dapat melihat Induk SPT.</li>
-      <li>Dapat melihat Lampiran I-A.</li>
-      <li>Dapat melihat Lampiran I-B.</li>
-      <li>Dapat melihat Lampiran II dan III.</li>
-      <li>Dapat melihat rincian data pegawai.</li>
-      <li>Dapat menandatangani SPT.</li>
-    </ul>
-  </section>
-</div>
 
 ### 1. Penandatangan SPT Masa PPh Pasal 21/26 — Hanya Induk
 
