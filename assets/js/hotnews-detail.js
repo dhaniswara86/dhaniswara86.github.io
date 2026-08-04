@@ -3,20 +3,23 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("hotnews-article");
 
   if (!articleContainer) {
-    console.error("Elemen #hotnews-article tidak ditemukan.");
+    console.error(
+      "Elemen dengan ID hotnews-article tidak ditemukan."
+    );
+
     return;
   }
 
-  const urlParams = new URLSearchParams(
+  const params = new URLSearchParams(
     window.location.search
   );
 
-  const slug = urlParams.get("slug");
+  const slug = params.get("slug");
 
   if (!slug) {
     tampilkanArtikelTidakDitemukan(
       articleContainer,
-      "Alamat artikel tidak lengkap."
+      "Alamat artikel tidak memiliki slug."
     );
 
     return;
@@ -25,15 +28,17 @@ document.addEventListener("DOMContentLoaded", function () {
   if (!Array.isArray(window.hotNewsData)) {
     tampilkanArtikelTidakDitemukan(
       articleContainer,
-      "Data artikel tidak dapat dimuat."
+      "Data Hot News tidak dapat dimuat."
     );
 
     return;
   }
 
-  const article = window.hotNewsData.find(function (item) {
-    return item.slug === slug;
-  });
+  const article = window.hotNewsData.find(
+    function (item) {
+      return item.slug === slug;
+    }
+  );
 
   if (!article) {
     tampilkanArtikelTidakDitemukan(
@@ -44,13 +49,14 @@ document.addEventListener("DOMContentLoaded", function () {
     return;
   }
 
-  document.title = article.title + " | Kabayan Hot News";
+  document.title =
+    article.title + " | Kabayan Hot News";
 
   const descriptionMeta = document.querySelector(
     'meta[name="description"]'
   );
 
-  if (descriptionMeta) {
+  if (descriptionMeta && article.excerpt) {
     descriptionMeta.setAttribute(
       "content",
       article.excerpt
@@ -58,33 +64,68 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   articleContainer.innerHTML = `
-    <nav class="hotnews-breadcrumb" aria-label="Breadcrumb">
-      <a href="index.html">Beranda</a>
+    <nav
+      class="hotnews-breadcrumb"
+      aria-label="Breadcrumb"
+    >
+      <a href="index.html">
+        Beranda
+      </a>
 
-      <span aria-hidden="true">/</span>
+      <span aria-hidden="true">
+        /
+      </span>
 
-      <a href="hotnews.html">Hot News</a>
+      <a href="hotnews.html">
+        Hot News
+      </a>
 
-      <span aria-hidden="true">/</span>
+      <span aria-hidden="true">
+        /
+      </span>
 
-      <span>Artikel</span>
+      <span>
+        Artikel
+      </span>
     </nav>
 
     <header class="hotnews-article-header">
       <span class="hotnews-article-category">
-        ${article.category}
+        ${article.category || "Hot News"}
       </span>
 
-      <h1>${article.title}</h1>
+      <h1>
+        ${article.title}
+      </h1>
 
-      <p class="hotnews-article-excerpt">
-        ${article.excerpt}
-      </p>
+      ${
+        article.excerpt
+          ? `
+            <p class="hotnews-article-excerpt">
+              ${article.excerpt}
+            </p>
+          `
+          : ""
+      }
 
       <div class="hotnews-article-meta">
-        <span>${article.dateLabel}</span>
-        <span aria-hidden="true">•</span>
-        <span>${article.readingTime}</span>
+        ${
+          article.dateLabel
+            ? `<span>${article.dateLabel}</span>`
+            : ""
+        }
+
+        ${
+          article.dateLabel && article.readingTime
+            ? `<span aria-hidden="true">•</span>`
+            : ""
+        }
+
+        ${
+          article.readingTime
+            ? `<span>${article.readingTime}</span>`
+            : ""
+        }
       </div>
     </header>
 
@@ -108,17 +149,27 @@ function tampilkanArtikelTidakDitemukan(
   container,
   message
 ) {
-  document.title = "Artikel Tidak Ditemukan | Kabayan";
+  document.title =
+    "Artikel Tidak Ditemukan | Kabayan";
 
   container.innerHTML = `
     <div class="hotnews-not-found">
-      <span class="hotnews-not-found-code">404</span>
+      <span class="hotnews-not-found-code">
+        404
+      </span>
 
-      <h1>Artikel Tidak Ditemukan</h1>
+      <h1>
+        Artikel Tidak Ditemukan
+      </h1>
 
-      <p>${message}</p>
+      <p>
+        ${message}
+      </p>
 
-      <a href="hotnews.html">
+      <a
+        class="hotnews-back-link"
+        href="hotnews.html"
+      >
         Kembali ke Hot News
       </a>
     </div>
