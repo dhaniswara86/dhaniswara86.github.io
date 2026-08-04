@@ -1,3 +1,9 @@
+---
+title: "Kabayan Hot News"
+description: "Kumpulan artikel, pembaruan Coretax, regulasi, dan informasi perpajakan dari Kabayan."
+permalink: /hotnews.html
+---
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -10,12 +16,12 @@
 
   <meta
     name="description"
-    content="Kabayan Hot News menyajikan pembaruan Coretax, regulasi, layanan, dan informasi perpajakan penting secara ringkas dan mudah dipahami."
+    content="{{ page.description | escape }}"
   >
 
   <meta
-    name="author"
-    content="Angga Sukma Dhaniswara"
+    name="robots"
+    content="index, follow"
   >
 
   <meta
@@ -25,22 +31,7 @@
 
   <link
     rel="canonical"
-    href="https://dhaniswara86.id/hotnews.html"
-  >
-
-  <meta
-    property="og:title"
-    content="Hot News | Kabayan"
-  >
-
-  <meta
-    property="og:description"
-    content="Pembaruan Coretax, regulasi, layanan, dan informasi perpajakan penting dalam satu halaman."
-  >
-
-  <meta
-    property="og:url"
-    content="https://dhaniswara86.id/hotnews.html"
+    href="{{ page.url | absolute_url }}"
   >
 
   <meta
@@ -48,1337 +39,742 @@
     content="website"
   >
 
-  <title>Hot News | Kabayan</title>
-
-  <!--
-    File CSS lama tetap dipertahankan.
-    CSS tema Kabayan di bawahnya akan menjadi penyempurnaan tampilan.
-  -->
-  <link
-    rel="stylesheet"
-    href="assets/css/hotnews.css"
+  <meta
+    property="og:title"
+    content="{{ page.title | escape }}"
   >
 
-  <style>
-    :root {
-      --black: #000000;
-      --text: #1d1d1f;
-      --text-soft: #424245;
-      --secondary: #6e6e73;
-      --tertiary: #86868b;
-      --white: #ffffff;
-      --page: #f5f5f7;
-      --soft: #e8e8ed;
-      --line: rgba(0, 0, 0, 0.09);
-      --blue: #0071e3;
-      --blue-hover: #0077ed;
-      --navy: #0b326e;
-      --cyan: #2aa8d2;
-      --yellow: #f2b705;
-      --hot: #d92d20;
-      --hot-soft: #fff1ef;
-      --nav-height: 48px;
-      --content-width: 1180px;
-      --radius-xl: 32px;
-      --radius-lg: 23px;
-      --radius-md: 16px;
-      --shadow:
-        0 3px 10px rgba(0, 0, 0, 0.035),
-        0 24px 58px rgba(0, 0, 0, 0.07);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: calc(var(--nav-height) + 22px);
-    }
-
-    body {
-      margin: 0;
-      overflow-x: hidden;
-      background: var(--white);
-      color: var(--text);
-      font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Arial,
-        Helvetica,
-        sans-serif;
-      line-height: 1.55;
-      letter-spacing: -0.012em;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
-    }
-
-    body.menu-open {
-      overflow: hidden;
-    }
-
-    a {
-      color: inherit;
-    }
-
-    button {
-      font: inherit;
-    }
-
-    .site-nav {
-      position: fixed;
-      z-index: 1000;
-      inset: 0 0 auto;
-      min-height: var(--nav-height);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.055);
-      background: rgba(250, 250, 252, 0.84);
-      backdrop-filter: saturate(180%) blur(20px);
-      -webkit-backdrop-filter: saturate(180%) blur(20px);
-    }
-
-    .nav-inner {
-      width: min(var(--content-width), calc(100% - 36px));
-      min-height: var(--nav-height);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 28px;
-      margin: 0 auto;
-    }
-
-    .nav-brand {
-      display: inline-flex;
-      flex-shrink: 0;
-      align-items: center;
-      gap: 9px;
-      color: var(--text);
-      font-size: 14px;
-      font-weight: 700;
-      text-decoration: none;
-    }
-
-    .brand-symbol {
-      width: 25px;
-      height: 25px;
-      display: grid;
-      place-items: center;
-      border-radius: 8px;
-      background: var(--text);
-      color: var(--white);
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: -0.04em;
-    }
-
-    .desktop-menu {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 28px;
-    }
-
-    .desktop-menu a {
-      color: var(--text-soft);
-      font-size: 12px;
-      text-decoration: none;
-      white-space: nowrap;
-    }
-
-    .desktop-menu a:hover,
-    .desktop-menu a[aria-current="page"] {
-      color: var(--black);
-    }
-
-    .nav-actions {
-      display: flex;
-      flex-shrink: 0;
-      align-items: center;
-      gap: 7px;
-    }
-
-    .nav-search,
-    .menu-toggle {
-      width: 34px;
-      height: 34px;
-      display: grid;
-      place-items: center;
-      border: 0;
-      border-radius: 50%;
-      background: transparent;
-      color: var(--text);
-      cursor: pointer;
-      font-size: 18px;
-      text-decoration: none;
-    }
-
-    .nav-search:hover,
-    .menu-toggle:hover {
-      background: rgba(0, 0, 0, 0.055);
-    }
-
-    .menu-toggle {
-      display: none;
-    }
-
-    .mobile-menu {
-      position: fixed;
-      z-index: 999;
-      inset: var(--nav-height) 0 0;
-      display: none;
-      overflow-y: auto;
-      padding: 34px 28px 60px;
-      background: rgba(250, 250, 252, 0.985);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-    }
-
-    .mobile-menu.active {
-      display: block;
-    }
-
-    .mobile-menu a {
-      display: block;
-      padding: 10px 0;
-      color: var(--text);
-      font-size: 28px;
-      font-weight: 650;
-      letter-spacing: -0.04em;
-      text-decoration: none;
-    }
-
-    main {
-      padding-top: var(--nav-height);
-    }
-
-    .announcement {
-      padding: 12px 20px;
-      background: var(--page);
-      color: #3a3a3c;
-      font-size: 14px;
-      text-align: center;
-    }
-
-    .announcement a {
-      color: var(--blue);
-      font-weight: 600;
-      text-decoration: none;
-    }
-
-    .announcement a:hover {
-      text-decoration: underline;
-    }
-
-    .hotnews-page {
-      min-height: 70vh;
-    }
-
-    .hotnews-hero {
-      position: relative;
-      overflow: hidden;
-      padding: 86px 20px 92px;
-      background:
-        radial-gradient(
-          circle at 84% 26%,
-          rgba(46, 179, 211, 0.20),
-          transparent 25%
-        ),
-        radial-gradient(
-          circle at 12% 83%,
-          rgba(0, 113, 227, 0.13),
-          transparent 27%
-        ),
-        linear-gradient(
-          180deg,
-          #ffffff 0%,
-          #f4f8ff 100%
-        );
-    }
-
-    .hotnews-hero::before {
-      position: absolute;
-      top: -205px;
-      left: 50%;
-      width: 900px;
-      height: 520px;
-      border-radius: 50%;
-      background:
-        radial-gradient(
-          ellipse,
-          rgba(0, 113, 227, 0.13),
-          rgba(66, 183, 213, 0.04) 50%,
-          transparent 72%
-        );
-      content: "";
-      transform: translateX(-50%);
-      pointer-events: none;
-    }
-
-    .hotnews-hero-inner {
-      position: relative;
-      z-index: 1;
-      width: min(var(--content-width), 100%);
-      display: grid;
-      grid-template-columns:
-        minmax(0, 1.08fr)
-        minmax(340px, 0.92fr);
-      align-items: center;
-      gap: 70px;
-      margin: 0 auto;
-    }
-
-    .hotnews-hero-copy {
-      min-width: 0;
-    }
-
-    .hotnews-kicker {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 14px;
-      color: var(--hot);
-      font-size: 14px;
-      font-weight: 750;
-      letter-spacing: 0.045em;
-      text-transform: uppercase;
-    }
-
-    .hotnews-kicker::before {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: #ff3b30;
-      box-shadow:
-        0 0 0 0 rgba(255, 59, 48, 0.30);
-      content: "";
-      animation: hotNewsPulse 2s infinite;
-    }
-
-    .hotnews-hero h1 {
-      max-width: 780px;
-      margin: 0;
-      font-size: clamp(51px, 6.7vw, 84px);
-      font-weight: 720;
-      letter-spacing: -0.064em;
-      line-height: 0.97;
-    }
-
-    .hotnews-gradient {
-      display: block;
-      background:
-        linear-gradient(
-          90deg,
-          #093b91,
-          #0071e3 43%,
-          #2aa8d2 72%,
-          #e1a000
-        );
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-
-    .hotnews-hero p {
-      max-width: 720px;
-      margin: 24px 0 0;
-      color: #515154;
-      font-size: clamp(19px, 2.1vw, 24px);
-      line-height: 1.42;
-    }
-
-    .hotnews-hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 28px;
-    }
-
-    .hotnews-button {
-      min-height: 44px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 10px 20px;
-      border: 1px solid var(--blue);
-      border-radius: 999px;
-      font-size: 14px;
-      font-weight: 600;
-      text-decoration: none;
-      transition:
-        background 0.2s ease,
-        color 0.2s ease,
-        transform 0.2s ease;
-    }
-
-    .hotnews-button:hover {
-      transform: translateY(-1px);
-    }
-
-    .hotnews-button.primary {
-      background: var(--blue);
-      color: var(--white);
-    }
-
-    .hotnews-button.primary:hover {
-      background: var(--blue-hover);
-    }
-
-    .hotnews-button.secondary {
-      background: rgba(255, 255, 255, 0.76);
-      color: var(--blue);
-    }
-
-    .hotnews-button.secondary:hover {
-      background: var(--blue);
-      color: var(--white);
-    }
-
-    .hotnews-topic-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 25px;
-    }
-
-    .hotnews-topic-list span {
-      padding: 7px 10px;
-      border: 1px solid rgba(0, 0, 0, 0.075);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.78);
-      color: var(--secondary);
-      font-size: 11px;
-      font-weight: 650;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-    }
-
-    .hotnews-hero-visual {
-      position: relative;
-      min-height: 420px;
-      display: grid;
-      place-items: center;
-    }
-
-    .news-window {
-      position: relative;
-      width: min(480px, 100%);
-      overflow: hidden;
-      padding: 23px;
-      border: 7px solid #17191d;
-      border-bottom-width: 16px;
-      border-radius: 29px 29px 9px 9px;
-      background:
-        linear-gradient(
-          180deg,
-          #f9fcff,
-          #edf7ff
-        );
-      box-shadow:
-        0 34px 72px rgba(6, 77, 143, 0.25);
-      transform:
-        perspective(1100px)
-        rotateY(-5deg)
-        rotateX(2deg);
-    }
-
-    .news-window-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 17px;
-      color: #536372;
-      font-size: 9px;
-      font-weight: 800;
-      letter-spacing: 0.075em;
-    }
-
-    .news-window-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      color: var(--hot);
-    }
-
-    .news-window-status::before {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #ff3b30;
-      content: "";
-    }
-
-    .news-featured {
-      padding: 22px;
-      border-radius: 19px;
-      background:
-        linear-gradient(
-          135deg,
-          #062d68,
-          #0871c6 58%,
-          #21a7cf
-        );
-      color: var(--white);
-    }
-
-    .news-featured span {
-      display: inline-block;
-      margin-bottom: 12px;
-      padding: 5px 8px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.14);
-      color: #d8f0ff;
-      font-size: 8px;
-      font-weight: 800;
-      letter-spacing: 0.07em;
-    }
-
-    .news-featured strong {
-      display: block;
-      max-width: 370px;
-      font-size: 24px;
-      letter-spacing: -0.038em;
-      line-height: 1.08;
-    }
-
-    .news-featured small {
-      display: block;
-      margin-top: 9px;
-      color: rgba(255, 255, 255, 0.72);
-      font-size: 10px;
-    }
-
-    .news-window-list {
-      display: grid;
-      gap: 8px;
-      margin-top: 11px;
-    }
-
-    .news-window-row {
-      display: grid;
-      align-items: center;
-      grid-template-columns: 36px minmax(0, 1fr);
-      gap: 11px;
-      padding: 10px 11px;
-      border: 1px solid #dfe7ee;
-      border-radius: 13px;
-      background: var(--white);
-    }
-
-    .news-window-row > span {
-      width: 34px;
-      height: 34px;
-      display: grid;
-      place-items: center;
-      border-radius: 10px;
-      background: #eaf4ff;
-      color: var(--blue);
-      font-size: 9px;
-      font-weight: 800;
-    }
-
-    .news-window-row strong {
-      display: block;
-      font-size: 11px;
-      letter-spacing: -0.02em;
-    }
-
-    .news-window-row small {
-      display: block;
-      margin-top: 2px;
-      color: var(--tertiary);
-      font-size: 8px;
-    }
-
-    .hotnews-list-section {
-      width: min(var(--content-width), calc(100% - 40px));
-      margin: 0 auto;
-      padding: 86px 0 112px;
-    }
-
-    .hotnews-section-heading {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 28px;
-      margin-bottom: 29px;
-    }
-
-    .hotnews-section-label {
-      display: block;
-      margin-bottom: 6px;
-      color: var(--hot);
-      font-size: 13px;
-      font-weight: 750;
-      letter-spacing: 0.045em;
-      text-transform: uppercase;
-    }
-
-    .hotnews-section-heading h2 {
-      margin: 0;
-      font-size: clamp(37px, 5vw, 58px);
-      font-weight: 720;
-      letter-spacing: -0.052em;
-      line-height: 1;
-    }
-
-    #hotnewsCount {
-      flex-shrink: 0;
-      padding: 8px 12px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: var(--page);
-      color: var(--secondary);
-      font-size: 12px;
-      font-weight: 650;
-    }
-
-    #hotnewsCount:empty {
-      display: none;
-    }
-
-    .hotnews-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
-      min-height: 180px;
-    }
-
-    /*
-      Selector berikut dibuat cukup fleksibel agar tetap bekerja
-      meskipun hotnews-list.js menggunakan article, div, atau a
-      sebagai pembungkus kartu.
-    */
-    .hotnews-grid > article,
-    .hotnews-grid > div,
-    .hotnews-grid > a,
-    .hotnews-card {
-      position: relative;
-      min-width: 0;
-      overflow: hidden;
-      border: 1px solid var(--line);
-      border-radius: var(--radius-lg);
-      background: var(--white);
-      box-shadow:
-        0 3px 10px rgba(0, 0, 0, 0.025),
-        0 18px 44px rgba(0, 0, 0, 0.055);
-      color: var(--text);
-      text-decoration: none;
-      transition:
-        transform 0.22s ease,
-        box-shadow 0.22s ease,
-        border-color 0.22s ease;
-    }
-
-    .hotnews-grid > article:hover,
-    .hotnews-grid > div:hover,
-    .hotnews-grid > a:hover,
-    .hotnews-card:hover {
-      border-color: rgba(0, 113, 227, 0.22);
-      box-shadow:
-        0 4px 13px rgba(0, 0, 0, 0.035),
-        0 25px 54px rgba(0, 86, 179, 0.11);
-      transform: translateY(-4px);
-    }
-
-    .hotnews-card-link,
-    .hotnews-grid > a {
-      display: block;
-      height: 100%;
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .hotnews-card-image,
-    .hotnews-image,
-    .hotnews-thumbnail {
-      position: relative;
-      min-height: 205px;
-      overflow: hidden;
-      background:
-        radial-gradient(
-          circle at 72% 28%,
-          rgba(255, 255, 255, 0.28),
-          transparent 24%
-        ),
-        linear-gradient(
-          145deg,
-          #082d66,
-          #0871c6 58%,
-          #27a9cf
-        );
-    }
-
-    .hotnews-card-image img,
-    .hotnews-image img,
-    .hotnews-thumbnail img,
-    .hotnews-grid img {
-      width: 100%;
-      height: 205px;
-      display: block;
-      object-fit: cover;
-    }
-
-    .hotnews-card-content,
-    .hotnews-content,
-    .hotnews-body {
-      padding: 22px;
-    }
-
-    .hotnews-category,
-    .hotnews-tag,
-    .hotnews-badge {
-      display: inline-flex;
-      align-items: center;
-      margin-bottom: 12px;
-      padding: 5px 8px;
-      border-radius: 999px;
-      background: #eaf4ff;
-      color: var(--blue);
-      font-size: 9px;
-      font-weight: 800;
-      letter-spacing: 0.045em;
-      text-transform: uppercase;
-    }
-
-    .hotnews-grid h2,
-    .hotnews-grid h3,
-    .hotnews-title {
-      margin: 0;
-      color: var(--text);
-      font-size: 23px;
-      font-weight: 690;
-      letter-spacing: -0.038em;
-      line-height: 1.12;
-    }
-
-    .hotnews-grid p,
-    .hotnews-summary,
-    .hotnews-description {
-      margin: 12px 0 0;
-      color: var(--secondary);
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    .hotnews-meta,
-    .hotnews-date {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px;
-      margin-top: 18px;
-      color: var(--tertiary);
-      font-size: 10px;
-      font-weight: 600;
-    }
-
-    .hotnews-read-more {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      margin-top: 17px;
-      color: var(--blue);
-      font-size: 13px;
-      font-weight: 650;
-      text-decoration: none;
-    }
-
-    .hotnews-empty,
-    .hotnews-loading {
-      grid-column: 1 / -1;
-      padding: 55px 25px;
-      border: 1px dashed #c9c9cf;
-      border-radius: var(--radius-lg);
-      background: var(--page);
-      color: var(--secondary);
-      text-align: center;
-    }
-
-    footer {
-      background: var(--page);
-      color: var(--secondary);
-    }
-
-    .disclaimer {
-      width: min(var(--content-width), calc(100% - 40px));
-      margin: 0 auto;
-      padding: 27px 0;
-      border-bottom: 1px solid #d2d2d7;
-      font-size: 12px;
-      line-height: 1.55;
-    }
-
-    .disclaimer strong {
-      color: var(--text-soft);
-    }
-
-    .footer-inner {
-      width: min(var(--content-width), calc(100% - 40px));
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      margin: 0 auto;
-      padding: 22px 0 28px;
-      font-size: 12px;
-    }
-
-    .footer-inner p {
-      margin: 0;
-    }
-
-    .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 18px;
-    }
-
-    .footer-links a {
-      color: var(--text-soft);
-      text-decoration: none;
-    }
-
-    .footer-links a:hover {
-      text-decoration: underline;
-    }
-
-    @keyframes hotNewsPulse {
-      0% {
-        box-shadow:
-          0 0 0 0 rgba(255, 59, 48, 0.30);
-      }
-
-      65% {
-        box-shadow:
-          0 0 0 9px rgba(255, 59, 48, 0);
-      }
-
-      100% {
-        box-shadow:
-          0 0 0 0 rgba(255, 59, 48, 0);
-      }
-    }
-
-    @media (max-width: 980px) {
-      .hotnews-hero-inner {
-        grid-template-columns: 1fr 350px;
-        gap: 42px;
-      }
-
-      .hotnews-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 900px) {
-      .desktop-menu {
-        display: none;
-      }
-
-      .menu-toggle {
-        display: grid;
-      }
-
-      .hotnews-hero-inner {
-        grid-template-columns: 1fr;
-        gap: 48px;
-      }
-
-      .hotnews-hero-copy {
-        text-align: center;
-      }
-
-      .hotnews-hero h1,
-      .hotnews-hero p {
-        margin-right: auto;
-        margin-left: auto;
-      }
-
-      .hotnews-hero-actions,
-      .hotnews-topic-list {
-        justify-content: center;
-      }
-
-      .hotnews-hero-visual {
-        min-height: 370px;
-      }
-
-      .news-window {
-        width: min(520px, 100%);
-        transform: none;
-      }
-    }
-
-    @media (max-width: 680px) {
-      .announcement {
-        padding-right: 26px;
-        padding-left: 26px;
-        font-size: 13px;
-      }
-
-      .hotnews-hero {
-        padding: 62px 16px 70px;
-      }
-
-      .hotnews-hero h1 {
-        font-size: clamp(45px, 14vw, 61px);
-      }
-
-      .hotnews-hero p {
-        font-size: 18px;
-      }
-
-      .hotnews-hero-actions {
-        align-items: stretch;
-        flex-direction: column;
-      }
-
-      .hotnews-button {
-        width: 100%;
-      }
-
-      .hotnews-topic-list {
-        align-items: center;
-        flex-direction: column;
-      }
-
-      .hotnews-topic-list span {
-        width: 100%;
-      }
-
-      .hotnews-hero-visual {
-        min-height: 330px;
-      }
-
-      .news-window {
-        padding: 15px;
-        border-width: 6px;
-        border-bottom-width: 14px;
-        border-radius: 23px 23px 8px 8px;
-      }
-
-      .news-featured {
-        padding: 17px;
-      }
-
-      .news-featured strong {
-        font-size: 20px;
-      }
-
-      .hotnews-list-section {
-        width: min(100% - 28px, var(--content-width));
-        padding: 67px 0 86px;
-      }
-
-      .hotnews-section-heading {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 14px;
-      }
-
-      .hotnews-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hotnews-card-image,
-      .hotnews-image,
-      .hotnews-thumbnail {
-        min-height: 190px;
-      }
-
-      .hotnews-card-image img,
-      .hotnews-image img,
-      .hotnews-thumbnail img,
-      .hotnews-grid img {
-        height: 190px;
-      }
-
-      .footer-inner {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-    }
-
-    @media (max-width: 440px) {
-      .nav-brand span:last-child {
-        display: none;
-      }
-
-      .news-window-row:nth-child(3) {
-        display: none;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-
-      * {
-        transition: none !important;
-      }
-
-      .hotnews-kicker::before {
-        animation: none !important;
-      }
-
-      .news-window {
-        transform: none;
-      }
-    }
-  </style>
+  <meta
+    property="og:description"
+    content="{{ page.description | escape }}"
+  >
+
+  <meta
+    property="og:url"
+    content="{{ page.url | absolute_url }}"
+  >
+
+  <meta
+    property="og:locale"
+    content="id_ID"
+  >
+
+  <meta
+    property="og:site_name"
+    content="Kabayan"
+  >
+
+  <title>
+    {{ page.title }} | Kabayan
+  </title>
+
+  <link
+    rel="stylesheet"
+    href="{{ '/assets/css/hotnews.css' | relative_url }}"
+  >
+
+  <link
+    rel="stylesheet"
+    href="{{ '/assets/css/hotnews-article.css' | relative_url }}"
+  >
 </head>
 
-<body id="top">
-  <header class="site-nav">
-    <div class="nav-inner">
+<body>
+  {% assign months =
+    "Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember"
+    | split: ","
+  %}
+
+  {% assign article_count =
+    site.posts
+    | size
+  %}
+
+  {% assign hotnews_categories =
+    site.posts
+    | map: "category"
+    | uniq
+    | sort
+  %}
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-inner">
       <a
-        class="nav-brand"
-        href="index.html"
-        aria-label="Beranda dhaniswara86"
+        class="brand"
+        href="{{ '/' | relative_url }}"
+        aria-label="Kabayan — Kembali ke beranda"
       >
-        <span class="brand-symbol">ASD</span>
-        <span>dhaniswara86</span>
+        <span
+          class="brand-mark"
+          aria-hidden="true"
+        >
+          ASD
+        </span>
+
+        <span class="brand-name">
+          Kabayan
+        </span>
       </a>
 
       <nav
-        class="desktop-menu"
+        class="main-nav"
         aria-label="Navigasi utama"
       >
-        <a href="index.html">Beranda</a>
-        <a href="buku.html">Buku</a>
-        <a href="formulir.html">Formulir</a>
-        <a href="kalkulator.html">Kalkulator</a>
-        <a href="aplikasi.html">Aplikasi</a>
-        <a href="artikel.html">Artikel</a>
+        <a href="{{ '/' | relative_url }}">
+          Beranda
+        </a>
+
+        <a href="{{ '/buku.html' | relative_url }}">
+          Buku
+        </a>
+
+        <a href="{{ '/formulir.html' | relative_url }}">
+          Formulir
+        </a>
+
+        <a href="{{ '/aplikasi.html' | relative_url }}">
+          Aplikasi
+        </a>
 
         <a
-          href="hotnews.html"
+          href="{{ '/hotnews.html' | relative_url }}"
           aria-current="page"
         >
           Hot News
         </a>
 
-        <a href="index.html#tentang">Tentang</a>
+        <a href="{{ '/tentang.html' | relative_url }}">
+          Tentang
+        </a>
       </nav>
 
-      <div class="nav-actions">
-        <a
-          class="nav-search"
-          href="#hotnewsList"
-          aria-label="Lihat daftar Hot News"
-          title="Lihat daftar Hot News"
-        >
-          ⌕
-        </a>
-
-        <button
-          class="menu-toggle"
-          id="menuToggle"
-          type="button"
-          aria-label="Buka menu"
-          aria-expanded="false"
-        >
+      <button
+        id="menuButton"
+        class="menu-button"
+        type="button"
+        aria-label="Buka menu navigasi"
+        aria-expanded="false"
+        aria-controls="mobileMenu"
+      >
+        <span aria-hidden="true">
           ☰
-        </button>
-      </div>
+        </span>
+      </button>
     </div>
   </header>
 
+  <!-- Navigasi seluler -->
   <nav
-    class="mobile-menu"
     id="mobileMenu"
+    class="mobile-menu"
     aria-label="Navigasi seluler"
+    hidden
   >
-    <a href="index.html">Beranda</a>
-    <a href="buku.html">Buku</a>
-    <a href="formulir.html">Formulir</a>
-    <a href="kalkulator.html">Kalkulator</a>
-    <a href="aplikasi.html">Aplikasi</a>
-    <a href="artikel.html">Artikel</a>
-    <a href="hotnews.html">Hot News</a>
-    <a href="index.html#tentang">Tentang</a>
+    <a href="{{ '/' | relative_url }}">
+      Beranda
+    </a>
+
+    <a href="{{ '/buku.html' | relative_url }}">
+      Buku Digital
+    </a>
+
+    <a href="{{ '/formulir.html' | relative_url }}">
+      Formulir
+    </a>
+
+    <a href="{{ '/aplikasi.html' | relative_url }}">
+      Aplikasi
+    </a>
+
+    <a
+      href="{{ '/hotnews.html' | relative_url }}"
+      aria-current="page"
+    >
+      Hot News
+    </a>
+
+    <a href="{{ '/tentang.html' | relative_url }}">
+      Tentang
+    </a>
   </nav>
 
-  <main class="hotnews-page">
-    <div class="announcement">
-      Pembaruan perpajakan yang perlu segera diketahui.
-      <a href="#hotnewsList">Lihat informasi terbaru ›</a>
-    </div>
-
+  <main
+    id="mainContent"
+    class="hotnews-page"
+  >
+    <!-- Hero -->
     <section class="hotnews-hero">
       <div class="hotnews-hero-inner">
-        <div class="hotnews-hero-copy">
-          <span class="hotnews-kicker">
-            Kabayan Hot News
-          </span>
+        <span class="hotnews-kicker">
+          Kabayan Hot News
+        </span>
 
-          <h1>
-            Informasi perpajakan.
-            <span class="hotnews-gradient">
-              Lebih cepat diketahui.
-            </span>
-          </h1>
+        <h1>
+          Informasi Perpajakan Terkini
+        </h1>
 
-          <p>
-            Ikuti pembaruan Coretax, regulasi, layanan,
-            pengumuman, dan informasi perpajakan penting
-            lainnya dalam format yang ringkas dan mudah dipahami.
-          </p>
+        <p>
+          Ikuti pembaruan Coretax, regulasi, layanan,
+          administrasi, dan informasi perpajakan yang
+          disajikan secara ringkas dan mudah dipahami.
+        </p>
 
-          <div class="hotnews-hero-actions">
-            <a
-              class="hotnews-button primary"
-              id="latestHotNewsButton"
-              href="#hotnewsList"
-            >
-              Lihat Hot News
-              <span aria-hidden="true">›</span>
-            </a>
-
-            <a
-              class="hotnews-button secondary"
-              href="artikel.html"
-            >
-              Baca artikel
-              <span aria-hidden="true">›</span>
-            </a>
-          </div>
-
-          <div
-            class="hotnews-topic-list"
-            aria-label="Topik Hot News"
+        <div class="hotnews-hero-actions">
+          <a
+            class="
+              hotnews-button
+              hotnews-button-primary
+            "
+            href="#articleArchive"
           >
-            <span>Coretax</span>
-            <span>Regulasi terbaru</span>
-            <span>Layanan perpajakan</span>
-            <span>Pengumuman penting</span>
-          </div>
-        </div>
+            Lihat artikel
+          </a>
 
-        <div
-          class="hotnews-hero-visual"
-          aria-hidden="true"
-        >
-          <div class="news-window">
-            <div class="news-window-top">
-              <span>KABAYAN NEWS</span>
-              <span class="news-window-status">
-                TERBARU
-              </span>
-            </div>
-
-            <div class="news-featured">
-              <span>HOT NEWS</span>
-
-              <strong>
-                Pembaruan perpajakan dalam satu halaman.
-              </strong>
-
-              <small>
-                Ringkas, aktual, dan mudah dipahami.
-              </small>
-            </div>
-
-            <div class="news-window-list">
-              <div class="news-window-row">
-                <span>01</span>
-                <div>
-                  <strong>Coretax</strong>
-                  <small>Pembaruan fitur dan layanan.</small>
-                </div>
-              </div>
-
-              <div class="news-window-row">
-                <span>02</span>
-                <div>
-                  <strong>Regulasi terbaru</strong>
-                  <small>Perubahan ketentuan perpajakan.</small>
-                </div>
-              </div>
-
-              <div class="news-window-row">
-                <span>03</span>
-                <div>
-                  <strong>Pengumuman penting</strong>
-                  <small>Informasi yang perlu diperhatikan.</small>
-                </div>
-              </div>
-            </div>
-          </div>
+          <a
+            class="
+              hotnews-button
+              hotnews-button-secondary
+            "
+            href="hotnews-arsip.html"
+          >
+            Arsip berdasarkan tahun
+          </a>
         </div>
       </div>
     </section>
 
-    <section class="hotnews-list-section">
-      <div class="hotnews-section-heading">
-        <div>
-          <span class="hotnews-section-label">
-            Terbaru
-          </span>
+    <!-- Katalog artikel -->
+    <section
+      id="articleArchive"
+      class="hotnews-catalog-section"
+    >
+      <div class="hotnews-catalog-container">
+        <header class="hotnews-section-header">
+          <div>
+            <span class="hotnews-section-kicker">
+              Kumpulan artikel
+            </span>
 
-          <h2>Seluruh Hot News</h2>
+            <h2>
+              Seluruh Hot News
+            </h2>
+
+            <p>
+              Artikel disusun berdasarkan tanggal publikasi,
+              mulai dari informasi terbaru.
+            </p>
+          </div>
+
+          <p
+            id="hotnewsCount"
+            class="hotnews-count"
+            aria-live="polite"
+          >
+            {{ article_count }}
+            {% if article_count == 1 %}
+              artikel
+            {% else %}
+              artikel
+            {% endif %}
+          </p>
+        </header>
+
+        <!-- Pencarian dan filter -->
+        <div class="hotnews-toolbar">
+          <div class="hotnews-search-field">
+            <label for="articleSearch">
+              Cari artikel
+            </label>
+
+            <input
+              id="articleSearch"
+              type="search"
+              placeholder="Cari judul, kategori, atau topik..."
+              autocomplete="off"
+            >
+          </div>
+
+          <div class="hotnews-filter-field">
+            <label for="categoryFilter">
+              Kategori
+            </label>
+
+            <select id="categoryFilter">
+              <option value="">
+                Semua kategori
+              </option>
+
+              {% for category_item in hotnews_categories %}
+                {% if category_item %}
+                  <option
+                    value="{{ category_item | downcase | escape }}"
+                  >
+                    {{ category_item }}
+                  </option>
+                {% endif %}
+              {% endfor %}
+            </select>
+          </div>
+
+          <button
+            id="resetArticleFilter"
+            class="hotnews-reset-button"
+            type="button"
+          >
+            Atur ulang
+          </button>
         </div>
 
-        <span
-          id="hotnewsCount"
-          aria-live="polite"
-        ></span>
+        <!-- Daftar artikel -->
+        <div
+          id="hotnewsList"
+          class="hotnews-list"
+        >
+          {% if site.posts.size > 0 %}
+
+            {% for post in site.posts %}
+              {% assign post_month_number =
+                post.date
+                | date: "%-m"
+                | minus: 1
+              %}
+
+              {% capture post_search_text %}
+                {{ post.title }}
+                {{ post.excerpt }}
+                {{ post.category }}
+                {{ post.tags | join: " " }}
+              {% endcapture %}
+
+              <article
+                class="hotnews-card"
+                data-hotnews-card
+                data-search="{{ post_search_text | strip_html | normalize_whitespace | downcase | escape }}"
+                data-category="{{ post.category | default: 'Hot News' | downcase | escape }}"
+              >
+                <div class="hotnews-card-meta">
+                  <span class="hotnews-card-category">
+                    {{ post.category | default: "Hot News" }}
+                  </span>
+
+                  <time
+                    datetime="{{ post.date | date_to_xmlschema }}"
+                  >
+                    {{ post.date | date: "%-d" }}
+                    {{ months[post_month_number] }}
+                    {{ post.date | date: "%Y" }}
+                  </time>
+                </div>
+
+                <h3 class="hotnews-card-title">
+                  <a href="{{ post.url | relative_url }}">
+                    {{ post.title }}
+                  </a>
+                </h3>
+
+                {% if post.excerpt %}
+                  <p class="hotnews-card-excerpt">
+                    {{ post.excerpt }}
+                  </p>
+                {% else %}
+                  <p class="hotnews-card-excerpt">
+                    {{ post.content | strip_html | truncatewords: 28 }}
+                  </p>
+                {% endif %}
+
+                <div class="hotnews-card-footer">
+                  <div class="hotnews-card-info">
+                    {% if post.author %}
+                      <span>
+                        {{ post.author }}
+                      </span>
+                    {% endif %}
+
+                    {% if post.reading_time %}
+                      <span aria-hidden="true">
+                        •
+                      </span>
+
+                      <span>
+                        {{ post.reading_time }}
+                      </span>
+                    {% endif %}
+                  </div>
+
+                  <a
+                    class="hotnews-card-link"
+                    href="{{ post.url | relative_url }}"
+                    aria-label="Baca artikel: {{ post.title | escape }}"
+                  >
+                    Baca selengkapnya
+                    <span aria-hidden="true">
+                      →
+                    </span>
+                  </a>
+                </div>
+
+                {% if post.tags and post.tags.size > 0 %}
+                  <div
+                    class="hotnews-card-tags"
+                    aria-label="Topik artikel"
+                  >
+                    {% for tag in post.tags limit: 4 %}
+                      <span>
+                        {{ tag }}
+                      </span>
+                    {% endfor %}
+                  </div>
+                {% endif %}
+              </article>
+            {% endfor %}
+
+          {% else %}
+            <div class="hotnews-empty-state">
+              <h3>
+                Belum ada artikel
+              </h3>
+
+              <p>
+                Artikel Hot News akan tampil otomatis setelah
+                ditambahkan ke folder
+                <code>_posts</code>.
+              </p>
+            </div>
+          {% endif %}
+        </div>
+
+        <!-- Tidak ada hasil pencarian -->
+        <div
+          id="hotnewsNoResult"
+          class="hotnews-empty-state"
+          hidden
+        >
+          <h3>
+            Artikel tidak ditemukan
+          </h3>
+
+          <p>
+            Coba gunakan kata kunci lain atau tampilkan
+            kembali seluruh kategori.
+          </p>
+        </div>
       </div>
-
-      <div
-        class="hotnews-grid"
-        id="hotnewsList"
-        aria-live="polite"
-      ></div>
-
-      <noscript>
-        <div class="hotnews-empty">
-          Aktifkan JavaScript untuk menampilkan daftar Hot News.
-        </div>
-      </noscript>
     </section>
   </main>
 
-  <footer>
-    <div class="disclaimer">
-      <strong>Disclaimer:</strong>
-      Kabayan merupakan situs edukasi perpajakan pribadi dan bukan
-      situs resmi Direktorat Jenderal Pajak atau instansi pemerintah.
-      Informasi perlu diperiksa kembali dengan ketentuan dan sumber
-      resmi terbaru sebelum digunakan.
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a
+          class="brand"
+          href="{{ '/' | relative_url }}"
+        >
+          <span
+            class="brand-mark"
+            aria-hidden="true"
+          >
+            ASD
+          </span>
+
+          <span>
+            Kabayan
+          </span>
+        </a>
+
+        <p>
+          Katalog Bahan Pelayanan dan media edukasi
+          perpajakan oleh Angga Sukma Dhaniswara.
+        </p>
+      </div>
+
+      <nav
+        class="footer-nav"
+        aria-label="Navigasi footer"
+      >
+        <a href="{{ '/' | relative_url }}">
+          Beranda
+        </a>
+
+        <a href="{{ '/hotnews.html' | relative_url }}">
+          Hot News
+        </a>
+
+        <a href="{{ '/hotnews-arsip.html' | relative_url }}">
+          Arsip Hot News
+        </a>
+
+        <a href="{{ '/tentang.html' | relative_url }}">
+          Tentang
+        </a>
+
+        <a href="#mainContent">
+          Kembali ke atas
+        </a>
+      </nav>
     </div>
 
-    <div class="footer-inner">
+    <div class="footer-disclaimer">
       <p>
-        © <span id="currentYear"></span>
-        Angga Sukma Dhaniswara.
+        <strong>Disclaimer:</strong>
+        Kabayan merupakan situs edukasi perpajakan pribadi
+        dan bukan situs resmi Direktorat Jenderal Pajak atau
+        instansi pemerintah. Informasi perlu diperiksa kembali
+        dengan ketentuan dan tampilan sistem terbaru sebelum
+        digunakan.
       </p>
+    </div>
 
-      <div class="footer-links">
-        <a href="index.html">Beranda</a>
-        <a href="buku.html">Buku</a>
-        <a href="formulir.html">Formulir</a>
-        <a href="kalkulator.html">Kalkulator</a>
-        <a href="aplikasi.html">Aplikasi</a>
-        <a href="artikel.html">Artikel</a>
-        <a href="hotnews.html">Hot News</a>
-        <a href="#top">Kembali ke atas</a>
-      </div>
+    <div class="footer-bottom">
+      <p>
+        © Angga Sukma Dhaniswara.
+      </p>
     </div>
   </footer>
 
-  <!--
-    Data harus dimuat lebih dahulu, kemudian script daftar.
-    Atribut defer menjaga urutan eksekusi sesuai urutan penulisan.
-  -->
-  <script src="assets/js/hotnews-data.js"></script>
-  <script src="assets/js/hotnews-list.js"></script>
-
   <script>
-    const menuToggle =
-      document.getElementById("menuToggle");
+    (function () {
+      "use strict";
 
-    const mobileMenu =
-      document.getElementById("mobileMenu");
+      const searchInput =
+        document.getElementById("articleSearch");
 
-    if (menuToggle && mobileMenu) {
-      menuToggle.addEventListener("click", () => {
-        const isOpen =
-          mobileMenu.classList.toggle("active");
+      const categoryFilter =
+        document.getElementById("categoryFilter");
 
-        document.body.classList.toggle(
-          "menu-open",
-          isOpen
+      const resetButton =
+        document.getElementById("resetArticleFilter");
+
+      const countElement =
+        document.getElementById("hotnewsCount");
+
+      const noResultElement =
+        document.getElementById("hotnewsNoResult");
+
+      const cards =
+        Array.from(
+          document.querySelectorAll(
+            "[data-hotnews-card]"
+          )
         );
 
-        menuToggle.setAttribute(
-          "aria-expanded",
-          String(isOpen)
+      const menuButton =
+        document.getElementById("menuButton");
+
+      const mobileMenu =
+        document.getElementById("mobileMenu");
+
+      /*
+       * Normalisasi teks pencarian.
+       */
+      function normalizeText(value) {
+        return String(value || "")
+          .normalize("NFD")
+          .replace(
+            /[\u0300-\u036f]/g,
+            ""
+          )
+          .toLowerCase()
+          .trim();
+      }
+
+      /*
+       * Filter artikel berdasarkan kata kunci
+       * dan kategori.
+       */
+      function filterArticles() {
+        const keyword =
+          normalizeText(
+            searchInput
+              ? searchInput.value
+              : ""
+          );
+
+        const selectedCategory =
+          normalizeText(
+            categoryFilter
+              ? categoryFilter.value
+              : ""
+          );
+
+        let visibleCount =
+          0;
+
+        cards.forEach(
+          function (card) {
+            const searchableText =
+              normalizeText(
+                card.dataset.search
+              );
+
+            const cardCategory =
+              normalizeText(
+                card.dataset.category
+              );
+
+            const matchesKeyword =
+              !keyword ||
+              searchableText.includes(keyword);
+
+            const matchesCategory =
+              !selectedCategory ||
+              cardCategory === selectedCategory;
+
+            const isVisible =
+              matchesKeyword &&
+              matchesCategory;
+
+            card.hidden =
+              !isVisible;
+
+            if (isVisible) {
+              visibleCount += 1;
+            }
+          }
         );
 
-        menuToggle.setAttribute(
-          "aria-label",
-          isOpen ? "Tutup menu" : "Buka menu"
-        );
+        if (countElement) {
+          countElement.textContent =
+            visibleCount + " artikel";
+        }
 
-        menuToggle.textContent =
-          isOpen ? "×" : "☰";
-      });
+        if (noResultElement) {
+          noResultElement.hidden =
+            visibleCount !== 0;
+        }
+      }
 
-      mobileMenu
-        .querySelectorAll("a")
-        .forEach((link) => {
-          link.addEventListener("click", () => {
-            mobileMenu.classList.remove("active");
-
-            document.body.classList.remove(
-              "menu-open"
-            );
-
-            menuToggle.setAttribute(
-              "aria-expanded",
-              "false"
-            );
-
-            menuToggle.setAttribute(
-              "aria-label",
-              "Buka menu"
-            );
-
-            menuToggle.textContent = "☰";
-          });
-        });
-    }
-
-    const currentYear =
-      document.getElementById("currentYear");
-
-    if (currentYear) {
-      currentYear.textContent =
-        new Date().getFullYear();
-    }
-
-    /*
-     * Tombol utama membuka artikel Hot News terbaru.
-     * Jika data belum tersedia, tombol tetap menggulir ke daftar berita.
-     */
-    const latestHotNewsButton =
-      document.getElementById("latestHotNewsButton");
-
-    if (
-      latestHotNewsButton &&
-      Array.isArray(window.KABAYAN_HOTNEWS) &&
-      window.KABAYAN_HOTNEWS.length > 0
-    ) {
-      const latestArticle = [
-        ...window.KABAYAN_HOTNEWS
-      ]
-        .filter((item) => {
-          return item && item.id;
-        })
-        .sort((a, b) => {
-          const dateA =
-            Date.parse(a.dateISO) || 0;
-
-          const dateB =
-            Date.parse(b.dateISO) || 0;
-
-          return dateB - dateA;
-        })[0];
-
-      if (latestArticle) {
-        latestHotNewsButton.href =
-          "hotnews-detail.html?id=" +
-          encodeURIComponent(latestArticle.id);
-
-        latestHotNewsButton.setAttribute(
-          "aria-label",
-          "Buka Hot News terbaru: " +
-            String(latestArticle.title || "")
+      if (searchInput) {
+        searchInput.addEventListener(
+          "input",
+          filterArticles
         );
       }
-    }
+
+      if (categoryFilter) {
+        categoryFilter.addEventListener(
+          "change",
+          filterArticles
+        );
+      }
+
+      if (resetButton) {
+        resetButton.addEventListener(
+          "click",
+          function () {
+            if (searchInput) {
+              searchInput.value = "";
+            }
+
+            if (categoryFilter) {
+              categoryFilter.value = "";
+            }
+
+            filterArticles();
+
+            if (searchInput) {
+              searchInput.focus();
+            }
+          }
+        );
+      }
+
+      /*
+       * Menu seluler.
+       */
+      function closeMobileMenu() {
+        if (
+          !menuButton ||
+          !mobileMenu
+        ) {
+          return;
+        }
+
+        mobileMenu.hidden = true;
+
+        menuButton.setAttribute(
+          "aria-expanded",
+          "false"
+        );
+
+        menuButton.setAttribute(
+          "aria-label",
+          "Buka menu navigasi"
+        );
+
+        document.body.classList.remove(
+          "menu-open"
+        );
+      }
+
+      if (
+        menuButton &&
+        mobileMenu
+      ) {
+        menuButton.addEventListener(
+          "click",
+          function () {
+            const isOpen =
+              menuButton.getAttribute(
+                "aria-expanded"
+              ) === "true";
+
+            if (isOpen) {
+              closeMobileMenu();
+
+              return;
+            }
+
+            mobileMenu.hidden =
+              false;
+
+            menuButton.setAttribute(
+              "aria-expanded",
+              "true"
+            );
+
+            menuButton.setAttribute(
+              "aria-label",
+              "Tutup menu navigasi"
+            );
+
+            document.body.classList.add(
+              "menu-open"
+            );
+          }
+        );
+
+        mobileMenu.addEventListener(
+          "click",
+          function (event) {
+            if (event.target.closest("a")) {
+              closeMobileMenu();
+            }
+          }
+        );
+
+        document.addEventListener(
+          "keydown",
+          function (event) {
+            if (event.key === "Escape") {
+              closeMobileMenu();
+            }
+          }
+        );
+
+        window.addEventListener(
+          "resize",
+          function () {
+            if (window.innerWidth > 980) {
+              closeMobileMenu();
+            }
+          }
+        );
+      }
+
+      filterArticles();
+    })();
   </script>
 </body>
 </html>
