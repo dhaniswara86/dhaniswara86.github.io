@@ -1,20 +1,30 @@
 ---
-layout: hotnews
+layout: hotnews-editorial
 title: "Coretax Tambah Role Penandatangan SPT PPh 21/26, Data Gaji Pegawai Lebih Terjaga"
 date: 2026-08-04 09:00:00 +0700
 date_modified: 2026-08-04 09:00:00 +0700
 author: "Angga Sukma Dhaniswara"
 category: "Coretax dan Administrasi"
+
 tags:
   - Coretax
   - PPh Pasal 21
   - Hak Akses
   - Kerahasiaan Data
+
 excerpt: "Role baru memungkinkan pimpinan atau pejabat perusahaan menandatangani SPT Masa PPh Pasal 21/26 tanpa melihat rincian penghasilan setiap pegawai."
+
 reading_time: "6 menit baca"
 visual_type: "role-comparison"
+
 source_label: "FAQ Coretax"
 source_url: "https://t.me/FAQCoretax"
+
+hero_eyebrow: "Kabayan Hot News"
+hero_title: "Coretax tambah role baru."
+hero_gradient: "Data gaji lebih terjaga."
+hero_visual_label: "Pembaruan Coretax"
+hero_visual_title: "Role Hanya Induk"
 ---
 
 <p class="hotnews-lead">
