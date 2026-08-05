@@ -57,7 +57,34 @@
   let currentIndex = 0;
   let touchStartX = 0;
 
-  function showSlide(index) {
+  function centerThumbnailHorizontally(thumbnail) {
+    const thumbnailStrip =
+      thumbnail.closest(
+        ".hotnews-presentation-thumbnails"
+      );
+
+    if (!thumbnailStrip) {
+      return;
+    }
+
+    const targetLeft =
+      thumbnail.offsetLeft -
+      (
+        thumbnailStrip.clientWidth -
+        thumbnail.offsetWidth
+      ) / 2;
+
+    thumbnailStrip.scrollTo({
+      left: Math.max(0, targetLeft),
+      behavior: "smooth"
+    });
+  }
+
+  function showSlide(index, options) {
+    const shouldCenterThumbnail =
+      !options ||
+      options.centerThumbnail !== false;
+
     if (!mainImage) {
       return;
     }
@@ -69,6 +96,7 @@
       );
 
     const pageNumber = currentIndex + 1;
+
     const pageString =
       String(pageNumber).padStart(2, "0");
 
@@ -122,11 +150,11 @@
             "true"
           );
 
-          thumbnail.scrollIntoView({
-            behavior: "smooth",
-            block: "nearest",
-            inline: "center"
-          });
+          if (shouldCenterThumbnail) {
+            centerThumbnailHorizontally(
+              thumbnail
+            );
+          }
         } else {
           thumbnail.removeAttribute(
             "aria-current"
@@ -240,11 +268,13 @@
             await document.exitFullscreen();
           }
         } catch (error) {
-          window.open(
-            mainImage ? mainImage.src : "",
-            "_blank",
-            "noopener"
-          );
+          if (mainImage && mainImage.src) {
+            window.open(
+              mainImage.src,
+              "_blank",
+              "noopener"
+            );
+          }
         }
       }
     );
@@ -264,5 +294,16 @@
     }
   );
 
-  showSlide(0);
+  /*
+   * Saat halaman pertama kali dibuka, jangan menggulir
+   * deretan thumbnail. Pada peramban seluler, pengguliran
+   * otomatis thumbnail dapat menyeret seluruh halaman menuju
+   * bagian presentasi.
+   */
+  showSlide(
+    0,
+    {
+      centerThumbnail: false
+    }
+  );
 })();
