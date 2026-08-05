@@ -138,6 +138,12 @@
   }
   </script>
 
+  <script>
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "manual";
+    }
+  </script>
+
   <style>
     #awal-hotnews {
       scroll-margin-top: 72px;
@@ -901,6 +907,42 @@
           }
         }
       }
+
+      function focusArticleStart() {
+        if (
+          window.location.hash !== "#awal-hotnews"
+        ) {
+          return;
+        }
+
+        const articleStart =
+          document.getElementById("awal-hotnews");
+
+        if (!articleStart) {
+          return;
+        }
+
+        window.requestAnimationFrame(
+          function () {
+            articleStart.scrollIntoView({
+              behavior: "auto",
+              block: "start"
+            });
+          }
+        );
+      }
+
+      window.addEventListener(
+        "pageshow",
+        focusArticleStart
+      );
+
+      window.addEventListener(
+        "load",
+        focusArticleStart
+      );
+
+      focusArticleStart();
 
       const currentYear =
         document.getElementById("currentYear");
