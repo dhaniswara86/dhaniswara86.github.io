@@ -908,7 +908,7 @@
         }
       }
 
-      function focusArticleStart() {
+      function focusHotNewsTitle() {
         if (
           window.location.hash !== "#awal-hotnews"
         ) {
@@ -916,7 +916,9 @@
         }
 
         const articleStart =
-          document.getElementById("awal-hotnews");
+          document.getElementById(
+            "awal-hotnews"
+          );
 
         if (!articleStart) {
           return;
@@ -934,15 +936,15 @@
 
       window.addEventListener(
         "pageshow",
-        focusArticleStart
+        focusHotNewsTitle
       );
 
       window.addEventListener(
         "load",
-        focusArticleStart
+        focusHotNewsTitle
       );
 
-      focusArticleStart();
+      focusHotNewsTitle();
 
       const currentYear =
         document.getElementById("currentYear");
@@ -956,7 +958,7 @@
     })();
   </script>
   <script
-  src="{{ '/assets/js/hotnews-presentation.js' | relative_url }}?v=20260804-1"
+  src="{{ '/assets/js/hotnews-presentation.js' | relative_url }}?v=20260805-2"
   defer
 ></script>
 </body>
