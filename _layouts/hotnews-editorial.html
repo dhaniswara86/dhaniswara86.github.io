@@ -104,11 +104,11 @@
 
   <link
     rel="stylesheet"
-    href="{{ '/assets/css/hotnews-editorial.css' | relative_url }}?v=20260806-3"
+    href="{{ '/assets/css/hotnews-editorial.css' | relative_url }}?v=20260806-4"
   >
   <link
   rel="stylesheet"
-  href="{{ '/assets/css/hotnews-presentation.css' | relative_url }}?v=20260806-3"
+  href="{{ '/assets/css/hotnews-presentation.css' | relative_url }}?v=20260806-4"
   >
   <script type="application/ld+json">
   {
@@ -247,6 +247,72 @@
         font-size: 17px;
       }
     }
+
+    /*
+     * Perbaikan: artikel memakai elemen HTML
+     * .kabayan-highlight-bar, bukan blockquote.
+     */
+    .article-body .kabayan-highlight-bar {
+      width: 100%;
+      margin: 30px 0;
+      padding: 36px 42px;
+      color: #34445a;
+      background: #f5f7fb;
+      border: 1.5px solid #d6e4f7;
+      border-radius: 30px;
+      box-shadow: none;
+    }
+
+    .article-body .kabayan-highlight-pill {
+      display: inline-flex;
+      max-width: 100%;
+      min-height: 58px;
+      align-items: center;
+      padding: 13px 22px;
+      color: #124e9b;
+      font-size: clamp(18px, 2.2vw, 25px);
+      font-weight: 750;
+      line-height: 1.35;
+      background: #ffffff;
+      border: 2px solid #d0e1f6;
+      border-radius: 999px;
+      box-shadow: 0 3px 10px rgba(18, 78, 155, 0.03);
+    }
+
+    .article-body
+    .kabayan-highlight-bar--content
+    .kabayan-highlight-pill {
+      margin-bottom: 18px;
+    }
+
+    .article-body .kabayan-highlight-text {
+      max-width: 920px;
+      margin: 0 !important;
+      color: #34445a;
+      font-size: 17px;
+      font-style: normal;
+      line-height: 1.75;
+    }
+
+    @media (max-width: 640px) {
+      .article-body .kabayan-highlight-bar {
+        margin: 24px 0;
+        padding: 22px 18px;
+        border-radius: 22px;
+      }
+
+      .article-body .kabayan-highlight-pill {
+        min-height: 48px;
+        padding: 10px 17px;
+        font-size: 17px;
+      }
+
+      .article-body .kabayan-highlight-text {
+        font-size: 15px;
+        line-height: 1.7;
+      }
+    }
+
   </style>
 </head>
 
@@ -1187,7 +1253,7 @@
     })();
   </script>
   <script
-  src="{{ '/assets/js/hotnews-presentation.js' | relative_url }}?v=20260806-3"
+  src="{{ '/assets/js/hotnews-presentation.js' | relative_url }}?v=20260806-4"
   defer
 ></script>
 </body>
