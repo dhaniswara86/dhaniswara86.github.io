@@ -1708,3 +1708,184 @@ button:focus-visible {
       18px;
   }
 }
+/* =========================================================
+   VISUAL PENUNDAAN PPH PASAL 22 MARKETPLACE
+   ========================================================= */
+
+.hotnews-delay-visual {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    110px
+    minmax(0, 1fr);
+  gap: 22px;
+  align-items: stretch;
+  margin-top: 42px;
+  padding: 28px;
+  background: #f5f7fa;
+  border: 1px solid rgba(15, 42, 70, 0.1);
+  border-radius: 28px;
+}
+
+.delay-visual-card {
+  position: relative;
+  min-width: 0;
+  padding: 28px;
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid #dfe5ec;
+  border-radius: 22px;
+  box-shadow:
+    0 14px 36px
+    rgba(15, 42, 70, 0.07);
+}
+
+.delay-visual-card-highlight {
+  background:
+    linear-gradient(
+      145deg,
+      #0f2f52,
+      #173f6b
+    );
+  border-color: transparent;
+  box-shadow:
+    0 18px 42px
+    rgba(15, 47, 82, 0.2);
+}
+
+.delay-visual-label {
+  display: block;
+  margin-bottom: 14px;
+  color: #697585;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.delay-visual-status {
+  display: inline-flex;
+  margin-bottom: 20px;
+  padding: 7px 11px;
+  color: #a32c2c;
+  font-size: 12px;
+  font-weight: 800;
+  background: #fff0f0;
+  border-radius: 999px;
+}
+
+.delay-visual-day {
+  display: block;
+  margin-bottom: 2px;
+  color: #102c4b;
+  font-size: clamp(58px, 8vw, 88px);
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+}
+
+.delay-visual-card h2 {
+  margin: 10px 0 12px;
+  color: #102c4b;
+  font-size: clamp(22px, 3vw, 32px);
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+}
+
+.delay-visual-card p {
+  margin: 0;
+  color: #667383;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.delay-visual-card-highlight
+.delay-visual-label {
+  color: #b9cbe0;
+}
+
+.delay-visual-card-highlight
+.delay-visual-status {
+  color: #173f6b;
+  background: #ffffff;
+}
+
+.delay-visual-card-highlight
+.delay-visual-day,
+.delay-visual-card-highlight h2 {
+  color: #ffffff;
+}
+
+.delay-visual-card-highlight p {
+  color: #d9e4ef;
+}
+
+.delay-visual-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #c73535;
+  text-align: center;
+}
+
+.delay-visual-center span {
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.delay-visual-center strong {
+  font-size: 42px;
+  line-height: 1;
+}
+
+.delay-visual-note {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 16px 19px;
+  color: #5e4a1d;
+  font-size: 14px;
+  font-weight: 650;
+  line-height: 1.6;
+  background: #fff8e7;
+  border: 1px solid #efdfb8;
+  border-radius: 15px;
+}
+
+@media (max-width: 760px) {
+
+  .hotnews-delay-visual {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 18px;
+    border-radius: 22px;
+  }
+
+  .delay-visual-center {
+    min-height: 52px;
+  }
+
+  .delay-visual-center strong {
+    transform: rotate(90deg);
+  }
+
+  .delay-visual-note {
+    grid-column: auto;
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  .delay-visual-card {
+    padding: 22px;
+    border-radius: 18px;
+  }
+
+  .delay-visual-day {
+    font-size: 64px;
+  }
+
+}
