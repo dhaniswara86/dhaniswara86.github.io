@@ -78,7 +78,11 @@ dengan **31 Oktober 2026**.
 Dengan demikian, pemungutan PPh Pasal 22 oleh marketplace
 berdasarkan ketentuan tersebut mulai berlaku pada:
 
-> **1 November 2026**
+<div class="kabayan-highlight-bar">
+  <div class="kabayan-highlight-pill">
+    1 November 2026
+  </div>
+</div>
 
 Selama masa penundaan, ketentuan pemungutan PPh Pasal 22
 oleh marketplace berdasarkan PMK Nomor 37 Tahun 2025 belum
@@ -94,9 +98,17 @@ Penundaan tersebut tidak mengubah substansi kebijakan.
 Perubahan hanya dilakukan terhadap waktu mulai
 pemberlakuannya.
 
-> **Intinya:** kebijakan pemungutan PPh Pasal 22 oleh
-> marketplace tidak dibatalkan. Pelaksanaannya hanya
-> ditunda sampai dengan 31 Oktober 2026.
+<div class="kabayan-highlight-bar kabayan-highlight-bar--content">
+  <div class="kabayan-highlight-pill">
+    Intinya
+  </div>
+
+  <p class="kabayan-highlight-text">
+    Kebijakan pemungutan PPh Pasal 22 oleh marketplace
+    tidak dibatalkan. Pelaksanaannya hanya ditunda sampai
+    dengan 31 Oktober 2026.
+  </p>
+</div>
 
 ## Bagaimana dengan Marketplace yang Sudah Ditunjuk?
 
@@ -170,6 +182,14 @@ dan dilakukan penunjukan kembali. Sementara itu, PPh
 Pasal 22 yang telanjur dipungut akan dikembalikan oleh
 marketplace kepada Pedagang Dalam Negeri.
 
-> **Catatan Kabayan:** artikel ini merupakan ringkasan
-> informasi. Apabila terdapat perbedaan penafsiran, dokumen
-> resmi dan ketentuan perpajakan menjadi rujukan utama.
+<div class="kabayan-highlight-bar kabayan-highlight-bar--content">
+  <div class="kabayan-highlight-pill">
+    Catatan Kabayan
+  </div>
+
+  <p class="kabayan-highlight-text">
+    Artikel ini merupakan ringkasan informasi. Apabila
+    terdapat perbedaan penafsiran, dokumen resmi dan
+    ketentuan perpajakan menjadi rujukan utama.
+  </p>
+</div>
