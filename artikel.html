@@ -368,6 +368,11 @@
       padding: 28px 20px 95px;
     }
 
+    /* Dekatkan katalog ke kolom pencarian saat pencarian aktif. */
+    body.search-active .catalog-section {
+      padding-top: 42px;
+    }
+
     .section-inner {
       width: min(var(--max-width), 100%);
       margin: 0 auto;
@@ -1053,12 +1058,12 @@
         </button>
 </div>
 </section>
-<section class="featured-section">
+<section class="featured-section" id="featuredSection">
 <div class="section-inner">
 <div class="section-heading">
 <div>
 <p>Pilihan editor</p>
-<h2>Artikel unggulan.</h2>
+<h2>Artikel Unggulan.</h2>
 </div>
 </div>
 <article aria-label="Artikel unggulan PER-8/PJ/2026" class="featured-card">
@@ -1103,13 +1108,13 @@
 <section class="newsletter-section">
 <div class="newsletter-inner">
 <div>
-<p>Koleksi pembelajaran</p>
+<p>Hot News</p>
 <h2>
-            Lanjutkan belajar melalui buku dan panduan.
+            Cari tahu informasi perpajakan terbaru.
           </h2>
 </div>
 <a class="newsletter-link" href="buku.html">
-          Lihat buku digital
+          Buka Hot News
         </a>
 </div>
 </section>
@@ -1261,6 +1266,7 @@
     const clearSearch = document.getElementById("clearSearch");
     const resultCount = document.getElementById("resultCount");
     const emptyState = document.getElementById("emptyState");
+    const featuredSection = document.getElementById("featuredSection");
     const filterButtons = Array.from(
       document.querySelectorAll(".filter-button")
     );
@@ -1285,6 +1291,15 @@
 
     function renderArticles() {
       const searchTerm = normalizeText(searchInput.value.trim());
+      const isSearching = searchTerm.length > 0;
+
+      /*
+       * Saat pengguna mengetik kata kunci, sembunyikan artikel unggulan
+       * agar hasil pencarian langsung tampil di bawah kolom pencarian.
+       * Artikel unggulan akan muncul kembali ketika pencarian dikosongkan.
+       */
+      featuredSection.hidden = isSearching;
+      document.body.classList.toggle("search-active", isSearching);
 
       const filtered = articles.filter((article) => {
         const matchesFilter =
