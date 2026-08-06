@@ -1,5 +1,5 @@
 ---
-layout: hotnews-article
+layout: hotnews-editorial
 title: "Pemungutan PPh Pasal 22 oleh Marketplace Ditunda hingga 31 Oktober 2026"
 excerpt: "DJP menunda pemberlakuan pemungutan PPh Pasal 22 oleh marketplace. Ketentuan tersebut mulai berlaku pada 1 November 2026."
 date: 2026-08-05 08:00:00 +0700
