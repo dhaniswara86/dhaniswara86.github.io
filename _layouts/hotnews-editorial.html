@@ -104,11 +104,11 @@
 
   <link
     rel="stylesheet"
-    href="{{ '/assets/css/hotnews-editorial.css' | relative_url }}?v=20260804-1"
+    href="{{ '/assets/css/hotnews-editorial.css' | relative_url }}?v=20260806-3"
   >
   <link
   rel="stylesheet"
-  href="{{ '/assets/css/hotnews-presentation.css' | relative_url }}?v=20260804-1"
+  href="{{ '/assets/css/hotnews-presentation.css' | relative_url }}?v=20260806-3"
   >
   <script type="application/ld+json">
   {
@@ -148,10 +148,112 @@
     #awal-hotnews {
       scroll-margin-top: 72px;
     }
+
+    /*
+     * Highlight khusus artikel penundaan PPh Pasal 22 marketplace.
+     * Hanya aktif apabila front matter menggunakan:
+     * visual_type: "marketplace-delay"
+     */
+    .visual-marketplace-delay
+    .article-body
+    blockquote.kabayan-highlight {
+      width: 100%;
+      margin: 30px 0;
+      padding: 36px 42px;
+      color: #34445a;
+      background: #f5f7fb;
+      border: 1.5px solid #d6e4f7;
+      border-left: 1.5px solid #d6e4f7;
+      border-radius: 30px;
+      box-shadow: none;
+      quotes: none;
+    }
+
+    .visual-marketplace-delay
+    .article-body
+    blockquote.kabayan-highlight::before,
+    .visual-marketplace-delay
+    .article-body
+    blockquote.kabayan-highlight::after {
+      content: none !important;
+      display: none !important;
+    }
+
+    .visual-marketplace-delay
+    .article-body
+    blockquote.kabayan-highlight p {
+      margin: 0;
+      color: #34445a;
+      font-size: 17px;
+      font-style: normal;
+      line-height: 1.75;
+    }
+
+    .visual-marketplace-delay
+    .article-body
+    blockquote.kabayan-highlight
+    .kabayan-highlight-pill {
+      display: inline-flex;
+      max-width: 100%;
+      min-height: 58px;
+      align-items: center;
+      padding: 13px 22px;
+      color: #124e9b;
+      font-size: clamp(18px, 2.2vw, 25px);
+      font-weight: 750;
+      line-height: 1.35;
+      background: #ffffff;
+      border: 2px solid #d0e1f6;
+      border-radius: 999px;
+      box-shadow: 0 3px 10px rgba(18, 78, 155, 0.03);
+    }
+
+    .visual-marketplace-delay
+    .article-body
+    blockquote.kabayan-highlight--content
+    .kabayan-highlight-pill {
+      margin-bottom: 18px;
+    }
+
+    .visual-marketplace-delay
+    .article-body
+    blockquote.kabayan-highlight--date p {
+      display: flex;
+      align-items: center;
+    }
+
+    @media (max-width: 640px) {
+      .visual-marketplace-delay
+      .article-body
+      blockquote.kabayan-highlight {
+        margin: 24px 0;
+        padding: 22px 18px;
+        border-radius: 22px;
+      }
+
+      .visual-marketplace-delay
+      .article-body
+      blockquote.kabayan-highlight p {
+        font-size: 15px;
+        line-height: 1.7;
+      }
+
+      .visual-marketplace-delay
+      .article-body
+      blockquote.kabayan-highlight
+      .kabayan-highlight-pill {
+        min-height: 48px;
+        padding: 10px 17px;
+        font-size: 17px;
+      }
+    }
   </style>
 </head>
 
-<body id="top">
+<body
+  id="top"
+  class="{% if page.visual_type %}visual-{{ page.visual_type | escape }}{% endif %}"
+>
   {% assign months =
     "Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember"
     | split: ","
@@ -812,6 +914,75 @@
           );
       }
 
+      /*
+       * Mengubah blockquote tertentu menjadi kotak highlight
+       * bergaya Kabayan. Perubahan dibatasi hanya untuk artikel
+       * dengan visual_type: "marketplace-delay".
+       */
+      function enhanceKabayanHighlights() {
+        if (
+          !articleBody ||
+          !document.body.classList.contains(
+            "visual-marketplace-delay"
+          )
+        ) {
+          return;
+        }
+
+        const blockquotes =
+          articleBody.querySelectorAll(
+            "blockquote"
+          );
+
+        blockquotes.forEach(
+          function (blockquote) {
+            const strong =
+              blockquote.querySelector(
+                "strong"
+              );
+
+            if (!strong) {
+              return;
+            }
+
+            const label =
+              strong.textContent
+                .trim()
+                .toLowerCase()
+                .replace(/:$/, "");
+
+            if (label === "1 november 2026") {
+              blockquote.classList.add(
+                "kabayan-highlight",
+                "kabayan-highlight--date"
+              );
+
+              strong.classList.add(
+                "kabayan-highlight-pill"
+              );
+
+              return;
+            }
+
+            if (
+              label === "intinya" ||
+              label === "catatan kabayan"
+            ) {
+              blockquote.classList.add(
+                "kabayan-highlight",
+                "kabayan-highlight--content"
+              );
+
+              strong.classList.add(
+                "kabayan-highlight-pill"
+              );
+            }
+          }
+        );
+      }
+
+      enhanceKabayanHighlights();
+
       if (
         articleBody &&
         articleToc &&
@@ -1016,7 +1187,7 @@
     })();
   </script>
   <script
-  src="{{ '/assets/js/hotnews-presentation.js' | relative_url }}?v=20260805-2"
+  src="{{ '/assets/js/hotnews-presentation.js' | relative_url }}?v=20260806-3"
   defer
 ></script>
 </body>
