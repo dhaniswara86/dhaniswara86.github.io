@@ -19,55 +19,6 @@ source_url: "/assets/pdf/PENG-46-PJ.09-2026.pdf"
 
 <div class="kabayan-news">
 
-  <section class="kabayan-news-hero">
-    <div class="kabayan-news-hero__content">
-
-      <span class="kabayan-news-kicker">
-        Kabayan Hot News
-      </span>
-
-      <p class="kabayan-news-overline">
-        Pengumuman Direktorat Jenderal Pajak
-      </p>
-
-      <h2 class="kabayan-news-hero__title">
-        Pemungutan PPh Pasal 22 oleh Marketplace
-        <span>Ditunda hingga 31 Oktober 2026</span>
-      </h2>
-
-      <p class="kabayan-news-hero__summary">
-        Pemungutan berdasarkan PMK Nomor 37 Tahun 2025
-        belum diberlakukan sampai dengan 31 Oktober 2026.
-        Ketentuan tersebut mulai berlaku pada
-        <strong>1 November 2026</strong>.
-      </p>
-
-      <div class="kabayan-news-hero__meta">
-        <span>5 Agustus 2026</span>
-        <span>PPh Pasal 22</span>
-        <span>Marketplace</span>
-      </div>
-
-    </div>
-
-    <div class="kabayan-news-date-card" aria-label="Tanggal mulai berlaku">
-
-      <span class="kabayan-news-date-card__label">
-        Mulai berlaku
-      </span>
-
-      <strong class="kabayan-news-date-card__day">
-        1
-      </strong>
-
-      <span class="kabayan-news-date-card__month">
-        November 2026
-      </span>
-
-    </div>
-  </section>
-
-
   <section class="kabayan-news-lead">
 
     <span class="kabayan-news-lead__icon" aria-hidden="true">
