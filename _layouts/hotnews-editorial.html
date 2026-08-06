@@ -408,83 +408,65 @@
                 </div>
               </div>
             </div>
-        {% elsif page.visual_type == "marketplace-delay" %}
+          {% elsif page.visual_type == "marketplace-delay" %}
 
-          <div
-            class="hotnews-delay-visual"
-            aria-label="Perubahan waktu pemberlakuan pemungutan PPh Pasal 22 oleh marketplace"
-          >
-            <section class="delay-visual-card">
-              <span class="delay-visual-label">
-                Masa penundaan
+            <div class="regulation-visual">
+              <span class="visual-label">
+                {{
+                  page.hero_visual_label
+                  | default: "Pembaruan PPh Pasal 22"
+                }}
               </span>
-
-              <span class="delay-visual-status">
-                Belum berlaku
-              </span>
-
-              <strong class="delay-visual-day">
-                31
-              </strong>
 
               <h2>
-                Oktober 2026
+                {{
+                  page.hero_visual_title
+                  | default: "Mulai 1 November"
+                }}
               </h2>
 
               <p>
-                Ketentuan pemungutan belum diberlakukan
-                sampai dengan tanggal ini.
+                {{
+                  page.hero_visual_text
+                  | default:
+                    "Pemberlakuan pemungutan ditunda sampai dengan 31 Oktober 2026."
+                }}
               </p>
-            </section>
 
-            <div
-              class="delay-visual-center"
-              aria-hidden="true"
-            >
-              <span>
-                Ditunda
-              </span>
+              <div class="visual-stats">
+                <div class="visual-stat">
+                  <strong>
+                    {{
+                      page.hero_stat_1_value
+                      | default: "31 Okt"
+                    }}
+                  </strong>
 
-              <strong>
-                →
-              </strong>
+                  <span>
+                    {{
+                      page.hero_stat_1_label
+                      | default: "Akhir masa penundaan"
+                    }}
+                  </span>
+                </div>
+
+                <div class="visual-stat">
+                  <strong>
+                    {{
+                      page.hero_stat_2_value
+                      | default: "1 Nov"
+                    }}
+                  </strong>
+
+                  <span>
+                    {{
+                      page.hero_stat_2_label
+                      | default: "Mulai diberlakukan"
+                    }}
+                  </span>
+                </div>
+              </div>
             </div>
-
-            <section
-              class="
-                delay-visual-card
-                delay-visual-card-highlight
-              "
-            >
-              <span class="delay-visual-label">
-                Waktu pemberlakuan
-              </span>
-
-              <span class="delay-visual-status">
-                Mulai berlaku
-              </span>
-
-              <strong class="delay-visual-day">
-                1
-              </strong>
-
-              <h2>
-                November 2026
-              </h2>
-
-              <p>
-                Marketplace yang ditunjuk mulai melaksanakan
-                pemungutan sesuai ketentuan.
-              </p>
-            </section>
-
-            <p class="delay-visual-note">
-              Penundaan tidak mengubah substansi kebijakan.
-              Perubahan hanya dilakukan terhadap waktu
-              pemberlakuannya.
-            </p>
-          </div>
-          
           {% elsif page.image %}
             <figure class="hero-image">
               <img
