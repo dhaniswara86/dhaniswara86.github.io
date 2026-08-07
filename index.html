@@ -2668,6 +2668,211 @@
         transform: none;
       }
     }
+
+
+    /* =========================================================
+       Penyempurnaan Popup Hot News di HP
+       ========================================================= */
+
+    @media (max-width: 760px) {
+      .latest-hotnews-popup {
+        align-items: flex-end;
+        padding: 0;
+      }
+
+      .latest-hotnews-backdrop {
+        background: rgba(18, 18, 22, 0.54);
+        backdrop-filter: blur(7px);
+        -webkit-backdrop-filter: blur(7px);
+      }
+
+      .latest-hotnews-dialog {
+        width: 100%;
+        max-height: 88vh;
+        overflow: hidden;
+        border-radius: 26px 26px 0 0;
+        background: #ffffff;
+        box-shadow: 0 -24px 70px rgba(0, 0, 0, 0.24);
+      }
+
+      .latest-hotnews-dialog::before {
+        position: absolute;
+        z-index: 5;
+        top: 9px;
+        left: 50%;
+        width: 42px;
+        height: 5px;
+        border-radius: 999px;
+        background: #d2d2d7;
+        content: "";
+        transform: translateX(-50%);
+      }
+
+      .latest-hotnews-close {
+        top: 18px;
+        right: 16px;
+        width: 40px;
+        height: 40px;
+        background: #f0f0f2;
+        font-size: 22px;
+      }
+
+      .latest-hotnews-layout {
+        display: block;
+        max-height: 88vh;
+        overflow-y: auto;
+        padding:
+          58px
+          20px
+          calc(24px + env(safe-area-inset-bottom));
+        overscroll-behavior: contain;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .latest-hotnews-copy {
+        width: 100%;
+        text-align: left;
+      }
+
+      .latest-hotnews-label {
+        margin-bottom: 11px;
+        font-size: 10px;
+      }
+
+      .latest-hotnews-dialog h2 {
+        max-width: calc(100% - 42px);
+        font-size: clamp(31px, 9vw, 39px);
+        letter-spacing: -0.05em;
+        line-height: 1.03;
+      }
+
+      .latest-hotnews-summary {
+        display: block;
+        overflow: visible;
+        margin-top: 15px;
+        color: #515154;
+        font-size: 15px;
+        line-height: 1.55;
+        -webkit-line-clamp: unset;
+      }
+
+      .latest-hotnews-meta {
+        justify-content: flex-start;
+        gap: 6px;
+        margin-top: 16px;
+      }
+
+      .latest-hotnews-meta span {
+        padding: 6px 8px;
+        font-size: 9px;
+      }
+
+      .latest-hotnews-actions {
+        position: sticky;
+        z-index: 4;
+        bottom: calc(-24px - env(safe-area-inset-bottom));
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 9px;
+        margin:
+          22px
+          -20px
+          calc(-24px - env(safe-area-inset-bottom));
+        padding:
+          14px
+          20px
+          calc(16px + env(safe-area-inset-bottom));
+        border-top: 1px solid rgba(0, 0, 0, 0.08);
+        background: rgba(255, 255, 255, 0.96);
+        box-shadow: 0 -12px 30px rgba(0, 0, 0, 0.06);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+      }
+
+      .latest-hotnews-primary,
+      .latest-hotnews-secondary {
+        width: 100%;
+        min-height: 48px;
+        font-size: 15px;
+        font-weight: 680;
+      }
+
+      .latest-hotnews-primary {
+        order: 1;
+      }
+
+      .latest-hotnews-secondary {
+        order: 2;
+        border-color: #d2d2d7;
+        background: #f5f5f7;
+        color: #424245;
+      }
+
+      .latest-hotnews-secondary:hover {
+        border-color: #d2d2d7;
+        background: #e8e8ed;
+        color: #1d1d1f;
+      }
+
+      .latest-hotnews-visual {
+        display: none;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .latest-hotnews-layout {
+        padding-right: 17px;
+        padding-left: 17px;
+      }
+
+      .latest-hotnews-dialog h2 {
+        font-size: 30px;
+      }
+
+      .latest-hotnews-summary {
+        font-size: 14px;
+      }
+
+      .latest-hotnews-actions {
+        margin-right: -17px;
+        margin-left: -17px;
+        padding-right: 17px;
+        padding-left: 17px;
+      }
+    }
+
+    @media (max-height: 650px) and (max-width: 760px) {
+      .latest-hotnews-dialog {
+        max-height: 94vh;
+      }
+
+      .latest-hotnews-layout {
+        max-height: 94vh;
+        padding-top: 52px;
+      }
+
+      .latest-hotnews-dialog h2 {
+        font-size: 29px;
+      }
+
+      .latest-hotnews-summary {
+        margin-top: 12px;
+      }
+    }
+
+    .latest-hotnews-mobile-note {
+      display: none;
+    }
+
+    @media (max-width: 760px) {
+      .latest-hotnews-mobile-note {
+        display: block;
+        margin: -3px 0 8px;
+        color: #86868b;
+        font-size: 11px;
+        font-weight: 600;
+      }
+    }
 </style>
 <style>
 /* =========================================================
@@ -3543,7 +3748,7 @@ body.mega-menu-open {
 </div>
 </section>
 </main>
-<div aria-labelledby="latestHotNewsTitle" aria-modal="true" class="latest-hotnews-popup" hidden="" id="latestHotNewsPopup" role="dialog">
+<div aria-describedby="latestHotNewsSummary" aria-labelledby="latestHotNewsTitle" aria-modal="true" class="latest-hotnews-popup" hidden="" id="latestHotNewsPopup" role="dialog">
 <div class="latest-hotnews-backdrop" data-latest-hotnews-close=""></div>
 <div class="latest-hotnews-dialog">
 <button aria-label="Tutup Hot News" class="latest-hotnews-close" data-latest-hotnews-close="" type="button">
@@ -3553,7 +3758,7 @@ body.mega-menu-open {
 <div class="latest-hotnews-copy">
 <span class="latest-hotnews-label">
           Hot News Terbaru
-        </span>
+        </span><span class="latest-hotnews-mobile-note">Pembaruan terbaru dari Kabayan</span>
 <h2 id="latestHotNewsTitle">
           Memuat Hot News terbaru…
         </h2>
@@ -3564,9 +3769,7 @@ body.mega-menu-open {
             Baca Hot News
             <span aria-hidden="true">→</span>
 </a>
-<button class="latest-hotnews-secondary" data-latest-hotnews-close="" type="button">
-            Nanti saja
-          </button>
+<button class="latest-hotnews-secondary" data-latest-hotnews-close="" type="button">Tutup popup</button>
 </div>
 </div>
 <div aria-hidden="true" class="latest-hotnews-visual">
