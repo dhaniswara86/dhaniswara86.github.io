@@ -3325,7 +3325,221 @@ body.mega-menu-open {
     transition: none !important;
   }
 }
-</style></head>
+</style>
+<style id="navMegaMenuStyles">
+/* =========================================================
+   Mega Menu Navigasi Utama — Kabayan
+   ========================================================= */
+.desktop-menu .nav-menu-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #424245;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 400;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.desktop-menu .nav-menu-trigger:hover,
+.desktop-menu .nav-menu-trigger[aria-expanded="true"] { color: var(--black); }
+.desktop-menu .nav-menu-trigger > span:last-child {
+  display: inline-block;
+  font-size: 10px;
+  transition: transform .2s ease;
+}
+.desktop-menu .nav-menu-trigger[aria-expanded="true"] > span:last-child { transform: rotate(180deg); }
+.desktop-menu .nav-menu-trigger.nav-hotnews { gap: 4px; }
+
+.nav-mega-backdrop {
+  position: fixed;
+  z-index: 972;
+  inset: var(--nav-height) 0 0;
+  visibility: hidden;
+  background: rgba(0,0,0,.16);
+  opacity: 0;
+  transition: opacity .22s ease, visibility .22s ease;
+}
+.nav-mega-backdrop.active { visibility: visible; opacity: 1; }
+
+.nav-mega-menu {
+  position: fixed;
+  z-index: 985;
+  top: var(--nav-height);
+  right: 0;
+  left: 0;
+  visibility: hidden;
+  max-height: calc(100vh - var(--nav-height));
+  overflow-y: auto;
+  border-top: 1px solid rgba(0,0,0,.035);
+  border-bottom: 1px solid rgba(0,0,0,.08);
+  background: rgba(250,250,252,.985);
+  box-shadow: 0 24px 52px rgba(0,0,0,.10);
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity .22s ease, transform .28s cubic-bezier(.22,1,.36,1), visibility .22s ease;
+  backdrop-filter: saturate(180%) blur(24px);
+  -webkit-backdrop-filter: saturate(180%) blur(24px);
+}
+.nav-mega-menu.active { visibility: visible; opacity: 1; transform: translateY(0); }
+.nav-mega-inner {
+  position: relative;
+  width: min(1120px, calc(100% - 48px));
+  margin: 0 auto;
+  padding: 38px 0 40px;
+}
+.nav-mega-close {
+  position: absolute;
+  top: 18px;
+  right: 0;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: #e8e8ed;
+  color: #1d1d1f;
+  cursor: pointer;
+  font-size: 22px;
+  line-height: 1;
+}
+.nav-mega-close:hover { background: #dcdce1; }
+.nav-mega-panel {
+  display: none;
+  grid-template-columns: minmax(280px, 1.15fr) minmax(210px, .8fr) minmax(210px, .8fr);
+  gap: 46px;
+  align-items: start;
+}
+.nav-mega-panel.active { display: grid; }
+.nav-mega-intro { padding-right: 18px; }
+.nav-mega-kicker,
+.nav-mega-label {
+  display: block;
+  margin: 0 0 12px;
+  color: #86868b;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .045em;
+  text-transform: uppercase;
+}
+.nav-mega-kicker.hot { color: #d92d20; }
+.nav-mega-intro h2 {
+  max-width: 470px;
+  margin: 0;
+  color: #1d1d1f;
+  font-size: clamp(27px, 3vw, 40px);
+  font-weight: 650;
+  letter-spacing: -.045em;
+  line-height: 1.02;
+}
+.nav-mega-intro p {
+  max-width: 500px;
+  margin: 14px 0 0;
+  color: #6e6e73;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.nav-mega-main-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 18px;
+  color: var(--blue);
+  font-size: 14px;
+  font-weight: 550;
+  text-decoration: none;
+}
+.nav-mega-main-link.hot { color: #d92d20; }
+.nav-mega-main-link:hover { text-decoration: underline; }
+.nav-mega-column { padding-top: 1px; }
+.nav-mega-column > a {
+  display: block;
+  padding: 8px 0;
+  color: #29292d;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -.015em;
+  line-height: 1.35;
+  text-decoration: none;
+}
+.nav-mega-column > a:hover { color: var(--blue); }
+.nav-mega-column > a strong { display: block; font-size: 14px; font-weight: 650; }
+.nav-mega-column > a small { display: block; margin-top: 3px; color: #86868b; font-size: 11px; font-weight: 400; line-height: 1.35; }
+.nav-mega-featured > a {
+  margin-bottom: 8px;
+  padding: 13px 14px;
+  border: 1px solid #e2e2e7;
+  border-radius: 13px;
+  background: #fff;
+}
+.nav-mega-tags {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: -10px;
+  padding-top: 18px;
+  border-top: 1px solid #e2e2e7;
+}
+.nav-mega-tags span,
+.nav-mega-topic-list span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 5px 9px;
+  border-radius: 999px;
+  background: #f1f1f3;
+  color: #6e6e73;
+  font-size: 10px;
+  font-weight: 650;
+}
+.nav-mega-topic-list { display: flex; flex-wrap: wrap; gap: 7px; }
+
+.mobile-nav-group { border-bottom: 1px solid rgba(0,0,0,.08); }
+.mobile-nav-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 0;
+  border: 0;
+  background: transparent;
+  color: var(--near-black);
+  cursor: pointer;
+  font-size: 28px;
+  font-weight: 650;
+  letter-spacing: -.04em;
+  text-align: left;
+}
+.mobile-nav-trigger > span:last-child { font-size: 16px; transition: transform .2s ease; }
+.mobile-nav-trigger[aria-expanded="true"] > span:last-child { transform: rotate(180deg); }
+.mobile-nav-submenu { display: none; padding: 0 0 14px 14px; }
+.mobile-nav-group.open .mobile-nav-submenu { display: block; }
+.mobile-menu .mobile-nav-submenu a {
+  padding: 8px 0;
+  color: #6e6e73;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -.02em;
+}
+.mobile-menu .mobile-nav-submenu a:hover { color: var(--blue); }
+
+@media (max-width: 900px) {
+  .nav-mega-menu,
+  .nav-mega-backdrop { display: none !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-mega-menu,
+  .nav-mega-backdrop,
+  .desktop-menu .nav-menu-trigger > span:last-child,
+  .mobile-nav-trigger > span:last-child { transition: none !important; }
+}
+</style>
+</head>
 <body id="top">
 <header class="site-nav">
 <div class="nav-inner">
@@ -3335,14 +3549,12 @@ body.mega-menu-open {
 </a>
 <nav aria-label="Navigasi utama" class="desktop-menu">
 <a href="index.html">Beranda</a>
-<a href="buku.html">Buku</a>
-<a href="formulir.html">Formulir</a>
-<a href="aplikasi.html">Aplikasi</a>
-<a href="kalkulator.html">Kalkulator</a>
-<a href="artikel.html">Artikel</a>
-<a class="nav-hotnews" href="hotnews.html">
-    <span aria-hidden="true" class="nav-hotnews-icon">🔥</span>
-    <span>Hot News</span></a>
+<button aria-controls="navMegaMenu" aria-expanded="false" class="nav-menu-trigger" data-nav-menu="buku" type="button">Buku <span aria-hidden="true">⌄</span></button>
+<button aria-controls="navMegaMenu" aria-expanded="false" class="nav-menu-trigger" data-nav-menu="formulir" type="button">Formulir <span aria-hidden="true">⌄</span></button>
+<button aria-controls="navMegaMenu" aria-expanded="false" class="nav-menu-trigger" data-nav-menu="aplikasi" type="button">Aplikasi <span aria-hidden="true">⌄</span></button>
+<button aria-controls="navMegaMenu" aria-expanded="false" class="nav-menu-trigger" data-nav-menu="kalkulator" type="button">Kalkulator <span aria-hidden="true">⌄</span></button>
+<button aria-controls="navMegaMenu" aria-expanded="false" class="nav-menu-trigger" data-nav-menu="artikel" type="button">Artikel <span aria-hidden="true">⌄</span></button>
+<button aria-controls="navMegaMenu" aria-expanded="false" class="nav-menu-trigger nav-hotnews" data-nav-menu="hotnews" type="button"><span aria-hidden="true" class="nav-hotnews-icon">🔥</span><span>Hot News</span><span aria-hidden="true">⌄</span></button>
 </nav>
 <div class="nav-actions">
 <a aria-label="Cari formulir" class="search-link" href="formulir.html" title="Cari formulir">
@@ -3354,6 +3566,139 @@ body.mega-menu-open {
 </div>
 </div>
 </header>
+<div aria-hidden="true" class="nav-mega-backdrop" id="navMegaBackdrop"></div>
+<section aria-hidden="true" aria-label="Navigasi koleksi Kabayan" class="nav-mega-menu" id="navMegaMenu">
+  <div class="nav-mega-inner">
+    <button aria-label="Tutup mega menu" class="nav-mega-close" id="navMegaClose" type="button">×</button>
+
+    <div class="nav-mega-panel" data-nav-panel="buku">
+      <div class="nav-mega-intro">
+        <span class="nav-mega-kicker">Buku Digital</span>
+        <h2>Belajar pajak dengan materi yang lebih terstruktur.</h2>
+        <p>Modul, panduan, dan referensi perpajakan untuk Coretax, PPh, PPN, XML, dan aplikasi DJP.</p>
+        <a class="nav-mega-main-link" href="buku.html">Lihat seluruh buku <span aria-hidden="true">›</span></a>
+      </div>
+      <div class="nav-mega-column">
+        <p class="nav-mega-label">Pilihan terbaru</p>
+        <a href="kap-kjs.html">KAP dan KJS Era Coretax</a>
+        <a href="converter-xml-unifikasi.html">Converter XML PPh Unifikasi</a>
+        <a href="converter-xml-2126.html">Converter XML PPh Pasal 21/26</a>
+      </div>
+      <div class="nav-mega-column">
+        <p class="nav-mega-label">Referensi &amp; panduan</p>
+        <a href="list-barang-jasa-faktur.html">Kode Barang &amp; Jasa Faktur Pajak</a>
+        <a href="aktivasiakunkodjp.html">Aktivasi Akun &amp; KODJP</a>
+        <a href="cermat-2126.html">Cermat Pemotongan PPh 21/26</a>
+      </div>
+      <div class="nav-mega-tags" aria-label="Topik buku">
+        <span>Coretax</span><span>PPh</span><span>PPN</span><span>XML</span><span>DJP Online</span>
+      </div>
+    </div>
+
+    <div class="nav-mega-panel" data-nav-panel="formulir">
+      <div class="nav-mega-intro">
+        <span class="nav-mega-kicker">Formulir Perpajakan</span>
+        <h2>Dokumen berdasarkan kebutuhan administrasi.</h2>
+        <p>Koleksi formulir dikelompokkan dalam registrasi, PKP, Bea Meterai, PBB, kuasa, SPT, surat pernyataan, restrukturisasi, dan pembukuan.</p>
+        <a class="nav-mega-main-link" href="formulir.html">Lihat seluruh formulir <span aria-hidden="true">›</span></a>
+      </div>
+      <div class="nav-mega-column">
+        <p class="nav-mega-label">Sering digunakan</p>
+        <a href="surat-kuasa-khusus-wajib-pajak.html">Surat Kuasa Khusus Wajib Pajak</a>
+        <a href="pernyataanumkm500juta.html">Pernyataan UMKM Rp500 Juta</a>
+        <a href="surat-pernyataan-hibah.html">Surat Pernyataan Hibah</a>
+      </div>
+      <div class="nav-mega-column">
+        <p class="nav-mega-label">Permohonan &amp; keterangan</p>
+        <a href="permohonanskbpotput.html">Permohonan SKB PPh</a>
+        <a href="formulir-pembatalan-surat-keterangan-penelitian-formal-kabayan.html">Pembatalan Penelitian Formal</a>
+        <a href="formulir.html">Cari formulir lainnya</a>
+      </div>
+      <div class="nav-mega-tags" aria-label="Kelompok formulir">
+        <span>Registrasi</span><span>PKP &amp; PPN</span><span>Bea Meterai</span><span>PBB</span><span>Kuasa</span><span>SPT</span>
+      </div>
+    </div>
+
+    <div class="nav-mega-panel" data-nav-panel="aplikasi">
+      <div class="nav-mega-intro">
+        <span class="nav-mega-kicker">Aplikasi Perpajakan</span>
+        <h2>Installer dan arsip aplikasi perpajakan.</h2>
+        <p>Portal aplikasi lama untuk pengelolaan data dan pelaporan periode sebelum implementasi Coretax.</p>
+        <a class="nav-mega-main-link" href="aplikasi.html">Buka portal aplikasi <span aria-hidden="true">›</span></a>
+      </div>
+      <div class="nav-mega-column">
+        <p class="nav-mega-label">Kategori</p>
+        <a href="aplikasi.html">e-SPT</a>
+        <a href="aplikasi.html">e-Faktur</a>
+        <a href="aplikasi.html">e-Bupot</a>
+      </div>
+      <div class="nav-mega-column">
+        <p class="nav-mega-label">Lainnya</p>
+        <a href="aplikasi.html">Perangkat pendukung</a>
+        <a href="aplikasi.html">Arsip aplikasi</a>
+        <a href="buku.html">Baca buku panduan</a>
+      </div>
+      <div class="nav-mega-tags" aria-label="Jenis aplikasi">
+        <span>e-SPT</span><span>e-Faktur</span><span>e-Bupot</span><span>Pendukung</span><span>Arsip</span>
+      </div>
+    </div>
+
+    <div class="nav-mega-panel" data-nav-panel="kalkulator">
+      <div class="nav-mega-intro">
+        <span class="nav-mega-kicker">Kalkulator Pajak</span>
+        <h2>Hitung dan petakan kewajiban pajak lebih praktis.</h2>
+        <p>Empat alat bantu utama untuk PPN, PPh Pasal 21, transaksi instansi pemerintah, dan pengembalian pendahuluan.</p>
+        <a class="nav-mega-main-link" href="kalkulator.html">Lihat seluruh kalkulator <span aria-hidden="true">›</span></a>
+      </div>
+      <div class="nav-mega-column nav-mega-column-wide">
+        <p class="nav-mega-label">Alat bantu utama</p>
+        <a href="kalkulator-ppn-kabayan.html"><strong>PPN</strong><small>PPN umum dan DPP Nilai Lain.</small></a>
+        <a href="kalkulator-pasal21.html"><strong>PPh Pasal 21</strong><small>Pegawai tetap dan tidak tetap.</small></a>
+      </div>
+      <div class="nav-mega-column nav-mega-column-wide">
+        <p class="nav-mega-label">Pemetaan terpandu</p>
+        <a href="pajak-instansi-satu-pintu.html"><strong>Pajak Instansi Pemerintah</strong><small>PPh, PPN, dan kondisi khusus belanja.</small></a>
+        <a href="kalkulator-pengembalian-pendahuluan.html"><strong>Pengembalian Pendahuluan</strong><small>Kriteria, persyaratan, dan kredit pajak.</small></a>
+      </div>
+    </div>
+
+    <div class="nav-mega-panel" data-nav-panel="artikel">
+      <div class="nav-mega-intro">
+        <span class="nav-mega-kicker">Artikel Pajak</span>
+        <h2>Penjelasan ketentuan dalam bahasa yang lebih sederhana.</h2>
+        <p>Artikel membahas administrasi, PPh, PPN, Coretax, UMKM, dan prosedur perpajakan.</p>
+        <a class="nav-mega-main-link" href="artikel.html">Lihat seluruh artikel <span aria-hidden="true">›</span></a>
+      </div>
+      <div class="nav-mega-column nav-mega-featured">
+        <p class="nav-mega-label">Pilihan editor</p>
+        <a href="artikel-per8pj2026.html"><strong>PER-8/PJ/2026: Apa yang Berubah?</strong><small>Kode billing, pemindahbukuan, KAP/KJS, dan imbalan bunga.</small></a>
+      </div>
+      <div class="nav-mega-column">
+        <p class="nav-mega-label">Topik</p>
+        <div class="nav-mega-topic-list"><span>Administrasi</span><span>PPh</span><span>PPN</span><span>Coretax</span><span>UMKM</span><span>Prosedur Pajak</span></div>
+      </div>
+    </div>
+
+    <div class="nav-mega-panel" data-nav-panel="hotnews">
+      <div class="nav-mega-intro">
+        <span class="nav-mega-kicker hot">Hot News</span>
+        <h2>Informasi perpajakan yang perlu lebih cepat diketahui.</h2>
+        <p>Pembaruan Coretax, regulasi, layanan, pengumuman, dan isu perpajakan terbaru.</p>
+        <a class="nav-mega-main-link hot" href="hotnews.html">Lihat seluruh Hot News <span aria-hidden="true">›</span></a>
+      </div>
+      <div class="nav-mega-column nav-mega-featured">
+        <p class="nav-mega-label">Terbaru</p>
+        <a href="hotnews/2026/08/penundaan-pph22-marketplace/"><strong>PPh Pasal 22 Marketplace Ditunda</strong><small>Pemungutan mulai berlaku 1 November 2026.</small></a>
+        <a href="hotnews/2026/08/coretax-role-baru-pph21-hanya-induk/"><strong>Coretax Tambah Role Baru PPh 21/26</strong><small>Data penghasilan pegawai lebih terlindungi.</small></a>
+      </div>
+      <div class="nav-mega-column">
+        <p class="nav-mega-label">Jelajahi</p>
+        <a href="hotnews-arsip.html">Arsip Hot News</a>
+        <div class="nav-mega-topic-list"><span>Coretax</span><span>Regulasi</span><span>Layanan</span><span>Pengumuman</span></div>
+      </div>
+    </div>
+  </div>
+</section>
 <div aria-hidden="true" class="mega-menu-backdrop" id="megaMenuBackdrop"></div>
 <section aria-hidden="true" aria-label="Koleksi Kabayan" class="collection-mega-menu" id="collectionMegaMenu">
 <div class="mega-menu-inner">
@@ -3449,14 +3794,30 @@ body.mega-menu-open {
 </section>
 <nav class="mobile-menu" id="mobileMenu">
 <a href="index.html">Beranda</a>
-<a href="buku.html">Buku</a>
-<a href="formulir.html">Formulir</a>
-<a href="aplikasi.html">Aplikasi</a>
-<a href="kalkulator.html">Kalkulator</a>
-<a href="#artikel">Artikel</a>
-<a class="nav-hotnews" href="hotnews.html">
-    <span aria-hidden="true" class="nav-hotnews-icon">🔥</span>
-    <span>Hot News</span></a>
+<div class="mobile-nav-group">
+  <button aria-expanded="false" class="mobile-nav-trigger" type="button">Buku <span aria-hidden="true">⌄</span></button>
+  <div class="mobile-nav-submenu"><a href="buku.html">Semua Buku</a><a href="kap-kjs.html">KAP &amp; KJS Era Coretax</a><a href="converter-xml-unifikasi.html">Converter XML PPh Unifikasi</a><a href="converter-xml-2126.html">Converter XML PPh 21/26</a></div>
+</div>
+<div class="mobile-nav-group">
+  <button aria-expanded="false" class="mobile-nav-trigger" type="button">Formulir <span aria-hidden="true">⌄</span></button>
+  <div class="mobile-nav-submenu"><a href="formulir.html">Semua Formulir</a><a href="surat-kuasa-khusus-wajib-pajak.html">Surat Kuasa Khusus</a><a href="pernyataanumkm500juta.html">Pernyataan UMKM</a><a href="surat-pernyataan-hibah.html">Pernyataan Hibah</a></div>
+</div>
+<div class="mobile-nav-group">
+  <button aria-expanded="false" class="mobile-nav-trigger" type="button">Aplikasi <span aria-hidden="true">⌄</span></button>
+  <div class="mobile-nav-submenu"><a href="aplikasi.html">Portal Aplikasi</a><a href="buku.html">Buku Panduan</a></div>
+</div>
+<div class="mobile-nav-group">
+  <button aria-expanded="false" class="mobile-nav-trigger" type="button">Kalkulator <span aria-hidden="true">⌄</span></button>
+  <div class="mobile-nav-submenu"><a href="kalkulator.html">Semua Kalkulator</a><a href="kalkulator-ppn-kabayan.html">Kalkulator PPN</a><a href="kalkulator-pasal21.html">Kalkulator PPh 21</a><a href="pajak-instansi-satu-pintu.html">Pajak Instansi</a><a href="kalkulator-pengembalian-pendahuluan.html">Pengembalian Pendahuluan</a></div>
+</div>
+<div class="mobile-nav-group">
+  <button aria-expanded="false" class="mobile-nav-trigger" type="button">Artikel <span aria-hidden="true">⌄</span></button>
+  <div class="mobile-nav-submenu"><a href="artikel.html">Semua Artikel</a><a href="artikel-per8pj2026.html">PER-8/PJ/2026: Apa yang Berubah?</a></div>
+</div>
+<div class="mobile-nav-group">
+  <button aria-expanded="false" class="mobile-nav-trigger nav-hotnews" type="button"><span><span aria-hidden="true" class="nav-hotnews-icon">🔥</span> Hot News</span><span aria-hidden="true">⌄</span></button>
+  <div class="mobile-nav-submenu"><a href="hotnews.html">Semua Hot News</a><a href="hotnews/2026/08/penundaan-pph22-marketplace/">PPh 22 Marketplace</a><a href="hotnews/2026/08/coretax-role-baru-pph21-hanya-induk/">Role Baru Coretax</a><a href="hotnews-arsip.html">Arsip Hot News</a></div>
+</div>
 </nav>
 <main>
 <div class="announcement">
@@ -4830,5 +5191,121 @@ body.mega-menu-open {
     });
   }
 })();
-</script></body>
+</script>
+<script id="navMegaMenuScript">
+(() => {
+  const triggers = [...document.querySelectorAll('.nav-menu-trigger[data-nav-menu]')];
+  const menu = document.getElementById('navMegaMenu');
+  const backdrop = document.getElementById('navMegaBackdrop');
+  const closeButton = document.getElementById('navMegaClose');
+  const panels = [...document.querySelectorAll('.nav-mega-panel[data-nav-panel]')];
+  const collectionMenu = document.getElementById('collectionMegaMenu');
+  const collectionBackdrop = document.getElementById('megaMenuBackdrop');
+  const collectionTrigger = document.getElementById('collectionMenuTrigger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const mobileToggle = document.getElementById('menuToggle');
+  let activeName = null;
+  let hoverCloseTimer = null;
+
+  if (!triggers.length || !menu || !backdrop) return;
+
+  function closeCollectionMenu() {
+    if (collectionMenu) {
+      collectionMenu.classList.remove('active');
+      collectionMenu.setAttribute('aria-hidden', 'true');
+    }
+    if (collectionBackdrop) {
+      collectionBackdrop.classList.remove('active');
+      collectionBackdrop.setAttribute('aria-hidden', 'true');
+    }
+    if (collectionTrigger) collectionTrigger.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('mega-menu-open');
+  }
+
+  function setPanel(name) {
+    panels.forEach(panel => {
+      panel.classList.toggle('active', panel.dataset.navPanel === name);
+    });
+    triggers.forEach(trigger => {
+      trigger.setAttribute('aria-expanded', trigger.dataset.navMenu === name ? 'true' : 'false');
+    });
+    activeName = name;
+  }
+
+  function openMenu(name) {
+    window.clearTimeout(hoverCloseTimer);
+    closeCollectionMenu();
+    if (mobileMenu) mobileMenu.classList.remove('active');
+    if (mobileToggle) {
+      mobileToggle.setAttribute('aria-expanded', 'false');
+      mobileToggle.textContent = '☰';
+    }
+    document.body.classList.remove('menu-open');
+    setPanel(name);
+    menu.classList.add('active');
+    backdrop.classList.add('active');
+    menu.setAttribute('aria-hidden', 'false');
+    backdrop.setAttribute('aria-hidden', 'false');
+  }
+
+  function closeMenu() {
+    window.clearTimeout(hoverCloseTimer);
+    menu.classList.remove('active');
+    backdrop.classList.remove('active');
+    menu.setAttribute('aria-hidden', 'true');
+    backdrop.setAttribute('aria-hidden', 'true');
+    triggers.forEach(trigger => trigger.setAttribute('aria-expanded', 'false'));
+    activeName = null;
+  }
+
+  function scheduleHoverClose() {
+    window.clearTimeout(hoverCloseTimer);
+    hoverCloseTimer = window.setTimeout(closeMenu, 160);
+  }
+
+  triggers.forEach(trigger => {
+    trigger.addEventListener('click', event => {
+      event.preventDefault();
+      const name = trigger.dataset.navMenu;
+      if (menu.classList.contains('active') && activeName === name) closeMenu();
+      else openMenu(name);
+    });
+    trigger.addEventListener('mouseenter', () => {
+      if (window.innerWidth > 900) openMenu(trigger.dataset.navMenu);
+    });
+    trigger.addEventListener('mouseleave', scheduleHoverClose);
+  });
+
+  menu.addEventListener('mouseenter', () => window.clearTimeout(hoverCloseTimer));
+  menu.addEventListener('mouseleave', scheduleHoverClose);
+  backdrop.addEventListener('click', closeMenu);
+  if (closeButton) closeButton.addEventListener('click', closeMenu);
+  menu.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && menu.classList.contains('active')) closeMenu();
+  });
+
+  if (collectionTrigger) collectionTrigger.addEventListener('click', closeMenu);
+  if (mobileToggle) mobileToggle.addEventListener('click', closeMenu);
+  window.addEventListener('resize', () => { if (window.innerWidth <= 900) closeMenu(); });
+
+  document.querySelectorAll('.mobile-nav-trigger').forEach(trigger => {
+    trigger.addEventListener('click', () => {
+      const group = trigger.closest('.mobile-nav-group');
+      const willOpen = !group.classList.contains('open');
+      document.querySelectorAll('.mobile-nav-group.open').forEach(openGroup => {
+        if (openGroup !== group) {
+          openGroup.classList.remove('open');
+          const other = openGroup.querySelector('.mobile-nav-trigger');
+          if (other) other.setAttribute('aria-expanded', 'false');
+        }
+      });
+      group.classList.toggle('open', willOpen);
+      trigger.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+    });
+  });
+})();
+</script>
+</body>
 </html>
