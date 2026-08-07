@@ -3330,29 +3330,24 @@ body.mega-menu-open {
 /* =========================================================
    Mega Menu Navigasi Utama — Kabayan
    ========================================================= */
-.desktop-menu .nav-menu-trigger {
+.desktop-menu .nav-menu-link {
+  position: relative;
   display: inline-flex;
+  min-height: var(--nav-height);
   align-items: center;
-  gap: 5px;
-  padding: 0;
-  border: 0;
-  background: transparent;
+  gap: 4px;
+  margin: 0 -8px;
+  padding: 0 8px;
   color: #424245;
-  font: inherit;
   font-size: 12px;
   font-weight: 400;
+  line-height: 1;
+  text-decoration: none;
   white-space: nowrap;
-  cursor: pointer;
 }
-.desktop-menu .nav-menu-trigger:hover,
-.desktop-menu .nav-menu-trigger[aria-expanded="true"] { color: var(--black); }
-.desktop-menu .nav-menu-trigger > span:last-child {
-  display: inline-block;
-  font-size: 10px;
-  transition: transform .2s ease;
-}
-.desktop-menu .nav-menu-trigger[aria-expanded="true"] > span:last-child { transform: rotate(180deg); }
-.desktop-menu .nav-menu-trigger.nav-hotnews { gap: 4px; }
+.desktop-menu .nav-menu-link:hover,
+.desktop-menu .nav-menu-link.mega-active { color: var(--black); }
+.desktop-menu .nav-menu-link.nav-hotnews { gap: 4px; }
 
 .nav-mega-backdrop {
   position: fixed;
@@ -3391,23 +3386,6 @@ body.mega-menu-open {
   margin: 0 auto;
   padding: 38px 0 40px;
 }
-.nav-mega-close {
-  position: absolute;
-  top: 18px;
-  right: 0;
-  width: 34px;
-  height: 34px;
-  display: grid;
-  place-items: center;
-  border: 0;
-  border-radius: 50%;
-  background: #e8e8ed;
-  color: #1d1d1f;
-  cursor: pointer;
-  font-size: 22px;
-  line-height: 1;
-}
-.nav-mega-close:hover { background: #dcdce1; }
 .nav-mega-panel {
   display: none;
   grid-template-columns: minmax(280px, 1.15fr) minmax(210px, .8fr) minmax(210px, .8fr);
@@ -3499,44 +3477,13 @@ body.mega-menu-open {
 }
 .nav-mega-topic-list { display: flex; flex-wrap: wrap; gap: 7px; }
 
-.mobile-nav-group { border-bottom: 1px solid rgba(0,0,0,.08); }
-.mobile-nav-trigger {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 11px 0;
-  border: 0;
-  background: transparent;
-  color: var(--near-black);
-  cursor: pointer;
-  font-size: 28px;
-  font-weight: 650;
-  letter-spacing: -.04em;
-  text-align: left;
-}
-.mobile-nav-trigger > span:last-child { font-size: 16px; transition: transform .2s ease; }
-.mobile-nav-trigger[aria-expanded="true"] > span:last-child { transform: rotate(180deg); }
-.mobile-nav-submenu { display: none; padding: 0 0 14px 14px; }
-.mobile-nav-group.open .mobile-nav-submenu { display: block; }
-.mobile-menu .mobile-nav-submenu a {
-  padding: 8px 0;
-  color: #6e6e73;
-  font-size: 16px;
-  font-weight: 500;
-  letter-spacing: -.02em;
-}
-.mobile-menu .mobile-nav-submenu a:hover { color: var(--blue); }
-
 @media (max-width: 900px) {
   .nav-mega-menu,
   .nav-mega-backdrop { display: none !important; }
 }
 @media (prefers-reduced-motion: reduce) {
   .nav-mega-menu,
-  .nav-mega-backdrop,
-  .desktop-menu .nav-menu-trigger > span:last-child,
-  .mobile-nav-trigger > span:last-child { transition: none !important; }
+  .nav-mega-backdrop { transition: none !important; }
 }
 </style>
 </head>
@@ -3549,12 +3496,12 @@ body.mega-menu-open {
 </a>
 <nav aria-label="Navigasi utama" class="desktop-menu">
 <a href="index.html">Beranda</a>
-<button aria-controls="navMegaMenu" aria-expanded="false" class="nav-menu-trigger" data-nav-menu="buku" type="button">Buku <span aria-hidden="true">⌄</span></button>
-<button aria-controls="navMegaMenu" aria-expanded="false" class="nav-menu-trigger" data-nav-menu="formulir" type="button">Formulir <span aria-hidden="true">⌄</span></button>
-<button aria-controls="navMegaMenu" aria-expanded="false" class="nav-menu-trigger" data-nav-menu="aplikasi" type="button">Aplikasi <span aria-hidden="true">⌄</span></button>
-<button aria-controls="navMegaMenu" aria-expanded="false" class="nav-menu-trigger" data-nav-menu="kalkulator" type="button">Kalkulator <span aria-hidden="true">⌄</span></button>
-<button aria-controls="navMegaMenu" aria-expanded="false" class="nav-menu-trigger" data-nav-menu="artikel" type="button">Artikel <span aria-hidden="true">⌄</span></button>
-<button aria-controls="navMegaMenu" aria-expanded="false" class="nav-menu-trigger nav-hotnews" data-nav-menu="hotnews" type="button"><span aria-hidden="true" class="nav-hotnews-icon">🔥</span><span>Hot News</span><span aria-hidden="true">⌄</span></button>
+<a aria-haspopup="true" class="nav-menu-link" data-nav-menu="buku" href="buku.html">Buku</a>
+<a aria-haspopup="true" class="nav-menu-link" data-nav-menu="formulir" href="formulir.html">Formulir</a>
+<a aria-haspopup="true" class="nav-menu-link" data-nav-menu="aplikasi" href="aplikasi.html">Aplikasi</a>
+<a aria-haspopup="true" class="nav-menu-link" data-nav-menu="kalkulator" href="kalkulator.html">Kalkulator</a>
+<a aria-haspopup="true" class="nav-menu-link" data-nav-menu="artikel" href="artikel.html">Artikel</a>
+<a aria-haspopup="true" class="nav-menu-link nav-hotnews" data-nav-menu="hotnews" href="hotnews.html"><span aria-hidden="true" class="nav-hotnews-icon">🔥</span><span>Hot News</span></a>
 </nav>
 <div class="nav-actions">
 <a aria-label="Cari formulir" class="search-link" href="formulir.html" title="Cari formulir">
@@ -3569,7 +3516,6 @@ body.mega-menu-open {
 <div aria-hidden="true" class="nav-mega-backdrop" id="navMegaBackdrop"></div>
 <section aria-hidden="true" aria-label="Navigasi koleksi Kabayan" class="nav-mega-menu" id="navMegaMenu">
   <div class="nav-mega-inner">
-    <button aria-label="Tutup mega menu" class="nav-mega-close" id="navMegaClose" type="button">×</button>
 
     <div class="nav-mega-panel" data-nav-panel="buku">
       <div class="nav-mega-intro">
@@ -3794,30 +3740,12 @@ body.mega-menu-open {
 </section>
 <nav class="mobile-menu" id="mobileMenu">
 <a href="index.html">Beranda</a>
-<div class="mobile-nav-group">
-  <button aria-expanded="false" class="mobile-nav-trigger" type="button">Buku <span aria-hidden="true">⌄</span></button>
-  <div class="mobile-nav-submenu"><a href="buku.html">Semua Buku</a><a href="kap-kjs.html">KAP &amp; KJS Era Coretax</a><a href="converter-xml-unifikasi.html">Converter XML PPh Unifikasi</a><a href="converter-xml-2126.html">Converter XML PPh 21/26</a></div>
-</div>
-<div class="mobile-nav-group">
-  <button aria-expanded="false" class="mobile-nav-trigger" type="button">Formulir <span aria-hidden="true">⌄</span></button>
-  <div class="mobile-nav-submenu"><a href="formulir.html">Semua Formulir</a><a href="surat-kuasa-khusus-wajib-pajak.html">Surat Kuasa Khusus</a><a href="pernyataanumkm500juta.html">Pernyataan UMKM</a><a href="surat-pernyataan-hibah.html">Pernyataan Hibah</a></div>
-</div>
-<div class="mobile-nav-group">
-  <button aria-expanded="false" class="mobile-nav-trigger" type="button">Aplikasi <span aria-hidden="true">⌄</span></button>
-  <div class="mobile-nav-submenu"><a href="aplikasi.html">Portal Aplikasi</a><a href="buku.html">Buku Panduan</a></div>
-</div>
-<div class="mobile-nav-group">
-  <button aria-expanded="false" class="mobile-nav-trigger" type="button">Kalkulator <span aria-hidden="true">⌄</span></button>
-  <div class="mobile-nav-submenu"><a href="kalkulator.html">Semua Kalkulator</a><a href="kalkulator-ppn-kabayan.html">Kalkulator PPN</a><a href="kalkulator-pasal21.html">Kalkulator PPh 21</a><a href="pajak-instansi-satu-pintu.html">Pajak Instansi</a><a href="kalkulator-pengembalian-pendahuluan.html">Pengembalian Pendahuluan</a></div>
-</div>
-<div class="mobile-nav-group">
-  <button aria-expanded="false" class="mobile-nav-trigger" type="button">Artikel <span aria-hidden="true">⌄</span></button>
-  <div class="mobile-nav-submenu"><a href="artikel.html">Semua Artikel</a><a href="artikel-per8pj2026.html">PER-8/PJ/2026: Apa yang Berubah?</a></div>
-</div>
-<div class="mobile-nav-group">
-  <button aria-expanded="false" class="mobile-nav-trigger nav-hotnews" type="button"><span><span aria-hidden="true" class="nav-hotnews-icon">🔥</span> Hot News</span><span aria-hidden="true">⌄</span></button>
-  <div class="mobile-nav-submenu"><a href="hotnews.html">Semua Hot News</a><a href="hotnews/2026/08/penundaan-pph22-marketplace/">PPh 22 Marketplace</a><a href="hotnews/2026/08/coretax-role-baru-pph21-hanya-induk/">Role Baru Coretax</a><a href="hotnews-arsip.html">Arsip Hot News</a></div>
-</div>
+<a href="buku.html">Buku</a>
+<a href="formulir.html">Formulir</a>
+<a href="aplikasi.html">Aplikasi</a>
+<a href="kalkulator.html">Kalkulator</a>
+<a href="artikel.html">Artikel</a>
+<a class="nav-hotnews" href="hotnews.html"><span aria-hidden="true" class="nav-hotnews-icon">🔥</span><span>Hot News</span></a>
 </nav>
 <main>
 <section class="hero">
@@ -5190,20 +5118,20 @@ body.mega-menu-open {
 </script>
 <script id="navMegaMenuScript">
 (() => {
-  const triggers = [...document.querySelectorAll('.nav-menu-trigger[data-nav-menu]')];
+  const links = [...document.querySelectorAll('.nav-menu-link[data-nav-menu]')];
   const menu = document.getElementById('navMegaMenu');
   const backdrop = document.getElementById('navMegaBackdrop');
-  const closeButton = document.getElementById('navMegaClose');
   const panels = [...document.querySelectorAll('.nav-mega-panel[data-nav-panel]')];
   const collectionMenu = document.getElementById('collectionMegaMenu');
   const collectionBackdrop = document.getElementById('megaMenuBackdrop');
   const collectionTrigger = document.getElementById('collectionMenuTrigger');
   const mobileMenu = document.getElementById('mobileMenu');
   const mobileToggle = document.getElementById('menuToggle');
+  const desktopQuery = window.matchMedia('(min-width: 901px) and (hover: hover) and (pointer: fine)');
   let activeName = null;
-  let hoverCloseTimer = null;
+  let closeTimer = null;
 
-  if (!triggers.length || !menu || !backdrop) return;
+  if (!links.length || !menu || !backdrop) return;
 
   function closeCollectionMenu() {
     if (collectionMenu) {
@@ -5219,24 +5147,15 @@ body.mega-menu-open {
   }
 
   function setPanel(name) {
-    panels.forEach(panel => {
-      panel.classList.toggle('active', panel.dataset.navPanel === name);
-    });
-    triggers.forEach(trigger => {
-      trigger.setAttribute('aria-expanded', trigger.dataset.navMenu === name ? 'true' : 'false');
-    });
+    panels.forEach(panel => panel.classList.toggle('active', panel.dataset.navPanel === name));
+    links.forEach(link => link.classList.toggle('mega-active', link.dataset.navMenu === name));
     activeName = name;
   }
 
   function openMenu(name) {
-    window.clearTimeout(hoverCloseTimer);
+    if (!desktopQuery.matches) return;
+    window.clearTimeout(closeTimer);
     closeCollectionMenu();
-    if (mobileMenu) mobileMenu.classList.remove('active');
-    if (mobileToggle) {
-      mobileToggle.setAttribute('aria-expanded', 'false');
-      mobileToggle.textContent = '☰';
-    }
-    document.body.classList.remove('menu-open');
     setPanel(name);
     menu.classList.add('active');
     backdrop.classList.add('active');
@@ -5245,37 +5164,35 @@ body.mega-menu-open {
   }
 
   function closeMenu() {
-    window.clearTimeout(hoverCloseTimer);
+    window.clearTimeout(closeTimer);
     menu.classList.remove('active');
     backdrop.classList.remove('active');
     menu.setAttribute('aria-hidden', 'true');
     backdrop.setAttribute('aria-hidden', 'true');
-    triggers.forEach(trigger => trigger.setAttribute('aria-expanded', 'false'));
+    links.forEach(link => link.classList.remove('mega-active'));
     activeName = null;
   }
 
-  function scheduleHoverClose() {
-    window.clearTimeout(hoverCloseTimer);
-    hoverCloseTimer = window.setTimeout(closeMenu, 160);
+  function scheduleClose(delay = 240) {
+    window.clearTimeout(closeTimer);
+    closeTimer = window.setTimeout(closeMenu, delay);
   }
 
-  triggers.forEach(trigger => {
-    trigger.addEventListener('click', event => {
-      event.preventDefault();
-      const name = trigger.dataset.navMenu;
-      if (menu.classList.contains('active') && activeName === name) closeMenu();
-      else openMenu(name);
-    });
-    trigger.addEventListener('mouseenter', () => {
-      if (window.innerWidth > 900) openMenu(trigger.dataset.navMenu);
-    });
-    trigger.addEventListener('mouseleave', scheduleHoverClose);
+  // Desktop only: hovering the enlarged invisible hit-area opens the mega menu.
+  // Clicking remains untouched, so each menu name still navigates to its normal page.
+  links.forEach(link => {
+    link.addEventListener('mouseenter', () => openMenu(link.dataset.navMenu));
+    link.addEventListener('mouseleave', () => scheduleClose());
+    link.addEventListener('focus', () => openMenu(link.dataset.navMenu));
+    link.addEventListener('blur', () => scheduleClose(160));
   });
 
-  menu.addEventListener('mouseenter', () => window.clearTimeout(hoverCloseTimer));
-  menu.addEventListener('mouseleave', scheduleHoverClose);
-  backdrop.addEventListener('click', closeMenu);
-  if (closeButton) closeButton.addEventListener('click', closeMenu);
+  menu.addEventListener('mouseenter', () => window.clearTimeout(closeTimer));
+  menu.addEventListener('mouseleave', () => scheduleClose(180));
+
+  // The backdrop is visual only; moving away from the nav/menu closes naturally.
+  backdrop.style.pointerEvents = 'none';
+
   menu.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
 
   document.addEventListener('keydown', event => {
@@ -5284,23 +5201,14 @@ body.mega-menu-open {
 
   if (collectionTrigger) collectionTrigger.addEventListener('click', closeMenu);
   if (mobileToggle) mobileToggle.addEventListener('click', closeMenu);
-  window.addEventListener('resize', () => { if (window.innerWidth <= 900) closeMenu(); });
 
-  document.querySelectorAll('.mobile-nav-trigger').forEach(trigger => {
-    trigger.addEventListener('click', () => {
-      const group = trigger.closest('.mobile-nav-group');
-      const willOpen = !group.classList.contains('open');
-      document.querySelectorAll('.mobile-nav-group.open').forEach(openGroup => {
-        if (openGroup !== group) {
-          openGroup.classList.remove('open');
-          const other = openGroup.querySelector('.mobile-nav-trigger');
-          if (other) other.setAttribute('aria-expanded', 'false');
-        }
-      });
-      group.classList.toggle('open', willOpen);
-      trigger.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
-    });
-  });
+  function handleModeChange() {
+    if (!desktopQuery.matches) closeMenu();
+  }
+  if (desktopQuery.addEventListener) desktopQuery.addEventListener('change', handleModeChange);
+  else desktopQuery.addListener(handleModeChange);
+
+  window.addEventListener('resize', handleModeChange);
 })();
 </script>
 </body>
