@@ -3937,8 +3937,8 @@ body.mega-menu-open {
 <span>TERBARU</span>
 </div>
 <div class="latest-hotnews-screen-card">
-<small>PEMBARUAN PERPAJAKAN</small>
-<strong>Informasi terbaru dalam satu halaman.</strong>
+<small>PPh PASAL 22 MARKETPLACE</small>
+<strong>Informasi terbaru langsung dari arsip Hot News.</strong>
 </div>
 <div class="latest-hotnews-screen-lines">
 <span></span>
@@ -3991,132 +3991,309 @@ body.mega-menu-open {
     const linkElement =
       document.getElementById("latestHotNewsLink");
 
-    if (!popup || !titleElement || !linkElement) {
+    if (
+      !popup ||
+      !titleElement ||
+      !summaryElement ||
+      !metaElement ||
+      !linkElement
+    ) {
       return;
     }
 
     /*
-      DATA HOT NEWS TERBARU
-
-      Untuk mengganti berita yang muncul pada popup,
-      cukup ubah isi objek di bawah ini.
-
-      hotnews-presentation.js tetap digunakan pada halaman
-      detail Hot News dan tidak berfungsi sebagai penyimpan data.
+      Data cadangan digunakan hanya apabila halaman arsip
+      atau halaman artikel gagal dibaca.
     */
-    const latestNews = {
+    const fallbackNews = {
       title:
-        "Coretax Hadirkan Role Penandatangan SPT PPh 21 Hanya Induk",
+        "Pemungutan PPh Pasal 22 Marketplace Ditunda. Mulai 1 November 2026.",
 
       slug:
-        "coretax-role-baru-pph21-hanya-induk",
+        "penundaan-pph22-marketplace",
 
       dateISO:
-        "2026-08-04",
+        "2026-08-05",
 
       summary:
-        "Role baru memungkinkan pimpinan atau pejabat perusahaan menandatangani SPT Masa PPh Pasal 21/26 tanpa melihat rincian penghasilan dan gaji masing-masing pegawai.",
+        "Pemberlakuan pemungutan PPh Pasal 22 oleh marketplace ditunda sampai dengan 31 Oktober 2026 dan mulai diterapkan pada 1 November 2026.",
 
       tags: [
-        "Coretax",
-        "PPh Pasal 21"
+        "PPh Pasal 22",
+        "Marketplace"
       ],
 
       contentURL:
-        "hotnews.html"
+        "/hotnews/2026/08/penundaan-pph22-marketplace/"
     };
 
-    const latestIdentity =
-      latestNews.slug ||
-      latestNews.dateISO ||
-      latestNews.title ||
-      "latest";
-
     /*
-      Popup hanya tampil satu kali untuk setiap Hot News terbaru
-      pada browser/perangkat yang sama.
+      Mengambil Hot News paling baru dari hotnews-arsip.html.
 
-      Saat berita terbaru berubah, nilai latestIdentity juga berubah,
-      sehingga popup akan tampil kembali secara otomatis.
+      Halaman arsip menyusun artikel berdasarkan site.posts.
+      Artikel pertama pada arsip diperlakukan sebagai artikel
+      terbaru.
     */
-    const storageKey =
-      "kabayan-hotnews-popup-seen:" +
-      latestIdentity;
+    async function loadLatestNewsFromArchive() {
+      const archiveResponse =
+        await fetch(
+          "hotnews-arsip.html",
+          {
+            cache: "no-store"
+          }
+        );
 
-    let hasBeenSeen = false;
+      if (!archiveResponse.ok) {
+        throw new Error(
+          "Halaman arsip tidak dapat dibaca."
+        );
+      }
 
-    try {
-      hasBeenSeen =
-        window.localStorage.getItem(storageKey) === "yes";
-    } catch (error) {
-      hasBeenSeen = false;
+      const archiveHTML =
+        await archiveResponse.text();
+
+      const parser =
+        new DOMParser();
+
+      const archiveDocument =
+        parser.parseFromString(
+          archiveHTML,
+          "text/html"
+        );
+
+      const latestItem =
+        archiveDocument.querySelector(
+          "[data-archive-item]"
+        );
+
+      const latestLink =
+        latestItem
+          ? latestItem.querySelector(
+              ".archive-item-link"
+            )
+          : archiveDocument.querySelector(
+              ".archive-item-link"
+            );
+
+      if (!latestLink) {
+        throw new Error(
+          "Artikel terbaru tidak ditemukan di arsip."
+        );
+      }
+
+      const title =
+        latestLink
+          .querySelector(
+            ".archive-item-title"
+          )
+          ?.textContent
+          ?.trim() ||
+        fallbackNews.title;
+
+      const category =
+        latestLink
+          .querySelector(
+            ".archive-item-category"
+          )
+          ?.textContent
+          ?.trim() ||
+        "Hot News";
+
+      const dateElement =
+        latestLink.querySelector("time");
+
+      const dateISO =
+        dateElement
+          ?.getAttribute("datetime") ||
+        "";
+
+      const rawURL =
+        latestLink.getAttribute("href") ||
+        "hotnews.html";
+
+      const articleURL =
+        new URL(
+          rawURL,
+          window.location.href
+        ).href;
+
+      let summary =
+        "Baca pembaruan perpajakan terbaru selengkapnya di Kabayan.";
+
+      /*
+        Mengambil meta description dari halaman artikel
+        agar ringkasan popup sesuai dengan artikel terbaru.
+      */
+      try {
+        const articleResponse =
+          await fetch(
+            articleURL,
+            {
+              cache: "no-store"
+            }
+          );
+
+        if (articleResponse.ok) {
+          const articleHTML =
+            await articleResponse.text();
+
+          const articleDocument =
+            parser.parseFromString(
+              articleHTML,
+              "text/html"
+            );
+
+          summary =
+            articleDocument
+              .querySelector(
+                'meta[name="description"]'
+              )
+              ?.getAttribute("content")
+              ?.trim() ||
+            articleDocument
+              .querySelector(
+                'meta[property="og:description"]'
+              )
+              ?.getAttribute("content")
+              ?.trim() ||
+            summary;
+        }
+      } catch (error) {
+        /*
+          Ringkasan umum tetap digunakan apabila detail
+          artikel gagal dibaca.
+        */
+      }
+
+      return {
+        title: title,
+        slug:
+          rawURL ||
+          title
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-|-$/g, ""),
+        dateISO: dateISO,
+        summary: summary,
+        tags: [category],
+        contentURL: rawURL
+      };
     }
 
-    if (hasBeenSeen) {
-      return;
+    function formatDate(dateValue) {
+      if (!dateValue) {
+        return "";
+      }
+
+      const date =
+        new Date(dateValue);
+
+      if (
+        Number.isNaN(
+          date.getTime()
+        )
+      ) {
+        return "";
+      }
+
+      return new Intl.DateTimeFormat(
+        "id-ID",
+        {
+          day: "numeric",
+          month: "long",
+          year: "numeric"
+        }
+      ).format(date);
     }
 
-    titleElement.textContent =
-      latestNews.title || "Hot News terbaru";
+    function populatePopup(latestNews) {
+      titleElement.textContent =
+        latestNews.title ||
+        "Hot News terbaru";
 
-    summaryElement.textContent =
-      latestNews.summary ||
-      latestNews.excerpt ||
-      "Baca informasi perpajakan terbaru di Kabayan.";
+      summaryElement.textContent =
+        latestNews.summary ||
+        "Baca informasi perpajakan terbaru di Kabayan.";
 
-    const newsUrl =
-      latestNews.contentURL ||
-      latestNews.href ||
-      latestNews.url ||
-      "hotnews.html";
+      linkElement.href =
+        latestNews.contentURL ||
+        "hotnews.html";
 
-    linkElement.href = newsUrl;
+      metaElement.innerHTML = "";
 
-    metaElement.innerHTML = "";
+      const formattedDate =
+        formatDate(
+          latestNews.dateISO
+        );
 
-    if (latestNews.dateISO) {
-      const date = new Date(latestNews.dateISO);
-
-      if (!Number.isNaN(date.getTime())) {
+      if (formattedDate) {
         const dateBadge =
           document.createElement("span");
 
         dateBadge.textContent =
-          new Intl.DateTimeFormat(
-            "id-ID",
-            {
-              day: "numeric",
-              month: "long",
-              year: "numeric"
-            }
-          ).format(date);
+          formattedDate;
 
-        metaElement.appendChild(dateBadge);
+        metaElement.appendChild(
+          dateBadge
+        );
       }
+
+      const tags =
+        Array.isArray(
+          latestNews.tags
+        )
+          ? latestNews.tags.slice(0, 2)
+          : [];
+
+      tags.forEach(function (tag) {
+        if (!tag) {
+          return;
+        }
+
+        const tagBadge =
+          document.createElement("span");
+
+        tagBadge.textContent =
+          tag;
+
+        metaElement.appendChild(
+          tagBadge
+        );
+      });
     }
 
-    const tags = Array.isArray(latestNews.tags)
-      ? latestNews.tags.slice(0, 2)
-      : [];
+    function createStorageKey(latestNews) {
+      const latestIdentity =
+        latestNews.slug ||
+        latestNews.contentURL ||
+        latestNews.dateISO ||
+        latestNews.title ||
+        "latest";
 
-    tags.forEach(function (tag) {
-      const tagBadge =
-        document.createElement("span");
-
-      tagBadge.textContent = tag;
-      metaElement.appendChild(tagBadge);
-    });
+      return (
+        "kabayan-hotnews-popup-seen:" +
+        latestIdentity
+      );
+    }
 
     let lastFocusedElement = null;
+    let activeStorageKey = "";
 
     function markAsSeen() {
+      if (!activeStorageKey) {
+        return;
+      }
+
       try {
         window.localStorage.setItem(
-          storageKey,
+          activeStorageKey,
           "yes"
         );
       } catch (error) {
-        // Popup tetap dapat digunakan saat localStorage diblokir.
+        /*
+          Popup tetap berfungsi apabila localStorage
+          tidak tersedia.
+        */
       }
     }
 
@@ -4141,11 +4318,13 @@ body.mega-menu-open {
           ".latest-hotnews-close"
         );
 
-      window.requestAnimationFrame(function () {
-        if (closeButton) {
-          closeButton.focus();
+      window.requestAnimationFrame(
+        function () {
+          if (closeButton) {
+            closeButton.focus();
+          }
         }
-      });
+      );
     }
 
     function closePopup() {
@@ -4159,7 +4338,8 @@ body.mega-menu-open {
 
       if (
         lastFocusedElement &&
-        typeof lastFocusedElement.focus === "function"
+        typeof lastFocusedElement.focus ===
+          "function"
       ) {
         lastFocusedElement.focus();
       }
@@ -4193,10 +4373,49 @@ body.mega-menu-open {
       }
     );
 
-    window.setTimeout(
-      openPopup,
-      1200
-    );
+    async function initializeLatestNewsPopup() {
+      let latestNews =
+        fallbackNews;
+
+      try {
+        latestNews =
+          await loadLatestNewsFromArchive();
+      } catch (error) {
+        latestNews =
+          fallbackNews;
+      }
+
+      populatePopup(
+        latestNews
+      );
+
+      activeStorageKey =
+        createStorageKey(
+          latestNews
+        );
+
+      let hasBeenSeen = false;
+
+      try {
+        hasBeenSeen =
+          window.localStorage.getItem(
+            activeStorageKey
+          ) === "yes";
+      } catch (error) {
+        hasBeenSeen = false;
+      }
+
+      if (hasBeenSeen) {
+        return;
+      }
+
+      window.setTimeout(
+        openPopup,
+        1200
+      );
+    }
+
+    initializeLatestNewsPopup();
   })();
 </script><script>
     const menuToggle = document.getElementById("menuToggle");
