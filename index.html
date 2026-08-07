@@ -2873,6 +2873,166 @@
         font-weight: 600;
       }
     }
+
+
+    /* =========================================================
+       Popup Hot News HP — Versi Kompak
+       ========================================================= */
+
+    @media (max-width: 760px) {
+      body.hotnews-popup-open {
+        overflow: auto !important;
+      }
+
+      .latest-hotnews-popup {
+        align-items: flex-end;
+        justify-items: center;
+        padding:
+          0
+          12px
+          calc(12px + env(safe-area-inset-bottom));
+        pointer-events: none;
+      }
+
+      .latest-hotnews-backdrop {
+        display: none;
+      }
+
+      .latest-hotnews-dialog {
+        width: min(410px, 100%);
+        max-height: none;
+        overflow: visible;
+        border: 1px solid rgba(0, 0, 0, 0.09);
+        border-radius: 22px;
+        background: rgba(255, 255, 255, 0.97);
+        box-shadow:
+          0 8px 24px rgba(0, 0, 0, 0.11),
+          0 24px 60px rgba(0, 0, 0, 0.13);
+        pointer-events: auto;
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+      }
+
+      .latest-hotnews-dialog::before {
+        display: none;
+      }
+
+      .latest-hotnews-close {
+        top: 10px;
+        right: 10px;
+        width: 32px;
+        height: 32px;
+        background: #f0f0f2;
+        font-size: 19px;
+      }
+
+      .latest-hotnews-layout {
+        display: block;
+        max-height: none;
+        overflow: visible;
+        padding: 18px 17px 16px;
+      }
+
+      .latest-hotnews-copy {
+        padding-right: 34px;
+        text-align: left;
+      }
+
+      .latest-hotnews-label {
+        margin-bottom: 7px;
+        font-size: 9px;
+      }
+
+      .latest-hotnews-mobile-note {
+        display: none;
+      }
+
+      .latest-hotnews-dialog h2 {
+        max-width: 100%;
+        font-size: 24px;
+        letter-spacing: -0.042em;
+        line-height: 1.08;
+      }
+
+      .latest-hotnews-summary {
+        display: -webkit-box;
+        overflow: hidden;
+        margin-top: 9px;
+        color: #626267;
+        font-size: 13px;
+        line-height: 1.45;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+      }
+
+      .latest-hotnews-meta {
+        justify-content: flex-start;
+        gap: 5px;
+        margin-top: 10px;
+      }
+
+      .latest-hotnews-meta span {
+        padding: 4px 7px;
+        font-size: 8px;
+      }
+
+      .latest-hotnews-actions {
+        position: static;
+        display: block;
+        margin: 13px 0 0;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        box-shadow: none;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+      }
+
+      .latest-hotnews-primary {
+        width: auto;
+        min-height: 38px;
+        padding: 8px 15px;
+        font-size: 13px;
+      }
+
+      .latest-hotnews-secondary {
+        display: none;
+      }
+
+      .latest-hotnews-visual {
+        display: none;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .latest-hotnews-popup {
+        padding-right: 9px;
+        padding-left: 9px;
+      }
+
+      .latest-hotnews-layout {
+        padding: 16px 15px 14px;
+      }
+
+      .latest-hotnews-dialog h2 {
+        font-size: 22px;
+      }
+
+      .latest-hotnews-summary {
+        font-size: 12.5px;
+      }
+    }
+
+    @media (max-height: 560px) and (max-width: 760px) {
+      .latest-hotnews-summary,
+      .latest-hotnews-meta {
+        display: none;
+      }
+
+      .latest-hotnews-actions {
+        margin-top: 11px;
+      }
+    }
 </style>
 <style>
 /* =========================================================
@@ -3748,7 +3908,7 @@ body.mega-menu-open {
 </div>
 </section>
 </main>
-<div aria-describedby="latestHotNewsSummary" aria-labelledby="latestHotNewsTitle" aria-modal="true" class="latest-hotnews-popup" hidden="" id="latestHotNewsPopup" role="dialog">
+<div aria-describedby="latestHotNewsSummary" aria-label="Hot News terbaru" aria-labelledby="latestHotNewsTitle" aria-modal="true" class="latest-hotnews-popup" hidden="" id="latestHotNewsPopup" role="dialog">
 <div class="latest-hotnews-backdrop" data-latest-hotnews-close=""></div>
 <div class="latest-hotnews-dialog">
 <button aria-label="Tutup Hot News" class="latest-hotnews-close" data-latest-hotnews-close="" type="button">
@@ -3765,10 +3925,7 @@ body.mega-menu-open {
 <p class="latest-hotnews-summary" id="latestHotNewsSummary"></p>
 <div class="latest-hotnews-meta" id="latestHotNewsMeta"></div>
 <div class="latest-hotnews-actions">
-<a class="latest-hotnews-primary" href="hot-news.html" id="latestHotNewsLink">
-            Baca Hot News
-            <span aria-hidden="true">→</span>
-</a>
+<a class="latest-hotnews-primary" href="hot-news.html" id="latestHotNewsLink">Baca sekarang <span aria-hidden="true">→</span></a>
 <button class="latest-hotnews-secondary" data-latest-hotnews-close="" type="button">Tutup popup</button>
 </div>
 </div>
@@ -3969,9 +4126,15 @@ body.mega-menu-open {
 
       popup.hidden = false;
 
-      document.body.classList.add(
-        "hotnews-popup-open"
-      );
+      if (
+        !window.matchMedia(
+          "(max-width: 760px)"
+        ).matches
+      ) {
+        document.body.classList.add(
+          "hotnews-popup-open"
+        );
+      }
 
       const closeButton =
         popup.querySelector(
