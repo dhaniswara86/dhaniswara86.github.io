@@ -3612,7 +3612,7 @@ body.mega-menu-open {
 </div>
 </div>
 </footer>
-<script src="assets/js/hotnews-data.js"></script><script>
+<!-- Popup membaca data langsung dari konfigurasi di dalam index.html. --><script>
   (function () {
     "use strict";
 
@@ -3635,23 +3635,36 @@ body.mega-menu-open {
       return;
     }
 
-    const hotNewsItems =
-      Array.isArray(window.KABAYAN_HOTNEWS)
-        ? [...window.KABAYAN_HOTNEWS]
-        : [];
+    /*
+      DATA HOT NEWS TERBARU
 
-    if (!hotNewsItems.length) {
-      return;
-    }
+      Untuk mengganti berita yang muncul pada popup,
+      cukup ubah isi objek di bawah ini.
 
-    hotNewsItems.sort(function (a, b) {
-      return (
-        new Date(b.dateISO || 0) -
-        new Date(a.dateISO || 0)
-      );
-    });
+      hotnews-presentation.js tetap digunakan pada halaman
+      detail Hot News dan tidak berfungsi sebagai penyimpan data.
+    */
+    const latestNews = {
+      title:
+        "Coretax Hadirkan Role Penandatangan SPT PPh 21 Hanya Induk",
 
-    const latestNews = hotNewsItems[0];
+      slug:
+        "coretax-role-baru-pph21-hanya-induk",
+
+      dateISO:
+        "2026-08-04",
+
+      summary:
+        "Role baru memungkinkan pimpinan atau pejabat perusahaan menandatangani SPT Masa PPh Pasal 21/26 tanpa melihat rincian penghasilan dan gaji masing-masing pegawai.",
+
+      tags: [
+        "Coretax",
+        "PPh Pasal 21"
+      ],
+
+      contentURL:
+        "hot-news.html"
+    };
 
     const latestIdentity =
       latestNews.slug ||
