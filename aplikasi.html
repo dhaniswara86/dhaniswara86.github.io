@@ -434,6 +434,14 @@
       background: var(--off-white);
     }
 
+    .popular-section[hidden] {
+      display: none;
+    }
+
+    .catalog-section.search-active {
+      padding-top: 48px;
+    }
+
     .section-inner {
       width: min(var(--max-width), 100%);
       margin: 0 auto;
@@ -1540,6 +1548,8 @@
     const clearSearch = document.getElementById("clearSearch");
     const resultCount = document.getElementById("resultCount");
     const emptyState = document.getElementById("emptyState");
+    const popularSection = document.querySelector(".popular-section");
+    const catalogSection = document.querySelector(".catalog-section");
     const filterButtons = Array.from(
       document.querySelectorAll(".filter-button")
     );
@@ -1582,6 +1592,19 @@
 
     function renderApplications() {
       const searchTerm = normalizeText(searchInput.value.trim());
+      const isSearching = searchTerm.length > 0;
+
+      /*
+       * Saat pengguna mengetik kata kunci, sembunyikan bagian
+       * "Aplikasi yang sering dicari" agar hasil pencarian
+       * langsung terlihat. Bagian tersebut muncul kembali ketika
+       * kolom pencarian dikosongkan.
+       */
+      popularSection.hidden = isSearching;
+      catalogSection.classList.toggle(
+        "search-active",
+        isSearching
+      );
 
       const filtered = applications.filter((app) => {
         const matchesFilter =
