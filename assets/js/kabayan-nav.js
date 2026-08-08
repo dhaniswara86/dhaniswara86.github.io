@@ -9,7 +9,7 @@
       const active = mobileMenu.classList.toggle("active");
       document.body.classList.toggle("menu-open", active);
       menuToggle.setAttribute("aria-expanded", String(active));
-      menuToggle.textContent = active ? "×" : "☰";
+      menuToggle.classList.toggle("is-open", active);
     });
 
     mobileMenu.querySelectorAll("a").forEach(link => {
@@ -17,7 +17,7 @@
         mobileMenu.classList.remove("active");
         document.body.classList.remove("menu-open");
         menuToggle.setAttribute("aria-expanded", "false");
-        menuToggle.textContent = "☰";
+        menuToggle.classList.remove("is-open");
       });
     });
   }
@@ -111,7 +111,7 @@
         document.body.classList.remove("menu-open");
         if (menuToggle) {
           menuToggle.setAttribute("aria-expanded", "false");
-          menuToggle.textContent = "☰";
+          menuToggle.classList.remove("is-open");
         }
       }
     }
