@@ -141,6 +141,26 @@
       gap: 8px;
     }
 
+    .collection-search-trigger {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      flex-shrink: 0;
+      place-items: center;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: transparent;
+      color: var(--near-black);
+      cursor: pointer;
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .collection-search-trigger:hover {
+      background: rgba(0, 0, 0, 0.055);
+    }
+
     .menu-toggle {
       width: 34px;
       height: 34px;
@@ -3502,6 +3522,16 @@ body.mega-menu-open {
 <a aria-haspopup="true" class="nav-menu-link nav-hotnews" data-nav-menu="hotnews" href="hotnews.html"><span aria-hidden="true" class="nav-hotnews-icon">🔥</span><span>Hot News</span></a>
 </nav>
 <div class="nav-actions">
+<button
+  aria-controls="collectionMegaMenu"
+  aria-expanded="false"
+  aria-haspopup="true"
+  aria-label="Lihat Koleksi"
+  class="collection-search-trigger"
+  id="collectionSearchTrigger"
+  title="Lihat Koleksi"
+  type="button"
+>⌕</button>
 <button aria-expanded="false" aria-label="Buka menu" class="menu-toggle" id="menuToggle" type="button">
           ☰
         </button>
@@ -5115,6 +5145,56 @@ body.mega-menu-open {
   }
 })();
 </script>
+
+<script id="collectionSearchTriggerScript">
+(() => {
+  const searchTrigger = document.getElementById("collectionSearchTrigger");
+  const collectionTrigger = document.getElementById("collectionMenuTrigger");
+  const collectionMenu = document.getElementById("collectionMegaMenu");
+  const navMegaMenu = document.getElementById("navMegaMenu");
+  const navMegaBackdrop = document.getElementById("navMegaBackdrop");
+
+  if (!searchTrigger || !collectionTrigger || !collectionMenu) return;
+
+  function syncState() {
+    searchTrigger.setAttribute(
+      "aria-expanded",
+      String(collectionMenu.classList.contains("active"))
+    );
+  }
+
+  searchTrigger.addEventListener("click", () => {
+    // Tutup mega-menu hover navigasi bila masih terbuka.
+    if (navMegaMenu) {
+      navMegaMenu.classList.remove("active");
+      navMegaMenu.setAttribute("aria-hidden", "true");
+    }
+
+    if (navMegaBackdrop) {
+      navMegaBackdrop.classList.remove("active");
+      navMegaBackdrop.setAttribute("aria-hidden", "true");
+    }
+
+    document
+      .querySelectorAll(".nav-menu-link.mega-active")
+      .forEach((link) => link.classList.remove("mega-active"));
+
+    // Gunakan mekanisme asli tombol "Lihat Koleksi"
+    // agar buka/tutup, backdrop, Escape, dan focus tetap konsisten.
+    collectionTrigger.click();
+    window.setTimeout(syncState, 0);
+  });
+
+  const observer = new MutationObserver(syncState);
+  observer.observe(collectionMenu, {
+    attributes: true,
+    attributeFilter: ["class"]
+  });
+
+  syncState();
+})();
+</script>
+
 <script id="navMegaMenuScript">
 (() => {
   const links = [...document.querySelectorAll('.nav-menu-link[data-nav-menu]')];
