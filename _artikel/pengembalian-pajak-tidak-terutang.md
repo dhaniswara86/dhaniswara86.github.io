@@ -8,7 +8,7 @@ hero_accent: "Pilih alasan permohonan yang tepat."
 excerpt: "Panduan membaca alasan pengembalian atas kelebihan pembayaran pajak yang seharusnya tidak terutang, lengkap dengan kondisi penggunaannya dan penjelasan sesuai peraturan."
 description: "Panduan praktis memilih alasan pengembalian pajak yang seharusnya tidak terutang berdasarkan Pasal 122 sampai dengan Pasal 137."
 
-category: "Pengembalian Pajak"
+category: "Administrasi Pajak"
 
 tags:
   - Pengembalian Pajak
