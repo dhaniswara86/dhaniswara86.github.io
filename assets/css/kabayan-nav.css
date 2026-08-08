@@ -212,3 +212,76 @@ body.menu-open,body.mega-menu-open { overflow: hidden; }
 @media (max-width: 440px) {
   .nav-brand span:last-child { display: none; }
 }
+
+
+/* =========================================================
+   Encoding-safe navigation icons
+   Semua ikon kontrol dibangun dengan SVG/CSS agar tidak
+   bergantung pada encoding karakter khusus.
+   ========================================================= */
+
+.collection-search-trigger svg.collection-search-icon {
+  width: 17px;
+  height: 17px;
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.menu-toggle-icon {
+  position: relative;
+  width: 17px;
+  height: 14px;
+  display: block;
+}
+
+.menu-toggle-icon > span {
+  position: absolute;
+  left: 0;
+  width: 17px;
+  height: 1.5px;
+  border-radius: 999px;
+  background: currentColor;
+  transform-origin: center;
+  transition:
+    top .18s ease,
+    transform .18s ease,
+    opacity .18s ease;
+}
+
+.menu-toggle-icon > span:nth-child(1) {
+  top: 1px;
+}
+
+.menu-toggle-icon > span:nth-child(2) {
+  top: 6px;
+}
+
+.menu-toggle-icon > span:nth-child(3) {
+  top: 11px;
+}
+
+.menu-toggle.is-open .menu-toggle-icon > span:nth-child(1) {
+  top: 6px;
+  transform: rotate(45deg);
+}
+
+.menu-toggle.is-open .menu-toggle-icon > span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.is-open .menu-toggle-icon > span:nth-child(3) {
+  top: 6px;
+  transform: rotate(-45deg);
+}
+
+.nav-hotnews-icon {
+  font-family:
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Noto Color Emoji",
+    sans-serif;
+}
