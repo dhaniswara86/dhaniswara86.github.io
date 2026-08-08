@@ -27,7 +27,6 @@ reading_time: "Panduan praktis"
 
 # Untuk pengujian. Setelah tampil benar, permalink ini dapat diganti
 # dengan URL permanen yang Anda pilih.
-permalink: /artikel/uji-pengembalian-pajak/
 
 summary_label: "Ringkasan cepat"
 summary: "Permohonan pengembalian dapat timbul karena pembayaran pajak yang seharusnya tidak terutang, kelebihan Pajak Dalam Rangka Impor, kesalahan pemotongan atau pemungutan, transaksi atau subjek yang memperoleh fasilitas, maupun kelebihan PPh terkait penerapan Persetujuan Penghindaran Pajak Berganda."
