@@ -26,7 +26,7 @@ reading_time: "± 18 menit baca"
 
 # URL uji. Setelah halaman V2 dipastikan bekerja, ganti menjadi /01-kuasa.html
 # agar URL artikel lama tetap dipertahankan.
-permalink: /artikel/uji-kuasa-wajib-pajak/
+permalink: /01-kuasa.html
 
 sidebar_note: "Pegawai yang memberikan data atau keterangan tidak otomatis menjadi Kuasa Wajib Pajak. Perhatikan kedudukan formal dan tindakan yang dilakukan."
 
