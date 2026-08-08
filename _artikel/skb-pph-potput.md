@@ -5,7 +5,7 @@ hero_title: "SKB PPh Potput."
 hero_accent: "Syarat, checklist, dan cara pengajuannya."
 excerpt: "Panduan praktis bagi Wajib Pajak yang ingin memperoleh pembebasan dari pemotongan dan/atau pemungutan Pajak Penghasilan oleh pihak lain."
 description: "Panduan praktis pengajuan Surat Keterangan Bebas PPh berdasarkan PER-8/PJ/2025, lengkap dengan syarat, checklist, alur pengajuan, masa berlaku, pembatalan, dan pencabutan."
-category: "PPh dan Layanan Administrasi"
+category: "Administrasi Pajak"
 tags:
   - SKB PPh
   - PPh Pasal 21
