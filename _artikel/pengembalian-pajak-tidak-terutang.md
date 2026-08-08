@@ -2,10 +2,10 @@
 layout: artikel-editorial
 
 title: "Pengembalian Pajak yang Seharusnya Tidak Terutang"
-hero_title: "Pajak yang seharusnya tidak terutang."
-hero_accent: "Pilih alasan permohonan yang tepat."
+hero_title: "Pengembalian Pajak yang seharusnya"
+hero_accent: "Tidak Terutang."
 
-excerpt: "Panduan membaca alasan pengembalian atas kelebihan pembayaran pajak yang seharusnya tidak terutang, lengkap dengan kondisi penggunaannya dan penjelasan sesuai peraturan."
+excerpt: "Panduan memilih alasan pengembalian atas kelebihan pembayaran pajak yang seharusnya tidak terutang untuk menghindari penolakan permohonan."
 description: "Panduan praktis memilih alasan pengembalian pajak yang seharusnya tidak terutang berdasarkan Pasal 122 sampai dengan Pasal 137."
 
 category: "Administrasi Pajak"
