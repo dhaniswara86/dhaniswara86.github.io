@@ -19,7 +19,7 @@ reading_time: "Panduan interaktif"
 featured: true
 
 # Pertahankan URL lama saat migrasi agar tautan lama tidak rusak.
-permalink: /artikel/uji-skb-pph/
+permalink: /skbpotput.html/
 
 summary: "SKB PPh Potput dapat digunakan oleh Wajib Pajak tertentu untuk memperoleh pembebasan dari pemotongan dan/atau pemungutan PPh yang dapat dikreditkan, sepanjang syarat substantif dan administratifnya dipenuhi."
 summary_label: "Ringkasan cepat"
