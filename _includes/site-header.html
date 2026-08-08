@@ -1,0 +1,231 @@
+<header class="site-nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="{{ '/' | relative_url }}" aria-label="Beranda dhaniswara86">
+      <img class="brand-logo" src="{{ '/images/LogoASD.svg' | relative_url }}" alt="Logo dhaniswara86">
+      <span>| <strong>dhaniswara86</strong></span>
+    </a>
+
+    <nav aria-label="Navigasi utama" class="desktop-menu">
+      <a href="{{ '/' | relative_url }}">Beranda</a>
+      <a aria-haspopup="true" class="nav-menu-link" data-nav-menu="buku" href="{{ '/buku.html' | relative_url }}">Buku</a>
+      <a aria-haspopup="true" class="nav-menu-link" data-nav-menu="formulir" href="{{ '/formulir.html' | relative_url }}">Formulir</a>
+      <a aria-haspopup="true" class="nav-menu-link" data-nav-menu="aplikasi" href="{{ '/aplikasi.html' | relative_url }}">Aplikasi</a>
+      <a aria-haspopup="true" class="nav-menu-link" data-nav-menu="kalkulator" href="{{ '/kalkulator.html' | relative_url }}">Kalkulator</a>
+      <a aria-haspopup="true" class="nav-menu-link" data-nav-menu="artikel" href="{{ '/artikel.html' | relative_url }}" {% if page.collection == 'artikel' or page.url == '/artikel.html' %}aria-current="page"{% endif %}>Artikel</a>
+      <a aria-haspopup="true" class="nav-menu-link nav-hotnews" data-nav-menu="hotnews" href="{{ '/hotnews.html' | relative_url }}">
+        <span aria-hidden="true" class="nav-hotnews-icon">ðŸ”¥</span><span>Hot News</span>
+      </a>
+    </nav>
+
+    <div class="nav-actions">
+      <button
+        aria-controls="collectionMegaMenu"
+        aria-expanded="false"
+        aria-haspopup="true"
+        aria-label="Lihat Koleksi"
+        class="collection-search-trigger"
+        id="collectionSearchTrigger"
+        title="Lihat Koleksi"
+        type="button"
+      >âŒ•</button>
+
+      <button aria-expanded="false" aria-label="Buka menu" class="menu-toggle" id="menuToggle" type="button">
+        â˜°
+      </button>
+    </div>
+  </div>
+</header>
+
+<div aria-hidden="true" class="nav-mega-backdrop" id="navMegaBackdrop"></div>
+
+<section aria-hidden="true" aria-label="Navigasi koleksi Kabayan" class="nav-mega-menu" id="navMegaMenu">
+  <div class="nav-mega-inner">
+
+    <div class="nav-mega-panel" data-nav-panel="buku">
+      <div class="nav-mega-intro">
+        <span class="nav-mega-kicker">Buku Digital</span>
+        <h2>Belajar pajak dengan materi yang lebih terstruktur.</h2>
+        <p>Modul, panduan, dan referensi perpajakan untuk Coretax, PPh, PPN, XML, dan aplikasi DJP.</p>
+        <a class="nav-mega-main-link" href="{{ '/buku.html' | relative_url }}">Lihat seluruh buku <span aria-hidden="true">â€º</span></a>
+      </div>
+      <div class="nav-mega-column">
+        <p class="nav-mega-label">Pilihan terbaru</p>
+        <a href="{{ '/kap-kjs.html' | relative_url }}">KAP dan KJS Era Coretax</a>
+        <a href="{{ '/converter-xml-unifikasi.html' | relative_url }}">Converter XML PPh Unifikasi</a>
+        <a href="{{ '/converter-xml-2126.html' | relative_url }}">Converter XML PPh Pasal 21/26</a>
+      </div>
+      <div class="nav-mega-column">
+        <p class="nav-mega-label">Referensi &amp; panduan</p>
+        <a href="{{ '/list-barang-jasa-faktur.html' | relative_url }}">Kode Barang &amp; Jasa Faktur Pajak</a>
+        <a href="{{ '/aktivasiakunkodjp.html' | relative_url }}">Aktivasi Akun &amp; KODJP</a>
+        <a href="{{ '/cermat-2126.html' | relative_url }}">Cermat Pemotongan PPh 21/26</a>
+      </div>
+      <div class="nav-mega-tags">
+        <span>Coretax</span><span>PPh</span><span>PPN</span><span>XML</span><span>DJP Online</span>
+      </div>
+    </div>
+
+    <div class="nav-mega-panel" data-nav-panel="formulir">
+      <div class="nav-mega-intro">
+        <span class="nav-mega-kicker">Formulir Perpajakan</span>
+        <h2>Dokumen berdasarkan kebutuhan administrasi.</h2>
+        <p>Koleksi formulir untuk registrasi, PKP, Bea Meterai, PBB, kuasa, SPT, dan kebutuhan administrasi lainnya.</p>
+        <a class="nav-mega-main-link" href="{{ '/formulir.html' | relative_url }}">Lihat seluruh formulir <span aria-hidden="true">â€º</span></a>
+      </div>
+      <div class="nav-mega-column">
+        <p class="nav-mega-label">Sering digunakan</p>
+        <a href="{{ '/surat-kuasa-khusus-wajib-pajak.html' | relative_url }}">Surat Kuasa Khusus Wajib Pajak</a>
+        <a href="{{ '/pernyataanumkm500juta.html' | relative_url }}">Pernyataan UMKM Rp500 Juta</a>
+        <a href="{{ '/surat-pernyataan-hibah.html' | relative_url }}">Surat Pernyataan Hibah</a>
+      </div>
+      <div class="nav-mega-column">
+        <p class="nav-mega-label">Permohonan &amp; keterangan</p>
+        <a href="{{ '/permohonanskbpotput.html' | relative_url }}">Permohonan SKB PPh</a>
+        <a href="{{ '/formulir.html' | relative_url }}">Cari formulir lainnya</a>
+      </div>
+      <div class="nav-mega-tags">
+        <span>Registrasi</span><span>PKP &amp; PPN</span><span>Bea Meterai</span><span>PBB</span><span>Kuasa</span><span>SPT</span>
+      </div>
+    </div>
+
+    <div class="nav-mega-panel" data-nav-panel="aplikasi">
+      <div class="nav-mega-intro">
+        <span class="nav-mega-kicker">Aplikasi Perpajakan</span>
+        <h2>Installer dan arsip aplikasi perpajakan.</h2>
+        <p>Portal aplikasi untuk pengelolaan data dan pelaporan perpajakan.</p>
+        <a class="nav-mega-main-link" href="{{ '/aplikasi.html' | relative_url }}">Buka portal aplikasi <span aria-hidden="true">â€º</span></a>
+      </div>
+      <div class="nav-mega-column">
+        <p class="nav-mega-label">Kategori</p>
+        <a href="{{ '/aplikasi.html' | relative_url }}">e-SPT</a>
+        <a href="{{ '/aplikasi.html' | relative_url }}">e-Faktur</a>
+        <a href="{{ '/aplikasi.html' | relative_url }}">e-Bupot</a>
+      </div>
+      <div class="nav-mega-column">
+        <p class="nav-mega-label">Lainnya</p>
+        <a href="{{ '/aplikasi.html' | relative_url }}">Perangkat pendukung</a>
+        <a href="{{ '/aplikasi.html' | relative_url }}">Arsip aplikasi</a>
+        <a href="{{ '/buku.html' | relative_url }}">Baca buku panduan</a>
+      </div>
+    </div>
+
+    <div class="nav-mega-panel" data-nav-panel="kalkulator">
+      <div class="nav-mega-intro">
+        <span class="nav-mega-kicker">Kalkulator Pajak</span>
+        <h2>Hitung dan petakan kewajiban pajak lebih praktis.</h2>
+        <p>Alat bantu untuk PPN, PPh Pasal 21, transaksi instansi pemerintah, dan pengembalian pendahuluan.</p>
+        <a class="nav-mega-main-link" href="{{ '/kalkulator.html' | relative_url }}">Lihat seluruh kalkulator <span aria-hidden="true">â€º</span></a>
+      </div>
+      <div class="nav-mega-column">
+        <p class="nav-mega-label">Alat bantu utama</p>
+        <a href="{{ '/kalkulator-ppn-kabayan.html' | relative_url }}"><strong>PPN</strong><small>PPN umum dan DPP Nilai Lain.</small></a>
+        <a href="{{ '/kalkulator-pasal21.html' | relative_url }}"><strong>PPh Pasal 21</strong><small>Pegawai tetap dan tidak tetap.</small></a>
+      </div>
+      <div class="nav-mega-column">
+        <p class="nav-mega-label">Pemetaan terpandu</p>
+        <a href="{{ '/pajak-instansi-satu-pintu.html' | relative_url }}"><strong>Pajak Instansi Pemerintah</strong><small>PPh, PPN, dan kondisi khusus belanja.</small></a>
+        <a href="{{ '/kalkulator-pengembalian-pendahuluan.html' | relative_url }}"><strong>Pengembalian Pendahuluan</strong><small>Kriteria dan persyaratan.</small></a>
+      </div>
+    </div>
+
+    <div class="nav-mega-panel" data-nav-panel="artikel">
+      <div class="nav-mega-intro">
+        <span class="nav-mega-kicker">Artikel Pajak</span>
+        <h2>Penjelasan ketentuan dalam bahasa yang lebih sederhana.</h2>
+        <p>Artikel membahas administrasi, PPh, PPN, Coretax, UMKM, dan prosedur perpajakan.</p>
+        <a class="nav-mega-main-link" href="{{ '/artikel.html' | relative_url }}">Lihat seluruh artikel <span aria-hidden="true">â€º</span></a>
+      </div>
+      <div class="nav-mega-column nav-mega-featured">
+        <p class="nav-mega-label">Artikel</p>
+        {% assign nav_articles = site.artikel | sort: "date" | reverse %}
+        {% for item in nav_articles limit: 2 %}
+          <a href="{{ item.url | relative_url }}">
+            <strong>{{ item.title }}</strong>
+            <small>{{ item.excerpt | default: item.description | strip_html | truncatewords: 12 }}</small>
+          </a>
+        {% endfor %}
+      </div>
+      <div class="nav-mega-column">
+        <p class="nav-mega-label">Topik</p>
+        <div class="nav-mega-topic-list"><span>Administrasi</span><span>PPh</span><span>PPN</span><span>Coretax</span><span>UMKM</span><span>Prosedur Pajak</span></div>
+      </div>
+    </div>
+
+    <div class="nav-mega-panel" data-nav-panel="hotnews">
+      <div class="nav-mega-intro">
+        <span class="nav-mega-kicker hot">Hot News</span>
+        <h2>Informasi perpajakan yang perlu lebih cepat diketahui.</h2>
+        <p>Pembaruan Coretax, regulasi, layanan, pengumuman, dan isu perpajakan terbaru.</p>
+        <a class="nav-mega-main-link hot" href="{{ '/hotnews.html' | relative_url }}">Lihat seluruh Hot News <span aria-hidden="true">â€º</span></a>
+      </div>
+      <div class="nav-mega-column nav-mega-featured">
+        <p class="nav-mega-label">Terbaru</p>
+        {% for post in site.posts limit: 2 %}
+          <a href="{{ post.url | relative_url }}">
+            <strong>{{ post.title }}</strong>
+            <small>{{ post.excerpt | strip_html | truncatewords: 12 }}</small>
+          </a>
+        {% endfor %}
+      </div>
+      <div class="nav-mega-column">
+        <p class="nav-mega-label">Jelajahi</p>
+        <a href="{{ '/hotnews-arsip.html' | relative_url }}">Arsip Hot News</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div aria-hidden="true" class="mega-menu-backdrop" id="megaMenuBackdrop"></div>
+
+<section aria-hidden="true" aria-label="Koleksi Kabayan" class="collection-mega-menu" id="collectionMegaMenu">
+  <div class="mega-menu-inner">
+    <div class="mega-menu-top">
+      <span class="mega-menu-label">Koleksi Kabayan</span>
+      <button aria-label="Tutup menu koleksi" class="mega-menu-close" id="megaMenuClose" type="button">Ã—</button>
+    </div>
+
+    <div class="mega-menu-grid">
+      <section class="mega-column mega-primary-column">
+        <p class="mega-column-label">Jelajahi Koleksi</p>
+        <nav aria-label="Kategori koleksi" class="mega-primary-links">
+          <a href="{{ '/buku.html' | relative_url }}"><span>Buku Digital</span><small>Modul, panduan, dan referensi perpajakan.</small></a>
+          <a href="{{ '/formulir.html' | relative_url }}"><span>Formulir Perpajakan</span><small>Dokumen PDF dan formulir interaktif.</small></a>
+          <a href="{{ '/kalkulator.html' | relative_url }}"><span>Kalkulator Pajak</span><small>Alat bantu penghitungan dan pemetaan.</small></a>
+          <a href="{{ '/aplikasi.html' | relative_url }}"><span>Aplikasi Perpajakan</span><small>Installer, arsip, dan perangkat pendukung.</small></a>
+          <a href="{{ '/artikel.html' | relative_url }}"><span>Artikel Pajak</span><small>Penjelasan dan panduan praktis.</small></a>
+          <a href="{{ '/hotnews.html' | relative_url }}"><span>Hot News</span><small>Informasi perpajakan terbaru.</small></a>
+        </nav>
+      </section>
+
+      <section class="mega-column">
+        <p class="mega-column-label">Artikel Terbaru</p>
+        <nav aria-label="Artikel terbaru" class="mega-secondary-links">
+          {% for item in nav_articles limit: 4 %}
+            <a href="{{ item.url | relative_url }}">{{ item.title }}</a>
+          {% endfor %}
+          <a class="mega-view-all" href="{{ '/artikel.html' | relative_url }}">Lihat seluruh artikel <span aria-hidden="true">â€º</span></a>
+        </nav>
+      </section>
+
+      <section class="mega-column">
+        <p class="mega-column-label">Akses Cepat</p>
+        <nav aria-label="Akses cepat" class="mega-secondary-links">
+          <a href="{{ '/formulir.html' | relative_url }}">Formulir</a>
+          <a href="{{ '/kalkulator.html' | relative_url }}">Kalkulator</a>
+          <a href="{{ '/buku.html' | relative_url }}">Buku Digital</a>
+          <a href="{{ '/hotnews.html' | relative_url }}">Hot News</a>
+        </nav>
+      </section>
+    </div>
+  </div>
+</section>
+
+<nav class="mobile-menu" id="mobileMenu">
+  <a href="{{ '/' | relative_url }}">Beranda</a>
+  <a href="{{ '/buku.html' | relative_url }}">Buku</a>
+  <a href="{{ '/formulir.html' | relative_url }}">Formulir</a>
+  <a href="{{ '/aplikasi.html' | relative_url }}">Aplikasi</a>
+  <a href="{{ '/kalkulator.html' | relative_url }}">Kalkulator</a>
+  <a href="{{ '/artikel.html' | relative_url }}" {% if page.collection == 'artikel' or page.url == '/artikel.html' %}aria-current="page"{% endif %}>Artikel</a>
+  <a class="nav-hotnews" href="{{ '/hotnews.html' | relative_url }}"><span aria-hidden="true">ðŸ”¥</span><span>Hot News</span></a>
+</nav>
