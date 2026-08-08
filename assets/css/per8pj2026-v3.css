@@ -1,443 +1,691 @@
----
-layout: artikel-editorial
+/* =========================================================
+   PER-8/PJ/2026 — Table Fix V3
+   Dimuat SETELAH artikel-editorial.css.
+   Tujuan utama: memutus seluruh pewarisan style artikel pada tabel.
+   ========================================================= */
 
-title: "PER-8/PJ/2026: Perubahan Kode Billing, Pemindahbukuan, KAP, dan KJS"
-hero_title: "PER-8/PJ/2026."
-hero_accent: "Apa yang berubah?"
+/* Font umum artikel PER-8 tetap mengikuti Artikel V2 */
+.per8-article,
+.per8-article * {
+  font-family: inherit;
+}
 
-excerpt: "Memahami perubahan kode billing, pemindahbukuan, petunjuk pengisian SSP, Kode Akun Pajak, Kode Jenis Setoran, dan contoh imbalan bunga."
-description: "Ulasan PER-8/PJ/2026 tentang perubahan ketentuan pembayaran dan penyetoran pajak, kode billing, pemindahbukuan, KAP, KJS, dan imbalan bunga."
+/* =========================================================
+   RESET KHUSUS TABEL
+   Selector sengaja sangat spesifik + !important pada properti yang
+   sebelumnya diwarisi dari .article-body li / article li.
+   ========================================================= */
 
-category: "Administrasi Pajak"
+.per8-article .comparison-zone .table-scroll {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
 
-tags:
-  - PER-8/PJ/2026
-  - PER-10/PJ/2024
-  - Kode Billing
-  - Pemindahbukuan
-  - KAP
-  - KJS
-  - SSP
-  - Imbalan Bunga
-  - Coretax
+.per8-article .comparison-zone table {
+  width: 100% !important;
+  min-width: 900px !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  table-layout: fixed !important;
+  background: #ffffff !important;
+  font-family: inherit !important;
+  font-size: 13px !important;
+  line-height: 1.45 !important;
+}
 
-author: "Angga Sukma Dhaniswara"
-date: 2026-07-28
-legal_basis: "PER-8/PJ/2026"
-reading_time: "Panduan praktis"
+.per8-article .comparison-zone table thead {
+  display: table-header-group !important;
+}
 
-permalink: /artikel/uji-per8pj2026/
+.per8-article .comparison-zone table tbody {
+  display: table-row-group !important;
+  padding: 0 !important;
+  background: #ffffff !important;
+}
 
-summary_label: "Inti perubahan"
-summary: "Kode billing berlaku 336 jam atau 14 × 24 jam, kode billing tertentu dapat dibatalkan, ruang lingkup pemindahbukuan diperjelas, serta lampiran SSP, KAP/KJS, format imbalan bunga, dan contoh penghitungannya disesuaikan."
+.per8-article .comparison-zone table tr,
+.per8-article .comparison-zone table tbody tr,
+.per8-article .comparison-zone table tbody tr:nth-child(odd),
+.per8-article .comparison-zone table tbody tr:nth-child(even),
+.per8-article .comparison-zone table tbody tr:hover {
+  display: table-row !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: #ffffff !important;
+  box-shadow: none !important;
+}
 
-hero_links:
-  - label: "Lihat tabel perbandingan"
-    href: "#tabel-perbandingan"
-  - label: "Cari KAP/KJS"
-    href: "/kap-kjs-per8tahun2026.html"
+.per8-article .comparison-zone table th,
+.per8-article .comparison-zone table td,
+.per8-article .comparison-zone table tbody tr:nth-child(odd) td,
+.per8-article .comparison-zone table tbody tr:nth-child(even) td,
+.per8-article .comparison-zone table tbody tr:hover td {
+  display: table-cell !important;
+  width: auto;
+  min-width: 0;
+  padding: 12px 13px !important;
+  border-top: 0 !important;
+  border-left: 0 !important;
+  border-right: 1px solid #e8e8ed !important;
+  border-bottom: 1px solid #e8e8ed !important;
+  border-radius: 0 !important;
+  background: #ffffff !important;
+  color: #424245 !important;
+  font-family: inherit !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  line-height: 1.45 !important;
+  letter-spacing: normal !important;
+  text-align: left !important;
+  text-transform: none !important;
+  vertical-align: top !important;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
 
-hero_stats:
-  - value: "14 hari"
-    label: "Masa berlaku kode billing"
-  - value: "KAP/KJS"
-    label: "Lampiran kode diperbarui"
-  - value: "28 Juli"
-    label: "Tanggal ditetapkan"
-  - value: "PER-8"
-    label: "Perubahan PER-10/PJ/2024"
+.per8-article .comparison-zone table th:last-child,
+.per8-article .comparison-zone table td:last-child {
+  border-right: 0 !important;
+}
 
-sidebar_note: "Gunakan artikel ini sebagai ringkasan praktis. Untuk keputusan operasional, tetap periksa naskah PER-8/PJ/2026 beserta lampiran resminya."
+.per8-article .comparison-zone table tbody tr:last-child td {
+  border-bottom: 0 !important;
+}
 
-custom_css:
-  - /assets/css/per8pj2026-v3.css
+.per8-article .comparison-zone table thead th {
+  padding-top: 11px !important;
+  padding-bottom: 11px !important;
+  background: #f5f5f7 !important;
+  color: #515154 !important;
+  font-size: 10px !important;
+  font-weight: 750 !important;
+  line-height: 1.35 !important;
+  letter-spacing: .035em !important;
+  text-transform: uppercase !important;
+}
 
-custom_js:
-  - /assets/js/per8pj2026-v2.js
----
+/* Kolom nomor */
+.per8-article .comparison-zone table td:first-child {
+  color: #6e6e73 !important;
+  font-weight: 650 !important;
+  text-align: center !important;
+}
 
-<div class="per8-article">
-<p class="lead">
-          Direktur Jenderal Pajak menerbitkan
-          <strong>PER-8/PJ/2026</strong> untuk menyesuaikan
-          PER-10/PJ/2024 mengenai pembayaran dan penyetoran pajak
-          serta pengembalian kelebihan pembayaran pajak dalam
-          pelaksanaan Sistem Inti Administrasi Perpajakan.
-          Perubahan ini erat kaitannya dengan proses bisnis pembayaran mulai dari masa berlaku kode billing
-          sampai pemilihan KAP dan KJS.
-        </p>
-<section id="latar-belakang">
-<h2>Mengapa PER-10/PJ/2024 perlu diubah?</h2>
-<p>
-            Bagian pertimbangan PER-8/PJ/2026 menjelaskan bahwa
-            penyesuaian diperlukan untuk memberikan kepastian hukum
-            serta kemudahan dalam pelaksanaan hak dan pemenuhan
-            kewajiban perpajakan. Kebutuhan tersebut mencakup
-            pembayaran dan penyetoran pajak, pengembalian kelebihan
-            pembayaran pajak, kode billing, serta penambahan dan
-            penyesuaian kode jenis setoran.
-          </p>
-<p>
-            Secara struktur, perubahan utama terdapat pada Pasal 5
-            mengenai kode billing, Pasal 7 mengenai pemindahbukuan,
-            dan seluruh lampiran PER-10/PJ/2024 yang kemudian diganti
-            dengan lampiran baru dalam PER-8/PJ/2026.
-          </p>
-<div class="regulation-card">
-<div>
-<small>Peraturan yang diubah</small>
-<strong>PER-10/PJ/2024</strong>
-</div>
-<div>
-<small>Peraturan perubahan</small>
-<strong>PER-8/PJ/2026</strong>
-</div>
-<div>
-<small>Mulai berlaku</small>
-<strong>28 Juli 2026</strong>
-</div>
-</div>
-</section>
-<section id="kode-billing">
-<h2>Kode billing kini berlaku 14 hari</h2>
-<p>
-            Pasal 5 ayat (6) yang baru menentukan bahwa kode billing
-            berlaku selama <strong>336 jam atau 14 × 24 jam</strong>
-            sejak diterbitkan. Setelah jangka waktu tersebut berakhir
-            dan kode belum digunakan untuk pembayaran, kode billing
-            menjadi kedaluwarsa.
-          </p>
-<p>
-            PER-8/PJ/2026 juga menambahkan Pasal 5 ayat (7a).
-            Ketentuan ini memberikan ruang bagi wajib pajak untuk
-            membatalkan kode billing yang belum digunakan dan belum
-            kedaluwarsa. Apabila kode billing sudah kedaluwarsa atau
-            telah dibatalkan, wajib pajak dapat membuat kode billing
-            baru.
-          </p>
-<div class="callout">
-<p>
-<strong>Dampak praktis:</strong> wajib pajak mempunyai
-              waktu lebih panjang untuk menyelesaikan pembayaran,
-              tetapi tetap perlu memastikan data pada kode billing
-              telah benar sebelum transaksi dilakukan.
-            </p>
-</div>
-</section>
-<section id="pemindahbukuan">
-<h2>Pemindahbukuan untuk PHTB dan PPJB diperjelas</h2>
-<p>
-            Perubahan Pasal 7 ayat (2) huruf d memperjelas bahwa
-            pemindahbukuan dapat dilakukan ke jenis pembayaran pajak
-            tertentu, termasuk pembayaran PPh atas penghasilan dari
-            pengalihan hak atas tanah dan/atau bangunan
-            serta penghasilan dari
-            <strong>perjanjian pengikatan jual beli tanah dan/atau bangunan beserta perubahannya</strong>.
-          </p>
-<p>
-            Pembayaran tersebut berkaitan dengan penerbitan surat
-            keterangan penelitian formal bukti pemenuhan kewajiban
-            penyetoran PPh. Penyetoran di muka Bea Meterai juga tetap
-            termasuk dalam jenis pembayaran yang dapat menjadi tujuan
-            pemindahbukuan.
-          </p>
-<p>
-            Apabila pembayaran atau penyetoran tidak memenuhi
-            ketentuan pemindahbukuan, PER-8/PJ/2026 menyatakan bahwa
-            pembayaran tersebut dapat diajukan sebagai permohonan
-            pengembalian kelebihan pembayaran pajak yang seharusnya
-            tidak terutang sesuai ketentuan yang mengaturnya.
-          </p>
-</section>
-<section id="ssp">
-<h2>Petunjuk pengisian SSP ikut disesuaikan</h2>
-<p>
-            Lampiran A memuat contoh format Surat Setoran Pajak dan
-            petunjuk pengisiannya. Pada identitas pembayar atau
-            penyetor, kolom NPWP/NIK dapat diisi dengan NPWP, NIK,
-            atau nomor identitas perpajakan yang dimiliki wajib pajak.
-          </p>
-<p>
-            Referensi dokumen tagihan dan informasi objek pajak juga
-            diperinci. NOP dan alamat objek pajak diisi berdasarkan
-            SPPT, SKP PBB, atau STP PBB. Informasi ini digunakan untuk
-            transaksi yang terkait tanah dan/atau bangunan, termasuk
-            PBB sektor tertentu, pengalihan hak, PPJB beserta
-            perubahannya, persewaan tanah dan/atau bangunan, serta
-            kegiatan membangun sendiri.
-          </p>
-</section>
-<section id="kap-kjs">
-<h2>Perubahan penting dalam KAP dan KJS</h2>
-<p>
-            Lampiran B PER-8/PJ/2026 memuat daftar Kode Akun Pajak dan
-            Kode Jenis Setoran yang baru. Tidak semua kode merupakan
-            kode baru, tetapi terdapat sejumlah penambahan,
-            penyesuaian, dan penghapusan yang perlu diperhatikan.
-          </p>
-<h3>Pajak Minimum Global</h3>
-<p>
-            Untuk PPh Pasal 25/29 Badan dengan KAP
-            <strong>411126</strong> dan Deposit Pajak dengan KAP
-            <strong>411618</strong>, tersedia KJS
-            <strong>610</strong> untuk Income Inclusion Rules,
-            <strong>620</strong> untuk Undertaxed Payment Rules,
-            dan <strong>630</strong> untuk Domestic Minimum Top-Up Tax.
-          </p>
-<h3>PHTB dan PPJB</h3>
-<p>
-            Pada KAP <strong>411128</strong>, KJS
-            <strong>402</strong> digunakan untuk PPh Final Pasal 4
-            ayat (2) atas PHTB atau PPJB yang pertama. Sementara itu,
-            KJS <strong>432</strong> digunakan untuk penghasilan dari
-            perubahan atau adendum PPJB tanah dan/atau bangunan.
-          </p>
-<h3>Penambahan KJS PPN dan PPh Final</h3>
-<p>
-            KJS <strong>123</strong> pada KAP
-            <strong>411211</strong> digunakan untuk setoran PPN oleh
-            pihak lain di tempat lain dalam daerah pabean yang
-            menerima penyerahan BKP milik subjek pajak luar negeri
-            dari Kawasan Berikat.
-          </p>
-<p>
-            Pada kelompok PPh Final, KJS <strong>423</strong>
-            digunakan untuk PPh Final Pasal 4 ayat (2) atas royalti
-            buku yang disetor sendiri. KJS <strong>601</strong>
-            digunakan untuk PPh Final Pasal 15 atas imbalan kepada
-            perusahaan pelayaran luar negeri yang disetor sendiri
-            sesuai uraian dalam lampiran.
-          </p>
-<h3>Penyesuaian kode PBB</h3>
-<p>
-            Lampiran baru juga memperlihatkan penghapusan KAP bunga
-            penagihan PBB dan denda penagihan PBB serta penghapusan
-            KJS 520 dan 521 pada KAP PBB sektor perkebunan,
-            perhutanan, pertambangan, dan sektor lainnya.
-          </p>
-</section>
-<section id="imbalan-bunga">
-<h2>Format dan contoh imbalan bunga diperbarui</h2>
-<p>
-            Lampiran C berisi contoh format surat permohonan pemberian
-            imbalan bunga beserta petunjuk pengisiannya. Lampiran D
-            kemudian memberikan serangkaian contoh penghitungan
-            imbalan bunga untuk berbagai keadaan.
-          </p>
-<p>
-            Contoh tersebut mencakup keterlambatan pengembalian
-            kelebihan pembayaran pajak, keterlambatan penerbitan
-            SKPLB, kelebihan pembayaran akibat keputusan atau putusan,
-            serta keadaan ketika imbalan bunga tidak diberikan.
-            Contoh penghitungan menggunakan tarif bunga yang berlaku
-            pada saat dimulainya penghitungan sesuai keputusan Menteri
-            Keuangan yang relevan dalam masing-masing kasus.
-          </p>
-</section>
-<section class="comparison-zone" id="tabel-perbandingan">
-<div class="comparison-heading">
-<p>Tabel perbandingan</p>
-<h2>
-          Ringkasan perubahan PER-10/PJ/2024
-          menjadi PER-8/PJ/2026
-        </h2>
-<div class="comparison-copy">
-          Berikut adalah perbandingan antara PER-10/PJ/2024 dengan PER-8/PJ/2026.
-        </div>
-</div>
-<section class="section wide-comparison-table">
-<div class="section-head">
-<div class="section-title">PER-10/PJ/2024 vs PER-8/PJ/2026</div>
-<span class="badge">Kode billing, Pbk, SSP, KAP/KJS, dan imbalan bunga</span>
-</div>
-<div class="table-scroll">
-<table>
-<thead><tr><th>No</th><th>Semula (PER-10/2024)</th><th>Menjadi (PER-8/PJ/2026)</th><th>Keterangan</th></tr></thead>
-<tbody>
-<tr class="first-data-row">
-<td data-label="No">1</td>
-<td data-label="Semula">Kode billing berlaku 7 hari</td>
-<td data-label="Menjadi"><strong>Kode billing berlaku 14 hari</strong></td>
-<td data-label="Keterangan">Perubahan masa aktif kode billing.</td>
-</tr>
-<tr>
-<td data-label="No">2</td>
-<td data-label="Semula">Belum diatur</td>
-<td data-label="Menjadi">Pengaturan <strong>pembatalan kode billing</strong></td>
-<td data-label="Keterangan">Penambahan pengaturan terkait pembatalan kode billing.</td>
-</tr>
-<tr>
-<td data-label="No">3</td>
-<td data-label="Semula">Pemindahbukuan atas pembayaran dan penyetoran pajak dapat dilakukan ke jenis pembayaran pajak selain pajak sebagaimana huruf a sampai c, termasuk pembayaran PPh atas PHTB untuk penerbitan suket dan penyetoran di muka Bea Meterai.</td>
-<td data-label="Menjadi">Pemindahbukuan atas pembayaran dan penyetoran pajak dapat dilakukan ke jenis pembayaran pajak selain pajak sebagaimana huruf a sampai c, termasuk:<ol><li>pembayaran PPh atas <strong>PHTB atau PPJB beserta perubahannya</strong> untuk penerbitan suket; dan</li><li>penyetoran di muka Bea Meterai.</li></ol></td>
-<td data-label="Keterangan"><ul><li>Penambahan <strong>PPJB beserta perubahannya</strong> dalam ruang lingkup PHTB pada pengaturan terkait Pbk.</li><li>Selaras dengan PP 34 Tahun 2016 dan PMK 81 Tahun 2024.</li></ul></td>
-</tr>
-<tr>
-<td data-label="No">4</td>
-<td data-label="Semula">Sesuai PER-10 Lampiran A - Petunjuk Pengisian SSP.</td>
-<td data-label="Menjadi">Perbaikan redaksional.</td>
-<td data-label="Keterangan"><ul><li>Menambahkan <strong>nomor identitas perpajakan (NIP)</strong> sebagai identitas pembayar.</li><li>Melengkapi produk hukum PBB, yaitu <strong>SKP PBB dan STP PBB</strong>, pada NOP dan alamat objek pajak.</li></ul></td>
-</tr>
-<tr>
-<td data-label="No">5</td>
-<td data-label="Semula">Belum diatur dalam Lampiran B - KAP/KJS.</td>
-<td data-label="Menjadi"><ul><li>Penambahan <strong>KJS Pajak Minimum Global</strong>.</li><li>Penambahan <strong>KJS untuk PPN</strong>.</li><li>Penambahan <strong>KJS untuk PPh Final</strong>.</li><li>Penyesuaian <strong>KJS untuk PHTB dan PPJB</strong> beserta perubahannya.</li><li>Penghapusan beberapa <strong>KAP/KJS PBB</strong>.</li></ul></td>
-<td data-label="Keterangan"><ul><li>Pajak Minimum Global diatur dalam PMK 136/2024 dan PER-6/PJ/2026.</li><li>PPN atas pengeluaran BKP milik SPLN dari Kawasan Berikat ke tempat lain dalam daerah pabean.</li><li>PPh Final Pasal 15 atas imbalan kepada perusahaan pelayaran luar negeri yang disetor sendiri.</li><li>PPh Final Pasal 4 ayat (2) atas royalti buku yang disetor sendiri.</li><li>KJS 402 untuk PHTB dan PPJB yang pertama.</li><li>KJS 432 untuk PPJB perubahan atau adendum.</li><li>Penghapusan KAP bunga/denda penagihan PBB dan KJS tertentu terkait pengungkapan ketidakbenaran pengisian SPT.</li></ul></td>
-</tr><tr>
-<td data-label="No">6</td>
-<td data-label="Semula">Sesuai PER-10 Lampiran D - Contoh penghitungan imbalan bunga.</td>
-<td data-label="Menjadi"><ul><li>Menyesuaikan contoh IB Pasal 27B ayat (3) atas STP.</li><li>Menghapus contoh IB atas SKKP PBB yang diajukan keberatan.</li><li>Penyesuaian tarif KMK.</li></ul></td>
-<td data-label="Keterangan"><ul><li>IB Pasal 27B ayat (3) atas STP memperhitungkan syarat SPT LB.</li><li>SKKP PBB tidak dapat diajukan keberatan.</li></ul></td>
-</tr></tbody>
-</table>
-</div>
-</section>
-<section class="section">
-<div class="section-head">
-<div class="section-title">Penyesuaian Lampiran B - KAP KJS</div>
-<span class="badge">Daftar kode</span>
-</div>
-<div class="table-scroll">
-<table>
-<thead><tr><th>No</th><th>Uraian</th><th>KAP</th><th>KJS</th></tr></thead>
-<tbody>
-<tr class="first-data-row">
-<td data-label="No">1</td>
-<td data-label="Uraian">Penambahan KJS <strong>Pajak Minimum Global</strong></td>
-<td data-label="KAP"><ul><li>411126 (SPT Tahunan PPh Badan)</li><li>411618 (Deposit Pajak)</li></ul></td>
-<td data-label="KJS"><ul><li>610</li><li>620</li><li>630</li></ul></td>
-</tr>
-<tr>
-<td data-label="No">2</td>
-<td data-label="Uraian">Penyesuaian KJS <strong>PHTB dan PPJB yang pertama</strong></td>
-<td data-label="KAP">411128 (PPh Final Pasal 4 ayat (2))</td>
-<td data-label="KJS">402</td>
-</tr>
-<tr>
-<td data-label="No">3</td>
-<td data-label="Uraian">Penyesuaian KJS <strong>PPJB perubahan atau adendum</strong></td>
-<td data-label="KAP">411128 (PPh Final Pasal 4 ayat (2))</td>
-<td data-label="KJS">432</td>
-</tr>
-<tr>
-<td data-label="No">4</td>
-<td data-label="Uraian">Penambahan KJS <strong>PPN atas pengeluaran BKP milik SPLN</strong> dari Kawasan Berikat ke tempat lain dalam daerah pabean</td>
-<td data-label="KAP">411211 (PPN DN)</td>
-<td data-label="KJS">123</td>
-</tr>
-<tr>
-<td data-label="No">5</td>
-<td data-label="Uraian">Penghapusan KAP <strong>Bunga penagihan PBB</strong> dan <strong>Denda penagihan PBB</strong></td>
-<td data-label="KAP"><ul><li>411624 (Bunga penagihan PBB)</li><li>411654 (Denda penagihan PBB)</li></ul></td>
-<td data-label="KJS">300</td>
-</tr>
-<tr>
-<td data-label="No">6</td>
-<td data-label="Uraian">Penambahan KJS untuk <strong>PPh Final Pasal 15</strong> atas penghasilan dari imbalan yang dibayarkan atau terutang kepada perusahaan pelayaran luar negeri yang disetor sendiri</td>
-<td data-label="KAP">411128 (PPh Final Pasal 15)</td>
-<td data-label="KJS">601</td>
-</tr>
-<tr>
-<td data-label="No">7</td>
-<td data-label="Uraian">Penambahan KJS untuk <strong>PPh Final Pasal 4 ayat (2)</strong> atas royalti buku yang disetor sendiri</td>
-<td data-label="KAP">411128 (PPh Final Pasal 4 ayat (2))</td>
-<td data-label="KJS">423</td>
-</tr>
-<tr>
-<td data-label="No">8</td>
-<td data-label="Uraian">Penghapusan KJS <strong>Pengungkapan Ketidakbenaran Pengisian SPT</strong> dan KJS <strong>Sanksi Kenaikan Pengungkapan Ketidakbenaran Pengisian SPT</strong> untuk KAP PBB seluruh sektor</td>
-<td data-label="KAP"><ul><li>411313</li><li>411314</li><li>411315</li><li>411316</li><li>411317</li><li>411319</li></ul></td>
-<td data-label="KJS"><ul><li>520</li><li>521</li></ul></td>
-</tr>
-<tr>
-<td data-label="No">9</td>
-<td data-label="Uraian">Perbaikan redaksional</td>
-<td data-label="KAP">-</td>
-<td data-label="KJS">-</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="note">Catatan: gunakan tabel ini sebagai materi ringkas. Tetap verifikasi dengan naskah PER-8/PJ/2026 dan lampiran resminya sebelum dipakai untuk keputusan operasional.</div>
-</section>
-</section>
-<section class="promo-section" id="pencarian-cepat-kap-kjs">
-<div class="promo-card">
-<div class="promo-copy">
-<p class="promo-eyebrow">
-            Fitur Kabayan
-          </p>
-<h2>
-            Cari KAP/KJS lebih cepat.
-          </h2>
-<p>
-            Temukan Kode Akun Pajak dan Kode Jenis Setoran
-            berdasarkan kata kunci, kode, jenis pajak,
-            jenis setoran, atau uraian sesuai PER-8/PJ/2026.
-          </p>
-<div class="promo-benefits">
-<span>Pencarian per baris</span>
-<span>Tabel lengkap di laptop</span>
-<span>Kartu nyaman di HP</span>
-</div>
-<div class="promo-actions">
-<a class="promo-button" href="kap-kjs-per8tahun2026.html">
-              Buka pencarian KAP/KJS
-              <span aria-hidden="true">↗</span>
-</a>
-<span class="promo-url">
-              dhaniswara86.id/kap-kjs-per8tahun2026.html
-            </span>
-</div>
-</div>
-<div aria-hidden="true" class="promo-visual">
-<div class="browser-mockup">
-<div class="browser-bar">
-<span></span>
-<span></span>
-<span></span>
-</div>
-<div class="browser-content">
-<div class="browser-brand">KABAYAN</div>
-<h3>Pencarian KAP/KJS</h3>
-<p>
-                Temukan kode berdasarkan kata kunci.
-              </p>
-<div class="mock-search">
-<div></div>
-<span>⌕</span>
-</div>
-<div class="mock-table">
-<span></span><span></span><span></span>
-<span></span><span></span><span></span>
-<span></span><span></span><span></span>
-<span></span><span></span><span></span>
-</div>
-</div>
-</div>
-<div class="phone-mockup">
-<div class="phone-top"></div>
-<div class="phone-content">
-<strong>Pencarian KAP/KJS</strong>
-<span></span>
-<span></span>
-<span></span>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="penutup"><h2>Penutup</h2><p>
-            PER-8/PJ/2026 bukan hanya memperpanjang masa berlaku kode
-            billing. Peraturan ini juga memperjelas pembatalan kode,
-            memperluas uraian pemindahbukuan, memperbarui petunjuk SSP,
-            dan menata kembali KAP serta KJS agar selaras dengan
-            kebutuhan administrasi perpajakan.
-          </p><p>
-            Karena kesalahan kode dapat memengaruhi pencatatan
-            pembayaran, pemilihan KAP dan KJS perlu dilakukan
-            berdasarkan sifat transaksi, dokumen yang mendasari
-            pembayaran, serta ketentuan terbaru dalam lampiran
-            PER-8/PJ/2026.
-          </p></section>
-</div>
+/* Strong jangan membesarkan ukuran font */
+.per8-article .comparison-zone table td strong,
+.per8-article .comparison-zone table th strong {
+  color: #1d1d1f !important;
+  font-family: inherit !important;
+  font-size: inherit !important;
+  font-weight: 700 !important;
+  line-height: inherit !important;
+}
+
+/* Ini sumber utama tabel sebelumnya terlihat "besar":
+   rule article li / .article-body li ikut masuk ke dalam td.
+   Semua list dalam tabel diputus dari style artikel. */
+.per8-article .comparison-zone table ul,
+.per8-article .comparison-zone table ol {
+  margin: 0 !important;
+  padding-left: 17px !important;
+  color: #424245 !important;
+  font-family: inherit !important;
+  font-size: 13px !important;
+  line-height: 1.45 !important;
+}
+
+.per8-article .comparison-zone table li,
+.per8-article .comparison-zone table li + li {
+  margin: 0 0 4px !important;
+  padding: 0 !important;
+  color: #424245 !important;
+  font-family: inherit !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  line-height: 1.45 !important;
+  letter-spacing: normal !important;
+}
+
+.per8-article .comparison-zone table li:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* KAP dan KJS pada tabel kedua lebih baik berupa daftar kode rapat,
+   tanpa bullet besar yang membuat sel sangat tinggi. */
+.per8-article .comparison-zone .section:nth-of-type(2) td:nth-child(3) ul,
+.per8-article .comparison-zone .section:nth-of-type(2) td:nth-child(4) ul {
+  display: grid !important;
+  gap: 4px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+
+.per8-article .comparison-zone .section:nth-of-type(2) td:nth-child(3) li,
+.per8-article .comparison-zone .section:nth-of-type(2) td:nth-child(4) li {
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+
+.per8-article .comparison-zone .section:nth-of-type(2) td:nth-child(3) li::marker,
+.per8-article .comparison-zone .section:nth-of-type(2) td:nth-child(4) li::marker {
+  content: "" !important;
+}
+
+/* Tidak ada lagi warna biru ketika pointer berada di atas baris. */
+.per8-article .comparison-zone table tbody tr:hover td {
+  background: #ffffff !important;
+}
+
+/* =========================================================
+   STRUKTUR & KEPALA BAGIAN
+   ========================================================= */
+.per8-article .comparison-zone {
+  width: 100%;
+  margin: 62px 0 72px;
+  padding-top: 54px;
+  border-top: 1px solid #e8e8ed;
+}
+
+.per8-article .comparison-heading {
+  max-width: 780px;
+  margin-bottom: 24px;
+}
+
+.per8-article .comparison-heading > p {
+  margin: 0 0 7px !important;
+  color: #86868b !important;
+  font-size: 14px !important;
+  font-weight: 650 !important;
+  line-height: 1.45 !important;
+}
+
+.per8-article .comparison-heading h2 {
+  margin: 0 !important;
+  color: #1d1d1f !important;
+  font-size: clamp(31px, 4vw, 43px) !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.045em !important;
+  line-height: 1.08 !important;
+}
+
+.per8-article .comparison-copy {
+  max-width: 760px;
+  margin-top: 14px;
+  color: #515154;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.per8-article .comparison-zone .section {
+  overflow: hidden;
+  margin: 22px 0 0;
+  border: 1px solid #e1e1e6;
+  border-radius: 22px;
+  background: #ffffff;
+  box-shadow: 0 13px 34px rgba(0,0,0,.05);
+}
+
+.per8-article .section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 19px 20px;
+  border-bottom: 1px solid #e8e8ed;
+  background: #f8f8fa;
+}
+
+.per8-article .section-title {
+  margin: 0 !important;
+  color: #1d1d1f !important;
+  font-size: 19px !important;
+  font-weight: 700 !important;
+  line-height: 1.25 !important;
+  letter-spacing: -0.025em !important;
+}
+
+.per8-article .badge {
+  max-width: 46%;
+  flex: 0 0 auto;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #eaf4ff;
+  color: #0071e3;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.25;
+  text-align: center;
+}
+
+.per8-article .note {
+  padding: 15px 18px;
+  border-top: 1px solid #e8e8ed;
+  background: #fbfcff;
+  color: #6e6e73;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+/* Lebar kolom tabel pertama */
+.per8-article .comparison-zone .section:nth-of-type(1) th:nth-child(1),
+.per8-article .comparison-zone .section:nth-of-type(1) td:nth-child(1) { width: 6% !important; }
+.per8-article .comparison-zone .section:nth-of-type(1) th:nth-child(2),
+.per8-article .comparison-zone .section:nth-of-type(1) td:nth-child(2) { width: 25% !important; }
+.per8-article .comparison-zone .section:nth-of-type(1) th:nth-child(3),
+.per8-article .comparison-zone .section:nth-of-type(1) td:nth-child(3) { width: 33% !important; }
+.per8-article .comparison-zone .section:nth-of-type(1) th:nth-child(4),
+.per8-article .comparison-zone .section:nth-of-type(1) td:nth-child(4) { width: 36% !important; }
+
+/* Lebar kolom tabel kedua */
+.per8-article .comparison-zone .section:nth-of-type(2) th:nth-child(1),
+.per8-article .comparison-zone .section:nth-of-type(2) td:nth-child(1) { width: 6% !important; }
+.per8-article .comparison-zone .section:nth-of-type(2) th:nth-child(2),
+.per8-article .comparison-zone .section:nth-of-type(2) td:nth-child(2) { width: 49% !important; }
+.per8-article .comparison-zone .section:nth-of-type(2) th:nth-child(3),
+.per8-article .comparison-zone .section:nth-of-type(2) td:nth-child(3) { width: 30% !important; }
+.per8-article .comparison-zone .section:nth-of-type(2) th:nth-child(4),
+.per8-article .comparison-zone .section:nth-of-type(2) td:nth-child(4) { width: 15% !important; }
+
+/* =========================================================
+   KOMPONEN NON-TABEL DARI V2 TETAP DIPERTAHANKAN
+   ========================================================= */
+.per8-article .lead {
+  margin: 0 0 34px;
+  color: #333336;
+  font-size: 19px;
+  line-height: 1.62;
+}
+
+.per8-article .regulation-card {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 12px;
+  margin: 30px 0 10px;
+}
+
+.per8-article .regulation-card > div {
+  padding: 20px;
+  border: 1px solid #e8e8ed;
+  border-radius: 19px;
+  background: #f5f5f7;
+}
+
+.per8-article .regulation-card small {
+  display: block;
+  margin-bottom: 7px;
+  color: #86868b;
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+.per8-article .regulation-card strong {
+  display: block;
+  color: #1d1d1f;
+  font-size: 16px;
+  line-height: 1.35;
+}
+
+.per8-article .callout {
+  margin: 30px 0;
+  padding: 22px 24px;
+  border: 1px solid #d5e7f8;
+  border-radius: 20px;
+  background: #eef6ff;
+}
+
+.per8-article .callout p {
+  margin: 0 !important;
+  color: #31536f !important;
+  font-size: 16px !important;
+  line-height: 1.6 !important;
+}
+
+/* Promo KAP/KJS: sederhana dan mengikuti ukuran Artikel V2 */
+.per8-article .promo-section {
+  width: 100%;
+  margin: 0 0 70px;
+}
+
+.per8-article .promo-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0,1.05fr) minmax(280px,.95fr);
+  align-items: center;
+  gap: 30px;
+  overflow: hidden;
+  padding: 36px;
+  border-radius: 27px;
+  background: linear-gradient(135deg,#061d42,#084f9e 57%,#058bc1);
+  color: #fff;
+}
+
+.per8-article .promo-copy,
+.per8-article .promo-visual {
+  position: relative;
+  z-index: 1;
+}
+
+.per8-article .promo-eyebrow {
+  margin: 0 0 13px !important;
+  color: #cfeaff !important;
+  font-size: 11px !important;
+  font-weight: 750 !important;
+  text-transform: uppercase;
+}
+
+.per8-article .promo-copy h2 {
+  margin: 0 !important;
+  color: #fff !important;
+  font-size: clamp(32px,4vw,46px) !important;
+  font-weight: 700 !important;
+  line-height: 1.05 !important;
+}
+
+.per8-article .promo-copy > p {
+  margin: 17px 0 0 !important;
+  color: rgba(255,255,255,.78) !important;
+  font-size: 15px !important;
+  line-height: 1.6 !important;
+}
+
+.per8-article .promo-benefits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 18px;
+}
+
+.per8-article .promo-benefits span {
+  padding: 6px 9px;
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 999px;
+  background: rgba(255,255,255,.09);
+  color: #eaf6ff;
+  font-size: 10px;
+  font-weight: 650;
+}
+
+.per8-article .promo-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.per8-article .promo-button {
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 16px;
+  border-radius: 999px;
+  background: #fff;
+  color: #084a9c;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.per8-article .promo-url {
+  color: rgba(255,255,255,.7);
+  font-size: 11px;
+}
+
+.per8-article .promo-visual {
+  min-height: 245px;
+  display: grid;
+  place-items: center;
+}
+
+/* Browser mockup cukup disederhanakan agar tidak mengambil alih halaman */
+.per8-article .browser-mockup {
+  width: min(360px,100%);
+  overflow: hidden;
+  border: 5px solid rgba(255,255,255,.92);
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 20px 40px rgba(0,0,0,.25);
+  color: #1d1d1f;
+}
+
+.per8-article .browser-bar {
+  height: 28px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0 11px;
+  background: #eef0f4;
+}
+
+.per8-article .browser-bar span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #c2c4c9;
+}
+
+.per8-article .browser-content {
+  padding: 17px;
+}
+
+.per8-article .browser-brand {
+  color: #084a9c;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.per8-article .browser-content h3 {
+  margin: 16px 0 5px !important;
+  color: #1d1d1f !important;
+  font-size: 19px !important;
+  line-height: 1.1 !important;
+}
+
+.per8-article .browser-content p {
+  margin: 0 !important;
+  color: #6e6e73 !important;
+  font-size: 10px !important;
+}
+
+.per8-article .mock-search {
+  display: grid;
+  grid-template-columns: 1fr 36px;
+  gap: 7px;
+  margin-top: 13px;
+}
+
+.per8-article .mock-search div {
+  height: 33px;
+  border: 1px solid #d8dce2;
+  border-radius: 9px;
+}
+
+.per8-article .mock-search span {
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  background: #0071e3;
+  color: #fff;
+}
+
+.per8-article .mock-table {
+  display: grid;
+  grid-template-columns: .7fr .7fr 1.6fr;
+  gap: 1px;
+  overflow: hidden;
+  margin-top: 12px;
+  border: 1px solid #dfe3e8;
+  border-radius: 8px;
+  background: #dfe3e8;
+}
+
+.per8-article .mock-table span {
+  height: 23px;
+  background: #fff;
+}
+
+.per8-article .mock-table span:nth-child(-n+3) {
+  height: 21px;
+  background: #0c5ab2;
+}
+
+.per8-article .phone-mockup {
+  display: none;
+}
+
+/* =========================================================
+   MOBILE: baris tabel menjadi kartu.
+   ========================================================= */
+@media (max-width: 760px) {
+  .per8-article .regulation-card {
+    grid-template-columns: 1fr;
+  }
+
+  .per8-article .comparison-zone {
+    margin-top: 50px;
+    padding-top: 45px;
+  }
+
+  .per8-article .comparison-zone .section {
+    overflow: visible;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .per8-article .section-head {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 18px;
+    border: 1px solid #e8e8ed;
+    border-radius: 19px;
+  }
+
+  .per8-article .badge {
+    max-width: 100%;
+    text-align: left;
+  }
+
+  .per8-article .comparison-zone .table-scroll {
+    overflow: visible;
+  }
+
+  .per8-article .comparison-zone table,
+  .per8-article .comparison-zone table tbody,
+  .per8-article .comparison-zone table tr,
+  .per8-article .comparison-zone table td {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  .per8-article .comparison-zone table {
+    min-width: 0 !important;
+    background: transparent !important;
+  }
+
+  .per8-article .comparison-zone table thead {
+    display: none !important;
+  }
+
+  .per8-article .comparison-zone table tbody {
+    display: grid !important;
+    gap: 12px !important;
+    padding: 12px 0 0 !important;
+    background: transparent !important;
+  }
+
+  .per8-article .comparison-zone table tr,
+  .per8-article .comparison-zone table tbody tr:nth-child(odd),
+  .per8-article .comparison-zone table tbody tr:nth-child(even),
+  .per8-article .comparison-zone table tbody tr:hover {
+    display: block !important;
+    overflow: hidden !important;
+    border: 1px solid #e8e8ed !important;
+    border-radius: 17px !important;
+    background: #fff !important;
+    box-shadow: 0 8px 23px rgba(0,0,0,.04) !important;
+  }
+
+  .per8-article .comparison-zone table td,
+  .per8-article .comparison-zone table tbody tr:nth-child(odd) td,
+  .per8-article .comparison-zone table tbody tr:nth-child(even) td,
+  .per8-article .comparison-zone table tbody tr:hover td {
+    display: block !important;
+    width: 100% !important;
+    padding: 12px 14px !important;
+    border-right: 0 !important;
+    border-bottom: 1px solid #e8e8ed !important;
+    background: #fff !important;
+    color: #424245 !important;
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    text-align: left !important;
+  }
+
+  .per8-article .comparison-zone table td:last-child {
+    border-bottom: 0 !important;
+  }
+
+  .per8-article .comparison-zone table td::before {
+    display: block !important;
+    margin-bottom: 4px !important;
+    color: #86868b !important;
+    content: attr(data-label) !important;
+    font-size: 9px !important;
+    font-weight: 750 !important;
+    letter-spacing: .04em !important;
+    text-transform: uppercase !important;
+  }
+
+  .per8-article .comparison-zone table td:first-child {
+    background: #eef6ff !important;
+    color: #0071e3 !important;
+  }
+
+  .per8-article .comparison-zone table ul,
+  .per8-article .comparison-zone table ol,
+  .per8-article .comparison-zone table li {
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+  }
+
+  /* Di HP bullets daftar KAP/KJS boleh kembali terlihat sebagai daftar vertikal */
+  .per8-article .comparison-zone .section:nth-of-type(2) td:nth-child(3) ul,
+  .per8-article .comparison-zone .section:nth-of-type(2) td:nth-child(4) ul {
+    display: grid !important;
+    gap: 3px !important;
+  }
+
+  .per8-article .promo-card {
+    grid-template-columns: 1fr;
+    padding: 28px 21px 32px;
+  }
+
+  .per8-article .promo-copy {
+    text-align: center;
+  }
+
+  .per8-article .promo-benefits,
+  .per8-article .promo-actions {
+    justify-content: center;
+  }
+
+  .per8-article .promo-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .per8-article .promo-button {
+    width: 100%;
+  }
+}
