@@ -41,6 +41,8 @@ hero_stats:
     label: "Bukan mekanisme untuk PPh Final UMKM 0,5%"
 
 sidebar_note: "SKB tidak berlaku surut. Permohonan sebaiknya disampaikan sebelum pemotongan atau pemungutan dilakukan."
+custom_js:
+  - /assets/js/skb-form.js
 ---
 
 <section id="pengantar">
