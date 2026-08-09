@@ -52,15 +52,14 @@ hero_stats:
 sidebar_note: "Penentuan tarif tetap perlu memperhatikan kontrak, kegiatan yang sebenarnya dilakukan, status para pihak, serta dokumen sertifikasi penyedia jasa."
 
 custom_css:
-  - /assets/css/jasakonstruksi-v2.css
+  - /assets/css/jasakonstruksi.css?v=20260809-2
 
 custom_js:
-  - /assets/js/jasakonstruksi-v2.js
+  - /assets/js/jasakonstruksi.js?v=20260809-2
 ---
 
-<div class="jasakonstruksi-article">
+<div class="jk-article">
 <section id="pengantar">
-
 <p>
                 Membangun rumah, merenovasi kantor, mengerjakan instalasi,
                 merancang bangunan, sampai mengawasi proyek konstruksi
@@ -93,17 +92,17 @@ custom_js:
                 pajak dalam penghitungan PPh tahunan atas penghasilan
                 yang sama.
               </p>
-<div class="legal-basis">
-<div class="legal-item">
-<span class="legal-number">1</span>
+<div class="jk-legal-basis">
+<div class="jk-legal-item">
+<span class="jk-legal-number">1</span>
 <span>Peraturan Pemerintah Nomor 51 Tahun 2008.</span>
 </div>
-<div class="legal-item">
-<span class="legal-number">2</span>
+<div class="jk-legal-item">
+<span class="jk-legal-number">2</span>
 <span>Peraturan Pemerintah Nomor 40 Tahun 2009.</span>
 </div>
-<div class="legal-item">
-<span class="legal-number">3</span>
+<div class="jk-legal-item">
+<span class="jk-legal-number">3</span>
 <span>
                     Peraturan Pemerintah Nomor 9 Tahun 2022 sebagai
                     perubahan terakhir mengenai tarif dan pengelompokan
@@ -111,7 +110,7 @@ custom_js:
                   </span>
 </div>
 </div>
-<div class="callout callout-orange">
+<div class="jk-callout jk-callout-orange">
 <strong>Catatan Kabayan</strong>
 <p>
                   Untuk pembayaran kontrak yang dilakukan sejak
@@ -126,9 +125,9 @@ custom_js:
                 Sebelum mencari tarif pajaknya, tentukan terlebih dahulu
                 jenis layanan yang benar-benar diberikan.
               </p>
-<div class="service-grid">
-<article class="service-card">
-<div class="service-card-icon">K</div>
+<div class="jk-service-grid">
+<article class="jk-service-card">
+<div class="jk-service-card-icon">K</div>
 <h3>Jasa konsultansi konstruksi</h3>
 <p>
                     Mencakup kegiatan pengkajian, perencanaan,
@@ -142,8 +141,8 @@ custom_js:
 <li>Manajemen konstruksi.</li>
 </ul>
 </article>
-<article class="service-card">
-<div class="service-card-icon">P</div>
+<article class="jk-service-card">
+<div class="jk-service-card-icon">P</div>
 <h3>Pekerjaan konstruksi</h3>
 <p>
                     Mencakup pembangunan, pengoperasian, pemeliharaan,
@@ -156,8 +155,8 @@ custom_js:
 <li>Pemeliharaan konstruksi.</li>
 </ul>
 </article>
-<article class="service-card">
-<div class="service-card-icon">I</div>
+<article class="jk-service-card">
+<div class="jk-service-card-icon">I</div>
 <h3>Konstruksi terintegrasi</h3>
 <p>
                     Merupakan gabungan pekerjaan konstruksi dengan
@@ -171,17 +170,17 @@ custom_js:
 </article>
 </div>
 </section>
-<section class="tariff-section" id="tarif">
-<div class="tariff-heading">
-<span class="section-label">Tarif yang berlaku</span>
+<section class="jk-tariff-section" id="tarif">
+<div class="jk-tariff-heading">
+<span class="jk-section-label">Tarif yang berlaku</span>
 <h2>Tarif PPh Final Jasa Konstruksi</h2>
 <p>
                   Tarif ditentukan berdasarkan kelompok jasa, kualifikasi,
                   dan kepemilikan SBU atau sertifikat kompetensi kerja.
                 </p>
 </div>
-<div class="tariff-table-wrapper">
-<table class="tariff-table">
+<div class="jk-tariff-table-wrapper">
+<table class="jk-tariff-table">
 <thead>
 <tr>
 <th>Jenis layanan</th>
@@ -191,55 +190,55 @@ custom_js:
 </thead>
 <tbody>
 <tr>
-<td>Pekerjaan konstruksi</td>
-<td>
+<td data-label="Jenis layanan">Pekerjaan konstruksi</td>
+<td data-label="Kondisi penyedia">
                         Mempunyai SBU kualifikasi kecil atau sertifikat
                         kompetensi kerja untuk usaha orang perseorangan.
-                        <span class="tariff-badge">Kualifikasi kecil</span>
+                        <span class="jk-tariff-badge">Kualifikasi kecil</span>
 </td>
-<td>1,75%</td>
+<td data-label="Tarif">1,75%</td>
 </tr>
 <tr>
-<td>Pekerjaan konstruksi</td>
-<td>
+<td data-label="Jenis layanan">Pekerjaan konstruksi</td>
+<td data-label="Kondisi penyedia">
                         Tidak mempunyai SBU atau sertifikat kompetensi
                         kerja yang dipersyaratkan.
                       </td>
-<td>4%</td>
+<td data-label="Tarif">4%</td>
 </tr>
 <tr>
-<td>Pekerjaan konstruksi</td>
-<td>
+<td data-label="Jenis layanan">Pekerjaan konstruksi</td>
+<td data-label="Kondisi penyedia">
                         Selain kualifikasi kecil, antara lain kualifikasi
                         menengah, besar, atau spesialis.
                       </td>
-<td>2,65%</td>
+<td data-label="Tarif">2,65%</td>
 </tr>
 <tr>
-<td>Pekerjaan konstruksi terintegrasi</td>
-<td>Mempunyai SBU yang sesuai.</td>
-<td>2,65%</td>
+<td data-label="Jenis layanan">Pekerjaan konstruksi terintegrasi</td>
+<td data-label="Kondisi penyedia">Mempunyai SBU yang sesuai.</td>
+<td data-label="Tarif">2,65%</td>
 </tr>
 <tr>
-<td>Pekerjaan konstruksi terintegrasi</td>
-<td>Tidak mempunyai SBU.</td>
-<td>4%</td>
+<td data-label="Jenis layanan">Pekerjaan konstruksi terintegrasi</td>
+<td data-label="Kondisi penyedia">Tidak mempunyai SBU.</td>
+<td data-label="Tarif">4%</td>
 </tr>
 <tr>
-<td>Jasa konsultansi konstruksi</td>
-<td>
+<td data-label="Jenis layanan">Jasa konsultansi konstruksi</td>
+<td data-label="Kondisi penyedia">
                         Mempunyai SBU atau sertifikat kompetensi kerja
                         untuk usaha orang perseorangan.
                       </td>
-<td>3,5%</td>
+<td data-label="Tarif">3,5%</td>
 </tr>
 <tr>
-<td>Jasa konsultansi konstruksi</td>
-<td>
+<td data-label="Jenis layanan">Jasa konsultansi konstruksi</td>
+<td data-label="Kondisi penyedia">
                         Tidak mempunyai SBU atau sertifikat kompetensi
                         kerja yang dipersyaratkan.
                       </td>
-<td>6%</td>
+<td data-label="Tarif">6%</td>
 </tr>
 </tbody>
 </table>
@@ -247,8 +246,8 @@ custom_js:
 </section>
 <section id="sertifikasi">
 <h2>Apa Itu SBU dan Sertifikat Kompetensi Kerja?</h2>
-<div class="certificate-grid">
-<article class="certificate-card">
+<div class="jk-certificate-grid">
+<article class="jk-certificate-card">
 <h3>SBU</h3>
 <p>
                     Sertifikat Badan Usaha merupakan tanda bukti
@@ -256,7 +255,7 @@ custom_js:
                     kemampuan badan usaha jasa konstruksi.
                   </p>
 </article>
-<article class="certificate-card">
+<article class="jk-certificate-card">
 <h3>Sertifikat kompetensi kerja</h3>
 <p>
                     Digunakan untuk membuktikan kompetensi tenaga kerja
@@ -272,7 +271,7 @@ custom_js:
                 1,75%. Apabila tidak mempunyai sertifikat yang
                 dipersyaratkan, tarifnya dapat menjadi 4%.
               </p>
-<div class="callout callout-blue">
+<div class="jk-callout jk-callout-blue">
 <strong>Ingat</strong>
 <p>
                   Tidak cukup hanya melihat nama perusahaan atau nama
@@ -288,14 +287,14 @@ custom_js:
                 Gunakan simulasi berikut untuk memperkirakan PPh Final
                 berdasarkan nilai pembayaran sebelum PPN.
               </p>
-<div class="calculator-card">
+<div class="jk-calculator-card">
 <h3>Kalkulator edukasi</h3>
 <p>
                   Pilih kondisi penyedia jasa, lalu masukkan nilai
                   pembayaran sebelum PPN.
                 </p>
-<div class="calculator-grid">
-<div class="calculator-field">
+<div class="jk-calculator-grid">
+<div class="jk-calculator-field">
 <label for="tariffSelector">Jenis layanan dan kondisi</label>
 <select id="tariffSelector">
 <option value="1.75">
@@ -321,28 +320,28 @@ custom_js:
                       </option>
 </select>
 </div>
-<div class="calculator-field">
+<div class="jk-calculator-field">
 <label for="paymentValue">
                       Nilai pembayaran sebelum PPN
                     </label>
 <input id="paymentValue" inputmode="numeric" placeholder="Contoh: 500000000" type="text" value="500000000"/>
 </div>
 </div>
-<div class="calculator-result">
-<div class="result-card">
+<div class="jk-calculator-result">
+<div class="jk-result-card">
 <span>Tarif</span>
 <strong id="resultRate">1,75%</strong>
 </div>
-<div class="result-card">
+<div class="jk-result-card">
 <span>Dasar penghitungan</span>
 <strong id="resultBase">Rp500.000.000</strong>
 </div>
-<div class="result-card">
+<div class="jk-result-card">
 <span>PPh Final</span>
 <strong id="resultTax">Rp8.750.000</strong>
 </div>
 </div>
-<div class="calculator-note">
+<div class="jk-calculator-note">
                   Simulasi ini merupakan alat bantu edukasi. Penentuan
                   tarif tetap harus didasarkan pada substansi transaksi
                   dan dokumen yang sebenarnya.
@@ -356,7 +355,7 @@ custom_js:
                 atau penerimaan yang menjadi bagian dari nilai kontrak
                 jasa konstruksi, tidak termasuk PPN.
               </p>
-<div class="formula-box">
+<div class="jk-formula-box">
 <span>Rumus sederhana</span>
 <strong>
                   PPh Final = Tarif × Nilai pembayaran sebelum PPN
@@ -367,49 +366,49 @@ custom_js:
                 berdasarkan termin, PPh Final dihitung pada setiap
                 pembayaran termin.
               </p>
-<div class="example-grid">
-<article class="example-card">
-<div class="example-card-header">
+<div class="jk-example-grid">
+<article class="jk-example-card">
+<div class="jk-example-card-header">
 <h3>Contoh 1: Kualifikasi kecil</h3>
-<span class="example-rate">1,75%</span>
+<span class="jk-example-rate">1,75%</span>
 </div>
 <p>
                     PT Maju Bangun menerima pembayaran termin renovasi
                     gedung sebesar Rp500.000.000 sebelum PPN dan
                     mempunyai SBU kualifikasi kecil yang sesuai.
                   </p>
-<div class="calculation-line">
+<div class="jk-calculation-line">
 <span>Dasar penghitungan</span>
 <strong>Rp500.000.000</strong>
 </div>
-<div class="calculation-line">
+<div class="jk-calculation-line">
 <span>PPh Final</span>
 <strong>Rp8.750.000</strong>
 </div>
 </article>
-<article class="example-card">
-<div class="example-card-header">
+<article class="jk-example-card">
+<div class="jk-example-card-header">
 <h3>Contoh 2: Tidak mempunyai SBU</h3>
-<span class="example-rate">4%</span>
+<span class="jk-example-rate">4%</span>
 </div>
 <p>
                     CV Bangun Bersama menerima pembayaran pekerjaan
                     konstruksi sebesar Rp500.000.000 sebelum PPN, tetapi
                     tidak mempunyai SBU atau sertifikat yang dipersyaratkan.
                   </p>
-<div class="calculation-line">
+<div class="jk-calculation-line">
 <span>Dasar penghitungan</span>
 <strong>Rp500.000.000</strong>
 </div>
-<div class="calculation-line">
+<div class="jk-calculation-line">
 <span>PPh Final</span>
 <strong>Rp20.000.000</strong>
 </div>
 </article>
-<article class="example-card">
-<div class="example-card-header">
+<article class="jk-example-card">
+<div class="jk-example-card-header">
 <h3>Contoh 3: Konsultansi konstruksi</h3>
-<span class="example-rate">3,5%</span>
+<span class="jk-example-rate">3,5%</span>
 </div>
 <p>
                     PT Arsitektur Nusantara memberikan jasa perencanaan
@@ -417,11 +416,11 @@ custom_js:
                     Rp200.000.000 sebelum PPN serta mempunyai SBU yang
                     sesuai.
                   </p>
-<div class="calculation-line">
+<div class="jk-calculation-line">
 <span>Dasar penghitungan</span>
 <strong>Rp200.000.000</strong>
 </div>
-<div class="calculation-line">
+<div class="jk-calculation-line">
 <span>PPh Final</span>
 <strong>Rp7.000.000</strong>
 </div>
@@ -430,8 +429,8 @@ custom_js:
 </section>
 <section id="pemotongan">
 <h2>Siapa yang Memotong Pajaknya?</h2>
-<div class="mechanism-grid">
-<article class="mechanism-card withholding">
+<div class="jk-mechanism-grid">
+<article class="jk-mechanism-card jk-withholding">
 <h3>Dipotong oleh pengguna jasa</h3>
 <p>
                     Berlaku apabila pengguna jasa merupakan pihak yang
@@ -443,7 +442,7 @@ custom_js:
 <li>Melaporkan dalam SPT Masa PPh Unifikasi.</li>
 </ol>
 </article>
-<article class="mechanism-card self-paid">
+<article class="jk-mechanism-card jk-self-paid">
 <h3>Disetor sendiri oleh penyedia jasa</h3>
 <p>
                     Berlaku apabila pengguna jasa bukan pemotong pajak,
@@ -456,7 +455,7 @@ custom_js:
                   </p>
 </article>
 </div>
-<div class="callout callout-orange">
+<div class="jk-callout jk-callout-orange">
 <strong>Catatan Kabayan</strong>
 <p>
                   Tidak adanya pemotongan dari pelanggan bukan berarti
@@ -484,7 +483,7 @@ custom_js:
                 mempunyai kontrak dan dokumen yang terpisah, serta bukan
                 bagian dari pelaksanaan kontrak jasa konstruksi.
               </p>
-<div class="callout callout-blue">
+<div class="jk-callout jk-callout-blue">
 <strong>Baca dokumen secara menyeluruh</strong>
 <p>
                   Periksa kontrak, ruang lingkup pekerjaan, invoice,
@@ -512,7 +511,7 @@ custom_js:
                 misalnya PPh Pasal 21 atau PPh Pasal 23, bergantung pada
                 bentuk penyedia jasa dan jenis layanan.
               </p>
-<div class="callout callout-red">
+<div class="jk-callout jk-callout-red">
 <strong>Jangan hanya membaca judul invoice</strong>
 <p>
                   Substansi pekerjaan lebih penting daripada satu atau
@@ -541,15 +540,15 @@ custom_js:
 </section>
 <section id="jatuh-tempo">
 <h2>Batas Waktu Pembayaran dan Pelaporan</h2>
-<div class="date-strip">
-<article class="date-card">
+<div class="jk-date-strip">
+<article class="jk-date-card">
 <span>Penyetoran pajak masa</span>
 <strong>Tanggal 15</strong>
 <p>
                     Paling lambat tanggal 15 bulan berikutnya.
                   </p>
 </article>
-<article class="date-card">
+<article class="jk-date-card">
 <span>SPT Masa PPh Unifikasi</span>
 <strong>20 hari</strong>
 <p>
@@ -568,9 +567,9 @@ custom_js:
 </section>
 <section id="kesalahan">
 <h2>Kesalahan yang Sering Terjadi</h2>
-<div class="mistake-list">
-<article class="mistake-item">
-<span class="mistake-number">1</span>
+<div class="jk-mistake-list">
+<article class="jk-mistake-item">
+<span class="jk-mistake-number">1</span>
 <div>
 <strong>Menggunakan satu tarif untuk semua kontraktor</strong>
 <p>
@@ -579,8 +578,8 @@ custom_js:
                     </p>
 </div>
 </article>
-<article class="mistake-item">
-<span class="mistake-number">2</span>
+<article class="jk-mistake-item">
+<span class="jk-mistake-number">2</span>
 <div>
 <strong>Hanya melihat kode usaha</strong>
 <p>
@@ -589,8 +588,8 @@ custom_js:
                     </p>
 </div>
 </article>
-<article class="mistake-item">
-<span class="mistake-number">3</span>
+<article class="jk-mistake-item">
+<span class="jk-mistake-number">3</span>
 <div>
 <strong>Tidak meminta dokumen sertifikasi</strong>
 <p>
@@ -599,8 +598,8 @@ custom_js:
                     </p>
 </div>
 </article>
-<article class="mistake-item">
-<span class="mistake-number">4</span>
+<article class="jk-mistake-item">
+<span class="jk-mistake-number">4</span>
 <div>
 <strong>Menghitung hanya dari nilai jasa</strong>
 <p>
@@ -609,8 +608,8 @@ custom_js:
                     </p>
 </div>
 </article>
-<article class="mistake-item">
-<span class="mistake-number">5</span>
+<article class="jk-mistake-item">
+<span class="jk-mistake-number">5</span>
 <div>
 <strong>Menggunakan tarif UMKM 0,5%</strong>
 <p>
@@ -619,8 +618,8 @@ custom_js:
                     </p>
 </div>
 </article>
-<article class="mistake-item">
-<span class="mistake-number">6</span>
+<article class="jk-mistake-item">
+<span class="jk-mistake-number">6</span>
 <div>
 <strong>Menganggap pajak tidak terutang</strong>
 <p>
@@ -633,7 +632,7 @@ custom_js:
 </section>
 <section id="dokumen">
 <h2>Dokumen yang Sebaiknya Diperiksa</h2>
-<ul class="check-list">
+<ul class="jk-check-list">
 <li>Kontrak atau surat perintah kerja.</li>
 <li>Ruang lingkup pekerjaan.</li>
 <li>Rincian nilai kontrak.</li>
@@ -653,46 +652,46 @@ custom_js:
 </section>
 <section id="cara-cepat">
 <h2>Cara Cepat Menentukan Tarif</h2>
-<div class="steps">
-<article class="step">
+<div class="jk-steps">
+<article class="jk-step">
 <strong>Pastikan termasuk jasa konstruksi</strong>
 <p>
                     Jangan hanya mengandalkan nama pekerjaan pada invoice.
                   </p>
 </article>
-<article class="step">
+<article class="jk-step">
 <strong>Tentukan kelompok layanannya</strong>
 <p>
                     Konsultansi, pekerjaan konstruksi, atau konstruksi
                     terintegrasi.
                   </p>
 </article>
-<article class="step">
+<article class="jk-step">
 <strong>Periksa sertifikasi penyedia</strong>
 <p>
                     Teliti SBU atau sertifikat kompetensi kerja yang relevan.
                   </p>
 </article>
-<article class="step">
+<article class="jk-step">
 <strong>Tentukan tarif</strong>
 <p>
                     Cocokkan jenis layanan dan kondisi penyedia dengan
                     tabel tarif.
                   </p>
 </article>
-<article class="step">
+<article class="jk-step">
 <strong>Hitung dari pembayaran sebelum PPN</strong>
 <p>
                     Lakukan penghitungan pada setiap pembayaran termin.
                   </p>
 </article>
-<article class="step">
+<article class="jk-step">
 <strong>Tentukan mekanisme pemenuhan</strong>
 <p>
                     Dipotong pengguna jasa atau disetor sendiri penyedia.
                   </p>
 </article>
-<article class="step">
+<article class="jk-step">
 <strong>Buat bukti dan laporkan</strong>
 <p>
                     Dokumentasikan pemotongan serta laporkan melalui
@@ -701,7 +700,7 @@ custom_js:
 </article>
 </div>
 </section>
-<section class="closing-box" id="kesimpulan">
+<section class="jk-closing-box" id="kesimpulan">
 <h2>Kesimpulan</h2>
 <p>
                 Menentukan PPh Final jasa konstruksi tidak cukup hanya
