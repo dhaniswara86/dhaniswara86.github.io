@@ -26,7 +26,7 @@ reading_time: "13 menit baca"
 legal_basis: "PP 51/2008 jo. PP 40/2009 jo. PP 9/2022"
 
 # URL uji. Setelah versi V2 dipastikan baik, gunakan URL file lama.
-permalink: /artikel/uji-jasa-konstruksi/
+permalink: /jasakonstruksi.html
 
 summary_label: "Ringkasan cepat"
 summary: "Ada tiga pertanyaan utama sebelum menentukan tarif: apa jenis pekerjaannya, siapa penyedia jasanya, dan sertifikat apa yang dimilikinya?"
