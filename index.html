@@ -4109,7 +4109,11 @@ body.mega-menu-open {
 <a class="showcase-button primary" href="artikel.html">
             Baca artikel
           </a>
-<a class="showcase-button secondary" href="per8pj2026.html">
+<a
+            class="showcase-button secondary"
+            href="artikel.html"
+            id="latestArticleButton"
+          >
             Artikel terbaru
           </a>
 </div>
@@ -4129,9 +4133,8 @@ body.mega-menu-open {
 <span>ARTIKEL</span>
 </div>
 <span class="editorial-chip blue">Terbaru</span>
-<strong>
-            PER-8/PJ/2026:
-            Apa yang berubah?
+<strong id="latestArticleVisualTitle">
+            Artikel perpajakan terbaru.
           </strong>
 <span class="editorial-line dark"></span>
 <span class="editorial-line short"></span>
@@ -5290,5 +5293,167 @@ body.mega-menu-open {
   window.addEventListener('resize', handleModeChange);
 })();
 </script>
+
+<script id="latestArticleAutoLinkScript">
+(() => {
+  "use strict";
+
+  const latestArticleButton =
+    document.getElementById("latestArticleButton");
+
+  const latestArticleVisualTitle =
+    document.getElementById("latestArticleVisualTitle");
+
+  if (!latestArticleButton) {
+    return;
+  }
+
+  /*
+   * Secara default tombol diarahkan ke artikel.html.
+   * Jadi jika proses pembacaan artikel terbaru gagal,
+   * pengguna tetap tidak akan mendapat halaman 404.
+   */
+  latestArticleButton.href = "artikel.html";
+
+  async function loadLatestArticle() {
+    try {
+      const response =
+        await fetch(
+          "artikel.html",
+          {
+            cache: "no-store"
+          }
+        );
+
+      if (!response.ok) {
+        throw new Error(
+          "Halaman artikel tidak dapat dibaca."
+        );
+      }
+
+      const html =
+        await response.text();
+
+      const parser =
+        new DOMParser();
+
+      const articleDocument =
+        parser.parseFromString(
+          html,
+          "text/html"
+        );
+
+      /*
+       * Urutan pencarian:
+       *
+       * 1. Daftar "Artikel Terbaru" pada mega menu artikel.
+       *    Pada sistem Artikel V2, daftar ini menempatkan artikel
+       *    terbaru pada posisi paling atas.
+       *
+       * 2. Kartu pertama pada katalog Artikel V2.
+       *
+       * 3. Struktur artikel lama sebagai fallback.
+       */
+      const latestLink =
+        articleDocument.querySelector(
+          '[data-nav-panel="artikel"] .nav-mega-featured a[href]'
+        ) ||
+        articleDocument.querySelector(
+          '#articleGrid [data-article-item] a[href]'
+        ) ||
+        articleDocument.querySelector(
+          '#articleGrid .article-card h3 a[href]'
+        ) ||
+        articleDocument.querySelector(
+          '#articleGrid .article-card .article-link[href]'
+        );
+
+      if (!latestLink) {
+        throw new Error(
+          "Link artikel terbaru tidak ditemukan."
+        );
+      }
+
+      const rawHref =
+        latestLink.getAttribute("href");
+
+      if (!rawHref) {
+        throw new Error(
+          "URL artikel terbaru kosong."
+        );
+      }
+
+      /*
+       * Pertahankan URL relatif terhadap domain Kabayan.
+       */
+      const resolvedURL =
+        new URL(
+          rawHref,
+          window.location.href
+        );
+
+      latestArticleButton.href =
+        resolvedURL.pathname +
+        resolvedURL.search +
+        resolvedURL.hash;
+
+      /*
+       * Ambil judul artikel agar ilustrasi "Terbaru"
+       * di index juga mengikuti artikel terbaru.
+       */
+      const titleFromLink =
+        latestLink
+          .querySelector("strong")
+          ?.textContent
+          ?.trim();
+
+      const parentCard =
+        latestLink.closest(
+          "[data-article-item], .article-card"
+        );
+
+      const titleFromCard =
+        parentCard
+          ?.querySelector("h3")
+          ?.textContent
+          ?.trim();
+
+      const latestTitle =
+        titleFromLink ||
+        titleFromCard ||
+        latestLink.textContent.trim();
+
+      if (
+        latestArticleVisualTitle &&
+        latestTitle
+      ) {
+        latestArticleVisualTitle.textContent =
+          latestTitle;
+      }
+
+      if (latestTitle) {
+        latestArticleButton.setAttribute(
+          "aria-label",
+          "Baca artikel terbaru: " +
+          latestTitle
+        );
+
+        latestArticleButton.title =
+          latestTitle;
+      }
+    } catch (error) {
+      /*
+       * Fallback tetap artikel.html agar tidak pernah
+       * mengarah ke URL artikel lama yang sudah tidak ada.
+       */
+      latestArticleButton.href =
+        "artikel.html";
+    }
+  }
+
+  loadLatestArticle();
+})();
+</script>
+
 </body>
 </html>
