@@ -23,7 +23,7 @@ date_modified: 2026-08-06
 reading_time: "8 menit baca"
 
 # URL uji. Jangan permanenkan sebelum tampilan tabel dan filter dipastikan benar.
-permalink: /artikel/uji-layanan-administrasi-ctas/
+permalink: /sop-layanan.html
 
 summary_label: "Ringkasan cepat"
 summary: "Tabel ini memuat empat informasi utama: Kode Layanan, Nama Layanan, Jangka Waktu Penyelesaian, dan Dasar Hukum. Gunakan pencarian dan filter agar daftar yang panjang lebih mudah ditelusuri."
