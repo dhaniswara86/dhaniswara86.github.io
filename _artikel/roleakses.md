@@ -25,7 +25,7 @@ author: "Angga Sukma Dhaniswara"
 reading_time: "14 menit baca"
 
 # URL uji. Setelah versi V2 dipastikan baik, ganti dengan URL lama.
-permalink: /artikel/uji-role-akses/
+permalink: /roleakses.html
 
 summary_label: "Ringkasan cepat"
 summary: "Role akses bukan sekadar menu teknis. Fitur ini membagi kewenangan berdasarkan pengguna, jenis dokumen, tahapan pekerjaan, dan dalam kondisi tertentu lokasi atau tempat kegiatan usaha."
