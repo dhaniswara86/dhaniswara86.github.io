@@ -324,7 +324,7 @@ custom_js:
 <label for="paymentValue">
                       Nilai pembayaran sebelum PPN
                     </label>
-<input id="paymentValue" inputmode="numeric" placeholder="Contoh: 500000000" type="text" value="500000000"/>
+<input id="paymentValue" inputmode="numeric" placeholder="Contoh: 500000000" type="text"/>
 </div>
 </div>
 <div class="jk-calculator-result">
