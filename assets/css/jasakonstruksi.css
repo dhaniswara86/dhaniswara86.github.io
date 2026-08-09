@@ -1,0 +1,900 @@
+/* =========================================================
+   PPh FINAL JASA KONSTRUKSI — ARTIKEL V2
+   Semua selector dibatasi ke .jasakonstruksi-article agar tidak
+   memengaruhi artikel Kabayan lainnya.
+   ========================================================= */
+
+.jasakonstruksi-article,
+.jasakonstruksi-article * {
+  font-family: inherit;
+}
+
+/* Dasar hukum */
+.jasakonstruksi-article .legal-basis {
+  display: grid;
+  gap: 10px;
+  margin: 25px 0 34px;
+}
+
+.jasakonstruksi-article .legal-item {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 39px minmax(0, 1fr);
+  gap: 13px;
+  padding: 15px 17px;
+  border: 1px solid var(--soft-gray);
+  border-radius: 17px;
+  background: #fff;
+}
+
+.jasakonstruksi-article .legal-number {
+  width: 39px;
+  height: 39px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: #eef6ff;
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.jasakonstruksi-article .legal-item span:last-child {
+  color: #515154;
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+/* Callout */
+.jasakonstruksi-article .callout {
+  margin: 32px 0;
+  padding: 23px 25px;
+  border-radius: 22px;
+}
+
+.jasakonstruksi-article .callout strong {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 16px;
+  letter-spacing: -0.02em;
+}
+
+.jasakonstruksi-article .callout p {
+  margin: 0 !important;
+  font-size: 16px !important;
+  line-height: 1.58 !important;
+}
+
+.jasakonstruksi-article .callout-blue {
+  border: 1px solid #d5e7f8;
+  background: #eef6ff;
+  color: #31536f;
+}
+
+.jasakonstruksi-article .callout-orange {
+  border: 1px solid #f2dfbd;
+  background: #fff7e8;
+  color: #6d4b14;
+}
+
+.jasakonstruksi-article .callout-green {
+  border: 1px solid #cfe8d3;
+  background: #edf8ef;
+  color: #315f3a;
+}
+
+.jasakonstruksi-article .callout-red {
+  border: 1px solid #f2cbc8;
+  background: #fff0ee;
+  color: #7b302d;
+}
+
+/* Tiga kelompok jasa */
+.jasakonstruksi-article .service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin: 28px 0 34px;
+}
+
+.jasakonstruksi-article .service-card {
+  min-height: 280px;
+  padding: 24px;
+  border: 1px solid var(--soft-gray);
+  border-radius: 23px;
+  background: #fff;
+}
+
+.jasakonstruksi-article .service-card-icon {
+  width: 45px;
+  height: 45px;
+  display: grid;
+  margin-bottom: 18px;
+  place-items: center;
+  border-radius: 14px;
+  background: #eef6ff;
+  color: var(--blue);
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.jasakonstruksi-article .service-card h3 {
+  margin: 0 0 10px;
+  font-size: 21px;
+}
+
+.jasakonstruksi-article .service-card p {
+  margin: 0 0 13px;
+  color: #515154;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.jasakonstruksi-article .service-card ul {
+  margin: 0;
+  padding-left: 18px;
+  color: #6e6e73;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* =========================================================
+   TABEL TARIF — RESET KHUSUS AGAR TIDAK BENTROK DENGAN
+   CSS TABEL GLOBAL ARTIKEL V2
+   ========================================================= */
+.jasakonstruksi-article .tariff-section {
+  margin: 74px 0 38px;
+  scroll-margin-top: 86px;
+}
+
+.jasakonstruksi-article .tariff-heading {
+  margin-bottom: 22px;
+}
+
+.jasakonstruksi-article .section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 12px;
+  padding: 7px 11px;
+  border-radius: 999px;
+  background: #eef6ff;
+  color: var(--blue);
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.jasakonstruksi-article .section-label::before {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--blue);
+  content: "";
+}
+
+.jasakonstruksi-article .tariff-heading h2 {
+  margin: 0 0 15px;
+}
+
+.jasakonstruksi-article .tariff-heading p {
+  max-width: 720px;
+  margin: 0;
+  color: #515154;
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+.jasakonstruksi-article .tariff-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  border: 1px solid rgba(0, 0, 0, .07);
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: 0 20px 55px rgba(20, 43, 76, .08);
+  -webkit-overflow-scrolling: touch;
+}
+
+.jasakonstruksi-article .tariff-table {
+  width: 100% !important;
+  min-width: 720px !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  table-layout: fixed !important;
+  background: #fff !important;
+  font-family: inherit !important;
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+}
+
+.jasakonstruksi-article .tariff-table thead {
+  display: table-header-group !important;
+}
+
+.jasakonstruksi-article .tariff-table tbody {
+  display: table-row-group !important;
+  padding: 0 !important;
+  background: #fff !important;
+}
+
+.jasakonstruksi-article .tariff-table tr,
+.jasakonstruksi-article .tariff-table tbody tr,
+.jasakonstruksi-article .tariff-table tbody tr:nth-child(odd),
+.jasakonstruksi-article .tariff-table tbody tr:nth-child(even),
+.jasakonstruksi-article .tariff-table tbody tr:hover {
+  display: table-row !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: #fff !important;
+  box-shadow: none !important;
+}
+
+.jasakonstruksi-article .tariff-table th,
+.jasakonstruksi-article .tariff-table td,
+.jasakonstruksi-article .tariff-table tbody tr:nth-child(even) td,
+.jasakonstruksi-article .tariff-table tbody tr:hover td {
+  display: table-cell !important;
+  min-width: 0 !important;
+  padding: 15px 16px !important;
+  border-top: 0 !important;
+  border-left: 0 !important;
+  border-right: 1px solid #e8e8ed !important;
+  border-bottom: 1px solid #e8e8ed !important;
+  border-radius: 0 !important;
+  background: #fff !important;
+  color: #515154 !important;
+  font-family: inherit !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  line-height: 1.55 !important;
+  letter-spacing: normal !important;
+  text-align: left !important;
+  text-transform: none !important;
+  vertical-align: top !important;
+  overflow-wrap: anywhere;
+}
+
+.jasakonstruksi-article .tariff-table th:last-child,
+.jasakonstruksi-article .tariff-table td:last-child {
+  border-right: 0 !important;
+}
+
+.jasakonstruksi-article .tariff-table tbody tr:last-child td {
+  border-bottom: 0 !important;
+}
+
+.jasakonstruksi-article .tariff-table thead th {
+  background: #111113 !important;
+  color: #fff !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  letter-spacing: .035em !important;
+  text-transform: uppercase !important;
+}
+
+.jasakonstruksi-article .tariff-table th:nth-child(1),
+.jasakonstruksi-article .tariff-table td:nth-child(1) {
+  width: 28% !important;
+}
+
+.jasakonstruksi-article .tariff-table th:nth-child(2),
+.jasakonstruksi-article .tariff-table td:nth-child(2) {
+  width: 57% !important;
+}
+
+.jasakonstruksi-article .tariff-table th:nth-child(3),
+.jasakonstruksi-article .tariff-table td:nth-child(3) {
+  width: 15% !important;
+  text-align: center !important;
+}
+
+.jasakonstruksi-article .tariff-table td:first-child {
+  color: var(--near-black) !important;
+  font-weight: 650 !important;
+}
+
+.jasakonstruksi-article .tariff-table td:last-child {
+  color: var(--near-black) !important;
+  font-size: 19px !important;
+  font-weight: 750 !important;
+  letter-spacing: -0.03em !important;
+}
+
+.jasakonstruksi-article .tariff-badge {
+  display: inline-flex;
+  margin-top: 7px;
+  padding: 5px 8px;
+  border-radius: 999px;
+  background: #eef6ff;
+  color: var(--blue);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+/* Sertifikasi */
+.jasakonstruksi-article .certificate-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+  margin: 28px 0 32px;
+}
+
+.jasakonstruksi-article .certificate-card {
+  padding: 25px;
+  border: 1px solid var(--soft-gray);
+  border-radius: 22px;
+  background: #fff;
+}
+
+.jasakonstruksi-article .certificate-card h3 {
+  margin: 0 0 11px;
+  font-size: 23px;
+}
+
+.jasakonstruksi-article .certificate-card p {
+  margin: 0;
+  color: #515154;
+  font-size: 15px;
+  line-height: 1.58;
+}
+
+/* =========================================================
+   KALKULATOR
+   ========================================================= */
+.jasakonstruksi-article .calculator-card {
+  margin: 32px 0 42px;
+  padding: 27px;
+  border: 1px solid rgba(0, 0, 0, .07);
+  border-radius: 25px;
+  background:
+    radial-gradient(circle at 95% 5%, rgba(0,113,227,.12), transparent 28%),
+    #fff;
+  box-shadow: 0 18px 50px rgba(20, 43, 76, .08);
+}
+
+.jasakonstruksi-article .calculator-card h3 {
+  margin: 0;
+  font-size: 27px;
+}
+
+.jasakonstruksi-article .calculator-card > p {
+  margin: 10px 0 22px;
+  color: #6e6e73;
+  font-size: 15px;
+}
+
+.jasakonstruksi-article .calculator-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 15px;
+}
+
+.jasakonstruksi-article .calculator-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.jasakonstruksi-article .calculator-field label {
+  color: #515154;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.jasakonstruksi-article .calculator-field select,
+.jasakonstruksi-article .calculator-field input {
+  width: 100%;
+  min-height: 48px;
+  padding: 11px 13px;
+  border: 1px solid #d2d2d7;
+  border-radius: 13px;
+  background: var(--off-white);
+  color: var(--near-black);
+  font: inherit;
+  outline: none;
+}
+
+.jasakonstruksi-article .calculator-field select:focus,
+.jasakonstruksi-article .calculator-field input:focus {
+  border-color: var(--blue);
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(0, 113, 227, .12);
+}
+
+.jasakonstruksi-article .calculator-result {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 11px;
+  margin-top: 19px;
+}
+
+.jasakonstruksi-article .result-card {
+  min-height: 105px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 17px;
+  border-radius: 18px;
+  background: var(--off-white);
+}
+
+.jasakonstruksi-article .result-card span {
+  color: var(--medium-gray);
+  font-size: 11px;
+}
+
+.jasakonstruksi-article .result-card strong {
+  display: block;
+  margin-top: 8px;
+  color: var(--near-black);
+  font-size: 20px;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+
+.jasakonstruksi-article .calculator-note {
+  margin-top: 16px;
+  color: var(--medium-gray);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* Rumus & contoh */
+.jasakonstruksi-article .formula-box {
+  margin: 28px 0;
+  padding: 25px;
+  border-radius: 22px;
+  background: linear-gradient(145deg, #071a38, #0b315e);
+  color: #fff;
+  text-align: center;
+}
+
+.jasakonstruksi-article .formula-box span {
+  display: block;
+  margin-bottom: 7px;
+  color: #b8d4ee;
+  font-size: 12px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.jasakonstruksi-article .formula-box strong {
+  font-size: clamp(20px, 3.4vw, 31px);
+  letter-spacing: -0.035em;
+}
+
+.jasakonstruksi-article .example-grid {
+  display: grid;
+  gap: 14px;
+  margin: 28px 0 36px;
+}
+
+.jasakonstruksi-article .example-card {
+  padding: 24px;
+  border: 1px solid var(--soft-gray);
+  border-radius: 22px;
+  background: #fff;
+}
+
+.jasakonstruksi-article .example-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 17px;
+  margin-bottom: 15px;
+}
+
+.jasakonstruksi-article .example-card h3 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.jasakonstruksi-article .example-rate {
+  display: inline-flex;
+  flex: 0 0 auto;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #eef6ff;
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.jasakonstruksi-article .example-card p {
+  margin-bottom: 13px;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.jasakonstruksi-article .calculation-line {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 14px;
+  padding: 11px 0;
+  border-top: 1px solid var(--soft-gray);
+  color: #515154;
+  font-size: 14px;
+}
+
+.jasakonstruksi-article .calculation-line:last-child {
+  color: var(--near-black);
+  font-weight: 700;
+}
+
+/* Mekanisme */
+.jasakonstruksi-article .mechanism-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+  margin: 28px 0 32px;
+}
+
+.jasakonstruksi-article .mechanism-card {
+  min-height: 265px;
+  padding: 25px;
+  border-radius: 22px;
+}
+
+.jasakonstruksi-article .mechanism-card.withholding {
+  border: 1px solid #d6e7f7;
+  background: #f2f8ff;
+}
+
+.jasakonstruksi-article .mechanism-card.self-paid {
+  border: 1px solid #d8eadc;
+  background: #f2faf4;
+}
+
+.jasakonstruksi-article .mechanism-card h3 {
+  margin: 0 0 12px;
+  font-size: 23px;
+}
+
+.jasakonstruksi-article .mechanism-card p,
+.jasakonstruksi-article .mechanism-card ol {
+  color: #515154;
+  font-size: 15px;
+  line-height: 1.58;
+}
+
+.jasakonstruksi-article .mechanism-card ol {
+  margin-bottom: 0;
+  padding-left: 20px;
+}
+
+/* Jatuh tempo */
+.jasakonstruksi-article .date-strip {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 13px;
+  margin: 27px 0 34px;
+}
+
+.jasakonstruksi-article .date-card {
+  padding: 24px;
+  border: 1px solid var(--soft-gray);
+  border-radius: 22px;
+  background: #fff;
+}
+
+.jasakonstruksi-article .date-card span {
+  color: var(--medium-gray);
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: .045em;
+  text-transform: uppercase;
+}
+
+.jasakonstruksi-article .date-card strong {
+  display: block;
+  margin-top: 8px;
+  color: var(--near-black);
+  font-size: 28px;
+  letter-spacing: -0.04em;
+}
+
+.jasakonstruksi-article .date-card p {
+  margin: 9px 0 0;
+  color: #6e6e73;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Kesalahan umum */
+.jasakonstruksi-article .mistake-list {
+  display: grid;
+  gap: 11px;
+  margin: 28px 0 36px;
+}
+
+.jasakonstruksi-article .mistake-item {
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr);
+  gap: 14px;
+  padding: 18px;
+  border: 1px solid var(--soft-gray);
+  border-radius: 18px;
+  background: #fff;
+}
+
+.jasakonstruksi-article .mistake-number {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: #fff0ee;
+  color: #d70015;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.jasakonstruksi-article .mistake-item strong {
+  display: block;
+  color: var(--near-black);
+  font-size: 16px;
+}
+
+.jasakonstruksi-article .mistake-item p {
+  margin: 5px 0 0;
+  color: #6e6e73;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+/* Checklist */
+.jasakonstruksi-article .check-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 11px;
+  margin: 25px 0 33px;
+  padding: 0;
+  list-style: none;
+}
+
+.jasakonstruksi-article .check-list li {
+  position: relative;
+  min-height: 58px;
+  margin: 0;
+  padding: 15px 16px 15px 48px;
+  border: 1px solid var(--soft-gray);
+  border-radius: 16px;
+  background: #fff;
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.jasakonstruksi-article .check-list li::before {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: #eaf4ff;
+  color: var(--blue);
+  content: "✓";
+  font-size: 12px;
+  font-weight: 800;
+}
+
+/* Langkah cepat */
+.jasakonstruksi-article .steps {
+  counter-reset: steps;
+  display: grid;
+  gap: 12px;
+  margin: 28px 0 36px;
+}
+
+.jasakonstruksi-article .step {
+  position: relative;
+  padding: 19px 20px 19px 70px;
+  border: 1px solid var(--soft-gray);
+  border-radius: 19px;
+  background: #fff;
+}
+
+.jasakonstruksi-article .step::before {
+  counter-increment: steps;
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  width: 37px;
+  height: 37px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #0071e3, #25a6d9);
+  color: #fff;
+  content: counter(steps);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.jasakonstruksi-article .step strong {
+  display: block;
+  color: var(--near-black);
+  font-size: 16px;
+}
+
+.jasakonstruksi-article .step p {
+  margin: 5px 0 0;
+  color: #6e6e73;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+/* Penutup */
+.jasakonstruksi-article .closing-box {
+  margin-top: 70px;
+  padding: 36px;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 90% 10%, rgba(39,160,210,.17), transparent 30%),
+    linear-gradient(145deg, #071a38, #0b315e);
+  color: #fff;
+}
+
+.jasakonstruksi-article .closing-box h2 {
+  margin-top: 0;
+  color: #fff;
+}
+
+.jasakonstruksi-article .closing-box p {
+  color: #dbe9f7;
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+@media (max-width: 760px) {
+  .jasakonstruksi-article .service-grid,
+  .jasakonstruksi-article .certificate-grid,
+  .jasakonstruksi-article .mechanism-grid,
+  .jasakonstruksi-article .date-strip,
+  .jasakonstruksi-article .check-list {
+    grid-template-columns: 1fr;
+  }
+
+  .jasakonstruksi-article .calculator-grid,
+  .jasakonstruksi-article .calculator-result {
+    grid-template-columns: 1fr;
+  }
+
+  /* Tabel tarif menjadi kartu, bukan tabel kecil */
+  .jasakonstruksi-article .tariff-table-wrapper {
+    overflow: visible;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .jasakonstruksi-article .tariff-table {
+    min-width: 0 !important;
+    table-layout: auto !important;
+    background: transparent !important;
+  }
+
+  .jasakonstruksi-article .tariff-table thead {
+    display: none !important;
+  }
+
+  .jasakonstruksi-article .tariff-table tbody {
+    display: grid !important;
+    gap: 13px !important;
+    padding: 0 !important;
+    background: transparent !important;
+  }
+
+  .jasakonstruksi-article .tariff-table tr,
+  .jasakonstruksi-article .tariff-table tbody tr,
+  .jasakonstruksi-article .tariff-table tbody tr:nth-child(even),
+  .jasakonstruksi-article .tariff-table tbody tr:hover {
+    display: block !important;
+    overflow: hidden !important;
+    border: 1px solid var(--soft-gray) !important;
+    border-radius: 19px !important;
+    background: #fff !important;
+    box-shadow: 0 12px 32px rgba(0,0,0,.055) !important;
+  }
+
+  .jasakonstruksi-article .tariff-table td,
+  .jasakonstruksi-article .tariff-table tbody tr:nth-child(even) td,
+  .jasakonstruksi-article .tariff-table tbody tr:hover td {
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    padding: 12px 15px !important;
+    border-right: 0 !important;
+    border-bottom: 1px solid var(--soft-gray) !important;
+    background: #fff !important;
+    color: #515154 !important;
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    text-align: left !important;
+  }
+
+  .jasakonstruksi-article .tariff-table td:last-child {
+    border-bottom: 0 !important;
+    background: #eef6ff !important;
+    color: var(--blue) !important;
+    font-size: 20px !important;
+    text-align: left !important;
+  }
+
+  .jasakonstruksi-article .tariff-table td::before {
+    display: block !important;
+    margin-bottom: 5px;
+    color: var(--medium-gray);
+    font-size: 10px;
+    font-weight: 750;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+  }
+
+  .jasakonstruksi-article .tariff-table td:nth-child(1)::before {
+    content: "Jenis layanan";
+  }
+
+  .jasakonstruksi-article .tariff-table td:nth-child(2)::before {
+    content: "Kondisi penyedia";
+  }
+
+  .jasakonstruksi-article .tariff-table td:nth-child(3)::before {
+    content: "Tarif";
+  }
+}
+
+@media (max-width: 520px) {
+  .jasakonstruksi-article .example-card-header {
+    flex-direction: column;
+  }
+
+  .jasakonstruksi-article .calculation-line {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .jasakonstruksi-article .closing-box {
+    padding: 27px;
+  }
+}
+
+@media print {
+  .jasakonstruksi-article .calculator-card {
+    display: none !important;
+  }
+
+  .jasakonstruksi-article .tariff-table-wrapper {
+    overflow: visible;
+    box-shadow: none;
+  }
+
+  .jasakonstruksi-article .tariff-table {
+    min-width: 0 !important;
+  }
+
+  .jasakonstruksi-article .tariff-table thead th {
+    background: #eee !important;
+    color: #000 !important;
+  }
+
+  .jasakonstruksi-article .closing-box {
+    border: 1px solid #bbb;
+    background: #fff;
+    color: #000;
+  }
+
+  .jasakonstruksi-article .closing-box h2,
+  .jasakonstruksi-article .closing-box p {
+    color: #000;
+  }
+}
