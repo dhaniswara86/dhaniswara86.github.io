@@ -54,7 +54,7 @@ custom_css:
   - /assets/css/roleakses-v2.css
 
 custom_js:
-  - /assets/js/roleakses-v2.js
+  - /assets/js/roleakses-v3.js
 ---
 
 <div class="role-article">
