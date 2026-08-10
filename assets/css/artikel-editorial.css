@@ -1099,73 +1099,78 @@
       }
 
       .table-wrap {
-        overflow: visible;
-        border: 0;
-        border-radius: 0;
-        background: transparent;
-        box-shadow: none;
-      }
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
 
-      table {
-        min-width: 0;
-      }
+/*
+ * Responsive table bawaan Artikel V2.
+ * Dibatasi hanya untuk tabel di dalam .table-wrap
+ * agar tidak mengganggu tabel khusus artikel.
+ */
+.table-wrap table {
+  min-width: 0;
+}
 
-      thead {
-        display: none;
-      }
+.table-wrap thead {
+  display: none;
+}
 
-      table,
-      tbody,
-      tr,
-      td {
-        display: block;
-        width: 100%;
-      }
+.table-wrap table,
+.table-wrap tbody,
+.table-wrap tr,
+.table-wrap td {
+  display: block;
+  width: 100%;
+}
 
-      tbody {
-        display: grid;
-        gap: 13px;
-      }
+.table-wrap tbody {
+  display: grid;
+  gap: 13px;
+}
 
-      tbody tr,
-      tbody tr:nth-child(even),
-      tbody tr:hover {
-        overflow: hidden;
-        border: 1px solid var(--soft-gray);
-        border-radius: 19px;
-        background: var(--white);
-        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.055);
-      }
+.table-wrap tbody tr,
+.table-wrap tbody tr:nth-child(even),
+.table-wrap tbody tr:hover {
+  overflow: hidden;
+  border: 1px solid var(--soft-gray);
+  border-radius: 19px;
+  background: var(--white);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.055);
+}
 
-      td {
-        width: 100% !important;
-        min-width: 0 !important;
-        padding: 12px 15px;
-        border-bottom: 1px solid var(--soft-gray);
-        overflow-wrap: anywhere;
-      }
+.table-wrap td {
+  width: 100% !important;
+  min-width: 0 !important;
+  padding: 12px 15px;
+  border-bottom: 1px solid var(--soft-gray);
+  overflow-wrap: anywhere;
+}
 
-      td::before {
-        display: block;
-        margin-bottom: 5px;
-        color: var(--medium-gray);
-        font-size: 10px;
-        font-weight: 750;
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
-      }
+.table-wrap td::before {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--medium-gray);
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
 
-      td:nth-child(1)::before {
-        content: "Komponen";
-      }
+.table-wrap td:nth-child(1)::before {
+  content: "Komponen";
+}
 
-      td:nth-child(2)::before {
-        content: "Informasi";
-      }
+.table-wrap td:nth-child(2)::before {
+  content: "Informasi";
+}
 
-      td:last-child {
-        border-bottom: 0;
-      }
+.table-wrap td:last-child {
+  border-bottom: 0;
+}
 
       .author-card {
         grid-template-columns: 65px minmax(0, 1fr);
