@@ -52,7 +52,7 @@ hero_stats:
 sidebar_note: "Penentuan tarif tetap perlu memperhatikan kontrak, kegiatan yang sebenarnya dilakukan, status para pihak, serta dokumen sertifikasi penyedia jasa."
 
 custom_css:
-  - /assets/css/jasakonstruksi.css?v=20260809-3
+  - /assets/css/jasakonstruksi.css?v=20260810-1
 
 custom_js:
   - /assets/js/jasakonstruksi.js?v=20260809-2
