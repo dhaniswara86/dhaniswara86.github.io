@@ -993,3 +993,37 @@
     text-align: left !important;
   }
 }
+/* =========================================================
+   FIX MOBILE — TABEL TARIF JASA KONSTRUKSI
+   Memastikan semua kolom menjadi full width di HP,
+   baik baris ganjil maupun genap.
+   ========================================================= */
+
+@media (max-width: 760px) {
+
+  .article-body .jk-tariff-table tbody tr td:nth-child(1),
+  .article-body .jk-tariff-table tbody tr td:nth-child(2),
+  .article-body .jk-tariff-table tbody tr td:nth-child(3),
+  .article-body .jk-tariff-table tbody tr:nth-child(odd) td:nth-child(1),
+  .article-body .jk-tariff-table tbody tr:nth-child(odd) td:nth-child(2),
+  .article-body .jk-tariff-table tbody tr:nth-child(odd) td:nth-child(3),
+  .article-body .jk-tariff-table tbody tr:nth-child(even) td:nth-child(1),
+  .article-body .jk-tariff-table tbody tr:nth-child(even) td:nth-child(2),
+  .article-body .jk-tariff-table tbody tr:nth-child(even) td:nth-child(3) {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    text-align: left !important;
+  }
+
+  .article-body .jk-tariff-table tbody tr td:nth-child(3),
+  .article-body .jk-tariff-table tbody tr:nth-child(odd) td:nth-child(3),
+  .article-body .jk-tariff-table tbody tr:nth-child(even) td:nth-child(3) {
+    background: #eef6ff !important;
+    color: var(--blue) !important;
+    font-size: 20px !important;
+    font-weight: 700 !important;
+    text-align: left !important;
+  }
+}
