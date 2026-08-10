@@ -272,25 +272,53 @@
   line-height: 1.55;
 }
 
-/* Lebar kolom tabel pertama */
-.per8-article .comparison-zone .section:nth-of-type(1) th:nth-child(1),
-.per8-article .comparison-zone .section:nth-of-type(1) td:nth-child(1) { width: 6% !important; }
-.per8-article .comparison-zone .section:nth-of-type(1) th:nth-child(2),
-.per8-article .comparison-zone .section:nth-of-type(1) td:nth-child(2) { width: 25% !important; }
-.per8-article .comparison-zone .section:nth-of-type(1) th:nth-child(3),
-.per8-article .comparison-zone .section:nth-of-type(1) td:nth-child(3) { width: 33% !important; }
-.per8-article .comparison-zone .section:nth-of-type(1) th:nth-child(4),
-.per8-article .comparison-zone .section:nth-of-type(1) td:nth-child(4) { width: 36% !important; }
+/* =========================================================
+   LEBAR KOLOM — HANYA DESKTOP
+   Penting: jangan biarkan width desktop masuk ke mode kartu HP.
+   ========================================================= */
+@media (min-width: 761px) {
+  /* Lebar kolom tabel pertama */
+  .per8-article .comparison-zone .section:nth-of-type(1) th:nth-child(1),
+  .per8-article .comparison-zone .section:nth-of-type(1) td:nth-child(1) {
+    width: 6% !important;
+  }
 
-/* Lebar kolom tabel kedua */
-.per8-article .comparison-zone .section:nth-of-type(2) th:nth-child(1),
-.per8-article .comparison-zone .section:nth-of-type(2) td:nth-child(1) { width: 6% !important; }
-.per8-article .comparison-zone .section:nth-of-type(2) th:nth-child(2),
-.per8-article .comparison-zone .section:nth-of-type(2) td:nth-child(2) { width: 49% !important; }
-.per8-article .comparison-zone .section:nth-of-type(2) th:nth-child(3),
-.per8-article .comparison-zone .section:nth-of-type(2) td:nth-child(3) { width: 30% !important; }
-.per8-article .comparison-zone .section:nth-of-type(2) th:nth-child(4),
-.per8-article .comparison-zone .section:nth-of-type(2) td:nth-child(4) { width: 15% !important; }
+  .per8-article .comparison-zone .section:nth-of-type(1) th:nth-child(2),
+  .per8-article .comparison-zone .section:nth-of-type(1) td:nth-child(2) {
+    width: 25% !important;
+  }
+
+  .per8-article .comparison-zone .section:nth-of-type(1) th:nth-child(3),
+  .per8-article .comparison-zone .section:nth-of-type(1) td:nth-child(3) {
+    width: 33% !important;
+  }
+
+  .per8-article .comparison-zone .section:nth-of-type(1) th:nth-child(4),
+  .per8-article .comparison-zone .section:nth-of-type(1) td:nth-child(4) {
+    width: 36% !important;
+  }
+
+  /* Lebar kolom tabel kedua */
+  .per8-article .comparison-zone .section:nth-of-type(2) th:nth-child(1),
+  .per8-article .comparison-zone .section:nth-of-type(2) td:nth-child(1) {
+    width: 6% !important;
+  }
+
+  .per8-article .comparison-zone .section:nth-of-type(2) th:nth-child(2),
+  .per8-article .comparison-zone .section:nth-of-type(2) td:nth-child(2) {
+    width: 49% !important;
+  }
+
+  .per8-article .comparison-zone .section:nth-of-type(2) th:nth-child(3),
+  .per8-article .comparison-zone .section:nth-of-type(2) td:nth-child(3) {
+    width: 30% !important;
+  }
+
+  .per8-article .comparison-zone .section:nth-of-type(2) th:nth-child(4),
+  .per8-article .comparison-zone .section:nth-of-type(2) td:nth-child(4) {
+    width: 15% !important;
+  }
+}
 
 /* =========================================================
    KOMPONEN NON-TABEL DARI V2 TETAP DIPERTAHANKAN
@@ -589,7 +617,11 @@
   }
 
   .per8-article .comparison-zone table {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
     min-width: 0 !important;
+    table-layout: auto !important;
     background: transparent !important;
   }
 
@@ -605,10 +637,14 @@
   }
 
   .per8-article .comparison-zone table tr,
+  .per8-article .comparison-zone table tbody tr,
   .per8-article .comparison-zone table tbody tr:nth-child(odd),
   .per8-article .comparison-zone table tbody tr:nth-child(even),
   .per8-article .comparison-zone table tbody tr:hover {
     display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
     overflow: hidden !important;
     border: 1px solid #e8e8ed !important;
     border-radius: 17px !important;
@@ -617,11 +653,15 @@
   }
 
   .per8-article .comparison-zone table td,
+  .per8-article .comparison-zone table tbody tr td,
   .per8-article .comparison-zone table tbody tr:nth-child(odd) td,
   .per8-article .comparison-zone table tbody tr:nth-child(even) td,
   .per8-article .comparison-zone table tbody tr:hover td {
     display: block !important;
     width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
     padding: 12px 14px !important;
     border-right: 0 !important;
     border-bottom: 1px solid #e8e8ed !important;
@@ -630,6 +670,10 @@
     font-size: 14px !important;
     line-height: 1.5 !important;
     text-align: left !important;
+    white-space: normal !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+    hyphens: none !important;
   }
 
   .per8-article .comparison-zone table td:last-child {
@@ -657,6 +701,18 @@
   .per8-article .comparison-zone table li {
     font-size: 14px !important;
     line-height: 1.5 !important;
+  }
+
+
+  .per8-article .comparison-zone table td ul,
+  .per8-article .comparison-zone table td ol {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    white-space: normal !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
   }
 
   /* Di HP bullets daftar KAP/KJS boleh kembali terlihat sebagai daftar vertikal */
@@ -687,401 +743,5 @@
 
   .per8-article .promo-button {
     width: 100%;
-  }
-}
-/* =========================================================
-   FIX MOBILE — TABEL PER-8/PJ/2026
-   Memastikan seluruh baris/kolom full width di HP
-   ========================================================= */
-
-@media (max-width: 760px) {
-
-  .article-body .table-scroll {
-    width: 100% !important;
-    overflow: visible !important;
-  }
-
-  .article-body .table-scroll table {
-    width: 100% !important;
-    min-width: 0 !important;
-    table-layout: auto !important;
-  }
-
-  .article-body .table-scroll thead {
-    display: none !important;
-  }
-
-  .article-body .table-scroll tbody {
-    display: grid !important;
-    width: 100% !important;
-    gap: 14px !important;
-  }
-
-  .article-body .table-scroll tbody tr,
-  .article-body .table-scroll tbody tr:nth-child(odd),
-  .article-body .table-scroll tbody tr:nth-child(even),
-  .article-body .table-scroll tbody tr:hover {
-    display: block !important;
-    width: 100% !important;
-    min-width: 0 !important;
-    overflow: hidden !important;
-
-    border: 1px solid var(--soft-gray) !important;
-    border-radius: 19px !important;
-    background: #ffffff !important;
-
-    box-shadow:
-      0 12px 32px rgba(0, 0, 0, 0.055) !important;
-  }
-
-  .article-body .table-scroll tbody tr td,
-  .article-body .table-scroll tbody tr td:nth-child(1),
-  .article-body .table-scroll tbody tr td:nth-child(2),
-  .article-body .table-scroll tbody tr td:nth-child(3),
-  .article-body .table-scroll tbody tr td:nth-child(4),
-
-  .article-body .table-scroll tbody tr:nth-child(odd) td,
-  .article-body .table-scroll tbody tr:nth-child(even) td,
-
-  .article-body .table-scroll tbody tr:nth-child(odd) td:nth-child(1),
-  .article-body .table-scroll tbody tr:nth-child(odd) td:nth-child(2),
-  .article-body .table-scroll tbody tr:nth-child(odd) td:nth-child(3),
-  .article-body .table-scroll tbody tr:nth-child(odd) td:nth-child(4),
-
-  .article-body .table-scroll tbody tr:nth-child(even) td:nth-child(1),
-  .article-body .table-scroll tbody tr:nth-child(even) td:nth-child(2),
-  .article-body .table-scroll tbody tr:nth-child(even) td:nth-child(3),
-  .article-body .table-scroll tbody tr:nth-child(even) td:nth-child(4) {
-
-    display: grid !important;
-
-    grid-template-columns:
-      minmax(90px, 115px)
-      minmax(0, 1fr) !important;
-
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-
-    box-sizing: border-box !important;
-
-    padding: 14px 15px !important;
-
-    border-right: 0 !important;
-    border-bottom:
-      1px solid var(--soft-gray) !important;
-
-    background: #ffffff !important;
-
-    text-align: left !important;
-    overflow-wrap: anywhere !important;
-  }
-
-  .article-body .table-scroll tbody tr td:last-child {
-    border-bottom: 0 !important;
-  }
-
-  .article-body .table-scroll td::before {
-    display: block !important;
-    min-width: 0 !important;
-
-    color: var(--medium-gray) !important;
-
-    font-size: 10px !important;
-    font-weight: 750 !important;
-    line-height: 1.35 !important;
-    letter-spacing: 0.04em !important;
-
-    text-transform: uppercase !important;
-  }
-
-  .article-body .table-scroll td:first-child {
-    background: #f7fbff !important;
-  }
-
-  .article-body .table-scroll td:first-child::before {
-    color: var(--blue) !important;
-  }
-
-  .article-body .table-scroll td > * {
-    min-width: 0 !important;
-    max-width: 100% !important;
-  }
-
-  .article-body .table-scroll ul,
-  .article-body .table-scroll ol {
-    min-width: 0 !important;
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-    padding-left: 18px !important;
-  }
-}
-/* =========================================================
-   FINAL FIX MOBILE — TABEL PER-8/PJ/2026
-   Reset lebar kolom desktop pada tampilan HP
-   ========================================================= */
-
-@media (max-width: 760px) {
-
-  .comparison-zone .section table {
-    width: 100% !important;
-    min-width: 0 !important;
-    table-layout: auto !important;
-  }
-
-  .comparison-zone .section tbody {
-    width: 100% !important;
-  }
-
-  .comparison-zone .section tbody tr {
-    width: 100% !important;
-  }
-
-  /*
-   * PENTING:
-   * Menimpa width 6%, 25%, 33%, 36%, 49%, 30%, 15%
-   * yang berasal dari layout desktop.
-   */
-  .comparison-zone .section tbody tr td,
-  .comparison-zone .section:nth-of-type(1) tbody tr td:nth-child(1),
-  .comparison-zone .section:nth-of-type(1) tbody tr td:nth-child(2),
-  .comparison-zone .section:nth-of-type(1) tbody tr td:nth-child(3),
-  .comparison-zone .section:nth-of-type(1) tbody tr td:nth-child(4),
-  .comparison-zone .section:nth-of-type(2) tbody tr td:nth-child(1),
-  .comparison-zone .section:nth-of-type(2) tbody tr td:nth-child(2),
-  .comparison-zone .section:nth-of-type(2) tbody tr td:nth-child(3),
-  .comparison-zone .section:nth-of-type(2) tbody tr td:nth-child(4) {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-  }
-
-  /*
-   * Setiap informasi tetap tampil dalam format:
-   * LABEL | ISI
-   */
-  .comparison-zone .section tbody tr td {
-    display: grid !important;
-    grid-template-columns: 105px minmax(0, 1fr) !important;
-    gap: 12px !important;
-
-    box-sizing: border-box !important;
-    padding: 14px 15px !important;
-
-    text-align: left !important;
-    overflow-wrap: break-word !important;
-    word-break: normal !important;
-  }
-
-  .comparison-zone .section tbody tr td::before {
-    display: block !important;
-    width: auto !important;
-    min-width: 0 !important;
-
-    color: var(--tertiary) !important;
-    content: attr(data-label) !important;
-
-    font-size: 10px !important;
-    font-weight: 760 !important;
-    line-height: 1.35 !important;
-    letter-spacing: 0.045em !important;
-
-    text-transform: uppercase !important;
-  }
-
-  /*
-   * Kolom nomor juga mengikuti layout yang sama.
-   */
-  .comparison-zone .section tbody tr td:first-child {
-    text-align: left !important;
-  }
-}
-/* =========================================================
-   FINAL MOBILE FIX — PER-8/PJ/2026
-   Label di atas, isi di bawah
-   ========================================================= */
-
-@media screen and (max-width: 760px) {
-
-  .comparison-zone .wide-comparison-table,
-  .comparison-zone .wide-comparison-table .table-scroll {
-    width: 100% !important;
-    max-width: 100% !important;
-    overflow: visible !important;
-  }
-
-  .comparison-zone .wide-comparison-table table {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-    table-layout: auto !important;
-    display: block !important;
-  }
-
-  .comparison-zone .wide-comparison-table thead {
-    display: none !important;
-  }
-
-  .comparison-zone .wide-comparison-table tbody {
-    width: 100% !important;
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-    gap: 14px !important;
-    padding: 12px !important;
-    background: #f5f5f7 !important;
-  }
-
-  .comparison-zone .wide-comparison-table tbody tr,
-  .comparison-zone .wide-comparison-table tbody tr:nth-child(odd),
-  .comparison-zone .wide-comparison-table tbody tr:nth-child(even),
-  .comparison-zone .wide-comparison-table tbody tr:hover {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-
-    display: block !important;
-    overflow: hidden !important;
-
-    border: 1px solid #e8e8ed !important;
-    border-radius: 18px !important;
-
-    background: #ffffff !important;
-
-    box-shadow:
-      0 8px 24px rgba(0, 0, 0, 0.05) !important;
-  }
-
-  /*
-   * Reset TOTAL semua lebar kolom desktop.
-   */
-  .comparison-zone .wide-comparison-table tbody tr td,
-  .comparison-zone .wide-comparison-table tbody tr td:nth-child(1),
-  .comparison-zone .wide-comparison-table tbody tr td:nth-child(2),
-  .comparison-zone .wide-comparison-table tbody tr td:nth-child(3),
-  .comparison-zone .wide-comparison-table tbody tr td:nth-child(4),
-
-  .comparison-zone .wide-comparison-table tbody tr:nth-child(odd) td,
-  .comparison-zone .wide-comparison-table tbody tr:nth-child(even) td,
-
-  .comparison-zone .wide-comparison-table tbody tr:nth-child(odd) td:nth-child(1),
-  .comparison-zone .wide-comparison-table tbody tr:nth-child(odd) td:nth-child(2),
-  .comparison-zone .wide-comparison-table tbody tr:nth-child(odd) td:nth-child(3),
-  .comparison-zone .wide-comparison-table tbody tr:nth-child(odd) td:nth-child(4),
-
-  .comparison-zone .wide-comparison-table tbody tr:nth-child(even) td:nth-child(1),
-  .comparison-zone .wide-comparison-table tbody tr:nth-child(even) td:nth-child(2),
-  .comparison-zone .wide-comparison-table tbody tr:nth-child(even) td:nth-child(3),
-  .comparison-zone .wide-comparison-table tbody tr:nth-child(even) td:nth-child(4) {
-
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-
-    display: block !important;
-
-    box-sizing: border-box !important;
-
-    padding: 14px 16px !important;
-
-    border-right: 0 !important;
-    border-bottom: 1px solid #e8e8ed !important;
-
-    background: #ffffff !important;
-
-    color: #3a3a3c !important;
-
-    text-align: left !important;
-
-    white-space: normal !important;
-    word-break: normal !important;
-    overflow-wrap: break-word !important;
-    hyphens: none !important;
-  }
-
-  .comparison-zone
-  .wide-comparison-table
-  tbody
-  tr
-  td:last-child {
-    border-bottom: 0 !important;
-  }
-
-  /*
-   * Label dipindahkan KE ATAS.
-   * Tidak lagi menggunakan grid 112px + sisa ruang.
-   */
-  .comparison-zone
-  .wide-comparison-table
-  tbody
-  tr
-  td::before {
-
-    position: static !important;
-
-    width: auto !important;
-    max-width: none !important;
-    min-width: 0 !important;
-
-    display: block !important;
-
-    margin: 0 0 7px !important;
-    padding: 0 !important;
-
-    content: attr(data-label) !important;
-
-    color: #86868b !important;
-
-    font-size: 10px !important;
-    font-weight: 760 !important;
-    line-height: 1.3 !important;
-
-    letter-spacing: 0.05em !important;
-    text-transform: uppercase !important;
-  }
-
-  /*
-   * Nomor dibuat sedikit berbeda.
-   */
-  .comparison-zone
-  .wide-comparison-table
-  tbody
-  tr
-  td:first-child {
-
-    background: #f7fbff !important;
-    color: #0071e3 !important;
-
-    font-size: 17px !important;
-    font-weight: 650 !important;
-  }
-
-  .comparison-zone
-  .wide-comparison-table
-  tbody
-  tr
-  td:first-child::before {
-    color: #0071e3 !important;
-  }
-
-  /*
-   * List dalam Menjadi/Keterangan
-   */
-  .comparison-zone
-  .wide-comparison-table
-  td ul,
-
-  .comparison-zone
-  .wide-comparison-table
-  td ol {
-
-    width: 100% !important;
-    max-width: 100% !important;
-
-    margin: 0 !important;
-    padding-left: 20px !important;
-
-    font-size: inherit !important;
-
-    white-space: normal !important;
   }
 }
