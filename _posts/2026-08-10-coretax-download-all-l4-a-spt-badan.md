@@ -23,7 +23,7 @@ source_url: "https://t.me/FAQCoretax"
 
 hero_eyebrow: "Kabayan Hot News"
 hero_title: "Coretax Update: Fitur “Unduh Semua”."
-hero_gradient: "Lampiran L4 Bagian A kini lebih praktis."
+hero_gradient: "Lampiran L4 Bagian A."
 hero_visual_label: "Update Coretax"
 hero_visual_title: "Unduh Semua L4"
 ---
