@@ -1,6 +1,6 @@
 ---
 layout: hotnews-editorial
-title: "Coretax Update: Fitur Unduh (Excel) pada Lampiran L4 Bagian A SPT Badan"
+title: "UPDATE CORETAX: Lampiran L4-A SPT Badan Kini Punya Fitur Download All Excel"
 date: 2026-08-10 20:00:00 +0700
 date_modified: 2026-08-10 20:00:00 +0700
 author: "Angga Sukma Dhaniswara"
@@ -13,7 +13,7 @@ tags:
   - PPh Final
   - Excel
 
-excerpt: "Coretax menambahkan tombol "Unduh Semua" pada Lampiran L4 Bagian A SPT Tahunan PPh Badan (Penghasilan yang Dikenakan PPh yang Bersifat Final), sehingga seluruh data bukti potong dapat diunduh sekaligus ke dalam bentuk Excel."
+excerpt: "Coretax menambahkan tombol Download All pada Lampiran L4-A SPT Tahunan PPh Badan, khususnya bagian A. Penghasilan yang Dikenakan PPh yang Bersifat Final, sehingga seluruh data dapat diunduh sekaligus ke Excel."
 
 reading_time: "4 menit baca"
 visual_type: "feature-update"
@@ -25,42 +25,54 @@ hero_eyebrow: "Kabayan Hot News"
 hero_title: "Download data L4-A kini lebih praktis."
 hero_gradient: "Sekali klik, seluruh data masuk Excel."
 hero_visual_label: "Update Coretax"
-hero_visual_title: "Unduh Semua L4-A"
+hero_visual_title: "Download All L4-A"
 ---
 
 <p class="hotnews-lead">
   <strong>
-    Coretax kini menambahkan tombol <em>Unduh Semua</em> pada
-    SPT Tahunan PPh Badan Lampiran L4 Bagian A (Penghasilan yang Dikenakan PPh
-    yang Bersifat Final).
+    Coretax kini menambahkan tombol <em>Download All</em> pada
+    Corporate Income Tax (CIT) Lampiran L4-A SPT Tahunan PPh Badan,
+    secara khusus pada bagian A. Penghasilan yang Dikenakan PPh
+    yang Bersifat Final.
   </strong>
 </p>
 
-Pembaruan fitur ini memudahkan Wajib Pajak untuk mengunduh seluruh data yang
-tercantum pada bagian A tersebut ke dalam satu file Excel, tanpa harus
+Pembaruan ini memudahkan Wajib Pajak mengunduh seluruh data yang
+tercantum pada bagian tersebut ke dalam satu file Excel, tanpa harus
 mengambil data halaman demi halaman.
 
+<figure class="hotnews-figure">
+  <img
+    src="{{ '/assets/img/Downloadall-L4.webp' | relative_url }}"
+    alt="Tombol Download All pada Lampiran L4-A SPT Tahunan PPh Badan di Coretax"
+    loading="lazy"
+  >
+  <figcaption>
+    Tombol <strong>Download All</strong> pada bagian A. Penghasilan yang
+    Dikenakan PPh yang Bersifat Final di Lampiran L4-A.
+  </figcaption>
+</figure>
 
 ## Apa yang Berubah?
 
-Pada tampilan Lampiran L4 Bagian A, pengguna kini dapat menggunakan tombol
-<strong>Unduh Semua</strong> untuk mengunduh seluruh data yang tersedia
+Pada tampilan Lampiran L4-A, pengguna kini dapat menggunakan tombol
+<strong>Download All</strong> untuk mengunduh seluruh data yang tersedia
 pada bagian:
 
 <div class="hotnews-menu-path">
   <span>
-    Induk SPT → Jawab Pertanyaan C.2 dengan "Ya" → Lampiran L4 → Bagian
+    Corporate Income Tax (CIT) → Lampiran L4-A →
     A. Penghasilan yang Dikenakan PPh yang Bersifat Final
   </span>
 </div>
 
-Fitur ini membantu wajib pajak yang memiliki data bukti potong final/bersifat final dalam jumlah cukup banyak dan
-terdiri dari beberapa halaman.
+Fitur ini terutama membantu ketika jumlah data cukup banyak dan
+ditampilkan dalam beberapa halaman pada aplikasi.
 
-Sebelumnya, proses pengambilan data dapat kurang praktis karena
+Sebelumnya, proses pengambilan data dapat menjadi kurang praktis jika
 pengguna harus berpindah halaman atau melakukan pengunduhan secara
-bertahap. Dengan hadirnya tombol baru ini, data dapat ditarik secara lebih utuh
-ke dalam satu file Excel tanpa perlu repot membuka per halaman.
+bertahap. Dengan tombol baru ini, data dapat ditarik secara lebih utuh
+ke dalam satu file Excel.
 
 ## Empat Manfaat Utama
 
@@ -125,25 +137,14 @@ dilakukan:
 - pengecekan nilai dasar pengenaan pajak maupun informasi lain
   yang tersedia pada data.
 
-## Cara Menggunakan Fitur "Unduh Semua"
+## Cara Menggunakan Fitur Download All
 
-Pada bagian Induk SPT Tahunan PPh Badan, jawab pertanyaan Huruf C. "2. Apakah Wajib Pajak menerima atau memperoleh penghasilan yang dikenakan PPh yang bersifat final?" dengan jawaban "Ya", sehingga terbuka Lampiran 4 PENGHASILAN YANG DIKENAKAN PAJAK FINAL DAN DAFTAR PENGHASILAN YANG BUKAN OBJEK PAJAK.
+Pengguna dapat membuka SPT Tahunan PPh Badan pada Coretax, kemudian
+masuk ke Lampiran L4-A dan membuka bagian
+<strong>A. Penghasilan yang Dikenakan PPh yang Bersifat Final</strong>.
 
-Pada L4 bagian <strong>A. Penghasilan yang Dikenakan PPh yang Bersifat Final</strong>.
-akan muncul tombol  <strong>Unduh Semua</strong>
+Pada toolbar di atas tabel, pilih ikon <strong>Download All</strong>
 seperti yang ditunjukkan pada gambar.
-
-<figure class="hotnews-figure">
-  <img
-    src="{{ '/assets/img/Downloadall-L4.webp' | relative_url }}"
-    alt="Tombol Download All pada Lampiran L4-A SPT Tahunan PPh Badan di Coretax"
-    loading="lazy"
-  >
-  <figcaption>
-    Tombol <strong>Unduh Semua</strong> pada bagian A. Penghasilan yang
-    Dikenakan PPh yang Bersifat Final di Lampiran L4-A.
-  </figcaption>
-</figure>
 
 File hasil unduhan selanjutnya dapat dibuka menggunakan aplikasi
 pengolah spreadsheet untuk kebutuhan pengecekan dan rekonsiliasi.
@@ -165,4 +166,13 @@ pengolah spreadsheet untuk kebutuhan pengecekan dan rekonsiliasi.
   </p>
 </div>
 
-Sumber: Telegram t.me/FAQCoretax
+## Intinya...
+
+Pembaruan ini terlihat sederhana, tetapi cukup penting untuk proses
+penyusunan SPT Tahunan PPh Badan.
+
+Dengan adanya tombol <strong>Download All</strong> pada Lampiran L4-A,
+Wajib Pajak tidak perlu lagi mengandalkan pengambilan data per halaman.
+Seluruh data dapat diunduh ke Excel dalam satu proses sehingga
+rekonsiliasi dan pengecekan data dapat dilakukan dengan lebih cepat dan
+lebih praktis.
