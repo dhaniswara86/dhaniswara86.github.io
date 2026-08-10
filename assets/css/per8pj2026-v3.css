@@ -816,3 +816,83 @@
     padding-left: 18px !important;
   }
 }
+/* =========================================================
+   FINAL FIX MOBILE — TABEL PER-8/PJ/2026
+   Reset lebar kolom desktop pada tampilan HP
+   ========================================================= */
+
+@media (max-width: 760px) {
+
+  .comparison-zone .section table {
+    width: 100% !important;
+    min-width: 0 !important;
+    table-layout: auto !important;
+  }
+
+  .comparison-zone .section tbody {
+    width: 100% !important;
+  }
+
+  .comparison-zone .section tbody tr {
+    width: 100% !important;
+  }
+
+  /*
+   * PENTING:
+   * Menimpa width 6%, 25%, 33%, 36%, 49%, 30%, 15%
+   * yang berasal dari layout desktop.
+   */
+  .comparison-zone .section tbody tr td,
+  .comparison-zone .section:nth-of-type(1) tbody tr td:nth-child(1),
+  .comparison-zone .section:nth-of-type(1) tbody tr td:nth-child(2),
+  .comparison-zone .section:nth-of-type(1) tbody tr td:nth-child(3),
+  .comparison-zone .section:nth-of-type(1) tbody tr td:nth-child(4),
+  .comparison-zone .section:nth-of-type(2) tbody tr td:nth-child(1),
+  .comparison-zone .section:nth-of-type(2) tbody tr td:nth-child(2),
+  .comparison-zone .section:nth-of-type(2) tbody tr td:nth-child(3),
+  .comparison-zone .section:nth-of-type(2) tbody tr td:nth-child(4) {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  /*
+   * Setiap informasi tetap tampil dalam format:
+   * LABEL | ISI
+   */
+  .comparison-zone .section tbody tr td {
+    display: grid !important;
+    grid-template-columns: 105px minmax(0, 1fr) !important;
+    gap: 12px !important;
+
+    box-sizing: border-box !important;
+    padding: 14px 15px !important;
+
+    text-align: left !important;
+    overflow-wrap: break-word !important;
+    word-break: normal !important;
+  }
+
+  .comparison-zone .section tbody tr td::before {
+    display: block !important;
+    width: auto !important;
+    min-width: 0 !important;
+
+    color: var(--tertiary) !important;
+    content: attr(data-label) !important;
+
+    font-size: 10px !important;
+    font-weight: 760 !important;
+    line-height: 1.35 !important;
+    letter-spacing: 0.045em !important;
+
+    text-transform: uppercase !important;
+  }
+
+  /*
+   * Kolom nomor juga mengikuti layout yang sama.
+   */
+  .comparison-zone .section tbody tr td:first-child {
+    text-align: left !important;
+  }
+}
