@@ -141,9 +141,4 @@ pada gambar berikut.
 </figure>
 
 <p>File hasil unduhan selanjutnya dapat dibuka menggunakan aplikasi
-pengolah spreadsheet untuk kebutuhan pengecekan dan rekonsiliasi.</p>
-
-<div class="hotnews-note">
-  <strong>Sumber</strong>
-
-</div>
+pengolah spreadsheet (microsoft excel, open office cal, dan sejenisnya) untuk kebutuhan pengecekan dan rekonsiliasi.</p>
