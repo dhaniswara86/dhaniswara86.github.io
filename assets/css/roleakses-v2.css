@@ -1018,3 +1018,135 @@
     min-width: 0 !important;
   }
 }
+/* =========================================================
+   FIX MOBILE — TABEL ROLE AKSES
+   Memaksa seluruh kolom menjadi full width di HP
+   ========================================================= */
+
+@media (max-width: 760px) {
+
+  .article-body .role-access-table {
+    width: 100% !important;
+    min-width: 0 !important;
+    table-layout: auto !important;
+  }
+
+  .article-body .role-access-table thead {
+    display: none !important;
+  }
+
+  .article-body .role-access-table tbody {
+    display: grid !important;
+    width: 100% !important;
+    gap: 14px !important;
+  }
+
+  .article-body .role-access-table tbody tr,
+  .article-body .role-access-table tbody tr:nth-child(odd),
+  .article-body .role-access-table tbody tr:nth-child(even),
+  .article-body .role-access-table tbody tr:hover {
+    display: block !important;
+    width: 100% !important;
+    overflow: hidden !important;
+
+    border: 1px solid var(--soft-gray) !important;
+    border-radius: 19px !important;
+
+    background: #ffffff !important;
+
+    box-shadow:
+      0 12px 32px rgba(0, 0, 0, 0.055) !important;
+  }
+
+  .article-body .role-access-table tbody tr td,
+  .article-body .role-access-table tbody tr td:nth-child(1),
+  .article-body .role-access-table tbody tr td:nth-child(2),
+  .article-body .role-access-table tbody tr td:nth-child(3),
+  .article-body .role-access-table tbody tr td:nth-child(4),
+
+  .article-body .role-access-table tbody tr:nth-child(odd) td,
+  .article-body .role-access-table tbody tr:nth-child(even) td,
+
+  .article-body .role-access-table tbody tr:nth-child(odd) td:nth-child(1),
+  .article-body .role-access-table tbody tr:nth-child(odd) td:nth-child(2),
+  .article-body .role-access-table tbody tr:nth-child(odd) td:nth-child(3),
+  .article-body .role-access-table tbody tr:nth-child(odd) td:nth-child(4),
+
+  .article-body .role-access-table tbody tr:nth-child(even) td:nth-child(1),
+  .article-body .role-access-table tbody tr:nth-child(even) td:nth-child(2),
+  .article-body .role-access-table tbody tr:nth-child(even) td:nth-child(3),
+  .article-body .role-access-table tbody tr:nth-child(even) td:nth-child(4) {
+    display: block !important;
+
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+
+    box-sizing: border-box !important;
+
+    padding: 38px 15px 12px !important;
+
+    border-bottom:
+      1px solid var(--soft-gray) !important;
+
+    background: #ffffff !important;
+
+    text-align: left !important;
+  }
+
+  .article-body .role-access-table tbody tr td:last-child {
+    border-bottom: 0 !important;
+  }
+
+  /* Nomor tidak boleh lagi memakai width desktop 48px */
+  .article-body .role-access-table .role-number {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    text-align: left !important;
+  }
+
+  /* Badge kelompok boleh memanjang sesuai kebutuhan */
+  .article-body .role-access-table .role-badge {
+    width: auto !important;
+    max-width: 100% !important;
+    white-space: normal !important;
+  }
+
+  /* Label setiap bagian */
+  .article-body .role-access-table td {
+    position: relative !important;
+  }
+
+  .article-body .role-access-table td::before {
+    position: absolute !important;
+    top: 11px !important;
+    left: 15px !important;
+
+    width: auto !important;
+
+    color: var(--medium-gray) !important;
+
+    font-size: 10px !important;
+    font-weight: 750 !important;
+    letter-spacing: 0.04em !important;
+
+    text-transform: uppercase !important;
+  }
+
+  .article-body .role-access-table td:nth-child(1)::before {
+    content: "Nomor" !important;
+  }
+
+  .article-body .role-access-table td:nth-child(2)::before {
+    content: "Kelompok" !important;
+  }
+
+  .article-body .role-access-table td:nth-child(3)::before {
+    content: "Role akses" !important;
+  }
+
+  .article-body .role-access-table td:nth-child(4)::before {
+    content: "Fungsi" !important;
+  }
+}
