@@ -51,7 +51,7 @@ hero_stats:
 sidebar_note: "Artikel ini berfokus pada pemahaman fungsi dan permasalahan role akses. Tampilan dan alur Coretax dapat mengalami perubahan."
 
 custom_css:
-  - /assets/css/roleakses-v2.css
+  - /assets/css/roleakses-v2.css?v=20260810-1
 
 custom_js:
   - /assets/js/roleakses-v3.js
