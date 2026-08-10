@@ -28,18 +28,11 @@ hero_visual_label: "Update Coretax"
 hero_visual_title: "Unduh Semua L4"
 ---
 
-<p class="hotnews-lead">
-  <strong>Ringkasan Cepat:</strong>
-  Coretax menambahkan tombol <strong>“Unduh Semua”</strong> pada
-  Lampiran L4 Bagian A SPT Tahunan PPh Badan
-  (<strong>Penghasilan yang Dikenakan PPh yang Bersifat Final</strong>),
-  sehingga seluruh data dapat diunduh sekaligus ke format Excel.
-</p>
 
 ## Apa yang Berubah?
 
-Pada Lampiran L4 Bagian A, pengguna kini dapat menggunakan tombol
-<strong>Unduh Semua</strong> untuk mengunduh seluruh data yang tersedia
+Di dalam Lampiran L4 Bagian A SPT Tahunan PPh Badan, pengguna kini dapat menggunakan tombol
+<strong>Unduh Semua</strong> untuk mengunduh seluruh data penghasilan yang tersedia
 pada bagian:
 
 <div class="hotnews-menu-path">
@@ -48,14 +41,12 @@ pada bagian:
   </span>
 </div>
 
-Fitur ini membantu Wajib Pajak yang memiliki data bukti potong final
-atau data penghasilan yang dikenakan PPh yang bersifat final dalam
-jumlah cukup banyak dan terbagi ke dalam beberapa halaman.
+Fitur ini membantu Wajib Pajak yang memiliki data bukti potong penghasilan yang dikenakan PPh 
+bersifat final dalam jumlah cukup banyak dan terbagi ke dalam beberapa halaman.
 
-Jika sebelumnya proses pengambilan data kurang praktis karena pengguna
-harus berpindah halaman atau melakukan pengunduhan secara bertahap,
-kini dengan hadirnya tombol ini data dapat ditarik secara lebih utuh
-ke dalam satu file Excel tanpa perlu membuka data per halaman.
+Apabila sebelumnya pengguna harus berpindah halaman dan melakukan pengunduhan secara bertahap,
+kini dengan hadirnya tombol tersebut data dapat ditarik secara lebih keseluruhan 
+dalam satu file Excel tanpa perlu membuka data per halaman.
 
 ## Empat Manfaat Utama
 
@@ -149,20 +140,10 @@ pada gambar berikut.
   </figcaption>
 </figure>
 
-File hasil unduhan selanjutnya dapat dibuka menggunakan aplikasi
-pengolah spreadsheet untuk kebutuhan pengecekan dan rekonsiliasi.
+<p>File hasil unduhan selanjutnya dapat dibuka menggunakan aplikasi
+pengolah spreadsheet untuk kebutuhan pengecekan dan rekonsiliasi.</p>
 
 <div class="hotnews-note">
   <strong>Sumber</strong>
 
-  <p>
-    Telegram:
-    <a
-      href="https://t.me/FAQCoretax"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      t.me/FAQCoretax
-    </a>
-  </p>
 </div>
