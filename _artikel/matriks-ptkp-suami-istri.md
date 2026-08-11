@@ -6,7 +6,7 @@ hero_title: "Matriks PTKP"
 hero_accent: "Suami-Istri."
 
 excerpt: "Panduan membaca matriks Penghasilan Tidak Kena Pajak (PTKP) bagi suami-istri berdasarkan kondisi penghasilan dan pemenuhan hak serta kewajiban Pajak Penghasilan."
-description: "Matriks PTKP suami-istri untuk kondisi Kepala Keluarga (KK) maupun masing-masing suami-istri (PH/MT), disusun kembali dari Lampiran Nota Dinas Direktur Peraturan Perpajakan I Nomor ND-383/PJ.02/2026."
+description: "Matriks PTKP suami-istri untuk kondisi Kepala Keluarga (KK) maupun masing-masing suami-istri (PH/MT)."
 
 category: "PPh Orang Pribadi"
 
@@ -54,14 +54,6 @@ custom_js:
 
 <div class="ptkp-article">
 
-<p class="lead">
-  Lampiran Nota Dinas Direktur Peraturan Perpajakan I
-  <strong>Nomor ND-383/PJ.02/2026 tanggal 6 April 2026</strong>
-  memuat matriks Penghasilan Tidak Kena Pajak (PTKP) bagi suami-istri,
-  baik ketika pemenuhan hak dan kewajiban Pajak Penghasilan dilakukan
-  oleh Kepala Keluarga (KK) maupun dilakukan oleh masing-masing
-  suami-istri (PH/MT).
-</p>
 
 <section id="pengantar">
 <h2>Bagaimana menggunakan matriks ini?</h2>
