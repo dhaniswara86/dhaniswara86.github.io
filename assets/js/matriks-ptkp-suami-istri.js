@@ -27,82 +27,113 @@
     !resetButton ||
     !resultCount ||
     !emptyState ||
-    !rows.length
+    rows.length === 0
   ) {
     console.error(
-      "PTKP Filter: elemen yang diperlukan tidak ditemukan."
+      "Kabayan PTKP: elemen filter tidak ditemukan."
     );
     return;
   }
 
+
   function applyFilter() {
-    const selectedSuami = filterSuami.value;
-    const selectedIstri = filterIstri.value;
+
+    const selectedSuami =
+      filterSuami.value;
+
+    const selectedIstri =
+      filterIstri.value;
 
     let visibleCount = 0;
 
+
     rows.forEach(function (row) {
+
       const rowSuami =
         row.getAttribute("data-suami");
 
       const rowIstri =
         row.getAttribute("data-istri");
 
+
       const matchSuami =
         selectedSuami === "" ||
-        selectedSuami === rowSuami;
+        rowSuami === selectedSuami;
+
 
       const matchIstri =
         selectedIstri === "" ||
-        selectedIstri === rowIstri;
+        rowIstri === selectedIstri;
+
 
       const visible =
         matchSuami && matchIstri;
 
+
       if (visible) {
-        row.style.display = "";
+
+        row.style.setProperty(
+          "display",
+          "table-row",
+          "important"
+        );
+
         visibleCount++;
+
       } else {
-        row.style.display = "none";
+
+        row.style.setProperty(
+          "display",
+          "none",
+          "important"
+        );
+
       }
+
     });
+
 
     resultCount.textContent =
       "Menampilkan " +
       visibleCount +
       " kombinasi";
 
-    if (visibleCount === 0) {
-      emptyState.hidden = false;
-    } else {
-      emptyState.hidden = true;
-    }
+
+    emptyState.hidden =
+      visibleCount !== 0;
+
   }
+
+
+  function resetFilter() {
+
+    filterSuami.value = "";
+
+    filterIstri.value = "";
+
+    applyFilter();
+
+  }
+
 
   filterSuami.addEventListener(
     "change",
     applyFilter
   );
 
+
   filterIstri.addEventListener(
     "change",
     applyFilter
   );
 
+
   resetButton.addEventListener(
     "click",
-    function () {
-      filterSuami.value = "";
-      filterIstri.value = "";
-      applyFilter();
-    }
+    resetFilter
   );
+
 
   applyFilter();
 
-  console.log(
-    "PTKP Filter aktif:",
-    rows.length,
-    "baris ditemukan."
-  );
 })();
