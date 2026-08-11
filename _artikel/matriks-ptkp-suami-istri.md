@@ -277,15 +277,15 @@ custom_js:
 <div class="ptkp-code-guide">
   <div>
     <strong>K/Tanggungan</strong>
-    <span>Ditampilkan sebagaimana tercantum pada dokumen sumber.</span>
+    <span>Rp58.500.000 + {jumlah tanggungan (max 3) x Rp4.500.000}.</span>
   </div>
   <div>
     <strong>K/I/Tanggungan</strong>
-    <span>Ditampilkan sebagaimana tercantum pada dokumen sumber.</span>
+    <span>Rp112.500.000 + {jumlah tanggungan (max 3) x Rp4.500.000}.</span>
   </div>
   <div>
     <strong>TK/0</strong>
-    <span>Ditampilkan sebagaimana tercantum pada dokumen sumber.</span>
+    <span>Rp54.000.000.</span>
   </div>
   <div>
     <strong>Tidak diberikan PTKP (-/-)</strong>
