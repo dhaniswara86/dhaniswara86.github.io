@@ -484,3 +484,99 @@
     display: table-row !important;
   }
 }
+/* =========================================================
+   DESKTOP / LAPTOP
+   Matriks tampil penuh tanpa horizontal scroll
+   ========================================================= */
+
+@media (min-width: 1024px) {
+
+  /*
+   * Khusus artikel PTKP:
+   * gunakan seluruh lebar area artikel.
+   */
+  .article-layout:has(.ptkp-article) {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  /*
+   * Sidebar "Dalam artikel ini" disembunyikan
+   * hanya pada artikel PTKP.
+   */
+  .article-layout:has(.ptkp-article) .article-sidebar {
+    display: none !important;
+  }
+
+  /*
+   * Pastikan body artikel mengambil lebar penuh.
+   */
+  .article-layout:has(.ptkp-article) .article-body {
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  /*
+   * Matriks tidak perlu digeser di laptop.
+   */
+  .ptkp-article .ptkp-matrix-wrap {
+    overflow-x: visible !important;
+  }
+
+  /*
+   * Hapus min-width 1040px yang sebelumnya
+   * memaksa tabel melakukan horizontal scroll.
+   */
+  .ptkp-article .ptkp-matrix-table {
+    width: 100% !important;
+    min-width: 0 !important;
+    table-layout: fixed !important;
+    font-size: 11.5px !important;
+  }
+
+  .ptkp-article .ptkp-matrix-table th,
+  .ptkp-article .ptkp-matrix-table td {
+    padding: 9px 9px !important;
+    font-size: 11.5px !important;
+    line-height: 1.4 !important;
+  }
+
+  /*
+   * Proporsi masing-masing kolom.
+   */
+  .ptkp-article .ptkp-matrix-table th:nth-child(1),
+  .ptkp-article .ptkp-matrix-table td:nth-child(1) {
+    width: 16% !important;
+  }
+
+  .ptkp-article .ptkp-matrix-table th:nth-child(2),
+  .ptkp-article .ptkp-matrix-table td:nth-child(2) {
+    width: 25% !important;
+  }
+
+  .ptkp-article .ptkp-matrix-table th:nth-child(3),
+  .ptkp-article .ptkp-matrix-table td:nth-child(3) {
+    width: 14% !important;
+  }
+
+  .ptkp-article .ptkp-matrix-table th:nth-child(4),
+  .ptkp-article .ptkp-matrix-table td:nth-child(4) {
+    width: 15% !important;
+  }
+
+  .ptkp-article .ptkp-matrix-table th:nth-child(5),
+  .ptkp-article .ptkp-matrix-table td:nth-child(5) {
+    width: 14% !important;
+  }
+
+  .ptkp-article .ptkp-matrix-table th:nth-child(6),
+  .ptkp-article .ptkp-matrix-table td:nth-child(6) {
+    width: 16% !important;
+  }
+
+  /*
+   * Petunjuk geser tidak diperlukan di laptop.
+   */
+  .ptkp-article .ptkp-mobile-hint {
+    display: none !important;
+  }
+}
