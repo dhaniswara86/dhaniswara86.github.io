@@ -264,38 +264,6 @@ custom_js:
 </section>
 
 
-<section id="cara-membaca">
-<h2>Cara membaca hasil PTKP</h2>
-
-<p>
-  Setelah menemukan baris yang sesuai, baca kolom dari kiri ke kanan.
-  Kolom <strong>PTKP - KK</strong> menunjukkan isi matriks untuk kondisi
-  KK. Tiga kolom berikutnya berada di bawah kelompok
-  <strong>PTKP untuk penghitungan angsuran PPh Pasal 25 dan lampiran PH/MT</strong>,
-  yaitu PTKP Suami, PTKP Istri, dan PTKP Gabungan.
-</p>
-
-<div class="ptkp-code-guide">
-  <div>
-    <strong>K/Tanggungan</strong>
-    <span>Ditampilkan sebagaimana tercantum pada dokumen sumber.</span>
-  </div>
-  <div>
-    <strong>K/I/Tanggungan</strong>
-    <span>Ditampilkan sebagaimana tercantum pada dokumen sumber.</span>
-  </div>
-  <div>
-    <strong>TK/0</strong>
-    <span>Ditampilkan sebagaimana tercantum pada dokumen sumber.</span>
-  </div>
-  <div>
-    <strong>Tidak diberikan PTKP (-/-)</strong>
-    <span>Menunjukkan kolom yang pada matriks sumber dinyatakan tidak diberikan PTKP.</span>
-  </div>
-</div>
-</section>
-
-
 <section id="sumber">
 <h2>Sumber Dokumen</h2>
 
