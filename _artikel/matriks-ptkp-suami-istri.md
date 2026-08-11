@@ -46,7 +46,7 @@ hero_stats:
 sidebar_note: "Mulai dengan memilih kondisi penghasilan suami, lalu cocokkan dengan kondisi penghasilan istri. Isi matriks mengikuti dokumen sumber."
 
 custom_css:
-  - /assets/css/matriks-ptkp-suami-istri.css?v=20260811-1
+  - /assets/css/matriks-ptkp-suami-istri.css
 
 custom_js:
   - /assets/js/matriks-ptkp-suami-istri.js
