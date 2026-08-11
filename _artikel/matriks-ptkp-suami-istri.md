@@ -49,7 +49,7 @@ custom_css:
   - /assets/css/matriks-ptkp-suami-istri.css?v=20260811-1
 
 custom_js:
-  - /assets/js/matriks-ptkp-suami-istri.js?v=20260811-1
+  - /assets/js/matriks-ptkp-suami-istri.js
 ---
 
 <div class="ptkp-article">
