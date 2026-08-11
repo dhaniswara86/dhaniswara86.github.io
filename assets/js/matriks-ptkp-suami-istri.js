@@ -1,83 +1,132 @@
-(() => {
+(function () {
   "use strict";
 
-  const filterSuami = document.getElementById("ptkpFilterSuami");
-  const filterIstri = document.getElementById("ptkpFilterIstri");
-  const resetButton = document.getElementById("ptkpResetFilter");
-  const resultCount = document.getElementById("ptkpResultCount");
-  const emptyState = document.getElementById("ptkpEmptyState");
+  function initPtkpFilter() {
+    const filterSuami =
+      document.getElementById("ptkpFilterSuami");
 
-  const rows = Array.from(
-    document.querySelectorAll(
-      "#ptkpMatrixBody tr[data-suami][data-istri]"
-    )
-  );
+    const filterIstri =
+      document.getElementById("ptkpFilterIstri");
 
-  if (
-    !filterSuami ||
-    !filterIstri ||
-    !resetButton ||
-    !resultCount ||
-    !emptyState ||
-    rows.length === 0
-  ) {
-    return;
-  }
+    const resetButton =
+      document.getElementById("ptkpResetFilter");
 
-  function applyFilter() {
-    const suami = filterSuami.value;
-    const istri = filterIstri.value;
+    const resultCount =
+      document.getElementById("ptkpResultCount");
 
-    let visibleCount = 0;
+    const emptyState =
+      document.getElementById("ptkpEmptyState");
 
-    rows.forEach((row) => {
-      const suamiMatch =
-        !suami || row.dataset.suami === suami;
+    const rows = Array.from(
+      document.querySelectorAll(
+        "#ptkpMatrixBody tr[data-suami][data-istri]"
+      )
+    );
 
-      const istriMatch =
-        !istri || row.dataset.istri === istri;
-
-      const isVisible =
-        suamiMatch && istriMatch;
-
-      row.classList.toggle(
-        "ptkp-hidden",
-        !isVisible
+    /*
+     * Jika elemen artikel PTKP tidak ada,
+     * script tidak perlu dijalankan.
+     */
+    if (
+      !filterSuami ||
+      !filterIstri ||
+      !resetButton ||
+      !resultCount ||
+      !emptyState ||
+      rows.length === 0
+    ) {
+      console.warn(
+        "Kabayan PTKP: elemen filter tidak ditemukan."
       );
 
-      if (isVisible) {
-        visibleCount += 1;
-      }
-    });
+      return;
+    }
 
-    resultCount.textContent =
-      `Menampilkan ${visibleCount} kombinasi`;
+    function applyFilter() {
+      const selectedSuami =
+        filterSuami.value;
 
-    emptyState.hidden =
-      visibleCount !== 0;
-  }
+      const selectedIstri =
+        filterIstri.value;
 
-  function resetFilter() {
-    filterSuami.value = "";
-    filterIstri.value = "";
+      let visibleCount = 0;
 
+      rows.forEach(function (row) {
+        const rowSuami =
+          row.getAttribute("data-suami");
+
+        const rowIstri =
+          row.getAttribute("data-istri");
+
+        const matchSuami =
+          selectedSuami === "" ||
+          rowSuami === selectedSuami;
+
+        const matchIstri =
+          selectedIstri === "" ||
+          rowIstri === selectedIstri;
+
+        const shouldShow =
+          matchSuami && matchIstri;
+
+        row.classList.toggle(
+          "ptkp-hidden",
+          !shouldShow
+        );
+
+        if (shouldShow) {
+          visibleCount += 1;
+        }
+      });
+
+      resultCount.textContent =
+        "Menampilkan " +
+        visibleCount +
+        " kombinasi";
+
+      emptyState.hidden =
+        visibleCount !== 0;
+    }
+
+    function resetFilter() {
+      filterSuami.value = "";
+      filterIstri.value = "";
+
+      applyFilter();
+    }
+
+    filterSuami.addEventListener(
+      "change",
+      applyFilter
+    );
+
+    filterIstri.addEventListener(
+      "change",
+      applyFilter
+    );
+
+    resetButton.addEventListener(
+      "click",
+      resetFilter
+    );
+
+    /*
+     * Jalankan kondisi awal.
+     */
     applyFilter();
   }
 
-  filterSuami.addEventListener(
-    "change",
-    applyFilter
-  );
-
-  filterIstri.addEventListener(
-    "change",
-    applyFilter
-  );
-
-  resetButton.addEventListener(
-    "click",
-    resetFilter
-  );
-
-  applyFilter();
+  /*
+   * PENTING:
+   * Jangan menjalankan filter sebelum
+   * seluruh HTML artikel selesai dimuat.
+   */
+  if (document.readyState === "loading") {
+    document.addEventListener(
+      "DOMContentLoaded",
+      initPtkpFilter
+    );
+  } else {
+    initPtkpFilter();
+  }
 })();
