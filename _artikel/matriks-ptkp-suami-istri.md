@@ -1,301 +1,132 @@
----
-layout: artikel-editorial
+(function () {
+  "use strict";
 
-title: "Matriks PTKP Suami-Istri: KK dan PH/MT"
-hero_title: "Matriks PTKP"
-hero_accent: "Suami-Istri."
+  function initPtkpFilter() {
+    const filterSuami =
+      document.getElementById("ptkpFilterSuami");
 
-excerpt: "Panduan membaca matriks Penghasilan Tidak Kena Pajak (PTKP) bagi suami-istri berdasarkan kondisi penghasilan dan pemenuhan hak serta kewajiban Pajak Penghasilan."
-description: "Matriks PTKP suami-istri untuk kondisi Kepala Keluarga (KK) maupun masing-masing suami-istri (PH/MT)."
+    const filterIstri =
+      document.getElementById("ptkpFilterIstri");
 
-category: "PPh Orang Pribadi"
+    const resetButton =
+      document.getElementById("ptkpResetFilter");
 
-tags:
-  - PTKP
-  - PPh Orang Pribadi
-  - Suami Istri
-  - KK
-  - PH
-  - MT
-  - SPT Tahunan
+    const resultCount =
+      document.getElementById("ptkpResultCount");
 
-author: "Angga Sukma Dhaniswara"
-date: 2026-08-11
-legal_basis: "ND-383/PJ.02/2026"
-reading_time: "Panduan praktis"
+    const emptyState =
+      document.getElementById("ptkpEmptyState");
 
-permalink: /artikel/matriks-ptkp-suami-istri/
+    const rows = Array.from(
+      document.querySelectorAll(
+        "#ptkpMatrixBody tr[data-suami][data-istri]"
+      )
+    );
 
-summary_label: "Ringkasan cepat"
-summary: "Matriks ini menyajikan penggunaan PTKP berdasarkan kombinasi kondisi penghasilan suami dan istri, baik ketika pemenuhan hak dan kewajiban Pajak Penghasilan dilakukan oleh Kepala Keluarga (KK) maupun dilakukan oleh masing-masing suami-istri (PH/MT)."
+    /*
+     * Jika elemen artikel PTKP tidak ada,
+     * script tidak perlu dijalankan.
+     */
+    if (
+      !filterSuami ||
+      !filterIstri ||
+      !resetButton ||
+      !resultCount ||
+      !emptyState ||
+      rows.length === 0
+    ) {
+      console.warn(
+        "Kabayan PTKP: elemen filter tidak ditemukan."
+      );
 
-hero_links:
-  - label: "Lihat matriks PTKP"
-    href: "#matriks-ptkp"
+      return;
+    }
 
-hero_stats:
-  - value: "3"
-    label: "Kelompok kondisi penghasilan suami"
-  - value: "4"
-    label: "Kondisi penghasilan istri"
-  - value: "12"
-    label: "Kombinasi dalam matriks"
-  - value: "KK / PH / MT"
-    label: "Kondisi yang dicakup"
+    function applyFilter() {
+      const selectedSuami =
+        filterSuami.value;
 
-sidebar_note: "Mulai dengan memilih kondisi penghasilan suami, lalu cocokkan dengan kondisi penghasilan istri. Isi matriks mengikuti dokumen sumber."
+      const selectedIstri =
+        filterIstri.value;
 
-custom_css:
-  - /assets/css/matriks-ptkp-suami-istri.css?v=20260811-1
+      let visibleCount = 0;
 
-custom_js:
-  - /assets/js/matriks-ptkp-suami-istri.js?v=20260811-1
----
+      rows.forEach(function (row) {
+        const rowSuami =
+          row.getAttribute("data-suami");
 
-<div class="ptkp-article">
+        const rowIstri =
+          row.getAttribute("data-istri");
 
+        const matchSuami =
+          selectedSuami === "" ||
+          rowSuami === selectedSuami;
 
-<section id="pengantar">
-<h2>Bagaimana menggunakan matriks ini?</h2>
+        const matchIstri =
+          selectedIstri === "" ||
+          rowIstri === selectedIstri;
 
-<p>
-  Matriks disusun berdasarkan dua kondisi utama. Pertama, tentukan
-  kondisi penghasilan <strong>suami</strong>. Kedua, cocokkan dengan
-  kondisi penghasilan <strong>istri</strong>. Setelah itu, lihat PTKP
-  yang tercantum pada kolom PTKP-KK, PTKP Suami, PTKP Istri, dan
-  PTKP Gabungan.
-</p>
+        const shouldShow =
+          matchSuami && matchIstri;
 
-<div class="callout callout-blue">
-<strong>Cara cepat membaca tabel</strong>
-<p>
-  Gunakan filter kondisi suami dan istri di bawah. Jika ingin melihat
-  matriks lengkap seperti pada dokumen sumber, biarkan kedua pilihan
-  pada posisi <b>Semua kondisi</b>.
-</p>
-</div>
-</section>
+        row.classList.toggle(
+          "ptkp-hidden",
+          !shouldShow
+        );
 
+        if (shouldShow) {
+          visibleCount += 1;
+        }
+      });
 
-<section id="matriks-ptkp">
-<h2>Matriks PTKP Suami-Istri</h2>
+      resultCount.textContent =
+        "Menampilkan " +
+        visibleCount +
+        " kombinasi";
 
-<p>
-  Tabel berikut merupakan penataan ulang matriks pada dokumen sumber
-  agar lebih mudah dibaca pada website. Urutan kondisi dan isi setiap
-  kolom dipertahankan sesuai matriks sumber.
-</p>
+      emptyState.hidden =
+        visibleCount !== 0;
+    }
 
-<div class="ptkp-filter-panel" aria-label="Filter matriks PTKP">
-  <div class="ptkp-filter-field">
-    <label for="ptkpFilterSuami">Kondisi Suami</label>
-    <select id="ptkpFilterSuami">
-      <option value="">Semua kondisi</option>
-      <option value="tidak-berpenghasilan">Tidak berpenghasilan</option>
-      <option value="pph-tidak-final">Penghasilan dikenai PPh tidak final</option>
-      <option value="usaha-pph-final">Penghasilan dari usaha yang dikenai PPh final</option>
-    </select>
-  </div>
+    function resetFilter() {
+      filterSuami.value = "";
+      filterIstri.value = "";
 
-  <div class="ptkp-filter-field">
-    <label for="ptkpFilterIstri">Kondisi Istri</label>
-    <select id="ptkpFilterIstri">
-      <option value="">Semua kondisi</option>
-      <option value="satu-pemberi">Penghasilan dari satu pemberi kerja</option>
-      <option value="lebih-satu-pemberi">Penghasilan dari &gt; 1 pemberi kerja</option>
-      <option value="usaha-tidak-final">Usaha dikenai PPh tidak final / pekerjaan bebas</option>
-      <option value="usaha-final-tidak-berpenghasilan">Usaha dikenai PPh final / tidak berpenghasilan</option>
-    </select>
-  </div>
+      applyFilter();
+    }
 
-  <button class="ptkp-reset-button" id="ptkpResetFilter" type="button">
-    Reset filter
-  </button>
-</div>
+    filterSuami.addEventListener(
+      "change",
+      applyFilter
+    );
 
-<div class="ptkp-filter-status">
-  <span id="ptkpResultCount">Menampilkan 12 kombinasi</span>
-  <span class="ptkp-source-short">Sumber: ND-383/PJ.02/2026</span>
-</div>
+    filterIstri.addEventListener(
+      "change",
+      applyFilter
+    );
 
-<div class="ptkp-matrix-wrap" tabindex="0" aria-label="Tabel matriks PTKP, dapat digeser secara horizontal">
-<table class="ptkp-matrix-table">
-<thead>
-<tr>
-  <th rowspan="2" scope="col">Suami</th>
-  <th rowspan="2" scope="col">Istri</th>
-  <th rowspan="2" scope="col">PTKP - KK</th>
-  <th colspan="3" scope="colgroup">
-    PTKP (untuk penghitungan angsuran PPh Ps. 25 dan lampiran PH/MT)
-  </th>
-</tr>
-<tr>
-  <th scope="col">PTKP Suami</th>
-  <th scope="col">PTKP Istri</th>
-  <th scope="col">PTKP Gabungan</th>
-</tr>
-</thead>
+    resetButton.addEventListener(
+      "click",
+      resetFilter
+    );
 
-<tbody id="ptkpMatrixBody">
+    /*
+     * Jalankan kondisi awal.
+     */
+    applyFilter();
+  }
 
-<tr class="ptkp-group-start" data-suami="tidak-berpenghasilan" data-istri="satu-pemberi">
-  <td data-label="Suami" class="ptkp-suami">Tidak berpenghasilan</td>
-  <td data-label="Istri">Penghasilan dari satu pemberi kerja</td>
-  <td data-label="PTKP - KK" class="ptkp-code">K/Tanggungan</td>
-  <td data-label="PTKP Suami" class="ptkp-none">Tidak diberikan PTKP (-/-)</td>
-  <td data-label="PTKP Istri" class="ptkp-code">K/Tanggungan</td>
-  <td data-label="PTKP Gabungan" class="ptkp-code">K/Tanggungan</td>
-</tr>
-
-<tr data-suami="tidak-berpenghasilan" data-istri="lebih-satu-pemberi">
-  <td data-label="Suami" class="ptkp-suami">Tidak berpenghasilan</td>
-  <td data-label="Istri">Penghasilan dari &gt; 1 pemberi kerja</td>
-  <td data-label="PTKP - KK" class="ptkp-code">K/Tanggungan</td>
-  <td data-label="PTKP Suami" class="ptkp-none">Tidak diberikan PTKP (-/-)</td>
-  <td data-label="PTKP Istri" class="ptkp-code">K/Tanggungan</td>
-  <td data-label="PTKP Gabungan" class="ptkp-code">K/Tanggungan</td>
-</tr>
-
-<tr data-suami="tidak-berpenghasilan" data-istri="usaha-tidak-final">
-  <td data-label="Suami" class="ptkp-suami">Tidak berpenghasilan</td>
-  <td data-label="Istri">Penghasilan dari usaha yang dikenai PPh tidak final atau pekerjaan bebas</td>
-  <td data-label="PTKP - KK" class="ptkp-code">K/Tanggungan</td>
-  <td data-label="PTKP Suami" class="ptkp-none">Tidak diberikan PTKP (-/-)</td>
-  <td data-label="PTKP Istri" class="ptkp-code">K/Tanggungan</td>
-  <td data-label="PTKP Gabungan" class="ptkp-code">K/Tanggungan</td>
-</tr>
-
-<tr data-suami="tidak-berpenghasilan" data-istri="usaha-final-tidak-berpenghasilan">
-  <td data-label="Suami" class="ptkp-suami">Tidak berpenghasilan</td>
-  <td data-label="Istri">Penghasilan dari usaha yang dikenai PPh final/tidak berpenghasilan</td>
-  <td data-label="PTKP - KK" class="ptkp-none">Tidak diberikan PTKP (-/-)</td>
-  <td data-label="PTKP Suami" class="ptkp-none">Tidak diberikan PTKP (-/-)</td>
-  <td data-label="PTKP Istri" class="ptkp-none">Tidak diberikan PTKP (-/-)</td>
-  <td data-label="PTKP Gabungan" class="ptkp-none">Tidak diberikan PTKP (-/-)</td>
-</tr>
-
-
-<tr class="ptkp-group-start" data-suami="pph-tidak-final" data-istri="satu-pemberi">
-  <td data-label="Suami" class="ptkp-suami">Penghasilan dikenai PPh tidak final</td>
-  <td data-label="Istri">Penghasilan dari satu pemberi kerja</td>
-  <td data-label="PTKP - KK" class="ptkp-code">K/Tanggungan</td>
-  <td data-label="PTKP Suami" class="ptkp-code">K/Tanggungan</td>
-  <td data-label="PTKP Istri" class="ptkp-code">TK/0</td>
-  <td data-label="PTKP Gabungan" class="ptkp-code">K/I/Tanggungan</td>
-</tr>
-
-<tr data-suami="pph-tidak-final" data-istri="lebih-satu-pemberi">
-  <td data-label="Suami" class="ptkp-suami">Penghasilan dikenai PPh tidak final</td>
-  <td data-label="Istri">Penghasilan dari &gt; 1 pemberi kerja</td>
-  <td data-label="PTKP - KK" class="ptkp-code">K/I/Tanggungan</td>
-  <td data-label="PTKP Suami" class="ptkp-code">K/Tanggungan</td>
-  <td data-label="PTKP Istri" class="ptkp-code">TK/0</td>
-  <td data-label="PTKP Gabungan" class="ptkp-code">K/I/Tanggungan</td>
-</tr>
-
-<tr data-suami="pph-tidak-final" data-istri="usaha-tidak-final">
-  <td data-label="Suami" class="ptkp-suami">Penghasilan dikenai PPh tidak final</td>
-  <td data-label="Istri">Penghasilan dari usaha yang dikenai PPh tidak final atau pekerjaan bebas</td>
-  <td data-label="PTKP - KK" class="ptkp-code">K/I/Tanggungan</td>
-  <td data-label="PTKP Suami" class="ptkp-code">K/Tanggungan</td>
-  <td data-label="PTKP Istri" class="ptkp-code">TK/0</td>
-  <td data-label="PTKP Gabungan" class="ptkp-code">K/I/Tanggungan</td>
-</tr>
-
-<tr data-suami="pph-tidak-final" data-istri="usaha-final-tidak-berpenghasilan">
-  <td data-label="Suami" class="ptkp-suami">Penghasilan dikenai PPh tidak final</td>
-  <td data-label="Istri">Penghasilan dari usaha yang dikenai PPh final/tidak berpenghasilan</td>
-  <td data-label="PTKP - KK" class="ptkp-code">K/Tanggungan</td>
-  <td data-label="PTKP Suami" class="ptkp-code">K/Tanggungan</td>
-  <td data-label="PTKP Istri" class="ptkp-none">Tidak diberikan PTKP (-/-)</td>
-  <td data-label="PTKP Gabungan" class="ptkp-code">K/Tanggungan</td>
-</tr>
-
-
-<tr class="ptkp-group-start" data-suami="usaha-pph-final" data-istri="satu-pemberi">
-  <td data-label="Suami" class="ptkp-suami">Penghasilan dari usaha yang dikenai PPh final</td>
-  <td data-label="Istri">Penghasilan dari satu pemberi kerja</td>
-  <td data-label="PTKP - KK" class="ptkp-none">Tidak diberikan PTKP (-/-)</td>
-  <td data-label="PTKP Suami" class="ptkp-none">Tidak diberikan PTKP (-/-)</td>
-  <td data-label="PTKP Istri" class="ptkp-code">TK/0</td>
-  <td data-label="PTKP Gabungan" class="ptkp-code">TK/0</td>
-</tr>
-
-<tr data-suami="usaha-pph-final" data-istri="lebih-satu-pemberi">
-  <td data-label="Suami" class="ptkp-suami">Penghasilan dari usaha yang dikenai PPh final</td>
-  <td data-label="Istri">Penghasilan dari &gt; 1 pemberi kerja</td>
-  <td data-label="PTKP - KK" class="ptkp-code">TK/0</td>
-  <td data-label="PTKP Suami" class="ptkp-none">Tidak diberikan PTKP (-/-)</td>
-  <td data-label="PTKP Istri" class="ptkp-code">TK/0</td>
-  <td data-label="PTKP Gabungan" class="ptkp-code">TK/0</td>
-</tr>
-
-<tr data-suami="usaha-pph-final" data-istri="usaha-tidak-final">
-  <td data-label="Suami" class="ptkp-suami">Penghasilan dari usaha yang dikenai PPh final</td>
-  <td data-label="Istri">Penghasilan dari usaha yang dikenai PPh tidak final atau pekerjaan bebas</td>
-  <td data-label="PTKP - KK" class="ptkp-code">TK/0</td>
-  <td data-label="PTKP Suami" class="ptkp-none">Tidak diberikan PTKP (-/-)</td>
-  <td data-label="PTKP Istri" class="ptkp-code">TK/0</td>
-  <td data-label="PTKP Gabungan" class="ptkp-code">TK/0</td>
-</tr>
-
-<tr data-suami="usaha-pph-final" data-istri="usaha-final-tidak-berpenghasilan">
-  <td data-label="Suami" class="ptkp-suami">Penghasilan dari usaha yang dikenai PPh final</td>
-  <td data-label="Istri">Penghasilan dari usaha yang dikenai PPh final/tidak berpenghasilan</td>
-  <td data-label="PTKP - KK" class="ptkp-none">Tidak diberikan PTKP (-/-)</td>
-  <td data-label="PTKP Suami" class="ptkp-none">Tidak diberikan PTKP (-/-)</td>
-  <td data-label="PTKP Istri" class="ptkp-none">Tidak diberikan PTKP (-/-)</td>
-  <td data-label="PTKP Gabungan" class="ptkp-none">Tidak diberikan PTKP (-/-)</td>
-</tr>
-
-</tbody>
-</table>
-</div>
-
-<div class="ptkp-mobile-hint">
-  <span aria-hidden="true">←</span>
-  Geser tabel ke kiri atau kanan untuk melihat seluruh kolom
-  <span aria-hidden="true">→</span>
-</div>
-
-<div class="ptkp-empty-state" id="ptkpEmptyState" hidden>
-  Tidak ada kombinasi yang sesuai dengan filter.
-</div>
-</section>
-
-
-<section id="sumber">
-<h2>Sumber Dokumen</h2>
-
-<div class="ptkp-source-box">
-  <span class="ptkp-source-kicker">Lampiran</span>
-  <strong>Nota Dinas Direktur Peraturan Perpajakan I</strong>
-  <dl>
-    <div>
-      <dt>Nomor</dt>
-      <dd>ND-383/PJ.02/2026</dd>
-    </div>
-    <div>
-      <dt>Tanggal</dt>
-      <dd>6 April 2026</dd>
-    </div>
-  </dl>
-  <p>
-    <b>Judul lampiran:</b> Matriks Penghasilan Tidak Kena Pajak (PTKP)
-    Bagi Suami-Istri baik yang Pemenuhan Hak dan Kewajiban Pajak
-    Penghasilan dilakukan oleh Kepala Keluarga (KK) maupun dilakukan
-    oleh Masing-Masing Suami-Istri (PH/MT).
-  </p>
-</div>
-
-<div class="callout callout-orange">
-<strong>Catatan penyajian</strong>
-<p>
-  Artikel ini menata ulang tabel pada dokumen sumber untuk kebutuhan
-  tampilan website. Materi pada halaman ini tidak menggantikan dokumen
-  sumber.
-</p>
-</div>
-</section>
-
-</div>
+  /*
+   * PENTING:
+   * Jangan menjalankan filter sebelum
+   * seluruh HTML artikel selesai dimuat.
+   */
+  if (document.readyState === "loading") {
+    document.addEventListener(
+      "DOMContentLoaded",
+      initPtkpFilter
+    );
+  } else {
+    initPtkpFilter();
+  }
+})();
