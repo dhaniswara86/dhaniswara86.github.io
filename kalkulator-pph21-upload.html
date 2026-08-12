@@ -865,6 +865,35 @@ a{color:inherit;text-decoration:none}
 
 /* ===== Kabayan v9: focused payroll workflow ===== */
 
+.error-notice{
+  position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;
+  padding:20px;background:rgba(0,0,0,.28);backdrop-filter:blur(4px)
+}
+.error-notice.show{display:flex}
+.error-notice-card{
+  width:min(560px,100%);max-height:min(78vh,680px);overflow:auto;
+  border:1px solid #e6c5c2;border-radius:18px;background:#fff;
+  box-shadow:0 24px 70px rgba(0,0,0,.18)
+}
+.error-notice-head{
+  display:flex;align-items:flex-start;justify-content:space-between;gap:14px;
+  padding:17px 18px 14px;border-bottom:1px solid #f0dddd;background:#fff6f5
+}
+.error-notice-head strong{display:block;color:#9f342f;font-size:15px;letter-spacing:-.02em}
+.error-notice-head span{display:block;margin-top:4px;color:#7a6260;font-size:9px;line-height:1.45}
+.error-notice-close{
+  flex:none;width:28px;height:28px;border:0;border-radius:50%;background:#fff;color:#6e6e73;
+  font-size:18px;line-height:1;cursor:pointer;box-shadow:0 0 0 1px #ead7d5 inset
+}
+.error-notice-body{padding:14px 18px 18px}
+.error-summary{padding:10px 12px;border-radius:11px;background:#fafafa;color:#5d5d62;font-size:9px;line-height:1.5}
+.error-reasons{display:grid;gap:8px;margin-top:10px}
+.error-reason{padding:10px 11px;border:1px solid #f0d8d5;border-radius:11px;background:#fffafa}
+.error-reason b{display:block;margin-bottom:3px;color:#92342f;font-size:9px}
+.error-reason p{margin:0;color:#66666b;font-size:8.5px;line-height:1.45}
+.error-notice-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:14px}
+
+
 .inline-validation{
   margin-top:12px;
   border-top:1px solid var(--line);
@@ -957,12 +986,7 @@ a{color:inherit;text-decoration:none}
   gap:12px;
   margin:14px 0;
 }
-.preflight-card,.validation-card,.recon-card,.individual-hub{
-  border:1px solid var(--line);
-  border-radius:17px;
-  background:#fff;
-}
-.preflight-card{padding:16px}
+.preflight-card,.validation-card,.recon-card,.preflight-card{padding:16px}
 .preflight-head{
   display:flex;
   align-items:flex-start;
@@ -1148,62 +1172,14 @@ a{color:inherit;text-decoration:none}
 }
 .recon-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
 
-.individual-area{
-  padding:0 28px 32px;
-}
-.individual-hub{
-  padding:18px 20px;
-  background:#fafafa;
-}
-.individual-hub-head{
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
-  gap:18px;
-}
-.individual-hub h2{
-  margin:4px 0 5px;
-  font-size:18px;
-  letter-spacing:-.03em;
-}
-.individual-hub p{
-  max-width:720px;
-  margin:0;
-  color:var(--muted);
-  font-size:9px;
-  line-height:1.5;
-}
-.individual-tabs{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:8px;
-  margin-top:14px;
-}
-.individual-tab{
-  min-height:58px;
-  padding:11px 12px;
-  border:1px solid var(--line);
-  border-radius:13px;
-  background:#fff;
-  color:#515154;
-  cursor:pointer;
-  text-align:left;
-}
-.individual-tab:hover{background:#f7fbff;border-color:#bfd7ee}
-.individual-tab.active{background:var(--blue-soft);border-color:#8ab9e8;color:#1d1d1f}
-.individual-tab b{display:block;font-size:11px}
-.individual-tab span{display:block;margin-top:3px;color:var(--muted);font-size:8px;line-height:1.35}
 
 @media(max-width:760px){
   .module-tabs.payroll-primary .module-tab{min-width:175px;flex:1 0 175px}
   .quality-grid{grid-template-columns:1fr}
   .check-list{grid-template-columns:1fr}
-  .recon-section,.individual-area{padding-left:14px;padding-right:14px}
-  .recon-head,.individual-hub-head{display:block}
-  .recon-state{display:inline-block;margin-top:10px}
+  .recon-section,  .recon-head,  .recon-state{display:inline-block;margin-top:10px}
   .recon-metrics{grid-template-columns:1fr 1fr}
-  .individual-tabs{grid-template-columns:1fr}
-}
+  }
 
 @media(max-width:980px){
   .kabayan-links{display:none}
@@ -1572,60 +1548,31 @@ a{color:inherit;text-decoration:none}
       </div>
     </section>
 
-    <section class="individual-area" id="individualArea">
-      <div class="individual-hub">
-        <div class="individual-hub-head">
-          <div>
-            <span class="recon-kicker">Kalkulator Individual</span>
-            <h2>Hitung PPh 21 per penerima penghasilan</h2>
-            <p>Bagian ini dipisahkan dari workflow payroll Excel → XML. Logic tetap mengikuti kalkulator PPh Pasal 21 yang Anda berikan sebelumnya.</p>
-          </div>
-        </div>
-        <div class="individual-tabs" id="individualTabs">
-          <button class="individual-tab" type="button" data-individual="tetap"><b>Karyawan Tetap</b><span>TER bulanan atau Masa Pajak Terakhir</span></button>
-          <button class="individual-tab" type="button" data-individual="tidak"><b>Pegawai Tidak Tetap</b><span>Harian, unit, borongan, atau bulanan</span></button>
-          <button class="individual-tab" type="button" data-individual="bukan"><b>Bukan Pegawai</b><span>Jasa atau pekerjaan bebas orang pribadi</span></button>
-        </div>
-      </div>
-    <section id="logicModule" class="logic-module" style="display:none">
-      <div class="logic-intro">
-        <div class="logic-intro-copy">
-          <div class="section-pill" id="logicPill">KALKULATOR INDIVIDUAL PPh PASAL 21</div>
-          <h2 id="logicTitle">Karyawan Tetap</h2>
-          <p id="logicDescription">Isi data sesuai kondisi penerima penghasilan. Mesin penghitungan mengikuti logic kalkulator PPh Pasal 21 yang Anda berikan.</p>
-        </div>
-        <span class="logic-privacy">✓ Diproses di perangkat</span>
-      </div>
-
-      <div class="logic-period" id="permanentPeriodChooser">
-        <button class="logic-period-btn active" type="button" data-logic-mode="ter">
-          <b>Selain Masa Pajak Terakhir</b>
-          <span>Gunakan TER bulanan untuk masa pajak yang masih memiliki masa berikutnya.</span>
-        </button>
-        <button class="logic-period-btn" type="button" data-logic-mode="final">
-          <b>Masa Pajak Terakhir</b>
-          <span>Hitung ulang PPh setahun atau bagian tahun pada bulan Desember atau bulan terakhir bekerja.</span>
-        </button>
-      </div>
-
-      <div class="logic-frame-shell" id="logicFrameShell">
-        <div class="logic-loader" id="logicLoader">
-          <div><div class="logic-spinner"></div>Menyiapkan kalkulator…</div>
-        </div>
-        <iframe class="logic-frame" id="logicFrame" title="Kalkulator PPh Pasal 21"></iframe>
-      </div>
-
-      <div class="logic-source-note">
-        Logic perhitungan pada modul ini berasal dari <b>kalkulator-pasal21.html</b> yang Anda unggah. Tampilan luar tetap menggunakan tema Kabayan; penghitungan dilakukan langsung di browser.
-      </div>
-    </section>
-
-
-    </section>
+    
 
   </main>
 
-  <footer class="foot"><b>Catatan:</b> Kabayan adalah alat bantu dan bukan aplikasi resmi DJP. Untuk Payroll Januari–November, struktur input dan XML pada halaman ini dibuat berdasarkan workbook <b>BPMP Excel to XML v.3</b> yang Anda unggah. Selalu uji satu file XML pada Coretax sebelum digunakan dalam jumlah besar.</footer>
+  
+  <div class="error-notice" id="errorNotice" role="dialog" aria-modal="true" aria-labelledby="errorNoticeTitle">
+    <div class="error-notice-card">
+      <div class="error-notice-head">
+        <div>
+          <strong id="errorNoticeTitle">Data belum dapat diproses</strong>
+          <span id="errorNoticeSubtitle">Kabayan menemukan data yang perlu diperbaiki.</span>
+        </div>
+        <button class="error-notice-close" id="errorNoticeClose" type="button" aria-label="Tutup">×</button>
+      </div>
+      <div class="error-notice-body">
+        <div class="error-summary" id="errorNoticeSummary"></div>
+        <div class="error-reasons" id="errorNoticeReasons"></div>
+        <div class="error-notice-actions">
+          <button class="btn" id="errorNoticeOk" type="button">Saya Mengerti</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<footer class="foot"><b>Catatan:</b> Kabayan adalah alat bantu dan bukan aplikasi resmi DJP. Untuk Payroll Januari–November, struktur input dan XML pada halaman ini dibuat berdasarkan workbook <b>BPMP Excel to XML v.3</b> yang Anda unggah. Selalu uji satu file XML pada Coretax sebelum digunakan dalam jumlah besar.</footer>
 </div>
 
 <footer class="kabayan-footer">
@@ -1965,7 +1912,7 @@ async function loadFile(file){
     $("fileMeta").textContent=`${rawRows.length} baris · ${currentSourceType==="simple"?"Template Payroll Kabayan":"Format BPMP"} · NPWP Pemotong ${currentTin||"tidak terbaca"}`;
     $("fileStatus").className="badge good";
     $("fileStatus").textContent="Terbaca";
-    toast("File payroll berhasil dibaca");
+    toast("File payroll berhasil dibaca");setTimeout(showBpmpErrorsIfAny,120);
   }catch(e){
     clearData(false);
     $("filebar").classList.add("show");
@@ -2065,6 +2012,48 @@ function qcSet(prefix,state,title,checks){
   list.innerHTML=checks.map(c=>`<div class="check-item ${c[0]}"><span class="check-dot"></span><span>${esc(c[1])}</span></div>`).join("");
 }
 
+
+function summarizeErrors(items){
+  const grouped=new Map();
+  items.forEach(i=>{
+    if(!grouped.has(i.msg))grouped.set(i.msg,{msg:i.msg,count:0,examples:[]});
+    const g=grouped.get(i.msg);
+    g.count++;
+    if(g.examples.length<3)g.examples.push(`Baris ${i.row}${i.label?` · ${i.label}`:""}`);
+  });
+  return [...grouped.values()].sort((a,b)=>b.count-a.count);
+}
+function closeErrorNotice(){
+  const m=$("errorNotice");
+  if(m)m.classList.remove("show");
+}
+function showErrorNotice(title,items){
+  if(!items||!items.length)return;
+  const grouped=summarizeErrors(items);
+  $("errorNoticeTitle").textContent=title||"Data perlu diperbaiki";
+  $("errorNoticeSubtitle").textContent=`Ditemukan ${items.length} error. Perbaiki file Excel, lalu unggah kembali.`;
+  $("errorNoticeSummary").innerHTML=`<b>${items.length} error</b> ditemukan pada ${new Set(items.map(x=>x.row)).size} baris. Penyebab utama:`;
+  $("errorNoticeReasons").innerHTML=grouped.slice(0,8).map(g=>`
+    <div class="error-reason">
+      <b>${esc(g.msg)}${g.count>1?` · ${g.count} kejadian`:""}</b>
+      <p>${g.examples.map(esc).join("<br>")}${g.count>g.examples.length?`<br>+ ${g.count-g.examples.length} baris lainnya`:""}</p>
+    </div>`).join("");
+  $("errorNotice").classList.add("show");
+}
+function showBpmpErrorsIfAny(){
+  const items=[];
+  processed.forEach(x=>{
+    x.errors.forEach(msg=>items.push({row:x.row,label:validationRecipientLabel(x),msg}));
+  });
+  if(items.length)showErrorNotice("Payroll belum siap dibuat XML",items);
+}
+function showBpaErrorsIfAny(type){
+  const rows=(bpaState[type]&&bpaState[type].processed)||[],items=[];
+  rows.forEach(x=>{
+    x.errors.forEach(msg=>items.push({row:x.row,label:x.counterpart||"",msg}));
+  });
+  if(items.length)showErrorNotice(`${type.toUpperCase()} belum siap dibuat XML`,items);
+}
 function validationRecipientLabel(x){
   const id=x.tin||x.passport||x.counterpart||"Tanpa identitas";
   const name=x.name||"";
@@ -2488,7 +2477,7 @@ async function loadBpaFile(type,file){
   const pre=type==="a1"?"a1":"a2";
   try{
     const ab=await file.arrayBuffer(),parsed=parseBpaWorkbook(ab,type);bpaState[type]={tin:parsed.tin,rows:parsed.rows,file:file.name,processed:[]};processBpa(type);
-    $(`${pre}Filebar`).classList.add("show");$(`${pre}FileName`).textContent=file.name;$(`${pre}FileMeta`).textContent=`${parsed.rows.length} baris · NPWP Pemotong ${parsed.tin||"tidak terbaca"}`;$(`${pre}FileStatus`).className="badge good";$(`${pre}FileStatus`).textContent="Terbaca";toast(`File ${type.toUpperCase()} berhasil dibaca`);
+    $(`${pre}Filebar`).classList.add("show");$(`${pre}FileName`).textContent=file.name;$(`${pre}FileMeta`).textContent=`${parsed.rows.length} baris · NPWP Pemotong ${parsed.tin||"tidak terbaca"}`;$(`${pre}FileStatus`).className="badge good";$(`${pre}FileStatus`).textContent="Terbaca";toast(`File ${type.toUpperCase()} berhasil dibaca`);setTimeout(()=>showBpaErrorsIfAny(type),120);
   }catch(e){clearBpa(type,false);$(`${pre}Filebar`).classList.add("show");$(`${pre}FileName`).textContent=file.name;$(`${pre}FileMeta`).textContent=e.message;$(`${pre}FileStatus`).className="badge bad";$(`${pre}FileStatus`).textContent="Gagal";const n=$(`${pre}Notice`);n.className="notice bad";n.textContent=e.message}
 }
 function bpaXmlValue(row,field,type){
@@ -2533,6 +2522,12 @@ if(menuBtn&&mobileNav){
 }
 const yearEl=document.getElementById("kabayanYear");if(yearEl)yearEl.textContent=new Date().getFullYear();
 
+
+$("errorNoticeClose").addEventListener("click",closeErrorNotice);
+$("errorNoticeOk").addEventListener("click",closeErrorNotice);
+$("errorNotice").addEventListener("click",e=>{if(e.target===$("errorNotice"))closeErrorNotice()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeErrorNotice()});
+
 document.querySelectorAll(".module-tab").forEach(btn=>btn.addEventListener("click",()=>{
   document.querySelectorAll(".module-tab").forEach(b=>b.classList.toggle("active",b===btn));
   const mod=btn.dataset.module;
@@ -2541,11 +2536,6 @@ document.querySelectorAll(".module-tab").forEach(btn=>btn.addEventListener("clic
   $("bpa2Module").style.display=mod==="bpa2"?"block":"none";
 }));
 
-document.querySelectorAll(".individual-tab").forEach(btn=>btn.addEventListener("click",()=>{
-  document.querySelectorAll(".individual-tab").forEach(b=>b.classList.toggle("active",b===btn));
-  showLogicTab(btn.dataset.individual);
-  setTimeout(()=>$("logicModule").scrollIntoView({behavior:"smooth",block:"start"}),40);
-}));
 updateBpmpPreflight();updateBpaPreflight("a1");updateBpaPreflight("a2");buildReconciliation();
 
 
