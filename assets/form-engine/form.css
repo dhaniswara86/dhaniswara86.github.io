@@ -642,3 +642,399 @@ body.menu-open{overflow:hidden}
     display:none;
   }
 }
+
+
+/* ==========================================================
+   SURAT KUASA KHUSUS — TAMPILAN KLASIK
+   Meniru tampilan standalone sebelum migrasi ke Form Engine.
+   Semua selector dibatasi ke .paper.kuasa-classic agar Hibah
+   dan formulir lain tidak berubah.
+   ========================================================== */
+
+.paper.kuasa-classic{
+  padding:18mm 18mm 16mm;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:10pt;
+  line-height:1.25;
+}
+
+.paper.kuasa-classic .title{
+  width:100%;
+  text-align:center;
+  font-size:13pt;
+  font-weight:700;
+  margin-bottom:1mm;
+  line-height:1.45;
+}
+
+.paper.kuasa-classic .title-line{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:2mm;
+  width:max-content;
+  max-width:100%;
+  margin:0 auto;
+  text-align:center;
+  white-space:nowrap;
+  font-size:13pt;
+}
+
+.paper.kuasa-classic .title-label{
+  white-space:nowrap;
+}
+
+.paper.kuasa-classic .title-select{
+  width:auto;
+  min-width:0;
+  max-width:none;
+  height:auto!important;
+  padding:1.1mm 8mm 1.1mm 2.5mm!important;
+  text-align:left;
+  text-align-last:left;
+  font-family:Arial,Helvetica,sans-serif!important;
+  font-weight:700;
+  font-size:13pt!important;
+  line-height:1.2;
+  border:.25mm solid #888!important;
+  border-radius:2mm!important;
+  background:#fff!important;
+  box-sizing:content-box;
+}
+
+.paper.kuasa-classic .subtitle{
+  text-align:center;
+  margin-bottom:6mm;
+}
+
+.paper.kuasa-classic .row{
+  display:grid;
+  grid-template-columns:45mm 4mm minmax(0,1fr);
+  align-items:center;
+  min-height:6mm;
+  font-size:10pt;
+  line-height:1.25;
+}
+
+.paper.kuasa-classic .colon{
+  text-align:center;
+}
+
+.paper.kuasa-classic input[type="text"],
+.paper.kuasa-classic input[type="date"],
+.paper.kuasa-classic textarea,
+.paper.kuasa-classic select{
+  width:100%;
+  border:0;
+  border-bottom:.25mm dotted #555;
+  border-radius:0;
+  padding:.45mm 1mm;
+  background:#fff;
+  color:#000;
+  outline:none;
+  font-family:Arial,Helvetica,sans-serif!important;
+  font-size:10pt!important;
+  line-height:1.22!important;
+}
+
+.paper.kuasa-classic input[type="text"],
+.paper.kuasa-classic input[type="date"],
+.paper.kuasa-classic select{
+  height:5.7mm;
+}
+
+.paper.kuasa-classic textarea{
+  min-height:11mm;
+  resize:vertical;
+  line-height:1.22!important;
+}
+
+.paper.kuasa-classic input:focus,
+.paper.kuasa-classic textarea:focus,
+.paper.kuasa-classic select:focus{
+  background:#eff6ff;
+  box-shadow:inset 0 -1px 0 var(--blue);
+}
+
+.paper.kuasa-classic .section{
+  margin:3mm 0;
+  text-align:left;
+}
+
+.paper.kuasa-classic .checks{
+  display:grid;
+  gap:1.2mm;
+  margin:1.5mm 0 2mm;
+}
+
+.paper.kuasa-classic .check-line{
+  display:flex;
+  align-items:flex-start;
+  gap:2.3mm;
+  cursor:pointer;
+  font-size:10pt;
+  line-height:1.25;
+}
+
+.paper.kuasa-classic input[type="radio"]{
+  -webkit-appearance:none;
+  appearance:none;
+  width:6.3mm;
+  height:6.3mm;
+  flex:0 0 6.3mm;
+  margin:0;
+  border:.3mm solid #555;
+  border-radius:1mm;
+  background:#fff;
+  display:inline-grid;
+  place-content:center;
+  vertical-align:middle;
+  cursor:pointer;
+  position:relative;
+}
+
+.paper.kuasa-classic input[type="radio"]::before{
+  content:"✓";
+  display:block;
+  font-family:Arial,Helvetica,sans-serif;
+  font-weight:700;
+  font-size:5mm;
+  line-height:1;
+  color:#000;
+  transform:scale(0);
+  transform-origin:center;
+}
+
+.paper.kuasa-classic input[type="radio"]:checked::before{
+  transform:scale(1);
+}
+
+.paper.kuasa-classic .indent{
+  margin-left:10mm;
+}
+
+.paper.kuasa-classic .paragraph{
+  margin:3mm 0;
+  text-align:justify;
+  font-size:10pt;
+  line-height:1.25;
+}
+
+.paper.kuasa-classic .inline-field{
+  display:inline-block;
+  vertical-align:baseline;
+  width:40mm!important;
+  height:5.7mm!important;
+}
+
+.paper.kuasa-classic .period-type-select{
+  width:43mm!important;
+  text-align:left!important;
+  text-align-last:left!important;
+  padding-left:1.5mm!important;
+  margin-right:1.5mm;
+}
+
+.paper.kuasa-classic .wide{
+  width:58mm!important;
+}
+
+.paper.kuasa-classic .date-wrap{
+  display:inline-flex;
+  align-items:center;
+  gap:1.5mm;
+  vertical-align:baseline;
+}
+
+.paper.kuasa-classic .date-print{
+  display:none;
+  font-weight:400;
+}
+
+.paper.kuasa-classic .detail-list{
+  display:grid;
+  gap:2mm;
+  margin:2mm 0 3mm 8mm;
+}
+
+.paper.kuasa-classic .repeatable-list{
+  display:grid;
+  gap:2mm;
+}
+
+.paper.kuasa-classic .detail-row{
+  display:grid;
+  grid-template-columns:7mm minmax(0,1fr) 26mm!important;
+  gap:2mm;
+  align-items:start;
+}
+
+.paper.kuasa-classic .detail-row textarea{
+  min-height:8mm;
+}
+
+.paper.kuasa-classic .detail-list.single-purpose .detail-row{
+  grid-template-columns:minmax(0,1fr) 26mm!important;
+}
+
+.paper.kuasa-classic .detail-list.single-purpose .detail-label{
+  display:none!important;
+}
+
+.paper.kuasa-classic .dynamic-actions{
+  display:flex;
+  gap:8px;
+  margin:2mm 0 0 9mm;
+}
+
+.paper.kuasa-classic .dynamic-actions button{
+  border:1px solid #d2d2d7;
+  background:#fff;
+  border-radius:999px;
+  padding:6px 12px;
+  cursor:pointer;
+  font-size:12px;
+}
+
+.paper.kuasa-classic .detail-remove{
+  border:1px solid #d2d2d7;
+  background:#fff;
+  border-radius:999px;
+  padding:5px 8px;
+  cursor:pointer;
+  font-size:11px;
+}
+
+.paper.kuasa-classic .detail-list.single-purpose .detail-remove{
+  visibility:hidden;
+}
+
+.paper.kuasa-classic .signature-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18mm;
+  margin-top:8mm;
+}
+
+.paper.kuasa-classic .sig-box{
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+.paper.kuasa-classic .sig-box input[type="text"]{
+  width:72mm;
+  max-width:100%;
+  text-align:center;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.paper.kuasa-classic .sig-space{
+  height:26mm;
+}
+
+.paper.kuasa-classic .meterai{
+  width:28mm;
+  height:20mm;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:0 auto 2mm;
+  border:1px dashed #888;
+  font-size:8pt;
+  color:#666;
+}
+
+.paper.kuasa-classic .pemberi-space{
+  height:6mm;
+}
+
+.paper.kuasa-classic .screen-help{
+  font-size:8pt;
+  color:#64748b;
+  margin-top:1mm;
+}
+
+.paper.kuasa-classic .footnotes{
+  margin-top:6mm;
+  font-size:8.8pt;
+  line-height:1.35;
+}
+
+@media(max-width:850px){
+  .paper.kuasa-classic{
+    font-size:16px;
+    line-height:1.25;
+  }
+
+  .paper.kuasa-classic .row,
+  .paper.kuasa-classic .paragraph,
+  .paper.kuasa-classic .section,
+  .paper.kuasa-classic .check-line{
+    font-size:16px;
+    line-height:1.25;
+  }
+
+  .paper.kuasa-classic input[type="text"],
+  .paper.kuasa-classic input[type="date"],
+  .paper.kuasa-classic textarea,
+  .paper.kuasa-classic select{
+    font-size:16px!important;
+  }
+
+  .paper.kuasa-classic .title,
+  .paper.kuasa-classic .title-line,
+  .paper.kuasa-classic .title-select{
+    font-size:18px!important;
+  }
+}
+
+@media print{
+  .paper.kuasa-classic{
+    padding:18mm 18mm 16mm!important;
+    font-size:10pt!important;
+    line-height:1.25!important;
+  }
+
+  .paper.kuasa-classic .row,
+  .paper.kuasa-classic .paragraph,
+  .paper.kuasa-classic .section,
+  .paper.kuasa-classic .check-line{
+    font-size:10pt!important;
+  }
+
+  .paper.kuasa-classic input[type="text"],
+  .paper.kuasa-classic textarea,
+  .paper.kuasa-classic select{
+    font-size:10pt!important;
+    border:0!important;
+    background:transparent!important;
+    box-shadow:none!important;
+  }
+
+  .paper.kuasa-classic .title-select{
+    border:0!important;
+    background:transparent!important;
+    padding-left:0!important;
+    padding-right:0!important;
+    appearance:none!important;
+    -webkit-appearance:none!important;
+  }
+
+  .paper.kuasa-classic .date-input{
+    display:none!important;
+  }
+
+  .paper.kuasa-classic .date-print{
+    display:inline!important;
+  }
+
+  .paper.kuasa-classic .meterai,
+  .paper.kuasa-classic .dynamic-actions,
+  .paper.kuasa-classic .detail-remove,
+  .paper.kuasa-classic .screen-help{
+    display:none!important;
+  }
+}
