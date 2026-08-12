@@ -26,10 +26,66 @@ main{padding-top:var(--nav-h)}
 .form-title{margin:0 0 7mm;text-align:center;font-size:13pt;font-weight:700}
 .paragraph{margin:0 0 2.5mm;text-align:justify}.group{margin-left:10mm}
 .row{display:grid;grid-template-columns:48mm 4mm minmax(0,1fr);align-items:center;min-height:6.5mm}.row.tall{align-items:start}.colon{text-align:center}
-input[type=text],input[type=date],textarea{width:100%;border:0;border-bottom:.25mm dotted #555;padding:.45mm 1mm;background:#fff;color:#000;font:inherit;outline:none}
-input[type=text],input[type=date]{height:6mm}textarea{min-height:13mm;resize:vertical;line-height:1.25}
+input[type="text"],
+input[type="date"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+textarea,
+select{
+  width:100%;
+  border:0;
+  border-bottom:.25mm dotted #555;
+  padding:.45mm 1mm;
+  background:#fff;
+  color:#000;
+  font-family:Arial,Helvetica,sans-serif !important;
+  font-size:10.9pt !important;
+  font-weight:400;
+  line-height:1.22;
+  outline:none;
+  -webkit-appearance:none;
+  appearance:none;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+select{
+  height:6mm;
+}
+
+textarea{
+  min-height:13mm;
+  resize:vertical;
+  line-height:1.25;
+}
+
+input::placeholder,
+textarea::placeholder{
+  font-family:Arial,Helvetica,sans-serif;
+  font-weight:400;
+  color:#86868b;
+  opacity:1;
+}
 input:focus,textarea:focus{background:#eff6ff;box-shadow:inset 0 -1px 0 var(--blue)}
 .missing{background:#fff1f2!important;box-shadow:inset 0 -1px 0 var(--danger)!important}
 .signature{width:74mm;margin:8mm 4mm 0 auto;text-align:center}.date-line{display:grid;grid-template-columns:25mm 4mm minmax(0,1fr);align-items:center}.comma{text-align:center}.date-print{display:none}.sig-space{height:20mm}.name-line input{width:52mm;text-align:center}
 .footnote{margin-top:5mm;font-size:9pt;line-height:1.3}.error-box{display:none;margin:0 0 4mm;padding:3mm 4mm;border:1px solid var(--danger);border-radius:3mm;background:#fff1f2;color:#a40012;font-size:9pt}.error-box.show{display:block}
+
+@media(max-width:850px){
+  input[type="text"],
+  input[type="date"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  textarea,
+  select{
+    font-family:Arial,Helvetica,sans-serif !important;
+    font-size:16px !important;
+  }
+}
+
 @media(max-width:850px){.nav-links{display:none}.toolbar{position:static;flex-direction:column;align-items:flex-start}.actions{width:100%;flex-wrap:wrap}.actions>*{flex:1}}
