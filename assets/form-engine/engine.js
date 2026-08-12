@@ -92,6 +92,28 @@
     return `<div class="conditional" data-show-when-group="${escapeHtml(block.when.group)}" data-show-when-value="${escapeHtml(block.when.value)}" hidden>${content}</div>`;
   }
 
+
+  function resizeTitleSelect() {
+    const select = document.querySelector('.title-line select');
+    if (!select) return;
+
+    const option = select.options[select.selectedIndex];
+    const text = option ? option.text : '';
+
+    const measurer = document.createElement('span');
+    measurer.style.position = 'absolute';
+    measurer.style.visibility = 'hidden';
+    measurer.style.whiteSpace = 'pre';
+    measurer.style.font = getComputedStyle(select).font;
+    measurer.textContent = text || ' ';
+    document.body.appendChild(measurer);
+
+    const width = Math.ceil(measurer.getBoundingClientRect().width + 14);
+    measurer.remove();
+
+    select.style.width = Math.max(width, 18) + 'px';
+  }
+
   function titleHtml(schema) {
     if (!schema.formTitleChoice) {
       return `<div class="form-title">${escapeHtml(schema.formTitle || schema.title)}</div>`;
@@ -105,7 +127,7 @@
     return `<div class="title-line">
       <span>${escapeHtml(c.prefix)}</span>
       <select id="${escapeHtml(c.id)}" data-required="true" data-label="${escapeHtml(c.label)}">
-        <option value=""></option>
+        <option value="">${escapeHtml(c.placeholder || '')}</option>
         ${options}
       </select>
     </div>`;
@@ -187,7 +209,7 @@
           <label>${escapeHtml(block.label)}</label>
           <span class="colon">:</span>
           <select id="${escapeHtml(t.id)}" data-required="true" data-label="${escapeHtml(t.label)}">
-            <option value=""></option>${options}
+            <option value="">${escapeHtml(t.placeholder || '')}</option>${options}
           </select>
           <input id="${escapeHtml(v.id)}" type="text" data-required="true" data-label="${escapeHtml(v.label)}"${attr('placeholder',v.placeholder)}>
         </div>`);
@@ -458,6 +480,7 @@
       }
 
       renderLetter(schema);
+      resizeTitleSelect();
       setupRepeatables(schema);
       setupSyncNames(schema);
       setupCurrency(schema);
@@ -471,6 +494,7 @@
       form.addEventListener('change', e => {
         e.target.classList?.remove('missing');
         errorBox.classList.remove('show');
+        if (e.target.closest('.title-line')) resizeTitleSelect();
         refreshConditionalVisibility();
         syncPrintDates();
       });
