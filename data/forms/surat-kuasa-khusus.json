@@ -17,11 +17,11 @@
         "label": "ORANG PRIBADI"
       },
       {
-        "value": "WARISAN YANG BELUM TERBAGI",
-        "label": "WARISAN YANG BELUM TERBAGI"
+        "value": "WARISAN BELUM TERBAGI",
+        "label": "WARISAN BELUM TERBAGI"
       }
     ],
-    "placeholder": "Pilih jenis WP"
+    "placeholder": "PILIH JENIS WAJIB PAJAK"
   },
   "blocks": [
     {
@@ -114,7 +114,7 @@
     },
     {
       "type": "radio",
-      "name": "statusPenerima",
+      "name": "statusKuasa",
       "label": "",
       "required": true,
       "options": [
@@ -123,12 +123,12 @@
           "label": "Konsultan Pajak"
         },
         {
-          "value": "Pihak lain",
-          "label": "Pihak lain"
+          "value": "Pihak Lain",
+          "label": "Pihak Lain"
         },
         {
-          "value": "keluarga Wajib Pajak",
-          "label": "keluarga Wajib Pajak"
+          "value": "Keluarga Wajib Pajak",
+          "label": "keluarga Wajib Pajak,"
         }
       ]
     },
@@ -152,7 +152,7 @@
     {
       "type": "conditional",
       "when": {
-        "group": "statusPenerima",
+        "group": "statusKuasa",
         "value": "Konsultan Pajak"
       },
       "fields": [
@@ -167,8 +167,8 @@
     {
       "type": "conditional",
       "when": {
-        "group": "statusPenerima",
-        "value": "Pihak lain"
+        "group": "statusKuasa",
+        "value": "Pihak Lain"
       },
       "fields": [
         {
@@ -182,8 +182,8 @@
     {
       "type": "conditional",
       "when": {
-        "group": "statusPenerima",
-        "value": "keluarga Wajib Pajak"
+        "group": "statusKuasa",
+        "value": "Keluarga Wajib Pajak"
       },
       "fields": [
         {
@@ -315,5 +315,6 @@
       "source": "namaKuasa",
       "target": "namaTtdKuasa"
     }
-  ]
+  ],
+  "renderer": "kuasa-classic"
 }
