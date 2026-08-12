@@ -11,19 +11,44 @@
 <body id="top">
   <header class="site-nav no-print">
     <div class="nav-inner">
-      <a class="brand" href="index.html">
-        <span class="brand-mark">ASD</span>
+      <a class="nav-brand" href="index.html">
+        <span class="brand-symbol">ASD</span>
         <span>dhaniswara86</span>
       </a>
-      <nav class="nav-links">
+
+      <nav aria-label="Navigasi utama" class="desktop-menu">
         <a href="index.html">Beranda</a>
         <a href="buku.html">Buku</a>
         <a href="formulir.html" aria-current="page">Formulir</a>
         <a href="aplikasi.html">Aplikasi</a>
+        <a href="kalkulator.html">Kalkulator</a>
         <a href="artikel.html">Artikel</a>
+        <a class="nav-hotnews" href="hotnews.html">
+          <span aria-hidden="true" class="nav-hotnews-icon">🔥</span>
+          <span>Hot News</span>
+        </a>
       </nav>
+
+      <div class="nav-actions">
+        <button aria-expanded="false" aria-label="Buka menu" class="menu-toggle" id="menuToggle" type="button">
+          ☰
+        </button>
+      </div>
     </div>
   </header>
+
+  <nav class="mobile-menu no-print" id="mobileMenu">
+    <a href="index.html">Beranda</a>
+    <a href="buku.html">Buku</a>
+    <a href="formulir.html">Formulir</a>
+    <a href="aplikasi.html">Aplikasi</a>
+    <a href="kalkulator.html">Kalkulator</a>
+    <a href="artikel.html">Artikel</a>
+    <a class="nav-hotnews" href="hotnews.html">
+      <span aria-hidden="true" class="nav-hotnews-icon">🔥</span>
+      <span>Hot News</span>
+    </a>
+  </nav>
 
   <main>
     <section class="hero no-print">
@@ -58,6 +83,28 @@
     </section>
   </main>
 
+  <script>
+    const menuToggle = document.getElementById("menuToggle");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    if (menuToggle && mobileMenu) {
+      menuToggle.addEventListener("click", () => {
+        const isActive = mobileMenu.classList.toggle("active");
+        document.body.classList.toggle("menu-open", isActive);
+        menuToggle.setAttribute("aria-expanded", String(isActive));
+        menuToggle.textContent = isActive ? "×" : "☰";
+      });
+
+      document.querySelectorAll(".mobile-menu a").forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileMenu.classList.remove("active");
+          document.body.classList.remove("menu-open");
+          menuToggle.setAttribute("aria-expanded", "false");
+          menuToggle.textContent = "☰";
+        });
+      });
+    }
+  </script>
   <script src="assets/form-engine/engine.js"></script>
 </body>
 </html>
