@@ -4,8 +4,8 @@
   --paper-w:210mm;--paper-h:297mm;--nav-h:48px;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;overflow-x:hidden;background:var(--off);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;overflow-x:hidden;background:var(--off);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 .site-nav{position:fixed;z-index:1000;top:0;left:0;right:0;min-height:var(--nav-h);border-bottom:1px solid rgba(0,0,0,.06);background:rgba(250,250,252,.84);backdrop-filter:saturate(180%) blur(20px)}
 .nav-inner{width:min(1180px,calc(100% - 36px));min-height:var(--nav-h);margin:auto;display:flex;align-items:center;justify-content:space-between;gap:28px}
 .brand{display:flex;align-items:center;gap:9px;color:var(--ink);font-size:14px;font-weight:700;text-decoration:none}
@@ -22,7 +22,7 @@ main{padding-top:var(--nav-h)}
 .toolbar h2{margin:0;font-size:15px}.toolbar p{margin:4px 0 0;color:var(--gray);font-size:12px}
 .actions{display:flex;gap:9px}.btn,.back{min-height:40px;display:inline-flex;align-items:center;justify-content:center;padding:9px 17px;border-radius:999px;font:inherit;font-size:13px;font-weight:550;cursor:pointer;text-decoration:none}
 .back{border:1px solid var(--blue);color:var(--blue);background:transparent}.reset{border:1px solid var(--line);background:transparent;color:#6e6e73}.print{border:1px solid var(--blue);background:var(--blue);color:#fff}
-.paper-wrap{overflow-x:auto}.paper{width:var(--paper-w);min-height:var(--paper-h);margin:auto;padding:24mm 24mm 17mm;background:#fff;color:#000;box-shadow:0 28px 75px rgba(15,23,42,.18);font-family:Arial,Helvetica,sans-serif;font-size:10.9pt;line-height:1.22}
+.paper-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}.paper{width:var(--paper-w);min-height:var(--paper-h);margin:auto;padding:24mm 24mm 17mm;background:#fff;color:#000;box-shadow:0 28px 75px rgba(15,23,42,.18);font-family:Arial,Helvetica,sans-serif;font-size:10.9pt;line-height:1.22;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 .form-title{margin:0 0 7mm;text-align:center;font-size:13pt;font-weight:700}
 .paragraph{margin:0 0 2.5mm;text-align:justify}.group{margin-left:10mm}
 .row{display:grid;grid-template-columns:48mm 4mm minmax(0,1fr);align-items:center;min-height:6.5mm}.row.tall{align-items:start}.colon{text-align:center}
@@ -39,13 +39,16 @@ select{
   padding:.45mm 1mm;
   background:#fff;
   color:#000;
-  font-family:Arial,Helvetica,sans-serif !important;
-  font-size:10.9pt !important;
+  font-family:inherit !important;
+  font-size:inherit !important;
   font-weight:400;
-  line-height:1.22;
+  line-height:inherit;
+  letter-spacing:inherit;
   outline:none;
   -webkit-appearance:none;
   appearance:none;
+  -webkit-text-size-adjust:100%;
+  text-size-adjust:100%;
 }
 
 input[type="text"],
@@ -65,7 +68,8 @@ textarea{
 
 input::placeholder,
 textarea::placeholder{
-  font-family:Arial,Helvetica,sans-serif;
+  font-family:inherit;
+  font-size:inherit;
   font-weight:400;
   color:#86868b;
   opacity:1;
@@ -76,15 +80,46 @@ input:focus,textarea:focus{background:#eff6ff;box-shadow:inset 0 -1px 0 var(--bl
 .footnote{margin-top:5mm;font-size:9pt;line-height:1.3}.error-box{display:none;margin:0 0 4mm;padding:3mm 4mm;border:1px solid var(--danger);border-radius:3mm;background:#fff1f2;color:#a40012;font-size:9pt}.error-box.show{display:block}
 
 @media(max-width:850px){
-  input[type="text"],
-  input[type="date"],
-  input[type="email"],
-  input[type="tel"],
-  input[type="number"],
-  textarea,
-  select{
+  /*
+    Di HP seluruh isi kertas memakai satu ukuran dasar yang sama.
+    16px dipakai agar Safari iPhone tidak melakukan auto-zoom saat field disentuh.
+  */
+  .paper{
+    font-size:16px;
+    line-height:1.22;
+    -webkit-text-size-adjust:100%;
+    text-size-adjust:100%;
+  }
+
+  .paper input[type="text"],
+  .paper input[type="date"],
+  .paper input[type="email"],
+  .paper input[type="tel"],
+  .paper input[type="number"],
+  .paper textarea,
+  .paper select{
     font-family:Arial,Helvetica,sans-serif !important;
     font-size:16px !important;
+    line-height:1.22 !important;
+    -webkit-text-size-adjust:100%;
+    text-size-adjust:100%;
+  }
+
+  .paper .paragraph,
+  .paper .row,
+  .paper label,
+  .paper .colon{
+    font-size:16px;
+    line-height:1.22;
+  }
+
+  .paper .form-title{
+    font-size:18px;
+  }
+
+  .paper .footnote,
+  .paper .error-box{
+    font-size:13px;
   }
 }
 
