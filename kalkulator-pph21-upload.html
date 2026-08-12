@@ -1,0 +1,1072 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Kabayan · Kalkulator PPh 21 Bulanan</title>
+<meta name="description" content="Kalkulator PPh Pasal 21 Bulanan Kabayan berbasis template BPMP Excel to XML v.3 DJP. Mendukung TER, gross-up, unduh template, hasil Excel, ekspor XML Coretax, dan hapus data.">
+
+<style>
+:root{
+  --ink:#1d1d1f;
+  --ink-2:#3a3a3c;
+  --muted:#6e6e73;
+  --muted-2:#86868b;
+  --blue:#0066cc;
+  --blue-hover:#0058b0;
+  --blue-soft:#f0f7ff;
+  --page:#ffffff;
+  --soft:#f5f5f7;
+  --soft-2:#fafafa;
+  --line:#e5e5e7;
+  --line-2:#ededf0;
+  --green:#1f7a42;
+  --green-bg:#edf8f0;
+  --amber:#8a5a00;
+  --amber-bg:#fff8e8;
+  --red:#a12d28;
+  --red-bg:#fff1f0;
+  --radius:20px;
+  --shadow:0 12px 34px rgba(0,0,0,.055);
+  --nav-h:48px;
+  --max:1180px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--page);
+  color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Segoe UI",Arial,sans-serif;
+  line-height:1.48;
+  letter-spacing:-.014em;
+  -webkit-font-smoothing:antialiased;
+}
+button,input{font:inherit}
+a{color:inherit;text-decoration:none}
+
+/* Kabayan global header */
+.kabayan-header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  height:var(--nav-h);
+  border-bottom:1px solid rgba(0,0,0,.06);
+  background:rgba(255,255,255,.88);
+  backdrop-filter:saturate(180%) blur(18px);
+  -webkit-backdrop-filter:saturate(180%) blur(18px);
+}
+.kabayan-nav{
+  width:min(1040px,calc(100% - 30px));
+  height:100%;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+}
+.kabayan-brand{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  min-width:0;
+  color:#3f3f42;
+  font-size:12px;
+  font-weight:600;
+  white-space:nowrap;
+}
+.kabayan-brand img{
+  width:22px;
+  height:22px;
+  object-fit:contain;
+  border-radius:4px;
+  background:#fff;
+}
+.kabayan-brand .sep{color:#c7c7cc;font-weight:400}
+.kabayan-links{display:flex;align-items:center;gap:24px}
+.kabayan-links a{
+  color:#424245;
+  font-size:12px;
+  transition:.16s ease;
+}
+.kabayan-links a:hover,.kabayan-links a.current{color:#000}
+.hot-link{display:inline-flex!important;align-items:center;gap:4px}
+.menu-btn{
+  display:none;
+  width:34px;height:34px;
+  border:0;
+  border-radius:50%;
+  background:transparent;
+  color:#1d1d1f;
+  font-size:18px;
+  cursor:pointer;
+}
+.mobile-nav{
+  display:none;
+  position:fixed;
+  z-index:999;
+  top:var(--nav-h);left:0;right:0;
+  padding:20px 24px 28px;
+  border-bottom:1px solid var(--line);
+  background:rgba(255,255,255,.98);
+  backdrop-filter:blur(20px);
+  box-shadow:0 14px 32px rgba(0,0,0,.08);
+}
+.mobile-nav.show{display:block}
+.mobile-nav a{
+  display:block;
+  padding:10px 0;
+  border-bottom:1px solid var(--line-2);
+  font-size:18px;
+  font-weight:650;
+  letter-spacing:-.03em;
+}
+
+/* Hero */
+.kabayan-hero{
+  background:
+    radial-gradient(circle at 76% 28%,rgba(0,102,204,.10),transparent 26%),
+    linear-gradient(180deg,#fff 0%,#fafcff 100%);
+  border-bottom:1px solid var(--line-2);
+}
+.hero-inner{
+  width:min(var(--max),calc(100% - 32px));
+  margin:auto;
+  padding:66px 0 58px;
+}
+.hero-kicker{
+  margin:0 0 12px;
+  color:var(--blue);
+  font-size:12px;
+  font-weight:750;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+}
+.kabayan-hero h1{
+  max-width:780px;
+  margin:0;
+  font-size:clamp(44px,6vw,72px);
+  line-height:.98;
+  letter-spacing:-.058em;
+}
+.kabayan-hero h1 span{color:var(--muted-2)}
+.hero-copy{
+  max-width:720px;
+  margin:20px 0 0;
+  color:#515154;
+  font-size:clamp(17px,2vw,22px);
+  line-height:1.34;
+  letter-spacing:-.025em;
+}
+.hero-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:24px;
+}
+.hero-tag{
+  padding:6px 10px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  background:#fff;
+  color:#515154;
+  font-size:10px;
+  font-weight:650;
+}
+
+/* Main calculator shell */
+.page{
+  width:min(var(--max),calc(100% - 32px));
+  margin:36px auto 54px;
+  overflow:hidden;
+  border:1px solid var(--line);
+  border-radius:24px;
+  background:#fff;
+  box-shadow:var(--shadow);
+}
+.topbar{
+  min-height:110px;
+  display:flex;
+  align-items:center;
+  gap:16px;
+  padding:24px 28px;
+  border-bottom:1px solid var(--line);
+  background:#fff;
+  color:var(--ink);
+}
+.brand-icon{
+  flex:none;
+  width:46px;height:46px;
+  display:grid;
+  place-items:center;
+  border:1px solid #dbe7f3;
+  border-radius:14px;
+  background:var(--blue-soft);
+  font-size:21px;
+}
+.topbar h1{
+  margin:0;
+  max-width:850px;
+  font-size:24px;
+  line-height:1.14;
+  letter-spacing:-.035em;
+}
+.topbar p{
+  margin:6px 0 0;
+  color:var(--muted);
+  font-size:11px;
+}
+
+/* Module navigation */
+.module-tabs{
+  display:flex;
+  gap:0;
+  overflow-x:auto;
+  border-bottom:1px solid var(--line);
+  background:var(--soft-2);
+  scrollbar-width:none;
+}
+.module-tabs::-webkit-scrollbar{display:none}
+.module-tab{
+  position:relative;
+  flex:1 0 116px;
+  min-width:116px;
+  min-height:98px;
+  padding:14px 10px 12px;
+  border:0;
+  border-right:1px solid var(--line);
+  background:transparent;
+  color:#626267;
+  cursor:pointer;
+  transition:.16s ease;
+}
+.module-tab:last-child{border-right:0}
+.module-tab:hover{background:#fff;color:#1d1d1f}
+.module-tab::after{
+  content:"";
+  position:absolute;
+  left:18px;right:18px;bottom:0;
+  height:2px;
+  border-radius:999px 999px 0 0;
+  background:transparent;
+}
+.module-tab.active{
+  background:#fff;
+  color:var(--ink);
+  box-shadow:none;
+}
+.module-tab.active::after{background:var(--blue)}
+.module-tab .ico{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:6px;
+  color:#6d6e73;
+}
+.module-tab.active .ico{color:var(--blue)}
+.module-tab:hover .ico{color:#1d1d1f}
+.module-tab .label{
+  display:block;
+  font-size:12px;
+  line-height:1.2;
+  font-weight:700;
+}
+.module-tab .tag{
+  display:inline-block;
+  margin-top:6px;
+  padding:2px 7px;
+  border-radius:999px;
+  background:#ececef;
+  color:#6e6e73;
+  font-size:8px;
+  font-weight:750;
+  letter-spacing:.04em;
+}
+.module-tab.active .tag{
+  background:var(--blue-soft);
+  color:var(--blue);
+}
+
+/* Main module */
+.content{padding:30px 28px 34px}
+.section-pill{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  padding:7px 11px;
+  border:1px solid #cfe2f6;
+  border-radius:999px;
+  background:var(--blue-soft);
+  color:#245d91;
+  font-size:11px;
+  font-weight:750;
+  letter-spacing:.025em;
+}
+.steps{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin:20px 0 22px;
+}
+.step{
+  min-height:138px;
+  padding:20px 17px;
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:#fff;
+  text-align:left;
+}
+.step-num{
+  width:30px;height:30px;
+  display:grid;
+  place-items:center;
+  margin:0 0 16px;
+  border-radius:9px;
+  background:#1d1d1f;
+  color:#fff;
+  font-size:11px;
+  font-weight:750;
+}
+.step b{
+  display:block;
+  font-size:14px;
+  letter-spacing:-.02em;
+}
+.step span{
+  display:block;
+  margin-top:6px;
+  color:var(--muted);
+  font-size:10px;
+  line-height:1.5;
+}
+.grossup{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  margin:22px 0 16px;
+  padding:14px 16px;
+  border:1px solid #eadfca;
+  border-radius:15px;
+  background:#fffaf1;
+  color:#76551f;
+}
+.grossup strong{font-size:12px}
+.switch{position:relative;flex:none;width:50px;height:28px}
+.switch input{display:none}
+.slider{
+  position:absolute;inset:0;
+  border-radius:999px;
+  background:#c7c7cc;
+  cursor:pointer;
+  transition:.18s ease;
+}
+.slider:after{
+  content:"";
+  position:absolute;left:3px;top:3px;
+  width:22px;height:22px;
+  border-radius:50%;
+  background:#fff;
+  box-shadow:0 1px 4px rgba(0,0,0,.20);
+  transition:.18s ease;
+}
+.switch input:checked+.slider{background:var(--blue)}
+.switch input:checked+.slider:after{transform:translateX(22px)}
+
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin:16px 0;
+}
+.btn{
+  min-height:42px;
+  padding:9px 15px;
+  border:1px solid #d2d2d7;
+  border-radius:999px;
+  background:#fff;
+  color:#3a3a3c;
+  font-size:11px;
+  font-weight:700;
+  cursor:pointer;
+  transition:.15s ease;
+}
+.btn:hover{background:#f7f7f8;transform:none}
+.btn.primary{
+  border-color:#1d1d1f;
+  background:#1d1d1f;
+  color:#fff;
+}
+.btn.primary:hover{background:#000}
+.btn.indigo{
+  border-color:var(--blue);
+  background:var(--blue);
+  color:#fff;
+}
+.btn.indigo:hover{background:var(--blue-hover)}
+.btn.orange{
+  border-color:#d2d2d7;
+  background:#fff;
+  color:#1d1d1f;
+}
+.btn.orange:hover{background:#f5f5f7}
+.btn.red{
+  border-color:#d2d2d7;
+  background:#fff;
+  color:#6e6e73;
+}
+.btn.red:hover{background:#fff4f3;color:#9f2d28;border-color:#ecc9c6}
+.btn:disabled{opacity:.42;cursor:not-allowed;background:#f5f5f7;color:#9a9a9f;border-color:#e2e2e5}
+
+.dropzone{
+  min-height:226px;
+  display:grid;
+  place-items:center;
+  padding:28px;
+  border:1.5px dashed #c7c7cc;
+  border-radius:18px;
+  background:#fafafa;
+  text-align:center;
+  cursor:pointer;
+  transition:.16s ease;
+}
+.dropzone:hover,.dropzone.drag{
+  border-color:#76aee3;
+  background:#f7fbff;
+}
+.dropzone .folder{opacity:.9}
+.dropzone b{
+  display:block;
+  margin-top:10px;
+  font-size:15px;
+  letter-spacing:-.02em;
+}
+.dropzone span{
+  display:block;
+  max-width:620px;
+  margin:6px auto 0;
+  color:var(--muted);
+  font-size:10px;
+  line-height:1.5;
+}
+.dropzone input{display:none}
+
+.filebar{
+  display:none;
+  grid-template-columns:1fr auto;
+  gap:12px;
+  align-items:center;
+  margin-top:14px;
+  padding:12px 14px;
+  border:1px solid var(--line);
+  border-radius:13px;
+  background:#fff;
+}
+.filebar.show{display:grid}
+.filebar .name{font-size:11px;font-weight:700}
+.filebar .meta{margin-top:3px;color:var(--muted);font-size:9px}
+.badge{
+  display:inline-flex;
+  align-items:center;
+  padding:4px 8px;
+  border-radius:999px;
+  font-size:9px;
+  font-weight:750;
+}
+.badge.good{background:var(--green-bg);color:var(--green)}
+.badge.warn{background:var(--amber-bg);color:var(--amber)}
+.badge.bad{background:var(--red-bg);color:var(--red)}
+.badge.info{background:var(--blue-soft);color:var(--blue)}
+
+.summary{
+  display:none;
+  grid-template-columns:1.2fr .8fr 1fr 1fr .8fr;
+  gap:9px;
+  margin:16px 0;
+}
+.summary.show{display:grid}
+.metric{
+  min-width:0;
+  padding:14px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:#fff;
+}
+.metric span{
+  display:block;
+  color:var(--muted-2);
+  font-size:8px;
+  font-weight:750;
+  letter-spacing:.055em;
+}
+.metric strong{
+  display:block;
+  overflow:hidden;
+  margin-top:5px;
+  font-size:15px;
+  letter-spacing:-.035em;
+  text-overflow:ellipsis;
+}
+.metric small{
+  display:block;
+  margin-top:3px;
+  color:#a1a1a6;
+  font-size:8px;
+  line-height:1.35;
+}
+
+.notice{
+  margin:14px 0;
+  padding:11px 13px;
+  border-radius:12px;
+  background:var(--blue-soft);
+  color:#315d86;
+  font-size:10px;
+  line-height:1.55;
+}
+.notice.warn{background:var(--amber-bg);color:var(--amber)}
+.notice.bad{background:var(--red-bg);color:var(--red)}
+.notice.good{background:var(--green-bg);color:var(--green)}
+
+.table-wrap{
+  margin-top:16px;
+  overflow:auto;
+  max-height:520px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:#fff;
+}
+.table{
+  width:100%;
+  min-width:1180px;
+  border-collapse:separate;
+  border-spacing:0;
+}
+.table th,.table td{
+  padding:9px 9px;
+  border-bottom:1px solid var(--line-2);
+  font-size:9px;
+  white-space:nowrap;
+}
+.table th{
+  position:sticky;
+  top:0;
+  z-index:2;
+  background:#f7f7f8;
+  color:#5f5f64;
+  text-align:left;
+  font-size:8px;
+  font-weight:750;
+  letter-spacing:.025em;
+}
+.table td.num{
+  text-align:right;
+  font-variant-numeric:tabular-nums;
+}
+.table tr:last-child td{border-bottom:0}
+.table tr:hover td{background:#fcfcfd}
+.empty{text-align:center!important;color:var(--muted);padding:28px!important}
+.row-error td{background:#fffafa}
+.row-warning td{background:#fffdf8}
+
+.details{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:16px;
+}
+.details-card{
+  padding:16px;
+  border:1px solid var(--line);
+  border-radius:15px;
+  background:#fff;
+}
+.details-card h3{
+  margin:0 0 8px;
+  font-size:11px;
+  letter-spacing:-.02em;
+}
+.details-card ul{
+  margin:0;
+  padding-left:17px;
+  color:#626267;
+  font-size:9px;
+  line-height:1.65;
+}
+.details-card code{
+  padding:1px 4px;
+  border-radius:4px;
+  background:#f2f2f4;
+  color:#3d3d41;
+  font-size:8px;
+}
+
+.placeholder{
+  display:none;
+  padding:60px 28px 66px;
+  text-align:center;
+}
+.placeholder.show{display:block}
+.placeholder .big{display:none}
+.placeholder-graphic{display:inline-flex;margin-bottom:10px}
+.placeholder h2{
+  margin:10px 0 6px;
+  font-size:26px;
+  letter-spacing:-.04em;
+}
+.placeholder p{
+  max-width:620px;
+  margin:0 auto;
+  color:var(--muted);
+  font-size:12px;
+}
+.placeholder .pill{
+  display:inline-block;
+  margin-top:16px;
+  padding:6px 10px;
+  border-radius:999px;
+  background:var(--soft);
+  color:#6e6e73;
+  font-size:9px;
+  font-weight:700;
+}
+
+/* Calculator disclaimer */
+.foot{
+  padding:18px 28px 21px;
+  border-top:1px solid var(--line);
+  background:#fafafa;
+  color:#77777c;
+  font-size:9px;
+  line-height:1.6;
+}
+.foot b{color:#515154}
+
+/* Kabayan site footer */
+.kabayan-footer{
+  border-top:1px solid var(--line);
+  background:#fff;
+}
+.footer-inner{
+  width:min(var(--max),calc(100% - 32px));
+  margin:auto;
+  padding:34px 0 38px;
+  display:grid;
+  grid-template-columns:1.35fr .65fr;
+  gap:40px;
+}
+.footer-title{
+  margin:0;
+  color:#1d1d1f;
+  font-size:22px;
+  font-weight:700;
+  letter-spacing:-.04em;
+}
+.footer-copy{
+  max-width:640px;
+  margin:8px 0 0;
+  color:var(--muted);
+  font-size:10px;
+  line-height:1.6;
+}
+.footer-links{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+  align-content:flex-start;
+  gap:8px 16px;
+}
+.footer-links a{
+  color:#515154;
+  font-size:10px;
+}
+.footer-links a:hover{color:#000}
+.footer-bottom{
+  width:min(var(--max),calc(100% - 32px));
+  margin:auto;
+  padding:14px 0 26px;
+  border-top:1px solid var(--line-2);
+  display:flex;
+  justify-content:space-between;
+  gap:16px;
+  color:#86868b;
+  font-size:9px;
+}
+
+.toast{
+  position:fixed;
+  z-index:9999;
+  left:50%;
+  bottom:24px;
+  transform:translate(-50%,18px);
+  opacity:0;
+  pointer-events:none;
+  padding:9px 14px;
+  border-radius:999px;
+  background:#1d1d1f;
+  color:#fff;
+  font-size:10px;
+  font-weight:650;
+  transition:.2s;
+  box-shadow:0 10px 30px rgba(0,0,0,.18);
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+
+.module-tab .ico,
+.section-pill .pill-icon,
+.folder,
+.placeholder-graphic{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+.module-tab .ico svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.section-pill .pill-icon svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.folder svg{width:42px;height:42px;stroke:#6d6e73;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.placeholder-graphic svg{width:42px;height:42px;stroke:#6d6e73;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+@media(max-width:980px){
+  .kabayan-links{display:none}
+  .menu-btn{display:grid;place-items:center}
+  .hero-inner{padding:52px 0 46px}
+  .steps{grid-template-columns:1fr}
+  .step{min-height:0}
+  .summary{grid-template-columns:repeat(2,1fr)}
+  .details{grid-template-columns:1fr}
+  .footer-inner{grid-template-columns:1fr}
+  .footer-links{justify-content:flex-start}
+}
+@media(max-width:640px){
+  .kabayan-nav{width:calc(100% - 22px)}
+  .kabayan-brand span:last-child{font-size:11px}
+  .hero-inner{width:calc(100% - 24px);padding:42px 0 38px}
+  .kabayan-hero h1{font-size:43px}
+  .hero-copy{font-size:16px}
+  .page{width:100%;margin:18px 0 34px;border-left:0;border-right:0;border-radius:0;box-shadow:none}
+  .topbar{padding:20px 16px;align-items:flex-start}
+  .brand-icon{width:40px;height:40px;border-radius:12px}
+  .topbar h1{font-size:19px}
+  .topbar p{font-size:9px;line-height:1.45}
+  .module-tab{flex-basis:104px;min-width:104px;min-height:92px}
+  .content{padding:22px 12px 26px}
+  .section-pill{font-size:9px}
+  .grossup{padding:13px 14px}
+  .actions{display:grid;grid-template-columns:1fr 1fr}
+  .btn{width:100%;padding-inline:11px}
+  .dropzone{min-height:195px;padding:22px 14px}
+  .summary{grid-template-columns:1fr 1fr}
+  .metric:first-child{grid-column:1/-1}
+  .details-card{padding:14px}
+  .foot{padding:16px 14px}
+  .footer-inner,.footer-bottom{width:calc(100% - 24px)}
+  .footer-bottom{display:block}
+  .footer-bottom span{display:block;margin-top:5px}
+}
+@media(max-width:420px){
+  .actions{grid-template-columns:1fr}
+  .summary{grid-template-columns:1fr}
+  .metric:first-child{grid-column:auto}
+}
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+<header class="kabayan-header">
+  <div class="kabayan-nav">
+    <a class="kabayan-brand" href="index.html" aria-label="Beranda Kabayan">
+      <img src="assets/img/LogoASD.svg" alt="Logo ASD" onerror="this.style.display='none'">
+      <span class="sep">|</span>
+      <span>dhaniswara86</span>
+    </a>
+    <nav class="kabayan-links" aria-label="Navigasi utama">
+      <a href="index.html">Beranda</a>
+      <a href="buku.html">Buku</a>
+      <a href="formulir.html">Formulir</a>
+      <a href="aplikasi.html">Aplikasi</a>
+      <a class="current" href="kalkulator.html">Kalkulator</a>
+      <a href="artikel.html">Artikel</a>
+      <a class="hot-link" href="hotnews.html"><span>🔥</span><span>Hot News</span></a>
+    </nav>
+    <button class="menu-btn" id="menuBtn" type="button" aria-label="Buka menu" aria-expanded="false">☰</button>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobileNav" aria-label="Navigasi seluler">
+  <a href="index.html">Beranda</a>
+  <a href="buku.html">Buku</a>
+  <a href="formulir.html">Formulir</a>
+  <a href="aplikasi.html">Aplikasi</a>
+  <a href="kalkulator.html">Kalkulator</a>
+  <a href="artikel.html">Artikel</a>
+  <a href="hotnews.html">🔥 Hot News</a>
+</nav>
+
+<section class="kabayan-hero">
+  <div class="hero-inner">
+    <p class="hero-kicker">Katalog Bahan Pelayanan · Kalkulator Pajak</p>
+    <h1>PPh Pasal 21.<br><span>Lebih sederhana.</span></h1>
+    <p class="hero-copy">Hitung PPh 21 bulanan, validasi data payroll, gunakan template resmi DJP, dan siapkan file XML Coretax dalam satu alur kerja.</p>
+    <div class="hero-tags">
+      <span class="hero-tag">PP 58/2023</span>
+      <span class="hero-tag">PMK 168/2023</span>
+      <span class="hero-tag">BPMP DJP v.3</span>
+      <span class="hero-tag">TER Bulanan</span>
+      <span class="hero-tag">Excel → XML</span>
+    </div>
+  </div>
+</section>
+
+<div class="page">
+  <header class="topbar">
+    <div class="brand-icon">21</div>
+    <div>
+      <h1>Kalkulator PPh 21 · Payroll Bulanan & XML Coretax</h1>
+      <p>Basis Payroll Januari–November menggunakan BPMP Excel to XML v.3 DJP · Data diproses langsung di browser.</p>
+    </div>
+  </header>
+
+  <nav class="module-tabs" id="moduleTabs" aria-label="Modul PPh 21">
+    <button class="module-tab active" data-module="jan-nov"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/><path d="M8 14h3M13 14h3M8 18h3"/></svg></span><span class="label">Payroll<br>Jan–Nov</span><span class="tag">TER · DJP</span></button>
+    <button class="module-tab" data-module="des"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2V3Z"/><path d="M9 8h6M9 12h6M9 16h4"/></svg></span><span class="label">Payroll<br>Des</span><span class="tag">PS.17</span></button>
+    <button class="module-tab" data-module="tetap"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 19a7 7 0 0 1 14 0"/><path d="M18.5 8.5h3M20 7v3"/></svg></span><span class="label">Karyawan<br>Tetap</span><span class="tag">TER</span></button>
+    <button class="module-tab" data-module="bukan"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="12" rx="2"/><path d="M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/><path d="M3 12h18"/><circle cx="12" cy="12" r="1.6"/></svg></span><span class="label">Bukan<br>Pegawai</span><span class="tag">PS.17</span></button>
+    <button class="module-tab" data-module="tidak"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19a6 6 0 0 1 11 0"/><circle cx="18" cy="16" r="3.5"/><path d="M18 14.8V16l1.2 1.2"/></svg></span><span class="label">Tidak<br>Tetap</span><span class="tag">HARIAN</span></button>
+    <button class="module-tab" data-module="pensiun"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7.5A2.5 2.5 0 0 1 6.5 5H18a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6.5A2.5 2.5 0 0 1 4 16.5v-9Z"/><path d="M4 8h14"/><path d="M15 13h5"/><circle cx="15.5" cy="13" r=".2" fill="currentColor" stroke="none"/></svg></span><span class="label">Pensiun/<br>Pesangon</span><span class="tag">FINAL</span></button>
+    <button class="module-tab" data-module="peserta"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v10H5z"/><path d="M12 14v6M9 20h6"/><path d="m8 10 2-2 2 1 3-3"/></svg></span><span class="label">Peserta<br>Kegiatan</span><span class="tag">HONOR</span></button>
+    <button class="module-tab" data-module="bpa1"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/><path d="M9 14h6M9 17h6"/><path d="M8.8 11.2h2.4"/><path d="M12.8 10.1v2.2"/><path d="M14.7 12.3h1.7M14.7 10.1v2.2"/></svg></span><span class="label">Bukti<br>Potong A1</span><span class="tag">BPA1</span></button>
+    <button class="module-tab" data-module="bpa2"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/><path d="M9 14h6M9 17h6"/><path d="M8.8 10.1h2.2v1.1H8.8l2.2 1.2H8.8"/><path d="M14.7 10.1h1.9l-1.9 2.2h1.9"/></svg></span><span class="label">Bukti<br>Potong A2</span><span class="tag">BPA2</span></button>
+  </nav>
+
+  <main>
+    <section id="janNovModule" class="content">
+      <div class="section-pill"><span class="pill-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="3" width="12" height="18" rx="2"/><path d="M9 7h6"/><path d="M9 11h.01M12 11h.01M15 11h.01M9 14h.01M12 14h.01M15 14h.01M9 17h.01M12 17h.01M15 17h.01"/></svg></span> MASA JANUARI – NOVEMBER (METODE TER) · BPMP DJP v.3</div>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><b>Unduh Template DJP</b><span>Template BPMP Excel to XML v.3 yang sama dengan basis penghitungan Kabayan.</span></div>
+        <div class="step"><div class="step-num">2</div><b>Isi Data pada Sheet DATA</b><span>NPWP Pemotong, masa/tahun, status, NIK/TIN, PTKP, posisi, fasilitas, objek pajak, bruto, ID TKU, tanggal.</span></div>
+        <div class="step"><div class="step-num">3</div><b>Upload & Hitung Otomatis</b><span>Kabayan membaca template, menghitung TER dari bruto + PTKP, memvalidasi, lalu menyiapkan hasil Excel dan XML.</span></div>
+      </div>
+
+      <div class="grossup">
+        <strong>🔼 Aktifkan Gross-Up (Perusahaan menanggung PPh)</strong>
+        <label class="switch" title="Aktifkan gross-up"><input id="grossupToggle" type="checkbox"><span class="slider"></span></label>
+      </div>
+
+      <div class="actions">
+        <button class="btn primary" id="btnCalc">🧮 Hitung PPh TER</button>
+        <button class="btn indigo" id="btnTemplate">📥 Unduh Template Jan–Nov</button>
+        <button class="btn orange" id="btnExcel" disabled>📤 Download Hasil Excel</button>
+        <button class="btn indigo" id="btnXml" disabled>📤 Export XML</button>
+        <button class="btn red" id="btnClear">🗑 Hapus Data</button>
+      </div>
+
+      <label class="dropzone" id="dropzone">
+        <input type="file" id="fileInput" accept=".xlsx,.xls,.csv">
+        <div><div class="folder"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 20h10a3 3 0 0 0 3-3v-4"/><path d="M4 17V7a3 3 0 0 1 3-3h5l4 4v2"/><path d="M12 18V9"/><path d="m8.5 12.5 3.5-3.5 3.5 3.5"/></svg></div><b>Klik atau Seret File Excel ke Sini</b><span>Mendukung .xlsx dari template BPMP DJP v.3. CSV dapat dibaca untuk penghitungan, tetapi ekspor XML tetap mengikuti struktur BPMP.</span></div>
+      </label>
+
+      <div class="filebar" id="filebar"><div><div class="name" id="fileName">—</div><div class="meta" id="fileMeta">—</div></div><span class="badge info" id="fileStatus">Siap</span></div>
+
+      <div class="summary" id="summary">
+        <div class="metric"><span>NPWP PEMOTONG</span><strong id="mTin">—</strong><small>Cell B1 template DJP</small></div>
+        <div class="metric"><span>BARIS DATA</span><strong id="mRows">0</strong><small>Record yang terbaca</small></div>
+        <div class="metric"><span>TOTAL BRUTO</span><strong id="mGross">Rp0</strong><small>Bruto XML setelah gross-up jika aktif</small></div>
+        <div class="metric"><span>TOTAL PPh 21</span><strong id="mTax">Rp0</strong><small>Bruto × TER</small></div>
+        <div class="metric"><span>VALIDASI</span><strong id="mValid">0 / 0</strong><small>Valid / bermasalah</small></div>
+      </div>
+
+      <div class="notice" id="notice">Belum ada file. Unduh template resmi DJP, isi sheet <b>DATA</b>, kemudian unggah kembali ke sini.</div>
+
+      <div class="table-wrap">
+        <table class="table">
+          <thead><tr><th>No</th><th>Masa</th><th>Tahun</th><th>Status Pegawai</th><th>NIK/TIN</th><th>PTKP</th><th>Objek Pajak</th><th>Bruto Asli</th><th>Tunjangan PPh</th><th>Bruto XML</th><th>Kategori</th><th>TER</th><th>PPh 21</th><th>Validasi</th></tr></thead>
+          <tbody id="dataBody"><tr><td colspan="14" class="empty">Belum ada data yang diunggah.</td></tr></tbody>
+        </table>
+      </div>
+
+      <div class="details">
+        <div class="details-card"><h3>Yang divalidasi Kabayan</h3><ul><li>NPWP Pemotong tersedia dan terdiri dari 15–16 digit.</li><li>Masa pajak 1–11 dan tahun pajak terisi.</li><li>Status pegawai <code>Resident</code> / <code>Foreign</code>.</li><li>Status PTKP sesuai daftar BPMP.</li><li>Kode objek pajak terisi.</li><li>Penghasilan bruto lebih dari nol.</li><li>ID TKU terisi.</li><li>Tanggal pemotongan dapat dibaca dan tidak lebih awal dari awal masa pajak.</li><li>Tarif template dibandingkan dengan TER hasil hitung Kabayan untuk baris N/A atau DTP.</li></ul></div>
+        <div class="details-card"><h3>Struktur XML</h3><ul><li>Root: <code>MmPayrollBulk</code>.</li><li>NPWP Pemotong: <code>TIN</code>.</li><li>Setiap baris: <code>MmPayroll</code>.</li><li>Urutan elemen mengikuti XML Map yang tertanam pada BPMP v.3.</li><li>Untuk fasilitas <code>ETC</code>, Kabayan mempertahankan literal sebagaimana referensi DATA pada workbook DJP.</li><li>Data tidak dikirim ke server Kabayan; proses terjadi pada browser pengguna.</li></ul></div>
+      </div>
+    </section>
+
+    <section id="placeholder" class="placeholder">
+      <div class="placeholder-graphic" id="placeholderIcon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1.2"/><rect x="14" y="4" width="6" height="6" rx="1.2"/><rect x="4" y="14" width="6" height="6" rx="1.2"/><rect x="14" y="14" width="6" height="6" rx="1.2"/></svg></div><div class="big" id="placeholderTextFallback">🧩</div><h2 id="placeholderTitle">Modul berikutnya</h2><p id="placeholderText">Modul ini akan diintegrasikan setelah basis template resminya dipastikan.</p><span class="pill">Payroll Jan–Nov tetap aktif dan dapat digunakan</span>
+    </section>
+  </main>
+
+  <footer class="foot"><b>Catatan:</b> Kabayan adalah alat bantu dan bukan aplikasi resmi DJP. Untuk Payroll Januari–November, struktur input dan XML pada halaman ini dibuat berdasarkan workbook <b>BPMP Excel to XML v.3</b> yang Anda unggah. Selalu uji satu file XML pada Coretax sebelum digunakan dalam jumlah besar.</footer>
+</div>
+
+<footer class="kabayan-footer">
+  <div class="footer-inner">
+    <div>
+      <p class="footer-title">Dibuat untuk berbagi.</p>
+      <p class="footer-copy">Kabayan (Katalog Bahan Pelayanan) adalah ruang edukasi pribadi untuk membagikan buku, formulir, aplikasi, template, artikel, dan alat bantu perpajakan secara lebih sederhana dan terstruktur.</p>
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Beranda</a>
+      <a href="buku.html">Buku</a>
+      <a href="formulir.html">Formulir</a>
+      <a href="kalkulator.html">Kalkulator</a>
+      <a href="artikel.html">Artikel</a>
+      <a href="hotnews.html">Hot News</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>Disclaimer: Kabayan bukan situs resmi Direktorat Jenderal Pajak.</div>
+    <span>© <span id="kabayanYear"></span> Angga Sukma Dhaniswara.</span>
+  </div>
+</footer>
+
+<div class="toast" id="toast">Selesai</div>
+<script>
+"use strict";
+const OFFICIAL_TEMPLATE_B64 = "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";
+const TEMPLATE_NAME = "BPMP Excel to XML v.3.xlsx";
+
+const TER={
+ A:[[5400000,0],[5650000,.25],[5950000,.5],[6300000,.75],[6750000,1],[7500000,1.25],[8550000,1.5],[9650000,1.75],[10050000,2],[10350000,2.25],[10700000,2.5],[11050000,3],[11600000,3.5],[12500000,4],[13750000,5],[15100000,6],[16950000,7],[19750000,8],[24150000,9],[26450000,10],[28000000,11],[30050000,12],[32400000,13],[35400000,14],[39100000,15],[43850000,16],[47800000,17],[51400000,18],[56300000,19],[62200000,20],[68600000,21],[77500000,22],[89000000,23],[103000000,24],[125000000,25],[157000000,26],[206000000,27],[337000000,28],[454000000,29],[550000000,30],[695000000,31],[910000000,32],[1400000000,33],[Infinity,34]],
+ B:[[6200000,0],[6500000,.25],[6850000,.5],[7300000,.75],[9200000,1],[10750000,1.5],[11250000,2],[11600000,2.5],[12600000,3],[13600000,4],[14950000,5],[16400000,6],[18450000,7],[21850000,8],[26000000,9],[27700000,10],[29350000,11],[31450000,12],[33950000,13],[37100000,14],[41100000,15],[45800000,16],[49500000,17],[53800000,18],[58500000,19],[64000000,20],[71000000,21],[80000000,22],[93000000,23],[109000000,24],[129000000,25],[163000000,26],[211000000,27],[374000000,28],[459000000,29],[555000000,30],[704000000,31],[957000000,32],[1405000000,33],[Infinity,34]],
+ C:[[6600000,0],[6950000,.25],[7350000,.5],[7800000,.75],[8850000,1],[9800000,1.25],[10950000,1.5],[11200000,1.75],[12050000,2],[12950000,3],[14150000,4],[15550000,5],[17050000,6],[19500000,7],[22700000,8],[26600000,9],[28100000,10],[30100000,11],[32600000,12],[35400000,13],[38900000,14],[43000000,15],[47400000,16],[51200000,17],[55800000,18],[60400000,19],[66700000,20],[74500000,21],[83200000,22],[95600000,23],[110000000,24],[134000000,25],[169000000,26],[221000000,27],[390000000,28],[463000000,29],[561000000,30],[709000000,31],[965000000,32],[1419000000,33],[Infinity,34]]
+};
+const CATEGORY={"TK/0":"A","TK/1":"A","K/0":"A","HB/0":"A","HB/1":"A","TK/2":"B","TK/3":"B","K/1":"B","K/2":"B","HB/2":"B","HB/3":"B","K/3":"C"};
+const PTKP_SET=new Set(Object.keys(CATEGORY));
+const $=id=>document.getElementById(id);
+const rupiah=v=>new Intl.NumberFormat("id-ID",{style:"currency",currency:"IDR",maximumFractionDigits:0}).format(Number(v)||0);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
+const xmlEsc=s=>String(s??"").replace(/[<>&'\"]/g,c=>({"<":"&lt;",">":"&gt;","&":"&amp;","'":"&apos;",'"':"&quot;"}[c]));
+let rawRows=[], processed=[], currentTin="", currentFile="";
+
+function toast(msg){$("toast").textContent=msg;$("toast").classList.add("show");setTimeout(()=>$("toast").classList.remove("show"),1800)}
+function terRate(cat,gross){for(const [max,rate] of TER[cat]||[])if(gross<=max)return rate;return 0}
+function grossUp(base,cat){
+  if(base<=0)return {allowance:0,gross:base,rate:terRate(cat,base),tax:0};
+  let best=null;
+  for(const [max,ratePct] of TER[cat]||[]){const r=ratePct/100;if(r>=1)continue;const g=base/(1-r);if(g<=max+1e-7){best={gross:Math.round(g),allowance:Math.round(g-base),rate:ratePct};break}}
+  if(!best){const rate=terRate(cat,base),tax=Math.round(base*rate/100);return {allowance:tax,gross:base+tax,rate:terRate(cat,base+tax),tax}}
+  best.rate=terRate(cat,best.gross);best.tax=Math.round(best.gross*best.rate/100);
+  // one fixed-point refinement for rupiah rounding / threshold transitions
+  for(let i=0;i<30;i++){const ng=base+best.tax,nr=terRate(cat,ng),nt=Math.round(ng*nr/100);if(ng===best.gross&&nt===best.tax)break;best.gross=ng;best.rate=nr;best.tax=nt;best.allowance=best.tax}
+  return best;
+}
+function normalizeDigits(v){return String(v??"").replace(/\D/g,"")}
+function asNumber(v){if(typeof v==="number")return isFinite(v)?v:0;return Number(String(v??"").replace(/[^0-9.-]/g,""))||0}
+function dateToISO(v){
+  if(v instanceof Date && !isNaN(v))return `${v.getFullYear()}-${String(v.getMonth()+1).padStart(2,"0")}-${String(v.getDate()).padStart(2,"0")}`;
+  if(typeof v==="number"&&window.XLSX){const d=XLSX.SSF.parse_date_code(v);if(d)return `${d.y}-${String(d.m).padStart(2,"0")}-${String(d.d).padStart(2,"0")}`}
+  const s=String(v??"").trim();if(/^\d{4}-\d{2}-\d{2}$/.test(s))return s;
+  const m=s.match(/^(\d{1,2})[\/\-.](\d{1,2})[\/\-.](\d{4})$/);if(m)return `${m[3]}-${m[2].padStart(2,"0")}-${m[1].padStart(2,"0")}`;
+  const d=new Date(s);if(!isNaN(d))return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+  return "";
+}
+function parseOfficialWorkbook(ab,fileName){
+  if(!window.XLSX)throw new Error("Pustaka pembaca Excel belum termuat. Periksa koneksi internet lalu muat ulang halaman.");
+  const wb=XLSX.read(ab,{type:"array",cellDates:true,cellFormula:true});
+  const ws=wb.Sheets["DATA"]||wb.Sheets[wb.SheetNames[0]];if(!ws)throw new Error("Sheet DATA tidak ditemukan.");
+  let tin="";const b1=ws["B1"];if(b1)tin=String(b1.w??b1.v??"").trim();tin=normalizeDigits(tin);
+  const arr=XLSX.utils.sheet_to_json(ws,{header:1,defval:"",raw:true});
+  let headerRow=arr.findIndex(r=>String(r?.[1]??"").trim()==="Masa Pajak"&&String(r?.[2]??"").trim()==="Tahun Pajak");
+  if(headerRow<0)throw new Error("Header resmi BPMP tidak ditemukan. Pastikan file menggunakan struktur sheet DATA BPMP DJP.");
+  const headers=arr[headerRow].slice(1,14).map(x=>String(x).trim());
+  const expected=["Masa Pajak","Tahun Pajak","Status Pegawai","NPWP/NIK/TIN","Nomor Passport","Status","Posisi","Sertifikat/Fasilitas","Kode Objek Pajak","Penghasilan Kotor","Tarif","ID TKU","Tgl Pemotongan"];
+  if(expected.some((h,i)=>headers[i]!==h))throw new Error("Susunan kolom DATA berbeda dari BPMP v.3 yang menjadi basis Kabayan.");
+  const rows=[];
+  for(let i=headerRow+1;i<arr.length;i++){
+    const a=arr[i];if(!a)continue;const vals=a.slice(1,14);if(vals.every(v=>String(v??"").trim()===""))continue;
+    const obj={_row:i+1};expected.forEach((h,j)=>obj[h]=vals[j]);rows.push(obj);
+  }
+  if(!rows.length)throw new Error("Tidak ada baris data pada sheet DATA.");
+  return {tin,rows,fileName};
+}
+function processRows(){
+  const useGrossup=$("grossupToggle").checked;
+  processed=rawRows.map((r,idx)=>{
+    const month=Math.trunc(asNumber(r["Masa Pajak"])),year=Math.trunc(asNumber(r["Tahun Pajak"]));
+    const counterpart=String(r["Status Pegawai"]??"").trim(),tin=normalizeDigits(r["NPWP/NIK/TIN"]),passport=String(r["Nomor Passport"]??"").trim();
+    const ptkp=String(r["Status"]??"").toUpperCase().trim(),position=String(r["Posisi"]??"").trim(),cert=String(r["Sertifikat/Fasilitas"]??"").toUpperCase().trim();
+    const obj=String(r["Kode Objek Pajak"]??"").trim(),grossOriginal=asNumber(r["Penghasilan Kotor"]),rateExcel=asNumber(r["Tarif"]),idTku=normalizeDigits(r["ID TKU"]),date=dateToISO(r["Tgl Pemotongan"]);
+    const cat=CATEGORY[ptkp]||"";let allowance=0,grossXml=grossOriginal,rateKab=cat?terRate(cat,grossOriginal):0,tax=0;
+    if(useGrossup&&cat&&grossOriginal>0){const gu=grossUp(grossOriginal,cat);allowance=gu.allowance;grossXml=gu.gross;rateKab=gu.rate;tax=gu.tax}else tax=Math.round(grossXml*rateKab/100);
+    const errors=[],warnings=[];
+    if(!currentTin||!/^\d{15,16}$/.test(currentTin))errors.push("NPWP Pemotong 15–16 digit belum valid");
+    if(month<1||month>11)errors.push("Masa harus 1–11");
+    if(year<2000||year>2200)errors.push("Tahun pajak tidak valid");
+    if(!["Resident","Foreign"].includes(counterpart))errors.push("Status Pegawai harus Resident/Foreign");
+    if(counterpart==="Resident"&&!/^\d{15,16}$/.test(tin))errors.push("NIK/TIN resident harus 15–16 digit");
+    if(counterpart==="Foreign"&&!tin&&!passport)errors.push("TIN atau Passport foreign harus diisi");
+    if(!PTKP_SET.has(ptkp))errors.push("Status PTKP tidak dikenal");
+    if(!position)errors.push("Posisi kosong");
+    if(!["N/A","DTP","ETC","ECT"].includes(cert))warnings.push("Fasilitas di luar referensi N/A/DTP/ETC");
+    if(!obj)errors.push("Kode Objek Pajak kosong");
+    if(!(grossOriginal>0))errors.push("Penghasilan Kotor harus > 0");
+    if(!idTku)errors.push("ID TKU kosong");
+    if(!date)errors.push("Tanggal pemotongan tidak terbaca");
+    if(date&&month&&year&&date<`${year}-${String(month).padStart(2,"0")}-01`)errors.push("Tanggal lebih awal dari masa pajak");
+    if(date&&month&&year&&date.slice(0,7)!==`${year}-${String(month).padStart(2,"0")}`)warnings.push("Tanggal berada di luar bulan masa pajak");
+    if(cert!=="ETC"&&cert!=="ECT"&&cat&&Math.abs(rateExcel-rateKab)>.0001&&!useGrossup)warnings.push(`Tarif Excel ${rateExcel}% ≠ TER Kabayan ${rateKab}%`);
+    if(cert==="ETC"||cert==="ECT")warnings.push("Fasilitas lainnya: tarif manual dapat berbeda dari TER referensi");
+    return {no:idx+1,row:r._row,month,year,counterpart,tin,passport,ptkp,position,cert,obj,grossOriginal,allowance,grossXml,rateExcel,rateKab,tax,idTku,date,cat,errors,warnings};
+  });
+  render();
+}
+function render(){
+  const body=$("dataBody");if(!processed.length){body.innerHTML='<tr><td colspan="14" class="empty">Belum ada data yang diunggah.</td></tr>';return}
+  body.innerHTML=processed.map(x=>{
+    const cls=x.errors.length?"row-error":x.warnings.length?"row-warning":"";const badge=x.errors.length?`<span class="badge bad">${x.errors.length} error</span>`:x.warnings.length?`<span class="badge warn">${x.warnings.length} warning</span>`:'<span class="badge good">Valid</span>';
+    const title=esc([...x.errors,...x.warnings].join(" · "));
+    return `<tr class="${cls}"><td>${x.no}</td><td>${x.month}</td><td>${x.year}</td><td>${esc(x.counterpart)}</td><td>${esc(x.tin||x.passport)}</td><td>${esc(x.ptkp)}</td><td>${esc(x.obj)}</td><td class="num">${rupiah(x.grossOriginal)}</td><td class="num">${rupiah(x.allowance)}</td><td class="num"><b>${rupiah(x.grossXml)}</b></td><td>${x.cat||"—"}</td><td>${x.rateKab}%</td><td class="num"><b>${rupiah(x.tax)}</b></td><td title="${title}">${badge}</td></tr>`
+  }).join("");
+  const totalGross=processed.reduce((a,x)=>a+x.grossXml,0),totalTax=processed.reduce((a,x)=>a+x.tax,0),valid=processed.filter(x=>!x.errors.length).length,issues=processed.length-valid;
+  $("summary").classList.add("show");$("mTin").textContent=currentTin||"—";$("mRows").textContent=processed.length.toLocaleString("id-ID");$("mGross").textContent=rupiah(totalGross);$("mTax").textContent=rupiah(totalTax);$("mValid").textContent=`${valid} / ${issues}`;
+  const warns=processed.reduce((a,x)=>a+x.warnings.length,0);$("btnExcel").disabled=false;$("btnXml").disabled=issues>0;
+  if(issues){$("notice").className="notice bad";$("notice").innerHTML=`Ditemukan <b>${issues} baris bermasalah</b>. Perbaiki error sebelum Export XML. ${warns?`Selain itu terdapat ${warns} peringatan.`:""}`}
+  else if(warns){$("notice").className="notice warn";$("notice").innerHTML=`Semua ${valid} baris lolos validasi minimum, tetapi terdapat <b>${warns} peringatan</b>. Periksa baris berwarna kuning sebelum ekspor XML.`}
+  else{$("notice").className="notice good";$("notice").innerHTML=`Semua <b>${valid} baris</b> lolos validasi minimum Kabayan. XML siap diekspor.`}
+}
+async function loadFile(file){
+  try{
+    const ab=await file.arrayBuffer(),parsed=parseOfficialWorkbook(ab,file.name);currentTin=parsed.tin;rawRows=parsed.rows;currentFile=file.name;processRows();
+    $("filebar").classList.add("show");$("fileName").textContent=file.name;$("fileMeta").textContent=`${rawRows.length} baris · NPWP Pemotong ${currentTin||"tidak terbaca"}`;$("fileStatus").className="badge good";$("fileStatus").textContent="Terbaca";toast("File BPMP berhasil dibaca");
+  }catch(e){clearData(false);$("filebar").classList.add("show");$("fileName").textContent=file.name;$("fileMeta").textContent=e.message;$("fileStatus").className="badge bad";$("fileStatus").textContent="Gagal";$("notice").className="notice bad";$("notice").textContent=e.message}
+}
+function downloadBlob(blob,name){const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},100)}
+function downloadTemplate(){const bin=atob(OFFICIAL_TEMPLATE_B64),bytes=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)bytes[i]=bin.charCodeAt(i);downloadBlob(new Blob([bytes],{type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}),TEMPLATE_NAME);toast("Template DJP diunduh")}
+function downloadResultExcel(){
+  if(!processed.length)return toast("Belum ada data");if(!window.XLSX)return toast("Pustaka Excel belum termuat");
+  const rows=processed.map(x=>({"Masa Pajak":x.month,"Tahun Pajak":x.year,"Status Pegawai":x.counterpart,"NPWP/NIK/TIN":x.tin,"Nomor Passport":x.passport,"Status":x.ptkp,"Posisi":x.position,"Sertifikat/Fasilitas":x.cert,"Kode Objek Pajak":x.obj,"Penghasilan Kotor Asli":x.grossOriginal,"Tunjangan PPh Kabayan":x.allowance,"Penghasilan Kotor XML":x.grossXml,"Tarif Excel":x.rateExcel,"Tarif Kabayan":x.rateKab,"PPh 21 Kabayan":x.tax,"ID TKU":x.idTku,"Tgl Pemotongan":x.date,"Kategori TER":x.cat,"Status Validasi":x.errors.length?"ERROR":x.warnings.length?"WARNING":"VALID","Catatan":[...x.errors,...x.warnings].join(" | ")}));
+  const wb=XLSX.utils.book_new();const ws=XLSX.utils.json_to_sheet(rows);XLSX.utils.book_append_sheet(wb,ws,"HASIL_KABAYAN");const info=XLSX.utils.aoa_to_sheet([["NPWP Pemotong",currentTin],["Sumber","BPMP Excel to XML v.3 DJP"],["Gross-Up",$("grossupToggle").checked?"Aktif":"Tidak aktif"],["Catatan","Hasil Kabayan adalah alat bantu; XML menggunakan kolom resmi BPMP."]]);XLSX.utils.book_append_sheet(wb,info,"INFO");XLSX.writeFile(wb,`Hasil_PPh21_TER_Kabayan_${currentTin||"BPMP"}.xlsx`);toast("Hasil Excel diunduh")
+}
+function makeXml(){
+  if(!processed.length)throw new Error("Belum ada data.");const bad=processed.filter(x=>x.errors.length);if(bad.length)throw new Error(`Masih ada ${bad.length} baris error.`);
+  const lines=['<?xml version="1.0" encoding="UTF-8" standalone="yes"?>','<MmPayrollBulk>',`  <TIN>${xmlEsc(currentTin)}</TIN>`,'  <ListOfMmPayroll>'];
+  for(const x of processed){const cert=x.cert==="ECT"?"ECT":x.cert;lines.push('    <MmPayroll>',`      <TaxPeriodMonth>${x.month}</TaxPeriodMonth>`,`      <TaxPeriodYear>${x.year}</TaxPeriodYear>`,`      <CounterpartOpt>${xmlEsc(x.counterpart)}</CounterpartOpt>`,`      <CounterpartPassport>${xmlEsc(x.passport)}</CounterpartPassport>`,`      <CounterpartTin>${xmlEsc(x.tin)}</CounterpartTin>`,`      <StatusTaxExemption>${xmlEsc(x.ptkp)}</StatusTaxExemption>`,`      <Position>${xmlEsc(x.position)}</Position>`,`      <TaxCertificate>${xmlEsc(cert)}</TaxCertificate>`,`      <TaxObjectCode>${xmlEsc(x.obj)}</TaxObjectCode>`,`      <Gross>${Math.round(x.grossXml)}</Gross>`,`      <Rate>${String(x.rateKab)}</Rate>`,`      <IDPlaceOfBusinessActivity>${xmlEsc(x.idTku)}</IDPlaceOfBusinessActivity>`,`      <WithholdingDate>${xmlEsc(x.date)}</WithholdingDate>`,'    </MmPayroll>')}
+  lines.push('  </ListOfMmPayroll>','</MmPayrollBulk>');return lines.join('\r\n')
+}
+function exportXml(){try{const xml=makeXml(),months=[...new Set(processed.map(x=>x.month))],years=[...new Set(processed.map(x=>x.year))],label=months.length===1&&years.length===1?`${years[0]}_${String(months[0]).padStart(2,"0")}`:"MULTI";downloadBlob(new Blob([xml],{type:"application/xml;charset=utf-8"}),`BPMP_Kabayan_${currentTin}_${label}.xml`);toast("XML Coretax dibuat")}catch(e){toast(e.message)}}
+function clearData(show=true){rawRows=[];processed=[];currentTin="";currentFile="";$("fileInput").value="";$("filebar").classList.remove("show");$("summary").classList.remove("show");$("dataBody").innerHTML='<tr><td colspan="14" class="empty">Belum ada data yang diunggah.</td></tr>';$("notice").className="notice";$("notice").innerHTML='Belum ada file. Unduh template resmi DJP, isi sheet <b>DATA</b>, kemudian unggah kembali ke sini.';$("btnExcel").disabled=true;$("btnXml").disabled=true;if(show)toast("Data dihapus")}
+
+$("btnTemplate").addEventListener("click",downloadTemplate);$("btnCalc").addEventListener("click",()=>{if(!rawRows.length)return toast("Unggah file BPMP terlebih dahulu");processRows();toast("PPh TER dihitung ulang")});$("btnExcel").addEventListener("click",downloadResultExcel);$("btnXml").addEventListener("click",exportXml);$("btnClear").addEventListener("click",()=>clearData(true));$("grossupToggle").addEventListener("change",()=>{if(rawRows.length){processRows();toast($("grossupToggle").checked?"Gross-Up aktif":"Gross-Up nonaktif")}});
+$("fileInput").addEventListener("change",e=>e.target.files[0]&&loadFile(e.target.files[0]));const dz=$("dropzone");["dragenter","dragover"].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.add("drag")}));["dragleave","drop"].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.remove("drag")}));dz.addEventListener("drop",e=>e.dataTransfer.files[0]&&loadFile(e.dataTransfer.files[0]));
+
+const menuBtn=document.getElementById("menuBtn"),mobileNav=document.getElementById("mobileNav");
+if(menuBtn&&mobileNav){
+  menuBtn.addEventListener("click",()=>{
+    const open=mobileNav.classList.toggle("show");
+    menuBtn.setAttribute("aria-expanded",String(open));
+    menuBtn.textContent=open?"×":"☰";
+  });
+  mobileNav.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{
+    mobileNav.classList.remove("show");menuBtn.setAttribute("aria-expanded","false");menuBtn.textContent="☰";
+  }));
+}
+const yearEl=document.getElementById("kabayanYear");if(yearEl)yearEl.textContent=new Date().getFullYear();
+
+document.querySelectorAll(".module-tab").forEach(btn=>btn.addEventListener("click",()=>{document.querySelectorAll(".module-tab").forEach(b=>b.classList.toggle("active",b===btn));if(btn.dataset.module==="jan-nov"){$("janNovModule").style.display="block";$("placeholder").classList.remove("show");return}$("janNovModule").style.display="none";$("placeholder").classList.add("show");const PLACEHOLDER_ICONS={des:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2V3Z"/><path d="M9 8h6M9 12h6M9 16h4"/></svg>`,tetap:`<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 19a7 7 0 0 1 14 0"/><path d="M18.5 8.5h3M20 7v3"/></svg>`,bukan:`<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="12" rx="2"/><path d="M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/><path d="M3 12h18"/><circle cx="12" cy="12" r="1.6"/></svg>`,tidak:`<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19a6 6 0 0 1 11 0"/><circle cx="18" cy="16" r="3.5"/><path d="M18 14.8V16l1.2 1.2"/></svg>`,pensiun:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7.5A2.5 2.5 0 0 1 6.5 5H18a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6.5A2.5 2.5 0 0 1 4 16.5v-9Z"/><path d="M4 8h14"/><path d="M15 13h5"/><circle cx="15.5" cy="13" r=".2" fill="currentColor" stroke="none"/></svg>`,peserta:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v10H5z"/><path d="M12 14v6M9 20h6"/><path d="m8 10 2-2 2 1 3-3"/></svg>`,bpa1:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/><path d="M9 14h6M9 17h6"/><path d="M8.8 11.2h2.4"/><path d="M12.8 10.1v2.2"/><path d="M14.7 12.3h1.7M14.7 10.1v2.2"/></svg>`,bpa2:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/><path d="M9 14h6M9 17h6"/><path d="M8.8 10.1h2.2v1.1H8.8l2.2 1.2H8.8"/><path d="M14.7 10.1h1.9l-1.9 2.2h1.9"/></svg>`};
+const info={des:["Payroll Desember","Modul rekonsiliasi tarif Pasal 17 akan menggunakan template/struktur DJP yang sesuai."],tetap:["Karyawan Tetap","Kalkulator individual TER akan diintegrasikan ke gaya baru ini."],bukan:["Bukan Pegawai","Modul bukan pegawai akan diintegrasikan setelah basis bukti potong resminya dipastikan."],tidak:["Pegawai Tidak Tetap","Modul harian/bulanan akan diintegrasikan setelah basis bukti potong resminya dipastikan."],pensiun:["Pensiun / Pesangon","Modul final akan diintegrasikan dengan pemisahan tarif pesangon dan manfaat pensiun/THT/JHT."],peserta:["Peserta Kegiatan","Modul peserta kegiatan akan diintegrasikan ke gaya yang sama."],bpa1:["Bukti Potong A1","Silakan gunakan template BPA1 resmi DJP sebagai basis tahap berikutnya."],bpa2:["Bukti Potong A2","Silakan gunakan template BPA2 resmi DJP sebagai basis tahap berikutnya."]}[btn.dataset.module];
+$("placeholderIcon").innerHTML=PLACEHOLDER_ICONS[btn.dataset.module]||`<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1.2"/><rect x="14" y="4" width="6" height="6" rx="1.2"/><rect x="4" y="14" width="6" height="6" rx="1.2"/><rect x="14" y="14" width="6" height="6" rx="1.2"/></svg>`;$("placeholderTitle").textContent=info[0];$("placeholderText").textContent=info[1]}));
+</script>
+</body>
+</html>
