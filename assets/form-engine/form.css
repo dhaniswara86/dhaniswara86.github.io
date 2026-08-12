@@ -1038,3 +1038,12 @@ body.menu-open{overflow:hidden}
     display:none!important;
   }
 }
+
+
+/* ===== FIX conditional field Surat Kuasa =====
+   Elemen dengan atribut hidden harus benar-benar tidak ditampilkan.
+   Aturan .row { display:grid } pada renderer klasik sebelumnya
+   menimpa perilaku bawaan atribut hidden di browser. */
+.paper.kuasa-classic [hidden]{
+  display:none!important;
+}
