@@ -29,7 +29,7 @@ reading_time: "13 menit baca"
 permalink: /skb-hibah-tanah-bangunan-coretax.html
 
 summary_label: "Ringkasan cepat"
-summary: "Pemberian hibah berupa tanah dan/atau bangunan tidak otomatis dibebaskan dari pengenaan Pajak Penghasilan. Pembebasan tersebut berlaku jika memenuhi persyaratan yang ditetapkan. Khusus untuk pemberian hibah berupa tanah dan/atau bangunan harus dibuktikan melalui kepemilikan Surat Keterangan Bebas PPh."
+summary: "Hibah berupa tanah dan/atau bangunan tidak otomatis dibebaskan dari pengenaan Pajak Penghasilan. Pembebasan tersebut berlaku jika memenuhi persyaratan yang ditetapkan. Khusus untuk pemberian hibah berupa tanah dan/atau bangunan harus dibuktikan melalui kepemilikan Surat Keterangan Bebas PPh."
 
 hero_links:
   - label: "Siapa yang bisa?"
