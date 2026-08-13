@@ -51,7 +51,7 @@ hero_stats:
 sidebar_note: "Artikel ini berfokus pada pemahaman fungsi dan permasalahan role akses. Tampilan dan alur Coretax dapat mengalami perubahan."
 
 custom_css:
-  - /assets/css/roleakses-v2.css?v=20260814-1
+  - /assets/css/roleakses-v2.css?v=20260814-2
 
 custom_js:
   - /assets/js/roleakses-v3.js?v=20260814-1
@@ -77,14 +77,49 @@ custom_js:
   opacity: 0.78;
 }
 
+.role-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.role-access-table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+.role-access-table th,
+.role-access-table td {
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+  word-break: normal;
+  vertical-align: top;
+}
+
+.role-access-table th:nth-child(1),
+.role-access-table td:nth-child(1) {
+  width: 8%;
+  text-align: center;
+}
+
 .role-access-table th:nth-child(2),
 .role-access-table td:nth-child(2) {
-  width: 38%;
+  width: 37%;
 }
 
 .role-access-table th:nth-child(3),
 .role-access-table td:nth-child(3) {
-  width: 62%;
+  width: 55%;
+}
+
+@media (max-width: 760px) {
+  .role-access-controls {
+    grid-template-columns: 1fr !important;
+  }
+
+  .role-access-table {
+    min-width: 680px;
+  }
 }
 </style>
 
@@ -384,16 +419,17 @@ custom_js:
 <div class="role-access-controls">
 <div class="role-search-wrapper">
 <label for="roleSearch">Cari role akses</label>
-<input autocomplete="off" id="roleSearch" placeholder="Contoh: PPh 21/26, hanya induk, eBupot, SPT Masa..." type="search"/>
+<input autocomplete="off" id="roleSearch" placeholder="Cari: PPh 21/26, eFaktur, Unifikasi..." type="search"/>
 </div>
 <div class="role-filter-wrapper">
-<label for="roleCategory">Filter kategori</label>
+<label for="roleCategory">Jenis role akses</label>
 <select id="roleCategory">
-<option value="semua">Semua kategori</option>
-<option value="pelaporan">Pelaporan dan Dokumen</option>
-<option value="pembayaran">Pembayaran dan Pengembalian</option>
-<option value="profil">Profil, Data, dan Status</option>
-<option value="layanan">Layanan Wajib Pajak</option>
+<option value="semua">Semua jenis role</option>
+<option value="drafter">Drafter</option>
+<option value="penandatangan">Penandatangan</option>
+<option value="kuasa">Kuasa</option>
+<option value="administrasi">Administrasi &amp; Status</option>
+<option value="pembayaran">Pembayaran &amp; Pengembalian</option>
 <option value="khusus">Layanan Khusus</option>
 </select>
 </div>
@@ -412,8 +448,8 @@ custom_js:
 </tr>
 </thead>
 <tbody id="roleTableBody">
-<!-- PELAPORAN DAN DOKUMEN -->
-<tr data-category="pelaporan">
+<!-- ROLE AKSES: DRAFTER / PENANDATANGAN -->
+<tr data-category="drafter">
 <td class="role-number">1</td>
 <td><strong>Drafter SPT Tahunan</strong></td>
 <td>
@@ -421,7 +457,7 @@ custom_js:
             dan data pendukungnya.
           </td>
 </tr>
-<tr data-category="pelaporan">
+<tr data-category="penandatangan">
 <td class="role-number">2</td>
 <td><strong>Penandatangan SPT Tahunan</strong></td>
 <td>
@@ -429,7 +465,7 @@ custom_js:
             yang telah disiapkan.
           </td>
 </tr>
-<tr data-category="pelaporan">
+<tr data-category="drafter">
 <td class="role-number">3</td>
 <td><strong>Drafter SPT Masa PPh Pasal 21/26</strong></td>
 <td>
@@ -437,14 +473,14 @@ custom_js:
             suatu masa pajak.
           </td>
 </tr>
-<tr data-category="pelaporan">
+<tr data-category="penandatangan">
 <td class="role-number">4</td>
 <td><strong>Penandatangan SPT Masa PPh Pasal 21/26</strong></td>
 <td>
             Menandatangani dan menyampaikan SPT Masa PPh Pasal 21/26.
           </td>
 </tr>
-<tr data-category="pelaporan">
+<tr data-category="penandatangan">
 <td class="role-number">5</td>
 <td>
 <strong>Penandatangan SPT Masa PPh Pasal 21/26 (Hanya Induk)</strong>
@@ -454,14 +490,14 @@ custom_js:
             pada Wajib Pajak induk.
           </td>
 </tr>
-<tr data-category="pelaporan">
+<tr data-category="drafter">
 <td class="role-number">6</td>
 <td><strong>Drafter eBupot PPh Masa Pasal 21/26</strong></td>
 <td>
             Membuat dan mengisi konsep bukti pemotongan PPh Pasal 21/26.
           </td>
 </tr>
-<tr data-category="pelaporan">
+<tr data-category="penandatangan">
 <td class="role-number">7</td>
 <td>
 <strong>Penandatangan eBupot PPh Masa Pasal 21/26</strong>
@@ -471,7 +507,7 @@ custom_js:
             Pasal 21/26.
           </td>
 </tr>
-<tr data-category="pelaporan">
+<tr data-category="drafter">
 <td class="role-number">8</td>
 <td><strong>Drafter eBupot Unifikasi</strong></td>
 <td>
@@ -479,7 +515,7 @@ custom_js:
             dalam modul eBupot Unifikasi.
           </td>
 </tr>
-<tr data-category="pelaporan">
+<tr data-category="penandatangan">
 <td class="role-number">9</td>
 <td><strong>Penandatangan eBupot Unifikasi</strong></td>
 <td>
@@ -487,7 +523,7 @@ custom_js:
             pemungutan PPh Unifikasi.
           </td>
 </tr>
-<tr data-category="pelaporan">
+<tr data-category="drafter">
 <td class="role-number">10</td>
 <td>
 <strong>
@@ -499,7 +535,7 @@ custom_js:
             Pasal 21/26 sesuai modul yang tersedia.
           </td>
 </tr>
-<tr data-category="pelaporan">
+<tr data-category="penandatangan">
 <td class="role-number">11</td>
 <td>
 <strong>
@@ -511,7 +547,7 @@ custom_js:
             PPh Pasal 21/26.
           </td>
 </tr>
-<tr data-category="pelaporan">
+<tr data-category="drafter">
 <td class="role-number">12</td>
 <td><strong>Drafter SPT Masa Bea Meterai</strong></td>
 <td>
@@ -519,14 +555,14 @@ custom_js:
             Bea Meterai.
           </td>
 </tr>
-<tr data-category="pelaporan">
+<tr data-category="penandatangan">
 <td class="role-number">13</td>
 <td><strong>Penandatangan SPT Masa Bea Meterai</strong></td>
 <td>
             Menandatangani dan menyampaikan SPT Masa Bea Meterai.
           </td>
 </tr>
-<tr data-category="pelaporan">
+<tr data-category="drafter">
 <td class="role-number">14</td>
 <td><strong>Drafter eFaktur Pajak</strong></td>
 <td>
@@ -534,7 +570,7 @@ custom_js:
             dan menyiapkan faktur untuk diproses.
           </td>
 </tr>
-<tr data-category="pelaporan">
+<tr data-category="penandatangan">
 <td class="role-number">15</td>
 <td><strong>Penandatangan eFaktur Pajak</strong></td>
 <td>
@@ -542,7 +578,7 @@ custom_js:
             sesuai kewenangannya.
           </td>
 </tr>
-<tr data-category="pelaporan">
+<tr data-category="drafter">
 <td class="role-number">16</td>
 <td><strong>Drafter SPT Masa PPh Unifikasi</strong></td>
 <td>
@@ -550,14 +586,14 @@ custom_js:
             bukti potong, pembayaran, dan data terkait.
           </td>
 </tr>
-<tr data-category="pelaporan">
+<tr data-category="penandatangan">
 <td class="role-number">17</td>
 <td><strong>Penandatangan SPT Masa PPh Unifikasi</strong></td>
 <td>
             Menandatangani dan menyampaikan SPT Masa PPh Unifikasi.
           </td>
 </tr>
-<tr data-category="pelaporan">
+<tr data-category="drafter">
 <td class="role-number">18</td>
 <td><strong>Drafter SPT Masa PPN/PPN DM/PPN PUT</strong></td>
 <td>
@@ -565,7 +601,7 @@ custom_js:
             pelaporan yang tersedia dalam Coretax.
           </td>
 </tr>
-<!-- LAYANAN KHUSUS -->
+<!-- ROLE AKSES: LAYANAN KHUSUS -->
 <tr data-category="khusus">
 <td class="role-number">19</td>
 <td>
@@ -588,8 +624,8 @@ custom_js:
             administrasi imbalan bunga.
           </td>
 </tr>
-<!-- PEMBAYARAN DAN PENGEMBALIAN -->
-<tr data-category="pembayaran">
+<!-- ROLE AKSES: KUASA / PEMBAYARAN / PENGEMBALIAN -->
+<tr data-category="kuasa">
 <td class="role-number">21</td>
 <td><strong>Kuasa untuk Modul Pembayaran</strong></td>
 <td>
@@ -613,8 +649,8 @@ custom_js:
             atau kelebihan pembayaran pajak.
           </td>
 </tr>
-<!-- PROFIL, DATA, DAN STATUS -->
-<tr data-category="profil">
+<!-- ROLE AKSES: ADMINISTRASI & STATUS -->
+<tr data-category="administrasi">
 <td class="role-number">24</td>
 <td><strong>Perubahan Profil Saya</strong></td>
 <td>
@@ -622,7 +658,7 @@ custom_js:
             Wajib Pajak.
           </td>
 </tr>
-<tr data-category="profil">
+<tr data-category="administrasi">
 <td class="role-number">25</td>
 <td><strong>Perubahan Data</strong></td>
 <td>
@@ -630,7 +666,7 @@ custom_js:
             dan identitas Wajib Pajak.
           </td>
 </tr>
-<tr data-category="profil">
+<tr data-category="administrasi">
 <td class="role-number">26</td>
 <td><strong>Penghapusan NPWP atau Pencabutan PKP</strong></td>
 <td>
@@ -638,7 +674,7 @@ custom_js:
             pengukuhan Pengusaha Kena Pajak.
           </td>
 </tr>
-<tr data-category="profil">
+<tr data-category="administrasi">
 <td class="role-number">27</td>
 <td><strong>Status Pemungut PMSE</strong></td>
 <td>
@@ -646,7 +682,7 @@ custom_js:
             PPN Perdagangan Melalui Sistem Elektronik.
           </td>
 </tr>
-<tr data-category="profil">
+<tr data-category="administrasi">
 <td class="role-number">28</td>
 <td><strong>Perubahan Status: Nonaktif atau Reaktivasi</strong></td>
 <td>
@@ -654,7 +690,7 @@ custom_js:
             pengaktifan kembali Wajib Pajak.
           </td>
 </tr>
-<tr data-category="profil">
+<tr data-category="administrasi">
 <td class="role-number">29</td>
 <td>
 <strong>Status Pemotong atau Pemungut PPh atau PPN</strong>
@@ -664,7 +700,7 @@ custom_js:
             pemotong atau pemungut PPh maupun PPN.
           </td>
 </tr>
-<tr data-category="profil">
+<tr data-category="administrasi">
 <td class="role-number">30</td>
 <td><strong>Pendaftaran Objek Pajak PBB P5L</strong></td>
 <td>
@@ -672,7 +708,7 @@ custom_js:
             beserta data pendukungnya.
           </td>
 </tr>
-<tr data-category="profil">
+<tr data-category="administrasi">
 <td class="role-number">31</td>
 <td>
 <strong>
@@ -684,7 +720,7 @@ custom_js:
             keuangan pelapor maupun nonpelapor.
           </td>
 </tr>
-<tr data-category="profil">
+<tr data-category="administrasi">
 <td class="role-number">32</td>
 <td><strong>Status Pemungut Bea Meterai</strong></td>
 <td>
@@ -692,7 +728,7 @@ custom_js:
             pemungut Bea Meterai.
           </td>
 </tr>
-<tr data-category="profil">
+<tr data-category="administrasi">
 <td class="role-number">33</td>
 <td><strong>Pengukuhan PKP</strong></td>
 <td>
@@ -700,8 +736,8 @@ custom_js:
             Pengusaha Kena Pajak.
           </td>
 </tr>
-<!-- LAYANAN WAJIB PAJAK -->
-<tr data-category="layanan">
+<!-- ROLE AKSES: KUASA -->
+<tr data-category="kuasa">
 <td class="role-number">34</td>
 <td><strong>Kuasa untuk Modul Layanan Wajib Pajak</strong></td>
 <td>
@@ -709,7 +745,7 @@ custom_js:
             Wajib Pajak.
           </td>
 </tr>
-<tr data-category="layanan">
+<tr data-category="kuasa">
 <td class="role-number">35</td>
 <td>
 <strong>
