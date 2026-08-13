@@ -44,479 +44,12 @@ hero_links:
 sidebar_note: "Bedakan antara ketentuan material hibah sebagai bukan objek PPh dan prosedur memperoleh SKB PPh atas pengalihan tanah/bangunan. Untuk kondisi khusus di Coretax, pastikan data identitas dan Data Unit Keluarga sudah sesuai."
 
 custom_css:
-  - /assets/css/jasakonstruksi.css?v=20260813-5
+  - /assets/css/jasakonstruksi.css?v=20260813-6
+  - /assets/css/skb-hibah.css?v=20260813-1
 ---
 
 <div class="jk-article">
 
-<style>
-/* =========================================================
-   TABEL ARTIKEL SKB HIBAH — OVERRIDE KHUSUS
-   Mencegah kolom terlalu sempit, kata pecah per huruf,
-   dan tinggi baris/header yang tidak proporsional.
-   ========================================================= */
-
-.jk-article .kb-table-wrap {
-  width: 100%;
-  margin: 24px 0 30px;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  border: 1px solid #e5e7eb;
-  border-radius: 18px;
-  background: #fff;
-}
-
-.jk-article table.kb-table {
-  width: 100% !important;
-  min-width: 0 !important;
-  table-layout: fixed !important;
-  border-collapse: collapse !important;
-  border-spacing: 0 !important;
-  margin: 0 !important;
-}
-
-.jk-article table.kb-table thead {
-  display: table-header-group !important;
-}
-
-.jk-article table.kb-table tbody {
-  display: table-row-group !important;
-}
-
-.jk-article table.kb-table tr {
-  display: table-row !important;
-  height: auto !important;
-  min-height: 0 !important;
-}
-
-.jk-article table.kb-table th,
-.jk-article table.kb-table td {
-  display: table-cell !important;
-  height: auto !important;
-  min-height: 0 !important;
-  padding: 16px 18px !important;
-  vertical-align: top !important;
-  line-height: 1.45 !important;
-  white-space: normal !important;
-  word-break: normal !important;
-  overflow-wrap: break-word !important;
-  hyphens: none !important;
-  border-right: 1px solid #e5e7eb !important;
-  border-bottom: 1px solid #e5e7eb !important;
-}
-
-.jk-article table.kb-table th:last-child,
-.jk-article table.kb-table td:last-child {
-  border-right: 0 !important;
-}
-
-.jk-article table.kb-table tbody tr:last-child td {
-  border-bottom: 0 !important;
-}
-
-.jk-article table.kb-table thead th {
-  background: #111113 !important;
-  color: #fff !important;
-  font-size: 0.88rem !important;
-  font-weight: 800 !important;
-  letter-spacing: 0.07em !important;
-  text-transform: uppercase !important;
-  text-align: left !important;
-  vertical-align: middle !important;
-  padding-top: 15px !important;
-  padding-bottom: 15px !important;
-}
-
-.jk-article table.kb-table tbody td {
-  background: #fff !important;
-  color: #55565a !important;
-  font-size: 0.98rem !important;
-  font-weight: 400 !important;
-}
-
-.jk-article table.kb-table tbody td:first-child {
-  color: #252529 !important;
-  font-weight: 700 !important;
-}
-
-
-/* =========================================================
-   WARNA STATUS & UKURAN FONT SERAGAM — KHUSUS MATRIKS KELUARGA
-   ========================================================= */
-
-/* =========================================================
-   OVERRIDE V4 — HERO STAT DIHAPUS + MATRIKS KELUARGA 1 BARIS
-   ========================================================= */
-
-.jk-article table.kb-table-family {
-  min-width: 1180px !important;
-}
-
-.jk-article table.kb-table-family col:nth-child(1) { width: 18%; }
-.jk-article table.kb-table-family col:nth-child(2) { width: 18%; }
-.jk-article table.kb-table-family col:nth-child(3) { width: 24%; }
-.jk-article table.kb-table-family col:nth-child(4) { width: 40%; }
-
-.jk-article table.kb-table-family tbody td {
-  font-size: 0.9rem !important;
-  line-height: 1.35 !important;
-  font-weight: 500 !important;
-  white-space: nowrap !important;
-  word-break: normal !important;
-  overflow-wrap: normal !important;
-}
-
-.jk-article table.kb-table-family tbody td strong,
-.jk-article table.kb-table-family tbody td span,
-.jk-article table.kb-table-family tbody td p,
-.jk-article table.kb-table-family tbody td div {
-  font-size: inherit !important;
-  line-height: inherit !important;
-  white-space: nowrap !important;
-}
-
-.jk-article table.kb-table-family tbody td:first-child {
-  font-weight: 700 !important;
-}
-
-.jk-article table.kb-table-family tbody td:nth-child(3) {
-  text-align: center !important;
-  font-weight: 700 !important;
-}
-
-.jk-article table.kb-table-family th,
-.jk-article table.kb-table-family td {
-  padding: 14px 16px !important;
-}
-
-.jk-article .kb-status-cell {
-  padding-top: 10px !important;
-  padding-bottom: 10px !important;
-}
-
-.jk-article .kb-status-box {
-  display: flex !important;
-  align-items: center !important;
-  gap: 10px !important;
-  flex-wrap: nowrap !important;
-  white-space: nowrap !important;
-  padding: 10px 12px !important;
-  border-radius: 12px !important;
-}
-
-.jk-article .kb-status-title {
-  margin: 0 !important;
-  padding: 5px 10px !important;
-  border-radius: 999px !important;
-  font-size: 0.9rem !important;
-  line-height: 1.2 !important;
-  white-space: nowrap !important;
-  flex: 0 0 auto !important;
-}
-
-.jk-article .kb-status-text {
-  margin: 0 !important;
-  font-size: 0.9rem !important;
-  line-height: 1.3 !important;
-  white-space: nowrap !important;
-  flex: 1 1 auto !important;
-}
-
-@media (max-width: 1200px) {
-  .jk-article table.kb-table-family {
-    min-width: 1120px !important;
-  }
-}
-
-@media (max-width: 760px) {
-  .jk-article table.kb-table-family {
-    min-width: 980px !important;
-  }
-
-  .jk-article table.kb-table-family tbody td,
-  .jk-article .kb-status-title,
-  .jk-article .kb-status-text {
-    font-size: 0.88rem !important;
-  }
-
-  .jk-article .kb-status-box {
-    gap: 8px !important;
-    padding: 9px 10px !important;
-  }
-}
-
-
-.jk-article table.kb-table-family tbody td {
-  font-size: 0.96rem !important;
-  line-height: 1.45 !important;
-  font-weight: 500 !important;
-}
-
-.jk-article table.kb-table-family tbody td * {
-  font-size: inherit !important;
-  line-height: inherit !important;
-}
-
-.jk-article table.kb-table-family tbody td strong {
-  font-size: inherit !important;
-  font-weight: 700 !important;
-}
-
-.jk-article table.kb-table-family tbody td:nth-child(3) {
-  text-align: center !important;
-}
-
-.jk-article .kb-status-cell {
-  padding-top: 14px !important;
-  padding-bottom: 14px !important;
-}
-
-.jk-article .kb-status-box {
-  display: block;
-  border-radius: 14px;
-  padding: 12px 14px;
-  border: 1px solid transparent;
-}
-
-.jk-article .kb-status-title {
-  display: inline-block;
-  margin: 0 0 6px;
-  padding: 5px 10px;
-  border-radius: 999px;
-  font-size: inherit !important;
-  font-weight: 800 !important;
-  letter-spacing: 0.02em;
-}
-
-.jk-article .kb-status-text {
-  display: block;
-  margin: 0;
-  font-size: inherit !important;
-  font-weight: 600 !important;
-}
-
-.jk-article .kb-status-ok .kb-status-box {
-  background: linear-gradient(135deg, #ecfdf5 0%, #eff6ff 100%);
-  border-color: #bfdbfe;
-}
-
-.jk-article .kb-status-ok .kb-status-title {
-  background: #d1fae5;
-  color: #065f46;
-}
-
-.jk-article .kb-status-ok .kb-status-text {
-  color: #1d4ed8;
-}
-
-.jk-article .kb-status-no .kb-status-box {
-  background: #fef2f2;
-  border-color: #fecaca;
-}
-
-.jk-article .kb-status-no .kb-status-title {
-  background: #fee2e2;
-  color: #991b1b;
-}
-
-.jk-article .kb-status-no .kb-status-text {
-  color: #b91c1c;
-}
-
-/* Matriks hubungan keluarga: kolom hasil dibuat paling lega. */
-.jk-article table.kb-table-family col:nth-child(1) { width: 19%; }
-.jk-article table.kb-table-family col:nth-child(2) { width: 21%; }
-.jk-article table.kb-table-family col:nth-child(3) { width: 25%; }
-.jk-article table.kb-table-family col:nth-child(4) { width: 35%; }
-
-/* Tabel kondisi NPWP istri: kolom penjelasan dan tindakan dibuat seimbang. */
-.jk-article table.kb-table-wife col:nth-child(1) { width: 27%; }
-.jk-article table.kb-table-wife col:nth-child(2) { width: 36%; }
-.jk-article table.kb-table-wife col:nth-child(3) { width: 37%; }
-
-/* Tabel dua kolom. */
-.jk-article table.kb-table-two col:nth-child(1) { width: 30%; }
-.jk-article table.kb-table-two col:nth-child(2) { width: 70%; }
-
-/* Tabel hibah vs waris. */
-.jk-article table.kb-table-warisan col:nth-child(1) { width: 22%; }
-.jk-article table.kb-table-warisan col:nth-child(2) { width: 39%; }
-.jk-article table.kb-table-warisan col:nth-child(3) { width: 39%; }
-
-/* Hindari pemecahan kata ekstrem pada kolom-kolom pendek. */
-.jk-article table.kb-table th,
-.jk-article table.kb-table td {
-  overflow-wrap: normal !important;
-}
-
-@media (max-width: 760px) {
-  .jk-article .kb-table-wrap {
-    margin-left: 0;
-    margin-right: 0;
-    border-radius: 15px;
-  }
-
-  /* Di mobile jangan paksa seluruh kolom menyempit.
-     Scroll horizontal lebih mudah dibaca daripada kata pecah. */
-  .jk-article table.kb-table {
-    min-width: 720px !important;
-  }
-
-  .jk-article table.kb-table th,
-  .jk-article table.kb-table td {
-    padding: 14px 15px !important;
-    font-size: 0.93rem !important;
-  }
-
-  .jk-article table.kb-table thead th {
-    font-size: 0.8rem !important;
-  }
-}
-
-
-/* =========================================================
-   V5 — TABEL MATRIKS KELUARGA: CLEAN / FLAT / RAPI
-   Referensi: header abu muda, garis tipis, pill status kecil.
-   ========================================================= */
-
-.jk-article .kb-table-wrap:has(.kb-table-family) {
-  overflow-x: auto !important;
-  border: 1px solid #dedfe3 !important;
-  border-radius: 22px !important;
-  background: #fff !important;
-  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.06) !important;
-}
-
-.jk-article table.kb-table-family {
-  width: 100% !important;
-  min-width: 980px !important;
-  table-layout: fixed !important;
-  border-collapse: separate !important;
-  border-spacing: 0 !important;
-}
-
-.jk-article table.kb-table-family col:nth-child(1) { width: 20% !important; }
-.jk-article table.kb-table-family col:nth-child(2) { width: 20% !important; }
-.jk-article table.kb-table-family col:nth-child(3) { width: 36% !important; }
-.jk-article table.kb-table-family col:nth-child(4) { width: 24% !important; }
-
-.jk-article table.kb-table-family thead th {
-  background: #f4f4f6 !important;
-  color: #414146 !important;
-  font-size: 15px !important;
-  line-height: 1.2 !important;
-  font-weight: 800 !important;
-  letter-spacing: 0.06em !important;
-  text-transform: uppercase !important;
-  text-align: left !important;
-  white-space: nowrap !important;
-  padding: 20px 24px !important;
-  border-right: 1px solid #dcdde2 !important;
-  border-bottom: 1px solid #dcdde2 !important;
-}
-
-.jk-article table.kb-table-family thead th:last-child {
-  border-right: 0 !important;
-  text-align: center !important;
-}
-
-.jk-article table.kb-table-family tbody td,
-.jk-article table.kb-table-family tbody td:first-child,
-.jk-article table.kb-table-family tbody td:nth-child(3) {
-  background: #fff !important;
-  color: #34343a !important;
-  font-size: 16px !important;
-  line-height: 1.35 !important;
-  font-weight: 500 !important;
-  text-align: left !important;
-  vertical-align: middle !important;
-  white-space: nowrap !important;
-  word-break: normal !important;
-  overflow-wrap: normal !important;
-  padding: 20px 24px !important;
-  border-right: 1px solid #dcdde2 !important;
-  border-bottom: 1px solid #dcdde2 !important;
-}
-
-.jk-article table.kb-table-family tbody td:first-child {
-  font-weight: 600 !important;
-}
-
-.jk-article table.kb-table-family tbody td:last-child {
-  border-right: 0 !important;
-  text-align: center !important;
-}
-
-.jk-article table.kb-table-family tbody tr:last-child td {
-  border-bottom: 0 !important;
-}
-
-.jk-article table.kb-table-family tbody tr:nth-child(even) td {
-  background: #fafbfc !important;
-}
-
-.jk-article table.kb-table-family tbody td *,
-.jk-article table.kb-table-family tbody td strong,
-.jk-article table.kb-table-family tbody td span {
-  font-size: inherit !important;
-  line-height: inherit !important;
-}
-
-.jk-article .kb-pill {
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  min-width: 78px !important;
-  padding: 8px 18px !important;
-  border-radius: 999px !important;
-  font-size: 15px !important;
-  line-height: 1 !important;
-  font-weight: 700 !important;
-  white-space: nowrap !important;
-}
-
-.jk-article .kb-pill-yes {
-  background: #e6f6ee !important;
-  color: #148653 !important;
-}
-
-.jk-article .kb-pill-no {
-  background: #fff0eb !important;
-  color: #c43625 !important;
-}
-
-.jk-article .kb-table-note {
-  margin: 12px 2px 0 !important;
-  color: #66676c !important;
-  font-size: 0.9rem !important;
-  line-height: 1.55 !important;
-}
-
-@media (max-width: 760px) {
-  .jk-article table.kb-table-family {
-    min-width: 900px !important;
-  }
-
-  .jk-article table.kb-table-family thead th {
-    font-size: 13px !important;
-    padding: 16px 18px !important;
-  }
-
-  .jk-article table.kb-table-family tbody td,
-  .jk-article table.kb-table-family tbody td:first-child,
-  .jk-article table.kb-table-family tbody td:nth-child(3) {
-    font-size: 15px !important;
-    padding: 16px 18px !important;
-  }
-
-  .jk-article .kb-pill {
-    font-size: 14px !important;
-    min-width: 72px !important;
-    padding: 7px 16px !important;
-  }
-}
-
-</style>
 
 
 <section id="pengantar">
@@ -682,14 +215,8 @@ custom_css:
     </p>
   </div>
 
-  <div class="jk-tariff-table-wrapper kb-table-wrap">
-    <table class="jk-tariff-table kb-table kb-table-family">
-      <colgroup>
-        <col style="width:19%;">
-        <col style="width:21%;">
-        <col style="width:25%;">
-        <col style="width:35%;">
-      </colgroup>
+  <div class="kb-table-shell">
+    <table class="kb-table kb-table-family">
       <thead>
         <tr>
           <th>Pemberi</th>
@@ -852,12 +379,8 @@ custom_css:
     persyaratan untuk diberikan Surat Keterangan Fiskal sebagaimana Pasal 4.
   </p>
 
-  <div class="jk-tariff-table-wrapper kb-table-wrap">
-    <table class="jk-tariff-table kb-table kb-table-two">
-      <colgroup>
-        <col style="width:30%;">
-        <col style="width:70%;">
-      </colgroup>
+  <div class="kb-table-shell">
+    <table class="kb-table kb-table-two">
       <thead>
         <tr>
           <th>Pemeriksaan</th>
@@ -1058,13 +581,8 @@ custom_css:
     <strong>Nonaktif</strong>, bergantung pada riwayat registrasi perpajakannya.
   </p>
 
-  <div class="jk-tariff-table-wrapper kb-table-wrap">
-    <table class="jk-tariff-table kb-table kb-table-wife">
-      <colgroup>
-        <col style="width:27%;">
-        <col style="width:36%;">
-        <col style="width:37%;">
-      </colgroup>
+  <div class="kb-table-shell">
+    <table class="kb-table kb-table-wife">
       <thead>
         <tr>
           <th>Kondisi istri</th>
@@ -1179,13 +697,8 @@ custom_css:
 <section id="waris">
   <h2>Hibah dan Waris Jangan Disamakan</h2>
 
-  <div class="jk-tariff-table-wrapper kb-table-wrap">
-    <table class="jk-tariff-table kb-table kb-table-warisan">
-      <colgroup>
-        <col style="width:22%;">
-        <col style="width:39%;">
-        <col style="width:39%;">
-      </colgroup>
+  <div class="kb-table-shell">
+    <table class="kb-table kb-table-warisan">
       <thead>
         <tr>
           <th>Aspek</th>
@@ -1246,12 +759,8 @@ custom_css:
 <section id="cek-sebelum-ajukan">
   <h2>Cek Sebelum Mengajukan</h2>
 
-  <div class="jk-tariff-table-wrapper kb-table-wrap">
-    <table class="jk-tariff-table kb-table kb-table-two">
-      <colgroup>
-        <col style="width:30%;">
-        <col style="width:70%;">
-      </colgroup>
+  <div class="kb-table-shell">
+    <table class="kb-table kb-table-two">
       <thead>
         <tr>
           <th>Yang dicek</th>
