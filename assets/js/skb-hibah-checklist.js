@@ -1,7 +1,7 @@
 (() => {
   "use strict";
 
-  const STORAGE_KEY = "kabayan-skb-hibah-checklist-v11";
+  const STORAGE_KEY = "kabayan-skb-hibah-checklist-v12";
 
   function safeParse(value) {
     try {
@@ -12,11 +12,13 @@
   }
 
   function initChecklist(root) {
-    const items = Array.from(root.querySelectorAll(".kb-potput-item"));
+    const items = Array.from(root.querySelectorAll(".kb-ref-item"));
     const countEl = root.querySelector("[data-check-count]");
+    const progressEl = root.querySelector("[data-check-progress]");
     const resetBtn = root.querySelector("[data-check-reset]");
+    const printBtn = root.querySelector("[data-check-print]");
 
-    if (!items.length || !countEl) return;
+    if (!items.length || !countEl || !progressEl) return;
 
     const stored = safeParse(localStorage.getItem(STORAGE_KEY) || "{}");
 
@@ -32,6 +34,7 @@
 
       if (na) {
         na.checked = Boolean(saved.na);
+
         if (na.checked) {
           check.checked = false;
           check.disabled = true;
@@ -87,6 +90,7 @@
       items.forEach((item) => {
         const check = item.querySelector(".kb-check-input");
         const na = item.querySelector(".kb-na-input");
+
         const isNa = Boolean(na && na.checked);
         const isChecked = Boolean(check && check.checked);
 
@@ -99,7 +103,15 @@
         }
       });
 
-      countEl.textContent = `${complete} dari ${applicable} butir selesai`;
+      const percent = applicable === 0
+        ? 100
+        : Math.round((complete / applicable) * 100);
+
+      countEl.textContent =
+        `${complete} dari ${applicable} butir selesai (${percent}%)`;
+
+      progressEl.style.width = `${percent}%`;
+
       saveState();
     }
 
@@ -116,7 +128,10 @@
             check.checked = false;
             check.disabled = false;
           }
-          if (na) na.checked = false;
+
+          if (na) {
+            na.checked = false;
+          }
         });
 
         try {
@@ -124,6 +139,17 @@
         } catch (_) {}
 
         update();
+      });
+    }
+
+    if (printBtn) {
+      printBtn.addEventListener("click", () => {
+        document.body.classList.add("kb-print-checklist");
+        window.print();
+      });
+
+      window.addEventListener("afterprint", () => {
+        document.body.classList.remove("kb-print-checklist");
       });
     }
 
