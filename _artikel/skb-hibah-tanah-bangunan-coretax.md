@@ -45,7 +45,7 @@ sidebar_note: "Bedakan antara ketentuan material hibah sebagai bukan objek PPh d
 
 custom_css:
   - /assets/css/jasakonstruksi.css?v=20260813-6
-  - /assets/css/skb-hibah-v10.css?v=20260813-1
+  - /assets/css/skb-hibah-v11.css?v=20260813-1
 ---
 
 <div class="jk-article">
@@ -710,192 +710,168 @@ custom_css:
 </section>
 
 
-<section id="cek-sebelum-ajukan" class="kb-checklist-section">
-  <div class="kb-checklist-heading">
+<section id="cek-sebelum-ajukan" class="kb-potput-checklist-section">
+  <div class="kb-potput-checklist-heading">
     <span class="jk-section-label">Cek mandiri</span>
     <h2>Checklist Kesiapan Permohonan SKB Hibah</h2>
     <p>
-      Gunakan checklist ini untuk melakukan pemeriksaan awal sebelum mengajukan
-      permohonan. Untuk syarat yang tidak relevan dengan kondisi Anda, pilih
-      <strong>Tidak berlaku</strong>.
+      Centang setiap butir sebelum mengirim permohonan. Status checklist
+      tersimpan otomatis pada perangkat yang digunakan.
     </p>
   </div>
 
-  <div class="kb-checklist-card" data-kb-checklist>
-    <div class="kb-checklist-summary">
-      <div>
-        <span class="kb-checklist-kicker">Status kesiapan</span>
-        <strong class="kb-checklist-count" data-check-count>0 dari 9 persyaratan terpenuhi</strong>
-      </div>
-      <span class="kb-checklist-status is-pending" data-check-status>Belum lengkap</span>
-    </div>
+  <div class="kb-potput-checklist" data-kb-checklist>
 
-    <div class="kb-progress" aria-hidden="true">
-      <span class="kb-progress-bar" data-check-progress style="width:0%"></span>
-    </div>
+    <div class="kb-potput-toolbar">
+      <strong class="kb-potput-count" data-check-count>0 dari 9 butir selesai</strong>
 
-    <p class="kb-checklist-message" data-check-message>
-      Centang setiap persyaratan yang sudah Anda pastikan.
-    </p>
-
-    <div class="kb-checklist-list">
-
-      <article class="kb-check-item" data-check-id="transaksi">
-        <label class="kb-check-main">
-          <input type="checkbox" class="kb-check-input">
-          <span class="kb-check-box" aria-hidden="true"></span>
-          <span class="kb-check-copy">
-            <strong>Transaksi benar-benar merupakan hibah</strong>
-            <span>
-              Pastikan pengalihan bukan jual beli, tukar-menukar, atau bentuk
-              transaksi lain yang hanya diberi label hibah.
-            </span>
-          </span>
-        </label>
-      </article>
-
-      <article class="kb-check-item" data-check-id="penerima">
-        <label class="kb-check-main">
-          <input type="checkbox" class="kb-check-input">
-          <span class="kb-check-box" aria-hidden="true"></span>
-          <span class="kb-check-copy">
-            <strong>Penerima hibah termasuk kategori yang memperoleh pengecualian</strong>
-            <span>
-              Periksa apakah penerima termasuk keluarga sedarah satu derajat
-              atau kategori penerima lain yang ditentukan dalam ketentuan.
-            </span>
-          </span>
-        </label>
-      </article>
-
-      <article class="kb-check-item kb-check-item-conditional" data-check-id="keluarga">
-        <div class="kb-check-main-wrap">
-          <label class="kb-check-main">
-            <input type="checkbox" class="kb-check-input">
-            <span class="kb-check-box" aria-hidden="true"></span>
-            <span class="kb-check-copy">
-              <strong>Untuk hibah keluarga: hubungan orang tua kandung ↔ anak kandung sudah sesuai</strong>
-              <span>
-                Berlaku apabila fasilitas digunakan berdasarkan kategori keluarga
-                sedarah dalam garis keturunan lurus satu derajat.
-              </span>
-            </span>
-          </label>
-
-          <label class="kb-na-control">
-            <input type="checkbox" class="kb-na-input">
-            <span>Tidak berlaku</span>
-          </label>
-        </div>
-      </article>
-
-      <article class="kb-check-item" data-check-id="identitas">
-        <label class="kb-check-main">
-          <input type="checkbox" class="kb-check-input">
-          <span class="kb-check-box" aria-hidden="true"></span>
-          <span class="kb-check-copy">
-            <strong>NIK/NPWP dan identitas para pihak sudah benar</strong>
-            <span>
-              Pastikan data pemberi dan penerima konsisten antara Coretax,
-              surat pernyataan, dan dokumen transaksi.
-            </span>
-          </span>
-        </label>
-      </article>
-
-      <article class="kb-check-item" data-check-id="objek">
-        <label class="kb-check-main">
-          <input type="checkbox" class="kb-check-input">
-          <span class="kb-check-box" aria-hidden="true"></span>
-          <span class="kb-check-copy">
-            <strong>Data objek tanah dan/atau bangunan sudah konsisten</strong>
-            <span>
-              Periksa NOP, NIB, alamat, luas tanah, luas bangunan, dan nilai
-              pengalihan.
-            </span>
-          </span>
-        </label>
-      </article>
-
-      <article class="kb-check-item" data-check-id="skf">
-        <label class="kb-check-main">
-          <input type="checkbox" class="kb-check-input">
-          <span class="kb-check-box" aria-hidden="true"></span>
-          <span class="kb-check-copy">
-            <strong>Persyaratan Surat Keterangan Fiskal telah terpenuhi</strong>
-            <span>
-              Pastikan kewajiban SPT yang memang menjadi kewajiban pemohon,
-              kondisi utang pajak, dan persyaratan lainnya telah sesuai.
-            </span>
-          </span>
-        </label>
-      </article>
-
-      <article class="kb-check-item" data-check-id="pernyataan">
-        <label class="kb-check-main">
-          <input type="checkbox" class="kb-check-input">
-          <span class="kb-check-box" aria-hidden="true"></span>
-          <span class="kb-check-copy">
-            <strong>Surat Pernyataan Hibah sudah disiapkan</strong>
-            <span>
-              Gunakan format yang sesuai dengan Lampiran PER-8/PJ/2025 dan
-              pastikan seluruh data di dalamnya benar.
-            </span>
-          </span>
-        </label>
-      </article>
-
-      <article class="kb-check-item" data-check-id="pengalihan">
-        <label class="kb-check-main">
-          <input type="checkbox" class="kb-check-input">
-          <span class="kb-check-box" aria-hidden="true"></span>
-          <span class="kb-check-copy">
-            <strong>Permohonan disiapkan untuk pengalihan yang bersangkutan</strong>
-            <span>
-              Pada prinsipnya permohonan SKB diajukan untuk setiap pengalihan
-              sesuai ketentuan yang berlaku.
-            </span>
-          </span>
-        </label>
-      </article>
-
-      <article class="kb-check-item kb-check-item-conditional" data-check-id="istri">
-        <div class="kb-check-main-wrap">
-          <label class="kb-check-main">
-            <input type="checkbox" class="kb-check-input">
-            <span class="kb-check-box" aria-hidden="true"></span>
-            <span class="kb-check-copy">
-              <strong>Jika terkait istri NPWP gabung suami: data DUK dan akses Coretax sudah sesuai</strong>
-              <span>
-                Pastikan struktur Data Unit Keluarga dan status kewajiban
-                perpajakan istri sudah benar sebelum mengajukan layanan.
-              </span>
-            </span>
-          </label>
-
-          <label class="kb-na-control">
-            <input type="checkbox" class="kb-na-input">
-            <span>Tidak berlaku</span>
-          </label>
-        </div>
-      </article>
-
-    </div>
-
-    <div class="kb-checklist-footer">
-      <div class="kb-checklist-disclaimer">
-        <strong>Catatan</strong>
-        <span>
-          Checklist ini merupakan alat bantu pemeriksaan mandiri dan bukan hasil
-          validasi DJP. Pemenuhan akhir tetap mengikuti penelitian sistem/DJP dan
-          ketentuan perpajakan yang berlaku.
-        </span>
-      </div>
-
-      <button type="button" class="kb-checklist-reset" data-check-reset>
-        Kosongkan checklist
+      <button type="button" class="kb-potput-reset" data-check-reset>
+        <span aria-hidden="true">↻</span>
+        Reset checklist
       </button>
     </div>
+
+    <div class="kb-potput-groups">
+
+      <section class="kb-potput-group" aria-labelledby="kb-group-a">
+        <h3 id="kb-group-a"><span>A.</span> Kelayakan</h3>
+
+        <div class="kb-potput-items">
+          <article class="kb-potput-item" data-check-id="transaksi">
+            <label class="kb-potput-label">
+              <input type="checkbox" class="kb-check-input">
+              <span class="kb-potput-box" aria-hidden="true"></span>
+              <span class="kb-potput-text">
+                Transaksi yang dilakukan benar-benar merupakan hibah.
+              </span>
+            </label>
+          </article>
+
+          <article class="kb-potput-item" data-check-id="penerima">
+            <label class="kb-potput-label">
+              <input type="checkbox" class="kb-check-input">
+              <span class="kb-potput-box" aria-hidden="true"></span>
+              <span class="kb-potput-text">
+                Penerima hibah termasuk kategori penerima yang memperoleh pengecualian sesuai ketentuan.
+              </span>
+            </label>
+          </article>
+
+          <article class="kb-potput-item kb-potput-item-conditional" data-check-id="keluarga">
+            <div class="kb-potput-conditional-wrap">
+              <label class="kb-potput-label">
+                <input type="checkbox" class="kb-check-input">
+                <span class="kb-potput-box" aria-hidden="true"></span>
+                <span class="kb-potput-text">
+                  Untuk hibah keluarga, hubungan pemberi dan penerima adalah orang tua kandung ↔ anak kandung.
+                </span>
+              </label>
+
+              <label class="kb-potput-na">
+                <input type="checkbox" class="kb-na-input">
+                <span>Tidak berlaku</span>
+              </label>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="kb-potput-group" aria-labelledby="kb-group-b">
+        <h3 id="kb-group-b"><span>B.</span> Kepatuhan</h3>
+
+        <div class="kb-potput-items">
+          <article class="kb-potput-item" data-check-id="skf">
+            <label class="kb-potput-label">
+              <input type="checkbox" class="kb-check-input">
+              <span class="kb-potput-box" aria-hidden="true"></span>
+              <span class="kb-potput-text">
+                Persyaratan Surat Keterangan Fiskal telah terpenuhi sesuai kewajiban perpajakan pemohon.
+              </span>
+            </label>
+          </article>
+        </div>
+      </section>
+
+      <section class="kb-potput-group" aria-labelledby="kb-group-c">
+        <h3 id="kb-group-c"><span>C.</span> Dokumen dan Data</h3>
+
+        <div class="kb-potput-items">
+          <article class="kb-potput-item" data-check-id="identitas">
+            <label class="kb-potput-label">
+              <input type="checkbox" class="kb-check-input">
+              <span class="kb-potput-box" aria-hidden="true"></span>
+              <span class="kb-potput-text">
+                NIK/NPWP dan identitas pemberi serta penerima hibah sudah benar dan konsisten.
+              </span>
+            </label>
+          </article>
+
+          <article class="kb-potput-item" data-check-id="objek">
+            <label class="kb-potput-label">
+              <input type="checkbox" class="kb-check-input">
+              <span class="kb-potput-box" aria-hidden="true"></span>
+              <span class="kb-potput-text">
+                NOP, NIB, alamat, luas tanah/bangunan, dan nilai pengalihan sudah sesuai dengan dokumen.
+              </span>
+            </label>
+          </article>
+
+          <article class="kb-potput-item" data-check-id="pernyataan">
+            <label class="kb-potput-label">
+              <input type="checkbox" class="kb-check-input">
+              <span class="kb-potput-box" aria-hidden="true"></span>
+              <span class="kb-potput-text">
+                Surat Pernyataan Hibah telah disiapkan menggunakan format yang sesuai ketentuan.
+              </span>
+            </label>
+          </article>
+
+          <article class="kb-potput-item" data-check-id="pengalihan">
+            <label class="kb-potput-label">
+              <input type="checkbox" class="kb-check-input">
+              <span class="kb-potput-box" aria-hidden="true"></span>
+              <span class="kb-potput-text">
+                Permohonan telah disiapkan untuk pengalihan tanah dan/atau bangunan yang bersangkutan.
+              </span>
+            </label>
+          </article>
+        </div>
+      </section>
+
+      <section class="kb-potput-group" aria-labelledby="kb-group-d">
+        <h3 id="kb-group-d"><span>D.</span> Coretax</h3>
+
+        <div class="kb-potput-items">
+          <article class="kb-potput-item kb-potput-item-conditional" data-check-id="istri">
+            <div class="kb-potput-conditional-wrap">
+              <label class="kb-potput-label">
+                <input type="checkbox" class="kb-check-input">
+                <span class="kb-potput-box" aria-hidden="true"></span>
+                <span class="kb-potput-text">
+                  Jika terkait istri NPWP gabung suami, Data Unit Keluarga dan akses Coretax sudah sesuai.
+                </span>
+              </label>
+
+              <label class="kb-potput-na">
+                <input type="checkbox" class="kb-na-input">
+                <span>Tidak berlaku</span>
+              </label>
+            </div>
+          </article>
+        </div>
+      </section>
+
+    </div>
+
+    <div class="kb-potput-note">
+      <strong>Catatan</strong>
+      <p>
+        Checklist ini merupakan alat bantu pemeriksaan mandiri dan bukan hasil
+        validasi DJP. Pemenuhan akhir tetap mengikuti penelitian sistem/DJP dan
+        ketentuan perpajakan yang berlaku.
+      </p>
+    </div>
+
   </div>
 </section>
 
@@ -1109,5 +1085,5 @@ custom_css:
 </section>
 
 
-<script src="/assets/js/skb-hibah-checklist.js?v=20260813-2" defer></script>
+<script src="/assets/js/skb-hibah-checklist-v11.js?v=20260813-1" defer></script>
 </div>
