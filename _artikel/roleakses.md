@@ -51,7 +51,7 @@ hero_stats:
 sidebar_note: "Artikel ini berfokus pada pemahaman fungsi dan permasalahan role akses. Tampilan dan alur Coretax dapat mengalami perubahan."
 
 custom_css:
-  - /assets/css/roleakses-v2.css?v=20260814-3
+  - /assets/css/roleakses-v2.css?v=20260814-4
 
 custom_js:
   - /assets/js/roleakses-v3.js?v=20260814-1
@@ -59,9 +59,11 @@ custom_js:
 
 <div class="role-article">
 <style>
-/* =====================================================
-   Override artikel Role Akses — tabel 3 kolom
-   ===================================================== */
+/* ==========================================================
+   FIX FINAL DIREKTORI ROLE AKSES
+   Tabel 3 kolom: No. | Role Akses | Fungsi Ringkas
+   Dibuat sangat spesifik agar tidak bentrok dengan CSS lama.
+   ========================================================== */
 
 .role-inline-figure {
   margin: 24px 0 30px;
@@ -81,115 +83,202 @@ custom_js:
   line-height: 1.6;
 }
 
-/* Hilangkan penyempitan tambahan dari komponen lama */
-.role-access-section {
+/* Direktori menggunakan lebar penuh area artikel */
+#daftar-role-akses.role-access-section {
   width: 100% !important;
-  max-width: none !important;
+  max-width: 100% !important;
   margin-left: 0 !important;
   margin-right: 0 !important;
   padding-left: 0 !important;
   padding-right: 0 !important;
+  overflow: visible !important;
 }
 
-/* Pencarian + filter */
-.role-access-controls {
-  grid-template-columns: minmax(0, 1.45fr) minmax(220px, 0.85fr) !important;
-}
-
-.role-access-controls input,
-.role-access-controls select {
-  min-width: 0 !important;
-  max-width: 100% !important;
-}
-
-/* Wrapper tidak boleh membuat tabel lebih lebar dari artikel */
-.role-table-wrapper {
+/* Search dan filter */
+#daftar-role-akses .role-access-controls {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.45fr) minmax(240px, 0.85fr) !important;
+  gap: 14px !important;
   width: 100% !important;
   max-width: 100% !important;
-  overflow-x: hidden !important;
+  box-sizing: border-box !important;
 }
 
-/* Reset aturan tabel 4 kolom dari CSS lama */
-.role-access-table {
+#daftar-role-akses .role-search-wrapper,
+#daftar-role-akses .role-filter-wrapper {
+  min-width: 0 !important;
+}
+
+#daftar-role-akses .role-access-controls input,
+#daftar-role-akses .role-access-controls select {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Wrapper TIDAK memotong isi tabel */
+#daftar-role-akses .role-table-wrapper {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  overflow: visible !important;
+  box-sizing: border-box !important;
+}
+
+/* Reset total aturan lama pada tabel */
+#roleDirectoryTable {
+  display: table !important;
   width: 100% !important;
   min-width: 0 !important;
   max-width: 100% !important;
   table-layout: fixed !important;
-  border-collapse: collapse !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  box-sizing: border-box !important;
 }
 
-.role-access-table th,
-.role-access-table td {
+/* Sel tidak boleh dipotong */
+#roleDirectoryTable th,
+#roleDirectoryTable td {
+  display: table-cell !important;
   box-sizing: border-box !important;
   min-width: 0 !important;
   max-width: none !important;
-  padding: 14px 12px !important;
-  overflow: visible !important;
+  height: auto !important;
+  padding: 16px 18px !important;
   white-space: normal !important;
-  overflow-wrap: anywhere !important;
   word-break: normal !important;
-  vertical-align: top !important;
+  overflow-wrap: break-word !important;
+  text-overflow: clip !important;
+  overflow: visible !important;
+  line-height: 1.5 !important;
 }
 
-/* 3 kolom: No. | Role Akses | Fungsi Ringkas */
-.role-access-table th:nth-child(1),
-.role-access-table td:nth-child(1) {
-  width: 8% !important;
+/* Header */
+#roleDirectoryTable thead,
+#roleDirectoryTable tbody {
+  width: 100% !important;
+}
+
+#roleDirectoryTable thead tr,
+#roleDirectoryTable tbody tr {
+  display: table-row !important;
+  width: 100% !important;
+  height: auto !important;
+}
+
+#roleDirectoryTable thead th {
+  vertical-align: middle !important;
+}
+
+/* ==========================================================
+   KOLOM 1 — NOMOR
+   ========================================================== */
+#roleDirectoryTable th:nth-child(1),
+#roleDirectoryTable td:nth-child(1),
+#roleDirectoryTable th.role-number,
+#roleDirectoryTable td.role-number {
+  width: 7% !important;
   min-width: 0 !important;
+  max-width: none !important;
+  padding-left: 6px !important;
+  padding-right: 6px !important;
   text-align: center !important;
+  vertical-align: middle !important;
+  white-space: nowrap !important;
+  font-variant-numeric: tabular-nums !important;
 }
 
-.role-access-table th:nth-child(2),
-.role-access-table td:nth-child(2) {
-  width: 38% !important;
-  min-width: 0 !important;
+/* Hilangkan kemungkinan aturan ganjil/genap dari stylesheet lama */
+#roleDirectoryTable tbody tr:nth-child(odd) td.role-number,
+#roleDirectoryTable tbody tr:nth-child(even) td.role-number,
+#roleDirectoryTable tbody tr:hover td.role-number {
+  text-align: center !important;
+  vertical-align: middle !important;
+  padding-left: 6px !important;
+  padding-right: 6px !important;
 }
 
-.role-access-table th:nth-child(3),
-.role-access-table td:nth-child(3) {
-  width: 54% !important;
-  min-width: 0 !important;
+/* ==========================================================
+   KOLOM 2 — ROLE AKSES
+   ========================================================== */
+#roleDirectoryTable th:nth-child(2),
+#roleDirectoryTable td:nth-child(2) {
+  width: 37% !important;
+  text-align: left !important;
+  vertical-align: middle !important;
+  white-space: normal !important;
+  overflow-wrap: break-word !important;
+  overflow: visible !important;
 }
 
-/* Pastikan aturan kolom ke-4 lama tidak memengaruhi layout */
-.role-access-table th:nth-child(4),
-.role-access-table td:nth-child(4) {
-  width: auto !important;
-  min-width: 0 !important;
+#roleDirectoryTable td:nth-child(2) strong {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  white-space: normal !important;
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  line-height: 1.45 !important;
 }
 
-/* Tampilan tablet */
-@media (max-width: 820px) {
-  .role-access-controls {
+/* ==========================================================
+   KOLOM 3 — FUNGSI RINGKAS
+   ========================================================== */
+#roleDirectoryTable th:nth-child(3),
+#roleDirectoryTable td:nth-child(3) {
+  width: 56% !important;
+  text-align: left !important;
+  vertical-align: middle !important;
+  white-space: normal !important;
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  padding-right: 22px !important;
+}
+
+/* Jangan biarkan rule kolom ke-4 stylesheet lama berpengaruh */
+#roleDirectoryTable th:nth-child(4),
+#roleDirectoryTable td:nth-child(4) {
+  display: none !important;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  #daftar-role-akses .role-access-controls {
     grid-template-columns: 1fr !important;
-    gap: 12px !important;
   }
 
-  .role-access-table th,
-  .role-access-table td {
-    padding: 12px 10px !important;
+  #roleDirectoryTable th,
+  #roleDirectoryTable td {
+    padding: 14px 13px !important;
+    font-size: 0.96rem !important;
   }
 
-  .role-access-table th:nth-child(1),
-  .role-access-table td:nth-child(1) {
-    width: 9% !important;
+  #roleDirectoryTable th:nth-child(1),
+  #roleDirectoryTable td:nth-child(1) {
+    width: 8% !important;
   }
 
-  .role-access-table th:nth-child(2),
-  .role-access-table td:nth-child(2) {
+  #roleDirectoryTable th:nth-child(2),
+  #roleDirectoryTable td:nth-child(2) {
     width: 39% !important;
   }
 
-  .role-access-table th:nth-child(3),
-  .role-access-table td:nth-child(3) {
-    width: 52% !important;
+  #roleDirectoryTable th:nth-child(3),
+  #roleDirectoryTable td:nth-child(3) {
+    width: 53% !important;
   }
 }
 
-/* Mobile: ubah tabel menjadi kartu 3-field.
-   Ini juga menimpa pseudo-label 4 kolom dari CSS lama. */
+/* Mobile: tampil menjadi kartu agar tetap mudah dibaca */
 @media (max-width: 620px) {
-  .role-table-wrapper {
+  #daftar-role-akses .role-table-wrapper {
     overflow: visible !important;
     border: 0 !important;
     border-radius: 0 !important;
@@ -197,52 +286,62 @@ custom_js:
     box-shadow: none !important;
   }
 
-  .role-access-table {
+  #roleDirectoryTable {
     display: block !important;
     width: 100% !important;
-    min-width: 0 !important;
   }
 
-  .role-access-table thead {
+  #roleDirectoryTable colgroup {
     display: none !important;
   }
 
-  .role-access-table tbody {
-    display: grid !important;
-    width: 100% !important;
-    gap: 12px !important;
+  #roleDirectoryTable thead {
+    display: none !important;
   }
 
-  .role-access-table tbody tr {
+  #roleDirectoryTable tbody {
+    display: grid !important;
+    gap: 12px !important;
+    width: 100% !important;
+  }
+
+  #roleDirectoryTable tbody tr {
     display: block !important;
     width: 100% !important;
-    overflow: hidden !important;
-    border: 1px solid #e8e8ed !important;
+    border: 1px solid #e5e5ea !important;
     border-radius: 16px !important;
-    background: #ffffff !important;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.045) !important;
+    overflow: hidden !important;
+    background: #fff !important;
+    box-shadow: 0 6px 20px rgba(0,0,0,.04) !important;
   }
 
-  .role-access-table tbody tr:nth-child(even),
-  .role-access-table tbody tr:hover {
-    background: #ffffff !important;
+  #roleDirectoryTable tbody tr:nth-child(odd),
+  #roleDirectoryTable tbody tr:nth-child(even),
+  #roleDirectoryTable tbody tr:hover {
+    background: #fff !important;
   }
 
-  .role-access-table td {
+  #roleDirectoryTable tbody td,
+  #roleDirectoryTable tbody td.role-number {
     position: relative !important;
     display: block !important;
     width: 100% !important;
+    max-width: 100% !important;
     min-width: 0 !important;
-    padding: 10px 14px 10px 118px !important;
-    border-bottom: 1px solid #eeeeF2 !important;
+    padding: 10px 14px 10px 120px !important;
     text-align: left !important;
+    vertical-align: top !important;
+    white-space: normal !important;
+    overflow: visible !important;
+    overflow-wrap: break-word !important;
+    border-bottom: 1px solid #eeeeF2 !important;
   }
 
-  .role-access-table td:last-child {
+  #roleDirectoryTable tbody td:last-child {
     border-bottom: 0 !important;
   }
 
-  .role-access-table td::before {
+  #roleDirectoryTable tbody td::before {
     position: absolute !important;
     top: 10px !important;
     left: 14px !important;
@@ -251,38 +350,30 @@ custom_js:
     font-size: 10px !important;
     font-weight: 750 !important;
     line-height: 1.35 !important;
-    letter-spacing: 0.03em !important;
+    letter-spacing: .035em !important;
     text-transform: uppercase !important;
   }
 
-  .role-access-table td:nth-child(1)::before {
+  #roleDirectoryTable tbody td:nth-child(1)::before {
     content: "No." !important;
   }
 
-  .role-access-table td:nth-child(2)::before {
+  #roleDirectoryTable tbody td:nth-child(2)::before {
     content: "Role akses" !important;
   }
 
-  .role-access-table td:nth-child(3)::before {
+  #roleDirectoryTable tbody td:nth-child(3)::before {
     content: "Fungsi ringkas" !important;
-  }
-
-  .role-access-table td:nth-child(4)::before {
-    content: none !important;
-  }
-
-  .role-number {
-    width: 100% !important;
-    text-align: left !important;
   }
 }
 
 @media (max-width: 430px) {
-  .role-access-table td {
-    padding: 34px 14px 11px !important;
+  #roleDirectoryTable tbody td,
+  #roleDirectoryTable tbody td.role-number {
+    padding: 34px 14px 12px !important;
   }
 
-  .role-access-table td::before {
+  #roleDirectoryTable tbody td::before {
     top: 9px !important;
     left: 14px !important;
     width: auto !important;
@@ -606,10 +697,15 @@ custom_js:
   </div>
 <!-- Tabel -->
 <div class="role-table-wrapper">
-<table class="role-access-table">
+<table class="role-access-table" id="roleDirectoryTable" style="width:100%!important;min-width:0!important;max-width:100%!important;table-layout:fixed!important;">
+<colgroup>
+<col style="width:7%"/>
+<col style="width:37%"/>
+<col style="width:56%"/>
+</colgroup>
 <thead>
 <tr>
-<th class="role-number" scope="col">No.</th>
+<th class="role-number" scope="col" style="text-align:center!important;vertical-align:middle!important;">No.</th>
 <th scope="col">Role Akses</th>
 <th scope="col">Fungsi Ringkas</th>
 </tr>
@@ -617,7 +713,7 @@ custom_js:
 <tbody id="roleTableBody">
 <!-- ROLE AKSES: DRAFTER / PENANDATANGAN -->
 <tr data-category="drafter">
-<td class="role-number">1</td>
+<td class="role-number" style="text-align:center!important;vertical-align:middle!important;padding-left:6px!important;padding-right:6px!important;white-space:nowrap!important;">1</td>
 <td><strong>Drafter SPT Tahunan</strong></td>
 <td>
             Menyiapkan konsep SPT Tahunan beserta induk, lampiran,
@@ -625,7 +721,7 @@ custom_js:
           </td>
 </tr>
 <tr data-category="penandatangan">
-<td class="role-number">2</td>
+<td class="role-number" style="text-align:center!important;vertical-align:middle!important;padding-left:6px!important;padding-right:6px!important;white-space:nowrap!important;">2</td>
 <td><strong>Penandatangan SPT Tahunan</strong></td>
 <td>
             Melakukan penandatanganan dan tindakan final atas SPT Tahunan
@@ -633,7 +729,7 @@ custom_js:
           </td>
 </tr>
 <tr data-category="drafter">
-<td class="role-number">3</td>
+<td class="role-number" style="text-align:center!important;vertical-align:middle!important;padding-left:6px!important;padding-right:6px!important;white-space:nowrap!important;">3</td>
 <td><strong>Drafter SPT Masa PPh Pasal 21/26</strong></td>
 <td>
             Menyiapkan konsep pelaporan SPT Masa PPh Pasal 21/26 untuk
@@ -641,14 +737,14 @@ custom_js:
           </td>
 </tr>
 <tr data-category="penandatangan">
-<td class="role-number">4</td>
+<td class="role-number" style="text-align:center!important;vertical-align:middle!important;padding-left:6px!important;padding-right:6px!important;white-space:nowrap!important;">4</td>
 <td><strong>Penandatangan SPT Masa PPh Pasal 21/26</strong></td>
 <td>
             Menandatangani dan menyampaikan SPT Masa PPh Pasal 21/26.
           </td>
 </tr>
 <tr data-category="penandatangan">
-<td class="role-number">5</td>
+<td class="role-number" style="text-align:center!important;vertical-align:middle!important;padding-left:6px!important;padding-right:6px!important;white-space:nowrap!important;">5</td>
 <td>
 <strong>Penandatangan SPT Masa PPh Pasal 21/26 (Hanya Induk)</strong>
 </td>
@@ -658,14 +754,14 @@ custom_js:
           </td>
 </tr>
 <tr data-category="drafter">
-<td class="role-number">6</td>
+<td class="role-number" style="text-align:center!important;vertical-align:middle!important;padding-left:6px!important;padding-right:6px!important;white-space:nowrap!important;">6</td>
 <td><strong>Drafter eBupot PPh Masa Pasal 21/26</strong></td>
 <td>
             Membuat dan mengisi konsep bukti pemotongan PPh Pasal 21/26.
           </td>
 </tr>
 <tr data-category="penandatangan">
-<td class="role-number">7</td>
+<td class="role-number" style="text-align:center!important;vertical-align:middle!important;padding-left:6px!important;padding-right:6px!important;white-space:nowrap!important;">7</td>
 <td>
 <strong>Penandatangan eBupot PPh Masa Pasal 21/26</strong>
 </td>
@@ -675,7 +771,7 @@ custom_js:
           </td>
 </tr>
 <tr data-category="drafter">
-<td class="role-number">8</td>
+<td class="role-number" style="text-align:center!important;vertical-align:middle!important;padding-left:6px!important;padding-right:6px!important;white-space:nowrap!important;">8</td>
 <td><strong>Drafter eBupot Unifikasi</strong></td>
 <td>
             Menyiapkan konsep bukti pemotongan atau pemungutan PPh
@@ -683,7 +779,7 @@ custom_js:
           </td>
 </tr>
 <tr data-category="penandatangan">
-<td class="role-number">9</td>
+<td class="role-number" style="text-align:center!important;vertical-align:middle!important;padding-left:6px!important;padding-right:6px!important;white-space:nowrap!important;">9</td>
 <td><strong>Penandatangan eBupot Unifikasi</strong></td>
 <td>
             Menandatangani atau menerbitkan bukti pemotongan dan
@@ -691,7 +787,7 @@ custom_js:
           </td>
 </tr>
 <tr data-category="drafter">
-<td class="role-number">10</td>
+<td class="role-number" style="text-align:center!important;vertical-align:middle!important;padding-left:6px!important;padding-right:6px!important;white-space:nowrap!important;">10</td>
 <td>
 <strong>
               Drafter SPT Masa selain SPT Masa PPh Pasal 21/26
@@ -703,7 +799,7 @@ custom_js:
           </td>
 </tr>
 <tr data-category="penandatangan">
-<td class="role-number">11</td>
+<td class="role-number" style="text-align:center!important;vertical-align:middle!important;padding-left:6px!important;padding-right:6px!important;white-space:nowrap!important;">11</td>
 <td>
 <strong>
               Penandatangan SPT Masa selain SPT Masa PPh Pasal 21/26
@@ -715,7 +811,7 @@ custom_js:
           </td>
 </tr>
 <tr data-category="drafter">
-<td class="role-number">12</td>
+<td class="role-number" style="text-align:center!important;vertical-align:middle!important;padding-left:6px!important;padding-right:6px!important;white-space:nowrap!important;">12</td>
 <td><strong>Drafter SPT Masa Bea Meterai</strong></td>
 <td>
             Menyiapkan konsep SPT Masa Bea Meterai bagi pemungut
@@ -723,14 +819,14 @@ custom_js:
           </td>
 </tr>
 <tr data-category="penandatangan">
-<td class="role-number">13</td>
+<td class="role-number" style="text-align:center!important;vertical-align:middle!important;padding-left:6px!important;padding-right:6px!important;white-space:nowrap!important;">13</td>
 <td><strong>Penandatangan SPT Masa Bea Meterai</strong></td>
 <td>
             Menandatangani dan menyampaikan SPT Masa Bea Meterai.
           </td>
 </tr>
 <tr data-category="drafter">
-<td class="role-number">14</td>
+<td class="role-number" style="text-align:center!important;vertical-align:middle!important;padding-left:6px!important;padding-right:6px!important;white-space:nowrap!important;">14</td>
 <td><strong>Drafter eFaktur Pajak</strong></td>
 <td>
             Membuat konsep faktur pajak, mengisi data transaksi,
@@ -738,7 +834,7 @@ custom_js:
           </td>
 </tr>
 <tr data-category="penandatangan">
-<td class="role-number">15</td>
+<td class="role-number" style="text-align:center!important;vertical-align:middle!important;padding-left:6px!important;padding-right:6px!important;white-space:nowrap!important;">15</td>
 <td><strong>Penandatangan eFaktur Pajak</strong></td>
 <td>
             Menandatangani, mengunggah, atau menerbitkan faktur pajak
@@ -746,7 +842,7 @@ custom_js:
           </td>
 </tr>
 <tr data-category="drafter">
-<td class="role-number">16</td>
+<td class="role-number" style="text-align:center!important;vertical-align:middle!important;padding-left:6px!important;padding-right:6px!important;white-space:nowrap!important;">16</td>
 <td><strong>Drafter SPT Masa PPh Unifikasi</strong></td>
 <td>
             Menyiapkan konsep SPT Masa PPh Unifikasi berdasarkan
@@ -754,14 +850,14 @@ custom_js:
           </td>
 </tr>
 <tr data-category="penandatangan">
-<td class="role-number">17</td>
+<td class="role-number" style="text-align:center!important;vertical-align:middle!important;padding-left:6px!important;padding-right:6px!important;white-space:nowrap!important;">17</td>
 <td><strong>Penandatangan SPT Masa PPh Unifikasi</strong></td>
 <td>
             Menandatangani dan menyampaikan SPT Masa PPh Unifikasi.
           </td>
 </tr>
 <tr data-category="drafter">
-<td class="role-number">18</td>
+<td class="role-number" style="text-align:center!important;vertical-align:middle!important;padding-left:6px!important;padding-right:6px!important;white-space:nowrap!important;">18</td>
 <td><strong>Drafter SPT Masa PPN/PPN DM/PPN PUT</strong></td>
 <td>
             Menyiapkan konsep SPT Masa PPN sesuai jenis dan kategori
@@ -770,7 +866,7 @@ custom_js:
 </tr>
 <!-- ROLE AKSES: LAYANAN KHUSUS -->
 <tr data-category="khusus">
-<td class="role-number">19</td>
+<td class="role-number" style="text-align:center!important;vertical-align:middle!important;padding-left:6px!important;padding-right:6px!important;white-space:nowrap!important;">19</td>
 <td>
 <strong>
               PPh DPT atas Penghasilan dari Penghapusan Secara Mutlak
@@ -784,7 +880,7 @@ custom_js:
           </td>
 </tr>
 <tr data-category="khusus">
-<td class="role-number">20</td>
+<td class="role-number" style="text-align:center!important;vertical-align:middle!important;padding-left:6px!important;padding-right:6px!important;white-space:nowrap!important;">20</td>
 <td><strong>Imbalan Bunga</strong></td>
 <td>
             Mengakses layanan yang berkaitan dengan permohonan atau
@@ -793,7 +889,7 @@ custom_js:
 </tr>
 <!-- ROLE AKSES: KUASA / PEMBAYARAN / PENGEMBALIAN -->
 <tr data-category="kuasa">
-<td class="role-number">21</td>
+<td class="role-number" style="text-align:center!important;vertical-align:middle!important;padding-left:6px!important;padding-right:6px!important;white-space:nowrap!important;">21</td>
 <td><strong>Kuasa untuk Modul Pembayaran</strong></td>
 <td>
             Menjalankan fungsi pembayaran pajak atas nama Wajib Pajak
@@ -801,7 +897,7 @@ custom_js:
           </td>
 </tr>
 <tr data-category="pembayaran">
-<td class="role-number">22</td>
+<td class="role-number" style="text-align:center!important;vertical-align:middle!important;padding-left:6px!important;padding-right:6px!important;white-space:nowrap!important;">22</td>
 <td><strong>Pemindahbukuan</strong></td>
 <td>
             Mengajukan atau mengelola permohonan pemindahbukuan
@@ -809,7 +905,7 @@ custom_js:
           </td>
 </tr>
 <tr data-category="pembayaran">
-<td class="role-number">23</td>
+<td class="role-number" style="text-align:center!important;vertical-align:middle!important;padding-left:6px!important;padding-right:6px!important;white-space:nowrap!important;">23</td>
 <td><strong>Pengembalian</strong></td>
 <td>
             Mengakses layanan terkait permohonan pengembalian pembayaran
@@ -818,7 +914,7 @@ custom_js:
 </tr>
 <!-- ROLE AKSES: ADMINISTRASI & STATUS -->
 <tr data-category="administrasi">
-<td class="role-number">24</td>
+<td class="role-number" style="text-align:center!important;vertical-align:middle!important;padding-left:6px!important;padding-right:6px!important;white-space:nowrap!important;">24</td>
 <td><strong>Perubahan Profil Saya</strong></td>
 <td>
             Mengakses dan memperbarui informasi tertentu pada profil
@@ -826,7 +922,7 @@ custom_js:
           </td>
 </tr>
 <tr data-category="administrasi">
-<td class="role-number">25</td>
+<td class="role-number" style="text-align:center!important;vertical-align:middle!important;padding-left:6px!important;padding-right:6px!important;white-space:nowrap!important;">25</td>
 <td><strong>Perubahan Data</strong></td>
 <td>
             Mengajukan atau mengelola perubahan data administrasi
@@ -834,7 +930,7 @@ custom_js:
           </td>
 </tr>
 <tr data-category="administrasi">
-<td class="role-number">26</td>
+<td class="role-number" style="text-align:center!important;vertical-align:middle!important;padding-left:6px!important;padding-right:6px!important;white-space:nowrap!important;">26</td>
 <td><strong>Penghapusan NPWP atau Pencabutan PKP</strong></td>
 <td>
             Mengakses permohonan penghapusan NPWP atau pencabutan
@@ -842,7 +938,7 @@ custom_js:
           </td>
 </tr>
 <tr data-category="administrasi">
-<td class="role-number">27</td>
+<td class="role-number" style="text-align:center!important;vertical-align:middle!important;padding-left:6px!important;padding-right:6px!important;white-space:nowrap!important;">27</td>
 <td><strong>Status Pemungut PMSE</strong></td>
 <td>
             Mengakses layanan yang berkaitan dengan status pemungut
@@ -850,7 +946,7 @@ custom_js:
           </td>
 </tr>
 <tr data-category="administrasi">
-<td class="role-number">28</td>
+<td class="role-number" style="text-align:center!important;vertical-align:middle!important;padding-left:6px!important;padding-right:6px!important;white-space:nowrap!important;">28</td>
 <td><strong>Perubahan Status: Nonaktif atau Reaktivasi</strong></td>
 <td>
             Mengajukan perubahan status menjadi nonaktif atau
@@ -858,7 +954,7 @@ custom_js:
           </td>
 </tr>
 <tr data-category="administrasi">
-<td class="role-number">29</td>
+<td class="role-number" style="text-align:center!important;vertical-align:middle!important;padding-left:6px!important;padding-right:6px!important;white-space:nowrap!important;">29</td>
 <td>
 <strong>Status Pemotong atau Pemungut PPh atau PPN</strong>
 </td>
@@ -868,7 +964,7 @@ custom_js:
           </td>
 </tr>
 <tr data-category="administrasi">
-<td class="role-number">30</td>
+<td class="role-number" style="text-align:center!important;vertical-align:middle!important;padding-left:6px!important;padding-right:6px!important;white-space:nowrap!important;">30</td>
 <td><strong>Pendaftaran Objek Pajak PBB P5L</strong></td>
 <td>
             Mendaftarkan objek Pajak Bumi dan Bangunan sektor P5L
@@ -876,7 +972,7 @@ custom_js:
           </td>
 </tr>
 <tr data-category="administrasi">
-<td class="role-number">31</td>
+<td class="role-number" style="text-align:center!important;vertical-align:middle!important;padding-left:6px!important;padding-right:6px!important;white-space:nowrap!important;">31</td>
 <td>
 <strong>
               Status Lembaga Keuangan Pelapor atau Nonpelapor
@@ -888,7 +984,7 @@ custom_js:
           </td>
 </tr>
 <tr data-category="administrasi">
-<td class="role-number">32</td>
+<td class="role-number" style="text-align:center!important;vertical-align:middle!important;padding-left:6px!important;padding-right:6px!important;white-space:nowrap!important;">32</td>
 <td><strong>Status Pemungut Bea Meterai</strong></td>
 <td>
             Mengakses layanan yang berkaitan dengan status sebagai
@@ -896,7 +992,7 @@ custom_js:
           </td>
 </tr>
 <tr data-category="administrasi">
-<td class="role-number">33</td>
+<td class="role-number" style="text-align:center!important;vertical-align:middle!important;padding-left:6px!important;padding-right:6px!important;white-space:nowrap!important;">33</td>
 <td><strong>Pengukuhan PKP</strong></td>
 <td>
             Mengakses dan mengajukan permohonan pengukuhan sebagai
@@ -905,7 +1001,7 @@ custom_js:
 </tr>
 <!-- ROLE AKSES: KUASA -->
 <tr data-category="kuasa">
-<td class="role-number">34</td>
+<td class="role-number" style="text-align:center!important;vertical-align:middle!important;padding-left:6px!important;padding-right:6px!important;white-space:nowrap!important;">34</td>
 <td><strong>Kuasa untuk Modul Layanan Wajib Pajak</strong></td>
 <td>
             Mengakses dan menjalankan fungsi tertentu dalam modul layanan
@@ -913,7 +1009,7 @@ custom_js:
           </td>
 </tr>
 <tr data-category="kuasa">
-<td class="role-number">35</td>
+<td class="role-number" style="text-align:center!important;vertical-align:middle!important;padding-left:6px!important;padding-right:6px!important;white-space:nowrap!important;">35</td>
 <td>
 <strong>
               Kuasa untuk Permohonan Layanan Administrasi dan Edukasi
