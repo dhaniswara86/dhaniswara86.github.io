@@ -2,8 +2,8 @@
 layout: artikel-editorial
 
 title: "SKB PPh Hibah Tanah dan Bangunan: Syarat, Coretax, dan NPWP Istri Gabung Suami"
-hero_title: "Surat Keterangan Bebas PPh."
-hero_accent: "Hibah Tanah dan/atau Bangunan."
+hero_title: "SKB PPh Hibah Tanah dan Bangunan."
+hero_accent: "Cek penerima hibah, kepatuhan, dan data Coretax sebelum mengajukan."
 
 excerpt: "Hibah tanah dan bangunan tidak otomatis bebas PPh. Pengecualian hanya berlaku jika memenuhi ketentuan, dan untuk pengalihan tanah/bangunan dibuktikan melalui SKB PPh."
 description: "Panduan terbaru mengenai SKB PPh atas hibah tanah dan bangunan, pihak yang memenuhi syarat, dokumen, persyaratan Surat Keterangan Fiskal, pengajuan melalui Coretax, serta catatan khusus NPWP istri yang digabung dengan suami."
@@ -40,20 +40,11 @@ hero_links:
   - label: "NPWP istri"
     href: "#istri-gabung-suami"
 
-hero_stats:
-  - value: "1 derajat"
-    label: "Orang tua kandung ↔ anak kandung"
-  - value: "1 pengalihan"
-    label: "Pada prinsipnya 1 permohonan SKB"
-  - value: "3 hari"
-    label: "Batas keputusan setelah permohonan lengkap"
-  - value: "Coretax"
-    label: "Pengajuan melalui Portal Wajib Pajak"
 
 sidebar_note: "Bedakan antara ketentuan material hibah sebagai bukan objek PPh dan prosedur memperoleh SKB PPh atas pengalihan tanah/bangunan. Untuk kondisi khusus di Coretax, pastikan data identitas dan Data Unit Keluarga sudah sesuai."
 
 custom_css:
-  - /assets/css/jasakonstruksi.css?v=20260813-3
+  - /assets/css/jasakonstruksi.css?v=20260813-4
 ---
 
 <div class="jk-article">
@@ -152,6 +143,108 @@ custom_css:
 /* =========================================================
    WARNA STATUS & UKURAN FONT SERAGAM — KHUSUS MATRIKS KELUARGA
    ========================================================= */
+
+/* =========================================================
+   OVERRIDE V4 — HERO STAT DIHAPUS + MATRIKS KELUARGA 1 BARIS
+   ========================================================= */
+
+.jk-article table.kb-table-family {
+  min-width: 1180px !important;
+}
+
+.jk-article table.kb-table-family col:nth-child(1) { width: 18%; }
+.jk-article table.kb-table-family col:nth-child(2) { width: 18%; }
+.jk-article table.kb-table-family col:nth-child(3) { width: 24%; }
+.jk-article table.kb-table-family col:nth-child(4) { width: 40%; }
+
+.jk-article table.kb-table-family tbody td {
+  font-size: 0.9rem !important;
+  line-height: 1.35 !important;
+  font-weight: 500 !important;
+  white-space: nowrap !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+}
+
+.jk-article table.kb-table-family tbody td strong,
+.jk-article table.kb-table-family tbody td span,
+.jk-article table.kb-table-family tbody td p,
+.jk-article table.kb-table-family tbody td div {
+  font-size: inherit !important;
+  line-height: inherit !important;
+  white-space: nowrap !important;
+}
+
+.jk-article table.kb-table-family tbody td:first-child {
+  font-weight: 700 !important;
+}
+
+.jk-article table.kb-table-family tbody td:nth-child(3) {
+  text-align: center !important;
+  font-weight: 700 !important;
+}
+
+.jk-article table.kb-table-family th,
+.jk-article table.kb-table-family td {
+  padding: 14px 16px !important;
+}
+
+.jk-article .kb-status-cell {
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+}
+
+.jk-article .kb-status-box {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  flex-wrap: nowrap !important;
+  white-space: nowrap !important;
+  padding: 10px 12px !important;
+  border-radius: 12px !important;
+}
+
+.jk-article .kb-status-title {
+  margin: 0 !important;
+  padding: 5px 10px !important;
+  border-radius: 999px !important;
+  font-size: 0.9rem !important;
+  line-height: 1.2 !important;
+  white-space: nowrap !important;
+  flex: 0 0 auto !important;
+}
+
+.jk-article .kb-status-text {
+  margin: 0 !important;
+  font-size: 0.9rem !important;
+  line-height: 1.3 !important;
+  white-space: nowrap !important;
+  flex: 1 1 auto !important;
+}
+
+@media (max-width: 1200px) {
+  .jk-article table.kb-table-family {
+    min-width: 1120px !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .jk-article table.kb-table-family {
+    min-width: 980px !important;
+  }
+
+  .jk-article table.kb-table-family tbody td,
+  .jk-article .kb-status-title,
+  .jk-article .kb-status-text {
+    font-size: 0.88rem !important;
+  }
+
+  .jk-article .kb-status-box {
+    gap: 8px !important;
+    padding: 9px 10px !important;
+  }
+}
+
 
 .jk-article table.kb-table-family tbody td {
   font-size: 0.96rem !important;
