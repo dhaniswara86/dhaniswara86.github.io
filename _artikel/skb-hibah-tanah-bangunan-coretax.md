@@ -2,8 +2,8 @@
 layout: artikel-editorial
 
 title: "SKB PPh Hibah Tanah dan Bangunan: Syarat, Coretax, dan NPWP Istri Gabung Suami"
-hero_title: "SKB PPh Hibah Tanah dan Bangunan."
-hero_accent: "Cek penerima hibah, kepatuhan, dan data Coretax sebelum mengajukan."
+hero_title: "Surat Keterangan Bebas PPh."
+hero_accent: "Hibah Tanah dan/atau Bangunan."
 
 excerpt: "Hibah tanah dan bangunan tidak otomatis bebas PPh. Pengecualian hanya berlaku jika memenuhi ketentuan, dan untuk pengalihan tanah/bangunan dibuktikan melalui SKB PPh."
 description: "Panduan terbaru mengenai SKB PPh atas hibah tanah dan bangunan, pihak yang memenuhi syarat, dokumen, persyaratan Surat Keterangan Fiskal, pengajuan melalui Coretax, serta catatan khusus NPWP istri yang digabung dengan suami."
@@ -53,7 +53,7 @@ hero_stats:
 sidebar_note: "Bedakan antara ketentuan material hibah sebagai bukan objek PPh dan prosedur memperoleh SKB PPh atas pengalihan tanah/bangunan. Untuk kondisi khusus di Coretax, pastikan data identitas dan Data Unit Keluarga sudah sesuai."
 
 custom_css:
-  - /assets/css/jasakonstruksi.css?v=20260813-2
+  - /assets/css/jasakonstruksi.css?v=20260813-3
 ---
 
 <div class="jk-article">
@@ -146,6 +146,88 @@ custom_css:
 .jk-article table.kb-table tbody td:first-child {
   color: #252529 !important;
   font-weight: 700 !important;
+}
+
+
+/* =========================================================
+   WARNA STATUS & UKURAN FONT SERAGAM — KHUSUS MATRIKS KELUARGA
+   ========================================================= */
+
+.jk-article table.kb-table-family tbody td {
+  font-size: 0.96rem !important;
+  line-height: 1.45 !important;
+  font-weight: 500 !important;
+}
+
+.jk-article table.kb-table-family tbody td * {
+  font-size: inherit !important;
+  line-height: inherit !important;
+}
+
+.jk-article table.kb-table-family tbody td strong {
+  font-size: inherit !important;
+  font-weight: 700 !important;
+}
+
+.jk-article table.kb-table-family tbody td:nth-child(3) {
+  text-align: center !important;
+}
+
+.jk-article .kb-status-cell {
+  padding-top: 14px !important;
+  padding-bottom: 14px !important;
+}
+
+.jk-article .kb-status-box {
+  display: block;
+  border-radius: 14px;
+  padding: 12px 14px;
+  border: 1px solid transparent;
+}
+
+.jk-article .kb-status-title {
+  display: inline-block;
+  margin: 0 0 6px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: inherit !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.02em;
+}
+
+.jk-article .kb-status-text {
+  display: block;
+  margin: 0;
+  font-size: inherit !important;
+  font-weight: 600 !important;
+}
+
+.jk-article .kb-status-ok .kb-status-box {
+  background: linear-gradient(135deg, #ecfdf5 0%, #eff6ff 100%);
+  border-color: #bfdbfe;
+}
+
+.jk-article .kb-status-ok .kb-status-title {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.jk-article .kb-status-ok .kb-status-text {
+  color: #1d4ed8;
+}
+
+.jk-article .kb-status-no .kb-status-box {
+  background: #fef2f2;
+  border-color: #fecaca;
+}
+
+.jk-article .kb-status-no .kb-status-title {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.jk-article .kb-status-no .kb-status-text {
+  color: #b91c1c;
 }
 
 /* Matriks hubungan keluarga: kolom hasil dibuat paling lega. */
@@ -384,49 +466,89 @@ custom_css:
           <td data-label="Pemberi">Ayah/Ibu</td>
           <td data-label="Penerima">Anak kandung</td>
           <td data-label="Hubungan">Garis lurus 1 derajat</td>
-          <td data-label="Fasilitas"><strong>Ya, dapat memenuhi kategori</strong></td>
+          <td data-label="Fasilitas" class="kb-status-cell kb-status-ok">
+            <span class="kb-status-box">
+              <span class="kb-status-title">Memenuhi</span>
+              <span class="kb-status-text">Ya, dapat memenuhi kategori</span>
+            </span>
+          </td>
         </tr>
         <tr>
           <td data-label="Pemberi">Anak kandung</td>
           <td data-label="Penerima">Ayah/Ibu</td>
           <td data-label="Hubungan">Garis lurus 1 derajat</td>
-          <td data-label="Fasilitas"><strong>Ya, dapat memenuhi kategori</strong></td>
+          <td data-label="Fasilitas" class="kb-status-cell kb-status-ok">
+            <span class="kb-status-box">
+              <span class="kb-status-title">Memenuhi</span>
+              <span class="kb-status-text">Ya, dapat memenuhi kategori</span>
+            </span>
+          </td>
         </tr>
         <tr>
           <td data-label="Pemberi">Kakek/Nenek</td>
           <td data-label="Penerima">Cucu</td>
           <td data-label="Hubungan">Garis lurus 2 derajat</td>
-          <td data-label="Fasilitas">Tidak berdasarkan kategori keluarga ini</td>
+          <td data-label="Fasilitas" class="kb-status-cell kb-status-no">
+            <span class="kb-status-box">
+              <span class="kb-status-title">Tidak memenuhi</span>
+              <span class="kb-status-text">Tidak berdasarkan kategori keluarga ini</span>
+            </span>
+          </td>
         </tr>
         <tr>
           <td data-label="Pemberi">Kakak</td>
           <td data-label="Penerima">Adik</td>
           <td data-label="Hubungan">Garis menyamping</td>
-          <td data-label="Fasilitas">Tidak berdasarkan kategori keluarga ini</td>
+          <td data-label="Fasilitas" class="kb-status-cell kb-status-no">
+            <span class="kb-status-box">
+              <span class="kb-status-title">Tidak memenuhi</span>
+              <span class="kb-status-text">Tidak berdasarkan kategori keluarga ini</span>
+            </span>
+          </td>
         </tr>
         <tr>
           <td data-label="Pemberi">Suami</td>
           <td data-label="Penerima">Istri</td>
           <td data-label="Hubungan">Perkawinan, bukan sedarah</td>
-          <td data-label="Fasilitas">Tidak berdasarkan kategori keluarga ini</td>
+          <td data-label="Fasilitas" class="kb-status-cell kb-status-no">
+            <span class="kb-status-box">
+              <span class="kb-status-title">Tidak memenuhi</span>
+              <span class="kb-status-text">Tidak berdasarkan kategori keluarga ini</span>
+            </span>
+          </td>
         </tr>
         <tr>
           <td data-label="Pemberi">Istri</td>
           <td data-label="Penerima">Suami</td>
           <td data-label="Hubungan">Perkawinan, bukan sedarah</td>
-          <td data-label="Fasilitas">Tidak berdasarkan kategori keluarga ini</td>
+          <td data-label="Fasilitas" class="kb-status-cell kb-status-no">
+            <span class="kb-status-box">
+              <span class="kb-status-title">Tidak memenuhi</span>
+              <span class="kb-status-text">Tidak berdasarkan kategori keluarga ini</span>
+            </span>
+          </td>
         </tr>
         <tr>
           <td data-label="Pemberi">Mertua</td>
           <td data-label="Penerima">Menantu</td>
           <td data-label="Hubungan">Semenda</td>
-          <td data-label="Fasilitas">Tidak berdasarkan kategori keluarga ini</td>
+          <td data-label="Fasilitas" class="kb-status-cell kb-status-no">
+            <span class="kb-status-box">
+              <span class="kb-status-title">Tidak memenuhi</span>
+              <span class="kb-status-text">Tidak berdasarkan kategori keluarga ini</span>
+            </span>
+          </td>
         </tr>
         <tr>
           <td data-label="Pemberi">Paman/Bibi</td>
           <td data-label="Penerima">Keponakan</td>
           <td data-label="Hubungan">Garis menyamping</td>
-          <td data-label="Fasilitas">Tidak berdasarkan kategori keluarga ini</td>
+          <td data-label="Fasilitas" class="kb-status-cell kb-status-no">
+            <span class="kb-status-box">
+              <span class="kb-status-title">Tidak memenuhi</span>
+              <span class="kb-status-text">Tidak berdasarkan kategori keluarga ini</span>
+            </span>
+          </td>
         </tr>
       </tbody>
     </table>
