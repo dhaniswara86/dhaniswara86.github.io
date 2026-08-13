@@ -2,10 +2,10 @@
 layout: artikel-editorial
 
 title: "SKB PPh Hibah Tanah dan Bangunan: Syarat, Coretax, dan NPWP Istri Gabung Suami"
-hero_title: "Surat Keterangan Bebas PPh"
-hero_accent: "Pengalihan Tanah dan/atau Bangunan."
+hero_title: "SKB PPh Hibah Tanah dan Bangunan."
+hero_accent: "Cek penerima hibah, kepatuhan, dan data Coretax sebelum mengajukan."
 
-excerpt: "Cek penerima hibah, kepatuhan, dan data Coretax sebelum mengajukan."
+excerpt: "Hibah tanah dan bangunan tidak otomatis bebas PPh. Pengecualian hanya berlaku jika memenuhi ketentuan, dan untuk pengalihan tanah/bangunan dibuktikan melalui SKB PPh."
 description: "Panduan terbaru mengenai SKB PPh atas hibah tanah dan bangunan, pihak yang memenuhi syarat, dokumen, persyaratan Surat Keterangan Fiskal, pengajuan melalui Coretax, serta catatan khusus NPWP istri yang digabung dengan suami."
 
 category: "PPh"
@@ -45,10 +45,19 @@ sidebar_note: "Bedakan antara ketentuan material hibah sebagai bukan objek PPh d
 
 custom_css:
   - /assets/css/jasakonstruksi.css?v=20260813-6
-  - /assets/css/skb-hibah.css?v=20260813-3
+  - /assets/css/skb-hibah-v9.css?v=20260813-1
 ---
 
 <div class="jk-article">
+
+<figure class="kb-article-visual kb-article-visual-hero">
+  <img
+    src="/assets/img/skb-hibah-hero.webp"
+    alt="Ilustrasi hibah tanah dan bangunan antara orang tua dan anak dengan dokumen SKB PPh, rumah, checklist, dan akses digital"
+    loading="eager"
+    decoding="async">
+</figure>
+
 
 
 
@@ -60,20 +69,20 @@ custom_css:
 
   <p>
     Dalam ketentuan Pajak Penghasilan, keuntungan karena pengalihan harta berupa
-    hibah pada prinsipnya merupakan <b>objek PPh bagi pihak pemberi</b>. Namun, 
-    terdapat pengecualian apabila hibah diberikan kepada pihak tertentu dan
+    hibah pada prinsipnya merupakan objek PPh bagi pihak pemberi. Namun, ketentuan
+    memberikan pengecualian apabila hibah diberikan kepada pihak tertentu dan
     memenuhi persyaratan yang ditetapkan.
   </p>
 
   <p>
-    Khusus harta pengalihan berupa tanah dan/atau bangunan, terdapat
-    administrasi tambahan. Pihak yang memperoleh pengecualian perlu
+    Khusus apabila harta yang dialihkan berupa tanah dan/atau bangunan, terdapat
+    lapisan administrasi tambahan. Pihak yang memperoleh pengecualian perlu
     mendapatkan <strong>Surat Keterangan Bebas Pajak Penghasilan atas penghasilan
     dari pengalihan hak atas tanah dan/atau bangunan</strong>.
   </p>
 
   <div class="jk-callout jk-callout-orange">
-    <strong>Catatan Kabayan:</strong>
+    <strong>Catatan Kabayan</strong>
     <p>
       Jangan hanya bertanya, “Apakah ini hibah?” Pertanyaan yang lebih tepat adalah:
       <strong>siapa pemberi hibah, siapa penerimanya, bagaimana hubungan kedua pihak,
@@ -133,7 +142,7 @@ custom_css:
   </ul>
 
   <p>
-    Selain itu, harus memenuhi syarat: tidak terdapat hubungan dengan usaha,
+    Pada prinsipnya juga dipersyaratkan tidak terdapat hubungan dengan usaha,
     pekerjaan, kepemilikan, atau penguasaan di antara pihak-pihak yang
     bersangkutan, dengan pengecualian tertentu yang secara khusus diatur bagi
     badan keagamaan, badan pendidikan, dan badan sosial.
@@ -401,6 +410,12 @@ custom_css:
   <p>
     Untuk kategori hibah ini, PER-8/PJ/2025 secara eksplisit menyebut
     <strong>Surat Pernyataan Hibah</strong> sebagai lampiran khusus.
+    Jangan menyebut KK atau akta kelahiran sebagai “lampiran wajib berdasarkan
+    Pasal 101 ayat (5) huruf b” apabila tidak terdapat dasar lain yang
+    mewajibkannya.
+  </p>
+
+  <p>
     Namun, dokumen seperti KK, akta kelahiran, sertifikat, SPPT PBB, atau
     dokumen pertanahan dapat tetap relevan sebagai <strong>dokumen pendukung</strong>
     untuk membuktikan hubungan pihak dan kesesuaian objek apabila diperlukan
@@ -693,6 +708,28 @@ custom_css:
     data keluarga telah terintegrasi dalam DUK.
   </p>
 </section>
+
+
+<section class="kb-visual-section" aria-labelledby="kb-visual-topik">
+  <div class="kb-visual-heading">
+    <span class="jk-section-label">Peta visual</span>
+    <h2 id="kb-visual-topik">Elemen Penting dalam Permohonan SKB Hibah</h2>
+    <p>
+      Hubungan keluarga, objek tanah dan/atau bangunan, dokumen SKB, validasi,
+      checklist, akses Coretax, dan proses pengalihan merupakan bagian yang
+      saling berkaitan dalam permohonan.
+    </p>
+  </div>
+
+  <figure class="kb-article-visual kb-article-visual-icons">
+    <img
+      src="/assets/img/skb-hibah-icons.webp"
+      alt="Ikon keluarga, bangunan, SKB, validasi, checklist, Coretax, pengalihan, dan catatan"
+      loading="lazy"
+      decoding="async">
+  </figure>
+</section>
+
 
 <section id="cek-sebelum-ajukan" class="kb-checklist-section">
   <div class="kb-checklist-heading">
