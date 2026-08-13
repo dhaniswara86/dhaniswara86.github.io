@@ -55,8 +55,6 @@ hero_stats:
 
 ## sidebar_note: "Aktivasi akun Coretax istri tidak sama dengan memilih NPWP terpisah. Istri yang kewajiban perpajakannya gabung dengan suami tetap dapat mempunyai akun Coretax sendiri."
 
-custom_css:
-  - /assets/css/jasakonstruksi.css?v=20260813-1
 ---
 <div class="jk-article">
 
