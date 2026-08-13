@@ -132,17 +132,17 @@ custom_css:
   </ul>
 
   <p>
-    Pada prinsipnya juga dipersyaratkan tidak terdapat hubungan dengan usaha,
+    Sepanjang tidak terdapat hubungan dengan usaha,
     pekerjaan, kepemilikan, atau penguasaan di antara pihak-pihak yang
-    bersangkutan, dengan pengecualian tertentu yang secara khusus diatur bagi
-    badan keagamaan, badan pendidikan, dan badan sosial.
+    bersangkutan
   </p>
 
   <div class="jk-callout jk-callout-blue">
-    <strong>Apa arti keluarga sedarah satu derajat?</strong>
+    <strong>Pengecualian</strong>
     <p>
-      Untuk konteks ketentuan hibah ini, keluarga sedarah dalam garis keturunan
-      lurus satu derajat adalah <strong>orang tua kandung dan anak kandung</strong>.
+      Dalam hal terdapat hubungan kepemilikan atau penguasaan, keuntungan karena pengalihan
+      harta hibahan tetap dikecualikan sebagai objek pajak penghasilan sepanjang pihak pemberi
+      dan penerima merupakan badan keagamaan, badan pendidikan, atau badan sosial termasuk yayasan</strong>.
     </p>
   </div>
 </section>
