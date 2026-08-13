@@ -45,7 +45,7 @@ sidebar_note: "Bedakan antara ketentuan material hibah sebagai bukan objek PPh d
 
 custom_css:
   - /assets/css/jasakonstruksi.css?v=20260813-6
-  - /assets/css/skb-hibah-v9.css?v=20260813-1
+  - /assets/css/skb-hibah-v10.css?v=20260813-1
 ---
 
 <div class="jk-article">
@@ -707,27 +707,6 @@ custom_css:
     SKF dalam Coretax dapat merujuk pada kewajiban kepala keluarga sepanjang
     data keluarga telah terintegrasi dalam DUK.
   </p>
-</section>
-
-
-<section class="kb-visual-section" aria-labelledby="kb-visual-topik">
-  <div class="kb-visual-heading">
-    <span class="jk-section-label">Peta visual</span>
-    <h2 id="kb-visual-topik">Elemen Penting dalam Permohonan SKB Hibah</h2>
-    <p>
-      Hubungan keluarga, objek tanah dan/atau bangunan, dokumen SKB, validasi,
-      checklist, akses Coretax, dan proses pengalihan merupakan bagian yang
-      saling berkaitan dalam permohonan.
-    </p>
-  </div>
-
-  <figure class="kb-article-visual kb-article-visual-icons">
-    <img
-      src="/assets/img/skb-hibah-icons.webp"
-      alt="Ikon keluarga, bangunan, SKB, validasi, checklist, Coretax, pengalihan, dan catatan"
-      loading="lazy"
-      decoding="async">
-  </figure>
 </section>
 
 
