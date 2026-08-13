@@ -45,7 +45,7 @@ sidebar_note: "Bedakan antara ketentuan material hibah sebagai bukan objek PPh d
 
 custom_css:
   - /assets/css/jasakonstruksi.css?v=20260813-6
-  - /assets/css/skb-hibah-v11.css?v=20260813-1
+  - /assets/css/skb-hibah-v12.css?v=20260813-1
 ---
 
 <div class="jk-article">
@@ -710,64 +710,73 @@ custom_css:
 </section>
 
 
-<section id="cek-sebelum-ajukan" class="kb-potput-checklist-section">
-  <div class="kb-potput-checklist-heading">
+<section id="cek-sebelum-ajukan" class="kb-ref-checklist-section">
+  <div class="kb-ref-checklist-heading">
     <span class="jk-section-label">Cek mandiri</span>
-    <h2>Checklist Kesiapan Permohonan SKB Hibah</h2>
+    <h2>Checklist Pengajuan SKB PPh Hibah</h2>
     <p>
-      Centang setiap butir sebelum mengirim permohonan. Status checklist
-      tersimpan otomatis pada perangkat yang digunakan.
+      Centang setiap butir sebelum mengirim permohonan. Status checklist tersimpan otomatis
+      pada perangkat yang digunakan.
     </p>
   </div>
 
-  <div class="kb-potput-checklist" data-kb-checklist>
+  <div class="kb-ref-checklist" data-kb-checklist>
 
-    <div class="kb-potput-toolbar">
-      <strong class="kb-potput-count" data-check-count>0 dari 9 butir selesai</strong>
+    <div class="kb-ref-summary">
+      <strong class="kb-ref-count" data-check-count>0 dari 9 butir selesai (0%)</strong>
 
-      <button type="button" class="kb-potput-reset" data-check-reset>
-        <span aria-hidden="true">↻</span>
-        Reset checklist
-      </button>
+      <div class="kb-ref-progress" aria-hidden="true">
+        <span class="kb-ref-progress-bar" data-check-progress style="width:0%"></span>
+      </div>
+
+      <div class="kb-ref-actions">
+        <button type="button" class="kb-ref-btn kb-ref-btn-reset" data-check-reset>
+          Reset checklist
+        </button>
+
+        <button type="button" class="kb-ref-btn kb-ref-btn-print" data-check-print>
+          Cetak checklist
+        </button>
+      </div>
     </div>
 
-    <div class="kb-potput-groups">
+    <div class="kb-ref-groups">
 
-      <section class="kb-potput-group" aria-labelledby="kb-group-a">
-        <h3 id="kb-group-a"><span>A.</span> Kelayakan</h3>
+      <section class="kb-ref-group" aria-labelledby="kb-ref-a">
+        <h3 id="kb-ref-a">A. Kelayakan</h3>
 
-        <div class="kb-potput-items">
-          <article class="kb-potput-item" data-check-id="transaksi">
-            <label class="kb-potput-label">
+        <div class="kb-ref-items">
+          <article class="kb-ref-item" data-check-id="transaksi">
+            <label class="kb-ref-label">
               <input type="checkbox" class="kb-check-input">
-              <span class="kb-potput-box" aria-hidden="true"></span>
-              <span class="kb-potput-text">
+              <span class="kb-ref-box" aria-hidden="true"></span>
+              <span class="kb-ref-text">
                 Transaksi yang dilakukan benar-benar merupakan hibah.
               </span>
             </label>
           </article>
 
-          <article class="kb-potput-item" data-check-id="penerima">
-            <label class="kb-potput-label">
+          <article class="kb-ref-item" data-check-id="penerima">
+            <label class="kb-ref-label">
               <input type="checkbox" class="kb-check-input">
-              <span class="kb-potput-box" aria-hidden="true"></span>
-              <span class="kb-potput-text">
+              <span class="kb-ref-box" aria-hidden="true"></span>
+              <span class="kb-ref-text">
                 Penerima hibah termasuk kategori penerima yang memperoleh pengecualian sesuai ketentuan.
               </span>
             </label>
           </article>
 
-          <article class="kb-potput-item kb-potput-item-conditional" data-check-id="keluarga">
-            <div class="kb-potput-conditional-wrap">
-              <label class="kb-potput-label">
+          <article class="kb-ref-item kb-ref-item-conditional" data-check-id="keluarga">
+            <div class="kb-ref-conditional">
+              <label class="kb-ref-label">
                 <input type="checkbox" class="kb-check-input">
-                <span class="kb-potput-box" aria-hidden="true"></span>
-                <span class="kb-potput-text">
+                <span class="kb-ref-box" aria-hidden="true"></span>
+                <span class="kb-ref-text">
                   Untuk hibah keluarga, hubungan pemberi dan penerima adalah orang tua kandung ↔ anak kandung.
                 </span>
               </label>
 
-              <label class="kb-potput-na">
+              <label class="kb-ref-na">
                 <input type="checkbox" class="kb-na-input">
                 <span>Tidak berlaku</span>
               </label>
@@ -775,6 +784,144 @@ custom_css:
           </article>
         </div>
       </section>
+
+      <section class="kb-ref-group" aria-labelledby="kb-ref-b">
+        <h3 id="kb-ref-b">B. Kepatuhan</h3>
+
+        <div class="kb-ref-items">
+          <article class="kb-ref-item" data-check-id="skf">
+            <label class="kb-ref-label">
+              <input type="checkbox" class="kb-check-input">
+              <span class="kb-ref-box" aria-hidden="true"></span>
+              <span class="kb-ref-text">
+                SPT Tahunan PPh untuk 2 Tahun Pajak terakhir yang telah menjadi kewajiban pemohon telah disampaikan.
+              </span>
+            </label>
+          </article>
+
+          <article class="kb-ref-item" data-check-id="ppn">
+            <label class="kb-ref-label">
+              <input type="checkbox" class="kb-check-input">
+              <span class="kb-ref-box" aria-hidden="true"></span>
+              <span class="kb-ref-text">
+                SPT Masa PPN untuk 3 Masa Pajak terakhir yang telah menjadi kewajiban pemohon telah disampaikan.
+              </span>
+            </label>
+          </article>
+
+          <article class="kb-ref-item" data-check-id="utang">
+            <label class="kb-ref-label">
+              <input type="checkbox" class="kb-check-input">
+              <span class="kb-ref-box" aria-hidden="true"></span>
+              <span class="kb-ref-text">
+                Tidak mempunyai utang pajak, atau seluruh utang pajak telah memperoleh izin mengangsur/menunda pembayaran.
+              </span>
+            </label>
+          </article>
+
+          <article class="kb-ref-item" data-check-id="pidana">
+            <label class="kb-ref-label">
+              <input type="checkbox" class="kb-check-input">
+              <span class="kb-ref-box" aria-hidden="true"></span>
+              <span class="kb-ref-text">
+                Tidak sedang dalam proses penanganan tindak pidana di bidang perpajakan.
+              </span>
+            </label>
+          </article>
+        </div>
+      </section>
+
+      <section class="kb-ref-group" aria-labelledby="kb-ref-c">
+        <h3 id="kb-ref-c">C. Dokumen dan Data</h3>
+
+        <div class="kb-ref-items">
+          <article class="kb-ref-item" data-check-id="identitas">
+            <label class="kb-ref-label">
+              <input type="checkbox" class="kb-check-input">
+              <span class="kb-ref-box" aria-hidden="true"></span>
+              <span class="kb-ref-text">
+                NIK/NPWP dan identitas pemberi serta penerima hibah sudah benar dan konsisten.
+              </span>
+            </label>
+          </article>
+
+          <article class="kb-ref-item" data-check-id="objek">
+            <label class="kb-ref-label">
+              <input type="checkbox" class="kb-check-input">
+              <span class="kb-ref-box" aria-hidden="true"></span>
+              <span class="kb-ref-text">
+                NOP, NIB, alamat, luas tanah/bangunan, dan nilai pengalihan sudah sesuai dengan dokumen.
+              </span>
+            </label>
+          </article>
+
+          <article class="kb-ref-item" data-check-id="pernyataan">
+            <label class="kb-ref-label">
+              <input type="checkbox" class="kb-check-input">
+              <span class="kb-ref-box" aria-hidden="true"></span>
+              <span class="kb-ref-text">
+                Surat Pernyataan Hibah telah disiapkan menggunakan format yang sesuai ketentuan.
+              </span>
+            </label>
+          </article>
+
+          <article class="kb-ref-item" data-check-id="pengalihan">
+            <label class="kb-ref-label">
+              <input type="checkbox" class="kb-check-input">
+              <span class="kb-ref-box" aria-hidden="true"></span>
+              <span class="kb-ref-text">
+                Permohonan telah disiapkan untuk pengalihan tanah dan/atau bangunan yang bersangkutan.
+              </span>
+            </label>
+          </article>
+        </div>
+      </section>
+
+      <section class="kb-ref-group" aria-labelledby="kb-ref-d">
+        <h3 id="kb-ref-d">D. Coretax dan Pengiriman</h3>
+
+        <div class="kb-ref-items">
+          <article class="kb-ref-item kb-ref-item-conditional" data-check-id="istri">
+            <div class="kb-ref-conditional">
+              <label class="kb-ref-label">
+                <input type="checkbox" class="kb-check-input">
+                <span class="kb-ref-box" aria-hidden="true"></span>
+                <span class="kb-ref-text">
+                  Jika terkait istri NPWP gabung suami, Data Unit Keluarga dan akses Coretax sudah sesuai.
+                </span>
+              </label>
+
+              <label class="kb-ref-na">
+                <input type="checkbox" class="kb-na-input">
+                <span>Tidak berlaku</span>
+              </label>
+            </div>
+          </article>
+
+          <article class="kb-ref-item" data-check-id="submit">
+            <label class="kb-ref-label">
+              <input type="checkbox" class="kb-check-input">
+              <span class="kb-ref-box" aria-hidden="true"></span>
+              <span class="kb-ref-text">
+                Seluruh data telah diperiksa kembali sebelum permohonan dikirim melalui Coretax.
+              </span>
+            </label>
+          </article>
+        </div>
+      </section>
+
+    </div>
+
+    <div class="kb-ref-note">
+      <strong>Catatan</strong>
+      <p>
+        Checklist ini merupakan alat bantu pemeriksaan mandiri dan bukan hasil validasi DJP.
+        Pemenuhan akhir tetap mengikuti penelitian sistem/DJP dan ketentuan perpajakan yang berlaku.
+      </p>
+    </div>
+
+  </div>
+</section>
 
       <section class="kb-potput-group" aria-labelledby="kb-group-b">
         <h3 id="kb-group-b"><span>B.</span> Kepatuhan</h3>
@@ -1085,5 +1232,5 @@ custom_css:
 </section>
 
 
-<script src="/assets/js/skb-hibah-checklist-v11.js?v=20260813-1" defer></script>
+<script src="/assets/js/skb-hibah-checklist-v12.js?v=20260813-1" defer></script>
 </div>
