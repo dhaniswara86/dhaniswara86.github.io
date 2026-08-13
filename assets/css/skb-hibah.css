@@ -291,372 +291,82 @@
 }
 
 /* =========================================================
-   CHECKLIST KESIAPAN PERMOHONAN SKB HIBAH
+   VISUAL ARTIKEL — SKB HIBAH
    ========================================================= */
 
-.article-body .kb-checklist-section {
-  margin-top: 44px;
+.article-body .kb-article-visual {
+  margin: 0;
 }
 
-.article-body .kb-checklist-heading {
-  margin-bottom: 20px;
+.article-body .kb-article-visual img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
-.article-body .kb-checklist-heading h2 {
+.article-body .kb-article-visual-hero {
+  margin: 8px 0 34px;
+  overflow: hidden;
+  border: 1px solid #e7e9ed;
+  border-radius: 28px;
+  background: #ffffff;
+  box-shadow: 0 18px 46px rgba(20, 43, 76, 0.07);
+}
+
+.article-body .kb-article-visual-hero img {
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.article-body .kb-visual-section {
+  margin: 46px 0 42px;
+}
+
+.article-body .kb-visual-heading {
+  margin-bottom: 18px;
+}
+
+.article-body .kb-visual-heading h2 {
   margin-bottom: 10px;
 }
 
-.article-body .kb-checklist-heading p {
+.article-body .kb-visual-heading p {
   margin: 0;
   color: #66676c;
 }
 
-.article-body .kb-checklist-card {
+.article-body .kb-article-visual-icons {
   overflow: hidden;
-  border: 1px solid #dedfe3;
-  border-radius: 22px;
+  border: 1px solid #e3e5e9;
+  border-radius: 24px;
   background: #ffffff;
-  box-shadow: 0 16px 38px rgba(20, 43, 76, 0.07);
+  box-shadow: 0 14px 34px rgba(20, 43, 76, 0.05);
 }
 
-.article-body .kb-checklist-summary {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  padding: 24px 26px 18px;
+.article-body .kb-article-visual-icons img {
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
 }
 
-.article-body .kb-checklist-kicker {
-  display: block;
-  margin-bottom: 5px;
-  color: #7a7b80;
-  font-size: 12px;
-  font-weight: 750;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-}
-
-.article-body .kb-checklist-count {
-  display: block;
-  color: #242428;
-  font-size: 20px;
-  line-height: 1.25;
-  font-weight: 750;
-}
-
-.article-body .kb-checklist-status {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 124px;
-  padding: 9px 15px;
-  border-radius: 999px;
-  font-size: 13px;
-  line-height: 1;
-  font-weight: 750;
-  white-space: nowrap;
-}
-
-.article-body .kb-checklist-status.is-pending {
-  background: #fff5df;
-  color: #9a6500;
-}
-
-.article-body .kb-checklist-status.is-ready {
-  background: #e5f6ed;
-  color: #158653;
-}
-
-.article-body .kb-progress {
-  height: 7px;
-  margin: 0 26px;
-  overflow: hidden;
-  border-radius: 999px;
-  background: #edf0f3;
-}
-
-.article-body .kb-progress-bar {
-  display: block;
-  width: 0;
-  height: 100%;
-  border-radius: inherit;
-  background: linear-gradient(90deg, #2878d0 0%, #1aa36f 100%);
-  transition: width 220ms ease;
-}
-
-.article-body .kb-checklist-message {
-  margin: 12px 26px 20px !important;
-  color: #77787d !important;
-  font-size: 13px !important;
-  line-height: 1.45 !important;
-}
-
-.article-body .kb-checklist-list {
-  border-top: 1px solid #e4e5e8;
-}
-
-.article-body .kb-check-item {
-  position: relative;
-  margin: 0;
-  padding: 0;
-  border-bottom: 1px solid #e4e5e8;
-  background: #ffffff;
-  transition:
-    background-color 160ms ease,
-    opacity 160ms ease;
-}
-
-.article-body .kb-check-item:last-child {
-  border-bottom: 0;
-}
-
-.article-body .kb-check-item.is-checked {
-  background: #f5fbf8;
-}
-
-.article-body .kb-check-item.is-na {
-  background: #fafafa;
-}
-
-.article-body .kb-check-main-wrap {
-  position: relative;
-}
-
-.article-body .kb-check-main {
-  display: grid;
-  grid-template-columns: 24px minmax(0, 1fr);
-  gap: 14px;
-  align-items: flex-start;
-  margin: 0;
-  padding: 20px 26px;
-  cursor: pointer;
-}
-
-.article-body .kb-check-item-conditional .kb-check-main {
-  padding-right: 150px;
-}
-
-.article-body .kb-check-input,
-.article-body .kb-na-input {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.article-body .kb-check-box {
-  position: relative;
-  display: block;
-  width: 22px;
-  height: 22px;
-  margin-top: 1px;
-  border: 1.5px solid #b8bbc1;
-  border-radius: 7px;
-  background: #ffffff;
-  transition:
-    border-color 150ms ease,
-    background-color 150ms ease,
-    transform 150ms ease;
-}
-
-.article-body .kb-check-main:hover .kb-check-box {
-  border-color: #2878d0;
-}
-
-.article-body .kb-check-input:checked + .kb-check-box {
-  border-color: #16895c;
-  background: #16895c;
-}
-
-.article-body .kb-check-input:checked + .kb-check-box::after {
-  content: "";
-  position: absolute;
-  left: 6px;
-  top: 3px;
-  width: 6px;
-  height: 11px;
-  border: solid #ffffff;
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
-}
-
-.article-body .kb-check-input:focus-visible + .kb-check-box {
-  outline: 3px solid rgba(40, 120, 208, 0.18);
-  outline-offset: 3px;
-}
-
-.article-body .kb-check-copy {
-  min-width: 0;
-}
-
-.article-body .kb-check-copy strong {
-  display: block;
-  margin: 0 0 5px;
-  color: #29292d;
-  font-size: 15px;
-  line-height: 1.35;
-  font-weight: 700;
-}
-
-.article-body .kb-check-copy > span {
-  display: block;
-  color: #6d6e73;
-  font-size: 13px;
-  line-height: 1.5;
-}
-
-.article-body .kb-check-item.is-checked .kb-check-copy strong {
-  color: #126d4b;
-}
-
-.article-body .kb-check-item.is-na .kb-check-copy {
-  opacity: 0.58;
-}
-
-.article-body .kb-na-control {
-  position: absolute;
-  right: 24px;
-  top: 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transform: translateY(-50%);
-  margin: 0;
-  padding: 7px 11px;
-  border: 1px solid #d8d9dd;
-  border-radius: 999px;
-  background: #ffffff;
-  color: #74757a;
-  font-size: 12px;
-  line-height: 1;
-  font-weight: 650;
-  cursor: pointer;
-  user-select: none;
-}
-
-.article-body .kb-na-control:hover {
-  border-color: #bfc1c6;
-  background: #f7f7f8;
-}
-
-.article-body .kb-na-control:has(.kb-na-input:checked) {
-  border-color: #ccd0d5;
-  background: #eef0f2;
-  color: #55565b;
-}
-
-.article-body .kb-checklist-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  padding: 20px 26px 24px;
-  border-top: 1px solid #e4e5e8;
-  background: #fbfbfc;
-}
-
-.article-body .kb-checklist-disclaimer {
-  display: grid;
-  gap: 3px;
-  max-width: 720px;
-}
-
-.article-body .kb-checklist-disclaimer strong {
-  color: #4b4c51;
-  font-size: 12px;
-  font-weight: 750;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.article-body .kb-checklist-disclaimer span {
-  color: #77787d;
-  font-size: 12px;
-  line-height: 1.5;
-}
-
-.article-body .kb-checklist-reset {
-  flex: 0 0 auto;
-  appearance: none;
-  border: 1px solid #d6d8dc;
-  border-radius: 12px;
-  background: #ffffff;
-  color: #4c4d52;
-  padding: 10px 14px;
-  font: inherit;
-  font-size: 13px;
-  font-weight: 650;
-  cursor: pointer;
-}
-
-.article-body .kb-checklist-reset:hover {
-  border-color: #bdc0c5;
-  background: #f5f6f7;
-}
-
-@media (max-width: 700px) {
-  .article-body .kb-checklist-summary {
-    align-items: flex-start;
-    padding: 20px 18px 16px;
+@media (max-width: 760px) {
+  .article-body .kb-article-visual-hero {
+    margin: 4px 0 28px;
+    border-radius: 20px;
   }
 
-  .article-body .kb-checklist-count {
-    font-size: 17px;
+  .article-body .kb-visual-section {
+    margin: 38px 0 34px;
   }
 
-  .article-body .kb-checklist-status {
-    min-width: 0;
-    padding: 8px 11px;
-    font-size: 12px;
-  }
-
-  .article-body .kb-progress {
-    margin: 0 18px;
-  }
-
-  .article-body .kb-checklist-message {
-    margin: 10px 18px 17px !important;
-  }
-
-  .article-body .kb-check-main {
-    padding: 18px;
-  }
-
-  .article-body .kb-check-item-conditional .kb-check-main {
-    padding-right: 18px;
-    padding-bottom: 54px;
-  }
-
-  .article-body .kb-na-control {
-    right: auto;
-    left: 56px;
-    top: auto;
-    bottom: 14px;
-    transform: none;
-  }
-
-  .article-body .kb-checklist-footer {
-    align-items: stretch;
-    flex-direction: column;
-    gap: 16px;
-    padding: 18px;
-  }
-
-  .article-body .kb-checklist-reset {
-    width: 100%;
+  .article-body .kb-article-visual-icons {
+    border-radius: 18px;
   }
 }
 
 @media print {
-  .article-body .kb-checklist-card {
-    box-shadow: none;
-  }
-
-  .article-body .kb-checklist-reset {
-    display: none !important;
+  .article-body .kb-article-visual-hero,
+  .article-body .kb-article-visual-icons {
+    box-shadow: none !important;
   }
 }
 
