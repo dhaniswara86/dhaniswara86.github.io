@@ -1,7 +1,7 @@
 (() => {
   "use strict";
 
-  const STORAGE_KEY = "kabayan-skb-hibah-checklist-v1";
+  const STORAGE_KEY = "kabayan-skb-hibah-checklist-v11";
 
   function safeParse(value) {
     try {
@@ -12,14 +12,11 @@
   }
 
   function initChecklist(root) {
-    const items = Array.from(root.querySelectorAll(".kb-check-item"));
+    const items = Array.from(root.querySelectorAll(".kb-potput-item"));
     const countEl = root.querySelector("[data-check-count]");
-    const statusEl = root.querySelector("[data-check-status]");
-    const progressEl = root.querySelector("[data-check-progress]");
-    const messageEl = root.querySelector("[data-check-message]");
     const resetBtn = root.querySelector("[data-check-reset]");
 
-    if (!items.length || !countEl || !statusEl || !progressEl) return;
+    if (!items.length || !countEl) return;
 
     const stored = safeParse(localStorage.getItem(STORAGE_KEY) || "{}");
 
@@ -35,7 +32,6 @@
 
       if (na) {
         na.checked = Boolean(saved.na);
-
         if (na.checked) {
           check.checked = false;
           check.disabled = true;
@@ -81,9 +77,7 @@
 
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-      } catch (_) {
-        // Checklist tetap berjalan apabila penyimpanan browser dibatasi.
-      }
+      } catch (_) {}
     }
 
     function update() {
@@ -105,45 +99,13 @@
         }
       });
 
-      const percent = applicable === 0
-        ? 100
-        : Math.round((complete / applicable) * 100);
-
-      countEl.textContent =
-        `${complete} dari ${applicable} persyaratan terpenuhi`;
-
-      progressEl.style.width = `${percent}%`;
-
-      const ready = applicable > 0 && complete === applicable;
-
-      statusEl.textContent = ready ? "Siap diajukan" : "Belum lengkap";
-      statusEl.classList.toggle("is-ready", ready);
-      statusEl.classList.toggle("is-pending", !ready);
-
-      if (messageEl) {
-        const remaining = applicable - complete;
-
-        if (ready) {
-          messageEl.textContent =
-            "Seluruh persyaratan yang relevan sudah Anda konfirmasi. Lakukan pemeriksaan akhir sebelum mengirim permohonan.";
-        } else if (remaining === 1) {
-          messageEl.textContent =
-            "Masih ada 1 persyaratan yang belum Anda konfirmasi.";
-        } else {
-          messageEl.textContent =
-            `Masih ada ${remaining} persyaratan yang belum Anda konfirmasi.`;
-        }
-      }
-
+      countEl.textContent = `${complete} dari ${applicable} butir selesai`;
       saveState();
     }
 
     if (resetBtn) {
       resetBtn.addEventListener("click", () => {
-        const confirmed = window.confirm(
-          "Kosongkan seluruh checklist kesiapan permohonan?"
-        );
-
+        const confirmed = window.confirm("Reset seluruh checklist?");
         if (!confirmed) return;
 
         items.forEach((item) => {
@@ -154,7 +116,6 @@
             check.checked = false;
             check.disabled = false;
           }
-
           if (na) na.checked = false;
         });
 
