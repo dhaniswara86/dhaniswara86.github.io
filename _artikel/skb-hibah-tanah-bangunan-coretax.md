@@ -29,7 +29,7 @@ reading_time: "13 menit baca"
 permalink: /skb-hibah-tanah-bangunan-coretax.html
 
 summary_label: "Ringkasan cepat"
-summary: "Pemberian hibah berupa tanah dan/atau bangunan tidak otomatis dibebaskan dari pengenaan Pajak Penghasilan. Pembebasan tersebut berlaku jika memenuhi persyaratan yang ditetapkan.Khusus untuk penerimaan hibah berupa tanah dan/atau bangunan harus dibuktikan melalui kepemilikan Surat Keterangan Bebas PPh."
+summary: "Pemberian hibah berupa tanah dan/atau bangunan tidak otomatis dibebaskan dari pengenaan Pajak Penghasilan. Pembebasan tersebut berlaku jika memenuhi persyaratan yang ditetapkan. Khusus untuk penerimaan hibah berupa tanah dan/atau bangunan harus dibuktikan melalui kepemilikan Surat Keterangan Bebas PPh."
 
 hero_links:
   - label: "Siapa yang bisa?"
@@ -118,8 +118,8 @@ custom_css:
   <h2>Siapa yang Dapat Memenuhi Ketentuan Hibah?</h2>
 
   <p>
-    Berdasarkan PMK 114 Tahun 2025 dan PER-8/PJ/2025, hibah dapat memperoleh
-    pengecualian apabila diberikan kepada:
+    Berdasarkan Peraturan Menteri Keuangan Nomor 114 Tahun 2025 dan Peraturan Direktur Jenderal Pajak Nomor 
+    PER-8/PJ/2025, hibah dapat memperoleh pengecualian apabila diberikan kepada:
   </p>
 
   <ul class="jk-check-list">
