@@ -2,10 +2,10 @@
 layout: artikel-editorial
 
 title: "SKB PPh Hibah Tanah dan Bangunan: Syarat, Coretax, dan NPWP Istri Gabung Suami"
-hero_title: "SKB PPh Hibah Tanah dan Bangunan."
-hero_accent: "Cek penerima hibah, kepatuhan, dan data Coretax sebelum mengajukan."
+hero_title: "Surat Keterangan Bebas PPh"
+hero_accent: "Pengalihan Hak atas Tanah dan/atau Bangunan."
 
-excerpt: "Hibah tanah dan bangunan tidak otomatis bebas PPh. Pengecualian hanya berlaku jika memenuhi ketentuan, dan untuk pengalihan tanah/bangunan dibuktikan melalui SKB PPh."
+excerpt: "Cek penerima hibah, kepatuhan perpajakan, dan profil data unit keluarga sebelum mengajukan."
 description: "Panduan terbaru mengenai SKB PPh atas hibah tanah dan bangunan, pihak yang memenuhi syarat, dokumen, persyaratan Surat Keterangan Fiskal, pengajuan melalui Coretax, serta catatan khusus NPWP istri yang digabung dengan suami."
 
 category: "PPh"
@@ -25,7 +25,6 @@ author: "Angga Sukma Dhaniswara"
 date: 2026-08-13
 date_modified: 2026-08-13
 reading_time: "13 menit baca"
-legal_basis: "PP 34/2016; PP 55/2022 jo. PP 20/2026; PMK 114/2025; PMK 81/2024 jo. PMK 1/2026; PER-8/PJ/2025"
 
 permalink: /skb-hibah-tanah-bangunan-coretax.html
 
@@ -69,15 +68,14 @@ custom_css:
 
   <p>
     Dalam ketentuan Pajak Penghasilan, keuntungan karena pengalihan harta berupa
-    hibah pada prinsipnya merupakan objek PPh bagi pihak pemberi. Namun, ketentuan
-    memberikan pengecualian apabila hibah diberikan kepada pihak tertentu dan
+    hibah pada prinsipnya merupakan <b>objek PPh bagi pihak pemberi</b>. Namun, terdapat
+    pengecualian apabila hibah diberikan kepada pihak tertentu dan
     memenuhi persyaratan yang ditetapkan.
   </p>
 
   <p>
-    Khusus apabila harta yang dialihkan berupa tanah dan/atau bangunan, terdapat
-    lapisan administrasi tambahan. Pihak yang memperoleh pengecualian perlu
-    mendapatkan <strong>Surat Keterangan Bebas Pajak Penghasilan atas penghasilan
+    Khusus terkait pengalihan harta berupa tanah dan/atau bangunan, terdapat
+    persyaratan administrasi tambahan. Pastikan pihak yang menerima memiliki <strong>Surat Keterangan Bebas Pajak Penghasilan atas penghasilan
     dari pengalihan hak atas tanah dan/atau bangunan</strong>.
   </p>
 
