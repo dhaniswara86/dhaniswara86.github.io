@@ -53,10 +53,152 @@ hero_stats:
 sidebar_note: "Bedakan antara ketentuan material hibah sebagai bukan objek PPh dan prosedur memperoleh SKB PPh atas pengalihan tanah/bangunan. Untuk kondisi khusus di Coretax, pastikan data identitas dan Data Unit Keluarga sudah sesuai."
 
 custom_css:
-  - /assets/css/jasakonstruksi.css?v=20260810-1
+  - /assets/css/jasakonstruksi.css?v=20260813-2
 ---
 
 <div class="jk-article">
+
+<style>
+/* =========================================================
+   TABEL ARTIKEL SKB HIBAH — OVERRIDE KHUSUS
+   Mencegah kolom terlalu sempit, kata pecah per huruf,
+   dan tinggi baris/header yang tidak proporsional.
+   ========================================================= */
+
+.jk-article .kb-table-wrap {
+  width: 100%;
+  margin: 24px 0 30px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  background: #fff;
+}
+
+.jk-article table.kb-table {
+  width: 100% !important;
+  min-width: 0 !important;
+  table-layout: fixed !important;
+  border-collapse: collapse !important;
+  border-spacing: 0 !important;
+  margin: 0 !important;
+}
+
+.jk-article table.kb-table thead {
+  display: table-header-group !important;
+}
+
+.jk-article table.kb-table tbody {
+  display: table-row-group !important;
+}
+
+.jk-article table.kb-table tr {
+  display: table-row !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+.jk-article table.kb-table th,
+.jk-article table.kb-table td {
+  display: table-cell !important;
+  height: auto !important;
+  min-height: 0 !important;
+  padding: 16px 18px !important;
+  vertical-align: top !important;
+  line-height: 1.45 !important;
+  white-space: normal !important;
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
+  hyphens: none !important;
+  border-right: 1px solid #e5e7eb !important;
+  border-bottom: 1px solid #e5e7eb !important;
+}
+
+.jk-article table.kb-table th:last-child,
+.jk-article table.kb-table td:last-child {
+  border-right: 0 !important;
+}
+
+.jk-article table.kb-table tbody tr:last-child td {
+  border-bottom: 0 !important;
+}
+
+.jk-article table.kb-table thead th {
+  background: #111113 !important;
+  color: #fff !important;
+  font-size: 0.88rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.07em !important;
+  text-transform: uppercase !important;
+  text-align: left !important;
+  vertical-align: middle !important;
+  padding-top: 15px !important;
+  padding-bottom: 15px !important;
+}
+
+.jk-article table.kb-table tbody td {
+  background: #fff !important;
+  color: #55565a !important;
+  font-size: 0.98rem !important;
+  font-weight: 400 !important;
+}
+
+.jk-article table.kb-table tbody td:first-child {
+  color: #252529 !important;
+  font-weight: 700 !important;
+}
+
+/* Matriks hubungan keluarga: kolom hasil dibuat paling lega. */
+.jk-article table.kb-table-family col:nth-child(1) { width: 19%; }
+.jk-article table.kb-table-family col:nth-child(2) { width: 21%; }
+.jk-article table.kb-table-family col:nth-child(3) { width: 25%; }
+.jk-article table.kb-table-family col:nth-child(4) { width: 35%; }
+
+/* Tabel kondisi NPWP istri: kolom penjelasan dan tindakan dibuat seimbang. */
+.jk-article table.kb-table-wife col:nth-child(1) { width: 27%; }
+.jk-article table.kb-table-wife col:nth-child(2) { width: 36%; }
+.jk-article table.kb-table-wife col:nth-child(3) { width: 37%; }
+
+/* Tabel dua kolom. */
+.jk-article table.kb-table-two col:nth-child(1) { width: 30%; }
+.jk-article table.kb-table-two col:nth-child(2) { width: 70%; }
+
+/* Tabel hibah vs waris. */
+.jk-article table.kb-table-warisan col:nth-child(1) { width: 22%; }
+.jk-article table.kb-table-warisan col:nth-child(2) { width: 39%; }
+.jk-article table.kb-table-warisan col:nth-child(3) { width: 39%; }
+
+/* Hindari pemecahan kata ekstrem pada kolom-kolom pendek. */
+.jk-article table.kb-table th,
+.jk-article table.kb-table td {
+  overflow-wrap: normal !important;
+}
+
+@media (max-width: 760px) {
+  .jk-article .kb-table-wrap {
+    margin-left: 0;
+    margin-right: 0;
+    border-radius: 15px;
+  }
+
+  /* Di mobile jangan paksa seluruh kolom menyempit.
+     Scroll horizontal lebih mudah dibaca daripada kata pecah. */
+  .jk-article table.kb-table {
+    min-width: 720px !important;
+  }
+
+  .jk-article table.kb-table th,
+  .jk-article table.kb-table td {
+    padding: 14px 15px !important;
+    font-size: 0.93rem !important;
+  }
+
+  .jk-article table.kb-table thead th {
+    font-size: 0.8rem !important;
+  }
+}
+</style>
+
 
 <section id="pengantar">
   <p>
@@ -221,8 +363,14 @@ custom_css:
     </p>
   </div>
 
-  <div class="jk-tariff-table-wrapper">
-    <table class="jk-tariff-table">
+  <div class="jk-tariff-table-wrapper kb-table-wrap">
+    <table class="jk-tariff-table kb-table kb-table-family">
+      <colgroup>
+        <col style="width:19%;">
+        <col style="width:21%;">
+        <col style="width:25%;">
+        <col style="width:35%;">
+      </colgroup>
       <thead>
         <tr>
           <th>Pemberi</th>
@@ -378,8 +526,12 @@ custom_css:
     persyaratan untuk diberikan Surat Keterangan Fiskal sebagaimana Pasal 4.
   </p>
 
-  <div class="jk-tariff-table-wrapper">
-    <table class="jk-tariff-table">
+  <div class="jk-tariff-table-wrapper kb-table-wrap">
+    <table class="jk-tariff-table kb-table kb-table-two">
+      <colgroup>
+        <col style="width:30%;">
+        <col style="width:70%;">
+      </colgroup>
       <thead>
         <tr>
           <th>Pemeriksaan</th>
@@ -580,8 +732,13 @@ custom_css:
     <strong>Nonaktif</strong>, bergantung pada riwayat registrasi perpajakannya.
   </p>
 
-  <div class="jk-tariff-table-wrapper">
-    <table class="jk-tariff-table">
+  <div class="jk-tariff-table-wrapper kb-table-wrap">
+    <table class="jk-tariff-table kb-table kb-table-wife">
+      <colgroup>
+        <col style="width:27%;">
+        <col style="width:36%;">
+        <col style="width:37%;">
+      </colgroup>
       <thead>
         <tr>
           <th>Kondisi istri</th>
@@ -696,8 +853,13 @@ custom_css:
 <section id="waris">
   <h2>Hibah dan Waris Jangan Disamakan</h2>
 
-  <div class="jk-tariff-table-wrapper">
-    <table class="jk-tariff-table">
+  <div class="jk-tariff-table-wrapper kb-table-wrap">
+    <table class="jk-tariff-table kb-table kb-table-warisan">
+      <colgroup>
+        <col style="width:22%;">
+        <col style="width:39%;">
+        <col style="width:39%;">
+      </colgroup>
       <thead>
         <tr>
           <th>Aspek</th>
@@ -758,8 +920,12 @@ custom_css:
 <section id="cek-sebelum-ajukan">
   <h2>Cek Sebelum Mengajukan</h2>
 
-  <div class="jk-tariff-table-wrapper">
-    <table class="jk-tariff-table">
+  <div class="jk-tariff-table-wrapper kb-table-wrap">
+    <table class="jk-tariff-table kb-table kb-table-two">
+      <colgroup>
+        <col style="width:30%;">
+        <col style="width:70%;">
+      </colgroup>
       <thead>
         <tr>
           <th>Yang dicek</th>
