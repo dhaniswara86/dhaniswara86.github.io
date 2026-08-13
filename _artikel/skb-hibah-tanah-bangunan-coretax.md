@@ -29,7 +29,7 @@ reading_time: "13 menit baca"
 permalink: /skb-hibah-tanah-bangunan-coretax.html
 
 summary_label: "Ringkasan cepat"
-summary: "Pemberian hibah atas tanah dan/atau bangunan tidak otomatis dibebaskan dari Pajak Penghasilan. Pengecualian hanya berlaku jika memenuhi ketentuan yang dipersyaratkan, dan khusus untuk penerimaan hibah berupa tanah dan/atau bangunan harus dibuktikan melalui kepemilikan Surat Keterangan Bebas PPh."
+summary: "Pemberian hibah berupa tanah dan/atau bangunan tidak otomatis dibebaskan dari pengenaan Pajak Penghasilan. Pembebasan tersebut berlaku jika memenuhi persyaratan yang ditetapkan.Khusus untuk penerimaan hibah berupa tanah dan/atau bangunan harus dibuktikan melalui kepemilikan Surat Keterangan Bebas PPh."
 
 hero_links:
   - label: "Siapa yang bisa?"
@@ -59,14 +59,14 @@ custom_css:
 
 <section id="pengantar">
   <p>
-    Hibah tanah atau bangunan sering dianggap otomatis bebas Pajak Penghasilan karena
+    Hibah tanah dan/atau bangunan sering dianggap otomatis bebas Pajak Penghasilan karena
     tidak ada transaksi jual beli. Anggapan ini perlu diluruskan.
   </p>
 
   <p>
     Dalam ketentuan Pajak Penghasilan, keuntungan karena pengalihan harta berupa
     hibah pada prinsipnya merupakan <b>objek PPh bagi pihak pemberi</b>. Namun, terdapat
-    pengecualian apabila hibah diberikan kepada pihak tertentu dan
+    pengecualian jika hibah diberikan kepada pihak tertentu dan
     memenuhi persyaratan yang ditetapkan.
   </p>
 
@@ -94,13 +94,8 @@ custom_css:
       <h3>Sisi pemberi hibah</h3>
       <p>
         Keuntungan karena pengalihan harta berupa hibah pada prinsipnya merupakan
-        objek PPh. PMK 114 Tahun 2025 memberikan pengecualian apabila penerima
-        hibah termasuk pihak yang ditentukan dan syarat hubungan transaksi dipenuhi.
-      </p>
-      <p>
-        Untuk pengalihan berupa tanah dan/atau bangunan, mekanisme PPh-nya
-        mengikuti ketentuan khusus PPh atas pengalihan hak atas tanah dan/atau
-        bangunan.
+        objek PPh. PMK 114 Tahun 2025 memberikan pengecualian jika penerima
+        hibah merupakan pihak yang memenuhin ketentuan dan syarat hubungan transaksi terpenuhi.
       </p>
     </article>
 
@@ -113,7 +108,7 @@ custom_css:
       </p>
       <p>
         Karena itu, status “bukan objek PPh bagi penerima” dan “SKB PPh atas
-        pengalihan tanah/bangunan” perlu dianalisis secara terpisah.
+        pengalihan tanah/bangunan” perlu penelaahan lebih lanjut.
       </p>
     </article>
   </div>
