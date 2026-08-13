@@ -2,8 +2,8 @@
 layout: artikel-editorial
 
 title: "SKB PPh Hibah Tanah dan Bangunan: Syarat, Coretax, dan NPWP Istri Gabung Suami"
-hero_title: "Surat Keterangan Bebas PPh"
-hero_accent: "Pengalihan Hak atas Tanah dan/atau Bangunan."
+hero_title: "Aspek Perpajakan Hibah"
+hero_accent: "Tanah dan/atau Bangunan."
 
 excerpt: "Cek penerima hibah, kepatuhan perpajakan, dan profil data unit keluarga sebelum mengajukan."
 description: "Panduan terbaru mengenai SKB PPh atas hibah tanah dan bangunan, pihak yang memenuhi syarat, dokumen, persyaratan Surat Keterangan Fiskal, pengajuan melalui Coretax, serta catatan khusus NPWP istri yang digabung dengan suami."
