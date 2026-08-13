@@ -39,7 +39,7 @@ hero_links:
     href: "#presentasi-role-akses"
 
 hero_stats:
-  - value: "34"
+  - value: "35"
     label: "Role dalam direktori artikel"
   - value: "Drafter"
     label: "Menyiapkan konsep dokumen"
@@ -51,13 +51,43 @@ hero_stats:
 sidebar_note: "Artikel ini berfokus pada pemahaman fungsi dan permasalahan role akses. Tampilan dan alur Coretax dapat mengalami perubahan."
 
 custom_css:
-  - /assets/css/roleakses-v2.css?v=20260810-1
+  - /assets/css/roleakses-v2.css?v=20260814-1
 
 custom_js:
-  - /assets/js/roleakses-v3.js
+  - /assets/js/roleakses-v3.js?v=20260814-1
 ---
 
 <div class="role-article">
+<style>
+.role-inline-figure {
+  margin: 24px 0 30px;
+}
+
+.role-inline-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 18px;
+}
+
+.role-inline-figure figcaption {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  opacity: 0.78;
+}
+
+.role-access-table th:nth-child(2),
+.role-access-table td:nth-child(2) {
+  width: 38%;
+}
+
+.role-access-table th:nth-child(3),
+.role-access-table td:nth-child(3) {
+  width: 62%;
+}
+</style>
+
 <section id="pengantar">
 
 <p>
@@ -217,6 +247,18 @@ custom_js:
                 memang masih aktif, mempunyai hubungan yang sah
                 dengan badan, dan memahami tanggung jawabnya.
               </p>
+<p>
+                Berikut adalah langkah untuk mengetahui orang yang
+                bertindak sebagai PIC.
+              </p>
+<figure class="role-inline-figure">
+<img alt="Langkah melihat pihak yang bertindak sebagai PIC pada menu Pihak Terkait di Coretax" loading="lazy" src="/assets/img/LetakPIC.webp"/>
+<figcaption>
+                  Letak informasi pihak yang bertindak sebagai PIC atau
+                  Penanggung Jawab dapat diperiksa melalui
+                  <strong>Portal Saya → Profil Saya → Pihak Terkait</strong>.
+                </figcaption>
+</figure>
 <div class="callout callout-orange">
 <strong>Perhatikan data PIC</strong>
 <p>
@@ -342,12 +384,12 @@ custom_js:
 <div class="role-access-controls">
 <div class="role-search-wrapper">
 <label for="roleSearch">Cari role akses</label>
-<input autocomplete="off" id="roleSearch" placeholder="Contoh: eBupot, SPT Masa, pembayaran..." type="search"/>
+<input autocomplete="off" id="roleSearch" placeholder="Contoh: PPh 21/26, hanya induk, eBupot, SPT Masa..." type="search"/>
 </div>
 <div class="role-filter-wrapper">
-<label for="roleCategory">Kelompok role</label>
+<label for="roleCategory">Filter kategori</label>
 <select id="roleCategory">
-<option value="semua">Semua kelompok</option>
+<option value="semua">Semua kategori</option>
 <option value="pelaporan">Pelaporan dan Dokumen</option>
 <option value="pembayaran">Pembayaran dan Pengembalian</option>
 <option value="profil">Profil, Data, dan Status</option>
@@ -357,7 +399,7 @@ custom_js:
 </div>
 </div>
 <div aria-live="polite" class="role-result-info">
-    Menampilkan <strong id="roleVisibleCount">34</strong> role akses
+    Menampilkan <strong id="roleVisibleCount">35</strong> role akses
   </div>
 <!-- Tabel -->
 <div class="role-table-wrapper">
@@ -365,7 +407,6 @@ custom_js:
 <thead>
 <tr>
 <th class="role-number" scope="col">No.</th>
-<th scope="col">Kelompok</th>
 <th scope="col">Role Akses</th>
 <th scope="col">Fungsi Ringkas</th>
 </tr>
@@ -374,11 +415,6 @@ custom_js:
 <!-- PELAPORAN DAN DOKUMEN -->
 <tr data-category="pelaporan">
 <td class="role-number">1</td>
-<td>
-<span class="role-badge badge-pelaporan">
-              Pelaporan dan Dokumen
-            </span>
-</td>
 <td><strong>Drafter SPT Tahunan</strong></td>
 <td>
             Menyiapkan konsep SPT Tahunan beserta induk, lampiran,
@@ -387,11 +423,6 @@ custom_js:
 </tr>
 <tr data-category="pelaporan">
 <td class="role-number">2</td>
-<td>
-<span class="role-badge badge-pelaporan">
-              Pelaporan dan Dokumen
-            </span>
-</td>
 <td><strong>Penandatangan SPT Tahunan</strong></td>
 <td>
             Melakukan penandatanganan dan tindakan final atas SPT Tahunan
@@ -400,11 +431,6 @@ custom_js:
 </tr>
 <tr data-category="pelaporan">
 <td class="role-number">3</td>
-<td>
-<span class="role-badge badge-pelaporan">
-              Pelaporan dan Dokumen
-            </span>
-</td>
 <td><strong>Drafter SPT Masa PPh Pasal 21/26</strong></td>
 <td>
             Menyiapkan konsep pelaporan SPT Masa PPh Pasal 21/26 untuk
@@ -413,11 +439,6 @@ custom_js:
 </tr>
 <tr data-category="pelaporan">
 <td class="role-number">4</td>
-<td>
-<span class="role-badge badge-pelaporan">
-              Pelaporan dan Dokumen
-            </span>
-</td>
 <td><strong>Penandatangan SPT Masa PPh Pasal 21/26</strong></td>
 <td>
             Menandatangani dan menyampaikan SPT Masa PPh Pasal 21/26.
@@ -426,22 +447,22 @@ custom_js:
 <tr data-category="pelaporan">
 <td class="role-number">5</td>
 <td>
-<span class="role-badge badge-pelaporan">
-              Pelaporan dan Dokumen
-            </span>
+<strong>Penandatangan SPT Masa PPh Pasal 21/26 (Hanya Induk)</strong>
 </td>
+<td>
+            Menandatangani dan menyampaikan SPT Masa PPh Pasal 21/26
+            pada Wajib Pajak induk.
+          </td>
+</tr>
+<tr data-category="pelaporan">
+<td class="role-number">6</td>
 <td><strong>Drafter eBupot PPh Masa Pasal 21/26</strong></td>
 <td>
             Membuat dan mengisi konsep bukti pemotongan PPh Pasal 21/26.
           </td>
 </tr>
 <tr data-category="pelaporan">
-<td class="role-number">6</td>
-<td>
-<span class="role-badge badge-pelaporan">
-              Pelaporan dan Dokumen
-            </span>
-</td>
+<td class="role-number">7</td>
 <td>
 <strong>Penandatangan eBupot PPh Masa Pasal 21/26</strong>
 </td>
@@ -451,12 +472,7 @@ custom_js:
           </td>
 </tr>
 <tr data-category="pelaporan">
-<td class="role-number">7</td>
-<td>
-<span class="role-badge badge-pelaporan">
-              Pelaporan dan Dokumen
-            </span>
-</td>
+<td class="role-number">8</td>
 <td><strong>Drafter eBupot Unifikasi</strong></td>
 <td>
             Menyiapkan konsep bukti pemotongan atau pemungutan PPh
@@ -464,12 +480,7 @@ custom_js:
           </td>
 </tr>
 <tr data-category="pelaporan">
-<td class="role-number">8</td>
-<td>
-<span class="role-badge badge-pelaporan">
-              Pelaporan dan Dokumen
-            </span>
-</td>
+<td class="role-number">9</td>
 <td><strong>Penandatangan eBupot Unifikasi</strong></td>
 <td>
             Menandatangani atau menerbitkan bukti pemotongan dan
@@ -477,12 +488,7 @@ custom_js:
           </td>
 </tr>
 <tr data-category="pelaporan">
-<td class="role-number">9</td>
-<td>
-<span class="role-badge badge-pelaporan">
-              Pelaporan dan Dokumen
-            </span>
-</td>
+<td class="role-number">10</td>
 <td>
 <strong>
               Drafter SPT Masa selain SPT Masa PPh Pasal 21/26
@@ -494,12 +500,7 @@ custom_js:
           </td>
 </tr>
 <tr data-category="pelaporan">
-<td class="role-number">10</td>
-<td>
-<span class="role-badge badge-pelaporan">
-              Pelaporan dan Dokumen
-            </span>
-</td>
+<td class="role-number">11</td>
 <td>
 <strong>
               Penandatangan SPT Masa selain SPT Masa PPh Pasal 21/26
@@ -511,12 +512,7 @@ custom_js:
           </td>
 </tr>
 <tr data-category="pelaporan">
-<td class="role-number">11</td>
-<td>
-<span class="role-badge badge-pelaporan">
-              Pelaporan dan Dokumen
-            </span>
-</td>
+<td class="role-number">12</td>
 <td><strong>Drafter SPT Masa Bea Meterai</strong></td>
 <td>
             Menyiapkan konsep SPT Masa Bea Meterai bagi pemungut
@@ -524,24 +520,14 @@ custom_js:
           </td>
 </tr>
 <tr data-category="pelaporan">
-<td class="role-number">12</td>
-<td>
-<span class="role-badge badge-pelaporan">
-              Pelaporan dan Dokumen
-            </span>
-</td>
+<td class="role-number">13</td>
 <td><strong>Penandatangan SPT Masa Bea Meterai</strong></td>
 <td>
             Menandatangani dan menyampaikan SPT Masa Bea Meterai.
           </td>
 </tr>
 <tr data-category="pelaporan">
-<td class="role-number">13</td>
-<td>
-<span class="role-badge badge-pelaporan">
-              Pelaporan dan Dokumen
-            </span>
-</td>
+<td class="role-number">14</td>
 <td><strong>Drafter eFaktur Pajak</strong></td>
 <td>
             Membuat konsep faktur pajak, mengisi data transaksi,
@@ -549,12 +535,7 @@ custom_js:
           </td>
 </tr>
 <tr data-category="pelaporan">
-<td class="role-number">14</td>
-<td>
-<span class="role-badge badge-pelaporan">
-              Pelaporan dan Dokumen
-            </span>
-</td>
+<td class="role-number">15</td>
 <td><strong>Penandatangan eFaktur Pajak</strong></td>
 <td>
             Menandatangani, mengunggah, atau menerbitkan faktur pajak
@@ -562,12 +543,7 @@ custom_js:
           </td>
 </tr>
 <tr data-category="pelaporan">
-<td class="role-number">15</td>
-<td>
-<span class="role-badge badge-pelaporan">
-              Pelaporan dan Dokumen
-            </span>
-</td>
+<td class="role-number">16</td>
 <td><strong>Drafter SPT Masa PPh Unifikasi</strong></td>
 <td>
             Menyiapkan konsep SPT Masa PPh Unifikasi berdasarkan
@@ -575,24 +551,14 @@ custom_js:
           </td>
 </tr>
 <tr data-category="pelaporan">
-<td class="role-number">16</td>
-<td>
-<span class="role-badge badge-pelaporan">
-              Pelaporan dan Dokumen
-            </span>
-</td>
+<td class="role-number">17</td>
 <td><strong>Penandatangan SPT Masa PPh Unifikasi</strong></td>
 <td>
             Menandatangani dan menyampaikan SPT Masa PPh Unifikasi.
           </td>
 </tr>
 <tr data-category="pelaporan">
-<td class="role-number">17</td>
-<td>
-<span class="role-badge badge-pelaporan">
-              Pelaporan dan Dokumen
-            </span>
-</td>
+<td class="role-number">18</td>
 <td><strong>Drafter SPT Masa PPN/PPN DM/PPN PUT</strong></td>
 <td>
             Menyiapkan konsep SPT Masa PPN sesuai jenis dan kategori
@@ -601,10 +567,7 @@ custom_js:
 </tr>
 <!-- LAYANAN KHUSUS -->
 <tr data-category="khusus">
-<td class="role-number">18</td>
-<td>
-<span class="role-badge badge-khusus">Layanan Khusus</span>
-</td>
+<td class="role-number">19</td>
 <td>
 <strong>
               PPh DPT atas Penghasilan dari Penghapusan Secara Mutlak
@@ -618,10 +581,7 @@ custom_js:
           </td>
 </tr>
 <tr data-category="khusus">
-<td class="role-number">19</td>
-<td>
-<span class="role-badge badge-khusus">Layanan Khusus</span>
-</td>
+<td class="role-number">20</td>
 <td><strong>Imbalan Bunga</strong></td>
 <td>
             Mengakses layanan yang berkaitan dengan permohonan atau
@@ -630,12 +590,7 @@ custom_js:
 </tr>
 <!-- PEMBAYARAN DAN PENGEMBALIAN -->
 <tr data-category="pembayaran">
-<td class="role-number">20</td>
-<td>
-<span class="role-badge badge-pembayaran">
-              Pembayaran dan Pengembalian
-            </span>
-</td>
+<td class="role-number">21</td>
 <td><strong>Kuasa untuk Modul Pembayaran</strong></td>
 <td>
             Menjalankan fungsi pembayaran pajak atas nama Wajib Pajak
@@ -643,12 +598,7 @@ custom_js:
           </td>
 </tr>
 <tr data-category="pembayaran">
-<td class="role-number">21</td>
-<td>
-<span class="role-badge badge-pembayaran">
-              Pembayaran dan Pengembalian
-            </span>
-</td>
+<td class="role-number">22</td>
 <td><strong>Pemindahbukuan</strong></td>
 <td>
             Mengajukan atau mengelola permohonan pemindahbukuan
@@ -656,12 +606,7 @@ custom_js:
           </td>
 </tr>
 <tr data-category="pembayaran">
-<td class="role-number">22</td>
-<td>
-<span class="role-badge badge-pembayaran">
-              Pembayaran dan Pengembalian
-            </span>
-</td>
+<td class="role-number">23</td>
 <td><strong>Pengembalian</strong></td>
 <td>
             Mengakses layanan terkait permohonan pengembalian pembayaran
@@ -670,12 +615,7 @@ custom_js:
 </tr>
 <!-- PROFIL, DATA, DAN STATUS -->
 <tr data-category="profil">
-<td class="role-number">23</td>
-<td>
-<span class="role-badge badge-profil">
-              Profil, Data, dan Status
-            </span>
-</td>
+<td class="role-number">24</td>
 <td><strong>Perubahan Profil Saya</strong></td>
 <td>
             Mengakses dan memperbarui informasi tertentu pada profil
@@ -683,12 +623,7 @@ custom_js:
           </td>
 </tr>
 <tr data-category="profil">
-<td class="role-number">24</td>
-<td>
-<span class="role-badge badge-profil">
-              Profil, Data, dan Status
-            </span>
-</td>
+<td class="role-number">25</td>
 <td><strong>Perubahan Data</strong></td>
 <td>
             Mengajukan atau mengelola perubahan data administrasi
@@ -696,12 +631,7 @@ custom_js:
           </td>
 </tr>
 <tr data-category="profil">
-<td class="role-number">25</td>
-<td>
-<span class="role-badge badge-profil">
-              Profil, Data, dan Status
-            </span>
-</td>
+<td class="role-number">26</td>
 <td><strong>Penghapusan NPWP atau Pencabutan PKP</strong></td>
 <td>
             Mengakses permohonan penghapusan NPWP atau pencabutan
@@ -709,12 +639,7 @@ custom_js:
           </td>
 </tr>
 <tr data-category="profil">
-<td class="role-number">26</td>
-<td>
-<span class="role-badge badge-profil">
-              Profil, Data, dan Status
-            </span>
-</td>
+<td class="role-number">27</td>
 <td><strong>Status Pemungut PMSE</strong></td>
 <td>
             Mengakses layanan yang berkaitan dengan status pemungut
@@ -722,12 +647,7 @@ custom_js:
           </td>
 </tr>
 <tr data-category="profil">
-<td class="role-number">27</td>
-<td>
-<span class="role-badge badge-profil">
-              Profil, Data, dan Status
-            </span>
-</td>
+<td class="role-number">28</td>
 <td><strong>Perubahan Status: Nonaktif atau Reaktivasi</strong></td>
 <td>
             Mengajukan perubahan status menjadi nonaktif atau
@@ -735,12 +655,7 @@ custom_js:
           </td>
 </tr>
 <tr data-category="profil">
-<td class="role-number">28</td>
-<td>
-<span class="role-badge badge-profil">
-              Profil, Data, dan Status
-            </span>
-</td>
+<td class="role-number">29</td>
 <td>
 <strong>Status Pemotong atau Pemungut PPh atau PPN</strong>
 </td>
@@ -750,12 +665,7 @@ custom_js:
           </td>
 </tr>
 <tr data-category="profil">
-<td class="role-number">29</td>
-<td>
-<span class="role-badge badge-profil">
-              Profil, Data, dan Status
-            </span>
-</td>
+<td class="role-number">30</td>
 <td><strong>Pendaftaran Objek Pajak PBB P5L</strong></td>
 <td>
             Mendaftarkan objek Pajak Bumi dan Bangunan sektor P5L
@@ -763,12 +673,7 @@ custom_js:
           </td>
 </tr>
 <tr data-category="profil">
-<td class="role-number">30</td>
-<td>
-<span class="role-badge badge-profil">
-              Profil, Data, dan Status
-            </span>
-</td>
+<td class="role-number">31</td>
 <td>
 <strong>
               Status Lembaga Keuangan Pelapor atau Nonpelapor
@@ -780,12 +685,7 @@ custom_js:
           </td>
 </tr>
 <tr data-category="profil">
-<td class="role-number">31</td>
-<td>
-<span class="role-badge badge-profil">
-              Profil, Data, dan Status
-            </span>
-</td>
+<td class="role-number">32</td>
 <td><strong>Status Pemungut Bea Meterai</strong></td>
 <td>
             Mengakses layanan yang berkaitan dengan status sebagai
@@ -793,12 +693,7 @@ custom_js:
           </td>
 </tr>
 <tr data-category="profil">
-<td class="role-number">32</td>
-<td>
-<span class="role-badge badge-profil">
-              Profil, Data, dan Status
-            </span>
-</td>
+<td class="role-number">33</td>
 <td><strong>Pengukuhan PKP</strong></td>
 <td>
             Mengakses dan mengajukan permohonan pengukuhan sebagai
@@ -807,12 +702,7 @@ custom_js:
 </tr>
 <!-- LAYANAN WAJIB PAJAK -->
 <tr data-category="layanan">
-<td class="role-number">33</td>
-<td>
-<span class="role-badge badge-layanan">
-              Layanan Wajib Pajak
-            </span>
-</td>
+<td class="role-number">34</td>
 <td><strong>Kuasa untuk Modul Layanan Wajib Pajak</strong></td>
 <td>
             Mengakses dan menjalankan fungsi tertentu dalam modul layanan
@@ -820,12 +710,7 @@ custom_js:
           </td>
 </tr>
 <tr data-category="layanan">
-<td class="role-number">34</td>
-<td>
-<span class="role-badge badge-layanan">
-              Layanan Wajib Pajak
-            </span>
-</td>
+<td class="role-number">35</td>
 <td>
 <strong>
               Kuasa untuk Permohonan Layanan Administrasi dan Edukasi
@@ -842,7 +727,7 @@ custom_js:
 </div>
 <div class="role-empty-state" hidden="" id="roleEmptyState">
 <strong>Role tidak ditemukan.</strong>
-<p>Coba gunakan kata kunci atau kelompok role yang berbeda.</p>
+<p>Coba gunakan kata kunci atau kategori yang berbeda.</p>
 </div>
 <div class="role-access-note">
 <strong>Catatan:</strong>
