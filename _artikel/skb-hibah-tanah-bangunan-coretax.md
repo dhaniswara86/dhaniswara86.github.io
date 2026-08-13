@@ -2,10 +2,10 @@
 layout: artikel-editorial
 
 title: "SKB PPh Hibah Tanah dan Bangunan: Syarat, Coretax, dan NPWP Istri Gabung Suami"
-hero_title: "SKB PPh Hibah Tanah dan Bangunan."
-hero_accent: "Cek penerima hibah, kepatuhan, dan data Coretax sebelum mengajukan."
+hero_title: "Surat Keterangan Bebas PPh"
+hero_accent: "Pengalihan Tanah dan/atau Bangunan."
 
-excerpt: "Hibah tanah dan bangunan tidak otomatis bebas PPh. Pengecualian hanya berlaku jika memenuhi ketentuan, dan untuk pengalihan tanah/bangunan dibuktikan melalui SKB PPh."
+excerpt: "Cek penerima hibah, kepatuhan, dan data Coretax sebelum mengajukan."
 description: "Panduan terbaru mengenai SKB PPh atas hibah tanah dan bangunan, pihak yang memenuhi syarat, dokumen, persyaratan Surat Keterangan Fiskal, pengajuan melalui Coretax, serta catatan khusus NPWP istri yang digabung dengan suami."
 
 category: "PPh"
@@ -60,20 +60,20 @@ custom_css:
 
   <p>
     Dalam ketentuan Pajak Penghasilan, keuntungan karena pengalihan harta berupa
-    hibah pada prinsipnya merupakan objek PPh bagi pihak pemberi. Namun, ketentuan
-    memberikan pengecualian apabila hibah diberikan kepada pihak tertentu dan
+    hibah pada prinsipnya merupakan <b>objek PPh bagi pihak pemberi</b>. Namun, 
+    terdapat pengecualian apabila hibah diberikan kepada pihak tertentu dan
     memenuhi persyaratan yang ditetapkan.
   </p>
 
   <p>
-    Khusus apabila harta yang dialihkan berupa tanah dan/atau bangunan, terdapat
-    lapisan administrasi tambahan. Pihak yang memperoleh pengecualian perlu
+    Khusus harta pengalihan berupa tanah dan/atau bangunan, terdapat
+    administrasi tambahan. Pihak yang memperoleh pengecualian perlu
     mendapatkan <strong>Surat Keterangan Bebas Pajak Penghasilan atas penghasilan
     dari pengalihan hak atas tanah dan/atau bangunan</strong>.
   </p>
 
   <div class="jk-callout jk-callout-orange">
-    <strong>Catatan Kabayan</strong>
+    <strong>Catatan Kabayan:</strong>
     <p>
       Jangan hanya bertanya, “Apakah ini hibah?” Pertanyaan yang lebih tepat adalah:
       <strong>siapa pemberi hibah, siapa penerimanya, bagaimana hubungan kedua pihak,
@@ -133,7 +133,7 @@ custom_css:
   </ul>
 
   <p>
-    Pada prinsipnya juga dipersyaratkan tidak terdapat hubungan dengan usaha,
+    Selain itu, harus memenuhi syarat: tidak terdapat hubungan dengan usaha,
     pekerjaan, kepemilikan, atau penguasaan di antara pihak-pihak yang
     bersangkutan, dengan pengecualian tertentu yang secara khusus diatur bagi
     badan keagamaan, badan pendidikan, dan badan sosial.
@@ -401,12 +401,6 @@ custom_css:
   <p>
     Untuk kategori hibah ini, PER-8/PJ/2025 secara eksplisit menyebut
     <strong>Surat Pernyataan Hibah</strong> sebagai lampiran khusus.
-    Jangan menyebut KK atau akta kelahiran sebagai “lampiran wajib berdasarkan
-    Pasal 101 ayat (5) huruf b” apabila tidak terdapat dasar lain yang
-    mewajibkannya.
-  </p>
-
-  <p>
     Namun, dokumen seperti KK, akta kelahiran, sertifikat, SPPT PBB, atau
     dokumen pertanahan dapat tetap relevan sebagai <strong>dokumen pendukung</strong>
     untuk membuktikan hubungan pihak dan kesesuaian objek apabila diperlukan
