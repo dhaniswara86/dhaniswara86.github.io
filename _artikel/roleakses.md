@@ -5,7 +5,7 @@ title: "Memahami Role Akses Coretax: Siapa Boleh Melakukan Apa?"
 hero_title: "Memahami Role Akses Coretax."
 hero_accent: "Siapa boleh melakukan apa?"
 
-excerpt: "Memahami fungsi role akses Coretax, hubungan dengan impersonate dan PIC, perbedaan drafter dan signer, direktori 34 role, serta berbagai permasalahan akses yang sering terjadi."
+excerpt: "Memahami fungsi role akses Coretax, hubungan dengan impersonate dan PIC, perbedaan drafter dan signer, direktori role, serta berbagai permasalahan akses yang sering terjadi."
 description: "Panduan konseptual untuk memahami role akses, impersonate, PIC, drafter, signer, pembagian kewenangan, direktori role, dan permasalahan akses di Coretax."
 
 category: "Coretax"
@@ -33,7 +33,7 @@ summary: "Role akses bukan sekadar menu teknis. Fitur ini membagi kewenangan ber
 hero_links:
   - label: "Mulai membaca"
     href: "#pengantar"
-  - label: "Daftar 34 role"
+  - label: "Daftar role"
     href: "#daftar-role-akses"
   - label: "Panduan visual"
     href: "#presentasi-role-akses"
