@@ -957,23 +957,15 @@ custom_css:
   </p>
 
   <p>
-    Bagi istri yang kewajiban perpajakannya digabung dengan suami, rapikan
-    terlebih dahulu Data Unit Keluarga dan akses Coretax. Memiliki akun Coretax
-    sendiri tidak otomatis berarti istri memiliki kewajiban perpajakan yang
+    Bagi istri yang kewajiban perpajakannya digabung dengan suami, pastikan namanya
+    telah tercantum dalam Data Unit Keluarga (DUK) Suami. Kepemilikan akun Coretax 
+    tidak berarti istri memiliki kewajiban perpajakan yang
     terpisah dari suami.
   </p>
 </section>
 
 <section id="aturan-terbaru">
-  <h2>Aturan Terbaru yang Perlu Digunakan</h2>
-
-  <p>
-    Untuk memahami SKB PPh atas hibah tanah dan/atau bangunan, ketentuannya
-    perlu dibaca secara berlapis. Aturan material mengenai hibah dan aturan
-    administratif mengenai SKB tidak seluruhnya berada dalam satu peraturan.
-    Klik nama regulasi berikut untuk membuka sumber resminya pada JDIH
-    Kementerian Keuangan.
-  </p>
+  <h2>Aturan Terkait</h2>
 
   <div class="jk-legal-basis">
 
