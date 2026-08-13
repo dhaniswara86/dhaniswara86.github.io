@@ -25,12 +25,12 @@ author: "Angga Sukma Dhaniswara"
 date: 2026-08-13
 date_modified: 2026-08-13
 reading_time: "13 menit baca"
-legal_basis: "PP 34/2016; PMK 114/2025; PER-8/PJ/2025"
+legal_basis: "PP 34/2016; PP 55/2022 jo. PP 20/2026; PMK 114/2025; PMK 81/2024 jo. PMK 1/2026; PER-8/PJ/2025"
 
 permalink: /skb-hibah-tanah-bangunan-coretax.html
 
 summary_label: "Ringkasan cepat"
-summary: "Untuk hibah keluarga, fasilitas tidak berlaku untuk semua hubungan keluarga. Hubungan orang tua kandung dan anak kandung dapat memenuhi kategori keluarga sedarah dalam garis keturunan lurus satu derajat, sepanjang syarat lainnya terpenuhi. Permohonan SKB diajukan untuk setiap pengalihan dan pemohon harus memenuhi persyaratan Surat Keterangan Fiskal."
+summary: "Hibah tanah dan/atau bangunan tidak otomatis bebas Pajak Penghasilan. Pengecualian hanya berlaku jika memenuhi ketentuan, dan untuk pengalihan tanah dan/atau bangunan dibuktikan melalui Surat Keterangan Bebas PPh."
 
 hero_links:
   - label: "Siapa yang bisa?"
@@ -45,7 +45,7 @@ sidebar_note: "Bedakan antara ketentuan material hibah sebagai bukan objek PPh d
 
 custom_css:
   - /assets/css/jasakonstruksi.css?v=20260813-6
-  - /assets/css/skb-hibah.css?v=20260813-2
+  - /assets/css/skb-hibah.css?v=20260813-3
 ---
 
 <div class="jk-article">
@@ -79,62 +79,6 @@ custom_css:
       <strong>siapa pemberi hibah, siapa penerimanya, bagaimana hubungan kedua pihak,
       apakah syarat pengecualian terpenuhi, dan apakah persyaratan SKB telah lengkap?</strong>
     </p>
-  </div>
-</section>
-
-<section id="aturan-terbaru">
-  <h2>Aturan Terbaru yang Perlu Digunakan</h2>
-
-  <p>
-    Untuk memahami SKB hibah tanah dan bangunan pada 2026, ketentuannya perlu
-    dibaca secara berlapis. Aturan material hibah dan aturan administrasi SKB
-    tidak berada dalam satu peraturan yang sama.
-  </p>
-
-  <div class="jk-legal-basis">
-    <div class="jk-legal-item">
-      <span class="jk-legal-number">1</span>
-      <span>
-        <strong>PP Nomor 34 Tahun 2016</strong> — mengatur PPh atas penghasilan
-        dari pengalihan hak atas tanah dan/atau bangunan serta pengecualiannya.
-      </span>
-    </div>
-
-    <div class="jk-legal-item">
-      <span class="jk-legal-number">2</span>
-      <span>
-        <strong>PP Nomor 55 Tahun 2022</strong> — menjadi salah satu dasar
-        pengaturan perlakuan PPh atas hibah dan harta hibahan.
-      </span>
-    </div>
-
-    <div class="jk-legal-item">
-      <span class="jk-legal-number">3</span>
-      <span>
-        <strong>PMK Nomor 114 Tahun 2025</strong> — merupakan ketentuan terbaru
-        mengenai perlakuan atas bantuan, sumbangan, dan harta hibahan dalam PPh.
-        PMK ini mencabut PMK 90/PMK.03/2020.
-      </span>
-    </div>
-
-    <div class="jk-legal-item">
-      <span class="jk-legal-number">4</span>
-      <span>
-        <strong>PMK Nomor 81 Tahun 2024</strong> sebagaimana telah diubah,
-        terakhir dengan <strong>PMK Nomor 1 Tahun 2026</strong> — menjadi
-        payung administrasi perpajakan dalam pelaksanaan Sistem Inti Administrasi
-        Perpajakan/Coretax.
-      </span>
-    </div>
-
-    <div class="jk-legal-item">
-      <span class="jk-legal-number">5</span>
-      <span>
-        <strong>PER-8/PJ/2025</strong> — mengatur secara operasional siapa yang
-        memperoleh pengecualian, syarat permohonan SKB, lampiran, kanal
-        pengajuan, serta jangka waktu penyelesaiannya.
-      </span>
-    </div>
   </div>
 </section>
 
@@ -1046,76 +990,114 @@ custom_css:
   </p>
 </section>
 
-<section id="dasar-hukum">
-  <h2>Dasar Hukum dan Sumber Resmi</h2>
+<section id="aturan-terbaru">
+  <h2>Aturan Terbaru yang Perlu Digunakan</h2>
 
-  <ol>
-    <li>
-      <a href="https://jdih.kemenkeu.go.id/dok/pp-34-tahun-2016" target="_blank" rel="noopener noreferrer">
-        Peraturan Pemerintah Nomor 34 Tahun 2016
-      </a>
-      tentang PPh atas penghasilan dari pengalihan hak atas tanah dan/atau
-      bangunan dan PPJB beserta perubahannya.
-    </li>
+  <p>
+    Untuk memahami SKB PPh atas hibah tanah dan/atau bangunan, ketentuannya
+    perlu dibaca secara berlapis. Aturan material mengenai hibah dan aturan
+    administratif mengenai SKB tidak seluruhnya berada dalam satu peraturan.
+    Klik nama regulasi berikut untuk membuka sumber resminya pada JDIH
+    Kementerian Keuangan.
+  </p>
 
-    <li>
-      <a href="https://jdih.kemenkeu.go.id/dok/pp-55-tahun-2022/view" target="_blank" rel="noopener noreferrer">
-        Peraturan Pemerintah Nomor 55 Tahun 2022
-      </a>
-      tentang Penyesuaian Pengaturan di Bidang Pajak Penghasilan.
-    </li>
+  <div class="jk-legal-basis">
 
-    <li>
-      <a href="https://jdih.kemenkeu.go.id/dok/pmk-114-tahun-2025" target="_blank" rel="noopener noreferrer">
-        Peraturan Menteri Keuangan Nomor 114 Tahun 2025
-      </a>
-      tentang Perlakuan atas Bantuan atau Sumbangan termasuk Zakat atau
-      Sumbangan Keagamaan yang Sifatnya Wajib, serta Harta Hibahan dalam
-      Pajak Penghasilan.
-    </li>
+    <div class="jk-legal-item">
+      <span class="jk-legal-number">1</span>
+      <span>
+        <a href="https://jdih.kemenkeu.go.id/dok/pp-34-tahun-2016"
+           target="_blank"
+           rel="noopener noreferrer">
+          <strong>PP Nomor 34 Tahun 2016</strong>
+        </a>
+        — mengatur PPh atas penghasilan dari pengalihan hak atas tanah
+        dan/atau bangunan, termasuk pengecualian dari kewajiban pembayaran
+        atau pemungutan PPh untuk kondisi tertentu.
+      </span>
+    </div>
 
-    <li>
-      <a href="https://jdih.kemenkeu.go.id/dok/pmk-81-tahun-2024" target="_blank" rel="noopener noreferrer">
-        Peraturan Menteri Keuangan Nomor 81 Tahun 2024
-      </a>
-      tentang Ketentuan Perpajakan dalam Rangka Pelaksanaan Sistem Inti
-      Administrasi Perpajakan, sebagaimana telah diubah terakhir dengan
-      PMK Nomor 1 Tahun 2026.
-    </li>
+    <div class="jk-legal-item">
+      <span class="jk-legal-number">2</span>
+      <span>
+        <a href="https://jdih.kemenkeu.go.id/dok/pp-55-tahun-2022"
+           target="_blank"
+           rel="noopener noreferrer">
+          <strong>PP Nomor 55 Tahun 2022</strong>
+        </a>
+        sebagaimana diubah dengan
+        <a href="https://jdih.kemenkeu.go.id/dok/pp-20-tahun-2026/files"
+           target="_blank"
+           rel="noopener noreferrer">
+          <strong>PP Nomor 20 Tahun 2026</strong>
+        </a>
+        — mengatur penyesuaian ketentuan di bidang Pajak Penghasilan dan
+        menjadi salah satu dasar untuk memahami perlakuan PPh atas hibah.
+      </span>
+    </div>
 
-    <li>
-      <a href="https://jdih.kemenkeu.go.id/dok/per-8pj2025" target="_blank" rel="noopener noreferrer">
-        PER-8/PJ/2025
-      </a>
-      tentang Ketentuan Pemberian Layanan Administrasi Perpajakan Tertentu
-      dalam Rangka Pelaksanaan Sistem Inti Administrasi Perpajakan,
-      khususnya Pasal 100, Pasal 101, dan Pasal 110.
-    </li>
+    <div class="jk-legal-item">
+      <span class="jk-legal-number">3</span>
+      <span>
+        <a href="https://jdih.kemenkeu.go.id/dok/pmk-114-tahun-2025"
+           target="_blank"
+           rel="noopener noreferrer">
+          <strong>PMK Nomor 114 Tahun 2025</strong>
+        </a>
+        — mengatur perlakuan atas bantuan atau sumbangan, termasuk zakat
+        atau sumbangan keagamaan yang sifatnya wajib, serta harta hibahan
+        dalam Pajak Penghasilan.
+      </span>
+    </div>
 
-    <li>
-      <a href="https://pajak.go.id/coretaxpedia/akses-bagi-istri-npwp-gabung-suami" target="_blank" rel="noopener noreferrer">
-        Coretaxpedia DJP — Akses bagi istri NPWP gabung suami
-      </a>.
-    </li>
+    <div class="jk-legal-item">
+      <span class="jk-legal-number">4</span>
+      <span>
+        <a href="https://jdih.kemenkeu.go.id/dok/pmk-81-tahun-2024"
+           target="_blank"
+           rel="noopener noreferrer">
+          <strong>PMK Nomor 81 Tahun 2024</strong>
+        </a>
+        sebagaimana terakhir diubah dengan
+        <a href="https://jdih.kemenkeu.go.id/dok/pmk-1-tahun-2026"
+           target="_blank"
+           rel="noopener noreferrer">
+          <strong>PMK Nomor 1 Tahun 2026</strong>
+        </a>
+        — menjadi payung administrasi perpajakan dalam pelaksanaan Sistem
+        Inti Administrasi Perpajakan/Coretax.
+      </span>
+    </div>
 
-    <li>
-      <a href="https://www.pajak.go.id/coretaxpedia/bagaimana-istri-gabung-npwp-suami" target="_blank" rel="noopener noreferrer">
-        Coretaxpedia DJP — Bagaimana istri gabung NPWP suami
-      </a>.
-    </li>
-  </ol>
+    <div class="jk-legal-item">
+      <span class="jk-legal-number">5</span>
+      <span>
+        <a href="https://jdih.kemenkeu.go.id/dok/per-8pj2025"
+           target="_blank"
+           rel="noopener noreferrer">
+          <strong>PER-8/PJ/2025</strong>
+        </a>
+        — menjadi ketentuan operasional penting mengenai pemberian layanan
+        administrasi perpajakan tertentu dalam Coretax, termasuk persyaratan,
+        dokumen, pengajuan, dan penyelesaian SKB PPh atas pengalihan hak atas
+        tanah dan/atau bangunan.
+      </span>
+    </div>
+
+  </div>
 
   <div class="jk-callout jk-callout-blue">
-    <strong>Catatan sumber</strong>
+    <strong>Bagian yang paling relevan untuk SKB hibah</strong>
     <p>
-      Informasi operasional Coretax dapat berubah mengikuti penyempurnaan
-      sistem. Untuk keputusan perpajakan, prioritaskan peraturan perundang-undangan
-      yang berlaku dan informasi resmi DJP. Artikel/berita yang ditulis pegawai
-      DJP dapat membantu memahami praktik, tetapi tidak menggantikan peraturan.
+      Dalam PER-8/PJ/2025, fokus utama pembahasan SKB hibah tanah dan/atau
+      bangunan terdapat pada ketentuan mengenai pihak yang memperoleh
+      pengecualian, persyaratan permohonan, dokumen pendukung, serta tata cara
+      pengajuan dan penyelesaian SKB. Selalu periksa kembali versi peraturan
+      pada JDIH apabila terdapat perubahan setelah artikel ini diterbitkan.
     </p>
   </div>
 </section>
 
 
-<script src="/assets/js/skb-hibah-checklist.js?v=20260813-1" defer></script>
+<script src="/assets/js/skb-hibah-checklist.js?v=20260813-2" defer></script>
 </div>
