@@ -44,7 +44,7 @@ hero_links:
 sidebar_note: "Bedakan antara ketentuan material hibah sebagai bukan objek PPh dan prosedur memperoleh SKB PPh atas pengalihan tanah/bangunan. Untuk kondisi khusus di Coretax, pastikan data identitas dan Data Unit Keluarga sudah sesuai."
 
 custom_css:
-  - /assets/css/jasakonstruksi.css?v=20260813-4
+  - /assets/css/jasakonstruksi.css?v=20260813-5
 ---
 
 <div class="jk-article">
@@ -372,6 +372,150 @@ custom_css:
     font-size: 0.8rem !important;
   }
 }
+
+
+/* =========================================================
+   V5 — TABEL MATRIKS KELUARGA: CLEAN / FLAT / RAPI
+   Referensi: header abu muda, garis tipis, pill status kecil.
+   ========================================================= */
+
+.jk-article .kb-table-wrap:has(.kb-table-family) {
+  overflow-x: auto !important;
+  border: 1px solid #dedfe3 !important;
+  border-radius: 22px !important;
+  background: #fff !important;
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.06) !important;
+}
+
+.jk-article table.kb-table-family {
+  width: 100% !important;
+  min-width: 980px !important;
+  table-layout: fixed !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+}
+
+.jk-article table.kb-table-family col:nth-child(1) { width: 20% !important; }
+.jk-article table.kb-table-family col:nth-child(2) { width: 20% !important; }
+.jk-article table.kb-table-family col:nth-child(3) { width: 36% !important; }
+.jk-article table.kb-table-family col:nth-child(4) { width: 24% !important; }
+
+.jk-article table.kb-table-family thead th {
+  background: #f4f4f6 !important;
+  color: #414146 !important;
+  font-size: 15px !important;
+  line-height: 1.2 !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  text-align: left !important;
+  white-space: nowrap !important;
+  padding: 20px 24px !important;
+  border-right: 1px solid #dcdde2 !important;
+  border-bottom: 1px solid #dcdde2 !important;
+}
+
+.jk-article table.kb-table-family thead th:last-child {
+  border-right: 0 !important;
+  text-align: center !important;
+}
+
+.jk-article table.kb-table-family tbody td,
+.jk-article table.kb-table-family tbody td:first-child,
+.jk-article table.kb-table-family tbody td:nth-child(3) {
+  background: #fff !important;
+  color: #34343a !important;
+  font-size: 16px !important;
+  line-height: 1.35 !important;
+  font-weight: 500 !important;
+  text-align: left !important;
+  vertical-align: middle !important;
+  white-space: nowrap !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  padding: 20px 24px !important;
+  border-right: 1px solid #dcdde2 !important;
+  border-bottom: 1px solid #dcdde2 !important;
+}
+
+.jk-article table.kb-table-family tbody td:first-child {
+  font-weight: 600 !important;
+}
+
+.jk-article table.kb-table-family tbody td:last-child {
+  border-right: 0 !important;
+  text-align: center !important;
+}
+
+.jk-article table.kb-table-family tbody tr:last-child td {
+  border-bottom: 0 !important;
+}
+
+.jk-article table.kb-table-family tbody tr:nth-child(even) td {
+  background: #fafbfc !important;
+}
+
+.jk-article table.kb-table-family tbody td *,
+.jk-article table.kb-table-family tbody td strong,
+.jk-article table.kb-table-family tbody td span {
+  font-size: inherit !important;
+  line-height: inherit !important;
+}
+
+.jk-article .kb-pill {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 78px !important;
+  padding: 8px 18px !important;
+  border-radius: 999px !important;
+  font-size: 15px !important;
+  line-height: 1 !important;
+  font-weight: 700 !important;
+  white-space: nowrap !important;
+}
+
+.jk-article .kb-pill-yes {
+  background: #e6f6ee !important;
+  color: #148653 !important;
+}
+
+.jk-article .kb-pill-no {
+  background: #fff0eb !important;
+  color: #c43625 !important;
+}
+
+.jk-article .kb-table-note {
+  margin: 12px 2px 0 !important;
+  color: #66676c !important;
+  font-size: 0.9rem !important;
+  line-height: 1.55 !important;
+}
+
+@media (max-width: 760px) {
+  .jk-article table.kb-table-family {
+    min-width: 900px !important;
+  }
+
+  .jk-article table.kb-table-family thead th {
+    font-size: 13px !important;
+    padding: 16px 18px !important;
+  }
+
+  .jk-article table.kb-table-family tbody td,
+  .jk-article table.kb-table-family tbody td:first-child,
+  .jk-article table.kb-table-family tbody td:nth-child(3) {
+    font-size: 15px !important;
+    padding: 16px 18px !important;
+  }
+
+  .jk-article .kb-pill {
+    font-size: 14px !important;
+    min-width: 72px !important;
+    padding: 7px 16px !important;
+  }
+}
+
 </style>
 
 
@@ -551,7 +695,7 @@ custom_css:
           <th>Pemberi</th>
           <th>Penerima</th>
           <th>Hubungan</th>
-          <th>Fasilitas hibah keluarga?</th>
+          <th>Masuk kategori?</th>
         </tr>
       </thead>
       <tbody>
@@ -559,93 +703,60 @@ custom_css:
           <td data-label="Pemberi">Ayah/Ibu</td>
           <td data-label="Penerima">Anak kandung</td>
           <td data-label="Hubungan">Garis lurus 1 derajat</td>
-          <td data-label="Fasilitas" class="kb-status-cell kb-status-ok">
-            <span class="kb-status-box">
-              <span class="kb-status-title">Memenuhi</span>
-              <span class="kb-status-text">Ya, dapat memenuhi kategori</span>
-            </span>
-          </td>
+          <td data-label="Kategori"><span class="kb-pill kb-pill-yes">Ya</span></td>
         </tr>
         <tr>
           <td data-label="Pemberi">Anak kandung</td>
           <td data-label="Penerima">Ayah/Ibu</td>
           <td data-label="Hubungan">Garis lurus 1 derajat</td>
-          <td data-label="Fasilitas" class="kb-status-cell kb-status-ok">
-            <span class="kb-status-box">
-              <span class="kb-status-title">Memenuhi</span>
-              <span class="kb-status-text">Ya, dapat memenuhi kategori</span>
-            </span>
-          </td>
+          <td data-label="Kategori"><span class="kb-pill kb-pill-yes">Ya</span></td>
         </tr>
         <tr>
           <td data-label="Pemberi">Kakek/Nenek</td>
           <td data-label="Penerima">Cucu</td>
           <td data-label="Hubungan">Garis lurus 2 derajat</td>
-          <td data-label="Fasilitas" class="kb-status-cell kb-status-no">
-            <span class="kb-status-box">
-              <span class="kb-status-title">Tidak memenuhi</span>
-              <span class="kb-status-text">Tidak berdasarkan kategori keluarga ini</span>
-            </span>
-          </td>
+          <td data-label="Kategori"><span class="kb-pill kb-pill-no">Tidak</span></td>
         </tr>
         <tr>
           <td data-label="Pemberi">Kakak</td>
           <td data-label="Penerima">Adik</td>
           <td data-label="Hubungan">Garis menyamping</td>
-          <td data-label="Fasilitas" class="kb-status-cell kb-status-no">
-            <span class="kb-status-box">
-              <span class="kb-status-title">Tidak memenuhi</span>
-              <span class="kb-status-text">Tidak berdasarkan kategori keluarga ini</span>
-            </span>
-          </td>
+          <td data-label="Kategori"><span class="kb-pill kb-pill-no">Tidak</span></td>
         </tr>
         <tr>
           <td data-label="Pemberi">Suami</td>
           <td data-label="Penerima">Istri</td>
           <td data-label="Hubungan">Perkawinan, bukan sedarah</td>
-          <td data-label="Fasilitas" class="kb-status-cell kb-status-no">
-            <span class="kb-status-box">
-              <span class="kb-status-title">Tidak memenuhi</span>
-              <span class="kb-status-text">Tidak berdasarkan kategori keluarga ini</span>
-            </span>
-          </td>
+          <td data-label="Kategori"><span class="kb-pill kb-pill-no">Tidak</span></td>
         </tr>
         <tr>
           <td data-label="Pemberi">Istri</td>
           <td data-label="Penerima">Suami</td>
           <td data-label="Hubungan">Perkawinan, bukan sedarah</td>
-          <td data-label="Fasilitas" class="kb-status-cell kb-status-no">
-            <span class="kb-status-box">
-              <span class="kb-status-title">Tidak memenuhi</span>
-              <span class="kb-status-text">Tidak berdasarkan kategori keluarga ini</span>
-            </span>
-          </td>
+          <td data-label="Kategori"><span class="kb-pill kb-pill-no">Tidak</span></td>
         </tr>
         <tr>
           <td data-label="Pemberi">Mertua</td>
           <td data-label="Penerima">Menantu</td>
           <td data-label="Hubungan">Semenda</td>
-          <td data-label="Fasilitas" class="kb-status-cell kb-status-no">
-            <span class="kb-status-box">
-              <span class="kb-status-title">Tidak memenuhi</span>
-              <span class="kb-status-text">Tidak berdasarkan kategori keluarga ini</span>
-            </span>
-          </td>
+          <td data-label="Kategori"><span class="kb-pill kb-pill-no">Tidak</span></td>
         </tr>
         <tr>
           <td data-label="Pemberi">Paman/Bibi</td>
           <td data-label="Penerima">Keponakan</td>
           <td data-label="Hubungan">Garis menyamping</td>
-          <td data-label="Fasilitas" class="kb-status-cell kb-status-no">
-            <span class="kb-status-box">
-              <span class="kb-status-title">Tidak memenuhi</span>
-              <span class="kb-status-text">Tidak berdasarkan kategori keluarga ini</span>
-            </span>
-          </td>
+          <td data-label="Kategori"><span class="kb-pill kb-pill-no">Tidak</span></td>
         </tr>
       </tbody>
     </table>
   </div>
+
+  <p class="kb-table-note">
+    <strong>Catatan:</strong> “Ya” pada matriks hanya menunjukkan bahwa hubungan
+    pemberi dan penerima masuk kategori keluarga sedarah dalam garis keturunan
+    lurus satu derajat. Persyaratan SKB lainnya tetap harus dipenuhi.
+  </p>
+
 </section>
 
 <section id="skb-bukan-otomatis">
