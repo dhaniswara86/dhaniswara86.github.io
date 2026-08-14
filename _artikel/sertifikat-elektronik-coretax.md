@@ -5,7 +5,7 @@ title: "Kode Otorisasi DJP: Cara Pengajuan dan Pengecekan Masa Berlaku"
 hero_title: "Kode Otorisasi DJP:"
 hero_accent: "Cara Pengajuan dan Pengecekan Masa Berlaku."
 
-excerpt: "Untuk menandatangani dokumen perpajakan di Coretax, Wajib Pajak dapat menggunakan Kode Otorisasi DJP atau Sertifikat Elektronik yang diterbitkan Penyelenggara Sertifikasi Elektronik."
+excerpt: "Untuk menandatangani dokumen perpajakan di Coretax, Wajib Pajak membutuhkan tanda tangan elektronik yang valid."
 description: "Panduan memahami fungsi Kode Otorisasi DJP, tata cara pengajuan dan pengecekan masa berlaku."
 
 category: "Coretax"
@@ -55,7 +55,7 @@ custom_js:
 <section id="pengertian">
 <h2>Apa Itu Kode Otorisasi DJP?</h2>
 <p>
-Untuk penerbitan bukti potong, faktur pajak, pelaporan SPT, dan permohonan layanan administrasi di Coretax dibutuhkan tanda tangan elektronik. Peraturan Menteri Keuangan (PMK) Nomor 81 Tahun 2024 s.t.d.d. PMK 1 Tahun 2026, membagi tanda tangan elektronik ini ke dalam dua jenis, yaitu: (1) Sertifikat Elektronik, dan (2) Kode Otorisasi DJP.
+Untuk penerbitan bukti potong, faktur pajak, pelaporan SPT, dan permohonan layanan administrasi di Coretax dibutuhkan tanda tangan elektronik. Di dalam Peraturan Menteri Keuangan (PMK) Nomor 81 Tahun 2024 s.t.d.d. PMK 1 Tahun 2026, tanda tangan elektronik terbagi ke dalam dua jenis, yaitu: (1) Sertifikat Elektronik, dan (2) Kode Otorisasi DJP.
 </p>
 
 <div class="jk-certificate-grid">
