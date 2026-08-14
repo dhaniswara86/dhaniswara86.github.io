@@ -44,7 +44,7 @@ sidebar_note: "Jangan tertukar antara password dan passphrase. Password digunaka
 
 custom_css:
   - /assets/css/jasakonstruksi.css?v=20260814-1
-  - /assets/css/sertifikat-elektronik-coretax.css?v=20260814-4
+  - /assets/css/sertifikat-elektronik-coretax.css?v=20260814-5
 
 custom_js:
   - /assets/js/sertifikat-elektronik-coretax.js?v=20260814-1
@@ -278,6 +278,7 @@ JavaScript diperlukan untuk menjalankan slider.
 </noscript>
 </section>
 
+</section>
 
 <section id="passphrase">
 <h2>Bagaimana Membuat Passphrase?</h2>
