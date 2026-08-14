@@ -58,7 +58,7 @@ Untuk penerbitan bukti potong, faktur pajak, penandatangan dan pelaporan Surat P
 <article class="jk-certificate-card">
 <h3>Sertifikat Elektronik</h3>
 <p>
-Sertifikat elektronik merupakan tanda tangan elektronik yang diterbitkan oleh Penyelenggara Sertifikasi Elektronik (PSrE). Sertifikat ini memuat identitas dan tanda tangan elektronik yang dapat digunakan untuk proses autentikasi dan penandatanganan dokumen elektronik. Contohnya: Privi ID, Vida, Vinotek, dan Signature. Sertifikat ini biasanya berlangganan dan berbayar.
+Sertifikat elektronik merupakan tanda tangan elektronik yang diterbitkan oleh Penyelenggara Sertifikasi Elektronik (PSrE). Sertifikat ini memuat identitas dan tanda tangan elektronik yang dapat digunakan untuk proses autentikasi dan penandatanganan dokumen elektronik. <br>Contohnya: Privi ID, Vida, Vinotek, dan Signature. Sertifikat ini biasanya berlangganan dan berbayar.
 </p>
 </article>
 
@@ -73,7 +73,7 @@ Kode Otorisasi DJP merupakan tanda tangan elektronik tidak tersertifikasi yang d
 <div class="jk-callout jk-callout-blue">
 <strong>Catatan Kabayan</strong>
 <p>
-Coretax memfasilitasi penggunaan <strong>Sertifikat Elektronik dari PSrE/strong>. Namun bagi wajib pajak yang tidak memiliki sertifikat PSrE dapat menggunakan Kode Otorisasi DJP untuk keperluan penandatanganan dokumen perpajakan.
+Coretax memfasilitasi penggunaan <strong>Sertifikat Elektronik dari PSrE</strong>. Namun bagi wajib pajak yang tidak memiliki sertifikat PSrE dapat menggunakan Kode Otorisasi DJP untuk keperluan penandatanganan dokumen perpajakan.
 </p>
 </div>
 </section>
