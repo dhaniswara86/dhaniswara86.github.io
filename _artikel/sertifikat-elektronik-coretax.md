@@ -1,9 +1,9 @@
 ---
 layout: artikel-editorial
 
-title: "Sertifikat Elektronik Coretax: Cara Mengajukan Kode Otorisasi DJP dan Menggunakan Sertifikat PSrE"
-hero_title: "Sertifikat Elektronik Coretax."
-hero_accent: "Jangan salah memilih tanda tangan digital."
+title: "Kode Otorisasi DJP: Cara Pengajuan dan Pengecekan Masa Berlaku"
+hero_title: "Kode Otorisasi DJP."
+hero_accent: "Pengajuan dan Pengecekan Masa Berlaku."
 
 excerpt: "Untuk menandatangani dokumen perpajakan di Coretax, Wajib Pajak dapat menggunakan Kode Otorisasi DJP atau Sertifikat Elektronik yang diterbitkan Penyelenggara Sertifikasi Elektronik."
 description: "Panduan memahami perbedaan Kode Otorisasi DJP dan Sertifikat Elektronik PSrE, cara mengajukan Kode Otorisasi melalui Coretax, mengecek statusnya, serta menggunakan sertifikat elektronik tersertifikasi."
@@ -28,7 +28,7 @@ legal_basis: "PMK 81/2024 s.t.d.d. PMK 1/2026 dan PER-7/PJ/2025"
 permalink: /sertifikat-elektronik-coretax.html
 
 summary_label: "Ringkasan cepat"
-summary: "Di Coretax terdapat dua pilihan tanda tangan digital: Kode Otorisasi DJP yang diterbitkan DJP dan Sertifikat Elektronik tersertifikasi yang diterbitkan PSrE. Bagi pengguna yang tidak memiliki Sertifikat Elektronik PSrE, Kode Otorisasi DJP dapat digunakan untuk menandatangani dokumen perpajakan di Coretax."
+summary: "Kode Otorisasi DJP merupakan tanda tangan elektronik tidak tersertifikasi yang diterbitkan oleh Direktorat Jenderal Pajak dengan masa berlaku selama 2 tahun yang digunakan menandatangani dokumen perpajakan di Coretax."
 
 hero_links:
   - label: "Lihat perbedaannya"
@@ -38,15 +38,6 @@ hero_links:
   - label: "Cek status"
     href: "#cek-status"
 
-hero_stats:
-  - value: "2"
-    label: "Jenis tanda tangan digital"
-  - value: "KO DJP"
-    label: "Diterbitkan oleh DJP"
-  - value: "PSrE"
-    label: "Penerbit sertifikat tersertifikasi"
-  - value: "Valid"
-    label: "Status sebelum digunakan"
 
 sidebar_note: "Jangan tertukar antara password dan passphrase. Password digunakan untuk login ke Coretax, sedangkan passphrase digunakan saat melakukan tanda tangan elektronik menggunakan Kode Otorisasi DJP."
 
