@@ -28,7 +28,7 @@ legal_basis: "PMK 81/2024 s.t.d.d. PMK 1/2026 dan PER-7/PJ/2025"
 permalink: /sertifikat-elektronik-coretax.html
 
 summary_label: "Ringkasan cepat"
-summary: "Kode Otorisasi DJP merupakan tanda tangan elektronik tidak tersertifikasi yang diterbitkan oleh Direktorat Jenderal Pajak dengan masa berlaku selama 2 tahun yang digunakan menandatangani dokumen perpajakan di Coretax."
+summary: "Kode Otorisasi DJP (KO DJP) merupakan tanda tangan elektronik tidak tersertifikasi yang diterbitkan oleh Direktorat Jenderal Pajak untuk keperluan penandatanganan dokumen perpajakan di Coretax. KO DJP memiliki masa berlaku selama 2 (dua) tahun"
 
 hero_links:
   - label: "Lihat perbedaannya"
@@ -48,36 +48,24 @@ custom_css:
 
 <div class="jk-article">
 
-<section id="pengantar">
-<p>
-Pelaporan SPT, penerbitan dokumen tertentu, serta berbagai layanan administrasi di Coretax membutuhkan tanda tangan elektronik. Karena itu, setelah akun Coretax dapat digunakan, salah satu hal penting yang perlu diperiksa adalah apakah pengguna telah mempunyai alat tanda tangan digital yang valid.
-</p>
-<p>
-Di sinilah istilah <strong>Sertifikat Elektronik</strong> dan <strong>Kode Otorisasi DJP</strong> sering tertukar. Keduanya sama-sama dapat digunakan untuk melakukan tanda tangan elektronik dalam pelaksanaan hak dan pemenuhan kewajiban perpajakan, tetapi penerbit dan mekanismenya berbeda.
-</p>
-<p>
-Bagi sebagian besar pengguna Coretax yang tidak memiliki sertifikat elektronik dari Penyelenggara Sertifikasi Elektronik, pilihan yang paling praktis adalah membuat <strong>Kode Otorisasi DJP</strong> melalui akun Coretax masing-masing.
-</p>
-</section>
-
 <section id="pengertian">
-<h2>Apa Itu Sertifikat Elektronik dan Kode Otorisasi DJP?</h2>
+<h2>Apa Itu Kode Otorisasi DJP?</h2>
 <p>
-Peraturan perpajakan membedakan tanda tangan elektronik menjadi tanda tangan elektronik tersertifikasi dan tidak tersertifikasi.
+Untuk penerbitan bukti potong, faktur pajak, penandatangan dan pelaporan Surat Pemberitahuan (SPT) serta permintaan layanan di sistem coretax dibutuhkan tanda tangan elektronik. Peraturan perpajakan membagi tanda tangan elektronik menjadi dua yaitu: (1) Sertifikat Elektronik, dan (2) Kode Otorisasi DJP.
 </p>
 
 <div class="jk-certificate-grid">
 <article class="jk-certificate-card">
 <h3>Sertifikat Elektronik</h3>
 <p>
-Sertifikat elektronik diterbitkan oleh Penyelenggara Sertifikasi Elektronik atau PSrE. Sertifikat tersebut memuat identitas dan tanda tangan elektronik yang dapat digunakan untuk proses autentikasi dan penandatanganan dokumen elektronik.
+Sertifikat elektronik merupakan tanda tangan elektronik yang diterbitkan oleh Penyelenggara Sertifikasi Elektronik (PSrE). Sertifikat ini memuat identitas dan tanda tangan elektronik yang dapat digunakan untuk proses autentikasi dan penandatanganan dokumen elektronik. Contohnya: Privi ID, Vida, Vinotek, dan Signature. Sertifikat ini biasanya berlangganan dan berbayar.
 </p>
 </article>
 
 <article class="jk-certificate-card">
 <h3>Kode Otorisasi DJP</h3>
 <p>
-Kode Otorisasi DJP merupakan alat verifikasi dan autentikasi yang diterbitkan oleh Direktorat Jenderal Pajak untuk melakukan tanda tangan elektronik tidak tersertifikasi dalam layanan perpajakan.
+Kode Otorisasi DJP merupakan tanda tangan elektronik tidak tersertifikasi yang diterbitkan oleh Direktorat Jenderal Pajak yang digunakan untuk melakukan tanda tangan dalam layanan perpajakan. Berbeda dengan Sertifikat Elektronik dari PSrE yang berbayar, KO DJP sifatnya gratis.
 </p>
 </article>
 </div>
@@ -85,7 +73,7 @@ Kode Otorisasi DJP merupakan alat verifikasi dan autentikasi yang diterbitkan ol
 <div class="jk-callout jk-callout-blue">
 <strong>Catatan Kabayan</strong>
 <p>
-Menu Coretax menggunakan istilah <strong>Permintaan Kode Otorisasi/Sertifikat Elektronik</strong>. Karena itu, jangan langsung menganggap semua pengguna harus membeli atau memperoleh sertifikat dari penyedia eksternal. Pengguna yang tidak mempunyai sertifikat PSrE dapat menggunakan Kode Otorisasi DJP.
+Coretax memfasilitasi penggunaan <strong>Sertifikat Elektronik dari PSrE/strong>. Namun bagi wajib pajak yang tidak memiliki sertifikat PSrE dapat menggunakan Kode Otorisasi DJP untuk keperluan penandatanganan dokumen perpajakan.
 </p>
 </div>
 </section>
