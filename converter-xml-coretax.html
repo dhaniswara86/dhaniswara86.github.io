@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Converter Excel ke XML Coretax Kabayan untuk BPMP, BP21, BP26, BPA1, BPA2, BPPU, BPNR, BPSP, BPCY, dan DDBU. Proses berjalan di browser.">
+  <title>Converter Excel ke XML Coretax | Kabayan</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="assets/css/converter-xml-coretax.css">
+</head>
+<body>
+  <header class="kxml-topbar">
+    <div class="kxml-shell kxml-topbar__inner">
+      <a class="kxml-brand" href="/" aria-label="Kabayan - Beranda">
+        <span class="kxml-brand__mark">K</span>
+        <span>
+          <strong>Kabayan</strong>
+          <small>Katalog Bahan Pelayanan</small>
+        </span>
+      </a>
+      <nav class="kxml-nav" aria-label="Navigasi utama">
+        <a href="/">Beranda</a>
+        <a href="/kalkulator.html" class="is-active">Kalkulator</a>
+        <a href="/artikel.html">Artikel</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="kxml-hero">
+      <div class="kxml-shell">
+        <div class="kxml-eyebrow">Kabayan · Converter XML Coretax</div>
+        <h1>Excel ke XML Coretax.<br><span>Lebih rapi sebelum diunggah.</span></h1>
+        <p class="kxml-hero__lead">Pilih jenis dokumen, gunakan template Excel, unggah kembali file yang sudah diisi, lalu periksa error sebelum membuat XML untuk Coretax.</p>
+        <div class="kxml-hero__facts" aria-label="Informasi utama">
+          <span>✓ 10 format XML</span>
+          <span>✓ Validasi sebelum unduh</span>
+          <span>✓ Diproses di perangkat Anda</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="kxml-shell kxml-workflow" aria-labelledby="alur-title">
+      <div class="kxml-section-head">
+        <div>
+          <span class="kxml-kicker">Cara menggunakan</span>
+          <h2 id="alur-title">Empat langkah sederhana</h2>
+        </div>
+        <p>Struktur template mengikuti file Excel yang Anda gunakan sebagai dasar converter.</p>
+      </div>
+      <div class="kxml-steps">
+        <article><span>01</span><div><strong>Pilih jenis XML</strong><p>Sesuaikan dengan jenis bukti potong atau dokumen Coretax.</p></div></article>
+        <article><span>02</span><div><strong>Unduh & isi template</strong><p>Jangan mengubah header atau susunan kolom pada sheet DATA.</p></div></article>
+        <article><span>03</span><div><strong>Unggah Excel</strong><p>File dibaca langsung oleh browser, bukan dikirim ke server Kabayan.</p></div></article>
+        <article><span>04</span><div><strong>Validasi & buat XML</strong><p>Perbaiki error yang terdeteksi, lalu unduh XML siap digunakan.</p></div></article>
+      </div>
+    </section>
+
+    <section class="kxml-shell kxml-tool" id="converter">
+      <div class="kxml-tool__header">
+        <div>
+          <span class="kxml-kicker">Converter</span>
+          <h2>Pilih format Coretax</h2>
+          <p>Kelompokkan berdasarkan PPh Pasal 21/26 atau Bupot Unifikasi.</p>
+        </div>
+        <div class="kxml-filter" role="group" aria-label="Filter jenis converter">
+          <button type="button" class="is-active" data-filter="Semua">Semua</button>
+          <button type="button" data-filter="PPh 21/26">PPh 21/26</button>
+          <button type="button" data-filter="Unifikasi">Unifikasi</button>
+        </div>
+      </div>
+
+      <div id="formatGrid" class="kxml-format-grid" aria-live="polite"></div>
+
+      <div class="kxml-panel">
+        <div class="kxml-panel__summary">
+          <div>
+            <span id="selectedCategory" class="kxml-badge">PPh 21/26</span>
+            <h3 id="selectedTitle">BPMP</h3>
+            <p id="selectedSubtitle">Bukti Pemotongan Bulanan Pegawai Tetap</p>
+          </div>
+          <div class="kxml-panel__actions">
+            <a id="templateButton" class="kxml-btn kxml-btn--light" href="#" download>
+              <span aria-hidden="true">↓</span> Unduh Template Excel
+            </a>
+          </div>
+        </div>
+
+        <div class="kxml-divider"></div>
+
+        <div class="kxml-upload-layout">
+          <div>
+            <div id="dropzone" class="kxml-dropzone" tabindex="0" role="button" aria-label="Pilih file Excel">
+              <input id="fileInput" type="file" accept=".xlsx,.xls" hidden>
+              <div class="kxml-dropzone__icon" aria-hidden="true">↥</div>
+              <strong>Tarik file Excel ke sini</strong>
+              <span>atau klik untuk memilih file .xlsx / .xls</span>
+              <small id="templateHint">Gunakan template sesuai jenis XML yang dipilih.</small>
+            </div>
+
+            <div id="fileCard" class="kxml-file-card" hidden>
+              <div class="kxml-file-card__icon">XLSX</div>
+              <div class="kxml-file-card__body">
+                <strong id="fileName">-</strong>
+                <span id="fileMeta">-</span>
+              </div>
+              <button id="clearFileButton" type="button" class="kxml-icon-btn" aria-label="Hapus file">×</button>
+            </div>
+
+            <div class="kxml-primary-actions">
+              <button id="validateButton" type="button" class="kxml-btn kxml-btn--light" disabled>Periksa Data</button>
+              <button id="convertButton" type="button" class="kxml-btn kxml-btn--primary" disabled>Buat XML</button>
+            </div>
+          </div>
+
+          <aside class="kxml-status-card" aria-label="Ringkasan file">
+            <div class="kxml-status-card__head">
+              <span>Ringkasan</span>
+              <span id="validationState" class="kxml-status-pill is-neutral">Belum ada file</span>
+            </div>
+            <dl>
+              <div><dt>Jenis XML</dt><dd id="summaryType">BPMP</dd></div>
+              <div><dt>NPWP Pemotong</dt><dd id="summaryTin">—</dd></div>
+              <div><dt>Baris data</dt><dd id="summaryRows">0</dd></div>
+              <div><dt>Periode</dt><dd id="summaryPeriod">—</dd></div>
+            </dl>
+            <div class="kxml-stat-row">
+              <div><span id="errorCount">0</span><small>Error</small></div>
+              <div><span id="warningCount">0</span><small>Peringatan</small></div>
+              <div><span id="readyCount">0</span><small>Data siap</small></div>
+            </div>
+          </aside>
+        </div>
+
+        <div id="issueSection" class="kxml-issues" hidden>
+          <div class="kxml-issues__head">
+            <div>
+              <span class="kxml-kicker">Hasil validasi</span>
+              <h3>Periksa data yang perlu diperbaiki</h3>
+            </div>
+            <div class="kxml-issue-filter">
+              <button type="button" class="is-active" data-issue-filter="all">Semua</button>
+              <button type="button" data-issue-filter="error">Error</button>
+              <button type="button" data-issue-filter="warning">Peringatan</button>
+            </div>
+          </div>
+          <div class="kxml-table-wrap">
+            <table>
+              <thead>
+                <tr><th>Status</th><th>Baris Excel</th><th>Kolom</th><th>Catatan</th></tr>
+              </thead>
+              <tbody id="issueTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div id="successSection" class="kxml-success" hidden>
+          <div class="kxml-success__icon">✓</div>
+          <div>
+            <strong>XML berhasil dibuat.</strong>
+            <p id="successText">File sudah siap diunduh.</p>
+          </div>
+          <button id="downloadXmlButton" type="button" class="kxml-btn kxml-btn--primary">Unduh XML</button>
+        </div>
+
+        <details id="xmlPreviewBox" class="kxml-preview" hidden>
+          <summary>Lihat pratinjau XML</summary>
+          <pre id="xmlPreview"></pre>
+        </details>
+      </div>
+    </section>
+
+    <section class="kxml-shell kxml-notes">
+      <div class="kxml-note kxml-note--accent">
+        <span>i</span>
+        <div>
+          <strong>Data tetap di perangkat Anda</strong>
+          <p>Proses membaca Excel, memeriksa data, dan membentuk XML dilakukan di browser. Kabayan tidak mengunggah isi file Excel ke server.</p>
+        </div>
+      </div>
+      <div class="kxml-note">
+        <span>!</span>
+        <div>
+          <strong>Tetap lakukan pemeriksaan akhir</strong>
+          <p>Validasi di halaman ini membantu menemukan masalah umum pada struktur dan format data. Penerimaan akhir file tetap ditentukan oleh validasi Coretax DJP.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="kxml-footer">
+    <div class="kxml-shell">
+      <p><strong>Kabayan</strong> · Katalog Bahan Pelayanan</p>
+      <p>Alat bantu edukasi perpajakan pribadi. Bukan situs resmi Direktorat Jenderal Pajak.</p>
+    </div>
+  </footer>
+
+  <noscript>JavaScript harus diaktifkan agar converter dapat digunakan.</noscript>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="assets/js/converter-xml-coretax.js"></script>
+</body>
+</html>
