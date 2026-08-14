@@ -116,6 +116,11 @@ Coretax memfasilitasi penggunaan <strong>Sertifikat Elektronik dari PSrE/strong>
 <td data-label="Kode Otorisasi DJP">Digunakan untuk menandatangani dokumen perpajakan</td>
 <td data-label="Sertifikat Elektronik">Dapat didaftarkan dan digunakan untuk penandatanganan di Coretax</td>
 </tr>
+<tr>
+<td data-label="Aspek">Biaya</td>
+<td data-label="Kode Otorisasi DJP">Gratis</td>
+<td data-label="Sertifikat Elektronik">Berbayar</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -210,8 +215,7 @@ Berdasarkan panduan operasional DJP, permintaan Kode Otorisasi DJP dapat dilakuk
 Passphrase bukan kata sandi untuk masuk ke akun Coretax. Passphrase digunakan ketika pengguna melakukan tindakan yang membutuhkan tanda tangan elektronik.
 </p>
 <p>
-Panduan DJP tahun 2026 menggunakan kriteria sekurang-kurangnya delapan karakter yang terdiri dari kombinasi huruf besar, huruf kecil, angka, dan karakter khusus. Namun, persyaratan teknis yang muncul pada layar Coretax tetap perlu dijadikan acuan apabila terdapat penyempurnaan sistem.
-</p>
+Passphrase sekurang-kurangnya delapan karakter yang terdiri dari kombinasi huruf besar, huruf kecil, angka, dan karakter khusus. Misalnya: Pajak123!, Indonesia1945@, dan lain sebagainya. Pastikan karakter yang diinput diperkenankan oleh sistem.
 
 <div class="jk-certificate-grid">
 <article class="jk-certificate-card">
