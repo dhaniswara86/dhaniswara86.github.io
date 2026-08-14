@@ -405,5 +405,3 @@ Namun, jangan berhenti sampai di situ. Periksa kembali bagian <strong>Digital Ce
 <li>Panduan DJP tahun 2026 mengenai Aktivasi Akun Coretax dan Permintaan Sertifikat Elektronik melalui M-Pajak.</li>
 </ol>
 </section>
-
-</div>
