@@ -285,7 +285,7 @@ JavaScript diperlukan untuk menjalankan slider.
 Passphrase bukan kata sandi untuk masuk ke akun Coretax. Passphrase digunakan ketika pengguna melakukan tindakan yang membutuhkan tanda tangan elektronik.
 </p>
 <p>
-Panduan DJP tahun 2026 menggunakan kriteria sekurang-kurangnya delapan karakter yang terdiri dari kombinasi huruf besar, huruf kecil, angka, dan karakter khusus. Namun, persyaratan teknis yang muncul pada layar Coretax tetap perlu dijadikan acuan apabila terdapat penyempurnaan sistem.
+Passphrase harus terdiri sekurang-kurangnya delapan karakter yang terdiri dari kombinasi huruf besar, huruf kecil, angka, dan karakter khusus. Contoh: Pajak123!, Indon3s143M4S!, dan lain sebagainya. <br>Notifikasi "format pola tidak valid" menunjukkan bahwa terdapat karakter yang tidak diterima oleh sistem. Biasanya permasalahan timbul karena adanya spesial karakter yang tidak diperkenankan. Gunakan karakter khusus yang terbukti aman, seperti @, #, !.
 </p>
 
 <div class="jk-certificate-grid">
