@@ -40,16 +40,6 @@ hero_links:
   - label: "Panduan visual"
     href: "#panduan-visual-kodjp"
 
-hero_stats:
-  - value: "2"
-    label: "Jenis tanda tangan digital"
-  - value: "KO DJP"
-    label: "Diterbitkan oleh DJP"
-  - value: "PSrE"
-    label: "Penerbit sertifikat tersertifikasi"
-  - value: "Valid"
-    label: "Status sebelum digunakan"
-
 sidebar_note: "Jangan tertukar antara password dan passphrase. Password digunakan untuk login ke Coretax, sedangkan passphrase digunakan saat melakukan tanda tangan elektronik menggunakan Kode Otorisasi DJP."
 
 custom_css:
