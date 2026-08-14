@@ -133,7 +133,7 @@ Coretax memfasilitasi penggunaan Sertifikat Elektronik dari PSrE. Bagi wajib paj
 <section id="pilihan">
 <h2>Mana yang Harus Dipilih?</h2>
 <p>
-Apabila Anda belum mempunyai Sertifikat Elektronik dari PSrE dan membutuhkan tanda tangan elektronik untuk menggunakan Coretax, Anda dapat memilih <strong>Kode Otorisasi DJP</strong>.
+Apabila Anda belum mempunyai Sertifikat Elektronik dari PSrE dan membutuhkan tanda tangan elektronik untuk digunakan di Coretax, Anda dapat memilih <strong>Kode Otorisasi DJP</strong>.
 </p>
 <p>
 Sebaliknya, apabila Anda telah mempunyai Sertifikat Elektronik tersertifikasi dari PSrE yang dapat digunakan dalam Coretax, sertifikat tersebut dapat didaftarkan dengan memilih nama penyelenggara sertifikat dan mengisi identitas penandatangan atau <em>Signer ID</em>.
@@ -166,17 +166,9 @@ Kode Otorisasi melekat pada identitas pengguna. Pada Wajib Pajak Badan, pegawai 
 
 <section id="cara-mengajukan">
 <h2>Cara Mengajukan Kode Otorisasi DJP di Coretax</h2>
-<p>
-Berikut adalah panduan permintaan Kode Otorisasi DJP melalui laman Coretax DJP.
-</p>
-
 <section aria-labelledby="judul-panduan-kodjp" class="presentation-section sertel-presentation-section" id="panduan-visual-kodjp">
 <div class="presentation-heading">
 <span class="presentation-label">Panduan Visual</span>
-<h3 id="judul-panduan-kodjp">Tata Cara Pengajuan &amp; Pengecekan Kode Otorisasi DJP</h3>
-<p>
-Presentasi berikut memperlihatkan alur pengajuan Kode Otorisasi DJP sampai pengecekan status kepemilikannya. Gunakan tombol navigasi, thumbnail, tombol panah keyboard, atau geser layar untuk berpindah halaman.
-</p>
 </div>
 
 <div class="presentation-viewer" id="sertelPresentationViewer" tabindex="0">
@@ -286,48 +278,6 @@ JavaScript diperlukan untuk menjalankan slider.
 </noscript>
 </section>
 
-<div class="jk-steps">
-<article class="jk-step">
-<strong>Login ke Coretax</strong>
-<p>Masuk menggunakan NIK atau NPWP dan kata sandi akun Coretax Anda.</p>
-</article>
-
-<article class="jk-step">
-<strong>Buka Portal Saya</strong>
-<p>Setelah masuk ke dashboard, pilih menu <strong>Portal Saya</strong>.</p>
-</article>
-
-<article class="jk-step">
-<strong>Pilih Permintaan Kode Otorisasi/Sertifikat Elektronik</strong>
-<p>Buka submenu tersebut untuk masuk ke formulir permintaan sertifikat digital.</p>
-</article>
-
-<article class="jk-step">
-<strong>Periksa data identitas</strong>
-<p>Pastikan NIK/NPWP, nama, alamat, email, dan nomor telepon yang tampil sudah sesuai.</p>
-</article>
-
-<article class="jk-step">
-<strong>Pilih Kode Otorisasi DJP</strong>
-<p>Pada bagian jenis sertifikat digital, pilih <strong>Kode Otorisasi DJP</strong>.</p>
-</article>
-
-<article class="jk-step">
-<strong>Buat passphrase</strong>
-<p>Masukkan passphrase yang akan digunakan untuk tanda tangan elektronik. Ikuti persyaratan karakter yang ditampilkan oleh sistem.</p>
-</article>
-
-<article class="jk-step">
-<strong>Centang pernyataan</strong>
-<p>Baca pernyataan yang ditampilkan, kemudian berikan tanda centang sebagai konfirmasi.</p>
-</article>
-
-<article class="jk-step">
-<strong>Simpan permohonan</strong>
-<p>Klik tombol <strong>Simpan</strong> untuk mengirim permintaan Kode Otorisasi DJP.</p>
-</article>
-</div>
-</section>
 
 <section id="passphrase">
 <h2>Bagaimana Membuat Passphrase?</h2>
@@ -358,95 +308,10 @@ Jangan menyimpan passphrase di dokumen bersama, mengirimkannya melalui grup perc
 </div>
 </section>
 
-<section id="cek-status">
-<h2>Setelah Mengajukan, Jangan Lupa Cek Status</h2>
-<p>
-Permohonan selesai dikirim bukan berarti Kode Otorisasi sudah pasti dapat langsung digunakan. Periksa status sertifikat digital pada profil pengguna.
-</p>
-
-<div class="jk-steps">
-<article class="jk-step">
-<strong>Buka Profil Saya</strong>
-<p>Masuk ke <strong>Portal Saya → Profil Saya</strong>.</p>
-</article>
-
-<article class="jk-step">
-<strong>Pilih Nomor Identifikasi Eksternal</strong>
-<p>Pada panel profil, buka submenu <strong>Nomor Identifikasi Eksternal</strong>.</p>
-</article>
-
-<article class="jk-step">
-<strong>Buka tab Digital Certificate</strong>
-<p>Di bagian ini akan ditampilkan sertifikat digital yang terhubung dengan akun.</p>
-</article>
-
-<article class="jk-step">
-<strong>Periksa Status Kepemilikan</strong>
-<p>Apabila status masih <strong>Invalid</strong>, buka kolom aksi dan klik <strong>Periksa Status</strong>.</p>
-</article>
-
-<article class="jk-step">
-<strong>Klik Menghasilkan</strong>
-<p>Apabila pemeriksaan berhasil dan sistem menampilkan notifikasi sukses, klik tombol <strong>Menghasilkan</strong>.</p>
-</article>
-
-<article class="jk-step">
-<strong>Pastikan status Valid</strong>
-<p>Kode Otorisasi dapat digunakan setelah Status Kepemilikan berubah menjadi <strong>Valid</strong>.</p>
-</article>
-</div>
-
-<div class="jk-callout jk-callout-blue">
-<strong>Patokan akhirnya adalah status Valid</strong>
-<p>
-Jangan hanya berpatokan bahwa permintaan sudah disimpan. Sebelum pelaporan SPT atau penandatanganan dokumen penting, pastikan Kode Otorisasi atau sertifikat digital pada profil sudah berstatus Valid.
-</p>
-</div>
-</section>
-
-<section id="invalid">
-<h2>Bagaimana Jika Status Masih Invalid?</h2>
-<p>
-Apabila status kepemilikan masih <strong>Invalid</strong>, jangan langsung membuat permintaan berulang-ulang.
-</p>
-<p>
-Masuk ke tab Digital Certificate dan gunakan tombol <strong>Periksa Status</strong>. Jika pemeriksaan berhasil, lanjutkan dengan tombol <strong>Menghasilkan</strong>. Apabila sistem masih menunjukkan bahwa penerbitan belum berhasil, permintaan Kode Otorisasi dapat diulangi.
-</p>
-<p>
-Coretaxpedia DJP juga menjelaskan bahwa apabila muncul pesan kegagalan pembuatan Kode Otorisasi, pengguna dapat mencoba melakukan kembali proses permintaan.
-</p>
-</section>
-
-<section id="psre">
-<h2>Bagaimana Jika Ingin Menggunakan Sertifikat Elektronik PSrE?</h2>
-<p>
-Sertifikat Elektronik tersertifikasi tidak diterbitkan oleh DJP, tetapi oleh Penyelenggara Sertifikasi Elektronik yang telah memenuhi ketentuan dan ditunjuk oleh Menteri Keuangan.
-</p>
-<p>
-Untuk memperoleh sertifikat tersebut, Wajib Pajak mengikuti proses penerbitan pada PSrE yang dipilih. Ketentuan verifikasi identitas, masa berlaku, serta prosedur penerbitannya mengikuti ketentuan masing-masing penyelenggara.
-</p>
-<p>
-Setelah sertifikat dimiliki, pengguna dapat masuk ke menu <strong>Permintaan Kode Otorisasi/Sertifikat Elektronik</strong>, memilih penyelenggara sertifikat pada pilihan jenis sertifikat digital, kemudian mengisi <strong>Signer ID</strong> atau identitas penandatangan sesuai data pada PSrE.
-</p>
-
-<div class="jk-callout jk-callout-orange">
-<strong>Daftar PSrE dapat berubah</strong>
-<p>
-Gunakan daftar PSrE yang telah ditunjuk Menteri Keuangan dan informasi terbaru pada laman resmi DJP sebelum memilih penyelenggara sertifikat elektronik.
-</p>
-</div>
-</section>
-
 <section id="badan">
 <h2>Bagaimana untuk Wajib Pajak Badan?</h2>
 <p>
-Pada Coretax, Wajib Pajak Badan tidak semestinya menjalankan seluruh proses perpajakan dengan membagikan satu akun badan kepada banyak pegawai.
-</p>
-<p>
-Pengurus, PIC, pegawai, atau pihak lain yang telah diberi kewenangan menjalankan tugas melalui akun pribadinya, kemudian melakukan <em>impersonate</em> terhadap Wajib Pajak Badan.
-</p>
-<p>
-Apabila orang tersebut bertindak sebagai penandatangan, tanda tangan elektronik yang digunakan tetap berkaitan dengan identitas orang yang melakukan tindakan tersebut. Karena itu, pihak yang akan bertindak sebagai signer perlu memastikan Kode Otorisasi atau Sertifikat Elektronik miliknya sudah siap digunakan.
+Berbeda dengan rezim DJP Online, Wajib Pajak Badan tidak memilki sertifikat elektronik. Kepemilikan sertifikat elektronik melekat kepada Pengurus, PIC, pegawai, atau pihak lain yang diberikan kewenangan untuk menjalankan kewajiban perpajakan Wajib Pajak Badan.
 </p>
 
 <div class="jk-callout jk-callout-blue">
@@ -511,41 +376,6 @@ Memiliki Kode Otorisasi belum otomatis membuat seseorang boleh menandatangani se
 </div>
 </section>
 
-<section id="cara-cepat">
-<h2>Cara Cepat Menyiapkan Tanda Tangan Digital Coretax</h2>
-
-<div class="jk-steps">
-<article class="jk-step">
-<strong>Pastikan akun Coretax aktif</strong>
-<p>Login terlebih dahulu menggunakan identitas pribadi pengguna.</p>
-</article>
-
-<article class="jk-step">
-<strong>Tentukan jenis tanda tangan</strong>
-<p>Pilih Kode Otorisasi DJP atau Sertifikat Elektronik PSrE.</p>
-</article>
-
-<article class="jk-step">
-<strong>Ajukan atau daftarkan</strong>
-<p>Gunakan menu Permintaan Kode Otorisasi/Sertifikat Elektronik.</p>
-</article>
-
-<article class="jk-step">
-<strong>Periksa Digital Certificate</strong>
-<p>Lihat status pada Profil Saya → Nomor Identifikasi Eksternal.</p>
-</article>
-
-<article class="jk-step">
-<strong>Pastikan status Valid</strong>
-<p>Baru gunakan untuk menandatangani dokumen di Coretax.</p>
-</article>
-
-<article class="jk-step">
-<strong>Jaga passphrase</strong>
-<p>Jangan dibagikan kepada pihak lain.</p>
-</article>
-</div>
-</section>
 
 <section class="jk-closing-box" id="kesimpulan">
 <h2>Kesimpulan</h2>
