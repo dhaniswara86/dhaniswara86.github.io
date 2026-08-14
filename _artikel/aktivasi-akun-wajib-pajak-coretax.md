@@ -37,16 +37,6 @@ hero_links:
   - label: "Setelah aktivasi"
     href: "#setelah-aktivasi"
 
-hero_stats:
-  - value: "15"
-    label: "Slide langkah aktivasi"
-  - value: "NIK/NPWP"
-    label: "Identitas yang digunakan"
-  - value: "E-mail"
-    label: "Tempat akun dikirim"
-  - value: "Login"
-    label: "Tahap akhir aktivasi"
-
 sidebar_note: "Aktivasi akun tidak otomatis membuat orang yang belum ber-NPWP menjadi memiliki NPWP. Aktivasi akun juga tidak sama dengan mengaktifkan kembali status Wajib Pajak Nonaktif."
 
 custom_css:
@@ -62,7 +52,7 @@ custom_js:
 <section id="pengantar">
 <h2>Apa Itu Aktivasi Akun Coretax?</h2>
 <p>
-Aktivasi akun merupakan proses agar Wajib Pajak yang <strong>sudah terdaftar</strong> tetapi belum memiliki akses dapat menggunakan Coretax DJP. Fokusnya adalah memperoleh akun untuk login dan menggunakan layanan perpajakan secara elektronik.
+Aktivasi akun merupakan proses agar Wajib Pajak memiliki akses untuk menggunakan Coretax DJP.
 </p>
 
 <div class="jk-callout jk-callout-blue">
@@ -76,10 +66,10 @@ Aktivasi akun bukan pendaftaran NPWP baru. Aktivasi akun juga bukan mekanisme un
 <section id="siapa">
 <h2>Siapa yang Perlu Melakukan Aktivasi?</h2>
 <p>
-Panduan ini ditujukan terutama untuk Wajib Pajak yang <strong>sudah terdaftar</strong>, tetapi belum mempunyai akun Coretax. Pada halaman login, proses dimulai melalui menu <strong>Belum Aktivasi?</strong>
+Aktivasi akun diperlukan bagi setiap orang yang memiliki kepentingan untuk masuk ke dalam sistem Coretax DJP. Baik yang sudah memiliki NPWP ataupun tidak. Proses aktivasi akun tidak akan memengaruhi statu kepemilikan NPWP.</strong>
 </p>
 
-<h3>Sebelum mulai, siapkan:</h3>
+<h3>Sebelum mulai, pastikan memiliki:</h3>
 <ul class="jk-check-list">
 <li>NIK atau NPWP yang sudah terdaftar.</li>
 <li>Perangkat dengan kamera untuk validasi foto.</li>
@@ -88,12 +78,6 @@ Panduan ini ditujukan terutama untuk Wajib Pajak yang <strong>sudah terdaftar</s
 </ul>
 </section>
 
-<section id="alur-ringkas">
-<h2>Alurnya Singkat</h2>
-<p>
-Urutannya adalah <strong>verifikasi identitas → validasi foto → verifikasi email/nomor telepon → simpan permohonan → periksa email → login dengan akun yang diterbitkan</strong>. Detail setiap langkah dapat diikuti pada slideshow berikut.
-</p>
-</section>
 
 <section aria-labelledby="judul-panduan-aktivasi" class="presentation-section" id="panduan-visual-aktivasi">
 <div class="presentation-heading">
@@ -202,17 +186,6 @@ Gambar slide belum ditemukan. Pastikan folder <code>assets/img/aktivasi-akun</co
 </div>
 </section>
 
-<section id="setelah-aktivasi">
-<h2>Setelah Aktivasi Berhasil</h2>
-<p>
-Setelah permohonan disimpan, periksa email untuk mendapatkan <strong>Surat Penerbitan Akun Wajib Pajak</strong>. Materi panduan menunjukkan bahwa surat tersebut memuat username berupa NIK/NPWP dan <strong>Password Akun</strong> untuk login. fileciteturn8file0
-</p>
-
-<p>
-Setelah berhasil login, segera lakukan penggantian password. Dalam materi panduan juga dijelaskan bahwa apabila sistem meminta <strong>passphrase</strong>, passphrase digunakan untuk membubuhkan tanda tangan elektronik dan dapat sama atau berbeda dengan password login Coretax. fileciteturn8file0
-</p>
-</section>
-
 <section id="catatan-penting">
 <h2>Tiga Hal yang Perlu Diingat</h2>
 <div class="jk-mistake-list">
@@ -243,7 +216,6 @@ Aktivasi akun Coretax pada dasarnya adalah proses untuk memastikan Wajib Pajak y
 <ol>
 <li>Peraturan Menteri Keuangan Nomor 81 Tahun 2024 tentang Ketentuan Perpajakan dalam Rangka Pelaksanaan Sistem Inti Administrasi Perpajakan sebagaimana telah beberapa kali diubah terakhir dengan Peraturan Menteri Keuangan Nomor 1 Tahun 2026.</li>
 <li>Peraturan Direktur Jenderal Pajak Nomor PER-7/PJ/2025.</li>
-<li>Materi “Tata Cara Aktivasi Akun Wajib Pajak” yang menjadi dasar panduan visual artikel ini. fileciteturn8file0</li>
 </ol>
 </section>
 
