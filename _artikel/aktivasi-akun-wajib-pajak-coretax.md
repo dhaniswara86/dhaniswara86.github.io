@@ -2,8 +2,8 @@
 layout: artikel-editorial
 
 title: "Aktivasi Akun Wajib Pajak Coretax: Panduan Langkah demi Langkah"
-hero_title: "Aktivasi Akun Coretax."
-hero_accent: "Dari belum punya akses sampai berhasil login."
+hero_title: "Aktivasi Akun Wajib Pajak."
+hero_accent: "Kunci masuk ke dalam sistem Coretax."
 
 excerpt: "Panduan singkat aktivasi akun Wajib Pajak di Coretax dengan alur visual langkah demi langkah."
 description: "Panduan aktivasi akun Wajib Pajak Coretax yang berfokus pada alur visual: mulai dari menu Belum Aktivasi, validasi identitas dan kontak, penerbitan akun melalui email, sampai login pertama."
@@ -27,7 +27,7 @@ legal_basis: "PMK 81/2024 s.t.d.d. PMK 1/2026 dan PER-7/PJ/2025"
 permalink: /aktivasi-akun-wajib-pajak-coretax.html
 
 summary_label: "Ringkasan cepat"
-summary: "Aktivasi akun digunakan untuk memperoleh akses Coretax bagi Wajib Pajak yang sudah terdaftar tetapi belum mempunyai akun. Proses ini berbeda dengan pendaftaran NPWP dan berbeda pula dengan pengaktifan kembali status Wajib Pajak Nonaktif."
+summary: "Aktivasi akun merupakan proses untuk mendapatkan akses masuk ke dalam sistem Coretax DJP. Proses ini berbeda dengan pendaftaran NPWP dan berbeda pula dengan pengaktifan kembali status Wajib Pajak Nonaktif."
 
 hero_links:
   - label: "Siapa yang perlu aktivasi?"
@@ -53,14 +53,8 @@ custom_js:
 <h2>Apa Itu Aktivasi Akun Coretax?</h2>
 <p>
 Aktivasi akun merupakan proses agar Wajib Pajak memiliki akses untuk menggunakan Coretax DJP.
+Proses aktivasi akun bukan pendaftaran NPWP baru. Aktivasi akun juga bukan mekanisme untuk mengubah status Wajib Pajak Nonaktif menjadi Aktif.
 </p>
-
-<div class="jk-callout jk-callout-blue">
-<strong>Jangan tertukar</strong>
-<p>
-Aktivasi akun bukan pendaftaran NPWP baru. Aktivasi akun juga bukan mekanisme untuk mengubah status Wajib Pajak Nonaktif menjadi Aktif.
-</p>
-</div>
 </section>
 
 <section id="siapa">
