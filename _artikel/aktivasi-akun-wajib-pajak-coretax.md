@@ -53,14 +53,14 @@ custom_js:
 <h2>Apa Itu Aktivasi Akun Coretax?</h2>
 <p>
 Aktivasi akun merupakan proses agar Wajib Pajak memiliki akses untuk menggunakan Coretax DJP.
-Proses aktivasi akun bukan pendaftaran NPWP baru. Aktivasi akun juga bukan mekanisme untuk mengubah status Wajib Pajak Nonaktif menjadi Aktif.
+Proses aktivasi akun bukanlah proses pendaftaran NPWP baru, bukan pula mekanisme untuk mengubah status Wajib Pajak Nonaktif menjadi Aktif.
 </p>
 </section>
 
 <section id="siapa">
 <h2>Siapa yang Perlu Melakukan Aktivasi?</h2>
 <p>
-Aktivasi akun diperlukan bagi setiap orang yang memiliki kepentingan untuk masuk ke dalam sistem Coretax DJP. Baik yang sudah memiliki NPWP ataupun tidak. Proses aktivasi akun tidak akan memengaruhi statu kepemilikan NPWP.</strong>
+Aktivasi akun diperlukan bagi setiap orang yang memiliki kepentingan untuk masuk ke dalam sistem Coretax DJP. Baik yang sudah memiliki NPWP ataupun tidak. Proses aktivasi akun tidak akan memengaruhi statu kepemilikan NPWP.
 </p>
 
 <h3>Sebelum mulai, pastikan memiliki:</h3>
