@@ -62,36 +62,24 @@ custom_js:
 
 <div class="jk-article">
 
-<section id="pengantar">
-<p>
-Pelaporan SPT, penerbitan dokumen tertentu, serta berbagai layanan administrasi di Coretax membutuhkan tanda tangan elektronik. Karena itu, setelah akun Coretax dapat digunakan, salah satu hal penting yang perlu diperiksa adalah apakah pengguna telah mempunyai alat tanda tangan digital yang valid.
-</p>
-<p>
-Di sinilah istilah <strong>Sertifikat Elektronik</strong> dan <strong>Kode Otorisasi DJP</strong> sering tertukar. Keduanya sama-sama dapat digunakan untuk melakukan tanda tangan elektronik dalam pelaksanaan hak dan pemenuhan kewajiban perpajakan, tetapi penerbit dan mekanismenya berbeda.
-</p>
-<p>
-Bagi sebagian besar pengguna Coretax yang tidak memiliki sertifikat elektronik dari Penyelenggara Sertifikasi Elektronik, pilihan yang paling praktis adalah membuat <strong>Kode Otorisasi DJP</strong> melalui akun Coretax masing-masing.
-</p>
-</section>
-
 <section id="pengertian">
-<h2>Apa Itu Sertifikat Elektronik dan Kode Otorisasi DJP?</h2>
+<h2>Apa Itu Kode Otorisasi DJP?</h2>
 <p>
-Peraturan perpajakan membedakan tanda tangan elektronik menjadi tanda tangan elektronik tersertifikasi dan tidak tersertifikasi.
+Untuk penerbitan bukti potong, faktur pajak, pelaporan SPT, dan permohonan layanan administrasi di Coretax dibutuhkan tanda tangan elektronik. Peraturan Menteri Keuangan (PMK) Nomor 81 Tahun 2024 s.t.d.d. PMK 1 Tahun 2026, membagi tanda tangan elektronik ini ke dalam dua jenis, yaitu: (1) Sertifikat Elektronik, dan (2) Kode Otorisasi DJP.
 </p>
 
 <div class="jk-certificate-grid">
 <article class="jk-certificate-card">
 <h3>Sertifikat Elektronik</h3>
 <p>
-Sertifikat elektronik diterbitkan oleh Penyelenggara Sertifikasi Elektronik atau PSrE. Sertifikat tersebut memuat identitas dan tanda tangan elektronik yang dapat digunakan untuk proses autentikasi dan penandatanganan dokumen elektronik.
+Sertifikat elektronik merupakan tanda tangan elektronik yang diterbitkan oleh Penyelenggara Sertifikasi Elektronik (PSrE). Sertifikat ini memuat identitas dan tanda tangan elektronik yang dapat digunakan untuk proses autentikasi dan penandatanganan dokumen elektronik.<br>Contoh: Privi ID, Vida, Vinotex, dan Signature.
 </p>
 </article>
 
 <article class="jk-certificate-card">
 <h3>Kode Otorisasi DJP</h3>
 <p>
-Kode Otorisasi DJP merupakan alat verifikasi dan autentikasi yang diterbitkan oleh Direktorat Jenderal Pajak untuk melakukan tanda tangan elektronik tidak tersertifikasi dalam layanan perpajakan.
+Kode Otorisasi DJP merupakan tanda tangan elektronik tidak tersertifikasi yang diterbitkan oleh Direktorat Jenderal Pajak guna keperluan penandatanganan dokumen perpajakan.
 </p>
 </article>
 </div>
@@ -99,7 +87,7 @@ Kode Otorisasi DJP merupakan alat verifikasi dan autentikasi yang diterbitkan ol
 <div class="jk-callout jk-callout-blue">
 <strong>Catatan Kabayan</strong>
 <p>
-Menu Coretax menggunakan istilah <strong>Permintaan Kode Otorisasi/Sertifikat Elektronik</strong>. Karena itu, jangan langsung menganggap semua pengguna harus membeli atau memperoleh sertifikat dari penyedia eksternal. Pengguna yang tidak mempunyai sertifikat PSrE dapat menggunakan Kode Otorisasi DJP.
+Coretax memfasilitasi penggunaan Sertifikat Elektronik dari PSrE. Bagi wajib pajak yang tidak memiliki sertifikat tersebut, KO DJP dapat menjadi solusi untuk keperluan penandatanganan dokumen perpajakan.
 </p>
 </div>
 </section>
@@ -141,6 +129,11 @@ Menu Coretax menggunakan istilah <strong>Permintaan Kode Otorisasi/Sertifikat El
 <td data-label="Aspek">Penggunaan di Coretax</td>
 <td data-label="Kode Otorisasi DJP">Digunakan untuk menandatangani dokumen perpajakan</td>
 <td data-label="Sertifikat Elektronik">Dapat didaftarkan dan digunakan untuk penandatanganan di Coretax</td>
+</tr>
+<tr>
+<td data-label="Aspek">Biaya</td>
+<td data-label="Kode Otorisasi DJP">Gratis</td>
+<td data-label="Sertifikat Elektronik">Berlangganan dan Berbayar</td>
 </tr>
 </tbody>
 </table>
@@ -184,7 +177,7 @@ Kode Otorisasi melekat pada identitas pengguna. Pada Wajib Pajak Badan, pegawai 
 <section id="cara-mengajukan">
 <h2>Cara Mengajukan Kode Otorisasi DJP di Coretax</h2>
 <p>
-Berdasarkan panduan operasional DJP, permintaan Kode Otorisasi DJP dapat dilakukan langsung dari akun Coretax.
+Berikut adalah panduan permintaan Kode Otorisasi DJP melalui laman Coretax DJP.
 </p>
 
 <section aria-labelledby="judul-panduan-kodjp" class="presentation-section sertel-presentation-section" id="panduan-visual-kodjp">
