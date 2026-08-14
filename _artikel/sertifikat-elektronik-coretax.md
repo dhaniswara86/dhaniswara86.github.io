@@ -69,7 +69,7 @@ Sertifikat elektronik merupakan tanda tangan elektronik yang diterbitkan oleh Pe
 <article class="jk-certificate-card">
 <h3>Kode Otorisasi DJP</h3>
 <p>
-Kode Otorisasi DJP merupakan tanda tangan elektronik tidak tersertifikasi yang diterbitkan oleh Direktorat Jenderal Pajak guna keperluan penandatanganan dokumen perpajakan.
+Kode Otorisasi DJP merupakan tanda tangan elektronik tidak tersertifikasi yang diterbitkan oleh Direktorat Jenderal Pajak guna keperluan penandatanganan dokumen perpajakan. Berbeda dengan sertifikat elektronik dari PSrE yang berbayar, KO DJP dapat diperoleh secara gratis.
 </p>
 </article>
 </div>
