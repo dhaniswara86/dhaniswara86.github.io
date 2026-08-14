@@ -73,7 +73,7 @@ Kode Otorisasi DJP merupakan tanda tangan elektronik tidak tersertifikasi yang d
 <div class="jk-callout jk-callout-blue">
 <strong>Catatan Kabayan</strong>
 <p>
-Coretax memfasilitasi penggunaan <strong>Sertifikat Elektronik dari PSrE</strong>. Namun bagi wajib pajak yang tidak memiliki sertifikat PSrE dapat menggunakan Kode Otorisasi DJP untuk keperluan penandatanganan dokumen perpajakan.
+Coretax memfasilitasi penggunaan Sertifikat Elektronik dari PSrE. Namun bagi wajib pajak yang tidak memiliki sertifikat tersebut dapat menggunakan Kode Otorisasi DJP untuk keperluan penandatanganan dokumen perpajakan.
 </p>
 </div>
 </section>
