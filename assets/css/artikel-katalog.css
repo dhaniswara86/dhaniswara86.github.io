@@ -1,0 +1,155 @@
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; overflow-x: hidden; background: #fff; color: #1d1d1f;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,Helvetica,sans-serif;
+  line-height: 1.47059; letter-spacing: -.015em;
+}
+main { padding-top: var(--nav-height); }
+.article-catalog-hero {
+  position: relative; overflow: hidden; padding: 105px 20px 80px; text-align: center;
+  background: linear-gradient(180deg,#fff 0%,#fff 58%,#f4f7fc 100%);
+}
+.article-catalog-hero::before {
+  position: absolute; top: -175px; left: 50%; width: 800px; height: 520px;
+  border-radius: 50%; content: ""; transform: translateX(-50%);
+  background: radial-gradient(ellipse,rgba(0,113,227,.19),rgba(54,151,255,.07) 45%,transparent 72%);
+  filter: blur(7px); pointer-events: none;
+}
+.article-catalog-hero-inner { position: relative; z-index: 1; width: min(920px,100%); margin: 0 auto; }
+.article-catalog-eyebrow { margin: 0 0 12px; color: #86868b; font-size: 18px; font-weight: 600; }
+.article-catalog-hero h1 {
+  margin: 0; font-size: clamp(50px,8vw,88px); font-weight: 700;
+  letter-spacing: -.065em; line-height: .94;
+}
+.article-catalog-gradient {
+  display: block;
+  background: linear-gradient(90deg,#083b8f,#0071e3 42%,#24a0cf 70%,#e6aa00);
+  background-clip: text; -webkit-background-clip: text; color: transparent;
+}
+.article-catalog-description { max-width: 740px; margin: 25px auto 0; color: #515154; font-size: clamp(19px,2.2vw,25px); line-height: 1.35; }
+
+.article-search-panel {
+  width: min(920px,calc(100% - 40px)); margin: -28px auto 52px; position: relative; z-index: 5;
+  padding: 16px; border: 1px solid rgba(0,0,0,.06); border-radius: 26px;
+  background: rgba(255,255,255,.96); box-shadow: 0 20px 60px rgba(0,0,0,.08);
+}
+.article-search-wrap { position: relative; }
+.article-search-icon { position: absolute; top: 50%; left: 18px; transform: translateY(-50%); color: #86868b; font-size: 20px; pointer-events: none; }
+.article-search-input {
+  width: 100%; min-height: 56px; padding: 14px 50px; border: 0; border-radius: 17px;
+  background: #f5f5f7; color: #1d1d1f; font-size: 17px; outline: none;
+}
+.article-search-input:focus { box-shadow: 0 0 0 4px rgba(0,113,227,.14); }
+.article-clear-search {
+  position: absolute; top: 50%; right: 13px; width: 32px; height: 32px;
+  display: none; place-items: center; border: 0; border-radius: 50%;
+  background: #d2d2d7; color: #515154; transform: translateY(-50%);
+}
+.article-clear-search.visible { display: grid; }
+.article-filter-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 13px; }
+.article-filter-button {
+  min-height: 35px; padding: 7px 14px; border: 0; border-radius: 999px;
+  background: transparent; color: #515154; font-size: 13px; font-weight: 550;
+}
+.article-filter-button:hover { background: #f5f5f7; }
+.article-filter-button.active { background: #1d1d1f; color: #fff; }
+
+.article-featured-section { padding: 28px 20px 95px; }
+.article-featured-section.is-hidden { display: none; }
+.article-section-inner { width: min(1180px,100%); margin: 0 auto; }
+.article-section-heading,.article-catalog-top {
+  display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 32px;
+}
+.article-section-heading p,.article-catalog-top p { margin: 0 0 6px; color: #86868b; font-size: 16px; font-weight: 600; }
+.article-section-heading h2,.article-catalog-top h2 {
+  margin: 0; font-size: clamp(38px,5vw,58px); font-weight: 700; letter-spacing: -.055em; line-height: 1;
+}
+.article-featured-card {
+  position: relative; min-height: 510px; display: grid; grid-template-columns: 1.08fr .92fr;
+  overflow: hidden; border-radius: 34px; background: #1d1d1f; color: #fff;
+}
+.article-featured-copy { display: flex; justify-content: center; flex-direction: column; padding: 62px; }
+.article-featured-category { margin-bottom: 20px; color: #b9dfff; font-size: 12px; font-weight: 650; }
+.article-featured-copy h3 { max-width: 620px; margin: 0; font-size: clamp(38px,5vw,62px); font-weight: 700; letter-spacing: -.055em; line-height: 1; }
+.article-featured-summary { max-width: 600px; margin: 22px 0 0; color: #c7c7cc; font-size: 18px; line-height: 1.5; }
+.article-featured-meta { display: flex; flex-wrap: wrap; gap: 8px 17px; margin-top: 23px; color: #a1a1a6; font-size: 12px; }
+.article-featured-link {
+  display: inline-flex; min-height: 44px; align-items: center; justify-content: center;
+  align-self: flex-start; margin-top: 30px; padding: 10px 21px; border-radius: 999px;
+  background: #0071e3; color: #fff; font-size: 15px; text-decoration: none;
+}
+.article-featured-link:hover { background: #0077ed; }
+.article-featured-visual {
+  position: relative; overflow: hidden;
+  background: radial-gradient(circle at 70% 28%,rgba(255,204,0,.55),transparent 21%),
+              radial-gradient(circle at 30% 82%,rgba(42,155,255,.55),transparent 28%),
+              linear-gradient(145deg,#071a38,#0755a3 56%,#18a5c7);
+}
+.article-featured-document {
+  position: absolute; top: 50%; left: 50%; width: 255px; height: 325px; padding: 37px 31px;
+  border-radius: 12px; background: #fff; color: #1d1d1f;
+  box-shadow: -17px 20px 0 rgba(9,45,93,.72),0 34px 55px rgba(0,0,0,.28);
+  transform: translate(-50%,-47%) perspective(900px) rotateY(-8deg) rotateZ(-3deg);
+}
+.article-featured-document small { display: block; color: #0071e3; font-size: 10px; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
+.article-featured-document strong { display: block; margin-top: 18px; font-size: 29px; letter-spacing: -.05em; line-height: 1.05; }
+.article-document-line { height: 7px; margin-top: 32px; border-radius: 999px; background: #d8d8dd; box-shadow: 0 20px 0 #d8d8dd,0 40px 0 #d8d8dd,0 60px 0 #d8d8dd; }
+
+.article-catalog-section { padding: 95px 20px; background: #f5f5f7; }
+.article-result-count { color: #86868b; font-size: 14px; white-space: nowrap; }
+.article-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 14px; }
+.article-card {
+  min-height: 390px; display: flex; flex-direction: column; justify-content: space-between;
+  padding: 28px; border-radius: 28px; background: #fff;
+  transition: transform .2s ease,box-shadow .2s ease;
+}
+.article-card:hover { box-shadow: 0 18px 48px rgba(0,0,0,.08); transform: translateY(-2px); }
+.article-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+.article-category-chip { display: inline-flex; padding: 5px 9px; border-radius: 999px; background: #eaf4ff; color: #0071e3; font-size: 10px; font-weight: 700; text-transform: uppercase; }
+.article-card h3 { margin: 38px 0 14px; font-size: 28px; font-weight: 650; letter-spacing: -.045em; line-height: 1.08; }
+.article-card h3 a { color: inherit; text-decoration: none; }
+.article-card-summary { margin: 0; color: #6e6e73; font-size: 15px; line-height: 1.55; }
+.article-card-footer { display: flex; align-items: flex-end; justify-content: space-between; gap: 14px; margin-top: 28px; }
+.article-card-meta { color: #86868b; font-size: 11px; line-height: 1.5; }
+.article-card-link { color: #0071e3; font-size: 13px; font-weight: 600; text-decoration: none; }
+.article-empty { display: none; padding: 50px 20px; text-align: center; color: #6e6e73; }
+.article-empty.visible { display: block; }
+
+@media (max-width: 900px) {
+  .article-featured-card { grid-template-columns: 1fr; }
+  .article-featured-visual { min-height: 340px; }
+  .article-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+}
+@media (max-width: 680px) {
+  .article-catalog-hero { padding-top: 82px; }
+  .article-search-panel { width: calc(100% - 28px); }
+  .article-section-heading,.article-catalog-top { align-items: flex-start; flex-direction: column; }
+  .article-featured-copy { padding: 37px 28px; }
+  .article-featured-copy h3 { font-size: 40px; }
+  .article-grid { grid-template-columns: 1fr; }
+  .article-card { min-height: 340px; }
+  .article-filter-row { flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; padding-bottom: 4px; }
+  .article-filter-button { flex-shrink: 0; }
+}
+
+
+/* =========================================================
+   Filter pencarian Artikel V2
+   ========================================================= */
+.article-card.is-search-hidden,
+.article-card[hidden] {
+  display: none !important;
+}
+
+.article-empty.visible {
+  display: block;
+}
+/* =========================================
+   Perbaikan footer kartu artikel
+   ========================================= */
+
+.article-card-footer {
+  background: transparent;
+  color: inherit;
+}

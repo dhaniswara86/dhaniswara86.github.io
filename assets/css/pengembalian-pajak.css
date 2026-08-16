@@ -1,0 +1,200 @@
+/* =========================================================
+   Artikel Pengembalian Pajak yang Seharusnya Tidak Terutang
+   CSS khusus tabel alasan.
+   Dimuat setelah artikel-editorial.css.
+   ========================================================= */
+
+table.reason-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.reason-table th,
+.reason-table td {
+  padding: 16px;
+  border-right: 1px solid var(--soft-gray);
+  border-bottom: 1px solid var(--soft-gray);
+  color: #515154;
+  font-size: 14px;
+  line-height: 1.55;
+  text-align: left;
+  vertical-align: top;
+  overflow-wrap: anywhere;
+}
+
+.reason-table th:last-child,
+.reason-table td:last-child {
+  border-right: 0;
+}
+
+.reason-table th {
+  background: #111113;
+  color: var(--white);
+  font-size: 11px;
+  font-weight: 680;
+  letter-spacing: 0.035em;
+  text-transform: uppercase;
+}
+
+.reason-table th:nth-child(1) {
+  width: 23%;
+}
+
+.reason-table th:nth-child(2) {
+  width: 24%;
+}
+
+.reason-table th:nth-child(3) {
+  width: 25%;
+}
+
+.reason-table th:nth-child(4) {
+  width: 28%;
+}
+
+.reason-table tbody.reason-group tr:nth-child(even) {
+  background: #fbfbfd;
+}
+
+.reason-table tbody.reason-group tr:hover {
+  background: #eef6ff;
+}
+
+.reason-table tbody.reason-group + tbody.reason-group tr:first-child td {
+  border-top: 3px solid var(--blue);
+}
+
+.reason-table .alasan-cell {
+  background: linear-gradient(145deg, #f7fbff, #eef6ff);
+  color: var(--near-black);
+  font-weight: 720;
+}
+
+.reason-table .alasan-cell .law {
+  display: block;
+  margin-top: 10px;
+  color: var(--blue);
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.reason-table .detail-cell strong {
+  color: var(--near-black);
+}
+
+.reason-table ul {
+  margin: 8px 0 0;
+  padding-left: 18px;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.reason-table li + li {
+  margin-top: 5px;
+}
+
+.deposit-table .alasan-cell {
+  background: var(--orange-soft);
+}
+
+/* Mobile: satu kelompok alasan menjadi satu kartu */
+@media (max-width: 760px) {
+  .table-wrap:has(.reason-table) {
+    overflow: visible;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  table.reason-table,
+  .reason-table tbody,
+  .reason-table tr,
+  .reason-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .reason-table {
+    min-width: 0 !important;
+    table-layout: auto !important;
+  }
+
+  .reason-table thead {
+    display: none;
+  }
+
+  .reason-table tbody.reason-group {
+    display: block;
+    overflow: hidden;
+    margin-bottom: 16px;
+    border: 1px solid var(--soft-gray);
+    border-radius: 19px;
+    background: var(--white);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.055);
+  }
+
+  .reason-table tbody.reason-group tr,
+  .reason-table tbody.reason-group tr:nth-child(even),
+  .reason-table tbody.reason-group tr:hover {
+    display: block;
+    background: var(--white);
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .reason-table tbody.reason-group + tbody.reason-group tr:first-child td {
+    border-top: 0;
+  }
+
+  .reason-table td {
+    width: 100% !important;
+    min-width: 0 !important;
+    padding: 13px 15px;
+    border-right: 0;
+    border-bottom: 1px solid var(--soft-gray);
+    overflow-wrap: anywhere;
+  }
+
+  .reason-table tr:last-child td:last-child {
+    border-bottom: 0;
+  }
+
+  .reason-table td::before {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--medium-gray);
+    content: attr(data-label);
+    font-size: 10px;
+    font-weight: 750;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .reason-table .alasan-cell {
+    padding: 17px 15px;
+    background: linear-gradient(145deg, #f7fbff, #eef6ff);
+    font-size: 16px;
+  }
+
+  .reason-table .alasan-cell::before {
+    color: var(--blue);
+  }
+
+  .reason-table .detail-cell {
+    padding-top: 16px;
+  }
+
+  .deposit-table .alasan-cell {
+    background: var(--orange-soft);
+  }
+}
+
+@media print {
+  .reason-table th {
+    background: #eeeeee !important;
+    color: #000000 !important;
+  }
+}
