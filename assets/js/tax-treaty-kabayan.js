@@ -1,0 +1,32 @@
+(() => {
+  const state={step:1,direction:'',income:'',country:'',countryLabel:'',resident:'',dgt:'',bo:'',abuse:'',currency:'IDR',amount:'',date:''};
+  const incomeLabels={dividend:'Dividen',interest:'Bunga',royalty:'Royalti'};
+  const directionLabels={outbound:'Indonesia membayar ke luar negeri',inbound:'Indonesia menerima dari luar negeri'};
+  const panels=[...document.querySelectorAll('.wizard-panel')];
+  const rails=[...document.querySelectorAll('.rail-step')];
+  function go(step){state.step=step;panels.forEach(p=>{const active=Number(p.dataset.step)===step;p.hidden=!active;p.classList.toggle('is-active',active)});rails.forEach((r,i)=>{r.classList.toggle('is-active',i+1===step);r.classList.toggle('is-complete',i+1<step)});document.getElementById('analisis').scrollIntoView({behavior:'smooth',block:'start'});if(step===5) renderResult()}
+  document.querySelector('[data-direction="outbound"]').addEventListener('click',e=>{state.direction='outbound';document.querySelectorAll('[data-direction]').forEach(b=>b.classList.remove('is-selected'));e.currentTarget.classList.add('is-selected');document.getElementById('incomeQuestion').hidden=false;checkStep1()});
+  document.querySelectorAll('[data-income]').forEach(b=>b.addEventListener('click',e=>{state.income=e.currentTarget.dataset.income;document.querySelectorAll('[data-income]').forEach(x=>x.classList.remove('is-selected'));e.currentTarget.classList.add('is-selected');checkStep1()}));
+  function checkStep1(){document.getElementById('toStep2').disabled=!(state.direction&&state.income)}
+  document.getElementById('toStep2').addEventListener('click',()=>go(2));
+  document.querySelectorAll('[data-country]').forEach(b=>b.addEventListener('click',e=>{state.country=e.currentTarget.dataset.country;state.countryLabel=e.currentTarget.dataset.label;document.querySelectorAll('[data-country]').forEach(x=>x.classList.remove('is-selected'));e.currentTarget.classList.add('is-selected');document.getElementById('toStep3').disabled=false}));
+  document.getElementById('countrySearch').addEventListener('input',e=>{const q=e.target.value.toLowerCase().trim();document.querySelectorAll('[data-country]').forEach(b=>{b.hidden=q&&!(`${b.dataset.label} ${b.dataset.country}`.toLowerCase().includes(q))})});
+  document.getElementById('toStep3').addEventListener('click',()=>go(3));
+  document.querySelectorAll('.segmented').forEach(group=>group.querySelectorAll('button').forEach(btn=>btn.addEventListener('click',()=>{group.querySelectorAll('button').forEach(x=>x.classList.remove('is-selected'));btn.classList.add('is-selected');state[group.dataset.field]=btn.dataset.value;checkStep3()})));
+  function checkStep3(){document.getElementById('toStep4').disabled=!['resident','dgt','bo','abuse'].every(k=>state[k])}
+  document.getElementById('toStep4').addEventListener('click',()=>go(4));
+  const amount=document.getElementById('grossAmount'),date=document.getElementById('transactionDate'),currency=document.getElementById('currency');
+  function checkStep4(){state.amount=amount.value.trim();state.date=date.value;state.currency=currency.value;document.getElementById('toStep5').disabled=!(state.amount&&state.date)}
+  [amount,date,currency].forEach(el=>el.addEventListener('input',checkStep4));currency.addEventListener('change',checkStep4);
+  amount.addEventListener('input',()=>{const raw=amount.value.replace(/[^0-9]/g,'');amount.value=raw?new Intl.NumberFormat('id-ID').format(Number(raw)):'';checkStep4()});
+  document.getElementById('toStep5').addEventListener('click',()=>go(5));
+  document.querySelectorAll('[data-back]').forEach(b=>b.addEventListener('click',()=>go(Number(b.dataset.back))));
+  document.querySelectorAll('[data-step-jump]').forEach(b=>b.addEventListener('click',()=>{const n=Number(b.dataset.stepJump);if(n<=state.step)go(n)}));
+  function yesNo(v){return v==='yes'?'Ya':v==='no'?'Tidak':'Belum tahu'}
+  function renderResult(){document.getElementById('summaryDirection').textContent=directionLabels[state.direction]||'—';document.getElementById('summaryIncome').textContent=incomeLabels[state.income]||'—';document.getElementById('summaryCountry').textContent=state.countryLabel||'—';document.getElementById('summaryAmount').textContent=`${state.currency} ${state.amount||'—'}`;document.getElementById('resultHeadline').textContent=`${incomeLabels[state.income]||'Transaksi'} · Indonesia – ${state.countryLabel||'Negara mitra'}`;const nodes=[['Transaksi',incomeLabels[state.income]],['Negara',state.countryLabel],['Residence',yesNo(state.resident)],['Form DGT',yesNo(state.dgt)],['Beneficial owner',yesNo(state.bo)],['Treaty abuse',yesNo(state.abuse)],['Rule engine','Belum aktif']];document.getElementById('traceTrack').innerHTML=nodes.map((n,i)=>`<div class="trace-node"><small>${n[0]}</small><strong>${n[1]||'—'}</strong></div>${i<nodes.length-1?'<span class="trace-arrow">›</span>':''}`).join('')}
+  document.getElementById('resetWizard').addEventListener('click',()=>location.reload());
+  const year=document.getElementById('currentYear');if(year)year.textContent=new Date().getFullYear();
+
+  const menuToggle=document.getElementById('menuToggle'),mobileMenu=document.getElementById('mobileMenu');if(menuToggle&&mobileMenu){menuToggle.addEventListener('click',()=>{const open=mobileMenu.classList.toggle('active');document.body.classList.toggle('menu-open',open);menuToggle.setAttribute('aria-expanded',String(open));menuToggle.textContent=open?'×':'☰'});mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mobileMenu.classList.remove('active');document.body.classList.remove('menu-open');menuToggle.textContent='☰'}))}
+  const trigger=document.getElementById('collectionSearchTrigger'),mega=document.getElementById('collectionMegaMenu'),backdrop=document.getElementById('megaMenuBackdrop'),close=document.getElementById('megaMenuClose');function setMega(open){mega.classList.toggle('active',open);backdrop.classList.toggle('active',open);document.body.classList.toggle('mega-menu-open',open);trigger.setAttribute('aria-expanded',String(open));mega.setAttribute('aria-hidden',String(!open));backdrop.setAttribute('aria-hidden',String(!open))}if(trigger&&mega&&backdrop){trigger.addEventListener('click',()=>setMega(!mega.classList.contains('active')));backdrop.addEventListener('click',()=>setMega(false));close?.addEventListener('click',()=>setMega(false));mega.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setMega(false)));document.addEventListener('keydown',e=>{if(e.key==='Escape')setMega(false)})}
+})();
