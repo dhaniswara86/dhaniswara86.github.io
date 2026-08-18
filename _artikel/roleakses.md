@@ -31,8 +31,6 @@ summary_label: "Ringkasan cepat"
 summary: "Role akses bukan sekadar menu teknis. Fitur ini membagi kewenangan berdasarkan pengguna, jenis dokumen, tahapan pekerjaan, dan dalam kondisi tertentu lokasi atau tempat kegiatan usaha."
 
 hero_links:
-  - label: "Mulai membaca"
-    href: "#pengantar"
   - label: "Daftar role"
     href: "#daftar-role-akses"
   - label: "Panduan visual"
