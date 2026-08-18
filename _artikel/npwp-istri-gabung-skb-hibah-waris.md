@@ -8,7 +8,7 @@ hero_accent: "Kalau perlu SKB Hibah atau Waris, akun siapa yang digunakan?"
 excerpt: "NPWP istri yang digabung dengan suami dapat berstatus Belum Aktif (SPDN) atau Nonaktif. Namun, istri tetap dapat memiliki akses Coretax sendiri untuk memperoleh layanan perpajakan tertentu."
 description: "Panduan memahami status NPWP istri gabung suami, Data Unit Keluarga, akses Coretax istri, serta pengajuan SKB PPh atas hibah atau waris tanah dan bangunan."
 
-category: "Administrasi Perpajakan"
+category: "Administrasi Pajak"
 
 tags:
   - Coretax
