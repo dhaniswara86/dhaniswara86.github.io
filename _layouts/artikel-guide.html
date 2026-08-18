@@ -1,0 +1,120 @@
+---
+---
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  {% assign meta_description = page.description | default: page.excerpt | default: site.description %}
+  <title>{{ page.title | escape }} | Kabayan</title>
+  <meta name="description" content="{{ meta_description | strip_html | normalize_whitespace | escape }}">
+  <meta name="author" content="{{ page.author | default: site.author.name | default: 'Angga Sukma Dhaniswara' | escape }}">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#f8fafc">
+
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="{{ page.title | escape }}">
+  <meta property="og:description" content="{{ meta_description | strip_html | normalize_whitespace | escape }}">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta property="og:locale" content="id_ID">
+  <meta property="og:site_name" content="Kabayan by Angga Sukma Dhaniswara">
+
+  {% if page.image %}
+    <meta property="og:image" content="{{ page.image | absolute_url }}">
+  {% endif %}
+
+  <link rel="stylesheet" href="{{ '/assets/css/kabayan-nav.css' | relative_url }}?v=20260808-3">
+  <link rel="stylesheet" href="{{ '/assets/css/artikel-guide.css' | relative_url }}?v=20260818-1">
+
+  {% if page.custom_css %}
+    {% for css in page.custom_css %}
+      <link rel="stylesheet" href="{{ css | relative_url }}">
+    {% endfor %}
+  {% endif %}
+</head>
+
+<body class="guide-page" id="top">
+  <div class="guide-reading-progress" id="guideReadingProgress" aria-hidden="true"></div>
+
+  {% include site-header.html %}
+
+  <main>
+    <article class="guide-article">
+      <header class="guide-hero">
+        <div class="guide-container">
+          <div class="guide-hero-copy">
+            <div class="guide-kicker">{{ page.category | default: "Panduan" }}</div>
+
+            <h1>{{ page.title }}</h1>
+
+            {% if page.excerpt or page.description %}
+              <p class="guide-hero-lead">{{ page.excerpt | default: page.description }}</p>
+            {% endif %}
+
+            <div class="guide-meta">
+              <span>{{ page.author | default: site.author.name | default: "Angga Sukma Dhaniswara" }}</span>
+              {% if page.reading_time %}<span>{{ page.reading_time }}</span>{% endif %}
+              {% if page.date_modified %}<span>Diperbarui {{ page.date_modified | date: "%d-%m-%Y" }}</span>{% endif %}
+            </div>
+
+            {% if page.guide_links %}
+              <nav class="guide-jump-nav" aria-label="Topik utama">
+                {% for item in page.guide_links %}
+                  <a href="{{ item.href }}">{{ item.label }}</a>
+                {% endfor %}
+              </nav>
+            {% endif %}
+          </div>
+        </div>
+      </header>
+
+      <div class="guide-container guide-shell">
+        <aside class="guide-sidebar">
+          <div class="guide-sidebar-inner">
+            <div class="guide-sidebar-label">Dalam panduan ini</div>
+            <nav class="guide-toc" id="guideToc" aria-label="Daftar isi"></nav>
+
+            <div class="guide-sidebar-actions">
+              <button type="button" id="guideCopyLink">Salin tautan</button>
+              <button type="button" onclick="window.print()">Cetak</button>
+            </div>
+          </div>
+        </aside>
+
+        <div class="guide-content" id="guideContent" data-guide-content>
+          {% if page.summary %}
+            <aside class="guide-summary">
+              <div class="guide-summary-label">{{ page.summary_label | default: "Ringkasan" }}</div>
+              <p>{{ page.summary }}</p>
+            </aside>
+          {% endif %}
+
+          {{ content }}
+
+          {% if page.tags %}
+            <div class="guide-tags" aria-label="Topik">
+              {% for tag in page.tags %}
+                <span>{{ tag }}</span>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </article>
+  </main>
+
+  {% include site-footer.html %}
+
+  <script src="{{ '/assets/js/kabayan-nav.js' | relative_url }}?v=20260808-3"></script>
+  <script src="{{ '/assets/js/artikel-guide.js' | relative_url }}?v=20260818-1"></script>
+
+  {% if page.custom_js %}
+    {% for js in page.custom_js %}
+      <script src="{{ js | relative_url }}"></script>
+    {% endfor %}
+  {% endif %}
+</body>
+</html>
