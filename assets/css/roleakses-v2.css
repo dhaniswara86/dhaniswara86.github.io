@@ -1,0 +1,1367 @@
+/* =========================================================
+   ROLE AKSES CORETAX — ARTIKEL V2
+   Semua selector dibatasi ke .role-article agar tidak mengubah
+   artikel Kabayan lainnya.
+   ========================================================= */
+
+.role-article,
+.role-article * {
+  font-family: inherit;
+}
+
+/* Isi umum */
+.role-article p {
+  color: #333336;
+}
+
+.role-article .question-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 13px;
+  margin: 25px 0 31px;
+}
+
+.role-article .question-card {
+  min-height: 135px;
+  padding: 22px;
+  border: 1px solid var(--soft-gray);
+  border-radius: 20px;
+  background: var(--white);
+}
+
+.role-article .question-number {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  margin-bottom: 14px;
+  place-items: center;
+  border-radius: 9px;
+  background: #eaf4ff;
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.role-article .question-card p {
+  margin: 0;
+  color: var(--near-black);
+  font-size: 16px;
+  font-weight: 620;
+  line-height: 1.42;
+}
+
+.role-article .callout {
+  margin: 32px 0;
+  padding: 23px 25px;
+  border-radius: 22px;
+}
+
+.role-article .callout strong {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 16px;
+  letter-spacing: -0.02em;
+}
+
+.role-article .callout p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.58;
+}
+
+.role-article .callout-blue {
+  border: 1px solid #d5e7f8;
+  background: #eef6ff;
+  color: #31536f;
+}
+
+.role-article .callout-orange {
+  border: 1px solid #f2dfbd;
+  background: #fff7e8;
+  color: #6d4b14;
+}
+
+.role-article .callout-green {
+  border: 1px solid #cfe8d3;
+  background: #edf8ef;
+  color: #315f3a;
+}
+
+/* Drafter vs Signer */
+.role-article .role-comparison {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin: 28px 0 34px;
+}
+
+.role-article .role-card {
+  position: relative;
+  min-height: 330px;
+  padding: 27px;
+  overflow: hidden;
+  border-radius: 25px;
+}
+
+.role-article .role-card.drafter {
+  border: 1px solid #d8e8f7;
+  background: #f2f8ff;
+}
+
+.role-article .role-card.signer {
+  border: 1px solid #e4d6ed;
+  background: #f5eff9;
+}
+
+.role-article .role-icon {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  margin-bottom: 20px;
+  place-items: center;
+  border-radius: 15px;
+  background: #fff;
+  box-shadow: 0 7px 20px rgba(0, 0, 0, .07);
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.role-article .drafter .role-icon { color: var(--blue); }
+.role-article .signer .role-icon { color: #8944ab; }
+
+.role-article .role-card h3 {
+  margin: 0 0 12px;
+  font-size: 27px;
+}
+
+.role-article .role-card > p {
+  margin: 0 0 16px;
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.role-article .role-card ul {
+  margin-bottom: 0;
+  padding-left: 20px;
+  font-size: 15px;
+  line-height: 1.52;
+}
+
+/* Chips */
+.role-article .service-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 24px 0 32px;
+}
+
+.role-article .service-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 13px;
+  border: 1px solid var(--soft-gray);
+  border-radius: 999px;
+  background: #fff;
+  color: #515154;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.role-article .service-chip::before {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--blue);
+  content: "";
+}
+
+/* Accordion masalah */
+.role-article .problem-list {
+  display: grid;
+  gap: 12px;
+  margin: 29px 0 36px;
+}
+
+.role-article .problem-item {
+  overflow: hidden;
+  border: 1px solid var(--soft-gray);
+  border-radius: 20px;
+  background: #fff;
+}
+
+.role-article .problem-button {
+  width: 100%;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 37px minmax(0, 1fr) 24px;
+  gap: 13px;
+  padding: 19px 21px;
+  border: 0;
+  background: transparent;
+  color: var(--near-black);
+  cursor: pointer;
+  text-align: left;
+}
+
+.role-article .problem-index {
+  width: 37px;
+  height: 37px;
+  display: grid;
+  place-items: center;
+  border-radius: 11px;
+  background: var(--off-white);
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.role-article .problem-title {
+  font-size: 16px;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  line-height: 1.35;
+}
+
+.role-article .problem-symbol {
+  color: var(--medium-gray);
+  font-size: 22px;
+  transition: transform .2s ease;
+}
+
+.role-article .problem-item.open .problem-symbol {
+  transform: rotate(45deg);
+}
+
+.role-article .problem-content {
+  display: none;
+  padding: 0 23px 22px 71px;
+}
+
+.role-article .problem-item.open .problem-content {
+  display: block;
+}
+
+.role-article .problem-content p {
+  margin-bottom: 14px;
+  color: #515154;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Flow kontrol */
+.role-article .control-flow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin: 29px 0 35px;
+}
+
+.role-article .control-step {
+  position: relative;
+  min-height: 130px;
+  display: grid;
+  align-content: center;
+  padding: 18px 14px;
+  border: 1px solid var(--soft-gray);
+  border-radius: 19px;
+  background: #fff;
+  text-align: center;
+}
+
+.role-article .control-step:not(:last-child)::after {
+  position: absolute;
+  top: 50%;
+  right: -15px;
+  z-index: 2;
+  color: #b6b6ba;
+  content: "›";
+  font-size: 25px;
+  transform: translateY(-50%);
+}
+
+.role-article .control-step strong {
+  display: block;
+  color: var(--near-black);
+  font-size: 15px;
+}
+
+.role-article .control-step span {
+  display: block;
+  margin-top: 7px;
+  color: var(--medium-gray);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+/* Checklist evaluasi */
+.role-article .check-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 11px;
+  margin: 25px 0 33px;
+  padding: 0;
+  list-style: none;
+}
+
+.role-article .check-list li {
+  position: relative;
+  min-height: 58px;
+  margin: 0;
+  padding: 15px 16px 15px 48px;
+  border: 1px solid var(--soft-gray);
+  border-radius: 16px;
+  background: #fff;
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.role-article .check-list li::before {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: #eaf4ff;
+  color: var(--blue);
+  content: "✓";
+  font-size: 12px;
+  font-weight: 800;
+}
+
+/* Closing box */
+.role-article .closing-box {
+  margin-top: 70px;
+  padding: 36px;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 90% 10%, rgba(39,160,210,.17), transparent 30%),
+    linear-gradient(145deg, #071a38, #0b315e);
+  color: #fff;
+}
+
+.role-article .closing-box h2 {
+  margin-top: 0;
+  color: #fff;
+}
+
+.role-article .closing-box p {
+  color: #dbe9f7;
+}
+
+/* =========================================================
+   DIREKTORI ROLE AKSES — 3 KOLOM
+   ========================================================= */
+
+.role-article .role-access-section {
+  margin: 76px 0 52px;
+  scroll-margin-top: 86px;
+}
+
+.role-article .role-access-heading {
+  margin-bottom: 25px;
+}
+
+.role-article .role-access-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 12px;
+  padding: 7px 11px;
+  border-radius: 999px;
+  background: #eef6ff;
+  color: var(--blue);
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.role-article .role-access-heading h2 {
+  margin: 0 0 15px;
+}
+
+.role-article .role-access-heading p {
+  max-width: 720px;
+  margin: 0;
+  color: #515154;
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+/* Gambar petunjuk PIC */
+.role-article .role-pic-guide-intro {
+  margin-bottom: 16px;
+}
+
+.role-article .role-inline-figure {
+  margin: 20px 0 32px;
+}
+
+.role-article .role-inline-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid rgba(0,0,0,.07);
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 18px 44px rgba(20,43,76,.08);
+}
+
+.role-article .role-inline-figure figcaption {
+  margin-top: 10px;
+  color: #6e6e73;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+/* Search + filter */
+.role-article .role-access-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(240px, .9fr);
+  gap: 14px;
+  margin: 24px 0 12px;
+  padding: 15px;
+  border: 1px solid rgba(0,0,0,.06);
+  border-radius: 21px;
+  background: rgba(255,255,255,.92);
+  box-shadow: 0 14px 42px rgba(0,0,0,.055);
+}
+
+.role-article .role-search-wrapper,
+.role-article .role-filter-wrapper {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.role-article .role-access-controls label {
+  color: #515154;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.role-article .role-access-controls input,
+.role-article .role-access-controls select {
+  width: 100%;
+  min-width: 0;
+  min-height: 45px;
+  box-sizing: border-box;
+  padding: 10px 13px;
+  border: 1px solid #d2d2d7;
+  border-radius: 13px;
+  background: var(--off-white);
+  color: var(--near-black);
+  font: inherit;
+  font-size: 14px;
+}
+
+.role-article .role-access-controls input:focus,
+.role-article .role-access-controls select:focus {
+  border-color: var(--blue);
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(0,113,227,.12);
+  outline: none;
+}
+
+.role-article .role-result-info {
+  margin: 0 0 11px;
+  color: var(--medium-gray);
+  font-size: 13px;
+}
+
+/* Wrapper tabel */
+.role-article .role-table-wrapper {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,.07);
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: 0 20px 55px rgba(20,43,76,.08);
+}
+
+/* Tabel selalu mengikuti lebar article-body, tidak pernah min-width 850px */
+.article-body .role-article #roleDirectoryTable {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  table-layout: fixed !important;
+  background: #fff !important;
+  font-family: inherit !important;
+  font-size: 14px !important;
+}
+
+/* Proporsi final */
+.article-body .role-article #roleDirectoryTable col.role-col-number {
+  width: 7%;
+}
+
+.article-body .role-article #roleDirectoryTable col.role-col-name {
+  width: 37%;
+}
+
+.article-body .role-article #roleDirectoryTable col.role-col-function {
+  width: 56%;
+}
+
+/* Reset gaya tabel global */
+.article-body .role-article #roleDirectoryTable thead {
+  display: table-header-group !important;
+}
+
+.article-body .role-article #roleDirectoryTable tbody {
+  display: table-row-group !important;
+  padding: 0 !important;
+  background: #fff !important;
+}
+
+.article-body .role-article #roleDirectoryTable tr,
+.article-body .role-article #roleDirectoryTable tbody tr,
+.article-body .role-article #roleDirectoryTable tbody tr:nth-child(odd),
+.article-body .role-article #roleDirectoryTable tbody tr:nth-child(even),
+.article-body .role-article #roleDirectoryTable tbody tr:hover {
+  display: table-row !important;
+  height: auto !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: #fff !important;
+  box-shadow: none !important;
+}
+
+.article-body .role-article #roleDirectoryTable th,
+.article-body .role-article #roleDirectoryTable td,
+.article-body .role-article #roleDirectoryTable tbody tr:nth-child(even) td,
+.article-body .role-article #roleDirectoryTable tbody tr:hover td {
+  display: table-cell !important;
+  box-sizing: border-box !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  height: auto !important;
+  padding: 15px 16px !important;
+  border-top: 0 !important;
+  border-left: 0 !important;
+  border-right: 1px solid #e8e8ed !important;
+  border-bottom: 1px solid #e8e8ed !important;
+  background: #fff !important;
+  color: #515154 !important;
+  font-family: inherit !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  line-height: 1.55 !important;
+  letter-spacing: normal !important;
+  text-align: left !important;
+  text-transform: none !important;
+  vertical-align: middle !important;
+  white-space: normal !important;
+  word-break: normal !important;
+  overflow-wrap: anywhere !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+}
+
+.article-body .role-article #roleDirectoryTable th:last-child,
+.article-body .role-article #roleDirectoryTable td:last-child {
+  border-right: 0 !important;
+}
+
+.article-body .role-article #roleDirectoryTable tbody tr:last-child td {
+  border-bottom: 0 !important;
+}
+
+.article-body .role-article #roleDirectoryTable thead th {
+  padding-top: 16px !important;
+  padding-bottom: 16px !important;
+  background: #111113 !important;
+  color: #fff !important;
+  font-size: 11px !important;
+  font-weight: 720 !important;
+  letter-spacing: .045em !important;
+  text-transform: uppercase !important;
+  vertical-align: middle !important;
+}
+
+.article-body .role-article #roleDirectoryTable td strong {
+  display: block !important;
+  max-width: 100% !important;
+  color: var(--near-black) !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  line-height: 1.48 !important;
+  white-space: normal !important;
+  overflow-wrap: anywhere !important;
+}
+
+/* Nomor: konsisten tepat di tengah */
+.article-body .role-article #roleDirectoryTable th.role-number,
+.article-body .role-article #roleDirectoryTable td.role-number,
+.article-body .role-article #roleDirectoryTable tbody tr:nth-child(odd) td.role-number,
+.article-body .role-article #roleDirectoryTable tbody tr:nth-child(even) td.role-number,
+.article-body .role-article #roleDirectoryTable tbody tr:hover td.role-number {
+  width: auto !important;
+  padding-left: 6px !important;
+  padding-right: 6px !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+  white-space: nowrap !important;
+  font-variant-numeric: tabular-nums !important;
+}
+
+/* Hidden hasil filter harus menang atas display:table-row */
+.article-body .role-article #roleDirectoryTable tr.is-role-hidden,
+.article-body .role-article #roleDirectoryTable tr[hidden] {
+  display: none !important;
+}
+
+.role-article .role-empty-state {
+  margin-top: 14px;
+  padding: 28px;
+  border: 1px dashed #bfcddd;
+  border-radius: 20px;
+  background: #fff;
+  text-align: center;
+}
+
+.role-article .role-empty-state p {
+  margin: 7px 0 0;
+  color: var(--medium-gray);
+  font-size: 14px;
+}
+
+.role-article .role-access-note {
+  margin-top: 16px;
+  padding: 17px 18px;
+  border: 1px solid #d9e9f8;
+  border-radius: 17px;
+  background: #eef6ff;
+  color: #31536f;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* =========================================================
+   PRESENTASI
+   ========================================================= */
+.role-article .presentation-section {
+  margin: 78px 0 48px;
+  scroll-margin-top: 86px;
+}
+
+.role-article .presentation-heading {
+  margin-bottom: 25px;
+}
+
+.role-article .presentation-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 12px;
+  padding: 7px 11px;
+  border-radius: 999px;
+  background: #eef6ff;
+  color: var(--blue);
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.role-article .presentation-heading p {
+  max-width: 720px;
+  margin: 0;
+  color: #515154;
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+.role-article .presentation-viewer {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,.07);
+  border-radius: 26px;
+  background: #111113;
+  box-shadow: 0 26px 70px rgba(20,43,76,.16);
+  outline: none;
+}
+
+.role-article .presentation-viewer:fullscreen {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  border: 0;
+  border-radius: 0;
+  background: #000;
+}
+
+.role-article .presentation-viewer:fullscreen .presentation-stage {
+  flex: 1;
+  min-height: 0;
+}
+
+.role-article .presentation-toolbar {
+  min-height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 10px 14px 10px 18px;
+  border-bottom: 1px solid rgba(255,255,255,.09);
+  background: #1d1d1f;
+  color: #d2d2d7;
+}
+
+.role-article .presentation-page-info {
+  font-size: 12px;
+}
+
+.role-article .presentation-page-info strong {
+  color: #fff;
+}
+
+.role-article .presentation-toolbar-actions {
+  display: flex;
+  gap: 7px;
+}
+
+.role-article .presentation-tool-button {
+  min-height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 11px;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 999px;
+  background: rgba(255,255,255,.07);
+  color: #fff;
+  cursor: pointer;
+  font-size: 11px;
+  text-decoration: none;
+}
+
+.role-article .presentation-stage {
+  position: relative;
+  min-height: 420px;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 54px minmax(0, 1fr) 54px;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(0,113,227,.18), transparent 48%),
+    #08080a;
+  touch-action: pan-y;
+}
+
+.role-article .presentation-slide {
+  min-width: 0;
+  margin: 0;
+  padding: 23px 6px 15px;
+  text-align: center;
+}
+
+.role-article .presentation-slide img {
+  width: 100%;
+  max-height: 535px;
+  display: block;
+  margin: 0 auto;
+  border-radius: 9px;
+  background: #fff;
+  object-fit: contain;
+  box-shadow: 0 20px 45px rgba(0,0,0,.38);
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.role-article .presentation-slide figcaption {
+  min-height: 32px;
+  margin-top: 13px;
+  color: #a1a1a6;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.role-article .presentation-nav {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  justify-self: center;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 50%;
+  background: rgba(255,255,255,.09);
+  color: #fff;
+  cursor: pointer;
+  font-size: 28px;
+}
+
+.role-article .presentation-nav:disabled {
+  opacity: .35;
+}
+
+.role-article .presentation-thumbnails {
+  display: flex;
+  gap: 9px;
+  max-width: 100%;
+  overflow-x: auto;
+  padding: 12px 14px 15px;
+  border-top: 1px solid rgba(255,255,255,.08);
+  background: #1d1d1f;
+}
+
+.role-article .presentation-thumb {
+  position: relative;
+  width: 82px;
+  min-width: 82px;
+  height: 56px;
+  overflow: hidden;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  opacity: .58;
+}
+
+.role-article .presentation-thumb.active {
+  border-color: #52a7ff;
+  opacity: 1;
+}
+
+.role-article .presentation-thumb img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.role-article .presentation-thumb span {
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  min-width: 19px;
+  height: 19px;
+  display: grid;
+  place-items: center;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: rgba(0,0,0,.74);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.role-article .presentation-error {
+  padding: 16px;
+  border-top: 1px solid rgba(255,255,255,.08);
+  background: #3a1518;
+  color: #ffd7d9;
+  font-size: 13px;
+  text-align: center;
+}
+
+.role-article .presentation-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 11px;
+  margin-top: 22px;
+}
+
+.role-article .presentation-note {
+  margin-top: 17px;
+  padding: 17px 18px;
+  border: 1px solid #f0dfb9;
+  border-radius: 17px;
+  background: #fff7e8;
+  color: #6d4b14;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* =========================================================
+   RESPONSIVE ROLE AKSES
+   ========================================================= */
+
+@media (max-width: 760px) {
+  .role-article .question-grid,
+  .role-article .role-comparison,
+  .role-article .check-list {
+    grid-template-columns: 1fr;
+  }
+
+  .role-article .control-flow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .role-article .control-step:nth-child(2)::after {
+    display: none;
+  }
+
+  .role-article .role-access-controls {
+    grid-template-columns: 1fr;
+  }
+
+  /* Tabel berubah menjadi kartu tiga informasi */
+  .role-article .role-table-wrapper {
+    overflow: visible;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .article-body .role-article #roleDirectoryTable {
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    background: transparent !important;
+  }
+
+  .article-body .role-article #roleDirectoryTable colgroup,
+  .article-body .role-article #roleDirectoryTable thead {
+    display: none !important;
+  }
+
+  .article-body .role-article #roleDirectoryTable tbody {
+    display: grid !important;
+    width: 100% !important;
+    gap: 14px !important;
+    background: transparent !important;
+  }
+
+  .article-body .role-article #roleDirectoryTable tbody tr,
+  .article-body .role-article #roleDirectoryTable tbody tr:nth-child(odd),
+  .article-body .role-article #roleDirectoryTable tbody tr:nth-child(even),
+  .article-body .role-article #roleDirectoryTable tbody tr:hover {
+    display: block !important;
+    width: 100% !important;
+    overflow: hidden !important;
+    border: 1px solid var(--soft-gray) !important;
+    border-radius: 19px !important;
+    background: #fff !important;
+    box-shadow: 0 12px 32px rgba(0,0,0,.055) !important;
+  }
+
+  .article-body .role-article #roleDirectoryTable tbody tr.is-role-hidden,
+  .article-body .role-article #roleDirectoryTable tbody tr[hidden] {
+    display: none !important;
+  }
+
+  .article-body .role-article #roleDirectoryTable tbody td,
+  .article-body .role-article #roleDirectoryTable tbody td.role-number,
+  .article-body .role-article #roleDirectoryTable tbody tr:nth-child(even) td,
+  .article-body .role-article #roleDirectoryTable tbody tr:hover td {
+    position: relative !important;
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 36px 15px 12px !important;
+    border-right: 0 !important;
+    border-bottom: 1px solid var(--soft-gray) !important;
+    background: #fff !important;
+    color: #515154 !important;
+    font-size: 14px !important;
+    line-height: 1.52 !important;
+    text-align: left !important;
+    vertical-align: top !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  .article-body .role-article #roleDirectoryTable tbody td:last-child {
+    border-bottom: 0 !important;
+  }
+
+  .article-body .role-article #roleDirectoryTable tbody td::before {
+    position: absolute !important;
+    top: 11px !important;
+    left: 15px !important;
+    display: block !important;
+    width: auto !important;
+    color: var(--medium-gray) !important;
+    font-size: 10px !important;
+    font-weight: 750 !important;
+    letter-spacing: .04em !important;
+    text-transform: uppercase !important;
+  }
+
+  .article-body .role-article #roleDirectoryTable tbody td:nth-child(1)::before {
+    content: "No." !important;
+  }
+
+  .article-body .role-article #roleDirectoryTable tbody td:nth-child(2)::before {
+    content: "Role akses" !important;
+  }
+
+  .article-body .role-article #roleDirectoryTable tbody td:nth-child(3)::before {
+    content: "Fungsi ringkas" !important;
+  }
+
+  .article-body .role-article #roleDirectoryTable tbody td.role-number {
+    background: #eef6ff !important;
+    color: var(--blue) !important;
+    font-weight: 700 !important;
+  }
+
+  .role-article .presentation-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .role-article .presentation-toolbar-actions {
+    width: 100%;
+  }
+
+  .role-article .presentation-tool-button {
+    flex: 1;
+  }
+
+  .role-article .presentation-stage {
+    min-height: 275px;
+    grid-template-columns: 40px minmax(0, 1fr) 40px;
+  }
+
+  .role-article .presentation-slide img {
+    max-height: 360px;
+  }
+
+  .role-article .presentation-thumb {
+    width: 68px;
+    min-width: 68px;
+    height: 47px;
+  }
+
+  .role-article .presentation-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .role-article .problem-button {
+    grid-template-columns: 34px minmax(0, 1fr) 20px;
+    padding: 17px;
+  }
+
+  .role-article .problem-content {
+    padding-right: 18px;
+    padding-left: 18px;
+  }
+
+  .role-article .control-flow {
+    grid-template-columns: 1fr;
+  }
+
+  .role-article .control-step:not(:last-child)::after {
+    top: auto;
+    right: 50%;
+    bottom: -22px;
+    transform: rotate(90deg) translateY(-50%);
+  }
+
+  .role-article .closing-box {
+    padding: 27px;
+  }
+}
+
+@media print {
+  .role-article .role-access-controls,
+  .role-article .presentation-toolbar,
+  .role-article .presentation-nav,
+  .role-article .presentation-thumbnails,
+  .role-article .presentation-actions {
+    display: none !important;
+  }
+
+  .role-article .problem-content {
+    display: block !important;
+  }
+
+  .role-article .role-table-wrapper {
+    overflow: visible;
+    box-shadow: none;
+  }
+
+  .article-body .role-article #roleDirectoryTable {
+    min-width: 0 !important;
+  }
+}
+
+/* =========================================================
+   ICON SYSTEM — ROLE AKSES CORETAX
+   Treatment visual ringan dan kontekstual.
+   Semua selector tetap dibatasi ke .role-article.
+   ========================================================= */
+
+/* SVG dasar */
+.role-article .role-inline-icon,
+.role-article .role-card-icon-svg,
+.role-article .chip-icon,
+.role-article .flow-icon-svg,
+.role-article .check-icon-svg {
+  width: 1em;
+  height: 1em;
+  display: block;
+  flex: 0 0 auto;
+}
+
+/* ---------------------------------------------------------
+   Dua pertanyaan utama
+   Ikon menggantikan badge angka polos, tetapi nomor tetap
+   muncul sebagai badge kecil agar urutan 1–2 tidak hilang.
+   --------------------------------------------------------- */
+.role-article .question-icon {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  margin-bottom: 15px;
+  place-items: center;
+  border-radius: 13px;
+  background: #eaf4ff;
+  color: var(--blue);
+}
+
+.role-article .question-icon .role-inline-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.role-article .question-icon::after {
+  position: absolute;
+  right: -5px;
+  bottom: -5px;
+  min-width: 18px;
+  height: 18px;
+  display: grid;
+  place-items: center;
+  padding: 0 3px;
+  border: 2px solid #fff;
+  border-radius: 999px;
+  background: var(--blue);
+  color: #fff;
+  content: attr(data-number);
+  font-size: 9px;
+  font-weight: 800;
+  line-height: 1;
+  box-shadow: 0 3px 9px rgba(0, 113, 227, .18);
+}
+
+/* Sembunyikan visual lama bila masih tersisa dari cache markup */
+.role-article .question-number {
+  width: 42px;
+  height: 42px;
+  border-radius: 13px;
+}
+
+/* ---------------------------------------------------------
+   Drafter vs Signer
+   --------------------------------------------------------- */
+.role-article .role-icon {
+  width: 50px;
+  height: 50px;
+  font-size: 1rem;
+}
+
+.role-article .role-icon .role-card-icon-svg {
+  width: 24px;
+  height: 24px;
+}
+
+.role-article .drafter .role-icon {
+  background: rgba(255,255,255,.94);
+  color: #0071e3;
+}
+
+.role-article .signer .role-icon {
+  background: rgba(255,255,255,.94);
+  color: #8944ab;
+}
+
+/* ---------------------------------------------------------
+   Chip cakupan layanan
+   --------------------------------------------------------- */
+.role-article .service-chip {
+  gap: 8px;
+  padding: 9px 13px 9px 10px;
+}
+
+.role-article .service-chip::before {
+  display: none;
+  content: none;
+}
+
+.role-article .service-chip .chip-icon {
+  width: 18px;
+  height: 18px;
+  padding: 4px;
+  box-sizing: content-box;
+  border-radius: 8px;
+  background: #eef6ff;
+  color: var(--blue);
+}
+
+/* ---------------------------------------------------------
+   Flow pengendalian internal
+   --------------------------------------------------------- */
+.role-article .control-step {
+  align-content: start;
+  justify-items: center;
+  padding-top: 19px;
+}
+
+.role-article .flow-icon {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  margin: 0 auto 12px;
+  place-items: center;
+  border-radius: 12px;
+  background: #eef6ff;
+  color: var(--blue);
+}
+
+.role-article .flow-icon .flow-icon-svg {
+  width: 19px;
+  height: 19px;
+}
+
+/* Sedikit pembeda fungsi tanpa membuat palet terlalu ramai */
+.role-article .control-step:nth-child(2) .flow-icon {
+  background: #f2f6f1;
+  color: #4b7352;
+}
+
+.role-article .control-step:nth-child(3) .flow-icon {
+  background: #f6eff9;
+  color: #8944ab;
+}
+
+.role-article .control-step:nth-child(4) .flow-icon {
+  background: #fff4e8;
+  color: #9a5c13;
+}
+
+/* ---------------------------------------------------------
+   Checklist evaluasi berkala
+   Setiap kondisi memakai ikon yang sesuai, bukan ✓ seragam.
+   --------------------------------------------------------- */
+.role-article .check-list li {
+  min-height: 68px;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 12px;
+  padding: 13px 15px;
+}
+
+.role-article .check-list li::before {
+  display: none;
+  content: none;
+}
+
+.role-article .check-icon {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 11px;
+  background: #eaf4ff;
+  color: var(--blue);
+}
+
+.role-article .check-icon .check-icon-svg {
+  width: 17px;
+  height: 17px;
+}
+
+.role-article .check-list li:nth-child(2n) .check-icon {
+  background: #f2f6f1;
+  color: #4b7352;
+}
+
+.role-article .check-list li:nth-child(3n) .check-icon {
+  background: #f6eff9;
+  color: #8944ab;
+}
+
+.role-article .check-list li:nth-child(4n) .check-icon {
+  background: #fff4e8;
+  color: #9a5c13;
+}
+
+/* ---------------------------------------------------------
+   Responsive
+   --------------------------------------------------------- */
+@media (max-width: 760px) {
+  .role-article .question-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .role-article .service-chip {
+    width: auto;
+  }
+
+  .role-article .control-step {
+    min-height: 126px;
+  }
+
+  .role-article .check-list li {
+    min-height: 64px;
+    grid-template-columns: 32px minmax(0, 1fr);
+    gap: 11px;
+    padding: 12px 14px;
+  }
+
+  .role-article .check-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+  }
+}
+
+@media (max-width: 520px) {
+  .role-article .question-card {
+    min-height: 0;
+  }
+
+  .role-article .service-chip {
+    max-width: 100%;
+  }
+
+  .role-article .service-chip > span:last-child {
+    min-width: 0;
+    white-space: normal;
+  }
+}
+
+/* Print: ikon tetap terbaca dan tidak boros tinta */
+@media print {
+  .role-article .question-icon,
+  .role-article .role-icon,
+  .role-article .service-chip .chip-icon,
+  .role-article .flow-icon,
+  .role-article .check-icon {
+    border: 1px solid #d2d2d7;
+    background: #fff !important;
+    color: #1d1d1f !important;
+    box-shadow: none !important;
+  }
+
+  .role-article .question-icon::after {
+    border-color: #fff;
+    background: #1d1d1f;
+    color: #fff;
+    box-shadow: none;
+  }
+}
+
