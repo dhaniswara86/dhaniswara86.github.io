@@ -1,0 +1,108 @@
+---
+---
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  {% assign meta_description = page.description | default: page.excerpt | default: site.description %}
+  <title>{{ page.title | escape }} | Kabayan</title>
+  <meta name="description" content="{{ meta_description | strip_html | normalize_whitespace | escape }}">
+  <meta name="author" content="{{ page.author | default: site.author.name | default: 'Angga Sukma Dhaniswara' | escape }}">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#ffffff">
+
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="{{ page.title | escape }}">
+  <meta property="og:description" content="{{ meta_description | strip_html | normalize_whitespace | escape }}">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta property="og:locale" content="id_ID">
+  <meta property="og:site_name" content="Kabayan by Angga Sukma Dhaniswara">
+
+  {% if page.image %}
+    <meta property="og:image" content="{{ page.image | absolute_url }}">
+  {% endif %}
+
+  <link rel="stylesheet" href="{{ '/assets/css/kabayan-nav.css' | relative_url }}?v=20260808-3">
+  <link rel="stylesheet" href="{{ '/assets/css/artikel-apple-minimal.css' | relative_url }}?v=20260818-1">
+
+  {% if page.custom_css %}
+    {% for css in page.custom_css %}
+      <link rel="stylesheet" href="{{ css | relative_url }}">
+    {% endfor %}
+  {% endif %}
+</head>
+
+<body class="apple-article-page">
+  {% include site-header.html %}
+
+  <div class="apple-localnav-wrap" id="appleLocalNavWrap">
+    <div class="apple-localnav">
+      <a class="apple-localnav-title" href="#top">{{ page.local_nav_title | default: page.category | default: "Panduan" }}</a>
+
+      {% if page.local_nav %}
+        <nav class="apple-localnav-links" aria-label="Navigasi artikel">
+          {% for item in page.local_nav %}
+            <a href="{{ item.href }}">{{ item.label }}</a>
+          {% endfor %}
+        </nav>
+      {% endif %}
+    </div>
+  </div>
+
+  <main id="top">
+    <article>
+      <header class="apple-hero">
+        <div class="apple-hero-inner">
+          <div class="apple-eyebrow">{{ page.category | default: "Coretax" }}</div>
+          <h1>{{ page.title }}</h1>
+          {% if page.excerpt or page.description %}
+            <p class="apple-hero-lead">{{ page.excerpt | default: page.description }}</p>
+          {% endif %}
+
+          <div class="apple-meta">
+            <span>{{ page.author | default: site.author.name | default: "Angga Sukma Dhaniswara" }}</span>
+            {% if page.reading_time %}<span>{{ page.reading_time }}</span>{% endif %}
+            {% if page.date_modified %}<span>Diperbarui {{ page.date_modified | date: "%d-%m-%Y" }}</span>{% endif %}
+          </div>
+        </div>
+      </header>
+
+      <div class="apple-content-shell">
+        {% if page.summary %}
+          <aside class="apple-summary">
+            <span>{{ page.summary_label | default: "Ringkasan" }}</span>
+            <p>{{ page.summary }}</p>
+          </aside>
+        {% endif %}
+
+        <div class="apple-content" id="appleArticleContent">
+          {{ content }}
+        </div>
+
+        {% if page.tags %}
+          <div class="apple-tags">
+            {% for tag in page.tags %}
+              <span>{{ tag }}</span>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    </article>
+  </main>
+
+  {% include site-footer.html %}
+
+  <script src="{{ '/assets/js/kabayan-nav.js' | relative_url }}?v=20260808-3"></script>
+  <script src="{{ '/assets/js/artikel-apple-minimal.js' | relative_url }}?v=20260818-1"></script>
+
+  {% if page.custom_js %}
+    {% for js in page.custom_js %}
+      <script src="{{ js | relative_url }}"></script>
+    {% endfor %}
+  {% endif %}
+</body>
+</html>
