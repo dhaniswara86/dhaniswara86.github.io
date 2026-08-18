@@ -60,7 +60,7 @@
 
   <main>
     <article>
-      <header class="hero">
+      <header class="hero{% if page.compact_hero %} hero-compact{% endif %}">
         <div class="hero-inner">
           <span class="category-pill">
             {{ page.category | default: "Artikel Pajak" }}
@@ -100,16 +100,18 @@
             {% endif %}
           </div>
 
-          <div class="hero-actions">
-            <a class="button button-primary" href="#articleContent">Mulai membaca</a>
+          {% unless page.hide_hero_actions %}
+            <div class="hero-actions">
+              <a class="button button-primary" href="#articleContent">Mulai membaca</a>
 
-            {% for action in page.hero_links %}
-              <a class="button" href="{{ action.href }}">{{ action.label }}</a>
-            {% endfor %}
+              {% for action in page.hero_links %}
+                <a class="button" href="{{ action.href }}">{{ action.label }}</a>
+              {% endfor %}
 
-            <button class="button" id="copyLinkButton" type="button">Salin tautan</button>
-            <button class="button" type="button" onclick="window.print()">Cetak</button>
-          </div>
+              <button class="button" id="copyLinkButton" type="button">Salin tautan</button>
+              <button class="button" type="button" onclick="window.print()">Cetak</button>
+            </div>
+          {% endunless %}
 
           {% if page.hero_stats %}
             <div class="hero-visual" aria-hidden="true">
@@ -171,11 +173,8 @@
     <section class="author-section">
       <div class="author-card">
         <div class="author-mark">
-  <img
-    src="/assets/img/LogoASD.svg"
-    alt="Logo ASD"
-  >
-</div>
+          <img src="/assets/img/LogoASD.svg" alt="Logo ASD">
+        </div>
 
         <div class="author-copy">
           <strong>{{ page.author | default: site.author.name | default: "Angga Sukma Dhaniswara" }}</strong>
