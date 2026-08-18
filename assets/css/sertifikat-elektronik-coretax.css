@@ -1,0 +1,969 @@
+/* =========================================================
+   SERTIFIKAT ELEKTRONIK CORETAX
+   Override khusus tabel perbandingan.
+   Tidak mengubah artikel Kabayan lainnya.
+   ========================================================= */
+
+/* Wrapper */
+.jk-article .se-comparison-wrapper {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+/* Tabel 3 kolom teks */
+.jk-article .se-comparison-table {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  table-layout: fixed !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+}
+
+/* Proporsi desktop:
+   Aspek 24% | Kode Otorisasi 38% | Sertifikat Elektronik 38% */
+.jk-article .se-comparison-table th:nth-child(1),
+.jk-article .se-comparison-table td:nth-child(1) {
+  width: 24% !important;
+}
+
+.jk-article .se-comparison-table th:nth-child(2),
+.jk-article .se-comparison-table td:nth-child(2) {
+  width: 38% !important;
+}
+
+.jk-article .se-comparison-table th:nth-child(3),
+.jk-article .se-comparison-table td:nth-child(3) {
+  width: 38% !important;
+}
+
+/* Jangan izinkan kata terpotong secara agresif */
+.jk-article .se-comparison-table th,
+.jk-article .se-comparison-table td {
+  box-sizing: border-box !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  height: auto !important;
+  padding: 16px 18px !important;
+  white-space: normal !important;
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
+  hyphens: none !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  vertical-align: top !important;
+  line-height: 1.5 !important;
+}
+
+/* Kolom aspek tetap tegas */
+.jk-article .se-comparison-table td:nth-child(1) {
+  font-weight: 700 !important;
+  color: var(--near-black, #1d1d1f) !important;
+}
+
+/* Hindari style tabel tarif lama yang menonjolkan kolom terakhir */
+.jk-article .se-comparison-table td:nth-child(3),
+.jk-article .se-comparison-table th:nth-child(3) {
+  text-align: left !important;
+}
+
+.jk-article .se-comparison-table td:nth-child(3) {
+  font-size: inherit !important;
+  font-weight: 400 !important;
+  color: inherit !important;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .jk-article .se-comparison-table th,
+  .jk-article .se-comparison-table td {
+    padding: 14px 14px !important;
+  }
+
+  .jk-article .se-comparison-table th:nth-child(1),
+  .jk-article .se-comparison-table td:nth-child(1) {
+    width: 23% !important;
+  }
+
+  .jk-article .se-comparison-table th:nth-child(2),
+  .jk-article .se-comparison-table td:nth-child(2),
+  .jk-article .se-comparison-table th:nth-child(3),
+  .jk-article .se-comparison-table td:nth-child(3) {
+    width: 38.5% !important;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   Tabel berubah menjadi kartu per aspek agar tidak gepeng.
+   ========================================================= */
+@media (max-width: 700px) {
+  .jk-article .se-comparison-wrapper {
+    overflow: visible !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .jk-article .se-comparison-table {
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    background: transparent !important;
+  }
+
+  .jk-article .se-comparison-table thead {
+    display: none !important;
+  }
+
+  .jk-article .se-comparison-table tbody {
+    display: grid !important;
+    gap: 14px !important;
+    width: 100% !important;
+    background: transparent !important;
+  }
+
+  .jk-article .se-comparison-table tbody tr {
+    display: block !important;
+    width: 100% !important;
+    overflow: hidden !important;
+    border: 1px solid #e5e5ea !important;
+    border-radius: 18px !important;
+    background: #ffffff !important;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, .045) !important;
+  }
+
+  .jk-article .se-comparison-table tbody td,
+  .jk-article .se-comparison-table tbody td:nth-child(1),
+  .jk-article .se-comparison-table tbody td:nth-child(2),
+  .jk-article .se-comparison-table tbody td:nth-child(3) {
+    position: relative !important;
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 34px 15px 13px !important;
+    border-right: 0 !important;
+    border-bottom: 1px solid #ececf0 !important;
+    background: #ffffff !important;
+    text-align: left !important;
+    white-space: normal !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+    hyphens: none !important;
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+  }
+
+  .jk-article .se-comparison-table tbody td:last-child {
+    border-bottom: 0 !important;
+  }
+
+  .jk-article .se-comparison-table tbody td::before {
+    position: absolute !important;
+    top: 10px !important;
+    left: 15px !important;
+    width: auto !important;
+    color: #86868b !important;
+    font-size: 10px !important;
+    font-weight: 750 !important;
+    line-height: 1.3 !important;
+    letter-spacing: .04em !important;
+    text-transform: uppercase !important;
+  }
+
+  .jk-article .se-comparison-table tbody td:nth-child(1)::before {
+    content: "Aspek" !important;
+  }
+
+  .jk-article .se-comparison-table tbody td:nth-child(2)::before {
+    content: "Kode Otorisasi DJP" !important;
+  }
+
+  .jk-article .se-comparison-table tbody td:nth-child(3)::before {
+    content: "Sertifikat Elektronik" !important;
+  }
+
+  .jk-article .se-comparison-table tbody td:nth-child(1) {
+    background: #f5f5f7 !important;
+    font-weight: 700 !important;
+  }
+}
+
+/* Print tetap tabel tiga kolom */
+@media print {
+  .jk-article .se-comparison-wrapper {
+    overflow: visible !important;
+  }
+
+  .jk-article .se-comparison-table {
+    display: table !important;
+    width: 100% !important;
+    table-layout: fixed !important;
+  }
+
+  .jk-article .se-comparison-table thead {
+    display: table-header-group !important;
+  }
+
+  .jk-article .se-comparison-table tbody {
+    display: table-row-group !important;
+  }
+
+  .jk-article .se-comparison-table tr {
+    display: table-row !important;
+  }
+
+  .jk-article .se-comparison-table th,
+  .jk-article .se-comparison-table td {
+    display: table-cell !important;
+  }
+
+  .jk-article .se-comparison-table td::before {
+    content: none !important;
+    display: none !important;
+  }
+}
+
+/* =========================================================
+   FIX TIPOGRAFI KOLOM PERBANDINGAN
+   Kolom 2 dan 3 harus identik.
+   Menimpa style last-child dari tabel tarif Jasa Konstruksi.
+   ========================================================= */
+
+body .article-body .jk-article table.se-comparison-table tbody tr > td:nth-child(2),
+body .article-body .jk-article table.se-comparison-table tbody tr > td:nth-child(3) {
+  font-family: inherit !important;
+  font-size: 16px !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  line-height: 1.55 !important;
+  letter-spacing: normal !important;
+  text-align: left !important;
+  text-transform: none !important;
+  color: #515154 !important;
+}
+
+/* Pastikan kolom ketiga tidak mewarisi karakter visual "tarif" */
+body .article-body .jk-article table.se-comparison-table tbody tr > td:last-child {
+  font-family: inherit !important;
+  font-size: 16px !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  line-height: 1.55 !important;
+  letter-spacing: normal !important;
+  text-align: left !important;
+  color: #515154 !important;
+}
+
+/* Header kolom 2 dan 3 juga dibuat setara */
+body .article-body .jk-article table.se-comparison-table thead th:nth-child(2),
+body .article-body .jk-article table.se-comparison-table thead th:nth-child(3) {
+  font-family: inherit !important;
+  font-size: inherit !important;
+  font-weight: inherit !important;
+  line-height: inherit !important;
+  text-align: left !important;
+}
+
+/* Tablet tetap seragam */
+@media (max-width: 900px) {
+  body .article-body .jk-article table.se-comparison-table tbody tr > td:nth-child(2),
+  body .article-body .jk-article table.se-comparison-table tbody tr > td:nth-child(3),
+  body .article-body .jk-article table.se-comparison-table tbody tr > td:last-child {
+    font-size: 15px !important;
+    font-weight: 400 !important;
+    line-height: 1.55 !important;
+    text-align: left !important;
+  }
+}
+
+/* Mobile: isi kedua nilai tetap sama, label kecil tetap dibedakan */
+@media (max-width: 700px) {
+  body .article-body .jk-article table.se-comparison-table tbody tr > td:nth-child(2),
+  body .article-body .jk-article table.se-comparison-table tbody tr > td:nth-child(3),
+  body .article-body .jk-article table.se-comparison-table tbody tr > td:last-child {
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    line-height: 1.5 !important;
+    text-align: left !important;
+    color: #515154 !important;
+  }
+}
+
+/* =========================================================
+   FIX UKURAN FONT ISI TABEL
+   Semua sel tbody memakai ukuran font yang sama.
+   Kolom Aspek tetap bold, kolom 2 dan 3 regular.
+   ========================================================= */
+
+body .article-body .jk-article table.se-comparison-table tbody tr > td {
+  font-family: inherit !important;
+  font-size: 16px !important;
+  line-height: 1.55 !important;
+  letter-spacing: normal !important;
+}
+
+body .article-body .jk-article table.se-comparison-table tbody tr > td:nth-child(1) {
+  font-size: 16px !important;
+  font-weight: 700 !important;
+}
+
+body .article-body .jk-article table.se-comparison-table tbody tr > td:nth-child(2),
+body .article-body .jk-article table.se-comparison-table tbody tr > td:nth-child(3),
+body .article-body .jk-article table.se-comparison-table tbody tr > td:last-child {
+  font-size: 16px !important;
+  font-weight: 400 !important;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  body .article-body .jk-article table.se-comparison-table tbody tr > td,
+  body .article-body .jk-article table.se-comparison-table tbody tr > td:nth-child(1),
+  body .article-body .jk-article table.se-comparison-table tbody tr > td:nth-child(2),
+  body .article-body .jk-article table.se-comparison-table tbody tr > td:nth-child(3) {
+    font-size: 15px !important;
+  }
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+  body .article-body .jk-article table.se-comparison-table tbody tr > td,
+  body .article-body .jk-article table.se-comparison-table tbody tr > td:nth-child(1),
+  body .article-body .jk-article table.se-comparison-table tbody tr > td:nth-child(2),
+  body .article-body .jk-article table.se-comparison-table tbody tr > td:nth-child(3) {
+    font-size: 14px !important;
+  }
+}
+
+
+
+/* =========================================================
+   PANDUAN VISUAL / SLIDESHOW KO DJP
+   Mengikuti pola slideshow artikel Role Akses.
+   ========================================================= */
+.jk-article .presentation-section {
+  margin: 34px 0 42px;
+  scroll-margin-top: 86px;
+}
+.jk-article .presentation-heading { margin-bottom: 22px; }
+.jk-article .presentation-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 12px;
+  padding: 7px 11px;
+  border-radius: 999px;
+  background: #eef6ff;
+  color: var(--blue, #0071e3);
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.jk-article .presentation-heading h3 {
+  margin: 0 0 13px;
+  color: var(--near-black, #1d1d1f);
+  font-size: clamp(24px, 3vw, 34px);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+}
+.jk-article .presentation-heading p {
+  max-width: 720px;
+  margin: 0;
+  color: #515154;
+  font-size: 16px;
+  line-height: 1.65;
+}
+.jk-article .presentation-viewer {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,.07);
+  border-radius: 26px;
+  background: #111113;
+  box-shadow: 0 26px 70px rgba(20,43,76,.16);
+  outline: none;
+}
+.jk-article .presentation-viewer:focus-visible {
+  box-shadow: 0 0 0 4px rgba(0,113,227,.18), 0 26px 70px rgba(20,43,76,.16);
+}
+.jk-article .presentation-viewer:fullscreen {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  border: 0;
+  border-radius: 0;
+  background: #000;
+}
+.jk-article .presentation-viewer:fullscreen .presentation-stage {
+  flex: 1;
+  min-height: 0;
+}
+.jk-article .presentation-toolbar {
+  min-height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 10px 14px 10px 18px;
+  border-bottom: 1px solid rgba(255,255,255,.09);
+  background: #1d1d1f;
+  color: #d2d2d7;
+}
+.jk-article .presentation-page-info { font-size: 12px; }
+.jk-article .presentation-page-info strong { color: #fff; }
+.jk-article .presentation-toolbar-actions {
+  display: flex;
+  gap: 7px;
+}
+.jk-article .presentation-tool-button {
+  min-height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 11px;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 999px;
+  background: rgba(255,255,255,.07);
+  color: #fff;
+  cursor: pointer;
+  font-size: 11px;
+  text-decoration: none;
+}
+.jk-article .presentation-tool-button:hover {
+  background: rgba(255,255,255,.13);
+}
+.jk-article .presentation-stage {
+  position: relative;
+  min-height: 420px;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 54px minmax(0, 1fr) 54px;
+  background: radial-gradient(circle at 50% 50%, rgba(0,113,227,.18), transparent 48%), #08080a;
+  touch-action: pan-y;
+}
+.jk-article .presentation-slide {
+  min-width: 0;
+  margin: 0;
+  padding: 23px 6px 15px;
+  text-align: center;
+}
+.jk-article .presentation-slide img {
+  width: 100%;
+  max-height: 535px;
+  display: block;
+  margin: 0 auto;
+  border-radius: 9px;
+  background: #fff;
+  object-fit: contain;
+  box-shadow: 0 20px 45px rgba(0,0,0,.38);
+  user-select: none;
+  -webkit-user-drag: none;
+}
+.jk-article .presentation-slide figcaption {
+  min-height: 32px;
+  margin-top: 13px;
+  color: #a1a1a6;
+  font-size: 12px;
+  line-height: 1.4;
+}
+.jk-article .presentation-nav {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  justify-self: center;
+  padding: 0;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 50%;
+  background: rgba(255,255,255,.09);
+  color: #fff;
+  cursor: pointer;
+  font-size: 28px;
+  line-height: 1;
+}
+.jk-article .presentation-nav:hover:not(:disabled) {
+  background: rgba(255,255,255,.16);
+}
+.jk-article .presentation-nav:disabled {
+  cursor: default;
+  opacity: .35;
+}
+.jk-article .presentation-thumbnails {
+  display: flex;
+  gap: 9px;
+  max-width: 100%;
+  overflow-x: auto;
+  padding: 12px 14px 15px;
+  border-top: 1px solid rgba(255,255,255,.08);
+  background: #1d1d1f;
+  scrollbar-width: thin;
+}
+.jk-article .presentation-thumb {
+  position: relative;
+  width: 82px;
+  min-width: 82px;
+  height: 56px;
+  overflow: hidden;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  opacity: .58;
+}
+.jk-article .presentation-thumb.active {
+  border-color: #52a7ff;
+  opacity: 1;
+}
+.jk-article .presentation-thumb img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+.jk-article .presentation-thumb span {
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  min-width: 19px;
+  height: 19px;
+  display: grid;
+  place-items: center;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: rgba(0,0,0,.74);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+}
+.jk-article .presentation-error {
+  padding: 16px;
+  border-top: 1px solid rgba(255,255,255,.08);
+  background: #3a1518;
+  color: #ffd7d9;
+  font-size: 13px;
+  text-align: center;
+}
+.jk-article .presentation-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 11px;
+  margin-top: 22px;
+}
+.jk-article .presentation-note {
+  margin-top: 17px;
+  padding: 17px 18px;
+  border: 1px solid #f0dfb9;
+  border-radius: 17px;
+  background: #fff7e8;
+  color: #6d4b14;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.jk-article .presentation-noscript {
+  margin-top: 15px;
+  color: #515154;
+  font-size: 14px;
+}
+
+@media (max-width: 760px) {
+  .jk-article .presentation-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .jk-article .presentation-toolbar-actions { width: 100%; }
+  .jk-article .presentation-tool-button { flex: 1; }
+  .jk-article .presentation-stage {
+    min-height: 275px;
+    grid-template-columns: 40px minmax(0, 1fr) 40px;
+  }
+  .jk-article .presentation-slide {
+    padding-right: 2px;
+    padding-left: 2px;
+  }
+  .jk-article .presentation-slide img { max-height: 360px; }
+  .jk-article .presentation-thumb {
+    width: 68px;
+    min-width: 68px;
+    height: 47px;
+  }
+  .jk-article .presentation-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 430px) {
+  .jk-article .presentation-stage {
+    grid-template-columns: 34px minmax(0, 1fr) 34px;
+  }
+  .jk-article .presentation-nav {
+    width: 32px;
+    height: 32px;
+    font-size: 23px;
+  }
+}
+@media print {
+  .jk-article .presentation-toolbar,
+  .jk-article .presentation-nav,
+  .jk-article .presentation-thumbnails,
+  .jk-article .presentation-actions {
+    display: none !important;
+  }
+  .jk-article .presentation-viewer {
+    border: 1px solid #d2d2d7;
+    background: #fff;
+    box-shadow: none;
+  }
+  .jk-article .presentation-stage {
+    display: block;
+    min-height: 0;
+    background: #fff;
+  }
+  .jk-article .presentation-slide { padding: 0; }
+  .jk-article .presentation-slide img {
+    max-height: none;
+    box-shadow: none;
+  }
+  .jk-article .presentation-slide figcaption { color: #515154; }
+}
+
+
+/* =========================================================
+   FIX FINAL MOBILE — TABEL PERBANDINGAN SERTIFIKAT
+   Label dibuat normal-flow agar tidak overlap di Safari/iPhone.
+   ========================================================= */
+@media (max-width: 700px) {
+
+  html body .article-body .jk-article .se-comparison-wrapper {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  html body .article-body .jk-article
+  .se-comparison-wrapper table.se-comparison-table {
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    table-layout: auto !important;
+    background: transparent !important;
+    border: 0 !important;
+  }
+
+  html body .article-body .jk-article
+  .se-comparison-wrapper table.se-comparison-table thead {
+    display: none !important;
+  }
+
+  html body .article-body .jk-article
+  .se-comparison-wrapper table.se-comparison-table tbody {
+    display: grid !important;
+    width: 100% !important;
+    gap: 14px !important;
+    padding: 0 !important;
+    background: transparent !important;
+  }
+
+  html body .article-body .jk-article
+  .se-comparison-wrapper table.se-comparison-table tbody > tr {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    border: 1px solid #e5e5ea !important;
+    border-radius: 18px !important;
+    background: #fff !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,.045) !important;
+  }
+
+  html body .article-body .jk-article
+  .se-comparison-wrapper table.se-comparison-table tbody > tr > td,
+  html body .article-body .jk-article
+  .se-comparison-wrapper table.se-comparison-table tbody > tr > td:nth-child(1),
+  html body .article-body .jk-article
+  .se-comparison-wrapper table.se-comparison-table tbody > tr > td:nth-child(2),
+  html body .article-body .jk-article
+  .se-comparison-wrapper table.se-comparison-table tbody > tr > td:nth-child(3),
+  html body .article-body .jk-article
+  .se-comparison-wrapper table.se-comparison-table tbody > tr > td:last-child {
+    position: static !important;
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    height: auto !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    padding: 14px 16px 16px !important;
+    border-top: 0 !important;
+    border-left: 0 !important;
+    border-right: 0 !important;
+    border-bottom: 1px solid #ececf0 !important;
+    background: #fff !important;
+    color: #515154 !important;
+    font-family: inherit !important;
+    font-size: 15px !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    line-height: 1.55 !important;
+    letter-spacing: normal !important;
+    text-align: left !important;
+    text-transform: none !important;
+    white-space: normal !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+    hyphens: none !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+  }
+
+  html body .article-body .jk-article
+  .se-comparison-wrapper table.se-comparison-table tbody > tr > td:last-child {
+    border-bottom: 0 !important;
+  }
+
+  html body .article-body .jk-article
+  .se-comparison-wrapper table.se-comparison-table tbody > tr > td::before {
+    position: static !important;
+    inset: auto !important;
+    display: block !important;
+    width: auto !important;
+    height: auto !important;
+    margin: 0 0 8px !important;
+    padding: 0 !important;
+    color: #86868b !important;
+    background: transparent !important;
+    font-family: inherit !important;
+    font-size: 11px !important;
+    font-style: normal !important;
+    font-weight: 750 !important;
+    line-height: 1.3 !important;
+    letter-spacing: .045em !important;
+    text-align: left !important;
+    text-transform: uppercase !important;
+    white-space: normal !important;
+  }
+
+  html body .article-body .jk-article
+  .se-comparison-wrapper table.se-comparison-table tbody > tr > td:nth-child(1)::before {
+    content: "Aspek" !important;
+  }
+
+  html body .article-body .jk-article
+  .se-comparison-wrapper table.se-comparison-table tbody > tr > td:nth-child(2)::before {
+    content: "Kode Otorisasi DJP" !important;
+  }
+
+  html body .article-body .jk-article
+  .se-comparison-wrapper table.se-comparison-table tbody > tr > td:nth-child(3)::before {
+    content: "Sertifikat Elektronik" !important;
+  }
+
+  html body .article-body .jk-article
+  .se-comparison-wrapper table.se-comparison-table tbody > tr > td:nth-child(1) {
+    background: #f5f5f7 !important;
+    color: #1d1d1f !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    line-height: 1.45 !important;
+  }
+
+  html body .article-body .jk-article
+  .se-comparison-wrapper table.se-comparison-table tbody > tr > td:nth-child(2),
+  html body .article-body .jk-article
+  .se-comparison-wrapper table.se-comparison-table tbody > tr > td:nth-child(3) {
+    color: #515154 !important;
+    font-size: 15px !important;
+    font-weight: 400 !important;
+    line-height: 1.55 !important;
+  }
+
+  html body .article-body .jk-article
+  .se-comparison-wrapper table.se-comparison-table tbody > tr > td:nth-child(2) {
+    background: #fff !important;
+  }
+
+  html body .article-body .jk-article
+  .se-comparison-wrapper table.se-comparison-table tbody > tr > td:nth-child(3) {
+    background: #f3f7ff !important;
+  }
+}
+
+@media (max-width: 430px) {
+  html body .article-body .jk-article
+  .se-comparison-wrapper table.se-comparison-table tbody > tr > td {
+    padding-right: 15px !important;
+    padding-left: 15px !important;
+  }
+}
+
+/* =========================================================
+   ICON SYSTEM — SERTIFIKAT ELEKTRONIK / KO DJP
+   Ikon inline SVG agar ringan, tajam, dan tidak bergantung
+   pada library eksternal. Khusus halaman ini.
+   ========================================================= */
+
+.jk-article .se-icon-card .se-card-heading {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0 0 16px;
+}
+
+.jk-article .se-icon-card .se-card-heading h3 {
+  margin: 0 !important;
+}
+
+.jk-article .se-card-icon {
+  width: 46px;
+  height: 46px;
+  min-width: 46px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 14px;
+  background: #eef6ff;
+  color: #0071e3;
+}
+
+.jk-article .se-card-icon svg {
+  width: 25px;
+  height: 25px;
+  display: block;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Sedikit pembeda tanpa membuat card menjadi ramai. */
+.jk-article .se-card-icon-certificate {
+  background: #eef7ff;
+  color: #0071e3;
+}
+
+.jk-article .se-card-icon-authorization {
+  background: #f1f3ff;
+  color: #4b5fd6;
+}
+
+.jk-article .se-card-icon-password {
+  background: #f2f2f7;
+  color: #515154;
+}
+
+.jk-article .se-card-icon-passphrase {
+  background: #f5f0ff;
+  color: #7657c7;
+}
+
+/* =========================================================
+   CHECKLIST PERSIAPAN — IKON KONTEKSTUAL
+   Mengganti checkmark generik dengan ikon per jenis data.
+   ========================================================= */
+
+body .article-body .jk-article .jk-check-list.se-ready-list {
+  list-style: none !important;
+  padding-left: 0 !important;
+}
+
+body .article-body .jk-article .jk-check-list.se-ready-list > li.se-ready-item {
+  position: relative !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 16px !important;
+  padding: 22px 24px !important;
+}
+
+/* Matikan checkmark bawaan dari jasakonstruksi.css hanya pada daftar ini. */
+body .article-body .jk-article .jk-check-list.se-ready-list > li.se-ready-item::before {
+  content: none !important;
+  display: none !important;
+}
+
+.jk-article .se-ready-icon {
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 13px;
+  background: #eaf4ff;
+  color: #0071e3;
+}
+
+.jk-article .se-ready-icon svg {
+  width: 23px;
+  height: 23px;
+  display: block;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.jk-article .se-ready-text {
+  min-width: 0;
+  display: block;
+  padding-top: 5px;
+}
+
+@media (max-width: 700px) {
+  .jk-article .se-icon-card .se-card-heading {
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .jk-article .se-card-icon {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    border-radius: 13px;
+  }
+
+  .jk-article .se-card-icon svg {
+    width: 23px;
+    height: 23px;
+  }
+
+  body .article-body .jk-article .jk-check-list.se-ready-list > li.se-ready-item {
+    gap: 13px !important;
+    padding: 18px 17px !important;
+  }
+
+  .jk-article .se-ready-icon {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    border-radius: 12px;
+  }
+
+  .jk-article .se-ready-icon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .jk-article .se-ready-text {
+    padding-top: 3px;
+  }
+}
+
+@media print {
+  .jk-article .se-card-icon,
+  .jk-article .se-ready-icon {
+    background: transparent !important;
+    color: #1d1d1f !important;
+    border: 1px solid #d2d2d7 !important;
+  }
+}
+
