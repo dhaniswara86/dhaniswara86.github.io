@@ -71,7 +71,7 @@ Untuk penerbitan bukti potong, faktur pajak, pelaporan SPT, dan permohonan layan
 <h3>Sertifikat Elektronik</h3>
 </div>
 <p>
-Sertifikat elektronik merupakan tanda tangan elektronik yang diterbitkan oleh Penyelenggara Sertifikasi Elektronik (PSrE). Sertifikat ini memuat identitas dan tanda tangan elektronik yang dapat digunakan untuk proses autentikasi dan penandatanganan dokumen elektronik.<br>Contoh: Privi ID, Vida, Vinotex, dan Signature.
+Sertifikat elektronik merupakan tanda tangan elektronik yang diterbitkan oleh Penyelenggara Sertifikasi Elektronik (PSrE). Sertifikat ini memuat identitas dan tanda tangan elektronik yang dapat digunakan untuk proses autentikasi dan penandatanganan dokumen elektronik.<br>Contoh: Ezsign, Privy ID, Vida, Vinotex, dan Xignature.
 </p>
 </article>
 
