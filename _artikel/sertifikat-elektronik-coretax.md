@@ -194,7 +194,7 @@ custom_js:
   <span class="se-eyebrow">Inti panduan</span>
   <h2>Kode Otorisasi DJP adalah Jalur Praktis untuk Menandatangani Dokumen di Coretax</h2>
   <p>Untuk menandatangani dokumen perpajakan melalui Coretax, pengguna dapat menggunakan Kode Otorisasi DJP atau Sertifikat Elektronik yang diterbitkan oleh PSrE.</p>
-  <p>Bagi pengguna yang tidak memiliki sertifikat tersertifikasi dari PSrE, Kode Otorisasi DJP menjadi pilihan yang praktis karena dapat diminta langsung melalui akun Coretax.</p>
+  <p>Bagi pengguna yang tidak memiliki sertifikat tersertifikasi dari PSrE, Kode Otorisasi DJP menjadi pilihan yang praktis dan gratis karena dapat diminta langsung melalui akun Coretax.</p>
   <p>Prosesnya relatif sederhana: masuk ke Portal Saya, pilih Permintaan Kode Otorisasi/Sertifikat Elektronik, pilih Kode Otorisasi DJP, buat passphrase, setujui pernyataan, lalu simpan.</p>
   <p>Namun, jangan berhenti sampai di situ. Periksa kembali bagian <strong>Digital Certificate</strong> dan pastikan Status Kepemilikan sudah berubah menjadi <strong>Valid</strong>. Status inilah yang menjadi tanda bahwa Kode Otorisasi sudah siap digunakan untuk penandatanganan dokumen perpajakan.</p>
   <a class="se-closing-action" href="#cara-mengajukan">Lihat kembali langkah pengajuan ↑</a>
