@@ -8,7 +8,7 @@ hero_accent: "Mengapa disebut final dan apa konsekuensinya?"
 excerpt: "Memahami makna PPh Final, alasan kebijakannya, perbedaannya dengan PPh tidak final dan bukan objek pajak, serta konsekuensinya terhadap biaya, kredit pajak, pembayaran, dan pelaporan SPT."
 description: "Penjelasan objektif mengenai Pajak Penghasilan yang bersifat final, alasan keberadaannya, konsekuensi terhadap biaya dan kerugian, kredit pajak, pelunasan, serta pelaporan SPT berdasarkan Undang-Undang Pajak Penghasilan dan ketentuan resmi DJP."
 
-category: "Pajak Penghasilan"
+category: "PPh"
 
 tags:
   - PPh Final
