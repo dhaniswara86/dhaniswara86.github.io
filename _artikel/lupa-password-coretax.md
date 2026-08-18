@@ -5,7 +5,7 @@ title: "Lupa Password Coretax? Begini Cara Mengatur Ulang Kata Sandi"
 hero_title: "Lupa Password Coretax?"
 hero_accent: "Atur ulang kata sandi dengan mudah."
 
-excerpt: "Tidak dapat masuk ke Coretax karena lupa password? Gunakan fasilitas Lupa Kata Sandi untuk memperoleh tautan pengaturan ulang melalui email atau nomor gawai yang terdaftar."
+excerpt: "Gagal masuk Coretax karena lupa password? Gunakan fasilitas Lupa Kata Sandi untuk memperoleh tautan pengaturan ulang melalui email atau nomor gawai yang terdaftar."
 description: "Panduan singkat lupa password Coretax DJP, hal yang perlu disiapkan, perbedaan dengan aktivasi akun, dan panduan visual pengaturan ulang kata sandi."
 
 category: "Coretax"
@@ -62,7 +62,7 @@ Lupa kata sandi dapat membuat pengguna tidak dapat masuk ke <strong>Coretax DJP<
 </p>
 
 <p>
-Berbeda dengan mekanisme lupa password pada DJP Online sebelumnya, pengaturan ulang kata sandi di Coretax <strong>tidak menggunakan EFIN</strong>. Tautan untuk membuat kata sandi baru dapat dikirimkan melalui alamat email atau nomor gawai yang terdaftar.
+Berbeda dengan DJP Online sebelumnya, pengaturan ulang kata sandi di Coretax <strong>tidak membutuhkan EFIN (Electronic Filling Identification Number)</strong>. Tautan untuk membuat kata sandi baru dapat dikirimkan melalui alamat email atau nomor gawai yang terdaftar.
 </p>
 
 <div class="lp-callout lp-callout-blue">
@@ -73,7 +73,7 @@ Berbeda dengan mekanisme lupa password pada DJP Online sebelumnya, pengaturan ul
   </div>
   <div>
     <strong>Intinya</strong>
-    <p>Jika akun sudah ada tetapi Anda lupa password, gunakan fasilitas <strong>Lupa Kata Sandi</strong>. Jangan membuat akun baru hanya karena tidak mengingat password.</p>
+    <p>Jika akun sudah ada tetapi Anda lupa password, gunakan fasilitas "Lupa Kata Sandi". Jangan membuat akun baru hanya karena tidak mengingat password.</p>
   </div>
 </div>
 </section>
@@ -299,7 +299,7 @@ Prosesnya dapat dilakukan langsung dari halaman login Coretax. Agar lebih mudah 
     <span class="lp-problem-icon" aria-hidden="true">1</span>
     <div>
       <h3>Periksa kembali email atau nomor gawai</h3>
-      <p>Pastikan tujuan konfirmasi yang dimasukkan sama dengan data yang terdaftar pada sistem DJP dan masih dapat diakses.</p>
+      <p>Pastikan tujuan konfirmasi yang dimasukkan sama dengan data yang terdaftar pada sistem DJP dan masih dapat diakses. Dalam hal terdapat perbedaan, maka silakan ajukan permohonan perubahan data ke Kantor Pelayanan Pajak terdekat</p>
     </div>
   </article>
 
