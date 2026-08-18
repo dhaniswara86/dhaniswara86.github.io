@@ -30,19 +30,6 @@ permalink: /sertifikat-elektronik-coretax.html
 summary_label: "Ringkasan cepat"
 summary: "Kode Otorisasi DJP merupakan tanda tangan elektronik tidak tersertifikasi yang diterbitkan oleh Direktorat Jenderal Pajak untuk keperluan penandatanganan dokumen perpajakan di Coretax. KO DJP memiliki masa berlaku selama 2 (dua) tahun."
 
-hero_links:
-  - label: "Memahami KODJP, Sertel, & Passphrase"
-    href: "#pengertian"
-  - label: "Hal yang harus disiapkan"
-    href: "#persiapan"
-  - label: "Cara permintaan KODJP"
-    href: "#cara-mengajukan"
-  - label: "Cara pengecekan status"
-    href: "#status-valid"
-  - label: "Untuk WP Badan"
-    href: "#badan"
-
-
 sidebar_note: "Jangan tertukar antara password dan passphrase. Password digunakan untuk login ke Coretax, sedangkan passphrase digunakan saat melakukan tanda tangan elektronik menggunakan Kode Otorisasi DJP."
 
 custom_css:
@@ -73,7 +60,7 @@ custom_js:
 
 <section id="pengertian" class="se-section">
   <div class="se-section-intro"><span class="se-eyebrow">Konsep dasar</span><h2>Apa Itu Kode Otorisasi DJP?</h2></div>
-  <p>Untuk penerbitan bukti potong, faktur pajak, pelaporan SPT, dan permohonan layanan administrasi di Coretax dibutuhkan tanda tangan elektronik. Di dalam Peraturan Menteri Keuangan (PMK) Nomor 81 Tahun 2024 s.t.d.d. PMK 1 Tahun 2026, tanda tangan elektronik terbagi ke dalam dua jenis, yaitu: <b>(1) Sertifikat Elektronik</b>, dan <b>(2) Kode Otorisasi DJP</b>.</p>
+  <p>Dalam penerbitan bukti potong, faktur pajak, pelaporan SPT, dan permohonan layanan administrasi di Coretax dibutuhkan tanda tangan elektronik. Di dalam Peraturan Menteri Keuangan (PMK) Nomor 81 Tahun 2024 s.t.d.d. PMK 1 Tahun 2026, tanda tangan elektronik terbagi ke dalam dua jenis, yaitu: <b>(1) Sertifikat Elektronik</b>, dan <b>(2) Kode Otorisasi DJP</b>. Berikut adalah penjelasan singkatnya.</p>
   <div class="se-signature-options">
     <article class="se-signature-card se-signature-card-psre">
       <div class="se-signature-card-top"><span class="se-signature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 3.75h10a2.25 2.25 0 0 1 2.25 2.25v8A2.25 2.25 0 0 1 17 16.25H7A2.25 2.25 0 0 1 4.75 14V6A2.25 2.25 0 0 1 7 3.75Z"/><path d="M8.25 8h7.5M8.25 11h4.5"/><path d="M9.25 16.25 8.5 20.5 12 18.7l3.5 1.8-.75-4.25"/></svg></span><span class="se-option-label">Tersertifikasi</span></div>
