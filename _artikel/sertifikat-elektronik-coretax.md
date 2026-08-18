@@ -35,8 +35,6 @@ hero_links:
     href: "#perbedaan"
   - label: "Cara mengajukan"
     href: "#cara-mengajukan"
-  - label: "Cek status"
-    href: "#cek-status"
   - label: "Panduan visual"
     href: "#panduan-visual-kodjp"
 
@@ -55,7 +53,7 @@ custom_js:
 <section id="pengertian">
 <h2>Apa Itu Kode Otorisasi DJP?</h2>
 <p>
-Untuk penerbitan bukti potong, faktur pajak, pelaporan SPT, dan permohonan layanan administrasi di Coretax dibutuhkan tanda tangan elektronik. Di dalam Peraturan Menteri Keuangan (PMK) Nomor 81 Tahun 2024 s.t.d.d. PMK 1 Tahun 2026, tanda tangan elektronik terbagi ke dalam dua jenis, yaitu: (1) Sertifikat Elektronik, dan (2) Kode Otorisasi DJP.
+Untuk penerbitan bukti potong, faktur pajak, pelaporan SPT, dan permohonan layanan administrasi di Coretax dibutuhkan tanda tangan elektronik. Di dalam Peraturan Menteri Keuangan (PMK) Nomor 81 Tahun 2024 s.t.d.d. PMK 1 Tahun 2026, tanda tangan elektronik terbagi ke dalam dua jenis, yaitu: <b>(1) Sertifikat Elektronik</b>, dan <b>(2) Kode Otorisasi DJP</b>.
 </p>
 
 <div class="jk-certificate-grid se-icon-card-grid">
@@ -116,7 +114,7 @@ Coretax memfasilitasi penggunaan Sertifikat Elektronik dari PSrE. Bagi wajib paj
 <tr>
 <td data-label="Aspek">Penerbit</td>
 <td data-label="Kode Otorisasi DJP">Direktorat Jenderal Pajak</td>
-<td data-label="Sertifikat Elektronik">Penyelenggara Sertifikasi Elektronik atau PSrE</td>
+<td data-label="Sertifikat Elektronik">Penyelenggara Sertifikasi Elektronik yang ditetapkan dan diakui secara resmi oleh Kementerian Komunikasi dan Digital (Kemenkomdigi)</td>
 </tr>
 <tr>
 <td data-label="Aspek">Jenis tanda tangan</td>
@@ -151,10 +149,10 @@ Coretax memfasilitasi penggunaan Sertifikat Elektronik dari PSrE. Bagi wajib paj
 <section id="pilihan">
 <h2>Mana yang Harus Dipilih?</h2>
 <p>
-Apabila Anda belum mempunyai Sertifikat Elektronik dari PSrE dan membutuhkan tanda tangan elektronik untuk digunakan di Coretax, Anda dapat memilih <strong>Kode Otorisasi DJP</strong>.
+Jika belum mempunyai Sertifikat Elektronik tersertifikasi dari PSrE, Anda dapat menggunakan <strong>Kode Otorisasi DJP</strong> untuk kperluan penandatanganan dokumen perpajakan di Coretax.
 </p>
 <p>
-Sebaliknya, apabila Anda telah mempunyai Sertifikat Elektronik tersertifikasi dari PSrE yang dapat digunakan dalam Coretax, sertifikat tersebut dapat didaftarkan dengan memilih nama penyelenggara sertifikat dan mengisi identitas penandatangan atau <em>Signer ID</em>.
+Sebaliknya, apabila Anda telah mempunyai Sertifikat Elektronik dari PSrE, sertifikat tersebut dapat didaftarkan pada laman Coretax dengan memilih nama penyelenggara sertifikat dan mengisi identitas penandatangan atau <em>Signer ID</em>.
 </p>
 
 <div class="jk-formula-box">
@@ -170,7 +168,7 @@ Sebaliknya, apabila Anda telah mempunyai Sertifikat Elektronik tersertifikasi da
 <span class="se-ready-icon" aria-hidden="true">
 <svg viewBox="0 0 24 24" fill="none"><path d="M8 4.75h8A2.25 2.25 0 0 1 18.25 7v10A2.25 2.25 0 0 1 16 19.25H8A2.25 2.25 0 0 1 5.75 17V7A2.25 2.25 0 0 1 8 4.75Z"/><path d="M9 8.25h6M9 11.5h3.5"/><path d="m10 15 1.4 1.4L14.8 13"/></svg>
 </span>
-<span class="se-ready-text">Akun Coretax sudah dapat digunakan untuk login.</span>
+<span class="se-ready-text">Telah memiliki Akun Coretax untuk login.</span>
 </li>
 <li class="se-ready-item">
 <span class="se-ready-icon" aria-hidden="true">
@@ -329,7 +327,7 @@ JavaScript diperlukan untuk menjalankan slider.
 </section>
 
 <section id="passphrase">
-<h2>Bagaimana Membuat Passphrase?</h2>
+<h2>Apa itu Passphrase?</h2>
 <p>
 Passphrase bukan kata sandi untuk masuk ke akun Coretax. Passphrase digunakan ketika pengguna melakukan tindakan yang membutuhkan tanda tangan elektronik.
 </p>
@@ -414,8 +412,8 @@ Memiliki Kode Otorisasi belum otomatis membuat seseorang boleh menandatangani se
 <article class="jk-mistake-item">
 <span class="jk-mistake-number">3</span>
 <div>
-<strong>Berhenti setelah klik Simpan</strong>
-<p>Status sertifikat digital tetap perlu diperiksa sampai menunjukkan status Valid.</p>
+<strong>Tidak memastikan status validitas KO DJP</strong>
+<p>Status Kode Otorisasi DJP tetap perlu dipastikan sampai berstatus Valid.</p>
 </div>
 </article>
 
@@ -424,22 +422,6 @@ Memiliki Kode Otorisasi belum otomatis membuat seseorang boleh menandatangani se
 <div>
 <strong>Membagikan passphrase kepada pegawai lain</strong>
 <p>Passphrase merupakan bagian dari otorisasi pengguna dan harus dijaga kerahasiaannya.</p>
-</div>
-</article>
-
-<article class="jk-mistake-item">
-<span class="jk-mistake-number">5</span>
-<div>
-<strong>Mengira Kode Otorisasi sama dengan role signer</strong>
-<p>Kode Otorisasi merupakan alat tanda tangan. Kewenangan menandatangani dokumen tetap mengikuti role dan hubungan pengguna dengan Wajib Pajak.</p>
-</div>
-</article>
-
-<article class="jk-mistake-item">
-<span class="jk-mistake-number">6</span>
-<div>
-<strong>Tidak mengecek status sebelum batas pelaporan</strong>
-<p>Lakukan pengecekan lebih awal agar masalah status Invalid tidak baru diketahui ketika akan menyampaikan SPT.</p>
 </div>
 </article>
 </div>
