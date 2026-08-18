@@ -28,7 +28,7 @@ legal_basis: "PMK 81/2024 s.t.d.d. PMK 1/2026 dan PER-7/PJ/2025"
 permalink: /sertifikat-elektronik-coretax.html
 
 summary_label: "Ringkasan cepat"
-summary: "Kode Otorisasi DJP merupakan tanda tangan elektronik tidak tersertifikasi yang diterbitkan oleh Direktorat Jenderal Pajak untuk keperluan penandatanganan dokumen perpajakan di Coretax. KO DJP memiliki masa berlaku selama 2 (dua) tahun."
+summary: "Kode Otorisasi DJP merupakan tanda tangan elektronik tidak tersertifikasi yang diterbitkan oleh Direktorat Jenderal Pajak guna keperluan penandatanganan dokumen perpajakan di Coretax. KO DJP memiliki masa berlaku selama 2 (dua) tahun dan bersifat gratis."
 
 sidebar_note: "Jangan tertukar antara password dan passphrase. Password digunakan untuk login ke Coretax, sedangkan passphrase digunakan saat melakukan tanda tangan elektronik menggunakan Kode Otorisasi DJP."
 
@@ -41,21 +41,6 @@ custom_js:
 ---
 
 <div class="jk-article se-utility">
-
-<nav class="se-task-nav" aria-label="Pilih kebutuhan Anda">
-  <div class="se-task-nav-copy">
-    <span class="se-eyebrow">Mulai dari kebutuhan Anda</span>
-    <strong>Apa yang ingin Anda pelajari?</strong>
-  </div>
-  <div class="se-task-actions">
-    <a href="#pengertian"><span class="se-task-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 3.75h10a2.25 2.25 0 0 1 2.25 2.25v8A2.25 2.25 0 0 1 17 16.25H7A2.25 2.25 0 0 1 4.75 14V6A2.25 2.25 0 0 1 7 3.75Z"/><path d="M8.25 8h7.5M8.25 11h4.5"/><path d="M9.25 16.25 8.5 20.5 12 18.7l3.5 1.8-.75-4.25"/></svg></span><span><strong>Memahami KODJP, Sertel, &amp; Passphrase</strong><small>Pelajari konsep dasarnya lebih dulu</small></span></a>
-    <a href="#persiapan"><span class="se-task-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6.5 12.5 10 16l7.5-8"/><path d="M4.75 6.75h14.5v10.5a2 2 0 0 1-2 2H6.75a2 2 0 0 1-2-2Z"/></svg></span><span><strong>Hal yang harus disiapkan</strong><small>Cek kesiapan sebelum mulai</small></span></a>
-    <a href="#cara-mengajukan"><span class="se-task-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3.5 19 6.4v5.4c0 4.1-2.6 7.3-7 9.2-4.4-1.9-7-5.1-7-9.2V6.4L12 3.5Z"/><circle cx="10" cy="11" r="2"/><path d="M12 11h4.5"/></svg></span><span><strong>Cara permintaan KODJP</strong><small>Ikuti panduan permintaan dari awal</small></span></a>
-    <a href="#status-valid"><span class="se-task-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="m8.5 12 2.2 2.2 4.8-4.8"/></svg></span><span><strong>Cara pengecekan status</strong><small>Pastikan KODJP sudah Valid dan siap digunakan</small></span></a>
-    <a href="#badan"><span class="se-task-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 20V7.5L12 4l7 3.5V20"/><path d="M8 20v-5h8v5M8.5 9.5h.01M12 9.5h.01M15.5 9.5h.01"/></svg></span><span><strong>Untuk WP Badan</strong><small>Pahami hubungan, role, dan identitas</small></span></a>
-  </div>
-</nav>
-
 
 
 <section id="pengertian" class="se-section">
