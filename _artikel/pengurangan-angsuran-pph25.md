@@ -108,7 +108,7 @@ custom_js:
 <h2>Kapan Pengurangan Angsuran Dapat Dimohonkan?</h2>
 
 <p>
-  Pasal 119 menggunakan beberapa syarat yang harus dibaca secara bersamaan.
+  Pasal 119 PER-11/PJ/2025 menggunakan beberapa syarat yang harus dibaca secara bersamaan.
   Jadi, tidak cukup hanya mengatakan omzet sedang turun.
 </p>
 
@@ -126,7 +126,7 @@ custom_js:
     <span class="p25-rule-kicker">Syarat 2</span>
     <strong>Tahun Pajak telah berjalan 3 bulan atau lebih</strong>
     <p>
-      Permohonan berdasarkan Pasal 119 baru dapat digunakan setelah terdapat
+      Permohonan berdasarkan Pasal 119 PER-11/PJ/2025 baru dapat digunakan setelah terdapat
       realisasi yang cukup untuk menunjukkan perubahan keadaan usaha.
     </p>
   </article>
