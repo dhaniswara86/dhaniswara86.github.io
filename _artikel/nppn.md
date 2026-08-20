@@ -65,7 +65,7 @@ custom_js:
 <h2>Apa Itu NPPN?</h2>
 
 <p>
-<strong>Pada dasarnya, cara paling ideal untuk mengetahui penghasilan neto adalah pembukuan. Dari pembukuan dapat diketahui penghasilan sebenarnya, biaya sebenarnya, laba/rugi, aset, kewajiban, dan akhirnya penghasilan kena pajak.
+Pada dasarnya, cara paling ideal untuk mengetahui penghasilan neto adalah pembukuan. Dari pembukuan dapat diketahui penghasilan sebenarnya, biaya sebenarnya, laba/rugi, aset, kewajiban, dan akhirnya penghasilan kena pajak.
 
 Namun tidak semua Wajib Pajak Orang Pribadi yang menjalankan usaha atau pekerjaan bebas mampu menyelenggarakan pembukuan lengkap. Karena itulah diperlukan cara alternatif yang sederhana, terbuka, dan tetap dapat dipertanggungjawabkan untuk memperkirakan penghasilan neto. Dari kebutuhan inilah Norma Penghitungan lahir.
 </p>
