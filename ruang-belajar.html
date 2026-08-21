@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ruang Belajar | Kabayan Learning</title>
+<link rel="stylesheet" href="assets/css/ruang-belajar.css">
+</head>
+
+<body>
+
+<header class="header">
+    <div class="logo">Kabayan Learning</div>
+    <a href="evaluasi-dashboard.html">Dashboard Pengajar</a>
+</header>
+
+
+<main class="container">
+
+<section class="hero">
+    <p class="eyebrow">PENGAJAR</p>
+
+    <h1>Ruang Belajar.</h1>
+
+    <p>
+        Tempat pengajar membangun kelas,
+        memantau perkembangan peserta,
+        dan mengelola evaluasi pembelajaran.
+    </p>
+
+    <button class="hero-button" onclick="document.querySelector('.create-section').scrollIntoView({behavior:'smooth'})">
+        + Buat Ruang Belajar
+    </button>
+</section>
+
+
+<section class="quick-stats">
+
+<div>
+<strong id="total-class">—</strong>
+<span>Kelas Aktif</span>
+</div>
+
+<div>
+<strong id="total-student">—</strong>
+<span>Peserta</span>
+</div>
+
+<div>
+<strong id="total-checkpoint">—</strong>
+<span>Checkpoint</span>
+</div>
+
+</section>
+
+
+<section class="create-section">
+
+<h2>Buat Ruang Belajar Baru</h2>
+
+<p>
+Mulai program pembelajaran baru dengan membuat kelas pertama Anda.
+</p>
+
+
+<div class="form">
+
+<input id="class-name" placeholder="Nama kelas">
+
+<input id="checkpoint"
+type="number"
+value="15"
+placeholder="Jumlah checkpoint">
+
+<button id="create">
+Buat Kelas
+</button>
+
+</div>
+
+<p id="message"></p>
+
+</section>
+
+
+
+<section class="class-section">
+
+<h2>Kelas Anda</h2>
+
+<div id="classes" class="class-list">
+Memuat kelas...
+</div>
+
+</section>
+
+
+</main>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/js/kabayan-supabase-config.js"></script>
+<script src="assets/js/manajemen-kelas.js"></script>
+
+</body>
+</html>
