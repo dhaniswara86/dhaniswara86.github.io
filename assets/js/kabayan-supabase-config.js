@@ -11,7 +11,7 @@
   - Anon/publishable key memang digunakan di browser dan diamankan dengan RLS.
 */
 window.KABAYAN_SUPABASE_CONFIG = {
-  enabled: false,
+  enabled: true,
   url: "https://pvqycqkrximskdkpiilz.supabase.co",
   anonKey: "sb_publishable_WfYBX6vLHVo2ZoJt0iFxJA_8teuK35W"
 };
