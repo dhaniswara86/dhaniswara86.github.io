@@ -19,3 +19,30 @@ button.href=url.toString();
 });
 
 });
+async function checkCertificate(participantId){
+
+    const {data,error}=await supabase
+    .from("certificate_records")
+    .select("id")
+    .eq("participant_id",participantId)
+    .maybeSingle();
+
+
+    const btn=document.getElementById(
+        "certificateButton"
+    );
+
+
+    if(!btn) return;
+
+
+    if(data){
+
+        btn.style.display="inline-flex";
+
+        btn.href=
+        "sertifikat.html?id="+participantId;
+
+    }
+
+}
