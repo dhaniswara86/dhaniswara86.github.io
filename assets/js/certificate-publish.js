@@ -1,36 +1,30 @@
 /*
 ====================================================
 KABAYAN LEARNING
-Certificate Publisher (FIXED)
+Certificate Publish Handler - Fixed
 ====================================================
 */
+
 
 document.addEventListener(
 "DOMContentLoaded",
 ()=>{
 
-const button = document.getElementById(
+
+const button =
+document.getElementById(
 "publishCertificate"
 );
 
-if(!button) return;
+
+if(!button)
+return;
+
+
 
 button.addEventListener(
 "click",
-publishCertificate
-);
-
-});
-
-
-async function publishCertificate(){
-
-const client = getSupabase();
-
-if(!client){
-alert("Supabase belum aktif");
-return;
-}
+async ()=>{
 
 
 const params =
@@ -39,8 +33,10 @@ window.location.search
 );
 
 
+
 const participantId =
 params.get("id");
+
 
 
 if(!participantId){
@@ -55,58 +51,41 @@ return;
 
 
 
-/*
-Ambil data peserta
-*/
 
-const {
-data: participant,
-error: pError
-}
-=
-await client
+const client =
+window.supabaseClient ||
+supabase.createClient(
 
-.from(
-"kabayan_participants"
-)
+window.KABAYAN_SUPABASE_CONFIG.url,
 
-.select("*")
+window.KABAYAN_SUPABASE_CONFIG.publishableKey
 
-.eq(
-"id",
-participantId
-)
-
-.single();
-
-
-
-if(pError){
-
-console.error(
-"Participant error:",
-pError
 );
 
-alert(
-"Gagal mengambil data peserta"
-);
 
-return;
 
-}
+
+
+try{
+
+
+button.disabled=true;
+
+
+button.innerHTML =
+"⏳ Menerbitkan...";
 
 
 
 
 
 /*
-Cek sertifikat yang sudah ada
+Cek sertifikat lama
 */
 
+
 const {
-data: existing,
-error: checkError
+data: existing
 }
 =
 await client
@@ -115,9 +94,7 @@ await client
 "certificate_records"
 )
 
-.select(
-"id"
-)
+.select("id")
 
 .eq(
 "participant_id",
@@ -128,30 +105,16 @@ participantId
 
 
 
-if(checkError){
-
-console.error(
-"Check certificate error:",
-checkError
-);
-
-}
-
-
-
 
 if(existing){
+
 
 alert(
 "Sertifikat sudah pernah diterbitkan"
 );
 
 
-window.location.href =
-"sertifikat.html?id="
-+
-existing.id;
-
+window.location.reload();
 
 return;
 
@@ -161,27 +124,22 @@ return;
 
 
 
-
 /*
-Generate nomor sertifikat
+Nomor sertifikat
 */
+
 
 const year =
 new Date()
 .getFullYear();
 
 
-const number =
-"KBY-"
-+
-year
-+
-"-"
-+
-Math.floor(
-1000 +
-Math.random()*9000
-);
+
+const certificateNumber =
+"KBY-" +
+year +
+"-" +
+Date.now();
 
 
 
@@ -189,40 +147,8 @@ Math.random()*9000
 
 
 /*
-Insert sertifikat
+Insert database
 */
-
-const insertData = {
-
-participant_id:
-participantId,
-
-
-certificate_number:
-number,
-
-
-issued_at:
-new Date()
-.toISOString(),
-
-
-issued_by:
-"Pengajar Kabayan",
-
-
-status:
-"valid"
-
-};
-
-
-
-console.log(
-"Data sertifikat:",
-insertData
-);
-
 
 
 const {
@@ -235,9 +161,21 @@ await client
 "certificate_records"
 )
 
-.insert(
-insertData
-);
+.insert({
+
+participant_id:
+participantId,
+
+certificate_number:
+certificateNumber,
+
+issued_by:
+"Kabayan Learning",
+
+status:
+"valid"
+
+});
 
 
 
@@ -245,18 +183,9 @@ insertData
 
 if(error){
 
-console.error(
-"Certificate insert error:",
-error
-);
+console.error(error);
 
-
-alert(
-"Gagal menerbitkan sertifikat. Cek console."
-);
-
-
-return;
+throw error;
 
 }
 
@@ -273,90 +202,58 @@ alert(
 
 
 /*
-Ambil ID sertifikat
+Reload agar tombol
+Lihat Sertifikat muncul
 */
 
-const {
-data: certificate
-}
-=
-await client
 
-.from(
-"certificate_records"
-)
+setTimeout(
 
-.select(
-"id"
-)
+()=>{
 
-.eq(
-"certificate_number",
-number
-)
+window.location.reload();
 
-.single();
+},
 
-
-
-
-
-if(certificate){
-
-window.location.href =
-"sertifikat.html?id="
-+
-certificate.id;
-
-}
-
-
-
-}
-
-
-
-
-
-
-
-function getSupabase(){
-
-
-if(
-!window.KABAYAN_SUPABASE_CONFIG ||
-!window.KABAYAN_SUPABASE_CONFIG.enabled
-){
-
-return null;
-
-}
-
-
-
-if(
-window.supabaseClient
-){
-
-return window.supabaseClient;
-
-}
-
-
-
-
-window.supabaseClient =
-supabase.createClient(
-
-window.KABAYAN_SUPABASE_CONFIG.url,
-
-window.KABAYAN_SUPABASE_CONFIG.publishableKey
+700
 
 );
 
 
 
-return window.supabaseClient;
+}
+
+
+
+catch(err){
+
+
+console.error(
+"Publish certificate error:",
+err
+);
+
+
+
+alert(
+"Gagal menerbitkan sertifikat"
+);
+
+
+
+button.disabled=false;
+
+
+button.innerHTML =
+"🏆 Terbitkan Sertifikat";
+
 
 
 }
+
+
+
+});
+
+
+});
