@@ -355,20 +355,11 @@ function updateSummary(
     }
 
 }
-
-
-
-
-
-
-
-
 function renderParticipants(
     peserta,
     evaluasi,
     kelas
 ){
-
 
     const tbody =
         document.querySelector(
@@ -386,26 +377,102 @@ function renderParticipants(
         p => {
 
 
-            const nilai =
+            /*
+            Ambil seluruh evaluasi peserta
+            */
+
+            const attempts =
                 evaluasi.filter(
                     e =>
                     e.participant_id === p.id
                 );
 
 
-            const score =
-                nilai.length
+
+            /*
+            Hitung checkpoint unik
+            */
+
+            const checkpointSelesai =
+                [
+                    ...new Set(
+                        attempts.map(
+                            e =>
+                            e.checkpoint_number
+                        )
+                    )
+                ].length;
+
+
+
+            /*
+            Hitung progress
+            */
+
+            const progress =
+                kelas.total_checkpoint
                 ?
                 Math.round(
-                    nilai.reduce(
-                        (a,b)=>a+b.score,
+                    checkpointSelesai /
+                    kelas.total_checkpoint *
+                    100
+                )
+                :
+                0;
+
+
+
+            /*
+            Tentukan status
+            */
+
+            let status =
+                "⚪ Belum mulai";
+
+
+
+            if(checkpointSelesai > 0){
+
+                status =
+                "🟡 Berjalan";
+
+            }
+
+
+
+            if(
+                checkpointSelesai >=
+                kelas.total_checkpoint
+            ){
+
+                status =
+                "🟢 Selesai";
+
+            }
+
+
+
+
+            /*
+            Hitung nilai rata-rata
+            */
+
+            const score =
+                attempts.length
+                ?
+                Math.round(
+                    attempts.reduce(
+                        (a,b)=>
+                        a + b.score,
                         0
                     )
                     /
-                    nilai.length
+                    attempts.length
                 )
                 :
                 "-";
+
+
 
 
 
@@ -413,15 +480,45 @@ function renderParticipants(
 
             <tr>
 
-            <td>${p.participant_name}</td>
-
-            <td>🟡 Berjalan</td>
-
             <td>
-            0/${kelas.total_checkpoint}
+                ${p.participant_name}
             </td>
 
-            <td>${score}</td>
+
+            <td>
+                ${status}
+            </td>
+
+
+            <td>
+
+                <div class="progress-wrapper">
+
+                    <div class="progress-bar">
+
+                        <span
+                        style="
+                        width:${progress}%
+                        ">
+                        </span>
+
+                    </div>
+
+
+                    <small>
+                    ${checkpointSelesai}/${kelas.total_checkpoint}
+                    checkpoint
+                    </small>
+
+                </div>
+
+            </td>
+
+
+            <td>
+                ${score}
+            </td>
+
 
             </tr>
 
@@ -433,3 +530,10 @@ function renderParticipants(
     ).join("");
 
 }
+
+
+
+
+
+
+
