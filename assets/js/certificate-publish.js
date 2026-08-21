@@ -73,7 +73,7 @@ button.disabled=true;
 
 
 button.innerHTML =
-"⏳ Menerbitkan...";
+"â³ Menerbitkan...";
 
 
 
@@ -101,6 +101,14 @@ await client
 participantId
 )
 
+.order(
+"issued_at",
+{
+ascending:false
+}
+)
+
+.limit(1)
 .maybeSingle();
 
 
@@ -245,7 +253,7 @@ button.disabled=false;
 
 
 button.innerHTML =
-"🏆 Terbitkan Sertifikat";
+"ðŸ† Terbitkan Sertifikat";
 
 
 
