@@ -6,54 +6,52 @@
 <title>Manajemen Kelas | Kabayan Learning</title>
 <link rel="stylesheet" href="assets/css/manajemen-kelas.css">
 </head>
-
 <body>
 
-<header>
-<div class="brand">KABAYAN LEARNING</div>
+<header class="topbar">
+<div class="brand">Kabayan Learning</div>
 <a href="evaluasi-dashboard.html">Dashboard Pengajar</a>
 </header>
 
 <main class="container">
 
 <section class="hero">
+<p class="eyebrow">PENGAJAR</p>
 <h1>Manajemen Kelas</h1>
-<p>Buat dan kelola kelas pembelajaran Kabayan Learning.</p>
+<p>Buat, kelola, dan pantau kelas pembelajaran Anda.</p>
 </section>
 
+<section class="create-card">
 
-<section class="panel">
+<div>
+<h2>Buat kelas baru</h2>
+<p class="muted">Tambahkan program pembelajaran baru ke Kabayan Learning.</p>
+</div>
 
-<h2>Buat Kelas Baru</h2>
+<div class="form-grid">
+<input id="class-name" placeholder="Nama kelas">
+<input id="checkpoint" type="number" value="15">
+</div>
 
-<input id="class-name" placeholder="Nama Kelas">
-
-<input id="checkpoint" type="number" value="15" placeholder="Jumlah checkpoint">
-
-
-<button id="create">
-+ Buat Kelas
-</button>
+<button id="create">Buat Kelas</button>
 
 <p id="message"></p>
 
 </section>
 
 
+<section>
+<div class="section-title">
+<h2>Kelas Anda</h2>
+</div>
 
-<section class="panel">
-
-<h2>Kelas Saya</h2>
-
-<div id="classes">
-Memuat kelas...
+<div id="classes" class="class-grid">
+<div class="loading">Memuat kelas...</div>
 </div>
 
 </section>
 
-
 </main>
-
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="assets/js/kabayan-supabase-config.js"></script>
