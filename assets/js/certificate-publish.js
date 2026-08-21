@@ -1,62 +1,36 @@
 /*
 ====================================================
 KABAYAN LEARNING
-Certificate Publisher
+Certificate Publisher (FIXED)
 ====================================================
 */
-
 
 document.addEventListener(
 "DOMContentLoaded",
 ()=>{
 
-
-const button =
-document.getElementById(
+const button = document.getElementById(
 "publishCertificate"
 );
 
-
-
-if(!button)
-return;
-
-
+if(!button) return;
 
 button.addEventListener(
 "click",
 publishCertificate
 );
 
-
-
 });
-
-
-
-
 
 
 async function publishCertificate(){
 
-
-
-const client =
-getSupabase();
-
-
+const client = getSupabase();
 
 if(!client){
-
-alert(
-"Supabase belum aktif"
-);
-
+alert("Supabase belum aktif");
 return;
-
 }
-
-
 
 
 const params =
@@ -65,10 +39,8 @@ window.location.search
 );
 
 
-
 const participantId =
 params.get("id");
-
 
 
 if(!participantId){
@@ -83,18 +55,13 @@ return;
 
 
 
-
-
-
 /*
 Ambil data peserta
 */
 
-
 const {
-data:participant,
-error:pError
-
+data: participant,
+error: pError
 }
 =
 await client
@@ -114,10 +81,12 @@ participantId
 
 
 
-
 if(pError){
 
-console.error(pError);
+console.error(
+"Participant error:",
+pError
+);
 
 alert(
 "Gagal mengambil data peserta"
@@ -131,16 +100,13 @@ return;
 
 
 
-
-
 /*
-Cek apakah sudah ada sertifikat
+Cek sertifikat yang sudah ada
 */
 
-
 const {
-data:existing
-
+data: existing,
+error: checkError
 }
 =
 await client
@@ -149,7 +115,9 @@ await client
 "certificate_records"
 )
 
-.select("*")
+.select(
+"id"
+)
 
 .eq(
 "participant_id",
@@ -160,10 +128,19 @@ participantId
 
 
 
+if(checkError){
+
+console.error(
+"Check certificate error:",
+checkError
+);
+
+}
+
+
 
 
 if(existing){
-
 
 alert(
 "Sertifikat sudah pernah diterbitkan"
@@ -178,7 +155,6 @@ existing.id;
 
 return;
 
-
 }
 
 
@@ -186,16 +162,13 @@ return;
 
 
 
-
 /*
-Buat nomor sertifikat
+Generate nomor sertifikat
 */
-
 
 const year =
 new Date()
 .getFullYear();
-
 
 
 const number =
@@ -215,28 +188,11 @@ Math.random()*9000
 
 
 
-
-
 /*
-Simpan sertifikat
+Insert sertifikat
 */
 
-
-const {
-
-data,
-error
-
-}
-
-=
-await client
-
-.from(
-"certificate_records"
-)
-
-.insert({
+const insertData = {
 
 participant_id:
 participantId,
@@ -258,12 +214,30 @@ issued_by:
 status:
 "valid"
 
+};
 
-})
 
-.select()
 
-.single();
+console.log(
+"Data sertifikat:",
+insertData
+);
+
+
+
+const {
+error
+}
+=
+await client
+
+.from(
+"certificate_records"
+)
+
+.insert(
+insertData
+);
 
 
 
@@ -271,11 +245,14 @@ status:
 
 if(error){
 
-console.error(error);
+console.error(
+"Certificate insert error:",
+error
+);
 
 
 alert(
-"Gagal menerbitkan sertifikat"
+"Gagal menerbitkan sertifikat. Cek console."
 );
 
 
@@ -287,25 +264,55 @@ return;
 
 
 
-
-
 alert(
 "Sertifikat berhasil diterbitkan"
 );
 
 
 
+
+
+/*
+Ambil ID sertifikat
+*/
+
+const {
+data: certificate
+}
+=
+await client
+
+.from(
+"certificate_records"
+)
+
+.select(
+"id"
+)
+
+.eq(
+"certificate_number",
+number
+)
+
+.single();
+
+
+
+
+
+if(certificate){
+
 window.location.href =
 "sertifikat.html?id="
 +
-data.id;
-
-
-
+certificate.id;
 
 }
 
 
+
+}
 
 
 
@@ -337,6 +344,7 @@ return window.supabaseClient;
 
 
 
+
 window.supabaseClient =
 supabase.createClient(
 
@@ -349,7 +357,6 @@ window.KABAYAN_SUPABASE_CONFIG.publishableKey
 
 
 return window.supabaseClient;
-
 
 
 }
