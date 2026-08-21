@@ -490,7 +490,7 @@ if(score>=80){
 
 box.innerHTML =
 `
-🟢 Performa baik.
+ðŸŸ¢ Performa baik.
 
 <br><br>
 
@@ -509,7 +509,7 @@ else{
 
 box.innerHTML =
 `
-⚠ Perlu penguatan.
+âš  Perlu penguatan.
 
 <br><br>
 
@@ -557,6 +557,14 @@ await client
 id
 )
 
+.order(
+"issued_at",
+{
+ascending:false
+}
+)
+
+.limit(1)
 .maybeSingle();
 
 
