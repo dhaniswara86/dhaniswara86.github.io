@@ -1,13 +1,45 @@
-const data=[
-{name:"Andi",status:"🟢 Selesai",progress:"100%",score:86},
-{name:"Budi",status:"🟡 Berjalan",progress:"50%",score:72},
-{name:"Citra",status:"⚪ Belum mulai",progress:"0%",score:"-"}
-];
+document.addEventListener("DOMContentLoaded", async () => {
 
-document.getElementById("participant-list").innerHTML=data.map(p=>`
-<tr>
-<td>${p.name}</td>
-<td>${p.status}</td>
-<td>${p.progress}</td>
-<td>${p.score}</td>
-</tr>`).join("");
+    if (!window.supabaseClient) {
+        console.error("Supabase belum aktif");
+        return;
+    }
+
+    loadClassSummary();
+
+});
+
+
+async function loadClassSummary(){
+
+    const { data: classes, error } =
+        await window.supabaseClient
+        .from("kabayan_classes")
+        .select("*")
+        .order("created_at",{ascending:false});
+
+
+    if(error){
+        console.error(error);
+        return;
+    }
+
+
+    console.log("Kelas:", classes);
+
+
+    if(classes.length){
+
+        const kelas = classes[0];
+
+        document.querySelector(".class-panel h2")
+        .innerText = kelas.class_name;
+
+
+        document.querySelector(".class-panel p")
+        .innerHTML =
+        `Kode kelas: <b>${kelas.class_code}</b>`;
+
+    }
+
+}
