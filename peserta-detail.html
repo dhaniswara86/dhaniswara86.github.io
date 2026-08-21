@@ -8,7 +8,6 @@
 
 <title>Detail Peserta | Kabayan Learning</title>
 
-
 <link rel="stylesheet" href="assets/css/peserta-detail.css">
 <link rel="stylesheet" href="assets/css/participant-action.css">
 
@@ -18,29 +17,18 @@
 .certificate-publish{
 
 background:#2563eb;
-
 color:white;
-
 border:none;
-
 padding:14px 22px;
-
 border-radius:14px;
-
 font-size:16px;
-
 font-weight:600;
-
 cursor:pointer;
-
 display:inline-flex;
-
 align-items:center;
-
 gap:8px;
 
 }
-
 
 .certificate-publish:hover{
 
@@ -52,18 +40,14 @@ background:#1d4ed8;
 .action-panel{
 
 display:flex;
-
 gap:16px;
-
 flex-wrap:wrap;
 
 }
 
 </style>
 
-
 </head>
-
 
 
 <body>
@@ -87,13 +71,9 @@ Dashboard Pengajar
 <main class="container">
 
 
-
 <a class="back" href="evaluasi-dashboard.html">
-
 ← Kembali ke dashboard
-
 </a>
-
 
 
 
@@ -109,9 +89,7 @@ Detail Peserta
 Memuat kelas...
 </span>
 
-
 </section>
-
 
 
 
@@ -120,12 +98,9 @@ Memuat kelas...
 <section class="summary-grid">
 
 
-
 <div class="card">
 
-<small>
-Progress
-</small>
+<small>Progress</small>
 
 <strong id="progress">
 -
@@ -137,12 +112,9 @@ Progress
 
 
 
-
 <div class="card">
 
-<small>
-Nilai rata-rata
-</small>
+<small>Nilai rata-rata</small>
 
 <strong id="average-score">
 -
@@ -156,13 +128,9 @@ Hasil evaluasi
 
 
 
-
-
 <div class="card">
 
-<small>
-Status
-</small>
+<small>Status</small>
 
 <strong id="status">
 -
@@ -173,9 +141,7 @@ Status
 </div>
 
 
-
 </section>
-
 
 
 
@@ -199,7 +165,6 @@ Memuat...
 
 
 
-
 <section class="panel">
 
 <h2>
@@ -217,7 +182,6 @@ Memuat...
 
 
 
-
 <section class="panel">
 
 <h2>
@@ -228,7 +192,6 @@ Insight Pengajar
 Memuat...
 </div>
 
-
 </section>
 
 
@@ -238,9 +201,7 @@ Memuat...
 
 
 
-
 <section class="action-panel">
-
 
 
 <a 
@@ -270,10 +231,13 @@ id="publishCertificate">
 
 
 
+
+
 <a 
 class="action-button certificate"
 id="certificateButton"
-href="#">
+href="#"
+style="display:none;">
 
 <span class="icon">
 🎓
@@ -291,8 +255,6 @@ Lihat Sertifikat
 
 
 
-
-
 </main>
 
 
@@ -303,17 +265,121 @@ Lihat Sertifikat
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-
 <script src="assets/js/kabayan-supabase-config.js"></script>
-
 
 <script src="assets/js/dashboard-detail.js"></script>
 
-
 <script src="assets/js/participant-action.js"></script>
 
-
 <script src="assets/js/certificate-publish.js"></script>
+
+
+
+<script>
+
+document.addEventListener(
+"DOMContentLoaded",
+async function(){
+
+
+const button =
+document.getElementById(
+"certificateButton"
+);
+
+
+if(!button)
+return;
+
+
+
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+
+
+const participantId =
+params.get("id");
+
+
+
+if(!participantId)
+return;
+
+
+
+const client =
+window.supabaseClient ||
+supabase.createClient(
+
+window.KABAYAN_SUPABASE_CONFIG.url,
+
+window.KABAYAN_SUPABASE_CONFIG.publishableKey
+
+);
+
+
+
+
+const {
+data,
+error
+}
+=
+await client
+
+.from(
+"certificate_records"
+)
+
+.select("id")
+
+.eq(
+"participant_id",
+participantId
+)
+
+.maybeSingle();
+
+
+
+
+if(error){
+
+console.error(
+"Certificate check:",
+error
+);
+
+return;
+
+}
+
+
+
+
+if(data){
+
+
+button.style.display =
+"inline-flex";
+
+
+button.href =
+"sertifikat.html?id="
++
+data.id;
+
+
+}
+
+
+});
+
+
+</script>
 
 
 
