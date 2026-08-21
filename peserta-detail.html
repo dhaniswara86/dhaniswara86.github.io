@@ -1,101 +1,322 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Detail Peserta | Kabayan Learning</title>
+
 
 <link rel="stylesheet" href="assets/css/peserta-detail.css">
 <link rel="stylesheet" href="assets/css/participant-action.css">
 
+
+<style>
+
+.certificate-publish{
+
+background:#2563eb;
+
+color:white;
+
+border:none;
+
+padding:14px 22px;
+
+border-radius:14px;
+
+font-size:16px;
+
+font-weight:600;
+
+cursor:pointer;
+
+display:inline-flex;
+
+align-items:center;
+
+gap:8px;
+
+}
+
+
+.certificate-publish:hover{
+
+background:#1d4ed8;
+
+}
+
+
+.action-panel{
+
+display:flex;
+
+gap:16px;
+
+flex-wrap:wrap;
+
+}
+
+</style>
+
+
 </head>
+
+
 
 <body>
 
+
 <header class="nav">
-<div class="brand">◼ dhaniswara86</div>
-<a href="evaluasi-dashboard.html">Dashboard Pengajar</a>
+
+<div class="brand">
+◼ dhaniswara86
+</div>
+
+<a href="evaluasi-dashboard.html">
+Dashboard Pengajar
+</a>
+
 </header>
+
+
 
 
 <main class="container">
 
+
+
 <a class="back" href="evaluasi-dashboard.html">
+
 ← Kembali ke dashboard
+
 </a>
 
 
+
+
 <section class="hero">
+
 <p>Kabayan Learning</p>
-<h1 id="participant-name">Detail Peserta</h1>
-<span id="class-name">Memuat kelas...</span>
+
+<h1 id="participant-name">
+Detail Peserta
+</h1>
+
+<span id="class-name">
+Memuat kelas...
+</span>
+
+
 </section>
+
+
+
+
 
 
 <section class="summary-grid">
 
+
+
 <div class="card">
-<small>Progress</small>
-<strong id="progress">-</strong>
+
+<small>
+Progress
+</small>
+
+<strong id="progress">
+-
+</strong>
+
 <p id="progress-detail"></p>
+
 </div>
 
-<div class="card">
-<small>Nilai rata-rata</small>
-<strong id="average-score">-</strong>
-<p>Hasil evaluasi</p>
-</div>
+
+
 
 <div class="card">
-<small>Status</small>
-<strong id="status">-</strong>
+
+<small>
+Nilai rata-rata
+</small>
+
+<strong id="average-score">
+-
+</strong>
+
+<p>
+Hasil evaluasi
+</p>
+
+</div>
+
+
+
+
+
+<div class="card">
+
+<small>
+Status
+</small>
+
+<strong id="status">
+-
+</strong>
+
 <p id="status-detail"></p>
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+<section class="panel">
+
+<h2>
+Perjalanan Belajar
+</h2>
+
+<div id="learning-progress">
+Memuat...
 </div>
 
 </section>
 
 
-<section class="panel">
-<h2>Perjalanan Belajar</h2>
-<div id="learning-progress">Memuat...</div>
-</section>
 
 
-<section class="panel">
-<h2>Riwayat Evaluasi</h2>
-<div id="history">Memuat...</div>
-</section>
+
 
 
 <section class="panel">
-<h2>Insight Pengajar</h2>
-<div id="insight">Memuat...</div>
+
+<h2>
+Riwayat Evaluasi
+</h2>
+
+<div id="history">
+Memuat...
+</div>
+
 </section>
+
+
+
+
+
+
+
+<section class="panel">
+
+<h2>
+Insight Pengajar
+</h2>
+
+<div id="insight">
+Memuat...
+</div>
+
+
+</section>
+
+
+
+
+
+
+
 
 
 <section class="action-panel">
 
-<a class="action-button report" href="report.html">
-<span class="icon">📄</span>
+
+
+<a 
+class="action-button report" 
+id="reportButton"
+href="report.html">
+
+<span class="icon">
+📄
+</span>
+
 Download Laporan Belajar
+
 </a>
 
 
-<a class="action-button certificate" href="sertifikat.html">
-<span class="icon">🏆</span>
-Cetak Sertifikat
+
+
+
+<button 
+class="certificate-publish"
+id="publishCertificate">
+
+🏆 Terbitkan Sertifikat
+
+</button>
+
+
+
+<a 
+class="action-button certificate"
+id="certificateButton"
+href="#">
+
+<span class="icon">
+🎓
+</span>
+
+Lihat Sertifikat
+
 </a>
+
+
 
 </section>
+
+
+
+
+
 
 
 </main>
 
 
+
+
+
+
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
 <script src="assets/js/kabayan-supabase-config.js"></script>
+
+
 <script src="assets/js/dashboard-detail.js"></script>
+
+
 <script src="assets/js/participant-action.js"></script>
 
+
+<script src="assets/js/certificate-publish.js"></script>
+
+
+
 </body>
+
 </html>
