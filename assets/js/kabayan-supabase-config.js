@@ -12,6 +12,6 @@
 */
 window.KABAYAN_SUPABASE_CONFIG = {
   enabled: false,
-  url: "https://YOUR-PROJECT.supabase.co",
-  anonKey: "YOUR-ANON-OR-PUBLISHABLE-KEY"
+  url: "https://pvqycqkrximskdkpiilz.supabase.co",
+  anonKey: "sb_publishable_WfYBX6vLHVo2ZoJt0iFxJA_8teuK35W"
 };
