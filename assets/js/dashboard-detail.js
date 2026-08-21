@@ -440,3 +440,73 @@ async function checkCertificate(participantId){
     }
 
 }
+async function checkCertificate(participantId){
+
+    const client = getClient();
+
+
+    const {
+        data,
+        error
+    } = await client
+    .from("certificate_records")
+    .select("id,participant_id")
+    .eq(
+        "participant_id",
+        participantId
+    )
+    .eq(
+        "status",
+        "valid"
+    )
+    .order(
+        "issued_at",
+        {
+            ascending:false
+        }
+    )
+    .limit(1)
+    .maybeSingle();
+
+
+
+    console.log(
+        "CERTIFICATE RESULT",
+        data,
+        error
+    );
+
+
+    const button =
+    document.getElementById(
+        "certificateButton"
+    );
+
+
+    if(!button){
+        console.warn(
+            "Tombol sertifikat tidak ditemukan"
+        );
+        return;
+    }
+
+
+
+    if(data){
+
+        button.style.display =
+        "inline-flex";
+
+
+        button.href =
+        "sertifikat.html?id="
+        +
+        data.id;
+
+
+        button.innerHTML =
+        "🎓 Lihat Sertifikat";
+
+    }
+
+}
