@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Dashboard Pengajar | Kabayan Learning</title>
+  <link rel="stylesheet" href="assets/css/kabayan-learning.css">
+</head>
+
+<body id="top">
+  <header class="site-nav">
+    <div class="nav-inner">
+      <a class="nav-brand" href="index.html">
+        <span class="brand-symbol">ASD</span>
+        <span>dhaniswara86</span>
+      </a>
+
+      <nav class="desktop-menu" aria-label="Navigasi dashboard">
+        <a href="evaluasi-pph21.html">Halaman Peserta</a>
+        <a href="index.html">Beranda Kabayan</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="menu-toggle" id="menuToggle" type="button"
+          aria-label="Buka menu" aria-expanded="false">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="evaluasi-pph21.html">Halaman Peserta</a>
+    <a href="index.html">Beranda Kabayan</a>
+  </nav>
+
+  <main>
+    <div class="announcement">
+      Kabayan Learning · Dashboard khusus pengajar.
+    </div>
+
+    <section class="dashboard-hero dashboard-hero--compact">
+      <div class="dashboard-hero-inner">
+        <p class="hero-eyebrow">Kabayan Learning</p>
+        <h1>Hasil evaluasi.</h1>
+        <p>
+          Lihat skor peserta, progres checkpoint, riwayat percobaan, dan pertanyaan yang paling banyak salah.
+        </p>
+      </div>
+    </section>
+
+    <section class="dashboard-section">
+      <div class="dashboard-shell">
+
+        <section id="teacherLoginPanel" class="teacher-login">
+          <div>
+            <p class="section-kicker">Akses pengajar</p>
+            <h2>Masuk ke dashboard.</h2>
+            <p>
+              Gunakan akun pengajar yang dibuat pada Supabase Authentication.
+            </p>
+          </div>
+
+          <form id="teacherLoginForm" class="teacher-login-form">
+            <label>
+              Email
+              <input id="teacherEmail" type="email" autocomplete="username" required
+                placeholder="pengajar@email.com">
+            </label>
+            <label>
+              Password
+              <input id="teacherPassword" type="password" autocomplete="current-password" required
+                placeholder="Password">
+            </label>
+            <button class="button button-primary" type="submit">Masuk</button>
+            <p id="teacherLoginMessage" class="form-message"></p>
+          </form>
+        </section>
+
+        <section id="teacherDashboard" class="teacher-dashboard" hidden>
+          <div class="dashboard-toolbar">
+            <div>
+              <p class="section-kicker">PPh Pasal 21/26</p>
+              <h2>Ringkasan kelas</h2>
+              <p id="dashboardUpdatedAt">Memuat data…</p>
+            </div>
+            <div class="participant-actions">
+              <span id="teacherModeBadge" class="sync-badge sync-badge--connected">Terhubung</span>
+              <button id="exportSummaryCsvBtn" class="button button-outline" type="button">CSV Ringkasan</button>
+              <button id="exportDetailCsvBtn" class="button button-outline" type="button">CSV Detail</button>
+              <button id="refreshDashboardBtn" class="button button-outline" type="button">Muat ulang</button>
+              <button id="teacherLogoutBtn" class="text-button" type="button">Keluar</button>
+            </div>
+          </div>
+
+          <div class="metric-grid">
+            <article class="metric-card">
+              <span>Peserta</span>
+              <strong id="metricParticipants">0</strong>
+              <small>nama unik</small>
+            </article>
+            <article class="metric-card">
+              <span>Rata-rata</span>
+              <strong id="metricAverage">—</strong>
+              <small>skor terbaru</small>
+            </article>
+            <article class="metric-card">
+              <span>Checkpoint dikerjakan</span>
+              <strong id="metricAttempts">0</strong>
+              <small>chapter unik</small>
+            </article>
+            <article class="metric-card">
+              <span>Perlu perhatian</span>
+              <strong id="metricWeakCheckpoint">—</strong>
+              <small id="metricWeakScore">belum ada data</small>
+            </article>
+          </div>
+
+          <section class="teacher-panel class-management-panel">
+            <div class="teacher-panel-heading class-management-heading">
+              <div>
+                <p class="section-kicker">Kelas</p>
+                <h3>Kelola kelas belajar</h3>
+                <p class="panel-description">
+                  Buat kode kelas untuk dibagikan kepada peserta. Setiap peserta akan mendapat Kode Peserta pribadi.
+                </p>
+              </div>
+
+              <form id="createClassForm" class="class-create-form">
+                <input id="newClassName" type="text" maxlength="100"
+                  placeholder="Nama kelas, mis. Brevet AB Agustus 2026" required>
+                <input id="newClassCodeTeacher" class="code-input" type="text" maxlength="30"
+                  placeholder="Kode, mis. BREVET0826" required>
+                <button class="button button-primary" type="submit">Buat kelas</button>
+                <p id="classFormMessage" class="form-message"></p>
+              </form>
+            </div>
+
+            <div id="classList" class="class-list"></div>
+          </section>
+
+          <section class="teacher-panel">
+            <div class="teacher-panel-heading">
+              <div>
+                <p class="section-kicker">Daftar hasil</p>
+                <h3>Skor setiap peserta</h3>
+              </div>
+
+              <div class="teacher-filters teacher-filters--three">
+                <input id="participantSearch" type="search" placeholder="Cari nama peserta…">
+                <select id="cohortFilter" aria-label="Filter kelas">
+                  <option value="all">Semua kelas</option>
+                </select>
+                <select id="checkpointFilter" aria-label="Filter checkpoint">
+                  <option value="all">Semua checkpoint</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="results-table-wrap">
+              <table class="results-table">
+                <thead>
+                  <tr>
+                    <th>Peserta</th>
+                    <th>Kelas/Batch</th>
+                    <th>Checkpoint</th>
+                    <th>Skor terbaru</th>
+                    <th>Percobaan</th>
+                    <th>Terakhir</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="resultsTableBody"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <div class="dashboard-two-column">
+            <section class="teacher-panel">
+              <div class="teacher-panel-heading">
+                <div>
+                  <p class="section-kicker">Analisis pembelajaran</p>
+                  <h3>Rata-rata per checkpoint</h3>
+                </div>
+              </div>
+              <div id="checkpointInsights" class="insight-list"></div>
+            </section>
+
+            <section class="teacher-panel">
+              <div class="teacher-panel-heading">
+                <div>
+                  <p class="section-kicker">Insight soal</p>
+                  <h3>Paling banyak salah</h3>
+                </div>
+              </div>
+              <div id="questionInsights" class="insight-list"></div>
+            </section>
+          </div>
+          <section class="teacher-panel admin-panel">
+            <div class="teacher-panel-heading">
+              <div>
+                <p class="section-kicker">Administrasi</p>
+                <h3>Kelola peserta & data uji</h3>
+              </div>
+            </div>
+
+            <div class="admin-tools-grid">
+              <div class="admin-tool">
+                <strong>Data peserta</strong>
+                <p>Ubah kelas/batch atau hapus seluruh riwayat seorang peserta melalui tombol Detail.</p>
+              </div>
+
+              <div class="admin-tool">
+                <strong>Bersihkan data uji</strong>
+                <p>Menghapus peserta yang namanya mengandung “Peserta Uji” atau “Test”.</p>
+                <button id="deleteTestDataBtn" class="button button-danger" type="button">
+                  Hapus data uji
+                </button>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <section id="dashboardSetupNotice" class="setup-notice" hidden>
+          <strong>Supabase belum dihubungkan.</strong>
+          <p>
+            Isi <code>assets/js/kabayan-supabase-config.js</code> lalu jalankan
+            <code>supabase/schema.sql</code>. Panduan lengkap ada pada
+            <code>PANDUAN-INTEGRASI.md</code>.
+          </p>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <div id="participantModal" class="modal" hidden>
+    <div class="modal-backdrop" data-close-modal></div>
+    <section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="participantModalTitle">
+      <div class="modal-head">
+        <div>
+          <p class="section-kicker">Detail peserta</p>
+          <h2 id="participantModalTitle">Peserta</h2>
+        </div>
+        <button class="icon-button" type="button" data-close-modal aria-label="Tutup">×</button>
+      </div>
+      <div id="participantModalBody"></div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <p>Dashboard Pengajar · Kabayan Learning</p>
+      <div class="footer-links">
+        <a href="evaluasi-pph21.html">Halaman Peserta</a>
+        <a href="index.html">Beranda</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="assets/js/kabayan-supabase-config.js"></script>
+  <script src="assets/js/kabayan-score-store.js"></script>
+  <script src="assets/js/evaluasi-pph21-data.js"></script>
+  <script src="assets/js/kabayan-teacher-dashboard.js"></script>
+</body>
+</html>
