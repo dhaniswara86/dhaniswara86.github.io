@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f5f7">
+  <title>Kabayan Checkpoint — Evaluasi PPh Pasal 21/26</title>
+  <meta name="description" content="Evaluasi interaktif per pembahasan untuk modul PPh Pasal 21/26.">
+  <link rel="stylesheet" href="assets/css/evaluasi-pph21.css">
+</head>
+<body>
+  <!--
+    DEMO STANDALONE.
+    Saat dipasang ke Kabayan, Anda dapat mempertahankan header/footer situs yang sudah ada
+    dan hanya menyalin elemen <main id="kabayan-eval-app"> ... </main>.
+  -->
+
+  <main id="kabayan-eval-app" class="kb-eval" aria-live="polite">
+    <section class="kb-eval__hero" aria-labelledby="kbEvalTitle">
+      <div class="kb-eval__hero-inner">
+        <div>
+          <span class="kb-eval__eyebrow">KABAYAN CHECKPOINT</span>
+          <h1 id="kbEvalTitle">Evaluasi PPh Pasal 21/26</h1>
+          <p>
+            Uji pemahaman setiap pembahasan dengan pengalaman belajar yang ringkas, tenang,
+            dan fokus pada konsep yang benar-benar perlu dipahami.
+          </p>
+        </div>
+
+        <div class="kb-eval__hero-stat" aria-label="Ringkasan progres">
+          <strong id="heroCompleted">0/15</strong>
+          <span>checkpoint selesai</span>
+          <div class="kb-eval__mini-progress" aria-hidden="true">
+            <span id="heroProgressBar"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="kb-eval__shell">
+      <aside class="kb-eval__sidebar" aria-label="Daftar pembahasan">
+        <div class="kb-eval__sidebar-head">
+          <div>
+            <span class="kb-eval__kicker">PROGRES BELAJAR</span>
+            <h2>Pilih pembahasan</h2>
+          </div>
+          <button id="resetProgressBtn" class="kb-eval__icon-btn" type="button" title="Hapus progres" aria-label="Hapus seluruh progres">
+            ↺
+          </button>
+        </div>
+
+        <div class="kb-eval__overall">
+          <div class="kb-eval__overall-row">
+            <span>Keseluruhan</span>
+            <strong id="overallPercent">0%</strong>
+          </div>
+          <div class="kb-eval__progress" aria-hidden="true">
+            <span id="overallProgressBar"></span>
+          </div>
+        </div>
+
+        <nav id="chapterList" class="kb-eval__chapter-list"></nav>
+      </aside>
+
+      <section class="kb-eval__workspace">
+        <div id="chapterIntro" class="kb-eval__panel"></div>
+
+        <div id="quizPanel" class="kb-eval__panel kb-eval__panel--quiz" hidden>
+          <div class="kb-eval__question-top">
+            <div>
+              <span id="questionChapter" class="kb-eval__kicker"></span>
+              <div id="questionMeta" class="kb-eval__question-meta"></div>
+            </div>
+            <button id="closeQuizBtn" class="kb-eval__text-btn" type="button">Keluar</button>
+          </div>
+
+          <div class="kb-eval__progress kb-eval__progress--question" aria-label="Progres pertanyaan">
+            <span id="questionProgressBar"></span>
+          </div>
+
+          <article class="kb-eval__question-card">
+            <div id="questionType" class="kb-eval__pill"></div>
+            <h2 id="questionText"></h2>
+            <p id="questionContext" class="kb-eval__question-context" hidden></p>
+
+            <div id="answerArea" class="kb-eval__answer-area"></div>
+
+            <div id="feedbackBox" class="kb-eval__feedback" hidden>
+              <div class="kb-eval__feedback-head">
+                <span id="feedbackIcon" class="kb-eval__feedback-icon"></span>
+                <div>
+                  <strong id="feedbackTitle"></strong>
+                  <p id="feedbackLead"></p>
+                </div>
+              </div>
+
+              <div class="kb-eval__feedback-body">
+                <p id="feedbackExplanation"></p>
+
+                <div id="memoryTip" class="kb-eval__memory" hidden>
+                  <span>INGAT KONSEPNYA</span>
+                  <strong id="memoryTipText"></strong>
+                </div>
+
+                <div class="kb-eval__source">
+                  <span>Sumber modul</span>
+                  <strong id="feedbackSource"></strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="kb-eval__actions">
+              <button id="checkAnswerBtn" class="kb-eval__btn kb-eval__btn--primary" type="button">
+                Periksa jawaban
+              </button>
+              <button id="nextQuestionBtn" class="kb-eval__btn kb-eval__btn--primary" type="button" hidden>
+                Lanjut
+              </button>
+            </div>
+          </article>
+        </div>
+
+        <div id="resultPanel" class="kb-eval__panel" hidden></div>
+      </section>
+    </section>
+
+    <footer class="kb-eval__disclaimer">
+      <strong>Catatan:</strong>
+      bank soal pada paket ini disusun mengikuti isi modul yang diunggah. Sebelum dipublikasikan sebagai
+      evaluasi regulasi terkini, lakukan validasi substansi bila modul sumber diperbarui.
+    </footer>
+  </main>
+
+  <script src="assets/js/evaluasi-pph21-data.js"></script>
+  <script src="assets/js/evaluasi-pph21.js"></script>
+</body>
+</html>
