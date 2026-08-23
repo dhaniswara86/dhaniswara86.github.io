@@ -11,16 +11,16 @@ description: "Panduan praktis Norma Penghitungan Penghasilan Neto (NPPN), termas
 category: "PPh"
 
 tags:
-  - #NPPN
-  - #Norma Penghitungan Penghasilan Neto
-  - #PPh Orang Pribadi
-  - #PER-17/PJ/2015
-  - #PMK 81 Tahun 2024
-  - #PMK 1 Tahun 2026
-  - #Coretax
-  - #Pekerjaan Bebas
-  - #Pembukuan
-  - #Pencatatan
+  - NPPN
+  - Norma Penghitungan Penghasilan Neto
+  - PPh Orang Pribadi
+  - PER-17/PJ/2015
+  - PMK 81 Tahun 2024
+  - PMK 1 Tahun 2026
+  - Coretax
+  - Pekerjaan Bebas
+  - Pembukuan
+  - Pencatatan
 
 author: "Angga Sukma Dhaniswara"
 date_modified: 2026-08-19
@@ -30,7 +30,7 @@ legal_basis: "Pasal 14 UU PPh; PMK 81/2024 s.t.d.d. PMK 1/2026; PER-17/PJ/2015"
 permalink: /nppn.html
 
 summary_label: "Ringkasan cepat"
-summary: "NPPN adalah cara menghitung penghasilan neto bagi WP Orang Pribadi tertentu dengan mengalikan penghasilan bruto dengan persentase norma berdasarkan jenis kegiatan dan wilayah. Untuk menggunakannya, perhatikan batas omzet, tenggat pemberitahuan, kewajiban pencatatan, dan konsekuensi apabila sudah memilih pembukuan."
+summary: "NPPN adalah pedoman untuk menentukan besarnya penghasilan neto bagi WP Orang Pribadi tertentu. Caranya dengan mengalikan penghasilan bruto dan persentase norma tertentu yang besarnya bergantung pada jenis kegiatan dan wilayahnya. Harap perhatikan batasan omzet, tenggat pemberitahuan, kewajiban pencatatan, dan konsekuensi jika sudah memilih pembukuan."
 
 hero_links:
   - label: "Cari persentase NPPN"
