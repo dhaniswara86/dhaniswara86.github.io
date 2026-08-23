@@ -2,10 +2,10 @@
 layout: artikel-editorial
 
 title: "Norma Penghitungan Penghasilan Neto (NPPN): Syarat, Cara Hitung, Batas Waktu & Konsekuensinya"
-hero_title: "Norma Penghitungan Penghasilan Neto."
-hero_accent: "Cara praktis menghitung penghasilan neto tanpa pembukuan."
+hero_title: "Norma Penghitungan."
+hero_accent: "Penghasilan Neto."
 
-excerpt: "Panduan lengkap NPPN untuk Wajib Pajak Orang Pribadi: siapa yang dapat menggunakan, batas omzet, pemberitahuan, pencatatan, persentase berdasarkan KLU dan wilayah, cara hitung, serta konsekuensi jika terlambat."
+excerpt: "Cara Praktis menghitung penghasilan neto tanpa pembukuan. Syarat, cara hitung, batas waktu dan tata cara pemberitahuan."
 description: "Panduan praktis Norma Penghitungan Penghasilan Neto (NPPN), termasuk syarat penggunaan, batas peredaran bruto Rp4,8 miliar, pemberitahuan melalui Coretax DJP, pencarian persentase PER-17/PJ/2015, kalkulator NPPN, dan konsekuensi pembukuan."
 
 category: "PPh"
@@ -65,12 +65,12 @@ custom_js:
 <h2>Apa Itu NPPN?</h2>
 
 <p>
-Pada dasarnya, cara paling ideal untuk menentukan besar penghasilan neto adalah melalui pembukuan. Dari pembukuan kita dapat mengetahui penghasilan sebenarnya, biaya yang benar-benar dikeluarkan, laba/rugi yang diperoleh, dan besaran penghasilan kena pajak yang dimiliki. </p>
+Pada dasarnya, cara paling ideal untuk menentukan besar penghasilan neto adalah melalui pembukuan. Dari pembukuan kita dapat mengetahui besaran penghasilan sebenarnya, biaya yang benar-benar dikeluarkan, laba/rugi yang diperoleh, dan penghasilan kena pajak yang dimiliki. </p>
 
-<p> Namun tidak semua Wajib Pajak Orang Pribadi yang menjalankan usaha atau pekerjaan bebas mampu menyelenggarakan pembukuan lengkap. Karena itulah diperlukan cara alternatif yang sederhana, terbuka, dan tetap dapat dipertanggungjawabkan untuk memperkirakan penghasilan neto. Dari kebutuhan inilah Norma Penghitungan Penghasilan Neto (NPPN) lahir. </p>
+<p> Namun tidak semua Wajib Pajak mampu menyelenggarakan pembukuan. Karena itulah diperlukan cara alternatif yang sederhana, terbuka, dan tetap dapat dipertanggungjawabkan untuk memperkirakan penghasilan neto. Dari kebutuhan inilah Norma Penghitungan Penghasilan Neto (NPPN) lahir. </p>
 
 <p>
-Dengan NPPN, penghasilan neto dihitung dengan mengalikan <strong>peredaran bruto/penghasilan bruto</strong> dari kegiatan usaha atau pekerjaan bebas dengan <strong>persentase norma</strong> yang sesuai dengan jenis kegiatan dan wilayahnya.
+Dengan NPPN, penghasilan neto dihitung dengan mengalikan <strong>peredaran bruto</strong> dari kegiatan usaha atau pekerjaan bebas dengan <strong>persentase norma</strong> yang besarnya sesuaijenis kegiatan dan wilayahnya.
 </p>
 
 <div class="jk-formula-box">
@@ -79,10 +79,10 @@ Dengan NPPN, penghasilan neto dihitung dengan mengalikan <strong>peredaran bruto
 </div>
 
 <div class="jk-callout jk-callout-blue">
-<strong>NPPN bukan tarif pajak</strong>
+<strong>NPPN adalah pedoman untuk menentukan besarnya penghasilan neto yang diterbitkan oleh Direktur Jenderal Pajak dan disempurnakan terus menerus.</strong>
 <p>
-Persentase NPPN hanya dipakai untuk menentukan penghasilan neto. Setelah itu, penghasilan neto masih diperhitungkan dengan PTKP untuk menentukan Penghasilan Kena Pajak, kemudian dikenai tarif progresif Pasal 17 UU PPh.
-</p>
+Penggunaan NPPN pada dasarnya dilakukan dalam hal:
+  <ul><li>tidak terdapat dasar penghitungan yang lebih baik, yaitu pembukuan yang lengkap</li><li>pembukuan atau catatan peredaran bruto Wajib Pajak ternyata diselenggarakan secara tidaj benar</li></ul></p>
 </div>
 </section>
 
