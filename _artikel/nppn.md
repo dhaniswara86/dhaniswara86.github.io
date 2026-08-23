@@ -65,17 +65,17 @@ custom_js:
 <h2>Apa Itu NPPN?</h2>
 
 <p>
-Pada dasarnya, cara paling ideal untuk menentukan besar penghasilan neto adalah melalui pembukuan. Dari pembukuan kita dapat mengetahui besaran penghasilan sebenarnya, biaya yang benar-benar dikeluarkan, laba/rugi yang diperoleh, dan penghasilan kena pajak yang dimiliki. </p>
+Pada dasarnya, cara paling ideal untuk menentukan besar penghasilan neto adalah melalui pembukuan. Dari pembukuan kita dapat mengetahui besar penghasilan sebenarnya, biaya yang benar-benar dikeluarkan, laba/rugi yang diperoleh, dan penghasilan kena pajak yang dimiliki. </p>
 
 <p> Namun tidak semua Wajib Pajak mampu menyelenggarakan pembukuan. Karena itulah diperlukan cara alternatif yang sederhana, terbuka, dan tetap dapat dipertanggungjawabkan untuk memperkirakan penghasilan neto. Dari kebutuhan inilah Norma Penghitungan Penghasilan Neto (NPPN) lahir. </p>
 
 <p>
-Dengan NPPN, penghasilan neto dihitung dengan mengalikan <strong>peredaran bruto</strong> dari kegiatan usaha atau pekerjaan bebas dengan <strong>persentase norma</strong> yang besarnya sesuaijenis kegiatan dan wilayahnya.
+Dengan NPPN, penghasilan neto dihitung dengan mengalikan <strong>peredaran bruto</strong> dari kegiatan usaha atau pekerjaan bebas dengan <strong>persentase norma</strong> yang besarnya bergantung pada jenis kegiatan dan wilayahnya.
 </p>
 
 <div class="jk-formula-box">
 <span>Rumus dasar</span>
-<strong>Penghasilan Neto = Penghasilan Bruto × Persentase NPPN</strong>
+<strong>Penghasilan Neto = <br>Penghasilan Bruto × Persentase NPPN</strong>
 </div>
 
 <div class="jk-callout jk-callout-blue">
