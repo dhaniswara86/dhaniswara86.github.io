@@ -11,16 +11,16 @@ description: "Panduan praktis Norma Penghitungan Penghasilan Neto (NPPN), termas
 category: "PPh"
 
 tags:
-  - NPPN
-  - Norma Penghitungan Penghasilan Neto
-  - PPh Orang Pribadi
-  - PER-17/PJ/2015
-  - PMK 81 Tahun 2024
-  - PMK 1 Tahun 2026
-  - Coretax
-  - Pekerjaan Bebas
-  - Pembukuan
-  - Pencatatan
+  - #NPPN
+  - #Norma Penghitungan Penghasilan Neto
+  - #PPh Orang Pribadi
+  - #PER-17/PJ/2015
+  - #PMK 81 Tahun 2024
+  - #PMK 1 Tahun 2026
+  - #Coretax
+  - #Pekerjaan Bebas
+  - #Pembukuan
+  - #Pencatatan
 
 author: "Angga Sukma Dhaniswara"
 date_modified: 2026-08-19
@@ -757,7 +757,7 @@ NPPN adalah fasilitas penyederhanaan penghitungan penghasilan neto bagi WP Orang
 </div>
 
 <p class="nppn-disclaimer">
-Artikel dan kalkulator ini ditujukan sebagai bahan edukasi. Untuk keputusan perpajakan pada kasus tertentu, periksa kegiatan, sumber penghasilan, status perpajakan, dokumen, dan peraturan yang berlaku pada Tahun Pajak yang bersangkutan.
+Artikel ini merupakan pendapat pribadi penulis yang disusun sesuai dengan pemahaman dan regulasi yang berlaku saat tulisan ini dibuat. Dalam hal terdapat perbedaan, dimohon agar tetap mengacu kepada ketentuan yang terbaru.
 </p>
 </section>
 
