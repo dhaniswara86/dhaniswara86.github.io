@@ -81,8 +81,7 @@ Dengan NPPN, penghasilan neto dihitung dengan mengalikan <strong>peredaran bruto
 <div class="jk-callout jk-callout-blue">
 <strong>NPPN adalah pedoman untuk menentukan besarnya penghasilan neto yang diterbitkan oleh Direktur Jenderal Pajak dan disempurnakan terus menerus.</strong>
 <p>
-Penggunaan NPPN pada dasarnya dilakukan dalam hal:
-  <ul><li>tidak terdapat dasar penghitungan yang lebih baik, yaitu pembukuan yang lengkap</li><li>pembukuan atau catatan peredaran bruto Wajib Pajak ternyata diselenggarakan secara tidaj benar</li></ul></p>
+Penggunaan NPPN pada dasarnya dilakukan dalam hal tidak terdapat dasar penghitungan berupa pembukuan yang lengkap atau catatan peredaran bruto Wajib Pajak ternyata diselenggarakan secara tidak benar</p>
 </div>
 </section>
 
