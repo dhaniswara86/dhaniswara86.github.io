@@ -65,11 +65,12 @@ custom_js:
 <h2>Apa Itu NPPN?</h2>
 
 <p>
-<strong>Norma Penghitungan Penghasilan Neto (NPPN)</strong> adalah pedoman yang digunakan untuk menentukan besarnya penghasilan neto Wajib Pajak Orang Pribadi tertentu tanpa menghitung laba berdasarkan seluruh biaya usaha yang sebenarnya.
-</p>
+Pada dasarnya, cara paling ideal untuk menentukan besar penghasilan neto adalah melalui pembukuan. Dari pembukuan dapat diketahui penghasilan sebenarnya, biaya yang benar-benar dikeluarkan, laba/rugi yang diperoleh, dan besaran penghasilan kena pajak yang dimiliki.
+
+Namun tidak semua Wajib Pajak Orang Pribadi yang menjalankan usaha atau pekerjaan bebas mampu menyelenggarakan pembukuan lengkap. Karena itulah diperlukan cara alternatif yang sederhana, terbuka, dan tetap dapat dipertanggungjawabkan untuk memperkirakan penghasilan neto. Dari kebutuhan inilah Norma Penghitungan Penghasilan Neto (NPPN) lahir. </p>
 
 <p>
-Dengan NPPN, penghasilan neto dihitung dengan mengalikan <strong>peredaran bruto atau penghasilan bruto</strong> dari kegiatan usaha atau pekerjaan bebas dengan <strong>persentase norma</strong> yang sesuai dengan jenis kegiatan dan wilayah.
+Dengan NPPN, penghasilan neto dihitung dengan mengalikan <strong>peredaran bruto/penghasilan bruto</strong> dari kegiatan usaha atau pekerjaan bebas dengan <strong>persentase norma</strong> yang sesuai dengan jenis kegiatan dan wilayahnya.
 </p>
 
 <div class="jk-formula-box">
