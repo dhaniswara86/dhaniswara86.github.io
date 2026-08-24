@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     ]);
   } catch (err) {
     console.error(err);
+    alert(err.message);
   }
 });
 
@@ -38,13 +39,14 @@ async function loadClass() {
   document.getElementById("className").textContent = data.name;
   document.getElementById("classDescription").textContent =
     data.description || "Belum ada deskripsi.";
+
   document.getElementById("classStatus").textContent =
     ({ draft: "Draft", active: "Aktif", closed: "Ditutup" })[data.status] || data.status;
 }
 
 async function loadMembers() {
   const host = document.getElementById("memberList");
-  host.innerHTML = `<div class="empty">Memuat peserta...</div>`;
+  host.innerHTML = `<div class="empty small">Memuat peserta...</div>`;
 
   const { data, error } = await window.kabayanSupabase
     .from("class_members")
@@ -57,15 +59,18 @@ async function loadMembers() {
     return;
   }
 
-  document.getElementById("memberCount").textContent = data.length;
+  const total = data.length;
+  document.getElementById("memberCount").textContent = total;
+  const countInline = document.getElementById("memberCountInline");
+  if (countInline) countInline.textContent = total;
 
   if (!data.length) {
-    host.innerHTML = `<div class="empty">Belum ada peserta di kelas ini.</div>`;
+    host.innerHTML = `<div class="empty small">Belum ada peserta di kelas ini.</div>`;
     return;
   }
 
   host.innerHTML = data.map(row => `
-    <div class="list-row">
+    <div class="list-row member-row">
       <div>
         <strong>${escapeHtml(row.profiles?.full_name || "Peserta")}</strong>
         <span>${escapeHtml(row.profiles?.email || "")}</span>
@@ -103,7 +108,7 @@ document.getElementById("addStudentForm")?.addEventListener("submit", async (e) 
 
 async function loadModules() {
   const host = document.getElementById("moduleList");
-  host.innerHTML = `<div class="empty">Memuat materi...</div>`;
+  host.innerHTML = `<div class="empty">Memuat modul...</div>`;
 
   const { data, error } = await window.kabayanSupabase
     .from("modules")
@@ -122,7 +127,7 @@ async function loadModules() {
   }));
 
   if (!moduleCache.length) {
-    host.innerHTML = `<div class="empty">Belum ada modul.</div>`;
+    host.innerHTML = `<div class="empty">Belum ada modul. Tambahkan modul pertama dari panel kanan.</div>`;
     return;
   }
 
@@ -132,52 +137,52 @@ async function loadModules() {
     const publishedLessons = lessons.filter(lesson => lesson.is_published).length;
 
     return `
-      <article class="module-card" id="module-${module.id}">
-        <div class="module-head module-control-head">
-          <div class="module-title-block">
-            <div class="eyebrow">Modul ${module.position}</div>
-            <h3>${escapeHtml(module.title)}</h3>
-            <p>${escapeHtml(module.description || "")}</p>
+      <article class="module-card redesign-module-card" id="module-${module.id}">
+        <div class="module-topline">
+          <div class="eyebrow">Modul ${module.position}</div>
+          <span class="pill ${module.is_published ? "success-pill" : ""}">
+            ${module.is_published ? "Modul Terbit" : "Modul Draft"}
+          </span>
+        </div>
 
-            <div class="module-stats">
-              <span>${filledLessons}/${lessons.length} materi terisi</span>
-              <span>${publishedLessons}/${lessons.length} materi terbit</span>
-            </div>
-          </div>
+        <div class="module-title-block">
+          <h3>${escapeHtml(module.title)}</h3>
+          <p>${escapeHtml(module.description || "Belum ada deskripsi modul.")}</p>
+        </div>
 
-          <div class="module-admin-actions">
-            <span class="pill ${module.is_published ? "success-pill" : ""}">
-              ${module.is_published ? "Modul Terbit" : "Modul Draft"}
-            </span>
+        <div class="module-stats">
+          <span>${filledLessons}/${lessons.length} materi terisi</span>
+          <span>${publishedLessons}/${lessons.length} materi terbit</span>
+        </div>
 
-            <button
-              class="btn ghost small editModuleBtn"
-              type="button"
-              data-module-id="${module.id}">
-              Edit modul
-            </button>
+        <div class="module-toolbar">
+          <button
+            class="btn ghost small editModuleBtn"
+            type="button"
+            data-module-id="${module.id}">
+            Edit modul
+          </button>
 
-            <button
-              class="btn ${module.is_published ? "ghost" : "secondary"} small toggleModulePublishBtn"
-              type="button"
-              data-module-id="${module.id}">
-              ${module.is_published ? "Jadikan Draft" : "Terbitkan modul"}
-            </button>
+          <button
+            class="btn ${module.is_published ? "ghost" : "secondary"} small toggleModulePublishBtn"
+            type="button"
+            data-module-id="${module.id}">
+            ${module.is_published ? "Jadikan Draft" : "Terbitkan modul"}
+          </button>
 
-            <button
-              class="btn ghost small toggleModuleContentBtn"
-              type="button"
-              data-module-id="${module.id}"
-              aria-expanded="true">
-              Sembunyikan materi
-            </button>
+          <button
+            class="btn ghost small toggleModuleContentBtn"
+            type="button"
+            data-module-id="${module.id}"
+            aria-expanded="true">
+            Sembunyikan materi
+          </button>
 
-            <a
-              class="btn ghost small"
-              href="kelola-kuis.html?module_id=${encodeURIComponent(module.id)}">
-              Kelola kuis
-            </a>
-          </div>
+          <a
+            class="btn ghost small"
+            href="kelola-kuis.html?module_id=${encodeURIComponent(module.id)}">
+            Kelola kuis
+          </a>
         </div>
 
         <div class="module-manage-body" id="module-body-${module.id}">
@@ -207,8 +212,8 @@ async function loadModules() {
             `).join("") : `<div class="empty small">Belum ada materi dalam modul ini.</div>`}
           </div>
 
-          <form class="inline-form addLessonForm" data-module-id="${module.id}">
-            <input name="title" required placeholder="Judul materi/checkpoint">
+          <form class="inline-form addLessonForm redesign-add-lesson-form" data-module-id="${module.id}">
+            <input name="title" required placeholder="Judul materi / checkpoint">
             <input name="position" required type="number" min="1" value="${lessons.length + 1}" aria-label="Urutan">
             <label class="checkline">
               <input type="checkbox" name="is_published">
@@ -247,6 +252,7 @@ document.getElementById("addModuleForm")?.addEventListener("submit", async (e) =
   const form = e.currentTarget;
   const status = document.getElementById("addModuleStatus");
   status.textContent = "Menambah modul...";
+  status.className = "form-status";
 
   const { error } = await window.kabayanSupabase
     .from("modules")
