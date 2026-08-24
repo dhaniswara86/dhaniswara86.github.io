@@ -3,6 +3,7 @@ const classId = params.get("id");
 
 let dashboardData = null;
 let visibleStudents = [];
+let pendingCertificateRevocation = null;
 
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -69,6 +70,22 @@ function bindControls() {
         document
           .getElementById("studentDetailModal")
           .close()
+    );
+
+
+  document
+    .getElementById("cancelRevokeCertificate")
+    ?.addEventListener(
+      "click",
+      closeRevokeCertificateModal
+    );
+
+
+  document
+    .getElementById("revokeCertificateForm")
+    ?.addEventListener(
+      "submit",
+      submitCertificateRevocation
     );
 }
 
@@ -755,16 +772,31 @@ function openStudentDetail(studentId) {
     ) {
 
       certificateAction = `
-        <a
-          class="certificate-detail-button view"
-          href="sertifikat.html?code=${encodeURIComponent(certificate.verification_code)}"
-          target="_blank"
-          rel="noopener">
-          Lihat Sertifikat
-        </a>
+        <div class="certificate-admin-actions">
+
+          <a
+            class="certificate-detail-button view"
+            href="sertifikat.html?code=${encodeURIComponent(certificate.verification_code)}"
+            target="_blank"
+            rel="noopener">
+            Lihat Sertifikat
+          </a>
+
+          <button
+            type="button"
+            class="certificate-detail-button revoke"
+            id="revokeCertificateBtn">
+            Cabut
+          </button>
+
+        </div>
       `;
 
     } else {
+
+      const isReissue =
+        certificate.exists &&
+        certificate.status === "revoked";
 
       certificateAction = `
         <button
@@ -772,7 +804,7 @@ function openStudentDetail(studentId) {
           class="certificate-detail-button issue"
           id="issueCertificateBtn"
           data-student-id="${student.user_id}">
-          Terbitkan Sertifikat
+          ${isReissue ? "Terbitkan Ulang" : "Terbitkan Sertifikat"}
         </button>
       `;
     }
@@ -825,6 +857,42 @@ function openStudentDetail(studentId) {
         ${certificateAction}
 
       </div>
+
+      <div class="certificate-admin-summary">
+        ${
+          certificate.exists
+            ? `
+              <div>
+                <span>Sertifikat terakhir</span>
+                <strong>${escapeHtml(certificate.certificate_number || "—")}</strong>
+              </div>
+
+              <div>
+                <span>Status</span>
+                <strong class="${certificate.status === "active" ? "certificate-status-active" : "certificate-status-revoked"}">
+                  ${certificate.status === "active" ? "Aktif" : "Dicabut"}
+                </strong>
+              </div>
+
+              <div>
+                <span>Tanggal terbit</span>
+                <strong>${formatDateTime(certificate.issued_at)}</strong>
+              </div>
+            `
+            : `
+              <div>
+                <span>Sertifikat</span>
+                <strong>Belum diterbitkan</strong>
+              </div>
+            `
+        }
+      </div>
+
+      <div
+        class="certificate-history-host"
+        id="certificateHistoryHost">
+        <span>Memuat riwayat sertifikat…</span>
+      </div>
     `;
 
 
@@ -839,6 +907,20 @@ function openStudentDetail(studentId) {
       "click",
       () => issueCertificate(student)
     );
+
+
+  document
+    .getElementById("revokeCertificateBtn")
+    ?.addEventListener(
+      "click",
+      () => openRevokeCertificateModal(
+        student,
+        certificate
+      )
+    );
+
+
+  loadCertificateHistory(student);
 }
 
 
@@ -853,10 +935,21 @@ async function issueCertificate(student) {
   if (!button) return;
 
 
+  const currentCertificate =
+    student.certificate || {
+      exists: false
+    };
+
+
+  const reissue =
+    currentCertificate.exists &&
+    currentCertificate.status === "revoked";
+
+
   const confirmed =
     confirm(
-      `Terbitkan sertifikat untuk ${student.full_name || student.email || "peserta"}?\n\n` +
-      `Sertifikat akan mempunyai nomor unik dan QR verifikasi online.`
+      `${reissue ? "Terbitkan ulang" : "Terbitkan"} sertifikat untuk ${student.full_name || student.email || "peserta"}?\n\n` +
+      `${reissue ? "Nomor dan QR baru akan dibuat. Sertifikat lama tetap tersimpan sebagai riwayat." : "Sertifikat akan mempunyai nomor unik dan QR verifikasi online."}`
     );
 
 
@@ -929,6 +1022,294 @@ async function issueCertificate(student) {
   }
 }
 
+
+
+async function loadCertificateHistory(student) {
+
+  const host =
+    document.getElementById(
+      "certificateHistoryHost"
+    );
+
+
+  if (!host) return;
+
+
+  const { data, error } =
+    await window.kabayanSupabase.rpc(
+      "get_certificate_history",
+      {
+        p_class_id: classId,
+        p_user_id: student.user_id
+      }
+    );
+
+
+  if (error) {
+
+    host.innerHTML = `
+      <span>
+        Riwayat sertifikat belum dapat dimuat.
+      </span>
+    `;
+
+    return;
+  }
+
+
+  const rows =
+    Array.isArray(data)
+      ? data
+      : [];
+
+
+  if (!rows.length) {
+
+    host.innerHTML = `
+      <span>
+        Belum ada riwayat penerbitan sertifikat.
+      </span>
+    `;
+
+    return;
+  }
+
+
+  host.innerHTML = `
+    <div class="certificate-history-head">
+      <strong>Riwayat Sertifikat</strong>
+      <span>${rows.length} penerbitan</span>
+    </div>
+
+    <div class="certificate-history-list">
+
+      ${rows.map((row, index) => `
+        <article class="certificate-history-item">
+
+          <div class="certificate-history-index">
+            ${rows.length - index}
+          </div>
+
+          <div class="certificate-history-copy">
+            <strong>
+              ${escapeHtml(row.certificate_number || "—")}
+            </strong>
+
+            <span>
+              Diterbitkan ${formatDateTime(row.issued_at)}
+            </span>
+
+            ${
+              row.status === "revoked"
+                ? `
+                  <small>
+                    Dicabut ${formatDateTime(row.revoked_at)}
+                    ${row.revocation_reason ? ` · ${escapeHtml(row.revocation_reason)}` : ""}
+                  </small>
+                `
+                : `
+                  <small>
+                    Sertifikat aktif
+                  </small>
+                `
+            }
+          </div>
+
+          <div class="certificate-history-actions">
+
+            <span class="certificate-history-status ${row.status}">
+              ${row.status === "active" ? "Aktif" : "Dicabut"}
+            </span>
+
+            <a
+              href="verifikasi-sertifikat.html?code=${encodeURIComponent(row.verification_code)}"
+              target="_blank"
+              rel="noopener">
+              Verifikasi
+            </a>
+
+          </div>
+
+        </article>
+      `).join("")}
+
+    </div>
+  `;
+}
+
+
+function openRevokeCertificateModal(
+  student,
+  certificate
+) {
+
+  if (
+    !certificate?.id ||
+    certificate.status !== "active"
+  ) {
+    return;
+  }
+
+
+  pendingCertificateRevocation = {
+    studentId: student.user_id,
+    studentName:
+      student.full_name ||
+      student.email ||
+      "peserta",
+    certificateId:
+      certificate.id,
+    certificateNumber:
+      certificate.certificate_number
+  };
+
+
+  document
+    .getElementById("studentDetailModal")
+    .close();
+
+
+  document
+    .getElementById("revokeCertificateReason")
+    .value = "";
+
+
+  document
+    .getElementById("revokeCertificateModal")
+    .showModal();
+
+
+  setTimeout(
+    () =>
+      document
+        .getElementById("revokeCertificateReason")
+        ?.focus(),
+    50
+  );
+}
+
+
+function closeRevokeCertificateModal() {
+
+  pendingCertificateRevocation = null;
+
+
+  document
+    .getElementById("revokeCertificateModal")
+    ?.close();
+}
+
+
+async function submitCertificateRevocation(event) {
+
+  event.preventDefault();
+
+
+  if (!pendingCertificateRevocation) {
+    return;
+  }
+
+
+  const reason =
+    document
+      .getElementById("revokeCertificateReason")
+      .value
+      .trim();
+
+
+  if (reason.length < 5) {
+
+    alert(
+      "Tuliskan alasan pencabutan minimal 5 karakter."
+    );
+
+    return;
+  }
+
+
+  const confirmButton =
+    event.currentTarget
+      .querySelector(
+        ".certificate-revoke-confirm"
+      );
+
+
+  const originalText =
+    confirmButton.textContent;
+
+
+  confirmButton.disabled = true;
+  confirmButton.textContent =
+    "Mencabut…";
+
+
+  const studentId =
+    pendingCertificateRevocation.studentId;
+
+
+  try {
+
+    const { error } =
+      await window.kabayanSupabase.rpc(
+        "revoke_certificate",
+        {
+          p_certificate_id:
+            pendingCertificateRevocation.certificateId,
+          p_reason:
+            reason
+        }
+      );
+
+
+    if (error) throw error;
+
+
+    closeRevokeCertificateModal();
+
+    await loadDashboard();
+
+
+    openStudentDetail(
+      studentId
+    );
+
+
+  } catch (error) {
+
+    console.error(error);
+
+    alert(
+      error.message ||
+      "Sertifikat belum dapat dicabut."
+    );
+
+
+  } finally {
+
+    confirmButton.disabled = false;
+    confirmButton.textContent =
+      originalText;
+  }
+}
+
+
+function formatDateTime(value) {
+
+  if (!value) return "—";
+
+
+  return new Intl.DateTimeFormat(
+    "id-ID",
+    {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+      timeZone: "Asia/Jakarta"
+    }
+  ).format(
+    new Date(value)
+  );
+}
 
 function exportCsv() {
 
