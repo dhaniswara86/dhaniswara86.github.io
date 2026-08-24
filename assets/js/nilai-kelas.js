@@ -18,6 +18,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("backToClass").href =
       `kelola-kelas.html?id=${encodeURIComponent(classId)}`;
 
+
+    document.getElementById("learningReportBtn").href =
+      `laporan-belajar.html?id=${encodeURIComponent(classId)}`;
+
     bindControls();
     await loadDashboard();
 
