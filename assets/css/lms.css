@@ -1397,3 +1397,110 @@ dialog::backdrop {
     font-size: .96rem;
   }
 }
+
+
+/* ============================================================
+   TAHAP 2B — KONTROL MODUL PENGAJAR
+   ============================================================ */
+
+.module-control-head {
+  align-items: flex-start;
+}
+
+.module-title-block {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.module-stats {
+  margin-top: 11px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.module-stats span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 9px;
+  border-radius: 999px;
+  background: #f0f3f8;
+  color: var(--muted);
+  font-size: .76rem;
+  font-weight: 750;
+}
+
+.module-admin-actions {
+  max-width: 330px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+
+.module-manage-body {
+  margin-top: 14px;
+  overflow: hidden;
+  opacity: 1;
+  max-height: 4000px;
+  transition: max-height .28s ease, opacity .2s ease, margin-top .28s ease;
+}
+
+.module-manage-body.collapsed {
+  max-height: 0;
+  opacity: 0;
+  margin-top: 0;
+  pointer-events: none;
+}
+
+.module-editor-dialog {
+  width: min(680px, calc(100% - 28px));
+}
+
+.module-position-note {
+  padding: 13px 14px;
+  display: grid;
+  gap: 3px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: #f8fafc;
+}
+
+.module-position-note strong {
+  color: var(--text);
+}
+
+.module-position-note span {
+  color: var(--muted);
+  font-size: .84rem;
+}
+
+@media (max-width: 850px) {
+  .module-control-head {
+    flex-direction: column;
+  }
+
+  .module-admin-actions {
+    max-width: none;
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 560px) {
+  .module-admin-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .module-admin-actions .pill {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+
+  .module-admin-actions .btn {
+    width: 100%;
+  }
+}
