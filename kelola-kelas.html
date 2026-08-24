@@ -35,10 +35,9 @@
       <div class="section-head">
         <div>
           <h2>Modul & checkpoint</h2>
-          <p>Susun alur materi belajar secara bertahap.</p>
+          <p>Klik <strong>Edit materi</strong> untuk mengisi isi pembelajaran.</p>
         </div>
       </div>
-
       <div id="moduleList" class="module-list"></div>
     </div>
 
@@ -82,12 +81,67 @@
   </section>
 </main>
 
+<dialog id="lessonEditorModal" class="editor-dialog">
+  <form id="lessonEditorForm" class="dialog-body">
+    <input type="hidden" name="lesson_id">
+
+    <div class="editor-heading">
+      <div>
+        <div class="eyebrow">Editor Materi</div>
+        <h2 id="editorHeading">Edit checkpoint</h2>
+      </div>
+      <button type="button" class="icon-close" id="closeEditorBtn" aria-label="Tutup">×</button>
+    </div>
+
+    <div class="editor-meta-grid">
+      <label class="field">Judul materi
+        <input name="title" required>
+      </label>
+      <label class="field">Urutan
+        <input name="position" type="number" min="1" required>
+      </label>
+      <label class="field">Estimasi belajar (menit)
+        <input name="estimated_minutes" type="number" min="1" placeholder="10">
+      </label>
+      <label class="checkline editor-publish">
+        <input name="is_published" type="checkbox">
+        Terbitkan untuk peserta
+      </label>
+    </div>
+
+    <div class="editor-toolbar" aria-label="Bantuan format materi">
+      <button type="button" data-insert="# Judul">Judul</button>
+      <button type="button" data-wrap="**">Tebal</button>
+      <button type="button" data-insert="## Subjudul">Subjudul</button>
+      <button type="button" data-insert="- Poin materi">Poin</button>
+      <button type="button" data-insert="> Catatan penting">Catatan</button>
+      <button type="button" data-template="table">Tabel</button>
+      <button type="button" data-template="example">Contoh</button>
+    </div>
+
+    <label class="field">Isi materi
+      <textarea id="lessonContentInput" name="content" class="lesson-editor-textarea" placeholder="# Konsep PPh Pasal 21
+
+Tuliskan materi di sini."></textarea>
+    </label>
+
+    <div class="editor-help">
+      <strong>Tips:</strong> Gunakan tombol format di atas. Materi akan ditampilkan rapi di halaman peserta.
+    </div>
+
+    <div id="lessonEditorStatus" class="form-status"></div>
+
+    <div class="dialog-actions">
+      <button type="button" class="btn ghost" id="cancelEditorBtn">Batal</button>
+      <button type="submit" class="btn">Simpan materi</button>
+    </div>
+  </form>
+</dialog>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="assets/js/supabase-config.js"></script>
 <script src="assets/js/supabase-client.js"></script>
 <script src="assets/js/auth.js"></script>
-
 <script src="assets/js/kelola-kelas.js"></script>
 </body>
 </html>
