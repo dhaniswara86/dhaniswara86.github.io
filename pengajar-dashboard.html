@@ -1,73 +1,347 @@
 <!doctype html>
-
 <html lang="id">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/><meta content="#f5f7fb" name="theme-color"/>
-<title>Dashboard Pengajar — Kabayan Learning</title>
-<link href="assets/css/lms.css" rel="stylesheet"/><link href="assets/css/lms-audit.css" rel="stylesheet"/>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f7fb">
+
+  <title>Dashboard Pengajar — Kabayan Learning</title>
+
+  <link rel="stylesheet" href="assets/css/lms.css">
+  <link rel="stylesheet" href="assets/css/lms-audit.css">
+  <link rel="stylesheet" href="assets/css/pengajar-dashboard.css">
 </head>
-<body class="teacher-dashboard-page">
-<header class="site-header">
-<nav class="nav">
-<a class="brand" href="pengajar-dashboard.html">Kabayan <span>Learning</span></a>
-<div class="nav-actions">
-<span class="muted" id="profileName">Pengajar</span>
-<button class="btn ghost small" onclick="KabayanAuth.signOut()" type="button">Keluar</button>
-</div>
-</nav>
+
+<body class="teacher-dashboard-page teacher-workspace">
+
+<header class="teacher-topbar">
+
+  <nav class="teacher-nav">
+
+    <a
+      class="teacher-brand"
+      href="pengajar-dashboard.html"
+      aria-label="Kabayan Learning">
+      <span>Kabayan</span>
+      <strong>Learning</strong>
+    </a>
+
+
+    <div class="teacher-nav-actions">
+
+      <div class="teacher-profile-chip">
+
+        <span class="teacher-profile-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="8" r="4"></circle>
+            <path d="M4 21a8 8 0 0 1 16 0"></path>
+          </svg>
+        </span>
+
+        <div>
+          <small>Pengajar</small>
+          <strong id="profileName">Pengajar</strong>
+        </div>
+
+      </div>
+
+
+      <button
+        class="teacher-logout"
+        onclick="KabayanAuth.signOut()"
+        type="button">
+
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M10 5H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h5"></path>
+          <path d="m15 8 4 4-4 4"></path>
+          <path d="M19 12H9"></path>
+        </svg>
+
+        <span>Keluar</span>
+
+      </button>
+
+    </div>
+
+  </nav>
+
 </header>
-<main class="page">
-<section class="hero">
-<div>
-<div class="eyebrow">Dashboard Pengajar</div>
-<h1>Kelola pembelajaran dalam satu ruang.</h1>
-<p>Buat kelas, tambahkan peserta, susun modul, dan pantau perjalanan belajar.</p>
-</div>
-<div class="surface panel stat">
-<span class="muted">Jumlah kelas</span>
-<strong class="stat-value" id="classCount">0</strong>
-</div>
-</section>
-<section class="grid">
-<div class="col-8">
-<div class="section-head">
-<div>
-<h2>Kelas Anda</h2>
-<p>Kelas yang sedang Anda kelola.</p>
-</div>
-</div>
-<div class="class-list" id="classList"></div>
-</div>
-<aside class="col-4">
-<div class="panel">
-<div class="eyebrow">Kelas Baru</div>
-<h2 class="audit-tight-heading">Buat kelas</h2>
-<form class="form-grid" id="createClassForm">
-<label class="field">Nama kelas
-            <input name="name" placeholder="Brevet PPh Pasal 21" required=""/>
-</label>
-<label class="field">Deskripsi
-            <textarea name="description" placeholder="Deskripsi singkat kelas"></textarea>
-</label>
-<label class="field">Status
+
+
+<main class="teacher-main">
+
+  <!-- ======================================================
+       HERO
+       ====================================================== -->
+  <section class="teacher-hero">
+
+    <div class="teacher-hero-pattern" aria-hidden="true"></div>
+    <div class="teacher-hero-glow" aria-hidden="true"></div>
+
+
+    <div class="teacher-hero-copy">
+
+      <div class="teacher-eyebrow">
+        <span></span>
+        Ruang Pengajar
+      </div>
+
+      <h1>
+        Kelola pembelajaran
+        <em>dengan lebih terarah.</em>
+      </h1>
+
+      <p>
+        Susun kelas, kelola peserta, siapkan materi dan evaluasi,
+        lalu pantau perjalanan belajar dari satu tempat.
+      </p>
+
+    </div>
+
+
+    <div class="teacher-hero-summary">
+
+      <div class="teacher-hero-summary-icon">
+
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="3" y="4" width="18" height="16" rx="3"></rect>
+          <path d="M7 8h10"></path>
+          <path d="M7 12h6"></path>
+          <path d="M7 16h4"></path>
+        </svg>
+
+      </div>
+
+      <span>Kelas yang dikelola</span>
+
+      <strong id="classCount">0</strong>
+
+      <small>
+        Semua kelas yang tersedia di ruang pengajar Anda.
+      </small>
+
+    </div>
+
+  </section>
+
+
+  <!-- ======================================================
+       WORKSPACE
+       ====================================================== -->
+  <section class="teacher-workspace-grid">
+
+    <!-- CLASS LIST -->
+    <section class="teacher-class-section">
+
+      <div class="teacher-section-head">
+
+        <div>
+
+          <span class="teacher-section-kicker">
+            Workspace
+          </span>
+
+          <h2>
+            Kelas Anda
+          </h2>
+
+          <p>
+            Pilih kelas untuk mengelola peserta, modul, kuis,
+            evaluasi, nilai, dan sertifikat.
+          </p>
+
+        </div>
+
+
+        <div class="teacher-section-indicator">
+
+          <span class="teacher-indicator-dot"></span>
+
+          <span>
+            Data tersinkron
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="class-list teacher-class-list"
+        id="classList">
+
+        <div class="teacher-loading-placeholder">
+          Memuat kelas…
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- CREATE CLASS -->
+    <aside class="teacher-create-panel">
+
+      <div class="teacher-create-head">
+
+        <div class="teacher-create-icon">
+
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 5v14"></path>
+            <path d="M5 12h14"></path>
+          </svg>
+
+        </div>
+
+
+        <div>
+
+          <span class="teacher-section-kicker">
+            Kelas Baru
+          </span>
+
+          <h2>
+            Buat kelas
+          </h2>
+
+          <p>
+            Mulai ruang belajar baru untuk peserta Anda.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <form
+        class="teacher-create-form form-grid"
+        id="createClassForm">
+
+        <label class="teacher-field">
+
+          <span>
+            Nama kelas
+          </span>
+
+          <div class="teacher-field-control">
+
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 5h16v14H4z"></path>
+              <path d="M8 9h8"></path>
+              <path d="M8 13h5"></path>
+            </svg>
+
+            <input
+              name="name"
+              placeholder="Contoh: Brevet PPh Pasal 21"
+              required>
+
+          </div>
+
+        </label>
+
+
+        <label class="teacher-field">
+
+          <span>
+            Deskripsi
+          </span>
+
+          <textarea
+            name="description"
+            placeholder="Tuliskan deskripsi singkat kelas">
+          </textarea>
+
+        </label>
+
+
+        <label class="teacher-field">
+
+          <span>
+            Status awal
+          </span>
+
+          <div class="teacher-select-wrap">
+
             <select name="status">
-<option value="draft">Draft</option>
-<option value="active">Aktif</option>
-<option value="closed">Ditutup</option>
-</select>
-</label>
-<button class="btn" type="submit">Buat kelas</button>
-</form>
-<div class="form-status" id="createStatus"></div>
-</div>
-</aside>
-</section>
+              <option value="draft">Draft</option>
+              <option value="active">Aktif</option>
+              <option value="closed">Ditutup</option>
+            </select>
+
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m8 10 4 4 4-4"></path>
+            </svg>
+
+          </div>
+
+        </label>
+
+
+        <button
+          class="teacher-create-button btn"
+          type="submit">
+
+          <span>
+            Buat kelas baru
+          </span>
+
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 12h14"></path>
+            <path d="m14 7 5 5-5 5"></path>
+          </svg>
+
+        </button>
+
+      </form>
+
+
+      <div
+        class="form-status teacher-create-status"
+        id="createStatus">
+      </div>
+
+
+      <div class="teacher-create-note">
+
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="9"></circle>
+          <path d="M12 11v5"></path>
+          <path d="M12 8h.01"></path>
+        </svg>
+
+        <span>
+          Kelas berstatus Draft dapat disiapkan terlebih dahulu
+          sebelum dibuka untuk peserta.
+        </span>
+
+      </div>
+
+    </aside>
+
+  </section>
+
 </main>
+
+
+<footer class="teacher-footer">
+
+  <span>
+    © 2026 dhaniswara86
+  </span>
+
+  <span>
+    Learning Tax with Angga Sukma Dhaniswara
+  </span>
+
+</footer>
+
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="assets/js/supabase-config.js"></script>
 <script src="assets/js/supabase-client.js"></script>
 <script src="assets/js/auth.js"></script>
 <script src="assets/js/pengajar-dashboard.js"></script>
+
 </body>
 </html>
