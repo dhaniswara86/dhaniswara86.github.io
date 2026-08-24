@@ -1,75 +1,460 @@
 <!doctype html>
-
 <html lang="id">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/><meta content="#f5f7fb" name="theme-color"/>
-<title>Masuk — Kabayan Learning</title>
-<link href="assets/css/lms.css" rel="stylesheet"/><link href="assets/css/lms-audit.css" rel="stylesheet"/>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1f3a">
+
+  <title>Masuk — Kabayan Learning</title>
+
+  <link rel="stylesheet" href="assets/css/lms.css">
+  <link rel="stylesheet" href="assets/css/lms-audit.css">
+  <link rel="stylesheet" href="assets/css/login.css">
 </head>
-<body class="login-page">
-<main class="login-shell">
-<section class="login-art">
-<div class="brand">Kabayan <span>Learning</span></div>
-<div>
-<div class="eyebrow login-eyebrow-light">PPh Pasal 21</div>
-<h1>Belajar. Latihan. Kuasai.</h1>
-<p>Ruang belajar terstruktur untuk memahami PPh Pasal 21 melalui materi, checkpoint, evaluasi, dan sertifikat digital.</p>
-</div>
-<small class="login-footer-note">Kabayan Learning</small>
-</section>
-<section class="login-panel">
-<div class="surface login-card">
-<div class="eyebrow">Ruang Belajar</div>
-<h2>Selamat datang</h2>
-<p>Masuk atau buat akun peserta.</p>
-<div class="tabs">
-<button class="tab-btn active" data-tab="login" type="button">Masuk</button>
-<button class="tab-btn" data-tab="signup" type="button">Daftar</button>
-</div>
-<div class="tab-panel active" id="tab-login">
-<form class="form-grid" id="loginForm">
-<label class="field">Email
-              <input autocomplete="email" name="email" required="" type="email"/>
-</label>
-<label class="field">Password
-              <input autocomplete="current-password" minlength="6" name="password" required="" type="password"/>
-</label>
-<button class="btn" type="submit">Masuk</button>
-</form>
-</div>
-<div class="tab-panel" id="tab-signup">
-<form class="form-grid" id="signupForm">
-<label class="field">Nama lengkap
-              <input name="full_name" required="" type="text"/>
-</label>
-<label class="field">Email
-              <input autocomplete="email" name="email" required="" type="email"/>
-</label>
-<label class="field">Password
-              <input autocomplete="new-password" minlength="6" name="password" required="" type="password"/>
-</label>
-<button class="btn" type="submit">Buat akun</button>
-</form>
-</div>
-<div class="form-status" id="status"></div>
-</div>
-</section>
+
+<body class="kl-login-page">
+
+<main class="kl-login-shell">
+
+  <!-- ======================================================
+       BRAND / VISUAL SIDE
+       ====================================================== -->
+  <section class="kl-login-brand-panel">
+
+    <div class="kl-login-grid-pattern" aria-hidden="true"></div>
+    <div class="kl-login-glow kl-login-glow-one" aria-hidden="true"></div>
+    <div class="kl-login-glow kl-login-glow-two" aria-hidden="true"></div>
+
+    <div class="kl-login-brand-top">
+
+      <a
+        href="index.html"
+        class="kl-login-brand">
+        Kabayan <span>Learning</span>
+      </a>
+
+      <span class="kl-login-edition">
+        Kelas Pajak Digital
+      </span>
+
+    </div>
+
+
+    <div class="kl-login-brand-content">
+
+      <div class="kl-login-kicker">
+        <span></span>
+        PPh Pasal 21
+      </div>
+
+      <h1>
+        Belajar pajak
+        <em>lebih terarah.</em>
+      </h1>
+
+      <p>
+        Materi terstruktur, checkpoint, kuis, evaluasi akhir,
+        dan sertifikat digital dalam satu ruang belajar.
+      </p>
+
+
+      <div class="kl-login-feature-grid">
+
+        <article class="kl-login-feature">
+
+          <div class="kl-login-feature-icon blue">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H11v17H6.5A2.5 2.5 0 0 0 4 22V5.5Z"></path>
+              <path d="M20 5.5A2.5 2.5 0 0 0 17.5 3H13v17h4.5A2.5 2.5 0 0 1 20 22V5.5Z"></path>
+            </svg>
+          </div>
+
+          <div>
+            <strong>Materi terstruktur</strong>
+            <span>Belajar per modul dan checkpoint.</span>
+          </div>
+
+        </article>
+
+
+        <article class="kl-login-feature">
+
+          <div class="kl-login-feature-icon green">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m5 12 4 4L19 6"></path>
+            </svg>
+          </div>
+
+          <div>
+            <strong>Progres terukur</strong>
+            <span>Nilai dan kelulusan tercatat otomatis.</span>
+          </div>
+
+        </article>
+
+
+        <article class="kl-login-feature">
+
+          <div class="kl-login-feature-icon purple">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="8" r="5"></circle>
+              <path d="M8.5 12 7 22l5-3 5 3-1.5-10"></path>
+            </svg>
+          </div>
+
+          <div>
+            <strong>Sertifikat digital</strong>
+            <span>Dilengkapi QR verifikasi online.</span>
+          </div>
+
+        </article>
+
+      </div>
+
+    </div>
+
+
+    <div class="kl-login-brand-footer">
+
+      <div class="kl-login-monogram">
+        KL
+      </div>
+
+      <div>
+        <strong>Kabayan Learning</strong>
+        <span>Learning Tax with Kabayan</span>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ======================================================
+       LOGIN SIDE
+       ====================================================== -->
+  <section class="kl-login-form-panel">
+
+    <div class="kl-login-mobile-brand">
+      Kabayan <span>Learning</span>
+    </div>
+
+
+    <div class="kl-login-form-wrap">
+
+      <div class="kl-login-welcome">
+
+        <span class="kl-login-small-kicker">
+          Ruang Belajar
+        </span>
+
+        <h2>
+          Selamat datang.
+        </h2>
+
+        <p>
+          Masuk untuk melanjutkan pembelajaran Anda.
+        </p>
+
+      </div>
+
+
+      <div class="kl-login-tabs" role="tablist" aria-label="Pilihan akun">
+
+        <button
+          class="kl-login-tab active tab-btn"
+          data-tab="login"
+          type="button"
+          role="tab"
+          aria-selected="true">
+          Masuk
+        </button>
+
+        <button
+          class="kl-login-tab tab-btn"
+          data-tab="signup"
+          type="button"
+          role="tab"
+          aria-selected="false">
+          Buat akun
+        </button>
+
+      </div>
+
+
+      <!-- LOGIN -->
+      <div
+        class="kl-login-tab-panel tab-panel active"
+        id="tab-login">
+
+        <form
+          class="kl-login-form"
+          id="loginForm">
+
+          <label class="kl-login-field">
+
+            <span>Email</span>
+
+            <div class="kl-login-input-wrap">
+
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3" y="5" width="18" height="14" rx="3"></rect>
+                <path d="m4 7 8 6 8-6"></path>
+              </svg>
+
+              <input
+                autocomplete="email"
+                inputmode="email"
+                name="email"
+                placeholder="nama@email.com"
+                required
+                type="email">
+
+            </div>
+
+          </label>
+
+
+          <label class="kl-login-field">
+
+            <span>Password</span>
+
+            <div class="kl-login-input-wrap">
+
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="4" y="10" width="16" height="11" rx="3"></rect>
+                <path d="M8 10V7a4 4 0 0 1 8 0v3"></path>
+              </svg>
+
+              <input
+                autocomplete="current-password"
+                minlength="6"
+                name="password"
+                placeholder="Masukkan password"
+                required
+                type="password">
+
+              <button
+                type="button"
+                class="kl-password-toggle"
+                aria-label="Tampilkan password"
+                data-password-toggle>
+                <svg class="eye-open" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6S2.5 12 2.5 12Z"></path>
+                  <circle cx="12" cy="12" r="2.5"></circle>
+                </svg>
+              </button>
+
+            </div>
+
+          </label>
+
+
+          <button
+            class="kl-login-submit btn"
+            type="submit">
+
+            <span>Masuk ke Kabayan Learning</span>
+
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5 12h14"></path>
+              <path d="m14 7 5 5-5 5"></path>
+            </svg>
+
+          </button>
+
+        </form>
+
+      </div>
+
+
+      <!-- SIGN UP -->
+      <div
+        class="kl-login-tab-panel tab-panel"
+        id="tab-signup">
+
+        <form
+          class="kl-login-form"
+          id="signupForm">
+
+          <label class="kl-login-field">
+
+            <span>Nama lengkap</span>
+
+            <div class="kl-login-input-wrap">
+
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="8" r="4"></circle>
+                <path d="M4 21a8 8 0 0 1 16 0"></path>
+              </svg>
+
+              <input
+                autocomplete="name"
+                name="full_name"
+                placeholder="Nama lengkap"
+                required
+                type="text">
+
+            </div>
+
+          </label>
+
+
+          <label class="kl-login-field">
+
+            <span>Email</span>
+
+            <div class="kl-login-input-wrap">
+
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3" y="5" width="18" height="14" rx="3"></rect>
+                <path d="m4 7 8 6 8-6"></path>
+              </svg>
+
+              <input
+                autocomplete="email"
+                inputmode="email"
+                name="email"
+                placeholder="nama@email.com"
+                required
+                type="email">
+
+            </div>
+
+          </label>
+
+
+          <label class="kl-login-field">
+
+            <span>Password</span>
+
+            <div class="kl-login-input-wrap">
+
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="4" y="10" width="16" height="11" rx="3"></rect>
+                <path d="M8 10V7a4 4 0 0 1 8 0v3"></path>
+              </svg>
+
+              <input
+                autocomplete="new-password"
+                minlength="6"
+                name="password"
+                placeholder="Minimal 6 karakter"
+                required
+                type="password">
+
+              <button
+                type="button"
+                class="kl-password-toggle"
+                aria-label="Tampilkan password"
+                data-password-toggle>
+                <svg class="eye-open" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6S2.5 12 2.5 12Z"></path>
+                  <circle cx="12" cy="12" r="2.5"></circle>
+                </svg>
+              </button>
+
+            </div>
+
+          </label>
+
+
+          <button
+            class="kl-login-submit btn"
+            type="submit">
+
+            <span>Buat akun peserta</span>
+
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5 12h14"></path>
+              <path d="m14 7 5 5-5 5"></path>
+            </svg>
+
+          </button>
+
+        </form>
+
+      </div>
+
+
+      <div
+        class="form-status kl-login-status"
+        id="status">
+      </div>
+
+
+      <div class="kl-login-security-note">
+
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 3 5 6v5c0 4.5 2.7 8 7 10 4.3-2 7-5.5 7-10V6l-7-3Z"></path>
+          <path d="m9.5 12 1.6 1.6 3.7-4"></path>
+        </svg>
+
+        <span>
+          Akses akun menggunakan autentikasi aman Kabayan Learning.
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <footer class="kl-login-form-footer">
+      <span>© 2026 Kabayan Learning</span>
+      <span>Pembelajaran perpajakan digital</span>
+    </footer>
+
+  </section>
+
 </main>
+
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="assets/js/supabase-config.js"></script>
 <script src="assets/js/supabase-client.js"></script>
 <script src="assets/js/auth.js"></script>
 <script src="assets/js/login.js"></script>
+
 <script>
-    document.querySelectorAll(".tab-btn").forEach(btn => {
-      btn.addEventListener("click", () => {
-        document.querySelectorAll(".tab-btn").forEach(x => x.classList.remove("active"));
-        document.querySelectorAll(".tab-panel").forEach(x => x.classList.remove("active"));
-        btn.classList.add("active");
-        document.getElementById("tab-" + btn.dataset.tab).classList.add("active");
+  document.querySelectorAll(".tab-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".tab-btn").forEach(x => {
+        x.classList.remove("active");
+        x.setAttribute("aria-selected", "false");
       });
+
+      document.querySelectorAll(".tab-panel").forEach(x => {
+        x.classList.remove("active");
+      });
+
+      btn.classList.add("active");
+      btn.setAttribute("aria-selected", "true");
+
+      document
+        .getElementById("tab-" + btn.dataset.tab)
+        .classList.add("active");
+
+      document.getElementById("status").textContent = "";
     });
-  </script>
+  });
+
+
+  document.querySelectorAll("[data-password-toggle]").forEach(button => {
+    button.addEventListener("click", () => {
+      const input = button.parentElement.querySelector("input");
+      const showing = input.type === "text";
+
+      input.type = showing ? "password" : "text";
+
+      button.setAttribute(
+        "aria-label",
+        showing ? "Tampilkan password" : "Sembunyikan password"
+      );
+
+      button.classList.toggle("showing", !showing);
+    });
+  });
+</script>
+
 </body>
 </html>
