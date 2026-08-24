@@ -1,6 +1,7 @@
 const params = new URLSearchParams(location.search);
 const classId = params.get("id");
 let currentClass = null;
+let moduleCache = [];
 
 document.addEventListener("DOMContentLoaded", async () => {
   try {
@@ -10,6 +11,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       location.replace("pengajar-dashboard.html");
       return;
     }
+
+    bindEditorControls();
 
     await Promise.all([
       loadClass(),
@@ -35,7 +38,7 @@ async function loadClass() {
   document.getElementById("classDescription").textContent =
     data.description || "Belum ada deskripsi.";
   document.getElementById("classStatus").textContent =
-    ({draft:"Draft", active:"Aktif", closed:"Ditutup"})[data.status] || data.status;
+    ({ draft: "Draft", active: "Aktif", closed: "Ditutup" })[data.status] || data.status;
 }
 
 async function loadMembers() {
@@ -103,7 +106,7 @@ async function loadModules() {
 
   const { data, error } = await window.kabayanSupabase
     .from("modules")
-    .select("id, title, description, position, is_published, lessons(id,title,position,is_published)")
+    .select("id, title, description, position, is_published, lessons(id,title,content,position,is_published,estimated_minutes)")
     .eq("class_id", classId)
     .order("position", { ascending: true });
 
@@ -112,13 +115,16 @@ async function loadModules() {
     return;
   }
 
+  moduleCache = data || [];
+
   if (!data.length) {
     host.innerHTML = `<div class="empty">Belum ada modul.</div>`;
     return;
   }
 
   host.innerHTML = data.map(module => {
-    const lessons = (module.lessons || []).sort((a,b) => a.position - b.position);
+    const lessons = (module.lessons || []).sort((a, b) => a.position - b.position);
+
     return `
       <article class="module-card">
         <div class="module-head">
@@ -134,13 +140,26 @@ async function loadModules() {
 
         <div class="lesson-list">
           ${lessons.length ? lessons.map(lesson => `
-            <div class="list-row compact">
-              <div>
+            <div class="lesson-admin-row">
+              <div class="lesson-admin-info">
                 <strong>${lesson.position}. ${escapeHtml(lesson.title)}</strong>
+                <span>
+                  ${lesson.content?.trim() ? "Materi sudah diisi" : "Isi materi masih kosong"}
+                  ${lesson.estimated_minutes ? ` · ${lesson.estimated_minutes} menit` : ""}
+                </span>
               </div>
-              <span class="pill ${lesson.is_published ? "success-pill" : ""}">
-                ${lesson.is_published ? "Terbit" : "Draft"}
-              </span>
+
+              <div class="lesson-admin-actions">
+                <span class="pill ${lesson.is_published ? "success-pill" : ""}">
+                  ${lesson.is_published ? "Terbit" : "Draft"}
+                </span>
+                <button
+                  class="btn ghost small editLessonBtn"
+                  type="button"
+                  data-lesson-id="${lesson.id}">
+                  Edit materi
+                </button>
+              </div>
             </div>
           `).join("") : `<div class="empty small">Belum ada materi dalam modul ini.</div>`}
         </div>
@@ -160,6 +179,10 @@ async function loadModules() {
 
   document.querySelectorAll(".addLessonForm").forEach(form => {
     form.addEventListener("submit", addLesson);
+  });
+
+  document.querySelectorAll(".editLessonBtn").forEach(btn => {
+    btn.addEventListener("click", () => openLessonEditor(btn.dataset.lessonId));
   });
 }
 
@@ -197,7 +220,7 @@ async function addLesson(e) {
   const form = e.currentTarget;
   const moduleId = form.dataset.moduleId;
 
-  const { error } = await window.kabayanSupabase
+  const { data, error } = await window.kabayanSupabase
     .from("lessons")
     .insert({
       module_id: moduleId,
@@ -205,7 +228,9 @@ async function addLesson(e) {
       position: Number(form.position.value),
       is_published: form.is_published.checked,
       content: ""
-    });
+    })
+    .select("id")
+    .single();
 
   if (error) {
     alert(error.message);
@@ -213,10 +238,147 @@ async function addLesson(e) {
   }
 
   await loadModules();
+
+  if (data?.id) {
+    openLessonEditor(data.id);
+  }
+}
+
+function findLesson(lessonId) {
+  for (const module of moduleCache) {
+    const lesson = (module.lessons || []).find(item => item.id === lessonId);
+    if (lesson) return lesson;
+  }
+  return null;
+}
+
+function openLessonEditor(lessonId) {
+  const lesson = findLesson(lessonId);
+  if (!lesson) return;
+
+  const form = document.getElementById("lessonEditorForm");
+  form.lesson_id.value = lesson.id;
+  form.title.value = lesson.title || "";
+  form.position.value = lesson.position || 1;
+  form.estimated_minutes.value = lesson.estimated_minutes || "";
+  form.is_published.checked = !!lesson.is_published;
+  form.content.value = lesson.content || "";
+
+  document.getElementById("editorHeading").textContent = lesson.title || "Edit checkpoint";
+  document.getElementById("lessonEditorStatus").textContent = "";
+  document.getElementById("lessonEditorStatus").className = "form-status";
+
+  document.getElementById("lessonEditorModal").showModal();
+  setTimeout(() => form.title.focus(), 80);
+}
+
+function bindEditorControls() {
+  const modal = document.getElementById("lessonEditorModal");
+  const form = document.getElementById("lessonEditorForm");
+  const textarea = document.getElementById("lessonContentInput");
+
+  document.getElementById("closeEditorBtn")?.addEventListener("click", () => modal.close());
+  document.getElementById("cancelEditorBtn")?.addEventListener("click", () => modal.close());
+
+  document.querySelectorAll(".editor-toolbar button").forEach(btn => {
+    btn.addEventListener("click", () => {
+      if (btn.dataset.wrap) {
+        wrapSelection(textarea, btn.dataset.wrap);
+      } else if (btn.dataset.insert) {
+        insertAtCursor(textarea, btn.dataset.insert + "\n");
+      } else if (btn.dataset.template === "table") {
+        insertAtCursor(
+          textarea,
+          "\n| Keterangan | Nilai |\n|---|---:|\n| Contoh | Rp10.000.000 |\n"
+        );
+      } else if (btn.dataset.template === "example") {
+        insertAtCursor(
+          textarea,
+          "\n## Contoh Perhitungan\n\n**Kasus:** Tuliskan kondisi kasus di sini.\n\n**Perhitungan:**\n\n1. Langkah pertama\n2. Langkah kedua\n3. Hasil perhitungan\n"
+        );
+      }
+    });
+  });
+
+  form?.addEventListener("submit", saveLesson);
+}
+
+async function saveLesson(e) {
+  e.preventDefault();
+
+  const form = e.currentTarget;
+  const status = document.getElementById("lessonEditorStatus");
+  const lessonId = form.lesson_id.value;
+
+  status.textContent = "Menyimpan materi...";
+  status.className = "form-status";
+
+  const estimated = form.estimated_minutes.value.trim();
+
+  const { error } = await window.kabayanSupabase
+    .from("lessons")
+    .update({
+      title: form.title.value.trim(),
+      position: Number(form.position.value),
+      estimated_minutes: estimated ? Number(estimated) : null,
+      is_published: form.is_published.checked,
+      content: form.content.value
+    })
+    .eq("id", lessonId);
+
+  if (error) {
+    status.textContent = error.message;
+    status.className = "form-status error";
+    return;
+  }
+
+  status.textContent = "Materi berhasil disimpan.";
+  status.className = "form-status success";
+
+  await loadModules();
+
+  setTimeout(() => {
+    document.getElementById("lessonEditorModal").close();
+  }, 500);
+}
+
+function insertAtCursor(textarea, text) {
+  const start = textarea.selectionStart;
+  const end = textarea.selectionEnd;
+  const before = textarea.value.slice(0, start);
+  const after = textarea.value.slice(end);
+
+  textarea.value = before + text + after;
+  const cursor = start + text.length;
+  textarea.setSelectionRange(cursor, cursor);
+  textarea.focus();
+}
+
+function wrapSelection(textarea, wrapper) {
+  const start = textarea.selectionStart;
+  const end = textarea.selectionEnd;
+  const selected = textarea.value.slice(start, end) || "teks";
+
+  textarea.value =
+    textarea.value.slice(0, start) +
+    wrapper +
+    selected +
+    wrapper +
+    textarea.value.slice(end);
+
+  textarea.setSelectionRange(
+    start + wrapper.length,
+    start + wrapper.length + selected.length
+  );
+  textarea.focus();
 }
 
 function escapeHtml(str = "") {
   return String(str).replace(/[&<>"']/g, s => ({
-    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;"
   })[s]);
 }

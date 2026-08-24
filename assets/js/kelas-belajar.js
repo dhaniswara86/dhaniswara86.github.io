@@ -1,6 +1,7 @@
 const params = new URLSearchParams(location.search);
 const classId = params.get("id");
 let studentProfile = null;
+let lessonCache = new Map();
 
 document.addEventListener("DOMContentLoaded", async () => {
   try {
@@ -29,14 +30,26 @@ async function loadClassLearning() {
 
   const { data: modules, error } = await window.kabayanSupabase
     .from("modules")
-    .select("id, title, description, position, lessons(id,title,content,position,estimated_minutes)")
+    .select("id, title, description, position, lessons(id,title,content,position,estimated_minutes,is_published)")
     .eq("class_id", classId)
     .eq("is_published", true)
     .order("position", { ascending: true });
 
   if (error) throw error;
 
-  const lessonIds = modules.flatMap(m => (m.lessons || []).map(l => l.id));
+  const publishedModules = (modules || []).map(module => ({
+    ...module,
+    lessons: (module.lessons || [])
+      .filter(lesson => lesson.is_published)
+      .sort((a, b) => a.position - b.position)
+  }));
+
+  lessonCache = new Map();
+  publishedModules.forEach(module => {
+    module.lessons.forEach(lesson => lessonCache.set(lesson.id, lesson));
+  });
+
+  const lessonIds = [...lessonCache.keys()];
   let progress = [];
 
   if (lessonIds.length) {
@@ -50,7 +63,7 @@ async function loadClassLearning() {
   }
 
   const progressMap = new Map(progress.map(p => [p.lesson_id, p]));
-  const allLessons = modules.flatMap(m => m.lessons || []);
+  const allLessons = [...lessonCache.values()];
   const completed = allLessons.filter(l => progressMap.get(l.id)?.status === "completed").length;
   const percent = allLessons.length ? Math.round((completed / allLessons.length) * 100) : 0;
 
@@ -61,50 +74,72 @@ async function loadClassLearning() {
 
   const host = document.getElementById("moduleList");
 
-  if (!modules.length) {
+  if (!publishedModules.length) {
     host.innerHTML = `<div class="empty">Materi belum diterbitkan oleh pengajar.</div>`;
     return;
   }
 
-  host.innerHTML = modules.map(module => {
-    const lessons = (module.lessons || []).sort((a,b) => a.position - b.position);
-    return `
-      <article class="learning-module">
-        <div class="eyebrow">Modul ${module.position}</div>
-        <h2>${escapeHtml(module.title)}</h2>
-        <p>${escapeHtml(module.description || "")}</p>
+  host.innerHTML = publishedModules.map(module => `
+    <article class="learning-module">
+      <div class="eyebrow">Modul ${module.position}</div>
+      <h2>${escapeHtml(module.title)}</h2>
+      <p>${escapeHtml(module.description || "")}</p>
 
-        <div class="checkpoint-list">
-          ${lessons.map(lesson => {
-            const done = progressMap.get(lesson.id)?.status === "completed";
-            return `
-              <button class="checkpoint ${done ? "done" : ""}"
-                      data-lesson-id="${lesson.id}"
-                      data-title="${escapeAttr(lesson.title)}"
-                      data-content="${escapeAttr(lesson.content || "")}">
-                <span class="checkpoint-index">${done ? "✓" : lesson.position}</span>
-                <span>
-                  <strong>${escapeHtml(lesson.title)}</strong>
-                  <small>${done ? "Selesai" : "Belum selesai"}</small>
-                </span>
-              </button>
-            `;
-          }).join("")}
-        </div>
-      </article>
-    `;
-  }).join("");
+      <div class="checkpoint-list">
+        ${module.lessons.length ? module.lessons.map(lesson => {
+          const done = progressMap.get(lesson.id)?.status === "completed";
+          return `
+            <button class="checkpoint ${done ? "done" : ""}" data-lesson-id="${lesson.id}">
+              <span class="checkpoint-index">${done ? "✓" : lesson.position}</span>
+              <span>
+                <strong>${escapeHtml(lesson.title)}</strong>
+                <small>
+                  ${done ? "Selesai" : "Belum selesai"}
+                  ${lesson.estimated_minutes ? ` · ${lesson.estimated_minutes} menit` : ""}
+                </small>
+              </span>
+            </button>
+          `;
+        }).join("") : `<div class="empty small">Belum ada checkpoint yang diterbitkan.</div>`}
+      </div>
+    </article>
+  `).join("");
 
   document.querySelectorAll(".checkpoint").forEach(btn => {
-    btn.addEventListener("click", () => openLesson(btn.dataset));
+    btn.addEventListener("click", () => openLesson(btn.dataset.lessonId));
   });
 }
 
-function openLesson(data) {
-  document.getElementById("lessonTitle").textContent = data.title;
-  document.getElementById("lessonContent").textContent =
-    data.content || "Materi belum diisi. Pada tahap berikutnya editor materi akan ditambahkan.";
-  document.getElementById("completeLessonBtn").dataset.lessonId = data.lessonId;
+function openLesson(lessonId) {
+  const lesson = lessonCache.get(lessonId);
+  if (!lesson) return;
+
+  document.getElementById("lessonTitle").textContent = lesson.title;
+  document.getElementById("lessonMeta").textContent =
+    lesson.estimated_minutes
+      ? `Estimasi belajar ${lesson.estimated_minutes} menit`
+      : "";
+
+  const rawContent = lesson.content?.trim()
+    ? lesson.content
+    : "Materi belum diisi oleh pengajar.";
+
+  let rendered = "";
+
+  try {
+    rendered = window.marked
+      ? window.marked.parse(rawContent)
+      : `<p>${escapeHtml(rawContent)}</p>`;
+
+    if (window.DOMPurify) {
+      rendered = window.DOMPurify.sanitize(rendered);
+    }
+  } catch (error) {
+    rendered = `<p>${escapeHtml(rawContent)}</p>`;
+  }
+
+  document.getElementById("lessonContent").innerHTML = rendered;
+  document.getElementById("completeLessonBtn").dataset.lessonId = lessonId;
   document.getElementById("lessonModal").showModal();
 }
 
@@ -137,10 +172,10 @@ document.getElementById("completeLessonBtn")?.addEventListener("click", async (e
 
 function escapeHtml(str = "") {
   return String(str).replace(/[&<>"']/g, s => ({
-    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;"
   })[s]);
-}
-
-function escapeAttr(str = "") {
-  return escapeHtml(str).replace(/\n/g, "&#10;");
 }
