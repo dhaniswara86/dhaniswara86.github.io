@@ -1,0 +1,1092 @@
+/* ============================================================
+   KABAYAN LEARNING
+   DASHBOARD NILAI PENGAJAR
+   ============================================================ */
+
+.grade-page {
+  background: #f4f6f9;
+}
+
+
+.grade-shell {
+  width: min(1240px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 34px 0 80px;
+}
+
+
+/* ============================================================
+   HERO
+   ============================================================ */
+
+.grade-hero {
+  padding: 28px 30px;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 22px;
+
+  background: #fff;
+
+  box-shadow:
+    0 10px 28px rgba(28, 43, 66, .05);
+}
+
+
+.grade-kicker {
+  color: #1267e8;
+
+  font-size: .72rem;
+  font-weight: 850;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+
+.grade-hero h1 {
+  margin: 7px 0 8px;
+
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  line-height: 1;
+  letter-spacing: -.055em;
+}
+
+
+.grade-hero p {
+  margin: 0;
+
+  max-width: 760px;
+
+  color: #687588;
+  line-height: 1.55;
+}
+
+
+.grade-hero-actions {
+  flex: 0 0 auto;
+
+  display: flex;
+  gap: 9px;
+}
+
+
+.grade-button {
+  min-height: 42px;
+  padding: 0 15px;
+
+  border: 1px solid transparent;
+  border-radius: 10px;
+
+  font-size: .82rem;
+  font-weight: 800;
+}
+
+
+.grade-button.primary {
+  background: #1267e8;
+  color: #fff;
+}
+
+
+.grade-button.secondary {
+  background: #fff;
+  border-color: #dfe5ed;
+  color: #34445b;
+}
+
+
+.grade-button:disabled {
+  cursor: wait;
+  opacity: .6;
+}
+
+
+/* ============================================================
+   SUMMARY
+   ============================================================ */
+
+.grade-summary {
+  margin-top: 18px;
+
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+
+.summary-card {
+  min-height: 128px;
+  padding: 19px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  border: 1px solid #e3e8ef;
+  border-radius: 17px;
+
+  background: #fff;
+}
+
+
+.summary-card span {
+  color: #6d7a8c;
+
+  font-size: .78rem;
+  font-weight: 750;
+}
+
+
+.summary-card strong {
+  font-size: 2.25rem;
+  line-height: 1;
+  letter-spacing: -.055em;
+}
+
+
+.summary-card small {
+  color: #8a95a5;
+  font-size: .72rem;
+}
+
+
+.summary-card.success {
+  background: #effaf5;
+  border-color: #d5eee2;
+}
+
+
+.summary-card.success strong {
+  color: #16885f;
+}
+
+
+.summary-card.final {
+  background: #f5f1ff;
+  border-color: #e5dcfb;
+}
+
+
+.summary-card.final strong {
+  color: #6d3fd3;
+}
+
+
+/* ============================================================
+   FILTER
+   ============================================================ */
+
+.grade-toolbar {
+  margin: 24px 0 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+
+.grade-search {
+  width: min(460px, 100%);
+  min-height: 44px;
+  padding: 0 13px;
+
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  border: 1px solid #dfe5ed;
+  border-radius: 11px;
+
+  background: #fff;
+}
+
+
+.grade-search > span {
+  color: #7f8a9a;
+  font-size: 1.1rem;
+}
+
+
+.grade-search input {
+  min-height: 40px;
+  padding: 0;
+
+  border: 0;
+  box-shadow: none;
+
+  background: transparent;
+}
+
+
+.grade-search input:focus {
+  border: 0;
+  box-shadow: none;
+}
+
+
+.grade-filter {
+  width: auto;
+  min-width: 180px;
+  min-height: 44px;
+
+  border-radius: 11px;
+}
+
+
+/* ============================================================
+   TABLE PANEL
+   ============================================================ */
+
+.grade-table-panel {
+  overflow: hidden;
+
+  border: 1px solid #e2e8ef;
+  border-radius: 20px;
+
+  background: #fff;
+
+  box-shadow:
+    0 7px 22px rgba(28, 43, 66, .04);
+}
+
+
+.grade-table-head {
+  padding: 20px 22px;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+
+  border-bottom: 1px solid #e9edf3;
+}
+
+
+.grade-table-head h2 {
+  margin: 0;
+
+  font-size: 1.35rem;
+  letter-spacing: -.035em;
+}
+
+
+.grade-table-head p {
+  margin: 3px 0 0;
+
+  color: #788496;
+  font-size: .82rem;
+}
+
+
+.grade-count {
+  flex: 0 0 auto;
+
+  padding: 6px 10px;
+
+  border-radius: 999px;
+
+  background: #f1f4f8;
+  color: #667487;
+
+  font-size: .72rem;
+  font-weight: 800;
+}
+
+
+.grade-table-wrap {
+  width: 100%;
+}
+
+
+.grade-table {
+  width: 100%;
+
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+
+.grade-table th {
+  padding: 11px 7px;
+
+  border-bottom: 1px solid #e9edf3;
+
+  background: #f7f9fc;
+
+  color: #6c7889;
+
+  font-size: .7rem;
+  font-weight: 850;
+  letter-spacing: .03em;
+  text-align: center;
+}
+
+
+.grade-table td {
+  height: 74px;
+  padding: 10px 7px;
+
+  border-bottom: 1px solid #edf0f4;
+
+  text-align: center;
+  vertical-align: middle;
+}
+
+
+.grade-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+
+.grade-table tbody tr:hover td {
+  background: #fbfcfe;
+}
+
+
+.grade-table .participant-column {
+  width: 210px;
+  text-align: left;
+}
+
+
+.grade-table .progress-column {
+  width: 112px;
+}
+
+
+.grade-table .quiz-column {
+  width: 68px;
+}
+
+
+.grade-table .final-column {
+  width: 74px;
+}
+
+
+.grade-table .status-column {
+  width: 104px;
+}
+
+
+.grade-table .detail-column {
+  width: 68px;
+}
+
+
+.participant-cell {
+  text-align: left !important;
+}
+
+
+.participant-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  color: #1c2a3e;
+
+  font-size: .86rem;
+  font-weight: 800;
+}
+
+
+.participant-email {
+  margin-top: 2px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  color: #8994a4;
+
+  font-size: .7rem;
+}
+
+
+/* ============================================================
+   PROGRESS
+   ============================================================ */
+
+.progress-compact {
+  display: grid;
+  gap: 6px;
+}
+
+
+.progress-compact > div:first-child {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 5px;
+}
+
+
+.progress-compact strong {
+  font-size: .78rem;
+}
+
+
+.progress-compact span {
+  color: #8994a4;
+  font-size: .64rem;
+}
+
+
+.progress-mini-track {
+  height: 5px;
+
+  overflow: hidden;
+
+  border-radius: 999px;
+  background: #edf1f5;
+}
+
+
+.progress-mini-track span {
+  display: block;
+  height: 100%;
+
+  border-radius: inherit;
+  background: #1267e8;
+}
+
+
+/* ============================================================
+   SCORES
+   ============================================================ */
+
+.score-cell {
+  min-width: 48px;
+
+  display: grid;
+  justify-items: center;
+  gap: 1px;
+}
+
+
+.score-cell strong {
+  color: #334156;
+
+  font-size: .9rem;
+}
+
+
+.score-cell small {
+  color: #929cab;
+  font-size: .61rem;
+}
+
+
+.score-cell.passed strong {
+  color: #16885f;
+}
+
+
+.score-cell.failed strong {
+  color: #c36b16;
+}
+
+
+.score-cell.final strong {
+  color: #6d3fd3;
+}
+
+
+.score-cell.final.passed strong {
+  color: #16885f;
+}
+
+
+.score-empty {
+  color: #a0a8b4;
+}
+
+
+/* ============================================================
+   STATUS
+   ============================================================ */
+
+.status-badge {
+  min-height: 28px;
+  padding: 0 9px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 999px;
+
+  font-size: .67rem;
+  font-weight: 850;
+  white-space: nowrap;
+}
+
+
+.status-badge.graduated {
+  background: #e8f7ef;
+  color: #16885f;
+}
+
+
+.status-badge.final {
+  background: #f1ebff;
+  color: #6d3fd3;
+}
+
+
+.status-badge.learning {
+  background: #f1f3f6;
+  color: #667487;
+}
+
+
+.detail-button {
+  min-height: 32px;
+  padding: 0 9px;
+
+  border: 1px solid #dfe5ed;
+  border-radius: 8px;
+
+  background: #fff;
+  color: #425168;
+
+  font-size: .68rem;
+  font-weight: 800;
+}
+
+
+.detail-button:hover {
+  border-color: #bad1f3;
+  background: #f7fbff;
+  color: #1267e8;
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+.grade-mobile-list {
+  display: none;
+}
+
+
+.mobile-student-card {
+  padding: 18px;
+
+  border: 1px solid #e2e8ef;
+  border-radius: 17px;
+
+  background: #fff;
+}
+
+
+.mobile-student-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+
+.mobile-student-top > div:first-child {
+  min-width: 0;
+
+  display: grid;
+  gap: 2px;
+}
+
+
+.mobile-student-top strong {
+  font-size: .95rem;
+}
+
+
+.mobile-student-top span:not(.status-badge) {
+  color: #8490a0;
+  font-size: .76rem;
+}
+
+
+.mobile-progress {
+  margin-top: 14px;
+}
+
+
+.mobile-progress .progress-compact > div:first-child {
+  justify-content: space-between;
+}
+
+
+.mobile-score-grid {
+  margin-top: 14px;
+
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 7px;
+}
+
+
+.mobile-score {
+  min-height: 50px;
+
+  padding: 7px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 10px;
+
+  background: #f3f5f8;
+
+  color: #7b8797;
+  font-size: .65rem;
+  font-weight: 800;
+}
+
+
+.mobile-score strong {
+  display: block;
+
+  color: #334156;
+  font-size: .9rem;
+}
+
+
+.mobile-score.passed {
+  background: #eaf8f2;
+  color: #16885f;
+}
+
+
+.mobile-score.passed strong {
+  color: #16885f;
+}
+
+
+.mobile-score.final {
+  background: #f1ebff;
+  color: #6d3fd3;
+}
+
+
+.mobile-detail {
+  width: 100%;
+
+  margin-top: 13px;
+}
+
+
+/* ============================================================
+   DETAIL MODAL
+   ============================================================ */
+
+.grade-dialog {
+  width: min(850px, calc(100% - 24px));
+  max-height: 92svh;
+
+  padding: 0;
+
+  overflow: auto;
+
+  border: 0;
+  border-radius: 22px;
+
+  box-shadow:
+    0 30px 80px rgba(16, 31, 52, .22);
+}
+
+
+.grade-dialog::backdrop {
+  background: rgba(21, 31, 46, .42);
+  backdrop-filter: blur(4px);
+}
+
+
+.grade-dialog-body {
+  padding: 26px;
+}
+
+
+.grade-dialog-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+
+.grade-dialog-head h2 {
+  margin: 6px 0 2px;
+
+  font-size: 2rem;
+  letter-spacing: -.045em;
+}
+
+
+.grade-dialog-head p {
+  margin: 0;
+
+  color: #7b8797;
+}
+
+
+.grade-dialog-close {
+  width: 38px;
+  height: 38px;
+
+  flex: 0 0 38px;
+
+  border: 0;
+  border-radius: 50%;
+
+  background: #eef2f6;
+  color: #3b485c;
+
+  font-size: 1.4rem;
+}
+
+
+.detail-summary {
+  margin-top: 22px;
+
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 9px;
+}
+
+
+.detail-summary > div {
+  min-height: 80px;
+  padding: 13px;
+
+  display: grid;
+  align-content: space-between;
+
+  border-radius: 13px;
+  background: #f5f7fa;
+}
+
+
+.detail-summary span {
+  color: #7b8797;
+  font-size: .7rem;
+}
+
+
+.detail-summary strong {
+  font-size: 1.15rem;
+}
+
+
+.detail-modules {
+  margin-top: 18px;
+
+  display: grid;
+  gap: 9px;
+}
+
+
+.detail-module-card {
+  padding: 14px;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(260px, 1fr) auto;
+  gap: 16px;
+  align-items: center;
+
+  border: 1px solid #e5eaf0;
+  border-radius: 14px;
+}
+
+
+.detail-module-title {
+  min-width: 0;
+
+  display: grid;
+  gap: 2px;
+}
+
+
+.detail-module-title span {
+  color: #1267e8;
+
+  font-size: .66rem;
+  font-weight: 850;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+
+.detail-module-title strong {
+  font-size: .86rem;
+}
+
+
+.detail-module-values {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+
+.detail-module-values > div {
+  display: grid;
+  gap: 1px;
+}
+
+
+.detail-module-values span {
+  color: #8390a1;
+  font-size: .62rem;
+}
+
+
+.detail-module-values strong {
+  font-size: .84rem;
+}
+
+
+.detail-module-values small {
+  color: #9aa3af;
+  font-size: .57rem;
+}
+
+
+.detail-result {
+  min-height: 27px;
+  padding: 0 8px;
+
+  display: inline-flex;
+  align-items: center;
+
+  border-radius: 999px;
+  background: #f0f2f6;
+
+  color: #6d7887;
+
+  font-size: .64rem;
+  font-weight: 850;
+  white-space: nowrap;
+}
+
+
+.detail-result.passed {
+  background: #e8f7ef;
+  color: #16885f;
+}
+
+
+.detail-final {
+  margin-top: 18px;
+  padding: 19px;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 22px;
+  align-items: center;
+
+  border-radius: 16px;
+
+  background: #0d2c55;
+  color: #fff;
+}
+
+
+.detail-final-copy h3 {
+  margin: 4px 0 3px;
+
+  color: #fff;
+  font-size: 1.25rem;
+}
+
+
+.detail-final-copy p {
+  margin: 0;
+
+  color: rgba(255,255,255,.68);
+  font-size: .78rem;
+}
+
+
+.detail-final .grade-kicker {
+  color: #79b0ff;
+}
+
+
+.detail-final-score {
+  display: grid;
+  justify-items: center;
+}
+
+
+.detail-final-score span,
+.detail-final-score small {
+  color: rgba(255,255,255,.68);
+  font-size: .66rem;
+}
+
+
+.detail-final-score strong {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+
+.detail-final-state {
+  padding: 7px 10px;
+
+  border-radius: 999px;
+  background: rgba(255,255,255,.12);
+
+  color: #fff;
+
+  font-size: .68rem;
+  font-weight: 850;
+}
+
+
+.detail-final-state.passed {
+  background: #dff7eb;
+  color: #16885f;
+}
+
+
+/* ============================================================
+   EMPTY / ERROR / LOADING
+   ============================================================ */
+
+.grade-loading,
+.grade-empty,
+.grade-error {
+  min-height: 180px;
+  padding: 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #7d8998;
+}
+
+
+.grade-error {
+  flex-direction: column;
+  gap: 5px;
+
+  color: #b83b3b;
+}
+
+
+.grade-error span {
+  color: #7d8998;
+  font-size: .82rem;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1080px) {
+
+  .grade-summary {
+    grid-template-columns: 1fr 1fr;
+  }
+
+
+  .grade-table-panel {
+    display: none;
+  }
+
+
+  .grade-mobile-list {
+    display: grid;
+    gap: 12px;
+  }
+
+}
+
+
+@media (max-width: 700px) {
+
+  .grade-shell {
+    width: min(100% - 20px, 1240px);
+    padding-top: 22px;
+  }
+
+
+  .grade-hero {
+    padding: 22px;
+
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+
+  .grade-hero-actions {
+    width: 100%;
+  }
+
+
+  .grade-hero-actions .grade-button {
+    flex: 1;
+  }
+
+
+  .grade-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+
+  .grade-search {
+    width: 100%;
+  }
+
+
+  .grade-filter {
+    width: 100%;
+  }
+
+
+  .detail-summary {
+    grid-template-columns: 1fr 1fr;
+  }
+
+
+  .detail-module-card {
+    grid-template-columns: 1fr;
+  }
+
+
+  .detail-final {
+    grid-template-columns: 1fr;
+  }
+
+
+  .detail-final-score {
+    justify-items: start;
+  }
+
+}
+
+
+@media (max-width: 440px) {
+
+  .grade-summary {
+    grid-template-columns: 1fr;
+  }
+
+
+  .mobile-score-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+}
