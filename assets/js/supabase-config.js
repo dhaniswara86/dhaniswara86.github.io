@@ -3,5 +3,5 @@
 // Jangan gunakan service_role key di browser.
 // ============================================================
 
-window.KABAYAN_SUPABASE_URL = "https://YOUR-PROJECT.supabase.co";
-window.KABAYAN_SUPABASE_PUBLISHABLE_KEY = "YOUR-PUBLISHABLE-OR-ANON-KEY";
+window.KABAYAN_SUPABASE_URL = "https://vwdeiootkkljxipwwwba.supabase.co";
+window.KABAYAN_SUPABASE_PUBLISHABLE_KEY = "sb_publishable_7w325tazoX_z7OnzSAOuvA_2lUdy8Gh";
