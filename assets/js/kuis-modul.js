@@ -209,57 +209,90 @@ function renderResult(result) {
   resultHost.classList.remove("hidden");
 
   const review = result.review || [];
+  const reviewAvailable = result.review_available !== false;
+  const isFinal = params.get("final") === "1";
+
+  const resultTitle = isFinal
+    ? (result.passed
+        ? "Evaluasi Akhir selesai."
+        : "Nilai belum mencapai batas kelulusan.")
+    : (result.passed
+        ? "Kuis modul selesai."
+        : "Pelajari kembali modul ini.");
+
+  const actionLabel = result.passed
+    ? "Lanjut ke kelas"
+    : (isFinal ? "Kembali ke kelas" : "Kembali ke materi");
+
+  const reviewSection = reviewAvailable
+    ? `
+      <section class="quiz-review">
+        <div class="section-head">
+          <div>
+            <h2>Pembahasan</h2>
+            <p>Gunakan pembahasan ini untuk memahami alasan setiap jawaban.</p>
+          </div>
+        </div>
+
+        ${review.map((item, index) => `
+          <article class="surface quiz-review-item ${item.is_correct ? "correct" : "wrong"}">
+            <div class="quiz-review-head">
+              <span>Soal ${index + 1}</span>
+              <strong>${item.is_correct ? "Benar" : "Belum tepat"}</strong>
+            </div>
+
+            <h3>${escapeHtml(item.question)}</h3>
+
+            <div class="quiz-review-grid">
+              <div>
+                <span>Jawaban Anda</span>
+                <strong>${escapeHtml(item.selected_answer || "-")}</strong>
+              </div>
+
+              <div>
+                <span>Jawaban benar</span>
+                <strong>${escapeHtml(item.correct_answer || "-")}</strong>
+              </div>
+            </div>
+
+            ${item.explanation ? `
+              <p>${escapeHtml(item.explanation)}</p>
+            ` : ""}
+          </article>
+        `).join("")}
+      </section>
+    `
+    : `
+      <section class="surface quiz-review-locked">
+        <div class="eyebrow">Evaluasi Akhir</div>
+        <h2>Pembahasan belum dibuka.</h2>
+        <p>
+          Anda masih mempunyai satu kesempatan berikutnya.
+          Kunci jawaban disembunyikan agar percobaan selanjutnya tetap objektif.
+        </p>
+      </section>
+    `;
 
   resultHost.innerHTML = `
     <section class="surface quiz-result-hero ${result.passed ? "passed" : "failed"}">
       <div class="eyebrow">${result.passed ? "Lulus" : "Belum Lulus"}</div>
       <div class="quiz-result-score">${result.score}</div>
-      <h1>${result.passed ? "Kuis modul selesai." : "Pelajari kembali modul ini."}</h1>
+      <h1>${resultTitle}</h1>
       <p>
         ${result.correct} dari ${result.total} jawaban benar.
         Nilai minimum kelulusan ${result.pass_score}.
       </p>
+
       <div class="quiz-result-actions">
-        <a class="btn" href="${classId ? `kelas-belajar.html?id=${encodeURIComponent(classId)}` : "peserta-dashboard.html"}">
-          ${result.passed ? "Lanjut ke kelas" : "Kembali ke materi"}
+        <a
+          class="btn"
+          href="${classId ? `kelas-belajar.html?id=${encodeURIComponent(classId)}` : "peserta-dashboard.html"}">
+          ${actionLabel}
         </a>
       </div>
     </section>
 
-    <section class="quiz-review">
-      <div class="section-head">
-        <div>
-          <h2>Pembahasan</h2>
-          <p>Gunakan pembahasan ini untuk memahami alasan setiap jawaban.</p>
-        </div>
-      </div>
-
-      ${review.map((item, index) => `
-        <article class="surface quiz-review-item ${item.is_correct ? "correct" : "wrong"}">
-          <div class="quiz-review-head">
-            <span>Soal ${index + 1}</span>
-            <strong>${item.is_correct ? "Benar" : "Belum tepat"}</strong>
-          </div>
-
-          <h3>${escapeHtml(item.question)}</h3>
-
-          <div class="quiz-review-grid">
-            <div>
-              <span>Jawaban Anda</span>
-              <strong>${escapeHtml(item.selected_answer || "-")}</strong>
-            </div>
-            <div>
-              <span>Jawaban benar</span>
-              <strong>${escapeHtml(item.correct_answer || "-")}</strong>
-            </div>
-          </div>
-
-          ${item.explanation ? `
-            <p>${escapeHtml(item.explanation)}</p>
-          ` : ""}
-        </article>
-      `).join("")}
-    </section>
+    ${reviewSection}
   `;
 }
 

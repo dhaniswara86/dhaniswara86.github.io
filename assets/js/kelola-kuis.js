@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 async function loadModule() {
   const { data, error } = await window.kabayanSupabase
     .from("modules")
-    .select("id,class_id,title,description,position,classes(id,name)")
+    .select("id,class_id,title,description,position,module_type,classes(id,name)")
     .eq("id", moduleId)
     .single();
 
@@ -34,13 +34,27 @@ async function loadModule() {
 
   currentModule = data;
 
-  document.getElementById("moduleEyebrow").textContent = `Kuis Modul ${data.position}`;
+  const isFinal = data.module_type === "final_exam";
+
+  document.getElementById("moduleEyebrow").textContent =
+    isFinal ? "Evaluasi Akhir" : `Kuis Modul ${data.position}`;
+
   document.getElementById("moduleTitle").textContent = data.title;
   document.getElementById("moduleDescription").textContent =
     data.description || "Kelola evaluasi untuk modul ini.";
 
   document.getElementById("backToClass").href =
     `kelola-kelas.html?id=${encodeURIComponent(data.class_id)}`;
+
+  const note = document.getElementById("quizAdminNote");
+
+  if (note && isFinal) {
+    note.innerHTML = `
+      <strong>Syarat peserta:</strong>
+      Evaluasi Akhir terbuka otomatis setelah peserta lulus seluruh Kuis Modul 1–6.
+      Jika gagal pada percobaan pertama, kunci jawaban tidak ditampilkan.
+    `;
+  }
 }
 
 async function loadQuiz() {
@@ -57,7 +71,9 @@ async function loadQuiz() {
       .from("quizzes")
       .insert({
         module_id: moduleId,
-        title: `Kuis Modul ${currentModule.position} — ${currentModule.title}`,
+        title: currentModule.module_type === "final_exam"
+          ? "Evaluasi Akhir — PPh Pasal 21"
+          : `Kuis Modul ${currentModule.position} — ${currentModule.title}`,
         description: "Uji pemahaman setelah menyelesaikan seluruh checkpoint pada modul ini.",
         pass_score: 70,
         max_attempts: 3,

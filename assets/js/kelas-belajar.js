@@ -1,18 +1,21 @@
 const params = new URLSearchParams(location.search);
 const classId = params.get("id");
+
 let studentProfile = null;
 let lessonCache = new Map();
 
 document.addEventListener("DOMContentLoaded", async () => {
   try {
     studentProfile = await window.KabayanAuth.requireRole("student");
+
     if (!classId) {
       location.replace("peserta-dashboard.html");
       return;
     }
+
     await loadClassLearning();
-  } catch (err) {
-    console.error(err);
+  } catch (error) {
+    console.error(error);
   }
 });
 
@@ -30,9 +33,10 @@ async function loadClassLearning() {
 
   const { data: modules, error } = await window.kabayanSupabase
     .from("modules")
-    .select("id, title, description, position, lessons(id,title,content,position,estimated_minutes,is_published)")
+    .select("id, title, description, position, module_type, lessons(id,title,content,position,estimated_minutes,is_published)")
     .eq("class_id", classId)
     .eq("is_published", true)
+    .eq("module_type", "learning")
     .order("position", { ascending: true });
 
   if (error) throw error;
@@ -69,17 +73,38 @@ async function loadClassLearning() {
 
   if (quizStatusError) throw quizStatusError;
 
+  const { data: finalRows, error: finalError } =
+    await window.kabayanSupabase.rpc("get_final_evaluation_status", {
+      p_class_id: classId
+    });
+
+  if (finalError) throw finalError;
+
+  const finalStatus =
+    Array.isArray(finalRows)
+      ? (finalRows[0] || null)
+      : finalRows;
+
   const quizStatusMap = new Map(
     (quizStatuses || []).map(status => [status.module_id, status])
   );
 
-  const progressMap = new Map(progress.map(p => [p.lesson_id, p]));
+  const progressMap = new Map(
+    progress.map(item => [item.lesson_id, item])
+  );
+
   const allLessons = [...lessonCache.values()];
-  const completed = allLessons.filter(l => progressMap.get(l.id)?.status === "completed").length;
-  const percent = allLessons.length ? Math.round((completed / allLessons.length) * 100) : 0;
+  const completed = allLessons.filter(
+    lesson => progressMap.get(lesson.id)?.status === "completed"
+  ).length;
+
+  const percent = allLessons.length
+    ? Math.round((completed / allLessons.length) * 100)
+    : 0;
 
   document.getElementById("progressText").textContent =
     `${completed} dari ${allLessons.length} checkpoint selesai`;
+
   document.getElementById("progressPercent").textContent = `${percent}%`;
   document.getElementById("progressBar").style.width = `${percent}%`;
 
@@ -90,86 +115,177 @@ async function loadClassLearning() {
     return;
   }
 
-  host.innerHTML = publishedModules.map(module => {
-    const quiz = quizStatusMap.get(module.id);
+  host.innerHTML =
+    publishedModules
+      .map(module =>
+        renderLearningModule(
+          module,
+          progressMap,
+          quizStatusMap.get(module.id)
+        )
+      )
+      .join("") +
+    renderFinalEvaluation(finalStatus);
 
-    let quizCard = "";
+  document.querySelectorAll(".checkpoint").forEach(button => {
+    button.addEventListener("click", () => openLesson(button.dataset.lessonId));
+  });
+}
 
-    if (quiz) {
-      let state = "locked";
-      let eyebrow = "Kuis Modul";
-      let title = quiz.quiz_title;
-      let detail = `${quiz.question_count} soal · Nilai minimum ${quiz.pass_score}`;
-      let action = "";
+function renderLearningModule(module, progressMap, quiz) {
+  let quizCard = "";
 
-      if (quiz.passed) {
-        state = "passed";
-        eyebrow = "Kuis Selesai";
-        detail = `Nilai terbaik ${quiz.best_score ?? 0} · Lulus`;
-        action = `<span class="quiz-module-badge">✓ Lulus</span>`;
-      } else if (!quiz.prerequisites_complete) {
-        detail = `Selesaikan semua checkpoint terlebih dahulu · ${quiz.question_count} soal`;
-        action = `<span class="quiz-module-badge locked">Terkunci</span>`;
-      } else if (!quiz.can_start) {
-        detail = quiz.max_attempts
-          ? `Percobaan ${quiz.attempts_used}/${quiz.max_attempts} telah digunakan`
-          : "Kuis belum dapat dimulai";
-        action = `<span class="quiz-module-badge locked">Tidak tersedia</span>`;
-      } else {
-        state = "ready";
-        eyebrow = quiz.attempts_used > 0 ? "Coba Lagi" : "Siap Dikerjakan";
-        detail = `${quiz.question_count} soal · Nilai minimum ${quiz.pass_score}`;
-        action = `
-          <a
-            class="btn small"
-            href="kuis-modul.html?id=${encodeURIComponent(quiz.quiz_id)}&class_id=${encodeURIComponent(classId)}">
-            ${quiz.attempts_used > 0 ? "Coba lagi" : "Mulai kuis"}
-          </a>`;
-      }
+  if (quiz) {
+    let state = "locked";
+    let eyebrow = "Kuis Modul";
+    let detail = `${quiz.question_count} soal · Nilai minimum ${quiz.pass_score}`;
+    let action = "";
 
-      quizCard = `
-        <div class="quiz-module-card ${state}">
-          <div>
-            <div class="eyebrow">${eyebrow}</div>
-            <strong>${escapeHtml(title)}</strong>
-            <span>${escapeHtml(detail)}</span>
-          </div>
-          ${action}
-        </div>`;
+    if (quiz.passed) {
+      state = "passed";
+      eyebrow = "Kuis Selesai";
+      detail = `Nilai terbaik ${quiz.best_score ?? 0} · Lulus`;
+      action = `<span class="quiz-module-badge">✓ Lulus</span>`;
+    } else if (!quiz.prerequisites_complete) {
+      detail = `Selesaikan semua checkpoint terlebih dahulu · ${quiz.question_count} soal`;
+      action = `<span class="quiz-module-badge locked">Terkunci</span>`;
+    } else if (!quiz.can_start) {
+      detail = quiz.max_attempts
+        ? `Percobaan ${quiz.attempts_used}/${quiz.max_attempts} telah digunakan`
+        : "Kuis belum dapat dimulai";
+      action = `<span class="quiz-module-badge locked">Tidak tersedia</span>`;
+    } else {
+      state = "ready";
+      eyebrow = quiz.attempts_used > 0 ? "Coba Lagi" : "Siap Dikerjakan";
+      detail = `${quiz.question_count} soal · Nilai minimum ${quiz.pass_score}`;
+      action = `
+        <a
+          class="btn small"
+          href="kuis-modul.html?id=${encodeURIComponent(quiz.quiz_id)}&class_id=${encodeURIComponent(classId)}">
+          ${quiz.attempts_used > 0 ? "Coba lagi" : "Mulai kuis"}
+        </a>`;
     }
 
-    return `
-      <article class="learning-module">
-        <div class="eyebrow">Modul ${module.position}</div>
-        <h2>${escapeHtml(module.title)}</h2>
-        <p>${escapeHtml(module.description || "")}</p>
-
-        <div class="checkpoint-list">
-          ${module.lessons.length ? module.lessons.map(lesson => {
-            const done = progressMap.get(lesson.id)?.status === "completed";
-            return `
-              <button class="checkpoint ${done ? "done" : ""}" data-lesson-id="${lesson.id}">
-                <span class="checkpoint-index">${done ? "✓" : lesson.position}</span>
-                <span>
-                  <strong>${escapeHtml(lesson.title)}</strong>
-                  <small>
-                    ${done ? "Selesai" : "Belum selesai"}
-                    ${lesson.estimated_minutes ? ` · ${lesson.estimated_minutes} menit` : ""}
-                  </small>
-                </span>
-              </button>
-            `;
-          }).join("") : `<div class="empty small">Belum ada checkpoint yang diterbitkan.</div>`}
+    quizCard = `
+      <div class="quiz-module-card ${state}">
+        <div>
+          <div class="eyebrow">${eyebrow}</div>
+          <strong>${escapeHtml(quiz.quiz_title)}</strong>
+          <span>${escapeHtml(detail)}</span>
         </div>
+        ${action}
+      </div>`;
+  }
 
-        ${quizCard}
-      </article>
+  return `
+    <article class="learning-module">
+      <div class="eyebrow">Modul ${module.position}</div>
+      <h2>${escapeHtml(module.title)}</h2>
+      <p>${escapeHtml(module.description || "")}</p>
+
+      <div class="checkpoint-list">
+        ${module.lessons.length ? module.lessons.map(lesson => {
+          const done = progressMap.get(lesson.id)?.status === "completed";
+          return `
+            <button class="checkpoint ${done ? "done" : ""}" data-lesson-id="${lesson.id}">
+              <span class="checkpoint-index">${done ? "✓" : lesson.position}</span>
+              <span>
+                <strong>${escapeHtml(lesson.title)}</strong>
+                <small>
+                  ${done ? "Selesai" : "Belum selesai"}
+                  ${lesson.estimated_minutes ? ` · ${lesson.estimated_minutes} menit` : ""}
+                </small>
+              </span>
+            </button>
+          `;
+        }).join("") : `<div class="empty small">Belum ada checkpoint yang diterbitkan.</div>`}
+      </div>
+
+      ${quizCard}
+    </article>
+  `;
+}
+
+function renderFinalEvaluation(status) {
+  if (!status) {
+    return `
+      <section class="final-evaluation-card unavailable">
+        <div class="final-evaluation-copy">
+          <div class="final-evaluation-kicker">Evaluasi Akhir</div>
+          <h2>Ujian komprehensif PPh Pasal 21</h2>
+          <p>Evaluasi Akhir belum diterbitkan oleh pengajar.</p>
+        </div>
+        <span class="final-evaluation-status">Belum tersedia</span>
+      </section>
     `;
-  }).join("");
+  }
 
-  document.querySelectorAll(".checkpoint").forEach(btn => {
-    btn.addEventListener("click", () => openLesson(btn.dataset.lessonId));
-  });
+  let cardClass = "locked";
+  let statusText = "Terkunci";
+  let action = "";
+
+  if (status.passed) {
+    cardClass = "passed";
+    statusText = "Lulus";
+
+    action = `
+      <div class="final-evaluation-score">
+        <span>Nilai terbaik</span>
+        <strong>${status.best_score ?? 0}</strong>
+      </div>
+    `;
+  } else if (!status.is_published) {
+    cardClass = "unavailable";
+    statusText = "Belum diterbitkan";
+  } else if (!status.prerequisites_complete) {
+    statusText = "Luluskan Modul 1–6";
+  } else if (status.can_start) {
+    cardClass = "ready";
+    statusText = status.attempts_used > 0
+      ? "Percobaan terakhir"
+      : "Siap dikerjakan";
+
+    action = `
+      <a
+        class="btn final-evaluation-button"
+        href="kuis-modul.html?id=${encodeURIComponent(status.quiz_id)}&class_id=${encodeURIComponent(classId)}&final=1">
+        ${status.attempts_used > 0 ? "Coba lagi" : "Mulai Evaluasi Akhir"}
+      </a>
+    `;
+  } else {
+    statusText = status.max_attempts
+      ? `Percobaan ${status.attempts_used}/${status.max_attempts}`
+      : "Tidak tersedia";
+  }
+
+  return `
+    <section class="final-evaluation-card ${cardClass}">
+      <div class="final-evaluation-copy">
+        <div class="final-evaluation-kicker">Evaluasi Akhir</div>
+
+        <h2>
+          ${escapeHtml(status.quiz_title || "Evaluasi Akhir — PPh Pasal 21")}
+        </h2>
+
+        <p>
+          ${status.question_count} soal lintas Modul 1–6 ·
+          Nilai minimum ${status.pass_score} ·
+          Maksimal ${status.max_attempts ?? "∞"} percobaan.
+        </p>
+
+        ${!status.prerequisites_complete ? `
+          <small>
+            Evaluasi terbuka otomatis setelah seluruh Kuis Modul 1–6 dinyatakan lulus.
+          </small>
+        ` : ""}
+      </div>
+
+      <div class="final-evaluation-action">
+        <span class="final-evaluation-status">${escapeHtml(statusText)}</span>
+        ${action}
+      </div>
+    </section>
+  `;
 }
 
 function openLesson(lessonId) {
@@ -205,8 +321,8 @@ function openLesson(lessonId) {
   document.getElementById("lessonModal").showModal();
 }
 
-document.getElementById("completeLessonBtn")?.addEventListener("click", async (e) => {
-  const lessonId = e.currentTarget.dataset.lessonId;
+document.getElementById("completeLessonBtn")?.addEventListener("click", async (event) => {
+  const lessonId = event.currentTarget.dataset.lessonId;
   if (!lessonId) return;
 
   const now = new Date().toISOString();
@@ -232,12 +348,12 @@ document.getElementById("completeLessonBtn")?.addEventListener("click", async (e
   await loadClassLearning();
 });
 
-function escapeHtml(str = "") {
-  return String(str).replace(/[&<>"']/g, s => ({
+function escapeHtml(value = "") {
+  return String(value).replace(/[&<>"']/g, char => ({
     "&": "&amp;",
     "<": "&lt;",
     ">": "&gt;",
     '"': "&quot;",
     "'": "&#039;"
-  })[s]);
+  })[char]);
 }

@@ -172,7 +172,7 @@ async function loadModules() {
   const { data, error } = await window.kabayanSupabase
     .from("modules")
     .select(
-      "id, title, description, position, is_published, lessons(id,title,content,position,is_published,estimated_minutes)"
+      "id, title, description, position, module_type, is_published, lessons(id,title,content,position,is_published,estimated_minutes)"
     )
     .eq("class_id", classId)
     .order("position", { ascending: true });
@@ -188,12 +188,25 @@ async function loadModules() {
 
   moduleCache = (data || []).map(module => ({
     ...module,
+    module_type: module.module_type || "learning",
     lessons: (module.lessons || []).sort(
       (a, b) => a.position - b.position
     )
   }));
 
-  if (!moduleCache.length) {
+  const learningModules =
+    moduleCache.filter(
+      module => module.module_type !== "final_exam"
+    );
+
+  const finalModule =
+    moduleCache.find(
+      module => module.module_type === "final_exam"
+    ) || null;
+
+  renderFinalEvaluationAdmin(finalModule);
+
+  if (!learningModules.length) {
     host.innerHTML = `
       <div class="kc-empty">
         Belum ada modul.
@@ -202,7 +215,7 @@ async function loadModules() {
     return;
   }
 
-  host.innerHTML = moduleCache
+  host.innerHTML = learningModules
     .map(renderModuleCard)
     .join("");
 
@@ -428,6 +441,38 @@ function bindModuleCardEvents() {
         () => toggleModuleContent(button)
       );
     });
+}
+
+
+function renderFinalEvaluationAdmin(module) {
+  const host = document.getElementById("finalEvaluationAdmin");
+  const text = document.getElementById("finalEvaluationAdminText");
+
+  if (!host || !text) return;
+
+  if (!module) {
+    text.textContent =
+      "Evaluasi Akhir belum dibuat. Jalankan SQL Tahap 3 terlebih dahulu.";
+
+    host.innerHTML = `
+      <span class="kc-final-admin-state">
+        Belum tersedia
+      </span>
+    `;
+
+    return;
+  }
+
+  text.textContent =
+    "30 soal lintas Modul 1–6. Peserta baru dapat mengerjakan setelah seluruh kuis modul lulus.";
+
+  host.innerHTML = `
+    <a
+      class="kc-final-admin-button"
+      href="kelola-kuis.html?module_id=${encodeURIComponent(module.id)}">
+      Kelola Evaluasi Akhir
+    </a>
+  `;
 }
 
 
