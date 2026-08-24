@@ -738,6 +738,47 @@ function openStudentDetail(studentId) {
     student.final_result || {};
 
 
+  const certificate =
+    student.certificate || {
+      exists: false
+    };
+
+
+  let certificateAction = "";
+
+
+  if (student.graduated) {
+
+    if (
+      certificate.exists &&
+      certificate.status === "active"
+    ) {
+
+      certificateAction = `
+        <a
+          class="certificate-detail-button view"
+          href="sertifikat.html?code=${encodeURIComponent(certificate.verification_code)}"
+          target="_blank"
+          rel="noopener">
+          Lihat Sertifikat
+        </a>
+      `;
+
+    } else {
+
+      certificateAction = `
+        <button
+          type="button"
+          class="certificate-detail-button issue"
+          id="issueCertificateBtn"
+          data-student-id="${student.user_id}">
+          Terbitkan Sertifikat
+        </button>
+      `;
+    }
+  }
+
+
   document
     .getElementById("detailFinal")
     .innerHTML = `
@@ -775,15 +816,117 @@ function openStudentDetail(studentId) {
       </div>
 
 
-      <span class="detail-final-state ${student.final_passed ? "passed" : ""}">
-        ${student.final_passed ? "Lulus" : "Belum lulus"}
-      </span>
+      <div class="detail-final-actions">
+
+        <span class="detail-final-state ${student.final_passed ? "passed" : ""}">
+          ${student.final_passed ? "Lulus" : "Belum lulus"}
+        </span>
+
+        ${certificateAction}
+
+      </div>
     `;
 
 
   document
     .getElementById("studentDetailModal")
     .showModal();
+
+
+  document
+    .getElementById("issueCertificateBtn")
+    ?.addEventListener(
+      "click",
+      () => issueCertificate(student)
+    );
+}
+
+
+async function issueCertificate(student) {
+
+  const button =
+    document.getElementById(
+      "issueCertificateBtn"
+    );
+
+
+  if (!button) return;
+
+
+  const confirmed =
+    confirm(
+      `Terbitkan sertifikat untuk ${student.full_name || student.email || "peserta"}?\n\n` +
+      `Sertifikat akan mempunyai nomor unik dan QR verifikasi online.`
+    );
+
+
+  if (!confirmed) return;
+
+
+  const originalText =
+    button.textContent;
+
+
+  button.disabled = true;
+  button.textContent =
+    "Menerbitkan…";
+
+
+  try {
+
+    const { data, error } =
+      await window.kabayanSupabase.rpc(
+        "issue_certificate",
+        {
+          p_class_id: classId,
+          p_user_id: student.user_id
+        }
+      );
+
+
+    if (error) throw error;
+
+
+    const code =
+      data?.verification_code;
+
+
+    if (!code) {
+      throw new Error(
+        "Kode verifikasi sertifikat tidak diterima."
+      );
+    }
+
+
+    await loadDashboard();
+
+
+    document
+      .getElementById("studentDetailModal")
+      .close();
+
+
+    window.open(
+      `sertifikat.html?code=${encodeURIComponent(code)}`,
+      "_blank",
+      "noopener"
+    );
+
+
+  } catch (error) {
+
+    console.error(error);
+
+    alert(
+      error.message ||
+      "Sertifikat belum dapat diterbitkan."
+    );
+
+
+    button.disabled = false;
+    button.textContent =
+      originalText;
+  }
 }
 
 
@@ -813,7 +956,8 @@ function exportCsv() {
     "Evaluasi Akhir",
     "Percobaan Final",
     "Final Lulus",
-    "Status Kelulusan"
+    "Status Kelulusan",
+    "Nomor Sertifikat"
   ];
 
 
@@ -850,7 +994,8 @@ function exportCsv() {
         student.final_best_score ?? "",
         student.final_attempts || 0,
         student.final_passed ? "Ya" : "Tidak",
-        student.graduated ? "Lulus" : "Belum Lulus"
+        student.graduated ? "Lulus" : "Belum Lulus",
+        student.certificate?.certificate_number ?? ""
       ];
     });
 
