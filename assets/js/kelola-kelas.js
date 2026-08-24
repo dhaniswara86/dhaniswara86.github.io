@@ -133,9 +133,16 @@ async function loadModules() {
             <h3>${escapeHtml(module.title)}</h3>
             <p>${escapeHtml(module.description || "")}</p>
           </div>
-          <span class="pill ${module.is_published ? "success-pill" : ""}">
-            ${module.is_published ? "Terbit" : "Draft"}
-          </span>
+          <div class="module-admin-actions">
+            <span class="pill ${module.is_published ? "success-pill" : ""}">
+              ${module.is_published ? "Terbit" : "Draft"}
+            </span>
+            <a
+              class="btn ghost small"
+              href="kelola-kuis.html?module_id=${encodeURIComponent(module.id)}">
+              Kelola kuis
+            </a>
+          </div>
         </div>
 
         <div class="lesson-list">
