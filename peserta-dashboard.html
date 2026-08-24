@@ -3,45 +3,165 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <title>Dashboard Peserta — Kabayan Learning</title>
+
   <link rel="stylesheet" href="assets/css/lms.css">
+  <link rel="stylesheet" href="assets/css/peserta-dashboard.css">
 </head>
-<body>
+
+<body class="participant-dashboard-page">
+
 <header class="site-header">
   <nav class="nav">
-    <a class="brand" href="peserta-dashboard.html">Kabayan <span>Learning</span></a>
+
+    <a
+      class="brand"
+      href="peserta-dashboard.html">
+      Kabayan <span>Learning</span>
+    </a>
+
     <div class="nav-actions">
-      <span class="muted" id="profileName">Peserta</span>
-      <button class="btn ghost small" onclick="KabayanAuth.signOut()">Keluar</button>
+      <span
+        class="muted participant-profile-name"
+        id="profileName">
+        Peserta
+      </span>
+
+      <button
+        class="btn ghost small"
+        onclick="KabayanAuth.signOut()">
+        Keluar
+      </button>
     </div>
+
   </nav>
 </header>
 
-<main class="page">
-  <section class="hero">
-    <div>
-      <div class="eyebrow">Ruang Belajar</div>
-      <h1>Belajar sesuai progres Anda.</h1>
-      <p>Lanjutkan kelas, selesaikan checkpoint, dan bangun pemahaman PPh Pasal 21 secara bertahap.</p>
+
+<main class="participant-dashboard-shell">
+
+  <!-- ========================================================
+       HERO
+       ======================================================== -->
+  <section class="participant-hero">
+
+    <div class="participant-hero-copy">
+
+      <div class="eyebrow">
+        Ruang Belajar
+      </div>
+
+      <h1>
+        Selamat datang,
+        <span id="heroName">Peserta</span>.
+      </h1>
+
+      <p>
+        Lanjutkan kelas Anda, selesaikan evaluasi, dan akses
+        sertifikat yang telah diterbitkan.
+      </p>
+
     </div>
+
+    <div class="participant-hero-mark">
+      KL
+    </div>
+
   </section>
 
-  <div class="section-head">
-    <div>
-      <h2>Kelas Saya</h2>
-      <p>Kelas yang telah ditambahkan oleh pengajar.</p>
-    </div>
-  </div>
 
-  <div id="classList" class="class-list"></div>
+  <!-- ========================================================
+       SERTIFIKAT SAYA
+       ======================================================== -->
+  <section class="participant-section">
+
+    <div class="participant-section-head">
+
+      <div>
+        <div class="participant-section-kicker">
+          Pencapaian
+        </div>
+
+        <h2>
+          Sertifikat Saya
+        </h2>
+
+        <p>
+          Sertifikat yang telah diterbitkan oleh pengajar.
+        </p>
+      </div>
+
+      <span
+        id="certificateCount"
+        class="participant-count">
+        0
+      </span>
+
+    </div>
+
+
+    <div
+      id="certificateList"
+      class="certificate-list">
+      <div class="participant-empty">
+        Memuat sertifikat…
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- ========================================================
+       KELAS SAYA
+       ======================================================== -->
+  <section class="participant-section">
+
+    <div class="participant-section-head">
+
+      <div>
+        <div class="participant-section-kicker">
+          Pembelajaran
+        </div>
+
+        <h2>
+          Kelas Saya
+        </h2>
+
+        <p>
+          Kelas yang telah ditambahkan oleh pengajar.
+        </p>
+      </div>
+
+      <span
+        id="classCount"
+        class="participant-count">
+        0
+      </span>
+
+    </div>
+
+
+    <div
+      id="classList"
+      class="participant-class-list">
+      <div class="participant-empty">
+        Memuat kelas…
+      </div>
+    </div>
+
+  </section>
+
 </main>
 
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script src="assets/js/supabase-config.js"></script>
 <script src="assets/js/supabase-client.js"></script>
 <script src="assets/js/auth.js"></script>
 
 <script src="assets/js/peserta-dashboard.js"></script>
+
 </body>
 </html>
