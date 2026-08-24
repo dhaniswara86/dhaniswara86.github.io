@@ -3508,12 +3508,11 @@ body.mega-menu-open {
 <style id="heroViewportFitStyles">
 /* =========================================================
    Hero awal — fit satu layar
-   Menjaga area navbar + announcement + hero/slideshow
-   tetap berada dalam viewport awal tanpa memotong slider.
+   Menjaga area navbar + hero/slideshow tetap berada
+   dalam viewport awal tanpa memotong slider.
    ========================================================= */
 :root {
   --hero-screen-height: 100vh;
-  --announcement-height: 47px;
 }
 
 @supports (height: 100svh) {
@@ -3526,7 +3525,6 @@ body.mega-menu-open {
   height: calc(
     var(--hero-screen-height)
     - var(--nav-height)
-    - var(--announcement-height)
   );
   min-height: 0;
   display: flex;
@@ -4032,10 +4030,6 @@ body.mega-menu-open {
 <a class="nav-hotnews" href="hotnews.html"><span aria-hidden="true" class="nav-hotnews-icon">🔥</span><span>Hot News</span></a>
 </nav>
 <main>
-<div class="announcement">
-      Temukan buku, formulir, dan aplikasi perpajakan dalam satu tempat.
-      <button aria-controls="collectionMegaMenu" aria-expanded="false" aria-haspopup="true" class="collection-menu-trigger" id="collectionMenuTrigger" type="button">Lihat Koleksi<span aria-hidden="true">⌄</span></button>
-</div>
 <section class="hero">
 <div class="hero-copy">
 <p class="eyebrow">Katalog Bahan Pelayanan</p>
@@ -5289,7 +5283,7 @@ body.mega-menu-open {
 <script>
 (() => {
   const trigger =
-    document.getElementById("collectionMenuTrigger");
+    document.getElementById("collectionSearchTrigger");
 
   const megaMenu =
     document.getElementById("collectionMegaMenu");
@@ -5365,7 +5359,26 @@ body.mega-menu-open {
     }
   }
 
-  trigger.addEventListener("click", toggleMegaMenu);
+  trigger.addEventListener("click", () => {
+    const navMegaMenu = document.getElementById("navMegaMenu");
+    const navMegaBackdrop = document.getElementById("navMegaBackdrop");
+
+    if (navMegaMenu) {
+      navMegaMenu.classList.remove("active");
+      navMegaMenu.setAttribute("aria-hidden", "true");
+    }
+
+    if (navMegaBackdrop) {
+      navMegaBackdrop.classList.remove("active");
+      navMegaBackdrop.setAttribute("aria-hidden", "true");
+    }
+
+    document
+      .querySelectorAll(".nav-menu-link.mega-active")
+      .forEach((link) => link.classList.remove("mega-active"));
+
+    toggleMegaMenu();
+  });
 
   backdrop.addEventListener("click", () => {
     closeMegaMenu({ returnFocus: true });
@@ -5408,54 +5421,7 @@ body.mega-menu-open {
 })();
 </script>
 
-<script id="collectionSearchTriggerScript">
-(() => {
-  const searchTrigger = document.getElementById("collectionSearchTrigger");
-  const collectionTrigger = document.getElementById("collectionMenuTrigger");
-  const collectionMenu = document.getElementById("collectionMegaMenu");
-  const navMegaMenu = document.getElementById("navMegaMenu");
-  const navMegaBackdrop = document.getElementById("navMegaBackdrop");
 
-  if (!searchTrigger || !collectionTrigger || !collectionMenu) return;
-
-  function syncState() {
-    searchTrigger.setAttribute(
-      "aria-expanded",
-      String(collectionMenu.classList.contains("active"))
-    );
-  }
-
-  searchTrigger.addEventListener("click", () => {
-    // Tutup mega-menu hover navigasi bila masih terbuka.
-    if (navMegaMenu) {
-      navMegaMenu.classList.remove("active");
-      navMegaMenu.setAttribute("aria-hidden", "true");
-    }
-
-    if (navMegaBackdrop) {
-      navMegaBackdrop.classList.remove("active");
-      navMegaBackdrop.setAttribute("aria-hidden", "true");
-    }
-
-    document
-      .querySelectorAll(".nav-menu-link.mega-active")
-      .forEach((link) => link.classList.remove("mega-active"));
-
-    // Gunakan mekanisme asli tombol "Lihat Koleksi"
-    // agar buka/tutup, backdrop, Escape, dan focus tetap konsisten.
-    collectionTrigger.click();
-    window.setTimeout(syncState, 0);
-  });
-
-  const observer = new MutationObserver(syncState);
-  observer.observe(collectionMenu, {
-    attributes: true,
-    attributeFilter: ["class"]
-  });
-
-  syncState();
-})();
-</script>
 
 <script id="navMegaMenuScript">
 (() => {
@@ -5465,7 +5431,7 @@ body.mega-menu-open {
   const panels = [...document.querySelectorAll('.nav-mega-panel[data-nav-panel]')];
   const collectionMenu = document.getElementById('collectionMegaMenu');
   const collectionBackdrop = document.getElementById('megaMenuBackdrop');
-  const collectionTrigger = document.getElementById('collectionMenuTrigger');
+  const collectionTrigger = document.getElementById('collectionSearchTrigger');
   const mobileMenu = document.getElementById('mobileMenu');
   const mobileToggle = document.getElementById('menuToggle');
   const desktopQuery = window.matchMedia('(min-width: 901px) and (hover: hover) and (pointer: fine)');
@@ -5715,32 +5681,7 @@ body.mega-menu-open {
 </script>
 
 
-<script id="heroViewportFitScript">
-(() => {
-  "use strict";
 
-  const root = document.documentElement;
-  const announcement = document.querySelector(".announcement");
-
-  if (!announcement) return;
-
-  const syncAnnouncementHeight = () => {
-    const height = Math.ceil(announcement.getBoundingClientRect().height);
-    root.style.setProperty("--announcement-height", `${height}px`);
-  };
-
-  syncAnnouncementHeight();
-
-  window.addEventListener("load", syncAnnouncementHeight, { once: true });
-  window.addEventListener("resize", syncAnnouncementHeight, { passive: true });
-  window.addEventListener("orientationchange", syncAnnouncementHeight, { passive: true });
-
-  if ("ResizeObserver" in window) {
-    const observer = new ResizeObserver(syncAnnouncementHeight);
-    observer.observe(announcement);
-  }
-})();
-</script>
 
 </body>
 </html>
