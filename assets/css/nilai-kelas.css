@@ -1139,3 +1139,360 @@
     justify-items: start;
   }
 }
+
+
+/* ============================================================
+   TAHAP 8 — MANAJEMEN SERTIFIKAT
+   ============================================================ */
+
+.detail-final {
+  flex-wrap: wrap;
+}
+
+.certificate-admin-actions {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.certificate-detail-button.revoke {
+  border: 1px solid rgba(255,255,255,.22);
+  background: rgba(255,255,255,.08);
+  color: #fff;
+}
+
+.certificate-detail-button.revoke:hover {
+  background: rgba(255,255,255,.16);
+}
+
+.certificate-admin-summary {
+  grid-column: 1 / -1;
+
+  width: 100%;
+  padding-top: 15px;
+
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 9px;
+
+  border-top: 1px solid rgba(255,255,255,.13);
+}
+
+.certificate-admin-summary > div {
+  padding: 10px 12px;
+
+  display: grid;
+  gap: 2px;
+
+  border-radius: 10px;
+
+  background: rgba(255,255,255,.07);
+}
+
+.certificate-admin-summary span {
+  color: rgba(255,255,255,.58);
+  font-size: .62rem;
+}
+
+.certificate-admin-summary strong {
+  color: #fff;
+  font-size: .73rem;
+}
+
+.certificate-status-active {
+  color: #a8f0cf !important;
+}
+
+.certificate-status-revoked {
+  color: #ffd29f !important;
+}
+
+.certificate-history-host {
+  grid-column: 1 / -1;
+
+  width: 100%;
+  margin-top: 4px;
+
+  color: rgba(255,255,255,.62);
+  font-size: .7rem;
+}
+
+.certificate-history-head {
+  margin-bottom: 8px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.certificate-history-head strong {
+  color: #fff;
+  font-size: .75rem;
+}
+
+.certificate-history-head span {
+  color: rgba(255,255,255,.52);
+  font-size: .62rem;
+}
+
+.certificate-history-list {
+  display: grid;
+  gap: 7px;
+}
+
+.certificate-history-item {
+  padding: 9px 10px;
+
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) auto;
+  gap: 9px;
+  align-items: center;
+
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 10px;
+
+  background: rgba(255,255,255,.055);
+}
+
+.certificate-history-index {
+  width: 26px;
+  height: 26px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+
+  background: rgba(255,255,255,.10);
+  color: #fff;
+
+  font-size: .61rem;
+  font-weight: 850;
+}
+
+.certificate-history-copy {
+  min-width: 0;
+
+  display: grid;
+  gap: 1px;
+}
+
+.certificate-history-copy strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  color: #fff;
+  font-size: .69rem;
+}
+
+.certificate-history-copy span,
+.certificate-history-copy small {
+  color: rgba(255,255,255,.54);
+  font-size: .59rem;
+}
+
+.certificate-history-actions {
+  display: grid;
+  justify-items: end;
+  gap: 4px;
+}
+
+.certificate-history-actions a {
+  color: #cfe1ff;
+  font-size: .59rem;
+  font-weight: 750;
+}
+
+.certificate-history-status {
+  min-height: 23px;
+  padding: 0 7px;
+
+  display: inline-flex;
+  align-items: center;
+
+  border-radius: 999px;
+
+  font-size: .57rem;
+  font-weight: 850;
+}
+
+.certificate-history-status.active {
+  background: rgba(77,220,154,.15);
+  color: #a8f0cf;
+}
+
+.certificate-history-status.revoked {
+  background: rgba(255,164,67,.13);
+  color: #ffd29f;
+}
+
+
+/* Revoke dialog */
+
+.certificate-revoke-dialog {
+  width: min(520px, calc(100% - 24px));
+  padding: 0;
+
+  border: 0;
+  border-radius: 22px;
+
+  box-shadow:
+    0 32px 90px rgba(18,30,48,.26);
+}
+
+.certificate-revoke-dialog::backdrop {
+  background: rgba(18,30,48,.46);
+  backdrop-filter: blur(5px);
+}
+
+.certificate-revoke-body {
+  padding: 26px;
+}
+
+.certificate-revoke-icon {
+  width: 50px;
+  height: 50px;
+
+  margin-bottom: 16px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 15px;
+
+  background: #fff0e4;
+  color: #c96b12;
+
+  font-size: 1.4rem;
+  font-weight: 900;
+}
+
+.certificate-revoke-copy h2 {
+  margin: 5px 0 7px;
+
+  color: #1c2b40;
+
+  font-size: 1.65rem;
+  letter-spacing: -.045em;
+}
+
+.certificate-revoke-copy p {
+  margin: 0;
+
+  color: #6f7c8e;
+
+  font-size: .82rem;
+  line-height: 1.55;
+}
+
+.certificate-revoke-field {
+  margin-top: 20px;
+
+  display: grid;
+  gap: 7px;
+}
+
+.certificate-revoke-field > span {
+  color: #35445a;
+
+  font-size: .75rem;
+  font-weight: 800;
+}
+
+.certificate-revoke-field textarea {
+  width: 100%;
+  padding: 12px 13px;
+
+  resize: vertical;
+
+  border: 1px solid #dce3ec;
+  border-radius: 11px;
+
+  background: #fbfcfe;
+  color: #24344a;
+
+  font: inherit;
+  font-size: .8rem;
+  line-height: 1.5;
+}
+
+.certificate-revoke-field textarea:focus {
+  outline: none;
+  border-color: #efb16f;
+  box-shadow: 0 0 0 3px rgba(239,177,111,.14);
+}
+
+.certificate-revoke-field small {
+  color: #8a95a4;
+
+  font-size: .65rem;
+}
+
+.certificate-revoke-actions {
+  margin-top: 20px;
+
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.certificate-revoke-actions button {
+  min-height: 40px;
+  padding: 0 14px;
+
+  border-radius: 9px;
+
+  font-size: .76rem;
+  font-weight: 800;
+}
+
+.certificate-revoke-cancel {
+  border: 1px solid #dce3eb;
+
+  background: #fff;
+  color: #47566b;
+}
+
+.certificate-revoke-confirm {
+  border: 1px solid #cf6b13;
+
+  background: #cf6b13;
+  color: #fff;
+}
+
+.certificate-revoke-confirm:disabled {
+  opacity: .65;
+  cursor: wait;
+}
+
+@media (max-width: 700px) {
+
+  .certificate-admin-actions {
+    justify-content: flex-start;
+  }
+
+  .certificate-admin-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .certificate-history-item {
+    grid-template-columns: 28px minmax(0, 1fr);
+  }
+
+  .certificate-history-actions {
+    grid-column: 2;
+    justify-items: start;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .certificate-revoke-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
