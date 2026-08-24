@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     bindEditorControls();
+    bindModuleEditorControls();
 
     await Promise.all([
       loadClass(),
@@ -115,28 +116,62 @@ async function loadModules() {
     return;
   }
 
-  moduleCache = data || [];
+  moduleCache = (data || []).map(module => ({
+    ...module,
+    lessons: (module.lessons || []).sort((a, b) => a.position - b.position)
+  }));
 
-  if (!data.length) {
+  if (!moduleCache.length) {
     host.innerHTML = `<div class="empty">Belum ada modul.</div>`;
     return;
   }
 
-  host.innerHTML = data.map(module => {
-    const lessons = (module.lessons || []).sort((a, b) => a.position - b.position);
+  host.innerHTML = moduleCache.map(module => {
+    const lessons = module.lessons || [];
+    const filledLessons = lessons.filter(lesson => lesson.content?.trim()).length;
+    const publishedLessons = lessons.filter(lesson => lesson.is_published).length;
 
     return `
-      <article class="module-card">
-        <div class="module-head">
-          <div>
+      <article class="module-card" id="module-${module.id}">
+        <div class="module-head module-control-head">
+          <div class="module-title-block">
             <div class="eyebrow">Modul ${module.position}</div>
             <h3>${escapeHtml(module.title)}</h3>
             <p>${escapeHtml(module.description || "")}</p>
+
+            <div class="module-stats">
+              <span>${filledLessons}/${lessons.length} materi terisi</span>
+              <span>${publishedLessons}/${lessons.length} materi terbit</span>
+            </div>
           </div>
+
           <div class="module-admin-actions">
             <span class="pill ${module.is_published ? "success-pill" : ""}">
-              ${module.is_published ? "Terbit" : "Draft"}
+              ${module.is_published ? "Modul Terbit" : "Modul Draft"}
             </span>
+
+            <button
+              class="btn ghost small editModuleBtn"
+              type="button"
+              data-module-id="${module.id}">
+              Edit modul
+            </button>
+
+            <button
+              class="btn ${module.is_published ? "ghost" : "secondary"} small toggleModulePublishBtn"
+              type="button"
+              data-module-id="${module.id}">
+              ${module.is_published ? "Jadikan Draft" : "Terbitkan modul"}
+            </button>
+
+            <button
+              class="btn ghost small toggleModuleContentBtn"
+              type="button"
+              data-module-id="${module.id}"
+              aria-expanded="true">
+              Sembunyikan materi
+            </button>
+
             <a
               class="btn ghost small"
               href="kelola-kuis.html?module_id=${encodeURIComponent(module.id)}">
@@ -145,41 +180,43 @@ async function loadModules() {
           </div>
         </div>
 
-        <div class="lesson-list">
-          ${lessons.length ? lessons.map(lesson => `
-            <div class="lesson-admin-row">
-              <div class="lesson-admin-info">
-                <strong>${lesson.position}. ${escapeHtml(lesson.title)}</strong>
-                <span>
-                  ${lesson.content?.trim() ? "Materi sudah diisi" : "Isi materi masih kosong"}
-                  ${lesson.estimated_minutes ? ` · ${lesson.estimated_minutes} menit` : ""}
-                </span>
-              </div>
+        <div class="module-manage-body" id="module-body-${module.id}">
+          <div class="lesson-list">
+            ${lessons.length ? lessons.map(lesson => `
+              <div class="lesson-admin-row">
+                <div class="lesson-admin-info">
+                  <strong>${lesson.position}. ${escapeHtml(lesson.title)}</strong>
+                  <span>
+                    ${lesson.content?.trim() ? "Materi sudah diisi" : "Isi materi masih kosong"}
+                    ${lesson.estimated_minutes ? ` · ${lesson.estimated_minutes} menit` : ""}
+                  </span>
+                </div>
 
-              <div class="lesson-admin-actions">
-                <span class="pill ${lesson.is_published ? "success-pill" : ""}">
-                  ${lesson.is_published ? "Terbit" : "Draft"}
-                </span>
-                <button
-                  class="btn ghost small editLessonBtn"
-                  type="button"
-                  data-lesson-id="${lesson.id}">
-                  Edit materi
-                </button>
+                <div class="lesson-admin-actions">
+                  <span class="pill ${lesson.is_published ? "success-pill" : ""}">
+                    ${lesson.is_published ? "Terbit" : "Draft"}
+                  </span>
+                  <button
+                    class="btn ghost small editLessonBtn"
+                    type="button"
+                    data-lesson-id="${lesson.id}">
+                    Edit materi
+                  </button>
+                </div>
               </div>
-            </div>
-          `).join("") : `<div class="empty small">Belum ada materi dalam modul ini.</div>`}
+            `).join("") : `<div class="empty small">Belum ada materi dalam modul ini.</div>`}
+          </div>
+
+          <form class="inline-form addLessonForm" data-module-id="${module.id}">
+            <input name="title" required placeholder="Judul materi/checkpoint">
+            <input name="position" required type="number" min="1" value="${lessons.length + 1}" aria-label="Urutan">
+            <label class="checkline">
+              <input type="checkbox" name="is_published">
+              Terbitkan
+            </label>
+            <button class="btn secondary" type="submit">Tambah materi</button>
+          </form>
         </div>
-
-        <form class="inline-form addLessonForm" data-module-id="${module.id}">
-          <input name="title" required placeholder="Judul materi/checkpoint">
-          <input name="position" required type="number" min="1" value="${lessons.length + 1}" aria-label="Urutan">
-          <label class="checkline">
-            <input type="checkbox" name="is_published">
-            Terbitkan
-          </label>
-          <button class="btn secondary" type="submit">Tambah materi</button>
-        </form>
       </article>
     `;
   }).join("");
@@ -190,6 +227,18 @@ async function loadModules() {
 
   document.querySelectorAll(".editLessonBtn").forEach(btn => {
     btn.addEventListener("click", () => openLessonEditor(btn.dataset.lessonId));
+  });
+
+  document.querySelectorAll(".editModuleBtn").forEach(btn => {
+    btn.addEventListener("click", () => openModuleEditor(btn.dataset.moduleId));
+  });
+
+  document.querySelectorAll(".toggleModulePublishBtn").forEach(btn => {
+    btn.addEventListener("click", () => toggleModulePublish(btn.dataset.moduleId));
+  });
+
+  document.querySelectorAll(".toggleModuleContentBtn").forEach(btn => {
+    btn.addEventListener("click", () => toggleModuleContent(btn));
   });
 }
 
@@ -251,12 +300,163 @@ async function addLesson(e) {
   }
 }
 
+function findModule(moduleId) {
+  return moduleCache.find(module => module.id === moduleId) || null;
+}
+
 function findLesson(lessonId) {
   for (const module of moduleCache) {
     const lesson = (module.lessons || []).find(item => item.id === lessonId);
     if (lesson) return lesson;
   }
   return null;
+}
+
+function toggleModuleContent(button) {
+  const moduleId = button.dataset.moduleId;
+  const body = document.getElementById(`module-body-${moduleId}`);
+  if (!body) return;
+
+  const isHidden = body.classList.toggle("collapsed");
+  button.setAttribute("aria-expanded", String(!isHidden));
+  button.textContent = isHidden ? "Kelola materi" : "Sembunyikan materi";
+}
+
+async function toggleModulePublish(moduleId) {
+  const module = findModule(moduleId);
+  if (!module) return;
+
+  if (module.is_published) {
+    const confirmed = confirm(
+      `Jadikan "${module.title}" sebagai Draft?\n\n` +
+      `Peserta tidak akan melihat modul ini. Isi materi dan status terbit masing-masing checkpoint tetap tersimpan.`
+    );
+
+    if (!confirmed) return;
+
+    const { error } = await window.kabayanSupabase
+      .from("modules")
+      .update({ is_published: false })
+      .eq("id", moduleId);
+
+    if (error) {
+      alert(error.message);
+      return;
+    }
+
+    await loadModules();
+    return;
+  }
+
+  const filledLessons = (module.lessons || []).filter(lesson => lesson.content?.trim());
+
+  if (!filledLessons.length) {
+    alert("Modul belum mempunyai materi yang sudah diisi. Isi minimal satu materi sebelum menerbitkan modul.");
+    return;
+  }
+
+  const unpublishedFilled = filledLessons.filter(lesson => !lesson.is_published);
+
+  const confirmed = confirm(
+    `Terbitkan "${module.title}"?\n\n` +
+    `${filledLessons.length} materi sudah diisi.` +
+    (unpublishedFilled.length
+      ? `\n${unpublishedFilled.length} materi yang sudah diisi tetapi masih Draft juga akan diterbitkan.`
+      : "") +
+    `\n\nMateri yang isinya masih kosong akan tetap Draft.`
+  );
+
+  if (!confirmed) return;
+
+  if (unpublishedFilled.length) {
+    const lessonIds = unpublishedFilled.map(lesson => lesson.id);
+
+    const { error: lessonError } = await window.kabayanSupabase
+      .from("lessons")
+      .update({ is_published: true })
+      .in("id", lessonIds);
+
+    if (lessonError) {
+      alert(lessonError.message);
+      return;
+    }
+  }
+
+  const { error: moduleError } = await window.kabayanSupabase
+    .from("modules")
+    .update({ is_published: true })
+    .eq("id", moduleId);
+
+  if (moduleError) {
+    alert(moduleError.message);
+    return;
+  }
+
+  await loadModules();
+}
+
+function bindModuleEditorControls() {
+  const modal = document.getElementById("moduleEditorModal");
+  const form = document.getElementById("moduleEditorForm");
+
+  document.getElementById("closeModuleEditorBtn")?.addEventListener("click", () => modal.close());
+  document.getElementById("cancelModuleEditorBtn")?.addEventListener("click", () => modal.close());
+
+  form?.addEventListener("submit", saveModule);
+}
+
+function openModuleEditor(moduleId) {
+  const module = findModule(moduleId);
+  if (!module) return;
+
+  const form = document.getElementById("moduleEditorForm");
+  form.module_id.value = module.id;
+  form.title.value = module.title || "";
+  form.description.value = module.description || "";
+
+  document.getElementById("moduleEditorHeading").textContent = module.title || "Edit modul";
+  document.getElementById("modulePositionLabel").textContent = `Modul ${module.position}`;
+
+  const status = document.getElementById("moduleEditorStatus");
+  status.textContent = "";
+  status.className = "form-status";
+
+  document.getElementById("moduleEditorModal").showModal();
+  setTimeout(() => form.title.focus(), 80);
+}
+
+async function saveModule(event) {
+  event.preventDefault();
+
+  const form = event.currentTarget;
+  const status = document.getElementById("moduleEditorStatus");
+  const moduleId = form.module_id.value;
+
+  status.textContent = "Menyimpan modul...";
+  status.className = "form-status";
+
+  const { error } = await window.kabayanSupabase
+    .from("modules")
+    .update({
+      title: form.title.value.trim(),
+      description: form.description.value.trim()
+    })
+    .eq("id", moduleId);
+
+  if (error) {
+    status.textContent = error.message;
+    status.className = "form-status error";
+    return;
+  }
+
+  status.textContent = "Perubahan modul berhasil disimpan.";
+  status.className = "form-status success";
+
+  await loadModules();
+
+  setTimeout(() => {
+    document.getElementById("moduleEditorModal").close();
+  }, 450);
 }
 
 function openLessonEditor(lessonId) {
