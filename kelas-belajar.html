@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kelas — Kabayan Learning</title>
+  <link rel="stylesheet" href="assets/css/lms.css">
+</head>
+<body>
+<header class="site-header">
+  <nav class="nav">
+    <a class="brand" href="peserta-dashboard.html">Kabayan <span>Learning</span></a>
+    <div class="nav-actions">
+      <a class="btn ghost small" href="peserta-dashboard.html">← Kelas Saya</a>
+      <button class="btn ghost small" onclick="KabayanAuth.signOut()">Keluar</button>
+    </div>
+  </nav>
+</header>
+
+<main class="page">
+  <section class="hero">
+    <div>
+      <div class="eyebrow">Kelas Saya</div>
+      <h1 id="className">Memuat kelas…</h1>
+      <p id="classDescription"></p>
+    </div>
+
+    <div class="surface progress-card">
+      <div class="progress-top">
+        <div>
+          <div class="eyebrow">Progress</div>
+          <div id="progressText" class="muted">0 checkpoint selesai</div>
+        </div>
+        <div id="progressPercent" class="progress-percent">0%</div>
+      </div>
+      <div class="progress-track">
+        <div id="progressBar" class="progress-fill"></div>
+      </div>
+    </div>
+  </section>
+
+  <div id="moduleList"></div>
+</main>
+
+<dialog id="lessonModal">
+  <div class="dialog-body">
+    <div class="eyebrow">Checkpoint</div>
+    <h2 id="lessonTitle"></h2>
+    <div id="lessonContent" class="dialog-content"></div>
+    <div class="dialog-actions">
+      <button class="btn ghost" onclick="document.getElementById('lessonModal').close()">Tutup</button>
+      <button class="btn" id="completeLessonBtn">Tandai selesai</button>
+    </div>
+  </div>
+</dialog>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/js/supabase-config.js"></script>
+<script src="assets/js/supabase-client.js"></script>
+<script src="assets/js/auth.js"></script>
+
+<script src="assets/js/kelas-belajar.js"></script>
+</body>
+</html>

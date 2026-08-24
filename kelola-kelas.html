@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kelola Kelas — Kabayan Learning</title>
+  <link rel="stylesheet" href="assets/css/lms.css">
+</head>
+<body>
+<header class="site-header">
+  <nav class="nav">
+    <a class="brand" href="pengajar-dashboard.html">Kabayan <span>Learning</span></a>
+    <div class="nav-actions">
+      <a class="btn ghost small" href="pengajar-dashboard.html">← Dashboard</a>
+      <button class="btn ghost small" onclick="KabayanAuth.signOut()">Keluar</button>
+    </div>
+  </nav>
+</header>
+
+<main class="page">
+  <section class="hero">
+    <div>
+      <div class="eyebrow" id="classStatus">Kelas</div>
+      <h1 id="className">Memuat kelas…</h1>
+      <p id="classDescription"></p>
+    </div>
+    <div class="surface panel stat">
+      <span class="muted">Peserta</span>
+      <strong id="memberCount" class="stat-value">0</strong>
+    </div>
+  </section>
+
+  <section class="grid">
+    <div class="col-7">
+      <div class="section-head">
+        <div>
+          <h2>Modul & checkpoint</h2>
+          <p>Susun alur materi belajar secara bertahap.</p>
+        </div>
+      </div>
+
+      <div id="moduleList" class="module-list"></div>
+    </div>
+
+    <aside class="col-5">
+      <div class="panel" style="margin-bottom:18px">
+        <div class="eyebrow">Materi</div>
+        <h2 style="letter-spacing:-.04em">Tambah modul</h2>
+        <form id="addModuleForm" class="form-grid">
+          <label class="field">Judul modul
+            <input name="title" required placeholder="Konsep Dasar PPh Pasal 21">
+          </label>
+          <label class="field">Deskripsi
+            <textarea name="description" placeholder="Tujuan atau ringkasan modul"></textarea>
+          </label>
+          <label class="field">Urutan
+            <input name="position" type="number" min="1" value="1" required>
+          </label>
+          <label class="checkline">
+            <input name="is_published" type="checkbox">
+            Terbitkan untuk peserta
+          </label>
+          <button class="btn" type="submit">Tambah modul</button>
+        </form>
+        <div id="addModuleStatus" class="form-status"></div>
+      </div>
+
+      <div class="panel">
+        <div class="eyebrow">Peserta</div>
+        <h2 style="letter-spacing:-.04em">Tambah peserta</h2>
+        <p class="muted">Masukkan email peserta yang sudah memiliki akun Kabayan Learning.</p>
+        <form id="addStudentForm" class="form-grid">
+          <label class="field">Email peserta
+            <input name="email" type="email" required placeholder="peserta@email.com">
+          </label>
+          <button class="btn" type="submit">Tambah peserta</button>
+        </form>
+        <div id="addStudentStatus" class="form-status"></div>
+        <div id="memberList"></div>
+      </div>
+    </aside>
+  </section>
+</main>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/js/supabase-config.js"></script>
+<script src="assets/js/supabase-client.js"></script>
+<script src="assets/js/auth.js"></script>
+
+<script src="assets/js/kelola-kelas.js"></script>
+</body>
+</html>
