@@ -1,0 +1,495 @@
+/* ============================================================
+   KABAYAN LEARNING — TAHAP 10
+   AUDIT & HARMONISASI UI
+   Additive override only. No application logic.
+   ============================================================ */
+
+:root {
+  --audit-focus: rgba(23, 102, 229, .28);
+  --audit-blue: #1766e5;
+  --audit-navy: #12315b;
+  --audit-text: #17263b;
+  --audit-muted: #748194;
+  --audit-line: #dfe6ee;
+  --audit-surface: #ffffff;
+  --audit-soft: #f7f9fc;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: 82px;
+}
+
+body {
+  min-height: 100svh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button,
+a,
+input,
+textarea,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--audit-focus);
+  outline-offset: 2px;
+}
+
+button:disabled,
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: .62;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Shared header */
+.site-header {
+  isolation: isolate;
+}
+
+.nav {
+  width: 100%;
+}
+
+.brand {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.nav-actions {
+  min-width: 0;
+}
+
+.nav-actions > .muted {
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.nav .btn,
+.nav button,
+.nav a.btn {
+  white-space: nowrap;
+}
+
+/* Long dynamic values */
+.certificate-number strong,
+.certificate-card-meta,
+.verify-code-box strong,
+.report-participant-cell span,
+.certificate-history-copy strong,
+.participant-report-head p,
+.lesson-content,
+.dialog-content {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* Dialog reliability */
+dialog {
+  max-height: calc(100svh - 24px);
+  overscroll-behavior: contain;
+}
+
+dialog[open] {
+  animation: audit-dialog-in .16s ease-out;
+}
+
+.dialog-body,
+.participant-report-body,
+.participant-score-body,
+.certificate-revoke-body {
+  min-width: 0;
+}
+
+.dialog-actions,
+.participant-report-footer-actions {
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+  padding-top: 12px;
+  padding-bottom: max(2px, env(safe-area-inset-bottom));
+  background: linear-gradient(180deg, rgba(255,255,255,0), #fff 24%);
+}
+
+.participant-report-footer-actions {
+  margin-left: -4px;
+  margin-right: -4px;
+}
+
+/* Shared form polish */
+input,
+textarea,
+select {
+  transition: border-color .16s ease, box-shadow .16s ease, background-color .16s ease;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #a2abb7;
+}
+
+/* ============================================================
+   LOGIN
+   ============================================================ */
+
+.login-page .login-art {
+  position: relative;
+  overflow: hidden;
+}
+
+.login-page .login-art::after {
+  content: "";
+  position: absolute;
+  width: 240px;
+  height: 240px;
+  right: -90px;
+  bottom: -80px;
+  border: 44px solid rgba(255,255,255,.07);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.login-page .login-card {
+  border-radius: 26px;
+  box-shadow: 0 22px 56px rgba(17,35,62,.10);
+}
+
+.login-page .login-eyebrow-light {
+  color: #a8d2ff;
+}
+
+.login-page .login-footer-note {
+  color: rgba(255,255,255,.55);
+}
+
+/* ============================================================
+   TEACHER DASHBOARD
+   ============================================================ */
+
+.teacher-dashboard-page .hero {
+  margin-top: 8px;
+  padding: 30px;
+  align-items: stretch;
+  border: 1px solid var(--audit-line);
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 94% 0%, rgba(23,102,229,.11), transparent 24rem),
+    #fff;
+  box-shadow: 0 16px 42px rgba(21,38,67,.055);
+}
+
+.teacher-dashboard-page .hero > div:first-child {
+  align-self: center;
+}
+
+.teacher-dashboard-page .hero .stat {
+  min-height: 170px;
+  box-shadow: none;
+  background: linear-gradient(145deg, #12315b, #1766e5);
+  color: #fff;
+  border: 0;
+}
+
+.teacher-dashboard-page .hero .stat .muted {
+  color: rgba(255,255,255,.68);
+}
+
+.teacher-dashboard-page .hero .stat-value {
+  color: #fff;
+  font-size: 3.1rem;
+}
+
+.teacher-dashboard-page .grid {
+  margin-top: 18px;
+}
+
+.teacher-dashboard-page .class-card {
+  box-shadow: 0 9px 26px rgba(21,38,67,.045);
+}
+
+/* ============================================================
+   ROUTER
+   ============================================================ */
+
+.router-page .router-main {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+}
+
+.router-page .router-card {
+  width: min(540px, 100%);
+  text-align: center;
+}
+
+.audit-tight-heading {
+  letter-spacing: -.04em;
+}
+
+.audit-form-spacer {
+  margin-top: 18px;
+}
+
+/* ============================================================
+   LEARNING CLASS
+   ============================================================ */
+
+.learning-class-page .hero {
+  margin-top: 6px;
+  padding: 28px;
+  align-items: stretch;
+  border: 1px solid var(--audit-line);
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 92% 0%, rgba(23,102,229,.08), transparent 22rem),
+    #fff;
+  box-shadow: 0 14px 36px rgba(21,38,67,.045);
+}
+
+.learning-class-page .progress-card {
+  box-shadow: none;
+  background: linear-gradient(145deg, #f7faff, #edf4ff);
+  border-color: #dce8fa;
+}
+
+.learning-class-page .learning-module {
+  box-shadow: 0 8px 24px rgba(21,38,67,.035);
+}
+
+.learning-class-page .lesson-reader-dialog .lesson-reader-top {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  padding-top: 2px;
+  padding-bottom: 12px;
+  background: #fff;
+}
+
+/* ============================================================
+   QUIZ ADMIN
+   ============================================================ */
+
+.quiz-admin-page .quiz-admin-hero {
+  margin-top: 6px;
+  padding: 28px;
+  align-items: stretch;
+  border: 1px solid var(--audit-line);
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 92% 0%, rgba(23,102,229,.09), transparent 22rem),
+    #fff;
+  box-shadow: 0 14px 36px rgba(21,38,67,.045);
+}
+
+.quiz-admin-page .quiz-admin-hero .stat {
+  min-height: 150px;
+  box-shadow: none;
+  background: linear-gradient(145deg, #12315b, #1766e5);
+  border: 0;
+  color: #fff;
+}
+
+.quiz-admin-page .quiz-admin-hero .stat .muted {
+  color: rgba(255,255,255,.68);
+}
+
+.quiz-admin-page .quiz-admin-hero .stat-value {
+  color: #fff;
+}
+
+.quiz-admin-page .editor-dialog .dialog-actions {
+  margin-left: -2px;
+  margin-right: -2px;
+}
+
+/* ============================================================
+   QUIZ PARTICIPANT
+   ============================================================ */
+
+.quiz-page .quiz-question-stage {
+  box-shadow: 0 16px 42px rgba(21,38,67,.055);
+}
+
+.quiz-page .quiz-option-list button,
+.quiz-page .quiz-option-list label {
+  touch-action: manipulation;
+}
+
+.quiz-page .quiz-question-navigator {
+  padding-bottom: max(10px, env(safe-area-inset-bottom));
+}
+
+/* ============================================================
+   GRADE / REPORT
+   ============================================================ */
+
+.grade-page .grade-hero,
+.learning-report-page .report-hero {
+  box-shadow: 0 15px 40px rgba(21,38,67,.05);
+}
+
+.grade-page .grade-button,
+.learning-report-page .report-export-button,
+.learning-report-page .report-detail-button {
+  transition: transform .16s ease, filter .16s ease, background-color .16s ease;
+}
+
+/* ============================================================
+   CERTIFICATE VERIFICATION
+   ============================================================ */
+
+.verify-page .verify-card {
+  box-shadow: 0 18px 48px rgba(21,37,60,.075);
+}
+
+.verify-page .verify-details strong,
+.verify-page .verify-code-box strong {
+  overflow-wrap: anywhere;
+}
+
+/* ============================================================
+   MOTION / HOVER
+   ============================================================ */
+
+@keyframes audit-dialog-in {
+  from { opacity: 0; transform: translateY(6px) scale(.995); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover,
+  .grade-button:hover,
+  .report-export-button:hover,
+  .report-detail-button:hover,
+  .participant-button:hover {
+    transform: translateY(-1px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+/* ============================================================
+   TABLET / MOBILE
+   ============================================================ */
+
+@media (max-width: 850px) {
+  .teacher-dashboard-page .hero,
+  .learning-class-page .hero,
+  .quiz-admin-page .quiz-admin-hero {
+    padding: 22px;
+  }
+
+  .teacher-dashboard-page .hero .stat,
+  .quiz-admin-page .quiz-admin-hero .stat {
+    min-height: 120px;
+  }
+}
+
+@media (max-width: 560px) {
+  .site-header {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .nav {
+    min-height: 62px;
+    gap: 8px;
+  }
+
+  .brand {
+    font-size: .96rem;
+  }
+
+  .nav-actions {
+    gap: 6px;
+  }
+
+  .nav .btn.small,
+  .nav button.small,
+  .nav a.btn.small {
+    min-height: 38px;
+    padding: 0 10px;
+    font-size: .74rem;
+  }
+
+  .nav-actions > .muted {
+    max-width: 92px;
+    font-size: .76rem;
+  }
+
+  input,
+  textarea,
+  select {
+    font-size: 16px;
+  }
+
+  dialog {
+    width: calc(100% - 14px);
+    max-height: calc(100svh - 14px);
+    border-radius: 18px;
+  }
+
+  .dialog-body,
+  .participant-report-body,
+  .participant-score-body,
+  .certificate-revoke-body {
+    padding: 18px;
+  }
+
+  .teacher-dashboard-page .hero,
+  .learning-class-page .hero,
+  .quiz-admin-page .quiz-admin-hero {
+    border-radius: 20px;
+    padding: 20px;
+  }
+
+  .teacher-dashboard-page .hero h1,
+  .learning-class-page .hero h1,
+  .quiz-admin-page .hero h1 {
+    font-size: clamp(2.15rem, 12vw, 3.4rem);
+  }
+
+  .dialog-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .dialog-actions .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 390px) {
+  .nav-actions > .muted {
+    display: none;
+  }
+
+  .nav .btn.small,
+  .nav button.small,
+  .nav a.btn.small {
+    padding: 0 9px;
+  }
+}
