@@ -17,34 +17,50 @@
   </nav>
 </header>
 
-<main class="page">
-  <section class="hero">
-    <div>
+<main class="page page-manage">
+  <section class="manage-hero surface">
+    <div class="manage-hero-copy">
       <div class="eyebrow" id="classStatus">Kelas</div>
       <h1 id="className">Memuat kelas…</h1>
       <p id="classDescription"></p>
     </div>
-    <div class="surface panel stat">
-      <span class="muted">Peserta</span>
-      <strong id="memberCount" class="stat-value">0</strong>
+
+    <div class="manage-hero-stats">
+      <article class="hero-stat-card">
+        <span class="muted">Peserta</span>
+        <strong id="memberCount" class="hero-stat-value">0</strong>
+        <small>Total anggota kelas aktif</small>
+      </article>
+
+      <article class="hero-stat-card">
+        <span class="muted">Workspace</span>
+        <strong class="hero-stat-label">Kelola</strong>
+        <small>modul, checkpoint, kuis, dan peserta</small>
+      </article>
     </div>
   </section>
 
-  <section class="grid">
-    <div class="col-7">
-      <div class="section-head">
+  <section class="manage-layout">
+    <div class="manage-main">
+      <div class="section-head manage-section-head">
         <div>
-          <h2>Modul & checkpoint</h2>
-          <p>Klik <strong>Edit materi</strong> untuk mengisi isi pembelajaran.</p>
+          <h2>Modul pembelajaran</h2>
+          <p>Isi materi, terbitkan modul, lalu kelola kuis per modul dari satu tempat.</p>
         </div>
       </div>
+
       <div id="moduleList" class="module-list"></div>
     </div>
 
-    <aside class="col-5">
-      <div class="panel" style="margin-bottom:18px">
-        <div class="eyebrow">Materi</div>
-        <h2 style="letter-spacing:-.04em">Tambah modul</h2>
+    <aside class="manage-sidebar">
+      <div class="panel sidebar-panel">
+        <div class="sidebar-panel-head">
+          <div>
+            <div class="eyebrow">Materi</div>
+            <h2>Tambah modul</h2>
+          </div>
+        </div>
+
         <form id="addModuleForm" class="form-grid">
           <label class="field">Judul modul
             <input name="title" required placeholder="Konsep Dasar PPh Pasal 21">
@@ -52,35 +68,53 @@
           <label class="field">Deskripsi
             <textarea name="description" placeholder="Tujuan atau ringkasan modul"></textarea>
           </label>
-          <label class="field">Urutan
-            <input name="position" type="number" min="1" value="1" required>
-          </label>
-          <label class="checkline">
-            <input name="is_published" type="checkbox">
-            Terbitkan untuk peserta
-          </label>
+
+          <div class="sidebar-mini-grid">
+            <label class="field">Urutan
+              <input name="position" type="number" min="1" value="1" required>
+            </label>
+
+            <label class="checkline sidebar-checkline">
+              <input name="is_published" type="checkbox">
+              Terbitkan untuk peserta
+            </label>
+          </div>
+
           <button class="btn" type="submit">Tambah modul</button>
         </form>
         <div id="addModuleStatus" class="form-status"></div>
       </div>
 
-      <div class="panel">
-        <div class="eyebrow">Peserta</div>
-        <h2 style="letter-spacing:-.04em">Tambah peserta</h2>
-        <p class="muted">Masukkan email peserta yang sudah memiliki akun Kabayan Learning.</p>
+      <div class="panel sidebar-panel">
+        <div class="sidebar-panel-head">
+          <div>
+            <div class="eyebrow">Peserta</div>
+            <h2>Tambah peserta</h2>
+          </div>
+        </div>
+
+        <p class="muted sidebar-intro">Masukkan email peserta yang sudah memiliki akun Kabayan Learning.</p>
+
         <form id="addStudentForm" class="form-grid">
           <label class="field">Email peserta
             <input name="email" type="email" required placeholder="peserta@email.com">
           </label>
           <button class="btn" type="submit">Tambah peserta</button>
         </form>
+
         <div id="addStudentStatus" class="form-status"></div>
-        <div id="memberList"></div>
+
+        <div class="member-panel">
+          <div class="member-panel-head">
+            <strong>Daftar peserta</strong>
+            <span class="member-panel-count" id="memberCountInline">0</span>
+          </div>
+          <div id="memberList"></div>
+        </div>
       </div>
     </aside>
   </section>
 </main>
-
 
 <dialog id="moduleEditorModal" class="editor-dialog module-editor-dialog">
   <form id="moduleEditorForm" class="dialog-body">
