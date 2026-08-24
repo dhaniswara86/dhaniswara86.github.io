@@ -214,23 +214,25 @@
 
     .announcement {
       padding: 13px 20px;
-      background: var(--off-white);
-      color: var(--blue);
+      background: var(--blue);
+      color: var(--white);
       font-size: 14px;
       text-align: center;
-      animation: announcementColorSettle 1.8s cubic-bezier(0.4, 0, 0.2, 1) 0.15s forwards;
+      animation: announcementBarSettle 1.8s cubic-bezier(0.4, 0, 0.2, 1) 0.15s forwards;
     }
 
     /* Apple-inspired announcement intro:
-       tampil biru sesaat, lalu bertransisi halus ke abu-abu. */
-    @keyframes announcementColorSettle {
+       bar tampil biru sesaat, lalu bertransisi halus ke abu-abu. */
+    @keyframes announcementBarSettle {
       0%,
       35% {
-        color: var(--blue);
+        background: var(--blue);
+        color: var(--white);
       }
 
       100% {
-        color: #6e6e73;
+        background: var(--off-white);
+        color: #3a3a3c;
       }
     }
 
@@ -3078,9 +3080,21 @@
   padding: 0;
   border: 0;
   background: transparent;
-  color: var(--blue);
+  color: var(--white);
   font: inherit;
   cursor: pointer;
+  animation: announcementCtaSettle 1.8s cubic-bezier(0.4, 0, 0.2, 1) 0.15s forwards;
+}
+
+@keyframes announcementCtaSettle {
+  0%,
+  35% {
+    color: var(--white);
+  }
+
+  100% {
+    color: var(--blue);
+  }
 }
 
 .collection-menu-trigger:hover {
@@ -3352,7 +3366,13 @@ body.mega-menu-open {
 
 @media (prefers-reduced-motion: reduce) {
   .announcement {
-    color: #6e6e73;
+    background: var(--off-white);
+    color: #3a3a3c;
+    animation: none !important;
+  }
+
+  .collection-menu-trigger {
+    color: var(--blue);
     animation: none !important;
   }
 
