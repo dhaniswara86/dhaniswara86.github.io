@@ -232,6 +232,70 @@
 </dialog>
 
 
+
+<!-- ==========================================================
+     CABUT SERTIFIKAT
+     ========================================================== -->
+<dialog
+  id="revokeCertificateModal"
+  class="certificate-revoke-dialog">
+
+  <form
+    id="revokeCertificateForm"
+    class="certificate-revoke-body">
+
+    <div class="certificate-revoke-icon">
+      !
+    </div>
+
+    <div class="certificate-revoke-copy">
+      <div class="grade-kicker">
+        Manajemen Sertifikat
+      </div>
+
+      <h2>Cabut sertifikat?</h2>
+
+      <p>
+        QR dan kode verifikasi sertifikat lama akan langsung
+        berstatus tidak berlaku. Riwayat sertifikat tetap disimpan.
+      </p>
+    </div>
+
+    <label class="certificate-revoke-field">
+      <span>Alasan pencabutan</span>
+
+      <textarea
+        id="revokeCertificateReason"
+        rows="4"
+        minlength="5"
+        maxlength="500"
+        placeholder="Contoh: terdapat kesalahan nama peserta pada sertifikat."
+        required></textarea>
+
+      <small>
+        Alasan ini disimpan sebagai bagian dari riwayat administrasi.
+      </small>
+    </label>
+
+    <div class="certificate-revoke-actions">
+      <button
+        type="button"
+        class="certificate-revoke-cancel"
+        id="cancelRevokeCertificate">
+        Batal
+      </button>
+
+      <button
+        type="submit"
+        class="certificate-revoke-confirm">
+        Cabut Sertifikat
+      </button>
+    </div>
+
+  </form>
+
+</dialog>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="assets/js/supabase-config.js"></script>
 <script src="assets/js/supabase-client.js"></script>
