@@ -1,74 +1,67 @@
 <!doctype html>
+
 <html lang="id">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Masuk — Kabayan Learning</title>
-  <link rel="stylesheet" href="assets/css/lms.css">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/><meta content="#f5f7fb" name="theme-color"/>
+<title>Masuk — Kabayan Learning</title>
+<link href="assets/css/lms.css" rel="stylesheet"/><link href="assets/css/lms-audit.css" rel="stylesheet"/>
 </head>
-<body>
-  <main class="login-shell">
-    <section class="login-art">
-      <div class="brand">Kabayan <span>Learning</span></div>
-      <div>
-        <div class="eyebrow" style="color:#a8d2ff">PPh Pasal 21</div>
-        <h1>Belajar. Latihan. Kuasai.</h1>
-        <p>Ruang belajar terstruktur untuk memahami PPh Pasal 21 melalui materi, checkpoint, evaluasi, dan sertifikat digital.</p>
-      </div>
-      <small style="color:rgba(255,255,255,.55)">Kabayan Learning</small>
-    </section>
-
-    <section class="login-panel">
-      <div class="surface login-card">
-        <div class="eyebrow">Ruang Belajar</div>
-        <h2>Selamat datang</h2>
-        <p>Masuk atau buat akun peserta.</p>
-
-        <div class="tabs">
-          <button class="tab-btn active" data-tab="login">Masuk</button>
-          <button class="tab-btn" data-tab="signup">Daftar</button>
-        </div>
-
-        <div class="tab-panel active" id="tab-login">
-          <form id="loginForm" class="form-grid">
-            <label class="field">Email
-              <input type="email" name="email" autocomplete="email" required>
-            </label>
-            <label class="field">Password
-              <input type="password" name="password" autocomplete="current-password" minlength="6" required>
-            </label>
-            <button class="btn" type="submit">Masuk</button>
-          </form>
-        </div>
-
-        <div class="tab-panel" id="tab-signup">
-          <form id="signupForm" class="form-grid">
-            <label class="field">Nama lengkap
-              <input type="text" name="full_name" required>
-            </label>
-            <label class="field">Email
-              <input type="email" name="email" autocomplete="email" required>
-            </label>
-            <label class="field">Password
-              <input type="password" name="password" autocomplete="new-password" minlength="6" required>
-            </label>
-            <button class="btn" type="submit">Buat akun</button>
-          </form>
-        </div>
-
-        <div id="status" class="form-status"></div>
-      </div>
-    </section>
-  </main>
-
-
+<body class="login-page">
+<main class="login-shell">
+<section class="login-art">
+<div class="brand">Kabayan <span>Learning</span></div>
+<div>
+<div class="eyebrow login-eyebrow-light">PPh Pasal 21</div>
+<h1>Belajar. Latihan. Kuasai.</h1>
+<p>Ruang belajar terstruktur untuk memahami PPh Pasal 21 melalui materi, checkpoint, evaluasi, dan sertifikat digital.</p>
+</div>
+<small class="login-footer-note">Kabayan Learning</small>
+</section>
+<section class="login-panel">
+<div class="surface login-card">
+<div class="eyebrow">Ruang Belajar</div>
+<h2>Selamat datang</h2>
+<p>Masuk atau buat akun peserta.</p>
+<div class="tabs">
+<button class="tab-btn active" data-tab="login" type="button">Masuk</button>
+<button class="tab-btn" data-tab="signup" type="button">Daftar</button>
+</div>
+<div class="tab-panel active" id="tab-login">
+<form class="form-grid" id="loginForm">
+<label class="field">Email
+              <input autocomplete="email" name="email" required="" type="email"/>
+</label>
+<label class="field">Password
+              <input autocomplete="current-password" minlength="6" name="password" required="" type="password"/>
+</label>
+<button class="btn" type="submit">Masuk</button>
+</form>
+</div>
+<div class="tab-panel" id="tab-signup">
+<form class="form-grid" id="signupForm">
+<label class="field">Nama lengkap
+              <input name="full_name" required="" type="text"/>
+</label>
+<label class="field">Email
+              <input autocomplete="email" name="email" required="" type="email"/>
+</label>
+<label class="field">Password
+              <input autocomplete="new-password" minlength="6" name="password" required="" type="password"/>
+</label>
+<button class="btn" type="submit">Buat akun</button>
+</form>
+</div>
+<div class="form-status" id="status"></div>
+</div>
+</section>
+</main>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="assets/js/supabase-config.js"></script>
 <script src="assets/js/supabase-client.js"></script>
 <script src="assets/js/auth.js"></script>
-
-  <script src="assets/js/login.js"></script>
-  <script>
+<script src="assets/js/login.js"></script>
+<script>
     document.querySelectorAll(".tab-btn").forEach(btn => {
       btn.addEventListener("click", () => {
         document.querySelectorAll(".tab-btn").forEach(x => x.classList.remove("active"));

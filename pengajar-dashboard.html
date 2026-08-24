@@ -1,78 +1,73 @@
 <!doctype html>
+
 <html lang="id">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Dashboard Pengajar — Kabayan Learning</title>
-  <link rel="stylesheet" href="assets/css/lms.css">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/><meta content="#f5f7fb" name="theme-color"/>
+<title>Dashboard Pengajar — Kabayan Learning</title>
+<link href="assets/css/lms.css" rel="stylesheet"/><link href="assets/css/lms-audit.css" rel="stylesheet"/>
 </head>
-<body>
+<body class="teacher-dashboard-page">
 <header class="site-header">
-  <nav class="nav">
-    <a class="brand" href="pengajar-dashboard.html">Kabayan <span>Learning</span></a>
-    <div class="nav-actions">
-      <span class="muted" id="profileName">Pengajar</span>
-      <button class="btn ghost small" onclick="KabayanAuth.signOut()">Keluar</button>
-    </div>
-  </nav>
+<nav class="nav">
+<a class="brand" href="pengajar-dashboard.html">Kabayan <span>Learning</span></a>
+<div class="nav-actions">
+<span class="muted" id="profileName">Pengajar</span>
+<button class="btn ghost small" onclick="KabayanAuth.signOut()" type="button">Keluar</button>
+</div>
+</nav>
 </header>
-
 <main class="page">
-  <section class="hero">
-    <div>
-      <div class="eyebrow">Dashboard Pengajar</div>
-      <h1>Kelola pembelajaran dalam satu ruang.</h1>
-      <p>Buat kelas, tambahkan peserta, susun modul, dan pantau perjalanan belajar.</p>
-    </div>
-    <div class="surface panel stat">
-      <span class="muted">Jumlah kelas</span>
-      <strong id="classCount" class="stat-value">0</strong>
-    </div>
-  </section>
-
-  <section class="grid">
-    <div class="col-8">
-      <div class="section-head">
-        <div>
-          <h2>Kelas Anda</h2>
-          <p>Kelas yang sedang Anda kelola.</p>
-        </div>
-      </div>
-      <div id="classList" class="class-list"></div>
-    </div>
-
-    <aside class="col-4">
-      <div class="panel">
-        <div class="eyebrow">Kelas Baru</div>
-        <h2 style="letter-spacing:-.04em">Buat kelas</h2>
-        <form id="createClassForm" class="form-grid">
-          <label class="field">Nama kelas
-            <input name="name" required placeholder="Brevet PPh Pasal 21">
-          </label>
-          <label class="field">Deskripsi
+<section class="hero">
+<div>
+<div class="eyebrow">Dashboard Pengajar</div>
+<h1>Kelola pembelajaran dalam satu ruang.</h1>
+<p>Buat kelas, tambahkan peserta, susun modul, dan pantau perjalanan belajar.</p>
+</div>
+<div class="surface panel stat">
+<span class="muted">Jumlah kelas</span>
+<strong class="stat-value" id="classCount">0</strong>
+</div>
+</section>
+<section class="grid">
+<div class="col-8">
+<div class="section-head">
+<div>
+<h2>Kelas Anda</h2>
+<p>Kelas yang sedang Anda kelola.</p>
+</div>
+</div>
+<div class="class-list" id="classList"></div>
+</div>
+<aside class="col-4">
+<div class="panel">
+<div class="eyebrow">Kelas Baru</div>
+<h2 class="audit-tight-heading">Buat kelas</h2>
+<form class="form-grid" id="createClassForm">
+<label class="field">Nama kelas
+            <input name="name" placeholder="Brevet PPh Pasal 21" required=""/>
+</label>
+<label class="field">Deskripsi
             <textarea name="description" placeholder="Deskripsi singkat kelas"></textarea>
-          </label>
-          <label class="field">Status
+</label>
+<label class="field">Status
             <select name="status">
-              <option value="draft">Draft</option>
-              <option value="active">Aktif</option>
-              <option value="closed">Ditutup</option>
-            </select>
-          </label>
-          <button class="btn" type="submit">Buat kelas</button>
-        </form>
-        <div id="createStatus" class="form-status"></div>
-      </div>
-    </aside>
-  </section>
+<option value="draft">Draft</option>
+<option value="active">Aktif</option>
+<option value="closed">Ditutup</option>
+</select>
+</label>
+<button class="btn" type="submit">Buat kelas</button>
+</form>
+<div class="form-status" id="createStatus"></div>
+</div>
+</aside>
+</section>
 </main>
-
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="assets/js/supabase-config.js"></script>
 <script src="assets/js/supabase-client.js"></script>
 <script src="assets/js/auth.js"></script>
-
 <script src="assets/js/pengajar-dashboard.js"></script>
 </body>
 </html>

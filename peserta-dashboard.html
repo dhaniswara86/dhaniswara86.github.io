@@ -1,177 +1,166 @@
 <!doctype html>
+
 <html lang="id">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Dashboard Peserta — Kabayan Learning</title>
-  <link rel="stylesheet" href="assets/css/lms.css">
-  <link rel="stylesheet" href="assets/css/peserta-dashboard.css">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/><meta content="#f5f7fb" name="theme-color"/>
+<title>Dashboard Peserta — Kabayan Learning</title>
+<link href="assets/css/lms.css" rel="stylesheet"/>
+<link href="assets/css/peserta-dashboard.css" rel="stylesheet"/><link href="assets/css/lms-audit.css" rel="stylesheet"/>
 </head>
 <body class="participant-dashboard-page">
-
 <header class="site-header">
-  <nav class="nav">
-    <a class="brand" href="peserta-dashboard.html">Kabayan <span>Learning</span></a>
-    <div class="nav-actions">
-      <span class="muted participant-profile-name" id="profileName">Peserta</span>
-      <button class="btn ghost small" onclick="KabayanAuth.signOut()">Keluar</button>
-    </div>
-  </nav>
+<nav class="nav">
+<a class="brand" href="peserta-dashboard.html">Kabayan <span>Learning</span></a>
+<div class="nav-actions">
+<span class="muted participant-profile-name" id="profileName">Peserta</span>
+<button class="btn ghost small" onclick="KabayanAuth.signOut()" type="button">Keluar</button>
+</div>
+</nav>
 </header>
-
 <main class="participant-dashboard-shell">
-  <section class="participant-hero card-surface">
-    <div class="participant-hero-grid">
-      <div class="participant-hero-copy">
-        <div class="eyebrow soft-blue">Ruang Belajar</div>
-        <h1>Selamat datang, <span id="heroName">Peserta</span>.</h1>
-        <p>Pantau progres belajar, nilai kuis, Evaluasi Akhir, dan sertifikat Anda dari satu tempat.</p>
-        <div class="participant-hero-badges">
-          <span class="hero-badge badge-blue">Dashboard Progres</span>
-          <span class="hero-badge badge-green">Nilai Terintegrasi</span>
-          <span class="hero-badge badge-purple">Sertifikat Digital</span>
-        </div>
-      </div>
-
-      <div class="hero-side-panel">
-        <div class="hero-orb orb-1"></div>
-        <div class="hero-orb orb-2"></div>
-        <div class="hero-kl-mark">
-          <span>KL</span>
-        </div>
-        <div class="hero-mini-stats">
-          <div class="hero-mini-stat">
-            <span>Progress</span>
-            <strong id="heroProgress">0%</strong>
-          </div>
-          <div class="hero-mini-stat">
-            <span>Sertifikat</span>
-            <strong id="heroCertificate">0</strong>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="learningSummary" class="participant-summary">
-    <article class="participant-summary-card accent-blue">
-      <div class="summary-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H11v17H6.5A2.5 2.5 0 0 0 4 22V5.5Z"/>
-            <path d="M20 5.5A2.5 2.5 0 0 0 17.5 3H13v17h4.5A2.5 2.5 0 0 1 20 22V5.5Z"/>
-          </svg>
-        </div>
-      <div class="summary-copy">
-        <span>Kelas aktif</span>
-        <strong id="summaryClasses">0</strong>
-        <small>kelas yang sedang diikuti</small>
-      </div>
-    </article>
-
-    <article class="participant-summary-card accent-cyan">
-      <div class="summary-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4 19V5"/>
-            <path d="M4 19h16"/>
-            <path d="m7 15 4-4 3 2 5-6"/>
-            <path d="M16 7h3v3"/>
-          </svg>
-        </div>
-      <div class="summary-copy">
-        <span>Rata-rata progres</span>
-        <strong id="summaryProgress">0%</strong>
-        <small>checkpoint pembelajaran</small>
-      </div>
-    </article>
-
-    <article class="participant-summary-card accent-green">
-      <div class="summary-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="9"/>
-            <path d="m8.5 12 2.2 2.2 4.8-5"/>
-          </svg>
-        </div>
-      <div class="summary-copy">
-        <span>Kelas selesai</span>
-        <strong id="summaryCompleted">0</strong>
-        <small>lulus hingga Evaluasi Akhir</small>
-      </div>
-    </article>
-
-    <article class="participant-summary-card accent-purple">
-      <div class="summary-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="8" r="4.5"/>
-            <path d="m9 12-1 9 4-2.2L16 21l-1-9"/>
-          </svg>
-        </div>
-      <div class="summary-copy">
-        <span>Sertifikat</span>
-        <strong id="summaryCertificates">0</strong>
-        <small>sertifikat aktif</small>
-      </div>
-    </article>
-  </section>
-
-  <section class="participant-section dashboard-section">
-    <div class="participant-section-head compact-head">
-      <div>
-        <div class="participant-section-kicker">Progress</div>
-        <h2>Perjalanan Belajar</h2>
-        <p>Status materi, kuis, Evaluasi Akhir, dan sertifikat pada setiap kelas.</p>
-      </div>
-    </div>
-    <div id="learningJourneyList" class="learning-journey-list">
-      <div class="participant-empty">Memuat progres belajar…</div>
-    </div>
-  </section>
-
-  <div class="participant-two-column">
-    <section class="participant-section dashboard-section section-stacked">
-      <div class="participant-section-head compact-head">
-        <div>
-          <div class="participant-section-kicker">Pencapaian</div>
-          <h2>Sertifikat Saya</h2>
-          <p>Sertifikat yang telah diterbitkan oleh pengajar.</p>
-        </div>
-        <span id="certificateCount" class="participant-count">0</span>
-      </div>
-      <div id="certificateList" class="certificate-list">
-        <div class="participant-empty">Memuat sertifikat…</div>
-      </div>
-    </section>
-
-    <section class="participant-section dashboard-section section-stacked">
-      <div class="participant-section-head compact-head">
-        <div>
-          <div class="participant-section-kicker">Pembelajaran</div>
-          <h2>Kelas Saya</h2>
-          <p>Nilai terbaik setiap kuis dan akses cepat ke kelas.</p>
-        </div>
-        <span id="classCount" class="participant-count">0</span>
-      </div>
-      <div id="classList" class="participant-class-list">
-        <div class="participant-empty">Memuat kelas…</div>
-      </div>
-    </section>
-  </div>
+<section class="participant-hero card-surface">
+<div class="participant-hero-grid">
+<div class="participant-hero-copy">
+<div class="eyebrow soft-blue">Ruang Belajar</div>
+<h1>Selamat datang, <span id="heroName">Peserta</span>.</h1>
+<p>Pantau progres belajar, nilai kuis, Evaluasi Akhir, dan sertifikat Anda dari satu tempat.</p>
+<div class="participant-hero-badges">
+<span class="hero-badge badge-blue">Dashboard Progres</span>
+<span class="hero-badge badge-green">Nilai Terintegrasi</span>
+<span class="hero-badge badge-purple">Sertifikat Digital</span>
+</div>
+</div>
+<div class="hero-side-panel">
+<div class="hero-orb orb-1"></div>
+<div class="hero-orb orb-2"></div>
+<div class="hero-kl-mark">
+<span>KL</span>
+</div>
+<div class="hero-mini-stats">
+<div class="hero-mini-stat">
+<span>Progress</span>
+<strong id="heroProgress">0%</strong>
+</div>
+<div class="hero-mini-stat">
+<span>Sertifikat</span>
+<strong id="heroCertificate">0</strong>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="participant-summary" id="learningSummary">
+<article class="participant-summary-card accent-blue">
+<div aria-hidden="true" class="summary-icon">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H11v17H6.5A2.5 2.5 0 0 0 4 22V5.5Z"></path>
+<path d="M20 5.5A2.5 2.5 0 0 0 17.5 3H13v17h4.5A2.5 2.5 0 0 1 20 22V5.5Z"></path>
+</svg>
+</div>
+<div class="summary-copy">
+<span>Kelas aktif</span>
+<strong id="summaryClasses">0</strong>
+<small>kelas yang sedang diikuti</small>
+</div>
+</article>
+<article class="participant-summary-card accent-cyan">
+<div aria-hidden="true" class="summary-icon">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M4 19V5"></path>
+<path d="M4 19h16"></path>
+<path d="m7 15 4-4 3 2 5-6"></path>
+<path d="M16 7h3v3"></path>
+</svg>
+</div>
+<div class="summary-copy">
+<span>Rata-rata progres</span>
+<strong id="summaryProgress">0%</strong>
+<small>checkpoint pembelajaran</small>
+</div>
+</article>
+<article class="participant-summary-card accent-green">
+<div aria-hidden="true" class="summary-icon">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24">
+<circle cx="12" cy="12" r="9"></circle>
+<path d="m8.5 12 2.2 2.2 4.8-5"></path>
+</svg>
+</div>
+<div class="summary-copy">
+<span>Kelas selesai</span>
+<strong id="summaryCompleted">0</strong>
+<small>lulus hingga Evaluasi Akhir</small>
+</div>
+</article>
+<article class="participant-summary-card accent-purple">
+<div aria-hidden="true" class="summary-icon">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24">
+<circle cx="12" cy="8" r="4.5"></circle>
+<path d="m9 12-1 9 4-2.2L16 21l-1-9"></path>
+</svg>
+</div>
+<div class="summary-copy">
+<span>Sertifikat</span>
+<strong id="summaryCertificates">0</strong>
+<small>sertifikat aktif</small>
+</div>
+</article>
+</section>
+<section class="participant-section dashboard-section">
+<div class="participant-section-head compact-head">
+<div>
+<div class="participant-section-kicker">Progress</div>
+<h2>Perjalanan Belajar</h2>
+<p>Status materi, kuis, Evaluasi Akhir, dan sertifikat pada setiap kelas.</p>
+</div>
+</div>
+<div class="learning-journey-list" id="learningJourneyList">
+<div class="participant-empty">Memuat progres belajar…</div>
+</div>
+</section>
+<div class="participant-two-column">
+<section class="participant-section dashboard-section section-stacked">
+<div class="participant-section-head compact-head">
+<div>
+<div class="participant-section-kicker">Pencapaian</div>
+<h2>Sertifikat Saya</h2>
+<p>Sertifikat yang telah diterbitkan oleh pengajar.</p>
+</div>
+<span class="participant-count" id="certificateCount">0</span>
+</div>
+<div class="certificate-list" id="certificateList">
+<div class="participant-empty">Memuat sertifikat…</div>
+</div>
+</section>
+<section class="participant-section dashboard-section section-stacked">
+<div class="participant-section-head compact-head">
+<div>
+<div class="participant-section-kicker">Pembelajaran</div>
+<h2>Kelas Saya</h2>
+<p>Nilai terbaik setiap kuis dan akses cepat ke kelas.</p>
+</div>
+<span class="participant-count" id="classCount">0</span>
+</div>
+<div class="participant-class-list" id="classList">
+<div class="participant-empty">Memuat kelas…</div>
+</div>
+</section>
+</div>
 </main>
-
-<dialog id="scoreModal" class="participant-score-dialog">
-  <div class="participant-score-body">
-    <div class="participant-score-head">
-      <div>
-        <div class="participant-section-kicker">Riwayat Nilai</div>
-        <h2 id="scoreClassName">Kelas</h2>
-        <p>Nilai terbaik dan jumlah percobaan setiap evaluasi.</p>
-      </div>
-      <button type="button" class="participant-score-close" id="closeScoreModal" aria-label="Tutup">×</button>
-    </div>
-    <div id="scoreModuleList" class="score-module-list"></div>
-    <div id="scoreFinalCard" class="score-final-card"></div>
-  </div>
+<dialog class="participant-score-dialog" id="scoreModal">
+<div class="participant-score-body">
+<div class="participant-score-head">
+<div>
+<div class="participant-section-kicker">Riwayat Nilai</div>
+<h2 id="scoreClassName">Kelas</h2>
+<p>Nilai terbaik dan jumlah percobaan setiap evaluasi.</p>
+</div>
+<button aria-label="Tutup" class="participant-score-close" id="closeScoreModal" type="button">×</button>
+</div>
+<div class="score-module-list" id="scoreModuleList"></div>
+<div class="score-final-card" id="scoreFinalCard"></div>
+</div>
 </dialog>
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="assets/js/supabase-config.js"></script>
 <script src="assets/js/supabase-client.js"></script>

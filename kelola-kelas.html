@@ -1,333 +1,243 @@
 <!doctype html>
+
 <html lang="id">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Kelola Kelas — Kabayan Learning</title>
-
-  <!-- CSS global LMS tetap dipakai -->
-  <link rel="stylesheet" href="assets/css/lms.css">
-
-  <!-- CSS khusus halaman Kelola Kelas.
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/><meta content="#f5f7fb" name="theme-color"/>
+<title>Kelola Kelas — Kabayan Learning</title>
+<!-- CSS global LMS tetap dipakai -->
+<link href="assets/css/lms.css" rel="stylesheet"/>
+<!-- CSS khusus halaman Kelola Kelas.
        Diletakkan setelah lms.css agar layout halaman ini terisolasi. -->
-  <link rel="stylesheet" href="assets/css/kelola-kelas.css">
+<link href="assets/css/kelola-kelas.css" rel="stylesheet"/><link href="assets/css/lms-audit.css" rel="stylesheet"/>
 </head>
-
 <body class="kc-page">
-
 <header class="site-header">
-  <nav class="nav">
-    <a class="brand" href="pengajar-dashboard.html">Kabayan <span>Learning</span></a>
-
-    <div class="nav-actions">
-      <a class="btn ghost small" href="pengajar-dashboard.html">← Dashboard</a>
-      <button class="btn ghost small" onclick="KabayanAuth.signOut()">Keluar</button>
-    </div>
-  </nav>
+<nav class="nav">
+<a class="brand" href="pengajar-dashboard.html">Kabayan <span>Learning</span></a>
+<div class="nav-actions">
+<a class="btn ghost small" href="pengajar-dashboard.html">← Dashboard</a>
+<button class="btn ghost small" onclick="KabayanAuth.signOut()" type="button">Keluar</button>
+</div>
+</nav>
 </header>
-
 <main class="kc-shell">
-
-  <!-- ======================================================
+<!-- ======================================================
        RINGKASAN KELAS
        ====================================================== -->
-  <section class="kc-summary">
-    <div class="kc-summary-copy">
-      <div class="kc-status" id="classStatus">Kelas</div>
-      <h1 id="className">Memuat kelas…</h1>
-      <p id="classDescription"></p>
-    </div>
-
-    <div class="kc-summary-count">
-      <strong id="memberCount">0</strong>
-      <span>Peserta</span>
-    </div>
-  </section>
-
-  <!-- ======================================================
+<section class="kc-summary">
+<div class="kc-summary-copy">
+<div class="kc-status" id="classStatus">Kelas</div>
+<h1 id="className">Memuat kelas…</h1>
+<p id="classDescription"></p>
+</div>
+<div class="kc-summary-count">
+<strong id="memberCount">0</strong>
+<span>Peserta</span>
+</div>
+</section>
+<!-- ======================================================
        WORKSPACE
        ====================================================== -->
-  <section class="kc-workspace">
-
-    <!-- MODUL -->
-    <div class="kc-main">
-      <div class="kc-section-heading">
-        <div>
-          <span class="kc-section-kicker">Kurikulum</span>
-          <h2>Modul pembelajaran</h2>
-          <p>Kelola materi dan kuis tanpa memenuhi layar dengan terlalu banyak kontrol.</p>
-        </div>
-      </div>
-
-      <div id="moduleList" class="kc-module-list"></div>
-    </div>
-
-    <!-- SIDEBAR -->
-    <aside class="kc-sidebar">
-
-      <!-- TAMBAH MODUL -->
-      <section class="kc-side-card">
-        <div class="kc-side-heading">
-          <span class="kc-side-icon kc-side-icon-blue">＋</span>
-          <div>
-            <span>Materi</span>
-            <h2>Tambah modul</h2>
-          </div>
-        </div>
-
-        <form id="addModuleForm" class="kc-form">
-          <label>
-            <span>Judul modul</span>
-            <input
-              name="title"
-              required
-              placeholder="Konsep Dasar PPh Pasal 21">
-          </label>
-
-          <label>
-            <span>Deskripsi</span>
-            <textarea
-              name="description"
-              placeholder="Tujuan atau ringkasan modul"></textarea>
-          </label>
-
-          <div class="kc-form-two">
-            <label>
-              <span>Urutan</span>
-              <input
-                name="position"
-                type="number"
-                min="1"
-                value="1"
-                required>
-            </label>
-
-            <label class="kc-check">
-              <input name="is_published" type="checkbox">
-              <span>Langsung terbit</span>
-            </label>
-          </div>
-
-          <button class="kc-submit kc-submit-blue" type="submit">
+<section class="kc-workspace">
+<!-- MODUL -->
+<div class="kc-main">
+<div class="kc-section-heading">
+<div>
+<span class="kc-section-kicker">Kurikulum</span>
+<h2>Modul pembelajaran</h2>
+<p>Kelola materi dan kuis tanpa memenuhi layar dengan terlalu banyak kontrol.</p>
+</div>
+</div>
+<div class="kc-module-list" id="moduleList"></div>
+</div>
+<!-- SIDEBAR -->
+<aside class="kc-sidebar">
+<!-- TAMBAH MODUL -->
+<section class="kc-side-card">
+<div class="kc-side-heading">
+<span class="kc-side-icon kc-side-icon-blue">＋</span>
+<div>
+<span>Materi</span>
+<h2>Tambah modul</h2>
+</div>
+</div>
+<form class="kc-form" id="addModuleForm">
+<label>
+<span>Judul modul</span>
+<input name="title" placeholder="Konsep Dasar PPh Pasal 21" required=""/>
+</label>
+<label>
+<span>Deskripsi</span>
+<textarea name="description" placeholder="Tujuan atau ringkasan modul"></textarea>
+</label>
+<div class="kc-form-two">
+<label>
+<span>Urutan</span>
+<input min="1" name="position" required="" type="number" value="1"/>
+</label>
+<label class="kc-check">
+<input name="is_published" type="checkbox"/>
+<span>Langsung terbit</span>
+</label>
+</div>
+<button class="kc-submit kc-submit-blue" type="submit">
             Tambah modul
           </button>
-        </form>
-
-        <div id="addModuleStatus" class="form-status"></div>
-      </section>
-
-      <!-- PESERTA -->
-      <section class="kc-side-card">
-        <div class="kc-side-heading">
-          <span class="kc-side-icon kc-side-icon-green">◎</span>
-          <div>
-            <span>Peserta</span>
-            <h2>Kelola peserta</h2>
-          </div>
-        </div>
-
-        <p class="kc-side-description">
+</form>
+<div class="form-status" id="addModuleStatus"></div>
+</section>
+<!-- PESERTA -->
+<section class="kc-side-card">
+<div class="kc-side-heading">
+<span class="kc-side-icon kc-side-icon-green">◎</span>
+<div>
+<span>Peserta</span>
+<h2>Kelola peserta</h2>
+</div>
+</div>
+<p class="kc-side-description">
           Tambahkan email peserta yang sudah mempunyai akun Kabayan Learning.
         </p>
-
-        <form id="addStudentForm" class="kc-form">
-          <label>
-            <span>Email peserta</span>
-            <input
-              name="email"
-              type="email"
-              required
-              placeholder="peserta@email.com">
-          </label>
-
-          <button class="kc-submit kc-submit-green" type="submit">
+<form class="kc-form" id="addStudentForm">
+<label>
+<span>Email peserta</span>
+<input name="email" placeholder="peserta@email.com" required="" type="email"/>
+</label>
+<button class="kc-submit kc-submit-green" type="submit">
             Tambah peserta
           </button>
-        </form>
-
-        <div id="addStudentStatus" class="form-status"></div>
-
-        <div class="kc-members">
-          <div class="kc-members-head">
-            <strong>Peserta kelas</strong>
-            <span id="memberCountInline">0</span>
-          </div>
-          <div id="memberList"></div>
-        </div>
-      </section>
-
-      <section class="kc-side-card kc-final-admin-card">
-        <div class="kc-side-heading">
-          <span class="kc-side-icon kc-side-icon-purple">★</span>
-
-          <div>
-            <span>Kelulusan</span>
-            <h2>Evaluasi Akhir</h2>
-          </div>
-        </div>
-
-        <p
-          class="kc-side-description"
-          id="finalEvaluationAdminText">
+</form>
+<div class="form-status" id="addStudentStatus"></div>
+<div class="kc-members">
+<div class="kc-members-head">
+<strong>Peserta kelas</strong>
+<span id="memberCountInline">0</span>
+</div>
+<div id="memberList"></div>
+</div>
+</section>
+<section class="kc-side-card kc-final-admin-card">
+<div class="kc-side-heading">
+<span class="kc-side-icon kc-side-icon-purple">★</span>
+<div>
+<span>Kelulusan</span>
+<h2>Evaluasi Akhir</h2>
+</div>
+</div>
+<p class="kc-side-description" id="finalEvaluationAdminText">
           Memuat Evaluasi Akhir…
         </p>
-
-        <div id="finalEvaluationAdmin"></div>
-      </section>
-
-    </aside>
-  </section>
-
+<div id="finalEvaluationAdmin"></div>
+</section>
+</aside>
+</section>
 </main>
-
-
 <!-- ==========================================================
      EDIT MODUL
      ========================================================== -->
-<dialog id="moduleEditorModal" class="editor-dialog module-editor-dialog">
-  <form id="moduleEditorForm" class="dialog-body">
-    <input type="hidden" name="module_id">
-
-    <div class="editor-heading">
-      <div>
-        <div class="eyebrow">Pengaturan Modul</div>
-        <h2 id="moduleEditorHeading">Edit modul</h2>
-      </div>
-
-      <button
-        type="button"
-        class="icon-close"
-        id="closeModuleEditorBtn"
-        aria-label="Tutup">×</button>
-    </div>
-
-    <div class="form-grid" style="margin-top:18px">
-      <label class="field">
+<dialog class="editor-dialog module-editor-dialog" id="moduleEditorModal">
+<form class="dialog-body" id="moduleEditorForm">
+<input name="module_id" type="hidden"/>
+<div class="editor-heading">
+<div>
+<div class="eyebrow">Pengaturan Modul</div>
+<h2 id="moduleEditorHeading">Edit modul</h2>
+</div>
+<button aria-label="Tutup" class="icon-close" id="closeModuleEditorBtn" type="button">×</button>
+</div>
+<div class="form-grid" style="margin-top:18px">
+<label class="field">
         Nama modul
-        <input name="title" required>
-      </label>
-
-      <label class="field">
+        <input name="title" required=""/>
+</label>
+<label class="field">
         Deskripsi modul
-        <textarea
-          name="description"
-          placeholder="Tujuan atau ringkasan modul"></textarea>
-      </label>
-
-      <div class="module-position-note">
-        <strong id="modulePositionLabel">Modul</strong>
-        <span>
+        <textarea name="description" placeholder="Tujuan atau ringkasan modul"></textarea>
+</label>
+<div class="module-position-note">
+<strong id="modulePositionLabel">Modul</strong>
+<span>
           Urutan modul tidak diubah dari editor ini agar alur pembukaan kuis tetap konsisten.
         </span>
-      </div>
-    </div>
-
-    <div id="moduleEditorStatus" class="form-status"></div>
-
-    <div class="dialog-actions">
-      <button type="button" class="btn ghost" id="cancelModuleEditorBtn">
+</div>
+</div>
+<div class="form-status" id="moduleEditorStatus"></div>
+<div class="dialog-actions">
+<button class="btn ghost" id="cancelModuleEditorBtn" type="button">
         Batal
       </button>
-      <button type="submit" class="btn">
+<button class="btn" type="submit">
         Simpan perubahan
       </button>
-    </div>
-  </form>
+</div>
+</form>
 </dialog>
-
-
 <!-- ==========================================================
      EDIT MATERI
      ========================================================== -->
-<dialog id="lessonEditorModal" class="editor-dialog">
-  <form id="lessonEditorForm" class="dialog-body">
-    <input type="hidden" name="lesson_id">
-
-    <div class="editor-heading">
-      <div>
-        <div class="eyebrow">Editor Materi</div>
-        <h2 id="editorHeading">Edit checkpoint</h2>
-      </div>
-
-      <button
-        type="button"
-        class="icon-close"
-        id="closeEditorBtn"
-        aria-label="Tutup">×</button>
-    </div>
-
-    <div class="editor-meta-grid">
-      <label class="field">
+<dialog class="editor-dialog" id="lessonEditorModal">
+<form class="dialog-body" id="lessonEditorForm">
+<input name="lesson_id" type="hidden"/>
+<div class="editor-heading">
+<div>
+<div class="eyebrow">Editor Materi</div>
+<h2 id="editorHeading">Edit checkpoint</h2>
+</div>
+<button aria-label="Tutup" class="icon-close" id="closeEditorBtn" type="button">×</button>
+</div>
+<div class="editor-meta-grid">
+<label class="field">
         Judul materi
-        <input name="title" required>
-      </label>
-
-      <label class="field">
+        <input name="title" required=""/>
+</label>
+<label class="field">
         Urutan
-        <input name="position" type="number" min="1" required>
-      </label>
-
-      <label class="field">
+        <input min="1" name="position" required="" type="number"/>
+</label>
+<label class="field">
         Estimasi belajar (menit)
-        <input
-          name="estimated_minutes"
-          type="number"
-          min="1"
-          placeholder="10">
-      </label>
-
-      <label class="checkline editor-publish">
-        <input name="is_published" type="checkbox">
+        <input min="1" name="estimated_minutes" placeholder="10" type="number"/>
+</label>
+<label class="checkline editor-publish">
+<input name="is_published" type="checkbox"/>
         Terbitkan untuk peserta
       </label>
-    </div>
-
-    <div class="editor-toolbar" aria-label="Bantuan format materi">
-      <button type="button" data-insert="# Judul">Judul</button>
-      <button type="button" data-wrap="**">Tebal</button>
-      <button type="button" data-insert="## Subjudul">Subjudul</button>
-      <button type="button" data-insert="- Poin materi">Poin</button>
-      <button type="button" data-insert="> Catatan penting">Catatan</button>
-      <button type="button" data-template="table">Tabel</button>
-      <button type="button" data-template="example">Contoh</button>
-    </div>
-
-    <label class="field">
+</div>
+<div aria-label="Bantuan format materi" class="editor-toolbar">
+<button data-insert="# Judul" type="button">Judul</button>
+<button data-wrap="**" type="button">Tebal</button>
+<button data-insert="## Subjudul" type="button">Subjudul</button>
+<button data-insert="- Poin materi" type="button">Poin</button>
+<button data-insert="&gt; Catatan penting" type="button">Catatan</button>
+<button data-template="table" type="button">Tabel</button>
+<button data-template="example" type="button">Contoh</button>
+</div>
+<label class="field">
       Isi materi
-      <textarea
-        id="lessonContentInput"
-        name="content"
-        class="lesson-editor-textarea"
-        placeholder="# Konsep PPh Pasal 21
+      <textarea class="lesson-editor-textarea" id="lessonContentInput" name="content" placeholder="# Konsep PPh Pasal 21
 
 Tuliskan materi di sini."></textarea>
-    </label>
-
-    <div class="editor-help">
-      <strong>Tips:</strong>
+</label>
+<div class="editor-help">
+<strong>Tips:</strong>
       Gunakan tombol format di atas. Materi akan ditampilkan rapi di halaman peserta.
     </div>
-
-    <div id="lessonEditorStatus" class="form-status"></div>
-
-    <div class="dialog-actions">
-      <button type="button" class="btn ghost" id="cancelEditorBtn">
+<div class="form-status" id="lessonEditorStatus"></div>
+<div class="dialog-actions">
+<button class="btn ghost" id="cancelEditorBtn" type="button">
         Batal
       </button>
-
-      <button type="submit" class="btn">
+<button class="btn" type="submit">
         Simpan materi
       </button>
-    </div>
-  </form>
+</div>
+</form>
 </dialog>
-
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="assets/js/supabase-config.js"></script>
 <script src="assets/js/supabase-client.js"></script>
 <script src="assets/js/auth.js"></script>
 <script src="assets/js/kelola-kelas.js"></script>
-
 </body>
 </html>

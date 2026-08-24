@@ -1,313 +1,188 @@
 <!doctype html>
+
 <html lang="id">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <title>Dashboard Nilai — Kabayan Learning</title>
-
-  <link rel="stylesheet" href="assets/css/lms.css">
-  <link rel="stylesheet" href="assets/css/nilai-kelas.css">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/><meta content="#f5f7fb" name="theme-color"/>
+<title>Dashboard Nilai — Kabayan Learning</title>
+<link href="assets/css/lms.css" rel="stylesheet"/>
+<link href="assets/css/nilai-kelas.css" rel="stylesheet"/><link href="assets/css/lms-audit.css" rel="stylesheet"/>
 </head>
-
 <body class="grade-page">
-
 <header class="site-header">
-  <nav class="nav">
-    <a class="brand" href="pengajar-dashboard.html">
+<nav class="nav">
+<a class="brand" href="pengajar-dashboard.html">
       Kabayan <span>Learning</span>
-    </a>
-
-    <div class="nav-actions">
-      <a
-        class="btn ghost small"
-        id="backToClass"
-        href="pengajar-dashboard.html">
+</a>
+<div class="nav-actions">
+<a class="btn ghost small" href="pengajar-dashboard.html" id="backToClass">
         ← Kelas
       </a>
-
-      <button
-        class="btn ghost small"
-        onclick="KabayanAuth.signOut()">
+<button class="btn ghost small" onclick="KabayanAuth.signOut()" type="button">
         Keluar
       </button>
-    </div>
-  </nav>
+</div>
+</nav>
 </header>
-
-
 <main class="grade-shell">
-
-  <!-- ========================================================
+<!-- ========================================================
        HEADER
        ======================================================== -->
-  <section class="grade-hero">
-
-    <div class="grade-hero-copy">
-      <div class="grade-kicker">Nilai & Kelulusan</div>
-
-      <h1 id="className">
+<section class="grade-hero">
+<div class="grade-hero-copy">
+<div class="grade-kicker">Nilai &amp; Kelulusan</div>
+<h1 id="className">
         Memuat kelas…
       </h1>
-
-      <p id="classDescription">
+<p id="classDescription">
         Ringkasan progres dan hasil evaluasi peserta.
       </p>
-    </div>
-
-
-    <div class="grade-hero-actions">
-
-      <a
-        class="grade-button report-link"
-        id="learningReportBtn"
-        href="#">
+</div>
+<div class="grade-hero-actions">
+<a class="grade-button report-link" href="#" id="learningReportBtn">
         Laporan Belajar
       </a>
-
-      <button
-        class="grade-button secondary"
-        id="refreshBtn"
-        type="button">
+<button class="grade-button secondary" id="refreshBtn" type="button">
         Muat ulang
       </button>
-
-      <button
-        class="grade-button primary"
-        id="exportBtn"
-        type="button">
+<button class="grade-button primary" id="exportBtn" type="button">
         Unduh CSV
       </button>
-
-    </div>
-
-  </section>
-
-
-  <!-- ========================================================
+</div>
+</section>
+<!-- ========================================================
        SUMMARY
        ======================================================== -->
-  <section class="grade-summary">
-
-    <article class="summary-card">
-      <span>Peserta aktif</span>
-      <strong id="summaryParticipants">0</strong>
-      <small>peserta dalam kelas</small>
-    </article>
-
-    <article class="summary-card success">
-      <span>Lulus</span>
-      <strong id="summaryGraduated">0</strong>
-      <small>memenuhi seluruh syarat</small>
-    </article>
-
-    <article class="summary-card">
-      <span>Rata-rata progres</span>
-      <strong id="summaryProgress">0%</strong>
-      <small>checkpoint selesai</small>
-    </article>
-
-    <article class="summary-card final">
-      <span>Rata-rata evaluasi</span>
-      <strong id="summaryFinal">—</strong>
-      <small>nilai terbaik peserta</small>
-    </article>
-
-  </section>
-
-
-  <!-- ========================================================
+<section class="grade-summary">
+<article class="summary-card">
+<span>Peserta aktif</span>
+<strong id="summaryParticipants">0</strong>
+<small>peserta dalam kelas</small>
+</article>
+<article class="summary-card success">
+<span>Lulus</span>
+<strong id="summaryGraduated">0</strong>
+<small>memenuhi seluruh syarat</small>
+</article>
+<article class="summary-card">
+<span>Rata-rata progres</span>
+<strong id="summaryProgress">0%</strong>
+<small>checkpoint selesai</small>
+</article>
+<article class="summary-card final">
+<span>Rata-rata evaluasi</span>
+<strong id="summaryFinal">—</strong>
+<small>nilai terbaik peserta</small>
+</article>
+</section>
+<!-- ========================================================
        FILTER
        ======================================================== -->
-  <section class="grade-toolbar">
-
-    <label class="grade-search">
-      <span aria-hidden="true">⌕</span>
-      <input
-        id="searchInput"
-        type="search"
-        placeholder="Cari nama atau email peserta">
-    </label>
-
-
-    <select
-      id="statusFilter"
-      class="grade-filter"
-      aria-label="Filter status">
-      <option value="all">Semua status</option>
-      <option value="graduated">Lulus</option>
-      <option value="final">Evaluasi Akhir</option>
-      <option value="learning">Belum selesai</option>
-    </select>
-
-  </section>
-
-
-  <!-- ========================================================
+<section class="grade-toolbar">
+<label class="grade-search">
+<span aria-hidden="true">⌕</span>
+<input id="searchInput" placeholder="Cari nama atau email peserta" type="search"/>
+</label>
+<select aria-label="Filter status" class="grade-filter" id="statusFilter">
+<option value="all">Semua status</option>
+<option value="graduated">Lulus</option>
+<option value="final">Evaluasi Akhir</option>
+<option value="learning">Belum selesai</option>
+</select>
+</section>
+<!-- ========================================================
        DESKTOP TABLE
        ======================================================== -->
-  <section class="grade-table-panel">
-
-    <div class="grade-table-head">
-      <div>
-        <h2>Rekap peserta</h2>
-        <p id="tableCaption">
+<section class="grade-table-panel">
+<div class="grade-table-head">
+<div>
+<h2>Rekap peserta</h2>
+<p id="tableCaption">
           Nilai terbaik dari setiap kuis.
         </p>
-      </div>
-
-      <span id="visibleCount" class="grade-count">
+</div>
+<span class="grade-count" id="visibleCount">
         0 peserta
       </span>
-    </div>
-
-
-    <div id="gradeTableHost">
-      <div class="grade-loading">
+</div>
+<div id="gradeTableHost">
+<div class="grade-loading">
         Memuat dashboard nilai…
       </div>
-    </div>
-
-  </section>
-
-
-  <!-- ========================================================
+</div>
+</section>
+<!-- ========================================================
        MOBILE CARDS
        ======================================================== -->
-  <section
-    id="gradeMobileHost"
-    class="grade-mobile-list">
-  </section>
-
+<section class="grade-mobile-list" id="gradeMobileHost">
+</section>
 </main>
-
-
 <!-- ==========================================================
      DETAIL PESERTA
      ========================================================== -->
-<dialog
-  id="studentDetailModal"
-  class="grade-dialog">
-
-  <div class="grade-dialog-body">
-
-    <div class="grade-dialog-head">
-
-      <div>
-        <div class="grade-kicker">
+<dialog class="grade-dialog" id="studentDetailModal">
+<div class="grade-dialog-body">
+<div class="grade-dialog-head">
+<div>
+<div class="grade-kicker">
           Detail Peserta
         </div>
-
-        <h2 id="detailName">
+<h2 id="detailName">
           Peserta
         </h2>
-
-        <p id="detailEmail"></p>
-      </div>
-
-
-      <button
-        type="button"
-        class="grade-dialog-close"
-        id="closeDetailBtn"
-        aria-label="Tutup">
+<p id="detailEmail"></p>
+</div>
+<button aria-label="Tutup" class="grade-dialog-close" id="closeDetailBtn" type="button">
         ×
       </button>
-
-    </div>
-
-
-    <div
-      id="detailSummary"
-      class="detail-summary">
-    </div>
-
-
-    <div
-      id="detailModules"
-      class="detail-modules">
-    </div>
-
-
-    <div
-      id="detailFinal"
-      class="detail-final">
-    </div>
-
-  </div>
-
+</div>
+<div class="detail-summary" id="detailSummary">
+</div>
+<div class="detail-modules" id="detailModules">
+</div>
+<div class="detail-final" id="detailFinal">
+</div>
+</div>
 </dialog>
-
-
-
 <!-- ==========================================================
      CABUT SERTIFIKAT
      ========================================================== -->
-<dialog
-  id="revokeCertificateModal"
-  class="certificate-revoke-dialog">
-
-  <form
-    id="revokeCertificateForm"
-    class="certificate-revoke-body">
-
-    <div class="certificate-revoke-icon">
+<dialog class="certificate-revoke-dialog" id="revokeCertificateModal">
+<form class="certificate-revoke-body" id="revokeCertificateForm">
+<div class="certificate-revoke-icon">
       !
     </div>
-
-    <div class="certificate-revoke-copy">
-      <div class="grade-kicker">
+<div class="certificate-revoke-copy">
+<div class="grade-kicker">
         Manajemen Sertifikat
       </div>
-
-      <h2>Cabut sertifikat?</h2>
-
-      <p>
+<h2>Cabut sertifikat?</h2>
+<p>
         QR dan kode verifikasi sertifikat lama akan langsung
         berstatus tidak berlaku. Riwayat sertifikat tetap disimpan.
       </p>
-    </div>
-
-    <label class="certificate-revoke-field">
-      <span>Alasan pencabutan</span>
-
-      <textarea
-        id="revokeCertificateReason"
-        rows="4"
-        minlength="5"
-        maxlength="500"
-        placeholder="Contoh: terdapat kesalahan nama peserta pada sertifikat."
-        required></textarea>
-
-      <small>
+</div>
+<label class="certificate-revoke-field">
+<span>Alasan pencabutan</span>
+<textarea id="revokeCertificateReason" maxlength="500" minlength="5" placeholder="Contoh: terdapat kesalahan nama peserta pada sertifikat." required="" rows="4"></textarea>
+<small>
         Alasan ini disimpan sebagai bagian dari riwayat administrasi.
       </small>
-    </label>
-
-    <div class="certificate-revoke-actions">
-      <button
-        type="button"
-        class="certificate-revoke-cancel"
-        id="cancelRevokeCertificate">
+</label>
+<div class="certificate-revoke-actions">
+<button class="certificate-revoke-cancel" id="cancelRevokeCertificate" type="button">
         Batal
       </button>
-
-      <button
-        type="submit"
-        class="certificate-revoke-confirm">
+<button class="certificate-revoke-confirm" type="submit">
         Cabut Sertifikat
       </button>
-    </div>
-
-  </form>
-
+</div>
+</form>
 </dialog>
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="assets/js/supabase-config.js"></script>
 <script src="assets/js/supabase-client.js"></script>
 <script src="assets/js/auth.js"></script>
 <script src="assets/js/nilai-kelas.js"></script>
-
 </body>
 </html>
