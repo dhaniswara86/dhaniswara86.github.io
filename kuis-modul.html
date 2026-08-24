@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kuis Modul — Kabayan Learning</title>
+  <link rel="stylesheet" href="assets/css/lms.css">
+</head>
+<body class="quiz-page">
+<header class="site-header">
+  <nav class="nav">
+    <a class="brand" href="peserta-dashboard.html">Kabayan <span>Learning</span></a>
+    <div class="nav-actions">
+      <span id="quizProgressMini" class="muted"></span>
+      <button class="btn ghost small" onclick="KabayanAuth.signOut()">Keluar</button>
+    </div>
+  </nav>
+</header>
+
+<main class="quiz-shell">
+  <section id="quizLoading" class="surface quiz-loading">
+    <div class="eyebrow">Kuis Modul</div>
+    <h1>Menyiapkan soal…</h1>
+    <p class="muted">Jawaban Anda akan tersimpan otomatis.</p>
+  </section>
+
+  <section id="quizWorkspace" class="quiz-workspace hidden">
+    <div class="quiz-workspace-head">
+      <div>
+        <div class="eyebrow" id="quizAttemptLabel">Percobaan</div>
+        <h1 id="quizTitle"></h1>
+        <p id="quizDescription"></p>
+      </div>
+      <div class="quiz-score-rule">
+        <span>Nilai lulus</span>
+        <strong id="quizPassScore">70</strong>
+      </div>
+    </div>
+
+    <div class="quiz-progress-track">
+      <div id="quizProgressBar" class="quiz-progress-fill"></div>
+    </div>
+
+    <article class="surface quiz-question-stage">
+      <div class="quiz-question-meta">
+        <span id="questionNumber">Soal 1</span>
+        <span id="saveStatus">Belum dijawab</span>
+      </div>
+
+      <h2 id="questionText"></h2>
+
+      <div id="optionList" class="quiz-option-list"></div>
+
+      <div class="quiz-navigation">
+        <button id="prevQuestionBtn" class="btn ghost" type="button">← Sebelumnya</button>
+        <button id="nextQuestionBtn" class="btn secondary" type="button">Berikutnya →</button>
+        <button id="submitQuizBtn" class="btn hidden" type="button">Kirim jawaban</button>
+      </div>
+    </article>
+
+    <div id="questionNavigator" class="quiz-question-navigator"></div>
+  </section>
+
+  <section id="quizResult" class="hidden"></section>
+
+  <section id="quizError" class="surface quiz-loading hidden">
+    <div class="eyebrow">Kuis Tidak Dapat Dibuka</div>
+    <h1>Belum dapat memulai kuis.</h1>
+    <p id="quizErrorMessage" class="muted"></p>
+    <a id="backToClassBtn" class="btn" href="peserta-dashboard.html">Kembali ke kelas</a>
+  </section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/js/supabase-config.js"></script>
+<script src="assets/js/supabase-client.js"></script>
+<script src="assets/js/auth.js"></script>
+<script src="assets/js/kuis-modul.js"></script>
+</body>
+</html>

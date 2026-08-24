@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kelola Kuis — Kabayan Learning</title>
+  <link rel="stylesheet" href="assets/css/lms.css">
+</head>
+<body>
+<header class="site-header">
+  <nav class="nav">
+    <a class="brand" href="pengajar-dashboard.html">Kabayan <span>Learning</span></a>
+    <div class="nav-actions">
+      <a id="backToClass" class="btn ghost small" href="pengajar-dashboard.html">← Kelas</a>
+      <button class="btn ghost small" onclick="KabayanAuth.signOut()">Keluar</button>
+    </div>
+  </nav>
+</header>
+
+<main class="page">
+  <section class="hero quiz-admin-hero">
+    <div>
+      <div class="eyebrow" id="moduleEyebrow">Kuis Modul</div>
+      <h1 id="moduleTitle">Memuat modul…</h1>
+      <p id="moduleDescription"></p>
+    </div>
+    <div class="surface panel stat">
+      <span class="muted">Soal aktif</span>
+      <strong id="questionCount" class="stat-value">0</strong>
+    </div>
+  </section>
+
+  <section class="grid">
+    <div class="col-8">
+      <div class="section-head">
+        <div>
+          <h2>Bank soal</h2>
+          <p>Soal dan opsi akan diacak untuk setiap percobaan peserta.</p>
+        </div>
+        <button class="btn" id="addQuestionBtn" type="button">+ Tambah soal</button>
+      </div>
+      <div id="questionList" class="quiz-question-list"></div>
+    </div>
+
+    <aside class="col-4">
+      <div class="panel">
+        <div class="eyebrow">Pengaturan Kuis</div>
+        <h2 style="letter-spacing:-.04em">Kuis modul</h2>
+
+        <form id="quizSettingsForm" class="form-grid">
+          <label class="field">Judul kuis
+            <input name="title" required>
+          </label>
+
+          <label class="field">Deskripsi
+            <textarea name="description"></textarea>
+          </label>
+
+          <label class="field">Nilai minimum lulus
+            <input name="pass_score" type="number" min="0" max="100" required>
+          </label>
+
+          <label class="field">Maksimum percobaan
+            <input name="max_attempts" type="number" min="1" placeholder="Kosong = tanpa batas">
+          </label>
+
+          <label class="checkline">
+            <input name="is_published" type="checkbox">
+            Terbitkan kuis untuk peserta
+          </label>
+
+          <button class="btn" type="submit">Simpan pengaturan</button>
+        </form>
+
+        <div id="quizSettingsStatus" class="form-status"></div>
+
+        <div class="quiz-admin-note">
+          <strong>Urutan pembukaan:</strong>
+          peserta harus menyelesaikan semua checkpoint yang sudah diterbitkan dalam modul sebelum kuis dapat dimulai.
+        </div>
+      </div>
+    </aside>
+  </section>
+</main>
+
+<dialog id="questionModal" class="editor-dialog">
+  <form id="questionForm" class="dialog-body">
+    <input type="hidden" name="question_id">
+
+    <div class="editor-heading">
+      <div>
+        <div class="eyebrow">Bank Soal</div>
+        <h2 id="questionModalTitle">Tambah soal</h2>
+      </div>
+      <button type="button" class="icon-close" id="closeQuestionBtn" aria-label="Tutup">×</button>
+    </div>
+
+    <div class="form-grid" style="margin-top:18px">
+      <label class="field">Pertanyaan
+        <textarea name="question_text" class="question-textarea" required></textarea>
+      </label>
+
+      <label class="field">Pembahasan
+        <textarea name="explanation" placeholder="Ditampilkan setelah kuis disubmit."></textarea>
+      </label>
+
+      <label class="field">Urutan
+        <input name="position" type="number" min="1" required>
+      </label>
+
+      <label class="checkline">
+        <input name="is_active" type="checkbox" checked>
+        Soal aktif
+      </label>
+
+      <div class="quiz-options-editor">
+        <div class="quiz-options-head">
+          <strong>Pilihan jawaban</strong>
+          <span>Pilih satu jawaban benar.</span>
+        </div>
+
+        <label class="quiz-option-edit">
+          <input type="radio" name="correct_option" value="1" required>
+          <span>A</span>
+          <input name="option_1" required placeholder="Pilihan A">
+        </label>
+
+        <label class="quiz-option-edit">
+          <input type="radio" name="correct_option" value="2" required>
+          <span>B</span>
+          <input name="option_2" required placeholder="Pilihan B">
+        </label>
+
+        <label class="quiz-option-edit">
+          <input type="radio" name="correct_option" value="3" required>
+          <span>C</span>
+          <input name="option_3" required placeholder="Pilihan C">
+        </label>
+
+        <label class="quiz-option-edit">
+          <input type="radio" name="correct_option" value="4" required>
+          <span>D</span>
+          <input name="option_4" required placeholder="Pilihan D">
+        </label>
+      </div>
+    </div>
+
+    <div id="questionStatus" class="form-status"></div>
+
+    <div class="dialog-actions">
+      <button type="button" class="btn ghost" id="cancelQuestionBtn">Batal</button>
+      <button type="submit" class="btn">Simpan soal</button>
+    </div>
+  </form>
+</dialog>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/js/supabase-config.js"></script>
+<script src="assets/js/supabase-client.js"></script>
+<script src="assets/js/auth.js"></script>
+<script src="assets/js/kelola-kuis.js"></script>
+</body>
+</html>
