@@ -467,11 +467,21 @@ function renderFinalEvaluationAdmin(module) {
     "30 soal lintas Modul 1–6. Peserta baru dapat mengerjakan setelah seluruh kuis modul lulus.";
 
   host.innerHTML = `
-    <a
-      class="kc-final-admin-button"
-      href="kelola-kuis.html?module_id=${encodeURIComponent(module.id)}">
-      Kelola Evaluasi Akhir
-    </a>
+    <div class="kc-final-admin-actions">
+
+      <a
+        class="kc-final-admin-button"
+        href="kelola-kuis.html?module_id=${encodeURIComponent(module.id)}">
+        Kelola Evaluasi Akhir
+      </a>
+
+      <a
+        class="kc-grade-admin-button"
+        href="nilai-kelas.html?id=${encodeURIComponent(classId)}">
+        Dashboard Nilai Peserta
+      </a>
+
+    </div>
   `;
 }
 
