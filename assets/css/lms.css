@@ -1091,46 +1091,72 @@ dialog::backdrop {
 }
 
 .quiz-option {
-  min-height: 62px;
+  position: relative;
+  min-height: 68px;
   display: grid;
-  grid-template-columns: 0 38px minmax(0,1fr);
+  grid-template-columns: 42px minmax(0, 1fr);
   align-items: center;
-  gap: 12px;
-  padding: 11px 14px;
+  gap: 14px;
+  padding: 13px 16px;
   border: 1px solid var(--line);
   border-radius: 16px;
   background: #fff;
   cursor: pointer;
-  transition: border-color .18s ease, background .18s ease, transform .18s ease;
+  overflow: hidden;
+  transition:
+    border-color .18s ease,
+    background .18s ease,
+    box-shadow .18s ease,
+    transform .18s ease;
 }
 
 .quiz-option:hover {
-  border-color: rgba(18,103,232,.3);
+  border-color: rgba(18,103,232,.32);
   background: #f8fbff;
 }
 
+.quiz-option:has(input:focus-visible) {
+  border-color: rgba(18,103,232,.62);
+  box-shadow: 0 0 0 4px rgba(18,103,232,.09);
+}
+
 .quiz-option.selected {
-  border-color: rgba(18,103,232,.55);
+  border-color: rgba(18,103,232,.52);
   background: #f2f7ff;
+  box-shadow: 0 6px 18px rgba(18,103,232,.07);
 }
 
 .quiz-option > input {
-  opacity: 0;
-  width: 0;
-  min-height: 0;
   position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  min-height: 0;
+  margin: 0;
   pointer-events: none;
 }
 
 .quiz-option-letter {
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   display: grid;
   place-items: center;
+  align-self: center;
   border-radius: 50%;
   background: #eef2f7;
   color: var(--text);
+  font-size: .92rem;
   font-weight: 850;
+  line-height: 1;
+}
+
+.quiz-option > span:last-child {
+  min-width: 0;
+  display: block;
+  color: var(--text);
+  font-size: 1rem;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
 }
 
 .quiz-option.selected .quiz-option-letter {
@@ -1334,5 +1360,40 @@ dialog::backdrop {
 
   .quiz-navigation #submitQuizBtn {
     grid-column: 1 / -1;
+  }
+}
+
+
+@media (max-width: 560px) {
+  .quiz-shell {
+    width: min(100% - 20px, 940px);
+    padding-top: 24px;
+  }
+
+  .quiz-question-stage {
+    padding: 20px 16px;
+  }
+
+  .quiz-question-stage h2 {
+    margin: 16px 0 20px;
+    font-size: 1.35rem;
+    line-height: 1.28;
+  }
+
+  .quiz-option {
+    min-height: 64px;
+    grid-template-columns: 38px minmax(0, 1fr);
+    gap: 11px;
+    padding: 11px 12px;
+  }
+
+  .quiz-option-letter {
+    width: 36px;
+    height: 36px;
+    font-size: .86rem;
+  }
+
+  .quiz-option > span:last-child {
+    font-size: .96rem;
   }
 }
