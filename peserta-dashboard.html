@@ -15,13 +15,12 @@
 <header class="site-header">
   <nav class="nav">
 
-    <a
-      class="brand"
-      href="peserta-dashboard.html">
+    <a class="brand" href="peserta-dashboard.html">
       Kabayan <span>Learning</span>
     </a>
 
     <div class="nav-actions">
+
       <span
         class="muted participant-profile-name"
         id="profileName">
@@ -33,6 +32,7 @@
         onclick="KabayanAuth.signOut()">
         Keluar
       </button>
+
     </div>
 
   </nav>
@@ -58,14 +58,87 @@
       </h1>
 
       <p>
-        Lanjutkan kelas Anda, selesaikan evaluasi, dan akses
-        sertifikat yang telah diterbitkan.
+        Pantau progres belajar, nilai kuis, Evaluasi Akhir,
+        dan sertifikat Anda dari satu tempat.
       </p>
 
     </div>
 
+
     <div class="participant-hero-mark">
       KL
+    </div>
+
+  </section>
+
+
+  <!-- ========================================================
+       SUMMARY
+       ======================================================== -->
+  <section
+    id="learningSummary"
+    class="participant-summary">
+
+    <article class="participant-summary-card">
+      <span>Kelas aktif</span>
+      <strong id="summaryClasses">0</strong>
+      <small>kelas yang sedang diikuti</small>
+    </article>
+
+    <article class="participant-summary-card">
+      <span>Rata-rata progres</span>
+      <strong id="summaryProgress">0%</strong>
+      <small>checkpoint pembelajaran</small>
+    </article>
+
+    <article class="participant-summary-card success">
+      <span>Kelas selesai</span>
+      <strong id="summaryCompleted">0</strong>
+      <small>lulus hingga Evaluasi Akhir</small>
+    </article>
+
+    <article class="participant-summary-card certificate">
+      <span>Sertifikat</span>
+      <strong id="summaryCertificates">0</strong>
+      <small>sertifikat aktif</small>
+    </article>
+
+  </section>
+
+
+  <!-- ========================================================
+       PERJALANAN BELAJAR
+       ======================================================== -->
+  <section class="participant-section">
+
+    <div class="participant-section-head">
+
+      <div>
+        <div class="participant-section-kicker">
+          Progress
+        </div>
+
+        <h2>
+          Perjalanan Belajar
+        </h2>
+
+        <p>
+          Status materi, kuis, Evaluasi Akhir, dan sertifikat
+          pada setiap kelas.
+        </p>
+      </div>
+
+    </div>
+
+
+    <div
+      id="learningJourneyList"
+      class="learning-journey-list">
+
+      <div class="participant-empty">
+        Memuat progres belajar…
+      </div>
+
     </div>
 
   </section>
@@ -104,9 +177,11 @@
     <div
       id="certificateList"
       class="certificate-list">
+
       <div class="participant-empty">
         Memuat sertifikat…
       </div>
+
     </div>
 
   </section>
@@ -129,7 +204,7 @@
         </h2>
 
         <p>
-          Kelas yang telah ditambahkan oleh pengajar.
+          Nilai terbaik setiap kuis dan akses ke kelas.
         </p>
       </div>
 
@@ -145,14 +220,68 @@
     <div
       id="classList"
       class="participant-class-list">
+
       <div class="participant-empty">
         Memuat kelas…
       </div>
+
     </div>
 
   </section>
 
 </main>
+
+
+<!-- ==========================================================
+     RIWAYAT NILAI
+     ========================================================== -->
+<dialog
+  id="scoreModal"
+  class="participant-score-dialog">
+
+  <div class="participant-score-body">
+
+    <div class="participant-score-head">
+
+      <div>
+        <div class="participant-section-kicker">
+          Riwayat Nilai
+        </div>
+
+        <h2 id="scoreClassName">
+          Kelas
+        </h2>
+
+        <p>
+          Nilai terbaik dan jumlah percobaan setiap evaluasi.
+        </p>
+      </div>
+
+      <button
+        type="button"
+        class="participant-score-close"
+        id="closeScoreModal"
+        aria-label="Tutup">
+        ×
+      </button>
+
+    </div>
+
+
+    <div
+      id="scoreModuleList"
+      class="score-module-list">
+    </div>
+
+
+    <div
+      id="scoreFinalCard"
+      class="score-final-card">
+    </div>
+
+  </div>
+
+</dialog>
 
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
