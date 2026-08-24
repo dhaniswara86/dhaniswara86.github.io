@@ -81,6 +81,43 @@
   </section>
 </main>
 
+
+<dialog id="moduleEditorModal" class="editor-dialog module-editor-dialog">
+  <form id="moduleEditorForm" class="dialog-body">
+    <input type="hidden" name="module_id">
+
+    <div class="editor-heading">
+      <div>
+        <div class="eyebrow">Pengaturan Modul</div>
+        <h2 id="moduleEditorHeading">Edit modul</h2>
+      </div>
+      <button type="button" class="icon-close" id="closeModuleEditorBtn" aria-label="Tutup">×</button>
+    </div>
+
+    <div class="form-grid" style="margin-top:18px">
+      <label class="field">Nama modul
+        <input name="title" required>
+      </label>
+
+      <label class="field">Deskripsi modul
+        <textarea name="description" placeholder="Tujuan atau ringkasan modul"></textarea>
+      </label>
+
+      <div class="module-position-note">
+        <strong id="modulePositionLabel">Modul</strong>
+        <span>Urutan modul tidak diubah dari editor ini agar alur pembukaan kuis tetap konsisten.</span>
+      </div>
+    </div>
+
+    <div id="moduleEditorStatus" class="form-status"></div>
+
+    <div class="dialog-actions">
+      <button type="button" class="btn ghost" id="cancelModuleEditorBtn">Batal</button>
+      <button type="submit" class="btn">Simpan perubahan</button>
+    </div>
+  </form>
+</dialog>
+
 <dialog id="lessonEditorModal" class="editor-dialog">
   <form id="lessonEditorForm" class="dialog-body">
     <input type="hidden" name="lesson_id">
