@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Laporan Belajar — Kabayan Learning</title>
+
+  <link rel="stylesheet" href="assets/css/lms.css">
+  <link rel="stylesheet" href="assets/css/laporan-belajar.css">
+</head>
+
+<body class="learning-report-page">
+
+<header class="site-header">
+  <nav class="nav">
+
+    <a
+      class="brand"
+      href="pengajar-dashboard.html">
+      Kabayan <span>Learning</span>
+    </a>
+
+    <div class="nav-actions">
+
+      <a
+        class="btn ghost small"
+        id="backToGrades"
+        href="pengajar-dashboard.html">
+        ← Dashboard Nilai
+      </a>
+
+      <button
+        class="btn ghost small"
+        onclick="KabayanAuth.signOut()">
+        Keluar
+      </button>
+
+    </div>
+
+  </nav>
+</header>
+
+
+<main class="report-shell">
+
+  <!-- ========================================================
+       HERO
+       ======================================================== -->
+  <section class="report-hero">
+
+    <div class="report-hero-copy">
+
+      <div class="report-kicker">
+        Laporan Belajar
+      </div>
+
+      <h1 id="reportClassName">
+        Memuat kelas…
+      </h1>
+
+      <p id="reportClassDescription">
+        Rekap progres, nilai, kelulusan, dan sertifikat peserta.
+      </p>
+
+    </div>
+
+
+    <div class="report-hero-mark">
+
+      <span>REPORT</span>
+
+      <strong id="heroParticipantCount">
+        0
+      </strong>
+
+      <small>
+        peserta
+      </small>
+
+    </div>
+
+  </section>
+
+
+  <!-- ========================================================
+       SUMMARY
+       ======================================================== -->
+  <section class="report-summary">
+
+    <article class="report-summary-card blue">
+      <div class="report-summary-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M7 3h10a2 2 0 0 1 2 2v16l-7-3-7 3V5a2 2 0 0 1 2-2Z"></path>
+        </svg>
+      </div>
+
+      <div>
+        <span>Peserta Aktif</span>
+        <strong id="summaryParticipants">0</strong>
+        <small>anggota aktif kelas</small>
+      </div>
+    </article>
+
+
+    <article class="report-summary-card green">
+      <div class="report-summary-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="m5 12 4 4L19 6"></path>
+        </svg>
+      </div>
+
+      <div>
+        <span>Lulus</span>
+        <strong id="summaryGraduated">0</strong>
+        <small>memenuhi seluruh syarat</small>
+      </div>
+    </article>
+
+
+    <article class="report-summary-card cyan">
+      <div class="report-summary-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4 19V9"></path>
+          <path d="M10 19V5"></path>
+          <path d="M16 19v-7"></path>
+          <path d="M22 19V3"></path>
+        </svg>
+      </div>
+
+      <div>
+        <span>Rata-rata Progres</span>
+        <strong id="summaryProgress">0%</strong>
+        <small>checkpoint pembelajaran</small>
+      </div>
+    </article>
+
+
+    <article class="report-summary-card purple">
+      <div class="report-summary-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="8" r="5"></circle>
+          <path d="M8.5 12 7 22l5-3 5 3-1.5-10"></path>
+        </svg>
+      </div>
+
+      <div>
+        <span>Sertifikat Aktif</span>
+        <strong id="summaryCertificates">0</strong>
+        <small>telah diterbitkan</small>
+      </div>
+    </article>
+
+  </section>
+
+
+  <!-- ========================================================
+       TOOLBAR
+       ======================================================== -->
+  <section class="report-toolbar">
+
+    <div class="report-filter-group">
+
+      <label class="report-search">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"></circle>
+          <path d="m20 20-4-4"></path>
+        </svg>
+
+        <input
+          id="reportSearch"
+          type="search"
+          placeholder="Cari nama atau email peserta">
+      </label>
+
+
+      <select
+        id="reportStatusFilter"
+        class="report-select">
+        <option value="all">Semua status</option>
+        <option value="graduated">Lulus</option>
+        <option value="not_graduated">Belum lulus</option>
+        <option value="certificate">Bersertifikat</option>
+      </select>
+
+    </div>
+
+
+    <div class="report-export-group">
+
+      <button
+        type="button"
+        class="report-export-button excel"
+        id="exportExcelBtn">
+        Excel
+      </button>
+
+      <button
+        type="button"
+        class="report-export-button csv"
+        id="exportCsvBtn">
+        CSV
+      </button>
+
+      <button
+        type="button"
+        class="report-export-button pdf"
+        id="exportPdfBtn">
+        PDF Rekap
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- ========================================================
+       TABLE
+       ======================================================== -->
+  <section class="report-table-panel">
+
+    <div class="report-table-head">
+
+      <div>
+        <h2>
+          Rekap Peserta
+        </h2>
+
+        <p>
+          Nilai terbaik setiap kuis dan Evaluasi Akhir.
+        </p>
+      </div>
+
+      <span
+        class="report-count"
+        id="reportVisibleCount">
+        0 peserta
+      </span>
+
+    </div>
+
+
+    <div
+      id="reportTableHost"
+      class="report-table-host">
+
+      <div class="report-loading">
+        Memuat laporan…
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ========================================================
+       MOBILE
+       ======================================================== -->
+  <section
+    id="reportMobileHost"
+    class="report-mobile-list">
+  </section>
+
+</main>
+
+
+<!-- ==========================================================
+     DETAIL REPORT PREVIEW
+     ========================================================== -->
+<dialog
+  id="participantReportModal"
+  class="participant-report-dialog">
+
+  <div class="participant-report-body">
+
+    <div class="participant-report-head">
+
+      <div>
+        <div class="report-kicker">
+          Laporan Individual
+        </div>
+
+        <h2 id="participantReportName">
+          Peserta
+        </h2>
+
+        <p id="participantReportEmail"></p>
+      </div>
+
+
+      <button
+        type="button"
+        class="participant-report-close"
+        id="closeParticipantReport"
+        aria-label="Tutup">
+        ×
+      </button>
+
+    </div>
+
+
+    <div
+      id="participantReportSummary"
+      class="participant-report-summary">
+    </div>
+
+
+    <div
+      id="participantModuleReport"
+      class="participant-module-report">
+    </div>
+
+
+    <div
+      id="participantFinalReport"
+      class="participant-final-report">
+    </div>
+
+
+    <div class="participant-report-footer-actions">
+
+      <button
+        type="button"
+        class="participant-report-pdf"
+        id="participantPdfBtn">
+        Unduh PDF Peserta
+      </button>
+
+    </div>
+
+  </div>
+
+</dialog>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.4/dist/jspdf.plugin.autotable.min.js"></script>
+
+<script src="assets/js/supabase-config.js"></script>
+<script src="assets/js/supabase-client.js"></script>
+<script src="assets/js/auth.js"></script>
+<script src="assets/js/laporan-belajar.js"></script>
+
+</body>
+</html>
