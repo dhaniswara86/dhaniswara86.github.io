@@ -3890,6 +3890,183 @@ body.mega-menu-open {
 }
 </style>
 
+
+<style id="kabayanHeroWordRotateOverrides">
+.hero {
+  padding-bottom: clamp(32px, 4vw, 56px) !important;
+}
+
+.hero-copy {
+  max-width: 900px;
+}
+
+.hero-copy h1 {
+  margin-bottom: 16px;
+}
+
+.hero-rotating-gradient {
+  display: block;
+  min-height: 1.08em;
+}
+
+#heroRotatingWord {
+  display: inline-block;
+  min-width: 5.6ch;
+  transition: opacity .26s ease, transform .26s ease;
+  will-change: opacity, transform;
+}
+
+#heroRotatingWord.is-switching {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.hero-description {
+  max-width: 930px;
+  margin-bottom: 26px;
+}
+
+.hero-actions-single {
+  justify-content: center;
+  gap: 0;
+}
+
+.hero-actions-single .button {
+  min-width: 214px;
+}
+
+.hero-visual.hero-explore-visual {
+  margin-top: clamp(26px, 3vw, 36px) !important;
+}
+
+.hero-explore-visual .hero-glow {
+  bottom: -38px;
+  width: min(900px, 84vw);
+  height: 220px;
+  opacity: .58;
+  filter: blur(24px);
+}
+
+.kabayan-explore-title {
+  margin: 0 0 clamp(16px, 2vw, 24px);
+  font-size: clamp(22px, 2.2vw, 32px);
+}
+
+.kabayan-explore-rail {
+  gap: clamp(10px, 1vw, 16px);
+  padding: 0 10px 6px;
+}
+
+.kabayan-explore-figure {
+  height: clamp(72px, 6.4vw, 90px);
+  margin: 0 auto 10px;
+}
+
+.kx-mockup {
+  width: 72px;
+  height: 78px;
+  filter: drop-shadow(0 11px 14px rgba(24, 45, 78, .10));
+}
+
+.kabayan-explore-label {
+  font-size: clamp(13px, 1.12vw, 18px);
+}
+
+.kabayan-explore-note {
+  margin-top: 5px;
+  font-size: 11px;
+}
+
+/* scaled colored mockups */
+.kx-form .paper { width: 49px; height: 66px; border-radius: 10px; }
+.kx-form .paper.back { left: 8px; top: 10px; }
+.kx-form .paper.front { right: 8px; top: 4px; }
+.kx-form .line { left: 10px; height: 5px; }
+.kx-form .l1{top:16px;width:30px}.kx-form .l2{top:28px;width:35px}.kx-form .l3{top:40px;width:28px}.kx-form .l4{top:52px;width:22px}
+
+.kx-book .cover { left: 15px; top: 4px; width: 48px; height: 68px; border-radius: 8px 12px 12px 8px; }
+.kx-book .cover::before { left: 21px; top: 14px; width: 6px; height: 36px; }
+.kx-book .cover::after { right: 8px; bottom: 13px; width: 20px; height: 6px; box-shadow: 0 -11px 0 rgba(255,255,255,.65); }
+
+.kx-calc .body { left: 11px; top: 3px; width: 52px; height: 72px; border-radius: 16px; }
+.kx-calc .display { left: 8px; right: 8px; top: 9px; height: 16px; font-size: 7px; }
+.kx-calc .keys { left: 10px; right: 10px; bottom: 12px; gap: 6px; }
+.kx-calc .keys i { height: 10px; }
+
+.kx-xml .file { top: 22px; width: 33px; height: 38px; border-radius: 10px; font-size: 10px; }
+.kx-xml .connector { left: 29px; top: 39px; width: 14px; }
+
+.kx-app .window { left: 1px; top: 12px; width: 70px; height: 50px; border-radius: 14px; }
+.kx-app .bar { height: 11px; }
+.kx-app .bar::before { left: 9px; top: 4px; width: 16px; height: 4px; }
+.kx-app .sidebar { top: 11px; width: 18px; }
+.kx-app .pill { left: 26px; right: 8px; height: 10px; }
+.kx-app .p1 { top: 21px; }
+.kx-app .p2 { top: 37px; }
+
+.kx-article .sheet { left: 8px; top: 3px; width: 56px; height: 72px; border-radius: 12px; }
+.kx-article .hero-line { height: 24px; }
+.kx-article .text { height: 5px; margin: 8px 9px 0; }
+.kx-article .w2 { width: 36px; }
+.kx-article .w3 { width: 28px; }
+
+.kx-news .tile { left: 7px; top: 6px; width: 58px; height: 58px; border-radius: 18px; font-size: 11px; }
+
+.kx-learning .monitor { left: 2px; top: 10px; width: 68px; height: 52px; border-radius: 14px; }
+.kx-learning .play { left: 31px; top: 25px; border-left: 13px solid #0d6ce8; border-top: 8px solid transparent; border-bottom: 8px solid transparent; }
+.kx-learning .base { left: 20px; bottom: 6px; width: 34px; height: 6px; }
+
+@media (max-width: 1080px) {
+  .hero-visual.hero-explore-visual { margin-top: 30px !important; }
+  .kabayan-explore-rail {
+    display: flex;
+    justify-content: flex-start;
+    gap: 18px;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    padding: 0 24px 8px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .kabayan-explore-rail::-webkit-scrollbar { display:none; }
+  .kabayan-explore-item { flex: 0 0 92px; scroll-snap-align: start; }
+}
+
+@media (max-width: 734px) {
+  .hero {
+    padding-bottom: 26px !important;
+  }
+
+  .hero-copy h1 {
+    margin-bottom: 12px;
+  }
+
+  .hero-description {
+    margin-bottom: 20px;
+  }
+
+  .hero-actions-single .button {
+    width: 100%;
+    max-width: 240px;
+  }
+
+  .hero-visual.hero-explore-visual {
+    margin-top: 24px !important;
+  }
+
+  .kabayan-explore-title {
+    text-align: center;
+    padding: 0 16px;
+    margin-bottom: 18px;
+  }
+
+  .kabayan-explore-item { flex-basis: 88px; }
+  .kabayan-explore-figure { height: 70px; }
+  .kabayan-explore-label { font-size: 14px; }
+  .kabayan-explore-note { font-size: 10px; }
+}
+</style>
+
 </head>
 <body id="top">
 <header class="site-nav">
@@ -4153,21 +4330,15 @@ body.mega-menu-open {
 <p class="eyebrow">Katalog Bahan Pelayanan</p>
 <h1>
           Belajar pajak.
-          <span class="hero-gradient">Lebih sederhana.</span>
+          <span class="hero-gradient hero-rotating-gradient"><span id="heroRotatingWord">Sederhana.</span></span>
 </h1>
 <p class="hero-description">
           Buku, formulir, aplikasi, template, dan artikel perpajakan
           dalam satu tempat yang praktis dan gratis.
         </p>
-<div class="hero-actions">
-<a class="button button-primary" href="buku.html">
-            Mulai belajar
-          </a>
-<a class="button button-outline" href="formulir.html">
-            Lihat formulir
-          </a>
-<a class="button button-outline" href="aplikasi.html">
-            Lihat aplikasi
+<div class="hero-actions hero-actions-single">
+<a class="button button-primary" href="#kabayanExploreTitle">
+            Jelajahi Kabayan
           </a>
 </div>
 </div>
@@ -5712,6 +5883,29 @@ body.mega-menu-open {
   }
 
   loadLatestArticle();
+})();
+</script>
+
+
+<script id="kabayanHeroWordRotateScript">
+(function(){
+  const wordEl = document.getElementById('heroRotatingWord');
+  if (!wordEl) return;
+  const words = ['Sederhana.', 'Praktis.', 'Gratis.'];
+  let index = 0;
+  const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (media.matches) {
+    wordEl.textContent = words[0];
+    return;
+  }
+  setInterval(() => {
+    wordEl.classList.add('is-switching');
+    window.setTimeout(() => {
+      index = (index + 1) % words.length;
+      wordEl.textContent = words[index];
+      wordEl.classList.remove('is-switching');
+    }, 240);
+  }, 2600);
 })();
 </script>
 
