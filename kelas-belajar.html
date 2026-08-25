@@ -9,7 +9,7 @@
 
   <link rel="stylesheet" href="assets/css/lms.css">
   <link rel="stylesheet" href="assets/css/evaluasi-akhir.css">
-  <link rel="stylesheet" href="assets/css/kelas-belajar.css?v=3.0">
+  <link rel="stylesheet" href="assets/css/kelas-belajar.css?v=3.1">
   <link rel="stylesheet" href="assets/css/kelas-belajar-video.css?v=1.2">
 </head>
 
@@ -130,7 +130,9 @@
           </strong>
         </div>
 
-        <span class="kb-live-badge">
+        <span
+          class="kb-live-badge"
+          id="progressBadge">
           Aktif
         </span>
 
@@ -161,17 +163,22 @@
 
         <div class="kb-progress-copy">
 
-          <span>
+          <span id="progressStateLabel">
             Perjalanan belajar
           </span>
 
-          <strong>
+          <strong id="progressStateTitle">
             Lanjutkan dari checkpoint terakhir.
           </strong>
 
-          <small>
+          <small id="progressStateDescription">
             Selesaikan materi dan kuis untuk membuka Evaluasi Akhir.
           </small>
+
+          <div
+            class="kb-progress-state-action"
+            id="progressStateAction">
+          </div>
 
         </div>
 
@@ -250,9 +257,9 @@
       </span>
 
       <div>
-        <span>Tersisa</span>
+        <span id="remainingLabel">Tersisa</span>
         <strong id="remainingCount">0</strong>
-        <small>checkpoint berikutnya</small>
+        <small id="remainingHint">checkpoint berikutnya</small>
       </div>
 
     </article>
@@ -263,7 +270,7 @@
   <!-- ======================================================
        LEARNING JOURNEY
        ====================================================== -->
-  <section class="kb-learning">
+  <section class="kb-learning" id="learningJourney">
 
     <div class="kb-section-head">
 
@@ -444,7 +451,7 @@
 <script src="assets/js/supabase-config.js"></script>
 <script src="assets/js/supabase-client.js"></script>
 <script src="assets/js/auth.js"></script>
-<script src="assets/js/kelas-belajar.js?v=3.0"></script>
+<script src="assets/js/kelas-belajar.js?v=3.1"></script>
 
 </body>
 </html>
