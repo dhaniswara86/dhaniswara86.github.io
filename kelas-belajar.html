@@ -3,57 +3,356 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f7fb">
+
   <title>Kelas — Kabayan Learning</title>
+
   <link rel="stylesheet" href="assets/css/lms.css">
   <link rel="stylesheet" href="assets/css/evaluasi-akhir.css">
-  <link rel="stylesheet" href="assets/css/kelas-belajar-video.css?v=1.1">
+  <link rel="stylesheet" href="assets/css/kelas-belajar.css?v=3.0">
+  <link rel="stylesheet" href="assets/css/kelas-belajar-video.css?v=1.2">
 </head>
-<body>
-<header class="site-header">
-  <nav class="nav">
-    <a class="brand" href="peserta-dashboard.html">Kabayan <span>Learning</span></a>
-    <div class="nav-actions">
-      <a class="btn ghost small" href="peserta-dashboard.html">← Kelas Saya</a>
-      <button class="btn ghost small" onclick="KabayanAuth.signOut()">Keluar</button>
+
+<body class="kb-page">
+
+<header class="kb-header">
+  <nav class="kb-nav">
+
+    <a
+      class="kb-brand"
+      href="peserta-dashboard.html"
+      aria-label="Kabayan Learning">
+
+      <span class="kb-brand-logo">
+        <img
+          src="assets/img/logoASD.svg"
+          alt="Logo ASD"
+          width="28"
+          height="28">
+      </span>
+
+      <span class="kb-brand-text">
+        Kabayan Learning
+      </span>
+
+    </a>
+
+
+    <div class="kb-nav-actions">
+
+      <a
+        class="kb-nav-button"
+        href="peserta-dashboard.html">
+
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="m15 18-6-6 6-6"></path>
+        </svg>
+
+        <span>Kelas Saya</span>
+
+      </a>
+
+
+      <button
+        class="kb-icon-button"
+        onclick="KabayanAuth.signOut()"
+        type="button"
+        aria-label="Keluar">
+
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M10 5H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h5"></path>
+          <path d="m15 8 4 4-4 4"></path>
+          <path d="M19 12H9"></path>
+        </svg>
+
+      </button>
+
     </div>
+
   </nav>
 </header>
 
-<main class="page">
-  <section class="hero">
-    <div>
-      <div class="eyebrow">Kelas Saya</div>
-      <h1 id="className">Memuat kelas…</h1>
+
+<main class="kb-shell">
+
+  <!-- ======================================================
+       HERO
+       ====================================================== -->
+  <section class="kb-hero">
+
+    <div class="kb-hero-copy">
+
+      <div class="kb-eyebrow">
+        Kelas Saya
+      </div>
+
+      <h1 id="className">
+        Memuat kelas…
+      </h1>
+
       <p id="classDescription"></p>
+
+
+      <div class="kb-hero-meta">
+
+        <span>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H11v17H6.5A2.5 2.5 0 0 0 4 22V5.5Z"></path>
+            <path d="M20 5.5A2.5 2.5 0 0 0 17.5 3H13v17h4.5A2.5 2.5 0 0 1 20 22V5.5Z"></path>
+          </svg>
+          Belajar bertahap
+        </span>
+
+        <span>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 12 9 17 20 6"></path>
+          </svg>
+          Progres tersimpan otomatis
+        </span>
+
+      </div>
+
     </div>
 
-    <div class="surface progress-card">
-      <div class="progress-top">
+
+    <aside class="kb-progress-panel">
+
+      <div class="kb-progress-orb orb-a"></div>
+      <div class="kb-progress-orb orb-b"></div>
+
+
+      <div class="kb-progress-panel-top">
+
         <div>
-          <div class="eyebrow">Progress</div>
-          <div id="progressText" class="muted">0 checkpoint selesai</div>
+          <span>Progress kelas</span>
+          <strong id="progressText">
+            0 checkpoint selesai
+          </strong>
         </div>
-        <div id="progressPercent" class="progress-percent">0%</div>
+
+        <span class="kb-live-badge">
+          Aktif
+        </span>
+
       </div>
-      <div class="progress-track">
-        <div id="progressBar" class="progress-fill"></div>
+
+
+      <div class="kb-progress-visual">
+
+        <div
+          class="kb-progress-ring"
+          id="progressRing"
+          style="--progress:0">
+
+          <div class="kb-progress-ring-inner">
+
+            <strong id="progressPercent">
+              0%
+            </strong>
+
+            <span>
+              selesai
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="kb-progress-copy">
+
+          <span>
+            Perjalanan belajar
+          </span>
+
+          <strong>
+            Lanjutkan dari checkpoint terakhir.
+          </strong>
+
+          <small>
+            Selesaikan materi dan kuis untuk membuka Evaluasi Akhir.
+          </small>
+
+        </div>
+
       </div>
-    </div>
+
+
+      <div
+        class="progress-track kb-progress-track"
+        aria-hidden="true">
+
+        <div
+          id="progressBar"
+          class="progress-fill kb-progress-fill">
+        </div>
+
+      </div>
+
+    </aside>
+
   </section>
 
-  <div id="moduleList"></div>
+
+  <!-- ======================================================
+       LEARNING SNAPSHOT
+       ====================================================== -->
+  <section class="kb-snapshot">
+
+    <article class="kb-snapshot-item">
+
+      <span class="kb-snapshot-icon blue">
+
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H11v17H6.5A2.5 2.5 0 0 0 4 22V5.5Z"></path>
+          <path d="M20 5.5A2.5 2.5 0 0 0 17.5 3H13v17h4.5A2.5 2.5 0 0 1 20 22V5.5Z"></path>
+        </svg>
+
+      </span>
+
+      <div>
+        <span>Modul</span>
+        <strong id="moduleCount">0</strong>
+        <small>bagian pembelajaran</small>
+      </div>
+
+    </article>
+
+
+    <article class="kb-snapshot-item">
+
+      <span class="kb-snapshot-icon green">
+
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="m5 12 4 4L19 6"></path>
+        </svg>
+
+      </span>
+
+      <div>
+        <span>Selesai</span>
+        <strong id="completedCount">0</strong>
+        <small>checkpoint diselesaikan</small>
+      </div>
+
+    </article>
+
+
+    <article class="kb-snapshot-item">
+
+      <span class="kb-snapshot-icon purple">
+
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 3v18"></path>
+          <path d="M3 12h18"></path>
+        </svg>
+
+      </span>
+
+      <div>
+        <span>Tersisa</span>
+        <strong id="remainingCount">0</strong>
+        <small>checkpoint berikutnya</small>
+      </div>
+
+    </article>
+
+  </section>
+
+
+  <!-- ======================================================
+       LEARNING JOURNEY
+       ====================================================== -->
+  <section class="kb-learning">
+
+    <div class="kb-section-head">
+
+      <div>
+
+        <div class="kb-section-kicker">
+          Perjalanan Belajar
+        </div>
+
+        <h2>
+          Materi kelas
+        </h2>
+
+        <p>
+          Buka checkpoint secara berurutan, pelajari video dan resume, lalu selesaikan kuis setiap modul.
+        </p>
+
+      </div>
+
+
+      <div class="kb-section-legend">
+
+        <span>
+          <i class="legend-dot done"></i>
+          Selesai
+        </span>
+
+        <span>
+          <i class="legend-dot current"></i>
+          Belum selesai
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div
+      class="kb-module-list"
+      id="moduleList">
+    </div>
+
+  </section>
+
 </main>
 
-<dialog id="lessonModal" class="lesson-reader-dialog">
+
+<!-- ==========================================================
+     LESSON READER
+     ========================================================== -->
+<dialog
+  id="lessonModal"
+  class="lesson-reader-dialog kb-reader-dialog">
+
   <div class="dialog-body lesson-reader">
-    <div class="lesson-reader-top">
+
+    <div class="lesson-reader-top kb-reader-top">
+
       <div>
-        <div class="eyebrow">Checkpoint</div>
+
+        <div class="kb-reader-kicker">
+          Checkpoint
+        </div>
+
         <h2 id="lessonTitle"></h2>
-        <div id="lessonMeta" class="lesson-meta"></div>
+
+        <div
+          id="lessonMeta"
+          class="lesson-meta">
+        </div>
+
+        <div
+          class="lesson-reader-pills"
+          id="lessonReaderPills">
+        </div>
+
       </div>
-      <button type="button" class="icon-close" onclick="document.getElementById('lessonModal').close()" aria-label="Tutup">×</button>
+
+
+      <button
+        type="button"
+        class="icon-close kb-reader-close"
+        onclick="document.getElementById('lessonModal').close()"
+        aria-label="Tutup">
+        ×
+      </button>
+
     </div>
+
 
     <section
       id="lessonVideoSection"
@@ -61,13 +360,16 @@
       hidden>
 
       <div class="lesson-reader-section-head">
+
         <div>
           <span>Video Pembelajaran</span>
           <strong>Tonton penjelasan materi</strong>
         </div>
 
         <small id="lessonVideoDuration"></small>
+
       </div>
+
 
       <div
         id="lessonVideo"
@@ -80,11 +382,14 @@
     <section class="lesson-resume-section">
 
       <div class="lesson-reader-section-head">
+
         <div>
           <span>Resume Materi</span>
           <strong>Ringkasan yang perlu dipahami</strong>
         </div>
+
       </div>
+
 
       <article
         id="lessonContent"
@@ -98,12 +403,40 @@
       Tonton video dan baca resume sebelum menandai checkpoint sebagai selesai.
     </div>
 
+
     <div class="dialog-actions">
-      <button class="btn ghost" onclick="document.getElementById('lessonModal').close()">Tutup</button>
-      <button class="btn" id="completeLessonBtn">Tandai selesai</button>
+
+      <button
+        class="btn ghost"
+        onclick="document.getElementById('lessonModal').close()">
+        Tutup
+      </button>
+
+      <button
+        class="btn kb-complete-button"
+        id="completeLessonBtn">
+        Tandai selesai
+      </button>
+
     </div>
+
   </div>
+
 </dialog>
+
+
+<footer class="kb-footer">
+
+  <span>
+    © 2026 dhaniswara86
+  </span>
+
+  <span>
+    Learning Tax with Angga Sukma Dhaniswara
+  </span>
+
+</footer>
+
 
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/dompurify/dist/purify.min.js"></script>
@@ -111,6 +444,7 @@
 <script src="assets/js/supabase-config.js"></script>
 <script src="assets/js/supabase-client.js"></script>
 <script src="assets/js/auth.js"></script>
-<script src="assets/js/kelas-belajar.js?v=2.1"></script>
+<script src="assets/js/kelas-belajar.js?v=3.0"></script>
+
 </body>
 </html>
