@@ -172,7 +172,7 @@ async function loadModules() {
   const { data, error } = await window.kabayanSupabase
     .from("modules")
     .select(
-      "id, title, description, position, module_type, is_published, lessons(id,title,content,position,is_published,estimated_minutes)"
+      "id, title, description, position, module_type, is_published, lessons(id,title,content,video_url,video_duration,position,is_published,estimated_minutes)"
     )
     .eq("class_id", classId)
     .order("position", { ascending: true });
@@ -383,8 +383,10 @@ function renderLessonRow(lesson) {
       <div class="kc-lesson-copy">
         <strong>${escapeHtml(lesson.title)}</strong>
         <span>
-          ${lesson.content?.trim() ? "Materi sudah diisi" : "Isi materi masih kosong"}
-          ${lesson.estimated_minutes ? ` · ${lesson.estimated_minutes} menit` : ""}
+          ${lesson.video_url?.trim() ? "Video tersedia" : "Tanpa video"}
+          · ${lesson.content?.trim() ? "Resume tersedia" : "Resume belum diisi"}
+          ${lesson.video_duration ? ` · Video ${lesson.video_duration} menit` : ""}
+          ${lesson.estimated_minutes ? ` · Belajar ${lesson.estimated_minutes} menit` : ""}
         </span>
       </div>
 
@@ -920,6 +922,12 @@ function openLessonEditor(lessonId) {
   form.estimated_minutes.value =
     lesson.estimated_minutes || "";
 
+  form.video_url.value =
+    lesson.video_url || "";
+
+  form.video_duration.value =
+    lesson.video_duration || "";
+
   form.is_published.checked =
     !!lesson.is_published;
 
@@ -970,6 +978,22 @@ async function saveLesson(event) {
   const estimated =
     form.estimated_minutes.value.trim();
 
+  const videoDuration =
+    form.video_duration.value.trim();
+
+  const videoUrl =
+    form.video_url.value.trim();
+
+  if (videoUrl && !isSupportedVideoUrl(videoUrl)) {
+    status.textContent =
+      "URL video tidak valid. Gunakan URL YouTube, Vimeo, atau tautan video http/https.";
+
+    status.className =
+      "form-status error";
+
+    return;
+  }
+
 
   const { error } =
     await window.kabayanSupabase
@@ -984,6 +1008,14 @@ async function saveLesson(event) {
         estimated_minutes:
           estimated
             ? Number(estimated)
+            : null,
+
+        video_url:
+          videoUrl || null,
+
+        video_duration:
+          videoDuration
+            ? Number(videoDuration)
             : null,
 
         is_published:
@@ -1124,6 +1156,21 @@ function getInitial(value = "") {
       .charAt(0)
       .toUpperCase() || "P"
   );
+}
+
+
+function isSupportedVideoUrl(value = "") {
+  try {
+    const url = new URL(value);
+
+    if (!["http:", "https:"].includes(url.protocol)) {
+      return false;
+    }
+
+    return true;
+  } catch (error) {
+    return false;
+  }
 }
 
 

@@ -33,7 +33,7 @@ async function loadClassLearning() {
 
   const { data: modules, error } = await window.kabayanSupabase
     .from("modules")
-    .select("id, title, description, position, module_type, lessons(id,title,content,position,estimated_minutes,is_published)")
+    .select("id, title, description, position, module_type, lessons(id,title,content,video_url,video_duration,position,estimated_minutes,is_published)")
     .eq("class_id", classId)
     .eq("is_published", true)
     .eq("module_type", "learning")
@@ -293,14 +293,24 @@ function openLesson(lessonId) {
   if (!lesson) return;
 
   document.getElementById("lessonTitle").textContent = lesson.title;
+  const metaParts = [];
+
+  if (lesson.video_duration) {
+    metaParts.push(`Video ${lesson.video_duration} menit`);
+  }
+
+  if (lesson.estimated_minutes) {
+    metaParts.push(`Estimasi belajar ${lesson.estimated_minutes} menit`);
+  }
+
   document.getElementById("lessonMeta").textContent =
-    lesson.estimated_minutes
-      ? `Estimasi belajar ${lesson.estimated_minutes} menit`
-      : "";
+    metaParts.join(" · ");
+
+  renderLessonVideo(lesson);
 
   const rawContent = lesson.content?.trim()
     ? lesson.content
-    : "Materi belum diisi oleh pengajar.";
+    : "Resume materi belum diisi oleh pengajar.";
 
   let rendered = "";
 
@@ -320,6 +330,192 @@ function openLesson(lessonId) {
   document.getElementById("completeLessonBtn").dataset.lessonId = lessonId;
   document.getElementById("lessonModal").showModal();
 }
+
+document.getElementById("lessonModal")
+  ?.addEventListener("close", () => {
+    const host = document.getElementById("lessonVideo");
+
+    if (host) {
+      host.innerHTML = "";
+    }
+  });
+
+
+function renderLessonVideo(lesson) {
+  const section =
+    document.getElementById("lessonVideoSection");
+
+  const host =
+    document.getElementById("lessonVideo");
+
+  const duration =
+    document.getElementById("lessonVideoDuration");
+
+  if (!section || !host || !duration) {
+    return;
+  }
+
+  host.innerHTML = "";
+  duration.textContent = "";
+
+  const rawUrl =
+    lesson.video_url?.trim();
+
+  if (!rawUrl) {
+    section.hidden = true;
+    return;
+  }
+
+  const video =
+    getVideoConfig(rawUrl);
+
+  if (!video) {
+    section.hidden = true;
+    return;
+  }
+
+  section.hidden = false;
+
+  duration.textContent =
+    lesson.video_duration
+      ? `${lesson.video_duration} menit`
+      : "";
+
+  if (video.type === "iframe") {
+    const iframe =
+      document.createElement("iframe");
+
+    iframe.src = video.src;
+    iframe.title = `Video pembelajaran: ${lesson.title}`;
+    iframe.loading = "lazy";
+    iframe.allow =
+      "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+    iframe.allowFullscreen = true;
+    iframe.referrerPolicy =
+      "strict-origin-when-cross-origin";
+
+    host.appendChild(iframe);
+    return;
+  }
+
+  if (video.type === "video") {
+    const player =
+      document.createElement("video");
+
+    player.src = video.src;
+    player.controls = true;
+    player.preload = "metadata";
+    player.playsInline = true;
+
+    host.appendChild(player);
+    return;
+  }
+
+  const link =
+    document.createElement("a");
+
+  link.href = video.src;
+  link.target = "_blank";
+  link.rel = "noopener noreferrer";
+  link.className = "lesson-video-external";
+  link.textContent = "Buka video pembelajaran ↗";
+
+  host.appendChild(link);
+}
+
+
+function getVideoConfig(value) {
+  let url;
+
+  try {
+    url = new URL(value);
+  } catch (error) {
+    return null;
+  }
+
+  if (!["http:", "https:"].includes(url.protocol)) {
+    return null;
+  }
+
+  const host =
+    url.hostname
+      .replace(/^www\./, "")
+      .toLowerCase();
+
+  let youtubeId = null;
+
+  if (host === "youtu.be") {
+    youtubeId =
+      url.pathname
+        .split("/")
+        .filter(Boolean)[0] || null;
+  }
+
+  if (
+    host === "youtube.com" ||
+    host === "m.youtube.com" ||
+    host === "youtube-nocookie.com"
+  ) {
+    if (url.pathname === "/watch") {
+      youtubeId =
+        url.searchParams.get("v");
+    } else {
+      const parts =
+        url.pathname
+          .split("/")
+          .filter(Boolean);
+
+      if (
+        ["embed", "shorts", "live"].includes(parts[0])
+      ) {
+        youtubeId =
+          parts[1] || null;
+      }
+    }
+  }
+
+  if (
+    youtubeId &&
+    /^[A-Za-z0-9_-]{6,20}$/.test(youtubeId)
+  ) {
+    return {
+      type: "iframe",
+      src:
+        `https://www.youtube-nocookie.com/embed/${encodeURIComponent(youtubeId)}?rel=0&modestbranding=1`
+    };
+  }
+
+  if (
+    host === "vimeo.com" ||
+    host === "player.vimeo.com"
+  ) {
+    const match =
+      url.pathname.match(/(?:video\/)?(\d+)/);
+
+    if (match) {
+      return {
+        type: "iframe",
+        src:
+          `https://player.vimeo.com/video/${match[1]}`
+      };
+    }
+  }
+
+  if (
+    /\.(mp4|webm|ogg)$/i.test(url.pathname)
+  ) {
+    return {
+      type: "video",
+      src: url.href
+    };
+  }
+
+  return {
+    type: "external",
+    src: url.href
+  };
+}
+
 
 document.getElementById("completeLessonBtn")?.addEventListener("click", async (event) => {
   const lessonId = event.currentTarget.dataset.lessonId;
