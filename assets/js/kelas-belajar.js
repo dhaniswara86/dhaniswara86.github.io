@@ -33,7 +33,7 @@ async function loadClassLearning() {
 
   const { data: modules, error } = await window.kabayanSupabase
     .from("modules")
-    .select("id, title, description, position, module_type, lessons(id,title,content,video_url,video_duration,position,estimated_minutes,is_published)")
+    .select("id, title, description, position, module_type, lessons(id,title,content,video_url,video_duration,video_orientation,position,estimated_minutes,is_published)")
     .eq("class_id", classId)
     .eq("is_published", true)
     .eq("module_type", "learning")
@@ -306,6 +306,7 @@ function openLesson(lessonId) {
   document.getElementById("lessonMeta").textContent =
     metaParts.join(" · ");
 
+  renderLessonReaderPills(lesson);
   renderLessonVideo(lesson);
 
   const rawContent = lesson.content?.trim()
@@ -341,6 +342,50 @@ document.getElementById("lessonModal")
   });
 
 
+function renderLessonReaderPills(lesson) {
+  const host =
+    document.getElementById("lessonReaderPills");
+
+  if (!host) {
+    return;
+  }
+
+  const pills = [];
+
+  if (lesson.video_url?.trim()) {
+    pills.push({
+      label: lesson.video_duration
+        ? `Video ${lesson.video_duration} menit`
+        : "Video pembelajaran",
+      tone: "blue"
+    });
+  }
+
+  if (lesson.estimated_minutes) {
+    pills.push({
+      label: `Belajar ± ${lesson.estimated_minutes} menit`,
+      tone: "gray"
+    });
+  }
+
+  if (lesson.content?.trim()) {
+    pills.push({
+      label: "Resume tersedia",
+      tone: "green"
+    });
+  }
+
+  host.innerHTML =
+    pills
+      .map((pill) => `
+        <span class="lesson-reader-pill ${pill.tone}">
+          ${escapeHtml(pill.label)}
+        </span>
+      `)
+      .join("");
+}
+
+
 function renderLessonVideo(lesson) {
   const section =
     document.getElementById("lessonVideoSection");
@@ -374,7 +419,28 @@ function renderLessonVideo(lesson) {
     return;
   }
 
+  const requestedOrientation =
+    ["auto", "landscape", "portrait"].includes(lesson.video_orientation)
+      ? lesson.video_orientation
+      : "auto";
+
+  const resolvedOrientation =
+    requestedOrientation === "auto"
+      ? inferVideoOrientation(rawUrl, video)
+      : requestedOrientation;
+
   section.hidden = false;
+
+  host.classList.remove(
+    "is-landscape",
+    "is-portrait"
+  );
+
+  host.classList.add(
+    resolvedOrientation === "portrait"
+      ? "is-portrait"
+      : "is-landscape"
+  );
 
   duration.textContent =
     lesson.video_duration
@@ -423,6 +489,22 @@ function renderLessonVideo(lesson) {
   host.appendChild(link);
 }
 
+
+function inferVideoOrientation(rawUrl, video) {
+  try {
+    const url = new URL(rawUrl);
+
+    if (
+      /(^|\/)shorts(\/|$)/i.test(url.pathname)
+    ) {
+      return "portrait";
+    }
+  } catch (error) {
+    // fallback landscape
+  }
+
+  return "landscape";
+}
 
 function getVideoConfig(value) {
   let url;

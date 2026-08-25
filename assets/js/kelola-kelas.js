@@ -172,7 +172,7 @@ async function loadModules() {
   const { data, error } = await window.kabayanSupabase
     .from("modules")
     .select(
-      "id, title, description, position, module_type, is_published, lessons(id,title,content,video_url,video_duration,position,is_published,estimated_minutes)"
+      "id, title, description, position, module_type, is_published, lessons(id,title,content,video_url,video_duration,video_orientation,position,is_published,estimated_minutes)"
     )
     .eq("class_id", classId)
     .order("position", { ascending: true });
@@ -928,6 +928,9 @@ function openLessonEditor(lessonId) {
   form.video_duration.value =
     lesson.video_duration || "";
 
+  form.video_orientation.value =
+    lesson.video_orientation || "auto";
+
   form.is_published.checked =
     !!lesson.is_published;
 
@@ -984,6 +987,9 @@ async function saveLesson(event) {
   const videoUrl =
     form.video_url.value.trim();
 
+  const videoOrientation =
+    form.video_orientation.value || "auto";
+
   if (videoUrl && !isSupportedVideoUrl(videoUrl)) {
     status.textContent =
       "URL video tidak valid. Gunakan URL YouTube, Vimeo, atau tautan video http/https.";
@@ -1017,6 +1023,11 @@ async function saveLesson(event) {
           videoDuration
             ? Number(videoDuration)
             : null,
+
+        video_orientation:
+          ["auto", "landscape", "portrait"].includes(videoOrientation)
+            ? videoOrientation
+            : "auto",
 
         is_published:
           form.is_published.checked,
