@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="id">
 <head>
 <meta charset="utf-8"/>
@@ -3544,260 +3545,722 @@ body.mega-menu-open {
 }
 </style>
 
-<style id="heroViewportFitStyles">
+<style id="proportionalHeroRefinement">
 /* =========================================================
-   Hero awal — fit satu layar
-   Menjaga area navbar + announcement + hero/slideshow
-   tetap berada dalam viewport awal tanpa memotong slider.
+   Hero proporsional — kembali ke desain original
+   Tidak dipaksa muat dalam satu viewport.
    ========================================================= */
-:root {
-  --hero-screen-height: 100vh;
-  --announcement-height: 47px;
-}
-
-@supports (height: 100svh) {
-  :root {
-    --hero-screen-height: 100svh;
-  }
-}
-
 .hero {
-  height: calc(
-    var(--hero-screen-height)
-    - var(--nav-height)
-    - var(--announcement-height)
-  );
-  min-height: 0;
-  display: flex;
-  flex-direction: column;
-  padding: clamp(18px, 4svh, 42px) 20px 0;
+  height: auto;
+  min-height: 760px;
+  padding: clamp(58px, 6vw, 82px) 20px 0;
 }
 
 .hero-copy {
-  flex: 0 0 auto;
-}
-
-.eyebrow {
-  margin-bottom: clamp(4px, 0.8svh, 8px);
-  font-size: clamp(14px, 2svh, 18px);
+  width: min(920px, 100%);
 }
 
 .hero h1 {
-  font-size: clamp(44px, min(6.2vw, 8svh), 80px);
-  line-height: 0.94;
+  font-size: clamp(52px, 7.3vw, 92px);
+  line-height: .96;
 }
 
 .hero-description {
-  max-width: 680px;
-  margin-top: clamp(10px, 2svh, 18px);
-  font-size: clamp(16px, min(2vw, 2.7svh), 24px);
-  line-height: 1.18;
+  max-width: 720px;
+  margin-top: 25px;
+  font-size: clamp(20px, 2.3vw, 28px);
+  line-height: 1.24;
 }
 
 .hero-actions {
-  gap: 12px;
-  margin-top: clamp(12px, 2.2svh, 20px);
+  margin-top: 29px;
+  gap: 17px;
 }
 
 .hero .button {
-  min-height: clamp(36px, 5.2svh, 44px);
-  padding: clamp(7px, 1svh, 10px) 18px;
-  font-size: clamp(14px, 1.65svh, 16px);
+  min-height: 44px;
+  padding: 10px 21px;
+  font-size: 17px;
 }
 
 .hero-visual {
   width: min(850px, 94vw);
-  height: auto;
-  min-height: 0;
-  flex: 1 1 auto;
-  margin-top: clamp(4px, 1.2svh, 12px);
+  height: 520px;
+  margin-top: 18px;
+  flex: none;
 }
 
 .hero-book-link {
-  justify-content: flex-start;
+  justify-content: flex-end;
 }
 
 .hero-book-image {
-  height: auto;
-  min-height: 0;
-  flex: 1 1 auto;
-  align-items: center;
+  height: 360px;
+  flex: none;
+  align-items: flex-end;
 }
 
 .hero-book-image img {
-  width: min(380px, 68vw);
-  height: 100%;
-  max-height: 100%;
-  object-fit: contain;
+  width: min(410px, 73vw);
+  height: 350px;
+  max-height: none;
 }
 
 .hero-book-caption {
-  width: min(630px, calc(100% - 80px));
-  min-height: 0;
-  flex: 0 0 auto;
-  padding: 6px 20px clamp(22px, 3svh, 30px);
+  width: min(630px, calc(100% - 90px));
+  min-height: 145px;
+  padding: 13px 20px 38px;
 }
 
 .hero-book-caption h2 {
-  margin: 4px 0 5px;
-  font-size: clamp(17px, min(2vw, 2.7svh), 24px);
+  margin: 6px 0 7px;
+  font-size: clamp(19px, 2.4vw, 27px);
 }
 
-.hero-book-category {
-  font-size: clamp(10px, 1.35svh, 12px);
-}
-
-.hero-book-detail {
-  font-size: clamp(12px, 1.55svh, 14px);
-}
-
-.slider-dots {
-  bottom: clamp(4px, 0.8svh, 6px);
-}
-
-.slider-fallback {
-  bottom: 10px;
-  width: min(210px, 54vw);
-  height: min(270px, calc(100% - 20px));
-  padding: clamp(24px, 4svh, 44px) 24px;
-}
+.hero-book-category { font-size: 12px; }
+.hero-book-detail { font-size: 14px; }
+.slider-dots { bottom: 6px; }
 
 @media (max-width: 680px) {
   .hero {
-    min-height: 0;
-    padding: clamp(14px, 2.6svh, 24px) 16px 0;
+    height: auto;
+    min-height: 690px;
+    padding: 54px 16px 0;
   }
 
   .hero h1 {
-    font-size: clamp(36px, 11.5vw, 48px);
+    font-size: clamp(42px, 12.5vw, 52px);
   }
 
   .hero-description {
-    max-width: 540px;
-    margin-top: clamp(8px, 1.5svh, 13px);
-    font-size: clamp(15px, 4.45vw, 19px);
-    line-height: 1.17;
+    max-width: 560px;
+    margin-top: 18px;
+    font-size: 20px;
+    line-height: 1.22;
   }
 
   .hero-actions {
-    gap: 7px;
-    margin-top: clamp(9px, 1.6svh, 13px);
+    gap: 10px;
+    margin-top: 22px;
   }
 
   .hero .button {
-    min-height: 36px;
-    padding: 6px 11px;
-    font-size: 13px;
+    min-height: 40px;
+    padding: 8px 14px;
+    font-size: 14px;
   }
 
   .hero-visual {
     width: 100%;
-    height: auto;
-    min-height: 0;
-    margin-top: 5px;
+    height: 490px;
+    margin-top: 18px;
   }
 
   .hero-book-image {
-    height: auto;
+    height: 335px;
   }
 
   .hero-book-image img {
-    width: min(330px, 75vw);
-    height: 100%;
-    max-height: 100%;
+    width: min(350px, 80vw);
+    height: 320px;
   }
 
   .hero-book-caption {
-    width: calc(100% - 50px);
-    min-height: 0;
-    padding: 4px 10px clamp(22px, 3svh, 27px);
+    width: calc(100% - 54px);
+    min-height: 145px;
+    padding: 10px 10px 34px;
   }
 
   .hero-book-caption h2 {
-    margin: 3px 0 4px;
-    font-size: clamp(16px, 4.7vw, 20px);
-    line-height: 1.1;
-  }
-
-  .slider-arrow {
-    top: 43%;
+    margin: 5px 0 6px;
+    font-size: clamp(18px, 5.2vw, 22px);
+    line-height: 1.12;
   }
 }
 
-/* Laptop / HP dengan layar pendek: rapatkan copy agar slideshow tetap utuh. */
-@media (max-height: 720px) {
+@media (max-width: 440px) {
   .hero {
-    padding-top: 12px;
-  }
-
-  .eyebrow {
-    margin-bottom: 3px;
-    font-size: 13px;
+    padding-top: 44px;
   }
 
   .hero h1 {
-    font-size: clamp(34px, min(5.5vw, 6.8svh), 58px);
+    font-size: clamp(40px, 12.8vw, 49px);
   }
 
   .hero-description {
-    margin-top: 8px;
-    font-size: clamp(14px, min(1.7vw, 2.45svh), 17px);
-    line-height: 1.15;
+    font-size: 18px;
   }
 
   .hero-actions {
-    gap: 7px;
-    margin-top: 8px;
+    gap: 9px;
   }
 
   .hero .button {
-    min-height: 34px;
-    padding: 5px 13px;
+    padding-right: 12px;
+    padding-left: 12px;
     font-size: 13px;
   }
 
-  .hero-book-caption {
-    padding-top: 3px;
-    padding-bottom: 18px;
+  .hero-visual {
+    height: 470px;
   }
 
-  .hero-book-caption h2 {
-    margin: 2px 0 3px;
-    font-size: 16px;
+  .hero-book-image {
+    height: 320px;
   }
 
-  .hero-book-category {
-    font-size: 10px;
+  .hero-book-image img {
+    height: 305px;
+  }
+}
+</style>
+<style id="kabayanCategoryRailStyles">
+/* =========================================================
+   HERO CATEGORY RAIL — original Kabayan, Apple-like browsing
+   ========================================================= */
+.hero {
+  min-height: 0 !important;
+  padding-bottom: 72px !important;
+}
+
+.hero-visual.kabayan-category-stage {
+  width: min(1320px, 100%) !important;
+  height: auto !important;
+  display: block !important;
+  margin: 62px auto 0 !important;
+  overflow: visible !important;
+}
+
+.kabayan-category-stage .hero-glow {
+  display: none;
+}
+
+.kabayan-rail-heading {
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto 28px;
+  color: var(--near-black);
+  font-size: clamp(28px, 3vw, 42px);
+  font-weight: 650;
+  letter-spacing: -0.045em;
+  line-height: 1.05;
+  text-align: left;
+}
+
+.kabayan-category-rail {
+  position: relative;
+  width: 100%;
+  display: flex;
+  gap: clamp(22px, 2.4vw, 38px);
+  align-items: flex-start;
+  padding: 8px max(24px, calc((100vw - 1180px) / 2)) 18px;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.kabayan-category-rail::-webkit-scrollbar {
+  display: none;
+}
+
+.kabayan-category-item {
+  flex: 0 0 116px;
+  min-width: 116px;
+  color: inherit;
+  text-decoration: none;
+  scroll-snap-align: start;
+}
+
+.kabayan-category-art {
+  position: relative;
+  width: 116px;
+  height: 110px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  margin: 0 auto;
+  transition: transform .32s cubic-bezier(.22,1,.36,1);
+}
+
+.kabayan-category-item:hover .kabayan-category-art,
+.kabayan-category-item:focus-visible .kabayan-category-art {
+  transform: translateY(-5px);
+}
+
+.kabayan-category-art svg,
+.kabayan-category-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 13px rgba(24, 42, 72, .12));
+}
+
+.kabayan-category-art.category-book img {
+  width: 96px;
+  height: 104px;
+}
+
+.kabayan-category-name {
+  display: block;
+  margin-top: 13px;
+  color: var(--near-black);
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  text-align: center;
+}
+
+.kabayan-category-note {
+  display: block;
+  min-height: 18px;
+  margin-top: 5px;
+  color: #bf4b00;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.kabayan-category-item:not(.has-note) .kabayan-category-note {
+  visibility: hidden;
+}
+
+/* Featured showcase below the category family. */
+.kabayan-featured {
+  padding: 92px 24px 110px;
+  background: #f5f5f7;
+}
+
+.kabayan-featured-inner {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+}
+
+.kabayan-featured-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 30px;
+}
+
+.kabayan-featured-head h2 {
+  margin: 0;
+  color: var(--near-black);
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 650;
+  letter-spacing: -0.055em;
+  line-height: .98;
+}
+
+.kabayan-featured-head p {
+  max-width: 390px;
+  margin: 0 0 5px;
+  color: var(--medium-gray);
+  font-size: 17px;
+  line-height: 1.45;
+}
+
+.kabayan-featured-card {
+  position: relative;
+  min-height: 560px;
+  display: grid;
+  grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr);
+  align-items: center;
+  gap: 28px;
+  overflow: hidden;
+  padding: clamp(38px, 5vw, 68px);
+  border-radius: 38px;
+  background:
+    radial-gradient(circle at 76% 34%, rgba(72, 157, 255, .18), transparent 34%),
+    linear-gradient(135deg, #ffffff 0%, #f9fbff 56%, #eef5ff 100%);
+  box-shadow: 0 1px 0 rgba(0,0,0,.04), 0 20px 60px rgba(27, 58, 102, .07);
+}
+
+.kabayan-featured-copy {
+  position: relative;
+  z-index: 2;
+  align-self: center;
+}
+
+.kabayan-featured-kicker {
+  margin: 0 0 14px;
+  color: var(--medium-gray);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.kabayan-featured-copy h3 {
+  max-width: 460px;
+  margin: 0;
+  color: var(--near-black);
+  font-size: clamp(40px, 5vw, 68px);
+  font-weight: 680;
+  letter-spacing: -0.06em;
+  line-height: .98;
+}
+
+.kabayan-featured-copy h3 span {
+  display: block;
+  margin-top: 6px;
+  background: linear-gradient(90deg, #0b4bab, #0071e3 50%, #25a6d9);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.kabayan-featured-copy > p:not(.kabayan-featured-kicker) {
+  max-width: 440px;
+  margin: 24px 0 0;
+  color: #424245;
+  font-size: 19px;
+  letter-spacing: -0.015em;
+  line-height: 1.45;
+}
+
+.kabayan-featured-copy .section-actions {
+  justify-content: flex-start;
+  margin-top: 28px;
+}
+
+.kabayan-converter-visual {
+  position: relative;
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+}
+
+.kabayan-converter-window {
+  position: relative;
+  z-index: 3;
+  width: min(610px, 100%);
+  min-height: 340px;
+  overflow: hidden;
+  border: 1px solid rgba(192, 205, 224, .9);
+  border-radius: 30px;
+  background: rgba(255,255,255,.93);
+  box-shadow: 0 36px 70px rgba(30, 58, 98, .17);
+  transform: rotateY(-4deg) rotateX(2deg);
+}
+
+.kabayan-window-top {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 18px;
+  border-bottom: 1px solid rgba(220, 228, 240, .95);
+  background: rgba(248, 250, 253, .96);
+}
+
+.kabayan-window-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #c8d1df;
+}
+
+.kabayan-window-title {
+  margin-left: 7px;
+  color: #596579;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.kabayan-converter-body {
+  padding: 24px;
+}
+
+.kabayan-upload-box {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 14px;
+  padding: 17px 18px;
+  border: 1px solid #dce5f3;
+  border-radius: 17px;
+  background: #f8fbff;
+}
+
+.kabayan-file-badge {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: #e8f5ec;
+  color: #14843c;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.kabayan-file-name strong,
+.kabayan-check-row strong {
+  display: block;
+  color: #1d1d1f;
+  font-size: 13px;
+}
+
+.kabayan-file-name span,
+.kabayan-check-row span {
+  display: block;
+  margin-top: 4px;
+  color: #7a8493;
+  font-size: 11px;
+}
+
+.kabayan-status-pill {
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: #edf7ff;
+  color: #0071e3;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.kabayan-checks {
+  display: grid;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.kabayan-check-row {
+  position: relative;
+  padding: 13px 15px 13px 46px;
+  border: 1px solid #edf0f5;
+  border-radius: 15px;
+  background: #ffffff;
+}
+
+.kabayan-check-row::before {
+  content: "✓";
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #e8f5ec;
+  color: #16833f;
+  font-size: 12px;
+  font-weight: 800;
+  transform: translateY(-50%);
+}
+
+.kabayan-convert-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 17px;
+  padding: 13px 15px;
+  border-radius: 15px;
+  background: #0b63d8;
+  color: #fff;
+}
+
+.kabayan-convert-bar span {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.kabayan-convert-bar strong {
+  font-size: 13px;
+}
+
+.kabayan-xml-sheet {
+  position: absolute;
+  z-index: 1;
+  right: -3%;
+  bottom: 16px;
+  width: 160px;
+  height: 210px;
+  padding: 22px 16px;
+  border-radius: 22px;
+  background: linear-gradient(160deg, #0c56b7, #2b9ee9);
+  box-shadow: 0 24px 50px rgba(17, 73, 142, .24);
+  color: #fff;
+  transform: rotate(8deg);
+}
+
+.kabayan-xml-sheet small {
+  display: block;
+  color: rgba(255,255,255,.72);
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.kabayan-xml-sheet strong {
+  display: block;
+  margin-top: 9px;
+  font-size: 28px;
+  letter-spacing: -.04em;
+}
+
+.kabayan-xml-lines {
+  display: grid;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.kabayan-xml-lines i {
+  height: 7px;
+  display: block;
+  border-radius: 999px;
+  background: rgba(255,255,255,.28);
+}
+
+.kabayan-xml-lines i:nth-child(2) { width: 76%; }
+.kabayan-xml-lines i:nth-child(3) { width: 58%; }
+
+@media (max-width: 900px) {
+  .hero-visual.kabayan-category-stage {
+    margin-top: 48px !important;
   }
 
-  .hero-book-detail {
-    font-size: 12px;
+  .kabayan-rail-heading {
+    width: calc(100% - 44px);
+    font-size: 30px;
+  }
+
+  .kabayan-category-rail {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+
+  .kabayan-featured {
+    padding: 74px 20px 88px;
+  }
+
+  .kabayan-featured-head {
+    display: block;
+  }
+
+  .kabayan-featured-head p {
+    margin-top: 14px;
+  }
+
+  .kabayan-featured-card {
+    min-height: 0;
+    grid-template-columns: 1fr;
+    gap: 26px;
+    padding: 44px 30px 30px;
+    border-radius: 30px;
+  }
+
+  .kabayan-converter-visual {
+    min-height: 370px;
   }
 }
 
-@media (max-width: 680px) and (max-height: 720px) {
+@media (max-width: 600px) {
   .hero {
-    padding-right: 12px;
-    padding-left: 12px;
+    padding-bottom: 54px !important;
   }
 
-  .hero h1 {
-    font-size: clamp(34px, 10.6vw, 41px);
+  .hero-visual.kabayan-category-stage {
+    margin-top: 42px !important;
   }
 
-  .hero-description {
-    font-size: clamp(14px, 4vw, 16px);
+  .kabayan-rail-heading {
+    width: calc(100% - 36px);
+    margin-bottom: 20px;
+    font-size: 27px;
   }
 
-  .hero .button {
-    padding-right: 9px;
-    padding-left: 9px;
-    font-size: 12px;
+  .kabayan-category-rail {
+    gap: 22px;
+    padding: 6px 18px 14px;
   }
 
-  .hero-book-caption {
-    width: calc(100% - 38px);
-    padding-bottom: 18px;
+  .kabayan-category-item {
+    flex-basis: 98px;
+    min-width: 98px;
+  }
+
+  .kabayan-category-art {
+    width: 98px;
+    height: 92px;
+  }
+
+  .kabayan-category-art.category-book img {
+    width: 82px;
+    height: 90px;
+  }
+
+  .kabayan-category-name {
+    margin-top: 10px;
+    font-size: 15px;
+  }
+
+  .kabayan-featured {
+    padding: 60px 16px 76px;
+  }
+
+  .kabayan-featured-head h2 {
+    font-size: 39px;
+  }
+
+  .kabayan-featured-card {
+    padding: 34px 20px 22px;
+    border-radius: 26px;
+  }
+
+  .kabayan-featured-copy h3 {
+    font-size: 42px;
+  }
+
+  .kabayan-featured-copy > p:not(.kabayan-featured-kicker) {
+    font-size: 17px;
+  }
+
+  .kabayan-converter-visual {
+    min-height: 310px;
+  }
+
+  .kabayan-converter-window {
+    min-height: 290px;
+    border-radius: 22px;
+    transform: none;
+  }
+
+  .kabayan-window-top {
+    height: 42px;
+  }
+
+  .kabayan-converter-body {
+    padding: 16px;
+  }
+
+  .kabayan-upload-box {
+    grid-template-columns: auto 1fr;
+    padding: 13px;
+  }
+
+  .kabayan-status-pill {
+    display: none;
+  }
+
+  .kabayan-check-row:nth-child(3) {
+    display: none;
+  }
+
+  .kabayan-xml-sheet {
+    width: 118px;
+    height: 156px;
+    right: -18px;
+    bottom: -7px;
+    border-radius: 18px;
+  }
+
+  .kabayan-xml-sheet strong {
+    font-size: 22px;
   }
 }
 </style>
@@ -3807,7 +4270,7 @@ body.mega-menu-open {
 <header class="site-nav">
 <div class="nav-inner">
 <a class="nav-brand" href="index.html">
-<img class="brand-logo" src="images/LogoASD.svg" alt="Logo dhaniswara86"/>
+<img alt="Logo dhaniswara86" class="brand-logo" src="images/LogoASD.svg"/>
 <span>| <strong>dhaniswara86</strong></span>
 </a>
 <nav aria-label="Navigasi utama" class="desktop-menu">
@@ -3820,16 +4283,7 @@ body.mega-menu-open {
 <a aria-haspopup="true" class="nav-menu-link nav-hotnews" data-nav-menu="hotnews" href="hotnews.html"><span aria-hidden="true" class="nav-hotnews-icon">🔥</span><span>Hot News</span></a>
 </nav>
 <div class="nav-actions">
-<button
-  aria-controls="collectionMegaMenu"
-  aria-expanded="false"
-  aria-haspopup="true"
-  aria-label="Lihat Koleksi"
-  class="collection-search-trigger"
-  id="collectionSearchTrigger"
-  title="Lihat Koleksi"
-  type="button"
->⌕</button>
+<button aria-controls="collectionMegaMenu" aria-expanded="false" aria-haspopup="true" aria-label="Lihat Koleksi" class="collection-search-trigger" id="collectionSearchTrigger" title="Lihat Koleksi" type="button">⌕</button>
 <button aria-expanded="false" aria-label="Buka menu" class="menu-toggle" id="menuToggle" type="button">
           ☰
         </button>
@@ -3838,135 +4292,129 @@ body.mega-menu-open {
 </header>
 <div aria-hidden="true" class="nav-mega-backdrop" id="navMegaBackdrop"></div>
 <section aria-hidden="true" aria-label="Navigasi koleksi Kabayan" class="nav-mega-menu" id="navMegaMenu">
-  <div class="nav-mega-inner">
-
-    <div class="nav-mega-panel" data-nav-panel="buku">
-      <div class="nav-mega-intro">
-        <span class="nav-mega-kicker">Buku Digital</span>
-        <h2>Belajar pajak dengan materi yang lebih terstruktur.</h2>
-        <p>Modul, panduan, dan referensi perpajakan untuk Coretax, PPh, PPN, XML, dan aplikasi DJP.</p>
-        <a class="nav-mega-main-link" href="buku.html">Lihat seluruh buku <span aria-hidden="true">›</span></a>
-      </div>
-      <div class="nav-mega-column">
-        <p class="nav-mega-label">Pilihan terbaru</p>
-        <a href="kap-kjs.html">KAP dan KJS Era Coretax</a>
-        <a href="converter-xml-unifikasi.html">Converter XML PPh Unifikasi</a>
-        <a href="converter-xml-2126.html">Converter XML PPh Pasal 21/26</a>
-      </div>
-      <div class="nav-mega-column">
-        <p class="nav-mega-label">Referensi &amp; panduan</p>
-        <a href="list-barang-jasa-faktur.html">Kode Barang &amp; Jasa Faktur Pajak</a>
-        <a href="aktivasiakunkodjp.html">Aktivasi Akun &amp; KODJP</a>
-        <a href="cermat-2126.html">Cermat Pemotongan PPh 21/26</a>
-      </div>
-      <div class="nav-mega-tags" aria-label="Topik buku">
-        <span>Coretax</span><span>PPh</span><span>PPN</span><span>XML</span><span>DJP Online</span>
-      </div>
-    </div>
-
-    <div class="nav-mega-panel" data-nav-panel="formulir">
-      <div class="nav-mega-intro">
-        <span class="nav-mega-kicker">Formulir Perpajakan</span>
-        <h2>Dokumen berdasarkan kebutuhan administrasi.</h2>
-        <p>Koleksi formulir dikelompokkan dalam registrasi, PKP, Bea Meterai, PBB, kuasa, SPT, surat pernyataan, restrukturisasi, dan pembukuan.</p>
-        <a class="nav-mega-main-link" href="formulir.html">Lihat seluruh formulir <span aria-hidden="true">›</span></a>
-      </div>
-      <div class="nav-mega-column">
-        <p class="nav-mega-label">Sering digunakan</p>
-        <a href="surat-kuasa-khusus-wajib-pajak.html">Surat Kuasa Khusus Wajib Pajak</a>
-        <a href="pernyataanumkm500juta.html">Pernyataan UMKM Rp500 Juta</a>
-        <a href="surat-pernyataan-hibah.html">Surat Pernyataan Hibah</a>
-      </div>
-      <div class="nav-mega-column">
-        <p class="nav-mega-label">Permohonan &amp; keterangan</p>
-        <a href="permohonanskbpotput.html">Permohonan SKB PPh</a>
-        <a href="formulir-pembatalan-surat-keterangan-penelitian-formal-kabayan.html">Pembatalan Penelitian Formal</a>
-        <a href="formulir.html">Cari formulir lainnya</a>
-      </div>
-      <div class="nav-mega-tags" aria-label="Kelompok formulir">
-        <span>Registrasi</span><span>PKP &amp; PPN</span><span>Bea Meterai</span><span>PBB</span><span>Kuasa</span><span>SPT</span>
-      </div>
-    </div>
-
-    <div class="nav-mega-panel" data-nav-panel="aplikasi">
-      <div class="nav-mega-intro">
-        <span class="nav-mega-kicker">Aplikasi Perpajakan</span>
-        <h2>Installer dan arsip aplikasi perpajakan.</h2>
-        <p>Portal aplikasi lama untuk pengelolaan data dan pelaporan periode sebelum implementasi Coretax.</p>
-        <a class="nav-mega-main-link" href="aplikasi.html">Buka portal aplikasi <span aria-hidden="true">›</span></a>
-      </div>
-      <div class="nav-mega-column">
-        <p class="nav-mega-label">Kategori</p>
-        <a href="aplikasi.html">e-SPT</a>
-        <a href="aplikasi.html">e-Faktur</a>
-        <a href="aplikasi.html">e-Bupot</a>
-      </div>
-      <div class="nav-mega-column">
-        <p class="nav-mega-label">Lainnya</p>
-        <a href="aplikasi.html">Perangkat pendukung</a>
-        <a href="aplikasi.html">Arsip aplikasi</a>
-        <a href="buku.html">Baca buku panduan</a>
-      </div>
-      <div class="nav-mega-tags" aria-label="Jenis aplikasi">
-        <span>e-SPT</span><span>e-Faktur</span><span>e-Bupot</span><span>Pendukung</span><span>Arsip</span>
-      </div>
-    </div>
-
-    <div class="nav-mega-panel" data-nav-panel="kalkulator">
-      <div class="nav-mega-intro">
-        <span class="nav-mega-kicker">Kalkulator Pajak</span>
-        <h2>Hitung dan petakan kewajiban pajak lebih praktis.</h2>
-        <p>Empat alat bantu utama untuk PPN, PPh Pasal 21, transaksi instansi pemerintah, dan pengembalian pendahuluan.</p>
-        <a class="nav-mega-main-link" href="kalkulator.html">Lihat seluruh kalkulator <span aria-hidden="true">›</span></a>
-      </div>
-      <div class="nav-mega-column nav-mega-column-wide">
-        <p class="nav-mega-label">Alat bantu utama</p>
-        <a href="kalkulator-ppn-kabayan.html"><strong>PPN</strong><small>PPN umum dan DPP Nilai Lain.</small></a>
-        <a href="kalkulator-pasal21.html"><strong>PPh Pasal 21</strong><small>Pegawai tetap dan tidak tetap.</small></a>
-      </div>
-      <div class="nav-mega-column nav-mega-column-wide">
-        <p class="nav-mega-label">Pemetaan terpandu</p>
-        <a href="pajak-instansi-satu-pintu.html"><strong>Pajak Instansi Pemerintah</strong><small>PPh, PPN, dan kondisi khusus belanja.</small></a>
-        <a href="kalkulator-pengembalian-pendahuluan.html"><strong>Pengembalian Pendahuluan</strong><small>Kriteria, persyaratan, dan kredit pajak.</small></a>
-      </div>
-    </div>
-
-    <div class="nav-mega-panel" data-nav-panel="artikel">
-      <div class="nav-mega-intro">
-        <span class="nav-mega-kicker">Artikel Pajak</span>
-        <h2>Penjelasan ketentuan dalam bahasa yang lebih sederhana.</h2>
-        <p>Artikel membahas administrasi, PPh, PPN, Coretax, UMKM, dan prosedur perpajakan.</p>
-        <a class="nav-mega-main-link" href="artikel.html">Lihat seluruh artikel <span aria-hidden="true">›</span></a>
-      </div>
-      <div class="nav-mega-column nav-mega-featured">
-        <p class="nav-mega-label">Pilihan editor</p>
-        <a href="artikel-per8pj2026.html"><strong>PER-8/PJ/2026: Apa yang Berubah?</strong><small>Kode billing, pemindahbukuan, KAP/KJS, dan imbalan bunga.</small></a>
-      </div>
-      <div class="nav-mega-column">
-        <p class="nav-mega-label">Topik</p>
-        <div class="nav-mega-topic-list"><span>Administrasi</span><span>PPh</span><span>PPN</span><span>Coretax</span><span>UMKM</span><span>Prosedur Pajak</span></div>
-      </div>
-    </div>
-
-    <div class="nav-mega-panel" data-nav-panel="hotnews">
-      <div class="nav-mega-intro">
-        <span class="nav-mega-kicker hot">Hot News</span>
-        <h2>Informasi perpajakan yang perlu lebih cepat diketahui.</h2>
-        <p>Pembaruan Coretax, regulasi, layanan, pengumuman, dan isu perpajakan terbaru.</p>
-        <a class="nav-mega-main-link hot" href="hotnews.html">Lihat seluruh Hot News <span aria-hidden="true">›</span></a>
-      </div>
-      <div class="nav-mega-column nav-mega-featured">
-        <p class="nav-mega-label">Terbaru</p>
-        <a href="hotnews/2026/08/penundaan-pph22-marketplace/"><strong>PPh Pasal 22 Marketplace Ditunda</strong><small>Pemungutan mulai berlaku 1 November 2026.</small></a>
-        <a href="hotnews/2026/08/coretax-role-baru-pph21-hanya-induk/"><strong>Coretax Tambah Role Baru PPh 21/26</strong><small>Data penghasilan pegawai lebih terlindungi.</small></a>
-      </div>
-      <div class="nav-mega-column">
-        <p class="nav-mega-label">Jelajahi</p>
-        <a href="hotnews-arsip.html">Arsip Hot News</a>
-        <div class="nav-mega-topic-list"><span>Coretax</span><span>Regulasi</span><span>Layanan</span><span>Pengumuman</span></div>
-      </div>
-    </div>
-  </div>
+<div class="nav-mega-inner">
+<div class="nav-mega-panel" data-nav-panel="buku">
+<div class="nav-mega-intro">
+<span class="nav-mega-kicker">Buku Digital</span>
+<h2>Belajar pajak dengan materi yang lebih terstruktur.</h2>
+<p>Modul, panduan, dan referensi perpajakan untuk Coretax, PPh, PPN, XML, dan aplikasi DJP.</p>
+<a class="nav-mega-main-link" href="buku.html">Lihat seluruh buku <span aria-hidden="true">›</span></a>
+</div>
+<div class="nav-mega-column">
+<p class="nav-mega-label">Pilihan terbaru</p>
+<a href="kap-kjs.html">KAP dan KJS Era Coretax</a>
+<a href="converter-xml-unifikasi.html">Converter XML PPh Unifikasi</a>
+<a href="converter-xml-2126.html">Converter XML PPh Pasal 21/26</a>
+</div>
+<div class="nav-mega-column">
+<p class="nav-mega-label">Referensi &amp; panduan</p>
+<a href="list-barang-jasa-faktur.html">Kode Barang &amp; Jasa Faktur Pajak</a>
+<a href="aktivasiakunkodjp.html">Aktivasi Akun &amp; KODJP</a>
+<a href="cermat-2126.html">Cermat Pemotongan PPh 21/26</a>
+</div>
+<div aria-label="Topik buku" class="nav-mega-tags">
+<span>Coretax</span><span>PPh</span><span>PPN</span><span>XML</span><span>DJP Online</span>
+</div>
+</div>
+<div class="nav-mega-panel" data-nav-panel="formulir">
+<div class="nav-mega-intro">
+<span class="nav-mega-kicker">Formulir Perpajakan</span>
+<h2>Dokumen berdasarkan kebutuhan administrasi.</h2>
+<p>Koleksi formulir dikelompokkan dalam registrasi, PKP, Bea Meterai, PBB, kuasa, SPT, surat pernyataan, restrukturisasi, dan pembukuan.</p>
+<a class="nav-mega-main-link" href="formulir.html">Lihat seluruh formulir <span aria-hidden="true">›</span></a>
+</div>
+<div class="nav-mega-column">
+<p class="nav-mega-label">Sering digunakan</p>
+<a href="surat-kuasa-khusus-wajib-pajak.html">Surat Kuasa Khusus Wajib Pajak</a>
+<a href="pernyataanumkm500juta.html">Pernyataan UMKM Rp500 Juta</a>
+<a href="surat-pernyataan-hibah.html">Surat Pernyataan Hibah</a>
+</div>
+<div class="nav-mega-column">
+<p class="nav-mega-label">Permohonan &amp; keterangan</p>
+<a href="permohonanskbpotput.html">Permohonan SKB PPh</a>
+<a href="formulir-pembatalan-surat-keterangan-penelitian-formal-kabayan.html">Pembatalan Penelitian Formal</a>
+<a href="formulir.html">Cari formulir lainnya</a>
+</div>
+<div aria-label="Kelompok formulir" class="nav-mega-tags">
+<span>Registrasi</span><span>PKP &amp; PPN</span><span>Bea Meterai</span><span>PBB</span><span>Kuasa</span><span>SPT</span>
+</div>
+</div>
+<div class="nav-mega-panel" data-nav-panel="aplikasi">
+<div class="nav-mega-intro">
+<span class="nav-mega-kicker">Aplikasi Perpajakan</span>
+<h2>Installer dan arsip aplikasi perpajakan.</h2>
+<p>Portal aplikasi lama untuk pengelolaan data dan pelaporan periode sebelum implementasi Coretax.</p>
+<a class="nav-mega-main-link" href="aplikasi.html">Buka portal aplikasi <span aria-hidden="true">›</span></a>
+</div>
+<div class="nav-mega-column">
+<p class="nav-mega-label">Kategori</p>
+<a href="aplikasi.html">e-SPT</a>
+<a href="aplikasi.html">e-Faktur</a>
+<a href="aplikasi.html">e-Bupot</a>
+</div>
+<div class="nav-mega-column">
+<p class="nav-mega-label">Lainnya</p>
+<a href="aplikasi.html">Perangkat pendukung</a>
+<a href="aplikasi.html">Arsip aplikasi</a>
+<a href="buku.html">Baca buku panduan</a>
+</div>
+<div aria-label="Jenis aplikasi" class="nav-mega-tags">
+<span>e-SPT</span><span>e-Faktur</span><span>e-Bupot</span><span>Pendukung</span><span>Arsip</span>
+</div>
+</div>
+<div class="nav-mega-panel" data-nav-panel="kalkulator">
+<div class="nav-mega-intro">
+<span class="nav-mega-kicker">Kalkulator Pajak</span>
+<h2>Hitung dan petakan kewajiban pajak lebih praktis.</h2>
+<p>Empat alat bantu utama untuk PPN, PPh Pasal 21, transaksi instansi pemerintah, dan pengembalian pendahuluan.</p>
+<a class="nav-mega-main-link" href="kalkulator.html">Lihat seluruh kalkulator <span aria-hidden="true">›</span></a>
+</div>
+<div class="nav-mega-column nav-mega-column-wide">
+<p class="nav-mega-label">Alat bantu utama</p>
+<a href="kalkulator-ppn-kabayan.html"><strong>PPN</strong><small>PPN umum dan DPP Nilai Lain.</small></a>
+<a href="kalkulator-pasal21.html"><strong>PPh Pasal 21</strong><small>Pegawai tetap dan tidak tetap.</small></a>
+</div>
+<div class="nav-mega-column nav-mega-column-wide">
+<p class="nav-mega-label">Pemetaan terpandu</p>
+<a href="pajak-instansi-satu-pintu.html"><strong>Pajak Instansi Pemerintah</strong><small>PPh, PPN, dan kondisi khusus belanja.</small></a>
+<a href="kalkulator-pengembalian-pendahuluan.html"><strong>Pengembalian Pendahuluan</strong><small>Kriteria, persyaratan, dan kredit pajak.</small></a>
+</div>
+</div>
+<div class="nav-mega-panel" data-nav-panel="artikel">
+<div class="nav-mega-intro">
+<span class="nav-mega-kicker">Artikel Pajak</span>
+<h2>Penjelasan ketentuan dalam bahasa yang lebih sederhana.</h2>
+<p>Artikel membahas administrasi, PPh, PPN, Coretax, UMKM, dan prosedur perpajakan.</p>
+<a class="nav-mega-main-link" href="artikel.html">Lihat seluruh artikel <span aria-hidden="true">›</span></a>
+</div>
+<div class="nav-mega-column nav-mega-featured">
+<p class="nav-mega-label">Pilihan editor</p>
+<a href="artikel-per8pj2026.html"><strong>PER-8/PJ/2026: Apa yang Berubah?</strong><small>Kode billing, pemindahbukuan, KAP/KJS, dan imbalan bunga.</small></a>
+</div>
+<div class="nav-mega-column">
+<p class="nav-mega-label">Topik</p>
+<div class="nav-mega-topic-list"><span>Administrasi</span><span>PPh</span><span>PPN</span><span>Coretax</span><span>UMKM</span><span>Prosedur Pajak</span></div>
+</div>
+</div>
+<div class="nav-mega-panel" data-nav-panel="hotnews">
+<div class="nav-mega-intro">
+<span class="nav-mega-kicker hot">Hot News</span>
+<h2>Informasi perpajakan yang perlu lebih cepat diketahui.</h2>
+<p>Pembaruan Coretax, regulasi, layanan, pengumuman, dan isu perpajakan terbaru.</p>
+<a class="nav-mega-main-link hot" href="hotnews.html">Lihat seluruh Hot News <span aria-hidden="true">›</span></a>
+</div>
+<div class="nav-mega-column nav-mega-featured">
+<p class="nav-mega-label">Terbaru</p>
+<a href="hotnews/2026/08/penundaan-pph22-marketplace/"><strong>PPh Pasal 22 Marketplace Ditunda</strong><small>Pemungutan mulai berlaku 1 November 2026.</small></a>
+<a href="hotnews/2026/08/coretax-role-baru-pph21-hanya-induk/"><strong>Coretax Tambah Role Baru PPh 21/26</strong><small>Data penghasilan pegawai lebih terlindungi.</small></a>
+</div>
+<div class="nav-mega-column">
+<p class="nav-mega-label">Jelajahi</p>
+<a href="hotnews-arsip.html">Arsip Hot News</a>
+<div class="nav-mega-topic-list"><span>Coretax</span><span>Regulasi</span><span>Layanan</span><span>Pengumuman</span></div>
+</div>
+</div>
+</div>
 </section>
 <div aria-hidden="true" class="mega-menu-backdrop" id="megaMenuBackdrop"></div>
 <section aria-hidden="true" aria-label="Koleksi Kabayan" class="collection-mega-menu" id="collectionMegaMenu">
@@ -4087,8 +4535,8 @@ body.mega-menu-open {
           dalam satu tempat yang praktis dan gratis.
         </p>
 <div class="hero-actions">
-<a class="button button-primary" href="buku.html">
-            Mulai belajar
+<a class="button button-primary" href="#jelajahi-kabayan">
+            Jelajahi Kabayan
           </a>
 <a class="button button-outline" href="formulir.html">
             Lihat formulir
@@ -4098,152 +4546,152 @@ body.mega-menu-open {
           </a>
 </div>
 </div>
-<div class="hero-visual">
-<div class="hero-glow"></div>
-<section aria-label="Katalog buku pilihan" class="hero-book-slider" id="heroBookSlider" tabindex="0">
-<div class="hero-book-viewport">
-<div class="hero-book-track">
-<article class="hero-book-slide">
-<a class="hero-book-link" href="converter-xml-unifikasi.html">
-<div class="hero-book-image">
-<div class="slider-fallback">
-<small>Petunjuk Teknis</small>
-<strong>
-                        Converter Excel ke XML Coretax
-                      </strong>
-<div class="slider-fallback-line"></div>
+<div class="hero-visual kabayan-category-stage" id="jelajahi-kabayan">
+<h2 class="kabayan-rail-heading">Jelajahi Kabayan</h2>
+<nav class="kabayan-category-rail" aria-label="Kategori utama Kabayan">
+<a class="kabayan-category-item" href="formulir.html">
+<div class="kabayan-category-art" aria-hidden="true">
+<svg viewBox="0 0 116 110" role="img">
+<defs><linearGradient id="formG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#eaf3ff"/></linearGradient></defs>
+<rect x="20" y="20" width="65" height="78" rx="9" fill="#dbe8f8" transform="rotate(-9 20 20)"/>
+<rect x="31" y="12" width="65" height="82" rx="10" fill="url(#formG)" stroke="#d7e1ef"/>
+<rect x="42" y="29" width="31" height="5" rx="2.5" fill="#0b63d8" opacity=".78"/>
+<rect x="42" y="43" width="42" height="4" rx="2" fill="#b7c8df"/>
+<rect x="42" y="53" width="38" height="4" rx="2" fill="#c7d4e5"/>
+<rect x="42" y="63" width="30" height="4" rx="2" fill="#c7d4e5"/>
+<rect x="42" y="77" width="22" height="8" rx="4" fill="#e4f0ff"/>
+</svg>
 </div>
-<img alt="Mockup buku Converter Excel ke XML Coretax Seri PPh Unifikasi" loading="eager" onerror="this.style.display='none'" onload="this.previousElementSibling.hidden=true" src="images/mockup-converter-excel-xml-unifikasi.webp"/>
-</div>
-<div class="hero-book-caption">
-<span class="hero-book-category">
-                      Coretax PPh Unifikasi dan XML
-                    </span>
-<h2>
-                      Converter Excel ke XML Coretax
-                      Seri PPh Unifikasi
-                    </h2>
-<span class="hero-book-detail">
-                      Lihat detail ›
-                    </span>
-</div>
+<span class="kabayan-category-name">Formulir</span><span class="kabayan-category-note">&nbsp;</span>
 </a>
-</article>
-<article class="hero-book-slide">
-<a class="hero-book-link" href="converter-xml-2126.html">
-<div class="hero-book-image">
-<div class="slider-fallback">
-<small>Petunjuk Teknis</small>
-<strong>
-                        Converter Excel ke XML PPh 21/26
-                      </strong>
-<div class="slider-fallback-line"></div>
+
+<a class="kabayan-category-item" href="buku.html">
+<div class="kabayan-category-art category-book" aria-hidden="true">
+<img src="images/mockup-cermat-2126.webp" alt="" loading="lazy"/>
 </div>
-<img alt="Mockup buku Converter Excel ke XML Coretax Seri PPh Pasal 21/26" loading="lazy" onerror="this.style.display='none'" onload="this.previousElementSibling.hidden=true" src="images/mockup-converter-excel-xml-2126.webp"/>
-</div>
-<div class="hero-book-caption">
-<span class="hero-book-category">
-                      Coretax PPh Pasal 21/26 dan XML
-                    </span>
-<h2>
-                      Converter Excel ke XML Coretax
-                      Seri PPh Pasal 21/26
-                    </h2>
-<span class="hero-book-detail">
-                      Lihat detail ›
-                    </span>
-</div>
+<span class="kabayan-category-name">Buku</span><span class="kabayan-category-note">&nbsp;</span>
 </a>
-</article>
-<article class="hero-book-slide">
-<a class="hero-book-link" href="list-barang-jasa-faktur.html">
-<div class="hero-book-image">
-<div class="slider-fallback">
-<small>Referensi PPN</small>
-<strong>
-                        Kode Barang dan Jasa Coretax
-                      </strong>
-<div class="slider-fallback-line"></div>
+
+<a class="kabayan-category-item" href="kalkulator.html">
+<div class="kabayan-category-art" aria-hidden="true">
+<svg viewBox="0 0 116 110" role="img">
+<defs><linearGradient id="calcG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#24334f"/><stop offset="1" stop-color="#0c1527"/></linearGradient></defs>
+<rect x="27" y="8" width="63" height="93" rx="15" fill="url(#calcG)"/>
+<rect x="36" y="19" width="45" height="21" rx="7" fill="#dff4ff"/>
+<rect x="41" y="25" width="27" height="5" rx="2.5" fill="#5e7891" opacity=".65"/>
+<g fill="#ffffff" opacity=".17"><rect x="36" y="49" width="12" height="12" rx="4"/><rect x="52" y="49" width="12" height="12" rx="4"/><rect x="68" y="49" width="12" height="12" rx="4"/><rect x="36" y="66" width="12" height="12" rx="4"/><rect x="52" y="66" width="12" height="12" rx="4"/><rect x="68" y="66" width="12" height="12" rx="4"/><rect x="36" y="83" width="28" height="8" rx="4"/></g>
+<rect x="68" y="66" width="12" height="25" rx="5" fill="#0b7cf0"/>
+</svg>
 </div>
-<img alt="Mockup buku Kode Barang dan Jasa di Faktur Pajak Era Coretax" loading="lazy" onerror="this.style.display='none'" onload="this.previousElementSibling.hidden=true" src="images/mockup-list-kode-barang-jasa.webp"/>
-</div>
-<div class="hero-book-caption">
-<span class="hero-book-category">
-                      PPN dan Faktur Pajak
-                    </span>
-<h2>
-                      Kode Barang dan Jasa di Faktur Pajak
-                      Era Coretax
-                    </h2>
-<span class="hero-book-detail">
-                      Lihat detail ›
-                    </span>
-</div>
+<span class="kabayan-category-name">Kalkulator</span><span class="kabayan-category-note">&nbsp;</span>
 </a>
-</article>
-<article class="hero-book-slide">
-<a class="hero-book-link" href="kap-kjs.html">
-<div class="hero-book-image">
-<div class="slider-fallback">
-<small>Referensi Pembayaran</small>
-<strong>
-                        KAP dan KJS Era Coretax
-                      </strong>
-<div class="slider-fallback-line"></div>
+
+<a class="kabayan-category-item" href="converter-xml-coretax.html">
+<div class="kabayan-category-art" aria-hidden="true">
+<svg viewBox="0 0 116 110" role="img">
+<rect x="8" y="22" width="82" height="62" rx="10" fill="#ffffff" stroke="#d6e1ef"/>
+<rect x="8" y="22" width="82" height="13" rx="10" fill="#eef3f8"/>
+<circle cx="17" cy="28" r="2" fill="#b8c4d4"/><circle cx="24" cy="28" r="2" fill="#b8c4d4"/><circle cx="31" cy="28" r="2" fill="#b8c4d4"/>
+<rect x="18" y="44" width="26" height="26" rx="7" fill="#e7f4eb"/><text x="31" y="60" text-anchor="middle" font-size="8" font-family="Arial" font-weight="700" fill="#16843f">XLS</text>
+<path d="M49 57h16" stroke="#8fa5c1" stroke-width="3" stroke-linecap="round"/><path d="M61 52l6 5-6 5" fill="none" stroke="#8fa5c1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="70" y="38" width="37" height="52" rx="9" fill="#0b63d8" transform="rotate(7 70 38)"/><text x="88" y="64" text-anchor="middle" font-size="9" font-family="Arial" font-weight="700" fill="#fff">XML</text>
+</svg>
 </div>
-<img alt="Mockup buku KAP dan KJS Era Coretax" loading="lazy" onerror="this.style.display='none'" onload="this.previousElementSibling.hidden=true" src="images/mockup-kap-kjs-per8tahun2026.webp"/>
-</div>
-<div class="hero-book-caption">
-<span class="hero-book-category">
-                      Pembayaran Pajak
-                    </span>
-<h2>
-                      Kode Akun Pajak dan Kode Jenis Setor
-                      Era Coretax
-                    </h2>
-<span class="hero-book-detail">
-                      Lihat detail ›
-                    </span>
-</div>
+<span class="kabayan-category-name">Converter</span><span class="kabayan-category-note">&nbsp;</span>
 </a>
-</article>
-<article class="hero-book-slide">
-<a class="hero-book-link" href="cermat-2126.html">
-<div class="hero-book-image">
-<div class="slider-fallback">
-<small>Panduan Pemotongan PPh 21/26</small>
-<strong>
-                        Cermat Pemotongan PPh Pasal 21/26
-                      </strong>
-<div class="slider-fallback-line"></div>
+
+<a class="kabayan-category-item" href="aplikasi.html">
+<div class="kabayan-category-art" aria-hidden="true">
+<svg viewBox="0 0 116 110" role="img">
+<rect x="10" y="18" width="96" height="68" rx="13" fill="#ffffff" stroke="#d7e0ec"/>
+<rect x="10" y="18" width="96" height="14" rx="13" fill="#eef2f7"/>
+<circle cx="19" cy="25" r="2" fill="#b8c4d4"/><circle cx="26" cy="25" r="2" fill="#b8c4d4"/><circle cx="33" cy="25" r="2" fill="#b8c4d4"/>
+<rect x="20" y="43" width="22" height="30" rx="6" fill="#eaf3ff"/><rect x="49" y="43" width="44" height="12" rx="5" fill="#0b63d8" opacity=".15"/><rect x="49" y="61" width="35" height="8" rx="4" fill="#dce6f2"/>
+<rect x="42" y="87" width="32" height="5" rx="2.5" fill="#acbcd0"/>
+</svg>
 </div>
-<img alt="Mockup buku cermat pemotongan PPh Pasal 21/26" loading="lazy" onerror="this.style.display='none'" onload="this.previousElementSibling.hidden=true" src="images/mockup-cermat-2126.webp"/>
-</div>
-<div class="hero-book-caption">
-<span class="hero-book-category">
-                      PPh Pasal 21/26
-                    </span>
-<h2>
-                      Cermat Pemotongan PPh Pasal 21/26
-                    </h2>
-<span class="hero-book-detail">
-                      Lihat detail ›
-                    </span>
-</div>
+<span class="kabayan-category-name">Aplikasi</span><span class="kabayan-category-note">&nbsp;</span>
 </a>
-</article>
+
+<a class="kabayan-category-item" href="artikel.html">
+<div class="kabayan-category-art" aria-hidden="true">
+<svg viewBox="0 0 116 110" role="img">
+<rect x="21" y="12" width="74" height="88" rx="12" fill="#ffffff" stroke="#dce4ef"/>
+<rect x="31" y="25" width="54" height="29" rx="8" fill="url(#articleG)"/>
+<defs><linearGradient id="articleG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b63d8"/><stop offset="1" stop-color="#62b3f4"/></linearGradient></defs>
+<rect x="31" y="64" width="46" height="5" rx="2.5" fill="#303c4e" opacity=".8"/><rect x="31" y="75" width="52" height="4" rx="2" fill="#c1ccda"/><rect x="31" y="84" width="38" height="4" rx="2" fill="#cbd5e1"/>
+</svg>
 </div>
+<span class="kabayan-category-name">Artikel</span><span class="kabayan-category-note">&nbsp;</span>
+</a>
+
+<a class="kabayan-category-item has-note" href="hotnews.html">
+<div class="kabayan-category-art" aria-hidden="true">
+<svg viewBox="0 0 116 110" role="img">
+<defs><linearGradient id="newsG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#19243a"/><stop offset="1" stop-color="#344a72"/></linearGradient></defs>
+<rect x="21" y="13" width="74" height="86" rx="20" fill="url(#newsG)"/>
+<circle cx="58" cy="49" r="21" fill="#ffffff" opacity=".08"/>
+<path d="M59 27c4 10-6 13-2 20 3 5 9 2 9-3 8 7 9 20 2 27-6 6-17 7-25 1-9-7-9-21 1-31 1 7 5 10 9 8-2-10 0-17 6-22z" fill="#ff8a00"/>
+<rect x="38" y="79" width="40" height="5" rx="2.5" fill="#ffffff" opacity=".7"/>
+</svg>
 </div>
-<button aria-label="Buku sebelumnya" class="slider-arrow slider-arrow-prev" type="button">
-            ‹
-          </button>
-<button aria-label="Buku berikutnya" class="slider-arrow slider-arrow-next" type="button">
-            ›
-          </button>
-<div aria-label="Pilih buku" class="slider-dots"></div>
-</section>
+<span class="kabayan-category-name">Hot News</span><span class="kabayan-category-note">Terbaru</span>
+</a>
+
+<a class="kabayan-category-item has-note" href="ruang-belajar.html">
+<div class="kabayan-category-art" aria-hidden="true">
+<svg viewBox="0 0 116 110" role="img">
+<rect x="11" y="19" width="94" height="62" rx="11" fill="#182742"/>
+<rect x="18" y="27" width="80" height="46" rx="7" fill="#eef6ff"/>
+<circle cx="58" cy="50" r="14" fill="#0b63d8"/><path d="M54 43l12 7-12 7z" fill="#fff"/>
+<rect x="47" y="84" width="22" height="5" rx="2.5" fill="#9fb0c7"/><rect x="38" y="91" width="40" height="5" rx="2.5" fill="#c0ccdb"/>
+</svg>
+</div>
+<span class="kabayan-category-name">Ruang Belajar</span><span class="kabayan-category-note">Baru</span>
+</a>
+</nav>
 </div>
 </section>
+
+<section class="kabayan-featured" aria-labelledby="kabayanFeaturedTitle">
+<div class="kabayan-featured-inner">
+<div class="kabayan-featured-head">
+<h2 id="kabayanFeaturedTitle">Unggulan di Kabayan.</h2>
+<p>Satu fitur utama diberi ruang lebih besar, sementara kategori lain tetap mudah dijangkau dari etalase di atas.</p>
+</div>
+<div class="kabayan-featured-card">
+<div class="kabayan-featured-copy">
+<p class="kabayan-featured-kicker">Converter XML Coretax</p>
+<h3>Data siap.<span>Tanpa ribet.</span></h3>
+<p>Ubah data Excel menjadi XML Coretax dengan alur yang lebih terstruktur, lengkap dengan pemeriksaan data sebelum file digunakan.</p>
+<div class="section-actions">
+<a class="button button-primary" href="converter-xml-coretax.html">Buka Converter</a>
+<a class="button button-outline" href="#coretax">Lihat cara kerja</a>
+</div>
+</div>
+<div class="kabayan-converter-visual" aria-hidden="true">
+<div class="kabayan-converter-window">
+<div class="kabayan-window-top"><span class="kabayan-window-dot"></span><span class="kabayan-window-dot"></span><span class="kabayan-window-dot"></span><span class="kabayan-window-title">Kabayan · Converter XML Coretax</span></div>
+<div class="kabayan-converter-body">
+<div class="kabayan-upload-box">
+<div class="kabayan-file-badge">XLS</div>
+<div class="kabayan-file-name"><strong>Data_PPh_Unifikasi.xlsx</strong><span>1.248 baris data</span></div>
+<span class="kabayan-status-pill">Siap diperiksa</span>
+</div>
+<div class="kabayan-checks">
+<div class="kabayan-check-row"><strong>Struktur data terbaca</strong><span>Kolom dan format data berhasil dikenali.</span></div>
+<div class="kabayan-check-row"><strong>Identitas diperiksa</strong><span>Data penting diperiksa sebelum proses konversi.</span></div>
+<div class="kabayan-check-row"><strong>Siap dibuat XML</strong><span>Data telah melewati pemeriksaan dasar.</span></div>
+</div>
+<div class="kabayan-convert-bar"><span>Semua pemeriksaan selesai</span><strong>Buat XML →</strong></div>
+</div>
+</div>
+<div class="kabayan-xml-sheet"><small>Output</small><strong>XML</strong><div class="kabayan-xml-lines"><i></i><i></i><i></i></div></div>
+</div>
+</div>
+</div>
+</section>
+
 <section class="full-panel panel-light">
 <div class="panel-content">
 <p class="section-kicker">Buku Digital</p>
@@ -4407,11 +4855,7 @@ body.mega-menu-open {
 <a class="showcase-button primary" href="artikel.html">
             Baca artikel
           </a>
-<a
-            class="showcase-button secondary"
-            href="artikel.html"
-            id="latestArticleButton"
-          >
+<a class="showcase-button secondary" href="artikel.html" id="latestArticleButton">
             Artikel terbaru
           </a>
 </div>
@@ -5446,7 +5890,6 @@ body.mega-menu-open {
   }
 })();
 </script>
-
 <script id="collectionSearchTriggerScript">
 (() => {
   const searchTrigger = document.getElementById("collectionSearchTrigger");
@@ -5495,7 +5938,6 @@ body.mega-menu-open {
   syncState();
 })();
 </script>
-
 <script id="navMegaMenuScript">
 (() => {
   const links = [...document.querySelectorAll('.nav-menu-link[data-nav-menu]')];
@@ -5591,7 +6033,6 @@ body.mega-menu-open {
   window.addEventListener('resize', handleModeChange);
 })();
 </script>
-
 <script id="latestArticleAutoLinkScript">
 (() => {
   "use strict";
@@ -5750,34 +6191,6 @@ body.mega-menu-open {
   }
 
   loadLatestArticle();
-})();
-</script>
-
-
-<script id="heroViewportFitScript">
-(() => {
-  "use strict";
-
-  const root = document.documentElement;
-  const announcement = document.querySelector(".announcement");
-
-  if (!announcement) return;
-
-  const syncAnnouncementHeight = () => {
-    const height = Math.ceil(announcement.getBoundingClientRect().height);
-    root.style.setProperty("--announcement-height", `${height}px`);
-  };
-
-  syncAnnouncementHeight();
-
-  window.addEventListener("load", syncAnnouncementHeight, { once: true });
-  window.addEventListener("resize", syncAnnouncementHeight, { passive: true });
-  window.addEventListener("orientationchange", syncAnnouncementHeight, { passive: true });
-
-  if ("ResizeObserver" in window) {
-    const observer = new ResizeObserver(syncAnnouncementHeight);
-    observer.observe(announcement);
-  }
 })();
 </script>
 
