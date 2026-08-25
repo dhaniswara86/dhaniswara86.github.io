@@ -3802,6 +3802,276 @@ body.mega-menu-open {
 }
 </style>
 
+
+<style id="centerFocusBookCarouselStyles">
+/* =========================================================
+   Hero book slider — center-focus carousel
+   Baseline lain tetap mengikuti index original.
+   ========================================================= */
+.hero-visual {
+  width: min(1180px, 98vw) !important;
+}
+
+.hero-book-viewport {
+  position: relative;
+  overflow: visible !important;
+}
+
+.hero-book-track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: block !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+.hero-book-slide {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: min(430px, 43vw);
+  height: 100%;
+  min-width: 0 !important;
+  align-items: stretch;
+  opacity: 0;
+  transform-origin: 50% 52%;
+  transition:
+    transform .72s cubic-bezier(.22, 1, .36, 1),
+    opacity .46s ease,
+    filter .46s ease;
+  will-change: transform, opacity;
+}
+
+.hero-book-slide .hero-book-link {
+  width: 100%;
+  height: 100%;
+}
+
+.hero-book-slide .hero-book-image img {
+  transition:
+    transform .72s cubic-bezier(.22, 1, .36, 1),
+    filter .46s ease,
+    opacity .46s ease;
+}
+
+/* Buku aktif */
+.hero-book-slide.is-active {
+  z-index: 8;
+  opacity: 1;
+  transform: translateX(-50%) translateX(0) scale(1);
+  filter: none;
+}
+
+/* Buku di kiri dan kanan */
+.hero-book-slide.is-prev {
+  z-index: 5;
+  opacity: .80;
+  transform:
+    translateX(-50%)
+    translateX(clamp(-345px, -25vw, -245px))
+    scale(.70);
+  filter: saturate(.90);
+}
+
+.hero-book-slide.is-next {
+  z-index: 5;
+  opacity: .80;
+  transform:
+    translateX(-50%)
+    translateX(clamp(245px, 25vw, 345px))
+    scale(.70);
+  filter: saturate(.90);
+}
+
+/* Buku paling luar */
+.hero-book-slide.is-far-prev {
+  z-index: 2;
+  opacity: .43;
+  transform:
+    translateX(-50%)
+    translateX(clamp(-585px, -43vw, -420px))
+    scale(.50);
+  filter: saturate(.74);
+}
+
+.hero-book-slide.is-far-next {
+  z-index: 2;
+  opacity: .43;
+  transform:
+    translateX(-50%)
+    translateX(clamp(420px, 43vw, 585px))
+    scale(.50);
+  filter: saturate(.74);
+}
+
+.hero-book-slide.is-prev .hero-book-image img,
+.hero-book-slide.is-next .hero-book-image img {
+  filter: drop-shadow(0 22px 22px rgba(15, 34, 67, .16));
+}
+
+.hero-book-slide.is-far-prev .hero-book-image img,
+.hero-book-slide.is-far-next .hero-book-image img {
+  filter: drop-shadow(0 15px 16px rgba(15, 34, 67, .10));
+}
+
+/* Caption hanya untuk buku yang sedang aktif. */
+.hero-book-slide:not(.is-active) .hero-book-caption {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  pointer-events: none;
+}
+
+.hero-book-caption {
+  transition:
+    opacity .34s ease .12s,
+    transform .42s cubic-bezier(.22, 1, .36, 1) .08s,
+    visibility .34s ease;
+}
+
+.hero-book-slide.is-active .hero-book-caption {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Buku samping dapat diklik untuk dipindahkan ke tengah. */
+.hero-book-slide:not(.is-active) .hero-book-link {
+  cursor: pointer;
+}
+
+/* Hover hanya menonjolkan buku aktif agar tidak ramai. */
+.hero-book-slide:not(.is-active) .hero-book-link:hover .hero-book-image img {
+  transform: none !important;
+}
+
+.hero-book-slide.is-active .hero-book-link:hover .hero-book-image img {
+  transform: translateY(-5px) scale(1.018);
+}
+
+/* Arrow mengikuti komposisi carousel yang lebih lebar. */
+.slider-arrow-prev {
+  left: clamp(6px, 1.6vw, 20px) !important;
+}
+
+.slider-arrow-next {
+  right: clamp(6px, 1.6vw, 20px) !important;
+}
+
+@media (max-width: 900px) {
+  .hero-visual {
+    width: 100% !important;
+  }
+
+  .hero-book-slide {
+    width: min(390px, 58vw);
+  }
+
+  .hero-book-slide.is-prev {
+    opacity: .58;
+    transform:
+      translateX(-50%)
+      translateX(clamp(-245px, -28vw, -175px))
+      scale(.62);
+  }
+
+  .hero-book-slide.is-next {
+    opacity: .58;
+    transform:
+      translateX(-50%)
+      translateX(clamp(175px, 28vw, 245px))
+      scale(.62);
+  }
+
+  .hero-book-slide.is-far-prev {
+    opacity: .18;
+    transform:
+      translateX(-50%)
+      translateX(clamp(-390px, -47vw, -285px))
+      scale(.42);
+  }
+
+  .hero-book-slide.is-far-next {
+    opacity: .18;
+    transform:
+      translateX(-50%)
+      translateX(clamp(285px, 47vw, 390px))
+      scale(.42);
+  }
+}
+
+@media (max-width: 680px) {
+  .hero-book-viewport {
+    overflow: visible !important;
+  }
+
+  .hero-book-slide {
+    width: min(340px, 76vw);
+  }
+
+  .hero-book-slide.is-active {
+    transform: translateX(-50%) scale(1);
+  }
+
+  .hero-book-slide.is-prev {
+    z-index: 4;
+    opacity: .38;
+    transform:
+      translateX(-50%)
+      translateX(clamp(-190px, -45vw, -145px))
+      scale(.50);
+  }
+
+  .hero-book-slide.is-next {
+    z-index: 4;
+    opacity: .38;
+    transform:
+      translateX(-50%)
+      translateX(clamp(145px, 45vw, 190px))
+      scale(.50);
+  }
+
+  .hero-book-slide.is-far-prev,
+  .hero-book-slide.is-far-next {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .slider-arrow {
+    top: 42% !important;
+  }
+}
+
+@media (max-width: 440px) {
+  .hero-book-slide {
+    width: min(320px, 80vw);
+  }
+
+  .hero-book-slide.is-prev {
+    transform:
+      translateX(-50%)
+      translateX(-43vw)
+      scale(.46);
+  }
+
+  .hero-book-slide.is-next {
+    transform:
+      translateX(-50%)
+      translateX(43vw)
+      scale(.46);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-book-slide,
+  .hero-book-slide .hero-book-image img,
+  .hero-book-caption {
+    transition: none !important;
+  }
+}
+</style>
+
 </head>
 <body id="top">
 <header class="site-nav">
@@ -5088,6 +5358,22 @@ body.mega-menu-open {
       let touchStartX = 0;
       let touchEndX = 0;
 
+      /*
+       * Slider memakai posisi melingkar:
+       * -2  = buku paling kiri
+       * -1  = buku kiri
+       *  0  = buku aktif / besar
+       * +1  = buku kanan
+       * +2  = buku paling kanan
+       */
+      const positionClasses = [
+        "is-far-prev",
+        "is-prev",
+        "is-active",
+        "is-next",
+        "is-far-next"
+      ];
+
       slides.forEach((slide, index) => {
         const dot = document.createElement("button");
 
@@ -5104,22 +5390,80 @@ body.mega-menu-open {
         });
 
         dotsContainer.appendChild(dot);
+
+        const link =
+          slide.querySelector(".hero-book-link");
+
+        /*
+         * Klik buku kecil tidak langsung membuka halaman.
+         * Buku tersebut lebih dulu digeser ke tengah.
+         */
+        if (link) {
+          link.addEventListener("click", (event) => {
+            if (index !== currentSlide) {
+              event.preventDefault();
+              goToSlide(index);
+              restartAutoSlide();
+            }
+          });
+        }
       });
 
       const dots = Array.from(
         dotsContainer.querySelectorAll(".slider-dot")
       );
 
+      function circularOffset(index, activeIndex) {
+        const total = slides.length;
+        let offset = index - activeIndex;
+
+        if (offset > total / 2) {
+          offset -= total;
+        }
+
+        if (offset < -total / 2) {
+          offset += total;
+        }
+
+        return offset;
+      }
+
+      function applySlidePosition(slide, offset) {
+        positionClasses.forEach((className) => {
+          slide.classList.remove(className);
+        });
+
+        if (offset === 0) {
+          slide.classList.add("is-active");
+        } else if (offset === -1) {
+          slide.classList.add("is-prev");
+        } else if (offset === 1) {
+          slide.classList.add("is-next");
+        } else if (offset <= -2) {
+          slide.classList.add("is-far-prev");
+        } else {
+          slide.classList.add("is-far-next");
+        }
+      }
+
       function goToSlide(index) {
         currentSlide =
           (index + slides.length) % slides.length;
 
-        track.style.transform =
-          "translateX(-" + currentSlide * 100 + "%)";
+        /* Track tidak lagi digeser 100%; setiap buku berpindah
+           posisi dan skala secara individual. */
+        if (track) {
+          track.style.transform = "none";
+        }
 
         slides.forEach((slide, slideIndex) => {
+          const offset =
+            circularOffset(slideIndex, currentSlide);
+
           const isCurrent =
-            slideIndex === currentSlide;
+            offset === 0;
+
+          applySlidePosition(slide, offset);
 
           slide.setAttribute(
             "aria-hidden",
@@ -5180,15 +5524,19 @@ body.mega-menu-open {
         startAutoSlide();
       }
 
-      previousButton.addEventListener("click", () => {
-        previousSlide();
-        restartAutoSlide();
-      });
+      if (previousButton) {
+        previousButton.addEventListener("click", () => {
+          previousSlide();
+          restartAutoSlide();
+        });
+      }
 
-      nextButton.addEventListener("click", () => {
-        nextSlide();
-        restartAutoSlide();
-      });
+      if (nextButton) {
+        nextButton.addEventListener("click", () => {
+          nextSlide();
+          restartAutoSlide();
+        });
+      }
 
       heroSlider.addEventListener(
         "mouseenter",
