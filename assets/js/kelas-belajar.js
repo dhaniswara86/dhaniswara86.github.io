@@ -108,6 +108,35 @@ async function loadClassLearning() {
   document.getElementById("progressPercent").textContent = `${percent}%`;
   document.getElementById("progressBar").style.width = `${percent}%`;
 
+  const progressRing =
+    document.getElementById("progressRing");
+
+  if (progressRing) {
+    progressRing.style.setProperty("--progress", percent);
+  }
+
+  const moduleCount =
+    document.getElementById("moduleCount");
+
+  const completedCount =
+    document.getElementById("completedCount");
+
+  const remainingCount =
+    document.getElementById("remainingCount");
+
+  if (moduleCount) {
+    moduleCount.textContent = publishedModules.length;
+  }
+
+  if (completedCount) {
+    completedCount.textContent = completed;
+  }
+
+  if (remainingCount) {
+    remainingCount.textContent =
+      Math.max(allLessons.length - completed, 0);
+  }
+
   const host = document.getElementById("moduleList");
 
   if (!publishedModules.length) {
@@ -133,75 +162,274 @@ async function loadClassLearning() {
 }
 
 function renderLearningModule(module, progressMap, quiz) {
+  const completedLessons =
+    module.lessons.filter(
+      lesson =>
+        progressMap.get(lesson.id)?.status === "completed"
+    ).length;
+
+  const totalLessons =
+    module.lessons.length;
+
+  const modulePercent =
+    totalLessons
+      ? Math.round(
+          (completedLessons / totalLessons) * 100
+        )
+      : 0;
+
   let quizCard = "";
 
   if (quiz) {
     let state = "locked";
     let eyebrow = "Kuis Modul";
-    let detail = `${quiz.question_count} soal · Nilai minimum ${quiz.pass_score}`;
+    let detail =
+      `${quiz.question_count} soal · Nilai minimum ${quiz.pass_score}`;
     let action = "";
 
     if (quiz.passed) {
       state = "passed";
       eyebrow = "Kuis Selesai";
-      detail = `Nilai terbaik ${quiz.best_score ?? 0} · Lulus`;
-      action = `<span class="quiz-module-badge">✓ Lulus</span>`;
+      detail =
+        `Nilai terbaik ${quiz.best_score ?? 0} · Lulus`;
+
+      action = `
+        <span class="quiz-module-badge kb-quiz-badge success">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="m5 12 4 4L19 6"></path>
+          </svg>
+          Lulus
+        </span>`;
     } else if (!quiz.prerequisites_complete) {
-      detail = `Selesaikan semua checkpoint terlebih dahulu · ${quiz.question_count} soal`;
-      action = `<span class="quiz-module-badge locked">Terkunci</span>`;
+      detail =
+        `Selesaikan semua checkpoint terlebih dahulu · ${quiz.question_count} soal`;
+
+      action = `
+        <span class="quiz-module-badge kb-quiz-badge locked">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="5" y="10" width="14" height="10" rx="2"></rect>
+            <path d="M8 10V7a4 4 0 0 1 8 0v3"></path>
+          </svg>
+          Terkunci
+        </span>`;
     } else if (!quiz.can_start) {
       detail = quiz.max_attempts
         ? `Percobaan ${quiz.attempts_used}/${quiz.max_attempts} telah digunakan`
         : "Kuis belum dapat dimulai";
-      action = `<span class="quiz-module-badge locked">Tidak tersedia</span>`;
+
+      action = `
+        <span class="quiz-module-badge kb-quiz-badge locked">
+          Tidak tersedia
+        </span>`;
     } else {
       state = "ready";
-      eyebrow = quiz.attempts_used > 0 ? "Coba Lagi" : "Siap Dikerjakan";
-      detail = `${quiz.question_count} soal · Nilai minimum ${quiz.pass_score}`;
+      eyebrow =
+        quiz.attempts_used > 0
+          ? "Coba Lagi"
+          : "Siap Dikerjakan";
+
+      detail =
+        `${quiz.question_count} soal · Nilai minimum ${quiz.pass_score}`;
+
       action = `
         <a
-          class="btn small"
+          class="kb-quiz-button"
           href="kuis-modul.html?id=${encodeURIComponent(quiz.quiz_id)}&class_id=${encodeURIComponent(classId)}">
-          ${quiz.attempts_used > 0 ? "Coba lagi" : "Mulai kuis"}
+
+          <span>
+            ${quiz.attempts_used > 0 ? "Coba lagi" : "Mulai kuis"}
+          </span>
+
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 12h14"></path>
+            <path d="m14 7 5 5-5 5"></path>
+          </svg>
+
         </a>`;
     }
 
     quizCard = `
-      <div class="quiz-module-card ${state}">
-        <div>
+      <div class="quiz-module-card kb-quiz-card ${state}">
+
+        <div class="kb-quiz-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 4h14v16H5z"></path>
+            <path d="m8 9 2 2 4-4"></path>
+            <path d="M8 15h8"></path>
+          </svg>
+        </div>
+
+        <div class="kb-quiz-copy">
           <div class="eyebrow">${eyebrow}</div>
           <strong>${escapeHtml(quiz.quiz_title)}</strong>
           <span>${escapeHtml(detail)}</span>
         </div>
-        ${action}
+
+        <div class="kb-quiz-action">
+          ${action}
+        </div>
+
       </div>`;
   }
 
   return `
-    <article class="learning-module">
-      <div class="eyebrow">Modul ${module.position}</div>
-      <h2>${escapeHtml(module.title)}</h2>
-      <p>${escapeHtml(module.description || "")}</p>
+    <article class="learning-module kb-module">
 
-      <div class="checkpoint-list">
-        ${module.lessons.length ? module.lessons.map(lesson => {
-          const done = progressMap.get(lesson.id)?.status === "completed";
-          return `
-            <button class="checkpoint ${done ? "done" : ""}" data-lesson-id="${lesson.id}">
-              <span class="checkpoint-index">${done ? "✓" : lesson.position}</span>
-              <span>
-                <strong>${escapeHtml(lesson.title)}</strong>
-                <small>
-                  ${done ? "Selesai" : "Belum selesai"}
-                  ${lesson.estimated_minutes ? ` · ${lesson.estimated_minutes} menit` : ""}
-                </small>
-              </span>
-            </button>
-          `;
-        }).join("") : `<div class="empty small">Belum ada checkpoint yang diterbitkan.</div>`}
+      <div class="kb-module-head">
+
+        <div class="kb-module-number">
+          ${module.position}
+        </div>
+
+        <div class="kb-module-title">
+
+          <div class="kb-module-kicker">
+            Modul ${module.position}
+          </div>
+
+          <h2>
+            ${escapeHtml(module.title)}
+          </h2>
+
+          <p>
+            ${escapeHtml(module.description || "")}
+          </p>
+
+        </div>
+
+
+        <div class="kb-module-progress">
+
+          <strong>
+            ${completedLessons}/${totalLessons}
+          </strong>
+
+          <span>
+            checkpoint selesai
+          </span>
+
+          <div class="kb-module-progress-track">
+            <i style="width:${modulePercent}%"></i>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="checkpoint-list kb-checkpoint-list">
+
+        ${
+          module.lessons.length
+            ? module.lessons
+                .map((lesson) => {
+                  const done =
+                    progressMap.get(lesson.id)?.status === "completed";
+
+                  const hasVideo =
+                    Boolean(lesson.video_url?.trim());
+
+                  const contentType =
+                    hasVideo
+                      ? "Video + Resume"
+                      : "Resume Materi";
+
+                  return `
+                    <button
+                      class="checkpoint kb-checkpoint ${done ? "done" : ""}"
+                      data-lesson-id="${lesson.id}">
+
+                      <span class="checkpoint-index kb-checkpoint-index">
+
+                        ${
+                          done
+                            ? `
+                              <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="m5 12 4 4L19 6"></path>
+                              </svg>
+                            `
+                            : lesson.position
+                        }
+
+                      </span>
+
+
+                      <span class="kb-checkpoint-copy">
+
+                        <strong>
+                          ${escapeHtml(lesson.title)}
+                        </strong>
+
+                        <small>
+                          <span>
+                            ${done ? "Selesai" : "Belum selesai"}
+                          </span>
+
+                          <i></i>
+
+                          <span>
+                            ${escapeHtml(contentType)}
+                          </span>
+
+                          ${
+                            lesson.estimated_minutes
+                              ? `
+                                <i></i>
+                                <span>
+                                  ± ${lesson.estimated_minutes} menit
+                                </span>
+                              `
+                              : ""
+                          }
+                        </small>
+
+                      </span>
+
+
+                      <span class="kb-checkpoint-type ${hasVideo ? "video" : "read"}">
+
+                        ${
+                          hasVideo
+                            ? `
+                              <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <rect x="3" y="5" width="18" height="14" rx="3"></rect>
+                                <path d="m10 9 5 3-5 3V9Z"></path>
+                              </svg>
+                            `
+                            : `
+                              <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M5 3h10l4 4v14H5z"></path>
+                                <path d="M15 3v5h5"></path>
+                                <path d="M8 13h8"></path>
+                                <path d="M8 17h6"></path>
+                              </svg>
+                            `
+                        }
+
+                      </span>
+
+
+                      <span class="kb-checkpoint-arrow">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                          <path d="m9 18 6-6-6-6"></path>
+                        </svg>
+                      </span>
+
+                    </button>
+                  `;
+                })
+                .join("")
+            : `
+              <div class="empty small kb-empty">
+                Belum ada checkpoint yang diterbitkan.
+              </div>
+            `
+        }
+
       </div>
 
       ${quizCard}
+
     </article>
   `;
 }
