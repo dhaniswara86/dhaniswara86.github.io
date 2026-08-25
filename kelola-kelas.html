@@ -1,243 +1,809 @@
 <!doctype html>
-
 <html lang="id">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/><meta content="#f5f7fb" name="theme-color"/>
-<title>Kelola Kelas — Kabayan Learning</title>
-<!-- CSS global LMS tetap dipakai -->
-<link href="assets/css/lms.css" rel="stylesheet"/>
-<!-- CSS khusus halaman Kelola Kelas.
-       Diletakkan setelah lms.css agar layout halaman ini terisolasi. -->
-<link href="assets/css/kelola-kelas.css" rel="stylesheet"/><link href="assets/css/lms-audit.css" rel="stylesheet"/>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f9fd">
+
+  <title>Kelola Kelas — Kabayan Learning</title>
+
+  <link rel="stylesheet" href="assets/css/lms.css">
+  <link rel="stylesheet" href="assets/css/lms-audit.css">
+  <link rel="stylesheet" href="assets/css/kelola-kelas.css?v=6.0">
 </head>
-<body class="kc-page">
-<header class="site-header">
-<nav class="nav">
-<a class="brand" href="pengajar-dashboard.html">Kabayan <span>Learning</span></a>
-<div class="nav-actions">
-<a class="btn ghost small" href="pengajar-dashboard.html">← Dashboard</a>
-<button class="btn ghost small" onclick="KabayanAuth.signOut()" type="button">Keluar</button>
-</div>
-</nav>
+
+<body class="kc-page kc-clean-page">
+
+<header class="kc-topbar">
+
+  <nav class="kc-nav">
+
+    <a
+      class="kc-brand"
+      href="pengajar-dashboard.html"
+      aria-label="Kabayan Learning">
+
+      <span class="kc-brand-logo">
+        <img
+          src="assets/img/logoASD.svg"
+          alt="Logo ASD"
+          width="28"
+          height="28"
+          style="width:28px;height:28px;max-width:28px;max-height:28px;object-fit:contain;display:block;">
+      </span>
+
+      <span class="kc-brand-wordmark">
+        Kabayan Learning
+      </span>
+
+    </a>
+
+
+    <div class="kc-nav-actions">
+
+      <a
+        class="kc-back"
+        href="pengajar-dashboard.html">
+
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="m15 18-6-6 6-6"></path>
+        </svg>
+
+        <span>Dashboard</span>
+
+      </a>
+
+
+      <button
+        class="kc-logout"
+        onclick="KabayanAuth.signOut()"
+        type="button"
+        aria-label="Keluar">
+
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M10 5H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h5"></path>
+          <path d="m15 8 4 4-4 4"></path>
+          <path d="M19 12H9"></path>
+        </svg>
+
+      </button>
+
+    </div>
+
+  </nav>
+
 </header>
+
+
 <main class="kc-shell">
-<!-- ======================================================
-       RINGKASAN KELAS
+
+  <!-- ======================================================
+       CLASS HEADER
        ====================================================== -->
-<section class="kc-summary">
-<div class="kc-summary-copy">
-<div class="kc-status" id="classStatus">Kelas</div>
-<h1 id="className">Memuat kelas…</h1>
-<p id="classDescription"></p>
-</div>
-<div class="kc-summary-count">
-<strong id="memberCount">0</strong>
-<span>Peserta</span>
-</div>
-</section>
-<!-- ======================================================
+  <section class="kc-class-head">
+
+    <div class="kc-class-head-copy">
+
+      <div class="kc-class-meta">
+
+        <span
+          class="kc-status"
+          id="classStatus">
+          Kelas
+        </span>
+
+        <span class="kc-meta-separator"></span>
+
+        <span class="kc-class-context">
+          Workspace Pengajar
+        </span>
+
+      </div>
+
+
+      <h1 id="className">
+        Memuat kelas…
+      </h1>
+
+      <p id="classDescription"></p>
+
+    </div>
+
+
+    <div class="kc-class-count">
+
+      <span>
+        Peserta
+      </span>
+
+      <strong id="memberCount">
+        0
+      </strong>
+
+      <small>
+        terdaftar di kelas
+      </small>
+
+    </div>
+
+  </section>
+
+
+  <!-- ======================================================
+       QUICK NAVIGATION
+       ====================================================== -->
+  <nav
+    class="kc-section-nav"
+    aria-label="Navigasi pengelolaan kelas">
+
+    <a href="#kurikulum" class="active">
+
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H11v17H6.5A2.5 2.5 0 0 0 4 22V5.5Z"></path>
+        <path d="M20 5.5A2.5 2.5 0 0 0 17.5 3H13v17h4.5A2.5 2.5 0 0 1 20 22V5.5Z"></path>
+      </svg>
+
+      Kurikulum
+
+    </a>
+
+    <a href="#peserta">
+
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="9" cy="8" r="4"></circle>
+        <path d="M2.5 21a6.5 6.5 0 0 1 13 0"></path>
+        <path d="M16 11a4 4 0 0 1 5.5 3.7"></path>
+      </svg>
+
+      Peserta
+
+    </a>
+
+    <a href="#evaluasi">
+
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M5 4h14v16H5z"></path>
+        <path d="m8 9 2 2 4-4"></path>
+        <path d="M8 15h8"></path>
+      </svg>
+
+      Evaluasi Akhir
+
+    </a>
+
+  </nav>
+
+
+  <!-- ======================================================
        WORKSPACE
        ====================================================== -->
-<section class="kc-workspace">
-<!-- MODUL -->
-<div class="kc-main">
-<div class="kc-section-heading">
-<div>
-<span class="kc-section-kicker">Kurikulum</span>
-<h2>Modul pembelajaran</h2>
-<p>Kelola materi dan kuis tanpa memenuhi layar dengan terlalu banyak kontrol.</p>
-</div>
-</div>
-<div class="kc-module-list" id="moduleList"></div>
-</div>
-<!-- SIDEBAR -->
-<aside class="kc-sidebar">
-<!-- TAMBAH MODUL -->
-<section class="kc-side-card">
-<div class="kc-side-heading">
-<span class="kc-side-icon kc-side-icon-blue">＋</span>
-<div>
-<span>Materi</span>
-<h2>Tambah modul</h2>
-</div>
-</div>
-<form class="kc-form" id="addModuleForm">
-<label>
-<span>Judul modul</span>
-<input name="title" placeholder="Konsep Dasar PPh Pasal 21" required=""/>
-</label>
-<label>
-<span>Deskripsi</span>
-<textarea name="description" placeholder="Tujuan atau ringkasan modul"></textarea>
-</label>
-<div class="kc-form-two">
-<label>
-<span>Urutan</span>
-<input min="1" name="position" required="" type="number" value="1"/>
-</label>
-<label class="kc-check">
-<input name="is_published" type="checkbox"/>
-<span>Langsung terbit</span>
-</label>
-</div>
-<button class="kc-submit kc-submit-blue" type="submit">
-            Tambah modul
+  <section class="kc-workspace">
+
+    <!-- ====================================================
+         MAIN / CURRICULUM
+         ==================================================== -->
+    <section
+      class="kc-main"
+      id="kurikulum">
+
+      <div class="kc-section-heading">
+
+        <div>
+
+          <span class="kc-section-kicker">
+            Kurikulum
+          </span>
+
+          <h2>
+            Modul pembelajaran
+          </h2>
+
+          <p>
+            Susun materi dan kuis sesuai urutan perjalanan belajar peserta.
+          </p>
+
+        </div>
+
+
+        <span class="kc-section-note">
+          Perubahan tersimpan ke kelas ini
+        </span>
+
+      </div>
+
+
+      <div
+        class="kc-module-list"
+        id="moduleList">
+      </div>
+
+    </section>
+
+
+    <!-- ====================================================
+         CONTROL SIDEBAR
+         ==================================================== -->
+    <aside class="kc-sidebar">
+
+      <!-- ADD MODULE -->
+      <section class="kc-control-panel">
+
+        <div class="kc-control-heading">
+
+          <span class="kc-control-icon blue">
+
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 5v14"></path>
+              <path d="M5 12h14"></path>
+            </svg>
+
+          </span>
+
+          <div>
+            <span>Materi</span>
+            <h2>Tambah modul</h2>
+          </div>
+
+        </div>
+
+
+        <form
+          class="kc-form"
+          id="addModuleForm">
+
+          <label>
+
+            <span>
+              Judul modul
+            </span>
+
+            <input
+              name="title"
+              placeholder="Konsep Dasar PPh Pasal 21"
+              required>
+
+          </label>
+
+
+          <label>
+
+            <span>
+              Deskripsi
+            </span>
+
+            <textarea
+              name="description"
+              placeholder="Tujuan atau ringkasan modul">
+            </textarea>
+
+          </label>
+
+
+          <div class="kc-form-two">
+
+            <label>
+
+              <span>
+                Urutan
+              </span>
+
+              <input
+                min="1"
+                name="position"
+                required
+                type="number"
+                value="1">
+
+            </label>
+
+
+            <label class="kc-check">
+
+              <input
+                name="is_published"
+                type="checkbox">
+
+              <span>
+                Langsung terbit
+              </span>
+
+            </label>
+
+          </div>
+
+
+          <button
+            class="kc-submit kc-submit-blue"
+            type="submit">
+
+            <span>
+              Tambah modul
+            </span>
+
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5 12h14"></path>
+              <path d="m14 7 5 5-5 5"></path>
+            </svg>
+
           </button>
-</form>
-<div class="form-status" id="addModuleStatus"></div>
-</section>
-<!-- PESERTA -->
-<section class="kc-side-card">
-<div class="kc-side-heading">
-<span class="kc-side-icon kc-side-icon-green">◎</span>
-<div>
-<span>Peserta</span>
-<h2>Kelola peserta</h2>
-</div>
-</div>
-<p class="kc-side-description">
+
+        </form>
+
+
+        <div
+          class="form-status"
+          id="addModuleStatus">
+        </div>
+
+      </section>
+
+
+      <!-- PARTICIPANTS -->
+      <section
+        class="kc-control-panel"
+        id="peserta">
+
+        <div class="kc-control-heading">
+
+          <span class="kc-control-icon green">
+
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="9" cy="8" r="4"></circle>
+              <path d="M2.5 21a6.5 6.5 0 0 1 13 0"></path>
+              <path d="M17 8v6"></path>
+              <path d="M14 11h6"></path>
+            </svg>
+
+          </span>
+
+          <div>
+            <span>Peserta</span>
+            <h2>Kelola peserta</h2>
+          </div>
+
+        </div>
+
+
+        <p class="kc-side-description">
           Tambahkan email peserta yang sudah mempunyai akun Kabayan Learning.
         </p>
-<form class="kc-form" id="addStudentForm">
-<label>
-<span>Email peserta</span>
-<input name="email" placeholder="peserta@email.com" required="" type="email"/>
-</label>
-<button class="kc-submit kc-submit-green" type="submit">
-            Tambah peserta
+
+
+        <form
+          class="kc-form"
+          id="addStudentForm">
+
+          <label>
+
+            <span>
+              Email peserta
+            </span>
+
+            <input
+              name="email"
+              placeholder="peserta@email.com"
+              required
+              type="email">
+
+          </label>
+
+
+          <button
+            class="kc-submit kc-submit-green"
+            type="submit">
+
+            <span>
+              Tambah peserta
+            </span>
+
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5 12h14"></path>
+              <path d="m14 7 5 5-5 5"></path>
+            </svg>
+
           </button>
-</form>
-<div class="form-status" id="addStudentStatus"></div>
-<div class="kc-members">
-<div class="kc-members-head">
-<strong>Peserta kelas</strong>
-<span id="memberCountInline">0</span>
-</div>
-<div id="memberList"></div>
-</div>
-</section>
-<section class="kc-side-card kc-final-admin-card">
-<div class="kc-side-heading">
-<span class="kc-side-icon kc-side-icon-purple">★</span>
-<div>
-<span>Kelulusan</span>
-<h2>Evaluasi Akhir</h2>
-</div>
-</div>
-<p class="kc-side-description" id="finalEvaluationAdminText">
+
+        </form>
+
+
+        <div
+          class="form-status"
+          id="addStudentStatus">
+        </div>
+
+
+        <div class="kc-members">
+
+          <div class="kc-members-head">
+
+            <strong>
+              Peserta kelas
+            </strong>
+
+            <span id="memberCountInline">
+              0
+            </span>
+
+          </div>
+
+
+          <div id="memberList"></div>
+
+        </div>
+
+      </section>
+
+
+      <!-- FINAL EVALUATION -->
+      <section
+        class="kc-control-panel kc-final-admin-card"
+        id="evaluasi">
+
+        <div class="kc-control-heading">
+
+          <span class="kc-control-icon purple">
+
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="8" r="5"></circle>
+              <path d="M8.5 12 7 22l5-3 5 3-1.5-10"></path>
+            </svg>
+
+          </span>
+
+          <div>
+            <span>Kelulusan</span>
+            <h2>Evaluasi Akhir</h2>
+          </div>
+
+        </div>
+
+
+        <p
+          class="kc-side-description"
+          id="finalEvaluationAdminText">
           Memuat Evaluasi Akhir…
         </p>
-<div id="finalEvaluationAdmin"></div>
-</section>
-</aside>
-</section>
+
+
+        <div id="finalEvaluationAdmin"></div>
+
+      </section>
+
+    </aside>
+
+  </section>
+
 </main>
+
+
 <!-- ==========================================================
-     EDIT MODUL
+     EDIT MODULE
      ========================================================== -->
-<dialog class="editor-dialog module-editor-dialog" id="moduleEditorModal">
-<form class="dialog-body" id="moduleEditorForm">
-<input name="module_id" type="hidden"/>
-<div class="editor-heading">
-<div>
-<div class="eyebrow">Pengaturan Modul</div>
-<h2 id="moduleEditorHeading">Edit modul</h2>
-</div>
-<button aria-label="Tutup" class="icon-close" id="closeModuleEditorBtn" type="button">×</button>
-</div>
-<div class="form-grid" style="margin-top:18px">
-<label class="field">
+<dialog
+  class="editor-dialog module-editor-dialog kc-editor-dialog"
+  id="moduleEditorModal">
+
+  <form
+    class="dialog-body kc-editor-body"
+    id="moduleEditorForm">
+
+    <input
+      name="module_id"
+      type="hidden">
+
+
+    <div class="editor-heading">
+
+      <div>
+
+        <div class="eyebrow">
+          Pengaturan Modul
+        </div>
+
+        <h2 id="moduleEditorHeading">
+          Edit modul
+        </h2>
+
+      </div>
+
+
+      <button
+        aria-label="Tutup"
+        class="icon-close"
+        id="closeModuleEditorBtn"
+        type="button">
+        ×
+      </button>
+
+    </div>
+
+
+    <div
+      class="form-grid"
+      style="margin-top:18px">
+
+      <label class="field">
+
         Nama modul
-        <input name="title" required=""/>
-</label>
-<label class="field">
+
+        <input
+          name="title"
+          required>
+
+      </label>
+
+
+      <label class="field">
+
         Deskripsi modul
-        <textarea name="description" placeholder="Tujuan atau ringkasan modul"></textarea>
-</label>
-<div class="module-position-note">
-<strong id="modulePositionLabel">Modul</strong>
-<span>
+
+        <textarea
+          name="description"
+          placeholder="Tujuan atau ringkasan modul">
+        </textarea>
+
+      </label>
+
+
+      <div class="module-position-note">
+
+        <strong id="modulePositionLabel">
+          Modul
+        </strong>
+
+        <span>
           Urutan modul tidak diubah dari editor ini agar alur pembukaan kuis tetap konsisten.
         </span>
-</div>
-</div>
-<div class="form-status" id="moduleEditorStatus"></div>
-<div class="dialog-actions">
-<button class="btn ghost" id="cancelModuleEditorBtn" type="button">
+
+      </div>
+
+    </div>
+
+
+    <div
+      class="form-status"
+      id="moduleEditorStatus">
+    </div>
+
+
+    <div class="dialog-actions">
+
+      <button
+        class="btn ghost"
+        id="cancelModuleEditorBtn"
+        type="button">
         Batal
       </button>
-<button class="btn" type="submit">
+
+      <button
+        class="btn"
+        type="submit">
         Simpan perubahan
       </button>
-</div>
-</form>
-</dialog>
-<!-- ==========================================================
-     EDIT MATERI
-     ========================================================== -->
-<dialog class="editor-dialog" id="lessonEditorModal">
-<form class="dialog-body" id="lessonEditorForm">
-<input name="lesson_id" type="hidden"/>
-<div class="editor-heading">
-<div>
-<div class="eyebrow">Editor Materi</div>
-<h2 id="editorHeading">Edit checkpoint</h2>
-</div>
-<button aria-label="Tutup" class="icon-close" id="closeEditorBtn" type="button">×</button>
-</div>
-<div class="editor-meta-grid">
-<label class="field">
-        Judul materi
-        <input name="title" required=""/>
-</label>
-<label class="field">
-        Urutan
-        <input min="1" name="position" required="" type="number"/>
-</label>
-<label class="field">
-        Estimasi belajar (menit)
-        <input min="1" name="estimated_minutes" placeholder="10" type="number"/>
-</label>
-<label class="checkline editor-publish">
-<input name="is_published" type="checkbox"/>
-        Terbitkan untuk peserta
-      </label>
-</div>
-<div aria-label="Bantuan format materi" class="editor-toolbar">
-<button data-insert="# Judul" type="button">Judul</button>
-<button data-wrap="**" type="button">Tebal</button>
-<button data-insert="## Subjudul" type="button">Subjudul</button>
-<button data-insert="- Poin materi" type="button">Poin</button>
-<button data-insert="&gt; Catatan penting" type="button">Catatan</button>
-<button data-template="table" type="button">Tabel</button>
-<button data-template="example" type="button">Contoh</button>
-</div>
-<label class="field">
-      Isi materi
-      <textarea class="lesson-editor-textarea" id="lessonContentInput" name="content" placeholder="# Konsep PPh Pasal 21
 
-Tuliskan materi di sini."></textarea>
-</label>
-<div class="editor-help">
-<strong>Tips:</strong>
-      Gunakan tombol format di atas. Materi akan ditampilkan rapi di halaman peserta.
     </div>
-<div class="form-status" id="lessonEditorStatus"></div>
-<div class="dialog-actions">
-<button class="btn ghost" id="cancelEditorBtn" type="button">
+
+  </form>
+
+</dialog>
+
+
+<!-- ==========================================================
+     EDIT LESSON
+     ========================================================== -->
+<dialog
+  class="editor-dialog kc-editor-dialog"
+  id="lessonEditorModal">
+
+  <form
+    class="dialog-body kc-editor-body"
+    id="lessonEditorForm">
+
+    <input
+      name="lesson_id"
+      type="hidden">
+
+
+    <div class="editor-heading">
+
+      <div>
+
+        <div class="eyebrow">
+          Editor Materi
+        </div>
+
+        <h2 id="editorHeading">
+          Edit checkpoint
+        </h2>
+
+      </div>
+
+
+      <button
+        aria-label="Tutup"
+        class="icon-close"
+        id="closeEditorBtn"
+        type="button">
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="editor-meta-grid">
+
+      <label class="field">
+
+        Judul materi
+
+        <input
+          name="title"
+          required>
+
+      </label>
+
+
+      <label class="field">
+
+        Urutan
+
+        <input
+          min="1"
+          name="position"
+          required
+          type="number">
+
+      </label>
+
+
+      <label class="field">
+
+        Estimasi belajar (menit)
+
+        <input
+          min="1"
+          name="estimated_minutes"
+          placeholder="10"
+          type="number">
+
+      </label>
+
+
+      <label class="checkline editor-publish">
+
+        <input
+          name="is_published"
+          type="checkbox">
+
+        Terbitkan untuk peserta
+
+      </label>
+
+    </div>
+
+
+    <div
+      aria-label="Bantuan format materi"
+      class="editor-toolbar">
+
+      <button
+        data-insert="# Judul"
+        type="button">
+        Judul
+      </button>
+
+      <button
+        data-wrap="**"
+        type="button">
+        Tebal
+      </button>
+
+      <button
+        data-insert="## Subjudul"
+        type="button">
+        Subjudul
+      </button>
+
+      <button
+        data-insert="- Poin materi"
+        type="button">
+        Poin
+      </button>
+
+      <button
+        data-insert="> Catatan penting"
+        type="button">
+        Catatan
+      </button>
+
+      <button
+        data-template="table"
+        type="button">
+        Tabel
+      </button>
+
+      <button
+        data-template="example"
+        type="button">
+        Contoh
+      </button>
+
+    </div>
+
+
+    <label class="field">
+
+      Isi materi
+
+      <textarea
+        class="lesson-editor-textarea"
+        id="lessonContentInput"
+        name="content"
+        placeholder="# Konsep PPh Pasal 21
+
+Tuliskan materi di sini.">
+      </textarea>
+
+    </label>
+
+
+    <div class="editor-help">
+
+      <strong>
+        Tips:
+      </strong>
+
+      Gunakan tombol format di atas. Materi akan ditampilkan rapi di halaman peserta.
+
+    </div>
+
+
+    <div
+      class="form-status"
+      id="lessonEditorStatus">
+    </div>
+
+
+    <div class="dialog-actions">
+
+      <button
+        class="btn ghost"
+        id="cancelEditorBtn"
+        type="button">
         Batal
       </button>
-<button class="btn" type="submit">
+
+      <button
+        class="btn"
+        type="submit">
         Simpan materi
       </button>
-</div>
-</form>
+
+    </div>
+
+  </form>
+
 </dialog>
+
+
+<footer class="kc-footer">
+
+  <span>
+    © 2026 dhaniswara86
+  </span>
+
+  <span>
+    Learning Tax with Angga Sukma Dhaniswara
+  </span>
+
+</footer>
+
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="assets/js/supabase-config.js"></script>
 <script src="assets/js/supabase-client.js"></script>
 <script src="assets/js/auth.js"></script>
 <script src="assets/js/kelola-kelas.js"></script>
+
 </body>
 </html>
