@@ -3802,305 +3802,6 @@ body.mega-menu-open {
 }
 </style>
 
-
-<style id="watchOSInspiredKabayanStyles">
-/* =========================================================
-   Kabayan — Apple/watchOS-inspired editorial rhythm
-   ========================================================= */
-:root {
-  --wk-shell: 1180px;
-  --wk-blue: #0071e3;
-  --wk-text: #1d1d1f;
-  --wk-muted: #6e6e73;
-}
-
-.site-nav {
-  background: rgba(250,250,252,.72);
-  border-bottom-color: rgba(0,0,0,.045);
-  transition: background .24s ease, box-shadow .24s ease, backdrop-filter .24s ease;
-}
-.site-nav.is-scrolled {
-  background: rgba(250,250,252,.92);
-  box-shadow: 0 1px 10px rgba(0,0,0,.055);
-  backdrop-filter: saturate(180%) blur(24px);
-  -webkit-backdrop-filter: saturate(180%) blur(24px);
-}
-.announcement {
-  animation: none !important;
-  background: rgba(245,245,247,.82) !important;
-  color: #3a3a3c !important;
-  border-bottom: 1px solid rgba(0,0,0,.035);
-  backdrop-filter: blur(18px) saturate(160%);
-  -webkit-backdrop-filter: blur(18px) saturate(160%);
-}
-.collection-menu-trigger { color: var(--blue) !important; animation: none !important; }
-
-.hero {
-  background:
-    radial-gradient(circle at 50% 88%, rgba(0,113,227,.13), transparent 30%),
-    linear-gradient(180deg,#fff 0%,#fff 56%,#f5f7fb 100%);
-}
-.hero-actions-watch { align-items: center; }
-.hero-actions-watch .button-primary {
-  min-width: 116px;
-  border-color: var(--blue);
-  background: var(--blue);
-  color: #fff;
-}
-.hero-text-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 8px 2px;
-  color: var(--blue);
-  font-size: clamp(14px,1.65svh,16px);
-  font-weight: 450;
-  text-decoration: none;
-}
-.hero-text-link:hover { text-decoration: underline; text-underline-offset: 3px; }
-.slider-arrow {
-  width: 36px;
-  height: 36px;
-  background: rgba(232,232,237,.70);
-  font-size: 25px;
-  font-weight: 300;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-}
-.slider-arrow:hover { background: rgba(218,218,223,.84); }
-
-.wk-shell { width: min(var(--wk-shell), calc(100% - 48px)); margin: 0 auto; }
-.wk-kicker {
-  margin: 0 0 11px;
-  color: #86868b;
-  font-size: 16px;
-  font-weight: 650;
-  letter-spacing: -.015em;
-}
-.wk-section-heading { width: min(920px,100%); margin: 0 auto; text-align: center; }
-.wk-section-heading-left { margin-left: 0; text-align: left; }
-.wk-section-heading h2,
-.wk-story-copy h2 {
-  margin: 0;
-  color: var(--wk-text);
-  font-size: clamp(48px,6.2vw,82px);
-  font-weight: 700;
-  letter-spacing: -.06em;
-  line-height: .98;
-}
-.wk-section-heading h2 span,
-.wk-story-copy h2 span { color: #6e6e73; }
-.wk-section-heading > p:last-of-type,
-.wk-story-copy > p:last-of-type {
-  max-width: 700px;
-  margin: 19px auto 0;
-  color: #515154;
-  font-size: clamp(18px,2vw,24px);
-  line-height: 1.28;
-}
-.wk-section-heading-left > p:last-of-type,
-.wk-story-copy > p:last-of-type { margin-left: 0; }
-.wk-inline-link,
-.wk-latest-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  margin-top: 21px;
-  color: var(--wk-blue);
-  font-size: 17px;
-  text-decoration: none;
-}
-.wk-inline-link:hover,
-.wk-latest-link:hover { text-decoration: underline; text-underline-offset: 3px; }
-
-/* Explore */
-.wk-explore { padding: 108px 0 116px; background: #fff; }
-.wk-explore .wk-section-heading { max-width: 760px; }
-.wk-explore .wk-section-heading h2 { font-size: clamp(48px,5.4vw,72px); }
-.wk-explore-scroller {
-  display: grid;
-  grid-auto-columns: minmax(255px, 1fr);
-  grid-auto-flow: column;
-  gap: 14px;
-  margin-top: 44px;
-  padding: 4px 0 18px;
-  overflow-x: auto;
-  scroll-snap-type: x proximity;
-  scrollbar-width: none;
-}
-.wk-explore-scroller::-webkit-scrollbar { display: none; }
-.wk-explore-card {
-  position: relative;
-  min-height: 280px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  overflow: hidden;
-  padding: 26px;
-  border-radius: 30px;
-  color: var(--wk-text);
-  text-decoration: none;
-  scroll-snap-align: start;
-  transition: transform .32s cubic-bezier(.22,1,.36,1), box-shadow .32s ease;
-}
-.wk-explore-card:hover { transform: translateY(-5px); box-shadow: 0 18px 42px rgba(24,34,53,.12); }
-.wk-explore-symbol {
-  width: 68px; height: 68px; display: grid; place-items: center;
-  border-radius: 20px; background: rgba(255,255,255,.76);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.9), 0 8px 22px rgba(0,0,0,.07);
-  font-size: 31px; font-weight: 720; letter-spacing: -.06em;
-}
-.wk-code-symbol { font-size: 20px; letter-spacing: -.08em; }
-.wk-aa-symbol { font-size: 25px; }
-.wk-explore-copy { display: block; margin-top: auto; padding-top: 30px; }
-.wk-explore-copy strong { display: block; font-size: 25px; letter-spacing: -.035em; }
-.wk-explore-copy small { display: block; margin-top: 5px; color: rgba(29,29,31,.67); font-size: 14px; }
-.wk-card-arrow { position: absolute; top: 24px; right: 24px; font-size: 19px; opacity: .45; }
-.wk-tone-blue { background: linear-gradient(150deg,#e8f4ff,#cde9ff); }
-.wk-tone-yellow { background: linear-gradient(150deg,#fff6cd,#ffeaa3); }
-.wk-tone-cyan { background: linear-gradient(150deg,#e5fbff,#bdeffc); }
-.wk-tone-green { background: linear-gradient(150deg,#eaf9ed,#cbeed2); }
-.wk-tone-violet { background: linear-gradient(150deg,#f0edff,#ddd6ff); }
-.wk-tone-neutral { background: linear-gradient(150deg,#f6f6f8,#e8e8ed); }
-.wk-tone-red { background: linear-gradient(150deg,#fff0ee,#ffd8d3); }
-
-/* Shared story */
-.wk-story { position: relative; overflow: hidden; }
-.wk-story-shell { padding: 118px 0 40px; }
-.wk-split {
-  min-height: 760px;
-  display: grid;
-  grid-template-columns: minmax(0,.92fr) minmax(0,1.08fr);
-  align-items: center;
-  gap: clamp(50px,7vw,100px);
-  padding: 110px 0;
-}
-.wk-split-reverse { grid-template-columns: minmax(0,1.08fr) minmax(0,.92fr); }
-.wk-story-copy { min-width: 0; }
-.wk-story-copy h2 { font-size: clamp(46px,5.4vw,74px); }
-
-/* Books */
-.wk-books {
-  min-height: 850px;
-  background: linear-gradient(180deg,#f5f5f7 0%,#fff 100%);
-}
-.wk-book-stage { position: relative; width: min(930px,100%); height: 500px; margin: 36px auto 0; }
-.wk-book { position: absolute; bottom: 30px; left: 50%; z-index: 2; display: block; transition: transform .36s cubic-bezier(.22,1,.36,1); }
-.wk-book img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 34px 30px rgba(15,34,67,.22)); }
-.wk-book-center { width: 310px; height: 410px; transform: translateX(-50%); z-index: 4; }
-.wk-book-left { width: 255px; height: 340px; transform: translateX(-140%) rotate(-7deg); z-index: 3; }
-.wk-book-right { width: 255px; height: 340px; transform: translateX(40%) rotate(7deg); z-index: 3; }
-.wk-book-center:hover { transform: translateX(-50%) translateY(-10px) scale(1.02); }
-.wk-book-left:hover { transform: translateX(-140%) rotate(-5deg) translateY(-8px); }
-.wk-book-right:hover { transform: translateX(40%) rotate(5deg) translateY(-8px); }
-.wk-book-floor { position:absolute; bottom:15px; left:50%; width:680px; max-width:90%; height:70px; border-radius:50%; background:radial-gradient(ellipse,rgba(0,113,227,.17),transparent 68%); filter:blur(15px); transform:translateX(-50%); }
-
-/* Converter */
-.wk-converter { background: #050505; color: #fff; }
-.wk-split-dark .wk-kicker { color: #a1a1a6; }
-.wk-split-dark .wk-story-copy h2 { color:#f5f5f7; }
-.wk-split-dark .wk-story-copy h2 span { color:#7bbcff; }
-.wk-split-dark .wk-story-copy > p:last-of-type { color:#b8b8bd; }
-.wk-inline-link-light { color:#75b9ff; }
-.wk-converter-visual { position: relative; min-height: 510px; display:grid; place-items:center; }
-.wk-converter-window {
-  position: relative; z-index:2; width:min(640px,100%); overflow:hidden;
-  border:1px solid rgba(255,255,255,.14); border-radius:30px;
-  background:rgba(16,20,28,.90); box-shadow:0 40px 100px rgba(0,68,170,.28), inset 0 1px 0 rgba(255,255,255,.08);
-}
-.wk-window-bar { height:48px; display:flex; align-items:center; gap:7px; padding:0 16px; border-bottom:1px solid rgba(255,255,255,.08); color:#9ca2ad; font-size:11px; }
-.wk-window-bar span { width:9px; height:9px; border-radius:50%; background:#4b505b; }
-.wk-window-bar b { margin-left:8px; font-weight:560; }
-.wk-converter-body { position:relative; min-height:405px; display:grid; align-content:center; gap:12px; padding:42px 190px 42px 36px; background:radial-gradient(circle at 88% 60%,rgba(0,113,227,.28),transparent 35%),linear-gradient(145deg,#09111f,#0c274c 65%,#07366a); }
-.wk-converter-step { display:grid; grid-template-columns:36px 1fr; gap:12px; align-items:center; padding:14px 15px; border:1px solid rgba(255,255,255,.10); border-radius:15px; background:rgba(255,255,255,.07); }
-.wk-converter-step.active { background:rgba(255,255,255,.13); }
-.wk-converter-step i { width:34px;height:34px;display:grid;place-items:center;border-radius:10px;background:rgba(255,255,255,.12);font-style:normal;font-weight:700; }
-.wk-converter-step strong,.wk-converter-step small { display:block; }
-.wk-converter-step strong { font-size:14px; }
-.wk-converter-step small { margin-top:2px; color:#9cc9ef; font-size:10px; }
-.wk-xml-orb { position:absolute; right:42px; top:50%; width:116px; height:116px; display:grid; place-items:center; border:1px solid rgba(255,255,255,.26); border-radius:34px; background:linear-gradient(145deg,rgba(255,255,255,.22),rgba(255,255,255,.06)); box-shadow:0 20px 45px rgba(0,102,255,.24),inset 0 1px 0 rgba(255,255,255,.25); color:#fff; font-size:25px;font-weight:760;transform:translateY(-50%) rotate(5deg);backdrop-filter:blur(12px); }
-.wk-converter-glow { position:absolute; width:520px;height:300px;border-radius:50%;background:radial-gradient(ellipse,rgba(0,113,227,.32),transparent 68%);filter:blur(35px); }
-
-/* Forms */
-.wk-forms { background:#fff; }
-.wk-form-visual { position:relative; min-height:520px; }
-.wk-paper { position:absolute; left:50%; top:50%; width:310px; height:400px; padding:34px; border-radius:18px; background:#fff; box-shadow:0 28px 60px rgba(38,48,65,.16); }
-.wk-paper b { display:block; margin-bottom:36px; color:#86868b; font-size:10px; letter-spacing:.12em; }
-.wk-paper strong { display:block; margin-bottom:30px; font-size:28px; letter-spacing:-.04em; }
-.wk-paper span { display:block; height:8px; margin:15px 0; border-radius:99px; background:#d9d9df; }
-.wk-paper span:nth-of-type(2){width:80%}.wk-paper span:nth-of-type(3){width:66%}.wk-paper span:nth-of-type(4){width:90%}
-.wk-paper-back { transform:translate(-64%,-48%) rotate(-9deg); background:#eef4ff; }
-.wk-paper-mid { transform:translate(-42%,-50%) rotate(5deg); background:#f7f7f9; }
-.wk-paper-front { z-index:3; transform:translate(-50%,-50%) rotate(-1deg); }
-.wk-paper-front em { position:absolute; right:30px; bottom:30px; width:50px;height:50px;display:grid;place-items:center;border-radius:50%;background:#e8f4ff;color:#0071e3;font-style:normal;font-size:22px;font-weight:700; }
-.wk-form-shadow { position:absolute; left:50%; bottom:35px; width:440px; max-width:88%; height:65px; border-radius:50%; background:rgba(26,49,87,.13); filter:blur(22px); transform:translateX(-50%); }
-
-/* Calculator */
-.wk-calculator { background:linear-gradient(160deg,#eaf6ff 0%,#f7fbff 48%,#fff 100%); }
-.wk-calc-visual { position:relative; min-height:520px; display:grid; place-items:center; }
-.wk-calc-card { position:absolute; width:min(470px,90%); border:1px solid rgba(0,0,0,.06); border-radius:28px; background:rgba(255,255,255,.90); box-shadow:0 28px 70px rgba(34,74,120,.15),inset 0 1px 0 #fff; }
-.wk-calc-card-back { width:300px; padding:24px; transform:translate(120px,-120px) rotate(8deg); }
-.wk-calc-card-back span,.wk-calc-card-back small { display:block; color:#6e6e73;font-size:11px; }.wk-calc-card-back strong{display:block;margin:6px 0;font-size:42px;letter-spacing:-.05em;}
-.wk-calc-card-main { z-index:2; padding:30px; }
-.wk-calc-top { display:flex;justify-content:space-between;align-items:center;color:#6e6e73;font-size:12px;font-weight:650; }.wk-calc-top i{color:#34c759;font-style:normal;font-size:9px;}
-.wk-calc-value { margin:28px 0 32px; font-size:clamp(36px,4vw,52px);font-weight:700;letter-spacing:-.055em; }
-.wk-calc-row { display:flex;justify-content:space-between;gap:20px;padding:13px 0;border-top:1px solid #ececf0;color:#6e6e73;font-size:12px; }.wk-calc-row b{color:#1d1d1f;}
-.wk-calc-progress{height:7px;margin-top:22px;border-radius:99px;background:#e8e8ed;overflow:hidden}.wk-calc-progress span{display:block;width:62%;height:100%;border-radius:inherit;background:linear-gradient(90deg,#0071e3,#42a8ff);}
-
-/* Apps */
-.wk-apps { min-height:900px; padding:115px 0 0; background:linear-gradient(180deg,#f5f5f7,#fff); }
-.wk-app-window { width:min(860px,96%); margin:55px auto -15px; overflow:hidden; border:1px solid rgba(0,0,0,.08); border-radius:30px 30px 10px 10px; background:rgba(255,255,255,.95); box-shadow:0 38px 90px rgba(26,49,87,.17); }
-.wk-window-bar-light { color:#6e6e73; border-bottom:1px solid #e6e6ea; background:rgba(245,245,247,.86); }.wk-window-bar-light span{background:#c7c7cc;}
-.wk-app-body { min-height:440px; display:grid; grid-template-columns:190px 1fr; }
-.wk-app-body aside { padding:24px 17px; border-right:1px solid #e5e5e9; background:rgba(245,245,247,.72); }
-.wk-app-body aside small { display:block;margin:0 9px 14px;color:#86868b;font-size:9px;font-weight:750;letter-spacing:.08em; }
-.wk-app-body aside span { display:flex;align-items:center;gap:10px;padding:9px;border-radius:10px;color:#515154;font-size:12px; }.wk-app-body aside span.active{background:rgba(0,113,227,.10);color:#0071e3;font-weight:650}.wk-app-body aside i{width:25px;height:25px;display:grid;place-items:center;border-radius:8px;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.06);font-style:normal;font-size:9px;font-weight:700;}
-.wk-app-content { padding:28px; }
-.wk-app-title{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:18px}.wk-app-title strong,.wk-app-title small{display:block}.wk-app-title strong{font-size:21px;letter-spacing:-.03em}.wk-app-title small{margin-top:3px;color:#86868b;font-size:11px}.wk-app-title>span{padding:7px 10px;border-radius:10px;background:#f5f5f7;color:#86868b;font-size:10px;}
-.wk-app-row{display:grid;grid-template-columns:42px minmax(0,1fr) auto;align-items:center;gap:12px;padding:13px 14px;border:1px solid #e8e8ed;border-radius:15px;background:#fff;margin-top:9px}.wk-app-row>i{width:40px;height:40px;display:grid;place-items:center;border-radius:12px;background:#eaf4ff;color:#0071e3;font-style:normal;font-size:10px;font-weight:760}.wk-app-row strong,.wk-app-row small{display:block}.wk-app-row strong{font-size:13px}.wk-app-row small{margin-top:2px;color:#86868b;font-size:10px}.wk-app-row>b{padding:5px 8px;border-radius:999px;background:#f0ebf7;color:#8944ab;font-size:8px}.wk-app-row>b.support{background:#eaf4ff;color:#0071e3;}
-
-/* Knowledge */
-.wk-knowledge { padding:120px 0 130px; background:#fff; }
-.wk-knowledge-grid { display:grid;grid-template-columns:minmax(0,1.35fr) minmax(320px,.65fr);gap:14px;margin-top:48px; }
-.wk-knowledge-card { position:relative; min-height:650px; overflow:hidden; border-radius:34px; padding:44px; }
-.wk-article-card { background:linear-gradient(150deg,#f5f5f7,#fff); }
-.wk-news-card { background:linear-gradient(155deg,#dff4ff,#eefbff 52%,#fff); }
-.wk-knowledge-copy{position:relative;z-index:3;max-width:520px}.wk-knowledge-copy>span{color:#86868b;font-size:15px;font-weight:650}.wk-knowledge-copy h3{margin:9px 0 0;font-size:clamp(40px,4.2vw,60px);line-height:1;letter-spacing:-.055em}.wk-knowledge-copy p{max-width:480px;margin:16px 0 0;color:#515154;font-size:18px;line-height:1.32}.wk-latest-link{margin-left:18px;font-size:15px}.wk-hot-label{color:#d92d20!important}.wk-hot-label i{display:inline-block;width:8px;height:8px;margin-right:6px;border-radius:50%;background:#ff3b30;box-shadow:0 0 0 6px rgba(255,59,48,.08)}
-.wk-article-visual{position:absolute;right:0;bottom:-20px;left:0;height:330px}.wk-article-sheet{position:absolute;bottom:0;width:250px;height:310px;padding:28px;border-radius:20px 20px 0 0;box-shadow:0 28px 55px rgba(32,40,54,.15)}.wk-article-sheet-back{left:calc(50% - 240px);background:linear-gradient(145deg,#073a7d,#0c86c3);color:#fff;transform:rotate(-7deg);font-size:11px;font-weight:750;letter-spacing:.1em}.wk-article-sheet-front{left:calc(50% - 20px);background:#fff;transform:rotate(5deg)}.wk-article-sheet-front small{display:inline-block;padding:5px 8px;border-radius:99px;background:#eaf4ff;color:#0071e3;font-size:9px;font-weight:750}.wk-article-sheet-front strong{display:block;margin:20px 0 28px;font-size:22px;line-height:1.08;letter-spacing:-.035em}.wk-article-sheet-front i{display:block;height:8px;margin:13px 0;border-radius:99px;background:#d8d8dd}.wk-article-sheet-front i.short{width:68%}
-.wk-news-visual{position:absolute;right:0;bottom:0;left:0;height:320px;display:grid;place-items:end center}.wk-news-card-mini{width:min(330px,88%);min-height:275px;padding:24px;border:7px solid #1b1c20;border-bottom-width:15px;border-radius:26px 26px 8px 8px;background:linear-gradient(180deg,#f9fcff,#edf7ff);box-shadow:0 30px 70px rgba(16,81,133,.22)}.wk-news-card-mini small,.wk-news-card-mini b{display:inline-block;font-size:9px;letter-spacing:.06em}.wk-news-card-mini b{float:right;color:#d92d20}.wk-news-card-mini strong{display:block;margin:28px 0 25px;font-size:23px;line-height:1.08;letter-spacing:-.04em}.wk-news-card-mini span{display:block;height:46px;margin-top:9px;border:1px solid #dfe7ee;border-radius:12px;background:#fff}
-
-/* About: quieter finale */
-.about { padding:120px 24px; background:#f5f5f7; }
-.about h2 { font-size:clamp(46px,6vw,72px); }
-.about .button-outline { border-color:#c7d9ec; background:rgba(255,255,255,.50); }
-
-@media (max-width: 900px) {
-  .wk-split,.wk-split-reverse{grid-template-columns:1fr;gap:42px;min-height:auto;padding:86px 0}.wk-split-reverse .wk-form-visual{order:2}.wk-split-reverse .wk-story-copy{order:1}
-  .wk-story-copy{text-align:center}.wk-story-copy>p:last-of-type{margin-left:auto}.wk-knowledge-grid{grid-template-columns:1fr}.wk-knowledge-card{min-height:620px}.wk-apps{min-height:820px}
-}
-@media (max-width: 680px) {
-  .wk-shell{width:calc(100% - 32px)}
-  .announcement{padding:11px 20px;font-size:12px}
-  .hero-actions-watch{gap:10px 15px}.hero-actions-watch .button-primary{width:auto}.hero-text-link{font-size:13px}
-  .slider-arrow{width:32px;height:32px;font-size:22px;opacity:.72}
-  .wk-explore{padding:72px 0 78px}.wk-explore .wk-section-heading h2,.wk-section-heading h2,.wk-story-copy h2{font-size:clamp(40px,12vw,56px)}.wk-kicker{font-size:14px}.wk-section-heading>p:last-of-type,.wk-story-copy>p:last-of-type{font-size:17px}
-  .wk-explore-scroller{grid-auto-columns:220px;margin-top:30px}.wk-explore-card{min-height:240px;padding:22px;border-radius:26px}.wk-explore-symbol{width:58px;height:58px;border-radius:17px;font-size:26px}.wk-explore-copy strong{font-size:21px}
-  .wk-story-shell{padding:80px 0 24px}.wk-books{min-height:730px}.wk-book-stage{height:390px;margin-top:28px}.wk-book-center{width:225px;height:310px}.wk-book-left,.wk-book-right{width:170px;height:245px}.wk-book-left{transform:translateX(-135%) rotate(-7deg)}.wk-book-right{transform:translateX(35%) rotate(7deg)}
-  .wk-split,.wk-split-reverse{padding:72px 0;gap:28px}.wk-converter-visual,.wk-form-visual,.wk-calc-visual{min-height:390px}.wk-converter-body{min-height:330px;padding:30px 120px 30px 20px}.wk-converter-step{grid-template-columns:30px 1fr;padding:11px}.wk-converter-step i{width:29px;height:29px}.wk-xml-orb{right:20px;width:86px;height:86px;border-radius:25px;font-size:18px}.wk-window-bar b{max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .wk-paper{width:230px;height:310px;padding:25px}.wk-paper strong{font-size:22px;margin-bottom:20px}.wk-paper b{margin-bottom:25px}.wk-paper span{height:6px;margin:11px 0}.wk-paper-front em{width:42px;height:42px;right:22px;bottom:22px}
-  .wk-calc-card-main{padding:22px}.wk-calc-card-back{width:220px;transform:translate(55px,-100px) rotate(8deg)}.wk-calc-value{font-size:34px;margin:22px 0}.wk-calc-row{font-size:10px}
-  .wk-apps{min-height:720px;padding-top:80px}.wk-app-window{width:100%;margin-top:38px;border-radius:22px 22px 7px 7px}.wk-app-body{min-height:360px;grid-template-columns:76px 1fr}.wk-app-body aside{padding:18px 9px}.wk-app-body aside small,.wk-app-body aside span:not(.active){font-size:0}.wk-app-body aside span{justify-content:center}.wk-app-body aside span.active{font-size:0}.wk-app-body aside i{font-size:9px}.wk-app-content{padding:18px 12px}.wk-app-title>span{display:none}.wk-app-row{grid-template-columns:36px 1fr;padding:10px}.wk-app-row>b{display:none}.wk-app-row>i{width:34px;height:34px}.wk-app-row strong{font-size:11px}.wk-app-row small{font-size:8px}
-  .wk-knowledge{padding:82px 0 90px}.wk-knowledge-grid{margin-top:32px}.wk-knowledge-card{min-height:570px;padding:30px 24px;border-radius:28px}.wk-knowledge-copy h3{font-size:40px}.wk-knowledge-copy p{font-size:16px}.wk-article-sheet{width:190px;height:265px;padding:20px}.wk-article-sheet-back{left:calc(50% - 175px)}.wk-article-sheet-front{left:calc(50% - 15px)}.wk-article-sheet-front strong{font-size:18px}.wk-latest-link{display:block;margin-left:0;margin-top:10px}.wk-news-card-mini{min-height:245px}.wk-news-card-mini strong{font-size:20px}
-}
-@media (max-width: 430px) {
-  .wk-book-left{transform:translateX(-125%) rotate(-8deg);opacity:.82}.wk-book-right{transform:translateX(25%) rotate(8deg);opacity:.82}.wk-book-center{width:205px}
-  .wk-explore-scroller{grid-auto-columns:205px}
-}
-@media (prefers-reduced-motion: reduce) {
-  .wk-explore-card,.wk-book,.site-nav{transition:none!important}
-}
-</style>
-
 </head>
 <body id="top">
 <header class="site-nav">
@@ -4382,15 +4083,19 @@ body.mega-menu-open {
           <span class="hero-gradient">Lebih sederhana.</span>
 </h1>
 <p class="hero-description">
-          Buku, formulir, aplikasi, dan alat bantu perpajakan
-          untuk belajar dan bekerja lebih praktis.
+          Buku, formulir, aplikasi, template, dan artikel perpajakan
+          dalam satu tempat yang praktis dan gratis.
         </p>
-<div class="hero-actions hero-actions-watch">
+<div class="hero-actions">
 <a class="button button-primary" href="buku.html">
             Mulai belajar
           </a>
-<a class="hero-text-link" href="formulir.html">Lihat formulir <span aria-hidden="true">›</span></a>
-<a class="hero-text-link" href="aplikasi.html">Lihat aplikasi <span aria-hidden="true">›</span></a>
+<a class="button button-outline" href="formulir.html">
+            Lihat formulir
+          </a>
+<a class="button button-outline" href="aplikasi.html">
+            Lihat aplikasi
+          </a>
 </div>
 </div>
 <div class="hero-visual">
@@ -4539,204 +4244,262 @@ body.mega-menu-open {
 </section>
 </div>
 </section>
-
-<section class="wk-explore" aria-labelledby="wkExploreTitle">
-  <div class="wk-shell">
-    <div class="wk-section-heading wk-section-heading-left">
-      <p class="wk-kicker">Katalog Bahan Pelayanan</p>
-      <h2 id="wkExploreTitle">Jelajahi Kabayan.</h2>
-      <p>Pilih kebutuhan Anda, lalu masuk lebih dalam saat diperlukan.</p>
-    </div>
-    <div class="wk-explore-scroller" aria-label="Kategori utama Kabayan">
-      <a class="wk-explore-card wk-tone-blue" href="buku.html">
-        <span class="wk-explore-symbol" aria-hidden="true">B</span>
-        <span class="wk-explore-copy"><strong>Buku Digital</strong><small>Modul dan referensi.</small></span>
-        <span class="wk-card-arrow" aria-hidden="true">↗</span>
-      </a>
-      <a class="wk-explore-card wk-tone-yellow" href="formulir.html">
-        <span class="wk-explore-symbol" aria-hidden="true">F</span>
-        <span class="wk-explore-copy"><strong>Formulir</strong><small>Dokumen siap digunakan.</small></span>
-        <span class="wk-card-arrow" aria-hidden="true">↗</span>
-      </a>
-      <a class="wk-explore-card wk-tone-cyan" href="converter-xml-coretax.html">
-        <span class="wk-explore-symbol wk-code-symbol" aria-hidden="true">&lt;/&gt;</span>
-        <span class="wk-explore-copy"><strong>Converter XML</strong><small>Excel ke XML Coretax.</small></span>
-        <span class="wk-card-arrow" aria-hidden="true">↗</span>
-      </a>
-      <a class="wk-explore-card wk-tone-green" href="kalkulator.html">
-        <span class="wk-explore-symbol" aria-hidden="true">=</span>
-        <span class="wk-explore-copy"><strong>Kalkulator</strong><small>Hitung lebih praktis.</small></span>
-        <span class="wk-card-arrow" aria-hidden="true">↗</span>
-      </a>
-      <a class="wk-explore-card wk-tone-violet" href="aplikasi.html">
-        <span class="wk-explore-symbol" aria-hidden="true">A</span>
-        <span class="wk-explore-copy"><strong>Aplikasi</strong><small>Installer dan arsip.</small></span>
-        <span class="wk-card-arrow" aria-hidden="true">↗</span>
-      </a>
-      <a class="wk-explore-card wk-tone-neutral" href="artikel.html">
-        <span class="wk-explore-symbol wk-aa-symbol" aria-hidden="true">Aa</span>
-        <span class="wk-explore-copy"><strong>Artikel</strong><small>Ketentuan lebih mudah.</small></span>
-        <span class="wk-card-arrow" aria-hidden="true">↗</span>
-      </a>
-      <a class="wk-explore-card wk-tone-red" href="hotnews.html">
-        <span class="wk-explore-symbol" aria-hidden="true">N</span>
-        <span class="wk-explore-copy"><strong>Hot News</strong><small>Yang berubah, lebih cepat.</small></span>
-        <span class="wk-card-arrow" aria-hidden="true">↗</span>
-      </a>
-    </div>
-  </div>
+<section class="full-panel panel-light">
+<div class="panel-content">
+<p class="section-kicker">Buku Digital</p>
+<h2 class="section-title">
+          Pengetahuan yang lebih terstruktur.
+        </h2>
+<p class="section-description">
+          Pelajari perpajakan melalui modul, e-book, petunjuk teknis, <br/>
+          yang dirancang untuk pembelajaran mandiri.
+        </p>
+<div class="section-actions">
+<a class="button button-primary" href="buku.html">
+            Lihat buku
+          </a>
+<a class="button button-outline" href="converter-xml-unifikasi.html">
+            Materi terbaru
+          </a>
+</div>
+<div aria-hidden="true" class="folder-stage">
+<div class="folder-back"></div>
+<div class="document"></div>
+<div class="folder-front"></div>
+</div>
+</div>
 </section>
-
-<section class="wk-story wk-books" id="buku-digital" aria-labelledby="wkBooksTitle">
-  <div class="wk-shell wk-story-shell">
-    <div class="wk-section-heading">
-      <p class="wk-kicker">Buku Digital</p>
-      <h2 id="wkBooksTitle">Pengetahuan pajak.<br/><span>Lebih terstruktur.</span></h2>
-      <p>Materi yang membantu memahami perpajakan secara bertahap, dari konsep sampai petunjuk teknis.</p>
-      <a class="wk-inline-link" href="buku.html">Lihat semua buku <span aria-hidden="true">›</span></a>
-    </div>
-    <div class="wk-book-stage" aria-label="Buku pilihan Kabayan">
-      <a class="wk-book wk-book-left" href="converter-xml-unifikasi.html" aria-label="Converter Excel ke XML PPh Unifikasi">
-        <img src="images/mockup-converter-excel-xml-unifikasi.webp" alt="Mockup buku Converter Excel ke XML PPh Unifikasi" loading="lazy"/>
-      </a>
-      <a class="wk-book wk-book-center" href="cermat-2126.html" aria-label="Cermat Pemotongan PPh Pasal 21/26">
-        <img src="images/mockup-cermat-2126.webp" alt="Mockup buku Cermat Pemotongan PPh Pasal 21/26" loading="lazy"/>
-      </a>
-      <a class="wk-book wk-book-right" href="kap-kjs.html" aria-label="KAP dan KJS Era Coretax">
-        <img src="images/mockup-kap-kjs-per8tahun2026.webp" alt="Mockup buku KAP dan KJS Era Coretax" loading="lazy"/>
-      </a>
-      <div class="wk-book-floor" aria-hidden="true"></div>
-    </div>
-  </div>
+<section class="full-panel panel-dark" id="coretax">
+<div class="panel-content">
+<p class="section-kicker">Converter XML Coretax</p>
+<h2 class="section-title">
+          Hasil cepat . Tanpa Ribet.
+        </h2>
+<p class="section-description">
+          Temukan Converter Excel ke XML Coretax, untuk pembuatan bukti potong/pungut dalam jumlah banyak dengan metode skema impor XML yang praktis.
+        </p>
+<div class="section-actions">
+<a class="button button-primary" href="converter-xml-coretax.html">
+            Buka Converter
+          </a>
+</div>
+<div aria-hidden="true" class="dark-visual">
+<div class="screen">
+<div class="screen-card one">
+<div class="screen-icon">⌘</div>
+<strong>Excel ke XML</strong>
+<span>Siapkan data lebih terstruktur.</span>
+</div>
+<div class="screen-card two">
+<div class="screen-icon">✓</div>
+<strong>Validasi Data</strong>
+<span>Periksa sebelum digunakan.</span>
+</div>
+</div>
+</div>
+</div>
 </section>
-
-<section class="wk-story wk-converter" id="coretax" aria-labelledby="wkConverterTitle">
-  <div class="wk-shell wk-split wk-split-dark">
-    <div class="wk-story-copy">
-      <p class="wk-kicker">Converter XML Coretax</p>
-      <h2 id="wkConverterTitle">Data siap.<br/><span>Tanpa ribet.</span></h2>
-      <p>Ubah data Excel menjadi XML Coretax dengan alur yang lebih praktis untuk kebutuhan impor bukti potong dan pungut.</p>
-      <a class="wk-inline-link wk-inline-link-light" href="converter-xml-coretax.html">Buka Converter <span aria-hidden="true">›</span></a>
-    </div>
-    <div class="wk-converter-visual" aria-hidden="true">
-      <div class="wk-converter-window">
-        <div class="wk-window-bar"><span></span><span></span><span></span><b>Converter XML Coretax</b></div>
-        <div class="wk-converter-body">
-          <div class="wk-converter-step active"><i>1</i><div><strong>Unggah Excel</strong><small>Gunakan template yang sesuai.</small></div></div>
-          <div class="wk-converter-step"><i>2</i><div><strong>Periksa data</strong><small>Validasi sebelum diproses.</small></div></div>
-          <div class="wk-converter-step"><i>3</i><div><strong>Buat XML</strong><small>File siap digunakan.</small></div></div>
-          <div class="wk-xml-orb">XML</div>
-        </div>
-      </div>
-      <div class="wk-converter-glow"></div>
-    </div>
-  </div>
+<section class="full-panel applications-panel" id="aplikasi">
+<div class="panel-content">
+<p class="section-kicker">Aplikasi Perpajakan</p>
+<h2 class="section-title">
+          Installer dan perangkat pendukung.
+        </h2>
+<p class="section-description">
+          Temukan aplikasi e-SPT, e-Faktur, formulir elektronik,
+          dan perangkat pendukung untuk kebutuhan administrasi
+          maupun pengelolaan data perpajakan untuk periode sebelum implementasi Coretax.
+        </p>
+<div class="section-actions">
+<a class="button button-primary" href="aplikasi.html">
+            Buka portal aplikasi
+          </a>
+<a class="button button-outline" href="buku.html">
+            Lihat petunjuk
+          </a>
+</div>
+<div aria-hidden="true" class="application-stage">
+<div class="application-window">
+<div class="application-toolbar">
+<span class="toolbar-dot"></span>
+<span class="toolbar-dot"></span>
+<span class="toolbar-dot"></span>
+</div>
+<div class="application-body">
+<div class="application-sidebar">
+<span class="sidebar-label">Kategori</span>
+<div class="sidebar-item active">
+<span class="sidebar-icon">A</span>
+<span>Semua aplikasi</span>
+</div>
+<div class="sidebar-item">
+<span class="sidebar-icon">S</span>
+<span>e-SPT</span>
+</div>
+<div class="sidebar-item">
+<span class="sidebar-icon">F</span>
+<span>e-Faktur</span>
+</div>
+<div class="sidebar-item">
+<span class="sidebar-icon">P</span>
+<span>Pendukung</span>
+</div>
+</div>
+<div class="application-content">
+<div class="application-content-header">
+<div>
+<strong>Portal Aplikasi</strong>
+<span>Installer dan arsip perpajakan</span>
+</div>
+<div class="application-search">
+                    Cari aplikasi...
+                  </div>
+</div>
+<div class="application-list">
+<div class="application-row">
+<span class="application-row-icon">EF</span>
+<span>
+<strong>e-Faktur</strong>
+<small>Installer dan database</small>
+</span>
+<span class="application-status">
+                      Arsip
+                    </span>
+</div>
+<div class="application-row">
+<span class="application-row-icon">21</span>
+<span>
+<strong>e-SPT Masa PPh Pasal 21</strong>
+<small>Aplikasi desktop</small>
+</span>
+<span class="application-status">
+                      Arsip
+                    </span>
+</div>
+<div class="application-row">
+<span class="application-row-icon">APP</span>
+<span>
+<strong>Aplikasi Pendukung e-SPT</strong>
+<small>Komponen prasyarat</small>
+</span>
+<span class="application-status support">
+                      Pendukung
+                    </span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
-
-<section class="wk-story wk-forms" id="formulir-kabayan" aria-labelledby="wkFormsTitle">
-  <div class="wk-shell wk-split wk-split-reverse">
-    <div class="wk-form-visual" aria-hidden="true">
-      <div class="wk-paper wk-paper-back"><span></span><span></span><span></span></div>
-      <div class="wk-paper wk-paper-mid"><b>FORMULIR</b><span></span><span></span><span></span><span></span></div>
-      <div class="wk-paper wk-paper-front"><b>KABAYAN</b><strong>Dokumen Pajak</strong><span></span><span></span><span></span><em>✓</em></div>
-      <div class="wk-form-shadow"></div>
-    </div>
-    <div class="wk-story-copy">
-      <p class="wk-kicker">Formulir Perpajakan</p>
-      <h2 id="wkFormsTitle">Dokumen pajak.<br/><span>Siap digunakan.</span></h2>
-      <p>Temukan formulir berdasarkan kebutuhan administrasi, dari registrasi dan PKP sampai surat pernyataan dan permohonan.</p>
-      <a class="wk-inline-link" href="formulir.html">Lihat seluruh formulir <span aria-hidden="true">›</span></a>
-    </div>
-  </div>
+<section class="showcase-section" id="artikel">
+<div class="showcase-grid">
+<article class="showcase-card article-showcase">
+<div class="showcase-copy">
+<span class="showcase-kicker">Artikel Pajak</span>
+<h3>Penjelasan pajak.<br/>Lebih mudah dipahami.</h3>
+<p>
+          Temukan pembahasan perpajakan yang ringkas, terstruktur,
+          dan relevan untuk membantu memahami ketentuan secara praktis.
+        </p>
+<div class="showcase-actions">
+<a class="showcase-button primary" href="artikel.html">
+            Baca artikel
+          </a>
+<a
+            class="showcase-button secondary"
+            href="artikel.html"
+            id="latestArticleButton"
+          >
+            Artikel terbaru
+          </a>
+</div>
+</div>
+<div aria-hidden="true" class="showcase-visual article-visual">
+<div class="article-glow"></div>
+<div class="editorial-card editorial-card-back">
+<span class="editorial-chip">PPh</span>
+<strong>Panduan perpajakan yang lebih sederhana.</strong>
+<span class="editorial-line"></span>
+<span class="editorial-line short"></span>
+<span class="editorial-line"></span>
+</div>
+<div class="editorial-card editorial-card-front">
+<div class="editorial-top">
+<span>KABAYAN</span>
+<span>ARTIKEL</span>
+</div>
+<span class="editorial-chip blue">Terbaru</span>
+<strong id="latestArticleVisualTitle">
+            Artikel perpajakan terbaru.
+          </strong>
+<span class="editorial-line dark"></span>
+<span class="editorial-line short"></span>
+<span class="editorial-line"></span>
+<span class="editorial-line short"></span>
+</div>
+</div>
+</article>
+<article class="showcase-card hotnews-showcase" id="hot-news">
+<div class="showcase-copy">
+<span class="showcase-kicker hot">
+<span aria-hidden="true" class="hot-dot"></span>
+          Hot News
+        </span>
+<h3>Informasi terbaru.<br/>Lebih cepat diketahui.</h3>
+<p>
+          Ikuti pembaruan regulasi, pengumuman penting,
+          dan isu perpajakan yang perlu segera diperhatikan.
+        </p>
+<div class="showcase-actions">
+<a class="showcase-button primary" href="hotnews.html">
+            Lihat Hot News
+          </a>
+<a class="showcase-button secondary" href="artikel.html">
+            Semua informasi
+          </a>
+</div>
+</div>
+<div aria-hidden="true" class="showcase-visual hotnews-visual">
+<div class="news-orbit orbit-one"></div>
+<div class="news-orbit orbit-two"></div>
+<div class="news-screen">
+<div class="news-screen-top">
+<span class="news-brand">KABAYAN NEWS</span>
+<span class="news-status">
+<span></span>
+              TERBARU
+            </span>
+</div>
+<div class="news-headline-card">
+<span>Hot News</span>
+<strong>
+              Pembaruan perpajakan dalam satu halaman.
+            </strong>
+<small>
+              Ringkas, aktual, dan mudah dipahami.
+            </small>
+</div>
+<div class="news-mini-grid">
+<div class="news-mini-card">
+<span>01</span>
+<strong>Regulasi terbaru</strong>
+</div>
+<div class="news-mini-card">
+<span>02</span>
+<strong>Pengumuman penting</strong>
+</div>
+<div class="news-mini-card">
+<span>03</span>
+<strong>Isu perpajakan</strong>
+</div>
+</div>
+</div>
+</div>
+</article>
+</div>
 </section>
-
-<section class="wk-story wk-calculator" id="kalkulator-kabayan" aria-labelledby="wkCalculatorTitle">
-  <div class="wk-shell wk-split">
-    <div class="wk-story-copy">
-      <p class="wk-kicker">Kalkulator Pajak</p>
-      <h2 id="wkCalculatorTitle">Hitung pajak.<br/><span>Lebih praktis.</span></h2>
-      <p>Gunakan alat bantu untuk memetakan PPN, PPh Pasal 21, transaksi instansi pemerintah, dan pengembalian pendahuluan.</p>
-      <a class="wk-inline-link" href="kalkulator.html">Buka kalkulator <span aria-hidden="true">›</span></a>
-    </div>
-    <div class="wk-calc-visual" aria-hidden="true">
-      <div class="wk-calc-card wk-calc-card-back">
-        <span>PPN</span><strong>11%</strong><small>DPP Nilai Lain</small>
-      </div>
-      <div class="wk-calc-card wk-calc-card-main">
-        <div class="wk-calc-top"><span>PPh Pasal 21</span><i>●</i></div>
-        <div class="wk-calc-value">Rp 2.450.000</div>
-        <div class="wk-calc-row"><span>Penghasilan bruto</span><b>Rp 15.000.000</b></div>
-        <div class="wk-calc-row"><span>Tarif efektif</span><b>16,33%</b></div>
-        <div class="wk-calc-progress"><span></span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="wk-story wk-apps" id="aplikasi" aria-labelledby="wkAppsTitle">
-  <div class="wk-shell">
-    <div class="wk-section-heading">
-      <p class="wk-kicker">Aplikasi Perpajakan</p>
-      <h2 id="wkAppsTitle">Perangkat lama.<br/><span>Tetap mudah ditemukan.</span></h2>
-      <p>Installer, arsip, dan perangkat pendukung untuk kebutuhan administrasi periode sebelum implementasi Coretax.</p>
-      <a class="wk-inline-link" href="aplikasi.html">Buka portal aplikasi <span aria-hidden="true">›</span></a>
-    </div>
-    <div class="wk-app-window" aria-hidden="true">
-      <div class="wk-window-bar wk-window-bar-light"><span></span><span></span><span></span><b>Portal Aplikasi</b></div>
-      <div class="wk-app-body">
-        <aside>
-          <small>KATEGORI</small>
-          <span class="active"><i>A</i>Semua</span>
-          <span><i>S</i>e-SPT</span>
-          <span><i>F</i>e-Faktur</span>
-          <span><i>P</i>Pendukung</span>
-        </aside>
-        <div class="wk-app-content">
-          <div class="wk-app-title"><div><strong>Portal Aplikasi</strong><small>Installer dan arsip perpajakan</small></div><span>Cari aplikasi…</span></div>
-          <div class="wk-app-row"><i>EF</i><div><strong>e-Faktur</strong><small>Installer dan database</small></div><b>ARSIP</b></div>
-          <div class="wk-app-row"><i>21</i><div><strong>e-SPT Masa PPh Pasal 21</strong><small>Aplikasi desktop</small></div><b>ARSIP</b></div>
-          <div class="wk-app-row"><i>APP</i><div><strong>Aplikasi Pendukung e-SPT</strong><small>Komponen prasyarat</small></div><b class="support">PENDUKUNG</b></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="wk-knowledge" id="artikel" aria-labelledby="wkKnowledgeTitle">
-  <div class="wk-shell">
-    <div class="wk-section-heading wk-section-heading-left">
-      <p class="wk-kicker">Baca &amp; ikuti</p>
-      <h2 id="wkKnowledgeTitle">Pahami ketentuan.<br/><span>Ikuti yang berubah.</span></h2>
-    </div>
-    <div class="wk-knowledge-grid">
-      <article class="wk-knowledge-card wk-article-card">
-        <div class="wk-knowledge-copy">
-          <span>Artikel Pajak</span>
-          <h3>Ketentuan pajak.<br/>Lebih mudah dipahami.</h3>
-          <p>Pembahasan ringkas dan terstruktur untuk membantu memahami aturan dan prosedur.</p>
-          <a class="wk-inline-link" href="artikel.html">Baca artikel <span aria-hidden="true">›</span></a>
-          <a class="wk-latest-link" href="artikel.html" id="latestArticleButton">Artikel terbaru <span aria-hidden="true">›</span></a>
-        </div>
-        <div class="wk-article-visual" aria-hidden="true">
-          <div class="wk-article-sheet wk-article-sheet-back">KABAYAN</div>
-          <div class="wk-article-sheet wk-article-sheet-front"><small>TERBARU</small><strong id="latestArticleVisualTitle">Artikel perpajakan terbaru.</strong><i></i><i></i><i class="short"></i></div>
-        </div>
-      </article>
-      <article class="wk-knowledge-card wk-news-card">
-        <div class="wk-knowledge-copy">
-          <span class="wk-hot-label"><i></i> Hot News</span>
-          <h3>Yang berubah.<br/>Lebih cepat diketahui.</h3>
-          <p>Pembaruan regulasi, Coretax, layanan, dan isu yang perlu segera diperhatikan.</p>
-          <a class="wk-inline-link" href="hotnews.html">Lihat Hot News <span aria-hidden="true">›</span></a>
-        </div>
-        <div class="wk-news-visual" aria-hidden="true">
-          <div class="wk-news-card-mini"><small>KABAYAN NEWS</small><b>TERBARU</b><strong>Pembaruan perpajakan dalam satu halaman.</strong><span></span><span></span></div>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-
 <section class="about" id="tentang">
 <div class="about-inner">
 <h2>
@@ -6015,18 +5778,6 @@ body.mega-menu-open {
     const observer = new ResizeObserver(syncAnnouncementHeight);
     observer.observe(announcement);
   }
-})();
-</script>
-
-
-<script id="watchOSInspiredIndexScript">
-(() => {
-  "use strict";
-  const nav = document.querySelector(".site-nav");
-  if (!nav) return;
-  const sync = () => nav.classList.toggle("is-scrolled", window.scrollY > 12);
-  sync();
-  window.addEventListener("scroll", sync, { passive: true });
 })();
 </script>
 
