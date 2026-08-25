@@ -3802,6 +3802,391 @@ body.mega-menu-open {
 }
 </style>
 
+
+<style id="kabayanGlassButtonHoverStyles">
+/* =========================================================
+   Kabayan — Glass Button + Color on Hover
+   Baseline tetap index(6).html.
+   Default = glass, hover/focus = biru.
+   ========================================================= */
+
+/* ---------- Hero / section buttons: default glass ---------- */
+.button,
+.showcase-button {
+  position: relative;
+  overflow: hidden;
+  border-color: rgba(255, 255, 255, 0.72) !important;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.72) 0%,
+      rgba(255, 255, 255, 0.42) 100%
+    ) !important;
+  color: var(--blue) !important;
+  box-shadow:
+    0 8px 22px rgba(34, 55, 86, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.92),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(18px) saturate(175%);
+  -webkit-backdrop-filter: blur(18px) saturate(175%);
+  transition:
+    background 0.22s ease,
+    border-color 0.22s ease,
+    color 0.22s ease,
+    box-shadow 0.22s ease,
+    transform 0.22s ease;
+}
+
+/* Highlight kaca sangat tipis. */
+.button::before,
+.showcase-button::before {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.50) 0%,
+      rgba(255, 255, 255, 0.12) 34%,
+      rgba(255, 255, 255, 0) 62%
+    );
+  content: "";
+  pointer-events: none;
+}
+
+/* Semua CTA berubah biru ketika didekati / dipilih keyboard. */
+.button:hover,
+.button:focus-visible,
+.showcase-button:hover,
+.showcase-button:focus-visible {
+  border-color: rgba(0, 113, 227, 0.88) !important;
+  background:
+    linear-gradient(
+      180deg,
+      #1684ef 0%,
+      var(--blue) 100%
+    ) !important;
+  color: var(--white) !important;
+  box-shadow:
+    0 11px 26px rgba(0, 113, 227, 0.20),
+    inset 0 1px 0 rgba(255, 255, 255, 0.30);
+  transform: translateY(-1px);
+}
+
+.button:active,
+.showcase-button:active {
+  background: #0068d1 !important;
+  transform: translateY(0) scale(0.985);
+}
+
+.button:focus-visible,
+.showcase-button:focus-visible {
+  outline: 3px solid rgba(0, 113, 227, 0.18);
+  outline-offset: 3px;
+}
+
+/* Tombol di panel gelap tetap terbaca sebagai kaca sebelum hover. */
+.panel-dark .button {
+  border-color: rgba(255, 255, 255, 0.34) !important;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.20),
+      rgba(255, 255, 255, 0.10)
+    ) !important;
+  color: #ffffff !important;
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.26);
+}
+
+.panel-dark .button:hover,
+.panel-dark .button:focus-visible {
+  border-color: rgba(71, 161, 255, 0.88) !important;
+  background:
+    linear-gradient(
+      180deg,
+      #1684ef,
+      #0071e3
+    ) !important;
+  color: #ffffff !important;
+}
+
+/* ---------- Navbar: Formulir berubah warna saat didekati ---------- */
+.desktop-menu .nav-menu-link[data-nav-menu="formulir"] {
+  border-radius: 999px;
+  transition:
+    background 0.20s ease,
+    color 0.20s ease,
+    box-shadow 0.20s ease;
+}
+
+.desktop-menu .nav-menu-link[data-nav-menu="formulir"]:hover,
+.desktop-menu .nav-menu-link[data-nav-menu="formulir"]:focus-visible,
+.desktop-menu .nav-menu-link[data-nav-menu="formulir"].mega-active {
+  background: rgba(0, 113, 227, 0.10);
+  color: var(--blue) !important;
+  box-shadow: inset 0 0 0 1px rgba(0, 113, 227, 0.08);
+}
+
+.desktop-menu .nav-menu-link[data-nav-menu="formulir"]:focus-visible {
+  outline: 2px solid rgba(0, 113, 227, 0.20);
+  outline-offset: 2px;
+}
+
+/* Touch device tidak bergantung pada hover. */
+@media (hover: none) {
+  .button:hover,
+  .showcase-button:hover {
+    border-color: rgba(255, 255, 255, 0.72) !important;
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.72),
+        rgba(255, 255, 255, 0.42)
+      ) !important;
+    color: var(--blue) !important;
+    box-shadow:
+      0 8px 22px rgba(34, 55, 86, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.92),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.28);
+    transform: none;
+  }
+
+  .button:active,
+  .showcase-button:active {
+    border-color: rgba(0, 113, 227, 0.88) !important;
+    background: var(--blue) !important;
+    color: #ffffff !important;
+    transform: scale(0.985);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button,
+  .showcase-button,
+  .desktop-menu .nav-menu-link[data-nav-menu="formulir"] {
+    transition: none !important;
+  }
+}
+</style>
+
+
+<style id="kabayanGlassRefinementStyles">
+/* =========================================================
+   Kabayan — Glass refinement
+   Hanya menyempurnakan controls/nav/announcement.
+   Hero glow, cover, slider proportion, dan layout hero tidak diubah.
+   ========================================================= */
+
+/* 1) Panah slider: lebih kecil, ringan, dan translucent. */
+.slider-arrow {
+  width: 36px !important;
+  height: 36px !important;
+  border: 1px solid rgba(255, 255, 255, 0.62) !important;
+  background: rgba(255, 255, 255, 0.50) !important;
+  color: rgba(29, 29, 31, 0.78) !important;
+  box-shadow:
+    0 5px 16px rgba(31, 44, 66, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.80) !important;
+  font-size: 24px !important;
+  font-weight: 400;
+  backdrop-filter: blur(14px) saturate(165%);
+  -webkit-backdrop-filter: blur(14px) saturate(165%);
+  transition:
+    opacity 0.20s ease,
+    background 0.20s ease,
+    border-color 0.20s ease,
+    color 0.20s ease,
+    transform 0.20s ease !important;
+}
+
+.slider-arrow:hover,
+.slider-arrow:focus-visible {
+  border-color: rgba(255, 255, 255, 0.80) !important;
+  background: rgba(255, 255, 255, 0.72) !important;
+  color: var(--near-black) !important;
+  box-shadow:
+    0 7px 18px rgba(31, 44, 66, 0.10),
+    inset 0 1px 0 rgba(255, 255, 255, 0.92) !important;
+}
+
+.slider-arrow:focus-visible {
+  outline: 2px solid rgba(0, 113, 227, 0.18);
+  outline-offset: 2px;
+}
+
+/* 2) Outline tombol sekunder diperlunak.
+      Default tetap glass; hover/focus tetap berubah biru sesuai konsep sebelumnya. */
+.button-outline,
+.showcase-button.secondary {
+  border-color: rgba(0, 113, 227, 0.14) !important;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.62) 0%,
+      rgba(248, 251, 255, 0.34) 100%
+    ) !important;
+  box-shadow:
+    0 7px 19px rgba(34, 55, 86, 0.055),
+    inset 0 1px 0 rgba(255, 255, 255, 0.88),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.20) !important;
+}
+
+.button-outline:hover,
+.button-outline:focus-visible,
+.showcase-button.secondary:hover,
+.showcase-button.secondary:focus-visible {
+  border-color: rgba(0, 113, 227, 0.76) !important;
+  background:
+    linear-gradient(
+      180deg,
+      #1684ef 0%,
+      var(--blue) 100%
+    ) !important;
+  color: #ffffff !important;
+}
+
+/* 3) Navbar: lebih transparan saat di atas, lalu menguat saat scroll. */
+.site-nav {
+  border-bottom-color: rgba(0, 0, 0, 0.025) !important;
+  background: rgba(250, 250, 252, 0.48) !important;
+  box-shadow: none;
+  backdrop-filter: saturate(185%) blur(16px);
+  -webkit-backdrop-filter: saturate(185%) blur(16px);
+  transition:
+    background 0.28s ease,
+    border-color 0.28s ease,
+    box-shadow 0.28s ease,
+    backdrop-filter 0.28s ease;
+}
+
+.site-nav.is-scrolled {
+  border-bottom-color: rgba(0, 0, 0, 0.065) !important;
+  background: rgba(250, 250, 252, 0.82) !important;
+  box-shadow: 0 6px 20px rgba(25, 35, 52, 0.045);
+  backdrop-filter: saturate(185%) blur(22px);
+  -webkit-backdrop-filter: saturate(185%) blur(22px);
+}
+
+/* 4) Announcement: langsung glass abu-putih, tanpa fase biru solid. */
+.announcement {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.54);
+  background:
+    linear-gradient(
+      180deg,
+      rgba(248, 248, 250, 0.70),
+      rgba(242, 244, 247, 0.54)
+    ) !important;
+  color: #4b4b50 !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+  animation: none !important;
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+}
+
+.collection-menu-trigger {
+  color: var(--blue) !important;
+  animation: none !important;
+  text-decoration: none;
+  transition: color 0.18s ease, opacity 0.18s ease;
+}
+
+.collection-menu-trigger:hover,
+.collection-menu-trigger:focus-visible {
+  color: var(--blue-hover) !important;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* 5) HP: controls tetap ringan, mudah disentuh, dan tidak bergantung pada hover. */
+@media (max-width: 680px) {
+  .site-nav {
+    background: rgba(250, 250, 252, 0.58) !important;
+    backdrop-filter: saturate(180%) blur(16px);
+    -webkit-backdrop-filter: saturate(180%) blur(16px);
+  }
+
+  .site-nav.is-scrolled {
+    background: rgba(250, 250, 252, 0.88) !important;
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+  }
+
+  .announcement {
+    padding: 11px 20px !important;
+    font-size: 12.5px !important;
+    line-height: 1.35;
+  }
+
+  .slider-arrow {
+    width: 34px !important;
+    height: 34px !important;
+    background: rgba(255, 255, 255, 0.64) !important;
+    font-size: 22px !important;
+    opacity: 0.92 !important;
+  }
+
+  .slider-arrow-prev {
+    left: 2px !important;
+  }
+
+  .slider-arrow-next {
+    right: 2px !important;
+  }
+
+  .hero .button {
+    border-width: 1px;
+  }
+
+  .button-outline {
+    border-color: rgba(0, 113, 227, 0.12) !important;
+  }
+}
+
+@media (max-width: 440px) {
+  .announcement {
+    padding-right: 16px !important;
+    padding-left: 16px !important;
+  }
+
+  .slider-arrow {
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 21px !important;
+  }
+}
+
+@media (hover: none) {
+  .button-outline:hover,
+  .showcase-button.secondary:hover {
+    border-color: rgba(0, 113, 227, 0.14) !important;
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.62),
+        rgba(248, 251, 255, 0.34)
+      ) !important;
+    color: var(--blue) !important;
+  }
+
+  .button-outline:active,
+  .showcase-button.secondary:active {
+    border-color: rgba(0, 113, 227, 0.78) !important;
+    background: var(--blue) !important;
+    color: #ffffff !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-nav,
+  .slider-arrow,
+  .collection-menu-trigger {
+    transition: none !important;
+  }
+}
+</style>
+
 </head>
 <body id="top">
 <header class="site-nav">
@@ -5778,6 +6163,23 @@ body.mega-menu-open {
     const observer = new ResizeObserver(syncAnnouncementHeight);
     observer.observe(announcement);
   }
+})();
+</script>
+
+
+<script id="kabayanNavbarScrollGlassScript">
+(() => {
+  "use strict";
+
+  const nav = document.querySelector(".site-nav");
+  if (!nav) return;
+
+  const syncNavState = () => {
+    nav.classList.toggle("is-scrolled", window.scrollY > 10);
+  };
+
+  syncNavState();
+  window.addEventListener("scroll", syncNavState, { passive: true });
 })();
 </script>
 
