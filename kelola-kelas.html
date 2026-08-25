@@ -3,126 +3,152 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f6f9fd">
+  <meta name="theme-color" content="#f4f7fb">
 
   <title>Kelola Kelas — Kabayan Learning</title>
 
   <link rel="stylesheet" href="assets/css/lms.css">
   <link rel="stylesheet" href="assets/css/lms-audit.css">
-  <link rel="stylesheet" href="assets/css/kelola-kelas.css?v=6.0">
+  <link rel="stylesheet" href="assets/css/kelola-kelas.css?v=7.0">
 </head>
 
-<body class="kc-page kc-clean-page">
+<body class="kc-participant-style">
 
-<header class="kc-topbar">
-
-  <nav class="kc-nav">
+<header class="site-header kc-site-header">
+  <nav class="nav kc-nav">
 
     <a
       class="kc-brand"
-      href="pengajar-dashboard.html"
-      aria-label="Kabayan Learning">
+      href="pengajar-dashboard.html">
 
       <span class="kc-brand-logo">
         <img
           src="assets/img/logoASD.svg"
           alt="Logo ASD"
           width="28"
-          height="28"
-          style="width:28px;height:28px;max-width:28px;max-height:28px;object-fit:contain;display:block;">
+          height="28">
       </span>
 
-      <span class="kc-brand-wordmark">
+      <span class="kc-brand-text">
         Kabayan Learning
       </span>
 
     </a>
 
 
-    <div class="kc-nav-actions">
+    <div class="nav-actions">
 
       <a
-        class="kc-back"
+        class="btn ghost small kc-back-button"
         href="pengajar-dashboard.html">
-
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="m15 18-6-6 6-6"></path>
-        </svg>
-
-        <span>Dashboard</span>
-
+        ← Dashboard
       </a>
 
-
       <button
-        class="kc-logout"
+        class="btn ghost small"
         onclick="KabayanAuth.signOut()"
-        type="button"
-        aria-label="Keluar">
-
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M10 5H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h5"></path>
-          <path d="m15 8 4 4-4 4"></path>
-          <path d="M19 12H9"></path>
-        </svg>
-
+        type="button">
+        Keluar
       </button>
 
     </div>
 
   </nav>
-
 </header>
 
 
-<main class="kc-shell">
+<main class="kc-dashboard-shell">
 
   <!-- ======================================================
-       CLASS HEADER
+       HERO — mengikuti bahasa visual peserta-dashboard
        ====================================================== -->
-  <section class="kc-class-head">
+  <section class="kc-hero">
 
-    <div class="kc-class-head-copy">
+    <div class="kc-hero-grid">
 
-      <div class="kc-class-meta">
+      <div class="kc-hero-copy">
 
-        <span
-          class="kc-status"
-          id="classStatus">
-          Kelas
-        </span>
+        <div class="kc-eyebrow">
+          Kelola Kelas
+        </div>
 
-        <span class="kc-meta-separator"></span>
+        <div class="kc-title-row">
 
-        <span class="kc-class-context">
-          Workspace Pengajar
-        </span>
+          <span
+            class="kc-status"
+            id="classStatus">
+            Kelas
+          </span>
+
+        </div>
+
+        <h1 id="className">
+          Memuat kelas…
+        </h1>
+
+        <p id="classDescription">
+          Kelola materi, peserta, evaluasi, dan perjalanan pembelajaran dalam satu tempat.
+        </p>
+
+
+        <div class="kc-hero-badges">
+
+          <a
+            href="#kurikulum"
+            class="kc-hero-badge badge-blue">
+            Kurikulum
+          </a>
+
+          <a
+            href="#peserta"
+            class="kc-hero-badge badge-green">
+            Peserta
+          </a>
+
+          <a
+            href="#evaluasi"
+            class="kc-hero-badge badge-purple">
+            Evaluasi Akhir
+          </a>
+
+        </div>
 
       </div>
 
 
-      <h1 id="className">
-        Memuat kelas…
-      </h1>
+      <div class="kc-hero-side">
 
-      <p id="classDescription"></p>
-
-    </div>
+        <div class="kc-hero-orb orb-one"></div>
+        <div class="kc-hero-orb orb-two"></div>
 
 
-    <div class="kc-class-count">
+        <div class="kc-hero-mark" aria-hidden="true">
 
-      <span>
-        Peserta
-      </span>
+          <svg viewBox="0 0 24 24">
+            <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H11v17H6.5A2.5 2.5 0 0 0 4 22V5.5Z"></path>
+            <path d="M20 5.5A2.5 2.5 0 0 0 17.5 3H13v17h4.5A2.5 2.5 0 0 1 20 22V5.5Z"></path>
+          </svg>
 
-      <strong id="memberCount">
-        0
-      </strong>
+        </div>
 
-      <small>
-        terdaftar di kelas
-      </small>
+
+        <div class="kc-hero-stat">
+
+          <span>
+            Peserta
+          </span>
+
+          <strong id="memberCount">
+            0
+          </strong>
+
+          <small>
+            terdaftar di kelas
+          </small>
+
+        </div>
+
+      </div>
 
     </div>
 
@@ -130,121 +156,148 @@
 
 
   <!-- ======================================================
-       QUICK NAVIGATION
+       QUICK ACCESS CARDS
        ====================================================== -->
-  <nav
-    class="kc-section-nav"
-    aria-label="Navigasi pengelolaan kelas">
+  <section class="kc-summary">
 
-    <a href="#kurikulum" class="active">
+    <a
+      href="#kurikulum"
+      class="kc-summary-card accent-blue">
 
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H11v17H6.5A2.5 2.5 0 0 0 4 22V5.5Z"></path>
-        <path d="M20 5.5A2.5 2.5 0 0 0 17.5 3H13v17h4.5A2.5 2.5 0 0 1 20 22V5.5Z"></path>
-      </svg>
+      <div class="kc-summary-icon">
 
-      Kurikulum
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H11v17H6.5A2.5 2.5 0 0 0 4 22V5.5Z"></path>
+          <path d="M20 5.5A2.5 2.5 0 0 0 17.5 3H13v17h4.5A2.5 2.5 0 0 1 20 22V5.5Z"></path>
+        </svg>
 
-    </a>
+      </div>
 
-    <a href="#peserta">
+      <div>
+        <span>Kurikulum</span>
+        <strong>Modul & materi</strong>
+        <small>Kelola checkpoint dan kuis modul</small>
+      </div>
 
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <circle cx="9" cy="8" r="4"></circle>
-        <path d="M2.5 21a6.5 6.5 0 0 1 13 0"></path>
-        <path d="M16 11a4 4 0 0 1 5.5 3.7"></path>
-      </svg>
-
-      Peserta
+      <span class="kc-summary-arrow">→</span>
 
     </a>
 
-    <a href="#evaluasi">
 
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M5 4h14v16H5z"></path>
-        <path d="m8 9 2 2 4-4"></path>
-        <path d="M8 15h8"></path>
-      </svg>
+    <a
+      href="#peserta"
+      class="kc-summary-card accent-green">
 
-      Evaluasi Akhir
+      <div class="kc-summary-icon">
+
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="9" cy="8" r="4"></circle>
+          <path d="M2.5 21a6.5 6.5 0 0 1 13 0"></path>
+          <path d="M17 8v6"></path>
+          <path d="M14 11h6"></path>
+        </svg>
+
+      </div>
+
+      <div>
+        <span>Peserta</span>
+        <strong>Kelola peserta</strong>
+        <small>Tambahkan dan lihat peserta kelas</small>
+      </div>
+
+      <span class="kc-summary-arrow">→</span>
 
     </a>
 
-  </nav>
+
+    <a
+      href="#evaluasi"
+      class="kc-summary-card accent-purple">
+
+      <div class="kc-summary-icon">
+
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="8" r="4.5"></circle>
+          <path d="m9 12-1 9 4-2.2L16 21l-1-9"></path>
+        </svg>
+
+      </div>
+
+      <div>
+        <span>Kelulusan</span>
+        <strong>Evaluasi Akhir</strong>
+        <small>Atur evaluasi penentu kelulusan</small>
+      </div>
+
+      <span class="kc-summary-arrow">→</span>
+
+    </a>
+
+  </section>
 
 
   <!-- ======================================================
-       WORKSPACE
+       KURIKULUM
        ====================================================== -->
-  <section class="kc-workspace">
+  <section
+    class="kc-section"
+    id="kurikulum">
 
-    <!-- ====================================================
-         MAIN / CURRICULUM
-         ==================================================== -->
-    <section
-      class="kc-main"
-      id="kurikulum">
+    <div class="kc-section-head">
 
-      <div class="kc-section-heading">
-
-        <div>
-
-          <span class="kc-section-kicker">
-            Kurikulum
-          </span>
-
-          <h2>
-            Modul pembelajaran
-          </h2>
-
-          <p>
-            Susun materi dan kuis sesuai urutan perjalanan belajar peserta.
-          </p>
-
+      <div>
+        <div class="kc-section-kicker">
+          Kurikulum
         </div>
 
+        <h2>
+          Modul pembelajaran
+        </h2>
 
-        <span class="kc-section-note">
-          Perubahan tersimpan ke kelas ini
-        </span>
+        <p>
+          Susun modul, checkpoint, dan kuis sesuai perjalanan belajar peserta.
+        </p>
+      </div>
+
+    </div>
+
+
+    <div class="kc-curriculum-layout">
+
+      <div class="kc-module-panel">
+
+        <div
+          class="kc-module-list"
+          id="moduleList">
+        </div>
 
       </div>
 
 
-      <div
-        class="kc-module-list"
-        id="moduleList">
-      </div>
+      <aside class="kc-add-module-card">
 
-    </section>
+        <div class="kc-card-heading">
 
-
-    <!-- ====================================================
-         CONTROL SIDEBAR
-         ==================================================== -->
-    <aside class="kc-sidebar">
-
-      <!-- ADD MODULE -->
-      <section class="kc-control-panel">
-
-        <div class="kc-control-heading">
-
-          <span class="kc-control-icon blue">
+          <div class="kc-card-icon blue">
 
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M12 5v14"></path>
               <path d="M5 12h14"></path>
             </svg>
 
-          </span>
+          </div>
 
           <div>
             <span>Materi</span>
-            <h2>Tambah modul</h2>
+            <h3>Tambah modul</h3>
           </div>
 
         </div>
+
+
+        <p class="kc-card-description">
+          Tambahkan bagian pembelajaran baru ke dalam kelas.
+        </p>
 
 
         <form
@@ -253,9 +306,7 @@
 
           <label>
 
-            <span>
-              Judul modul
-            </span>
+            <span>Judul modul</span>
 
             <input
               name="title"
@@ -267,9 +318,7 @@
 
           <label>
 
-            <span>
-              Deskripsi
-            </span>
+            <span>Deskripsi</span>
 
             <textarea
               name="description"
@@ -283,9 +332,7 @@
 
             <label>
 
-              <span>
-                Urutan
-              </span>
+              <span>Urutan</span>
 
               <input
                 min="1"
@@ -313,7 +360,7 @@
 
 
           <button
-            class="kc-submit kc-submit-blue"
+            class="kc-action-button blue"
             type="submit">
 
             <span>
@@ -335,149 +382,127 @@
           id="addModuleStatus">
         </div>
 
-      </section>
+      </aside>
 
-
-      <!-- PARTICIPANTS -->
-      <section
-        class="kc-control-panel"
-        id="peserta">
-
-        <div class="kc-control-heading">
-
-          <span class="kc-control-icon green">
-
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <circle cx="9" cy="8" r="4"></circle>
-              <path d="M2.5 21a6.5 6.5 0 0 1 13 0"></path>
-              <path d="M17 8v6"></path>
-              <path d="M14 11h6"></path>
-            </svg>
-
-          </span>
-
-          <div>
-            <span>Peserta</span>
-            <h2>Kelola peserta</h2>
-          </div>
-
-        </div>
-
-
-        <p class="kc-side-description">
-          Tambahkan email peserta yang sudah mempunyai akun Kabayan Learning.
-        </p>
-
-
-        <form
-          class="kc-form"
-          id="addStudentForm">
-
-          <label>
-
-            <span>
-              Email peserta
-            </span>
-
-            <input
-              name="email"
-              placeholder="peserta@email.com"
-              required
-              type="email">
-
-          </label>
-
-
-          <button
-            class="kc-submit kc-submit-green"
-            type="submit">
-
-            <span>
-              Tambah peserta
-            </span>
-
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M5 12h14"></path>
-              <path d="m14 7 5 5-5 5"></path>
-            </svg>
-
-          </button>
-
-        </form>
-
-
-        <div
-          class="form-status"
-          id="addStudentStatus">
-        </div>
-
-
-        <div class="kc-members">
-
-          <div class="kc-members-head">
-
-            <strong>
-              Peserta kelas
-            </strong>
-
-            <span id="memberCountInline">
-              0
-            </span>
-
-          </div>
-
-
-          <div id="memberList"></div>
-
-        </div>
-
-      </section>
-
-
-      <!-- FINAL EVALUATION -->
-      <section
-        class="kc-control-panel kc-final-admin-card"
-        id="evaluasi">
-
-        <div class="kc-control-heading">
-
-          <span class="kc-control-icon purple">
-
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <circle cx="12" cy="8" r="5"></circle>
-              <path d="M8.5 12 7 22l5-3 5 3-1.5-10"></path>
-            </svg>
-
-          </span>
-
-          <div>
-            <span>Kelulusan</span>
-            <h2>Evaluasi Akhir</h2>
-          </div>
-
-        </div>
-
-
-        <p
-          class="kc-side-description"
-          id="finalEvaluationAdminText">
-          Memuat Evaluasi Akhir…
-        </p>
-
-
-        <div id="finalEvaluationAdmin"></div>
-
-      </section>
-
-    </aside>
+    </div>
 
   </section>
+
+
+  <!-- ======================================================
+       PESERTA + EVALUASI
+       ====================================================== -->
+  <div class="kc-two-column">
+
+    <section
+      class="kc-section kc-stacked"
+      id="peserta">
+
+      <div class="kc-section-head compact">
+
+        <div>
+          <div class="kc-section-kicker green">
+            Peserta
+          </div>
+
+          <h2>
+            Kelola peserta
+          </h2>
+
+          <p>
+            Tambahkan peserta yang sudah mempunyai akun Kabayan Learning.
+          </p>
+        </div>
+
+
+        <span
+          class="kc-count"
+          id="memberCountInline">
+          0
+        </span>
+
+      </div>
+
+
+      <form
+        class="kc-inline-form"
+        id="addStudentForm">
+
+        <input
+          name="email"
+          placeholder="peserta@email.com"
+          required
+          type="email">
+
+        <button
+          class="kc-action-button green"
+          type="submit">
+
+          <span>
+            Tambah peserta
+          </span>
+
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 5v14"></path>
+            <path d="M5 12h14"></path>
+          </svg>
+
+        </button>
+
+      </form>
+
+
+      <div
+        class="form-status"
+        id="addStudentStatus">
+      </div>
+
+
+      <div
+        class="kc-member-list"
+        id="memberList">
+      </div>
+
+    </section>
+
+
+    <section
+      class="kc-section kc-stacked kc-evaluation-section"
+      id="evaluasi">
+
+      <div class="kc-section-head compact">
+
+        <div>
+          <div class="kc-section-kicker purple">
+            Kelulusan
+          </div>
+
+          <h2>
+            Evaluasi Akhir
+          </h2>
+
+          <p id="finalEvaluationAdminText">
+            Memuat Evaluasi Akhir…
+          </p>
+        </div>
+
+      </div>
+
+
+      <div
+        class="kc-final-admin"
+        id="finalEvaluationAdmin">
+      </div>
+
+    </section>
+
+  </div>
 
 </main>
 
 
 <!-- ==========================================================
-     EDIT MODULE
+     EDIT MODUL
      ========================================================== -->
 <dialog
   class="editor-dialog module-editor-dialog kc-editor-dialog"
@@ -589,7 +614,7 @@
 
 
 <!-- ==========================================================
-     EDIT LESSON
+     EDIT MATERI
      ========================================================== -->
 <dialog
   class="editor-dialog kc-editor-dialog"
@@ -686,45 +711,31 @@
       aria-label="Bantuan format materi"
       class="editor-toolbar">
 
-      <button
-        data-insert="# Judul"
-        type="button">
+      <button data-insert="# Judul" type="button">
         Judul
       </button>
 
-      <button
-        data-wrap="**"
-        type="button">
+      <button data-wrap="**" type="button">
         Tebal
       </button>
 
-      <button
-        data-insert="## Subjudul"
-        type="button">
+      <button data-insert="## Subjudul" type="button">
         Subjudul
       </button>
 
-      <button
-        data-insert="- Poin materi"
-        type="button">
+      <button data-insert="- Poin materi" type="button">
         Poin
       </button>
 
-      <button
-        data-insert="> Catatan penting"
-        type="button">
+      <button data-insert="> Catatan penting" type="button">
         Catatan
       </button>
 
-      <button
-        data-template="table"
-        type="button">
+      <button data-template="table" type="button">
         Tabel
       </button>
 
-      <button
-        data-template="example"
-        type="button">
+      <button data-template="example" type="button">
         Contoh
       </button>
 
