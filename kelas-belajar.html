@@ -9,8 +9,8 @@
 
   <link rel="stylesheet" href="assets/css/lms.css">
   <link rel="stylesheet" href="assets/css/evaluasi-akhir.css">
-  <link rel="stylesheet" href="assets/css/kelas-belajar.css?v=3.1">
-  <link rel="stylesheet" href="assets/css/kelas-belajar-video.css?v=1.2">
+  <link rel="stylesheet" href="assets/css/kelas-belajar.css?v=3.2">
+  <link rel="stylesheet" href="assets/css/kelas-belajar-video.css?v=2.0">
 </head>
 
 <body class="kb-page">
@@ -319,118 +319,294 @@
 
 
 <!-- ==========================================================
-     LESSON READER
+     FULLSCREEN LESSON READER
      ========================================================== -->
 <dialog
   id="lessonModal"
-  class="lesson-reader-dialog kb-reader-dialog">
+  class="lesson-reader-dialog kb-reader-dialog kb-fullscreen-reader">
 
-  <div class="dialog-body lesson-reader">
+  <div class="lesson-reader kb-fullscreen-reader-inner">
 
-    <div class="lesson-reader-top kb-reader-top">
+    <!-- TOP BAR -->
+    <header class="kb-reader-full-topbar">
 
-      <div>
+      <div class="kb-reader-full-brand">
 
-        <div class="kb-reader-kicker">
-          Checkpoint
+        <span class="kb-reader-full-logo">
+          <img
+            src="assets/img/logoASD.svg"
+            alt=""
+            width="26"
+            height="26">
+        </span>
+
+        <div>
+          <span>
+            Checkpoint
+          </span>
+
+          <strong id="lessonTitle"></strong>
         </div>
 
-        <h2 id="lessonTitle"></h2>
+      </div>
 
-        <div
-          id="lessonMeta"
-          class="lesson-meta">
-        </div>
 
-        <div
-          class="lesson-reader-pills"
-          id="lessonReaderPills">
-        </div>
+      <div class="kb-reader-steps" aria-label="Tahapan checkpoint">
+
+        <span
+          class="kb-reader-step active"
+          id="lessonStepVideo">
+          <i>1</i>
+          Video
+        </span>
+
+        <span class="kb-reader-step-line"></span>
+
+        <span
+          class="kb-reader-step locked"
+          id="lessonStepResume">
+          <i>2</i>
+          Resume
+        </span>
+
+        <span class="kb-reader-step-line"></span>
+
+        <span
+          class="kb-reader-step locked"
+          id="lessonStepComplete">
+          <i>3</i>
+          Selesai
+        </span>
 
       </div>
 
 
       <button
         type="button"
-        class="icon-close kb-reader-close"
-        onclick="document.getElementById('lessonModal').close()"
-        aria-label="Tutup">
+        class="kb-reader-full-close"
+        id="closeLessonReaderBtn"
+        aria-label="Tutup checkpoint">
         ×
       </button>
 
-    </div>
+    </header>
 
 
-    <section
-      id="lessonVideoSection"
-      class="lesson-video-section"
-      hidden>
+    <!-- SCROLLABLE LEARNING AREA -->
+    <div
+      class="kb-reader-scroll"
+      id="lessonReaderScroll">
 
-      <div class="lesson-reader-section-head">
-
-        <div>
-          <span>Video Pembelajaran</span>
-          <strong>Tonton penjelasan materi</strong>
-        </div>
-
-        <small id="lessonVideoDuration"></small>
-
-      </div>
-
-
-      <div
-        id="lessonVideo"
-        class="lesson-video-host">
-      </div>
-
-    </section>
-
-
-    <section class="lesson-resume-section">
-
-      <div class="lesson-reader-section-head">
+      <!-- LESSON META -->
+      <section class="kb-reader-intro">
 
         <div>
-          <span>Resume Materi</span>
-          <strong>Ringkasan yang perlu dipahami</strong>
+
+          <div
+            id="lessonMeta"
+            class="lesson-meta">
+          </div>
+
+          <div
+            class="lesson-reader-pills"
+            id="lessonReaderPills">
+          </div>
+
         </div>
+
+      </section>
+
+
+      <!-- VIDEO -->
+      <section
+        id="lessonVideoSection"
+        class="lesson-video-section kb-gated-video-stage"
+        hidden>
+
+        <div class="lesson-reader-section-head">
+
+          <div>
+            <span>Langkah 1 · Video Pembelajaran</span>
+            <strong>Tonton video sampai selesai</strong>
+          </div>
+
+          <small id="lessonVideoDuration"></small>
+
+        </div>
+
+
+        <div
+          id="lessonVideo"
+          class="lesson-video-host">
+        </div>
+
+
+        <div
+          class="kb-video-gate-status"
+          id="lessonVideoGateStatus">
+
+          <span class="kb-video-gate-icon">
+
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="5" y="10" width="14" height="10" rx="2"></rect>
+              <path d="M8 10V7a4 4 0 0 1 8 0v3"></path>
+            </svg>
+
+          </span>
+
+          <div>
+            <strong>Resume masih terkunci</strong>
+            <span>
+              Resume materi akan terbuka otomatis setelah video selesai diputar.
+            </span>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- VIDEO NOT TRACKABLE -->
+      <section
+        id="lessonVideoUnsupported"
+        class="kb-video-unsupported"
+        hidden>
+
+        <strong>
+          Video ini tidak dapat diverifikasi otomatis.
+        </strong>
+
+        <p>
+          Gunakan video YouTube, Vimeo, atau file video langsung agar penyelesaian video dapat dicatat.
+        </p>
+
+      </section>
+
+
+      <!-- RESUME LOCK PLACEHOLDER -->
+      <section
+        id="lessonResumeLocked"
+        class="kb-resume-locked">
+
+        <span class="kb-resume-lock-icon">
+
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="4" y="10" width="16" height="11" rx="2"></rect>
+            <path d="M8 10V7a4 4 0 0 1 8 0v3"></path>
+          </svg>
+
+        </span>
+
+        <div>
+          <span>Langkah 2</span>
+          <strong>Resume Materi Terkunci</strong>
+          <p>
+            Selesaikan video pembelajaran terlebih dahulu untuk membuka resume.
+          </p>
+        </div>
+
+      </section>
+
+
+      <!-- RESUME -->
+      <section
+        id="lessonResumeSection"
+        class="lesson-resume-section kb-gated-resume"
+        hidden>
+
+        <div class="lesson-reader-section-head">
+
+          <div>
+            <span>Langkah 2 · Resume Materi</span>
+            <strong>Pelajari ringkasan yang perlu dipahami</strong>
+          </div>
+
+          <small class="kb-unlocked-badge">
+            Terbuka
+          </small>
+
+        </div>
+
+
+        <article
+          id="lessonContent"
+          class="lesson-content">
+        </article>
+
+
+        <div class="kb-resume-complete-hint">
+
+          <span>
+
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m5 12 4 4L19 6"></path>
+            </svg>
+
+          </span>
+
+          <div>
+            <strong>Resume sudah terbuka</strong>
+            <p>
+              Setelah membaca materi, Anda dapat menandai checkpoint sebagai selesai.
+            </p>
+          </div>
+
+        </div>
+
+      </section>
+
+    </div>
+
+
+    <!-- FIXED BOTTOM ACTION -->
+    <footer class="kb-reader-full-footer">
+
+      <div class="kb-reader-footer-status">
+
+        <span
+          class="kb-reader-footer-dot locked"
+          id="lessonFooterDot">
+        </span>
+
+        <span id="lessonFooterStatus">
+          Selesaikan video terlebih dahulu
+        </span>
 
       </div>
 
 
-      <article
-        id="lessonContent"
-        class="lesson-content">
-      </article>
+      <div class="kb-reader-footer-actions">
 
-    </section>
+        <button
+          type="button"
+          class="btn ghost kb-reader-exit"
+          id="closeLessonReaderFooterBtn">
+          Keluar dari materi
+        </button>
 
+        <button
+          type="button"
+          class="btn kb-complete-button"
+          id="completeLessonBtn"
+          disabled>
 
-    <div class="lesson-reader-note">
-      Tonton video dan baca resume sebelum menandai checkpoint sebagai selesai.
-    </div>
+          <span id="completeLessonBtnText">
+            Resume terkunci
+          </span>
 
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="m5 12 4 4L19 6"></path>
+          </svg>
 
-    <div class="dialog-actions">
+        </button>
 
-      <button
-        class="btn ghost"
-        onclick="document.getElementById('lessonModal').close()">
-        Tutup
-      </button>
+      </div>
 
-      <button
-        class="btn kb-complete-button"
-        id="completeLessonBtn">
-        Tandai selesai
-      </button>
-
-    </div>
+    </footer>
 
   </div>
 
 </dialog>
-
 
 <footer class="kb-footer">
 
@@ -451,7 +627,7 @@
 <script src="assets/js/supabase-config.js"></script>
 <script src="assets/js/supabase-client.js"></script>
 <script src="assets/js/auth.js"></script>
-<script src="assets/js/kelas-belajar.js?v=3.1"></script>
+<script src="assets/js/kelas-belajar.js?v=4.0"></script>
 
 </body>
 </html>
