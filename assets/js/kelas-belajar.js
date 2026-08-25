@@ -85,6 +85,31 @@ async function loadClassLearning() {
       ? (finalRows[0] || null)
       : finalRows;
 
+  let activeCertificate = null;
+
+  try {
+    const { data: certificateRows, error: certificateError } =
+      await window.kabayanSupabase.rpc("get_my_certificates");
+
+    if (!certificateError) {
+      const certificates =
+        Array.isArray(certificateRows)
+          ? certificateRows
+          : [];
+
+      activeCertificate =
+        certificates.find(certificate =>
+          String(certificate.class_id) === String(classId) &&
+          certificate.status === "active"
+        ) || null;
+    }
+  } catch (certificateLookupError) {
+    console.warn(
+      "Sertifikat belum dapat dibaca:",
+      certificateLookupError
+    );
+  }
+
   const quizStatusMap = new Map(
     (quizStatuses || []).map(status => [status.module_id, status])
   );
@@ -137,6 +162,35 @@ async function loadClassLearning() {
       Math.max(allLessons.length - completed, 0);
   }
 
+  const quizRows =
+    quizStatuses || [];
+
+  const learningQuizRows =
+    quizRows.filter(status =>
+      status.module_id &&
+      status.is_published !== false
+    );
+
+  const allLearningQuizzesPassed =
+    learningQuizRows.length > 0 &&
+    learningQuizRows.every(status => status.passed);
+
+  const firstReadyQuiz =
+    learningQuizRows.find(status =>
+      !status.passed &&
+      status.can_start
+    ) || null;
+
+  updateAdaptiveLearningState({
+    completed,
+    totalLessons: allLessons.length,
+    percent,
+    finalStatus,
+    allLearningQuizzesPassed,
+    firstReadyQuiz,
+    activeCertificate
+  });
+
   const host = document.getElementById("moduleList");
 
   if (!publishedModules.length) {
@@ -160,6 +214,302 @@ async function loadClassLearning() {
     button.addEventListener("click", () => openLesson(button.dataset.lessonId));
   });
 }
+
+function updateAdaptiveLearningState({
+  completed,
+  totalLessons,
+  percent,
+  finalStatus,
+  allLearningQuizzesPassed,
+  firstReadyQuiz,
+  activeCertificate
+}) {
+  const panel =
+    document.querySelector(".kb-progress-panel");
+
+  const badge =
+    document.getElementById("progressBadge");
+
+  const label =
+    document.getElementById("progressStateLabel");
+
+  const title =
+    document.getElementById("progressStateTitle");
+
+  const description =
+    document.getElementById("progressStateDescription");
+
+  const action =
+    document.getElementById("progressStateAction");
+
+  const remainingLabel =
+    document.getElementById("remainingLabel");
+
+  const remainingCount =
+    document.getElementById("remainingCount");
+
+  const remainingHint =
+    document.getElementById("remainingHint");
+
+  if (
+    !panel ||
+    !badge ||
+    !label ||
+    !title ||
+    !description ||
+    !action
+  ) {
+    return;
+  }
+
+  panel.classList.remove(
+    "is-learning",
+    "is-material-complete",
+    "is-final-ready",
+    "is-complete",
+    "is-attention"
+  );
+
+  action.innerHTML = "";
+
+  const allMaterialsComplete =
+    totalLessons > 0 &&
+    completed === totalLessons;
+
+  if (finalStatus?.passed) {
+    panel.classList.add("is-complete");
+
+    badge.textContent = "Lulus";
+    label.textContent = "Kelas selesai";
+    title.textContent =
+      "Seluruh pembelajaran telah diselesaikan.";
+
+    description.textContent =
+      `Evaluasi Akhir lulus dengan nilai terbaik ${finalStatus.best_score ?? 0}.`;
+
+    if (activeCertificate?.verification_code) {
+      action.innerHTML = `
+        <a
+          class="kb-state-button light"
+          href="sertifikat.html?code=${encodeURIComponent(activeCertificate.verification_code)}">
+          Lihat Sertifikat
+          <span aria-hidden="true">→</span>
+        </a>
+      `;
+    } else {
+      action.innerHTML = `
+        <a
+          class="kb-state-button subtle"
+          href="sertifikat-saya.html">
+          Sertifikat Saya
+          <span aria-hidden="true">→</span>
+        </a>
+      `;
+    }
+
+    if (remainingLabel) {
+      remainingLabel.textContent = "Status";
+    }
+
+    if (remainingCount) {
+      remainingCount.textContent = "Selesai";
+      remainingCount.classList.add("is-word");
+    }
+
+    if (remainingHint) {
+      remainingHint.textContent =
+        `Final ${finalStatus.best_score ?? 0} · kelas tuntas`;
+    }
+
+    return;
+  }
+
+  if (
+    finalStatus?.is_published &&
+    finalStatus?.prerequisites_complete &&
+    finalStatus?.can_start
+  ) {
+    panel.classList.add("is-final-ready");
+
+    badge.textContent = "Final";
+    label.textContent = "Tahap terakhir";
+    title.textContent =
+      "Saatnya mengerjakan Evaluasi Akhir.";
+
+    description.textContent =
+      "Seluruh prasyarat telah terpenuhi. Selesaikan evaluasi untuk menuntaskan kelas.";
+
+    action.innerHTML = `
+      <a
+        class="kb-state-button light"
+        href="kuis-modul.html?id=${encodeURIComponent(finalStatus.quiz_id)}&class_id=${encodeURIComponent(classId)}&final=1">
+        Mulai Evaluasi Akhir
+        <span aria-hidden="true">→</span>
+      </a>
+    `;
+
+    if (remainingLabel) {
+      remainingLabel.textContent = "Tahap";
+    }
+
+    if (remainingCount) {
+      remainingCount.textContent = "Final";
+      remainingCount.classList.add("is-word");
+    }
+
+    if (remainingHint) {
+      remainingHint.textContent =
+        "Evaluasi Akhir siap dikerjakan";
+    }
+
+    return;
+  }
+
+  if (
+    finalStatus?.is_published &&
+    finalStatus?.prerequisites_complete &&
+    !finalStatus?.can_start &&
+    !finalStatus?.passed
+  ) {
+    panel.classList.add("is-attention");
+
+    badge.textContent = "Evaluasi";
+    label.textContent = "Evaluasi Akhir";
+    title.textContent =
+      "Evaluasi membutuhkan tindak lanjut.";
+
+    description.textContent =
+      finalStatus.max_attempts
+        ? `Percobaan ${finalStatus.attempts_used}/${finalStatus.max_attempts} telah digunakan.`
+        : "Evaluasi Akhir belum dapat dilanjutkan.";
+
+    if (remainingLabel) {
+      remainingLabel.textContent = "Status";
+    }
+
+    if (remainingCount) {
+      remainingCount.textContent = "Final";
+      remainingCount.classList.add("is-word");
+    }
+
+    if (remainingHint) {
+      remainingHint.textContent =
+        "Hubungi pengajar bila diperlukan";
+    }
+
+    return;
+  }
+
+  if (allMaterialsComplete) {
+    panel.classList.add("is-material-complete");
+
+    badge.textContent =
+      allLearningQuizzesPassed
+        ? "Siap"
+        : "Materi selesai";
+
+    label.textContent =
+      allLearningQuizzesPassed
+        ? "Materi & kuis selesai"
+        : "Checkpoint selesai";
+
+    if (
+      allLearningQuizzesPassed &&
+      (!finalStatus || !finalStatus.is_published)
+    ) {
+      title.textContent =
+        "Seluruh materi dan kuis telah selesai.";
+
+      description.textContent =
+        "Evaluasi Akhir belum tersedia. Tunggu pengajar menerbitkannya.";
+
+      if (remainingLabel) {
+        remainingLabel.textContent = "Status";
+      }
+
+      if (remainingCount) {
+        remainingCount.textContent = "Menunggu";
+        remainingCount.classList.add("is-word");
+      }
+
+      if (remainingHint) {
+        remainingHint.textContent =
+          "Evaluasi Akhir belum diterbitkan";
+      }
+
+      return;
+    }
+
+    title.textContent =
+      "Seluruh checkpoint telah selesai.";
+
+    description.textContent =
+      "Selesaikan kuis modul yang belum lulus untuk membuka Evaluasi Akhir.";
+
+    if (firstReadyQuiz) {
+      action.innerHTML = `
+        <a
+          class="kb-state-button light"
+          href="kuis-modul.html?id=${encodeURIComponent(firstReadyQuiz.quiz_id)}&class_id=${encodeURIComponent(classId)}">
+          Lanjut Kuis Modul
+          <span aria-hidden="true">→</span>
+        </a>
+      `;
+    }
+
+    if (remainingLabel) {
+      remainingLabel.textContent = "Checkpoint";
+    }
+
+    if (remainingCount) {
+      remainingCount.textContent = "Selesai";
+      remainingCount.classList.add("is-word");
+    }
+
+    if (remainingHint) {
+      remainingHint.textContent =
+        "lanjutkan kuis modul";
+    }
+
+    return;
+  }
+
+  panel.classList.add("is-learning");
+
+  badge.textContent = "Aktif";
+  label.textContent = "Perjalanan belajar";
+  title.textContent =
+    "Lanjutkan dari checkpoint terakhir.";
+
+  description.textContent =
+    "Selesaikan materi dan kuis secara bertahap untuk membuka Evaluasi Akhir.";
+
+  action.innerHTML = `
+    <a
+      class="kb-state-button light"
+      href="#learningJourney">
+      Lanjut Belajar
+      <span aria-hidden="true">↓</span>
+    </a>
+  `;
+
+  if (remainingLabel) {
+    remainingLabel.textContent = "Tersisa";
+  }
+
+  if (remainingCount) {
+    remainingCount.textContent =
+      Math.max(totalLessons - completed, 0);
+
+    remainingCount.classList.remove("is-word");
+  }
+
+  if (remainingHint) {
+    remainingHint.textContent =
+      "checkpoint berikutnya";
+  }
+}
+
 
 function renderLearningModule(module, progressMap, quiz) {
   const completedLessons =
@@ -273,7 +623,7 @@ function renderLearningModule(module, progressMap, quiz) {
   }
 
   return `
-    <article class="learning-module kb-module">
+    <article class="learning-module kb-module" id="module-${module.id}">
 
       <div class="kb-module-head">
 
