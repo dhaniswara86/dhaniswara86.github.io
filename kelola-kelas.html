@@ -9,7 +9,7 @@
 
   <link rel="stylesheet" href="assets/css/lms.css">
   <link rel="stylesheet" href="assets/css/lms-audit.css">
-  <link rel="stylesheet" href="assets/css/kelola-kelas.css?v=7.1">
+  <link rel="stylesheet" href="assets/css/kelola-kelas.css?v=7.2">
 </head>
 
 <body class="kc-participant-style">
@@ -707,8 +707,79 @@
     </div>
 
 
+    <section class="kc-video-editor">
+
+      <div class="kc-video-editor-head">
+
+        <span class="kc-video-editor-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <rect x="3" y="5" width="18" height="14" rx="3"></rect>
+            <path d="m10 9 5 3-5 3V9Z"></path>
+          </svg>
+        </span>
+
+        <div>
+          <span>Video Pembelajaran</span>
+          <strong>Tambahkan video ke checkpoint</strong>
+        </div>
+
+      </div>
+
+
+      <div class="kc-video-editor-grid">
+
+        <label class="field kc-video-url-field">
+
+          URL video
+
+          <input
+            name="video_url"
+            type="url"
+            inputmode="url"
+            placeholder="https://youtu.be/...">
+
+        </label>
+
+
+        <label class="field">
+
+          Durasi video (menit)
+
+          <input
+            name="video_duration"
+            type="number"
+            min="1"
+            placeholder="12">
+
+        </label>
+
+      </div>
+
+
+      <p class="kc-video-editor-help">
+        Mendukung YouTube/YouTube Unlisted, Vimeo, dan tautan langsung video.
+        Kosongkan jika checkpoint hanya menggunakan resume tertulis.
+      </p>
+
+    </section>
+
+
+    <div class="kc-resume-heading">
+
+      <div>
+        <span>Resume Materi</span>
+        <strong>Ringkasan pembelajaran tertulis</strong>
+      </div>
+
+      <small>
+        Markdown didukung
+      </small>
+
+    </div>
+
+
     <div
-      aria-label="Bantuan format materi"
+      aria-label="Bantuan format resume materi"
       class="editor-toolbar">
 
       <button data-insert="# Judul" type="button">
@@ -744,15 +815,13 @@
 
     <label class="field">
 
-      Isi materi
+      Resume materi
 
       <textarea
         class="lesson-editor-textarea"
         id="lessonContentInput"
         name="content"
-        placeholder="# Konsep PPh Pasal 21
-
-Tuliskan materi di sini.">
+        placeholder="# Ringkasan Materi\n\nTuliskan resume materi, poin penting, contoh, dan referensi di sini.">
       </textarea>
 
     </label>
@@ -764,7 +833,7 @@ Tuliskan materi di sini.">
         Tips:
       </strong>
 
-      Gunakan tombol format di atas. Materi akan ditampilkan rapi di halaman peserta.
+      Susun resume sebagai ringkasan pembelajaran, bukan sekadar transkrip video. Materi akan ditampilkan di bawah video pada halaman peserta.
 
     </div>
 
