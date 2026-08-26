@@ -3781,101 +3781,231 @@ body.mega-menu-open {
 }
 </style>
 
-<style id="heroCategoryIconRailStyles">
+<style id="heroLargeCategorySlideshowStyles">
 /* =========================================================
-   Hero Kabayan — category product rail
-   Menggantikan slideshow buku dengan navigasi kategori visual.
+   Hero Kabayan — large center-focus category slideshow
+   Berdiri bebas tanpa card/container di belakang mockup.
    ========================================================= */
 .hero-visual {
-  width: min(1180px, 100%) !important;
+  position: relative;
+  z-index: 2;
+  width: min(920px, 96vw) !important;
   height: auto !important;
   min-height: 0 !important;
   flex: 1 1 auto;
-  align-items: center !important;
-  margin: clamp(24px, 4svh, 42px) auto 0 !important;
-  padding: 0 8px clamp(20px, 3svh, 32px);
+  align-items: stretch !important;
+  margin: clamp(16px, 2.5svh, 26px) auto 0 !important;
+  padding: 0 0 clamp(16px, 2.2svh, 24px);
 }
 
 .hero-visual .hero-glow {
-  bottom: -74px;
-  width: min(900px, 84vw);
-  height: 260px;
-  opacity: .7;
-  filter: blur(24px);
+  bottom: -82px;
+  width: min(760px, 78vw);
+  height: 250px;
+  opacity: .68;
+  filter: blur(25px);
 }
 
-.hero-category-stage {
+.hero-showcase-slider {
   position: relative;
   z-index: 2;
   width: 100%;
-  margin: auto 0;
-}
-
-.hero-category-rail {
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(8, minmax(0, 1fr));
-  align-items: start;
-  gap: clamp(12px, 1.5vw, 24px);
-  padding: 10px 8px 12px;
-}
-
-.hero-category-item {
-  min-width: 0;
-  color: var(--near-black);
-  text-decoration: none;
-  text-align: center;
+  height: 100%;
+  min-height: 330px;
   outline: none;
 }
 
-.hero-category-icon-wrap {
+.hero-showcase-viewport {
+  position: relative;
   width: 100%;
-  height: clamp(92px, 9vw, 118px);
+  height: 100%;
+  min-height: inherit;
+}
+
+.hero-showcase-slide {
+  position: absolute;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 11px;
-  transition: transform .3s cubic-bezier(.2,.8,.2,1);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(18px) scale(.935);
+  transition:
+    opacity .52s ease,
+    transform .64s cubic-bezier(.22, 1, .36, 1);
 }
 
-.hero-category-icon {
-  width: clamp(78px, 7.4vw, 102px);
-  height: clamp(78px, 7.4vw, 102px);
-  display: block;
+.hero-showcase-slide.active {
+  z-index: 3;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+.hero-showcase-link {
+  width: min(720px, 100%);
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+  text-decoration: none;
+}
+
+.hero-showcase-image-wrap {
+  position: relative;
+  width: 100%;
+  min-height: 0;
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-showcase-image-wrap::after {
+  position: absolute;
+  z-index: 0;
+  bottom: 8%;
+  left: 50%;
+  width: min(240px, 40vw);
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(18, 43, 81, .13);
+  filter: blur(18px);
+  content: "";
+  transform: translateX(-50%);
+}
+
+.hero-showcase-image {
+  position: relative;
+  z-index: 2;
+  width: min(320px, 34svh, 67vw);
+  max-height: min(310px, 39svh);
   object-fit: contain;
-  filter: drop-shadow(0 12px 18px rgba(23, 47, 84, .10));
-  transition: filter .3s ease;
+  filter: drop-shadow(0 28px 28px rgba(19, 44, 80, .22));
+  transform: translateY(0) scale(1);
+  transition:
+    transform .42s cubic-bezier(.2, .8, .2, 1),
+    filter .42s ease;
+  will-change: transform;
 }
 
-.hero-category-item:hover .hero-category-icon-wrap,
-.hero-category-item:focus-visible .hero-category-icon-wrap {
-  transform: translateY(-5px) scale(1.025);
+@media (hover:hover) and (pointer:fine) {
+  .hero-showcase-link:hover .hero-showcase-image,
+  .hero-showcase-link:focus-visible .hero-showcase-image {
+    transform: translateY(-7px) scale(1.055);
+    filter: drop-shadow(0 34px 32px rgba(19, 44, 80, .27));
+  }
 }
 
-.hero-category-item:hover .hero-category-icon,
-.hero-category-item:focus-visible .hero-category-icon {
-  filter: drop-shadow(0 17px 23px rgba(23, 47, 84, .15));
+.hero-showcase-caption {
+  width: min(650px, calc(100% - 76px));
+  flex: 0 0 auto;
+  padding: 2px 18px 28px;
+  text-align: center;
 }
 
-.hero-category-label {
-  display: block;
-  font-size: clamp(13px, 1.18vw, 16px);
-  line-height: 1.15;
-  font-weight: 600;
-  letter-spacing: -.025em;
-  white-space: nowrap;
-}
-
-.hero-category-note {
-  display: block;
-  margin-top: 5px;
-  color: #bf4800;
-  font-size: 10px;
-  line-height: 1.1;
+.hero-showcase-category {
+  color: var(--medium-gray);
+  font-size: 11px;
   font-weight: 650;
+  letter-spacing: .045em;
+  text-transform: uppercase;
 }
 
-/* Slider lama tidak lagi dipakai pada hero. */
+.hero-showcase-caption h2 {
+  margin: 5px 0 6px;
+  color: var(--near-black);
+  font-size: clamp(20px, min(2.3vw, 2.8svh), 27px);
+  font-weight: 650;
+  letter-spacing: -.035em;
+  line-height: 1.12;
+}
+
+.hero-showcase-caption p {
+  margin: 0;
+  color: #515154;
+  font-size: clamp(13px, min(1.45vw, 1.8svh), 16px);
+  line-height: 1.35;
+}
+
+.hero-showcase-detail {
+  display: inline-block;
+  margin-top: 7px;
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.hero-showcase-arrow {
+  position: absolute;
+  z-index: 10;
+  top: 39%;
+  width: 43px;
+  height: 43px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(232, 232, 237, .84);
+  color: var(--near-black);
+  cursor: pointer;
+  font-size: 28px;
+  line-height: 1;
+  opacity: 0;
+  transform: translateY(-50%);
+  transition: opacity .2s ease, background .2s ease, transform .2s ease;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.hero-showcase-slider:hover .hero-showcase-arrow,
+.hero-showcase-slider:focus-within .hero-showcase-arrow {
+  opacity: 1;
+}
+
+.hero-showcase-arrow:hover {
+  background: rgba(214, 214, 219, .96);
+}
+
+.hero-showcase-prev { left: 4px; }
+.hero-showcase-next { right: 4px; }
+
+.hero-showcase-dots {
+  position: absolute;
+  z-index: 10;
+  right: 0;
+  bottom: 3px;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  gap: 7px;
+}
+
+.hero-showcase-dot {
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  border: 0;
+  border-radius: 99px;
+  background: #b6b6ba;
+  cursor: pointer;
+  transition: width .25s ease, background .25s ease;
+}
+
+.hero-showcase-dot.active {
+  width: 23px;
+  background: var(--near-black);
+}
+
+/* Komponen rail dan slider buku lama tidak dipakai di hero. */
+.hero-category-stage,
+.hero-category-rail,
+.hero-category-item,
 .hero-book-slider,
 .hero-book-viewport,
 .hero-book-track,
@@ -3885,128 +4015,73 @@ body.mega-menu-open {
   display: none !important;
 }
 
-@media (max-width: 900px) {
-  .hero-category-rail {
-    grid-template-columns: none;
-    grid-auto-flow: column;
-    grid-auto-columns: 116px;
-    justify-content: start;
-    gap: 16px;
-    overflow-x: auto;
-    padding: 8px 22px 16px;
-    scroll-snap-type: x proximity;
-    overscroll-behavior-inline: contain;
-    scrollbar-width: none;
-  }
-  .hero-category-rail::-webkit-scrollbar { display: none; }
-  .hero-category-item { scroll-snap-align: center; }
-  .hero-category-icon-wrap { height: 94px; }
-  .hero-category-icon { width: 82px; height: 82px; }
-  .hero-category-label { font-size: 14px; }
-}
-
 @media (max-width: 680px) {
   .hero-visual {
     width: 100% !important;
-    margin-top: clamp(22px, 3svh, 30px) !important;
-    padding-right: 0;
-    padding-left: 0;
+    margin-top: clamp(14px, 2.2svh, 22px) !important;
+    padding-bottom: 14px;
   }
-  .hero-category-rail {
-    grid-auto-columns: 108px;
-    gap: 11px;
-    padding-right: 18px;
-    padding-left: 18px;
+
+  .hero-showcase-slider {
+    min-height: 310px;
   }
-  .hero-category-icon-wrap { height: 88px; margin-bottom: 8px; }
-  .hero-category-icon { width: 76px; height: 76px; }
-  .hero-category-note { font-size: 9px; }
+
+  .hero-showcase-image {
+    width: min(230px, 28svh, 63vw);
+    max-height: min(220px, 28svh);
+  }
+
+  .hero-showcase-caption {
+    width: calc(100% - 46px);
+    padding: 2px 8px 27px;
+  }
+
+  .hero-showcase-caption h2 {
+    margin-top: 4px;
+    font-size: clamp(18px, 5vw, 21px);
+  }
+
+  .hero-showcase-caption p {
+    font-size: 13px;
+    line-height: 1.3;
+  }
+
+  .hero-showcase-category { font-size: 9px; }
+  .hero-showcase-detail { margin-top: 5px; font-size: 12px; }
+
+  .hero-showcase-arrow {
+    top: 40%;
+    width: 38px;
+    height: 38px;
+    font-size: 25px;
+    opacity: .88;
+  }
+
+  .hero-showcase-prev { left: 0; }
+  .hero-showcase-next { right: 0; }
 }
 
 @media (max-height: 720px) and (min-width: 681px) {
-  .hero-visual { margin-top: 14px !important; padding-bottom: 14px; }
-  .hero-category-icon-wrap { height: 82px; margin-bottom: 7px; }
-  .hero-category-icon { width: 72px; height: 72px; }
-  .hero-category-label { font-size: 13px; }
-  .hero-category-note { margin-top: 3px; font-size: 9px; }
+  .hero-visual {
+    margin-top: 8px !important;
+    padding-bottom: 10px;
+  }
+
+  .hero-showcase-slider { min-height: 250px; }
+  .hero-showcase-image {
+    width: min(235px, 29svh);
+    max-height: 210px;
+  }
+  .hero-showcase-caption { padding-bottom: 20px; }
+  .hero-showcase-caption h2 { font-size: 18px; }
+  .hero-showcase-caption p { font-size: 12px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-category-icon-wrap,
-  .hero-category-icon { transition: none !important; }
-}
-</style>
-
-<style id="heroGenieMagnificationStyles">
-/* =========================================================
-   Hero category icons — transparent + proximity magnification
-   Base layout tetap mengikuti index original.
-   ========================================================= */
-.hero-category-stage,
-.hero-category-rail,
-.hero-category-item,
-.hero-category-icon-wrap {
-  background: transparent !important;
-  border: 0 !important;
-  box-shadow: none !important;
-}
-
-.hero-category-stage {
-  overflow: visible !important;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .hero-category-rail {
-    overflow: visible !important;
-  }
-
-  .hero-category-item {
-    --genie-scale: 1;
-    --genie-lift: 0px;
-    position: relative;
-    z-index: 1;
-  }
-
-  .hero-category-icon-wrap {
-    transform: translateY(var(--genie-lift)) scale(var(--genie-scale)) !important;
-    transform-origin: 50% 100%;
-    will-change: transform;
-    transition: transform 115ms cubic-bezier(.22,.9,.3,1);
-  }
-
-  .hero-category-icon {
-    transition: filter 140ms ease !important;
-  }
-
-  .hero-category-item.is-genie-near .hero-category-icon {
-    filter: drop-shadow(0 18px 24px rgba(23,47,84,.17)) !important;
-  }
-
-  .hero-category-item:hover .hero-category-icon-wrap,
-  .hero-category-item:focus-visible .hero-category-icon-wrap {
-    transform: translateY(var(--genie-lift)) scale(var(--genie-scale)) !important;
-  }
-}
-
-@media (max-width: 900px), (hover: none), (pointer: coarse) {
-  .hero-category-item {
-    --genie-scale: 1 !important;
-    --genie-lift: 0px !important;
-  }
-
-  .hero-category-icon-wrap {
-    transform: none !important;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-category-item {
-    --genie-scale: 1 !important;
-    --genie-lift: 0px !important;
-  }
-
-  .hero-category-icon-wrap {
-    transform: none !important;
+  .hero-showcase-slide,
+  .hero-showcase-image,
+  .hero-showcase-arrow,
+  .hero-showcase-dot {
     transition: none !important;
   }
 }
@@ -4289,43 +4364,101 @@ body.mega-menu-open {
 </div>
 <div class="hero-visual">
 <div class="hero-glow"></div>
-<section aria-label="Jelajahi kategori utama Kabayan" class="hero-category-stage">
-<div class="hero-category-rail">
-<a class="hero-category-item" href="formulir.html">
-<span class="hero-category-icon-wrap"><img alt="" aria-hidden="true" class="hero-category-icon" src="images/jelajahi-formulir.webp"/></span>
-<span class="hero-category-label">Formulir</span>
-</a>
-<a class="hero-category-item" href="kalkulator.html">
-<span class="hero-category-icon-wrap"><img alt="" aria-hidden="true" class="hero-category-icon" src="images/jelajahi-kalkulator.webp"/></span>
-<span class="hero-category-label">Kalkulator</span>
-</a>
-<a class="hero-category-item" href="converter-xml-coretax.html">
-<span class="hero-category-icon-wrap"><img alt="" aria-hidden="true" class="hero-category-icon" src="images/jelajahi-converter.webp"/></span>
-<span class="hero-category-label">Converter</span>
-</a>
-<a class="hero-category-item" href="buku.html">
-<span class="hero-category-icon-wrap"><img alt="" aria-hidden="true" class="hero-category-icon" src="images/jelajahi-buku-digital.webp"/></span>
-<span class="hero-category-label">Buku Digital</span>
-</a>
-<a class="hero-category-item" href="aplikasi.html">
-<span class="hero-category-icon-wrap"><img alt="" aria-hidden="true" class="hero-category-icon" src="images/jelajahi-aplikasi.webp"/></span>
-<span class="hero-category-label">Aplikasi</span>
-</a>
-<a class="hero-category-item" href="artikel.html">
-<span class="hero-category-icon-wrap"><img alt="" aria-hidden="true" class="hero-category-icon" src="images/jelajahi-artikel.webp"/></span>
-<span class="hero-category-label">Artikel</span>
-</a>
-<a class="hero-category-item" href="hotnews.html">
-<span class="hero-category-icon-wrap"><img alt="" aria-hidden="true" class="hero-category-icon" src="images/jelajahi-hot-news.webp"/></span>
-<span class="hero-category-label">Hot News</span>
-<span class="hero-category-note">Terbaru</span>
-</a>
-<a class="hero-category-item" href="ruang-belajar.html">
-<span class="hero-category-icon-wrap"><img alt="" aria-hidden="true" class="hero-category-icon" src="images/jelajahi-ruang-belajar.webp"/></span>
-<span class="hero-category-label">Ruang Belajar</span>
-</a>
+<div aria-label="Jelajahi kategori utama Kabayan" aria-roledescription="carousel" class="hero-showcase-slider" id="heroCategorySlider" role="region" tabindex="0">
+<div class="hero-showcase-viewport">
+<article aria-hidden="false" class="hero-showcase-slide active">
+<a class="hero-showcase-link" href="formulir.html">
+<div class="hero-showcase-image-wrap"><img alt="Mockup Formulir Perpajakan" class="hero-showcase-image" src="images/jelajahi-formulir.webp"/></div>
+<div class="hero-showcase-caption">
+<span class="hero-showcase-category">Administrasi</span>
+<h2>Formulir Perpajakan</h2>
+<p>Temukan, isi, dan siapkan dokumen perpajakan sesuai kebutuhan.</p>
+<span class="hero-showcase-detail">Buka formulir ›</span>
 </div>
-</section>
+</a>
+</article>
+<article aria-hidden="true" class="hero-showcase-slide">
+<a class="hero-showcase-link" href="kalkulator.html">
+<div class="hero-showcase-image-wrap"><img alt="Mockup Kalkulator Pajak" class="hero-showcase-image" src="images/jelajahi-kalkulator.webp"/></div>
+<div class="hero-showcase-caption">
+<span class="hero-showcase-category">Hitung</span>
+<h2>Kalkulator Pajak</h2>
+<p>Hitung kewajiban pajak dengan lebih praktis dan mudah dipahami.</p>
+<span class="hero-showcase-detail">Buka kalkulator ›</span>
+</div>
+</a>
+</article>
+<article aria-hidden="true" class="hero-showcase-slide">
+<a class="hero-showcase-link" href="converter-xml-coretax.html">
+<div class="hero-showcase-image-wrap"><img alt="Mockup Converter XML" class="hero-showcase-image" src="images/jelajahi-converter.webp"/></div>
+<div class="hero-showcase-caption">
+<span class="hero-showcase-category">Coretax</span>
+<h2>Converter XML</h2>
+<p>Ubah data Excel menjadi XML Coretax melalui alur yang lebih praktis.</p>
+<span class="hero-showcase-detail">Buka converter ›</span>
+</div>
+</a>
+</article>
+<article aria-hidden="true" class="hero-showcase-slide">
+<a class="hero-showcase-link" href="buku.html">
+<div class="hero-showcase-image-wrap"><img alt="Mockup Buku Digital" class="hero-showcase-image" src="images/jelajahi-buku-digital.webp"/></div>
+<div class="hero-showcase-caption">
+<span class="hero-showcase-category">Pembelajaran</span>
+<h2>Buku Digital</h2>
+<p>Pelajari perpajakan melalui materi yang lebih terstruktur.</p>
+<span class="hero-showcase-detail">Lihat buku ›</span>
+</div>
+</a>
+</article>
+<article aria-hidden="true" class="hero-showcase-slide">
+<a class="hero-showcase-link" href="aplikasi.html">
+<div class="hero-showcase-image-wrap"><img alt="Mockup Aplikasi Perpajakan" class="hero-showcase-image" src="images/jelajahi-aplikasi.webp"/></div>
+<div class="hero-showcase-caption">
+<span class="hero-showcase-category">Perangkat</span>
+<h2>Aplikasi Perpajakan</h2>
+<p>Temukan installer, arsip aplikasi, dan perangkat pendukung perpajakan.</p>
+<span class="hero-showcase-detail">Buka aplikasi ›</span>
+</div>
+</a>
+</article>
+<article aria-hidden="true" class="hero-showcase-slide">
+<a class="hero-showcase-link" href="artikel.html">
+<div class="hero-showcase-image-wrap"><img alt="Mockup Artikel Pajak" class="hero-showcase-image" src="images/jelajahi-artikel.webp"/></div>
+<div class="hero-showcase-caption">
+<span class="hero-showcase-category">Pengetahuan</span>
+<h2>Artikel Pajak</h2>
+<p>Pahami ketentuan pajak dengan penjelasan yang lebih sederhana.</p>
+<span class="hero-showcase-detail">Baca artikel ›</span>
+</div>
+</a>
+</article>
+<article aria-hidden="true" class="hero-showcase-slide">
+<a class="hero-showcase-link" href="hotnews.html">
+<div class="hero-showcase-image-wrap"><img alt="Mockup Hot News" class="hero-showcase-image" src="images/jelajahi-hot-news.webp"/></div>
+<div class="hero-showcase-caption">
+<span class="hero-showcase-category">Terbaru</span>
+<h2>Hot News</h2>
+<p>Ikuti pembaruan regulasi dan informasi perpajakan yang perlu cepat diketahui.</p>
+<span class="hero-showcase-detail">Lihat Hot News ›</span>
+</div>
+</a>
+</article>
+<article aria-hidden="true" class="hero-showcase-slide">
+<a class="hero-showcase-link" href="ruang-belajar.html">
+<div class="hero-showcase-image-wrap"><img alt="Mockup Ruang Belajar" class="hero-showcase-image" src="images/jelajahi-ruang-belajar.webp"/></div>
+<div class="hero-showcase-caption">
+<span class="hero-showcase-category">Pembelajaran</span>
+<h2>Ruang Belajar</h2>
+<p>Belajar melalui materi dan pembelajaran terpandu dalam satu ruang.</p>
+<span class="hero-showcase-detail">Masuk ruang belajar ›</span>
+</div>
+</a>
+</article>
+</div>
+<button aria-label="Kategori sebelumnya" class="hero-showcase-arrow hero-showcase-prev" type="button">‹</button>
+<button aria-label="Kategori berikutnya" class="hero-showcase-arrow hero-showcase-next" type="button">›</button>
+<div aria-label="Pilih kategori" class="hero-showcase-dots"></div>
+</div>
 </div>
 </section>
 <section class="full-panel panel-light">
@@ -5885,86 +6018,136 @@ body.mega-menu-open {
     }, 2600);
   })();
 </script>
-
-<script id="heroGenieMagnificationScript">
+<script id="heroCategorySlideshowScript">
 (() => {
   "use strict";
 
-  const rail = document.querySelector(".hero-category-rail");
-  if (!rail) return;
+  const slider = document.getElementById("heroCategorySlider");
+  if (!slider) return;
 
-  const items = Array.from(rail.querySelectorAll(".hero-category-item"));
-  if (!items.length) return;
+  const slides = Array.from(slider.querySelectorAll(".hero-showcase-slide"));
+  const prev = slider.querySelector(".hero-showcase-prev");
+  const next = slider.querySelector(".hero-showcase-next");
+  const dotsWrap = slider.querySelector(".hero-showcase-dots");
+  if (!slides.length || !prev || !next || !dotsWrap) return;
 
-  const finePointer = window.matchMedia("(hover: hover) and (pointer: fine) and (min-width: 901px)");
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let index = 0;
+  let timer = null;
+  let touchStartX = 0;
+  let touchStartY = 0;
 
-  const MAX_SCALE = 1.52;
-  const MAX_LIFT = 20;
-  const INFLUENCE = 225;
+  const dots = slides.map((_, slideIndex) => {
+    const dot = document.createElement("button");
+    dot.type = "button";
+    dot.className = "hero-showcase-dot";
+    dot.setAttribute("aria-label", `Tampilkan kategori ${slideIndex + 1}`);
+    dot.addEventListener("click", () => {
+      showSlide(slideIndex);
+      restart();
+    });
+    dotsWrap.appendChild(dot);
+    return dot;
+  });
 
-  function resetItems() {
-    items.forEach((item) => {
-      item.style.setProperty("--genie-scale", "1");
-      item.style.setProperty("--genie-lift", "0px");
-      item.style.zIndex = "1";
-      item.classList.remove("is-genie-near");
+  function showSlide(nextIndex) {
+    index = (nextIndex + slides.length) % slides.length;
+
+    slides.forEach((slide, slideIndex) => {
+      const active = slideIndex === index;
+      slide.classList.toggle("active", active);
+      slide.setAttribute("aria-hidden", String(!active));
+      const link = slide.querySelector("a");
+      if (link) link.tabIndex = active ? 0 : -1;
+    });
+
+    dots.forEach((dot, dotIndex) => {
+      const active = dotIndex === index;
+      dot.classList.toggle("active", active);
+      dot.setAttribute("aria-current", active ? "true" : "false");
     });
   }
 
-  function applyMagnification(clientX) {
-    if (!finePointer.matches || reduceMotion.matches) {
-      resetItems();
-      return;
+  function stop() {
+    if (timer !== null) {
+      window.clearInterval(timer);
+      timer = null;
     }
-
-    const railRect = rail.getBoundingClientRect();
-    const localX = clientX - railRect.left + rail.scrollLeft;
-
-    items.forEach((item) => {
-      // offsetLeft/offsetWidth tidak berubah saat transform, sehingga efek stabil.
-      const center = item.offsetLeft + item.offsetWidth / 2;
-      const distance = Math.abs(localX - center);
-      const proximity = Math.max(0, 1 - distance / INFLUENCE);
-      const eased = 0.5 - 0.5 * Math.cos(Math.PI * proximity);
-      const scale = 1 + (MAX_SCALE - 1) * eased;
-      const lift = -MAX_LIFT * eased;
-
-      item.style.setProperty("--genie-scale", scale.toFixed(3));
-      item.style.setProperty("--genie-lift", `${lift.toFixed(1)}px`);
-      item.style.zIndex = String(2 + Math.round(eased * 20));
-      item.classList.toggle("is-genie-near", eased > 0.06);
-    });
   }
 
-  rail.addEventListener("pointermove", (event) => {
-    if (event.pointerType === "touch") return;
-    applyMagnification(event.clientX);
+  function start() {
+    stop();
+    if (reduceMotion.matches || slides.length < 2 || document.hidden) return;
+    timer = window.setInterval(() => showSlide(index + 1), 3400);
+  }
+
+  function restart() {
+    stop();
+    start();
+  }
+
+  prev.addEventListener("click", () => {
+    showSlide(index - 1);
+    restart();
+  });
+
+  next.addEventListener("click", () => {
+    showSlide(index + 1);
+    restart();
+  });
+
+  slider.addEventListener("mouseenter", stop);
+  slider.addEventListener("mouseleave", start);
+  slider.addEventListener("focusin", stop);
+  slider.addEventListener("focusout", () => {
+    requestAnimationFrame(() => {
+      if (!slider.contains(document.activeElement)) start();
+    });
+  });
+
+  slider.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      showSlide(index - 1);
+      restart();
+    } else if (event.key === "ArrowRight") {
+      event.preventDefault();
+      showSlide(index + 1);
+      restart();
+    }
+  });
+
+  slider.addEventListener("touchstart", (event) => {
+    const touch = event.changedTouches[0];
+    touchStartX = touch.screenX;
+    touchStartY = touch.screenY;
+    stop();
   }, { passive: true });
 
-  rail.addEventListener("pointerleave", resetItems, { passive: true });
+  slider.addEventListener("touchend", (event) => {
+    const touch = event.changedTouches[0];
+    const dx = touchStartX - touch.screenX;
+    const dy = touchStartY - touch.screenY;
 
-  rail.addEventListener("focusin", (event) => {
-    const item = event.target.closest(".hero-category-item");
-    if (!item || !finePointer.matches || reduceMotion.matches) return;
+    if (Math.abs(dx) > 42 && Math.abs(dx) > Math.abs(dy)) {
+      showSlide(index + (dx > 0 ? 1 : -1));
+    }
+    start();
+  }, { passive: true });
 
-    const railRect = rail.getBoundingClientRect();
-    const center = railRect.left + item.offsetLeft + item.offsetWidth / 2 - rail.scrollLeft;
-    applyMagnification(center);
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) stop();
+    else start();
   });
 
-  rail.addEventListener("focusout", () => {
-    requestAnimationFrame(() => {
-      if (!rail.contains(document.activeElement)) resetItems();
-    });
+  reduceMotion.addEventListener?.("change", () => {
+    if (reduceMotion.matches) stop();
+    else start();
   });
 
-  const resetOnModeChange = () => resetItems();
-  finePointer.addEventListener?.("change", resetOnModeChange);
-  reduceMotion.addEventListener?.("change", resetOnModeChange);
-  window.addEventListener("resize", resetOnModeChange, { passive: true });
+  showSlide(0);
+  start();
 })();
 </script>
-
 </body>
 </html>
