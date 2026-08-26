@@ -3882,6 +3882,320 @@ body.mega-menu-open {
 }
 </style>
 
+
+
+<style id="firstScreenCompositionStyles">
+/* =========================================================
+   FIRST SCREEN COMPOSITION — Kabayan
+   Goals:
+   1) Announcement → eyebrow keeps ORIGINAL hero top spacing.
+   2) Tagline → CTA has a deliberate gap.
+   3) CTA → category mockups has a larger visual pause.
+   4) The first screen ends after the category mockups; Buku Digital
+      starts after the first viewport.
+   ========================================================= */
+:root {
+  --nav-height-live: var(--nav-height);
+  --viewport-height-live: 100dvh;
+}
+
+main {
+  padding-top: var(--nav-height-live, var(--nav-height)) !important;
+}
+
+.first-screen {
+  box-sizing: border-box;
+  width: 100%;
+  height: calc(var(--viewport-height-live, 100dvh) - var(--nav-height-live, var(--nav-height)));
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #fff;
+}
+
+/* Keep the announcement exactly where it belongs: flush under nav. */
+.first-screen > .announcement {
+  flex: 0 0 auto;
+  width: 100%;
+  margin: 0 !important;
+}
+
+/* Desktop/laptop: preserve ORIGINAL 72px top distance from announcement to hero content. */
+.first-screen > .hero {
+  box-sizing: border-box;
+  width: 100%;
+  flex: 1 1 0;
+  min-height: 0 !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 72px 20px 24px !important;
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden !important;
+}
+
+.first-screen .hero-copy {
+  flex: 0 0 auto;
+  width: min(920px, 100%);
+  margin: 0 auto !important;
+}
+
+/* Keep the original copy rhythm, with a slightly clearer CTA separation. */
+.first-screen .hero .eyebrow {
+  margin-bottom: 8px !important;
+}
+
+.first-screen .hero-description {
+  margin-top: 25px !important;
+}
+
+.first-screen .hero-actions {
+  margin-top: clamp(28px, 3.1vh, 36px) !important;
+}
+
+/*
+   The menu is the final visual object of the first screen.
+   Auto margins share surplus vertical space, while padding-top guarantees
+   a noticeable CTA → mockup pause even on shorter laptops.
+*/
+.first-screen .hero-visual {
+  flex: 0 0 auto;
+  width: min(1180px, 100%) !important;
+  height: auto !important;
+  min-height: 0 !important;
+  margin-top: auto !important;
+  margin-bottom: auto !important;
+  padding: clamp(46px, 5.3vh, 66px) 0 0 !important;
+}
+
+.first-screen .hero-category-stage {
+  margin: 0 auto !important;
+}
+
+/* 4×2 widths need a compact mockup block so the original top rhythm survives. */
+@media (max-width: 1100px) and (min-width: 681px) {
+  .first-screen > .hero {
+    padding-top: 72px !important;
+    padding-bottom: 18px !important;
+  }
+
+  .first-screen .hero-visual {
+    width: min(820px, 100%) !important;
+    padding-top: clamp(40px, 4.6vh, 54px) !important;
+  }
+
+  .first-screen .hero-category-stage {
+    padding: 8px !important;
+    border-radius: 27px !important;
+  }
+
+  .first-screen .hero-category-rail {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 7px !important;
+  }
+
+  .first-screen .hero-category-item {
+    min-height: 92px !important;
+    padding: 5px 3px 7px !important;
+    border-radius: 18px !important;
+  }
+
+  .first-screen .hero-category-icon-wrap {
+    height: 54px !important;
+    flex-basis: 54px !important;
+    margin-bottom: 2px !important;
+  }
+
+  .first-screen .hero-category-icon {
+    width: 48px !important;
+    height: 48px !important;
+  }
+
+  .first-screen .hero-category-label {
+    min-height: 1.9em !important;
+    font-size: 10.8px !important;
+    line-height: 1.05 !important;
+  }
+
+  .first-screen .hero-category-note {
+    font-size: 7.5px !important;
+  }
+}
+
+/* Short laptops: keep the requested spacing hierarchy; compact the mockups, not the top gap. */
+@media (min-width: 1101px) and (max-height: 780px) {
+  .first-screen > .hero {
+    padding-top: 72px !important;
+    padding-bottom: 14px !important;
+  }
+
+  .first-screen .hero h1 {
+    font-size: clamp(44px, 4.65vw, 62px) !important;
+  }
+
+  .first-screen .hero-description {
+    font-size: clamp(16px, 1.45vw, 19px) !important;
+  }
+
+  .first-screen .hero .button {
+    min-height: 38px !important;
+    padding: 7px 17px !important;
+    font-size: 14.5px !important;
+  }
+
+  .first-screen .hero-visual {
+    padding-top: 42px !important;
+  }
+
+  .first-screen .hero-category-stage {
+    padding: 8px !important;
+    border-radius: 27px !important;
+  }
+
+  .first-screen .hero-category-item {
+    min-height: 100px !important;
+    padding: 5px 3px 7px !important;
+    border-radius: 18px !important;
+  }
+
+  .first-screen .hero-category-icon-wrap {
+    height: 58px !important;
+    flex-basis: 58px !important;
+    margin-bottom: 2px !important;
+  }
+
+  .first-screen .hero-category-icon {
+    width: 52px !important;
+    height: 52px !important;
+  }
+
+  .first-screen .hero-category-label {
+    min-height: 1.9em !important;
+    font-size: 10.8px !important;
+    line-height: 1.05 !important;
+  }
+}
+
+/* Phones: ORIGINAL mobile top spacing was 54px. Keep it, and show all 8 items 4×2. */
+@media (max-width: 680px) {
+  .first-screen > .hero {
+    padding: 54px 9px 12px !important;
+    justify-content: flex-start !important;
+  }
+
+  .first-screen .hero .eyebrow {
+    margin-bottom: 7px !important;
+  }
+
+  .first-screen .hero-description {
+    margin-top: 18px !important;
+  }
+
+  .first-screen .hero-actions {
+    margin-top: 24px !important;
+  }
+
+  .first-screen .hero-visual {
+    width: min(100%, 470px) !important;
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+    padding-top: clamp(32px, 4.2vh, 44px) !important;
+  }
+
+  .first-screen .hero-category-stage {
+    width: 100% !important;
+    padding: 6px !important;
+    border-radius: 22px !important;
+  }
+
+  .first-screen .hero-category-rail {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    grid-auto-flow: row !important;
+    grid-auto-columns: auto !important;
+    gap: 5px !important;
+    overflow: visible !important;
+    padding: 0 !important;
+  }
+
+  .first-screen .hero-category-item {
+    min-width: 0 !important;
+    min-height: 82px !important;
+    padding: 4px 1px 5px !important;
+    border-radius: 15px !important;
+  }
+
+  .first-screen .hero-category-icon-wrap {
+    height: 46px !important;
+    flex-basis: 46px !important;
+    margin-bottom: 2px !important;
+  }
+
+  .first-screen .hero-category-icon {
+    width: 41px !important;
+    height: 41px !important;
+  }
+
+  .first-screen .hero-category-label {
+    min-height: 2em !important;
+    padding-inline: 0 !important;
+    font-size: clamp(8.5px, 2.3vw, 10px) !important;
+    line-height: 1.04 !important;
+    white-space: normal !important;
+  }
+
+  .first-screen .hero-category-note {
+    margin-top: 1px !important;
+    font-size: 6.8px !important;
+  }
+}
+
+/* Very short landscape viewports: do not crop interactive content. */
+@media (max-height: 560px) {
+  .first-screen {
+    height: auto;
+    min-height: calc(var(--viewport-height-live, 100dvh) - var(--nav-height-live, var(--nav-height)));
+    overflow: visible;
+  }
+}
+</style>
+
+
+<style id="heroTypographyMatchSectionStyles">
+/* Hero typography is locked to the Buku Digital section scale. */
+.first-screen .hero h1 {
+  font-size: clamp(43px, 6vw, 72px) !important;
+}
+
+.first-screen .hero-description {
+  font-size: clamp(20px, 2.2vw, 26px) !important;
+}
+
+/* On short screens we preserve type size and compact only supporting UI/spacing. */
+@media (min-width: 681px) and (max-height: 780px) {
+  .first-screen .hero-actions {
+    margin-top: 24px !important;
+  }
+  .first-screen .hero-visual {
+    padding-top: 34px !important;
+  }
+}
+
+@media (max-width: 680px) {
+  .first-screen .hero h1 {
+    font-size: clamp(43px, 6vw, 72px) !important;
+  }
+  .first-screen .hero-description {
+    font-size: clamp(20px, 2.2vw, 26px) !important;
+    line-height: 1.25 !important;
+  }
+}
+</style>
+
 </head>
 <body id="top">
 <header class="site-nav">
@@ -4136,6 +4450,7 @@ body.mega-menu-open {
 <a class="nav-hotnews" href="hotnews.html"><span aria-hidden="true" class="nav-hotnews-icon">🔥</span><span>Hot News</span></a>
 </nav>
 <main>
+<div class="first-screen">
 <div class="announcement">
       Temukan buku, formulir, dan aplikasi perpajakan dalam satu tempat.
       <button aria-controls="collectionMegaMenu" aria-expanded="false" aria-haspopup="true" class="collection-menu-trigger" id="collectionMenuTrigger" type="button">Lihat Koleksi<span aria-hidden="true">⌄</span></button>
@@ -4197,6 +4512,7 @@ body.mega-menu-open {
 </section>
 </div>
 </section>
+</div>
 <section class="full-panel panel-light">
 <div class="panel-content">
 <p class="section-kicker">Buku Digital</p>
@@ -5730,6 +6046,43 @@ body.mega-menu-open {
 </script>
 
 
+
+
+<script id="firstScreenStrictSizingScript">
+(() => {
+  "use strict";
+
+  const root = document.documentElement;
+  const nav = document.querySelector(".site-nav");
+  if (!nav) return;
+
+  let raf = 0;
+
+  const syncFirstScreenMetrics = () => {
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(() => {
+      const navHeight = Math.ceil(nav.getBoundingClientRect().height);
+      const viewportHeight = Math.round(
+        window.visualViewport?.height || window.innerHeight || document.documentElement.clientHeight
+      );
+
+      root.style.setProperty("--nav-height-live", `${navHeight}px`);
+      root.style.setProperty("--viewport-height-live", `${viewportHeight}px`);
+    });
+  };
+
+  syncFirstScreenMetrics();
+  window.addEventListener("load", syncFirstScreenMetrics, { once: true });
+  window.addEventListener("resize", syncFirstScreenMetrics, { passive: true });
+  window.addEventListener("orientationchange", syncFirstScreenMetrics, { passive: true });
+  window.visualViewport?.addEventListener("resize", syncFirstScreenMetrics, { passive: true });
+
+  if ("ResizeObserver" in window) {
+    const observer = new ResizeObserver(syncFirstScreenMetrics);
+    observer.observe(nav);
+  }
+})();
+</script>
 
 </body>
 </html>
