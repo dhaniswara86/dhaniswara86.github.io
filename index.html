@@ -3794,7 +3794,7 @@ body.mega-menu-open {
   min-height: 0 !important;
   flex: 1 1 auto;
   align-items: stretch !important;
-  margin: clamp(16px, 2.5svh, 26px) auto 0 !important;
+  margin: clamp(24px, 3.2svh, 34px) auto 0 !important;
   padding: 0 0 clamp(16px, 2.2svh, 24px);
 }
 
@@ -3882,23 +3882,11 @@ body.mega-menu-open {
 .hero-showcase-image {
   position: relative;
   z-index: 2;
-  width: min(320px, 34svh, 67vw);
-  max-height: min(310px, 39svh);
+  width: min(265px, 29svh, 56vw);
+  max-height: min(255px, 32svh);
   object-fit: contain;
   filter: drop-shadow(0 28px 28px rgba(19, 44, 80, .22));
-  transform: translateY(0) scale(1);
-  transition:
-    transform .42s cubic-bezier(.2, .8, .2, 1),
-    filter .42s ease;
-  will-change: transform;
-}
-
-@media (hover:hover) and (pointer:fine) {
-  .hero-showcase-link:hover .hero-showcase-image,
-  .hero-showcase-link:focus-visible .hero-showcase-image {
-    transform: translateY(-7px) scale(1.055);
-    filter: drop-shadow(0 34px 32px rgba(19, 44, 80, .27));
-  }
+  transform: none;
 }
 
 .hero-showcase-caption {
@@ -3956,20 +3944,11 @@ body.mega-menu-open {
   cursor: pointer;
   font-size: 28px;
   line-height: 1;
-  opacity: 0;
+  opacity: .72;
   transform: translateY(-50%);
-  transition: opacity .2s ease, background .2s ease, transform .2s ease;
+  transition: opacity .2s ease;
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-}
-
-.hero-showcase-slider:hover .hero-showcase-arrow,
-.hero-showcase-slider:focus-within .hero-showcase-arrow {
-  opacity: 1;
-}
-
-.hero-showcase-arrow:hover {
-  background: rgba(214, 214, 219, .96);
 }
 
 .hero-showcase-prev { left: 4px; }
@@ -4018,7 +3997,7 @@ body.mega-menu-open {
 @media (max-width: 680px) {
   .hero-visual {
     width: 100% !important;
-    margin-top: clamp(14px, 2.2svh, 22px) !important;
+    margin-top: clamp(20px, 2.8svh, 28px) !important;
     padding-bottom: 14px;
   }
 
@@ -4027,8 +4006,8 @@ body.mega-menu-open {
   }
 
   .hero-showcase-image {
-    width: min(230px, 28svh, 63vw);
-    max-height: min(220px, 28svh);
+    width: min(195px, 24svh, 54vw);
+    max-height: min(188px, 24svh);
   }
 
   .hero-showcase-caption {
@@ -4063,14 +4042,14 @@ body.mega-menu-open {
 
 @media (max-height: 720px) and (min-width: 681px) {
   .hero-visual {
-    margin-top: 8px !important;
+    margin-top: 14px !important;
     padding-bottom: 10px;
   }
 
   .hero-showcase-slider { min-height: 250px; }
   .hero-showcase-image {
-    width: min(235px, 29svh);
-    max-height: 210px;
+    width: min(205px, 25svh);
+    max-height: 190px;
   }
   .hero-showcase-caption { padding-bottom: 20px; }
   .hero-showcase-caption h2 { font-size: 18px; }
@@ -4368,7 +4347,7 @@ body.mega-menu-open {
 <div class="hero-showcase-viewport">
 <article aria-hidden="false" class="hero-showcase-slide active">
 <a class="hero-showcase-link" href="formulir.html">
-<div class="hero-showcase-image-wrap"><img alt="Mockup Formulir Perpajakan" class="hero-showcase-image" src="images/jelajahi-formulir.webp"/></div>
+<div class="hero-showcase-image-wrap"><img alt="Mockup Formulir Perpajakan" class="hero-showcase-image" src="images/jelajahi-formulir.webp" decoding="async" fetchpriority="high" width="1254" height="1254"/></div>
 <div class="hero-showcase-caption">
 <span class="hero-showcase-category">Administrasi</span>
 <h2>Formulir Perpajakan</h2>
@@ -4379,7 +4358,7 @@ body.mega-menu-open {
 </article>
 <article aria-hidden="true" class="hero-showcase-slide">
 <a class="hero-showcase-link" href="kalkulator.html">
-<div class="hero-showcase-image-wrap"><img alt="Mockup Kalkulator Pajak" class="hero-showcase-image" src="images/jelajahi-kalkulator.webp"/></div>
+<div class="hero-showcase-image-wrap"><img alt="Mockup Kalkulator Pajak" class="hero-showcase-image" data-src="images/jelajahi-kalkulator.webp" decoding="async" width="1254" height="1254"/></div>
 <div class="hero-showcase-caption">
 <span class="hero-showcase-category">Hitung</span>
 <h2>Kalkulator Pajak</h2>
@@ -4390,7 +4369,7 @@ body.mega-menu-open {
 </article>
 <article aria-hidden="true" class="hero-showcase-slide">
 <a class="hero-showcase-link" href="converter-xml-coretax.html">
-<div class="hero-showcase-image-wrap"><img alt="Mockup Converter XML" class="hero-showcase-image" src="images/jelajahi-converter.webp"/></div>
+<div class="hero-showcase-image-wrap"><img alt="Mockup Converter XML" class="hero-showcase-image" data-src="images/jelajahi-converter.webp" decoding="async" width="1254" height="1254"/></div>
 <div class="hero-showcase-caption">
 <span class="hero-showcase-category">Coretax</span>
 <h2>Converter XML</h2>
@@ -4401,7 +4380,7 @@ body.mega-menu-open {
 </article>
 <article aria-hidden="true" class="hero-showcase-slide">
 <a class="hero-showcase-link" href="buku.html">
-<div class="hero-showcase-image-wrap"><img alt="Mockup Buku Digital" class="hero-showcase-image" src="images/jelajahi-buku-digital.webp"/></div>
+<div class="hero-showcase-image-wrap"><img alt="Mockup Buku Digital" class="hero-showcase-image" data-src="images/jelajahi-buku-digital.webp" decoding="async" width="1254" height="1254"/></div>
 <div class="hero-showcase-caption">
 <span class="hero-showcase-category">Pembelajaran</span>
 <h2>Buku Digital</h2>
@@ -4412,7 +4391,7 @@ body.mega-menu-open {
 </article>
 <article aria-hidden="true" class="hero-showcase-slide">
 <a class="hero-showcase-link" href="aplikasi.html">
-<div class="hero-showcase-image-wrap"><img alt="Mockup Aplikasi Perpajakan" class="hero-showcase-image" src="images/jelajahi-aplikasi.webp"/></div>
+<div class="hero-showcase-image-wrap"><img alt="Mockup Aplikasi Perpajakan" class="hero-showcase-image" data-src="images/jelajahi-aplikasi.webp" decoding="async" width="1254" height="1254"/></div>
 <div class="hero-showcase-caption">
 <span class="hero-showcase-category">Perangkat</span>
 <h2>Aplikasi Perpajakan</h2>
@@ -4423,7 +4402,7 @@ body.mega-menu-open {
 </article>
 <article aria-hidden="true" class="hero-showcase-slide">
 <a class="hero-showcase-link" href="artikel.html">
-<div class="hero-showcase-image-wrap"><img alt="Mockup Artikel Pajak" class="hero-showcase-image" src="images/jelajahi-artikel.webp"/></div>
+<div class="hero-showcase-image-wrap"><img alt="Mockup Artikel Pajak" class="hero-showcase-image" data-src="images/jelajahi-artikel.webp" decoding="async" width="1254" height="1254"/></div>
 <div class="hero-showcase-caption">
 <span class="hero-showcase-category">Pengetahuan</span>
 <h2>Artikel Pajak</h2>
@@ -4434,7 +4413,7 @@ body.mega-menu-open {
 </article>
 <article aria-hidden="true" class="hero-showcase-slide">
 <a class="hero-showcase-link" href="hotnews.html">
-<div class="hero-showcase-image-wrap"><img alt="Mockup Hot News" class="hero-showcase-image" src="images/jelajahi-hot-news.webp"/></div>
+<div class="hero-showcase-image-wrap"><img alt="Mockup Hot News" class="hero-showcase-image" data-src="images/jelajahi-hot-news.webp" decoding="async" width="1254" height="1254"/></div>
 <div class="hero-showcase-caption">
 <span class="hero-showcase-category">Terbaru</span>
 <h2>Hot News</h2>
@@ -4445,7 +4424,7 @@ body.mega-menu-open {
 </article>
 <article aria-hidden="true" class="hero-showcase-slide">
 <a class="hero-showcase-link" href="ruang-belajar.html">
-<div class="hero-showcase-image-wrap"><img alt="Mockup Ruang Belajar" class="hero-showcase-image" src="images/jelajahi-ruang-belajar.webp"/></div>
+<div class="hero-showcase-image-wrap"><img alt="Mockup Ruang Belajar" class="hero-showcase-image" data-src="images/jelajahi-ruang-belajar.webp" decoding="async" width="1254" height="1254"/></div>
 <div class="hero-showcase-caption">
 <span class="hero-showcase-category">Pembelajaran</span>
 <h2>Ruang Belajar</h2>
@@ -6037,12 +6016,39 @@ body.mega-menu-open {
   let touchStartX = 0;
   let touchStartY = 0;
 
+  const getImage = (slideIndex) => slides[slideIndex]?.querySelector(".hero-showcase-image");
+
+  function loadImage(slideIndex, priority = "auto") {
+    const normalized = (slideIndex + slides.length) % slides.length;
+    const image = getImage(normalized);
+    if (!image || image.dataset.loaded === "true") return;
+
+    const source = image.dataset.src;
+    if (source && !image.getAttribute("src")) {
+      image.fetchPriority = priority;
+      image.src = source;
+      image.removeAttribute("data-src");
+    }
+
+    image.dataset.loaded = "true";
+  }
+
+  function preloadNext() {
+    const nextIndex = (index + 1) % slides.length;
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(() => loadImage(nextIndex, "low"), { timeout: 900 });
+    } else {
+      window.setTimeout(() => loadImage(nextIndex, "low"), 180);
+    }
+  }
+
   const dots = slides.map((_, slideIndex) => {
     const dot = document.createElement("button");
     dot.type = "button";
     dot.className = "hero-showcase-dot";
     dot.setAttribute("aria-label", `Tampilkan kategori ${slideIndex + 1}`);
     dot.addEventListener("click", () => {
+      loadImage(slideIndex, "high");
       showSlide(slideIndex);
       restart();
     });
@@ -6052,6 +6058,7 @@ body.mega-menu-open {
 
   function showSlide(nextIndex) {
     index = (nextIndex + slides.length) % slides.length;
+    loadImage(index, "high");
 
     slides.forEach((slide, slideIndex) => {
       const active = slideIndex === index;
@@ -6066,6 +6073,8 @@ body.mega-menu-open {
       dot.classList.toggle("active", active);
       dot.setAttribute("aria-current", active ? "true" : "false");
     });
+
+    preloadNext();
   }
 
   function stop() {
@@ -6087,11 +6096,13 @@ body.mega-menu-open {
   }
 
   prev.addEventListener("click", () => {
+    loadImage(index - 1, "high");
     showSlide(index - 1);
     restart();
   });
 
   next.addEventListener("click", () => {
+    loadImage(index + 1, "high");
     showSlide(index + 1);
     restart();
   });
@@ -6108,10 +6119,12 @@ body.mega-menu-open {
   slider.addEventListener("keydown", (event) => {
     if (event.key === "ArrowLeft") {
       event.preventDefault();
+      loadImage(index - 1, "high");
       showSlide(index - 1);
       restart();
     } else if (event.key === "ArrowRight") {
       event.preventDefault();
+      loadImage(index + 1, "high");
       showSlide(index + 1);
       restart();
     }
@@ -6130,7 +6143,9 @@ body.mega-menu-open {
     const dy = touchStartY - touch.screenY;
 
     if (Math.abs(dx) > 42 && Math.abs(dx) > Math.abs(dy)) {
-      showSlide(index + (dx > 0 ? 1 : -1));
+      const nextIndex = index + (dx > 0 ? 1 : -1);
+      loadImage(nextIndex, "high");
+      showSlide(nextIndex);
     }
     start();
   }, { passive: true });
@@ -6145,6 +6160,9 @@ body.mega-menu-open {
     else start();
   });
 
+  // The first image is present in HTML; only the next slide is prefetched.
+  const firstImage = getImage(0);
+  if (firstImage) firstImage.dataset.loaded = "true";
   showSlide(0);
   start();
 })();
