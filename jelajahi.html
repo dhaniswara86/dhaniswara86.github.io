@@ -268,6 +268,50 @@ footer{background:#f5f5f7;color:#6e6e73}
 }
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}.lineup-card:hover,.goal-card:hover{transform:none}}
 </style>
+
+<style id="lineupMockupVisualStyles">
+/* Kartu lineup: visual mockup konsisten dengan bahasa visual Kabayan */
+.mockup-visual{
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  overflow:hidden;
+}
+.mockup-visual img{
+  display:block;
+  width:auto;
+  height:auto;
+  max-width:none;
+  object-fit:contain;
+  transform-origin:50% 100%;
+  filter:drop-shadow(0 24px 26px rgba(27,48,78,.14));
+}
+.mockup-form img{width:330px;transform:translateY(24px) rotate(-1.5deg)}
+.mockup-calc img{width:292px;transform:translateY(22px) rotate(-2deg);filter:drop-shadow(0 26px 30px rgba(8,27,55,.24))}
+.mockup-xml img{width:350px;transform:translateY(24px);filter:drop-shadow(0 25px 30px rgba(0,0,0,.19))}
+.mockup-book img{width:280px;transform:translateY(16px);filter:drop-shadow(0 28px 24px rgba(92,62,12,.18))}
+.mockup-article img{width:320px;transform:translateY(24px) rotate(1deg)}
+.mockup-learn img{width:355px;transform:translateY(28px);filter:drop-shadow(0 25px 28px rgba(28,62,90,.17))}
+
+@media (max-width:680px){
+  .mockup-form img{width:292px;transform:translateY(26px) rotate(-1.5deg)}
+  .mockup-calc img{width:258px;transform:translateY(24px) rotate(-2deg)}
+  .mockup-xml img{width:308px;transform:translateY(27px)}
+  .mockup-book img{width:246px;transform:translateY(18px)}
+  .mockup-article img{width:280px;transform:translateY(26px) rotate(1deg)}
+  .mockup-learn img{width:315px;transform:translateY(30px)}
+}
+
+@media (max-width:430px){
+  .mockup-form img{width:270px}
+  .mockup-calc img{width:238px}
+  .mockup-xml img{width:286px}
+  .mockup-book img{width:226px}
+  .mockup-article img{width:260px}
+  .mockup-learn img{width:294px}
+}
+</style>
+
 </head>
 <body id="top">
 <header class="site-nav">
@@ -350,32 +394,32 @@ footer{background:#f5f5f7;color:#6e6e73}
       <div class="lineup-track" id="lineupTrack" tabindex="0" aria-label="Pilihan utama Kabayan">
         <a class="lineup-card card-form" href="formulir.html">
           <div class="card-copy"><span class="card-kicker">ADMINISTRASI</span><h3>Formulir Perpajakan</h3><p>Temukan, isi, dan siapkan dokumen perpajakan sesuai kebutuhan.</p><span class="card-link">Lihat formulir ›</span></div>
-          <div class="card-visual big-form"><div class="paper back"></div><div class="paper front"></div></div>
+          <div class="card-visual mockup-visual mockup-form"><img src="images/jelajahi-lineup-formulir.webp" alt="" aria-hidden="true" loading="lazy"></div>
         </a>
 
         <a class="lineup-card card-calc" href="kalkulator.html">
           <div class="card-copy"><span class="card-kicker">HITUNG</span><h3>Kalkulator Pajak</h3><p>Hitung PPN, PPh Pasal 21, dan kebutuhan perpajakan lainnya.</p><span class="card-link">Buka kalkulator ›</span></div>
-          <div class="card-visual"><div class="big-calc"><div class="big-calc-grid"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div></div>
+          <div class="card-visual mockup-visual mockup-calc"><img src="images/jelajahi-lineup-kalkulator.webp" alt="" aria-hidden="true" loading="lazy"></div>
         </a>
 
         <a class="lineup-card card-xml" href="converter-xml-coretax.html">
           <div class="card-copy"><span class="card-kicker">CORETAX</span><h3>Converter XML</h3><p>Siapkan data dari Excel menjadi XML Coretax dengan alur yang lebih praktis.</p><span class="card-link">Buka converter ›</span></div>
-          <div class="card-visual big-xml"><div class="file xls">XLS</div><div class="flow"></div><div class="file xml">XML</div></div>
+          <div class="card-visual mockup-visual mockup-xml"><img src="images/jelajahi-lineup-converter.webp" alt="" aria-hidden="true" loading="lazy"></div>
         </a>
 
         <a class="lineup-card card-book" href="buku.html">
           <div class="card-copy"><span class="card-kicker">PEMBELAJARAN</span><h3>Buku Digital</h3><p>Modul, e-book, dan petunjuk teknis untuk belajar secara lebih terstruktur.</p><span class="card-link">Lihat buku ›</span></div>
-          <div class="card-visual big-book"><img src="images/mockup-cermat-2126.webp" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" /><div class="big-book-fallback" style="display:none"></div></div>
+          <div class="card-visual mockup-visual mockup-book"><img src="images/jelajahi-lineup-buku.webp" alt="" aria-hidden="true" loading="lazy"></div>
         </a>
 
         <a class="lineup-card card-article" href="artikel.html">
           <div class="card-copy"><span class="card-kicker">REFERENSI</span><h3>Artikel Pajak</h3><p>Penjelasan regulasi dan prosedur dalam bahasa yang lebih mudah dipahami.</p><span class="card-link">Baca artikel ›</span></div>
-          <div class="card-visual big-editorial"><div class="sheet back"></div><div class="sheet front"></div></div>
+          <div class="card-visual mockup-visual mockup-article"><img src="images/jelajahi-lineup-artikel.webp" alt="" aria-hidden="true" loading="lazy"></div>
         </a>
 
         <a class="lineup-card card-learn" href="ruang-belajar.html">
           <div class="card-copy"><span class="card-kicker">BELAJAR</span><h3>Ruang Belajar</h3><p>Materi, video, checkpoint, dan pengalaman belajar yang lebih terarah.</p><span class="card-link">Masuk ruang belajar ›</span></div>
-          <div class="card-visual big-learn"><div class="laptop"></div><div class="play"></div></div>
+          <div class="card-visual mockup-visual mockup-learn"><img src="images/jelajahi-lineup-belajar.webp" alt="" aria-hidden="true" loading="lazy"></div>
         </a>
       </div>
     </div>
