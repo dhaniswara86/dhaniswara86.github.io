@@ -4186,6 +4186,156 @@ body.mega-menu-open {
 }
 </style>
 
+
+<style id="heroMobileGridHardFix">
+/* =========================================================
+   Mobile hard fix — tampilkan semua 8 kategori tanpa swipe.
+   Reset aturan carousel lama + lepaskan hero dari tinggi 1 layar.
+   ========================================================= */
+@media (max-width: 680px) {
+  .hero {
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 18px 12px 34px !important;
+    overflow: visible !important;
+  }
+
+  .hero-copy {
+    flex: 0 0 auto !important;
+  }
+
+  .hero-visual {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    flex: 0 0 auto !important;
+    margin: 28px auto 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+
+  .hero-category-stage {
+    width: min(100%, 430px) !important;
+    margin: 0 auto !important;
+    padding: 9px !important;
+    border-radius: 26px !important;
+    overflow: visible !important;
+  }
+
+  .hero-category-stage::before {
+    border-radius: 25px 25px 48% 48% !important;
+  }
+
+  .hero-category-rail {
+    display: grid !important;
+    width: 100% !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    grid-auto-flow: row !important;
+    grid-auto-columns: auto !important;
+    grid-auto-rows: auto !important;
+    justify-content: stretch !important;
+    align-items: stretch !important;
+    gap: 8px !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    overflow-x: visible !important;
+    scroll-snap-type: none !important;
+    overscroll-behavior: auto !important;
+  }
+
+  .hero-category-item {
+    width: auto !important;
+    min-width: 0 !important;
+    min-height: 116px !important;
+    padding: 8px 3px 9px !important;
+    border-radius: 19px !important;
+    scroll-snap-align: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    overflow: hidden !important;
+  }
+
+  .hero-category-icon-wrap {
+    width: 100% !important;
+    height: 62px !important;
+    flex: 0 0 62px !important;
+    margin: 0 auto 5px !important;
+  }
+
+  .hero-category-icon {
+    width: 54px !important;
+    height: 54px !important;
+    max-width: 100% !important;
+  }
+
+  .hero-category-label {
+    width: 100% !important;
+    min-height: 2.25em !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 !important;
+    padding: 0 1px !important;
+    font-size: 10.5px !important;
+    line-height: 1.12 !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+    text-align: center !important;
+  }
+
+  .hero-category-note {
+    margin-top: 2px !important;
+    font-size: 8.5px !important;
+    line-height: 1 !important;
+  }
+
+  .hero-category-item:hover,
+  .hero-category-item:focus-visible,
+  .hero-category-item:active {
+    transform: none !important;
+  }
+
+  .hero-category-item:hover .hero-category-icon-wrap,
+  .hero-category-item:focus-visible .hero-category-icon-wrap,
+  .hero-category-item:hover .hero-category-icon,
+  .hero-category-item:focus-visible .hero-category-icon {
+    transform: none !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .hero-category-stage {
+    padding: 7px !important;
+  }
+
+  .hero-category-rail {
+    gap: 6px !important;
+  }
+
+  .hero-category-item {
+    min-height: 108px !important;
+    padding: 7px 2px 8px !important;
+    border-radius: 17px !important;
+  }
+
+  .hero-category-icon-wrap {
+    height: 56px !important;
+    flex-basis: 56px !important;
+  }
+
+  .hero-category-icon {
+    width: 48px !important;
+    height: 48px !important;
+  }
+
+  .hero-category-label {
+    font-size: 9.8px !important;
+  }
+}
+</style>
+
 </head>
 <body id="top">
 <header class="site-nav">
