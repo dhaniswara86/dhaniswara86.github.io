@@ -28,9 +28,19 @@
       });
     };
 
-    roleButtons.forEach((button) => {
+    roleButtons.forEach((button, buttonIndex) => {
       button.addEventListener('click', () => {
         activateRole(button.dataset.roleTarget);
+      });
+
+      button.addEventListener('keydown', (event) => {
+        if (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft') return;
+        event.preventDefault();
+        const direction = event.key === 'ArrowRight' ? 1 : -1;
+        const nextIndex = (buttonIndex + direction + roleButtons.length) % roleButtons.length;
+        const nextButton = roleButtons[nextIndex];
+        activateRole(nextButton.dataset.roleTarget);
+        nextButton.focus();
       });
     });
 
