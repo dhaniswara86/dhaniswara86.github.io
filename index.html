@@ -4315,6 +4315,338 @@ body.mega-menu-open {
 }
 </style>
 
+
+<style id="heroDesktopFullscreenFit">
+/* =========================================================
+   Desktop/laptop dengan viewport pendek-menengah
+   Seluruh hero + slideshow dibuat muat dalam first viewport.
+   Breakpoint 900px sengaja lebih tinggi dari rule lama 760px
+   agar MacBook/Chrome full-screen juga masuk mode compact.
+   ========================================================= */
+@media (min-width: 681px) and (max-height: 900px) {
+  .hero {
+    height: calc(var(--hero-screen-height) - var(--nav-height) - var(--announcement-height)) !important;
+    min-height: 0 !important;
+    padding: 20px 20px 10px !important;
+    overflow: hidden !important;
+  }
+
+  .hero-copy {
+    flex: 0 0 auto !important;
+  }
+
+  .eyebrow {
+    margin-bottom: 5px !important;
+    font-size: 14px !important;
+    line-height: 1.15 !important;
+  }
+
+  .hero h1 {
+    font-size: clamp(48px, min(5.4vw, 7.1svh), 62px) !important;
+    line-height: .96 !important;
+  }
+
+  .hero-description {
+    max-width: 860px !important;
+    margin-top: 12px !important;
+    font-size: clamp(16px, min(1.55vw, 2.15svh), 19px) !important;
+    line-height: 1.18 !important;
+  }
+
+  .hero-actions {
+    margin-top: 13px !important;
+  }
+
+  .hero .button {
+    min-height: 38px !important;
+    padding: 7px 16px !important;
+    font-size: 14px !important;
+  }
+
+  .hero-visual {
+    flex: 1 1 auto !important;
+    width: min(900px, 94vw) !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 14px auto 0 !important;
+    padding: 0 0 18px !important;
+    overflow: hidden !important;
+  }
+
+  .hero-showcase-slider {
+    height: 100% !important;
+    min-height: 0 !important;
+    padding-bottom: 16px !important;
+  }
+
+  .hero-showcase-viewport {
+    height: calc(100% - 16px) !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .hero-showcase-slide,
+  .hero-showcase-link {
+    height: 100% !important;
+    min-height: 0 !important;
+  }
+
+  .hero-showcase-link {
+    justify-content: flex-start !important;
+  }
+
+  .hero-showcase-image-wrap {
+    flex: 1 1 auto !important;
+    height: auto !important;
+    min-height: 112px !important;
+    max-height: none !important;
+    padding: 0 0 4px !important;
+    align-items: center !important;
+  }
+
+  .hero-showcase-image-wrap::after {
+    bottom: 7% !important;
+    width: min(185px, 31vw) !important;
+    height: 22px !important;
+    filter: blur(16px) !important;
+  }
+
+  .hero-showcase-image {
+    width: min(172px, 20svh, 38vw) !important;
+    max-height: min(166px, 19.5svh) !important;
+  }
+
+  .hero-showcase-caption {
+    flex: 0 0 86px !important;
+    width: min(720px, calc(100% - 70px)) !important;
+    min-height: 86px !important;
+    display: grid !important;
+    grid-template-rows: 10px 25px 30px 16px !important;
+    row-gap: 1px !important;
+    padding: 0 12px !important;
+  }
+
+  .hero-showcase-category {
+    font-size: 8.5px !important;
+    line-height: 10px !important;
+  }
+
+  .hero-showcase-caption h2 {
+    margin: 0 !important;
+    font-size: 19px !important;
+    line-height: 25px !important;
+  }
+
+  .hero-showcase-caption p {
+    align-self: center !important;
+    margin: 0 !important;
+    font-size: 12.5px !important;
+    line-height: 1.25 !important;
+    white-space: normal !important;
+  }
+
+  .hero-showcase-detail {
+    align-self: center !important;
+    margin: 0 !important;
+    font-size: 11px !important;
+    line-height: 16px !important;
+  }
+
+  .hero-showcase-arrow {
+    top: calc((100% - 102px) / 2) !important;
+    width: 38px !important;
+    height: 38px !important;
+    font-size: 24px !important;
+  }
+
+  .hero-showcase-dots {
+    bottom: 0 !important;
+    height: 14px !important;
+    align-items: center !important;
+  }
+
+  .hero-showcase-dot {
+    width: 6px !important;
+    height: 6px !important;
+  }
+
+  .hero-showcase-dot.active {
+    width: 20px !important;
+  }
+}
+
+/* Layar laptop yang sangat pendek: satu tingkat lebih compact lagi. */
+@media (min-width: 681px) and (max-height: 760px) {
+  .hero {
+    padding-top: 12px !important;
+    padding-bottom: 7px !important;
+  }
+
+  .eyebrow {
+    font-size: 12px !important;
+    margin-bottom: 3px !important;
+  }
+
+  .hero h1 {
+    font-size: clamp(42px, min(4.9vw, 6.6svh), 54px) !important;
+  }
+
+  .hero-description {
+    max-width: 900px !important;
+    margin-top: 8px !important;
+    font-size: 15px !important;
+  }
+
+  .hero-actions {
+    margin-top: 9px !important;
+  }
+
+  .hero .button {
+    min-height: 34px !important;
+    padding: 5px 14px !important;
+    font-size: 13px !important;
+  }
+
+  .hero-visual {
+    margin-top: 8px !important;
+    padding-bottom: 14px !important;
+  }
+
+  .hero-showcase-slider {
+    padding-bottom: 14px !important;
+  }
+
+  .hero-showcase-viewport {
+    height: calc(100% - 14px) !important;
+  }
+
+  .hero-showcase-image-wrap {
+    min-height: 90px !important;
+    padding-bottom: 2px !important;
+  }
+
+  .hero-showcase-image {
+    width: min(142px, 18svh, 32vw) !important;
+    max-height: min(136px, 17.5svh) !important;
+  }
+
+  .hero-showcase-caption {
+    flex-basis: 72px !important;
+    min-height: 72px !important;
+    grid-template-rows: 9px 21px 26px 14px !important;
+  }
+
+  .hero-showcase-category {
+    font-size: 7.5px !important;
+    line-height: 9px !important;
+  }
+
+  .hero-showcase-caption h2 {
+    font-size: 17px !important;
+    line-height: 21px !important;
+  }
+
+  .hero-showcase-caption p {
+    font-size: 11.5px !important;
+    line-height: 1.18 !important;
+  }
+
+  .hero-showcase-detail {
+    font-size: 10px !important;
+    line-height: 14px !important;
+  }
+
+  .hero-showcase-arrow {
+    top: calc((100% - 86px) / 2) !important;
+    width: 34px !important;
+    height: 34px !important;
+    font-size: 22px !important;
+  }
+}
+</style>
+
+
+<style id="heroHeadlineExactSectionTitleMatch">
+/* Hero headline = persis dengan .section-title */
+.hero h1 {
+  font-size: clamp(43px, 6vw, 72px) !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.055em !important;
+  line-height: 1 !important;
+}
+
+/* Kompensasi ruang: headline tidak dikecilkan pada laptop pendek. */
+@media (min-width: 681px) and (max-height: 900px) {
+  .hero {
+    padding-top: 14px !important;
+    padding-bottom: 8px !important;
+  }
+  .eyebrow {
+    margin-bottom: 3px !important;
+  }
+  .hero-description {
+    margin-top: 9px !important;
+  }
+  .hero-actions {
+    margin-top: 10px !important;
+  }
+  .hero-visual {
+    margin-top: 8px !important;
+    padding-bottom: 14px !important;
+  }
+  .hero-showcase-slider {
+    padding-bottom: 14px !important;
+  }
+  .hero-showcase-viewport {
+    height: calc(100% - 14px) !important;
+  }
+}
+
+@media (min-width: 681px) and (max-height: 760px) {
+  .hero {
+    padding-top: 7px !important;
+    padding-bottom: 5px !important;
+  }
+  .eyebrow {
+    margin-bottom: 2px !important;
+  }
+  .hero-description {
+    margin-top: 5px !important;
+    line-height: 1.12 !important;
+  }
+  .hero-actions {
+    margin-top: 6px !important;
+  }
+  .hero-visual {
+    margin-top: 4px !important;
+    padding-bottom: 10px !important;
+  }
+  .hero-showcase-slider {
+    padding-bottom: 10px !important;
+  }
+  .hero-showcase-viewport {
+    height: calc(100% - 10px) !important;
+  }
+  .hero-showcase-caption {
+    flex-basis: 80px !important;
+    min-height: 80px !important;
+    grid-template-rows: 9px 22px 28px 14px !important;
+  }
+  .hero-showcase-caption h2 {
+    font-size: 17px !important;
+    line-height: 22px !important;
+  }
+  .hero-showcase-caption p {
+    font-size: 11.5px !important;
+    line-height: 1.18 !important;
+  }
+  .hero-showcase-detail {
+    font-size: 10.5px !important;
+    line-height: 14px !important;
+  }
+}
+</style>
+
 </head>
 <body id="top">
 <header class="site-nav">
