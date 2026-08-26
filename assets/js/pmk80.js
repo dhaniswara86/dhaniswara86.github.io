@@ -3,58 +3,20 @@
   if (!root || root.dataset.pmk80Ready === '1') return;
   root.dataset.pmk80Ready = '1';
 
-  const rupiah = (n) =>
-    'Rp' + Math.max(0, Math.round(Number(n) || 0)).toLocaleString('id-ID');
+  const rupiah = (number) =>
+    'Rp' + Math.max(0, Math.round(Number(number) || 0)).toLocaleString('id-ID');
 
-
-  // =========================
-  // PANDUAN BERDASARKAN POSISI
-  // =========================
-  const roleGuide = root.querySelector('#pmk80RoleGuide');
-
-  if (roleGuide) {
-    const roleButtons = [...roleGuide.querySelectorAll('[data-role-target]')];
-    const rolePanels = [...roleGuide.querySelectorAll('[data-role-panel]')];
-
-    const activateRole = (target) => {
-      roleButtons.forEach((button) => {
-        const active = button.dataset.roleTarget === target;
-        button.classList.toggle('is-active', active);
-        button.setAttribute('aria-selected', active ? 'true' : 'false');
-      });
-
-      rolePanels.forEach((panel) => {
-        panel.classList.toggle('is-active', panel.dataset.rolePanel === target);
-      });
-    };
-
-    roleButtons.forEach((button, buttonIndex) => {
-      button.addEventListener('click', () => {
-        activateRole(button.dataset.roleTarget);
-      });
-
-      button.addEventListener('keydown', (event) => {
-        if (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft') return;
-        event.preventDefault();
-        const direction = event.key === 'ArrowRight' ? 1 : -1;
-        const nextIndex = (buttonIndex + direction + roleButtons.length) % roleButtons.length;
-        const nextButton = roleButtons[nextIndex];
-        activateRole(nextButton.dataset.roleTarget);
-        nextButton.focus();
-      });
-    });
-
-    activateRole('penerima');
-  }
-
+  // =========================================================
+  // 1. CEK CEPAT
+  // =========================================================
   const checker = root.querySelector('#pmk80EligibilityChecker');
 
   if (checker) {
     const questions = [
       'Apakah kegiatan tersebut merupakan proyek/kegiatan Kementerian, Lembaga, atau Pemerintah Daerah?',
       'Apakah proyek dibiayai hibah uang, pinjaman luar negeri, dan/atau hibah barang/jasa dari luar negeri yang memenuhi ketentuan?',
-      'Apakah hibah atau pinjaman telah dituangkan dalam perjanjian, kontrak, atau dokumen sejenis?',
-      'Apakah hibah atau pinjaman telah memiliki Nomor Register?',
+      'Apakah hibah atau pinjaman dituangkan dalam perjanjian, kontrak, atau dokumen sejenis?',
+      'Apakah hibah atau pinjaman telah memperoleh Nomor Register?',
       'Apakah proyek dilaksanakan dan dipertanggungjawabkan sebagai bagian APBN atau APBD?',
       'Apakah transaksi yang akan memperoleh fasilitas berkaitan dengan proyek dan bagian pembiayaan hibah/pinjaman luar negeri tersebut?'
     ];
@@ -65,40 +27,48 @@
     const questionEl = checker.querySelector('#pmk80EligibilityQuestion');
     const progressText = checker.querySelector('#pmk80EligibilityProgressText');
     const countEl = checker.querySelector('#pmk80EligibilityCount');
-    const progressBar = checker.querySelector('#pmk80EligibilityProgressBar');
-    const backButton = checker.querySelector('#pmk80EligibilityBack');
-    const resultEl = checker.querySelector('#pmk80EligibilityResult');
-    const stageEl = checker.querySelector('#pmk80EligibilityStage');
+    const bar = checker.querySelector('#pmk80EligibilityProgressBar');
+    const back = checker.querySelector('#pmk80EligibilityBack');
+    const result = checker.querySelector('#pmk80EligibilityResult');
+    const stage = checker.querySelector('#pmk80EligibilityStage');
 
-    const renderQuestion = () => {
-      resultEl.hidden = true;
-      stageEl.hidden = false;
+    const render = () => {
+      stage.hidden = false;
+      result.hidden = true;
+
       questionEl.textContent = questions[index];
       progressText.textContent = `Pertanyaan ${index + 1} dari ${questions.length}`;
       countEl.textContent = `${index + 1}/${questions.length}`;
-      progressBar.style.width = `${((index + 1) / questions.length) * 100}%`;
-      backButton.hidden = index === 0;
+      bar.style.width = `${((index + 1) / questions.length) * 100}%`;
+      back.hidden = index === 0;
     };
 
     const showResult = () => {
-      stageEl.hidden = true;
-      resultEl.hidden = false;
-      progressBar.style.width = '100%';
+      stage.hidden = true;
+      result.hidden = false;
+      bar.style.width = '100%';
 
       const failed = answers.some((answer) => answer === 'no');
-      resultEl.classList.remove('is-good', 'is-bad');
+      result.classList.remove('is-good', 'is-bad');
 
       if (failed) {
-        resultEl.classList.add('is-bad');
-        resultEl.innerHTML = `
+        result.classList.add('is-bad');
+        result.innerHTML = `
           <strong>Belum memenuhi pemeriksaan dasar.</strong>
-          <p>Setidaknya ada satu kriteria dasar yang belum terpenuhi. Periksa kembali status Proyek Pemerintah, sumber pembiayaan, Nomor Register, pengadministrasian APBN/APBD, dan keterkaitan transaksi.</p>
+          <p>
+            Ada satu atau lebih kriteria dasar yang belum terpenuhi. Periksa kembali
+            status Proyek Pemerintah, sumber pembiayaan, dokumen hibah/pinjaman,
+            Nomor Register, administrasi APBN/APBD, dan keterkaitan transaksi.
+          </p>
         `;
       } else {
-        resultEl.classList.add('is-good');
-        resultEl.innerHTML = `
+        result.classList.add('is-good');
+        result.innerHTML = `
           <strong>Berpotensi memenuhi kriteria dasar.</strong>
-          <p>Lanjutkan dengan pemeriksaan pihak yang menggunakan fasilitas, jenis transaksi, bagian pembiayaan yang memperoleh fasilitas, serta dokumen seperti SKTD atau Surat Keterangan Fasilitas PPh.</p>
+          <p>
+            Berikutnya tentukan posisi Anda dalam proyek. Kewajiban, alur dokumen,
+            fasilitas, dan konsekuensinya berbeda untuk setiap pihak.
+          </p>
         `;
       }
     };
@@ -106,77 +76,121 @@
     checker.querySelectorAll('[data-pmk80-answer]').forEach((button) => {
       button.addEventListener('click', () => {
         answers[index] = button.dataset.pmk80Answer;
+
         if (index < questions.length - 1) {
           index += 1;
-          renderQuestion();
+          render();
         } else {
           showResult();
         }
       });
     });
 
-    backButton?.addEventListener('click', () => {
-      if (index > 0) {
-        answers.splice(index, 1);
-        index -= 1;
-        renderQuestion();
-      }
+    back?.addEventListener('click', () => {
+      if (index <= 0) return;
+      answers.splice(index, 1);
+      index -= 1;
+      render();
     });
 
-    renderQuestion();
+    render();
   }
 
-  root.querySelectorAll('.pmk80-tab-button').forEach((button) => {
-    button.addEventListener('click', () => {
-      const tabs = button.closest('.pmk80-tabs');
-      if (!tabs) return;
+  // =========================================================
+  // 2. PILIH POSISI -> TAMPILKAN HANYA PANDUAN TERPILIH
+  // =========================================================
+  const roleGuide = root.querySelector('#pmk80RoleGuide');
 
-      const target = button.dataset.tab;
+  if (roleGuide) {
+    const buttons = [...roleGuide.querySelectorAll('[data-role-target]')];
+    const panels = [...roleGuide.querySelectorAll('[data-role-panel]')];
+    const placeholder = roleGuide.querySelector('#pmk80RolePlaceholder');
 
-      tabs.querySelectorAll('.pmk80-tab-button').forEach((item) => {
-        const active = item === button;
-        item.classList.toggle('is-active', active);
-        item.setAttribute('aria-selected', active ? 'true' : 'false');
+    const activateRole = (role) => {
+      buttons.forEach((button) => {
+        const active = button.dataset.roleTarget === role;
+        button.classList.toggle('is-active', active);
+        button.setAttribute('aria-selected', active ? 'true' : 'false');
       });
 
-      tabs.querySelectorAll('.pmk80-tab-panel').forEach((panel) => {
-        panel.classList.toggle('is-active', panel.dataset.panel === target);
+      panels.forEach((panel) => {
+        const active = panel.dataset.rolePanel === role;
+        panel.hidden = !active;
       });
-    });
-  });
 
-  const checklist = root.querySelector('#pmk80Checklist');
-
-  if (checklist) {
-    const checkboxes = [...checklist.querySelectorAll('input[type="checkbox"]')];
-    const progressLabel = checklist.querySelector('#pmk80ChecklistProgress');
-    const progressBar = checklist.querySelector('#pmk80ChecklistBar');
-    const resetButton = checklist.querySelector('#pmk80ChecklistReset');
-
-    const updateChecklist = () => {
-      const checked = checkboxes.filter((box) => box.checked).length;
-      const percentage = checkboxes.length
-        ? Math.round((checked / checkboxes.length) * 100)
-        : 0;
-
-      progressLabel.textContent = `${percentage}% siap`;
-      progressBar.style.width = `${percentage}%`;
+      if (placeholder) placeholder.hidden = true;
     };
 
-    checkboxes.forEach((checkbox) => {
-      checkbox.addEventListener('change', updateChecklist);
-    });
-
-    resetButton?.addEventListener('click', () => {
-      checkboxes.forEach((checkbox) => {
-        checkbox.checked = false;
+    buttons.forEach((button, buttonIndex) => {
+      button.addEventListener('click', () => {
+        activateRole(button.dataset.roleTarget);
       });
-      updateChecklist();
+
+      button.addEventListener('keydown', (event) => {
+        if (!['ArrowRight', 'ArrowLeft', 'ArrowDown', 'ArrowUp'].includes(event.key)) return;
+
+        event.preventDefault();
+
+        const forward = event.key === 'ArrowRight' || event.key === 'ArrowDown';
+        const direction = forward ? 1 : -1;
+        const nextIndex =
+          (buttonIndex + direction + buttons.length) % buttons.length;
+        const nextButton = buttons[nextIndex];
+
+        activateRole(nextButton.dataset.roleTarget);
+        nextButton.focus();
+      });
     });
 
-    updateChecklist();
+    // Sengaja tidak memilih posisi secara otomatis.
+    buttons.forEach((button) => {
+      button.classList.remove('is-active');
+      button.setAttribute('aria-selected', 'false');
+    });
+
+    panels.forEach((panel) => {
+      panel.hidden = true;
+    });
+
+    if (placeholder) placeholder.hidden = false;
   }
 
+  // =========================================================
+  // 3. CHECKLIST KHUSUS SETIAP POSISI
+  // =========================================================
+  root.querySelectorAll('[data-role-checklist]').forEach((checklist) => {
+    const boxes = [...checklist.querySelectorAll('input[type="checkbox"]')];
+    const progress = checklist.querySelector('[data-checklist-progress]');
+    const bar = checklist.querySelector('[data-checklist-bar]');
+    const reset = checklist.querySelector('[data-checklist-reset]');
+
+    const update = () => {
+      const checked = boxes.filter((box) => box.checked).length;
+      const percentage = boxes.length
+        ? Math.round((checked / boxes.length) * 100)
+        : 0;
+
+      if (progress) progress.textContent = `${percentage}% siap`;
+      if (bar) bar.style.width = `${percentage}%`;
+    };
+
+    boxes.forEach((box) => {
+      box.addEventListener('change', update);
+    });
+
+    reset?.addEventListener('click', () => {
+      boxes.forEach((box) => {
+        box.checked = false;
+      });
+      update();
+    });
+
+    update();
+  });
+
+  // =========================================================
+  // 4. SIMULASI PEMBIAYAAN PHLN
+  // =========================================================
   const simulator = root.querySelector('#pmk80Simulator');
 
   if (simulator) {
@@ -196,17 +210,17 @@
       Math.min(max, Math.max(min, value));
 
     const updateSimulator = () => {
-      const transaction = parseMoney(transactionInput.value);
-      const fundingPct = clamp(Number(fundingInput.value) || 0, 0, 100);
-      const vatRate = clamp(Number(vatInput.value) || 0, 0, 100);
+      const transaction = parseMoney(transactionInput?.value);
+      const fundingPct = clamp(Number(fundingInput?.value) || 0, 0, 100);
+      const vatRate = clamp(Number(vatInput?.value) || 0, 0, 100);
 
       const eligibleBase = transaction * (fundingPct / 100);
       const otherBase = transaction - eligibleBase;
 
-      eligibleBaseEl.textContent = rupiah(eligibleBase);
-      otherBaseEl.textContent = rupiah(otherBase);
-      vatFacilityEl.textContent = rupiah(eligibleBase * (vatRate / 100));
-      vatNormalEl.textContent = rupiah(otherBase * (vatRate / 100));
+      if (eligibleBaseEl) eligibleBaseEl.textContent = rupiah(eligibleBase);
+      if (otherBaseEl) otherBaseEl.textContent = rupiah(otherBase);
+      if (vatFacilityEl) vatFacilityEl.textContent = rupiah(eligibleBase * vatRate / 100);
+      if (vatNormalEl) vatNormalEl.textContent = rupiah(otherBase * vatRate / 100);
     };
 
     transactionInput?.addEventListener('input', () => {
