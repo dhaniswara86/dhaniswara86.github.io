@@ -62,10 +62,10 @@ custom_js:
 <div class="jk-article pmk80-article">
 
 <section id="pengertian">
-<h2>Proyek Hibah Luar Negeri, Apakah Otomatis Bebas Pajak?</h2>
+<h2>Proyek Hibah/Pinjaman Luar Negeri, Apakah Otomatis Bebas Pajak?</h2>
 
 <p>
-Belum tentu. Sumber dana yang berasal dari hibah atau pinjaman luar negeri <strong>tidak otomatis</strong> membuat seluruh transaksi dalam proyek tersebut bebas pajak.
+<b>Belum tentu</b>. Sumber dana yang berasal dari hibah atau pinjaman luar negeri <strong>tidak otomatis</strong> membuat seluruh transaksi dalam proyek tersebut bebas pajak.
 </p>
 
 <p>
@@ -75,7 +75,7 @@ PMK Nomor 80 Tahun 2024 memberikan fasilitas perpajakan untuk Proyek Pemerintah 
 <div class="jk-callout jk-callout-blue">
 <strong>Mulai dari proyeknya, bukan dari nama dananya</strong>
 <p>
-Pertanyaan pertama bukan “apakah dananya berasal dari luar negeri?”, melainkan apakah kegiatan tersebut merupakan Proyek Pemerintah yang memenuhi kriteria PMK 80 Tahun 2024 dan bagian transaksi yang akan diberikan fasilitas memang berkaitan dengan pembiayaan hibah/pinjaman luar negeri tersebut.
+Pertanyaan pertama bukan “apakah dananya berasal dari hibah atau pinjaman luar negeri?”, melainkan apakah kegiatan tersebut merupakan Proyek Pemerintah yang memenuhi kriteria yang telah diatur dalam PMK 80 Tahun 2024 dan bagian transaksi yang akan diberikan fasilitas memang berkaitan dengan pembiayaan hibah/pinjaman luar negeri tersebut.
 </p>
 </div>
 </section>
