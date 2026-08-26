@@ -6,6 +6,37 @@
   const rupiah = (n) =>
     'Rp' + Math.max(0, Math.round(Number(n) || 0)).toLocaleString('id-ID');
 
+
+  // =========================
+  // PANDUAN BERDASARKAN POSISI
+  // =========================
+  const roleGuide = root.querySelector('#pmk80RoleGuide');
+
+  if (roleGuide) {
+    const roleButtons = [...roleGuide.querySelectorAll('[data-role-target]')];
+    const rolePanels = [...roleGuide.querySelectorAll('[data-role-panel]')];
+
+    const activateRole = (target) => {
+      roleButtons.forEach((button) => {
+        const active = button.dataset.roleTarget === target;
+        button.classList.toggle('is-active', active);
+        button.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+
+      rolePanels.forEach((panel) => {
+        panel.classList.toggle('is-active', panel.dataset.rolePanel === target);
+      });
+    };
+
+    roleButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        activateRole(button.dataset.roleTarget);
+      });
+    });
+
+    activateRole('penerima');
+  }
+
   const checker = root.querySelector('#pmk80EligibilityChecker');
 
   if (checker) {
