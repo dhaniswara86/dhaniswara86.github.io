@@ -4053,6 +4053,64 @@ body.mega-menu-open {
 }
 </style>
 
+
+<style id="heroDockMagnificationStyles">
+/* macOS Dock-style magnification */
+@media (hover:hover) and (pointer:fine) {
+  .hero-category-stage {
+    overflow: visible;
+  }
+
+  .hero-category-rail {
+    overflow: visible;
+  }
+
+  .hero-category-item {
+    --dock-scale: 1;
+    --dock-lift: 0px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-category-icon-wrap {
+    transform: translateY(var(--dock-lift)) scale(var(--dock-scale));
+    transform-origin: 50% 100%;
+    will-change: transform;
+    transition: transform 120ms cubic-bezier(.22,.9,.3,1);
+  }
+
+  .hero-category-item:hover .hero-category-icon-wrap,
+  .hero-category-item:focus-visible .hero-category-icon-wrap {
+    transform: translateY(var(--dock-lift)) scale(var(--dock-scale));
+  }
+
+  .hero-category-icon {
+    transition: filter 140ms ease;
+  }
+
+  .hero-category-item.is-dock-near .hero-category-icon {
+    filter: drop-shadow(0 16px 22px rgba(28,45,69,.18));
+  }
+
+  .hero-category-label,
+  .hero-category-note {
+    transition: transform 140ms cubic-bezier(.22,.9,.3,1), opacity 140ms ease;
+  }
+
+  .hero-category-item.is-dock-near .hero-category-label,
+  .hero-category-item.is-dock-near .hero-category-note {
+    transform: translateY(-2px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-category-item {
+    --dock-scale: 1 !important;
+    --dock-lift: 0px !important;
+  }
+}
+</style>
+
 </head>
 <body id="top">
 <header class="site-nav">
@@ -5926,5 +5984,79 @@ body.mega-menu-open {
     }, 2600);
   })();
 </script>
+
+<script id="heroDockMagnificationScript">
+(() => {
+  "use strict";
+
+  const rail = document.querySelector(".hero-category-rail");
+  if (!rail) return;
+
+  const items = Array.from(rail.querySelectorAll(".hero-category-item"));
+  if (!items.length) return;
+
+  const finePointer = window.matchMedia("(hover:hover) and (pointer:fine)");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  const MAX_SCALE = 1.42;
+  const MAX_LIFT = 18;
+  const INFLUENCE = 245;
+
+  function resetDock() {
+    items.forEach((item) => {
+      item.style.setProperty("--dock-scale", "1");
+      item.style.setProperty("--dock-lift", "0px");
+      item.style.zIndex = "1";
+      item.classList.remove("is-dock-near");
+    });
+  }
+
+  function magnify(clientX) {
+    if (!finePointer.matches || reduceMotion.matches) {
+      resetDock();
+      return;
+    }
+
+    items.forEach((item) => {
+      const rect = item.getBoundingClientRect();
+      const center = rect.left + rect.width / 2;
+      const distance = Math.abs(clientX - center);
+      const proximity = Math.max(0, 1 - distance / INFLUENCE);
+      const eased = proximity * proximity * (3 - 2 * proximity);
+      const scale = 1 + (MAX_SCALE - 1) * eased;
+      const lift = -MAX_LIFT * eased;
+
+      item.style.setProperty("--dock-scale", scale.toFixed(3));
+      item.style.setProperty("--dock-lift", `${lift.toFixed(1)}px`);
+      item.style.zIndex = String(2 + Math.round(eased * 20));
+      item.classList.toggle("is-dock-near", eased > 0.08);
+    });
+  }
+
+  rail.addEventListener("pointermove", (event) => {
+    if (event.pointerType === "touch") return;
+    magnify(event.clientX);
+  }, { passive: true });
+
+  rail.addEventListener("pointerleave", resetDock, { passive: true });
+
+  rail.addEventListener("focusin", (event) => {
+    const item = event.target.closest(".hero-category-item");
+    if (!item || !finePointer.matches || reduceMotion.matches) return;
+    const rect = item.getBoundingClientRect();
+    magnify(rect.left + rect.width / 2);
+  });
+
+  rail.addEventListener("focusout", () => {
+    window.setTimeout(() => {
+      if (!rail.contains(document.activeElement)) resetDock();
+    }, 0);
+  });
+
+  finePointer.addEventListener?.("change", resetDock);
+  reduceMotion.addEventListener?.("change", resetDock);
+})();
+</script>
+
 </body>
 </html>
