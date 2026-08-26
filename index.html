@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="id">
 <head>
 <meta charset="utf-8"/>
@@ -3494,7 +3495,6 @@ body.mega-menu-open {
   .nav-mega-backdrop { transition: none !important; }
 }
 </style>
-
 <style id="heroViewportFitStyles">
 /* =========================================================
    Hero awal — fit satu layar
@@ -3745,8 +3745,6 @@ body.mega-menu-open {
   }
 }
 </style>
-
-
 <style id="kabayanOriginalHeadingBookSizeFix">
 /*
   Penyesuaian ringan pada ORIGINAL index:
@@ -3783,12 +3781,167 @@ body.mega-menu-open {
 }
 </style>
 
+<style id="heroCategoryIconRailStyles">
+/* =========================================================
+   Hero Kabayan — category product rail
+   Menggantikan slideshow buku dengan navigasi kategori visual.
+   ========================================================= */
+.hero-visual {
+  width: min(1180px, 100%) !important;
+  height: auto !important;
+  min-height: 0 !important;
+  flex: 1 1 auto;
+  align-items: center !important;
+  margin: clamp(24px, 4svh, 42px) auto 0 !important;
+  padding: 0 8px clamp(20px, 3svh, 32px);
+}
+
+.hero-visual .hero-glow {
+  bottom: -74px;
+  width: min(900px, 84vw);
+  height: 260px;
+  opacity: .7;
+  filter: blur(24px);
+}
+
+.hero-category-stage {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  margin: auto 0;
+}
+
+.hero-category-rail {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  align-items: start;
+  gap: clamp(12px, 1.5vw, 24px);
+  padding: 10px 8px 12px;
+}
+
+.hero-category-item {
+  min-width: 0;
+  color: var(--near-black);
+  text-decoration: none;
+  text-align: center;
+  outline: none;
+}
+
+.hero-category-icon-wrap {
+  width: 100%;
+  height: clamp(92px, 9vw, 118px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 11px;
+  transition: transform .3s cubic-bezier(.2,.8,.2,1);
+}
+
+.hero-category-icon {
+  width: clamp(78px, 7.4vw, 102px);
+  height: clamp(78px, 7.4vw, 102px);
+  display: block;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 18px rgba(23, 47, 84, .10));
+  transition: filter .3s ease;
+}
+
+.hero-category-item:hover .hero-category-icon-wrap,
+.hero-category-item:focus-visible .hero-category-icon-wrap {
+  transform: translateY(-5px) scale(1.025);
+}
+
+.hero-category-item:hover .hero-category-icon,
+.hero-category-item:focus-visible .hero-category-icon {
+  filter: drop-shadow(0 17px 23px rgba(23, 47, 84, .15));
+}
+
+.hero-category-label {
+  display: block;
+  font-size: clamp(13px, 1.18vw, 16px);
+  line-height: 1.15;
+  font-weight: 600;
+  letter-spacing: -.025em;
+  white-space: nowrap;
+}
+
+.hero-category-note {
+  display: block;
+  margin-top: 5px;
+  color: #bf4800;
+  font-size: 10px;
+  line-height: 1.1;
+  font-weight: 650;
+}
+
+/* Slider lama tidak lagi dipakai pada hero. */
+.hero-book-slider,
+.hero-book-viewport,
+.hero-book-track,
+.hero-book-slide,
+.slider-arrow,
+.slider-dots {
+  display: none !important;
+}
+
+@media (max-width: 900px) {
+  .hero-category-rail {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: 116px;
+    justify-content: start;
+    gap: 16px;
+    overflow-x: auto;
+    padding: 8px 22px 16px;
+    scroll-snap-type: x proximity;
+    overscroll-behavior-inline: contain;
+    scrollbar-width: none;
+  }
+  .hero-category-rail::-webkit-scrollbar { display: none; }
+  .hero-category-item { scroll-snap-align: center; }
+  .hero-category-icon-wrap { height: 94px; }
+  .hero-category-icon { width: 82px; height: 82px; }
+  .hero-category-label { font-size: 14px; }
+}
+
+@media (max-width: 680px) {
+  .hero-visual {
+    width: 100% !important;
+    margin-top: clamp(22px, 3svh, 30px) !important;
+    padding-right: 0;
+    padding-left: 0;
+  }
+  .hero-category-rail {
+    grid-auto-columns: 108px;
+    gap: 11px;
+    padding-right: 18px;
+    padding-left: 18px;
+  }
+  .hero-category-icon-wrap { height: 88px; margin-bottom: 8px; }
+  .hero-category-icon { width: 76px; height: 76px; }
+  .hero-category-note { font-size: 9px; }
+}
+
+@media (max-height: 720px) and (min-width: 681px) {
+  .hero-visual { margin-top: 14px !important; padding-bottom: 14px; }
+  .hero-category-icon-wrap { height: 82px; margin-bottom: 7px; }
+  .hero-category-icon { width: 72px; height: 72px; }
+  .hero-category-label { font-size: 13px; }
+  .hero-category-note { margin-top: 3px; font-size: 9px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-category-icon-wrap,
+  .hero-category-icon { transition: none !important; }
+}
+</style>
 </head>
 <body id="top">
 <header class="site-nav">
 <div class="nav-inner">
 <a class="nav-brand" href="index.html">
-<img class="brand-logo" src="images/LogoASD.svg" alt="Logo dhaniswara86"/>
+<img alt="Logo dhaniswara86" class="brand-logo" src="images/LogoASD.svg"/>
 <span>| <strong>dhaniswara86</strong></span>
 </a>
 <nav aria-label="Navigasi utama" class="desktop-menu">
@@ -3801,16 +3954,7 @@ body.mega-menu-open {
 <a aria-haspopup="true" class="nav-menu-link nav-hotnews" data-nav-menu="hotnews" href="hotnews.html"><span aria-hidden="true" class="nav-hotnews-icon">🔥</span><span>Hot News</span></a>
 </nav>
 <div class="nav-actions">
-<button
-  aria-controls="collectionMegaMenu"
-  aria-expanded="false"
-  aria-haspopup="true"
-  aria-label="Lihat Koleksi"
-  class="collection-search-trigger"
-  id="collectionSearchTrigger"
-  title="Lihat Koleksi"
-  type="button"
->⌕</button>
+<button aria-controls="collectionMegaMenu" aria-expanded="false" aria-haspopup="true" aria-label="Lihat Koleksi" class="collection-search-trigger" id="collectionSearchTrigger" title="Lihat Koleksi" type="button">⌕</button>
 <button aria-expanded="false" aria-label="Buka menu" class="menu-toggle" id="menuToggle" type="button">
           ☰
         </button>
@@ -3819,135 +3963,129 @@ body.mega-menu-open {
 </header>
 <div aria-hidden="true" class="nav-mega-backdrop" id="navMegaBackdrop"></div>
 <section aria-hidden="true" aria-label="Navigasi koleksi Kabayan" class="nav-mega-menu" id="navMegaMenu">
-  <div class="nav-mega-inner">
-
-    <div class="nav-mega-panel" data-nav-panel="buku">
-      <div class="nav-mega-intro">
-        <span class="nav-mega-kicker">Buku Digital</span>
-        <h2>Belajar pajak dengan materi yang lebih terstruktur.</h2>
-        <p>Modul, panduan, dan referensi perpajakan untuk Coretax, PPh, PPN, XML, dan aplikasi DJP.</p>
-        <a class="nav-mega-main-link" href="buku.html">Lihat seluruh buku <span aria-hidden="true">›</span></a>
-      </div>
-      <div class="nav-mega-column">
-        <p class="nav-mega-label">Pilihan terbaru</p>
-        <a href="kap-kjs.html">KAP dan KJS Era Coretax</a>
-        <a href="converter-xml-unifikasi.html">Converter XML PPh Unifikasi</a>
-        <a href="converter-xml-2126.html">Converter XML PPh Pasal 21/26</a>
-      </div>
-      <div class="nav-mega-column">
-        <p class="nav-mega-label">Referensi &amp; panduan</p>
-        <a href="list-barang-jasa-faktur.html">Kode Barang &amp; Jasa Faktur Pajak</a>
-        <a href="aktivasiakunkodjp.html">Aktivasi Akun &amp; KODJP</a>
-        <a href="cermat-2126.html">Cermat Pemotongan PPh 21/26</a>
-      </div>
-      <div class="nav-mega-tags" aria-label="Topik buku">
-        <span>Coretax</span><span>PPh</span><span>PPN</span><span>XML</span><span>DJP Online</span>
-      </div>
-    </div>
-
-    <div class="nav-mega-panel" data-nav-panel="formulir">
-      <div class="nav-mega-intro">
-        <span class="nav-mega-kicker">Formulir Perpajakan</span>
-        <h2>Dokumen berdasarkan kebutuhan administrasi.</h2>
-        <p>Koleksi formulir dikelompokkan dalam registrasi, PKP, Bea Meterai, PBB, kuasa, SPT, surat pernyataan, restrukturisasi, dan pembukuan.</p>
-        <a class="nav-mega-main-link" href="formulir.html">Lihat seluruh formulir <span aria-hidden="true">›</span></a>
-      </div>
-      <div class="nav-mega-column">
-        <p class="nav-mega-label">Sering digunakan</p>
-        <a href="surat-kuasa-khusus-wajib-pajak.html">Surat Kuasa Khusus Wajib Pajak</a>
-        <a href="pernyataanumkm500juta.html">Pernyataan UMKM Rp500 Juta</a>
-        <a href="surat-pernyataan-hibah.html">Surat Pernyataan Hibah</a>
-      </div>
-      <div class="nav-mega-column">
-        <p class="nav-mega-label">Permohonan &amp; keterangan</p>
-        <a href="permohonanskbpotput.html">Permohonan SKB PPh</a>
-        <a href="formulir-pembatalan-surat-keterangan-penelitian-formal-kabayan.html">Pembatalan Penelitian Formal</a>
-        <a href="formulir.html">Cari formulir lainnya</a>
-      </div>
-      <div class="nav-mega-tags" aria-label="Kelompok formulir">
-        <span>Registrasi</span><span>PKP &amp; PPN</span><span>Bea Meterai</span><span>PBB</span><span>Kuasa</span><span>SPT</span>
-      </div>
-    </div>
-
-    <div class="nav-mega-panel" data-nav-panel="aplikasi">
-      <div class="nav-mega-intro">
-        <span class="nav-mega-kicker">Aplikasi Perpajakan</span>
-        <h2>Installer dan arsip aplikasi perpajakan.</h2>
-        <p>Portal aplikasi lama untuk pengelolaan data dan pelaporan periode sebelum implementasi Coretax.</p>
-        <a class="nav-mega-main-link" href="aplikasi.html">Buka portal aplikasi <span aria-hidden="true">›</span></a>
-      </div>
-      <div class="nav-mega-column">
-        <p class="nav-mega-label">Kategori</p>
-        <a href="aplikasi.html">e-SPT</a>
-        <a href="aplikasi.html">e-Faktur</a>
-        <a href="aplikasi.html">e-Bupot</a>
-      </div>
-      <div class="nav-mega-column">
-        <p class="nav-mega-label">Lainnya</p>
-        <a href="aplikasi.html">Perangkat pendukung</a>
-        <a href="aplikasi.html">Arsip aplikasi</a>
-        <a href="buku.html">Baca buku panduan</a>
-      </div>
-      <div class="nav-mega-tags" aria-label="Jenis aplikasi">
-        <span>e-SPT</span><span>e-Faktur</span><span>e-Bupot</span><span>Pendukung</span><span>Arsip</span>
-      </div>
-    </div>
-
-    <div class="nav-mega-panel" data-nav-panel="kalkulator">
-      <div class="nav-mega-intro">
-        <span class="nav-mega-kicker">Kalkulator Pajak</span>
-        <h2>Hitung dan petakan kewajiban pajak lebih praktis.</h2>
-        <p>Empat alat bantu utama untuk PPN, PPh Pasal 21, transaksi instansi pemerintah, dan pengembalian pendahuluan.</p>
-        <a class="nav-mega-main-link" href="kalkulator.html">Lihat seluruh kalkulator <span aria-hidden="true">›</span></a>
-      </div>
-      <div class="nav-mega-column nav-mega-column-wide">
-        <p class="nav-mega-label">Alat bantu utama</p>
-        <a href="kalkulator-ppn-kabayan.html"><strong>PPN</strong><small>PPN umum dan DPP Nilai Lain.</small></a>
-        <a href="kalkulator-pasal21.html"><strong>PPh Pasal 21</strong><small>Pegawai tetap dan tidak tetap.</small></a>
-      </div>
-      <div class="nav-mega-column nav-mega-column-wide">
-        <p class="nav-mega-label">Pemetaan terpandu</p>
-        <a href="pajak-instansi-satu-pintu.html"><strong>Pajak Instansi Pemerintah</strong><small>PPh, PPN, dan kondisi khusus belanja.</small></a>
-        <a href="kalkulator-pengembalian-pendahuluan.html"><strong>Pengembalian Pendahuluan</strong><small>Kriteria, persyaratan, dan kredit pajak.</small></a>
-      </div>
-    </div>
-
-    <div class="nav-mega-panel" data-nav-panel="artikel">
-      <div class="nav-mega-intro">
-        <span class="nav-mega-kicker">Artikel Pajak</span>
-        <h2>Penjelasan ketentuan dalam bahasa yang lebih sederhana.</h2>
-        <p>Artikel membahas administrasi, PPh, PPN, Coretax, UMKM, dan prosedur perpajakan.</p>
-        <a class="nav-mega-main-link" href="artikel.html">Lihat seluruh artikel <span aria-hidden="true">›</span></a>
-      </div>
-      <div class="nav-mega-column nav-mega-featured">
-        <p class="nav-mega-label">Pilihan editor</p>
-        <a href="artikel-per8pj2026.html"><strong>PER-8/PJ/2026: Apa yang Berubah?</strong><small>Kode billing, pemindahbukuan, KAP/KJS, dan imbalan bunga.</small></a>
-      </div>
-      <div class="nav-mega-column">
-        <p class="nav-mega-label">Topik</p>
-        <div class="nav-mega-topic-list"><span>Administrasi</span><span>PPh</span><span>PPN</span><span>Coretax</span><span>UMKM</span><span>Prosedur Pajak</span></div>
-      </div>
-    </div>
-
-    <div class="nav-mega-panel" data-nav-panel="hotnews">
-      <div class="nav-mega-intro">
-        <span class="nav-mega-kicker hot">Hot News</span>
-        <h2>Informasi perpajakan yang perlu lebih cepat diketahui.</h2>
-        <p>Pembaruan Coretax, regulasi, layanan, pengumuman, dan isu perpajakan terbaru.</p>
-        <a class="nav-mega-main-link hot" href="hotnews.html">Lihat seluruh Hot News <span aria-hidden="true">›</span></a>
-      </div>
-      <div class="nav-mega-column nav-mega-featured">
-        <p class="nav-mega-label">Terbaru</p>
-        <a href="hotnews/2026/08/penundaan-pph22-marketplace/"><strong>PPh Pasal 22 Marketplace Ditunda</strong><small>Pemungutan mulai berlaku 1 November 2026.</small></a>
-        <a href="hotnews/2026/08/coretax-role-baru-pph21-hanya-induk/"><strong>Coretax Tambah Role Baru PPh 21/26</strong><small>Data penghasilan pegawai lebih terlindungi.</small></a>
-      </div>
-      <div class="nav-mega-column">
-        <p class="nav-mega-label">Jelajahi</p>
-        <a href="hotnews-arsip.html">Arsip Hot News</a>
-        <div class="nav-mega-topic-list"><span>Coretax</span><span>Regulasi</span><span>Layanan</span><span>Pengumuman</span></div>
-      </div>
-    </div>
-  </div>
+<div class="nav-mega-inner">
+<div class="nav-mega-panel" data-nav-panel="buku">
+<div class="nav-mega-intro">
+<span class="nav-mega-kicker">Buku Digital</span>
+<h2>Belajar pajak dengan materi yang lebih terstruktur.</h2>
+<p>Modul, panduan, dan referensi perpajakan untuk Coretax, PPh, PPN, XML, dan aplikasi DJP.</p>
+<a class="nav-mega-main-link" href="buku.html">Lihat seluruh buku <span aria-hidden="true">›</span></a>
+</div>
+<div class="nav-mega-column">
+<p class="nav-mega-label">Pilihan terbaru</p>
+<a href="kap-kjs.html">KAP dan KJS Era Coretax</a>
+<a href="converter-xml-unifikasi.html">Converter XML PPh Unifikasi</a>
+<a href="converter-xml-2126.html">Converter XML PPh Pasal 21/26</a>
+</div>
+<div class="nav-mega-column">
+<p class="nav-mega-label">Referensi &amp; panduan</p>
+<a href="list-barang-jasa-faktur.html">Kode Barang &amp; Jasa Faktur Pajak</a>
+<a href="aktivasiakunkodjp.html">Aktivasi Akun &amp; KODJP</a>
+<a href="cermat-2126.html">Cermat Pemotongan PPh 21/26</a>
+</div>
+<div aria-label="Topik buku" class="nav-mega-tags">
+<span>Coretax</span><span>PPh</span><span>PPN</span><span>XML</span><span>DJP Online</span>
+</div>
+</div>
+<div class="nav-mega-panel" data-nav-panel="formulir">
+<div class="nav-mega-intro">
+<span class="nav-mega-kicker">Formulir Perpajakan</span>
+<h2>Dokumen berdasarkan kebutuhan administrasi.</h2>
+<p>Koleksi formulir dikelompokkan dalam registrasi, PKP, Bea Meterai, PBB, kuasa, SPT, surat pernyataan, restrukturisasi, dan pembukuan.</p>
+<a class="nav-mega-main-link" href="formulir.html">Lihat seluruh formulir <span aria-hidden="true">›</span></a>
+</div>
+<div class="nav-mega-column">
+<p class="nav-mega-label">Sering digunakan</p>
+<a href="surat-kuasa-khusus-wajib-pajak.html">Surat Kuasa Khusus Wajib Pajak</a>
+<a href="pernyataanumkm500juta.html">Pernyataan UMKM Rp500 Juta</a>
+<a href="surat-pernyataan-hibah.html">Surat Pernyataan Hibah</a>
+</div>
+<div class="nav-mega-column">
+<p class="nav-mega-label">Permohonan &amp; keterangan</p>
+<a href="permohonanskbpotput.html">Permohonan SKB PPh</a>
+<a href="formulir-pembatalan-surat-keterangan-penelitian-formal-kabayan.html">Pembatalan Penelitian Formal</a>
+<a href="formulir.html">Cari formulir lainnya</a>
+</div>
+<div aria-label="Kelompok formulir" class="nav-mega-tags">
+<span>Registrasi</span><span>PKP &amp; PPN</span><span>Bea Meterai</span><span>PBB</span><span>Kuasa</span><span>SPT</span>
+</div>
+</div>
+<div class="nav-mega-panel" data-nav-panel="aplikasi">
+<div class="nav-mega-intro">
+<span class="nav-mega-kicker">Aplikasi Perpajakan</span>
+<h2>Installer dan arsip aplikasi perpajakan.</h2>
+<p>Portal aplikasi lama untuk pengelolaan data dan pelaporan periode sebelum implementasi Coretax.</p>
+<a class="nav-mega-main-link" href="aplikasi.html">Buka portal aplikasi <span aria-hidden="true">›</span></a>
+</div>
+<div class="nav-mega-column">
+<p class="nav-mega-label">Kategori</p>
+<a href="aplikasi.html">e-SPT</a>
+<a href="aplikasi.html">e-Faktur</a>
+<a href="aplikasi.html">e-Bupot</a>
+</div>
+<div class="nav-mega-column">
+<p class="nav-mega-label">Lainnya</p>
+<a href="aplikasi.html">Perangkat pendukung</a>
+<a href="aplikasi.html">Arsip aplikasi</a>
+<a href="buku.html">Baca buku panduan</a>
+</div>
+<div aria-label="Jenis aplikasi" class="nav-mega-tags">
+<span>e-SPT</span><span>e-Faktur</span><span>e-Bupot</span><span>Pendukung</span><span>Arsip</span>
+</div>
+</div>
+<div class="nav-mega-panel" data-nav-panel="kalkulator">
+<div class="nav-mega-intro">
+<span class="nav-mega-kicker">Kalkulator Pajak</span>
+<h2>Hitung dan petakan kewajiban pajak lebih praktis.</h2>
+<p>Empat alat bantu utama untuk PPN, PPh Pasal 21, transaksi instansi pemerintah, dan pengembalian pendahuluan.</p>
+<a class="nav-mega-main-link" href="kalkulator.html">Lihat seluruh kalkulator <span aria-hidden="true">›</span></a>
+</div>
+<div class="nav-mega-column nav-mega-column-wide">
+<p class="nav-mega-label">Alat bantu utama</p>
+<a href="kalkulator-ppn-kabayan.html"><strong>PPN</strong><small>PPN umum dan DPP Nilai Lain.</small></a>
+<a href="kalkulator-pasal21.html"><strong>PPh Pasal 21</strong><small>Pegawai tetap dan tidak tetap.</small></a>
+</div>
+<div class="nav-mega-column nav-mega-column-wide">
+<p class="nav-mega-label">Pemetaan terpandu</p>
+<a href="pajak-instansi-satu-pintu.html"><strong>Pajak Instansi Pemerintah</strong><small>PPh, PPN, dan kondisi khusus belanja.</small></a>
+<a href="kalkulator-pengembalian-pendahuluan.html"><strong>Pengembalian Pendahuluan</strong><small>Kriteria, persyaratan, dan kredit pajak.</small></a>
+</div>
+</div>
+<div class="nav-mega-panel" data-nav-panel="artikel">
+<div class="nav-mega-intro">
+<span class="nav-mega-kicker">Artikel Pajak</span>
+<h2>Penjelasan ketentuan dalam bahasa yang lebih sederhana.</h2>
+<p>Artikel membahas administrasi, PPh, PPN, Coretax, UMKM, dan prosedur perpajakan.</p>
+<a class="nav-mega-main-link" href="artikel.html">Lihat seluruh artikel <span aria-hidden="true">›</span></a>
+</div>
+<div class="nav-mega-column nav-mega-featured">
+<p class="nav-mega-label">Pilihan editor</p>
+<a href="artikel-per8pj2026.html"><strong>PER-8/PJ/2026: Apa yang Berubah?</strong><small>Kode billing, pemindahbukuan, KAP/KJS, dan imbalan bunga.</small></a>
+</div>
+<div class="nav-mega-column">
+<p class="nav-mega-label">Topik</p>
+<div class="nav-mega-topic-list"><span>Administrasi</span><span>PPh</span><span>PPN</span><span>Coretax</span><span>UMKM</span><span>Prosedur Pajak</span></div>
+</div>
+</div>
+<div class="nav-mega-panel" data-nav-panel="hotnews">
+<div class="nav-mega-intro">
+<span class="nav-mega-kicker hot">Hot News</span>
+<h2>Informasi perpajakan yang perlu lebih cepat diketahui.</h2>
+<p>Pembaruan Coretax, regulasi, layanan, pengumuman, dan isu perpajakan terbaru.</p>
+<a class="nav-mega-main-link hot" href="hotnews.html">Lihat seluruh Hot News <span aria-hidden="true">›</span></a>
+</div>
+<div class="nav-mega-column nav-mega-featured">
+<p class="nav-mega-label">Terbaru</p>
+<a href="hotnews/2026/08/penundaan-pph22-marketplace/"><strong>PPh Pasal 22 Marketplace Ditunda</strong><small>Pemungutan mulai berlaku 1 November 2026.</small></a>
+<a href="hotnews/2026/08/coretax-role-baru-pph21-hanya-induk/"><strong>Coretax Tambah Role Baru PPh 21/26</strong><small>Data penghasilan pegawai lebih terlindungi.</small></a>
+</div>
+<div class="nav-mega-column">
+<p class="nav-mega-label">Jelajahi</p>
+<a href="hotnews-arsip.html">Arsip Hot News</a>
+<div class="nav-mega-topic-list"><span>Coretax</span><span>Regulasi</span><span>Layanan</span><span>Pengumuman</span></div>
+</div>
+</div>
+</div>
 </section>
 <div aria-hidden="true" class="mega-menu-backdrop" id="megaMenuBackdrop"></div>
 <section aria-hidden="true" aria-label="Koleksi Kabayan" class="collection-mega-menu" id="collectionMegaMenu">
@@ -4075,112 +4213,42 @@ body.mega-menu-open {
 </div>
 <div class="hero-visual">
 <div class="hero-glow"></div>
-<section aria-label="Katalog buku pilihan" class="hero-book-slider" id="heroBookSlider" tabindex="0">
-<div class="hero-book-viewport">
-<div class="hero-book-track">
-<article class="hero-book-slide">
-<a class="hero-book-link" href="converter-xml-unifikasi.html">
-<div class="hero-book-image">
-<img alt="Mockup buku Converter Excel ke XML Coretax Seri PPh Unifikasi" loading="eager" src="images/mockup-converter-excel-xml-unifikasi.webp"/>
-</div>
-<div class="hero-book-caption">
-<span class="hero-book-category">
-                      Coretax PPh Unifikasi dan XML
-                    </span>
-<h2>
-                      Converter Excel ke XML Coretax
-                      Seri PPh Unifikasi
-                    </h2>
-<span class="hero-book-detail">
-                      Lihat detail ›
-                    </span>
-</div>
+<section aria-label="Jelajahi kategori utama Kabayan" class="hero-category-stage">
+<div class="hero-category-rail">
+<a class="hero-category-item" href="formulir.html">
+<span class="hero-category-icon-wrap"><img alt="" aria-hidden="true" class="hero-category-icon" src="images/jelajahi-formulir.webp"/></span>
+<span class="hero-category-label">Formulir</span>
 </a>
-</article>
-<article class="hero-book-slide">
-<a class="hero-book-link" href="converter-xml-2126.html">
-<div class="hero-book-image">
-<img alt="Mockup buku Converter Excel ke XML Coretax Seri PPh Pasal 21/26" loading="lazy" src="images/mockup-converter-excel-xml-2126.webp"/>
-</div>
-<div class="hero-book-caption">
-<span class="hero-book-category">
-                      Coretax PPh Pasal 21/26 dan XML
-                    </span>
-<h2>
-                      Converter Excel ke XML Coretax
-                      Seri PPh Pasal 21/26
-                    </h2>
-<span class="hero-book-detail">
-                      Lihat detail ›
-                    </span>
-</div>
+<a class="hero-category-item" href="kalkulator.html">
+<span class="hero-category-icon-wrap"><img alt="" aria-hidden="true" class="hero-category-icon" src="images/jelajahi-kalkulator.webp"/></span>
+<span class="hero-category-label">Kalkulator</span>
 </a>
-</article>
-<article class="hero-book-slide">
-<a class="hero-book-link" href="list-barang-jasa-faktur.html">
-<div class="hero-book-image">
-<img alt="Mockup buku Kode Barang dan Jasa di Faktur Pajak Era Coretax" loading="lazy" src="images/mockup-list-kode-barang-jasa.webp"/>
-</div>
-<div class="hero-book-caption">
-<span class="hero-book-category">
-                      PPN dan Faktur Pajak
-                    </span>
-<h2>
-                      Kode Barang dan Jasa di Faktur Pajak
-                      Era Coretax
-                    </h2>
-<span class="hero-book-detail">
-                      Lihat detail ›
-                    </span>
-</div>
+<a class="hero-category-item" href="converter-xml-coretax.html">
+<span class="hero-category-icon-wrap"><img alt="" aria-hidden="true" class="hero-category-icon" src="images/jelajahi-converter.webp"/></span>
+<span class="hero-category-label">Converter</span>
 </a>
-</article>
-<article class="hero-book-slide">
-<a class="hero-book-link" href="kap-kjs.html">
-<div class="hero-book-image">
-<img alt="Mockup buku KAP dan KJS Era Coretax" loading="lazy" src="images/mockup-kap-kjs-per8tahun2026.webp"/>
-</div>
-<div class="hero-book-caption">
-<span class="hero-book-category">
-                      Pembayaran Pajak
-                    </span>
-<h2>
-                      Kode Akun Pajak dan Kode Jenis Setor
-                      Era Coretax
-                    </h2>
-<span class="hero-book-detail">
-                      Lihat detail ›
-                    </span>
-</div>
+<a class="hero-category-item" href="buku.html">
+<span class="hero-category-icon-wrap"><img alt="" aria-hidden="true" class="hero-category-icon" src="images/jelajahi-buku-digital.webp"/></span>
+<span class="hero-category-label">Buku Digital</span>
 </a>
-</article>
-<article class="hero-book-slide">
-<a class="hero-book-link" href="cermat-2126.html">
-<div class="hero-book-image">
-<img alt="Mockup buku cermat pemotongan PPh Pasal 21/26" loading="lazy" src="images/mockup-cermat-2126.webp"/>
-</div>
-<div class="hero-book-caption">
-<span class="hero-book-category">
-                      PPh Pasal 21/26
-                    </span>
-<h2>
-                      Cermat Pemotongan PPh Pasal 21/26
-                    </h2>
-<span class="hero-book-detail">
-                      Lihat detail ›
-                    </span>
-</div>
+<a class="hero-category-item" href="aplikasi.html">
+<span class="hero-category-icon-wrap"><img alt="" aria-hidden="true" class="hero-category-icon" src="images/jelajahi-aplikasi.webp"/></span>
+<span class="hero-category-label">Aplikasi</span>
 </a>
-</article>
+<a class="hero-category-item" href="artikel.html">
+<span class="hero-category-icon-wrap"><img alt="" aria-hidden="true" class="hero-category-icon" src="images/jelajahi-artikel.webp"/></span>
+<span class="hero-category-label">Artikel</span>
+</a>
+<a class="hero-category-item" href="hotnews.html">
+<span class="hero-category-icon-wrap"><img alt="" aria-hidden="true" class="hero-category-icon" src="images/jelajahi-hot-news.webp"/></span>
+<span class="hero-category-label">Hot News</span>
+<span class="hero-category-note">Terbaru</span>
+</a>
+<a class="hero-category-item" href="ruang-belajar.html">
+<span class="hero-category-icon-wrap"><img alt="" aria-hidden="true" class="hero-category-icon" src="images/jelajahi-ruang-belajar.webp"/></span>
+<span class="hero-category-label">Ruang Belajar</span>
+</a>
 </div>
-</div>
-<button aria-label="Buku sebelumnya" class="slider-arrow slider-arrow-prev" type="button">
-            ‹
-          </button>
-<button aria-label="Buku berikutnya" class="slider-arrow slider-arrow-next" type="button">
-            ›
-          </button>
-<div aria-label="Pilih buku" class="slider-dots"></div>
 </section>
 </div>
 </section>
@@ -4347,11 +4415,7 @@ body.mega-menu-open {
 <a class="showcase-button primary" href="artikel.html">
             Baca artikel
           </a>
-<a
-            class="showcase-button secondary"
-            href="artikel.html"
-            id="latestArticleButton"
-          >
+<a class="showcase-button secondary" href="artikel.html" id="latestArticleButton">
             Artikel terbaru
           </a>
 </div>
@@ -5386,7 +5450,6 @@ body.mega-menu-open {
   }
 })();
 </script>
-
 <script id="collectionSearchTriggerScript">
 (() => {
   const searchTrigger = document.getElementById("collectionSearchTrigger");
@@ -5435,7 +5498,6 @@ body.mega-menu-open {
   syncState();
 })();
 </script>
-
 <script id="navMegaMenuScript">
 (() => {
   const links = [...document.querySelectorAll('.nav-menu-link[data-nav-menu]')];
@@ -5531,7 +5593,6 @@ body.mega-menu-open {
   window.addEventListener('resize', handleModeChange);
 })();
 </script>
-
 <script id="latestArticleAutoLinkScript">
 (() => {
   "use strict";
@@ -5692,8 +5753,6 @@ body.mega-menu-open {
   loadLatestArticle();
 })();
 </script>
-
-
 <script id="heroViewportFitScript">
 (() => {
   "use strict";
@@ -5720,8 +5779,6 @@ body.mega-menu-open {
   }
 })();
 </script>
-
-
 <script id="heroRotatingTaglineScript">
   (function () {
     const line = document.getElementById('heroRotatingLine');
@@ -5752,6 +5809,5 @@ body.mega-menu-open {
     }, 2600);
   })();
 </script>
-
 </body>
 </html>
