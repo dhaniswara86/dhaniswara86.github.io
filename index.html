@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="id">
 <head>
 <meta charset="utf-8"/>
@@ -3545,1941 +3544,298 @@ body.mega-menu-open {
 }
 </style>
 
-<style id="proportionalHeroRefinement">
+<style id="heroViewportFitStyles">
 /* =========================================================
-   Hero proporsional — kembali ke desain original
-   Tidak dipaksa muat dalam satu viewport.
+   Hero awal — fit satu layar
+   Menjaga area navbar + announcement + hero/slideshow
+   tetap berada dalam viewport awal tanpa memotong slider.
    ========================================================= */
+:root {
+  --hero-screen-height: 100vh;
+  --announcement-height: 47px;
+}
+
+@supports (height: 100svh) {
+  :root {
+    --hero-screen-height: 100svh;
+  }
+}
+
 .hero {
-  height: auto;
-  min-height: 760px;
-  padding: clamp(58px, 6vw, 82px) 20px 0;
+  height: calc(
+    var(--hero-screen-height)
+    - var(--nav-height)
+    - var(--announcement-height)
+  );
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(18px, 4svh, 42px) 20px 0;
 }
 
 .hero-copy {
-  width: min(920px, 100%);
+  flex: 0 0 auto;
+}
+
+.eyebrow {
+  margin-bottom: clamp(4px, 0.8svh, 8px);
+  font-size: clamp(14px, 2svh, 18px);
 }
 
 .hero h1 {
-  font-size: clamp(52px, 7.3vw, 92px);
-  line-height: .96;
+  font-size: clamp(44px, min(6.2vw, 8svh), 80px);
+  line-height: 0.94;
 }
 
 .hero-description {
-  max-width: 720px;
-  margin-top: 25px;
-  font-size: clamp(20px, 2.3vw, 28px);
-  line-height: 1.24;
+  max-width: 680px;
+  margin-top: clamp(10px, 2svh, 18px);
+  font-size: clamp(16px, min(2vw, 2.7svh), 24px);
+  line-height: 1.18;
 }
 
 .hero-actions {
-  margin-top: 29px;
-  gap: 17px;
+  gap: 12px;
+  margin-top: clamp(12px, 2.2svh, 20px);
 }
 
 .hero .button {
-  min-height: 44px;
-  padding: 10px 21px;
-  font-size: 17px;
+  min-height: clamp(36px, 5.2svh, 44px);
+  padding: clamp(7px, 1svh, 10px) 18px;
+  font-size: clamp(14px, 1.65svh, 16px);
 }
 
 .hero-visual {
   width: min(850px, 94vw);
-  height: 520px;
-  margin-top: 18px;
-  flex: none;
+  height: auto;
+  min-height: 0;
+  flex: 1 1 auto;
+  margin-top: clamp(4px, 1.2svh, 12px);
 }
 
 .hero-book-link {
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 
 .hero-book-image {
-  height: 360px;
-  flex: none;
-  align-items: flex-end;
+  height: auto;
+  min-height: 0;
+  flex: 1 1 auto;
+  align-items: center;
 }
 
 .hero-book-image img {
-  width: min(410px, 73vw);
-  height: 350px;
-  max-height: none;
+  width: min(380px, 68vw);
+  height: 100%;
+  max-height: 100%;
+  object-fit: contain;
 }
 
 .hero-book-caption {
-  width: min(630px, calc(100% - 90px));
-  min-height: 145px;
-  padding: 13px 20px 38px;
+  width: min(630px, calc(100% - 80px));
+  min-height: 0;
+  flex: 0 0 auto;
+  padding: 6px 20px clamp(22px, 3svh, 30px);
 }
 
 .hero-book-caption h2 {
-  margin: 6px 0 7px;
-  font-size: clamp(19px, 2.4vw, 27px);
+  margin: 4px 0 5px;
+  font-size: clamp(17px, min(2vw, 2.7svh), 24px);
 }
 
-.hero-book-category { font-size: 12px; }
-.hero-book-detail { font-size: 14px; }
-.slider-dots { bottom: 6px; }
+.hero-book-category {
+  font-size: clamp(10px, 1.35svh, 12px);
+}
+
+.hero-book-detail {
+  font-size: clamp(12px, 1.55svh, 14px);
+}
+
+.slider-dots {
+  bottom: clamp(4px, 0.8svh, 6px);
+}
+
+.slider-fallback {
+  bottom: 10px;
+  width: min(210px, 54vw);
+  height: min(270px, calc(100% - 20px));
+  padding: clamp(24px, 4svh, 44px) 24px;
+}
 
 @media (max-width: 680px) {
   .hero {
-    height: auto;
-    min-height: 690px;
-    padding: 54px 16px 0;
+    min-height: 0;
+    padding: clamp(14px, 2.6svh, 24px) 16px 0;
   }
 
   .hero h1 {
-    font-size: clamp(42px, 12.5vw, 52px);
+    font-size: clamp(36px, 11.5vw, 48px);
   }
 
   .hero-description {
-    max-width: 560px;
-    margin-top: 18px;
-    font-size: 20px;
-    line-height: 1.22;
+    max-width: 540px;
+    margin-top: clamp(8px, 1.5svh, 13px);
+    font-size: clamp(15px, 4.45vw, 19px);
+    line-height: 1.17;
   }
 
   .hero-actions {
-    gap: 10px;
-    margin-top: 22px;
+    gap: 7px;
+    margin-top: clamp(9px, 1.6svh, 13px);
   }
 
   .hero .button {
-    min-height: 40px;
-    padding: 8px 14px;
-    font-size: 14px;
-  }
-
-  .hero-visual {
-    width: 100%;
-    height: 490px;
-    margin-top: 18px;
-  }
-
-  .hero-book-image {
-    height: 335px;
-  }
-
-  .hero-book-image img {
-    width: min(350px, 80vw);
-    height: 320px;
-  }
-
-  .hero-book-caption {
-    width: calc(100% - 54px);
-    min-height: 145px;
-    padding: 10px 10px 34px;
-  }
-
-  .hero-book-caption h2 {
-    margin: 5px 0 6px;
-    font-size: clamp(18px, 5.2vw, 22px);
-    line-height: 1.12;
-  }
-}
-
-@media (max-width: 440px) {
-  .hero {
-    padding-top: 44px;
-  }
-
-  .hero h1 {
-    font-size: clamp(40px, 12.8vw, 49px);
-  }
-
-  .hero-description {
-    font-size: 18px;
-  }
-
-  .hero-actions {
-    gap: 9px;
-  }
-
-  .hero .button {
-    padding-right: 12px;
-    padding-left: 12px;
+    min-height: 36px;
+    padding: 6px 11px;
     font-size: 13px;
   }
 
   .hero-visual {
-    height: 470px;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    margin-top: 5px;
   }
 
   .hero-book-image {
-    height: 320px;
+    height: auto;
   }
 
   .hero-book-image img {
-    height: 305px;
+    width: min(330px, 75vw);
+    height: 100%;
+    max-height: 100%;
+  }
+
+  .hero-book-caption {
+    width: calc(100% - 50px);
+    min-height: 0;
+    padding: 4px 10px clamp(22px, 3svh, 27px);
+  }
+
+  .hero-book-caption h2 {
+    margin: 3px 0 4px;
+    font-size: clamp(16px, 4.7vw, 20px);
+    line-height: 1.1;
+  }
+
+  .slider-arrow {
+    top: 43%;
+  }
+}
+
+/* Laptop / HP dengan layar pendek: rapatkan copy agar slideshow tetap utuh. */
+@media (max-height: 720px) {
+  .hero {
+    padding-top: 12px;
+  }
+
+  .eyebrow {
+    margin-bottom: 3px;
+    font-size: 13px;
+  }
+
+  .hero h1 {
+    font-size: clamp(34px, min(5.5vw, 6.8svh), 58px);
+  }
+
+  .hero-description {
+    margin-top: 8px;
+    font-size: clamp(14px, min(1.7vw, 2.45svh), 17px);
+    line-height: 1.15;
+  }
+
+  .hero-actions {
+    gap: 7px;
+    margin-top: 8px;
+  }
+
+  .hero .button {
+    min-height: 34px;
+    padding: 5px 13px;
+    font-size: 13px;
+  }
+
+  .hero-book-caption {
+    padding-top: 3px;
+    padding-bottom: 18px;
+  }
+
+  .hero-book-caption h2 {
+    margin: 2px 0 3px;
+    font-size: 16px;
+  }
+
+  .hero-book-category {
+    font-size: 10px;
+  }
+
+  .hero-book-detail {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 680px) and (max-height: 720px) {
+  .hero {
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+
+  .hero h1 {
+    font-size: clamp(34px, 10.6vw, 41px);
+  }
+
+  .hero-description {
+    font-size: clamp(14px, 4vw, 16px);
+  }
+
+  .hero .button {
+    padding-right: 9px;
+    padding-left: 9px;
+    font-size: 12px;
+  }
+
+  .hero-book-caption {
+    width: calc(100% - 38px);
+    padding-bottom: 18px;
   }
 }
 </style>
-<style id="kabayanOriginalExploreRail">
-/* Original Kabayan hero retained; only the former book slider becomes a category rail. */
-.hero {
+
+
+<style id="kabayanOriginalHeadingBookSizeFix">
+/*
+  Penyesuaian ringan pada ORIGINAL index:
+  1) Hero headline memakai skala yang sama dengan .section-title.
+  2) Mockup buku pada hero dibuat lebih kecil tanpa mengubah slider.
+*/
+.hero h1 {
+  font-size: clamp(43px, 6vw, 72px) !important;
+  line-height: 1 !important;
+}
+
+.hero-book-image img {
+  width: min(315px, 58vw) !important;
   height: auto !important;
-  min-height: auto !important;
-  padding-bottom: clamp(52px, 6vw, 86px) !important;
+  max-height: 82% !important;
+  object-fit: contain;
 }
 
-.hero-visual.hero-explore-visual {
-  width: min(1280px, 100%) !important;
-  height: auto !important;
-  min-height: 0 !important;
-  margin-top: clamp(42px, 5vw, 66px) !important;
-  display: block !important;
-}
-
-.hero-explore-visual .hero-glow {
-  bottom: -64px;
-  width: min(980px, 86vw);
-  height: 300px;
-  opacity: .72;
-  filter: blur(26px);
-}
-
-.kabayan-explore {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  margin: 0 auto;
-}
-
-.kabayan-explore-title {
-  margin: 0 0 clamp(26px, 3vw, 40px);
-  color: #1d1d1f;
-  font-size: clamp(25px, 2.4vw, 34px);
-  line-height: 1.08;
-  font-weight: 600;
-  letter-spacing: -0.035em;
-  text-align: center;
-}
-
-.kabayan-explore-rail {
-  display: grid;
-  grid-template-columns: repeat(8, minmax(0, 1fr));
-  align-items: start;
-  gap: clamp(14px, 1.55vw, 24px);
-  width: 100%;
-  padding: 2px 4px 8px;
-}
-
-.kabayan-explore-item {
-  min-width: 0;
-  color: #1d1d1f;
-  text-decoration: none;
-  text-align: center;
-  outline: none;
-}
-
-.kabayan-explore-figure {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: clamp(94px, 8.7vw, 126px);
-  margin: 0 auto 14px;
-  transition: transform .28s cubic-bezier(.2,.8,.2,1);
-}
-
-.kabayan-explore-item:hover .kabayan-explore-figure,
-.kabayan-explore-item:focus-visible .kabayan-explore-figure {
-  transform: translateY(-5px) scale(1.025);
-}
-
-.kabayan-explore-label {
-  display: block;
-  font-size: clamp(15px, 1.35vw, 20px);
-  line-height: 1.1;
-  font-weight: 600;
-  letter-spacing: -0.025em;
-  white-space: nowrap;
-}
-
-.kabayan-explore-note {
-  display: block;
-  margin-top: 7px;
-  color: #bf4800;
-  font-size: 12px;
-  line-height: 1.15;
-  font-weight: 600;
-}
-
-.kx-mockup {
-  position: relative;
-  width: 92px;
-  height: 98px;
-  filter: drop-shadow(0 14px 16px rgba(24, 45, 78, .12));
-}
-
-/* Formulir */
-.kx-form .paper {
-  position: absolute;
-  width: 61px;
-  height: 82px;
-  border: 1px solid #dbe4f0;
-  border-radius: 12px;
-  background: linear-gradient(180deg,#fff,#f8fbff);
-}
-.kx-form .paper.back { left: 8px; top: 12px; transform: rotate(-7deg); }
-.kx-form .paper.front { right: 8px; top: 4px; transform: rotate(6deg); }
-.kx-form .line { position:absolute; left:12px; height:6px; border-radius:999px; background:#cad5e6; }
-.kx-form .l1{top:19px;width:37px}.kx-form .l2{top:33px;width:43px}.kx-form .l3{top:47px;width:34px}.kx-form .l4{top:61px;width:27px}
-
-/* Buku */
-.kx-book .cover {
-  position:absolute; left:19px; top:6px; width:62px; height:86px;
-  border-radius:10px 15px 15px 10px;
-  background:linear-gradient(155deg,#0d6ce8 0%,#3d8df2 58%,#84c2ff 100%);
-  box-shadow:inset 10px 0 0 rgba(8,63,139,.22);
-}
-.kx-book .cover::before{content:"";position:absolute;left:26px;top:18px;width:8px;height:45px;border-radius:999px;background:rgba(255,255,255,.30)}
-.kx-book .cover::after{content:"";position:absolute;right:9px;bottom:17px;width:27px;height:7px;border-radius:999px;background:rgba(255,255,255,.88);box-shadow:0 -14px 0 rgba(255,255,255,.65)}
-
-/* Kalkulator */
-.kx-calc .body{position:absolute;left:15px;top:4px;width:66px;height:88px;border-radius:20px;background:linear-gradient(180deg,#111827,#273244);box-shadow:0 12px 20px rgba(17,24,39,.24)}
-.kx-calc .display{position:absolute;left:10px;right:10px;top:11px;height:21px;border-radius:12px;background:#374151;color:white;font-size:8px;font-weight:600;display:flex;align-items:center;justify-content:center}
-.kx-calc .keys{position:absolute;left:13px;right:13px;bottom:15px;display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.kx-calc .keys i{height:13px;border-radius:50%;background:#4b5563}
-
-/* Converter */
-.kx-xml .file{position:absolute;top:27px;width:43px;height:47px;border-radius:12px;color:white;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center}
-.kx-xml .xls{left:0;background:linear-gradient(180deg,#24a866,#13874c)}
-.kx-xml .xml{right:0;background:linear-gradient(180deg,#1672ed,#4ca1ff)}
-.kx-xml .connector{position:absolute;left:39px;top:49px;width:17px;height:2px;background:#8895a8}.kx-xml .connector::after{content:"";position:absolute;right:-2px;top:-4px;border-left:6px solid #8895a8;border-top:5px solid transparent;border-bottom:5px solid transparent}
-
-/* Aplikasi */
-.kx-app .window{position:absolute;left:3px;top:15px;width:88px;height:64px;border:1px solid #dce5f1;border-radius:17px;background:linear-gradient(180deg,#fff,#f7faff);overflow:hidden}
-.kx-app .bar{height:14px;background:#eff3f8}.kx-app .bar::before{content:"";position:absolute;left:11px;top:5px;width:20px;height:5px;border-radius:999px;background:#bcc7d6}
-.kx-app .sidebar{position:absolute;left:0;top:14px;bottom:0;width:24px;background:#eef3f8}.kx-app .pill{position:absolute;left:34px;right:10px;height:13px;border-radius:999px;background:#dce8fb}.kx-app .p1{top:28px}.kx-app .p2{top:49px}
-
-/* Artikel */
-.kx-article .sheet{position:absolute;left:12px;top:4px;width:70px;height:88px;border:1px solid #dce5f1;border-radius:14px;background:#fff;overflow:hidden}.kx-article .hero-line{height:30px;background:linear-gradient(135deg,#0d6ce8,#82c3ff)}.kx-article .text{height:6px;margin:9px 11px 0;border-radius:999px;background:#cad5e5}.kx-article .w2{width:45px}.kx-article .w3{width:34px}
-
-/* Hot News */
-.kx-news .tile{position:absolute;left:11px;top:8px;width:72px;height:72px;border-radius:22px;background:linear-gradient(135deg,#ff695a,#ff866f);color:white;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;letter-spacing:.11em;box-shadow:0 14px 22px rgba(255,105,90,.18)}
-
-/* Ruang Belajar */
-.kx-learning .monitor{position:absolute;left:5px;top:11px;width:84px;height:65px;border:1px solid #dce5f1;border-radius:17px;background:linear-gradient(180deg,#fff,#f8fbff)}.kx-learning .play{position:absolute;left:39px;top:32px;width:0;height:0;border-left:16px solid #0d6ce8;border-top:10px solid transparent;border-bottom:10px solid transparent}.kx-learning .base{position:absolute;left:26px;bottom:8px;width:44px;height:7px;border-radius:999px;background:#c5cfde}
-
-@media (max-width: 1080px) {
-  .hero-visual.hero-explore-visual { width: 100% !important; }
-  .kabayan-explore-rail {
-    display:flex;
-    justify-content:flex-start;
-    gap:24px;
-    overflow-x:auto;
-    overscroll-behavior-inline:contain;
-    scroll-snap-type:x proximity;
-    -webkit-overflow-scrolling:touch;
-    padding:4px 26px 14px;
-    scrollbar-width:none;
-  }
-  .kabayan-explore-rail::-webkit-scrollbar{display:none}
-  .kabayan-explore-item{flex:0 0 118px;scroll-snap-align:start}
-  .kabayan-explore-label{font-size:17px}
+.hero-book-image::after {
+  width: 205px;
+  height: 32px;
 }
 
 @media (max-width: 680px) {
-  .hero-visual.hero-explore-visual { margin-top: 34px !important; }
-  .kabayan-explore-title { text-align:left; padding:0 22px; margin-bottom:22px; font-size:24px; }
-  .kabayan-explore-rail { gap:18px; padding-inline:20px; }
-  .kabayan-explore-item { flex-basis:104px; }
-  .kabayan-explore-figure { height:92px; margin-bottom:10px; }
-  .kx-mockup { transform:scale(.90); }
-  .kabayan-explore-label { font-size:15px; white-space:normal; }
-}
-</style>
-
-
-<style id="kabayanHeroWordRotateOverrides">
-.hero {
-  padding-bottom: clamp(32px, 4vw, 56px) !important;
-}
-
-.hero-copy {
-  max-width: 900px;
-}
-
-.hero-copy h1 {
-  margin-bottom: 16px;
-}
-
-.hero-rotating-gradient {
-  display: block;
-  min-height: 1.08em;
-}
-
-#heroRotatingWord {
-  display: block;
-  width: max-content;
-  max-width: 100%;
-  min-width: 5.6ch;
-  margin: 0 auto;
-  background: linear-gradient(90deg, #093b91 2%, #0071e3 42%, #25a6d9 68%, #ffb800 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-  transition: opacity .26s ease, transform .26s ease;
-  will-change: opacity, transform;
-}
-
-#heroRotatingWord.is-switching {
-  opacity: 0;
-  transform: translateY(8px);
-}
-
-.hero-description {
-  max-width: 930px;
-  margin-bottom: 26px;
-}
-
-.hero-actions-single {
-  justify-content: center;
-  gap: 0;
-}
-
-.hero-actions-single .button {
-  min-width: 214px;
-}
-
-.hero-visual.hero-explore-visual {
-  margin-top: clamp(26px, 3vw, 36px) !important;
-}
-
-.hero-explore-visual .hero-glow {
-  bottom: -38px;
-  width: min(900px, 84vw);
-  height: 220px;
-  opacity: .58;
-  filter: blur(24px);
-}
-
-.kabayan-explore-title {
-  margin: 0 0 clamp(16px, 2vw, 24px);
-  font-size: clamp(22px, 2.2vw, 32px);
-}
-
-.kabayan-explore-rail {
-  gap: clamp(10px, 1vw, 16px);
-  padding: 0 10px 6px;
-}
-
-.kabayan-explore-figure {
-  height: clamp(72px, 6.4vw, 90px);
-  margin: 0 auto 10px;
-}
-
-.kx-mockup {
-  width: 72px;
-  height: 78px;
-  filter: drop-shadow(0 11px 14px rgba(24, 45, 78, .10));
-}
-
-.kabayan-explore-label {
-  font-size: clamp(13px, 1.12vw, 18px);
-}
-
-.kabayan-explore-note {
-  margin-top: 5px;
-  font-size: 11px;
-}
-
-/* scaled colored mockups */
-.kx-form .paper { width: 49px; height: 66px; border-radius: 10px; }
-.kx-form .paper.back { left: 8px; top: 10px; }
-.kx-form .paper.front { right: 8px; top: 4px; }
-.kx-form .line { left: 10px; height: 5px; }
-.kx-form .l1{top:16px;width:30px}.kx-form .l2{top:28px;width:35px}.kx-form .l3{top:40px;width:28px}.kx-form .l4{top:52px;width:22px}
-
-.kx-book .cover { left: 15px; top: 4px; width: 48px; height: 68px; border-radius: 8px 12px 12px 8px; }
-.kx-book .cover::before { left: 21px; top: 14px; width: 6px; height: 36px; }
-.kx-book .cover::after { right: 8px; bottom: 13px; width: 20px; height: 6px; box-shadow: 0 -11px 0 rgba(255,255,255,.65); }
-
-.kx-calc .body { left: 11px; top: 3px; width: 52px; height: 72px; border-radius: 16px; }
-.kx-calc .display { left: 8px; right: 8px; top: 9px; height: 16px; font-size: 7px; }
-.kx-calc .keys { left: 10px; right: 10px; bottom: 12px; gap: 6px; }
-.kx-calc .keys i { height: 10px; }
-
-.kx-xml .file { top: 22px; width: 33px; height: 38px; border-radius: 10px; font-size: 10px; }
-.kx-xml .connector { left: 29px; top: 39px; width: 14px; }
-
-.kx-app .window { left: 1px; top: 12px; width: 70px; height: 50px; border-radius: 14px; }
-.kx-app .bar { height: 11px; }
-.kx-app .bar::before { left: 9px; top: 4px; width: 16px; height: 4px; }
-.kx-app .sidebar { top: 11px; width: 18px; }
-.kx-app .pill { left: 26px; right: 8px; height: 10px; }
-.kx-app .p1 { top: 21px; }
-.kx-app .p2 { top: 37px; }
-
-.kx-article .sheet { left: 8px; top: 3px; width: 56px; height: 72px; border-radius: 12px; }
-.kx-article .hero-line { height: 24px; }
-.kx-article .text { height: 5px; margin: 8px 9px 0; }
-.kx-article .w2 { width: 36px; }
-.kx-article .w3 { width: 28px; }
-
-.kx-news .tile { left: 7px; top: 6px; width: 58px; height: 58px; border-radius: 18px; font-size: 11px; }
-
-.kx-learning .monitor { left: 2px; top: 10px; width: 68px; height: 52px; border-radius: 14px; }
-.kx-learning .play { left: 31px; top: 25px; border-left: 13px solid #0d6ce8; border-top: 8px solid transparent; border-bottom: 8px solid transparent; }
-.kx-learning .base { left: 20px; bottom: 6px; width: 34px; height: 6px; }
-
-@media (max-width: 1080px) {
-  .hero-visual.hero-explore-visual { margin-top: 30px !important; }
-  .kabayan-explore-rail {
-    display: flex;
-    justify-content: flex-start;
-    gap: 18px;
-    overflow-x: auto;
-    scroll-snap-type: x proximity;
-    padding: 0 24px 8px;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-  }
-  .kabayan-explore-rail::-webkit-scrollbar { display:none; }
-  .kabayan-explore-item { flex: 0 0 92px; scroll-snap-align: start; }
-}
-
-@media (max-width: 734px) {
-  .hero {
-    padding-bottom: 26px !important;
-  }
-
-  .hero-copy h1 {
-    margin-bottom: 12px;
-  }
-
-  .hero-description {
-    margin-bottom: 20px;
-  }
-
-  .hero-actions-single .button {
-    width: 100%;
-    max-width: 240px;
-  }
-
-  .hero-visual.hero-explore-visual {
-    margin-top: 24px !important;
-  }
-
-  .kabayan-explore-title {
-    text-align: center;
-    padding: 0 16px;
-    margin-bottom: 18px;
-  }
-
-  .kabayan-explore-item { flex-basis: 88px; }
-  .kabayan-explore-figure { height: 70px; }
-  .kabayan-explore-label { font-size: 14px; }
-  .kabayan-explore-note { font-size: 10px; }
-}
-</style>
-
-
-<style id="kabayanHeroCleanupOverrides">
-main {
-  padding-top: var(--nav-height);
-}
-.hero {
-  padding-top: clamp(44px, 6vw, 76px);
-}
-.kabayan-explore-title {
-  display: none !important;
-}
-.hero-visual.hero-explore-visual {
-  margin-top: clamp(22px, 2.8vw, 32px) !important;
-}
-.kabayan-explore-rail {
-  padding-top: 0;
-}
-</style>
-
-<style id="kabayanCenterFocusSlideshow">
-.kabayan-explore-carousel {
-  position: relative;
-  width: 100%;
-  max-width: 980px;
-  margin: 0 auto;
-  outline: none;
-}
-
-.kabayan-carousel-shell {
-  position: relative;
-  width: 100%;
-  min-height: 176px;
-}
-
-.kabayan-explore-carousel .kabayan-explore-rail {
-  position: relative !important;
-  display: block !important;
-  width: 100% !important;
-  height: 176px;
-  padding: 0 !important;
-  overflow: hidden !important;
-}
-
-.kabayan-explore-carousel .kabayan-explore-item {
-  position: absolute;
-  left: 50%;
-  top: 6px;
-  width: 138px;
-  min-width: 0;
-  margin: 0;
-  opacity: 0;
-  pointer-events: none;
-  transform: translateX(-50%) scale(.42);
-  transform-origin: 50% 48%;
-  transition:
-    transform .68s cubic-bezier(.22,1,.36,1),
-    opacity .38s ease,
-    filter .38s ease;
-  will-change: transform, opacity;
-  z-index: 1;
-}
-
-.kabayan-explore-carousel .kabayan-explore-figure {
-  height: 106px !important;
-  margin-bottom: 8px !important;
-  transform: none !important;
-}
-
-.kabayan-explore-carousel .kx-mockup {
-  width: 78px !important;
-  height: 84px !important;
-  transform: none !important;
-  transition: filter .38s ease;
-}
-
-.kabayan-explore-carousel .kabayan-explore-label {
-  font-size: 16px !important;
-  transition: font-size .45s ease, opacity .35s ease;
-}
-
-.kabayan-explore-carousel .kabayan-explore-note {
-  font-size: 10px !important;
-}
-
-.kabayan-explore-carousel .is-active {
-  z-index: 8;
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateX(-50%) scale(1.22);
-  filter: none;
-}
-
-.kabayan-explore-carousel .is-prev {
-  z-index: 5;
-  opacity: .68;
-  pointer-events: auto;
-  transform: translateX(-50%) translateX(-200px) scale(.76);
-  filter: saturate(.9);
-}
-
-.kabayan-explore-carousel .is-next {
-  z-index: 5;
-  opacity: .68;
-  pointer-events: auto;
-  transform: translateX(-50%) translateX(200px) scale(.76);
-  filter: saturate(.9);
-}
-
-.kabayan-explore-carousel .is-far-prev {
-  z-index: 2;
-  opacity: .34;
-  pointer-events: auto;
-  transform: translateX(-50%) translateX(-350px) scale(.53);
-  filter: saturate(.75);
-}
-
-.kabayan-explore-carousel .is-far-next {
-  z-index: 2;
-  opacity: .34;
-  pointer-events: auto;
-  transform: translateX(-50%) translateX(350px) scale(.53);
-  filter: saturate(.75);
-}
-
-.kabayan-explore-carousel .is-active .kabayan-explore-label {
-  font-size: 18px !important;
-}
-
-.kabayan-explore-carousel .is-prev .kabayan-explore-label,
-.kabayan-explore-carousel .is-next .kabayan-explore-label {
-  opacity: .88;
-  font-size: 14px !important;
-}
-
-.kabayan-explore-carousel .is-far-prev .kabayan-explore-label,
-.kabayan-explore-carousel .is-far-next .kabayan-explore-label {
-  opacity: .62;
-  font-size: 12px !important;
-}
-
-.kabayan-carousel-arrow {
-  position: absolute;
-  top: 62px;
-  z-index: 12;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 38px;
-  height: 38px;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background: rgba(232,232,237,.88);
-  color: #1d1d1f;
-  font: inherit;
-  font-size: 28px;
-  line-height: 1;
-  cursor: pointer;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  transition: background .2s ease, transform .2s ease;
-}
-
-.kabayan-carousel-arrow:hover {
-  background: rgba(217,217,222,.96);
-  transform: scale(1.05);
-}
-
-.kabayan-carousel-prev { left: 8px; }
-.kabayan-carousel-next { right: 8px; }
-
-.kabayan-carousel-dots {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 7px;
-  min-height: 20px;
-  margin-top: 2px;
-}
-
-.kabayan-carousel-dot {
-  width: 7px;
-  height: 7px;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background: #c7c7cc;
-  cursor: pointer;
-  transition: width .25s ease, border-radius .25s ease, background .25s ease;
-}
-
-.kabayan-carousel-dot.active {
-  width: 22px;
-  border-radius: 999px;
-  background: #6e6e73;
-}
-
-@media (max-width: 760px) {
-  .kabayan-carousel-shell,
-  .kabayan-explore-carousel .kabayan-explore-rail {
-    min-height: 150px;
-    height: 150px;
-  }
-
-  .kabayan-explore-carousel .kabayan-explore-item {
-    width: 112px;
-    top: 4px;
-  }
-
-  .kabayan-explore-carousel .kabayan-explore-figure {
-    height: 88px !important;
-  }
-
-  .kabayan-explore-carousel .kx-mockup {
-    width: 68px !important;
-    height: 74px !important;
-  }
-
-  .kabayan-explore-carousel .is-active {
-    transform: translateX(-50%) scale(1.12);
-  }
-
-  .kabayan-explore-carousel .is-prev {
-    opacity: .48;
-    transform: translateX(-50%) translateX(-118px) scale(.62);
-  }
-
-  .kabayan-explore-carousel .is-next {
-    opacity: .48;
-    transform: translateX(-50%) translateX(118px) scale(.62);
-  }
-
-  .kabayan-explore-carousel .is-far-prev,
-  .kabayan-explore-carousel .is-far-next {
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  .kabayan-explore-carousel .is-active .kabayan-explore-label {
-    font-size: 16px !important;
-  }
-
-  .kabayan-explore-carousel .is-prev .kabayan-explore-label,
-  .kabayan-explore-carousel .is-next .kabayan-explore-label {
-    font-size: 12px !important;
-  }
-
-  .kabayan-carousel-arrow {
-    top: 48px;
-    width: 34px;
-    height: 34px;
-    font-size: 24px;
-  }
-
-  .kabayan-carousel-prev { left: 2px; }
-  .kabayan-carousel-next { right: 2px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .kabayan-explore-carousel .kabayan-explore-item,
-  .kabayan-carousel-dot,
-  .kabayan-carousel-arrow {
-    transition: none !important;
-  }
-}
-</style>
-
-
-<style id="kabayanFuturisticMockupOverrides">
-/* Futuristic visual language for the center-focus mockup carousel.
-   Mechanics and content stay unchanged; only the mockups are redesigned. */
-.kabayan-explore-carousel {
-  --kx-ink: #091426;
-  --kx-blue: #1478ff;
-  --kx-cyan: #57d7ff;
-  --kx-violet: #7c6cff;
-  --kx-glass: rgba(255,255,255,.60);
-  --kx-line: rgba(95,169,255,.42);
-}
-
-.kabayan-explore-carousel .kabayan-explore-figure {
-  isolation: isolate;
-}
-
-.kabayan-explore-carousel .kabayan-explore-figure::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 116px;
-  height: 82px;
-  border-radius: 28px;
-  transform: translate(-50%, -50%) scale(.82);
-  background:
-    radial-gradient(circle at 72% 28%, rgba(87,215,255,.26), transparent 35%),
-    linear-gradient(145deg, rgba(255,255,255,.72), rgba(237,246,255,.36));
-  border: 1px solid rgba(123,181,255,.24);
-  box-shadow:
-    0 16px 34px rgba(24,72,140,.08),
-    inset 0 1px 0 rgba(255,255,255,.78);
-  opacity: .54;
-  z-index: -2;
-  transition: transform .55s cubic-bezier(.22,1,.36,1), opacity .35s ease, box-shadow .35s ease;
-}
-
-.kabayan-explore-carousel .is-active .kabayan-explore-figure::before {
-  transform: translate(-50%, -50%) scale(1);
-  opacity: 1;
-  box-shadow:
-    0 18px 42px rgba(23,108,230,.14),
-    0 0 42px rgba(87,215,255,.12),
-    inset 0 1px 0 rgba(255,255,255,.9);
-}
-
-.kabayan-explore-carousel .kabayan-explore-figure::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: 2px;
-  width: 70px;
-  height: 10px;
-  border-radius: 999px;
-  transform: translateX(-50%);
-  background: rgba(16,74,155,.14);
-  filter: blur(7px);
-  opacity: .48;
-  z-index: -3;
-}
-
-.kabayan-explore-carousel .kx-mockup {
-  filter: drop-shadow(0 14px 18px rgba(24,63,119,.12)) !important;
-}
-
-/* FORMULIR — floating transparent documents */
-.kabayan-explore-carousel .kx-form .paper {
-  border: 1px solid rgba(91,171,255,.48) !important;
-  background:
-    linear-gradient(160deg, rgba(255,255,255,.88), rgba(223,242,255,.48)) !important;
-  box-shadow:
-    0 12px 28px rgba(29,94,170,.13),
-    inset 0 1px 0 rgba(255,255,255,.92) !important;
-  backdrop-filter: blur(9px);
-  -webkit-backdrop-filter: blur(9px);
-}
-.kabayan-explore-carousel .kx-form .paper.back {
-  transform: rotate(-9deg) translateY(3px) !important;
-  opacity: .76;
-}
-.kabayan-explore-carousel .kx-form .paper.front {
-  transform: rotate(5deg) translateY(-2px) !important;
-}
-.kabayan-explore-carousel .kx-form .line {
-  height: 4px !important;
-  background: linear-gradient(90deg, rgba(20,120,255,.88), rgba(87,215,255,.34)) !important;
-  box-shadow: 0 0 8px rgba(87,215,255,.18);
-}
-.kabayan-explore-carousel .kx-form .paper.front::after {
-  content: "";
-  position: absolute;
-  right: 8px;
-  top: 8px;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #fff, #57d7ff 46%, #1478ff 100%);
-  box-shadow: 0 0 14px rgba(87,215,255,.5);
-}
-
-/* BUKU — translucent tech-book */
-.kabayan-explore-carousel .kx-book .cover {
-  border-radius: 13px 18px 18px 13px !important;
-  background:
-    linear-gradient(145deg, rgba(8,31,72,.97) 0%, rgba(20,120,255,.92) 56%, rgba(87,215,255,.74) 100%) !important;
-  border: 1px solid rgba(133,207,255,.52);
-  box-shadow:
-    inset 9px 0 0 rgba(1,17,43,.30),
-    inset 0 1px 0 rgba(255,255,255,.24),
-    0 15px 30px rgba(20,88,184,.22) !important;
-  overflow: hidden;
-}
-.kabayan-explore-carousel .kx-book .cover::before {
-  left: 19px !important;
-  top: 12px !important;
-  width: 28px !important;
-  height: 28px !important;
-  border-radius: 10px !important;
-  background:
-    linear-gradient(135deg, rgba(255,255,255,.28), rgba(87,215,255,.05)) !important;
-  border: 1px solid rgba(255,255,255,.24);
-  box-shadow: 0 0 18px rgba(87,215,255,.26);
-}
-.kabayan-explore-carousel .kx-book .cover::after {
-  right: 10px !important;
-  bottom: 13px !important;
-  width: 30px !important;
-  height: 4px !important;
-  border-radius: 999px !important;
-  background: rgba(255,255,255,.92) !important;
-  box-shadow:
-    0 -10px 0 rgba(255,255,255,.48),
-    0 -20px 0 rgba(255,255,255,.20),
-    0 0 12px rgba(87,215,255,.3) !important;
-}
-
-/* KALKULATOR — glossy dark panel */
-.kabayan-explore-carousel .kx-calc .body {
-  border-radius: 21px !important;
-  background:
-    linear-gradient(155deg, rgba(8,20,41,.98), rgba(18,48,88,.96)) !important;
-  border: 1px solid rgba(94,178,255,.34);
-  box-shadow:
-    0 15px 32px rgba(1,17,43,.28),
-    inset 0 1px 0 rgba(255,255,255,.10) !important;
-}
-.kabayan-explore-carousel .kx-calc .display {
-  border: 1px solid rgba(87,215,255,.28);
-  background:
-    linear-gradient(90deg, rgba(20,120,255,.28), rgba(87,215,255,.10)) !important;
-  color: #dff8ff !important;
-  letter-spacing: .06em;
-  box-shadow: inset 0 0 12px rgba(87,215,255,.08), 0 0 10px rgba(87,215,255,.08);
-}
-.kabayan-explore-carousel .kx-calc .keys i {
-  background:
-    linear-gradient(145deg, rgba(255,255,255,.16), rgba(75,137,210,.18)) !important;
-  border: 1px solid rgba(121,187,255,.18);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.10);
-}
-.kabayan-explore-carousel .kx-calc .keys i:nth-child(3n) {
-  background: linear-gradient(145deg, rgba(20,120,255,.72), rgba(87,215,255,.48)) !important;
-  box-shadow: 0 0 10px rgba(87,215,255,.16);
-}
-
-/* CONVERTER — twin floating data capsules */
-.kabayan-explore-carousel .kx-xml .file {
-  border-radius: 15px !important;
-  border: 1px solid rgba(148,210,255,.38);
-  box-shadow:
-    0 12px 24px rgba(20,82,170,.18),
-    inset 0 1px 0 rgba(255,255,255,.28);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
-.kabayan-explore-carousel .kx-xml .xls {
-  background: linear-gradient(145deg, rgba(9,44,78,.96), rgba(33,188,170,.84)) !important;
-}
-.kabayan-explore-carousel .kx-xml .xml {
-  background: linear-gradient(145deg, rgba(13,50,103,.98), rgba(58,126,255,.90)) !important;
-}
-.kabayan-explore-carousel .kx-xml .connector {
-  height: 3px !important;
-  border-radius: 999px;
-  background: linear-gradient(90deg, #43cfff, #6d8cff) !important;
-  box-shadow: 0 0 12px rgba(87,215,255,.55);
-}
-.kabayan-explore-carousel .kx-xml .connector::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 8px;
-  height: 8px;
-  transform: translate(-50%,-50%);
-  border-radius: 50%;
-  background: #dffaff;
-  box-shadow: 0 0 12px rgba(87,215,255,.85);
-}
-.kabayan-explore-carousel .kx-xml .connector::after {
-  border-left-color: #6d8cff !important;
-}
-
-/* APLIKASI — floating command window */
-.kabayan-explore-carousel .kx-app .window {
-  border: 1px solid rgba(97,176,255,.38) !important;
-  background:
-    linear-gradient(145deg, rgba(255,255,255,.82), rgba(220,241,255,.38)) !important;
-  box-shadow:
-    0 15px 30px rgba(21,76,148,.15),
-    inset 0 1px 0 rgba(255,255,255,.92) !important;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-.kabayan-explore-carousel .kx-app .bar {
-  background: linear-gradient(90deg, rgba(9,28,61,.94), rgba(28,77,137,.88)) !important;
-}
-.kabayan-explore-carousel .kx-app .bar::before {
-  background: linear-gradient(90deg, #57d7ff, #7c6cff) !important;
-  box-shadow: 0 0 8px rgba(87,215,255,.38);
-}
-.kabayan-explore-carousel .kx-app .sidebar {
-  background: linear-gradient(180deg, rgba(15,55,111,.94), rgba(16,92,174,.82)) !important;
-}
-.kabayan-explore-carousel .kx-app .pill {
-  background: linear-gradient(90deg, rgba(20,120,255,.34), rgba(87,215,255,.12)) !important;
-  border: 1px solid rgba(96,175,255,.18);
-}
-
-/* ARTIKEL — luminous editorial panel */
-.kabayan-explore-carousel .kx-article .sheet {
-  border: 1px solid rgba(99,178,255,.42) !important;
-  background: linear-gradient(160deg, rgba(255,255,255,.90), rgba(226,243,255,.46)) !important;
-  box-shadow:
-    0 15px 30px rgba(20,77,148,.14),
-    inset 0 1px 0 rgba(255,255,255,.94);
-  backdrop-filter: blur(9px);
-  -webkit-backdrop-filter: blur(9px);
-}
-.kabayan-explore-carousel .kx-article .hero-line {
-  background:
-    radial-gradient(circle at 78% 24%, rgba(87,215,255,.8), transparent 30%),
-    linear-gradient(135deg, #071a38, #1478ff 62%, #57d7ff) !important;
-}
-.kabayan-explore-carousel .kx-article .text {
-  height: 4px !important;
-  background: linear-gradient(90deg, rgba(13,74,146,.64), rgba(87,215,255,.22)) !important;
-}
-
-/* HOT NEWS — futuristic alert tile */
-.kabayan-explore-carousel .kx-news .tile {
-  border-radius: 24px !important;
-  background:
-    radial-gradient(circle at 25% 20%, rgba(120,225,255,.42), transparent 32%),
-    linear-gradient(145deg, #09152c, #244e9b 58%, #7c6cff) !important;
-  border: 1px solid rgba(144,203,255,.36);
-  color: #f5fbff !important;
-  box-shadow:
-    0 15px 30px rgba(31,62,138,.22),
-    inset 0 1px 0 rgba(255,255,255,.18),
-    0 0 20px rgba(124,108,255,.10) !important;
-  letter-spacing: .16em !important;
-}
-.kabayan-explore-carousel .kx-news .tile::before {
-  content: "";
-  position: absolute;
-  right: 9px;
-  top: 9px;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #57d7ff;
-  box-shadow: 0 0 12px rgba(87,215,255,.78);
-}
-
-/* RUANG BELAJAR — glass display + luminous play */
-.kabayan-explore-carousel .kx-learning .monitor {
-  border: 1px solid rgba(95,175,255,.44) !important;
-  background:
-    linear-gradient(145deg, rgba(255,255,255,.82), rgba(214,239,255,.40)) !important;
-  box-shadow:
-    0 15px 30px rgba(22,78,148,.15),
-    inset 0 1px 0 rgba(255,255,255,.92);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-.kabayan-explore-carousel .kx-learning .monitor::after {
-  content: "";
-  position: absolute;
-  inset: 8px;
-  border-radius: 10px;
-  background:
-    radial-gradient(circle at 72% 22%, rgba(87,215,255,.33), transparent 35%),
-    linear-gradient(145deg, rgba(8,27,60,.96), rgba(18,67,128,.88));
-}
-.kabayan-explore-carousel .kx-learning .play {
-  z-index: 2;
-  border-left-color: #dffaff !important;
-  filter: drop-shadow(0 0 7px rgba(87,215,255,.80));
-}
-.kabayan-explore-carousel .kx-learning .base {
-  background: linear-gradient(90deg, rgba(20,120,255,.5), rgba(87,215,255,.24)) !important;
-}
-
-/* Active item gets a restrained neon lift; side items remain quieter. */
-.kabayan-explore-carousel .is-active .kx-mockup {
-  filter:
-    drop-shadow(0 18px 20px rgba(19,72,146,.16))
-    drop-shadow(0 0 16px rgba(87,215,255,.11)) !important;
-}
-
-.kabayan-explore-carousel .is-prev .kabayan-explore-figure::before,
-.kabayan-explore-carousel .is-next .kabayan-explore-figure::before {
-  opacity: .56;
-}
-
-.kabayan-explore-carousel .is-far-prev .kabayan-explore-figure::before,
-.kabayan-explore-carousel .is-far-next .kabayan-explore-figure::before {
-  opacity: .28;
-}
-
-@media (max-width: 760px) {
-  .kabayan-explore-carousel .kabayan-explore-figure::before {
-    width: 100px;
-    height: 72px;
-    border-radius: 24px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .kabayan-explore-carousel .kabayan-explore-figure::before {
-    transition: none;
-  }
-}
-</style>
-
-
-<style id="kabayanFullscreenHeroFinal">
-/* Hero pertama memenuhi satu viewport desktop: navbar + hero = satu layar. */
-.hero {
-  height: calc(100svh - var(--nav-height)) !important;
-  min-height: 620px !important;
-  max-height: none !important;
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: center !important;
-  padding: clamp(24px, 3.2vh, 42px) 20px clamp(18px, 2.5vh, 32px) !important;
-  overflow: hidden !important;
-}
-
-.hero-copy {
-  flex: 0 0 auto;
-}
-
-.hero .eyebrow {
-  margin-bottom: 7px;
-  font-size: clamp(15px, 1.2vw, 18px);
-}
-
-.hero h1 {
-  font-size: clamp(50px, 6.25vw, 84px) !important;
-  line-height: .95 !important;
-}
-
-#heroRotatingWord {
-  min-width: 0 !important;
-}
-
-.hero-description {
-  max-width: 760px !important;
-  margin-top: clamp(14px, 1.9vh, 22px) !important;
-  margin-bottom: 0 !important;
-  font-size: clamp(17px, 1.55vw, 22px) !important;
-  line-height: 1.3 !important;
-}
-
-.hero-actions {
-  margin-top: clamp(16px, 2vh, 24px) !important;
-}
-
-.hero-actions-single .button {
-  min-width: 196px !important;
-}
-
-.hero-visual.hero-explore-visual {
-  flex: 0 0 auto;
-  width: min(1040px, 100%) !important;
-  margin-top: clamp(18px, 2.5vh, 30px) !important;
-}
-
-.kabayan-explore-carousel {
-  max-width: 940px !important;
-}
-
-.kabayan-carousel-shell {
-  min-height: 158px !important;
-}
-
-.kabayan-explore-carousel .kabayan-explore-rail {
-  height: 158px !important;
-}
-
-.kabayan-explore-carousel .kabayan-explore-item {
-  top: 2px !important;
-}
-
-.kabayan-explore-carousel .kabayan-explore-figure {
-  height: 96px !important;
-  margin-bottom: 5px !important;
-}
-
-.kabayan-explore-carousel .kx-mockup {
-  width: 72px !important;
-  height: 78px !important;
-}
-
-.kabayan-explore-carousel .is-active {
-  transform: translateX(-50%) scale(1.16) !important;
-}
-
-.kabayan-explore-carousel .is-prev {
-  transform: translateX(-50%) translateX(-190px) scale(.72) !important;
-}
-
-.kabayan-explore-carousel .is-next {
-  transform: translateX(-50%) translateX(190px) scale(.72) !important;
-}
-
-.kabayan-explore-carousel .is-far-prev {
-  transform: translateX(-50%) translateX(-330px) scale(.49) !important;
-}
-
-.kabayan-explore-carousel .is-far-next {
-  transform: translateX(-50%) translateX(330px) scale(.49) !important;
-}
-
-.kabayan-carousel-arrow {
-  top: 54px !important;
-}
-
-.kabayan-carousel-dots {
-  margin-top: 0 !important;
-}
-
-/* Laptop dengan layar rendah tetap muat tanpa mengorbankan keterbacaan. */
-@media (min-width: 761px) and (max-height: 720px) {
-  .hero {
-    min-height: 0 !important;
-    padding-top: 16px !important;
-    padding-bottom: 12px !important;
-  }
-  .hero .eyebrow {
-    margin-bottom: 4px;
-    font-size: 14px;
-  }
-  .hero h1 {
-    font-size: clamp(44px, 5.3vw, 68px) !important;
-  }
-  .hero-description {
-    margin-top: 10px !important;
-    font-size: 17px !important;
-  }
-  .hero-actions {
-    margin-top: 12px !important;
-  }
-  .hero-actions .button {
-    min-height: 40px !important;
-    padding-top: 8px !important;
-    padding-bottom: 8px !important;
-  }
-  .hero-visual.hero-explore-visual {
-    margin-top: 12px !important;
-  }
-  .kabayan-carousel-shell,
-  .kabayan-explore-carousel .kabayan-explore-rail {
-    min-height: 136px !important;
-    height: 136px !important;
-  }
-  .kabayan-explore-carousel .kabayan-explore-figure {
-    height: 82px !important;
-  }
-  .kabayan-explore-carousel .kx-mockup {
-    width: 64px !important;
-    height: 70px !important;
-  }
-  .kabayan-carousel-arrow {
-    top: 44px !important;
-  }
-}
-
-/* HP: tetap mengutamakan proporsi; jika layar sangat pendek, konten boleh tumbuh agar tidak terpotong. */
-@media (max-width: 760px) {
-  .hero {
-    height: auto !important;
-    min-height: calc(100svh - var(--nav-height)) !important;
-    justify-content: center !important;
-    padding: 34px 16px 26px !important;
-  }
-  .hero h1 {
-    font-size: clamp(44px, 14vw, 64px) !important;
-  }
-  .hero-description {
-    max-width: 520px !important;
-    margin-top: 15px !important;
-    font-size: 17px !important;
-  }
-  .hero-actions {
-    margin-top: 18px !important;
-  }
-  .hero-visual.hero-explore-visual {
-    margin-top: 24px !important;
-  }
-  .kabayan-carousel-shell,
-  .kabayan-explore-carousel .kabayan-explore-rail {
-    min-height: 145px !important;
-    height: 145px !important;
-  }
-  .kabayan-explore-carousel .kabayan-explore-figure {
-    height: 84px !important;
-  }
-}
-
-@supports not (height: 100svh) {
-  .hero {
-    height: calc(100vh - var(--nav-height)) !important;
-  }
-  @media (max-width: 760px) {
-    .hero {
-      height: auto !important;
-      min-height: calc(100vh - var(--nav-height)) !important;
-    }
-  }
-}
-</style>
-
-
-<style id="kabayanFullscreenHeroSpacingV2">
-/* Rebalance hero: less empty space above, more breathing room before carousel. */
-@media (min-width: 761px) {
-  .hero {
-    justify-content: flex-start !important;
-    padding-top: clamp(12px, 1.7vh, 22px) !important;
-    padding-bottom: clamp(14px, 1.8vh, 24px) !important;
-  }
-
-  .hero-copy {
-    margin-top: 0 !important;
-  }
-
-  .hero .eyebrow {
-    margin-top: 0 !important;
-  }
-
-  .hero-visual.hero-explore-visual {
-    width: min(1120px, 100%) !important;
-    margin-top: clamp(38px, 5.2vh, 56px) !important;
-  }
-
-  .kabayan-explore-carousel {
-    max-width: 1040px !important;
-  }
-
-  .kabayan-carousel-shell,
-  .kabayan-explore-carousel .kabayan-explore-rail {
-    min-height: 190px !important;
-    height: 190px !important;
-  }
-
-  .kabayan-explore-carousel .kabayan-explore-item {
-    top: 8px !important;
-  }
-
-  .kabayan-explore-carousel .kabayan-explore-figure {
-    height: 116px !important;
-    margin-bottom: 8px !important;
-  }
-
-  .kabayan-explore-carousel .kx-mockup {
-    width: 88px !important;
-    height: 96px !important;
-  }
-
-  .kabayan-explore-carousel .is-active {
-    transform: translateX(-50%) scale(1.28) !important;
-  }
-
-  .kabayan-explore-carousel .is-prev {
-    transform: translateX(-50%) translateX(-220px) scale(.80) !important;
+  .hero-book-image img {
+    width: min(270px, 64vw) !important;
+    max-height: 80% !important;
   }
 
-  .kabayan-explore-carousel .is-next {
-    transform: translateX(-50%) translateX(220px) scale(.80) !important;
+  .hero-book-image::after {
+    width: 175px;
+    height: 28px;
   }
-
-  .kabayan-explore-carousel .is-far-prev {
-    transform: translateX(-50%) translateX(-385px) scale(.54) !important;
-  }
-
-  .kabayan-explore-carousel .is-far-next {
-    transform: translateX(-50%) translateX(385px) scale(.54) !important;
-  }
-
-  .kabayan-explore-carousel .is-active .kabayan-explore-label {
-    font-size: 20px !important;
-  }
-
-  .kabayan-explore-carousel .is-prev .kabayan-explore-label,
-  .kabayan-explore-carousel .is-next .kabayan-explore-label {
-    font-size: 15px !important;
-  }
-
-  .kabayan-carousel-arrow {
-    top: 69px !important;
-  }
-
-  .kabayan-carousel-dots {
-    margin-top: 2px !important;
-  }
-}
-
-/* Short laptops: retain the hierarchy but scale down just enough to stay in one viewport. */
-@media (min-width: 761px) and (max-height: 720px) {
-  .hero {
-    justify-content: flex-start !important;
-    padding-top: 8px !important;
-    padding-bottom: 8px !important;
-  }
-
-  .hero-visual.hero-explore-visual {
-    margin-top: 28px !important;
-  }
-
-  .kabayan-carousel-shell,
-  .kabayan-explore-carousel .kabayan-explore-rail {
-    min-height: 164px !important;
-    height: 164px !important;
-  }
-
-  .kabayan-explore-carousel .kabayan-explore-figure {
-    height: 98px !important;
-  }
-
-  .kabayan-explore-carousel .kx-mockup {
-    width: 76px !important;
-    height: 84px !important;
-  }
-
-  .kabayan-explore-carousel .is-active {
-    transform: translateX(-50%) scale(1.22) !important;
-  }
-
-  .kabayan-explore-carousel .is-prev {
-    transform: translateX(-50%) translateX(-205px) scale(.76) !important;
-  }
-
-  .kabayan-explore-carousel .is-next {
-    transform: translateX(-50%) translateX(205px) scale(.76) !important;
-  }
-
-  .kabayan-explore-carousel .is-far-prev {
-    transform: translateX(-50%) translateX(-350px) scale(.50) !important;
-  }
-
-  .kabayan-explore-carousel .is-far-next {
-    transform: translateX(-50%) translateX(350px) scale(.50) !important;
-  }
-
-  .kabayan-carousel-arrow {
-    top: 56px !important;
-  }
-}
-
-@media (max-width: 760px) {
-  .hero {
-    justify-content: flex-start !important;
-    padding-top: 22px !important;
-  }
-
-  .hero-visual.hero-explore-visual {
-    margin-top: 34px !important;
-  }
-
-  .kabayan-carousel-shell,
-  .kabayan-explore-carousel .kabayan-explore-rail {
-    min-height: 165px !important;
-    height: 165px !important;
-  }
-
-  .kabayan-explore-carousel .kabayan-explore-figure {
-    height: 100px !important;
-  }
-
-  .kabayan-explore-carousel .kx-mockup {
-    width: 78px !important;
-    height: 86px !important;
-  }
-
-  .kabayan-explore-carousel .is-active {
-    transform: translateX(-50%) scale(1.20) !important;
-  }
-}
-</style>
-
-
-<style id="kabayanProductObjectIconOverrides">
-/* Alternative icon mockups: miniature product objects */
-.kabayan-explore-carousel .kabayan-explore-figure {
-  height: 118px !important;
-  margin-bottom: 10px !important;
-}
-
-.kabayan-explore-carousel .kx-mockup {
-  width: 96px !important;
-  height: 104px !important;
-  filter: drop-shadow(0 16px 16px rgba(18, 37, 70, .12));
-}
-
-.kabayan-explore-carousel .is-active .kx-mockup {
-  filter: drop-shadow(0 22px 22px rgba(18, 37, 70, .18));
-}
-
-/* Shared premium object styling */
-.kx-mockup * { box-sizing: border-box; }
-.kx-form .paper,
-.kx-book .cover,
-.kx-calc .body,
-.kx-xml .file,
-.kx-app .window,
-.kx-article .sheet,
-.kx-news .tile,
-.kx-learning .monitor {
-  box-shadow:
-    0 16px 24px rgba(19, 35, 64, .12),
-    0 1px 0 rgba(255,255,255,.84) inset;
-}
-
-/* FORMULIR: stacked paper object */
-.kx-form .paper {
-  position: absolute;
-  width: 64px;
-  height: 84px;
-  border-radius: 14px;
-  background: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
-  border: 1px solid #dbe5f0;
-}
-.kx-form .paper.back {
-  left: 7px;
-  top: 12px;
-  transform: rotate(-8deg);
-  opacity: .96;
-}
-.kx-form .paper.front {
-  right: 7px;
-  top: 6px;
-  transform: rotate(6deg);
-}
-.kx-form .paper.front::before,
-.kx-form .paper.back::before {
-  content: '';
-  position: absolute;
-  left: 0; right: 0; top: 0;
-  height: 14px;
-  border-radius: 14px 14px 0 0;
-  background: linear-gradient(90deg, #edf4ff, #f7fbff);
-  border-bottom: 1px solid rgba(216,226,239,.8);
-}
-.kx-form .paper.front::after {
-  content: '';
-  position: absolute;
-  right: -4px;
-  top: 8px;
-  width: 16px;
-  height: 18px;
-  border-radius: 0 10px 10px 10px;
-  background: linear-gradient(135deg, #5ca7ff, #0d6ce8);
-  box-shadow: 0 8px 12px rgba(13,108,232,.18);
-}
-.kx-form .line {
-  position: absolute;
-  left: 11px;
-  height: 6px;
-  border-radius: 999px;
-  background: rgba(197, 209, 227, .92);
-}
-.kx-form .l1 { top: 24px; width: 34px; }
-.kx-form .l2 { top: 36px; width: 40px; }
-.kx-form .l3 { top: 48px; width: 30px; }
-.kx-form .l4 { top: 60px; width: 22px; }
-
-/* BUKU: standing product book */
-.kx-book .cover {
-  position: absolute;
-  left: 18px;
-  top: 5px;
-  width: 58px;
-  height: 84px;
-  border-radius: 10px 14px 14px 10px;
-  background: linear-gradient(180deg, #1450d2 0%, #0d6ce8 48%, #77c1ff 100%);
-  transform: perspective(240px) rotateY(-12deg);
-  overflow: hidden;
-}
-.kx-book .cover::before {
-  content: '';
-  position: absolute;
-  left: 7px;
-  top: 0;
-  width: 10px;
-  height: 100%;
-  background: linear-gradient(180deg, rgba(255,255,255,.3), rgba(255,255,255,.12));
-}
-.kx-book .cover::after {
-  content: '';
-  position: absolute;
-  left: 22px;
-  right: 12px;
-  bottom: 16px;
-  height: 28px;
-  border-radius: 8px;
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.9), rgba(255,255,255,.9)) 0 0 / 70% 6px no-repeat,
-    linear-gradient(180deg, rgba(255,255,255,.72), rgba(255,255,255,.72)) 0 12px / 86% 5px no-repeat,
-    linear-gradient(180deg, rgba(255,255,255,.58), rgba(255,255,255,.58)) 0 22px / 52% 5px no-repeat;
-}
-.kx-book::before {
-  content: '';
-  position: absolute;
-  left: 14px;
-  top: 10px;
-  width: 58px;
-  height: 84px;
-  border-radius: 9px 12px 12px 9px;
-  background: linear-gradient(180deg, #ffffff 0%, #ecf5ff 100%);
-  transform: perspective(240px) rotateY(-18deg) translateX(3px);
-  z-index: -1;
-  box-shadow: 0 12px 18px rgba(31, 57, 96, .12);
-}
-
-/* KALKULATOR: dark premium calculator */
-.kx-calc .body {
-  position: absolute;
-  left: 18px;
-  top: 4px;
-  width: 60px;
-  height: 86px;
-  border-radius: 20px;
-  background: linear-gradient(180deg, #111827 0%, #16233c 100%);
-  border: 1px solid rgba(255,255,255,.08);
-}
-.kx-calc .body::before {
-  content: '';
-  position: absolute;
-  left: 10px;
-  right: 10px;
-  top: 10px;
-  height: 16px;
-  border-radius: 10px;
-  background: linear-gradient(180deg, rgba(75, 212, 220, .34), rgba(83, 184, 255, .16));
-  box-shadow: 0 0 18px rgba(78, 198, 255, .2);
-}
-.kx-calc .display {
-  position: absolute;
-  left: 14px;
-  right: 12px;
-  top: 14px;
-  color: #d7fbff;
-  font-size: 8px;
-  line-height: 1;
-  text-align: right;
-  font-weight: 700;
-  letter-spacing: .04em;
-}
-.kx-calc .keys {
-  position: absolute;
-  left: 10px;
-  right: 10px;
-  bottom: 12px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 6px;
-}
-.kx-calc .keys i {
-  display: block;
-  height: 11px;
-  border-radius: 999px;
-  background: linear-gradient(180deg, rgba(255,255,255,.2), rgba(255,255,255,.08));
-}
-.kx-calc .keys i:nth-child(3n) {
-  background: linear-gradient(180deg, rgba(80,186,255,.46), rgba(13,108,232,.26));
-}
-
-/* CONVERTER: two file objects */
-.kx-xml .file {
-  position: absolute;
-  top: 26px;
-  width: 34px;
-  height: 42px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: .04em;
-}
-.kx-xml .file.xls {
-  left: 10px;
-  background: linear-gradient(180deg, #1fa35f 0%, #137c46 100%);
-}
-.kx-xml .file.xml {
-  right: 10px;
-  background: linear-gradient(180deg, #1c8bff 0%, #1251dd 100%);
-}
-.kx-xml .file::before {
-  content: '';
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 10px;
-  height: 10px;
-  background: rgba(255,255,255,.28);
-  clip-path: polygon(0 0, 100% 0, 100% 100%);
-  border-radius: 0 12px 0 0;
-}
-.kx-xml .connector {
-  position: absolute;
-  left: 39px;
-  top: 46px;
-  width: 18px;
-  height: 4px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, #21b566, #1484f0);
-  box-shadow: 0 0 12px rgba(42, 153, 255, .24);
-}
-.kx-xml .connector::after {
-  content: '';
-  position: absolute;
-  right: -4px;
-  top: -4px;
-  border-left: 8px solid #1484f0;
-  border-top: 6px solid transparent;
-  border-bottom: 6px solid transparent;
-}
-
-/* APLIKASI: mini app window */
-.kx-app .window {
-  position: absolute;
-  left: 9px;
-  top: 16px;
-  width: 78px;
-  height: 58px;
-  border-radius: 16px;
-  background: linear-gradient(180deg, #ffffff 0%, #f5f9ff 100%);
-  border: 1px solid #d8e3f0;
-  overflow: hidden;
-}
-.kx-app .bar {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 13px;
-  background: linear-gradient(180deg, #eef4fc, #e9f0f9);
-  border-bottom: 1px solid rgba(219,229,241,.88);
-}
-.kx-app .bar::before {
-  content: '';
-  position: absolute;
-  left: 10px;
-  top: 4px;
-  width: 18px;
-  height: 5px;
-  border-radius: 999px;
-  background: rgba(154, 169, 191, .76);
-}
-.kx-app .sidebar {
-  position: absolute;
-  top: 13px;
-  left: 0;
-  bottom: 0;
-  width: 21px;
-  background: linear-gradient(180deg, #f5f8fc, #edf3fb);
-  border-right: 1px solid rgba(222,232,243,.9);
-}
-.kx-app .pill {
-  position: absolute;
-  left: 28px;
-  right: 8px;
-  height: 10px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, rgba(13,108,232,.14), rgba(13,108,232,.05));
-}
-.kx-app .p1 { top: 23px; }
-.kx-app .p2 { top: 40px; width: 30px; }
-.kx-app .window::after {
-  content: '';
-  position: absolute;
-  left: 28px;
-  top: 56px;
-  width: 18px;
-  height: 18px;
-  border-radius: 8px;
-  background: linear-gradient(135deg, #0d6ce8, #69b5ff);
-  box-shadow: 0 8px 12px rgba(13,108,232,.18);
-}
-
-/* ARTIKEL: editorial card */
-.kx-article .sheet {
-  position: absolute;
-  left: 14px;
-  top: 7px;
-  width: 68px;
-  height: 84px;
-  border-radius: 16px;
-  background: linear-gradient(180deg, #ffffff 0%, #f9fbff 100%);
-  border: 1px solid #dbe5f0;
-  overflow: hidden;
-}
-.kx-article .hero-line {
-  height: 30px;
-  background: linear-gradient(135deg, #1756d8, #7ac4ff);
-}
-.kx-article .hero-line::after {
-  content: '';
-  position: absolute;
-  right: 10px;
-  top: 8px;
-  width: 18px;
-  height: 14px;
-  border-radius: 8px;
-  background: rgba(255,255,255,.2);
-}
-.kx-article .text {
-  height: 6px;
-  margin: 10px 10px 0;
-  border-radius: 999px;
-  background: rgba(194, 206, 225, .95);
-}
-.kx-article .w2 { width: 38px; }
-.kx-article .w3 { width: 28px; }
-.kx-article .sheet::after {
-  content: '';
-  position: absolute;
-  left: 10px;
-  right: 10px;
-  bottom: 10px;
-  height: 16px;
-  border-radius: 10px;
-  background: rgba(13,108,232,.08);
-}
-
-/* HOT NEWS: vivid news tile */
-.kx-news .tile {
-  position: absolute;
-  left: 16px;
-  top: 12px;
-  width: 64px;
-  height: 64px;
-  border-radius: 20px;
-  background: linear-gradient(135deg, #ff7a59 0%, #ff5d5d 55%, #f53d7d 100%);
-  color: #fff;
-  font-size: 11px;
-  font-weight: 800;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  letter-spacing: .08em;
-}
-.kx-news .tile::before {
-  content: 'LIVE';
-  position: absolute;
-  top: -8px;
-  right: -10px;
-  min-width: 34px;
-  height: 18px;
-  padding: 0 6px;
-  border-radius: 999px;
-  background: #fff;
-  color: #ff5d5d;
-  font-size: 9px;
-  font-weight: 800;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 8px 12px rgba(28,49,82,.12);
-}
-
-/* RUANG BELAJAR: screen device */
-.kx-learning .monitor {
-  position: absolute;
-  left: 10px;
-  top: 16px;
-  width: 76px;
-  height: 54px;
-  border-radius: 16px;
-  background: linear-gradient(180deg, #ffffff 0%, #f4f9ff 100%);
-  border: 1px solid #d7e2ef;
-}
-.kx-learning .monitor::before {
-  content: '';
-  position: absolute;
-  left: 14px;
-  right: 14px;
-  top: 10px;
-  bottom: 14px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, rgba(13,108,232,.12), rgba(99,177,255,.22));
-}
-.kx-learning .play {
-  position: absolute;
-  left: 42px;
-  top: 37px;
-  width: 0;
-  height: 0;
-  border-left: 14px solid #0d6ce8;
-  border-top: 9px solid transparent;
-  border-bottom: 9px solid transparent;
-  filter: drop-shadow(0 6px 8px rgba(13,108,232,.18));
-}
-.kx-learning .base {
-  position: absolute;
-  left: 28px;
-  bottom: 10px;
-  width: 40px;
-  height: 6px;
-  border-radius: 999px;
-  background: linear-gradient(180deg, rgba(148,163,184,.48), rgba(148,163,184,.18));
-}
-
-@media (max-width: 734px) {
-  .kabayan-explore-carousel .kabayan-explore-item { width: 118px; }
-  .kabayan-explore-carousel .is-prev { transform: translateX(-50%) translateX(-124px) scale(.7); }
-  .kabayan-explore-carousel .is-next { transform: translateX(-50%) translateX(124px) scale(.7); }
-  .kabayan-explore-carousel .is-far-prev { transform: translateX(-50%) translateX(-212px) scale(.5); }
-  .kabayan-explore-carousel .is-far-next { transform: translateX(-50%) translateX(212px) scale(.5); }
-  .kabayan-explore-carousel .kabayan-explore-figure { height: 104px !important; }
-  .kabayan-explore-carousel .kx-mockup { width: 86px !important; height: 92px !important; }
 }
 </style>
 
@@ -5488,7 +3844,7 @@ main {
 <header class="site-nav">
 <div class="nav-inner">
 <a class="nav-brand" href="index.html">
-<img alt="Logo dhaniswara86" class="brand-logo" src="images/LogoASD.svg"/>
+<img class="brand-logo" src="images/LogoASD.svg" alt="Logo dhaniswara86"/>
 <span>| <strong>dhaniswara86</strong></span>
 </a>
 <nav aria-label="Navigasi utama" class="desktop-menu">
@@ -5501,7 +3857,16 @@ main {
 <a aria-haspopup="true" class="nav-menu-link nav-hotnews" data-nav-menu="hotnews" href="hotnews.html"><span aria-hidden="true" class="nav-hotnews-icon">🔥</span><span>Hot News</span></a>
 </nav>
 <div class="nav-actions">
-<button aria-controls="collectionMegaMenu" aria-expanded="false" aria-haspopup="true" aria-label="Lihat Koleksi" class="collection-search-trigger" id="collectionSearchTrigger" title="Lihat Koleksi" type="button">⌕</button>
+<button
+  aria-controls="collectionMegaMenu"
+  aria-expanded="false"
+  aria-haspopup="true"
+  aria-label="Lihat Koleksi"
+  class="collection-search-trigger"
+  id="collectionSearchTrigger"
+  title="Lihat Koleksi"
+  type="button"
+>⌕</button>
 <button aria-expanded="false" aria-label="Buka menu" class="menu-toggle" id="menuToggle" type="button">
           ☰
         </button>
@@ -5510,129 +3875,135 @@ main {
 </header>
 <div aria-hidden="true" class="nav-mega-backdrop" id="navMegaBackdrop"></div>
 <section aria-hidden="true" aria-label="Navigasi koleksi Kabayan" class="nav-mega-menu" id="navMegaMenu">
-<div class="nav-mega-inner">
-<div class="nav-mega-panel" data-nav-panel="buku">
-<div class="nav-mega-intro">
-<span class="nav-mega-kicker">Buku Digital</span>
-<h2>Belajar pajak dengan materi yang lebih terstruktur.</h2>
-<p>Modul, panduan, dan referensi perpajakan untuk Coretax, PPh, PPN, XML, dan aplikasi DJP.</p>
-<a class="nav-mega-main-link" href="buku.html">Lihat seluruh buku <span aria-hidden="true">›</span></a>
-</div>
-<div class="nav-mega-column">
-<p class="nav-mega-label">Pilihan terbaru</p>
-<a href="kap-kjs.html">KAP dan KJS Era Coretax</a>
-<a href="converter-xml-unifikasi.html">Converter XML PPh Unifikasi</a>
-<a href="converter-xml-2126.html">Converter XML PPh Pasal 21/26</a>
-</div>
-<div class="nav-mega-column">
-<p class="nav-mega-label">Referensi &amp; panduan</p>
-<a href="list-barang-jasa-faktur.html">Kode Barang &amp; Jasa Faktur Pajak</a>
-<a href="aktivasiakunkodjp.html">Aktivasi Akun &amp; KODJP</a>
-<a href="cermat-2126.html">Cermat Pemotongan PPh 21/26</a>
-</div>
-<div aria-label="Topik buku" class="nav-mega-tags">
-<span>Coretax</span><span>PPh</span><span>PPN</span><span>XML</span><span>DJP Online</span>
-</div>
-</div>
-<div class="nav-mega-panel" data-nav-panel="formulir">
-<div class="nav-mega-intro">
-<span class="nav-mega-kicker">Formulir Perpajakan</span>
-<h2>Dokumen berdasarkan kebutuhan administrasi.</h2>
-<p>Koleksi formulir dikelompokkan dalam registrasi, PKP, Bea Meterai, PBB, kuasa, SPT, surat pernyataan, restrukturisasi, dan pembukuan.</p>
-<a class="nav-mega-main-link" href="formulir.html">Lihat seluruh formulir <span aria-hidden="true">›</span></a>
-</div>
-<div class="nav-mega-column">
-<p class="nav-mega-label">Sering digunakan</p>
-<a href="surat-kuasa-khusus-wajib-pajak.html">Surat Kuasa Khusus Wajib Pajak</a>
-<a href="pernyataanumkm500juta.html">Pernyataan UMKM Rp500 Juta</a>
-<a href="surat-pernyataan-hibah.html">Surat Pernyataan Hibah</a>
-</div>
-<div class="nav-mega-column">
-<p class="nav-mega-label">Permohonan &amp; keterangan</p>
-<a href="permohonanskbpotput.html">Permohonan SKB PPh</a>
-<a href="formulir-pembatalan-surat-keterangan-penelitian-formal-kabayan.html">Pembatalan Penelitian Formal</a>
-<a href="formulir.html">Cari formulir lainnya</a>
-</div>
-<div aria-label="Kelompok formulir" class="nav-mega-tags">
-<span>Registrasi</span><span>PKP &amp; PPN</span><span>Bea Meterai</span><span>PBB</span><span>Kuasa</span><span>SPT</span>
-</div>
-</div>
-<div class="nav-mega-panel" data-nav-panel="aplikasi">
-<div class="nav-mega-intro">
-<span class="nav-mega-kicker">Aplikasi Perpajakan</span>
-<h2>Installer dan arsip aplikasi perpajakan.</h2>
-<p>Portal aplikasi lama untuk pengelolaan data dan pelaporan periode sebelum implementasi Coretax.</p>
-<a class="nav-mega-main-link" href="aplikasi.html">Buka portal aplikasi <span aria-hidden="true">›</span></a>
-</div>
-<div class="nav-mega-column">
-<p class="nav-mega-label">Kategori</p>
-<a href="aplikasi.html">e-SPT</a>
-<a href="aplikasi.html">e-Faktur</a>
-<a href="aplikasi.html">e-Bupot</a>
-</div>
-<div class="nav-mega-column">
-<p class="nav-mega-label">Lainnya</p>
-<a href="aplikasi.html">Perangkat pendukung</a>
-<a href="aplikasi.html">Arsip aplikasi</a>
-<a href="buku.html">Baca buku panduan</a>
-</div>
-<div aria-label="Jenis aplikasi" class="nav-mega-tags">
-<span>e-SPT</span><span>e-Faktur</span><span>e-Bupot</span><span>Pendukung</span><span>Arsip</span>
-</div>
-</div>
-<div class="nav-mega-panel" data-nav-panel="kalkulator">
-<div class="nav-mega-intro">
-<span class="nav-mega-kicker">Kalkulator Pajak</span>
-<h2>Hitung dan petakan kewajiban pajak lebih praktis.</h2>
-<p>Empat alat bantu utama untuk PPN, PPh Pasal 21, transaksi instansi pemerintah, dan pengembalian pendahuluan.</p>
-<a class="nav-mega-main-link" href="kalkulator.html">Lihat seluruh kalkulator <span aria-hidden="true">›</span></a>
-</div>
-<div class="nav-mega-column nav-mega-column-wide">
-<p class="nav-mega-label">Alat bantu utama</p>
-<a href="kalkulator-ppn-kabayan.html"><strong>PPN</strong><small>PPN umum dan DPP Nilai Lain.</small></a>
-<a href="kalkulator-pasal21.html"><strong>PPh Pasal 21</strong><small>Pegawai tetap dan tidak tetap.</small></a>
-</div>
-<div class="nav-mega-column nav-mega-column-wide">
-<p class="nav-mega-label">Pemetaan terpandu</p>
-<a href="pajak-instansi-satu-pintu.html"><strong>Pajak Instansi Pemerintah</strong><small>PPh, PPN, dan kondisi khusus belanja.</small></a>
-<a href="kalkulator-pengembalian-pendahuluan.html"><strong>Pengembalian Pendahuluan</strong><small>Kriteria, persyaratan, dan kredit pajak.</small></a>
-</div>
-</div>
-<div class="nav-mega-panel" data-nav-panel="artikel">
-<div class="nav-mega-intro">
-<span class="nav-mega-kicker">Artikel Pajak</span>
-<h2>Penjelasan ketentuan dalam bahasa yang lebih sederhana.</h2>
-<p>Artikel membahas administrasi, PPh, PPN, Coretax, UMKM, dan prosedur perpajakan.</p>
-<a class="nav-mega-main-link" href="artikel.html">Lihat seluruh artikel <span aria-hidden="true">›</span></a>
-</div>
-<div class="nav-mega-column nav-mega-featured">
-<p class="nav-mega-label">Pilihan editor</p>
-<a href="artikel-per8pj2026.html"><strong>PER-8/PJ/2026: Apa yang Berubah?</strong><small>Kode billing, pemindahbukuan, KAP/KJS, dan imbalan bunga.</small></a>
-</div>
-<div class="nav-mega-column">
-<p class="nav-mega-label">Topik</p>
-<div class="nav-mega-topic-list"><span>Administrasi</span><span>PPh</span><span>PPN</span><span>Coretax</span><span>UMKM</span><span>Prosedur Pajak</span></div>
-</div>
-</div>
-<div class="nav-mega-panel" data-nav-panel="hotnews">
-<div class="nav-mega-intro">
-<span class="nav-mega-kicker hot">Hot News</span>
-<h2>Informasi perpajakan yang perlu lebih cepat diketahui.</h2>
-<p>Pembaruan Coretax, regulasi, layanan, pengumuman, dan isu perpajakan terbaru.</p>
-<a class="nav-mega-main-link hot" href="hotnews.html">Lihat seluruh Hot News <span aria-hidden="true">›</span></a>
-</div>
-<div class="nav-mega-column nav-mega-featured">
-<p class="nav-mega-label">Terbaru</p>
-<a href="hotnews/2026/08/penundaan-pph22-marketplace/"><strong>PPh Pasal 22 Marketplace Ditunda</strong><small>Pemungutan mulai berlaku 1 November 2026.</small></a>
-<a href="hotnews/2026/08/coretax-role-baru-pph21-hanya-induk/"><strong>Coretax Tambah Role Baru PPh 21/26</strong><small>Data penghasilan pegawai lebih terlindungi.</small></a>
-</div>
-<div class="nav-mega-column">
-<p class="nav-mega-label">Jelajahi</p>
-<a href="hotnews-arsip.html">Arsip Hot News</a>
-<div class="nav-mega-topic-list"><span>Coretax</span><span>Regulasi</span><span>Layanan</span><span>Pengumuman</span></div>
-</div>
-</div>
-</div>
+  <div class="nav-mega-inner">
+
+    <div class="nav-mega-panel" data-nav-panel="buku">
+      <div class="nav-mega-intro">
+        <span class="nav-mega-kicker">Buku Digital</span>
+        <h2>Belajar pajak dengan materi yang lebih terstruktur.</h2>
+        <p>Modul, panduan, dan referensi perpajakan untuk Coretax, PPh, PPN, XML, dan aplikasi DJP.</p>
+        <a class="nav-mega-main-link" href="buku.html">Lihat seluruh buku <span aria-hidden="true">›</span></a>
+      </div>
+      <div class="nav-mega-column">
+        <p class="nav-mega-label">Pilihan terbaru</p>
+        <a href="kap-kjs.html">KAP dan KJS Era Coretax</a>
+        <a href="converter-xml-unifikasi.html">Converter XML PPh Unifikasi</a>
+        <a href="converter-xml-2126.html">Converter XML PPh Pasal 21/26</a>
+      </div>
+      <div class="nav-mega-column">
+        <p class="nav-mega-label">Referensi &amp; panduan</p>
+        <a href="list-barang-jasa-faktur.html">Kode Barang &amp; Jasa Faktur Pajak</a>
+        <a href="aktivasiakunkodjp.html">Aktivasi Akun &amp; KODJP</a>
+        <a href="cermat-2126.html">Cermat Pemotongan PPh 21/26</a>
+      </div>
+      <div class="nav-mega-tags" aria-label="Topik buku">
+        <span>Coretax</span><span>PPh</span><span>PPN</span><span>XML</span><span>DJP Online</span>
+      </div>
+    </div>
+
+    <div class="nav-mega-panel" data-nav-panel="formulir">
+      <div class="nav-mega-intro">
+        <span class="nav-mega-kicker">Formulir Perpajakan</span>
+        <h2>Dokumen berdasarkan kebutuhan administrasi.</h2>
+        <p>Koleksi formulir dikelompokkan dalam registrasi, PKP, Bea Meterai, PBB, kuasa, SPT, surat pernyataan, restrukturisasi, dan pembukuan.</p>
+        <a class="nav-mega-main-link" href="formulir.html">Lihat seluruh formulir <span aria-hidden="true">›</span></a>
+      </div>
+      <div class="nav-mega-column">
+        <p class="nav-mega-label">Sering digunakan</p>
+        <a href="surat-kuasa-khusus-wajib-pajak.html">Surat Kuasa Khusus Wajib Pajak</a>
+        <a href="pernyataanumkm500juta.html">Pernyataan UMKM Rp500 Juta</a>
+        <a href="surat-pernyataan-hibah.html">Surat Pernyataan Hibah</a>
+      </div>
+      <div class="nav-mega-column">
+        <p class="nav-mega-label">Permohonan &amp; keterangan</p>
+        <a href="permohonanskbpotput.html">Permohonan SKB PPh</a>
+        <a href="formulir-pembatalan-surat-keterangan-penelitian-formal-kabayan.html">Pembatalan Penelitian Formal</a>
+        <a href="formulir.html">Cari formulir lainnya</a>
+      </div>
+      <div class="nav-mega-tags" aria-label="Kelompok formulir">
+        <span>Registrasi</span><span>PKP &amp; PPN</span><span>Bea Meterai</span><span>PBB</span><span>Kuasa</span><span>SPT</span>
+      </div>
+    </div>
+
+    <div class="nav-mega-panel" data-nav-panel="aplikasi">
+      <div class="nav-mega-intro">
+        <span class="nav-mega-kicker">Aplikasi Perpajakan</span>
+        <h2>Installer dan arsip aplikasi perpajakan.</h2>
+        <p>Portal aplikasi lama untuk pengelolaan data dan pelaporan periode sebelum implementasi Coretax.</p>
+        <a class="nav-mega-main-link" href="aplikasi.html">Buka portal aplikasi <span aria-hidden="true">›</span></a>
+      </div>
+      <div class="nav-mega-column">
+        <p class="nav-mega-label">Kategori</p>
+        <a href="aplikasi.html">e-SPT</a>
+        <a href="aplikasi.html">e-Faktur</a>
+        <a href="aplikasi.html">e-Bupot</a>
+      </div>
+      <div class="nav-mega-column">
+        <p class="nav-mega-label">Lainnya</p>
+        <a href="aplikasi.html">Perangkat pendukung</a>
+        <a href="aplikasi.html">Arsip aplikasi</a>
+        <a href="buku.html">Baca buku panduan</a>
+      </div>
+      <div class="nav-mega-tags" aria-label="Jenis aplikasi">
+        <span>e-SPT</span><span>e-Faktur</span><span>e-Bupot</span><span>Pendukung</span><span>Arsip</span>
+      </div>
+    </div>
+
+    <div class="nav-mega-panel" data-nav-panel="kalkulator">
+      <div class="nav-mega-intro">
+        <span class="nav-mega-kicker">Kalkulator Pajak</span>
+        <h2>Hitung dan petakan kewajiban pajak lebih praktis.</h2>
+        <p>Empat alat bantu utama untuk PPN, PPh Pasal 21, transaksi instansi pemerintah, dan pengembalian pendahuluan.</p>
+        <a class="nav-mega-main-link" href="kalkulator.html">Lihat seluruh kalkulator <span aria-hidden="true">›</span></a>
+      </div>
+      <div class="nav-mega-column nav-mega-column-wide">
+        <p class="nav-mega-label">Alat bantu utama</p>
+        <a href="kalkulator-ppn-kabayan.html"><strong>PPN</strong><small>PPN umum dan DPP Nilai Lain.</small></a>
+        <a href="kalkulator-pasal21.html"><strong>PPh Pasal 21</strong><small>Pegawai tetap dan tidak tetap.</small></a>
+      </div>
+      <div class="nav-mega-column nav-mega-column-wide">
+        <p class="nav-mega-label">Pemetaan terpandu</p>
+        <a href="pajak-instansi-satu-pintu.html"><strong>Pajak Instansi Pemerintah</strong><small>PPh, PPN, dan kondisi khusus belanja.</small></a>
+        <a href="kalkulator-pengembalian-pendahuluan.html"><strong>Pengembalian Pendahuluan</strong><small>Kriteria, persyaratan, dan kredit pajak.</small></a>
+      </div>
+    </div>
+
+    <div class="nav-mega-panel" data-nav-panel="artikel">
+      <div class="nav-mega-intro">
+        <span class="nav-mega-kicker">Artikel Pajak</span>
+        <h2>Penjelasan ketentuan dalam bahasa yang lebih sederhana.</h2>
+        <p>Artikel membahas administrasi, PPh, PPN, Coretax, UMKM, dan prosedur perpajakan.</p>
+        <a class="nav-mega-main-link" href="artikel.html">Lihat seluruh artikel <span aria-hidden="true">›</span></a>
+      </div>
+      <div class="nav-mega-column nav-mega-featured">
+        <p class="nav-mega-label">Pilihan editor</p>
+        <a href="artikel-per8pj2026.html"><strong>PER-8/PJ/2026: Apa yang Berubah?</strong><small>Kode billing, pemindahbukuan, KAP/KJS, dan imbalan bunga.</small></a>
+      </div>
+      <div class="nav-mega-column">
+        <p class="nav-mega-label">Topik</p>
+        <div class="nav-mega-topic-list"><span>Administrasi</span><span>PPh</span><span>PPN</span><span>Coretax</span><span>UMKM</span><span>Prosedur Pajak</span></div>
+      </div>
+    </div>
+
+    <div class="nav-mega-panel" data-nav-panel="hotnews">
+      <div class="nav-mega-intro">
+        <span class="nav-mega-kicker hot">Hot News</span>
+        <h2>Informasi perpajakan yang perlu lebih cepat diketahui.</h2>
+        <p>Pembaruan Coretax, regulasi, layanan, pengumuman, dan isu perpajakan terbaru.</p>
+        <a class="nav-mega-main-link hot" href="hotnews.html">Lihat seluruh Hot News <span aria-hidden="true">›</span></a>
+      </div>
+      <div class="nav-mega-column nav-mega-featured">
+        <p class="nav-mega-label">Terbaru</p>
+        <a href="hotnews/2026/08/penundaan-pph22-marketplace/"><strong>PPh Pasal 22 Marketplace Ditunda</strong><small>Pemungutan mulai berlaku 1 November 2026.</small></a>
+        <a href="hotnews/2026/08/coretax-role-baru-pph21-hanya-induk/"><strong>Coretax Tambah Role Baru PPh 21/26</strong><small>Data penghasilan pegawai lebih terlindungi.</small></a>
+      </div>
+      <div class="nav-mega-column">
+        <p class="nav-mega-label">Jelajahi</p>
+        <a href="hotnews-arsip.html">Arsip Hot News</a>
+        <div class="nav-mega-topic-list"><span>Coretax</span><span>Regulasi</span><span>Layanan</span><span>Pengumuman</span></div>
+      </div>
+    </div>
+  </div>
 </section>
 <div aria-hidden="true" class="mega-menu-backdrop" id="megaMenuBackdrop"></div>
 <section aria-hidden="true" aria-label="Koleksi Kabayan" class="collection-mega-menu" id="collectionMegaMenu">
@@ -5737,66 +4108,170 @@ main {
 <a class="nav-hotnews" href="hotnews.html"><span aria-hidden="true" class="nav-hotnews-icon">🔥</span><span>Hot News</span></a>
 </nav>
 <main>
-
+<div class="announcement">
+      Temukan buku, formulir, dan aplikasi perpajakan dalam satu tempat.
+      <button aria-controls="collectionMegaMenu" aria-expanded="false" aria-haspopup="true" class="collection-menu-trigger" id="collectionMenuTrigger" type="button">Lihat Koleksi<span aria-hidden="true">⌄</span></button>
+</div>
 <section class="hero">
 <div class="hero-copy">
-<p class="eyebrow">Kabayan</p>
+<p class="eyebrow">Katalog Bahan Pelayanan</p>
 <h1>
-          Pajak.
-          <span class="hero-gradient hero-rotating-gradient" id="heroRotatingWord">Lebih sederhana.</span>
+          Belajar pajak.
+          <span class="hero-gradient">Lebih sederhana.</span>
 </h1>
 <p class="hero-description">
-          Formulir, kalkulator, converter, buku, aplikasi, dan informasi perpajakan dalam satu tempat.
+          Buku, formulir, aplikasi, template, dan artikel perpajakan
+          dalam satu tempat yang praktis dan gratis.
         </p>
-<div class="hero-actions hero-actions-single">
+<div class="hero-actions">
 <a class="button button-primary" href="jelajahi.html">
             Jelajahi Kabayan
           </a>
 </div>
 </div>
-<div class="hero-visual hero-explore-visual">
+<div class="hero-visual">
 <div class="hero-glow"></div>
-<section class="kabayan-explore kabayan-explore-carousel" aria-label="Kategori utama Kabayan" id="kabayanExplore" tabindex="0">
-<div class="kabayan-carousel-shell">
-<button class="kabayan-carousel-arrow kabayan-carousel-prev" type="button" aria-label="Kategori sebelumnya">‹</button>
-<div class="kabayan-explore-rail">
-<a class="kabayan-explore-item" href="formulir.html">
-<div class="kabayan-explore-figure"><div class="kx-mockup kx-form"><div class="paper back"></div><div class="paper front"><span class="line l1"></span><span class="line l2"></span><span class="line l3"></span><span class="line l4"></span></div></div></div>
-<span class="kabayan-explore-label">Formulir</span>
-</a>
-<a class="kabayan-explore-item" href="buku.html">
-<div class="kabayan-explore-figure"><div class="kx-mockup kx-book"><div class="cover"></div></div></div>
-<span class="kabayan-explore-label">Buku</span>
-</a>
-<a class="kabayan-explore-item" href="kalkulator.html">
-<div class="kabayan-explore-figure"><div class="kx-mockup kx-calc"><div class="body"><span class="display">11.000.000</span><span class="keys"><i></i><i></i><i></i><i></i><i></i><i></i></span></div></div></div>
-<span class="kabayan-explore-label">Kalkulator</span>
-</a>
-<a class="kabayan-explore-item" href="converter-xml-coretax.html">
-<div class="kabayan-explore-figure"><div class="kx-mockup kx-xml"><span class="file xls">XLS</span><span class="connector"></span><span class="file xml">XML</span></div></div>
-<span class="kabayan-explore-label">Converter</span>
-</a>
-<a class="kabayan-explore-item" href="aplikasi.html">
-<div class="kabayan-explore-figure"><div class="kx-mockup kx-app"><div class="window"><span class="bar"></span><span class="sidebar"></span><span class="pill p1"></span><span class="pill p2"></span></div></div></div>
-<span class="kabayan-explore-label">Aplikasi</span>
-</a>
-<a class="kabayan-explore-item" href="artikel.html">
-<div class="kabayan-explore-figure"><div class="kx-mockup kx-article"><div class="sheet"><div class="hero-line"></div><div class="text"></div><div class="text w2"></div><div class="text w3"></div></div></div></div>
-<span class="kabayan-explore-label">Artikel</span>
-</a>
-<a class="kabayan-explore-item" href="hotnews.html">
-<div class="kabayan-explore-figure"><div class="kx-mockup kx-news"><div class="tile">NEWS</div></div></div>
-<span class="kabayan-explore-label">Hot News</span>
-<span class="kabayan-explore-note">Terbaru</span>
-</a>
-<a class="kabayan-explore-item" href="ruang-belajar.html">
-<div class="kabayan-explore-figure"><div class="kx-mockup kx-learning"><div class="monitor"></div><span class="play"></span><span class="base"></span></div></div>
-<span class="kabayan-explore-label">Ruang Belajar</span>
-</a>
+<section aria-label="Katalog buku pilihan" class="hero-book-slider" id="heroBookSlider" tabindex="0">
+<div class="hero-book-viewport">
+<div class="hero-book-track">
+<article class="hero-book-slide">
+<a class="hero-book-link" href="converter-xml-unifikasi.html">
+<div class="hero-book-image">
+<div class="slider-fallback">
+<small>Petunjuk Teknis</small>
+<strong>
+                        Converter Excel ke XML Coretax
+                      </strong>
+<div class="slider-fallback-line"></div>
 </div>
-<button class="kabayan-carousel-arrow kabayan-carousel-next" type="button" aria-label="Kategori berikutnya">›</button>
+<img alt="Mockup buku Converter Excel ke XML Coretax Seri PPh Unifikasi" loading="eager" onerror="this.style.display='none'" onload="this.previousElementSibling.hidden=true" src="images/mockup-converter-excel-xml-unifikasi.webp"/>
 </div>
-<div class="kabayan-carousel-dots" aria-label="Pilih kategori"></div>
+<div class="hero-book-caption">
+<span class="hero-book-category">
+                      Coretax PPh Unifikasi dan XML
+                    </span>
+<h2>
+                      Converter Excel ke XML Coretax
+                      Seri PPh Unifikasi
+                    </h2>
+<span class="hero-book-detail">
+                      Lihat detail ›
+                    </span>
+</div>
+</a>
+</article>
+<article class="hero-book-slide">
+<a class="hero-book-link" href="converter-xml-2126.html">
+<div class="hero-book-image">
+<div class="slider-fallback">
+<small>Petunjuk Teknis</small>
+<strong>
+                        Converter Excel ke XML PPh 21/26
+                      </strong>
+<div class="slider-fallback-line"></div>
+</div>
+<img alt="Mockup buku Converter Excel ke XML Coretax Seri PPh Pasal 21/26" loading="lazy" onerror="this.style.display='none'" onload="this.previousElementSibling.hidden=true" src="images/mockup-converter-excel-xml-2126.webp"/>
+</div>
+<div class="hero-book-caption">
+<span class="hero-book-category">
+                      Coretax PPh Pasal 21/26 dan XML
+                    </span>
+<h2>
+                      Converter Excel ke XML Coretax
+                      Seri PPh Pasal 21/26
+                    </h2>
+<span class="hero-book-detail">
+                      Lihat detail ›
+                    </span>
+</div>
+</a>
+</article>
+<article class="hero-book-slide">
+<a class="hero-book-link" href="list-barang-jasa-faktur.html">
+<div class="hero-book-image">
+<div class="slider-fallback">
+<small>Referensi PPN</small>
+<strong>
+                        Kode Barang dan Jasa Coretax
+                      </strong>
+<div class="slider-fallback-line"></div>
+</div>
+<img alt="Mockup buku Kode Barang dan Jasa di Faktur Pajak Era Coretax" loading="lazy" onerror="this.style.display='none'" onload="this.previousElementSibling.hidden=true" src="images/mockup-list-kode-barang-jasa.webp"/>
+</div>
+<div class="hero-book-caption">
+<span class="hero-book-category">
+                      PPN dan Faktur Pajak
+                    </span>
+<h2>
+                      Kode Barang dan Jasa di Faktur Pajak
+                      Era Coretax
+                    </h2>
+<span class="hero-book-detail">
+                      Lihat detail ›
+                    </span>
+</div>
+</a>
+</article>
+<article class="hero-book-slide">
+<a class="hero-book-link" href="kap-kjs.html">
+<div class="hero-book-image">
+<div class="slider-fallback">
+<small>Referensi Pembayaran</small>
+<strong>
+                        KAP dan KJS Era Coretax
+                      </strong>
+<div class="slider-fallback-line"></div>
+</div>
+<img alt="Mockup buku KAP dan KJS Era Coretax" loading="lazy" onerror="this.style.display='none'" onload="this.previousElementSibling.hidden=true" src="images/mockup-kap-kjs-per8tahun2026.webp"/>
+</div>
+<div class="hero-book-caption">
+<span class="hero-book-category">
+                      Pembayaran Pajak
+                    </span>
+<h2>
+                      Kode Akun Pajak dan Kode Jenis Setor
+                      Era Coretax
+                    </h2>
+<span class="hero-book-detail">
+                      Lihat detail ›
+                    </span>
+</div>
+</a>
+</article>
+<article class="hero-book-slide">
+<a class="hero-book-link" href="cermat-2126.html">
+<div class="hero-book-image">
+<div class="slider-fallback">
+<small>Panduan Pemotongan PPh 21/26</small>
+<strong>
+                        Cermat Pemotongan PPh Pasal 21/26
+                      </strong>
+<div class="slider-fallback-line"></div>
+</div>
+<img alt="Mockup buku cermat pemotongan PPh Pasal 21/26" loading="lazy" onerror="this.style.display='none'" onload="this.previousElementSibling.hidden=true" src="images/mockup-cermat-2126.webp"/>
+</div>
+<div class="hero-book-caption">
+<span class="hero-book-category">
+                      PPh Pasal 21/26
+                    </span>
+<h2>
+                      Cermat Pemotongan PPh Pasal 21/26
+                    </h2>
+<span class="hero-book-detail">
+                      Lihat detail ›
+                    </span>
+</div>
+</a>
+</article>
+</div>
+</div>
+<button aria-label="Buku sebelumnya" class="slider-arrow slider-arrow-prev" type="button">
+            ‹
+          </button>
+<button aria-label="Buku berikutnya" class="slider-arrow slider-arrow-next" type="button">
+            ›
+          </button>
+<div aria-label="Pilih buku" class="slider-dots"></div>
 </section>
 </div>
 </section>
@@ -5963,7 +4438,11 @@ main {
 <a class="showcase-button primary" href="artikel.html">
             Baca artikel
           </a>
-<a class="showcase-button secondary" href="artikel.html" id="latestArticleButton">
+<a
+            class="showcase-button secondary"
+            href="artikel.html"
+            id="latestArticleButton"
+          >
             Artikel terbaru
           </a>
 </div>
@@ -6998,6 +5477,7 @@ main {
   }
 })();
 </script>
+
 <script id="collectionSearchTriggerScript">
 (() => {
   const searchTrigger = document.getElementById("collectionSearchTrigger");
@@ -7046,6 +5526,7 @@ main {
   syncState();
 })();
 </script>
+
 <script id="navMegaMenuScript">
 (() => {
   const links = [...document.querySelectorAll('.nav-menu-link[data-nav-menu]')];
@@ -7141,6 +5622,7 @@ main {
   window.addEventListener('resize', handleModeChange);
 })();
 </script>
+
 <script id="latestArticleAutoLinkScript">
 (() => {
   "use strict";
@@ -7303,146 +5785,30 @@ main {
 </script>
 
 
-<script id="kabayanHeroWordRotateScript">
-(function(){
-  const wordEl = document.getElementById('heroRotatingWord');
-  if (!wordEl) return;
-  const words = ['Lebih sederhana.', 'Lebih praktis.', 'Lebih mudah.'];
-  let index = 0;
-  const media = window.matchMedia('(prefers-reduced-motion: reduce)');
-  if (media.matches) {
-    wordEl.textContent = words[0];
-    return;
+<script id="heroViewportFitScript">
+(() => {
+  "use strict";
+
+  const root = document.documentElement;
+  const announcement = document.querySelector(".announcement");
+
+  if (!announcement) return;
+
+  const syncAnnouncementHeight = () => {
+    const height = Math.ceil(announcement.getBoundingClientRect().height);
+    root.style.setProperty("--announcement-height", `${height}px`);
+  };
+
+  syncAnnouncementHeight();
+
+  window.addEventListener("load", syncAnnouncementHeight, { once: true });
+  window.addEventListener("resize", syncAnnouncementHeight, { passive: true });
+  window.addEventListener("orientationchange", syncAnnouncementHeight, { passive: true });
+
+  if ("ResizeObserver" in window) {
+    const observer = new ResizeObserver(syncAnnouncementHeight);
+    observer.observe(announcement);
   }
-  setInterval(() => {
-    wordEl.classList.add('is-switching');
-    window.setTimeout(() => {
-      index = (index + 1) % words.length;
-      wordEl.textContent = words[index];
-      wordEl.classList.remove('is-switching');
-    }, 240);
-  }, 2600);
-})();
-</script>
-
-
-<script id="kabayanCenterFocusSlideshowScript">
-(function(){
-  const carousel = document.getElementById('kabayanExplore');
-  if (!carousel) return;
-
-  const items = Array.from(carousel.querySelectorAll('.kabayan-explore-item'));
-  const prevButton = carousel.querySelector('.kabayan-carousel-prev');
-  const nextButton = carousel.querySelector('.kabayan-carousel-next');
-  const dotsHost = carousel.querySelector('.kabayan-carousel-dots');
-  if (!items.length || !prevButton || !nextButton || !dotsHost) return;
-
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const classes = ['is-far-prev','is-prev','is-active','is-next','is-far-next'];
-  let current = 0;
-  let timer = null;
-  let touchStartX = 0;
-
-  items.forEach((item, index) => {
-    const dot = document.createElement('button');
-    dot.type = 'button';
-    dot.className = 'kabayan-carousel-dot';
-    dot.setAttribute('aria-label', 'Tampilkan ' + (item.querySelector('.kabayan-explore-label')?.textContent || 'kategori ' + (index + 1)));
-    dot.addEventListener('click', () => {
-      goTo(index);
-      restart();
-    });
-    dotsHost.appendChild(dot);
-
-    item.addEventListener('click', (event) => {
-      if (index !== current) {
-        event.preventDefault();
-        goTo(index);
-        restart();
-      }
-    });
-  });
-
-  const dots = Array.from(dotsHost.querySelectorAll('.kabayan-carousel-dot'));
-
-  function circularOffset(index, activeIndex) {
-    let diff = index - activeIndex;
-    const half = items.length / 2;
-    if (diff > half) diff -= items.length;
-    if (diff < -half) diff += items.length;
-    return diff;
-  }
-
-  function applyPosition(item, offset) {
-    classes.forEach(cls => item.classList.remove(cls));
-    item.setAttribute('aria-hidden', 'true');
-    item.tabIndex = -1;
-
-    if (offset === 0) {
-      item.classList.add('is-active');
-      item.setAttribute('aria-hidden', 'false');
-      item.tabIndex = 0;
-    } else if (offset === -1) {
-      item.classList.add('is-prev');
-    } else if (offset === 1) {
-      item.classList.add('is-next');
-    } else if (offset === -2) {
-      item.classList.add('is-far-prev');
-    } else if (offset === 2) {
-      item.classList.add('is-far-next');
-    }
-  }
-
-  function goTo(index) {
-    current = (index + items.length) % items.length;
-    items.forEach((item, itemIndex) => applyPosition(item, circularOffset(itemIndex, current)));
-    dots.forEach((dot, dotIndex) => {
-      const active = dotIndex === current;
-      dot.classList.toggle('active', active);
-      dot.setAttribute('aria-current', active ? 'true' : 'false');
-    });
-  }
-
-  function next() { goTo(current + 1); }
-  function prev() { goTo(current - 1); }
-  function stop() {
-    if (timer !== null) {
-      window.clearInterval(timer);
-      timer = null;
-    }
-  }
-  function start() {
-    if (reduceMotion || items.length < 2) return;
-    stop();
-    timer = window.setInterval(next, 3600);
-  }
-  function restart() { stop(); start(); }
-
-  prevButton.addEventListener('click', () => { prev(); restart(); });
-  nextButton.addEventListener('click', () => { next(); restart(); });
-  carousel.addEventListener('mouseenter', stop);
-  carousel.addEventListener('mouseleave', start);
-  carousel.addEventListener('focusin', stop);
-  carousel.addEventListener('focusout', start);
-  carousel.addEventListener('keydown', (event) => {
-    if (event.key === 'ArrowLeft') { event.preventDefault(); prev(); restart(); }
-    if (event.key === 'ArrowRight') { event.preventDefault(); next(); restart(); }
-  });
-  carousel.addEventListener('touchstart', (event) => {
-    touchStartX = event.changedTouches[0].clientX;
-  }, {passive:true});
-  carousel.addEventListener('touchend', (event) => {
-    const diff = touchStartX - event.changedTouches[0].clientX;
-    if (Math.abs(diff) < 40) return;
-    if (diff > 0) next(); else prev();
-    restart();
-  }, {passive:true});
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) stop(); else start();
-  });
-
-  goTo(0);
-  start();
 })();
 </script>
 
