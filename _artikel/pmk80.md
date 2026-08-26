@@ -8,7 +8,7 @@ hero_accent: "Apakah Otomatis Bebas Pajak?"
 excerpt: "Panduan praktis fasilitas PPN/PPnBM tidak dipungut dan PPh ditanggung pemerintah untuk proyek pemerintah yang dibiayai hibah dan/atau pinjaman luar negeri."
 description: "Panduan PMK 80 Tahun 2024 mengenai fasilitas PPN atau PPN dan PPnBM tidak dipungut serta PPh ditanggung pemerintah untuk proyek pemerintah yang dibiayai hibah dan/atau pinjaman luar negeri, termasuk cek kelayakan, alur SKTD, SK Fasilitas PPh, checklist dokumen, dan simulasi transaksi."
 
-category: "Pajak"
+category: "Hibah Luar Negeri"
 
 tags:
   - PMK 80 Tahun 2024
@@ -23,7 +23,7 @@ tags:
 
 author: "Angga Sukma Dhaniswara"
 date_modified: 2026-08-26
-reading_time: "14 menit baca"
+reading_time: "17 menit baca"
 legal_basis: "PP 42 Tahun 1995 s.t.d.t.d. PP 25 Tahun 2001; PMK 80 Tahun 2024"
 
 permalink: /pmk80.html
@@ -32,10 +32,10 @@ summary_label: "Ringkasan cepat"
 summary: "PMK 80 Tahun 2024 memberikan fasilitas PPN atau PPN dan PPnBM tidak dipungut serta PPh ditanggung pemerintah untuk proyek pemerintah tertentu yang dibiayai hibah dan/atau pinjaman luar negeri. Fasilitas tidak otomatis berlaku hanya karena sumber dana berasal dari luar negeri. Nomor Register, status proyek, pihak yang terlibat, bagian pembiayaan PHLN, serta dokumen fasilitas harus memenuhi ketentuan."
 
 hero_links:
+  - label: "Pilih posisi Anda"
+    href: "#panduan-posisi"
   - label: "Cek kelayakan"
     href: "#cek-kelayakan"
-  - label: "Lihat alur fasilitas"
-    href: "#alur-fasilitas"
   - label: "Coba simulasi"
     href: "#simulasi"
 
@@ -53,10 +53,10 @@ sidebar_note: "Hibah atau pinjaman luar negeri tidak otomatis membuat semua tran
 
 custom_css:
   - /assets/css/jasakonstruksi.css?v=20260818-1
-  - /assets/css/pmk80.css?v=20260826-1
+  - /assets/css/pmk80.css?v=20260826-2
 
 custom_js:
-  - /assets/js/pmk80.js?v=20260826-1
+  - /assets/js/pmk80.js?v=20260826-2
 ---
 
 <div class="jk-article pmk80-article">
@@ -75,6 +75,208 @@ PMK Nomor 80 Tahun 2024 memberikan fasilitas perpajakan untuk Proyek Pemerintah 
 <div class="jk-callout jk-callout-blue">
 <strong>Mulai dari proyeknya, bukan dari nama dananya</strong>
 <p>Pertanyaan pertama bukan “apakah dananya berasal dari luar negeri?”, melainkan “apakah kegiatan tersebut memenuhi definisi Proyek Pemerintah dan pembiayaannya memenuhi ketentuan PMK 80 Tahun 2024?”</p>
+</div>
+</section>
+
+
+<section id="panduan-posisi">
+<div class="pmk80-role-heading">
+<span class="jk-section-label">Mulai dari posisi Anda</span>
+<h2>Dalam Proyek Ini, Anda Bertindak Sebagai Apa?</h2>
+<p>
+PMK 80 Tahun 2024 memberi peran yang berbeda kepada setiap pihak. Pilih posisi Anda untuk melihat <strong>apa yang harus dilakukan, fasilitas yang relevan, dan konsekuensi jika tahap penting tidak dilakukan</strong>.
+</p>
+</div>
+
+<div class="pmk80-role-guide" id="pmk80RoleGuide">
+<div class="pmk80-role-buttons" role="tablist" aria-label="Pilih posisi dalam proyek hibah atau pinjaman luar negeri">
+
+<button type="button" class="pmk80-role-button is-active" data-role-target="penerima" role="tab" aria-selected="true">
+<span class="pmk80-role-icon" aria-hidden="true">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+<path d="M3 21h18"></path><path d="M5 21V7l7-4 7 4v14"></path><path d="M9 21v-6h6v6"></path>
+</svg>
+</span>
+<span>
+<small>Posisi 1</small>
+<strong>Penerima Hibah / Pinjaman</strong>
+<em>Instansi pelaksana / implementing agency</em>
+</span>
+</button>
+
+<button type="button" class="pmk80-role-button" data-role-target="kontraktor" role="tab" aria-selected="false">
+<span class="pmk80-role-icon" aria-hidden="true">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+<rect x="3" y="7" width="18" height="13" rx="2"></rect><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><path d="M3 12h18"></path>
+</svg>
+</span>
+<span>
+<small>Posisi 2</small>
+<strong>Pelaksana / Kontraktor Utama</strong>
+<em>Kontraktor, konsultan, pemasok</em>
+</span>
+</button>
+
+<button type="button" class="pmk80-role-button" data-role-target="pemberi" role="tab" aria-selected="false">
+<span class="pmk80-role-icon" aria-hidden="true">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+<path d="M12 21V9"></path><path d="m8 13 4-4 4 4"></path><rect x="3" y="3" width="18" height="18" rx="3"></rect>
+</svg>
+</span>
+<span>
+<small>Posisi 3</small>
+<strong>Pemberi Hibah Barang / Jasa</strong>
+<em>Pihak yang menyerahkan hibah barang/jasa</em>
+</span>
+</button>
+
+</div>
+
+<div class="pmk80-role-panels">
+
+<article class="pmk80-role-panel is-active" data-role-panel="penerima">
+<div class="pmk80-role-panel-head">
+<span>Anda sebagai</span>
+<h3>Penerima Hibah, Penerima Pinjaman, atau Penerima Penerusan Hibah/Pinjaman</h3>
+<p>
+Posisi ini pada dasarnya adalah pihak yang dinyatakan sebagai <strong>instansi pelaksana (implementing agency)</strong> dalam proses registrasi perjanjian hibah dan/atau pinjaman.
+</p>
+</div>
+
+<div class="pmk80-role-columns">
+<div>
+<h4>Apa yang harus Anda lakukan?</h4>
+<ol class="pmk80-action-list">
+<li><strong>Pastikan fondasi proyek benar.</strong><span>Perjanjian hibah/pinjaman tersedia, Nomor Register telah diperoleh, dan proyek dilaksanakan serta dipertanggungjawabkan sebagai bagian APBN/APBD.</span></li>
+<li><strong>Jika Anda sendiri memanfaatkan fasilitas PPN, ajukan SKTD.</strong><span>SKTD harus sudah dimiliki sebelum saat terutangnya PPN atau PPN dan PPnBM.</span></li>
+<li><strong>Jika fasilitas akan dipakai Kontraktor Utama, laporkan kontraktornya.</strong><span>Sampaikan Pemberitahuan Kontraktor Utama untuk setiap kontrak/perjanjian dan masing-masing Kontraktor Utama.</span></li>
+<li><strong>Setelah SK Kontraktor Utama terbit, lakukan Registrasi BKP/JKP.</strong><span>Registrasi ini menjadi dasar penerbitan Bukti Registrasi BKP/JKP yang diperlukan Kontraktor Utama untuk fasilitas tertentu.</span></li>
+<li><strong>Koordinasikan dokumen saat membayar Kontraktor Utama.</strong><span>Jika penghasilan merupakan objek pemotongan/pemungutan PPh, pastikan Surat Keterangan Fasilitas PPh dari Kontraktor Utama tersedia dan administrasi pemotongan serta SPT dilakukan sesuai ketentuan.</span></li>
+<li><strong>Untuk impor yang memperoleh fasilitas, cantumkan nomor SKTD.</strong><span>Nomor SKTD dicantumkan dalam dokumen pemberitahuan pabean sesuai ketentuan.</span></li>
+</ol>
+</div>
+
+<div>
+<h4>Fasilitas yang dapat relevan</h4>
+<ul class="pmk80-role-facilities">
+<li><strong>PPN/PPnBM tidak dipungut</strong> atas perolehan BKP/JKP, impor BKP, serta pemanfaatan BKP tidak berwujud/JKP dari luar Daerah Pabean yang memenuhi ketentuan.</li>
+<li><strong>Bukan penerima fasilitas PPh DTP.</strong> Fasilitas PPh DTP diberikan kepada Kontraktor Utama.</li>
+</ul>
+
+<div class="pmk80-consequence">
+<span>Jika tahap penting tidak dilakukan</span>
+<strong>Fasilitas dapat terhenti sebelum sampai ke Kontraktor Utama.</strong>
+<p>
+Tanpa Pemberitahuan Kontraktor Utama, tidak ada dasar penerbitan Surat Keterangan sebagai Kontraktor Utama. Tanpa Registrasi BKP/JKP, Bukti Registrasi BKP/JKP tidak terbit. Akibatnya, Kontraktor Utama dalam negeri tidak dapat melanjutkan persyaratan dokumen untuk fasilitas yang memerlukannya.
+</p>
+<p>
+Jika SKTD belum dimiliki sebelum PPN/PPnBM terutang, fasilitas PPN tidak dipungut tidak dapat digunakan untuk transaksi tersebut dan transaksi mengikuti ketentuan PPN yang berlaku.
+</p>
+</div>
+</div>
+</div>
+</article>
+
+<article class="pmk80-role-panel" data-role-panel="kontraktor">
+<div class="pmk80-role-panel-head">
+<span>Anda sebagai</span>
+<h3>Pelaksana Pekerjaan / Kontraktor Utama</h3>
+<p>
+Kontraktor Utama dapat berupa kontraktor, konsultan, pemasok, atau pihak lain yang menandatangani kontrak/perjanjian untuk pelaksanaan Proyek Pemerintah.
+</p>
+</div>
+
+<div class="pmk80-role-columns">
+<div>
+<h4>Apa yang harus Anda lakukan?</h4>
+<ol class="pmk80-action-list">
+<li><strong>Pastikan Anda telah diberitahukan sebagai Kontraktor Utama.</strong><span>Pemberitahuan dilakukan oleh Penerima Hibah/Pinjaman/Penerusan Hibah atau Pinjaman. Hasilnya adalah Surat Keterangan sebagai Kontraktor Utama.</span></li>
+<li><strong>Pastikan BKP/JKP terkait telah diregistrasi.</strong><span>Registrasi dilakukan oleh pihak penerima setelah Surat Keterangan sebagai Kontraktor Utama terbit dan menghasilkan Bukti Registrasi BKP/JKP.</span></li>
+<li><strong>Jika memanfaatkan fasilitas PPN, ajukan SKTD sebelum PPN terutang.</strong><span>Untuk Kontraktor Utama, fasilitas PPN terutama terkait impor BKP serta pemanfaatan BKP tidak berwujud/JKP dari luar Daerah Pabean. Pembelian domestik biasa oleh Kontraktor Utama tidak otomatis memperoleh fasilitas.</span></li>
+<li><strong>Ajukan Surat Keterangan Fasilitas PPh.</strong><span>Surat ini harus sudah dimiliki <em>sebelum</em> penghasilan dari Proyek Pemerintah diterima atau diperoleh.</span></li>
+<li><strong>Serahkan SK Fasilitas PPh kepada pihak pembayar.</strong><span>Lakukan apabila penghasilan Anda merupakan objek pemotongan dan/atau pemungutan PPh.</span></li>
+<li><strong>Sampaikan Laporan Realisasi Fasilitas PPh.</strong><span>Laporan dan SPT harus dipenuhi sesuai batas waktu yang ditentukan agar PPh DTP dapat dimanfaatkan.</span></li>
+<li><strong>Pisahkan pembukuan/pencatatan proyek.</strong><span>Jika juga mempunyai kegiatan lain, penghasilan dan biaya proyek fasilitas harus dapat dipisahkan; biaya bersama yang tidak dapat dipisahkan dialokasikan secara proporsional.</span></li>
+</ol>
+</div>
+
+<div>
+<h4>Fasilitas yang dapat relevan</h4>
+<ul class="pmk80-role-facilities">
+<li><strong>PPN/PPnBM tidak dipungut</strong> atas impor BKP dan pemanfaatan BKP tidak berwujud/JKP dari luar Daerah Pabean yang memenuhi ketentuan.</li>
+<li><strong>PPh Ditanggung Pemerintah</strong> atas PPh final dan/atau tidak final yang terutang atas penghasilan dari bagian Proyek Pemerintah yang memenuhi ketentuan.</li>
+</ul>
+
+<div class="pmk80-consequence">
+<span>Jika tahap penting tidak dilakukan</span>
+<strong>Risikonya langsung mengenai hak fasilitas Anda.</strong>
+<p>
+Tanpa Surat Keterangan sebagai Kontraktor Utama dan Bukti Registrasi BKP/JKP, Kontraktor Utama dalam negeri tidak memenuhi prasyarat untuk mengajukan SKTD.
+</p>
+<p>
+Jika SKTD belum dimiliki sebelum PPN/PPnBM terutang, fasilitas PPN tidak dipungut tidak dapat digunakan pada transaksi tersebut.
+</p>
+<p>
+Jika Surat Keterangan Fasilitas PPh belum dimiliki sebelum penghasilan diterima atau diperoleh, fasilitas PPh tidak dapat digunakan untuk penghasilan tersebut.
+</p>
+<p>
+Jika Laporan Realisasi Fasilitas PPh tidak disampaikan sesuai batas waktu yang masih diperkenankan PMK 80/2024, <strong>atas penghasilan Kontraktor Utama tidak diberikan fasilitas PPh ditanggung pemerintah</strong>.
+</p>
+</div>
+
+<div class="jk-callout jk-callout-blue pmk80-role-note">
+<strong>Kontraktor Utama luar negeri selain BUT mempunyai mekanisme khusus</strong>
+<p>
+Untuk subjek pajak luar negeri selain bentuk usaha tetap, PMK 80/2024 memberikan perlakuan khusus sehingga tidak diwajibkan memiliki SKTD, SK Fasilitas PPh, dan Laporan Realisasi Fasilitas PPh. Surat Keterangan sebagai Kontraktor Utama dan Bukti Registrasi BKP/JKP dipersamakan dengan SKTD.
+</p>
+</div>
+</div>
+</div>
+</article>
+
+<article class="pmk80-role-panel" data-role-panel="pemberi">
+<div class="pmk80-role-panel-head">
+<span>Anda sebagai</span>
+<h3>Pemberi Hibah Barang dan/atau Jasa</h3>
+<p>
+Posisi ini relevan ketika Proyek Pemerintah diperoleh dalam bentuk hibah barang dan/atau jasa, bukan semata-mata hibah uang.
+</p>
+</div>
+
+<div class="pmk80-role-columns">
+<div>
+<h4>Apa yang harus Anda lakukan?</h4>
+<ol class="pmk80-action-list">
+<li><strong>Pastikan hibah barang/jasa masuk dalam proyek yang memenuhi ketentuan.</strong><span>Perjanjian/dokumen hibah dan Nomor Register harus tersedia serta proyek menjadi bagian dari APBN/APBD.</span></li>
+<li><strong>Koordinasikan pencatatan barang/jasa hibah dengan penerima.</strong><span>Barang hibah dicatat sebagai barang milik negara/daerah dari perolehan lain yang sah berupa hibah dan/atau jasa dicatat sebagai beban jasa yang berasal dari hibah sesuai ketentuan.</span></li>
+<li><strong>Jika memperoleh BKP/JKP dari Kontraktor Utama dan akan memakai fasilitas PPN, ajukan SKTD melalui Penerima Hibah/Penerima Penerusan Hibah.</strong><span>Permohonan tidak dilakukan sendiri melalui jalur Kontraktor Utama; PMK mengatur pengajuannya melalui pihak penerima.</span></li>
+<li><strong>Pastikan SKTD telah terbit sebelum PPN/PPnBM terutang.</strong><span>SKTD diterbitkan untuk Pemberi Hibah barang dan/atau jasa.</span></li>
+<li><strong>Berikan data kontrak kepada pihak penerima bila Kontraktor Utama akan memanfaatkan fasilitas.</strong><span>Kontrak antara Pemberi Hibah barang/jasa dan Kontraktor Utama merupakan salah satu informasi/dokumen yang digunakan dalam Pemberitahuan Kontraktor Utama dan Registrasi BKP/JKP.</span></li>
+</ol>
+</div>
+
+<div>
+<h4>Fasilitas yang dapat relevan</h4>
+<ul class="pmk80-role-facilities">
+<li><strong>PPN/PPnBM tidak dipungut</strong> atas perolehan BKP atau JKP dari Kontraktor Utama yang memenuhi ketentuan.</li>
+<li><strong>Tidak memperoleh fasilitas PPh DTP sebagai Pemberi Hibah.</strong> Fasilitas tersebut diberikan kepada Kontraktor Utama.</li>
+</ul>
+
+<div class="pmk80-consequence">
+<span>Jika tahap penting tidak dilakukan</span>
+<strong>Fasilitas PPN tidak otomatis melekat pada transaksi hibah.</strong>
+<p>
+Jika SKTD tidak dimiliki sebelum PPN/PPnBM terutang, fasilitas tidak dipungut tidak dapat digunakan dan transaksi mengikuti ketentuan PPN yang berlaku.
+</p>
+<p>
+Jika barang/jasa hibah tidak memenuhi administrasi Proyek Pemerintah sebagaimana dipersyaratkan—termasuk registrasi dan pencatatan sebagai bagian proyek—dasar penggunaan fasilitas perlu diperiksa kembali.
+</p>
+</div>
+</div>
+</div>
+</article>
+
+</div>
 </div>
 </section>
 
@@ -257,7 +459,7 @@ PMK Nomor 80 Tahun 2024 memberikan fasilitas perpajakan untuk Proyek Pemerintah 
 <h2>Dasar Hukum dan Sumber Resmi</h2>
 <div class="jk-legal-basis">
 <div class="jk-legal-item"><span class="jk-legal-number">1</span><span><strong>PP Nomor 42 Tahun 1995</strong> sebagaimana telah beberapa kali diubah, terakhir dengan <strong>PP Nomor 25 Tahun 2001</strong>.</span></div>
-<div class="jk-legal-item"><span class="jk-legal-number">2</span><span><a href="https://jdih.kemenkeu.go.id/dok/pmk-80-tahun-2024" target="_blank" rel="noopener"><strong>PMK Nomor 80 Tahun 2024</strong></a> — tata cara pemberian fasilitas PPN/PPnBM dan PPh untuk Proyek Pemerintah yang dibiayai dengan hibah dan/atau pinjaman luar negeri.</span></div>
+<div class="jk-legal-item"><span class="jk-legal-number">2</span><span><a href="https://jdih.kemenkeu.go.id/dok/pmk-80-tahun-2024" target="_blank" rel="noopener"><strong>PMK Nomor 80 Tahun 2024</strong></a> — khususnya ketentuan mengenai penerima fasilitas, kriteria proyek, Pemberitahuan Kontraktor Utama, Registrasi BKP/JKP, SKTD, SK Fasilitas PPh, dan Laporan Realisasi Fasilitas PPh.</span></div>
 <div class="jk-legal-item"><span class="jk-legal-number">3</span><span><strong>Ketentuan PPN dan PPh terkait</strong> sepanjang relevan dengan jenis transaksi yang dilakukan.</span></div>
 </div>
 <p class="pmk80-disclaimer">Artikel ini merupakan pendapat pribadi penulis yang disusun berdasarkan pemahaman dan regulasi yang berlaku saat tulisan ini dibuat. Dalam hal terdapat perbedaan, tetap mengacu kepada ketentuan peraturan perundang-undangan dan informasi resmi DJP yang terbaru.</p>
