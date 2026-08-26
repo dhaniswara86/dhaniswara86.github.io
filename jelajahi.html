@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Jelajahi Kabayan | dhaniswara86</title>
+<meta name="description" content="Jelajahi formulir, kalkulator, converter XML Coretax, buku digital, artikel, Hot News, aplikasi, dan ruang belajar Kabayan." />
+<style>
+:root{
+  --navy:#0f223d;
+  --blue:#0066cc;
+  --blue2:#3b91f7;
+  --ink:#1d1d1f;
+  --muted:#6e6e73;
+  --line:#e4e8ef;
+  --soft:#f5f7fb;
+  --white:#fff;
+  --nav-h:52px;
+  --radius:28px;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;color:var(--ink);background:#fff;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.site-nav{position:sticky;top:0;z-index:50;height:var(--nav-h);background:rgba(250,250,252,.84);border-bottom:1px solid rgba(0,0,0,.05);backdrop-filter:saturate(180%) blur(20px)}
+.nav-inner{height:100%;max-width:1180px;margin:auto;padding:0 22px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.nav-brand{display:flex;align-items:center;gap:9px;text-decoration:none;font-size:13px;color:#333}
+.nav-brand img{width:25px;height:25px;object-fit:contain}
+.desktop-menu{display:flex;align-items:center;gap:28px;font-size:12px}
+.desktop-menu a{text-decoration:none;color:#333;transition:color .18s ease}
+.desktop-menu a:hover,.desktop-menu a[aria-current="page"]{color:var(--blue)}
+.back-home{display:none;text-decoration:none;color:var(--blue);font-size:13px;font-weight:600}
+
+.hero{position:relative;overflow:hidden;padding:94px 24px 54px;text-align:center}
+.hero::before{content:"";position:absolute;left:50%;top:180px;width:min(940px,90vw);height:360px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,rgba(60,141,255,.15),rgba(95,190,255,.07) 42%,transparent 72%);filter:blur(18px);pointer-events:none}
+.hero-inner{position:relative;z-index:1;max-width:960px;margin:auto}
+.eyebrow{margin:0 0 15px;color:var(--blue);font-size:14px;font-weight:650;letter-spacing:.02em}
+h1{margin:0;font-size:clamp(48px,7vw,88px);line-height:.96;letter-spacing:-.055em;font-weight:700}
+.hero-gradient{display:block;margin-top:4px;background:linear-gradient(90deg,#0066cc 0%,#5e5ce6 47%,#34aadc 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{max-width:720px;margin:28px auto 0;color:var(--muted);font-size:clamp(17px,2vw,22px);line-height:1.5;letter-spacing:-.015em}
+.search-wrap{max-width:760px;margin:38px auto 0;position:relative}
+.search-wrap label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.search-box{display:flex;align-items:center;gap:12px;min-height:62px;padding:0 20px;border:1px solid rgba(188,199,217,.75);border-radius:20px;background:rgba(255,255,255,.88);box-shadow:0 18px 48px rgba(25,49,84,.10);backdrop-filter:blur(18px)}
+.search-icon{font-size:22px;color:#697386}
+.search-box input{flex:1;min-width:0;border:0;outline:0;background:transparent;color:var(--ink);font:inherit;font-size:16px}
+.search-box input::placeholder{color:#8b95a5}
+.search-clear{display:none;border:0;background:#eef2f7;color:#596579;width:30px;height:30px;border-radius:50%;font-size:18px;cursor:pointer}
+.search-clear.show{display:inline-grid;place-items:center}
+.search-status{min-height:20px;margin:10px 0 0;color:var(--muted);font-size:13px}
+
+.explore{position:relative;z-index:2;max-width:1180px;margin:0 auto;padding:26px 24px 100px}
+.section-heading{display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:22px}
+.section-heading h2{margin:0;font-size:clamp(30px,4vw,48px);line-height:1.02;letter-spacing:-.04em}
+.section-heading p{max-width:500px;margin:0;color:var(--muted);font-size:15px;line-height:1.55}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.card{position:relative;min-height:280px;padding:28px;border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(180deg,#fff,#f8fbff);overflow:hidden;text-decoration:none;box-shadow:0 12px 30px rgba(25,49,84,.05);transition:transform .24s cubic-bezier(.2,.8,.2,1),box-shadow .24s ease,border-color .24s ease}
+.card:hover,.card:focus-visible{transform:translateY(-4px);box-shadow:0 22px 44px rgba(25,49,84,.10);border-color:#d6dfeb;outline:none}
+.card-copy{position:relative;z-index:2;max-width:62%}
+.card-kicker{display:inline-flex;align-items:center;min-height:26px;padding:0 10px;border-radius:999px;background:#eef5ff;color:var(--blue);font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+.card h3{margin:16px 0 8px;font-size:clamp(25px,3vw,38px);line-height:1.02;letter-spacing:-.04em}
+.card p{margin:0;color:var(--muted);font-size:14px;line-height:1.55}
+.card-cta{display:inline-block;margin-top:18px;color:var(--blue);font-size:14px;font-weight:600}
+.visual{position:absolute;right:22px;bottom:16px;width:34%;height:72%;display:flex;align-items:center;justify-content:center;pointer-events:none}
+
+/* document */
+.doc-stack{position:relative;width:116px;height:148px}.doc{position:absolute;width:82px;height:112px;border:1px solid #d6e0ee;border-radius:17px;background:linear-gradient(180deg,#fff,#f4f8ff);box-shadow:0 16px 28px rgba(24,45,78,.12)}.doc:nth-child(1){left:3px;top:22px;transform:rotate(-9deg)}.doc:nth-child(2){right:2px;top:7px;transform:rotate(7deg)}.doc::before{content:"";position:absolute;left:15px;right:15px;top:23px;height:7px;border-radius:999px;background:#cbd8e9;box-shadow:0 18px 0 #d5dfed,0 36px 0 #d5dfed,0 54px 0 #d5dfed}
+/* calculator */
+.calc{width:112px;height:144px;padding:15px;border-radius:27px;background:linear-gradient(180deg,#111827,#26344c);box-shadow:0 24px 36px rgba(17,24,39,.25)}.calc-display{height:32px;border-radius:14px;background:rgba(255,255,255,.1);color:#d9f4ff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:flex-end;padding:0 10px}.calc-keys{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:15px}.calc-keys i{height:19px;border-radius:9px;background:rgba(255,255,255,.13)}
+/* converter */
+.convert{position:relative;width:160px;height:100px}.file{position:absolute;top:22px;width:62px;height:70px;border-radius:20px;display:grid;place-items:center;color:white;font-size:15px;font-weight:800;box-shadow:0 16px 26px rgba(25,49,84,.14)}.file.xls{left:0;background:linear-gradient(145deg,#20a865,#097b45)}.file.xml{right:0;background:linear-gradient(145deg,#0872ec,#61b5ff)}.flow{position:absolute;left:65px;right:65px;top:55px;height:2px;background:#7e8ca1}.flow::after{content:"";position:absolute;right:-3px;top:-4px;border-left:7px solid #7e8ca1;border-top:5px solid transparent;border-bottom:5px solid transparent}
+/* book */
+.book{position:relative;width:106px;height:148px;border-radius:15px 22px 22px 15px;background:linear-gradient(155deg,#0a61dc,#71b9ff);box-shadow:inset 14px 0 0 rgba(6,54,127,.2),0 22px 32px rgba(14,81,177,.2)}.book::before{content:"";position:absolute;left:46px;top:32px;width:11px;height:62px;border-radius:99px;background:rgba(255,255,255,.26)}.book::after{content:"";position:absolute;left:59px;bottom:29px;width:31px;height:8px;border-radius:99px;background:#fff;box-shadow:0 -17px 0 rgba(255,255,255,.72)}
+/* article */
+.article{width:125px;height:150px;border:1px solid #d7e0ec;border-radius:20px;background:#fff;box-shadow:0 18px 30px rgba(25,49,84,.12);overflow:hidden}.article-top{height:55px;background:linear-gradient(135deg,#086bde,#75c2ff)}.article-line{height:7px;margin:14px 16px 0;border-radius:99px;background:#ccd8e8}.article-line.sm{width:55%}.article-line.md{width:70%}
+/* news */
+.news{width:120px;height:120px;border-radius:32px;background:linear-gradient(145deg,#ff6254,#ff8d73);box-shadow:0 22px 34px rgba(255,98,84,.22);color:white;display:grid;place-items:center;font-size:17px;font-weight:800;letter-spacing:.09em}
+/* app */
+.app-window{width:150px;height:106px;border:1px solid #d7e1ef;border-radius:24px;background:#fff;box-shadow:0 20px 32px rgba(25,49,84,.12);overflow:hidden}.app-top{height:24px;background:#f0f4fa;border-bottom:1px solid #e4eaf3}.app-body{display:grid;grid-template-columns:38px 1fr;height:82px}.app-side{background:#edf3fb}.app-main{padding:13px}.app-pill{height:14px;margin-bottom:10px;border-radius:99px;background:#dbe8fb}.app-pill:nth-child(2){width:70%}
+/* learn */
+.learning{position:relative;width:150px;height:112px;border:1px solid #d8e1ef;border-radius:24px;background:linear-gradient(180deg,#fff,#f4f8ff);box-shadow:0 20px 32px rgba(25,49,84,.12)}.play{position:absolute;left:50%;top:44%;transform:translate(-40%,-50%);width:0;height:0;border-left:24px solid var(--blue);border-top:15px solid transparent;border-bottom:15px solid transparent}.learn-base{position:absolute;left:50%;bottom:-13px;width:76px;height:8px;border-radius:99px;background:#c8d3e2;transform:translateX(-50%)}
+
+.popular{max-width:1180px;margin:0 auto;padding:0 24px 110px}.popular-box{padding:36px;border-radius:32px;background:#0f223d;color:white;overflow:hidden}.popular-box h2{margin:0;font-size:clamp(30px,4vw,48px);letter-spacing:-.04em}.popular-box p{margin:10px 0 24px;color:#b9c9dd;line-height:1.5}.chips{display:flex;flex-wrap:wrap;gap:10px}.chips a{text-decoration:none;padding:11px 15px;border:1px solid rgba(255,255,255,.14);border-radius:999px;background:rgba(255,255,255,.07);font-size:13px;transition:background .2s ease}.chips a:hover{background:rgba(255,255,255,.14)}
+
+footer{padding:30px 24px 42px;border-top:1px solid #e8ebf0;color:#777;font-size:12px}.footer-inner{max-width:1180px;margin:auto;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.footer-inner a{text-decoration:none;color:var(--blue)}
+.hidden-by-search{display:none!important}
+
+@media(max-width:800px){
+  .desktop-menu{display:none}.back-home{display:block}
+  .hero{padding:68px 18px 42px}.lead{font-size:17px}.search-wrap{margin-top:28px}.search-box{min-height:56px;border-radius:18px;padding:0 16px}
+  .explore{padding:18px 16px 70px}.section-heading{display:block}.section-heading p{margin-top:10px}.grid{grid-template-columns:1fr}.card{min-height:245px;padding:24px}.card-copy{max-width:64%}.visual{right:14px;width:36%;transform:scale(.9);transform-origin:center right}
+  .popular{padding:0 16px 70px}.popular-box{padding:26px;border-radius:26px}
+}
+@media(max-width:460px){
+  h1{font-size:46px}.hero-gradient{margin-top:6px}.card{min-height:230px}.card-copy{max-width:61%}.card h3{font-size:28px}.visual{width:38%;right:8px;transform:scale(.76)}
+  .card p{font-size:13px}.card-cta{font-size:13px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.card{transition:none}}
+</style>
+</head>
+<body>
+<header class="site-nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="index.html"><img src="images/LogoASD.svg" alt="Logo dhaniswara86"><span>| <strong>dhaniswara86</strong></span></a>
+    <nav class="desktop-menu" aria-label="Navigasi utama">
+      <a href="index.html">Beranda</a>
+      <a href="buku.html">Buku</a>
+      <a href="formulir.html">Formulir</a>
+      <a href="aplikasi.html">Aplikasi</a>
+      <a href="kalkulator.html">Kalkulator</a>
+      <a href="artikel.html">Artikel</a>
+      <a href="hotnews.html">Hot News</a>
+      <a href="jelajahi.html" aria-current="page">Jelajahi</a>
+    </nav>
+    <a class="back-home" href="index.html">Beranda</a>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">Jelajahi Kabayan</p>
+    <h1>Semua kebutuhan.<span class="hero-gradient">Dalam satu tempat.</span></h1>
+    <p class="lead">Temukan alat bantu, formulir, materi pembelajaran, aplikasi, dan pembaruan perpajakan sesuai kebutuhan Anda.</p>
+    <div class="search-wrap">
+      <label for="exploreSearch">Cari di Kabayan</label>
+      <div class="search-box">
+        <span class="search-icon" aria-hidden="true">⌕</span>
+        <input id="exploreSearch" type="search" autocomplete="off" placeholder="Cari formulir, kalkulator, converter, artikel..." />
+        <button class="search-clear" id="searchClear" type="button" aria-label="Hapus pencarian">×</button>
+      </div>
+      <p class="search-status" id="searchStatus" aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
+<section class="explore" aria-labelledby="categoriesTitle">
+  <div class="section-heading">
+    <h2 id="categoriesTitle">Pilih kebutuhan Anda.</h2>
+    <p>Kabayan mengelompokkan konten berdasarkan apa yang ingin Anda lakukan, sehingga Anda tidak perlu mencari dari banyak tempat.</p>
+  </div>
+  <div class="grid" id="categoryGrid">
+    <a class="card" href="formulir.html" data-search="formulir dokumen pdf interaktif surat kuasa skb permohonan umkm pph">
+      <div class="card-copy"><span class="card-kicker">Administrasi</span><h3>Formulir</h3><p>Cari dokumen PDF dan formulir interaktif untuk kebutuhan administrasi perpajakan.</p><span class="card-cta">Lihat formulir ›</span></div>
+      <div class="visual"><div class="doc-stack"><div class="doc"></div><div class="doc"></div></div></div>
+    </a>
+    <a class="card" href="kalkulator.html" data-search="kalkulator hitung pajak ppn pph 21 ter pengembalian pendahuluan instansi pemerintah">
+      <div class="card-copy"><span class="card-kicker">Hitung</span><h3>Kalkulator</h3><p>Gunakan alat bantu untuk menghitung dan memetakan kewajiban pajak secara lebih praktis.</p><span class="card-cta">Buka kalkulator ›</span></div>
+      <div class="visual"><div class="calc"><div class="calc-display">11.000.000</div><div class="calc-keys"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div></div>
+    </a>
+    <a class="card" href="converter-xml-coretax.html" data-search="converter xml coretax excel xls pph unifikasi pph 21 26 bukti potong impor">
+      <div class="card-copy"><span class="card-kicker">Tools</span><h3>Converter XML</h3><p>Ubah data Excel menjadi XML Coretax untuk membantu proses impor data dalam jumlah banyak.</p><span class="card-cta">Buka converter ›</span></div>
+      <div class="visual"><div class="convert"><div class="file xls">XLS</div><div class="flow"></div><div class="file xml">XML</div></div></div>
+    </a>
+    <a class="card" href="buku.html" data-search="buku digital modul ebook panduan belajar pajak coretax pph ppn referensi">
+      <div class="card-copy"><span class="card-kicker">Belajar</span><h3>Buku Digital</h3><p>Pelajari perpajakan melalui modul, e-book, petunjuk teknis, dan referensi terstruktur.</p><span class="card-cta">Lihat buku ›</span></div>
+      <div class="visual"><div class="book"></div></div>
+    </a>
+    <a class="card" href="artikel.html" data-search="artikel pajak penjelasan aturan regulasi coretax pph ppn umkm prosedur panduan">
+      <div class="card-copy"><span class="card-kicker">Pengetahuan</span><h3>Artikel</h3><p>Baca penjelasan ketentuan perpajakan dengan bahasa yang lebih ringkas dan mudah dipahami.</p><span class="card-cta">Baca artikel ›</span></div>
+      <div class="visual"><div class="article"><div class="article-top"></div><div class="article-line"></div><div class="article-line md"></div><div class="article-line sm"></div></div></div>
+    </a>
+    <a class="card" href="hotnews.html" data-search="hot news berita terbaru update pembaruan coretax regulasi pengumuman isu perpajakan">
+      <div class="card-copy"><span class="card-kicker">Terbaru</span><h3>Hot News</h3><p>Ikuti perubahan, pengumuman, dan isu perpajakan yang perlu diketahui lebih cepat.</p><span class="card-cta">Lihat Hot News ›</span></div>
+      <div class="visual"><div class="news">NEWS</div></div>
+    </a>
+    <a class="card" href="aplikasi.html" data-search="aplikasi espt e-spt efaktur e-faktur ebupot installer arsip perangkat pendukung">
+      <div class="card-copy"><span class="card-kicker">Perangkat</span><h3>Aplikasi</h3><p>Temukan installer, arsip, dan perangkat pendukung perpajakan untuk kebutuhan tertentu.</p><span class="card-cta">Buka aplikasi ›</span></div>
+      <div class="visual"><div class="app-window"><div class="app-top"></div><div class="app-body"><div class="app-side"></div><div class="app-main"><div class="app-pill"></div><div class="app-pill"></div></div></div></div></div>
+    </a>
+    <a class="card" href="ruang-belajar.html" data-search="ruang belajar lms kelas video materi checkpoint evaluasi peserta belajar online">
+      <div class="card-copy"><span class="card-kicker">Learning</span><h3>Ruang Belajar</h3><p>Masuk ke ruang pembelajaran Kabayan untuk materi, video, checkpoint, dan evaluasi.</p><span class="card-cta">Masuk ruang belajar ›</span></div>
+      <div class="visual"><div class="learning"><div class="play"></div><div class="learn-base"></div></div></div>
+    </a>
+  </div>
+</section>
+
+<section class="popular">
+  <div class="popular-box">
+    <h2>Sering dicari.</h2>
+    <p>Beberapa halaman yang sering dibutuhkan dapat dibuka langsung dari sini.</p>
+    <div class="chips">
+      <a href="surat-kuasa-khusus-wajib-pajak.html">Surat Kuasa Khusus</a>
+      <a href="pernyataanumkm500juta.html">Pernyataan UMKM Rp500 Juta</a>
+      <a href="permohonanskbpotput.html">Permohonan SKB PPh</a>
+      <a href="kalkulator-ppn-kabayan.html">Kalkulator PPN</a>
+      <a href="kalkulator-pasal21.html">Kalkulator PPh 21</a>
+      <a href="converter-xml-coretax.html">Converter XML Coretax</a>
+      <a href="hotnews-arsip.html">Arsip Hot News</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="footer-inner"><span>Kabayan by Angga Sukma Dhaniswara</span><span><a href="index.html">Kembali ke Beranda</a></span></div>
+</footer>
+<script>
+(function(){
+  const input=document.getElementById('exploreSearch');
+  const clear=document.getElementById('searchClear');
+  const status=document.getElementById('searchStatus');
+  const cards=Array.from(document.querySelectorAll('#categoryGrid .card'));
+  function normalize(s){return (s||'').toLocaleLowerCase('id-ID').normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();}
+  function filter(){
+    const q=normalize(input.value);
+    let visible=0;
+    cards.forEach(card=>{
+      const hay=normalize(card.dataset.search+' '+card.textContent);
+      const match=!q||hay.includes(q);
+      card.classList.toggle('hidden-by-search',!match);
+      if(match) visible++;
+    });
+    clear.classList.toggle('show',Boolean(q));
+    status.textContent=q ? (visible ? visible+' kategori cocok dengan pencarian.' : 'Belum ada kategori yang cocok. Coba kata kunci lain.') : '';
+  }
+  input.addEventListener('input',filter);
+  clear.addEventListener('click',()=>{input.value='';filter();input.focus();});
+})();
+</script>
+</body>
+</html>
