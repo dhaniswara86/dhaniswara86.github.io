@@ -4306,6 +4306,302 @@ body.mega-menu-open {
 }
 </style>
 
+
+<style id="heroAdaptive100ViewportStyles">
+/* =========================================================
+   Hero adaptif 100% viewport
+   Target: navbar + announcement + hero sampai dots slider
+   selesai tepat dalam tinggi layar yang tersedia.
+   ========================================================= */
+:root {
+  --hero-live-viewport: 100dvh;
+  --hero-dots-space: 20px;
+}
+
+/* Hero selalu memakai tinggi layar aktual yang tersisa. */
+.hero {
+  height: calc(
+    var(--hero-live-viewport, 100dvh)
+    - var(--nav-height)
+    - var(--announcement-height)
+  ) !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+  padding:
+    clamp(16px, 3.3svh, 34px)
+    20px
+    4px !important;
+}
+
+.hero-copy {
+  flex: 0 0 auto !important;
+}
+
+/* Pertahankan ukuran headline sama dengan section-title. */
+.hero h1 {
+  font-size: clamp(43px, 6vw, 72px) !important;
+  line-height: 1 !important;
+}
+
+/* Copy tetap nyaman, tetapi margin ikut menyesuaikan tinggi layar. */
+.hero-description {
+  margin-top: clamp(8px, 1.65svh, 18px) !important;
+}
+
+.hero-actions {
+  margin-top: clamp(10px, 1.9svh, 20px) !important;
+}
+
+/* Area slider mengambil SEMUA ruang yang tersisa setelah hero-copy. */
+.hero-visual {
+  position: relative !important;
+  flex: 1 1 0 !important;
+  width: min(920px, 96vw) !important;
+  height: auto !important;
+  min-height: 0 !important;
+  margin: clamp(8px, 1.6svh, 18px) auto 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  align-items: stretch !important;
+}
+
+.hero-showcase-slider {
+  position: relative;
+  width: 100%;
+  height: 100% !important;
+  min-height: 0 !important;
+  padding-bottom: var(--hero-dots-space) !important;
+}
+
+.hero-showcase-viewport {
+  position: relative;
+  width: 100%;
+  height: 100% !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+
+.hero-showcase-slide {
+  inset: 0 !important;
+  bottom: 0 !important;
+}
+
+.hero-showcase-link {
+  width: min(720px, 100%);
+  height: 100% !important;
+  min-height: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+}
+
+/* Gambar fleksibel: membesar di layar tinggi, mengecil otomatis di layar pendek. */
+.hero-showcase-image-wrap {
+  position: relative;
+  flex: 1 1 0 !important;
+  width: 100%;
+  height: auto !important;
+  min-height: 72px !important;
+  padding: 0 0 clamp(2px, .7svh, 7px) !important;
+  display: flex !important;
+  align-items: flex-end !important;
+  justify-content: center !important;
+  overflow: visible;
+}
+
+.hero-showcase-image {
+  width: auto !important;
+  height: clamp(104px, 22svh, 218px) !important;
+  max-width: min(48vw, 228px) !important;
+  max-height: 100% !important;
+  object-fit: contain !important;
+}
+
+.hero-showcase-image-wrap::after {
+  bottom: 2% !important;
+  width: min(205px, 36vw) !important;
+  height: clamp(18px, 2.8svh, 26px) !important;
+}
+
+/* Caption tidak memakai tinggi tetap agar tidak memakan ruang kosong. */
+.hero-showcase-caption {
+  flex: 0 0 auto !important;
+  width: min(650px, calc(100% - 76px)) !important;
+  min-height: 0 !important;
+  display: grid !important;
+  grid-template-rows: auto auto auto !important;
+  row-gap: clamp(1px, .35svh, 4px) !important;
+  align-content: start !important;
+  padding: 0 18px clamp(3px, .65svh, 7px) !important;
+}
+
+.hero-showcase-caption h2 {
+  margin: 0 !important;
+}
+
+.hero-showcase-caption p {
+  margin: 0 !important;
+}
+
+.hero-showcase-detail {
+  margin-top: 0 !important;
+  line-height: 1.25 !important;
+}
+
+/* Dots selalu berada di slot khusus paling bawah hero. */
+.hero-showcase-dots {
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 3px !important;
+  height: 14px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Panah mengikuti pusat area gambar yang fleksibel. */
+.hero-showcase-arrow {
+  top: 38% !important;
+}
+
+/* Laptop/desktop dengan viewport pendek. Headline tetap sama skala,
+   tetapi elemen lain menjadi lebih hemat ruang. */
+@media (min-width: 681px) and (max-height: 900px) {
+  .hero {
+    padding-top: clamp(10px, 2svh, 20px) !important;
+  }
+
+  .eyebrow {
+    margin-bottom: 3px !important;
+    font-size: 14px !important;
+  }
+
+  .hero-description {
+    max-width: 860px !important;
+    margin-top: clamp(6px, 1.15svh, 10px) !important;
+    font-size: clamp(16px, min(1.7vw, 2.25svh), 20px) !important;
+    line-height: 1.16 !important;
+  }
+
+  .hero-actions {
+    margin-top: clamp(7px, 1.2svh, 11px) !important;
+  }
+
+  .hero .button {
+    min-height: 36px !important;
+    padding: 6px 16px !important;
+    font-size: 14px !important;
+  }
+
+  .hero-visual {
+    margin-top: clamp(5px, .9svh, 9px) !important;
+  }
+
+  .hero-showcase-image {
+    height: clamp(92px, 18.5svh, 178px) !important;
+    max-width: 198px !important;
+  }
+
+  .hero-showcase-caption h2 {
+    font-size: clamp(17px, 2.15svh, 21px) !important;
+    line-height: 1.08 !important;
+  }
+
+  .hero-showcase-caption p {
+    font-size: clamp(11px, 1.55svh, 14px) !important;
+    line-height: 1.22 !important;
+  }
+
+  .hero-showcase-detail {
+    font-size: clamp(11px, 1.5svh, 13px) !important;
+  }
+}
+
+/* Mobile: tetap 100% viewport, namun judul mengikuti ukuran mobile yang wajar. */
+@media (max-width: 680px) {
+  .hero {
+    padding: clamp(12px, 2.4svh, 22px) 14px 4px !important;
+  }
+
+  .hero h1 {
+    font-size: clamp(38px, 11vw, 49px) !important;
+  }
+
+  .hero-description {
+    margin-top: clamp(7px, 1.35svh, 11px) !important;
+    font-size: clamp(15px, 4.4vw, 19px) !important;
+    line-height: 1.16 !important;
+  }
+
+  .hero-actions {
+    margin-top: clamp(8px, 1.4svh, 12px) !important;
+  }
+
+  .hero-visual {
+    width: 100% !important;
+    margin-top: clamp(5px, 1svh, 9px) !important;
+  }
+
+  .hero-showcase-image-wrap {
+    min-height: 62px !important;
+  }
+
+  .hero-showcase-image {
+    height: clamp(90px, 20svh, 174px) !important;
+    max-width: min(44vw, 184px) !important;
+  }
+
+  .hero-showcase-caption {
+    width: calc(100% - 32px) !important;
+    padding-right: 8px !important;
+    padding-left: 8px !important;
+  }
+
+  .hero-showcase-caption h2 {
+    font-size: clamp(17px, 4.8vw, 20px) !important;
+  }
+
+  .hero-showcase-caption p {
+    font-size: clamp(11.5px, 3.25vw, 13px) !important;
+    line-height: 1.22 !important;
+  }
+
+  .hero-showcase-detail {
+    font-size: 12px !important;
+  }
+
+  .hero-showcase-arrow {
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 24px !important;
+  }
+}
+
+/* Sangat pendek: prioritaskan semua komponen tetap terlihat. */
+@media (max-height: 650px) {
+  .hero-showcase-image {
+    height: clamp(72px, 15.5svh, 120px) !important;
+  }
+
+  .hero-showcase-caption p {
+    font-size: 11px !important;
+    line-height: 1.15 !important;
+  }
+
+  .hero-showcase-caption h2 {
+    font-size: 16px !important;
+  }
+
+  .hero-showcase-detail {
+    font-size: 11px !important;
+  }
+}
+</style>
+
 </head>
 <body id="top">
 <header class="site-nav">
@@ -6206,5 +6502,35 @@ body.mega-menu-open {
   schedule();
 })();
 </script>
+
+<script id="heroAdaptiveViewportScript">
+(() => {
+  "use strict";
+
+  const root = document.documentElement;
+
+  function syncHeroViewport() {
+    const viewportHeight =
+      window.visualViewport && window.visualViewport.height
+        ? window.visualViewport.height
+        : window.innerHeight;
+
+    root.style.setProperty(
+      "--hero-live-viewport",
+      `${Math.round(viewportHeight)}px`
+    );
+  }
+
+  syncHeroViewport();
+
+  window.addEventListener("resize", syncHeroViewport, { passive: true });
+  window.addEventListener("orientationchange", syncHeroViewport, { passive: true });
+
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener("resize", syncHeroViewport, { passive: true });
+  }
+})();
+</script>
+
 </body>
 </html>
