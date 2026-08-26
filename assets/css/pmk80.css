@@ -1,357 +1,648 @@
-.pmk80-article {
-  --pmk-blue: #1769d2;
-  --pmk-blue-soft: #eef5ff;
-  --pmk-text: #1d2939;
-  --pmk-muted: #667085;
-  --pmk-line: #e4e7ec;
-  --pmk-soft: #f8fafc;
-  --pmk-danger: #b42318;
-  --pmk-danger-soft: #fff5f4;
+
+.pmk80-article{
+  --pmk-blue:#1565c0;
+  --pmk-blue-soft:#eef5ff;
+  --pmk-green:#067647;
+  --pmk-green-soft:#ecfdf3;
+  --pmk-red:#b42318;
+  --pmk-red-soft:#fff3f2;
+  --pmk-orange-soft:#fff8eb;
+  --pmk-border:#e4e7ec;
+  --pmk-muted:#667085;
+  --pmk-text:#1d2939;
 }
 
-.pmk80-article *,
-.pmk80-article *::before,
-.pmk80-article *::after { box-sizing: border-box; }
-
-.pmk80-article section { min-width: 0; }
-.pmk80-article button,
-.pmk80-article input { font: inherit; }
-
-/* Generic component titles: deliberately not headings so the article TOC stays concise. */
-.pmk80-card-title,
-.pmk80-panel-title,
-.pmk80-group-title,
-.pmk80-role-panel-title {
-  color: var(--pmk-text);
-  font-weight: 720;
-  line-height: 1.28;
+/* fasilitas */
+.pmk80-facility-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:16px;
+  margin:24px 0;
 }
-.pmk80-card-title { font-size: 1.05rem; margin: 8px 0; }
-.pmk80-panel-title { font-size: 1.14rem; margin: 4px 0 16px; }
-.pmk80-group-title { font-size: 1rem; margin-bottom: 10px; }
-
-/* ===== Choose your role ===== */
-.pmk80-role-heading { margin-bottom: 18px; }
-.pmk80-role-guide { margin: 22px 0 32px; min-width: 0; }
-
-.pmk80-role-buttons {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
-  margin-bottom: 12px;
-}
-
-.pmk80-role-button {
-  min-width: 0;
-  min-height: 82px;
-  display: flex;
-  align-items: center;
-  gap: 11px;
-  padding: 13px;
-  border: 1px solid var(--pmk-line);
-  border-radius: 16px;
-  background: #fff;
-  color: var(--pmk-text);
-  text-align: left;
-  cursor: pointer;
-}
-.pmk80-role-button:hover { border-color: #b8c7dc; }
-.pmk80-role-button.is-active { border-color: #84adff; background: #f5f9ff; }
-.pmk80-role-button:focus-visible { outline: 3px solid rgba(23,105,210,.18); outline-offset: 2px; }
-
-.pmk80-role-icon {
-  flex: 0 0 38px;
-  width: 38px;
-  height: 38px;
-  display: grid;
-  place-items: center;
-  border-radius: 12px;
-  background: #f2f4f7;
-  color: #344054;
-}
-.pmk80-role-button.is-active .pmk80-role-icon { background: #e8f1ff; color: #175cd3; }
-.pmk80-role-icon svg { width: 20px; height: 20px; }
-.pmk80-role-button-copy { min-width: 0; }
-.pmk80-role-button-copy small,
-.pmk80-role-button-copy strong,
-.pmk80-role-button-copy em { display: block; }
-.pmk80-role-button-copy small {
-  font-size: .68rem;
-  line-height: 1.2;
-  font-weight: 750;
-  letter-spacing: .045em;
-  text-transform: uppercase;
-  color: var(--pmk-muted);
-}
-.pmk80-role-button-copy strong { margin-top: 3px; font-size: .94rem; line-height: 1.25; }
-.pmk80-role-button-copy em { margin-top: 2px; font-size: .76rem; line-height: 1.3; color: var(--pmk-muted); font-style: normal; }
-
-.pmk80-role-panels {
-  min-width: 0;
-  border: 1px solid var(--pmk-line);
-  border-radius: 20px;
-  background: #fff;
-  overflow: hidden;
-}
-.pmk80-role-panel { display: none; min-width: 0; padding: 24px; }
-.pmk80-role-panel.is-active { display: block; }
-.pmk80-role-panel-head { max-width: 760px; margin-bottom: 24px; }
-.pmk80-role-kicker {
-  display: block;
-  margin-bottom: 5px;
-  color: var(--pmk-muted);
-  font-size: .73rem;
-  font-weight: 750;
-  letter-spacing: .055em;
-  text-transform: uppercase;
-}
-.pmk80-role-panel-title { font-size: 1.32rem; margin-bottom: 8px; }
-.pmk80-role-panel-head p { margin: 0; }
-.pmk80-role-section-title {
-  margin: 0 0 5px;
-  color: #475467;
-  font-size: .8rem;
-  font-weight: 780;
-  letter-spacing: .055em;
-  text-transform: uppercase;
-}
-
-/* Robust timeline: number and content are explicitly separated. */
-.pmk80-action-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  counter-reset: pmk80-step;
-}
-.pmk80-action-list > li {
-  counter-increment: pmk80-step;
-  display: grid;
-  grid-template-columns: 34px minmax(0, 1fr);
-  gap: 12px;
-  align-items: start;
-  padding: 16px 0;
-  border-bottom: 1px solid #edf0f3;
-  min-width: 0;
-}
-.pmk80-action-list > li:last-child { border-bottom: 0; }
-.pmk80-action-list > li::before {
-  content: counter(pmk80-step);
-  width: 30px;
-  height: 30px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  background: #f2f4f7;
-  color: #344054;
-  font-size: .8rem;
-  font-weight: 760;
-}
-.pmk80-action-list > li > div { min-width: 0; }
-.pmk80-action-list strong { display: block; color: var(--pmk-text); line-height: 1.42; }
-.pmk80-action-list p { margin: 5px 0 0; color: var(--pmk-muted); font-size: .91rem; line-height: 1.6; }
-
-.pmk80-role-summary-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-  margin-top: 20px;
-}
-.pmk80-role-summary {
-  min-width: 0;
-  padding: 17px;
-  border-radius: 16px;
-  background: var(--pmk-soft);
-}
-.pmk80-role-summary > span {
-  display: block;
-  margin-bottom: 5px;
-  color: var(--pmk-muted);
-  font-size: .72rem;
-  font-weight: 780;
-  letter-spacing: .05em;
-  text-transform: uppercase;
-}
-.pmk80-role-summary > strong { display: block; color: var(--pmk-text); line-height: 1.35; }
-.pmk80-role-summary p { margin: 7px 0 0; font-size: .9rem; line-height: 1.58; }
-.pmk80-role-summary-facility { background: #f4f8ff; }
-.pmk80-role-summary-risk { background: var(--pmk-danger-soft); border-left: 3px solid #d92d20; }
-.pmk80-role-summary-risk > span,
-.pmk80-role-summary-risk > strong { color: var(--pmk-danger); }
-.pmk80-role-note { margin-top: 16px; }
-
-/* ===== Facility and requirement cards ===== */
-.pmk80-facility-grid,
-.pmk80-requirement-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
-  margin: 22px 0;
-}
-.pmk80-facility-card,
-.pmk80-requirement-card,
-.pmk80-example-box,
-.pmk80-simulator,
-.pmk80-checklist,
-.pmk80-tabs {
-  min-width: 0;
-  border: 1px solid var(--pmk-line);
-  border-radius: 18px;
-  background: #fff;
-  padding: 20px;
+.pmk80-facility-card{
+  border:1px solid var(--pmk-border);
+  border-radius:20px;
+  background:#fff;
+  padding:22px;
+  min-width:0;
 }
 .pmk80-card-label,
-.pmk80-checklist-label,
-.pmk80-checker-eyebrow {
-  color: var(--pmk-muted);
-  font-size: .74rem;
-  font-weight: 760;
-  letter-spacing: .045em;
-  text-transform: uppercase;
+.pmk80-checker-eyebrow,
+.pmk80-role-kicker{
+  display:block;
+  font-size:.75rem;
+  font-weight:750;
+  letter-spacing:.055em;
+  text-transform:uppercase;
+  color:var(--pmk-muted);
 }
-.pmk80-card-icon {
-  width: 42px;
-  height: 42px;
-  display: grid;
-  place-items: center;
-  margin: 14px 0 10px;
-  border-radius: 13px;
-  background: var(--pmk-blue-soft);
-  color: var(--pmk-blue);
+.pmk80-card-icon{
+  width:44px;
+  height:44px;
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  background:var(--pmk-blue-soft);
+  color:var(--pmk-blue);
+  margin:16px 0;
 }
 .pmk80-card-icon svg,
-.pmk80-closing-icon svg { width: 23px; height: 23px; }
-.pmk80-requirement-card > span {
-  display: inline-grid;
-  place-items: center;
-  width: 32px;
-  height: 32px;
-  margin-bottom: 8px;
-  border-radius: 50%;
-  background: #f2f4f7;
-  font-weight: 730;
+.pmk80-closing-icon svg{
+  width:23px;
+  height:23px;
+}
+.pmk80-card-title{
+  font-size:1.08rem;
+  line-height:1.35;
+  font-weight:750;
+  margin-bottom:8px;
+}
+.pmk80-facility-card p{
+  margin-bottom:0;
 }
 
-/* ===== Eligibility checker ===== */
-.pmk80-checker {
-  min-width: 0;
-  margin: 22px 0;
-  padding: 21px;
-  border: 1px solid var(--pmk-line);
-  border-radius: 20px;
-  background: #fff;
+/* cek cepat */
+.pmk80-checker{
+  margin:22px 0;
+  padding:22px;
+  border:1px solid var(--pmk-border);
+  border-radius:22px;
+  background:#fff;
 }
-.pmk80-checker-top,
-.pmk80-checklist-head { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
-.pmk80-checker-count { color: var(--pmk-muted); font-weight: 700; }
-.pmk80-checker-progress,
-.pmk80-checklist-progress {
-  height: 7px;
-  margin: 15px 0 20px;
-  overflow: hidden;
-  border-radius: 999px;
-  background: #eef1f5;
+.pmk80-checker-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:16px;
 }
-.pmk80-checker-progress span,
-.pmk80-checklist-progress span { display: block; width: 0; height: 100%; background: var(--pmk-blue); transition: width .25s ease; }
-.pmk80-checker-question { min-height: 70px; font-size: 1.14rem; font-weight: 700; line-height: 1.48; }
-.pmk80-checker-actions { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; margin-top: 16px; }
-.pmk80-answer-button,
-.pmk80-tab-button,
-.pmk80-checker-back,
-.pmk80-checklist-head button {
-  min-height: 44px;
-  border: 1px solid #d0d5dd;
-  border-radius: 13px;
-  background: #fff;
-  font-weight: 650;
-  cursor: pointer;
+.pmk80-checker-top strong{
+  display:block;
+  margin-top:4px;
 }
-.pmk80-answer-yes { background: #ecfdf3; border-color: #abefc6; color: #067647; }
-.pmk80-answer-no { background: #fff1f0; border-color: #fecdca; color: #b42318; }
-.pmk80-checker-back { margin-top: 10px; padding: 7px 0; border: 0; background: transparent; color: var(--pmk-muted); }
-.pmk80-checker-result { margin-top: 16px; padding: 17px; border-radius: 15px; background: var(--pmk-soft); }
-.pmk80-checker-result.is-good { background: #ecfdf3; color: #05603a; }
-.pmk80-checker-result.is-bad { background: #fff1f0; color: #912018; }
-.pmk80-checker-note,
-.pmk80-simulator-note,
-.pmk80-disclaimer { color: var(--pmk-muted); font-size: .9rem; }
-
-/* ===== Linear flow ===== */
-.pmk80-flow {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0,1fr));
-  gap: 10px;
-  margin: 24px 0;
+.pmk80-checker-count{
+  flex:0 0 auto;
+  font-weight:750;
+  color:var(--pmk-muted);
 }
-.pmk80-flow-arrow { display: none; }
-.pmk80-flow-node { min-width: 0; padding: 16px; border: 1px solid var(--pmk-line); border-radius: 15px; }
-.pmk80-flow-node span { color: var(--pmk-muted); font-size: .72rem; }
-.pmk80-flow-node strong { display: block; margin: 5px 0; line-height: 1.35; }
-.pmk80-flow-node p { margin-bottom: 0; font-size: .88rem; line-height: 1.5; }
+.pmk80-checker-progress{
+  height:7px;
+  background:#eef1f5;
+  border-radius:999px;
+  overflow:hidden;
+  margin:16px 0 24px;
+}
+.pmk80-checker-progress span{
+  display:block;
+  width:0;
+  height:100%;
+  background:var(--pmk-blue);
+  transition:width .22s ease;
+}
+.pmk80-checker-question{
+  max-width:700px;
+  min-height:68px;
+  font-size:1.14rem;
+  line-height:1.48;
+  font-weight:700;
+}
+.pmk80-checker-actions{
+  display:flex;
+  gap:10px;
+  margin-top:18px;
+}
+.pmk80-answer-button{
+  min-width:118px;
+  min-height:46px;
+  border-radius:13px;
+  border:1px solid var(--pmk-border);
+  background:#fff;
+  font:inherit;
+  font-weight:700;
+  cursor:pointer;
+}
+.pmk80-answer-yes{
+  background:var(--pmk-green-soft);
+  border-color:#abefc6;
+  color:var(--pmk-green);
+}
+.pmk80-answer-no{
+  background:var(--pmk-red-soft);
+  border-color:#fecdca;
+  color:var(--pmk-red);
+}
+.pmk80-checker-back{
+  border:0;
+  background:transparent;
+  padding:10px 0 0;
+  color:var(--pmk-muted);
+  font:inherit;
+  font-size:.9rem;
+  cursor:pointer;
+}
+.pmk80-checker-result{
+  border-radius:16px;
+  padding:18px;
+}
+.pmk80-checker-result strong{
+  display:block;
+  margin-bottom:5px;
+}
+.pmk80-checker-result p{
+  margin:0;
+}
+.pmk80-checker-result.is-good{
+  background:var(--pmk-green-soft);
+  color:#05603a;
+}
+.pmk80-checker-result.is-bad{
+  background:var(--pmk-red-soft);
+  color:#912018;
+}
+.pmk80-checker-note{
+  font-size:.9rem;
+  color:var(--pmk-muted);
+}
 
-/* ===== Tabs ===== */
-.pmk80-tab-buttons { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 17px; }
-.pmk80-tab-button { padding: 0 17px; }
-.pmk80-tab-button.is-active { border-color: #111827; background: #111827; color: #fff; }
-.pmk80-tab-panel { display: none; }
-.pmk80-tab-panel.is-active { display: block; }
-.pmk80-step-list { display: grid; gap: 0; }
-.pmk80-step-list article { display: grid; grid-template-columns: 36px minmax(0,1fr); gap: 11px; padding: 14px 0; border-top: 1px solid #eaecf0; }
-.pmk80-step-list article:first-child { border-top: 0; }
-.pmk80-step-list article > span { width: 31px; height: 31px; display: grid; place-items: center; border-radius: 50%; background: #f2f4f7; font-weight: 700; }
-.pmk80-step-list article > div { min-width: 0; }
-.pmk80-step-list p { margin: 4px 0 0; }
-.pmk80-step-critical { padding: 14px !important; border: 0 !important; border-radius: 14px; background: #fff8eb; }
+/* pilihan posisi */
+.pmk80-role-heading{
+  margin-bottom:18px;
+}
+.pmk80-role-guide{
+  margin:22px 0 30px;
+}
+.pmk80-role-buttons{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+}
+.pmk80-role-button{
+  min-width:0;
+  min-height:112px;
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  text-align:left;
+  padding:16px;
+  border:1px solid var(--pmk-border);
+  border-radius:18px;
+  background:#fff;
+  color:inherit;
+  font:inherit;
+  cursor:pointer;
+  transition:border-color .16s ease, background .16s ease;
+}
+.pmk80-role-button:hover{
+  border-color:#b8c7dc;
+}
+.pmk80-role-button.is-active{
+  border-color:#84adff;
+  background:#f5f9ff;
+}
+.pmk80-role-icon{
+  flex:0 0 40px;
+  width:40px;
+  height:40px;
+  display:grid;
+  place-items:center;
+  border-radius:13px;
+  background:#f2f4f7;
+  color:#344054;
+}
+.pmk80-role-button.is-active .pmk80-role-icon{
+  background:#e8f1ff;
+  color:#175cd3;
+}
+.pmk80-role-icon svg{
+  width:21px;
+  height:21px;
+}
+.pmk80-role-button-copy{
+  min-width:0;
+}
+.pmk80-role-button-copy small,
+.pmk80-role-button-copy strong,
+.pmk80-role-button-copy em{
+  display:block;
+}
+.pmk80-role-button-copy small{
+  font-size:.68rem;
+  line-height:1.3;
+  letter-spacing:.035em;
+  text-transform:uppercase;
+  font-weight:700;
+  color:var(--pmk-muted);
+}
+.pmk80-role-button-copy strong{
+  margin-top:5px;
+  font-size:.96rem;
+  line-height:1.28;
+}
+.pmk80-role-button-copy em{
+  margin-top:5px;
+  font-size:.78rem;
+  line-height:1.35;
+  font-style:normal;
+  color:var(--pmk-muted);
+}
 
-/* ===== Checklist ===== */
-.pmk80-checklist-group { margin-top: 21px; }
-.pmk80-checklist-group label { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 1px solid #f0f2f5; }
-.pmk80-checklist-group input { flex: 0 0 auto; width: 18px; height: 18px; margin-top: 3px; }
-.pmk80-checklist-head button { padding: 0 14px; }
+.pmk80-role-placeholder{
+  margin-top:16px;
+  padding:28px 18px;
+  border:1px dashed #cfd7e3;
+  border-radius:20px;
+  text-align:center;
+  background:#fafbfc;
+  color:var(--pmk-muted);
+}
+.pmk80-role-placeholder-icon{
+  font-size:1.25rem;
+  margin-bottom:5px;
+}
+.pmk80-role-placeholder strong{
+  display:block;
+  color:#344054;
+}
+.pmk80-role-placeholder p{
+  margin:5px 0 0;
+}
 
-/* ===== Simulator ===== */
-.pmk80-tool-heading { margin-bottom: 13px; }
-.pmk80-simulator-grid { display: grid; grid-template-columns: minmax(0,2fr) minmax(120px,1fr) minmax(120px,1fr); gap: 12px; }
-.pmk80-field { min-width: 0; }
-.pmk80-field label { display: block; margin-bottom: 7px; font-size: .88rem; font-weight: 650; }
+.pmk80-role-panel{
+  margin-top:16px;
+  padding:24px;
+  border:1px solid var(--pmk-border);
+  border-radius:22px;
+  background:#fff;
+}
+.pmk80-role-result-head{
+  max-width:780px;
+  margin-bottom:26px;
+}
+.pmk80-role-result-title{
+  margin:5px 0 8px;
+  font-size:1.45rem;
+  line-height:1.25;
+  font-weight:780;
+}
+.pmk80-role-result-head p{
+  margin:0;
+}
+.pmk80-role-block{
+  margin-top:26px;
+}
+.pmk80-role-block-label{
+  margin-bottom:12px;
+  font-size:.78rem;
+  font-weight:800;
+  letter-spacing:.055em;
+  text-transform:uppercase;
+  color:#475467;
+}
+
+/* list tindakan: sengaja satu kolom agar tidak pecah di layout editorial */
+.pmk80-action-list{
+  list-style:none;
+  padding:0;
+  margin:0;
+  counter-reset:pmkstep;
+}
+.pmk80-action-list li{
+  counter-increment:pmkstep;
+  position:relative;
+  display:grid;
+  grid-template-columns:36px minmax(0,1fr);
+  gap:12px;
+  padding:15px 0;
+  border-top:1px solid #eef0f3;
+  min-width:0;
+}
+.pmk80-action-list li:first-child{
+  border-top:0;
+  padding-top:0;
+}
+.pmk80-action-list li::before{
+  content:counter(pmkstep);
+  width:32px;
+  height:32px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:#f2f4f7;
+  color:#344054;
+  font-size:.82rem;
+  font-weight:800;
+}
+.pmk80-action-list li>div{
+  min-width:0;
+}
+.pmk80-action-list strong{
+  display:block;
+  line-height:1.42;
+}
+.pmk80-action-list p{
+  margin:5px 0 0;
+  color:var(--pmk-muted);
+  font-size:.93rem;
+  line-height:1.58;
+}
+
+/* alur dinamis */
+.pmk80-role-flow{
+  display:grid;
+  gap:0;
+  border-top:1px solid #e9edf2;
+}
+.pmk80-role-flow>div{
+  position:relative;
+  display:grid;
+  grid-template-columns:42px minmax(0,1fr);
+  gap:13px;
+  padding:14px 0;
+  border-bottom:1px solid #e9edf2;
+  min-width:0;
+}
+.pmk80-role-flow>div>span{
+  width:34px;
+  height:34px;
+  display:grid;
+  place-items:center;
+  border-radius:11px;
+  background:var(--pmk-blue-soft);
+  color:var(--pmk-blue);
+  font-size:.82rem;
+  font-weight:800;
+}
+.pmk80-role-flow p{
+  margin:0;
+  min-width:0;
+}
+.pmk80-role-flow strong,
+.pmk80-role-flow small{
+  display:block;
+}
+.pmk80-role-flow small{
+  margin-top:3px;
+  color:var(--pmk-muted);
+  font-size:.86rem;
+  line-height:1.45;
+}
+
+/* fasilitas + konsekuensi */
+.pmk80-role-summary-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+  margin-top:26px;
+}
+.pmk80-role-summary{
+  min-width:0;
+  border-radius:17px;
+  padding:18px;
+}
+.pmk80-role-summary>span{
+  display:block;
+  margin-bottom:5px;
+  font-size:.72rem;
+  letter-spacing:.055em;
+  text-transform:uppercase;
+  font-weight:800;
+}
+.pmk80-role-summary>strong{
+  display:block;
+  margin-bottom:7px;
+  line-height:1.35;
+}
+.pmk80-role-summary p{
+  margin:0;
+  font-size:.91rem;
+  line-height:1.55;
+}
+.pmk80-role-summary-facility{
+  background:#f4f8ff;
+}
+.pmk80-role-summary-facility>span{
+  color:#175cd3;
+}
+.pmk80-role-summary-risk{
+  background:var(--pmk-red-soft);
+}
+.pmk80-role-summary-risk>span,
+.pmk80-role-summary-risk>strong{
+  color:#b42318;
+}
+.pmk80-role-note{
+  margin-top:18px;
+}
+
+/* checklist per posisi */
+.pmk80-role-checklist{
+  margin-top:24px;
+  border-top:1px solid #e9edf2;
+  padding-top:22px;
+}
+.pmk80-role-checklist-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:14px;
+}
+.pmk80-role-checklist-head span,
+.pmk80-role-checklist-head strong{
+  display:block;
+}
+.pmk80-role-checklist-head span{
+  font-size:.76rem;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+  color:var(--pmk-muted);
+  font-weight:750;
+}
+.pmk80-role-checklist-head strong{
+  margin-top:3px;
+}
+.pmk80-role-checklist-head button{
+  min-height:38px;
+  padding:0 13px;
+  border:1px solid var(--pmk-border);
+  border-radius:11px;
+  background:#fff;
+  color:#475467;
+  font:inherit;
+  font-size:.85rem;
+  cursor:pointer;
+}
+.pmk80-role-checklist-bar{
+  height:6px;
+  margin:13px 0 10px;
+  border-radius:999px;
+  overflow:hidden;
+  background:#eef1f5;
+}
+.pmk80-role-checklist-bar span{
+  display:block;
+  width:0;
+  height:100%;
+  background:var(--pmk-blue);
+  transition:width .2s ease;
+}
+.pmk80-role-checklist label{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  padding:10px 0;
+  border-bottom:1px solid #f0f2f5;
+  line-height:1.48;
+}
+.pmk80-role-checklist label:last-child{
+  border-bottom:0;
+}
+.pmk80-role-checklist input{
+  flex:0 0 auto;
+  width:18px;
+  height:18px;
+  margin-top:2px;
+}
+
+/* simulator */
+.pmk80-tool-heading{
+  margin-bottom:16px;
+}
+.pmk80-simulator{
+  padding:22px;
+  border:1px solid var(--pmk-border);
+  border-radius:22px;
+  background:#fff;
+}
+.pmk80-simulator-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.6fr) minmax(120px,.7fr) minmax(120px,.7fr);
+  gap:12px;
+}
+.pmk80-field{
+  min-width:0;
+}
+.pmk80-field label{
+  display:block;
+  margin-bottom:7px;
+  font-size:.88rem;
+  font-weight:700;
+}
 .pmk80-money-input,
-.pmk80-percent-input { display: flex; align-items: center; min-width: 0; overflow: hidden; border: 1px solid #d0d5dd; border-radius: 12px; background: #fff; }
+.pmk80-percent-input{
+  display:flex;
+  align-items:center;
+  border:1px solid #d0d5dd;
+  border-radius:12px;
+  overflow:hidden;
+  background:#fff;
+}
 .pmk80-money-input span,
-.pmk80-percent-input span { flex: 0 0 auto; padding: 0 11px; color: var(--pmk-muted); }
+.pmk80-percent-input span{
+  flex:0 0 auto;
+  padding:0 11px;
+  color:var(--pmk-muted);
+}
 .pmk80-money-input input,
-.pmk80-percent-input input { width: 100%; min-width: 0; border: 0; outline: 0; padding: 11px 9px; background: transparent; }
-.pmk80-sim-results { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; margin-top: 17px; }
-.pmk80-result-card { min-width: 0; padding: 15px; border-radius: 14px; background: var(--pmk-soft); }
+.pmk80-percent-input input{
+  min-width:0;
+  width:100%;
+  border:0;
+  outline:0;
+  padding:12px 10px;
+  background:transparent;
+  font:inherit;
+  font-size:16px;
+}
+.pmk80-sim-results{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+  margin-top:18px;
+}
+.pmk80-result-card{
+  min-width:0;
+  padding:16px;
+  border-radius:15px;
+  background:#f8fafc;
+}
 .pmk80-result-card span,
-.pmk80-result-card small { display: block; color: var(--pmk-muted); }
-.pmk80-result-card strong { display: block; margin: 5px 0; font-size: 1.16rem; overflow-wrap: anywhere; }
-.pmk80-result-primary { background: var(--pmk-blue-soft); }
-.pmk80-example-box { margin: 20px 0; }
-.pmk80-closing-icon { width: 44px; height: 44px; display: grid; place-items: center; margin-bottom: 13px; border-radius: 14px; background: var(--pmk-blue-soft); color: var(--pmk-blue); }
-
-/* The article body is already narrowed by the editorial sidebar. Stack earlier than ordinary mobile. */
-@media (max-width: 980px) {
-  .pmk80-role-buttons { grid-template-columns: 1fr; }
-  .pmk80-role-button { min-height: 68px; }
-  .pmk80-role-summary-grid { grid-template-columns: 1fr; }
-  .pmk80-flow { grid-template-columns: repeat(2,minmax(0,1fr)); }
+.pmk80-result-card small{
+  display:block;
+  color:var(--pmk-muted);
+}
+.pmk80-result-card strong{
+  display:block;
+  margin:5px 0;
+  font-size:1.15rem;
+  overflow-wrap:anywhere;
+}
+.pmk80-result-card small{
+  font-size:.8rem;
+  line-height:1.4;
+}
+.pmk80-result-primary{
+  background:var(--pmk-blue-soft);
+}
+.pmk80-simulator-note,
+.pmk80-disclaimer{
+  font-size:.9rem;
+  color:var(--pmk-muted);
+}
+.pmk80-simulator-note{
+  margin-bottom:0;
+}
+.pmk80-closing-icon{
+  width:46px;
+  height:46px;
+  display:grid;
+  place-items:center;
+  border-radius:15px;
+  background:var(--pmk-blue-soft);
+  color:var(--pmk-blue);
+  margin-bottom:14px;
 }
 
-@media (max-width: 760px) {
+/* Layout editorial sudah memiliki sidebar; collapse lebih awal */
+@media (max-width:980px){
+  .pmk80-role-buttons{
+    grid-template-columns:1fr;
+  }
+  .pmk80-role-button{
+    min-height:0;
+  }
+  .pmk80-role-summary-grid{
+    grid-template-columns:1fr;
+  }
+  .pmk80-simulator-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+@media (max-width:720px){
   .pmk80-facility-grid,
-  .pmk80-requirement-grid,
-  .pmk80-simulator-grid,
-  .pmk80-sim-results,
-  .pmk80-flow { grid-template-columns: 1fr; }
-  .pmk80-role-panel { padding: 19px; }
-  .pmk80-checker-actions { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .pmk80-sim-results{
+    grid-template-columns:1fr;
+  }
+  .pmk80-role-panel,
+  .pmk80-checker,
+  .pmk80-simulator{
+    padding:18px;
+  }
 }
 
-@media (max-width: 430px) {
-  .pmk80-role-button { padding: 12px; }
-  .pmk80-role-panel { padding: 16px; }
-  .pmk80-checker { padding: 17px; }
-  .pmk80-checker-actions { grid-template-columns: 1fr; }
-  .pmk80-checker-top,
-  .pmk80-checklist-head { align-items: flex-start; }
+@media (max-width:480px){
+  .pmk80-checker-actions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+  }
+  .pmk80-answer-button{
+    min-width:0;
+    width:100%;
+  }
+  .pmk80-role-result-title{
+    font-size:1.25rem;
+  }
+  .pmk80-action-list li{
+    grid-template-columns:32px minmax(0,1fr);
+    gap:9px;
+  }
 }
