@@ -2570,7 +2570,7 @@
 
       to {
         opacity: 1;
-        transform: translateY(0) scale(1);
+        transform: scale(1);
       }
     }
 
@@ -3830,10 +3830,10 @@ body.mega-menu-open {
   justify-content: center;
   opacity: 0;
   pointer-events: none;
-  transform: translateY(18px) scale(.935);
+  transform: scale(.985);
   transition:
-    opacity .52s ease,
-    transform .64s cubic-bezier(.22, 1, .36, 1);
+    opacity .48s cubic-bezier(.4, 0, .2, 1),
+    transform .58s cubic-bezier(.22, 1, .36, 1);
 }
 
 .hero-showcase-slide.active {
@@ -3892,6 +3892,10 @@ body.mega-menu-open {
 .hero-showcase-caption {
   width: min(650px, calc(100% - 76px));
   flex: 0 0 auto;
+  min-height: 126px;
+  display: grid;
+  grid-template-rows: 14px 34px minmax(42px, auto) 22px;
+  align-content: start;
   padding: 2px 18px 28px;
   text-align: center;
 }
@@ -3905,6 +3909,7 @@ body.mega-menu-open {
 }
 
 .hero-showcase-caption h2 {
+  align-self: center;
   margin: 5px 0 6px;
   color: var(--near-black);
   font-size: clamp(20px, min(2.3vw, 2.8svh), 27px);
@@ -3914,6 +3919,7 @@ body.mega-menu-open {
 }
 
 .hero-showcase-caption p {
+  align-self: start;
   margin: 0;
   color: #515154;
   font-size: clamp(13px, min(1.45vw, 1.8svh), 16px);
@@ -4012,6 +4018,8 @@ body.mega-menu-open {
 
   .hero-showcase-caption {
     width: calc(100% - 46px);
+    min-height: 138px;
+    grid-template-rows: 12px 30px minmax(54px, auto) 20px;
     padding: 2px 8px 27px;
   }
 
@@ -4051,7 +4059,7 @@ body.mega-menu-open {
     width: min(205px, 25svh);
     max-height: 190px;
   }
-  .hero-showcase-caption { padding-bottom: 20px; }
+  .hero-showcase-caption { min-height: 112px; grid-template-rows: 12px 27px minmax(38px, auto) 18px; padding-bottom: 20px; }
   .hero-showcase-caption h2 { font-size: 18px; }
   .hero-showcase-caption p { font-size: 12px; }
 }
@@ -5249,222 +5257,6 @@ body.mega-menu-open {
       });
     });
 
-
-    const heroSlider =
-      document.getElementById("heroBookSlider");
-
-    if (heroSlider) {
-      const track =
-        heroSlider.querySelector(".hero-book-track");
-
-      const slides = Array.from(
-        heroSlider.querySelectorAll(".hero-book-slide")
-      );
-
-      const previousButton =
-        heroSlider.querySelector(".slider-arrow-prev");
-
-      const nextButton =
-        heroSlider.querySelector(".slider-arrow-next");
-
-      const dotsContainer =
-        heroSlider.querySelector(".slider-dots");
-
-      const reduceMotion =
-        window.matchMedia(
-          "(prefers-reduced-motion: reduce)"
-        ).matches;
-
-      let currentSlide = 0;
-      let autoSlideTimer = null;
-      let touchStartX = 0;
-      let touchEndX = 0;
-
-      slides.forEach((slide, index) => {
-        const dot = document.createElement("button");
-
-        dot.type = "button";
-        dot.className = "slider-dot";
-        dot.setAttribute(
-          "aria-label",
-          "Tampilkan buku " + (index + 1)
-        );
-
-        dot.addEventListener("click", () => {
-          goToSlide(index);
-          restartAutoSlide();
-        });
-
-        dotsContainer.appendChild(dot);
-      });
-
-      const dots = Array.from(
-        dotsContainer.querySelectorAll(".slider-dot")
-      );
-
-      function goToSlide(index) {
-        currentSlide =
-          (index + slides.length) % slides.length;
-
-        track.style.transform =
-          "translateX(-" + currentSlide * 100 + "%)";
-
-        slides.forEach((slide, slideIndex) => {
-          const isCurrent =
-            slideIndex === currentSlide;
-
-          slide.setAttribute(
-            "aria-hidden",
-            String(!isCurrent)
-          );
-
-          const link =
-            slide.querySelector(".hero-book-link");
-
-          if (link) {
-            link.tabIndex = isCurrent ? 0 : -1;
-          }
-        });
-
-        dots.forEach((dot, dotIndex) => {
-          const isActive =
-            dotIndex === currentSlide;
-
-          dot.classList.toggle("active", isActive);
-
-          dot.setAttribute(
-            "aria-current",
-            isActive ? "true" : "false"
-          );
-        });
-      }
-
-      function nextSlide() {
-        goToSlide(currentSlide + 1);
-      }
-
-      function previousSlide() {
-        goToSlide(currentSlide - 1);
-      }
-
-      function stopAutoSlide() {
-        if (autoSlideTimer !== null) {
-          window.clearInterval(autoSlideTimer);
-          autoSlideTimer = null;
-        }
-      }
-
-      function startAutoSlide() {
-        if (reduceMotion || slides.length < 2) {
-          return;
-        }
-
-        stopAutoSlide();
-
-        autoSlideTimer = window.setInterval(
-          nextSlide,
-          4500
-        );
-      }
-
-      function restartAutoSlide() {
-        stopAutoSlide();
-        startAutoSlide();
-      }
-
-      previousButton.addEventListener("click", () => {
-        previousSlide();
-        restartAutoSlide();
-      });
-
-      nextButton.addEventListener("click", () => {
-        nextSlide();
-        restartAutoSlide();
-      });
-
-      heroSlider.addEventListener(
-        "mouseenter",
-        stopAutoSlide
-      );
-
-      heroSlider.addEventListener(
-        "mouseleave",
-        startAutoSlide
-      );
-
-      heroSlider.addEventListener(
-        "focusin",
-        stopAutoSlide
-      );
-
-      heroSlider.addEventListener(
-        "focusout",
-        startAutoSlide
-      );
-
-      heroSlider.addEventListener("keydown", (event) => {
-        if (event.key === "ArrowLeft") {
-          event.preventDefault();
-          previousSlide();
-          restartAutoSlide();
-        }
-
-        if (event.key === "ArrowRight") {
-          event.preventDefault();
-          nextSlide();
-          restartAutoSlide();
-        }
-      });
-
-      heroSlider.addEventListener(
-        "touchstart",
-        (event) => {
-          touchStartX =
-            event.changedTouches[0].screenX;
-        },
-        { passive: true }
-      );
-
-      heroSlider.addEventListener(
-        "touchend",
-        (event) => {
-          touchEndX =
-            event.changedTouches[0].screenX;
-
-          const difference =
-            touchStartX - touchEndX;
-
-          if (Math.abs(difference) < 45) {
-            return;
-          }
-
-          if (difference > 0) {
-            nextSlide();
-          } else {
-            previousSlide();
-          }
-
-          restartAutoSlide();
-        },
-        { passive: true }
-      );
-
-      document.addEventListener(
-        "visibilitychange",
-        () => {
-          if (document.hidden) {
-            stopAutoSlide();
-          } else {
-            startAutoSlide();
-          }
-        }
-      );
-
-      goToSlide(0);
-      startAutoSlide();
-    }
-
-
     /*
       GANTI ALAMAT EMAIL DI BAWAH INI.
       Contoh: namaanda@gmail.com
@@ -6011,35 +5803,51 @@ body.mega-menu-open {
   if (!slides.length || !prev || !next || !dotsWrap) return;
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const AUTOPLAY_DELAY = 3900;
   let index = 0;
   let timer = null;
   let touchStartX = 0;
   let touchStartY = 0;
+  let changeToken = 0;
 
-  const getImage = (slideIndex) => slides[slideIndex]?.querySelector(".hero-showcase-image");
+  const normalize = (value) => (value + slides.length) % slides.length;
+  const getImage = (slideIndex) =>
+    slides[normalize(slideIndex)]?.querySelector(".hero-showcase-image");
 
-  function loadImage(slideIndex, priority = "auto") {
-    const normalized = (slideIndex + slides.length) % slides.length;
+  function ensureImage(slideIndex, priority = "auto") {
+    const normalized = normalize(slideIndex);
     const image = getImage(normalized);
-    if (!image || image.dataset.loaded === "true") return;
+    if (!image) return Promise.resolve();
+
+    if (priority !== "auto") image.fetchPriority = priority;
 
     const source = image.dataset.src;
     if (source && !image.getAttribute("src")) {
-      image.fetchPriority = priority;
       image.src = source;
       image.removeAttribute("data-src");
     }
 
-    image.dataset.loaded = "true";
+    const finishDecode = () => {
+      image.dataset.loaded = "true";
+      if (typeof image.decode === "function") {
+        return image.decode().catch(() => {});
+      }
+      return Promise.resolve();
+    };
+
+    if (image.complete && image.naturalWidth > 0) return finishDecode();
+
+    return new Promise((resolve) => {
+      const done = () => finishDecode().finally(resolve);
+      image.addEventListener("load", done, { once: true });
+      image.addEventListener("error", resolve, { once: true });
+    });
   }
 
-  function preloadNext() {
-    const nextIndex = (index + 1) % slides.length;
-    if ("requestIdleCallback" in window) {
-      window.requestIdleCallback(() => loadImage(nextIndex, "low"), { timeout: 900 });
-    } else {
-      window.setTimeout(() => loadImage(nextIndex, "low"), 180);
-    }
+  function preloadAround(centerIndex) {
+    // Hanya satu slide berikutnya yang dimuat di latar belakang.
+    // Ini menjaga initial load ringan, tetapi memastikan transisi berikutnya siap.
+    ensureImage(centerIndex + 1, "low");
   }
 
   const dots = slides.map((_, slideIndex) => {
@@ -6047,18 +5855,27 @@ body.mega-menu-open {
     dot.type = "button";
     dot.className = "hero-showcase-dot";
     dot.setAttribute("aria-label", `Tampilkan kategori ${slideIndex + 1}`);
-    dot.addEventListener("click", () => {
-      loadImage(slideIndex, "high");
-      showSlide(slideIndex);
-      restart();
+    dot.addEventListener("click", async () => {
+      stop();
+      await showSlide(slideIndex);
+      schedule();
     });
     dotsWrap.appendChild(dot);
     return dot;
   });
 
-  function showSlide(nextIndex) {
-    index = (nextIndex + slides.length) % slides.length;
-    loadImage(index, "high");
+  async function showSlide(nextIndex) {
+    const targetIndex = normalize(nextIndex);
+    if (targetIndex === index && slides[index].classList.contains("active")) {
+      preloadAround(index);
+      return;
+    }
+
+    const token = ++changeToken;
+    await ensureImage(targetIndex, "high");
+    if (token !== changeToken) return;
+
+    index = targetIndex;
 
     slides.forEach((slide, slideIndex) => {
       const active = slideIndex === index;
@@ -6074,60 +5891,45 @@ body.mega-menu-open {
       dot.setAttribute("aria-current", active ? "true" : "false");
     });
 
-    preloadNext();
+    preloadAround(index);
   }
 
   function stop() {
     if (timer !== null) {
-      window.clearInterval(timer);
+      window.clearTimeout(timer);
       timer = null;
     }
   }
 
-  function start() {
+  function schedule() {
     stop();
     if (reduceMotion.matches || slides.length < 2 || document.hidden) return;
-    timer = window.setInterval(() => showSlide(index + 1), 3400);
+
+    timer = window.setTimeout(async () => {
+      timer = null;
+      await showSlide(index + 1);
+      schedule();
+    }, AUTOPLAY_DELAY);
   }
 
-  function restart() {
+  prev.addEventListener("click", async () => {
     stop();
-    start();
-  }
-
-  prev.addEventListener("click", () => {
-    loadImage(index - 1, "high");
-    showSlide(index - 1);
-    restart();
+    await showSlide(index - 1);
+    schedule();
   });
 
-  next.addEventListener("click", () => {
-    loadImage(index + 1, "high");
-    showSlide(index + 1);
-    restart();
+  next.addEventListener("click", async () => {
+    stop();
+    await showSlide(index + 1);
+    schedule();
   });
 
-  slider.addEventListener("mouseenter", stop);
-  slider.addEventListener("mouseleave", start);
-  slider.addEventListener("focusin", stop);
-  slider.addEventListener("focusout", () => {
-    requestAnimationFrame(() => {
-      if (!slider.contains(document.activeElement)) start();
-    });
-  });
-
-  slider.addEventListener("keydown", (event) => {
-    if (event.key === "ArrowLeft") {
-      event.preventDefault();
-      loadImage(index - 1, "high");
-      showSlide(index - 1);
-      restart();
-    } else if (event.key === "ArrowRight") {
-      event.preventDefault();
-      loadImage(index + 1, "high");
-      showSlide(index + 1);
-      restart();
-    }
+  slider.addEventListener("keydown", async (event) => {
+    if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+    event.preventDefault();
+    stop();
+    await showSlide(index + (event.key === "ArrowRight" ? 1 : -1));
+    schedule();
   });
 
   slider.addEventListener("touchstart", (event) => {
@@ -6137,34 +5939,47 @@ body.mega-menu-open {
     stop();
   }, { passive: true });
 
-  slider.addEventListener("touchend", (event) => {
+  slider.addEventListener("touchend", async (event) => {
     const touch = event.changedTouches[0];
     const dx = touchStartX - touch.screenX;
     const dy = touchStartY - touch.screenY;
 
     if (Math.abs(dx) > 42 && Math.abs(dx) > Math.abs(dy)) {
-      const nextIndex = index + (dx > 0 ? 1 : -1);
-      loadImage(nextIndex, "high");
-      showSlide(nextIndex);
+      await showSlide(index + (dx > 0 ? 1 : -1));
     }
-    start();
+    schedule();
   }, { passive: true });
 
   document.addEventListener("visibilitychange", () => {
     if (document.hidden) stop();
-    else start();
+    else schedule();
   });
 
   reduceMotion.addEventListener?.("change", () => {
     if (reduceMotion.matches) stop();
-    else start();
+    else schedule();
   });
 
-  // The first image is present in HTML; only the next slide is prefetched.
+  // Slide pertama sudah ada di HTML; tandai dan preload hanya slide berikutnya.
   const firstImage = getImage(0);
   if (firstImage) firstImage.dataset.loaded = "true";
-  showSlide(0);
-  start();
+
+  slides.forEach((slide, slideIndex) => {
+    const active = slideIndex === 0;
+    slide.classList.toggle("active", active);
+    slide.setAttribute("aria-hidden", String(!active));
+    const link = slide.querySelector("a");
+    if (link) link.tabIndex = active ? 0 : -1;
+  });
+
+  dots.forEach((dot, dotIndex) => {
+    const active = dotIndex === 0;
+    dot.classList.toggle("active", active);
+    dot.setAttribute("aria-current", active ? "true" : "false");
+  });
+
+  preloadAround(0);
+  schedule();
 })();
 </script>
 </body>
