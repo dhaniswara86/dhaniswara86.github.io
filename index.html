@@ -4138,6 +4138,183 @@ body.mega-menu-open {
 }
 </style>
 
+
+<style id="heroShowcaseLayoutFix">
+/* =========================================================
+   Hero slideshow — layout fix
+   - hero tidak lagi memotong caption pada viewport pendek
+   - dots punya ruang sendiri di bawah caption
+   - arrow disejajarkan dengan area mockup, bukan keseluruhan slider
+   ========================================================= */
+.hero {
+  height: auto !important;
+  min-height: calc(var(--hero-screen-height) - var(--nav-height) - var(--announcement-height)) !important;
+  overflow: visible !important;
+  padding-bottom: 28px !important;
+}
+
+.hero-visual {
+  flex: 0 0 auto !important;
+  width: min(920px, 96vw) !important;
+  height: 396px !important;
+  min-height: 396px !important;
+  margin: clamp(30px, 3.5svh, 38px) auto 0 !important;
+  padding: 0 0 28px !important;
+  overflow: visible !important;
+}
+
+.hero-showcase-slider {
+  height: 368px !important;
+  min-height: 368px !important;
+  padding-bottom: 26px;
+}
+
+.hero-showcase-viewport {
+  height: 342px !important;
+  min-height: 342px !important;
+  overflow: visible;
+}
+
+.hero-showcase-slide {
+  bottom: 0;
+}
+
+.hero-showcase-link {
+  height: 342px;
+  justify-content: flex-start;
+}
+
+.hero-showcase-image-wrap {
+  flex: 0 0 218px !important;
+  height: 218px;
+  padding: 0 0 8px !important;
+  align-items: flex-end;
+}
+
+.hero-showcase-image {
+  width: min(218px, 24svh, 46vw) !important;
+  max-height: 208px !important;
+}
+
+.hero-showcase-caption {
+  width: min(650px, calc(100% - 76px));
+  min-height: 116px !important;
+  padding: 2px 18px 0 !important;
+  grid-template-rows: 12px auto minmax(38px, auto) 18px !important;
+  row-gap: 3px !important;
+}
+
+.hero-showcase-caption h2 {
+  margin: 1px 0 1px !important;
+}
+
+.hero-showcase-detail {
+  margin-top: 0 !important;
+}
+
+.hero-showcase-arrow {
+  top: 109px !important;
+}
+
+.hero-showcase-dots {
+  bottom: 0 !important;
+  height: 14px;
+  align-items: center;
+  pointer-events: auto;
+}
+
+@media (max-width: 680px) {
+  .hero {
+    padding-bottom: 22px !important;
+  }
+
+  .hero-visual {
+    height: 352px !important;
+    min-height: 352px !important;
+    margin-top: 26px !important;
+    padding-bottom: 24px !important;
+  }
+
+  .hero-showcase-slider {
+    height: 328px !important;
+    min-height: 328px !important;
+    padding-bottom: 24px;
+  }
+
+  .hero-showcase-viewport,
+  .hero-showcase-link {
+    height: 304px !important;
+    min-height: 304px !important;
+  }
+
+  .hero-showcase-image-wrap {
+    flex-basis: 184px !important;
+    height: 184px;
+    padding-bottom: 6px !important;
+  }
+
+  .hero-showcase-image {
+    width: min(184px, 43vw) !important;
+    max-height: 174px !important;
+  }
+
+  .hero-showcase-caption {
+    width: calc(100% - 34px) !important;
+    min-height: 112px !important;
+    grid-template-rows: 11px auto minmax(40px, auto) 17px !important;
+    padding: 0 8px !important;
+  }
+
+  .hero-showcase-arrow {
+    top: 92px !important;
+  }
+}
+
+/* Viewport pendek: jangan memaksa hero menjadi lebih pendek dari kontennya. */
+@media (max-height: 760px) {
+  .hero {
+    min-height: auto !important;
+    padding-bottom: 24px !important;
+  }
+
+  .hero-visual {
+    height: 340px !important;
+    min-height: 340px !important;
+    margin-top: 24px !important;
+  }
+
+  .hero-showcase-slider {
+    height: 316px !important;
+    min-height: 316px !important;
+  }
+
+  .hero-showcase-viewport,
+  .hero-showcase-link {
+    height: 290px !important;
+    min-height: 290px !important;
+  }
+
+  .hero-showcase-image-wrap {
+    flex-basis: 176px !important;
+    height: 176px;
+  }
+
+  .hero-showcase-image {
+    width: min(176px, 23svh) !important;
+    max-height: 168px !important;
+  }
+
+  .hero-showcase-caption {
+    min-height: 108px !important;
+    grid-template-rows: 11px auto minmax(35px, auto) 17px !important;
+  }
+
+  .hero-showcase-arrow {
+    top: 88px !important;
+  }
+}
+</style>
+
 </head>
 <body id="top">
 <header class="site-nav">
