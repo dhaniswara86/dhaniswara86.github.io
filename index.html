@@ -313,6 +313,18 @@
       line-height: 1.24;
     }
 
+    .hero-rotating-line {
+      display: block;
+      min-height: 1.08em;
+      transition: opacity 0.28s ease, transform 0.28s ease;
+      will-change: opacity, transform;
+    }
+
+    .hero-rotating-line.is-switching {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+
     .hero-actions,
     .section-actions {
       display: flex;
@@ -4116,8 +4128,8 @@ body.mega-menu-open {
 <div class="hero-copy">
 <p class="eyebrow">Katalog Bahan Pelayanan</p>
 <h1>
-          Belajar pajak.
-          <span class="hero-gradient">Lebih sederhana.</span>
+          Urusan Pajak.
+          <span class="hero-gradient hero-rotating-line" id="heroRotatingLine">Lebih Sederhana.</span>
 </h1>
 <p class="hero-description">
           Buku, formulir, aplikasi, template, dan artikel perpajakan
@@ -5810,6 +5822,38 @@ body.mega-menu-open {
     observer.observe(announcement);
   }
 })();
+</script>
+
+
+<script id="heroRotatingTaglineScript">
+  (function () {
+    const line = document.getElementById('heroRotatingLine');
+    if (!line) return;
+
+    const phrases = [
+      'Lebih Sederhana.',
+      'Lebih Mudah.',
+      'Lebih Praktis.'
+    ];
+
+    let index = 0;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (reduceMotion) {
+      line.textContent = phrases[0];
+      return;
+    }
+
+    window.setInterval(() => {
+      line.classList.add('is-switching');
+
+      window.setTimeout(() => {
+        index = (index + 1) % phrases.length;
+        line.textContent = phrases[index];
+        line.classList.remove('is-switching');
+      }, 240);
+    }, 2600);
+  })();
 </script>
 
 </body>
