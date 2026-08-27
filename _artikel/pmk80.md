@@ -246,9 +246,9 @@ Anda adalah pihak penerima hibah, penerima pinjaman, atau penerima penerusan hib
 <ol class="pmk80-action-list">
 <li><div><strong>Pastikan proyek dan sumber pembiayaannya telah diregistrasi.</strong><p>Perjanjian hibah/pinjaman, Nomor Register, data proyek, serta administrasi APBN/APBD harus dapat ditelusuri.</p></div></li>
 <li><div><strong>Jika Anda sendiri memanfaatkan fasilitas PPN, ajukan SKTD sebelum PPN/PPnBM terutang.</strong><p>Jangan menunggu transaksi selesai baru mengurus dokumen fasilitas.</p></div></li>
-<li><div><strong>Jika fasilitas akan digunakan Kontraktor Utama, sampaikan Pemberitahuan Kontraktor Utama.</strong><p>Pemberitahuan menjadi dasar penerbitan Surat Keterangan sebagai Kontraktor Utama.</p></div></li>
-<li><div><strong>Setelah Surat Keterangan Kontraktor Utama terbit, lakukan Registrasi BKP/JKP.</strong><p>Registrasi menghasilkan Bukti Registrasi BKP/JKP yang dibutuhkan untuk tahap fasilitas tertentu.</p></div></li>
-<li><div><strong>Ketika melakukan pembayaran kepada Kontraktor Utama, periksa dokumen fasilitas PPh.</strong><p>Jika pembayaran merupakan objek pemotongan/pemungutan, administrasi pembayaran, bukti pemotongan, dan SPT harus mengikuti ketentuan yang berlaku.</p></div></li>
+<li><div><strong>Jika fasilitas akan digunakan Kontraktor Utama, pastikan Anda telah membuatkan "Surat Keterangan Sebagai Kontraktor Utama Sehubungan dengan Pemanfaatan Fasilitas Perpajakan Dalam Rangka Pelaksanaan Proyek Pemerintah Yang Dibiayai dengan Hibah dan/atau Pinjaman Luar Negeri" melalui laman DJP Online.</strong> Lalu sampaikan cetakan Surat Keterangan tersebut kepada Kontraktor Utama. Untuk selanjutnya kontraktor tersebut menyampaikan Surat Keterangan Pemanfaatan Fasilitas PPh DTP melalui laman DJP Online miliknya.</p></div></li>
+<li><div><strong>Setelah Surat Keterangan Kontraktor Utama terbit, lakukan Registrasi BKP/JKP.</strong><p>Registrasi menghasilkan Bukti Registrasi Barang Kena Pajak/Jasa Kena Pajak yang dibutuhkan untuk tahap fasilitas tertentu.</p></div></li>
+<li><div><strong>Ketika melakukan pembayaran kepada Kontraktor Utama, periksa dokumen fasilitas PPh.</strong><p>Jika kontraktor utama tidak menyampaikan "Surat Keterangan Pemanfaatan Fasilitas Pajak Penghasilan Ditanggung Pemerintah Sehubungan dengan Pelaksanaan Proyek Pemerintah Yang Dibiayai dengan Hibah dan/atau Pinjaman Luar Negeri" , pembayaran yang dilakukan tetap terutang pajak penghasilan dan harus dilakukan pemotongan sesuai dengan ketentuan perpajakan.</p></div></li>
 </ol>
 </div>
 
