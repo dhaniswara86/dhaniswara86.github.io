@@ -53,10 +53,10 @@ sidebar_note: "Mulai dari proyeknya, lalu cek fasilitas, pastikan kriteria dasar
 
 custom_css:
   - /assets/css/jasakonstruksi.css?v=20260818-1
-  - /assets/css/pmk80.css?v=20260826-4
+  - /assets/css/pmk80.css?v=20260827-1
 
 custom_js:
-  - /assets/js/pmk80.js?v=20260826-4
+  - /assets/js/pmk80.js?v=20260827-1
 ---
 
 <div class="jk-article pmk80-article">
@@ -65,7 +65,7 @@ custom_js:
 <h2>Proyek Hibah/Pinjaman Luar Negeri, Apakah Otomatis Bebas Pajak?</h2>
 
 <p>
-<b>Belum tentu</b>. Sumber dana yang berasal dari hibah atau pinjaman luar negeri <strong>tidak otomatis</strong> membuat seluruh transaksi dalam proyek tersebut bebas pajak.
+<strong class="pmk80-belum-tentu">Belum Tentu.</strong> Sumber dana yang berasal dari hibah atau pinjaman luar negeri <strong>tidak otomatis</strong> membuat seluruh transaksi dalam proyek tersebut bebas pajak.
 </p>
 
 <p>
@@ -241,6 +241,64 @@ Anda adalah pihak penerima hibah, penerima pinjaman, atau penerima penerusan hib
 </p>
 </div>
 
+
+<div class="pmk80-visual-guide" id="pmk80InstansiGuide" data-slide-base="/assets/img/pmk80/instansi/" tabindex="0">
+<div class="pmk80-visual-guide-head">
+<div>
+<span class="pmk80-visual-guide-label">Panduan visual instansi pemerintah</span>
+<strong id="pmk80InstansiGuideTitle">Registrasi Kontraktor Utama</strong>
+</div>
+<div class="pmk80-visual-guide-counter" aria-live="polite">
+<span id="pmk80InstansiGuideCurrent">1</span>
+<span>/</span>
+<span>29</span>
+</div>
+</div>
+
+<div class="pmk80-visual-guide-frame">
+<button type="button" class="pmk80-slide-arrow pmk80-slide-prev" id="pmk80InstansiSlidePrev" aria-label="Slide sebelumnya" disabled>
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="m15 18-6-6 6-6"></path>
+</svg>
+</button>
+
+<img
+id="pmk80InstansiGuideImage"
+src="/assets/img/pmk80/instansi/pmk80-instansi-slide-01.webp"
+alt="Slide 1 dari 29: Registrasi Kontraktor Utama"
+width="1600"
+height="900"
+loading="lazy"
+decoding="async"
+/>
+
+<button type="button" class="pmk80-slide-arrow pmk80-slide-next" id="pmk80InstansiSlideNext" aria-label="Slide berikutnya">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="m9 18 6-6-6-6"></path>
+</svg>
+</button>
+</div>
+
+<div class="pmk80-visual-guide-progress" aria-hidden="true">
+<span id="pmk80InstansiGuideProgress"></span>
+</div>
+
+<div class="pmk80-visual-guide-footer">
+<div>
+<p id="pmk80InstansiGuideCaption">Tahap 1 — Instansi Pemerintah mendaftarkan rekanan/vendor/pegawai sebagai Kontraktor Utama.</p>
+<span class="pmk80-visual-guide-hint">Gunakan tombol panah, keyboard, atau geser slide di HP.</span>
+</div>
+
+<a class="pmk80-pdf-download" href="/assets/pdf/Alur-pmk80-Instansi-Pemerintah.pdf" download>
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M12 3v12"></path><path d="m7 10 5 5 5-5"></path><path d="M5 21h14"></path>
+</svg>
+<span><small>Panduan lengkap</small><strong>Unduh PDF</strong></span>
+</a>
+</div>
+</div>
+
+
 <div class="pmk80-role-block">
 <div class="pmk80-role-block-label">Apa yang harus dilakukan?</div>
 <ol class="pmk80-action-list">
@@ -252,16 +310,61 @@ Anda adalah pihak penerima hibah, penerima pinjaman, atau penerima penerusan hib
 </ol>
 </div>
 
-<div class="pmk80-role-block">
-<div class="pmk80-role-block-label">Alur Anda</div>
-<div class="pmk80-role-flow">
-<div><span>1</span><p><strong>Pastikan Nomor Register</strong><small>Fondasi proyek dan pembiayaan.</small></p></div>
-<div><span>2</span><p><strong>Ajukan SKTD jika Anda menggunakan fasilitas PPN</strong><small>Harus sebelum PPN/PPnBM terutang.</small></p></div>
-<div><span>3</span><p><strong>Laporkan Kontraktor Utama</strong><small>Jika fasilitas akan digunakan kontraktor.</small></p></div>
-<div><span>4</span><p><strong>Registrasi BKP/JKP</strong><small>Setelah SK Kontraktor Utama terbit.</small></p></div>
-<div><span>5</span><p><strong>Koordinasikan pembayaran & dokumen PPh</strong><small>Pastikan dokumen fasilitas kontraktor tersedia.</small></p></div>
+
+<div class="pmk80-tax-decision">
+<div class="pmk80-role-block-label">Formula: kapan Instansi Pemerintah memungut PPN atau PPh?</div>
+
+<p class="pmk80-tax-decision-intro">
+PPN dan PPh diperiksa <strong>secara terpisah</strong>. Keberadaan dokumen fasilitas menentukan apakah transaksi tetap menggunakan mekanisme pajak umum atau dapat menggunakan fasilitas PMK 80 Tahun 2024.
+</p>
+
+<div class="pmk80-tax-decision-grid">
+
+<article class="pmk80-tax-decision-card">
+<span class="pmk80-tax-badge">PPN</span>
+<div class="pmk80-tax-formula">
+<strong>SKTD valid + sudah dimiliki sebelum PPN/PPnBM terutang + transaksi tercakup</strong>
+<span>→</span>
+<b>PPN/PPnBM tidak dipungut</b>
+</div>
+<p>
+Untuk perolehan BKP/JKP oleh Instansi Pemerintah, <strong>SKTD dimiliki oleh pihak penerima</strong> dan disampaikan kepada PKP rekanan agar Faktur Pajak fasilitas (kode 07) dapat dibuat.
+</p>
+<div class="pmk80-tax-otherwise">
+<strong>Jika SKTD tidak ada, tidak valid, terlambat, atau transaksi tidak tercakup:</strong>
+<p>fasilitas PMK 80/2024 tidak dapat digunakan. Jika transaksi tersebut berdasarkan ketentuan umum merupakan transaksi yang PPN-nya dipungut oleh Instansi Pemerintah, Instansi Pemerintah wajib memungut, menyetor, dan melaporkan PPN sesuai ketentuan umum.</p>
+</div>
+</article>
+
+<article class="pmk80-tax-decision-card">
+<span class="pmk80-tax-badge">PPh</span>
+<div class="pmk80-tax-formula">
+<strong>SK Fasilitas PPh valid + dimiliki sebelum penghasilan diterima/diperoleh + diserahkan kepada Instansi</strong>
+<span>→</span>
+<b>gunakan mekanisme fasilitas PPh DTP sesuai jenis PPh</b>
+</div>
+
+<div class="pmk80-tax-split">
+<p><strong>PPh tidak final:</strong> pembayaran dapat dibebaskan dari pemotongan/pemungutan. Instansi tetap membuat bukti pemotongan/pemungutan dan melaporkannya sesuai ketentuan fasilitas.</p>
+<p><strong>PPh final:</strong> PPh tetap dilakukan pemotongan/pemungutan oleh Penerima Hibah/Pinjaman pada saat terutang, tetapi diperlakukan sebagai PPh yang ditanggung pemerintah dan wajib dibuat bukti serta dilaporkan.</p>
+</div>
+
+<div class="pmk80-tax-otherwise">
+<strong>Jika Kontraktor Utama tidak memiliki/menyerahkan SK Fasilitas PPh:</strong>
+<p>tidak ada pembebasan pemotongan/pemungutan dan tidak ada fasilitas PPh DTP atas penghasilan tersebut. Jika pembayarannya merupakan objek PPh, Instansi Pemerintah memotong atau memungut PPh sesuai ketentuan umum.</p>
+</div>
+</article>
+
+</div>
+
+<div class="jk-callout jk-callout-blue pmk80-document-direction">
+<strong>Perhatikan arah dokumennya</strong>
+<p>
+Untuk <strong>PPN</strong>, bukan rekanan yang menyerahkan SKTD kepada Instansi. SKTD diperoleh/dimiliki pihak penerima, lalu diberikan kepada PKP rekanan sebagai dasar pembuatan Faktur Pajak fasilitas. Untuk <strong>PPh</strong>, Kontraktor Utama yang harus menyerahkan Surat Keterangan Fasilitas PPh kepada Penerima Hibah/Pinjaman apabila penghasilannya merupakan objek pemotongan atau pemungutan PPh.
+</p>
 </div>
 </div>
+
 
 <div class="pmk80-role-summary-grid">
 <div class="pmk80-role-summary pmk80-role-summary-facility">
@@ -315,17 +418,6 @@ Kontraktor Utama dapat berupa kontraktor, konsultan, pemasok, atau pihak lain ya
 <li><div><strong>Sampaikan Laporan Realisasi Fasilitas PPh dan SPT sesuai ketentuan.</strong><p>Surat fasilitas bukan akhir proses. Realisasi pemanfaatannya tetap harus dilaporkan.</p></div></li>
 <li><div><strong>Pisahkan pembukuan/pencatatan proyek dari kegiatan lain.</strong><p>Penghasilan dan biaya proyek fasilitas harus dapat ditelusuri. Biaya bersama yang tidak dapat dipisahkan dialokasikan secara proporsional sesuai ketentuan.</p></div></li>
 </ol>
-</div>
-
-<div class="pmk80-role-block">
-<div class="pmk80-role-block-label">Alur Anda</div>
-<div class="pmk80-role-flow">
-<div><span>1</span><p><strong>SK Kontraktor Utama</strong><small>Pastikan sudah diterbitkan.</small></p></div>
-<div><span>2</span><p><strong>Bukti Registrasi BKP/JKP</strong><small>Pastikan transaksi terkait telah diregistrasi.</small></p></div>
-<div><span>3</span><p><strong>SKTD untuk PPN, jika relevan</strong><small>Harus sebelum PPN/PPnBM terutang.</small></p></div>
-<div><span>4</span><p><strong>SK Fasilitas PPh</strong><small>Harus sebelum penghasilan diterima/diperoleh.</small></p></div>
-<div><span>5</span><p><strong>Realisasi & pelaporan</strong><small>Laporan Realisasi dan SPT sesuai ketentuan.</small></p></div>
-</div>
 </div>
 
 <div class="pmk80-role-summary-grid">
@@ -387,17 +479,6 @@ Posisi ini relevan apabila Proyek Pemerintah menerima hibah dalam bentuk barang 
 <li><div><strong>Pastikan SKTD telah terbit sebelum saat PPN/PPnBM terutang.</strong><p>SKTD diterbitkan atas nama Pemberi Hibah barang dan/atau jasa.</p></div></li>
 <li><div><strong>Berikan data kontrak kepada pihak penerima jika Kontraktor Utama terkait akan memanfaatkan fasilitas.</strong><p>Data kontrak mendukung proses Pemberitahuan Kontraktor Utama dan Registrasi BKP/JKP.</p></div></li>
 </ol>
-</div>
-
-<div class="pmk80-role-block">
-<div class="pmk80-role-block-label">Alur Anda</div>
-<div class="pmk80-role-flow">
-<div><span>1</span><p><strong>Pastikan hibah terhubung dengan proyek</strong><small>Perjanjian dan Nomor Register tersedia.</small></p></div>
-<div><span>2</span><p><strong>Koordinasi dengan Penerima Hibah</strong><small>Administrasi dan pencatatan hibah.</small></p></div>
-<div><span>3</span><p><strong>Ajukan SKTD melalui pihak penerima</strong><small>Jika transaksi PPN memenuhi ketentuan.</small></p></div>
-<div><span>4</span><p><strong>Pastikan SKTD sebelum pajak terutang</strong><small>Jangan mengurus setelah transaksi selesai.</small></p></div>
-<div><span>5</span><p><strong>Berikan data kontrak bila diperlukan</strong><small>Untuk administrasi Kontraktor Utama.</small></p></div>
-</div>
 </div>
 
 <div class="pmk80-role-summary-grid">
