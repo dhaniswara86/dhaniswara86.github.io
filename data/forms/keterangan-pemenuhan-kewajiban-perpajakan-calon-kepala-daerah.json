@@ -1,0 +1,130 @@
+{
+  "id": "keterangan-pemenuhan-kewajiban-perpajakan-calon-kepala-daerah",
+  "title": "Permohonan Keterangan Pemenuhan Kewajiban Perpajakan Bakal Calon Kepala Daerah",
+  "description": "Lengkapi surat permohonan keterangan pemenuhan kewajiban perpajakan bakal calon kepala daerah.",
+  "type": "letter",
+  "printPageSize": "A4 portrait",
+  "blocks": [
+    {
+      "type": "fields",
+      "fields": [
+        {
+          "id": "nomor",
+          "label": "Nomor",
+          "required": true
+        },
+        {
+          "id": "lampiran",
+          "label": "Lampiran",
+          "required": true
+        },
+        {
+          "id": "kpp",
+          "label": "Kantor Pelayanan Pajak tujuan",
+          "required": true
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Yang bertanda tangan di bawah ini:"
+    },
+    {
+      "type": "fields",
+      "fields": [
+        {
+          "id": "namaPenandatangan",
+          "label": "Nama penandatangan",
+          "required": true
+        },
+        {
+          "id": "npwpPenandatangan",
+          "label": "NPWP penandatangan",
+          "required": true
+        }
+      ]
+    },
+    {
+      "type": "radio",
+      "name": "status",
+      "label": "Bertindak selaku",
+      "required": true,
+      "options": [
+        {
+          "value": "Wajib Pajak",
+          "label": "Wajib Pajak"
+        },
+        {
+          "value": "Wakil",
+          "label": "Wakil"
+        },
+        {
+          "value": "Kuasa",
+          "label": "Kuasa, dari Wajib Pajak"
+        }
+      ]
+    },
+    {
+      "type": "fields",
+      "fields": [
+        {
+          "id": "namaWp",
+          "label": "Nama Wajib Pajak",
+          "required": true
+        },
+        {
+          "id": "npwpWp",
+          "label": "NPWP Wajib Pajak",
+          "required": true
+        },
+        {
+          "id": "alamatWp",
+          "label": "Alamat Wajib Pajak",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "klu",
+          "label": "KLU",
+          "required": true
+        },
+        {
+          "id": "uraianKlu",
+          "label": "Uraian KLU",
+          "required": true
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "bersama ini mengajukan permohonan keterangan pemenuhan kewajiban perpajakan bakal calon kepala daerah dari Kantor Pelayanan Pajak sebagai salah satu dokumen persyaratan pencalonan diri saya sebagai bakal calon kepala daerah sesuai dengan Peraturan Komisi Pemilihan Umum mengenai Pencalonan Pemilihan Gubernur dan Wakil Gubernur, Bupati dan Wakil Bupati, dan/atau Walikota dan Wakil Walikota."
+    },
+    {
+      "type": "signature",
+      "placeField": {
+        "id": "tempatTtd",
+        "label": "Tempat dan tanggal",
+        "placeholder": "Contoh: Bandung"
+      },
+      "dateField": {
+        "id": "tanggalTtd",
+        "label": "Tanggal",
+        "required": true
+      },
+      "roleText": "Wajib Pajak/Wakil/Kuasa",
+      "nameField": {
+        "id": "namaTtd",
+        "label": "Nama lengkap penandatangan",
+        "required": true
+      }
+    },
+    {
+      "type": "footnote",
+      "text": "*) Beri tanda (√) pada kotak yang sesuai. **) Coret yang tidak perlu."
+    }
+  ],
+  "syncName": {
+    "source": "namaPenandatangan",
+    "target": "namaTtd"
+  }
+}
