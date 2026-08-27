@@ -267,6 +267,244 @@
     renderSlide();
   }
 
+
+  // =========================================================
+  // CEK YA/TIDAK: KAPAN INSTANSI PEMERINTAH MEMUNGUT?
+  // =========================================================
+  const taxChecker = root.querySelector('#pmk80TaxCollectorChecker');
+
+  if (taxChecker) {
+    const modeButtons = [...taxChecker.querySelectorAll('[data-tax-mode]')];
+    const answerButtons = [...taxChecker.querySelectorAll('[data-tax-answer]')];
+    const placeholder = taxChecker.querySelector('#pmk80TaxCheckerPlaceholder');
+    const stage = taxChecker.querySelector('#pmk80TaxQuestionStage');
+    const questionType = taxChecker.querySelector('#pmk80TaxQuestionType');
+    const questionCount = taxChecker.querySelector('#pmk80TaxQuestionCount');
+    const question = taxChecker.querySelector('#pmk80TaxQuestion');
+    const back = taxChecker.querySelector('#pmk80TaxBack');
+    const result = taxChecker.querySelector('#pmk80TaxResult');
+    const resultLabel = taxChecker.querySelector('#pmk80TaxResultLabel');
+    const resultTitle = taxChecker.querySelector('#pmk80TaxResultTitle');
+    const resultText = taxChecker.querySelector('#pmk80TaxResultText');
+    const resultNote = taxChecker.querySelector('#pmk80TaxResultNote');
+    const restart = taxChecker.querySelector('#pmk80TaxRestart');
+
+    const trees = {
+      ppn: {
+        label: 'PPN / PPnBM',
+        start: 'eligible',
+        nodes: {
+          eligible: {
+            question: 'Apakah transaksi tersebut termasuk transaksi yang berpotensi memperoleh fasilitas PPN/PPnBM berdasarkan PMK 80 Tahun 2024?',
+            yes: 'sktd',
+            no: 'generalCollector'
+          },
+          sktd: {
+            question: 'Apakah SKTD yang sesuai sudah dimiliki sebelum saat PPN/PPnBM terutang?',
+            yes: 'covered',
+            no: 'generalCollector'
+          },
+          covered: {
+            question: 'Apakah transaksi serta BKP/JKP yang dibayar sesuai dengan cakupan yang tercantum dalam SKTD?',
+            yesResult: 'ppnFacility',
+            no: 'generalCollector'
+          },
+          generalCollector: {
+            question: 'Tanpa fasilitas PMK 80/2024, apakah menurut ketentuan umum Instansi Pemerintah berkedudukan sebagai pemungut PPN atas transaksi tersebut?',
+            yesResult: 'ppnCollect',
+            noResult: 'ppnSeller'
+          }
+        },
+        results: {
+          ppnFacility: {
+            type: 'facility',
+            label: 'Fasilitas dapat digunakan',
+            title: 'Tidak dipungut PPN/PPnBM melalui fasilitas PMK 80/2024.',
+            text: 'SKTD telah tersedia tepat waktu dan transaksi sesuai dengan cakupan fasilitas.',
+            note: 'SKTD diberikan kepada PKP rekanan sebagai dasar penerbitan Faktur Pajak fasilitas (kode 07).'
+          },
+          ppnCollect: {
+            type: 'collect',
+            label: 'Instansi harus memungut',
+            title: 'Ya. Instansi Pemerintah memungut PPN sesuai ketentuan umum.',
+            text: 'Fasilitas PMK 80/2024 tidak dapat digunakan pada transaksi ini dan berdasarkan ketentuan umum Instansi berkedudukan sebagai pemungut PPN.',
+            note: 'Lakukan pemungutan, penyetoran, dan pelaporan PPN sesuai ketentuan yang berlaku.'
+          },
+          ppnSeller: {
+            type: 'neutral',
+            label: 'Ikuti mekanisme PPN umum',
+            title: 'Instansi tidak memungut PPN sebagai pemungut.',
+            text: 'Fasilitas PMK 80/2024 tidak digunakan, tetapi berdasarkan ketentuan umum transaksi tersebut juga bukan transaksi yang PPN-nya dipungut oleh Instansi.',
+            note: 'PPN mengikuti mekanisme umum yang berlaku pada PKP penjual/rekanan.'
+          }
+        }
+      },
+
+      pph: {
+        label: 'PPh',
+        start: 'object',
+        nodes: {
+          object: {
+            question: 'Apakah pembayaran kepada Kontraktor Utama merupakan objek pemotongan atau pemungutan PPh?',
+            yes: 'certificate',
+            noResult: 'pphNoObject'
+          },
+          certificate: {
+            question: 'Apakah Kontraktor Utama telah menyerahkan Surat Keterangan Pemanfaatan Fasilitas PPh DTP yang valid dan surat tersebut sudah dimiliki sebelum penghasilan diterima atau diperoleh?',
+            yes: 'final',
+            noResult: 'pphGeneral'
+          },
+          final: {
+            question: 'Apakah PPh atas penghasilan tersebut bersifat final?',
+            yesResult: 'pphFinalDtp',
+            noResult: 'pphNonFinal'
+          }
+        },
+        results: {
+          pphNoObject: {
+            type: 'neutral',
+            label: 'Bukan objek pemotongan/pemungutan',
+            title: 'Tidak ada PPh yang perlu dipotong atau dipungut atas pembayaran tersebut.',
+            text: 'Hasil ini berlaku sepanjang pembayaran tersebut memang bukan objek pemotongan atau pemungutan PPh menurut ketentuan yang berlaku.',
+            note: 'Tetap simpan dokumen yang mendukung karakter pembayaran tersebut.'
+          },
+          pphGeneral: {
+            type: 'collect',
+            label: 'Instansi harus memotong/memungut',
+            title: 'Ya. PPh dipotong atau dipungut sesuai ketentuan umum.',
+            text: 'Kontraktor Utama tidak memenuhi dokumen fasilitas PPh yang dipersyaratkan sehingga pembebasan pemotongan/pemungutan dan fasilitas PPh DTP tidak dapat digunakan.',
+            note: 'Gunakan jenis dan tarif PPh yang sesuai dengan karakter pembayaran.'
+          },
+          pphFinalDtp: {
+            type: 'facility',
+            label: 'PPh final — mekanisme DTP',
+            title: 'Ya. PPh final tetap dipotong/dipungut, tetapi menggunakan mekanisme PPh Ditanggung Pemerintah.',
+            text: 'Surat fasilitas tersedia dan penghasilan merupakan objek PPh final.',
+            note: 'Buat bukti dan lakukan pelaporan sesuai mekanisme fasilitas PPh DTP yang berlaku.'
+          },
+          pphNonFinal: {
+            type: 'facility',
+            label: 'PPh tidak final — fasilitas pembebasan',
+            title: 'Tidak dipotong/dipungut PPh tidak final karena fasilitas dapat digunakan.',
+            text: 'Surat Keterangan Pemanfaatan Fasilitas PPh DTP tersedia tepat waktu dan PPh atas penghasilan tersebut bersifat tidak final.',
+            note: 'Tetap penuhi administrasi bukti dan pelaporan yang diwajibkan dalam mekanisme fasilitas.'
+          }
+        }
+      }
+    };
+
+    let mode = null;
+    let nodeKey = null;
+    let history = [];
+
+    const resetView = () => {
+      stage.hidden = true;
+      result.hidden = true;
+      placeholder.hidden = false;
+      modeButtons.forEach((button) => {
+        button.classList.remove('is-active');
+        button.setAttribute('aria-selected', 'false');
+      });
+      mode = null;
+      nodeKey = null;
+      history = [];
+    };
+
+    const renderNode = () => {
+      if (!mode || !nodeKey) return;
+
+      const tree = trees[mode];
+      const node = tree.nodes[nodeKey];
+
+      placeholder.hidden = true;
+      result.hidden = true;
+      stage.hidden = false;
+
+      questionType.textContent = tree.label;
+      questionCount.textContent = `Pertanyaan ${history.length + 1}`;
+      question.textContent = node.question;
+      back.hidden = history.length === 0;
+    };
+
+    const showResult = (resultKey) => {
+      const data = trees[mode].results[resultKey];
+
+      stage.hidden = true;
+      result.hidden = false;
+      result.classList.remove('is-facility', 'is-collect', 'is-neutral');
+      result.classList.add(`is-${data.type}`);
+
+      resultLabel.textContent = data.label;
+      resultTitle.textContent = data.title;
+      resultText.textContent = data.text;
+      resultNote.textContent = data.note;
+    };
+
+    const chooseMode = (selectedMode) => {
+      mode = selectedMode;
+      nodeKey = trees[mode].start;
+      history = [];
+
+      modeButtons.forEach((button) => {
+        const active = button.dataset.taxMode === mode;
+        button.classList.toggle('is-active', active);
+        button.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+
+      renderNode();
+    };
+
+    const answer = (choice) => {
+      if (!mode || !nodeKey) return;
+
+      const node = trees[mode].nodes[nodeKey];
+      const resultKey = node[`${choice}Result`];
+      const nextNode = node[choice];
+
+      if (resultKey) {
+        showResult(resultKey);
+        return;
+      }
+
+      if (nextNode) {
+        history.push(nodeKey);
+        nodeKey = nextNode;
+        renderNode();
+      }
+    };
+
+    modeButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        chooseMode(button.dataset.taxMode);
+      });
+    });
+
+    answerButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        answer(button.dataset.taxAnswer);
+      });
+    });
+
+    back?.addEventListener('click', () => {
+      if (!history.length) return;
+      nodeKey = history.pop();
+      renderNode();
+    });
+
+    restart?.addEventListener('click', () => {
+      if (!mode) {
+        resetView();
+        return;
+      }
+      nodeKey = trees[mode].start;
+      history = [];
+      renderNode();
+    });
+
+    resetView();
+  }
+
+
   // =========================================================
   // 3. CHECKLIST KHUSUS SETIAP POSISI
   // =========================================================
