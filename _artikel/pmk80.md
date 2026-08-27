@@ -53,10 +53,10 @@ sidebar_note: "Mulai dari proyeknya, lalu cek fasilitas, pastikan kriteria dasar
 
 custom_css:
   - /assets/css/jasakonstruksi.css?v=20260818-1
-  - /assets/css/pmk80.css?v=20260827-1
+  - /assets/css/pmk80.css?v=20260827-2
 
 custom_js:
-  - /assets/js/pmk80.js?v=20260827-1
+  - /assets/js/pmk80.js?v=20260827-2
 ---
 
 <div class="jk-article pmk80-article">
@@ -242,6 +242,17 @@ Anda adalah pihak penerima hibah, penerima pinjaman, atau penerima penerusan hib
 </div>
 
 
+<div class="pmk80-role-block">
+<div class="pmk80-role-block-label">Apa yang harus dilakukan?</div>
+<ol class="pmk80-action-list">
+<li><div><strong>Pastikan proyek dan sumber pembiayaannya telah diregistrasi.</strong><p>Perjanjian hibah/pinjaman, Nomor Register, data proyek, serta administrasi APBN/APBD harus dapat ditelusuri.</p></div></li>
+<li><div><strong>Jika Anda sendiri memanfaatkan fasilitas PPN, ajukan SKTD sebelum PPN/PPnBM terutang.</strong><p>Jangan menunggu transaksi selesai baru mengurus dokumen fasilitas.</p></div></li>
+<li><div><strong>Jika fasilitas akan digunakan Kontraktor Utama, pastikan Anda telah membuatkan "Surat Keterangan Sebagai Kontraktor Utama Sehubungan dengan Pemanfaatan Fasilitas Perpajakan Dalam Rangka Pelaksanaan Proyek Pemerintah Yang Dibiayai dengan Hibah dan/atau Pinjaman Luar Negeri" melalui laman DJP Online.</strong> <p>Lalu sampaikan cetakan Surat Keterangan tersebut kepada Kontraktor Utama. Untuk selanjutnya kontraktor tersebut menyampaikan Surat Keterangan Pemanfaatan Fasilitas PPh DTP melalui laman DJP Online miliknya</p></div></li>
+<li><div><strong>Setelah Surat Keterangan Kontraktor Utama terbit, lakukan Registrasi BKP/JKP.</strong><p>Registrasi menghasilkan Bukti Registrasi Barang Kena Pajak/Jasa Kena Pajak yang dibutuhkan untuk tahap fasilitas tertentu.</p></div></li>
+<li><div><strong>Ketika melakukan pembayaran kepada Kontraktor Utama, periksa dokumen fasilitas PPh.</strong><p>Jika kontraktor utama tidak menyampaikan "Surat Keterangan Pemanfaatan Fasilitas Pajak Penghasilan Ditanggung Pemerintah Sehubungan dengan Pelaksanaan Proyek Pemerintah Yang Dibiayai dengan Hibah dan/atau Pinjaman Luar Negeri" , pembayaran yang dilakukan tetap terutang pajak penghasilan dan harus dilakukan pemotongan sesuai dengan ketentuan perpajakan.</p></div></li>
+</ol>
+</div>
+
 <div class="pmk80-visual-guide" id="pmk80InstansiGuide" data-slide-base="/assets/img/pmk80/instansi/" tabindex="0">
 <div class="pmk80-visual-guide-head">
 <div>
@@ -299,68 +310,63 @@ decoding="async"
 </div>
 
 
-<div class="pmk80-role-block">
-<div class="pmk80-role-block-label">Apa yang harus dilakukan?</div>
-<ol class="pmk80-action-list">
-<li><div><strong>Pastikan proyek dan sumber pembiayaannya telah diregistrasi.</strong><p>Perjanjian hibah/pinjaman, Nomor Register, data proyek, serta administrasi APBN/APBD harus dapat ditelusuri.</p></div></li>
-<li><div><strong>Jika Anda sendiri memanfaatkan fasilitas PPN, ajukan SKTD sebelum PPN/PPnBM terutang.</strong><p>Jangan menunggu transaksi selesai baru mengurus dokumen fasilitas.</p></div></li>
-<li><div><strong>Jika fasilitas akan digunakan Kontraktor Utama, pastikan Anda telah membuatkan "Surat Keterangan Sebagai Kontraktor Utama Sehubungan dengan Pemanfaatan Fasilitas Perpajakan Dalam Rangka Pelaksanaan Proyek Pemerintah Yang Dibiayai dengan Hibah dan/atau Pinjaman Luar Negeri" melalui laman DJP Online.</strong> <p>Lalu sampaikan cetakan Surat Keterangan tersebut kepada Kontraktor Utama. Untuk selanjutnya kontraktor tersebut menyampaikan Surat Keterangan Pemanfaatan Fasilitas PPh DTP melalui laman DJP Online miliknya</p></div></li>
-<li><div><strong>Setelah Surat Keterangan Kontraktor Utama terbit, lakukan Registrasi BKP/JKP.</strong><p>Registrasi menghasilkan Bukti Registrasi Barang Kena Pajak/Jasa Kena Pajak yang dibutuhkan untuk tahap fasilitas tertentu.</p></div></li>
-<li><div><strong>Ketika melakukan pembayaran kepada Kontraktor Utama, periksa dokumen fasilitas PPh.</strong><p>Jika kontraktor utama tidak menyampaikan "Surat Keterangan Pemanfaatan Fasilitas Pajak Penghasilan Ditanggung Pemerintah Sehubungan dengan Pelaksanaan Proyek Pemerintah Yang Dibiayai dengan Hibah dan/atau Pinjaman Luar Negeri" , pembayaran yang dilakukan tetap terutang pajak penghasilan dan harus dilakukan pemotongan sesuai dengan ketentuan perpajakan.</p></div></li>
-</ol>
-</div>
 
 
-<div class="pmk80-tax-decision">
-<div class="pmk80-role-block-label">Formula: kapan Instansi Pemerintah memungut PPN atau PPh?</div>
 
-<p class="pmk80-tax-decision-intro">
-PPN dan PPh diperiksa <strong>secara terpisah</strong>. Keberadaan dokumen fasilitas menentukan apakah transaksi tetap menggunakan mekanisme pajak umum atau dapat menggunakan fasilitas PMK 80 Tahun 2024.
-</p>
-
-<div class="pmk80-tax-decision-grid">
-
-<article class="pmk80-tax-decision-card">
-<span class="pmk80-tax-badge">PPN</span>
-<div class="pmk80-tax-formula">
-<strong>SKTD valid + sudah dimiliki sebelum PPN/PPnBM terutang + transaksi tercakup</strong>
-<span>→</span>
-<b>PPN/PPnBM tidak dipungut</b>
-</div>
+<div class="pmk80-tax-checker" id="pmk80TaxCollectorChecker">
+<div class="pmk80-tax-checker-head">
+<span class="pmk80-role-kicker">Cek pemungutan pajak</span>
+<div class="pmk80-tax-checker-title">Apakah Instansi Pemerintah Harus Memungut PPN atau PPh?</div>
 <p>
-Untuk perolehan BKP/JKP oleh Instansi Pemerintah, <strong>SKTD dimiliki oleh pihak penerima</strong> dan disampaikan kepada PKP rekanan agar Faktur Pajak fasilitas (kode 07) dapat dibuat.
+Pilih jenis pajak, kemudian jawab pertanyaan dengan <strong>Ya</strong> atau <strong>Tidak</strong>. Hasil akan menunjukkan apakah fasilitas PMK 80/2024 dapat digunakan atau Instansi harus kembali ke mekanisme pajak yang berlaku.
 </p>
-<div class="pmk80-tax-otherwise">
-<strong>Jika SKTD tidak ada, tidak valid, terlambat, atau transaksi tidak tercakup:</strong>
-<p>fasilitas PMK 80/2024 tidak dapat digunakan. Jika transaksi tersebut berdasarkan ketentuan umum merupakan transaksi yang PPN-nya dipungut oleh Instansi Pemerintah, Instansi Pemerintah wajib memungut, menyetor, dan melaporkan PPN sesuai ketentuan umum.</p>
-</div>
-</article>
-
-<article class="pmk80-tax-decision-card">
-<span class="pmk80-tax-badge">PPh</span>
-<div class="pmk80-tax-formula">
-<strong>SK Fasilitas PPh valid + dimiliki sebelum penghasilan diterima/diperoleh + diserahkan kepada Instansi</strong>
-<span>→</span>
-<b>gunakan mekanisme fasilitas PPh DTP sesuai jenis PPh</b>
 </div>
 
-<div class="pmk80-tax-split">
-<p><strong>PPh tidak final:</strong> pembayaran dapat dibebaskan dari pemotongan/pemungutan. Instansi tetap membuat bukti pemotongan/pemungutan dan melaporkannya sesuai ketentuan fasilitas.</p>
-<p><strong>PPh final:</strong> PPh tetap dilakukan pemotongan/pemungutan oleh Penerima Hibah/Pinjaman pada saat terutang, tetapi diperlakukan sebagai PPh yang ditanggung pemerintah dan wajib dibuat bukti serta dilaporkan.</p>
+<div class="pmk80-tax-type-buttons" role="tablist" aria-label="Pilih jenis pajak yang akan diperiksa">
+<button type="button" data-tax-mode="ppn" aria-selected="false">
+<span>PPN / PPnBM</span>
+<small>Cek SKTD dan kewajiban pemungutan</small>
+</button>
+<button type="button" data-tax-mode="pph" aria-selected="false">
+<span>PPh</span>
+<small>Cek Surat Fasilitas PPh DTP</small>
+</button>
 </div>
 
-<div class="pmk80-tax-otherwise">
-<strong>Jika Kontraktor Utama tidak memiliki/menyerahkan SK Fasilitas PPh:</strong>
-<p>tidak ada pembebasan pemotongan/pemungutan dan tidak ada fasilitas PPh DTP atas penghasilan tersebut. Jika pembayarannya merupakan objek PPh, Instansi Pemerintah memotong atau memungut PPh sesuai ketentuan umum.</p>
+<div class="pmk80-tax-checker-placeholder" id="pmk80TaxCheckerPlaceholder">
+<strong>Pilih PPN atau PPh</strong>
+<p>Pertanyaan akan muncul sesuai jenis pajak yang ingin Anda periksa.</p>
 </div>
-</article>
 
+<div class="pmk80-tax-question-stage" id="pmk80TaxQuestionStage" hidden aria-live="polite">
+<div class="pmk80-tax-question-meta">
+<span id="pmk80TaxQuestionType">PPN</span>
+<span id="pmk80TaxQuestionCount">Pertanyaan 1</span>
+</div>
+<div class="pmk80-tax-question" id="pmk80TaxQuestion"></div>
+
+<div class="pmk80-tax-answer-actions">
+<button type="button" class="pmk80-tax-answer pmk80-tax-answer-yes" data-tax-answer="yes">Ya</button>
+<button type="button" class="pmk80-tax-answer pmk80-tax-answer-no" data-tax-answer="no">Tidak</button>
+</div>
+
+<button type="button" class="pmk80-tax-back" id="pmk80TaxBack" hidden>
+← Pertanyaan sebelumnya
+</button>
+</div>
+
+<div class="pmk80-tax-result" id="pmk80TaxResult" hidden aria-live="polite">
+<span class="pmk80-tax-result-label" id="pmk80TaxResultLabel"></span>
+<strong id="pmk80TaxResultTitle"></strong>
+<p id="pmk80TaxResultText"></p>
+<div class="pmk80-tax-result-note" id="pmk80TaxResultNote"></div>
+<button type="button" class="pmk80-tax-restart" id="pmk80TaxRestart">Periksa lagi</button>
 </div>
 
 <div class="jk-callout jk-callout-blue pmk80-document-direction">
 <strong>Perhatikan arah dokumennya</strong>
 <p>
-Untuk <strong>PPN</strong>, bukan rekanan yang menyerahkan SKTD kepada Instansi. SKTD diperoleh/dimiliki pihak penerima, lalu diberikan kepada PKP rekanan sebagai dasar pembuatan Faktur Pajak fasilitas. Untuk <strong>PPh</strong>, Kontraktor Utama yang harus menyerahkan Surat Keterangan Fasilitas PPh kepada Penerima Hibah/Pinjaman apabila penghasilannya merupakan objek pemotongan atau pemungutan PPh.
+Untuk <strong>PPN</strong>, SKTD diperoleh/dimiliki pihak penerima dan diberikan kepada PKP rekanan sebagai dasar pembuatan Faktur Pajak fasilitas. Untuk <strong>PPh</strong>, Kontraktor Utama menyerahkan Surat Keterangan Pemanfaatan Fasilitas PPh DTP kepada Penerima Hibah/Pinjaman apabila penghasilannya merupakan objek pemotongan atau pemungutan PPh.
 </p>
 </div>
 </div>
