@@ -98,7 +98,7 @@ Secara garis besar terdapat dua fasilitas. Namun siapa yang dapat memanfaatkanny
 </div>
 <div class="pmk80-card-title">PPN atau PPN dan PPnBM Tidak Dipungut</div>
 <p>
-Fasilitas diberikan atas transaksi tertentu yang memenuhi ketentuan. Istilah yang digunakan adalah <strong>tidak dipungut</strong>, bukan “dibebaskan”. <br>Kode faktur pajak yang terbit adalah 07. Pihak pembeli tidak dipungut PPN jika sudah memiliki Surat Keterangan Tidak Dipungut (SKTD)
+Fasilitas diberikan atas transaksi tertentu yang memenuhi ketentuan. Istilah yang digunakan adalah <strong>tidak dipungut</strong>, bukan “dibebaskan”.</p> <p>Kode faktur pajak yang terbit adalah 07. Pihak pembeli tidak dipungut PPN jika sudah memiliki Surat Keterangan Tidak Dipungut (SKTD)
 </p>
 </article>
 
@@ -111,7 +111,7 @@ Fasilitas diberikan atas transaksi tertentu yang memenuhi ketentuan. Istilah yan
 </div>
 <div class="pmk80-card-title">PPh Ditanggung Pemerintah</div>
 <p>
-Fasilitas ini diberikan kepada <strong>Kontraktor Utama</strong> atas PPh yang terutang dari penghasilan dalam pelaksanaan bagian Proyek Pemerintah yang memenuhi ketentuan. <br>Fasilitas PPh Ditanggung Pemerintah hanya diberikan jika Kontraktor Utama telah memiliki Surat Keterangan Pemanfaatan Fasilitas PPh DTP.
+Fasilitas ini diberikan kepada <strong>Kontraktor Utama</strong> atas PPh yang terutang dari penghasilan dalam pelaksanaan bagian Proyek Pemerintah yang memenuhi ketentuan. </p><p>Fasilitas PPh Ditanggung Pemerintah hanya diberikan jika Kontraktor Utama telah memiliki Surat Keterangan Pemanfaatan Fasilitas PPh DTP.
 </p>
 </article>
 </div>
