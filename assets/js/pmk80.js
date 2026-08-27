@@ -155,6 +155,118 @@
     if (placeholder) placeholder.hidden = false;
   }
 
+
+  // =========================================================
+  // PANDUAN VISUAL INSTANSI PEMERINTAH (29 SLIDE)
+  // =========================================================
+  const instansiGuide = root.querySelector('#pmk80InstansiGuide');
+
+  if (instansiGuide) {
+    const totalSlides = 29;
+    const base = instansiGuide.dataset.slideBase || '/assets/img/pmk80/instansi/';
+    const image = instansiGuide.querySelector('#pmk80InstansiGuideImage');
+    const currentEl = instansiGuide.querySelector('#pmk80InstansiGuideCurrent');
+    const titleEl = instansiGuide.querySelector('#pmk80InstansiGuideTitle');
+    const captionEl = instansiGuide.querySelector('#pmk80InstansiGuideCaption');
+    const progress = instansiGuide.querySelector('#pmk80InstansiGuideProgress');
+    const prev = instansiGuide.querySelector('#pmk80InstansiSlidePrev');
+    const next = instansiGuide.querySelector('#pmk80InstansiSlideNext');
+    const frame = instansiGuide.querySelector('.pmk80-visual-guide-frame');
+
+    let slide = 1;
+    let pointerStartX = null;
+
+    const stageInfo = (number) => {
+      if (number <= 10) {
+        return {
+          title: 'Tahap 1 — Registrasi Kontraktor Utama',
+          caption: 'Instansi Pemerintah memastikan rekanan/vendor/pegawai telah didaftarkan sebagai Kontraktor Utama dan menyerahkan Surat Keterangan sebagai Kontraktor Utama kepada pihak yang ditunjuk.'
+        };
+      }
+
+      if (number <= 17) {
+        return {
+          title: 'Tahap 2 — Registrasi BKP/JKP PHLN',
+          caption: 'Instansi Pemerintah meregistrasikan BKP/JKP yang terkait dengan proyek. Produk tahap ini adalah Bukti Registrasi BKP/JKP untuk mendukung pemanfaatan fasilitas oleh Kontraktor Utama.'
+        };
+      }
+
+      return {
+        title: 'Opsional — Pengajuan SKTD oleh Instansi Pemerintah',
+        caption: 'Jika Instansi Pemerintah merupakan pembeli barang/pengguna jasa dan transaksi memenuhi ketentuan, Instansi mengajukan SKTD sebelum PPN/PPnBM terutang agar fasilitas tidak dipungut dapat digunakan.'
+      };
+    };
+
+    const renderSlide = () => {
+      slide = Math.min(totalSlides, Math.max(1, slide));
+
+      const info = stageInfo(slide);
+      const file = `pmk80-instansi-slide-${String(slide).padStart(2, '0')}.webp`;
+
+      image.src = `${base}${file}`;
+      image.alt = `Slide ${slide} dari ${totalSlides}: ${info.title}`;
+      currentEl.textContent = String(slide);
+      titleEl.textContent = info.title;
+      captionEl.textContent = info.caption;
+      progress.style.width = `${(slide / totalSlides) * 100}%`;
+      prev.disabled = slide === 1;
+      next.disabled = slide === totalSlides;
+    };
+
+    prev?.addEventListener('click', () => {
+      if (slide > 1) {
+        slide -= 1;
+        renderSlide();
+      }
+    });
+
+    next?.addEventListener('click', () => {
+      if (slide < totalSlides) {
+        slide += 1;
+        renderSlide();
+      }
+    });
+
+    instansiGuide.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowLeft' && slide > 1) {
+        event.preventDefault();
+        slide -= 1;
+        renderSlide();
+      } else if (event.key === 'ArrowRight' && slide < totalSlides) {
+        event.preventDefault();
+        slide += 1;
+        renderSlide();
+      }
+    });
+
+    frame?.addEventListener('pointerdown', (event) => {
+      pointerStartX = event.clientX;
+    });
+
+    frame?.addEventListener('pointerup', (event) => {
+      if (pointerStartX === null) return;
+
+      const delta = event.clientX - pointerStartX;
+      pointerStartX = null;
+
+      if (Math.abs(delta) < 45) return;
+
+      if (delta < 0 && slide < totalSlides) {
+        slide += 1;
+        renderSlide();
+      } else if (delta > 0 && slide > 1) {
+        slide -= 1;
+        renderSlide();
+      }
+    });
+
+    frame?.addEventListener('pointercancel', () => {
+      pointerStartX = null;
+    });
+
+    renderSlide();
+  }
+
   // =========================================================
   // 3. CHECKLIST KHUSUS SETIAP POSISI
   // =========================================================
