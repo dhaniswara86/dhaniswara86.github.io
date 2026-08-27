@@ -800,94 +800,197 @@
   font-size:.82rem;
 }
 
-/* Formula keputusan pajak untuk Instansi Pemerintah */
-.pmk80-tax-decision{
+/* Cek Ya/Tidak: kapan Instansi Pemerintah memungut PPN atau PPh */
+.pmk80-tax-checker{
   margin:26px 0;
-  padding-top:24px;
-  border-top:1px solid #e9edf2;
-}
-.pmk80-tax-decision-intro{
-  max-width:760px;
-  margin:0 0 15px;
-}
-.pmk80-tax-decision-grid{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:14px;
-}
-.pmk80-tax-decision-card{
-  min-width:0;
-  padding:18px;
+  padding:22px;
   border:1px solid var(--pmk-border);
-  border-radius:18px;
+  border-radius:22px;
   background:#fff;
 }
-.pmk80-tax-badge{
-  display:inline-flex;
-  align-items:center;
-  min-height:28px;
-  padding:0 10px;
-  border-radius:999px;
-  background:var(--pmk-blue-soft);
-  color:var(--pmk-blue);
-  font-size:.76rem;
-  font-weight:800;
-  letter-spacing:.04em;
+.pmk80-tax-checker-head{
+  max-width:780px;
 }
-.pmk80-tax-formula{
+.pmk80-tax-checker-title{
+  margin:5px 0 8px;
+  font-size:1.22rem;
+  line-height:1.35;
+  font-weight:780;
+}
+.pmk80-tax-checker-head p{
+  margin:0;
+  color:#475467;
+}
+.pmk80-tax-type-buttons{
   display:grid;
-  grid-template-columns:1fr;
-  gap:6px;
-  margin:13px 0 12px;
-  padding:14px;
-  border-radius:14px;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+  margin-top:18px;
+}
+.pmk80-tax-type-buttons button{
+  min-width:0;
+  min-height:72px;
+  padding:13px 15px;
+  text-align:left;
+  border:1px solid var(--pmk-border);
+  border-radius:15px;
+  background:#fff;
+  color:inherit;
+  font:inherit;
+  cursor:pointer;
+}
+.pmk80-tax-type-buttons button.is-active{
+  border-color:#84adff;
+  background:#f5f9ff;
+}
+.pmk80-tax-type-buttons span,
+.pmk80-tax-type-buttons small{
+  display:block;
+}
+.pmk80-tax-type-buttons span{
+  font-weight:750;
+}
+.pmk80-tax-type-buttons small{
+  margin-top:3px;
+  color:var(--pmk-muted);
+  font-size:.79rem;
+  line-height:1.35;
+}
+.pmk80-tax-checker-placeholder{
+  margin-top:14px;
+  padding:20px;
+  border:1px dashed #cfd7e3;
+  border-radius:15px;
+  background:#fafbfc;
+  text-align:center;
+  color:var(--pmk-muted);
+}
+.pmk80-tax-checker-placeholder strong{
+  display:block;
+  color:#344054;
+}
+.pmk80-tax-checker-placeholder p{
+  margin:4px 0 0;
+  font-size:.88rem;
+}
+.pmk80-tax-question-stage{
+  margin-top:14px;
+  padding:18px;
+  border-radius:17px;
   background:#f8fafc;
 }
-.pmk80-tax-formula strong,
-.pmk80-tax-formula b{
-  line-height:1.45;
+.pmk80-tax-question-meta{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:10px;
+  color:var(--pmk-muted);
+  font-size:.76rem;
+  font-weight:750;
+  letter-spacing:.035em;
+  text-transform:uppercase;
 }
-.pmk80-tax-formula>span{
-  color:var(--pmk-blue);
-  font-size:1.2rem;
+.pmk80-tax-question{
+  max-width:720px;
+  min-height:58px;
+  font-size:1.06rem;
+  line-height:1.5;
+  font-weight:700;
+}
+.pmk80-tax-answer-actions{
+  display:flex;
+  gap:10px;
+  margin-top:17px;
+}
+.pmk80-tax-answer{
+  min-width:112px;
+  min-height:44px;
+  border-radius:12px;
+  border:1px solid var(--pmk-border);
+  font:inherit;
+  font-weight:750;
+  cursor:pointer;
+}
+.pmk80-tax-answer-yes{
+  background:var(--pmk-green-soft);
+  border-color:#abefc6;
+  color:var(--pmk-green);
+}
+.pmk80-tax-answer-no{
+  background:var(--pmk-red-soft);
+  border-color:#fecdca;
+  color:var(--pmk-red);
+}
+.pmk80-tax-back{
+  margin-top:8px;
+  padding:7px 0;
+  border:0;
+  background:transparent;
+  color:var(--pmk-muted);
+  font:inherit;
+  font-size:.85rem;
+  cursor:pointer;
+}
+.pmk80-tax-result{
+  margin-top:14px;
+  padding:18px;
+  border-radius:17px;
+  background:#f8fafc;
+}
+.pmk80-tax-result.is-facility{
+  background:#ecfdf3;
+}
+.pmk80-tax-result.is-collect{
+  background:#fff3f2;
+}
+.pmk80-tax-result.is-neutral{
+  background:#f2f4f7;
+}
+.pmk80-tax-result-label{
+  display:block;
+  margin-bottom:4px;
+  font-size:.72rem;
   font-weight:800;
+  letter-spacing:.055em;
+  text-transform:uppercase;
+  color:var(--pmk-muted);
 }
-.pmk80-tax-formula b{
-  color:#05603a;
+.pmk80-tax-result>strong{
+  display:block;
+  font-size:1.05rem;
+  line-height:1.4;
 }
-.pmk80-tax-decision-card>p,
-.pmk80-tax-split p,
-.pmk80-tax-otherwise p{
-  font-size:.9rem;
+.pmk80-tax-result>p{
+  margin:7px 0 0;
   line-height:1.55;
 }
-.pmk80-tax-split{
-  margin:12px 0;
+.pmk80-tax-result-note{
+  margin-top:12px;
+  padding:12px 13px;
+  border-radius:12px;
+  background:rgba(255,255,255,.65);
+  font-size:.88rem;
+  line-height:1.5;
 }
-.pmk80-tax-split p{
-  margin:8px 0;
-}
-.pmk80-tax-otherwise{
-  margin-top:14px;
-  padding:14px;
-  border-left:4px solid #d92d20;
-  border-radius:0 13px 13px 0;
-  background:#fff5f4;
-}
-.pmk80-tax-otherwise>strong{
-  display:block;
-  color:#b42318;
-  line-height:1.45;
-}
-.pmk80-tax-otherwise p{
-  margin:6px 0 0;
+.pmk80-tax-restart{
+  margin-top:13px;
+  min-height:40px;
+  padding:0 14px;
+  border:1px solid var(--pmk-border);
+  border-radius:11px;
+  background:#fff;
+  color:#344054;
+  font:inherit;
+  font-size:.86rem;
+  font-weight:700;
+  cursor:pointer;
 }
 .pmk80-document-direction{
   margin-top:16px;
 }
 
 @media (max-width:980px){
-  .pmk80-tax-decision-grid{
+  .pmk80-tax-type-buttons{
     grid-template-columns:1fr;
   }
 }
@@ -917,7 +1020,15 @@
   .pmk80-visual-guide-footer{
     padding:14px;
   }
-  .pmk80-tax-decision-card{
-    padding:15px;
+  .pmk80-tax-checker{
+    padding:16px;
+  }
+  .pmk80-tax-answer-actions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+  }
+  .pmk80-tax-answer{
+    min-width:0;
+    width:100%;
   }
 }
