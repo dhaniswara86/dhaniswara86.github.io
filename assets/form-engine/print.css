@@ -31,11 +31,7 @@
     display:none!important;
   }
 
-  /*
-    Wrapper saja yang dinolkan. Jangan masukkan #dynamicForm di sini:
-    elemen tersebut juga memiliki class .paper dan harus mempertahankan
-    ukuran A4 serta padding renderer di bawah.
-  */
+  /* Pertahankan halaman fisik tanpa margin: ini jalur yang stabil di Safari. */
   main,
   .workspace,
   .workspace-inner,
@@ -54,11 +50,11 @@
   }
 
   .paper{
-    width:210mm!important;
-    min-width:210mm!important;
-    min-height:297mm!important;
+    width:auto!important;
+    min-width:0!important;
+    min-height:0!important;
     margin:0!important;
-    padding:24mm 24mm 17mm!important;
+    padding:0!important;
     border:0!important;
     background:#fff!important;
     box-shadow:none!important;
@@ -68,6 +64,14 @@
     line-height:1.22!important;
     -webkit-text-size-adjust:100%!important;
     text-size-adjust:100%!important;
+  }
+
+  /* Ruang tepi dibuat pada isi, bukan pada @page atau ukuran fisik .paper. */
+  .paper #formRoot{
+    box-sizing:border-box!important;
+    width:100%!important;
+    margin:0!important;
+    padding:18mm 18mm 16mm!important;
   }
 
   .paper input[type="text"],
@@ -98,9 +102,13 @@
 
   /* Surat Pernyataan Hibah */
   .paper.letter-classic{
-    padding:20mm 24mm 17mm!important;
+    padding:0!important;
     font-size:10.8pt!important;
     line-height:1.28!important;
+  }
+
+  .paper.letter-classic #formRoot{
+    padding:20mm 24mm 17mm!important;
   }
 
   .paper.letter-classic .form-title{
@@ -173,10 +181,14 @@
 
   /* Surat Kuasa Khusus */
   .paper.kuasa-classic{
-    padding:18mm 18mm 16mm!important;
+    padding:0!important;
     font-family:Arial,Helvetica,sans-serif!important;
     font-size:10pt!important;
     line-height:1.25!important;
+  }
+
+  .paper.kuasa-classic #formRoot{
+    padding:18mm 18mm 16mm!important;
   }
 
   .paper.kuasa-classic .title{
