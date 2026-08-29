@@ -73,15 +73,25 @@
           </div>
         </header>
 
+        <div class="note no-print" id="formNotice" hidden></div>
+
         <div class="paper-wrap">
           <form class="paper" id="dynamicForm" autocomplete="off" novalidate>
-            <div id="errorBox" class="error-box no-print" role="alert"></div>
-            <div id="formRoot"></div>
+            <div id="errorBox" class="error-box no-print" role="alert" aria-live="assertive"></div>
+            <div id="formRoot" aria-live="polite">
+              <p class="loading-message no-print">Memuat formulir...</p>
+            </div>
           </form>
         </div>
+
+        <section class="guide no-print" id="formGuide" hidden></section>
       </div>
     </section>
   </main>
+
+  <noscript>
+    <p class="noscript-message">JavaScript harus diaktifkan untuk membuka formulir interaktif ini.</p>
+  </noscript>
 
   <script>
     const menuToggle = document.getElementById("menuToggle");
