@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Pratinjau cetak formulir Kabayan">
+  <title>Pratinjau Cetak | Kabayan</title>
+  <link rel="stylesheet" href="assets/form-engine/form.css?v=20260829-1">
+  <link rel="stylesheet" href="assets/form-engine/print.css?v=20260829-4" media="all">
+  <style>
+    .preview-actions {
+      position: fixed;
+      z-index: 1000;
+      top: 0;
+      right: 0;
+      left: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      min-height: 60px;
+      padding: 10px max(20px, calc((100vw - 1180px) / 2));
+      border-bottom: 1px solid #dbe2ea;
+      background: rgba(255, 255, 255, .96);
+      box-shadow: 0 8px 24px rgba(15, 23, 42, .08);
+      font-family: Arial, Helvetica, sans-serif;
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+    }
+
+    .preview-actions p {
+      margin: 0;
+      color: #475569;
+      font-size: 13px;
+    }
+
+    .preview-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .preview-button {
+      min-height: 40px;
+      padding: 9px 16px;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      background: #fff;
+      color: #0f172a;
+      cursor: pointer;
+      font: 700 14px/1 Arial, Helvetica, sans-serif;
+    }
+
+    .preview-button.primary {
+      border-color: #0f172a;
+      background: #0f172a;
+      color: #fff;
+    }
+
+    .preview-button:disabled {
+      cursor: not-allowed;
+      opacity: .5;
+    }
+
+    .preview-message {
+      width: min(680px, calc(100vw - 40px));
+      margin: 100px auto 24px;
+      padding: 20px;
+      border: 1px solid #fecaca;
+      border-radius: 14px;
+      background: #fff;
+      color: #991b1b;
+      font: 14px/1.5 Arial, Helvetica, sans-serif;
+    }
+
+    @media screen {
+      html,
+      body {
+        width: auto !important;
+        min-width: 0 !important;
+        min-height: 100% !important;
+        background: #e9eef5 !important;
+        overflow: auto !important;
+      }
+
+      body {
+        padding: 84px 20px 36px !important;
+      }
+
+      .preview-main,
+      .workspace,
+      .workspace-inner,
+      .paper-wrap {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: visible !important;
+      }
+
+      .paper-wrap {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .paper {
+        margin: 0 auto !important;
+        box-shadow: 0 24px 70px rgba(15, 23, 42, .2) !important;
+      }
+    }
+
+    @media screen and (max-width: 720px) {
+      body {
+        padding: 118px 12px 24px !important;
+      }
+
+      .preview-actions {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .preview-buttons,
+      .preview-button {
+        width: 100%;
+      }
+    }
+
+    @media print {
+      .preview-actions,
+      .preview-message {
+        display: none !important;
+      }
+
+      .preview-main {
+        display: block !important;
+        width: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+    }
+  </style>
+</head>
+<body class="printing-form">
+  <header class="preview-actions" aria-label="Kontrol pratinjau cetak">
+    <p>Periksa posisi dan isi formulir sebelum mencetak.</p>
+    <div class="preview-buttons">
+      <button class="preview-button" id="backBtn" type="button">Kembali ke formulir</button>
+      <button class="preview-button primary" id="printPreviewBtn" type="button" disabled>Cetak / Simpan PDF</button>
+    </div>
+  </header>
+
+  <main class="preview-main">
+    <p class="preview-message" id="previewMessage" hidden></p>
+    <section class="workspace" id="previewWorkspace" hidden>
+      <div class="workspace-inner">
+        <div class="paper-wrap" id="previewRoot"></div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (() => {
+      const storageKey = "kabayan-print-preview";
+      const backButton = document.getElementById("backBtn");
+      const printButton = document.getElementById("printPreviewBtn");
+      const message = document.getElementById("previewMessage");
+      const workspace = document.getElementById("previewWorkspace");
+      const root = document.getElementById("previewRoot");
+      let snapshot = null;
+
+      function showError(text) {
+        message.textContent = text;
+        message.hidden = false;
+        workspace.hidden = true;
+        printButton.disabled = true;
+      }
+
+      try {
+        const stored = sessionStorage.getItem(storageKey);
+        snapshot = stored ? JSON.parse(stored) : null;
+
+        if (!snapshot?.formHtml) {
+          showError("Data pratinjau tidak ditemukan. Kembali ke formulir, lalu tekan tombol Cetak / Simpan PDF kembali.");
+        } else {
+          document.title = `Pratinjau ${snapshot.title} | Kabayan`;
+          root.innerHTML = snapshot.formHtml;
+          root.querySelector("form")?.setAttribute("inert", "");
+          workspace.hidden = false;
+          printButton.disabled = false;
+        }
+      } catch (error) {
+        console.error(error);
+        showError("Data pratinjau tidak dapat dibaca. Kembali ke formulir dan coba kembali.");
+      }
+
+      backButton.addEventListener("click", () => {
+        if (window.history.length > 1) {
+          window.history.back();
+        } else if (snapshot?.returnUrl) {
+          window.location.assign(snapshot.returnUrl);
+        } else {
+          window.location.assign("formulir.html");
+        }
+      });
+
+      printButton.addEventListener("click", () => {
+        if (!printButton.disabled) window.print();
+      });
+    })();
+  </script>
+</body>
+</html>
