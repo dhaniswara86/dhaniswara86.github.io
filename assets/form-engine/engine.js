@@ -19,12 +19,12 @@
   const guide = document.getElementById("formGuide");
   const printButton = document.getElementById("printBtn");
   const resetButton = document.getElementById("resetBtn");
-  const safariPreview = document.getElementById("safariPrintPreview");
-  const safariPreviewRoot = document.getElementById("safariPreviewRoot");
-  const safariPreviewBack = document.getElementById("safariPreviewBack");
-  const safariPreviewPrint = document.getElementById("safariPreviewPrint");
+  const previewBar = document.getElementById("printPreviewBar");
+  const previewBackButton = document.getElementById("previewBackBtn");
+  const previewPrintButton = document.getElementById("previewPrintBtn");
 
   let activeSchema = null;
+  let previewScrollPosition = 0;
   const repeatables = new Map();
 
   printButton.disabled = true;
@@ -469,84 +469,21 @@
     form.querySelectorAll('input[type="date"]').forEach(formatDate);
   }
 
-  function enterPrintMode() {
+  function enterPreviewMode() {
     updateAllDates();
-    document.documentElement.classList.add("printing-form");
-    document.body.classList.add("printing-form");
+    previewScrollPosition = window.scrollY;
+    previewBar.hidden = false;
+    document.documentElement.classList.add("preview-mode");
+    document.body.classList.add("preview-mode");
+    window.scrollTo(0, 0);
+    previewBackButton?.focus();
   }
 
-  function exitPrintMode() {
-    document.documentElement.classList.remove("printing-form");
-    document.body.classList.remove("printing-form");
-  }
-
-  function isSafariBrowser() {
-    const userAgent = navigator.userAgent;
-    return /Safari/i.test(userAgent)
-      && !/(Chrome|Chromium|CriOS|Edg|OPR|FxiOS|Android)/i.test(userAgent);
-  }
-
-  function copyControlValues(sourceForm, clonedForm) {
-    const selector = "input, textarea, select";
-    const sourceControls = [...sourceForm.querySelectorAll(selector)];
-    const clonedControls = [...clonedForm.querySelectorAll(selector)];
-
-    sourceControls.forEach((source, index) => {
-      const clone = clonedControls[index];
-      if (!clone) return;
-
-      if (source instanceof HTMLInputElement) {
-        if (source.type === "radio" || source.type === "checkbox") {
-          clone.checked = source.checked;
-          clone.toggleAttribute("checked", source.checked);
-        } else {
-          clone.value = source.value;
-          clone.setAttribute("value", source.value);
-        }
-      } else if (source instanceof HTMLTextAreaElement) {
-        clone.value = source.value;
-        clone.textContent = source.value;
-      } else if (source instanceof HTMLSelectElement) {
-        clone.value = source.value;
-        [...clone.options].forEach((option) => {
-          option.toggleAttribute("selected", option.value === source.value);
-        });
-      }
-    });
-  }
-
-  function openSafariPrintPreview() {
-    updateAllDates();
-    try {
-      if (!safariPreview || !safariPreviewRoot) {
-        throw new Error("Area preview Safari tidak tersedia.");
-      }
-
-      const clonedForm = form.cloneNode(true);
-      copyControlValues(form, clonedForm);
-      clonedForm.querySelectorAll(".no-print").forEach((node) => node.remove());
-      clonedForm.querySelectorAll("[aria-live]").forEach((node) => node.removeAttribute("aria-live"));
-      clonedForm.setAttribute("inert", "");
-      clonedForm.id = "safariPreviewForm";
-
-      safariPreviewRoot.replaceChildren(clonedForm);
-      safariPreview.hidden = false;
-      document.documentElement.classList.add("safari-preview-open");
-      document.body.classList.add("safari-preview-open");
-      safariPreview.scrollTop = 0;
-      safariPreviewBack?.focus();
-    } catch (error) {
-      console.error(error);
-      window.alert("Preview cetak tidak dapat disiapkan. Muat ulang halaman lalu coba kembali.");
-    }
-  }
-
-  function closeSafariPrintPreview() {
-    if (!safariPreview || safariPreview.hidden) return;
-    safariPreview.hidden = true;
-    safariPreviewRoot?.replaceChildren();
-    document.documentElement.classList.remove("safari-preview-open");
-    document.body.classList.remove("safari-preview-open");
+  function exitPreviewMode() {
+    document.documentElement.classList.remove("preview-mode");
+    document.body.classList.remove("preview-mode");
+    previewBar.hidden = true;
+    window.scrollTo(0, previewScrollPosition);
     printButton.focus();
   }
 
@@ -830,29 +767,21 @@
       result.firstInvalid?.focus();
       return;
     }
-    if (isSafariBrowser()) {
-      openSafariPrintPreview();
-      return;
-    }
-    enterPrintMode();
-    window.print();
+    enterPreviewMode();
   });
-  if (isSafariBrowser()) {
-    printButton.textContent = "Pratinjau Cetak";
-  }
-  safariPreviewBack?.addEventListener("click", closeSafariPrintPreview);
-  safariPreviewPrint?.addEventListener("click", () => {
-    if (!safariPreview || safariPreview.hidden) return;
+  previewBackButton?.addEventListener("click", exitPreviewMode);
+  previewPrintButton?.addEventListener("click", () => {
+    if (!document.body.classList.contains("preview-mode")) return;
+    updateAllDates();
     window.print();
   });
   document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && safariPreview && !safariPreview.hidden) {
-      closeSafariPrintPreview();
+    if (event.key === "Escape" && document.body.classList.contains("preview-mode")) {
+      exitPreviewMode();
     }
   });
   resetButton.addEventListener("click", resetForm);
-  window.addEventListener("beforeprint", enterPrintMode);
-  window.addEventListener("afterprint", exitPrintMode);
+  window.addEventListener("beforeprint", updateAllDates);
   window.addEventListener("load", resizeTitleChoice);
 
   loadForm();
