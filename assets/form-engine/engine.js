@@ -7,7 +7,7 @@
   ];
   const SAFE_ID = /^[a-z0-9-]+$/;
   const SAFE_CLASS = /^[A-Za-z0-9_-]+$/;
-  const SUPPORTED_RENDERERS = new Set(["kuasa-classic"]);
+  const SUPPORTED_RENDERERS = new Set(["kuasa-classic", "letter-classic"]);
 
   const form = document.getElementById("dynamicForm");
   const root = document.getElementById("formRoot");
@@ -82,8 +82,15 @@
   function createInput(field) {
     if (field.type === "select") return createSelect(field);
 
+    if (field.type === "textarea") {
+      const textarea = document.createElement("textarea");
+      textarea.rows = Math.max(1, Number(field.rows) || 2);
+      applyFieldMetadata(textarea, field);
+      return textarea;
+    }
+
     const input = document.createElement("input");
-    input.type = field.type === "date" ? "date" : "text";
+    input.type = ["date", "email", "tel", "number"].includes(field.type) ? field.type : "text";
     applyFieldMetadata(input, field);
 
     if (field.type === "npwp") {
@@ -131,7 +138,10 @@
 
   function renderTitle(schema) {
     const config = schema.formTitleChoice;
-    if (!config) return;
+    if (!config) {
+      if (schema.formTitle) root.appendChild(createElement("h2", "form-title", schema.formTitle));
+      return;
+    }
 
     const title = createElement("div", "title");
     const line = createElement("div", "title-line");
@@ -173,7 +183,7 @@
   }
 
   function renderFields(block, parent = root) {
-    const container = createElement("div", block.className || "");
+    const container = createElement("div", `field-group ${block.className || ""}`);
     (block.fields || []).forEach((field) => container.appendChild(createRow(field)));
     parent.appendChild(container);
     return container;
@@ -342,6 +352,32 @@
     root.appendChild(grid);
   }
 
+  function renderSignature(block) {
+    const section = createElement("section", "signature");
+    const dateLine = createElement("div", "date-line");
+
+    if (block.placeField) {
+      dateLine.appendChild(createInput({ ...block.placeField, type: "text" }));
+      dateLine.appendChild(createElement("span", "comma", ","));
+    }
+    if (block.dateField) {
+      dateLine.appendChild(createDateControl(block.dateField));
+    }
+
+    if (dateLine.childElementCount) section.appendChild(dateLine);
+    if (block.roleText) section.appendChild(createElement("div", "role-line", block.roleText));
+    section.appendChild(createElement("div", "sig-space"));
+
+    if (block.nameField) {
+      const nameLine = createElement("div", "name-line");
+      nameLine.appendChild(createInput({ ...block.nameField, type: "text" }));
+      section.appendChild(nameLine);
+    }
+
+    section.appendChild(createElement("div", "screen-help no-print", "Area tanda tangan"));
+    root.appendChild(section);
+  }
+
   function renderFootnote(block) {
     let container = root.querySelector(":scope > .footnotes");
     if (!container) {
@@ -362,6 +398,7 @@
       validity: renderValidity,
       repeatable: renderRepeatable,
       "signature-pair": renderSignaturePair,
+      signature: renderSignature,
       footnote: renderFootnote
     };
     const renderer = renderers[block.type];
@@ -671,7 +708,20 @@
 
     const titleChoice = form.querySelector(".title-select");
     titleChoice?.addEventListener("change", resizeTitleChoice);
-    bindNameSync(schema.syncNames);
+    (schema.currencyFields || []).forEach((id) => {
+      const control = document.getElementById(id);
+      if (!control) return;
+      control.inputMode = "numeric";
+      control.addEventListener("input", () => {
+        const digits = control.value.replace(/\D/g, "");
+        control.value = digits.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+      });
+    });
+
+    const syncRules = Array.isArray(schema.syncNames)
+      ? schema.syncNames
+      : (schema.syncName ? [schema.syncName] : []);
+    bindNameSync(syncRules);
     updateConditionals();
     updateAllDates();
     requestAnimationFrame(resizeTitleChoice);
