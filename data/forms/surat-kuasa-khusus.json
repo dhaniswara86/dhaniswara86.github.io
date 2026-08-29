@@ -1,41 +1,47 @@
 {
+  "schemaVersion": 1,
   "id": "surat-kuasa-khusus",
   "type": "letter",
+  "renderer": "kuasa-classic",
   "title": "Surat Kuasa Khusus Wajib Pajak",
-  "description": "Formulir interaktif Surat Kuasa Khusus Wajib Pajak.",
+  "description": "Formulir Kabayan untuk membuat Surat Kuasa Khusus dalam bentuk kertas, lengkap dengan status pemberi kuasa, jenis kuasa, ruang lingkup, masa berlaku, dan area meterai.",
+  "notice": "Format mengikuti Lampiran Huruf A PMK Nomor 44 Tahun 2026. Satu Surat Kuasa Khusus hanya berlaku untuk satu orang kuasa dan ruang lingkup perpajakan tertentu.",
+  "output": {
+    "method": "browser-print",
+    "pageSize": "A4",
+    "orientation": "portrait"
+  },
+  "legacyUrls": [
+    "surat-kuasa-khusus-wajib-pajak.html"
+  ],
   "formTitleChoice": {
     "prefix": "SURAT KUASA KHUSUS WAJIB PAJAK",
     "id": "jenisWp",
     "label": "Jenis Wajib Pajak",
+    "required": true,
     "options": [
-      {
-        "value": "BADAN",
-        "label": "BADAN"
-      },
-      {
-        "value": "ORANG PRIBADI",
-        "label": "ORANG PRIBADI"
-      },
-      {
-        "value": "WARISAN BELUM TERBAGI",
-        "label": "WARISAN BELUM TERBAGI"
-      }
+      { "value": "BADAN", "label": "BADAN" },
+      { "value": "ORANG PRIBADI", "label": "ORANG PRIBADI" },
+      { "value": "WARISAN BELUM TERBAGI", "label": "WARISAN BELUM TERBAGI" }
     ],
     "placeholder": "PILIH JENIS WAJIB PAJAK"
   },
   "blocks": [
     {
       "type": "inline-fields",
+      "layout": "subtitle",
       "fields": [
         {
           "id": "nomor",
           "label": "Nomor",
+          "validationLabel": "Nomor surat",
           "type": "text",
           "required": true
         },
         {
           "id": "tanggal",
           "label": "Tanggal",
+          "validationLabel": "Tanggal surat",
           "type": "date",
           "required": true
         }
@@ -43,6 +49,7 @@
     },
     {
       "type": "paragraph",
+      "variant": "section",
       "text": "Yang bertanda tangan di bawah ini:"
     },
     {
@@ -51,114 +58,106 @@
         {
           "id": "namaPemberi",
           "label": "nama",
+          "validationLabel": "Nama pemberi kuasa",
           "type": "text",
           "required": true
         },
         {
           "id": "npwpPemberi",
           "label": "NPWP",
-          "type": "text",
+          "validationLabel": "NPWP pemberi kuasa",
+          "type": "npwp",
+          "placeholder": "16 digit NPWP",
           "required": true
         },
         {
-          "id": "jabatan",
+          "id": "jabatanPemberi",
           "label": "jabatan",
-          "type": "text",
-          "requiredWhen": {
-            "group": "statusPemberi",
-            "value": "Wakil Wajib Pajak"
-          }
+          "type": "text"
         }
       ]
     },
     {
       "type": "radio",
       "name": "statusPemberi",
-      "label": "bertindak selaku:",
+      "label": "bertindak selaku: *)",
+      "validationLabel": "Status pemberi kuasa",
       "required": true,
       "options": [
-        {
-          "value": "Wajib Pajak",
-          "label": "Wajib Pajak"
-        },
-        {
-          "value": "Wakil Wajib Pajak",
-          "label": "Wakil Wajib Pajak"
-        }
+        { "value": "Wajib Pajak", "label": "Wajib Pajak" },
+        { "value": "Wakil Wajib Pajak", "label": "Wakil Wajib Pajak:" }
       ]
     },
     {
       "type": "conditional",
-      "when": {
-        "group": "statusPemberi",
-        "value": "Wakil Wajib Pajak"
-      },
+      "className": "indent",
+      "when": { "group": "statusPemberi", "value": "Wakil Wajib Pajak" },
       "fields": [
         {
           "id": "namaWpDiwakili",
           "label": "nama",
+          "validationLabel": "Nama Wajib Pajak yang diwakili",
           "type": "text",
           "required": true
         },
         {
           "id": "npwpWpDiwakili",
           "label": "NPWP",
-          "type": "text",
+          "validationLabel": "NPWP Wajib Pajak yang diwakili",
+          "type": "npwp",
+          "placeholder": "16 digit NPWP",
           "required": true
         }
       ]
     },
     {
       "type": "paragraph",
-      "text": "dengan ini memberikan kuasa khusus kepada:"
+      "variant": "section",
+      "text": "dengan ini memberikan kuasa khusus kepada: *)"
     },
     {
       "type": "radio",
       "name": "statusKuasa",
       "label": "",
+      "validationLabel": "Jenis penerima kuasa",
       "required": true,
       "options": [
-        {
-          "value": "Konsultan Pajak",
-          "label": "Konsultan Pajak"
-        },
-        {
-          "value": "Pihak Lain",
-          "label": "Pihak Lain"
-        },
-        {
-          "value": "Keluarga Wajib Pajak",
-          "label": "keluarga Wajib Pajak,"
-        }
+        { "value": "Konsultan Pajak", "label": "Konsultan Pajak" },
+        { "value": "Pihak Lain", "label": "Pihak Lain" },
+        { "value": "Keluarga Wajib Pajak", "label": "keluarga Wajib Pajak," }
       ]
     },
     {
       "type": "fields",
+      "className": "indent",
       "fields": [
         {
           "id": "namaKuasa",
           "label": "nama",
+          "validationLabel": "Nama penerima kuasa",
           "type": "text",
           "required": true
         },
         {
           "id": "npwpKuasa",
           "label": "NPWP",
-          "type": "text",
+          "validationLabel": "NPWP penerima kuasa",
+          "type": "npwp",
+          "placeholder": "16 digit NPWP",
           "required": true
         }
       ]
     },
     {
       "type": "conditional",
-      "when": {
-        "group": "statusKuasa",
-        "value": "Konsultan Pajak"
-      },
+      "className": "indent",
+      "clearWhenHidden": true,
+      "when": { "group": "statusKuasa", "value": "Konsultan Pajak" },
       "fields": [
         {
           "id": "izinKonsultan",
-          "label": "Nomor Izin Konsultan Pajak",
+          "label": "Nomor Izin Konsultan",
+          "validationLabel": "Nomor Izin Konsultan",
           "type": "text",
           "required": true
         }
@@ -166,14 +165,14 @@
     },
     {
       "type": "conditional",
-      "when": {
-        "group": "statusKuasa",
-        "value": "Pihak Lain"
-      },
+      "className": "indent",
+      "clearWhenHidden": true,
+      "when": { "group": "statusKuasa", "value": "Pihak Lain" },
       "fields": [
         {
           "id": "nomorSkt",
           "label": "SKT",
+          "validationLabel": "SKT",
           "type": "text",
           "required": true
         }
@@ -181,91 +180,93 @@
     },
     {
       "type": "conditional",
-      "when": {
-        "group": "statusKuasa",
-        "value": "Keluarga Wajib Pajak"
-      },
+      "className": "indent",
+      "clearWhenHidden": true,
+      "when": { "group": "statusKuasa", "value": "Keluarga Wajib Pajak" },
       "fields": [
         {
           "id": "hubunganKeluarga",
           "label": "status hubungan keluarga",
+          "validationLabel": "Status hubungan keluarga",
           "type": "text",
           "required": true
         }
       ]
     },
     {
-      "type": "paragraph",
-      "text": "untuk melaksanakan hak dan/atau memenuhi kewajiban perpajakan terkait:"
-    },
-    {
-      "type": "fields",
-      "fields": [
+      "type": "inline-sentence",
+      "segments": [
+        { "type": "text", "value": "untuk melaksanakan hak dan/atau memenuhi kewajiban perpajakan terkait " },
         {
-          "id": "ruangLingkup",
-          "label": "hak dan/atau kewajiban perpajakan",
-          "type": "text",
-          "required": true
+          "type": "field",
+          "field": {
+            "id": "ruangLingkup",
+            "label": "Hak dan/atau kewajiban perpajakan yang dikuasakan",
+            "type": "text",
+            "className": "inline-field wide",
+            "required": true
+          }
+        },
+        { "type": "text", "value": " berkenaan dengan jenis pajak " },
+        {
+          "type": "field",
+          "field": {
+            "id": "jenisPajak",
+            "label": "Jenis pajak",
+            "type": "text",
+            "className": "inline-field",
+            "required": true
+          }
         },
         {
-          "id": "jenisPajak",
-          "label": "jenis pajak",
-          "type": "text",
-          "required": true
-        }
-      ]
-    },
-    {
-      "type": "period",
-      "label": "periode pajak",
-      "typeField": {
-        "id": "jenisPeriodePajak",
-        "label": "Jenis periode pajak",
-        "options": [
-          {
-            "value": "Masa Pajak",
-            "label": "Masa Pajak"
-          },
-          {
-            "value": "Bagian Tahun Pajak",
-            "label": "Bagian Tahun Pajak"
-          },
-          {
-            "value": "Tahun Pajak",
-            "label": "Tahun Pajak"
+          "type": "select",
+          "field": {
+            "id": "jenisPeriodePajak",
+            "label": "Jenis periode pajak",
+            "className": "inline-field period-type-select",
+            "placeholder": "Pilih periode",
+            "required": true,
+            "options": [
+              { "value": "Masa Pajak", "label": "Masa Pajak" },
+              { "value": "Bagian Tahun Pajak", "label": "Bagian Tahun Pajak" },
+              { "value": "Tahun Pajak", "label": "Tahun Pajak" }
+            ]
           }
-        ],
-        "placeholder": "Pilih periode"
-      },
-      "valueField": {
-        "id": "periodePajak",
-        "label": "Periode pajak",
-        "placeholder": "Contoh: Juli 2026"
-      }
+        },
+        {
+          "type": "field",
+          "field": {
+            "id": "periodePajak",
+            "label": "Periode pajak",
+            "type": "text",
+            "className": "inline-field",
+            "placeholder": "Contoh: Juli 2026",
+            "required": true
+          }
+        },
+        { "type": "text", "value": "." }
+      ]
     },
     {
       "type": "validity",
       "prefix": "Surat Kuasa Khusus ini berlaku mulai tanggal",
       "middle": "sampai dengan tanggal",
-      "start": {
-        "id": "mulaiBerlaku",
-        "label": "Tanggal mulai berlaku"
-      },
-      "end": {
-        "id": "akhirBerlaku",
-        "label": "Tanggal akhir berlaku"
-      }
+      "start": { "id": "mulaiBerlaku", "label": "Tanggal mulai berlaku", "required": true },
+      "end": { "id": "akhirBerlaku", "label": "Tanggal berakhir", "required": true }
     },
     {
       "type": "paragraph",
+      "variant": "section",
       "text": "Untuk keperluan tersebut, penerima kuasa dikuasakan untuk:"
     },
     {
       "type": "repeatable",
       "id": "tujuanKuasa",
-      "label": "Rincian tindakan yang dikuasakan",
+      "label": "Tujuan atau tindakan yang dikuasakan",
+      "placeholder": "Tuliskan tujuan atau tindakan yang dikuasakan",
       "min": 1,
       "max": 20,
+      "required": true,
       "addLabel": "+ Tambah tujuan kuasa",
       "removeLastLabel": "− Hapus tujuan terakhir"
     },
@@ -283,8 +284,9 @@
         "roleText": "Penerima kuasa,",
         "nameField": {
           "id": "namaTtdKuasa",
-          "label": "Nama penerima kuasa",
-          "placeholder": "Nama lengkap"
+          "label": "Nama penerima kuasa pada tanda tangan",
+          "placeholder": "Nama lengkap penerima kuasa",
+          "required": true
         }
       },
       "right": {
@@ -292,29 +294,49 @@
         "showStampOnScreen": true,
         "nameField": {
           "id": "namaTtdPemberi",
-          "label": "Nama pemberi kuasa",
-          "placeholder": "Nama lengkap"
+          "label": "Nama pemberi kuasa pada tanda tangan",
+          "placeholder": "Nama lengkap pemberi kuasa",
+          "required": true
         }
       }
     },
-    {
-      "type": "footnote",
-      "text": "*) Beri tanda “√” pada kolom yang sesuai."
-    },
-    {
-      "type": "footnote",
-      "text": "**) Pilih salah satu yang sesuai."
-    }
+    { "type": "footnote", "text": "*) Beri tanda “√” pada kolom yang sesuai." },
+    { "type": "footnote", "text": "**) Pilih salah satu yang sesuai." }
   ],
   "syncNames": [
+    { "source": "namaPemberi", "target": "namaTtdPemberi" },
+    { "source": "namaKuasa", "target": "namaTtdKuasa" }
+  ],
+  "guide": [
     {
-      "source": "namaPemberi",
-      "target": "namaTtdPemberi"
+      "title": "Jenis Wajib Pajak",
+      "paragraphs": [
+        "Isi “BADAN”, “ORANG PRIBADI”, atau “WARISAN YANG BELUM TERBAGI” sesuai status pemberi kuasa."
+      ]
     },
     {
-      "source": "namaKuasa",
-      "target": "namaTtdKuasa"
+      "title": "Status penerima kuasa",
+      "paragraphs": [
+        "Pilih Konsultan Pajak, Pihak Lain, atau Keluarga. Nomor izin/SKT diisi untuk Konsultan Pajak atau Pihak Lain. Status hubungan keluarga diisi jika kuasa merupakan keluarga."
+      ]
+    },
+    {
+      "title": "Ruang lingkup kuasa",
+      "paragraphs": [
+        "Isi hak atau kewajiban perpajakan, jenis pajak, periode pajak, masa berlaku, dan rincian tindakan yang benar-benar dikuasakan. Contoh rincian tindakan yang dapat dimasukkan:"
+      ],
+      "items": [
+        "menghadap dan melakukan pembahasan dengan pejabat atau pegawai Direktorat Jenderal Pajak;",
+        "menyampaikan klarifikasi, tanggapan, jawaban baik secara lisan maupun tertulis, atau dokumen kepada pejabat atau pegawai Direktorat Jenderal Pajak;",
+        "menandatangani Surat Pemberitahuan Tahunan atau Surat Pemberitahuan Masa;",
+        "menandatangani surat-surat, formulir-formulir, atau dokumen perpajakan lainnya yang diperlukan dalam pelaksanaan hak dan/atau pemenuhan kewajiban perpajakan yang dikuasakan kepadanya."
+      ]
+    },
+    {
+      "title": "Kuasa elektronik",
+      "paragraphs": [
+        "Apabila pelaksanaan kuasa dilakukan secara elektronik, Wajib Pajak tetap perlu memberikan persetujuan akses pada Portal Wajib Pajak."
+      ]
     }
-  ],
-  "renderer": "kuasa-classic"
+  ]
 }
