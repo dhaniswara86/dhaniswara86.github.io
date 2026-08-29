@@ -439,6 +439,139 @@
     document.body.classList.remove("printing-form");
   }
 
+  function isSafariBrowser() {
+    const userAgent = navigator.userAgent;
+    return /Safari/i.test(userAgent)
+      && !/(Chrome|Chromium|CriOS|Edg|OPR|FxiOS|Android)/i.test(userAgent);
+  }
+
+  function copyControlValues(sourceForm, clonedForm) {
+    const selector = "input, textarea, select";
+    const sourceControls = [...sourceForm.querySelectorAll(selector)];
+    const clonedControls = [...clonedForm.querySelectorAll(selector)];
+
+    sourceControls.forEach((source, index) => {
+      const clone = clonedControls[index];
+      if (!clone) return;
+
+      if (source instanceof HTMLInputElement) {
+        if (source.type === "radio" || source.type === "checkbox") {
+          clone.checked = source.checked;
+          clone.toggleAttribute("checked", source.checked);
+        } else {
+          clone.value = source.value;
+          clone.setAttribute("value", source.value);
+        }
+      } else if (source instanceof HTMLTextAreaElement) {
+        clone.value = source.value;
+        clone.textContent = source.value;
+      } else if (source instanceof HTMLSelectElement) {
+        clone.value = source.value;
+        [...clone.options].forEach((option) => {
+          option.toggleAttribute("selected", option.value === source.value);
+        });
+      }
+    });
+  }
+
+  function waitForStylesheet(link, timeout = 2500) {
+    return new Promise((resolve) => {
+      let settled = false;
+      const finish = () => {
+        if (settled) return;
+        settled = true;
+        resolve();
+      };
+      link.addEventListener("load", finish, { once: true });
+      link.addEventListener("error", finish, { once: true });
+      window.setTimeout(finish, timeout);
+    });
+  }
+
+  async function printInSafariWindow() {
+    updateAllDates();
+    const printWindow = window.open("", "_blank");
+    if (!printWindow) {
+      window.alert("Safari memerlukan izin untuk membuka jendela cetak. Izinkan pop-up untuk situs ini, lalu coba kembali.");
+      return;
+    }
+
+    try {
+      const printDocument = printWindow.document;
+      printDocument.documentElement.lang = "id";
+      printDocument.documentElement.className = "printing-form";
+      printDocument.title = activeSchema?.title || "Formulir Kabayan";
+
+      const charset = printDocument.createElement("meta");
+      charset.setAttribute("charset", "UTF-8");
+      printDocument.head.appendChild(charset);
+
+      const viewport = printDocument.createElement("meta");
+      viewport.name = "viewport";
+      viewport.content = "width=device-width, initial-scale=1";
+      printDocument.head.appendChild(viewport);
+
+      const stylesheetPromises = [];
+      ["form.css", "print.css"].forEach((filename) => {
+        const source = document.querySelector(`link[rel="stylesheet"][href*="${filename}"]`);
+        if (!source?.href) return;
+        const link = printDocument.createElement("link");
+        link.rel = "stylesheet";
+        link.href = source.href;
+        link.media = "all";
+        stylesheetPromises.push(waitForStylesheet(link));
+        printDocument.head.appendChild(link);
+      });
+
+      const safeguard = printDocument.createElement("style");
+      safeguard.textContent = `
+        @page { size: A4 portrait; margin: 0; }
+        html, body { width: auto !important; min-width: 0 !important; min-height: 0 !important; margin: 0 !important; padding: 0 !important; background: #fff !important; overflow: visible !important; }
+        body, main, .workspace, .workspace-inner, .paper-wrap, #dynamicForm, #formRoot { display: block !important; visibility: visible !important; margin: 0 !important; overflow: visible !important; }
+        main, .workspace, .workspace-inner, .paper-wrap { width: auto !important; padding: 0 !important; }
+        #dynamicForm { position: static !important; float: none !important; width: 210mm !important; min-height: 297mm !important; }
+        .paper.kuasa-classic .sig-space, .paper.kuasa-classic .pemberi-space { height: 26mm !important; }
+        .no-print { display: none !important; }
+      `;
+      printDocument.head.appendChild(safeguard);
+
+      const clonedForm = form.cloneNode(true);
+      copyControlValues(form, clonedForm);
+      clonedForm.querySelectorAll(".no-print").forEach((node) => node.remove());
+      clonedForm.querySelectorAll("[aria-live]").forEach((node) => node.removeAttribute("aria-live"));
+
+      const main = printDocument.createElement("main");
+      const workspace = printDocument.createElement("section");
+      workspace.className = "workspace";
+      const workspaceInner = printDocument.createElement("div");
+      workspaceInner.className = "workspace-inner";
+      const paperWrap = printDocument.createElement("div");
+      paperWrap.className = "paper-wrap";
+      paperWrap.appendChild(printDocument.importNode(clonedForm, true));
+      workspaceInner.appendChild(paperWrap);
+      workspace.appendChild(workspaceInner);
+      main.appendChild(workspace);
+      printDocument.body.className = "printing-form";
+      printDocument.body.replaceChildren(main);
+
+      await Promise.all(stylesheetPromises);
+      if (printDocument.fonts?.ready) await printDocument.fonts.ready;
+      await new Promise((resolve) => {
+        printWindow.requestAnimationFrame(() => printWindow.requestAnimationFrame(resolve));
+      });
+
+      printWindow.addEventListener("afterprint", () => {
+        window.setTimeout(() => printWindow.close(), 100);
+      }, { once: true });
+      printWindow.focus();
+      printWindow.print();
+    } catch (error) {
+      console.error(error);
+      printWindow.close();
+      window.alert("Jendela cetak Safari tidak dapat disiapkan. Muat ulang halaman lalu coba kembali.");
+    }
+  }
+
   function resizeTitleChoice() {
     const select = form.querySelector(".title-select");
     const measure = form.querySelector(".select-measure");
@@ -704,6 +837,10 @@
     const result = validateForm();
     if (!result.valid) {
       result.firstInvalid?.focus();
+      return;
+    }
+    if (isSafariBrowser()) {
+      printInSafariWindow();
       return;
     }
     enterPrintMode();
