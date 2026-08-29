@@ -469,6 +469,16 @@
     form.querySelectorAll('input[type="date"]').forEach(formatDate);
   }
 
+  function resizeTextarea(control) {
+    if (!control?.matches?.("textarea") || !form.classList.contains("letter-classic")) return;
+    control.style.height = "auto";
+    control.style.height = `${Math.ceil(control.scrollHeight)}px`;
+  }
+
+  function resizeAllTextareas() {
+    form.querySelectorAll("textarea").forEach(resizeTextarea);
+  }
+
   function enterPreviewMode() {
     updateAllDates();
     previewScrollPosition = window.scrollY;
@@ -508,6 +518,7 @@
         container.querySelectorAll("input, textarea, select").forEach((control) => {
           if (control.type === "radio" || control.type === "checkbox") control.checked = false;
           else control.value = "";
+          resizeTextarea(control);
           control.classList.remove("missing");
           setFieldError(control, "");
         });
@@ -544,14 +555,15 @@
   function checkNpwp(control, required) {
     if (!control || control.closest("[hidden]")) return true;
     const value = control.value.trim();
+    const label = control.dataset.label || "NPWP";
     if (!value && !required) {
       setFieldError(control, "");
       return true;
     }
     if (!/^\d{16}$/.test(value)) {
       const message = !value
-        ? "NPWP wajib diisi dengan tepat 16 digit."
-        : `NPWP masih ${value.length} digit. NPWP harus tepat 16 digit.`;
+        ? `${label} wajib diisi dengan tepat 16 digit.`
+        : `${label} masih ${value.length} digit. Nomor harus tepat 16 digit.`;
       setFieldError(control, message);
       return false;
     }
@@ -650,6 +662,7 @@
     });
 
     form.addEventListener("input", (event) => {
+      resizeTextarea(event.target);
       if (!event.target.matches('[data-npwp="true"]')) {
         event.target.classList?.remove("missing");
         event.target.setAttribute?.("aria-invalid", "false");
@@ -676,6 +689,7 @@
     bindNameSync(syncRules);
     updateConditionals();
     updateAllDates();
+    resizeAllTextareas();
     requestAnimationFrame(resizeTitleChoice);
   }
 
@@ -698,6 +712,7 @@
     clearValidationSummary();
     updateConditionals();
     updateAllDates();
+    resizeAllTextareas();
     resizeTitleChoice();
     document.getElementById("namaPemberi")?.focus();
   }
