@@ -24,6 +24,40 @@ body{
   display:none!important;
 }
 
+/* Saat preview Safari terbuka, hanya salinan formulir di overlay yang dicetak. */
+body.safari-preview-open > *:not(#safariPrintPreview){
+  display:none!important;
+}
+
+body.safari-preview-open #safariPrintPreview{
+  position:static!important;
+  display:block!important;
+  width:auto!important;
+  min-width:0!important;
+  height:auto!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:0!important;
+  overflow:visible!important;
+  background:#fff!important;
+}
+
+body.safari-preview-open .safari-preview-content,
+body.safari-preview-open .safari-preview-paper-wrap,
+body.safari-preview-open #safariPreviewRoot{
+  display:block!important;
+  width:auto!important;
+  margin:0!important;
+  padding:0!important;
+  overflow:visible!important;
+}
+
+body.safari-preview-open #safariPreviewRoot > .paper{
+  display:block!important;
+  margin:0!important;
+  box-shadow:none!important;
+}
+
 .workspace,
 .workspace-inner,
 .paper-wrap{

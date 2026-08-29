@@ -19,6 +19,10 @@
   const guide = document.getElementById("formGuide");
   const printButton = document.getElementById("printBtn");
   const resetButton = document.getElementById("resetBtn");
+  const safariPreview = document.getElementById("safariPrintPreview");
+  const safariPreviewRoot = document.getElementById("safariPreviewRoot");
+  const safariPreviewBack = document.getElementById("safariPreviewBack");
+  const safariPreviewPrint = document.getElementById("safariPreviewPrint");
 
   let activeSchema = null;
   const repeatables = new Map();
@@ -514,25 +518,36 @@
   function openSafariPrintPreview() {
     updateAllDates();
     try {
+      if (!safariPreview || !safariPreviewRoot) {
+        throw new Error("Area preview Safari tidak tersedia.");
+      }
+
       const clonedForm = form.cloneNode(true);
       copyControlValues(form, clonedForm);
       clonedForm.querySelectorAll(".no-print").forEach((node) => node.remove());
       clonedForm.querySelectorAll("[aria-live]").forEach((node) => node.removeAttribute("aria-live"));
       clonedForm.setAttribute("inert", "");
+      clonedForm.id = "safariPreviewForm";
 
-      const snapshot = {
-        title: activeSchema?.title || "Formulir Kabayan",
-        formHtml: clonedForm.outerHTML,
-        returnUrl: window.location.href,
-        createdAt: Date.now()
-      };
-
-      sessionStorage.setItem("kabayan-print-preview", JSON.stringify(snapshot));
-      window.location.assign(new URL("print-preview.html", document.baseURI).href);
+      safariPreviewRoot.replaceChildren(clonedForm);
+      safariPreview.hidden = false;
+      document.documentElement.classList.add("safari-preview-open");
+      document.body.classList.add("safari-preview-open");
+      safariPreview.scrollTop = 0;
+      safariPreviewBack?.focus();
     } catch (error) {
       console.error(error);
       window.alert("Preview cetak tidak dapat disiapkan. Muat ulang halaman lalu coba kembali.");
     }
+  }
+
+  function closeSafariPrintPreview() {
+    if (!safariPreview || safariPreview.hidden) return;
+    safariPreview.hidden = true;
+    safariPreviewRoot?.replaceChildren();
+    document.documentElement.classList.remove("safari-preview-open");
+    document.body.classList.remove("safari-preview-open");
+    printButton.focus();
   }
 
   function resizeTitleChoice() {
@@ -825,6 +840,16 @@
   if (isSafariBrowser()) {
     printButton.textContent = "Pratinjau Cetak";
   }
+  safariPreviewBack?.addEventListener("click", closeSafariPrintPreview);
+  safariPreviewPrint?.addEventListener("click", () => {
+    if (!safariPreview || safariPreview.hidden) return;
+    window.print();
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && safariPreview && !safariPreview.hidden) {
+      closeSafariPrintPreview();
+    }
+  });
   resetButton.addEventListener("click", resetForm);
   window.addEventListener("beforeprint", enterPrintMode);
   window.addEventListener("afterprint", exitPrintMode);
