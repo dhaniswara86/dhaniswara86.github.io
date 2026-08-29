@@ -428,6 +428,17 @@
     form.querySelectorAll('input[type="date"]').forEach(formatDate);
   }
 
+  function enterPrintMode() {
+    updateAllDates();
+    document.documentElement.classList.add("printing-form");
+    document.body.classList.add("printing-form");
+  }
+
+  function exitPrintMode() {
+    document.documentElement.classList.remove("printing-form");
+    document.body.classList.remove("printing-form");
+  }
+
   function resizeTitleChoice() {
     const select = form.querySelector(".title-select");
     const measure = form.querySelector(".select-measure");
@@ -695,11 +706,12 @@
       result.firstInvalid?.focus();
       return;
     }
-    updateAllDates();
+    enterPrintMode();
     window.print();
   });
   resetButton.addEventListener("click", resetForm);
-  window.addEventListener("beforeprint", updateAllDates);
+  window.addEventListener("beforeprint", enterPrintMode);
+  window.addEventListener("afterprint", exitPrintMode);
   window.addEventListener("load", resizeTitleChoice);
 
   loadForm();
