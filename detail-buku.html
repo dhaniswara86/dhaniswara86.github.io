@@ -1,33 +1,23 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-<title>Detail Buku Kabayan</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Detail Buku | Kabayan</title>
+<link rel="stylesheet" href="assets/css/buku-detail.css">
 </head>
 <body>
 
-<div id="detail"></div>
+<header class="simple-header">
+  <a href="buku.html">← Koleksi Buku</a>
+</header>
 
-<script>
-fetch("data/buku.json")
-.then(r=>r.json())
-.then(data=>{
+<main class="detail-container">
+  <div id="bookDetail">
+    <div class="loading">Memuat data buku...</div>
+  </div>
+</main>
 
-let id=new URLSearchParams(location.search).get("id");
-let book=data.find(x=>x.id===id);
-
-document.getElementById("detail").innerHTML=`
-
-<img src="${book.cover}" width="350">
-
-<h1>${book.judul}</h1>
-
-<p>${book.kategori}</p>
-
-`;
-
-});
-</script>
-
+<script src="assets/js/buku-detail.js"></script>
 </body>
 </html>
