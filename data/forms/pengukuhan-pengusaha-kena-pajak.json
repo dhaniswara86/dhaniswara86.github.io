@@ -1,164 +1,313 @@
 {
+  "schemaVersion": 1,
   "id": "pengukuhan-pengusaha-kena-pajak",
   "title": "Formulir Pengukuhan Pengusaha Kena Pajak",
-  "description": "Formulir interaktif pengukuhan Pengusaha Kena Pajak.",
-  "type": "letter",
-  "renderer": "letter",
+  "description": "Lengkapi formulir pengukuhan Pengusaha Kena Pajak sesuai dokumen sumber.",
+  "type": "form",
+  "renderer": "pkp-classic",
   "printPageSize": "A4 portrait",
   "blocks": [
     {
-      "type": "paragraph",
-      "text": "FORMULIR PENGUKUHAN PENGUSAHA KENA PAJAK"
-    },
-    {
-      "type": "paragraph",
-      "text": "A. IDENTITAS WAJIB PAJAK/PENGUSAHA"
-    },
-    {
-      "type": "fields",
-      "fields": [
-        {
-          "id": "nikNpwp",
-          "label": "NIK/NPWP*",
-          "required": true
-        },
-        {
-          "id": "nama",
-          "label": "Nama*",
-          "required": true
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "text": "B. INFORMASI KEGIATAN USAHA"
-    },
-    {
-      "type": "radio",
-      "name": "statusTempatUsaha",
-      "label": "Status Kepemilikan Tempat Kegiatan Usaha",
-      "required": true,
-      "options": [
-        {
-          "value": "Sewa/Kontrak",
-          "label": "Sewa/Kontrak"
-        },
-        {
-          "value": "Milik Sendiri/Perusahaan",
-          "label": "Milik Sendiri/Perusahaan"
-        },
-        {
-          "value": "Sewa Kantor Virtual",
-          "label": "Sewa Kantor Virtual"
-        }
-      ]
-    },
-    {
-      "type": "fields",
-      "fields": [
-        {
-          "id": "npwpPenyediaKantorVirtual",
-          "label": "NPWP Penyedia Kantor Virtual"
-        },
-        {
-          "id": "namaPenyediaKantorVirtual",
-          "label": "Nama Penyedia Kantor Virtual"
-        },
-        {
-          "id": "peredaranBruto",
-          "label": "Peredaran Bruto dan/atau Penerimaan Bruto"
-        },
-        {
-          "id": "masaMulaiKewajiban",
-          "label": "Saat Mulai Kewajiban sebagai PKP (Masa)"
-        },
-        {
-          "id": "tahunMulaiKewajiban",
-          "label": "Saat Mulai Kewajiban sebagai PKP (Tahun)"
-        }
-      ]
-    },
-    {
-      "type": "fields",
-      "fields": [
-        {
-          "id": "jalan",
-          "label": "Jalan",
-          "type": "textarea"
-        },
-        {
-          "id": "blok",
-          "label": "Blok"
-        },
-        {
-          "id": "nomor",
-          "label": "Nomor"
-        },
-        {
-          "id": "rt",
-          "label": "RT"
-        },
-        {
-          "id": "rw",
-          "label": "RW"
-        },
-        {
-          "id": "kelurahan",
-          "label": "Kelurahan/Desa"
-        },
-        {
-          "id": "kecamatan",
-          "label": "Kecamatan"
-        },
-        {
-          "id": "kotaKabupaten",
-          "label": "Kota/Kabupaten"
-        },
-        {
-          "id": "provinsi",
-          "label": "Provinsi"
-        },
-        {
-          "id": "kodePos",
-          "label": "Kode Pos"
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "text": "C. PERNYATAAN"
-    },
-    {
-      "type": "radio",
-      "name": "pernyataan",
-      "label": "Pernyataan",
-      "options": [
-        {
-          "value": "setuju1",
-          "label": "Menyatakan data yang disampaikan benar dan lengkap serta menyetujui ketentuan perpajakan."
-        },
-        {
-          "value": "setuju2",
-          "label": "Menyatakan akan melakukan pemutakhiran penyampaian SPT PPN."
-        }
-      ]
-    },
-    {
-      "type": "signature",
-      "placeField": {
-        "id": "tempatTtd",
-        "label": "Tempat"
+      "type": "pkp-form",
+      "header": {
+        "ministry": "KEMENTERIAN KEUANGAN REPUBLIK INDONESIA",
+        "agency": "DIREKTORAT JENDERAL PAJAK",
+        "title": "FORMULIR PENGUKUHAN PENGUSAHA KENA PAJAK",
+        "instruction": "SEMUA INFORMASI HARAP DIISI DENGAN HURUF KAPITAL/CETAK. Isi atau beri tanda ✓ pada kotak jawaban yang sesuai. Bagian yang memiliki tanda bintang (*) wajib diisi.",
+        "instructionNote": "(Lihat petunjuk)"
       },
-      "dateField": {
-        "id": "tanggalTtd",
-        "label": "Tanggal"
+      "identity": {
+        "letter": "A.",
+        "title": "IDENTITAS WAJIB PAJAK/PENGUSAHA",
+        "items": [
+          {
+            "number": "1.",
+            "label": "NIK/NPWP*",
+            "field": {
+              "id": "nikNpwp",
+              "label": "NIK/NPWP",
+              "validationLabel": "NIK/NPWP",
+              "type": "npwp",
+              "required": true,
+              "cells": 16,
+              "columns": 16,
+              "widthMm": 68
+            }
+          },
+          {
+            "number": "2.",
+            "label": "Nama*",
+            "field": {
+              "id": "nama",
+              "label": "Nama Wajib Pajak/Pengusaha",
+              "required": true,
+              "uppercase": true,
+              "cells": 50,
+              "columns": 25,
+              "widthMm": 110
+            }
+          }
+        ]
       },
-      "roleText": "Pemohon,",
-      "nameField": {
-        "id": "namaPemohon",
-        "label": "Nama Pemohon",
-        "required": true
+      "business": {
+        "letter": "B.",
+        "title": "INFORMASI KEGIATAN USAHA",
+        "status": {
+          "number": "1.",
+          "name": "statusTempatUsaha",
+          "label": "Status Kepemilikan tempat kegiatan usaha:*",
+          "note": "(pilih salah satu)",
+          "validationLabel": "Status kepemilikan tempat kegiatan usaha",
+          "required": true,
+          "options": [
+            { "value": "Sewa/Kontrak", "label": "Sewa/Kontrak" },
+            { "value": "Milik Sendiri/Perusahaan", "label": "Milik Sendiri/Perusahaan" },
+            { "value": "Sewa Kantor Virtual", "label": "Sewa Kantor Virtual:" }
+          ],
+          "providerFields": [
+            {
+              "label": "NPWP Penyedia Kantor Virtual",
+              "field": {
+                "id": "npwpPenyediaKantorVirtual",
+                "label": "NPWP Penyedia Kantor Virtual",
+                "type": "npwp",
+                "cells": 16,
+                "columns": 16,
+                "widthMm": 67
+              }
+            },
+            {
+              "label": "Nama Penyedia Kantor Virtual",
+              "field": {
+                "id": "namaPenyediaKantorVirtual",
+                "label": "Nama Penyedia Kantor Virtual",
+                "uppercase": true,
+                "cells": 40,
+                "columns": 20,
+                "widthMm": 82
+              }
+            }
+          ]
+        },
+        "gross": {
+          "number": "2.",
+          "label": "Peredaran Bruto dan/atau Penerimaan Bruto:*",
+          "prefix": "Rp",
+          "field": {
+            "id": "peredaranBruto",
+            "label": "Peredaran Bruto dan/atau Penerimaan Bruto",
+            "required": true,
+            "digitsOnly": true,
+            "inputMode": "numeric",
+            "cells": 20,
+            "columns": 20,
+            "widthMm": 88
+          }
+        },
+        "start": {
+          "number": "3.",
+          "label": "Saat Mulai Kewajiban sebagai PKP",
+          "monthCaption": "Masa Pajak",
+          "yearCaption": "Tahun",
+          "monthField": {
+            "id": "masaMulaiKewajiban",
+            "label": "Masa mulai kewajiban sebagai PKP",
+            "digitsOnly": true,
+            "inputMode": "numeric",
+            "cells": 2,
+            "columns": 2,
+            "widthMm": 10
+          },
+          "yearField": {
+            "id": "tahunMulaiKewajiban",
+            "label": "Tahun mulai kewajiban sebagai PKP",
+            "digitsOnly": true,
+            "inputMode": "numeric",
+            "cells": 4,
+            "columns": 4,
+            "widthMm": 20
+          }
+        },
+        "address": {
+          "number": "4.",
+          "label": "Alamat Utama Status PKP:*",
+          "fields": [
+            {
+              "label": "Jalan",
+              "field": {
+                "id": "jalan",
+                "label": "Jalan",
+                "required": true,
+                "uppercase": true,
+                "cells": 75,
+                "columns": 25,
+                "widthMm": 114
+              }
+            },
+            {
+              "label": "Blok",
+              "field": {
+                "id": "blok",
+                "label": "Blok",
+                "uppercase": true,
+                "cells": 7,
+                "columns": 7,
+                "widthMm": 30
+              }
+            },
+            {
+              "label": "Nomor",
+              "className": "pkp-address-number-row",
+              "field": {
+                "id": "nomorAlamat",
+                "label": "Nomor alamat",
+                "uppercase": true,
+                "cells": 7,
+                "columns": 7,
+                "widthMm": 30
+              },
+              "secondary": {
+                "label": "RT/RW",
+                "separator": "/",
+                "firstField": {
+                  "id": "rt",
+                  "label": "RT",
+                  "digitsOnly": true,
+                  "inputMode": "numeric",
+                  "cells": 3,
+                  "columns": 3,
+                  "widthMm": 14
+                },
+                "secondField": {
+                  "id": "rw",
+                  "label": "RW",
+                  "digitsOnly": true,
+                  "inputMode": "numeric",
+                  "cells": 3,
+                  "columns": 3,
+                  "widthMm": 14
+                }
+              }
+            },
+            {
+              "label": "Kelurahan/Desa",
+              "field": {
+                "id": "kelurahan",
+                "label": "Kelurahan/Desa",
+                "required": true,
+                "uppercase": true,
+                "cells": 25,
+                "columns": 25,
+                "widthMm": 114
+              }
+            },
+            {
+              "label": "Kecamatan",
+              "field": {
+                "id": "kecamatan",
+                "label": "Kecamatan",
+                "required": true,
+                "uppercase": true,
+                "cells": 25,
+                "columns": 25,
+                "widthMm": 114
+              }
+            },
+            {
+              "label": "Kota/Kabupaten",
+              "field": {
+                "id": "kotaKabupaten",
+                "label": "Kota/Kabupaten",
+                "required": true,
+                "uppercase": true,
+                "cells": 25,
+                "columns": 25,
+                "widthMm": 114
+              }
+            },
+            {
+              "label": "Provinsi",
+              "field": {
+                "id": "provinsi",
+                "label": "Provinsi",
+                "required": true,
+                "uppercase": true,
+                "cells": 25,
+                "columns": 25,
+                "widthMm": 114
+              }
+            },
+            {
+              "label": "Kode Pos",
+              "field": {
+                "id": "kodePos",
+                "label": "Kode Pos",
+                "required": true,
+                "digitsOnly": true,
+                "inputMode": "numeric",
+                "cells": 5,
+                "columns": 5,
+                "widthMm": 24
+              }
+            }
+          ]
+        }
+      },
+      "statements": {
+        "letter": "C.",
+        "title": "PERNYATAAN",
+        "items": [
+          {
+            "field": {
+              "id": "pernyataanKebenaran",
+              "label": "Pernyataan kebenaran dan kelengkapan data",
+              "required": true
+            },
+            "text": "Dengan menyadari sepenuhnya akan segala akibatnya termasuk sanksi sesuai dengan ketentuan peraturan perundang-undangan yang berlaku, saya menyatakan bahwa apa yang saya sampaikan di atas adalah benar dan lengkap, dan saya menyetujui untuk menggunakan Akun Wajib Pajak saya sebagai sarana penerimaan surat dan dokumen perpajakan."
+          },
+          {
+            "field": {
+              "id": "pernyataanPemusatan",
+              "label": "Pernyataan pemusatan penyampaian SPT PPN",
+              "required": true
+            },
+            "text": "Dengan disampaikannya aplikasi konfirmasi PKP ini, saya menyatakan bahwa saya akan melakukan pemusatan penyampaian SPT PPN atas seluruh transaksi BKP atau JKP di tempat tinggal atau tempat kedudukan dan seluruh tempat kegiatan usaha."
+          }
+        ]
+      },
+      "approval": {
+        "official": {
+          "reviewedText": "Telah diteliti:",
+          "officerText": "Petugas,",
+          "checks": [
+            "Lengkap dan Benar",
+            "Pengusaha Belum Dikukuhkan Sebelumnya"
+          ]
+        },
+        "applicant": {
+          "roleText": "Pemohon,",
+          "placeField": {
+            "id": "tempatTtd",
+            "label": "Tempat penandatanganan",
+            "required": true
+          },
+          "dateField": {
+            "id": "tanggalTtd",
+            "label": "Tanggal penandatanganan",
+            "required": true
+          },
+          "nameField": {
+            "id": "namaPemohon",
+            "label": "Nama Pemohon",
+            "required": true,
+            "placeholder": "Nama lengkap"
+          }
+        }
       }
     }
-  ]
+  ],
+  "syncName": {
+    "source": "nama",
+    "target": "namaPemohon"
+  }
 }
