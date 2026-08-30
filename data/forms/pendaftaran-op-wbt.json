@@ -1,0 +1,292 @@
+{
+  "schemaVersion": 1,
+  "id": "pendaftaran-op-wbt",
+  "title": "Formulir Pendaftaran Wajib Pajak Orang Pribadi dan Warisan Belum Terbagi",
+  "description": "Lengkapi formulir pendaftaran Wajib Pajak Orang Pribadi dan Warisan Belum Terbagi sesuai dokumen sumber.",
+  "type": "form",
+  "renderer": "op-wbt-classic",
+  "printPageSize": "A4 portrait",
+  "blocks": [
+    {
+      "type": "op-wbt-form",
+      "header": {
+        "ministry": "KEMENTERIAN KEUANGAN REPUBLIK INDONESIA",
+        "agency": "DIREKTORAT JENDERAL PAJAK",
+        "title": "FORMULIR PENDAFTARAN WAJIB PAJAK ORANG PRIBADI DAN WARISAN BELUM TERBAGI",
+        "instruction": "SEMUA INFORMASI HARAP DIISI DENGAN HURUF KAPITAL/CETAK. Beri tanda silang (x) pada kotak jawaban yang sesuai. Bagian yang memiliki tanda bintang (*) wajib diisi. (Lihat petunjuk)"
+      },
+      "registration": {
+        "identityType": {
+          "name": "statusNik",
+          "label": "Status kepemilikan NIK",
+          "required": true,
+          "options": [
+            { "value": "Dengan NIK", "label": "Orang Pribadi dengan NIK" },
+            { "value": "Tanpa NIK", "label": "Orang Pribadi tanpa NIK" }
+          ]
+        },
+        "activation": {
+          "name": "jenisAktivasi",
+          "label": "Jenis pendaftaran dan aktivasi",
+          "required": true,
+          "options": [
+            { "value": "Tanpa Aktivasi", "label": "Pendaftaran tanpa Aktivasi" },
+            { "value": "Sekaligus Aktivasi", "label": "Pendaftaran sekaligus Aktivasi" }
+          ]
+        },
+        "category": {
+          "name": "kategoriWp",
+          "label": "Kategori",
+          "required": true,
+          "options": [
+            { "value": "OP", "label": "1. Orang Pribadi" },
+            { "value": "HB", "label": "2. Wanita yang telah hidup terpisah berdasarkan putusan hakim (HB)" },
+            { "value": "PH", "label": "3. Istri dengan perjanjian pemisahan penghasilan dan harta (PH)" },
+            { "value": "MT", "label": "4. Istri memilih menjalankan hak dan kewajiban perpajakan terpisah (MT)" },
+            { "value": "WBT", "label": "5. Warisan yang belum terbagi sebagai satu kesatuan menggantikan yang berhak (WBT)" },
+            { "value": "SPLN", "label": "6. Orang Pribadi SPLN" }
+          ]
+        }
+      },
+      "identity": {
+        "letter": "A1.",
+        "title": "IDENTITAS WAJIB PAJAK",
+        "items": [
+          {
+            "number": "1.",
+            "label": "NIK",
+            "field": { "id": "nik", "label": "NIK", "digitsOnly": true, "inputMode": "numeric", "cells": 16, "columns": 16, "widthMm": 68 }
+          },
+          {
+            "number": "",
+            "label": "No Paspor",
+            "field": { "id": "nomorPaspor", "label": "Nomor paspor", "uppercase": true, "cells": 30, "columns": 30, "widthMm": 120 }
+          },
+          {
+            "number": "2.",
+            "label": "Nama Wajib Pajak*",
+            "field": { "id": "namaWp", "label": "Nama Wajib Pajak", "required": true, "uppercase": true, "cells": 50, "columns": 25, "widthMm": 120 }
+          },
+          {
+            "kind": "birth",
+            "number": "3.",
+            "label": "Tempat/Tanggal lahir*",
+            "placeField": { "id": "tempatLahir", "label": "Tempat lahir", "required": true, "uppercase": true, "cells": 25, "columns": 25, "widthMm": 74 },
+            "dateField": { "id": "tanggalLahir", "label": "Tanggal lahir", "required": true }
+          },
+          {
+            "kind": "choice",
+            "number": "4.",
+            "label": "Jenis Kelamin",
+            "choice": { "name": "jenisKelamin", "label": "Jenis kelamin", "options": [ { "value": "Pria", "label": "Pria" }, { "value": "Wanita", "label": "Wanita" } ] }
+          },
+          {
+            "kind": "choice",
+            "number": "5.",
+            "label": "Status Perkawinan*",
+            "choice": { "name": "statusPerkawinan", "label": "Status perkawinan", "required": true, "options": [ { "value": "Kawin", "label": "1 Kawin" }, { "value": "Tidak Kawin", "label": "2 Tidak Kawin" }, { "value": "Cerai Hidup", "label": "3 Cerai Hidup" }, { "value": "Cerai Mati", "label": "4 Cerai Mati" } ] }
+          },
+          {
+            "kind": "choice",
+            "number": "6.",
+            "label": "Agama",
+            "choice": { "name": "agama", "label": "Agama", "options": [ { "value": "Islam", "label": "Islam" }, { "value": "Kristen", "label": "Kristen" }, { "value": "Katolik", "label": "Katolik" }, { "value": "Buddha", "label": "Buddha" }, { "value": "Hindu", "label": "Hindu" }, { "value": "Konghucu", "label": "Konghucu" }, { "value": "Kepercayaan", "label": "Kepercayaan" } ] }
+          },
+          { "number": "7.", "label": "Pekerjaan", "field": { "id": "pekerjaan", "label": "Pekerjaan", "uppercase": true, "cells": 40, "columns": 40, "widthMm": 120 } },
+          { "number": "8.", "label": "Nama Ibu Kandung", "field": { "id": "namaIbuKandung", "label": "Nama ibu kandung", "uppercase": true, "cells": 40, "columns": 40, "widthMm": 120 } },
+          { "number": "9.", "label": "Nomor Kartu Keluarga", "field": { "id": "nomorKk", "label": "Nomor Kartu Keluarga", "digitsOnly": true, "inputMode": "numeric", "cells": 16, "columns": 16, "widthMm": 68 } },
+          { "number": "10.", "label": "Status Anggota Keluarga", "field": { "id": "statusAnggotaKeluarga", "label": "Status anggota keluarga", "uppercase": true, "cells": 30, "columns": 30, "widthMm": 120 } },
+          { "number": "11.", "label": "NIK Kepala Unit Keluarga", "field": { "id": "nikKepalaKeluarga", "label": "NIK kepala unit keluarga", "digitsOnly": true, "inputMode": "numeric", "cells": 16, "columns": 16, "widthMm": 68 } },
+          { "number": "12.", "label": "Nama Kepala Unit Keluarga", "field": { "id": "namaKepalaKeluarga", "label": "Nama kepala unit keluarga", "uppercase": true, "cells": 40, "columns": 40, "widthMm": 120 } },
+          {
+            "kind": "choice",
+            "number": "13.",
+            "label": "Kebangsaan*",
+            "choice": { "name": "kebangsaan", "label": "Kebangsaan", "required": true, "options": [ { "value": "Indonesia", "label": "Indonesia" }, { "value": "Asing", "label": "Asing" } ] }
+          },
+          {
+            "kind": "choice",
+            "number": "14.",
+            "label": "Jenis Paspor",
+            "choice": { "name": "jenisPaspor", "label": "Jenis paspor", "options": [ { "value": "Biasa", "label": "Biasa" }, { "value": "Dinas", "label": "Dinas" }, { "value": "Diplomatik", "label": "Diplomatik" } ] }
+          },
+          {
+            "number": "15.",
+            "label": "Negara Asal",
+            "field": { "id": "negaraAsal", "label": "Negara asal", "uppercase": true, "cells": 30, "columns": 30, "widthMm": 120 }
+          },
+          {
+            "number": "16.",
+            "label": "No. KITAS/KITAP",
+            "field": { "id": "nomorKitasKitap", "label": "Nomor KITAS atau KITAP", "uppercase": true, "cells": 30, "columns": 30, "widthMm": 120 }
+          },
+          { "number": "17.", "label": "Nomor Telepon/Telepon Seluler*", "field": { "id": "nomorTelepon", "label": "Nomor telepon atau telepon seluler", "required": true, "digitsOnly": true, "inputMode": "numeric", "cells": 30, "columns": 30, "widthMm": 120 } },
+          { "number": "18.", "label": "Nomor Faksimile", "field": { "id": "nomorFaksimile", "label": "Nomor faksimile", "digitsOnly": true, "inputMode": "numeric", "cells": 30, "columns": 30, "widthMm": 120 } },
+          { "number": "19.", "label": "Surel (email)*", "field": { "id": "email", "label": "Surel atau email", "required": true, "type": "email", "cells": 40, "columns": 40, "widthMm": 120 } }
+        ]
+      },
+      "wbtRepresentative": {
+        "letter": "A2.",
+        "title": "IDENTITAS WAKIL WAJIB PAJAK WARISAN BELUM TERBAGI",
+        "items": [
+          { "number": "1.", "label": "NIK Wakil Wajib Pajak*", "field": { "id": "nikWakilWbt", "label": "NIK wakil Wajib Pajak WBT", "digitsOnly": true, "inputMode": "numeric", "cells": 16, "columns": 16, "widthMm": 68 } },
+          { "number": "2.", "label": "Nama Wakil Wajib Pajak*", "field": { "id": "namaWakilWbt", "label": "Nama wakil Wajib Pajak WBT", "uppercase": true, "cells": 40, "columns": 40, "widthMm": 120 } }
+        ]
+      },
+      "otherRepresentative": {
+        "letter": "A3.",
+        "title": "IDENTITAS WAKIL WAJIB PAJAK LAINNYA",
+        "items": [
+          { "number": "1.", "label": "NIK Wakil Wajib Pajak*", "field": { "id": "nikWakilLainnya", "label": "NIK wakil Wajib Pajak lainnya", "digitsOnly": true, "inputMode": "numeric", "cells": 16, "columns": 16, "widthMm": 68 } },
+          { "number": "2.", "label": "Nama Wakil Wajib Pajak*", "field": { "id": "namaWakilLainnya", "label": "Nama wakil Wajib Pajak lainnya", "uppercase": true, "cells": 40, "columns": 40, "widthMm": 120 } }
+        ]
+      },
+      "income": {
+        "letter": "B.",
+        "title": "SUMBER PENGHASILAN*",
+        "validationLabel": "Sumber penghasilan",
+        "required": true,
+        "sources": [
+          {
+            "label": "Pekerjaan",
+            "field": { "id": "sumberPekerjaan", "label": "Pekerjaan" },
+            "entries": [
+              { "descriptionField": { "id": "uraianPekerjaan1", "label": "Uraian pekerjaan pertama", "uppercase": true, "cells": 78, "columns": 26, "widthMm": 110 }, "secondaryLabel": "Tempat Kerja", "secondaryField": { "id": "tempatKerja1", "label": "Tempat kerja pertama", "uppercase": true, "cells": 40, "columns": 40, "widthMm": 120 }, "kluLabel": "KLU", "kluNote": "(diisi oleh petugas)" },
+              { "descriptionField": { "id": "uraianPekerjaan2", "label": "Uraian pekerjaan kedua", "uppercase": true, "cells": 78, "columns": 26, "widthMm": 110 }, "secondaryLabel": "Tempat Kerja", "secondaryField": { "id": "tempatKerja2", "label": "Tempat kerja kedua", "uppercase": true, "cells": 40, "columns": 40, "widthMm": 120 }, "kluLabel": "KLU", "kluNote": "(diisi oleh petugas)" }
+            ],
+            "methodChoice": { "name": "metodePekerjaan", "label": "Metode Pembukuan/Pencatatan", "options": [ { "value": "Pencatatan", "label": "Pencatatan" }, { "value": "Akrual", "label": "Pembukuan Stelsel Akrual" }, { "value": "Kas", "label": "Pembukuan Stelsel Kas" } ] },
+            "period": { "label": "Periode Pembukuan:", "separator": "s.d.", "startField": { "id": "periodePekerjaanMulai", "label": "Awal periode pekerjaan", "digitsOnly": true, "inputMode": "numeric", "cells": 2, "columns": 2, "widthMm": 10 }, "endField": { "id": "periodePekerjaanSelesai", "label": "Akhir periode pekerjaan", "digitsOnly": true, "inputMode": "numeric", "cells": 2, "columns": 2, "widthMm": 10 } }
+          },
+          {
+            "label": "Kegiatan Usaha",
+            "field": { "id": "sumberKegiatanUsaha", "label": "Kegiatan usaha" },
+            "entries": [
+              { "descriptionField": { "id": "uraianKegiatanUsaha1", "label": "Uraian kegiatan usaha pertama", "uppercase": true, "cells": 78, "columns": 26, "widthMm": 110 }, "secondaryLabel": "Merek Dagang/Usaha", "secondaryField": { "id": "merekUsaha1", "label": "Merek dagang atau usaha pertama", "uppercase": true, "cells": 40, "columns": 40, "widthMm": 120 }, "kluLabel": "KLU", "kluNote": "(diisi oleh petugas)" },
+              { "descriptionField": { "id": "uraianKegiatanUsaha2", "label": "Uraian kegiatan usaha kedua", "uppercase": true, "cells": 78, "columns": 26, "widthMm": 110 }, "secondaryLabel": "Merek Dagang/Usaha", "secondaryField": { "id": "merekUsaha2", "label": "Merek dagang atau usaha kedua", "uppercase": true, "cells": 40, "columns": 40, "widthMm": 120 }, "kluLabel": "KLU", "kluNote": "(diisi oleh petugas)" }
+            ],
+            "employeeChoice": { "name": "memilikiKaryawanUsaha", "label": "Memiliki Karyawan", "options": [ { "value": "Ya", "label": "Ya" }, { "value": "Tidak", "label": "Tidak" } ] },
+            "methodChoice": { "name": "metodeUsaha", "label": "Metode Pembukuan/Pencatatan", "options": [ { "value": "Pencatatan", "label": "Pencatatan" }, { "value": "Akrual", "label": "Pembukuan Stelsel Akrual" }, { "value": "Kas", "label": "Pembukuan Stelsel Kas" } ] },
+            "period": { "label": "Periode Pembukuan:", "separator": "s.d.", "startField": { "id": "periodeUsahaMulai", "label": "Awal periode kegiatan usaha", "digitsOnly": true, "inputMode": "numeric", "cells": 2, "columns": 2, "widthMm": 10 }, "endField": { "id": "periodeUsahaSelesai", "label": "Akhir periode kegiatan usaha", "digitsOnly": true, "inputMode": "numeric", "cells": 2, "columns": 2, "widthMm": 10 } }
+          },
+          {
+            "label": "Pekerjaan Bebas",
+            "field": { "id": "sumberPekerjaanBebas", "label": "Pekerjaan bebas" },
+            "entries": [
+              { "descriptionField": { "id": "uraianPekerjaanBebas1", "label": "Uraian pekerjaan bebas pertama", "uppercase": true, "cells": 78, "columns": 26, "widthMm": 110 }, "secondaryLabel": "Merek Dagang/Usaha", "secondaryField": { "id": "merekPekerjaanBebas1", "label": "Merek pekerjaan bebas pertama", "uppercase": true, "cells": 40, "columns": 40, "widthMm": 120 }, "kluLabel": "KLU", "kluNote": "(diisi oleh petugas)" },
+              { "descriptionField": { "id": "uraianPekerjaanBebas2", "label": "Uraian pekerjaan bebas kedua", "uppercase": true, "cells": 78, "columns": 26, "widthMm": 110 }, "secondaryLabel": "Merek Dagang/Usaha", "secondaryField": { "id": "merekPekerjaanBebas2", "label": "Merek pekerjaan bebas kedua", "uppercase": true, "cells": 40, "columns": 40, "widthMm": 120 }, "kluLabel": "KLU", "kluNote": "(diisi oleh petugas)" }
+            ],
+            "employeeChoice": { "name": "memilikiKaryawanBebas", "label": "Memiliki Karyawan", "options": [ { "value": "Ya", "label": "Ya" }, { "value": "Tidak", "label": "Tidak" } ] },
+            "methodChoice": { "name": "metodePekerjaanBebas", "label": "Metode Pembukuan/Pencatatan", "options": [ { "value": "Pencatatan", "label": "Pencatatan" }, { "value": "Akrual", "label": "Pembukuan Stelsel Akrual" }, { "value": "Kas", "label": "Pembukuan Stelsel Kas" } ] },
+            "period": { "label": "Periode Pembukuan:", "separator": "s.d.", "startField": { "id": "periodeBebasMulai", "label": "Awal periode pekerjaan bebas", "digitsOnly": true, "inputMode": "numeric", "cells": 2, "columns": 2, "widthMm": 10 }, "endField": { "id": "periodeBebasSelesai", "label": "Akhir periode pekerjaan bebas", "digitsOnly": true, "inputMode": "numeric", "cells": 2, "columns": 2, "widthMm": 10 } }
+          }
+        ],
+        "monthlyIncome": {
+          "name": "penghasilanBulanan",
+          "label": "Perkiraan Penghasilan Per Bulan",
+          "required": true,
+          "options": [
+            { "value": "<4.500.000", "label": "Kurang dari Rp 4.500.000" },
+            { "value": "4.500.000-9.999.999", "label": "Rp 4.500.000 s.d. Rp 9.999.999" },
+            { "value": "10.000.000-14.999.999", "label": "Rp 10.000.000 s.d. Rp 14.999.999" },
+            { "value": "15.000.000-19.999.999", "label": "Rp 15.000.000 s.d. Rp 19.999.999" },
+            { "value": ">=20.000.000", "label": "Rp 20.000.000 atau lebih" }
+          ]
+        },
+        "annualTurnover": {
+          "name": "omzetTahunan",
+          "label": "Perkiraan Omset Per Tahun",
+          "required": true,
+          "options": [
+            { "value": "<=4,8M", "label": "0 s.d. 4,8 M" },
+            { "value": ">4,8M", "label": "Lebih dari 4,8 M" }
+          ]
+        }
+      },
+      "addresses": {
+        "letter": "C.",
+        "title": "ALAMAT*",
+        "groups": [
+          {
+            "number": "1.",
+            "title": "Alamat tempat tinggal menurut keadaan yang sebenarnya",
+            "streetField": { "id": "jalanDomisili", "label": "Jalan alamat domisili", "required": true, "uppercase": true, "cells": 52, "columns": 26, "widthMm": 120 },
+            "blockField": { "id": "blokDomisili", "label": "Blok alamat domisili", "uppercase": true, "cells": 7, "columns": 7, "widthMm": 30 },
+            "numberField": { "id": "nomorDomisili", "label": "Nomor alamat domisili", "uppercase": true, "cells": 7, "columns": 7, "widthMm": 30 },
+            "rtField": { "id": "rtDomisili", "label": "RT alamat domisili", "digitsOnly": true, "inputMode": "numeric", "cells": 3, "columns": 3, "widthMm": 14 },
+            "rwField": { "id": "rwDomisili", "label": "RW alamat domisili", "digitsOnly": true, "inputMode": "numeric", "cells": 3, "columns": 3, "widthMm": 14 },
+            "villageField": { "id": "kelurahanDomisili", "label": "Kelurahan atau desa alamat domisili", "required": true, "uppercase": true, "cells": 30, "columns": 30, "widthMm": 120 },
+            "districtField": { "id": "kecamatanDomisili", "label": "Kecamatan alamat domisili", "required": true, "uppercase": true, "cells": 30, "columns": 30, "widthMm": 120 },
+            "cityField": { "id": "kotaDomisili", "label": "Kota atau kabupaten alamat domisili", "required": true, "uppercase": true, "cells": 30, "columns": 30, "widthMm": 120 },
+            "provinceField": { "id": "provinsiDomisili", "label": "Provinsi alamat domisili", "required": true, "uppercase": true, "cells": 30, "columns": 30, "widthMm": 120 },
+            "postalCodeField": { "id": "kodePosDomisili", "label": "Kode pos alamat domisili", "required": true, "digitsOnly": true, "inputMode": "numeric", "cells": 5, "columns": 5, "widthMm": 22 }
+          },
+          {
+            "number": "2.",
+            "title": "Alamat sesuai KTP (tidak perlu diisi apabila sama dengan alamat tempat tinggal menurut keadaan yang sebenarnya)",
+            "streetField": { "id": "jalanKtp", "label": "Jalan alamat KTP", "uppercase": true, "cells": 52, "columns": 26, "widthMm": 120 },
+            "blockField": { "id": "blokKtp", "label": "Blok alamat KTP", "uppercase": true, "cells": 7, "columns": 7, "widthMm": 30 },
+            "numberField": { "id": "nomorKtp", "label": "Nomor alamat KTP", "uppercase": true, "cells": 7, "columns": 7, "widthMm": 30 },
+            "rtField": { "id": "rtKtp", "label": "RT alamat KTP", "digitsOnly": true, "inputMode": "numeric", "cells": 3, "columns": 3, "widthMm": 14 },
+            "rwField": { "id": "rwKtp", "label": "RW alamat KTP", "digitsOnly": true, "inputMode": "numeric", "cells": 3, "columns": 3, "widthMm": 14 },
+            "villageField": { "id": "kelurahanKtp", "label": "Kelurahan atau desa alamat KTP", "uppercase": true, "cells": 30, "columns": 30, "widthMm": 120 },
+            "districtField": { "id": "kecamatanKtp", "label": "Kecamatan alamat KTP", "uppercase": true, "cells": 30, "columns": 30, "widthMm": 120 },
+            "cityField": { "id": "kotaKtp", "label": "Kota atau kabupaten alamat KTP", "uppercase": true, "cells": 30, "columns": 30, "widthMm": 120 },
+            "provinceField": { "id": "provinsiKtp", "label": "Provinsi alamat KTP", "uppercase": true, "cells": 30, "columns": 30, "widthMm": 120 },
+            "postalCodeField": { "id": "kodePosKtp", "label": "Kode pos alamat KTP", "digitsOnly": true, "inputMode": "numeric", "cells": 5, "columns": 5, "widthMm": 22 }
+          },
+          {
+            "number": "3.",
+            "title": "Alamat Tempat Usaha (bukan karyawan/pegawai):",
+            "streetField": { "id": "jalanUsaha", "label": "Jalan alamat tempat usaha", "uppercase": true, "cells": 78, "columns": 26, "widthMm": 120 },
+            "blockField": { "id": "blokUsaha", "label": "Blok alamat tempat usaha", "uppercase": true, "cells": 7, "columns": 7, "widthMm": 30 },
+            "numberField": { "id": "nomorUsaha", "label": "Nomor alamat tempat usaha", "uppercase": true, "cells": 7, "columns": 7, "widthMm": 30 },
+            "rtField": { "id": "rtUsaha", "label": "RT alamat tempat usaha", "digitsOnly": true, "inputMode": "numeric", "cells": 3, "columns": 3, "widthMm": 14 },
+            "rwField": { "id": "rwUsaha", "label": "RW alamat tempat usaha", "digitsOnly": true, "inputMode": "numeric", "cells": 3, "columns": 3, "widthMm": 14 },
+            "villageField": { "id": "kelurahanUsaha", "label": "Kelurahan atau desa alamat tempat usaha", "uppercase": true, "cells": 30, "columns": 30, "widthMm": 120 },
+            "districtField": { "id": "kecamatanUsaha", "label": "Kecamatan alamat tempat usaha", "uppercase": true, "cells": 30, "columns": 30, "widthMm": 120 },
+            "cityField": { "id": "kotaUsaha", "label": "Kota atau kabupaten alamat tempat usaha", "uppercase": true, "cells": 30, "columns": 30, "widthMm": 120 },
+            "provinceField": { "id": "provinsiUsaha", "label": "Provinsi alamat tempat usaha", "uppercase": true, "cells": 30, "columns": 30, "widthMm": 120 },
+            "postalCodeField": { "id": "kodePosUsaha", "label": "Kode pos alamat tempat usaha", "digitsOnly": true, "inputMode": "numeric", "cells": 5, "columns": 5, "widthMm": 22 }
+          },
+          {
+            "number": "4.",
+            "title": "Alamat Korespondensi:",
+            "streetField": { "id": "jalanKorespondensi", "label": "Jalan alamat korespondensi", "uppercase": true, "cells": 78, "columns": 26, "widthMm": 120 },
+            "blockField": { "id": "blokKorespondensi", "label": "Blok alamat korespondensi", "uppercase": true, "cells": 7, "columns": 7, "widthMm": 30 },
+            "numberField": { "id": "nomorKorespondensi", "label": "Nomor alamat korespondensi", "uppercase": true, "cells": 7, "columns": 7, "widthMm": 30 },
+            "rtField": { "id": "rtKorespondensi", "label": "RT alamat korespondensi", "digitsOnly": true, "inputMode": "numeric", "cells": 3, "columns": 3, "widthMm": 14 },
+            "rwField": { "id": "rwKorespondensi", "label": "RW alamat korespondensi", "digitsOnly": true, "inputMode": "numeric", "cells": 3, "columns": 3, "widthMm": 14 },
+            "villageField": { "id": "kelurahanKorespondensi", "label": "Kelurahan atau desa alamat korespondensi", "uppercase": true, "cells": 30, "columns": 30, "widthMm": 120 },
+            "districtField": { "id": "kecamatanKorespondensi", "label": "Kecamatan alamat korespondensi", "uppercase": true, "cells": 30, "columns": 30, "widthMm": 120 },
+            "cityField": { "id": "kotaKorespondensi", "label": "Kota atau kabupaten alamat korespondensi", "uppercase": true, "cells": 30, "columns": 30, "widthMm": 120 },
+            "provinceField": { "id": "provinsiKorespondensi", "label": "Provinsi alamat korespondensi", "uppercase": true, "cells": 30, "columns": 30, "widthMm": 120 },
+            "postalCodeField": { "id": "kodePosKorespondensi", "label": "Kode pos alamat korespondensi", "digitsOnly": true, "inputMode": "numeric", "cells": 5, "columns": 5, "widthMm": 22 }
+          }
+        ]
+      },
+      "statement": {
+        "letter": "D.",
+        "title": "PERNYATAAN",
+        "field": { "id": "pernyataanKebenaran", "label": "Pernyataan kebenaran dan kelengkapan data", "required": true },
+        "text": "Dengan menyadari sepenuhnya akan segala akibatnya termasuk sanksi sesuai dengan ketentuan peraturan perundang-undangan yang berlaku, saya menyatakan bahwa apa yang saya sampaikan di atas adalah benar dan lengkap, dan saya menyetujui untuk menggunakan Akun Wajib Pajak saya sebagai sarana penerimaan surat dan dokumen perpajakan."
+      },
+      "approval": {
+        "official": {
+          "reviewedText": "Telah diteliti:",
+          "officerText": "Petugas,",
+          "checks": [ "Lengkap dan Benar", "WP Belum Terdaftar Sebelumnya" ]
+        },
+        "applicant": {
+          "roleText": "Pemohon,",
+          "placeField": { "id": "tempatTtd", "label": "Tempat penandatanganan", "required": true },
+          "dateField": { "id": "tanggalTtd", "label": "Tanggal penandatanganan", "required": true },
+          "nameField": { "id": "namaPemohon", "label": "Nama lengkap pemohon", "required": true }
+        }
+      }
+    }
+  ],
+  "syncName": {
+    "source": "namaWp",
+    "target": "namaPemohon"
+  }
+}
