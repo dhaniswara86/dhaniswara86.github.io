@@ -1,0 +1,187 @@
+{
+  "schemaVersion": 1,
+  "id": "pendaftaran-instansi",
+  "title": "Formulir Pendaftaran Wajib Pajak Instansi Pemerintah",
+  "description": "Lengkapi formulir pendaftaran Wajib Pajak Instansi Pemerintah sesuai dokumen sumber.",
+  "type": "form",
+  "renderer": "op-wbt-classic",
+  "printPageSize": "A4 portrait",
+  "blocks": [
+    {
+      "type": "instansi-form",
+      "header": {
+        "ministry": "KEMENTERIAN KEUANGAN REPUBLIK INDONESIA",
+        "agency": "DIREKTORAT JENDERAL PAJAK",
+        "title": "FORMULIR PENDAFTARAN WAJIB PAJAK INSTANSI PEMERINTAH",
+        "instruction": "SEMUA INFORMASI HARAP DIISI DENGAN HURUF KAPITAL/CETAK. Isi atau beri tanda silang (x) pada kotak jawaban yang sesuai. Bagian yang memiliki tanda bintang (*) wajib diisi. (Lihat petunjuk)"
+      },
+      "category": {
+        "name": "kategoriInstansi",
+        "label": "Kategori Instansi Pemerintah",
+        "required": true,
+        "options": [
+          { "value": "Instansi Pemerintah Pusat", "label": "1. Instansi Pemerintah Pusat" },
+          { "value": "Badan Layanan Umum Pusat", "label": "4. Badan Layanan Umum Pusat" },
+          { "value": "Instansi Pemerintah Daerah", "label": "2. Instansi Pemerintah Daerah" },
+          { "value": "Badan Layanan Umum Daerah", "label": "5. Badan Layanan Umum Daerah" },
+          { "value": "Instansi Pemerintah Desa", "label": "3. Instansi Pemerintah Desa" }
+        ]
+      },
+      "identity": {
+        "letter": "A.",
+        "title": "IDENTITAS WAJIB PAJAK",
+        "items": [
+          { "number": "1.", "label": "Kode Satker/Kode Wilayah Desa*:", "field": { "id": "kodeSatker", "label": "Kode Satker atau Kode Wilayah Desa", "required": true, "uppercase": true, "cells": 28, "columns": 28 } },
+          { "number": "2.", "label": "Nama Instansi Pemerintah*", "field": { "id": "namaInstansi", "label": "Nama Instansi Pemerintah", "required": true, "uppercase": true, "cells": 50, "columns": 25 } },
+          { "kind": "phone-fax", "number": "3.", "label": "Nomor Telepon*", "phoneField": { "id": "nomorTelepon", "label": "Nomor Telepon", "required": true, "digitsOnly": true, "inputMode": "numeric", "cells": 14, "columns": 14 }, "faxField": { "id": "nomorFaksimile", "label": "Nomor Faksimile", "digitsOnly": true, "inputMode": "numeric", "cells": 10, "columns": 10 } },
+          { "number": "4.", "label": "Nomor Telepon Seluler (handphone)*", "field": { "id": "nomorHandphone", "label": "Nomor Telepon Seluler", "required": true, "digitsOnly": true, "inputMode": "numeric", "cells": 28, "columns": 28 } },
+          { "number": "5.", "label": "Surel (email)*", "field": { "id": "emailInstansi", "label": "Surel atau email Instansi", "required": true, "type": "email", "cells": 28, "columns": 28 } }
+        ],
+        "people": [
+          {
+            "number": "6.",
+            "title": "Identitas kepala Instansi Pemerintah, Penanggung Jawab, atau Kuasa Pengguna Anggaran*:",
+            "fields": [
+              { "label": "Nama Pegawai", "field": { "id": "namaKepalaInstansi", "label": "Nama Kepala Instansi atau Penanggung Jawab", "required": true, "uppercase": true, "cells": 50, "columns": 25 } },
+              { "label": "NIK/NPWP", "field": { "id": "nikNpwpKepala", "label": "NIK atau NPWP Kepala Instansi", "required": true, "digitsOnly": true, "inputMode": "numeric", "cells": 16, "columns": 16, "widthMm": 72 } },
+              { "label": "Surel (email)*", "field": { "id": "emailKepala", "label": "Surel Kepala Instansi", "required": true, "type": "email", "cells": 28, "columns": 28 } },
+              { "label": "Nomor Telepon Seluler (handphone)*", "field": { "id": "handphoneKepala", "label": "Nomor Telepon Seluler Kepala Instansi", "required": true, "digitsOnly": true, "inputMode": "numeric", "cells": 28, "columns": 28 } }
+            ]
+          },
+          {
+            "number": "7.",
+            "title": "Identitas Bendaharawan*:",
+            "fields": [
+              { "label": "Nama Pegawai", "field": { "id": "namaBendaharawan", "label": "Nama Bendaharawan", "required": true, "uppercase": true, "cells": 50, "columns": 25 } },
+              { "label": "NIK/NPWP", "field": { "id": "nikNpwpBendaharawan", "label": "NIK atau NPWP Bendaharawan", "required": true, "digitsOnly": true, "inputMode": "numeric", "cells": 16, "columns": 16, "widthMm": 72 } },
+              { "label": "Surel (email)*", "field": { "id": "emailBendaharawan", "label": "Surel Bendaharawan", "required": true, "type": "email", "cells": 28, "columns": 28 } },
+              { "label": "Nomor Telepon Seluler (handphone)*", "field": { "id": "handphoneBendaharawan", "label": "Nomor Telepon Seluler Bendaharawan", "required": true, "digitsOnly": true, "inputMode": "numeric", "cells": 28, "columns": 28 } }
+            ]
+          },
+          {
+            "number": "8.",
+            "title": "Identitas Pegawai Keuangan, Pejabat Penandatangan SPM, Pimpinan, atau Wakil:",
+            "fields": [
+              { "label": "Nama Pegawai", "field": { "id": "namaPegawaiKeuangan", "label": "Nama Pegawai Keuangan", "uppercase": true, "cells": 50, "columns": 25 } },
+              { "label": "NIK/NPWP", "field": { "id": "nikNpwpPegawaiKeuangan", "label": "NIK atau NPWP Pegawai Keuangan", "digitsOnly": true, "inputMode": "numeric", "cells": 16, "columns": 16, "widthMm": 72 } },
+              { "label": "Surel (email)*", "field": { "id": "emailPegawaiKeuangan", "label": "Surel Pegawai Keuangan", "required": true, "type": "email", "cells": 28, "columns": 28 } },
+              { "label": "Nomor Telepon Seluler (handphone)*", "field": { "id": "handphonePegawaiKeuangan", "label": "Nomor Telepon Seluler Pegawai Keuangan", "required": true, "digitsOnly": true, "inputMode": "numeric", "cells": 28, "columns": 28 } }
+            ]
+          }
+        ],
+        "activities": [
+          { "roman": "I.", "field": { "id": "jenisKegiatan1", "label": "Jenis Usaha atau Kegiatan utama", "required": true, "uppercase": true, "cells": 60, "columns": 30 }, "kluLabel": "KLU Utama" },
+          { "roman": "II.", "field": { "id": "jenisKegiatan2", "label": "Jenis Usaha atau Kegiatan tambahan pertama", "uppercase": true, "cells": 60, "columns": 30 }, "kluLabel": "KLU Tambahan" },
+          { "roman": "III.", "field": { "id": "jenisKegiatan3", "label": "Jenis Usaha atau Kegiatan tambahan kedua", "uppercase": true, "cells": 60, "columns": 30 }, "kluLabel": "KLU Tambahan" }
+        ]
+      },
+      "addresses": {
+        "letter": "B.",
+        "title": "ALAMAT WAJIB PAJAK",
+        "groups": [
+          {
+            "number": "1.", "title": "Alamat Utama",
+            "fields": {
+              "street": { "id": "jalanUtama", "label": "Detail Alamat atau Nama Jalan Utama", "required": true, "uppercase": true, "cells": 52, "columns": 26 },
+              "block": { "id": "blokUtama", "label": "Blok Alamat Utama", "uppercase": true, "cells": 8, "columns": 8, "widthMm": 36 },
+              "number": { "id": "nomorUtama", "label": "Nomor Alamat Utama", "uppercase": true, "cells": 8, "columns": 8, "widthMm": 36 },
+              "rt": { "id": "rtUtama", "label": "RT Alamat Utama", "digitsOnly": true, "inputMode": "numeric", "cells": 3, "columns": 3, "widthMm": 15 },
+              "rw": { "id": "rwUtama", "label": "RW Alamat Utama", "digitsOnly": true, "inputMode": "numeric", "cells": 3, "columns": 3, "widthMm": 15 },
+              "village": { "id": "kelurahanUtama", "label": "Kelurahan atau Desa Alamat Utama", "required": true, "uppercase": true, "cells": 28, "columns": 28 },
+              "district": { "id": "kecamatanUtama", "label": "Kecamatan Alamat Utama", "required": true, "uppercase": true, "cells": 28, "columns": 28 },
+              "city": { "id": "kotaUtama", "label": "Kota atau Kabupaten Alamat Utama", "required": true, "uppercase": true, "cells": 28, "columns": 28 },
+              "province": { "id": "provinsiUtama", "label": "Provinsi Alamat Utama", "required": true, "uppercase": true, "cells": 28, "columns": 28 },
+              "regionCode": { "id": "kodeWilayahUtama", "label": "Kode Wilayah Alamat Utama", "digitsOnly": true, "inputMode": "numeric", "cells": 6, "columns": 6, "widthMm": 28 },
+              "postalCode": { "id": "kodePosUtama", "label": "Kode Pos Alamat Utama", "required": true, "digitsOnly": true, "inputMode": "numeric", "cells": 5, "columns": 5, "widthMm": 24 }
+            }
+          },
+          {
+            "number": "2.", "title": "Alamat Korespondensi",
+            "fields": {
+              "street": { "id": "jalanKorespondensi", "label": "Detail Alamat atau Nama Jalan Korespondensi", "uppercase": true, "cells": 52, "columns": 26 },
+              "block": { "id": "blokKorespondensi", "label": "Blok Alamat Korespondensi", "uppercase": true, "cells": 8, "columns": 8, "widthMm": 36 },
+              "number": { "id": "nomorKorespondensi", "label": "Nomor Alamat Korespondensi", "uppercase": true, "cells": 8, "columns": 8, "widthMm": 36 },
+              "rt": { "id": "rtKorespondensi", "label": "RT Alamat Korespondensi", "digitsOnly": true, "inputMode": "numeric", "cells": 3, "columns": 3, "widthMm": 15 },
+              "rw": { "id": "rwKorespondensi", "label": "RW Alamat Korespondensi", "digitsOnly": true, "inputMode": "numeric", "cells": 3, "columns": 3, "widthMm": 15 },
+              "village": { "id": "kelurahanKorespondensi", "label": "Kelurahan atau Desa Alamat Korespondensi", "uppercase": true, "cells": 28, "columns": 28 },
+              "district": { "id": "kecamatanKorespondensi", "label": "Kecamatan Alamat Korespondensi", "uppercase": true, "cells": 28, "columns": 28 },
+              "city": { "id": "kotaKorespondensi", "label": "Kota atau Kabupaten Alamat Korespondensi", "uppercase": true, "cells": 28, "columns": 28 },
+              "province": { "id": "provinsiKorespondensi", "label": "Provinsi Alamat Korespondensi", "uppercase": true, "cells": 28, "columns": 28 },
+              "regionCode": { "id": "kodeWilayahKorespondensi", "label": "Kode Wilayah Alamat Korespondensi", "digitsOnly": true, "inputMode": "numeric", "cells": 6, "columns": 6, "widthMm": 28 },
+              "postalCode": { "id": "kodePosKorespondensi", "label": "Kode Pos Alamat Korespondensi", "digitsOnly": true, "inputMode": "numeric", "cells": 5, "columns": 5, "widthMm": 24 }
+            }
+          }
+        ]
+      },
+      "subunit": {
+        "letter": "C.", "title": "SUBUNIT ORGANISASI",
+        "types": {
+          "label": "Jenis Subunit Organisasi",
+          "options": [
+            { "field": { "id": "subunitCabangProvinsi", "label": "Cabang Wilayah atau Provinsi" }, "label": "Cabang Wilayah/Provinsi" },
+            { "field": { "id": "subunitPajakKarbon", "label": "Objek Pajak Karbon" }, "label": "Objek Pajak Karbon" },
+            { "field": { "id": "subunitCabangKota", "label": "Cabang Kota atau Kabupaten" }, "label": "Cabang Kota/Kabupaten" },
+            { "field": { "id": "subunitPusatKesehatan", "label": "Pusat Kesehatan" }, "label": "Pusat Kesehatan" },
+            { "field": { "id": "subunitCabangKecamatan", "label": "Cabang Kecamatan" }, "label": "Cabang Kecamatan" },
+            { "field": { "id": "subunitSekolah", "label": "Sekolah" }, "label": "Sekolah" },
+            { "field": { "id": "subunitCabangKelurahan", "label": "Cabang Kelurahan Desa" }, "label": "Cabang Kelurahan Desa" },
+            { "field": { "id": "subunitKantorPusat", "label": "Kantor Pusat" }, "label": "Kantor Pusat" },
+            { "field": { "id": "subunitPbbP5l", "label": "Objek Pajak PBB P5L" }, "label": "Objek Pajak PBB P5L" },
+            { "field": { "id": "subunitLainnya", "label": "Jenis Lainnya" }, "label": "Jenis Lainnya" }
+          ]
+        },
+        "nameField": { "id": "namaSubunit", "label": "Nama Subunit Organisasi", "uppercase": true, "type": "textarea", "rows": 2 },
+        "descriptionField": { "id": "deskripsiSubunit", "label": "Deskripsi Subunit Organisasi", "uppercase": true, "type": "textarea", "rows": 2 },
+        "kluField": { "id": "kluSubunit", "label": "Klasifikasi Lapangan Usaha Subunit Organisasi", "uppercase": true, "type": "textarea", "rows": 2 },
+        "kluDescriptionField": { "id": "deskripsiKluSubunit", "label": "Deskripsi KLU Subunit Organisasi", "uppercase": true, "type": "textarea", "rows": 2 },
+        "picField": { "id": "nikNpwpPicSubunit", "label": "NPWP atau NIK PIC Subunit", "digitsOnly": true, "inputMode": "numeric", "cells": 16, "columns": 16, "widthMm": 76 },
+        "address": {
+          "detailField": { "id": "alamatSubunit", "label": "Detail Alamat Subunit", "uppercase": true, "type": "textarea", "rows": 3 },
+          "numberField": { "id": "nomorSubunit", "label": "Nomor Alamat Subunit", "uppercase": true, "cells": 5, "columns": 5, "widthMm": 26 },
+          "rtField": { "id": "rtSubunit", "label": "RT Subunit", "digitsOnly": true, "inputMode": "numeric", "cells": 3, "columns": 3, "widthMm": 15 },
+          "rwField": { "id": "rwSubunit", "label": "RW Subunit", "digitsOnly": true, "inputMode": "numeric", "cells": 3, "columns": 3, "widthMm": 15 },
+          "provinceField": { "id": "provinsiSubunit", "label": "Provinsi Subunit", "uppercase": true },
+          "villageField": { "id": "kelurahanSubunit", "label": "Kelurahan Subunit", "uppercase": true },
+          "districtField": { "id": "kecamatanSubunit", "label": "Kecamatan Subunit", "uppercase": true },
+          "cityField": { "id": "kotaSubunit", "label": "Kota atau Kabupaten Subunit", "uppercase": true },
+          "postalCodeField": { "id": "kodePosSubunit", "label": "Kode Pos Subunit", "digitsOnly": true, "inputMode": "numeric", "cells": 5, "columns": 5, "widthMm": 24 }
+        },
+        "rentedField": { "id": "lokasiDisewa", "label": "Lokasi yang disewa" },
+        "ownerField": { "id": "nikNpwpPemilikSewa", "label": "NIK atau NPWP Pemilik Tempat Sewa", "digitsOnly": true, "inputMode": "numeric", "cells": 16, "columns": 16, "widthMm": 76 },
+        "rentalStartField": { "id": "tanggalMulaiSewa", "label": "Tanggal Mulai Sewa" },
+        "rentalEndField": { "id": "tanggalAkhirSewa", "label": "Tanggal Sewa Berakhir" },
+        "zones": [
+          { "field": { "id": "zonaRetailPpn", "label": "Toko Retail Pengembalian PPN" }, "label": "Toko Retail Pengembalian PPN" },
+          { "field": { "id": "zonaPerdaganganBebas", "label": "Zona Perdagangan Bebas" }, "label": "Zona Perdagangan Bebas" },
+          { "field": { "id": "zonaEkonomiKhusus", "label": "Zona Ekonomi Khusus" }, "label": "Zona Ekonomi Khusus" },
+          { "field": { "id": "kawasanPenimbunanBerikat", "label": "Kawasan Penimbunan Berikat" }, "label": "Kawasan Penimbunan Berikat" }
+        ],
+        "decisionNumberField": { "id": "nomorSkSubunit", "label": "Nomor Surat Keputusan", "uppercase": true },
+        "decisionStartField": { "id": "tanggalMulaiKeputusan", "label": "Tanggal Mulai Keputusan" },
+        "decisionEndField": { "id": "tanggalAkhirKeputusan", "label": "Tanggal Berakhirnya Keputusan" }
+      },
+      "statement": {
+        "letter": "D.", "title": "PERNYATAAN",
+        "field": { "id": "persetujuanPernyataan", "label": "Persetujuan pernyataan", "required": true },
+        "text": "Dengan menyadari sepenuhnya akan segala akibatnya termasuk sanksi sesuai dengan ketentuan peraturan perundang-undangan yang berlaku, saya menyatakan bahwa apa yang saya sampaikan di atas adalah benar dan lengkap, dan saya menyetujui untuk menggunakan Akun Wajib Pajak saya sebagai sarana penerimaan surat dan dokumen perpajakan."
+      },
+      "approval": {
+        "official": { "reviewedText": "Telah diteliti:", "officerText": "Petugas,", "checks": ["Lengkap dan Benar", "WP Belum Terdaftar Sebelumnya"] },
+        "applicant": {
+          "placeField": { "id": "tempatPermohonan", "label": "Tempat permohonan", "required": true, "uppercase": true },
+          "dateField": { "id": "tanggalPermohonan", "label": "Tanggal permohonan", "required": true },
+          "roleText": "Pemohon,",
+          "nameField": { "id": "namaPemohon", "label": "Nama pemohon", "required": true, "uppercase": true }
+        }
+      }
+    }
+  ],
+  "syncName": { "source": "namaKepalaInstansi", "target": "namaPemohon" },
+  "guidance": [
+    { "title": "Cara mengisi", "items": [
+      "Isi kolom bertanda bintang (*) dan pilih kategori instansi yang sesuai.",
+      "Gunakan angka saja pada kolom NIK, NPWP, nomor telepon, RT/RW, dan kode pos.",
+      "Periksa tiga halaman pratinjau A4 sebelum mencetak atau menyimpan PDF."
+    ] }
+  ]
+}
