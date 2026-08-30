@@ -1,0 +1,274 @@
+{
+  "schemaVersion": 1,
+  "id": "surat-pernyataan-kegiatan-usaha-tku",
+  "title": "Surat Pernyataan Tentang Kegiatan Usaha dan Tempat Kegiatan Usaha Sebenarnya",
+  "description": "Lengkapi surat pernyataan kegiatan usaha dan tempat kegiatan usaha sebenarnya sesuai dokumen sumber.",
+  "type": "form",
+  "renderer": "business-statement-classic",
+  "printPageSize": "A4 portrait",
+  "blocks": [
+    {
+      "type": "business-statement-form",
+      "header": {
+        "lines": [
+          "SURAT PERNYATAAN",
+          "TENTANG KEGIATAN USAHA DAN TEMPAT KEGIATAN USAHA SEBENARNYA"
+        ]
+      },
+      "signer": {
+        "intro": "Saya yang bertanda tangan di bawah ini:",
+        "fields": [
+          {
+            "number": "1",
+            "label": "Nama",
+            "field": {
+              "id": "namaPenandatangan",
+              "label": "Nama penandatangan",
+              "required": true
+            }
+          },
+          {
+            "number": "2",
+            "label": "NPWP",
+            "field": {
+              "id": "npwpPenandatangan",
+              "label": "NPWP penandatangan",
+              "type": "npwp",
+              "required": true
+            }
+          },
+          {
+            "number": "3",
+            "label": "Alamat Tempat Tinggal",
+            "field": {
+              "id": "alamatPenandatangan",
+              "label": "Alamat tempat tinggal penandatangan",
+              "required": true
+            }
+          },
+          {
+            "number": "4",
+            "label": "Alamat Posel/e-Mail",
+            "field": {
+              "id": "emailPenandatangan",
+              "label": "Alamat posel atau e-mail penandatangan",
+              "type": "email",
+              "required": true
+            }
+          },
+          {
+            "number": "5",
+            "label": "Nomor Handphone",
+            "field": {
+              "id": "teleponPenandatangan",
+              "label": "Nomor handphone penandatangan",
+              "type": "tel",
+              "inputMode": "numeric",
+              "digitsOnly": true,
+              "maxLength": 15,
+              "required": true
+            }
+          }
+        ]
+      },
+      "taxpayer": {
+        "rolePrefix": "Bertindak selaku",
+        "roleField": {
+          "id": "peranPenandatangan",
+          "label": "Kedudukan penandatangan",
+          "required": true,
+          "placeholder": "Pilih",
+          "options": [
+            { "value": "Wakil", "label": "Wakil" },
+            { "value": "Kuasa", "label": "Kuasa" }
+          ]
+        },
+        "roleSuffix": "Wajib Pajak*):",
+        "fields": [
+          {
+            "number": "6",
+            "label": "Nama",
+            "field": {
+              "id": "namaWp",
+              "label": "Nama Wajib Pajak",
+              "required": true
+            }
+          },
+          {
+            "number": "7",
+            "label": "NPWP",
+            "field": {
+              "id": "npwpWp",
+              "label": "NPWP Wajib Pajak",
+              "type": "npwp",
+              "required": true
+            }
+          },
+          {
+            "number": "8",
+            "label": "Alamat",
+            "field": {
+              "id": "alamatWp",
+              "label": "Alamat Wajib Pajak",
+              "required": true
+            }
+          },
+          {
+            "number": "9",
+            "label": "Alamat Posel/e-Mail",
+            "field": {
+              "id": "emailWp",
+              "label": "Alamat posel atau e-mail Wajib Pajak",
+              "type": "email",
+              "required": true
+            }
+          }
+        ]
+      },
+      "declaration": "dengan ini menyatakan bahwa Wajib Pajak bertempat kedudukan di kantor virtual dan memiliki:",
+      "management": {
+        "number": "1.",
+        "title": "susunan pengurus dengan perincian sebagai berikut**:",
+        "fields": [
+          {
+            "number": "10",
+            "label": "Nama",
+            "field": {
+              "id": "namaPengurus",
+              "label": "Nama pengurus",
+              "required": true
+            }
+          },
+          {
+            "number": "11",
+            "label": "NPWP",
+            "field": {
+              "id": "npwpPengurus",
+              "label": "NPWP pengurus",
+              "type": "npwp",
+              "required": true
+            }
+          },
+          {
+            "number": "12",
+            "label": "Alamat Tempat Tinggal",
+            "field": {
+              "id": "alamatPengurus",
+              "label": "Alamat tempat tinggal pengurus",
+              "required": true
+            }
+          },
+          {
+            "number": "13",
+            "label": "Jabatan",
+            "field": {
+              "id": "jabatanPengurus",
+              "label": "Jabatan pengurus",
+              "required": true
+            }
+          },
+          {
+            "number": "14",
+            "label": "Nomor Handphone",
+            "field": {
+              "id": "teleponPengurus",
+              "label": "Nomor handphone pengurus",
+              "type": "tel",
+              "inputMode": "numeric",
+              "digitsOnly": true,
+              "maxLength": 15,
+              "required": true
+            }
+          },
+          {
+            "number": "15",
+            "label": "Alamat Posel/e-Mail",
+            "field": {
+              "id": "emailPengurus",
+              "label": "Alamat posel atau e-mail pengurus",
+              "type": "email",
+              "required": true
+            }
+          }
+        ]
+      },
+      "activities": {
+        "number": "2.",
+        "mainLabel": "kegiatan usaha utama",
+        "mainNumber": "16",
+        "mainField": {
+          "id": "kegiatanUtama",
+          "label": "Kegiatan usaha utama",
+          "required": true
+        },
+        "otherLabel": "dan kegiatan usaha lainnya",
+        "otherNumber": "17",
+        "otherField": {
+          "id": "kegiatanLainnya",
+          "label": "Kegiatan usaha lainnya"
+        }
+      },
+      "locations": [
+        {
+          "number": "3.",
+          "title": "tempat kegiatan usaha utama Pengusaha Kena Pajak berlokasi di***:",
+          "fields": [
+            { "number": "18", "label": "a. alamat", "field": { "id": "alamatUsahaUtama", "label": "Alamat tempat kegiatan usaha utama", "required": true } },
+            { "number": "19", "label": "b. Provinsi", "field": { "id": "provinsiUsahaUtama", "label": "Provinsi tempat kegiatan usaha utama", "required": true } },
+            { "number": "20", "label": "c. Kab/Kota", "field": { "id": "kabKotaUsahaUtama", "label": "Kabupaten atau kota tempat kegiatan usaha utama", "required": true } },
+            { "number": "21", "label": "d. Kecamatan", "field": { "id": "kecamatanUsahaUtama", "label": "Kecamatan tempat kegiatan usaha utama", "required": true } },
+            { "number": "22", "label": "e. Desa/Kel.", "field": { "id": "desaKelUsahaUtama", "label": "Desa atau kelurahan tempat kegiatan usaha utama", "required": true } },
+            { "number": "23", "label": "f. NITKU", "field": { "id": "nitkuUsahaUtama", "label": "NITKU tempat kegiatan usaha utama", "inputMode": "numeric", "digitsOnly": true, "maxLength": 22, "required": true } },
+            { "number": "24", "label": "g. Nama Penanggung Jawab", "field": { "id": "namaPenanggungJawab", "label": "Nama penanggung jawab tempat kegiatan usaha utama", "required": true } },
+            { "number": "25", "label": "h. Nomor Identitas Penanggung Jawab", "field": { "id": "identitasPenanggungJawab", "label": "Nomor identitas penanggung jawab", "required": true } },
+            { "number": "26", "label": "i. Jabatan", "field": { "id": "jabatanPenanggungJawab", "label": "Jabatan penanggung jawab", "required": true } }
+          ]
+        },
+        {
+          "number": "4.",
+          "title": "tempat kegiatan usaha lainnya****",
+          "fields": [
+            { "number": "27", "label": "a. alamat", "field": { "id": "alamatUsahaLain", "label": "Alamat tempat kegiatan usaha lainnya" } },
+            { "number": "28", "label": "b. Provinsi", "field": { "id": "provinsiUsahaLain", "label": "Provinsi tempat kegiatan usaha lainnya" } },
+            { "number": "29", "label": "c. Kab/Kota", "field": { "id": "kabKotaUsahaLain", "label": "Kabupaten atau kota tempat kegiatan usaha lainnya" } },
+            { "number": "30", "label": "d. Kecamatan", "field": { "id": "kecamatanUsahaLain", "label": "Kecamatan tempat kegiatan usaha lainnya" } },
+            { "number": "31", "label": "e. Desa/Kel.", "field": { "id": "desaKelUsahaLain", "label": "Desa atau kelurahan tempat kegiatan usaha lainnya" } },
+            { "number": "32", "label": "f. NITKU", "field": { "id": "nitkuUsahaLain", "label": "NITKU tempat kegiatan usaha lainnya", "inputMode": "numeric", "digitsOnly": true, "maxLength": 22 } }
+          ]
+        }
+      ],
+      "closing": {
+        "text": "Dengan menyadari sepenuhnya akan segala akibatnya termasuk pencabutan pengukuhan Pengusaha Kena Pajak secara jabatan sesuai dengan ketentuan perundang-undangan di bidang perpajakan, saya menyatakan bahwa apa yang telah saya beritahukan di atas adalah sesuai dengan keadaan yang sebenarnya.",
+        "placeField": {
+          "id": "tempatTtd",
+          "label": "Tempat penandatanganan",
+          "required": true
+        },
+        "dateField": {
+          "id": "tanggalTtd",
+          "label": "Tanggal penandatanganan",
+          "required": true
+        },
+        "dateNumber": "33",
+        "roleText": "Wakil/Kuasa Wajib Pajak*),",
+        "stampText": "METERAI",
+        "nameField": {
+          "id": "namaTtd",
+          "label": "Nama lengkap penandatangan",
+          "required": true
+        },
+        "nameNumber": "34"
+      },
+      "footnotes": [
+        { "marker": "*", "text": "Coret yang tidak perlu" },
+        { "marker": "**", "text": "Cantumkan seluruh data pengurus" },
+        { "marker": "***", "text": "Dalam hal tidak memiliki Tempat Kegiatan Usaha lain selain di Kantor Virtual maka dapat diisi dengan data Kantor Virtual" },
+        { "marker": "****", "text": "Jika ada, bisa ditambahkan lebih dari 1 (satu)" }
+      ]
+    }
+  ],
+  "syncName": {
+    "source": "namaPenandatangan",
+    "target": "namaTtd"
+  }
+}
