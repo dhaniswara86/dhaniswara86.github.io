@@ -691,9 +691,98 @@
     root.appendChild(frame);
   }
 
+  function renderPkpRetailForm(block) {
+    const frame = createElement("div", "pkp-form-frame pkp-retail-frame");
+    const header = createElement("header", "pkp-document-header");
+    const institution = createElement("div", "pkp-institution");
+    institution.append(
+      createElement("div", "", block.header?.ministry || ""),
+      createElement("div", "", block.header?.agency || "")
+    );
+    header.append(
+      institution,
+      createElement("div", "pkp-document-title", block.header?.title || ""),
+      createElement("div", "pkp-instruction", block.header?.instruction || "")
+    );
+    if (block.header?.instructionNote) {
+      header.lastElementChild.appendChild(
+        createElement("span", "pkp-retail-instruction-note", ` ${block.header.instructionNote}`)
+      );
+    }
+    frame.appendChild(header);
+
+    const sectionHeading = (letter, title) => {
+      const heading = createElement("div", "pkp-section-heading");
+      heading.append(
+        createElement("span", "pkp-section-letter", letter),
+        createElement("strong", "", title)
+      );
+      return heading;
+    };
+
+    const identity = createElement("section", "pkp-section pkp-identity-section pkp-retail-identity-section");
+    identity.appendChild(sectionHeading(block.identity?.letter || "A.", block.identity?.title || ""));
+    (block.identity?.items || []).forEach((item) => {
+      const row = createElement("div", "pkp-numbered-row pkp-retail-numbered-row");
+      const label = createElement("label", "pkp-field-label", item.label || "");
+      label.htmlFor = item.field.id;
+      row.append(
+        createElement("span", "pkp-item-number", item.number || ""),
+        label,
+        createBoxedInput(item.field)
+      );
+      identity.appendChild(row);
+    });
+    frame.appendChild(identity);
+
+    const statement = createElement("section", "pkp-section pkp-statement-section pkp-retail-statement-section");
+    statement.appendChild(sectionHeading(block.statement?.letter || "B.", block.statement?.title || ""));
+    statement.appendChild(
+      createCheckbox(block.statement?.field || {}, block.statement?.text || "", "pkp-statement-line")
+    );
+    frame.appendChild(statement);
+
+    const approval = block.approval || {};
+    const approvalSection = createElement("section", "pkp-approval-section pkp-retail-approval-section");
+    const official = createElement("div", "pkp-official-panel");
+    const officialHeader = createElement("div", "pkp-approval-header");
+    officialHeader.append(
+      createElement("span", "", approval.official?.reviewedText || ""),
+      createElement("span", "", approval.official?.officerText || "")
+    );
+    official.appendChild(officialHeader);
+    const officialChecks = createElement("div", "pkp-official-checks");
+    (approval.official?.checks || []).forEach((text) => {
+      const line = createElement("div", "pkp-official-check-line");
+      line.append(createElement("span", "pkp-empty-box"), createElement("span", "", text));
+      officialChecks.appendChild(line);
+    });
+    official.append(officialChecks, createElement("div", "pkp-official-signature-line"));
+
+    const applicant = createElement("div", "pkp-applicant-panel");
+    const dateLine = createElement("div", "pkp-applicant-date-line");
+    const placeWrap = createElement("span", "pkp-inline-field");
+    placeWrap.appendChild(createInput({ ...approval.applicant?.placeField, type: "text" }));
+    const dateWrap = createElement("span", "pkp-inline-field");
+    dateWrap.appendChild(createInput({ ...approval.applicant?.dateField, type: "date" }));
+    dateLine.append(placeWrap, createElement("span", "", ", tanggal"), dateWrap);
+    applicant.append(
+      dateLine,
+      createElement("div", "pkp-applicant-role", approval.applicant?.roleText || ""),
+      createElement("div", "pkp-applicant-signature-space")
+    );
+    const nameWrap = createElement("div", "pkp-applicant-name-line");
+    nameWrap.appendChild(createInput({ ...approval.applicant?.nameField, type: "text" }));
+    applicant.appendChild(nameWrap);
+    approvalSection.append(official, applicant);
+    frame.appendChild(approvalSection);
+    root.appendChild(frame);
+  }
+
   function renderBlock(block) {
     const renderers = {
       "pkp-form": renderPkpForm,
+      "pkp-retail-form": renderPkpRetailForm,
       "letter-meta": renderLetterMeta,
       recipient: renderRecipient,
       "inline-fields": renderInlineFields,
@@ -925,7 +1014,8 @@
     if (sourceControl.matches('input[type="radio"], input[type="checkbox"]')) {
       const mark = document.createElement("span");
       mark.className = "static-choice-box";
-      mark.textContent = sourceControl.checked ? "✓" : "";
+      const checkedMark = sourceControl.closest(".pkp-retail-frame") ? "×" : "✓";
+      mark.textContent = sourceControl.checked ? checkedMark : "";
       mark.setAttribute("aria-hidden", "true");
       clonedControl.replaceWith(mark);
       return;
