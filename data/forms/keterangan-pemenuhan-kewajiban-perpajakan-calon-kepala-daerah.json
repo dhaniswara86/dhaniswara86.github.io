@@ -1,45 +1,53 @@
 {
+  "schemaVersion": 1,
   "id": "keterangan-pemenuhan-kewajiban-perpajakan-calon-kepala-daerah",
   "title": "Permohonan Keterangan Pemenuhan Kewajiban Perpajakan Bakal Calon Kepala Daerah",
   "description": "Lengkapi surat permohonan keterangan pemenuhan kewajiban perpajakan bakal calon kepala daerah.",
   "type": "letter",
+  "renderer": "calon-kepala-daerah-classic",
   "printPageSize": "A4 portrait",
   "blocks": [
     {
-      "type": "fields",
+      "type": "letter-meta",
       "fields": [
-        {
-          "id": "nomor",
-          "label": "Nomor",
-          "required": true
-        },
-        {
-          "id": "lampiran",
-          "label": "Lampiran",
-          "required": true
-        },
-        {
-          "id": "kpp",
-          "label": "Kantor Pelayanan Pajak tujuan",
-          "required": true
-        }
+        { "id": "nomor", "label": "Nomor", "required": true },
+        { "id": "lampiran", "label": "Lampiran", "required": true }
+      ],
+      "subjectLabel": "Hal",
+      "subjectLines": [
+        "Permohonan Keterangan Pemenuhan Kewajiban Perpajakan",
+        "Bakal Calon Kepala Daerah"
       ]
     },
     {
+      "type": "recipient",
+      "prefix": "Yth. Kepala Kantor Pelayanan Pajak",
+      "field": {
+        "id": "kpp",
+        "label": "Kantor Pelayanan Pajak tujuan",
+        "required": true
+      }
+    },
+    {
       "type": "paragraph",
-      "text": "Yang bertanda tangan di bawah ini:"
+      "text": "Yang bertanda tangan di bawah ini:",
+      "className": "candidate-section-title candidate-indent"
     },
     {
       "type": "fields",
+      "className": "candidate-signer-data candidate-indent",
       "fields": [
         {
           "id": "namaPenandatangan",
-          "label": "Nama penandatangan",
+          "label": "Nama",
+          "validationLabel": "Nama penandatangan",
           "required": true
         },
         {
           "id": "npwpPenandatangan",
-          "label": "NPWP penandatangan",
+          "label": "NPWP",
+          "validationLabel": "NPWP penandatangan",
+          "type": "npwp",
           "required": true
         }
       ]
@@ -48,81 +56,129 @@
       "type": "radio",
       "name": "status",
       "label": "Bertindak selaku",
+      "labelMarker": "*)",
+      "labelClassName": "candidate-status-title",
+      "className": "candidate-status-list",
+      "validationLabel": "Kedudukan penandatangan",
       "required": true,
       "options": [
-        {
-          "value": "Wajib Pajak",
-          "label": "Wajib Pajak"
-        },
-        {
-          "value": "Wakil",
-          "label": "Wakil"
-        },
-        {
-          "value": "Kuasa",
-          "label": "Kuasa, dari Wajib Pajak"
-        }
+        { "value": "Wajib Pajak", "label": "Wajib Pajak" },
+        { "value": "Wakil", "label": "Wakil" },
+        { "value": "Kuasa", "label": "Kuasa, dari Wajib Pajak" }
       ]
     },
     {
       "type": "fields",
+      "className": "candidate-taxpayer-data candidate-indent",
       "fields": [
         {
           "id": "namaWp",
-          "label": "Nama Wajib Pajak",
+          "label": "Nama",
+          "validationLabel": "Nama Wajib Pajak",
           "required": true
         },
         {
           "id": "npwpWp",
-          "label": "NPWP Wajib Pajak",
+          "label": "NPWP",
+          "validationLabel": "NPWP Wajib Pajak",
+          "type": "npwp",
           "required": true
         },
         {
           "id": "alamatWp",
-          "label": "Alamat Wajib Pajak",
+          "label": "Alamat",
+          "validationLabel": "Alamat Wajib Pajak",
           "type": "textarea",
+          "rows": 2,
           "required": true
         },
-        {
-          "id": "klu",
-          "label": "KLU",
-          "required": true
-        },
+        { "id": "klu", "label": "KLU", "required": true },
         {
           "id": "uraianKlu",
-          "label": "Uraian KLU",
+          "label": "",
+          "validationLabel": "Uraian KLU",
+          "placeholder": "Uraian KLU",
           "required": true
+        }
+      ]
+    },
+    {
+      "type": "inline-sentence",
+      "className": "candidate-request-paragraph",
+      "segments": [
+        {
+          "type": "text",
+          "value": "bersama ini mengajukan permohonan keterangan pemenuhan kewajiban perpajakan bakal calon kepala daerah dari Kantor Pelayanan Pajak sebagai salah satu dokumen persyaratan pencalonan diri saya sebagai bakal calon "
+        },
+        {
+          "type": "select",
+          "field": {
+            "id": "jabatanCalon",
+            "label": "Jabatan bakal calon kepala daerah",
+            "required": true,
+            "placeholder": "Pilih jabatan",
+            "className": "candidate-position-select",
+            "options": [
+              { "value": "Gubernur", "label": "Gubernur" },
+              { "value": "Wakil Gubernur", "label": "Wakil Gubernur" },
+              { "value": "Bupati", "label": "Bupati" },
+              { "value": "Wakil Bupati", "label": "Wakil Bupati" },
+              { "value": "Walikota", "label": "Walikota" },
+              { "value": "Wakil Walikota", "label": "Wakil Walikota" }
+            ]
+          }
+        },
+        {
+          "type": "text",
+          "value": " sesuai dengan Peraturan Komisi Pemilihan Umum mengenai Pencalonan Pemilihan Gubernur dan Wakil Gubernur, Bupati dan Wakil Bupati, dan/atau Walikota dan Wakil Walikota."
         }
       ]
     },
     {
       "type": "paragraph",
-      "text": "bersama ini mengajukan permohonan keterangan pemenuhan kewajiban perpajakan bakal calon kepala daerah dari Kantor Pelayanan Pajak sebagai salah satu dokumen persyaratan pencalonan diri saya sebagai bakal calon kepala daerah sesuai dengan Peraturan Komisi Pemilihan Umum mengenai Pencalonan Pemilihan Gubernur dan Wakil Gubernur, Bupati dan Wakil Bupati, dan/atau Walikota dan Wakil Walikota."
+      "text": "Atas perhatian dan kerja samanya, diucapkan terima kasih.",
+      "className": "candidate-closing"
     },
     {
       "type": "signature",
-      "placeField": {
-        "id": "tempatTtd",
+      "combinedField": {
+        "id": "tempatTanggal",
         "label": "Tempat dan tanggal",
-        "placeholder": "Contoh: Bandung"
-      },
-      "dateField": {
-        "id": "tanggalTtd",
-        "label": "Tanggal",
+        "placeholder": "Contoh: Bandung, 17 Juli 2026",
         "required": true
       },
       "roleText": "Wajib Pajak/Wakil/Kuasa",
+      "roleMarker": "**)",
       "nameField": {
         "id": "namaTtd",
         "label": "Nama lengkap penandatangan",
+        "placeholder": "Nama lengkap",
         "required": true
       }
     },
     {
       "type": "footnote",
-      "text": "*) Beri tanda (√) pada kotak yang sesuai. **) Coret yang tidak perlu."
+      "items": [
+        { "marker": "*)", "text": "Beri tanda (√) pada kotak yang sesuai" },
+        { "marker": "**)", "text": "Coret yang tidak perlu" }
+      ]
     }
   ],
+  "copyWhen": [
+    {
+      "group": "status",
+      "value": "Wajib Pajak",
+      "fields": [
+        { "source": "namaPenandatangan", "target": "namaWp" },
+        { "source": "npwpPenandatangan", "target": "npwpWp" }
+      ]
+    }
+  ],
+  "syncRole": {
+    "group": "status",
+    "targetSelector": ".signature .role-value",
+    "emptyText": "Wajib Pajak/Wakil/Kuasa"
+  },
   "syncName": {
     "source": "namaPenandatangan",
     "target": "namaTtd"
