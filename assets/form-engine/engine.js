@@ -11,7 +11,8 @@
     "kuasa-classic",
     "letter-classic",
     "calon-kepala-daerah-classic",
-    "pkp-classic"
+    "pkp-classic",
+    "business-statement-classic"
   ]);
   const PRINT_PAYLOAD_KEY = "kabayan.printPayload.v1";
   const DRAFT_PREFIX = "kabayan.formDraft.v1:";
@@ -789,10 +790,142 @@
     root.appendChild(frame);
   }
 
+  function renderBusinessStatementForm(block) {
+    const frame = createElement("div", "business-statement-frame");
+    const firstPage = createElement("section", "business-statement-page business-statement-page-one");
+    const secondPage = createElement("section", "business-statement-page business-statement-page-two");
+
+    const controlFor = (field) => {
+      const control = createInput(field);
+      if (field.type !== "npwp") return control;
+      const wrap = createElement("div", "business-npwp-wrap");
+      const message = createElement("div", "field-error");
+      message.id = `${field.id}Error`;
+      message.setAttribute("role", "alert");
+      control.setAttribute("aria-describedby", message.id);
+      wrap.append(control, message);
+      return wrap;
+    };
+
+    const fieldRow = (item, className = "") => {
+      const row = createElement("div", `business-field-row ${className}`);
+      const label = createElement("label", "business-field-label", item.label || "");
+      label.htmlFor = item.field.id;
+      row.append(
+        label,
+        createElement("span", "business-colon", ":"),
+        controlFor(item.field),
+        createElement("span", "business-reference", item.number ? `(${item.number})` : "")
+      );
+      return row;
+    };
+
+    const locationRows = (section) => {
+      const list = createElement("div", "business-location-list");
+      (section.fields || []).forEach((item) => {
+        list.appendChild(fieldRow(item, "business-location-row"));
+      });
+      return list;
+    };
+
+    const header = createElement("header", "business-document-header");
+    (block.header?.lines || []).forEach((line) => {
+      header.appendChild(createElement("div", "", line));
+    });
+    firstPage.appendChild(header);
+
+    firstPage.appendChild(createElement("p", "business-intro", block.signer?.intro || ""));
+    const signerFields = createElement("div", "business-field-group business-signer-fields");
+    (block.signer?.fields || []).forEach((item) => signerFields.appendChild(fieldRow(item)));
+    firstPage.appendChild(signerFields);
+
+    const roleLine = createElement("div", "business-role-line");
+    appendText(roleLine, block.taxpayer?.rolePrefix || "");
+    if (block.taxpayer?.roleField) {
+      roleLine.appendChild(createSelect(block.taxpayer.roleField));
+    }
+    appendText(roleLine, block.taxpayer?.roleSuffix || "");
+    firstPage.appendChild(roleLine);
+
+    const taxpayerFields = createElement("div", "business-field-group business-taxpayer-fields");
+    (block.taxpayer?.fields || []).forEach((item) => taxpayerFields.appendChild(fieldRow(item)));
+    firstPage.appendChild(taxpayerFields);
+    firstPage.appendChild(createElement("p", "business-declaration", block.declaration || ""));
+
+    const management = createElement("section", "business-numbered-section business-management-section");
+    const managementHeading = createElement("div", "business-section-heading");
+    managementHeading.append(
+      createElement("span", "business-section-number", block.management?.number || ""),
+      createElement("span", "", block.management?.title || "")
+    );
+    management.appendChild(managementHeading);
+    const managementFields = createElement("div", "business-field-group business-management-fields");
+    (block.management?.fields || []).forEach((item) => managementFields.appendChild(fieldRow(item)));
+    management.appendChild(managementFields);
+    firstPage.appendChild(management);
+
+    const activities = createElement("section", "business-numbered-section business-activities-section");
+    const activityNumber = createElement("span", "business-section-number", block.activities?.number || "");
+    const activitySentence = createElement("div", "business-activity-sentence");
+    appendText(activitySentence, block.activities?.mainLabel || "");
+    activitySentence.appendChild(controlFor(block.activities.mainField));
+    activitySentence.appendChild(createElement("span", "business-reference", `(${block.activities.mainNumber || ""})`));
+    appendText(activitySentence, block.activities?.otherLabel || "");
+    activitySentence.appendChild(controlFor(block.activities.otherField));
+    activitySentence.appendChild(createElement("span", "business-reference", `(${block.activities.otherNumber || ""})`));
+    activities.append(activityNumber, activitySentence);
+    firstPage.appendChild(activities);
+
+    (block.locations || []).forEach((location) => {
+      const section = createElement("section", "business-numbered-section business-location-section");
+      const heading = createElement("div", "business-section-heading");
+      heading.append(
+        createElement("span", "business-section-number", location.number || ""),
+        createElement("span", "", location.title || "")
+      );
+      section.append(heading, locationRows(location));
+      firstPage.appendChild(section);
+    });
+
+    secondPage.appendChild(createElement("p", "business-closing-statement", block.closing?.text || ""));
+    const signature = createElement("section", "business-signature");
+    const dateLine = createElement("div", "business-signature-date");
+    dateLine.append(
+      controlFor(block.closing.placeField),
+      createElement("span", "business-date-comma", ","),
+      createDateControl(block.closing.dateField),
+      createElement("span", "business-reference", `(${block.closing.dateNumber || ""})`)
+    );
+    signature.append(
+      dateLine,
+      createElement("div", "business-signature-role", block.closing.roleText || ""),
+      createElement("div", "business-meterai", block.closing.stampText || "METERAI"),
+      createElement("div", "business-signature-space")
+    );
+    const nameLine = createElement("div", "business-signature-name");
+    nameLine.append(
+      controlFor(block.closing.nameField),
+      createElement("span", "business-reference", `(${block.closing.nameNumber || ""})`)
+    );
+    signature.appendChild(nameLine);
+    secondPage.appendChild(signature);
+
+    const footnotes = createElement("div", "business-footnotes");
+    (block.footnotes || []).forEach((item) => {
+      const row = createElement("div", "business-footnote-row");
+      row.append(createElement("span", "", item.marker || ""), createElement("span", "", item.text || ""));
+      footnotes.appendChild(row);
+    });
+    secondPage.appendChild(footnotes);
+    frame.append(firstPage, secondPage);
+    root.appendChild(frame);
+  }
+
   function renderBlock(block) {
     const renderers = {
       "pkp-form": renderPkpForm,
       "pkp-retail-form": renderPkpRetailForm,
+      "business-statement-form": renderBusinessStatementForm,
       "letter-meta": renderLetterMeta,
       recipient: renderRecipient,
       "inline-fields": renderInlineFields,
