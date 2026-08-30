@@ -922,6 +922,404 @@
     root.appendChild(frame);
   }
 
+  function renderBadanForm(block) {
+    const frame = createElement("div", "opwbt-frame badan-frame");
+    const pages = [
+      createElement("section", "opwbt-page opwbt-page-1 badan-page badan-page-1"),
+      createElement("section", "opwbt-page opwbt-page-2 badan-page badan-page-2"),
+      createElement("section", "opwbt-page opwbt-page-4 badan-page badan-page-3")
+    ];
+
+    const choiceGroup = (config, className = "") => {
+      const choices = createElement("div", `checks badan-choice-group ${className}`);
+      choices.setAttribute("role", "radiogroup");
+      choices.setAttribute("aria-label", config.validationLabel || config.label || "Pilihan");
+      choices.dataset.radioGroup = config.name;
+      choices.dataset.label = config.validationLabel || config.label || "Pilihan";
+      if (config.required) choices.dataset.radioRequired = "true";
+      (config.options || []).forEach((option, index) => {
+        const label = createElement("label", "check-line opwbt-choice-line badan-choice-line");
+        const input = document.createElement("input");
+        input.type = "radio";
+        input.name = config.name;
+        input.value = String(option.value ?? "");
+        input.id = `${config.name}-${index + 1}`;
+        label.append(input, createElement("span", "", option.label ?? option.value ?? ""));
+        choices.appendChild(label);
+      });
+      return choices;
+    };
+
+    const checkboxLine = (field, text, className = "") => {
+      const label = createElement("label", `opwbt-checkbox-line badan-checkbox-line ${className}`);
+      const input = document.createElement("input");
+      input.type = "checkbox";
+      applyFieldMetadata(input, { ...field, type: "checkbox" });
+      label.append(input, createElement("span", "", text || ""));
+      return label;
+    };
+
+    const sectionHeading = (config) => {
+      const heading = createElement("div", "opwbt-section-heading badan-section-heading");
+      heading.append(
+        createElement("span", "opwbt-section-letter", config.letter || ""),
+        createElement("strong", "", config.title || "")
+      );
+      return heading;
+    };
+
+    const fieldRow = (item, className = "") => {
+      const row = createElement("div", `badan-field-row ${className} ${item.className || ""}`);
+      row.append(
+        createElement("span", "opwbt-item-number badan-item-number", item.number || ""),
+        createElement("label", "badan-field-label", item.label || "")
+      );
+      const control = createElement("div", "badan-field-control");
+      if (item.kind === "choice") {
+        control.appendChild(choiceGroup(item.choice, item.choice.className || ""));
+      } else if (item.kind === "date") {
+        row.querySelector("label").htmlFor = item.field.id;
+        control.appendChild(createDateControl(item.field));
+      } else if (item.kind === "phone-fax") {
+        const split = createElement("div", "badan-phone-fax");
+        split.append(
+          createBoxedInput(item.phoneField),
+          createElement("span", "badan-secondary-label", "No. Faksimile"),
+          createBoxedInput(item.faxField)
+        );
+        control.appendChild(split);
+      } else if (item.kind === "currency") {
+        const currency = createElement("div", "badan-currency-row");
+        const foreignLabel = createElement("label", "badan-foreign-currency-label", "Nama mata uang:");
+        foreignLabel.htmlFor = item.foreignField.id;
+        currency.append(
+          choiceGroup(item.choice, "badan-currency-choice"),
+          foreignLabel,
+          createInput(item.foreignField)
+        );
+        control.appendChild(currency);
+      } else if (item.kind === "period") {
+        const period = createElement("div", "badan-period-row");
+        period.append(
+          createBoxedInput(item.startField),
+          createElement("span", "", "s.d."),
+          createBoxedInput(item.endField)
+        );
+        control.appendChild(period);
+      } else {
+        row.querySelector("label").htmlFor = item.field.id;
+        control.appendChild(createBoxedInput(item.field));
+      }
+      row.appendChild(control);
+      return row;
+    };
+
+    const lineRow = (number, labelText, field, className = "") => {
+      const row = createElement("div", `badan-line-row ${className}`);
+      const label = createElement("label", "badan-line-label", labelText || "");
+      label.htmlFor = field.id;
+      row.append(
+        createElement("span", "opwbt-item-number badan-item-number", number || ""),
+        label,
+        createInput(field)
+      );
+      return row;
+    };
+
+    const personBlock = (config) => {
+      const section = createElement("section", "badan-person-block");
+      const title = createElement("div", "badan-person-title");
+      title.append(
+        createElement("span", "opwbt-item-number badan-item-number", config.number || ""),
+        createElement("span", "", config.title || "")
+      );
+      section.appendChild(title);
+
+      const simpleRow = (labelText, field, className = "") => {
+        const row = createElement("div", `badan-person-row ${className}`);
+        const label = createElement("label", "", labelText);
+        label.htmlFor = field.id;
+        row.append(label, createBoxedInput(field));
+        return row;
+      };
+      section.append(
+        simpleRow("Nama*", config.nameField),
+        simpleRow(config === block.identity?.relatedManager ? "Jabatan/Jenis Wajib Pajak terkait*" : "Jabatan*", config.positionField)
+      );
+
+      const citizenship = createElement("div", "badan-person-row badan-citizenship-row");
+      citizenship.append(
+        createElement("span", "", "Kebangsaan*"),
+        choiceGroup(config.citizenship, "badan-citizenship-choice")
+      );
+      section.appendChild(citizenship);
+
+      const foreign = createElement("div", "badan-person-foreign");
+      const foreignField = (labelText, field) => {
+        const row = createElement("div", "badan-person-foreign-row");
+        const label = createElement("label", "", labelText);
+        label.htmlFor = field.id;
+        row.append(label, createBoxedInput(field));
+        return row;
+      };
+      foreign.append(
+        foreignField("NIK", config.nikField),
+        foreignField("Negara Asal", config.countryField),
+        foreignField("No. Paspor", config.passportField),
+        foreignField("No. KITAS/KITAP", config.permitField)
+      );
+      section.appendChild(foreign);
+      section.appendChild(simpleRow("NIK/NPWP*", config.taxIdField, "badan-person-tax-id"));
+      return section;
+    };
+
+    const header = createElement("header", "opwbt-document-header");
+    header.append(
+      createElement("div", "opwbt-institution", block.header?.ministry || ""),
+      createElement("div", "opwbt-institution", block.header?.agency || ""),
+      createElement("div", "opwbt-document-title", block.header?.title || ""),
+      createElement("div", "opwbt-instruction", block.header?.instruction || "")
+    );
+    pages[0].appendChild(header);
+
+    const identity = block.identity || {};
+    const identitySection = createElement("section", "badan-section badan-identity-section");
+    identitySection.appendChild(sectionHeading(identity));
+    const entityRow = createElement("div", "badan-entity-row");
+    entityRow.append(
+      createElement("span", "opwbt-item-number badan-item-number", "1."),
+      createElement("span", "badan-field-label", identity.entityType?.label || "Bentuk Badan"),
+      choiceGroup(identity.entityType || {}, "badan-entity-options")
+    );
+    identitySection.appendChild(entityRow);
+    (identity.items || []).forEach((item) => identitySection.appendChild(fieldRow(item)));
+    identitySection.append(
+      personBlock(identity.leader || {}),
+      personBlock(identity.relatedManager || {})
+    );
+    pages[0].appendChild(identitySection);
+
+    const business = block.business || {};
+    const businessSection = createElement("section", "badan-section badan-business-section");
+    businessSection.appendChild(sectionHeading(business));
+    const activities = createElement("div", "badan-activities");
+    const activityLead = createElement("div", "badan-activity-lead");
+    activityLead.append(
+      createElement("span", "opwbt-item-number badan-item-number", "1."),
+      createElement("span", "", "Jenis Usaha/Kegiatan*:")
+    );
+    activities.appendChild(activityLead);
+    (business.activities || []).forEach((activity) => {
+      const row = createElement("div", "badan-activity-entry");
+      const klu = createElement("div", "badan-klu-block");
+      klu.append(createElement("span", "", activity.kluLabel || "KLU"));
+      const boxes = createElement("span", "opwbt-klu-boxes badan-klu-boxes");
+      for (let index = 0; index < 5; index += 1) boxes.appendChild(createElement("span", ""));
+      klu.append(boxes, createElement("small", "", "(diisi oleh petugas)"));
+      row.append(
+        createElement("span", "badan-activity-roman", activity.roman || ""),
+        createBoxedInput(activity.field),
+        klu
+      );
+      activities.appendChild(row);
+    });
+    businessSection.appendChild(activities);
+    (business.items || []).forEach((item) => businessSection.appendChild(fieldRow(item)));
+    pages[1].appendChild(businessSection);
+
+    const addressGroup = (group) => {
+      const section = createElement("section", "badan-address-group");
+      const title = createElement("div", "badan-address-title");
+      title.append(
+        createElement("span", "opwbt-item-number badan-item-number", group.number || ""),
+        createElement("span", "", group.title || "")
+      );
+      section.appendChild(title);
+      const fields = group.fields || {};
+      const row = (labelText, field, className = "") => {
+        const line = createElement("div", `badan-address-row ${className}`);
+        const label = createElement("label", "", labelText);
+        label.htmlFor = field.id;
+        line.append(label, createBoxedInput(field));
+        return line;
+      };
+      section.append(
+        row("Detail Alamat/Nama Jalan", fields.street, "badan-address-street"),
+        row("Blok", fields.block)
+      );
+      const numberRow = createElement("div", "badan-address-row badan-address-number");
+      const numberLabel = createElement("label", "", "Nomor");
+      numberLabel.htmlFor = fields.number.id;
+      numberRow.append(
+        numberLabel,
+        createBoxedInput(fields.number),
+        createElement("span", "badan-rt-label", "RT/RW"),
+        createBoxedInput(fields.rt),
+        createElement("span", "badan-address-separator", "/"),
+        createBoxedInput(fields.rw)
+      );
+      section.appendChild(numberRow);
+      section.append(
+        row("Kelurahan/Desa", fields.village),
+        row("Kecamatan", fields.district),
+        row("Kota/Kabupaten", fields.city),
+        row("Provinsi", fields.province),
+        row("Kode Wilayah", fields.regionCode, "badan-address-short"),
+        row("Kode Pos", fields.postalCode, "badan-address-short")
+      );
+      return section;
+    };
+
+    const addresses = block.addresses || {};
+    const addressSection = createElement("section", "badan-section badan-address-section");
+    addressSection.appendChild(sectionHeading(addresses));
+    (addresses.groups || []).forEach((group) => addressSection.appendChild(addressGroup(group)));
+    pages[1].appendChild(addressSection);
+
+    const place = block.businessPlace || {};
+    const placeSection = createElement("section", "badan-section badan-place-section");
+    placeSection.appendChild(sectionHeading(place));
+    const typeRow = createElement("div", "badan-place-type-row");
+    typeRow.append(
+      createElement("span", "opwbt-item-number badan-item-number", "1."),
+      createElement("span", "", place.types?.label || "Jenis Tempat Kegiatan Usaha")
+    );
+    const typeOptions = createElement("div", "badan-place-types");
+    (place.types?.options || []).forEach((option) => {
+      typeOptions.appendChild(checkboxLine(option.field, option.label));
+    });
+    typeRow.appendChild(typeOptions);
+    placeSection.appendChild(typeRow);
+    placeSection.append(
+      lineRow("2.", "Nama Tempat Kegiatan Usaha", place.nameField),
+      lineRow("3.", "Deskripsi Tempat Kegiatan Usaha", place.descriptionField, "badan-multiline-row"),
+      lineRow("4.", "KLU Tempat Kegiatan Usaha", place.kluField),
+      lineRow("5.", "Deskripsi KLU Tempat Kegiatan Usaha", place.kluDescriptionField, "badan-multiline-row")
+    );
+
+    const picRow = createElement("div", "badan-field-row badan-place-pic-row");
+    picRow.append(
+      createElement("span", "opwbt-item-number badan-item-number", "6."),
+      createElement("label", "badan-field-label", "NPWP/NIK PIC Tempat Kegiatan Usaha"),
+      createBoxedInput(place.picField)
+    );
+    placeSection.appendChild(picRow);
+
+    const detailRow = lineRow("7.", "Detail Alamat", place.address?.detailField, "badan-place-address-detail");
+    placeSection.appendChild(detailRow);
+    const addressNumber = createElement("div", "badan-place-address-number");
+    addressNumber.append(
+      createElement("span", ""),
+      createElement("span", ""),
+      createElement("span", "", "Nomor"),
+      createBoxedInput(place.address?.numberField),
+      createElement("span", "", "RT"),
+      createBoxedInput(place.address?.rtField),
+      createElement("span", "", "RW"),
+      createBoxedInput(place.address?.rwField)
+    );
+    placeSection.appendChild(addressNumber);
+    [
+      ["Provinsi", place.address?.provinceField],
+      ["Kelurahan", place.address?.villageField],
+      ["Kecamatan", place.address?.districtField],
+      ["Kota/Kabupaten", place.address?.cityField]
+    ].forEach(([labelText, field]) => placeSection.appendChild(lineRow("", labelText, field, "badan-place-address-line")));
+
+    const postalRow = createElement("div", "badan-field-row badan-place-postal-row");
+    postalRow.append(
+      createElement("span", ""),
+      createElement("label", "badan-field-label", "Kode Pos"),
+      createBoxedInput(place.address?.postalCodeField)
+    );
+    placeSection.appendChild(postalRow);
+
+    const rentedRow = createElement("div", "badan-boolean-row");
+    rentedRow.append(
+      createElement("span", "opwbt-item-number badan-item-number", "8."),
+      createElement("span", "", "Lokasi yang disewa"),
+      checkboxLine(place.rentedField || {}, "")
+    );
+    placeSection.appendChild(rentedRow);
+
+    const ownerRow = createElement("div", "badan-field-row badan-owner-row");
+    ownerRow.append(
+      createElement("span", "opwbt-item-number badan-item-number", "9."),
+      createElement("label", "badan-field-label", "NIK/NPWP Pemilik Tempat Sewa"),
+      createBoxedInput(place.ownerField)
+    );
+    placeSection.appendChild(ownerRow);
+
+    const dateRow = (number, labelText, field) => {
+      const row = createElement("div", "badan-field-row badan-date-row");
+      const label = createElement("label", "badan-field-label", labelText);
+      label.htmlFor = field.id;
+      row.append(
+        createElement("span", "opwbt-item-number badan-item-number", number),
+        label,
+        createDateControl(field)
+      );
+      return row;
+    };
+    placeSection.append(
+      dateRow("10.", "Tanggal Mulai Sewa", place.rentalStartField),
+      dateRow("11.", "Tanggal Sewa Berakhir", place.rentalEndField)
+    );
+
+    const zones = createElement("div", "badan-zone-options");
+    (place.zones || []).forEach((zone) => zones.appendChild(checkboxLine(zone.field, zone.label)));
+    placeSection.appendChild(zones);
+    placeSection.append(
+      lineRow("12.", "Nomor Surat Keputusan", place.decisionNumberField),
+      dateRow("13.", "Tanggal Mulai Keputusan", place.decisionStartField),
+      dateRow("14.", "Tanggal Berakhirnya Keputusan", place.decisionEndField)
+    );
+    pages[2].appendChild(placeSection);
+
+    const statement = block.statement || {};
+    const statementSection = createElement("section", "badan-section badan-statement-section");
+    statementSection.append(
+      sectionHeading(statement),
+      checkboxLine(statement.field || {}, statement.text || "", "badan-statement-line")
+    );
+    pages[2].appendChild(statementSection);
+
+    const approval = block.approval || {};
+    const approvalSection = createElement("section", "opwbt-approval badan-approval");
+    const official = createElement("div", "opwbt-official-panel");
+    official.append(
+      createElement("div", "opwbt-approval-heading", approval.official?.reviewedText || ""),
+      createElement("div", "opwbt-official-role", approval.official?.officerText || "")
+    );
+    (approval.official?.checks || []).forEach((text) => {
+      const row = createElement("div", "opwbt-official-check");
+      row.append(createElement("span", "opwbt-empty-box"), createElement("span", "", text));
+      official.appendChild(row);
+    });
+    official.appendChild(createElement("div", "opwbt-official-signature-line"));
+
+    const applicant = createElement("div", "opwbt-applicant-panel");
+    const applicantDate = createElement("div", "opwbt-applicant-date");
+    applicantDate.append(
+      createInput(approval.applicant?.placeField || {}),
+      createElement("span", "", ", tanggal"),
+      createDateControl(approval.applicant?.dateField || {})
+    );
+    applicant.append(
+      applicantDate,
+      createElement("div", "opwbt-applicant-role", approval.applicant?.roleText || ""),
+      createElement("div", "opwbt-applicant-signature-space")
+    );
+    const applicantName = createElement("div", "opwbt-applicant-name");
+    applicantName.appendChild(createInput(approval.applicant?.nameField || {}));
+    applicant.appendChild(applicantName);
+    approvalSection.append(official, applicant);
+    pages[2].appendChild(approvalSection);
+
+    frame.append(...pages);
+    root.appendChild(frame);
+  }
+
   function renderOpWbtForm(block) {
     const frame = createElement("div", "opwbt-frame");
     const pages = [1, 2, 3, 4].map((number) => (
@@ -1207,6 +1605,7 @@
       "pkp-form": renderPkpForm,
       "pkp-retail-form": renderPkpRetailForm,
       "business-statement-form": renderBusinessStatementForm,
+      "badan-form": renderBadanForm,
       "op-wbt-form": renderOpWbtForm,
       "letter-meta": renderLetterMeta,
       recipient: renderRecipient,
