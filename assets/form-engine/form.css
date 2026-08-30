@@ -1782,3 +1782,412 @@ body.preview-mode .paper{
   display:grid;
   grid-template-columns:10mm minmax(0,1fr);
 }
+
+/* Formulir Pendaftaran OP dan Warisan Belum Terbagi */
+.paper.op-wbt-classic{
+  min-height:0;
+  padding:0;
+  background:transparent;
+  box-shadow:none;
+  font-family:"Bookman Old Style",Bookman,Georgia,serif;
+  font-size:7.2pt;
+  line-height:1.12;
+}
+
+.paper.op-wbt-classic #formRoot{padding:0}
+
+.paper.op-wbt-classic .opwbt-frame{
+  display:grid;
+  gap:12mm;
+}
+
+.paper.op-wbt-classic .opwbt-page{
+  position:relative;
+  width:210mm;
+  min-height:297mm;
+  padding:11mm 13mm 10mm;
+  background:#fff;
+  box-shadow:0 28px 75px rgba(15,23,42,.18);
+}
+
+.paper.op-wbt-classic .opwbt-page::before{
+  content:"";
+  position:absolute;
+  z-index:0;
+  inset:10mm 12mm;
+  border:.2mm solid #000;
+  pointer-events:none;
+}
+
+.paper.op-wbt-classic .opwbt-page > *{position:relative;z-index:1}
+
+.paper.op-wbt-classic .opwbt-document-header{
+  margin:-1mm -1mm 2mm;
+  text-align:center;
+}
+
+.paper.op-wbt-classic .opwbt-institution{
+  font-size:7.6pt;
+  line-height:1.45;
+}
+
+.paper.op-wbt-classic .opwbt-document-title{
+  margin-top:1.2mm;
+  padding:1mm 2mm;
+  border-top:.2mm solid #000;
+  border-bottom:.2mm solid #000;
+  font-size:10pt;
+  line-height:1.15;
+}
+
+.paper.op-wbt-classic .opwbt-instruction{
+  padding:.8mm 2mm;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:5.3pt;
+  line-height:1.2;
+}
+
+.paper.op-wbt-classic .opwbt-registration{
+  display:grid;
+  grid-template-columns:60mm minmax(0,1fr);
+  gap:1mm 4mm;
+  padding:1mm 4mm 2mm;
+}
+
+.paper.op-wbt-classic .opwbt-registration-type,
+.paper.op-wbt-classic .opwbt-activation-type{
+  display:grid;
+  gap:1mm;
+}
+
+.paper.op-wbt-classic .opwbt-category-row{
+  grid-column:1 / -1;
+  display:grid;
+  grid-template-columns:16mm minmax(0,1fr);
+  align-items:start;
+  margin-top:1mm;
+}
+
+.paper.op-wbt-classic .opwbt-category-label{padding-top:1mm}
+
+.paper.op-wbt-classic .opwbt-category-options{
+  display:grid;
+  gap:.5mm;
+}
+
+.paper.op-wbt-classic .opwbt-choice-line,
+.paper.op-wbt-classic .opwbt-checkbox-line{
+  display:flex;
+  align-items:flex-start;
+  gap:1mm;
+}
+
+.paper.op-wbt-classic .opwbt-choice-line input,
+.paper.op-wbt-classic .opwbt-checkbox-line input{
+  width:4.5mm;
+  height:4.5mm;
+  flex:0 0 4.5mm;
+  margin:0;
+  border:.2mm solid #000;
+  border-radius:0;
+  background:#fff;
+  appearance:none;
+  -webkit-appearance:none;
+}
+
+.paper.op-wbt-classic .opwbt-choice-line input:checked::after,
+.paper.op-wbt-classic .opwbt-checkbox-line input:checked::after{
+  content:"×";
+  display:grid;
+  place-items:center;
+  color:#000;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:4mm;
+  font-weight:700;
+  line-height:1;
+}
+
+.paper.op-wbt-classic .opwbt-section{margin-top:1.4mm}
+
+.paper.op-wbt-classic .opwbt-section-heading{
+  display:grid;
+  grid-template-columns:9mm minmax(0,1fr);
+  align-items:baseline;
+  margin:1mm 0 1.2mm;
+  font-size:7.8pt;
+}
+
+.paper.op-wbt-classic .opwbt-section-heading strong{font-weight:400}
+
+.paper.op-wbt-classic .opwbt-field-row{
+  min-height:4.35mm;
+  display:grid;
+  grid-template-columns:8mm 51mm minmax(0,1fr);
+  align-items:start;
+}
+
+.paper.op-wbt-classic .opwbt-item-number{text-align:center}
+.paper.op-wbt-classic .opwbt-field-label{padding-top:1mm}
+.paper.op-wbt-classic .opwbt-field-control{min-width:0}
+
+.paper.op-wbt-classic .char-box-field{
+  position:relative;
+  max-width:100%;
+  min-height:calc(var(--box-rows) * 4.2mm);
+}
+
+.paper.op-wbt-classic .char-box-grid{
+  width:100%;
+  display:grid;
+  grid-template-columns:repeat(var(--box-columns),minmax(0,1fr));
+  border-top:.2mm solid #000;
+  border-left:.2mm solid #000;
+}
+
+.paper.op-wbt-classic .char-box{
+  min-width:0;
+  height:4.2mm;
+  display:grid;
+  place-items:center;
+  border-right:.2mm solid #000;
+  border-bottom:.2mm solid #000;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:6.6pt;
+  line-height:1;
+  text-transform:uppercase;
+}
+
+.paper.op-wbt-classic .boxed-entry{
+  position:absolute;
+  z-index:2;
+  inset:0;
+  width:100%;
+  height:100%;
+  margin:0;
+  padding:0;
+  border:0;
+  background:transparent;
+  color:transparent!important;
+  caret-color:#000;
+  -webkit-text-fill-color:transparent!important;
+  opacity:.02;
+}
+
+.paper.op-wbt-classic .char-box-field:focus-within{
+  outline:.4mm solid #0071e3;
+  outline-offset:.4mm;
+}
+
+.paper.op-wbt-classic .char-box-field:has(.missing),
+.paper.op-wbt-classic .missing-group{
+  background:#fff1f2;
+  outline:.4mm solid #d70015;
+  outline-offset:.4mm;
+}
+
+.paper.op-wbt-classic .opwbt-field-row .opwbt-choice-group{
+  min-height:4.2mm;
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:.8mm 7mm;
+}
+
+.paper.op-wbt-classic .opwbt-birth-control{
+  display:grid;
+  grid-template-columns:74mm 3mm minmax(0,1fr);
+  align-items:center;
+  gap:1mm;
+}
+
+.paper.op-wbt-classic .opwbt-birth-separator{text-align:center}
+
+.paper.op-wbt-classic .opwbt-birth-control .date-wrap,
+.paper.op-wbt-classic .opwbt-birth-control input[type="date"]{
+  width:100%;
+  min-width:0;
+}
+
+.paper.op-wbt-classic input[type="text"],
+.paper.op-wbt-classic input[type="date"],
+.paper.op-wbt-classic input[type="email"],
+.paper.op-wbt-classic input[type="tel"],
+.paper.op-wbt-classic select{
+  height:4.2mm;
+  min-height:4.2mm;
+  padding:0 .6mm;
+  font-family:"Bookman Old Style",Bookman,Georgia,serif!important;
+  font-size:7.2pt!important;
+  line-height:1.05!important;
+}
+
+.paper.op-wbt-classic .opwbt-representative-section{margin-top:1.2mm}
+
+.paper.op-wbt-classic .opwbt-income-sources{
+  display:grid;
+  gap:1mm;
+}
+
+.paper.op-wbt-classic .opwbt-income-source{
+  display:grid;
+  grid-template-columns:52mm minmax(0,1fr);
+  gap:1mm;
+  padding:1mm 4mm 1.3mm;
+}
+
+.paper.op-wbt-classic .opwbt-income-source-title{padding-top:1mm}
+.paper.op-wbt-classic .opwbt-income-source-body{display:grid;gap:.8mm}
+
+.paper.op-wbt-classic .opwbt-income-entry{display:grid;gap:.6mm}
+
+.paper.op-wbt-classic .opwbt-income-description{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 7mm 25mm;
+  grid-template-rows:auto auto;
+  gap:.5mm 1mm;
+  align-items:start;
+}
+
+.paper.op-wbt-classic .opwbt-income-description > .char-box-field{grid-row:1 / 3}
+.paper.op-wbt-classic .opwbt-klu-label{padding-top:.8mm;text-align:center}
+
+.paper.op-wbt-classic .opwbt-klu-boxes{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  border-top:.2mm solid #000;
+  border-left:.2mm solid #000;
+}
+
+.paper.op-wbt-classic .opwbt-klu-boxes span{
+  height:4.2mm;
+  border-right:.2mm solid #000;
+  border-bottom:.2mm solid #000;
+}
+
+.paper.op-wbt-classic .opwbt-klu-note{
+  grid-column:2 / 4;
+  font-size:5.5pt;
+  text-align:right;
+}
+
+.paper.op-wbt-classic .opwbt-income-secondary{
+  display:grid;
+  grid-template-columns:52mm minmax(0,1fr);
+  align-items:center;
+}
+
+.paper.op-wbt-classic .opwbt-income-option-row{
+  display:grid;
+  grid-template-columns:52mm minmax(0,1fr);
+  align-items:center;
+}
+
+.paper.op-wbt-classic .opwbt-income-option-row .opwbt-choice-group{
+  display:flex;
+  flex-wrap:wrap;
+  gap:1mm 10mm;
+}
+
+.paper.op-wbt-classic .opwbt-period-row{
+  display:grid;
+  grid-template-columns:52mm 10mm 8mm 10mm;
+  align-items:center;
+}
+
+.paper.op-wbt-classic .opwbt-income-choice-row{
+  display:grid;
+  grid-template-columns:54mm minmax(0,1fr);
+  align-items:start;
+  margin:2mm 4mm 0;
+}
+
+.paper.op-wbt-classic .opwbt-income-range-options{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:1.2mm 6mm;
+}
+
+.paper.op-wbt-classic .opwbt-address-group{
+  margin:1.4mm 4mm 0;
+}
+
+.paper.op-wbt-classic .opwbt-address-title{
+  display:grid;
+  grid-template-columns:8mm minmax(0,1fr);
+  margin-bottom:.8mm;
+}
+
+.paper.op-wbt-classic .opwbt-address-row{
+  min-height:4.3mm;
+  display:grid;
+  grid-template-columns:51mm minmax(0,1fr);
+  align-items:start;
+}
+
+.paper.op-wbt-classic .opwbt-address-row > label{padding-top:1mm}
+
+.paper.op-wbt-classic .opwbt-address-number{
+  grid-template-columns:51mm 30mm 14mm 14mm 3mm 14mm;
+  align-items:center;
+}
+
+.paper.op-wbt-classic .opwbt-rt-label{text-align:right}
+.paper.op-wbt-classic .opwbt-rt-separator{text-align:center}
+.paper.op-wbt-classic .opwbt-address-postal{grid-template-columns:51mm 22mm}
+
+.paper.op-wbt-classic .opwbt-statement-line{
+  margin:2mm 4mm 0;
+  font-size:7.2pt;
+  line-height:1.35;
+  text-align:justify;
+}
+
+.paper.op-wbt-classic .opwbt-approval{
+  display:grid;
+  grid-template-columns:58% 42%;
+  min-height:34mm;
+  margin:2mm -1mm 0;
+  border-top:.2mm solid #000;
+  border-bottom:.2mm solid #000;
+}
+
+.paper.op-wbt-classic .opwbt-official-panel,
+.paper.op-wbt-classic .opwbt-applicant-panel{
+  position:relative;
+  padding:2mm 5mm;
+}
+
+.paper.op-wbt-classic .opwbt-official-panel{border-right:.2mm solid #000}
+.paper.op-wbt-classic .opwbt-official-role{text-align:center}
+
+.paper.op-wbt-classic .opwbt-official-check{
+  display:flex;
+  align-items:center;
+  gap:1mm;
+  margin-top:3mm;
+}
+
+.paper.op-wbt-classic .opwbt-empty-box{
+  width:5mm;
+  height:5mm;
+  display:block;
+  border:.2mm solid #000;
+}
+
+.paper.op-wbt-classic .opwbt-official-signature-line{
+  position:absolute;
+  right:8mm;
+  bottom:5mm;
+  width:38mm;
+  border-bottom:.2mm dotted #000;
+}
+
+.paper.op-wbt-classic .opwbt-applicant-date{
+  display:grid;
+  grid-template-columns:27mm 12mm minmax(0,1fr);
+  align-items:center;
+}
+
+.paper.op-wbt-classic .opwbt-applicant-role{margin-top:1mm;text-align:center}
+.paper.op-wbt-classic .opwbt-applicant-signature-space{height:15mm}
+.paper.op-wbt-classic .opwbt-applicant-name{width:44mm;margin:0 auto}

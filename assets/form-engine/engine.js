@@ -12,7 +12,8 @@
     "letter-classic",
     "calon-kepala-daerah-classic",
     "pkp-classic",
-    "business-statement-classic"
+    "business-statement-classic",
+    "op-wbt-classic"
   ]);
   const PRINT_PAYLOAD_KEY = "kabayan.printPayload.v1";
   const DRAFT_PREFIX = "kabayan.formDraft.v1:";
@@ -921,11 +922,292 @@
     root.appendChild(frame);
   }
 
+  function renderOpWbtForm(block) {
+    const frame = createElement("div", "opwbt-frame");
+    const pages = [1, 2, 3, 4].map((number) => (
+      createElement("section", `opwbt-page opwbt-page-${number}`)
+    ));
+
+    const choiceGroup = (config, className = "") => {
+      const choices = createElement("div", `checks opwbt-choice-group ${className}`);
+      choices.setAttribute("role", "radiogroup");
+      choices.setAttribute("aria-label", config.validationLabel || config.label || "Pilihan");
+      choices.dataset.radioGroup = config.name;
+      choices.dataset.label = config.validationLabel || config.label || "Pilihan";
+      if (config.required) choices.dataset.radioRequired = "true";
+      (config.options || []).forEach((option, index) => {
+        const label = createElement("label", "check-line opwbt-choice-line");
+        const input = document.createElement("input");
+        input.type = "radio";
+        input.name = config.name;
+        input.value = String(option.value ?? "");
+        input.id = `${config.name}-${index + 1}`;
+        label.append(input, createElement("span", "", option.label ?? option.value ?? ""));
+        choices.appendChild(label);
+      });
+      return choices;
+    };
+
+    const checkboxLine = (field, text, className = "") => {
+      const label = createElement("label", `opwbt-checkbox-line ${className}`);
+      const input = document.createElement("input");
+      input.type = "checkbox";
+      applyFieldMetadata(input, { ...field, type: "checkbox" });
+      label.append(input, createElement("span", "", text || ""));
+      return label;
+    };
+
+    const conditionalize = (node, when, clearWhenHidden = false) => {
+      if (!when?.group) return node;
+      node.classList.add("conditional");
+      node.hidden = true;
+      node.dataset.whenGroup = when.group;
+      node.dataset.whenValue = when.value || "";
+      if (clearWhenHidden) node.dataset.clearWhenHidden = "true";
+      return node;
+    };
+
+    const identityRow = (item) => {
+      const row = createElement("div", `opwbt-field-row ${item.className || ""}`);
+      row.append(
+        createElement("span", "opwbt-item-number", item.number || ""),
+        createElement("label", "opwbt-field-label", item.label || "")
+      );
+
+      const control = createElement("div", "opwbt-field-control");
+      if (item.kind === "choice") {
+        control.appendChild(choiceGroup(item.choice, item.choice.className || ""));
+      } else if (item.kind === "birth") {
+        const birth = createElement("div", "opwbt-birth-control");
+        birth.append(
+          createBoxedInput(item.placeField),
+          createElement("span", "opwbt-birth-separator", "/"),
+          createDateControl(item.dateField)
+        );
+        control.appendChild(birth);
+      } else {
+        const label = row.querySelector("label");
+        label.htmlFor = item.field.id;
+        control.appendChild(createBoxedInput(item.field));
+      }
+      row.appendChild(control);
+      return conditionalize(row, item.when, true);
+    };
+
+    const sectionHeading = (config) => {
+      const heading = createElement("div", "opwbt-section-heading");
+      heading.append(
+        createElement("span", "opwbt-section-letter", config.letter || ""),
+        createElement("strong", "", config.title || "")
+      );
+      return heading;
+    };
+
+    const header = createElement("header", "opwbt-document-header");
+    header.append(
+      createElement("div", "opwbt-institution", block.header?.ministry || ""),
+      createElement("div", "opwbt-institution", block.header?.agency || ""),
+      createElement("div", "opwbt-document-title", block.header?.title || ""),
+      createElement("div", "opwbt-instruction", block.header?.instruction || "")
+    );
+    pages[0].appendChild(header);
+
+    const registration = createElement("section", "opwbt-registration");
+    registration.append(
+      choiceGroup(block.registration?.identityType || {}, "opwbt-registration-type"),
+      choiceGroup(block.registration?.activation || {}, "opwbt-activation-type")
+    );
+    const category = createElement("div", "opwbt-category-row");
+    category.append(
+      createElement("span", "opwbt-category-label", block.registration?.category?.label || "Kategori"),
+      choiceGroup(block.registration?.category || {}, "opwbt-category-options")
+    );
+    registration.appendChild(category);
+    pages[0].appendChild(registration);
+
+    const identity = createElement("section", "opwbt-section opwbt-identity-section");
+    identity.appendChild(sectionHeading(block.identity || {}));
+    (block.identity?.items || []).forEach((item) => identity.appendChild(identityRow(item)));
+    pages[0].appendChild(identity);
+
+    const representativeSection = (config, className = "") => {
+      const section = createElement("section", `opwbt-section opwbt-representative-section ${className}`);
+      section.appendChild(sectionHeading(config || {}));
+      (config?.items || []).forEach((item) => section.appendChild(identityRow(item)));
+      return conditionalize(section, config?.when, true);
+    };
+    pages[0].append(
+      representativeSection(block.wbtRepresentative, "opwbt-wbt-representative"),
+      representativeSection(block.otherRepresentative, "opwbt-other-representative")
+    );
+
+    const income = block.income || {};
+    pages[1].appendChild(sectionHeading(income));
+    const incomeSources = createElement("div", "opwbt-income-sources");
+    incomeSources.dataset.checkboxGroup = income.validationLabel || "Sumber penghasilan";
+    incomeSources.dataset.label = income.validationLabel || "Sumber penghasilan";
+    if (income.required) incomeSources.dataset.checkboxRequired = "true";
+
+    (income.sources || []).forEach((source) => {
+      const sourceSection = createElement("section", "opwbt-income-source");
+      sourceSection.appendChild(checkboxLine(source.field, source.label, "opwbt-income-source-title"));
+      const sourceBody = createElement("div", "opwbt-income-source-body");
+      (source.entries || []).forEach((entry) => {
+        const entryBlock = createElement("div", "opwbt-income-entry");
+        const description = createElement("div", "opwbt-income-description");
+        description.append(
+          createBoxedInput(entry.descriptionField),
+          createElement("span", "opwbt-klu-label", entry.kluLabel || "KLU"),
+          (() => {
+            const boxes = createElement("span", "opwbt-klu-boxes");
+            for (let index = 0; index < 5; index += 1) boxes.appendChild(createElement("span", ""));
+            return boxes;
+          })(),
+          createElement("small", "opwbt-klu-note", entry.kluNote || "")
+        );
+        entryBlock.appendChild(description);
+        if (entry.secondaryField) {
+          const secondary = createElement("div", "opwbt-income-secondary");
+          const label = createElement("label", "", entry.secondaryLabel || "");
+          label.htmlFor = entry.secondaryField.id;
+          secondary.append(label, createBoxedInput(entry.secondaryField));
+          entryBlock.appendChild(secondary);
+        }
+        sourceBody.appendChild(entryBlock);
+      });
+
+      if (source.employeeChoice) {
+        const row = createElement("div", "opwbt-income-option-row");
+        row.append(
+          createElement("span", "", source.employeeChoice.label || ""),
+          choiceGroup(source.employeeChoice, "opwbt-yes-no")
+        );
+        sourceBody.appendChild(row);
+      }
+      if (source.methodChoice) {
+        const row = createElement("div", "opwbt-income-option-row");
+        row.append(
+          createElement("span", "", source.methodChoice.label || ""),
+          choiceGroup(source.methodChoice, "opwbt-bookkeeping")
+        );
+        sourceBody.appendChild(row);
+      }
+      if (source.period) {
+        const row = createElement("div", "opwbt-period-row");
+        row.append(
+          createElement("span", "", source.period.label || ""),
+          createBoxedInput(source.period.startField),
+          createElement("span", "", source.period.separator || "s.d."),
+          createBoxedInput(source.period.endField)
+        );
+        sourceBody.appendChild(row);
+      }
+      sourceSection.appendChild(sourceBody);
+      incomeSources.appendChild(sourceSection);
+    });
+    pages[1].appendChild(incomeSources);
+
+    const incomeChoiceRow = (config, className) => {
+      const row = createElement("div", `opwbt-income-choice-row ${className}`);
+      row.append(
+        createElement("span", "", config.label || ""),
+        choiceGroup(config, "opwbt-income-range-options")
+      );
+      return row;
+    };
+    pages[1].append(
+      incomeChoiceRow(income.monthlyIncome || {}, "opwbt-monthly-income"),
+      incomeChoiceRow(income.annualTurnover || {}, "opwbt-annual-turnover")
+    );
+
+    const addresses = block.addresses || {};
+    pages[2].appendChild(sectionHeading(addresses));
+    (addresses.groups || []).forEach((group) => {
+      const section = createElement("section", "opwbt-address-group");
+      const title = createElement("div", "opwbt-address-title");
+      title.append(
+        createElement("span", "opwbt-item-number", group.number || ""),
+        createElement("span", "", group.title || "")
+      );
+      section.appendChild(title);
+
+      const addressRow = (labelText, field, className = "") => {
+        const row = createElement("div", `opwbt-address-row ${className}`);
+        const label = createElement("label", "", labelText || "");
+        label.htmlFor = field.id;
+        row.append(label, createBoxedInput(field));
+        return row;
+      };
+      section.appendChild(addressRow("Jalan", group.streetField, "opwbt-address-street"));
+      section.appendChild(addressRow("Blok", group.blockField));
+      const numberRow = createElement("div", "opwbt-address-row opwbt-address-number");
+      const numberLabel = createElement("label", "", "Nomor");
+      numberLabel.htmlFor = group.numberField.id;
+      numberRow.append(
+        numberLabel,
+        createBoxedInput(group.numberField),
+        createElement("span", "opwbt-rt-label", "RT/RW"),
+        createBoxedInput(group.rtField),
+        createElement("span", "opwbt-rt-separator", "/"),
+        createBoxedInput(group.rwField)
+      );
+      section.appendChild(numberRow);
+      section.append(
+        addressRow("Kelurahan/Desa", group.villageField),
+        addressRow("Kecamatan", group.districtField),
+        addressRow("Kota/Kabupaten", group.cityField),
+        addressRow("Provinsi", group.provinceField),
+        addressRow("Kode Pos", group.postalCodeField, "opwbt-address-postal")
+      );
+      pages[2].appendChild(section);
+    });
+
+    const statement = block.statement || {};
+    pages[3].appendChild(sectionHeading(statement));
+    pages[3].appendChild(checkboxLine(statement.field || {}, statement.text || "", "opwbt-statement-line"));
+
+    const approval = block.approval || {};
+    const approvalSection = createElement("section", "opwbt-approval");
+    const official = createElement("div", "opwbt-official-panel");
+    official.append(
+      createElement("div", "opwbt-approval-heading", approval.official?.reviewedText || ""),
+      createElement("div", "opwbt-official-role", approval.official?.officerText || "")
+    );
+    (approval.official?.checks || []).forEach((text) => {
+      const row = createElement("div", "opwbt-official-check");
+      row.append(createElement("span", "opwbt-empty-box"), createElement("span", "", text));
+      official.appendChild(row);
+    });
+    official.appendChild(createElement("div", "opwbt-official-signature-line"));
+
+    const applicant = createElement("div", "opwbt-applicant-panel");
+    const dateLine = createElement("div", "opwbt-applicant-date");
+    dateLine.append(
+      createInput(approval.applicant?.placeField || {}),
+      createElement("span", "", ", tanggal"),
+      createDateControl(approval.applicant?.dateField || {})
+    );
+    applicant.append(
+      dateLine,
+      createElement("div", "opwbt-applicant-role", approval.applicant?.roleText || ""),
+      createElement("div", "opwbt-applicant-signature-space")
+    );
+    const nameLine = createElement("div", "opwbt-applicant-name");
+    nameLine.appendChild(createInput(approval.applicant?.nameField || {}));
+    applicant.appendChild(nameLine);
+    approvalSection.append(official, applicant);
+    pages[3].appendChild(approvalSection);
+
+    frame.append(...pages);
+    root.appendChild(frame);
+  }
+
   function renderBlock(block) {
     const renderers = {
       "pkp-form": renderPkpForm,
       "pkp-retail-form": renderPkpRetailForm,
       "business-statement-form": renderBusinessStatementForm,
+      "op-wbt-form": renderOpWbtForm,
       "letter-meta": renderLetterMeta,
       recipient: renderRecipient,
       "inline-fields": renderInlineFields,
@@ -1157,7 +1439,7 @@
     if (sourceControl.matches('input[type="radio"], input[type="checkbox"]')) {
       const mark = document.createElement("span");
       mark.className = "static-choice-box";
-      const checkedMark = sourceControl.closest(".pkp-retail-frame") ? "×" : "✓";
+      const checkedMark = sourceControl.closest(".pkp-retail-frame, .opwbt-frame") ? "×" : "✓";
       mark.textContent = sourceControl.checked ? checkedMark : "";
       mark.setAttribute("aria-hidden", "true");
       clonedControl.replaceWith(mark);
@@ -1407,6 +1689,14 @@
       messages.push(`${group.dataset.label || "Pilihan wajib"} belum dipilih.`);
     });
 
+    form.querySelectorAll('[data-checkbox-required="true"]').forEach((group) => {
+      if (group.querySelector('input[type="checkbox"]:checked')) return;
+      group.classList.add("missing-group");
+      const first = group.querySelector('input[type="checkbox"]');
+      firstInvalid ||= first;
+      messages.push(`${group.dataset.label || "Pilihan wajib"} belum dipilih.`);
+    });
+
     form.querySelectorAll('[data-npwp="true"]').forEach((control) => {
       if (!isVisible(control)) return;
       const required = control.dataset.required === "true";
@@ -1437,6 +1727,12 @@
         updateConditionals();
         clearValidationSummary();
         radio.closest(".checks")?.classList.remove("missing-group");
+      });
+    });
+    form.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
+      checkbox.addEventListener("change", () => {
+        checkbox.closest('[data-checkbox-required="true"]')?.classList.remove("missing-group");
+        clearValidationSummary();
       });
     });
 
