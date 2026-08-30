@@ -8,6 +8,9 @@
   const SAFE_ID = /^[a-z0-9-]+$/;
   const SAFE_CLASS = /^[A-Za-z0-9_-]+$/;
   const SUPPORTED_RENDERERS = new Set(["kuasa-classic", "letter-classic"]);
+  const PRINT_PAYLOAD_KEY = "kabayan.printPayload.v1";
+  const DRAFT_PREFIX = "kabayan.formDraft.v1:";
+  const PRINT_PAYLOAD_MAX_AGE = 4 * 60 * 60 * 1000;
 
   const form = document.getElementById("dynamicForm");
   const root = document.getElementById("formRoot");
@@ -19,12 +22,8 @@
   const guide = document.getElementById("formGuide");
   const printButton = document.getElementById("printBtn");
   const resetButton = document.getElementById("resetBtn");
-  const previewBar = document.getElementById("printPreviewBar");
-  const previewBackButton = document.getElementById("previewBackBtn");
-  const previewPrintButton = document.getElementById("previewPrintBtn");
 
   let activeSchema = null;
-  let previewScrollPosition = 0;
   const repeatables = new Map();
 
   printButton.disabled = true;
@@ -479,22 +478,190 @@
     form.querySelectorAll("textarea").forEach(resizeTextarea);
   }
 
-  function enterPreviewMode() {
-    updateAllDates();
-    previewScrollPosition = window.scrollY;
-    previewBar.hidden = false;
-    document.documentElement.classList.add("preview-mode");
-    document.body.classList.add("preview-mode");
-    window.scrollTo(0, 0);
-    previewBackButton?.focus();
+  function formatDateValue(value) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(value || "")) return "";
+    const [year, month, day] = value.split("-").map(Number);
+    if (!MONTH_NAMES[month - 1]) return "";
+    return `${day} ${MONTH_NAMES[month - 1]} ${year}`;
   }
 
-  function exitPreviewMode() {
-    document.documentElement.classList.remove("preview-mode");
-    document.body.classList.remove("preview-mode");
-    previewBar.hidden = true;
-    window.scrollTo(0, previewScrollPosition);
-    printButton.focus();
+  function captureDraft(schema) {
+    const values = {};
+    const radios = {};
+    const repeatableValues = {};
+
+    form.querySelectorAll("input[id], textarea[id], select[id]").forEach((control) => {
+      if (control.matches('input[type="radio"]')) return;
+      values[control.id] = control.value;
+    });
+
+    form.querySelectorAll('input[type="radio"][name]').forEach((control) => {
+      if (control.checked) radios[control.name] = control.value;
+    });
+
+    repeatables.forEach((state, id) => {
+      repeatableValues[id] = [...state.list.querySelectorAll("textarea")]
+        .map((control) => control.value);
+    });
+
+    return {
+      version: 1,
+      schemaId: schema.id,
+      savedAt: Date.now(),
+      values,
+      radios,
+      repeatables: repeatableValues
+    };
+  }
+
+  function storeDraft(schema) {
+    const draft = captureDraft(schema);
+    sessionStorage.setItem(`${DRAFT_PREFIX}${schema.id}`, JSON.stringify(draft));
+    return draft;
+  }
+
+  function restoreDraft(schema) {
+    let draft;
+    try {
+      draft = JSON.parse(sessionStorage.getItem(`${DRAFT_PREFIX}${schema.id}`) || "null");
+    } catch {
+      return;
+    }
+    if (!draft || draft.version !== 1 || draft.schemaId !== schema.id) return;
+
+    Object.entries(draft.repeatables || {}).forEach(([id, values]) => {
+      const state = repeatables.get(id);
+      if (!state || !Array.isArray(values)) return;
+      const wanted = Math.min(state.max, Math.max(state.min, values.length));
+      while (state.list.children.length < wanted) addRepeatableRow(state);
+      while (state.list.children.length > wanted) state.list.lastElementChild.remove();
+      [...state.list.querySelectorAll("textarea")].forEach((control, index) => {
+        control.value = values[index] || "";
+      });
+      labelRepeatable(state);
+    });
+
+    Object.entries(draft.values || {}).forEach(([id, value]) => {
+      const control = document.getElementById(id);
+      if (control?.matches?.("input, textarea, select")) control.value = String(value ?? "");
+    });
+
+    Object.entries(draft.radios || {}).forEach(([name, value]) => {
+      form.querySelectorAll(`input[type="radio"][name="${CSS.escape(name)}"]`).forEach((control) => {
+        control.checked = control.value === value;
+      });
+    });
+
+    updateConditionals();
+    updateAllDates();
+    resizeAllTextareas();
+    resizeTitleChoice();
+  }
+
+  function staticControlValue(control) {
+    if (control.matches("select")) {
+      if (!control.value) return "";
+      return control.options[control.selectedIndex]?.textContent || "";
+    }
+    if (control.matches('input[type="date"]')) return formatDateValue(control.value);
+    return control.value || "";
+  }
+
+  function replaceWithStaticControl(clonedControl, sourceControl) {
+    if (sourceControl.matches('input[type="date"]')) {
+      const dateOutput = clonedControl.closest(".date-wrap")?.querySelector(".date-print");
+      if (dateOutput) {
+        dateOutput.textContent = formatDateValue(sourceControl.value) || "\u00a0";
+        clonedControl.remove();
+        return;
+      }
+    }
+
+    if (sourceControl.matches('input[type="radio"], input[type="checkbox"]')) {
+      const mark = document.createElement("span");
+      mark.className = "static-choice-box";
+      mark.textContent = sourceControl.checked ? "✓" : "";
+      mark.setAttribute("aria-hidden", "true");
+      clonedControl.replaceWith(mark);
+      return;
+    }
+
+    const output = document.createElement("span");
+    const kind = sourceControl.matches("textarea")
+      ? "static-textarea"
+      : (sourceControl.matches("select") ? "static-select" : "static-input");
+    output.className = clonedControl.classList.contains("title-select")
+      ? "select-measure static-title-choice"
+      : `${clonedControl.className || ""} static-control ${kind}`.trim();
+    output.style.cssText = clonedControl.style.cssText;
+    output.textContent = staticControlValue(sourceControl) || "\u00a0";
+    output.setAttribute("data-static-control", kind);
+    if (sourceControl.getAttribute("aria-label")) {
+      output.setAttribute("aria-label", sourceControl.getAttribute("aria-label"));
+    }
+    clonedControl.replaceWith(output);
+  }
+
+  function buildPrintSnapshot() {
+    updateAllDates();
+
+    const snapshot = document.createElement("article");
+    snapshot.className = `${form.className} print-static-paper`;
+    snapshot.dataset.formId = activeSchema.id;
+
+    const clonedRoot = root.cloneNode(true);
+    const sourceControls = [...root.querySelectorAll("input, textarea, select")];
+    const clonedControls = [...clonedRoot.querySelectorAll("input, textarea, select")];
+    if (sourceControls.length !== clonedControls.length) {
+      throw new Error("Salinan formulir tidak lengkap.");
+    }
+
+    clonedControls.forEach((control, index) => {
+      replaceWithStaticControl(control, sourceControls[index]);
+    });
+
+    clonedRoot.querySelectorAll(".no-print, .field-error, .error-box, .select-measure:not(.static-title-choice), [hidden]")
+      .forEach((node) => node.remove());
+    clonedRoot.querySelectorAll(".missing, .missing-group")
+      .forEach((node) => node.classList.remove("missing", "missing-group"));
+    clonedRoot.querySelectorAll("[contenteditable]")
+      .forEach((node) => node.removeAttribute("contenteditable"));
+
+    if (clonedRoot.querySelector("input, textarea, select, button, script, iframe, object, embed")) {
+      throw new Error("Dokumen cetak masih memuat elemen interaktif.");
+    }
+
+    snapshot.appendChild(clonedRoot);
+    return snapshot.outerHTML;
+  }
+
+  function showPrintPreparationError(error) {
+    errorBox.replaceChildren(createElement("strong", "", "Pratinjau cetak belum dapat dibuat."));
+    errorBox.appendChild(createElement(
+      "p",
+      "",
+      error?.message || "Penyimpanan sementara browser tidak tersedia."
+    ));
+    errorBox.classList.add("show");
+    errorBox.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
+  function openStaticPrintPage() {
+    try {
+      storeDraft(activeSchema);
+      const payload = {
+        version: 1,
+        schemaId: activeSchema.id,
+        title: activeSchema.title,
+        createdAt: Date.now(),
+        expiresAt: Date.now() + PRINT_PAYLOAD_MAX_AGE,
+        markup: buildPrintSnapshot()
+      };
+      sessionStorage.setItem(PRINT_PAYLOAD_KEY, JSON.stringify(payload));
+      window.location.assign("cetak.html");
+    } catch (error) {
+      showPrintPreparationError(error);
+    }
   }
 
   function resizeTitleChoice() {
@@ -696,6 +863,13 @@
   function resetForm() {
     if (!window.confirm("Kosongkan seluruh isi formulir?")) return;
     form.reset();
+    if (activeSchema) {
+      try {
+        sessionStorage.removeItem(`${DRAFT_PREFIX}${activeSchema.id}`);
+      } catch {
+        // Formulir tetap dapat dikosongkan saat penyimpanan sesi dibatasi browser.
+      }
+    }
     repeatables.forEach((state) => {
       while (state.list.children.length > state.min) state.list.lastElementChild.remove();
       state.list.querySelectorAll("textarea").forEach((textarea) => { textarea.value = ""; });
@@ -728,6 +902,7 @@
     assertUniqueControlIds();
     renderGuide(schema.guide);
     bindInteractions(schema);
+    restoreDraft(schema);
 
     document.title = `${schema.title} | Kabayan`;
     heroTitle.textContent = schema.title;
@@ -782,21 +957,9 @@
       result.firstInvalid?.focus();
       return;
     }
-    enterPreviewMode();
-  });
-  previewBackButton?.addEventListener("click", exitPreviewMode);
-  previewPrintButton?.addEventListener("click", () => {
-    if (!document.body.classList.contains("preview-mode")) return;
-    updateAllDates();
-    window.print();
-  });
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && document.body.classList.contains("preview-mode")) {
-      exitPreviewMode();
-    }
+    openStaticPrintPage();
   });
   resetButton.addEventListener("click", resetForm);
-  window.addEventListener("beforeprint", updateAllDates);
   window.addEventListener("load", resizeTitleChoice);
 
   loadForm();

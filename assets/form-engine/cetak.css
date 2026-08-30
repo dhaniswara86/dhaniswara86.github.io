@@ -1,0 +1,295 @@
+:root{
+  color-scheme:light;
+}
+
+body.static-print-page{
+  min-width:320px;
+  margin:0;
+  background:#e9eef5;
+  color:#1d1d1f;
+}
+
+.static-print-toolbar{
+  width:100%;
+  min-height:72px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  padding:14px 24px;
+  border-bottom:1px solid #d2d2d7;
+  background:#fff;
+}
+
+.static-print-toolbar strong{
+  display:block;
+  font-size:15px;
+}
+
+.static-print-toolbar span{
+  display:block;
+  margin-top:3px;
+  color:#6e6e73;
+  font-size:12px;
+}
+
+.static-print-actions{
+  display:flex;
+  flex:0 0 auto;
+  gap:10px;
+}
+
+.static-button{
+  min-height:40px;
+  padding:9px 16px;
+  border:1px solid #d2d2d7;
+  border-radius:999px;
+  background:#fff;
+  color:#1d1d1f;
+  font:inherit;
+  font-size:13px;
+  font-weight:650;
+  cursor:pointer;
+}
+
+.static-button.primary{
+  border-color:#0071e3;
+  background:#0071e3;
+  color:#fff;
+}
+
+.static-button:disabled{
+  cursor:not-allowed;
+  opacity:.5;
+}
+
+.static-print-main{
+  width:100%;
+  padding:28px 20px 60px;
+}
+
+.static-paper-wrap{
+  width:100%;
+  overflow-x:auto;
+}
+
+.static-paper-wrap > .paper{
+  margin:0 auto;
+}
+
+.static-print-message{
+  width:min(680px,calc(100% - 40px));
+  margin:32px auto;
+  padding:18px 20px;
+  border:1px solid #ffb4b8;
+  border-radius:14px;
+  background:#fff1f2;
+  color:#8a0010;
+  line-height:1.5;
+}
+
+.static-control{
+  box-sizing:border-box;
+  width:100%;
+  min-width:0;
+  min-height:6mm;
+  display:block;
+  padding:.45mm 1mm;
+  border-bottom:.25mm dotted #555;
+  background:#fff;
+  color:#000;
+  font:inherit;
+  font-weight:400;
+  line-height:inherit;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+}
+
+.static-textarea{
+  min-height:13mm;
+  line-height:1.25;
+}
+
+.static-title-choice{
+  position:static!important;
+  width:auto!important;
+  height:auto!important;
+  display:inline!important;
+  visibility:visible!important;
+  color:#000;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:13pt;
+  font-weight:700;
+  line-height:1.2;
+  white-space:nowrap;
+}
+
+.date-print{
+  display:inline!important;
+}
+
+.static-choice-box{
+  box-sizing:border-box;
+  width:6.3mm;
+  height:6.3mm;
+  display:inline-grid;
+  flex:0 0 6.3mm;
+  place-content:center;
+  margin:0;
+  border:.3mm solid #555;
+  border-radius:1mm;
+  background:#fff;
+  color:#000;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:5mm;
+  font-weight:700;
+  line-height:1;
+  vertical-align:middle;
+}
+
+.paper.kuasa-classic .static-control{
+  min-height:5.7mm;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:10pt;
+  line-height:1.22;
+}
+
+.paper.kuasa-classic .static-textarea{
+  min-height:11mm;
+}
+
+.paper.kuasa-classic .inline-field{
+  display:inline-block;
+  width:40mm!important;
+  min-height:5.7mm!important;
+  vertical-align:baseline;
+}
+
+.paper.kuasa-classic .period-type-select{
+  width:43mm!important;
+  margin-right:1.5mm;
+}
+
+.paper.kuasa-classic .wide{
+  width:58mm!important;
+}
+
+.paper.kuasa-classic .detail-row .static-textarea{
+  min-height:8mm;
+}
+
+.paper.kuasa-classic .sig-box .static-control{
+  width:72mm;
+  max-width:100%;
+  grid-row:3;
+  grid-column:1;
+  margin-right:auto;
+  margin-left:auto;
+  text-align:center;
+}
+
+.paper.letter-classic .row:has(.static-textarea){
+  align-items:start;
+}
+
+.paper.letter-classic .row:has(.static-textarea) label,
+.paper.letter-classic .row:has(.static-textarea) .colon{
+  padding-top:1.2mm;
+}
+
+.paper.letter-classic .name-line .static-control{
+  width:58mm;
+  margin-right:auto;
+  margin-left:auto;
+  text-align:center;
+}
+
+@media(max-width:760px){
+  .static-print-toolbar{
+    align-items:stretch;
+    flex-direction:column;
+    padding:14px;
+  }
+
+  .static-print-actions{
+    width:100%;
+  }
+
+  .static-button{
+    flex:1;
+  }
+
+  .static-print-main{
+    padding:14px 0 40px;
+  }
+}
+
+@page{
+  size:A4 portrait;
+  margin:0;
+}
+
+@media print{
+  html,
+  body.static-print-page,
+  .static-print-main,
+  .static-paper-wrap{
+    width:auto!important;
+    min-width:0!important;
+    height:auto!important;
+    min-height:0!important;
+    margin:0!important;
+    padding:0!important;
+    overflow:visible!important;
+    background:#fff!important;
+  }
+
+  .static-print-toolbar,
+  .static-print-message{
+    display:none!important;
+  }
+
+  .static-paper-wrap > .paper{
+    margin:0!important;
+  }
+
+  .static-control{
+    border:0!important;
+    background:transparent!important;
+    box-shadow:none!important;
+    color:#000!important;
+    -webkit-text-fill-color:#000!important;
+  }
+
+  .static-choice-box{
+    border-color:#000!important;
+    -webkit-print-color-adjust:exact!important;
+    print-color-adjust:exact!important;
+  }
+
+  .paper.kuasa-classic .static-title-choice{
+    display:inline!important;
+    font-size:13pt!important;
+    font-weight:700!important;
+    line-height:1.2!important;
+  }
+
+  .paper.kuasa-classic .static-control,
+  .paper.letter-classic .static-control{
+    font-family:Arial,Helvetica,sans-serif!important;
+    font-weight:400!important;
+  }
+
+  .paper.kuasa-classic .sig-box .static-control{
+    width:72mm!important;
+    max-width:100%!important;
+    grid-row:3!important;
+    grid-column:1!important;
+    text-align:center!important;
+  }
+
+  .paper.letter-classic .name-line .static-control{
+    width:58mm!important;
+    text-align:center!important;
+  }
+}
