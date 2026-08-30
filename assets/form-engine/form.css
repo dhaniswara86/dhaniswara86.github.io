@@ -1065,6 +1065,347 @@ body.preview-mode .paper{
   grid-template-columns:9mm 1fr;
 }
 
+/* Formulir Pengukuhan Pengusaha Kena Pajak */
+.paper.pkp-classic{
+  padding:8mm 9mm 1mm;
+  font-family:"Bookman Old Style",Bookman,Georgia,serif;
+  font-size:8pt;
+  line-height:1.18;
+  letter-spacing:0;
+}
+
+.paper.pkp-classic .pkp-form-frame{
+  min-height:280mm;
+  display:flex;
+  flex-direction:column;
+  border:.25mm solid #000;
+  color:#000;
+}
+
+.paper.pkp-classic .pkp-document-header{text-align:center}
+
+.paper.pkp-classic .pkp-institution{
+  padding:2mm 3mm 1.5mm;
+  border-bottom:.25mm solid #000;
+  font-size:9pt;
+  line-height:1.45;
+}
+
+.paper.pkp-classic .pkp-document-title{
+  padding:1.2mm 3mm;
+  border-bottom:.25mm solid #000;
+  font-size:12pt;
+  line-height:1.15;
+}
+
+.paper.pkp-classic .pkp-instruction{
+  padding:1mm 5mm 1.5mm;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:6.5pt;
+  line-height:1.2;
+}
+
+.paper.pkp-classic .pkp-instruction-note{display:block}
+
+.paper.pkp-classic .pkp-section{
+  padding:2.2mm 5mm;
+  border-bottom:.25mm solid #000;
+}
+
+.paper.pkp-classic .pkp-section-heading{
+  display:grid;
+  grid-template-columns:8mm 1fr;
+  align-items:baseline;
+  margin-bottom:1.5mm;
+  font-size:9pt;
+}
+
+.paper.pkp-classic .pkp-section-heading strong{font-weight:400}
+
+.paper.pkp-classic .pkp-numbered-row{
+  display:grid;
+  grid-template-columns:8mm 42mm minmax(0,1fr);
+  align-items:start;
+  margin:.9mm 0;
+}
+
+.paper.pkp-classic .pkp-item-number{text-align:center}
+.paper.pkp-classic .pkp-field-label{padding-top:1.2mm}
+
+.paper.pkp-classic .char-box-field{
+  position:relative;
+  max-width:100%;
+  min-height:calc(var(--box-rows) * 5.2mm);
+}
+
+.paper.pkp-classic .char-box-grid{
+  width:100%;
+  display:grid;
+  grid-template-columns:repeat(var(--box-columns),minmax(0,1fr));
+  border-top:.25mm solid #000;
+  border-left:.25mm solid #000;
+}
+
+.paper.pkp-classic .char-box{
+  min-width:0;
+  height:5.2mm;
+  display:grid;
+  place-items:center;
+  border-right:.25mm solid #000;
+  border-bottom:.25mm solid #000;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:8pt;
+  line-height:1;
+  text-transform:uppercase;
+}
+
+.paper.pkp-classic .boxed-entry{
+  position:absolute;
+  z-index:2;
+  inset:0;
+  width:100%;
+  height:100%;
+  margin:0;
+  padding:0;
+  border:0;
+  background:transparent;
+  color:transparent!important;
+  caret-color:#000;
+  -webkit-text-fill-color:transparent!important;
+  opacity:.02;
+}
+
+.paper.pkp-classic .char-box-field:focus-within{
+  outline:.45mm solid #0071e3;
+  outline-offset:.5mm;
+}
+
+.paper.pkp-classic .char-box-field:has(.missing){
+  background:#fff1f2;
+  outline:.45mm solid #d70015;
+  outline-offset:.5mm;
+}
+
+.paper.pkp-classic .pkp-identity-section{padding-bottom:2.5mm}
+.paper.pkp-classic .pkp-business-section{flex:1;padding-top:1.8mm;padding-bottom:1.8mm}
+
+.paper.pkp-classic .pkp-numbered-title{
+  display:grid;
+  grid-template-columns:8mm max-content 1fr;
+  align-items:baseline;
+  margin-bottom:1mm;
+}
+
+.paper.pkp-classic .pkp-numbered-title em{font-size:7.5pt}
+
+.paper.pkp-classic .pkp-status-content{
+  display:grid;
+  grid-template-columns:54mm minmax(0,1fr);
+  align-items:start;
+  margin-left:8mm;
+}
+
+.paper.pkp-classic .pkp-status-options{
+  display:grid;
+  gap:1mm;
+}
+
+.paper.pkp-classic .pkp-status-options .check-line,
+.paper.pkp-classic .pkp-check-line{
+  display:flex;
+  align-items:flex-start;
+  gap:1mm;
+}
+
+.paper.pkp-classic input[type="radio"],
+.paper.pkp-classic input[type="checkbox"]{
+  box-sizing:border-box;
+  width:6mm;
+  height:6mm;
+  display:grid;
+  flex:0 0 6mm;
+  place-content:center;
+  margin:0;
+  border:.25mm solid #000;
+  border-radius:0;
+  background:#fff;
+  -webkit-appearance:none;
+  appearance:none;
+}
+
+.paper.pkp-classic input[type="radio"]::before,
+.paper.pkp-classic input[type="checkbox"]::before{
+  content:"✓";
+  font-family:Arial,sans-serif;
+  font-size:5mm;
+  font-weight:700;
+  line-height:1;
+  transform:scale(0);
+}
+
+.paper.pkp-classic input[type="radio"]:checked::before,
+.paper.pkp-classic input[type="checkbox"]:checked::before{transform:scale(1)}
+
+.paper.pkp-classic input[type="checkbox"].missing{outline:.45mm solid #d70015}
+
+.paper.pkp-classic .pkp-provider-fields{
+  display:grid;
+  gap:1mm;
+}
+
+.paper.pkp-classic .pkp-provider-row{
+  display:grid;
+  grid-template-columns:38mm minmax(0,1fr);
+  align-items:start;
+}
+
+.paper.pkp-classic .pkp-provider-row > label{padding:1.1mm 1mm 0 0}
+
+.paper.pkp-classic .pkp-gross-row{
+  grid-template-columns:8mm minmax(0,1fr) 7mm auto;
+  align-items:start;
+  margin-top:1.5mm;
+}
+
+.paper.pkp-classic .pkp-currency-prefix{padding-top:1.2mm}
+
+.paper.pkp-classic .pkp-start-row{
+  grid-template-columns:8mm 45mm minmax(0,1fr);
+  margin-top:1.2mm;
+}
+
+.paper.pkp-classic .pkp-start-fields{
+  display:flex;
+  align-items:flex-start;
+  gap:2mm;
+}
+
+.paper.pkp-classic .pkp-captioned-box{
+  display:grid;
+  justify-items:center;
+  gap:.5mm;
+}
+
+.paper.pkp-classic .pkp-date-separator{padding-top:1.2mm}
+
+.paper.pkp-classic .pkp-address-block{margin-top:1mm}
+
+.paper.pkp-classic .pkp-address-row{
+  display:grid;
+  grid-template-columns:50mm minmax(0,1fr);
+  align-items:start;
+  margin:.65mm 0;
+}
+
+.paper.pkp-classic .pkp-address-row > label{padding:1.1mm 0 0 8mm}
+
+.paper.pkp-classic .pkp-address-number-row{
+  grid-template-columns:50mm 30mm 22mm 14mm 4mm 14mm;
+  gap:0;
+}
+
+.paper.pkp-classic .pkp-secondary-label{
+  padding-top:1.1mm;
+  text-align:center;
+}
+
+.paper.pkp-classic .pkp-statement-section{
+  padding-top:1.6mm;
+  padding-bottom:1.6mm;
+}
+
+.paper.pkp-classic .pkp-statement-section .pkp-section-heading{margin-bottom:1mm}
+
+.paper.pkp-classic .pkp-statement-line{
+  margin:1.2mm 0 1.2mm 3mm;
+  text-align:justify;
+  line-height:1.22;
+}
+
+.paper.pkp-classic .pkp-statement-line span{padding-top:.4mm}
+
+.paper.pkp-classic .pkp-approval-section{
+  min-height:49mm;
+  display:grid;
+  grid-template-columns:58% 42%;
+}
+
+.paper.pkp-classic .pkp-official-panel,
+.paper.pkp-classic .pkp-applicant-panel{
+  position:relative;
+  padding:5mm 7mm 4mm;
+}
+
+.paper.pkp-classic .pkp-applicant-panel{border-left:.25mm solid #000;text-align:center}
+
+.paper.pkp-classic .pkp-approval-header{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  text-align:left;
+}
+
+.paper.pkp-classic .pkp-approval-header span:last-child{text-align:center}
+
+.paper.pkp-classic .pkp-official-checks{
+  display:grid;
+  gap:3mm;
+  margin-top:7mm;
+}
+
+.paper.pkp-classic .pkp-official-check-line{
+  display:flex;
+  align-items:center;
+  gap:1mm;
+}
+
+.paper.pkp-classic .pkp-empty-box{
+  width:6mm;
+  height:6mm;
+  flex:0 0 6mm;
+  border:.25mm solid #000;
+}
+
+.paper.pkp-classic .pkp-official-signature-line{
+  position:absolute;
+  right:15mm;
+  bottom:5mm;
+  width:34mm;
+  border-bottom:.25mm dotted #000;
+}
+
+.paper.pkp-classic .pkp-applicant-date-line{
+  display:flex;
+  align-items:baseline;
+  justify-content:center;
+  gap:1mm;
+  white-space:nowrap;
+}
+
+.paper.pkp-classic .pkp-inline-field{
+  width:27mm;
+  display:inline-block;
+  border-bottom:.25mm dotted #000;
+}
+
+.paper.pkp-classic .pkp-inline-field:last-child{width:35mm}
+
+.paper.pkp-classic .pkp-inline-field input,
+.paper.pkp-classic .pkp-applicant-name-line input{
+  height:auto;
+  padding:0;
+  border:0;
+  text-align:center;
+}
+
+.paper.pkp-classic .pkp-applicant-role{margin-top:2mm}
+.paper.pkp-classic .pkp-applicant-signature-space{height:25mm}
+
+.paper.pkp-classic .pkp-applicant-name-line{
+  width:38mm;
+  margin:0 auto;
+  border-bottom:.25mm dotted #000;
+}
+
 @media screen and (max-width:900px){
   .desktop-menu{display:none}
   .menu-toggle{display:grid}
@@ -1124,6 +1465,21 @@ body.preview-mode .paper{
   .paper.kuasa-classic .title-line,
   .paper.kuasa-classic .title-select{
     font-size:18px!important;
+  }
+
+  .paper.pkp-classic,
+  .paper.pkp-classic label,
+  .paper.pkp-classic .pkp-section-heading,
+  .paper.pkp-classic .pkp-numbered-title{
+    font-size:8pt;
+    line-height:1.18;
+  }
+
+  .paper.pkp-classic input[type="text"],
+  .paper.pkp-classic input[type="date"]{
+    font-family:"Bookman Old Style",Bookman,Georgia,serif!important;
+    font-size:8pt!important;
+    line-height:1.18!important;
   }
 }
 

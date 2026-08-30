@@ -10,7 +10,8 @@
   const SUPPORTED_RENDERERS = new Set([
     "kuasa-classic",
     "letter-classic",
-    "calon-kepala-daerah-classic"
+    "calon-kepala-daerah-classic",
+    "pkp-classic"
   ]);
   const PRINT_PAYLOAD_KEY = "kabayan.printPayload.v1";
   const DRAFT_PREFIX = "kabayan.formDraft.v1:";
@@ -63,6 +64,12 @@
     control.setAttribute("aria-label", validationLabel(field));
     if (field.required) control.dataset.required = "true";
     if (field.placeholder) control.placeholder = field.placeholder;
+    if (Number.isInteger(field.maxLength) && field.maxLength > 0) {
+      control.maxLength = field.maxLength;
+    }
+    if (field.inputMode) control.inputMode = field.inputMode;
+    if (field.uppercase) control.dataset.uppercase = "true";
+    if (field.digitsOnly) control.dataset.digitsOnly = "true";
     addClasses(control, field.className);
   }
 
@@ -108,6 +115,40 @@
       input.dataset.npwp = "true";
     }
     return input;
+  }
+
+  function createBoxedInput(field) {
+    const cellCount = Math.max(1, Number(field.cells) || Number(field.maxLength) || 1);
+    const columns = Math.max(1, Math.min(cellCount, Number(field.columns) || cellCount));
+    const rows = Math.ceil(cellCount / columns);
+    const container = createElement("div", `char-box-field ${field.boxClassName || ""}`);
+    container.style.setProperty("--box-columns", String(columns));
+    container.style.setProperty("--box-rows", String(rows));
+    if (Number(field.widthMm) > 0) container.style.width = `${Number(field.widthMm)}mm`;
+
+    const grid = createElement("span", "char-box-grid");
+    grid.setAttribute("aria-hidden", "true");
+    for (let index = 0; index < cellCount; index += 1) {
+      grid.appendChild(createElement("span", "char-box"));
+    }
+
+    const control = createInput({
+      ...field,
+      type: field.type || "text",
+      maxLength: cellCount,
+      className: `${field.className || ""} boxed-entry`
+    });
+    container.append(grid, control);
+    return container;
+  }
+
+  function createCheckbox(field, text, className = "") {
+    const label = createElement("label", `pkp-check-line ${className}`);
+    const input = document.createElement("input");
+    input.type = "checkbox";
+    applyFieldMetadata(input, { ...field, type: "checkbox" });
+    label.append(input, createElement("span", "", text));
+    return label;
   }
 
   function createDateControl(field, className = "") {
@@ -458,8 +499,201 @@
     container.appendChild(createElement("div", "", block.text));
   }
 
+  function renderPkpForm(block) {
+    const frame = createElement("div", "pkp-form-frame");
+    const header = createElement("header", "pkp-document-header");
+    const institution = createElement("div", "pkp-institution");
+    institution.append(
+      createElement("div", "", block.header?.ministry || ""),
+      createElement("div", "", block.header?.agency || "")
+    );
+    header.append(
+      institution,
+      createElement("div", "pkp-document-title", block.header?.title || ""),
+      createElement("div", "pkp-instruction", block.header?.instruction || "")
+    );
+    if (block.header?.instructionNote) {
+      header.lastElementChild.appendChild(createElement("span", "pkp-instruction-note", block.header.instructionNote));
+    }
+    frame.appendChild(header);
+
+    const sectionHeading = (letter, title) => {
+      const heading = createElement("div", "pkp-section-heading");
+      heading.append(createElement("span", "pkp-section-letter", letter), createElement("strong", "", title));
+      return heading;
+    };
+
+    const numberedBoxRow = (item) => {
+      const row = createElement("div", `pkp-numbered-row ${item.className || ""}`);
+      const label = createElement("label", "pkp-field-label", item.label || "");
+      label.htmlFor = item.field.id;
+      row.append(
+        createElement("span", "pkp-item-number", item.number || ""),
+        label,
+        createBoxedInput(item.field)
+      );
+      return row;
+    };
+
+    const identity = createElement("section", "pkp-section pkp-identity-section");
+    identity.appendChild(sectionHeading(block.identity?.letter || "A.", block.identity?.title || ""));
+    (block.identity?.items || []).forEach((item) => identity.appendChild(numberedBoxRow(item)));
+    frame.appendChild(identity);
+
+    const business = createElement("section", "pkp-section pkp-business-section");
+    business.appendChild(sectionHeading(block.business?.letter || "B.", block.business?.title || ""));
+
+    const status = block.business?.status || {};
+    const statusBlock = createElement("div", "pkp-status-block");
+    const statusTitle = createElement("div", "pkp-numbered-title");
+    statusTitle.append(
+      createElement("span", "pkp-item-number", status.number || ""),
+      createElement("span", "", status.label || "")
+    );
+    if (status.note) statusTitle.appendChild(createElement("em", "", ` ${status.note}`));
+    statusBlock.appendChild(statusTitle);
+
+    const statusContent = createElement("div", "pkp-status-content");
+    const statusOptions = createElement("div", "checks pkp-status-options");
+    statusOptions.setAttribute("role", "radiogroup");
+    statusOptions.setAttribute("aria-label", status.validationLabel || status.label || "Pilihan");
+    statusOptions.dataset.radioGroup = status.name || "statusTempatUsaha";
+    statusOptions.dataset.label = status.validationLabel || status.label || "Pilihan";
+    if (status.required) statusOptions.dataset.radioRequired = "true";
+    (status.options || []).forEach((option, index) => {
+      const label = createElement("label", "check-line");
+      const input = document.createElement("input");
+      input.type = "radio";
+      input.name = status.name;
+      input.value = String(option.value || "");
+      input.id = `${status.name}-${index + 1}`;
+      label.append(input, createElement("span", "", option.label || option.value || ""));
+      statusOptions.appendChild(label);
+    });
+    statusContent.appendChild(statusOptions);
+
+    const provider = createElement("div", "pkp-provider-fields");
+    (status.providerFields || []).forEach((item) => {
+      const row = createElement("div", "pkp-provider-row");
+      const label = createElement("label", "", item.label || "");
+      label.htmlFor = item.field.id;
+      row.append(label, createBoxedInput(item.field));
+      provider.appendChild(row);
+    });
+    statusContent.appendChild(provider);
+    statusBlock.appendChild(statusContent);
+    business.appendChild(statusBlock);
+
+    if (block.business?.gross) {
+      const gross = block.business.gross;
+      const row = createElement("div", "pkp-numbered-row pkp-gross-row");
+      const label = createElement("label", "pkp-field-label", gross.label || "");
+      label.htmlFor = gross.field.id;
+      row.append(
+        createElement("span", "pkp-item-number", gross.number || ""),
+        label,
+        createElement("span", "pkp-currency-prefix", gross.prefix || ""),
+        createBoxedInput(gross.field)
+      );
+      business.appendChild(row);
+    }
+
+    if (block.business?.start) {
+      const start = block.business.start;
+      const row = createElement("div", "pkp-numbered-row pkp-start-row");
+      const fields = createElement("div", "pkp-start-fields");
+      const month = createElement("div", "pkp-captioned-box");
+      month.append(createBoxedInput(start.monthField), createElement("span", "", start.monthCaption || ""));
+      const year = createElement("div", "pkp-captioned-box");
+      year.append(createBoxedInput(start.yearField), createElement("span", "", start.yearCaption || ""));
+      fields.append(month, createElement("span", "pkp-date-separator", "/"), year);
+      row.append(
+        createElement("span", "pkp-item-number", start.number || ""),
+        createElement("span", "pkp-field-label", start.label || ""),
+        fields
+      );
+      business.appendChild(row);
+    }
+
+    const address = block.business?.address;
+    if (address) {
+      const addressBlock = createElement("div", "pkp-address-block");
+      const title = createElement("div", "pkp-numbered-title");
+      title.append(
+        createElement("span", "pkp-item-number", address.number || ""),
+        createElement("span", "", address.label || "")
+      );
+      addressBlock.appendChild(title);
+      (address.fields || []).forEach((item) => {
+        const row = createElement("div", `pkp-address-row ${item.className || ""}`);
+        const label = createElement("label", "", item.label || "");
+        label.htmlFor = item.field.id;
+        row.append(label, createBoxedInput(item.field));
+        if (item.secondary) {
+          row.append(
+            createElement("span", "pkp-secondary-label", item.secondary.label || ""),
+            createBoxedInput(item.secondary.firstField),
+            createElement("span", "pkp-date-separator", item.secondary.separator || "/"),
+            createBoxedInput(item.secondary.secondField)
+          );
+        }
+        addressBlock.appendChild(row);
+      });
+      business.appendChild(addressBlock);
+    }
+    frame.appendChild(business);
+
+    const statementSection = createElement("section", "pkp-section pkp-statement-section");
+    statementSection.appendChild(sectionHeading(block.statements?.letter || "C.", block.statements?.title || ""));
+    (block.statements?.items || []).forEach((item) => {
+      statementSection.appendChild(createCheckbox(item.field, item.text, "pkp-statement-line"));
+    });
+    frame.appendChild(statementSection);
+
+    const approval = block.approval || {};
+    const approvalSection = createElement("section", "pkp-approval-section");
+    const official = createElement("div", "pkp-official-panel");
+    const officialHeader = createElement("div", "pkp-approval-header");
+    officialHeader.append(
+      createElement("span", "", approval.official?.reviewedText || ""),
+      createElement("span", "", approval.official?.officerText || "")
+    );
+    official.appendChild(officialHeader);
+    const officialChecks = createElement("div", "pkp-official-checks");
+    (approval.official?.checks || []).forEach((text) => {
+      const line = createElement("div", "pkp-official-check-line");
+      line.append(createElement("span", "pkp-empty-box"), createElement("span", "", text));
+      officialChecks.appendChild(line);
+    });
+    official.append(officialChecks, createElement("div", "pkp-official-signature-line"));
+
+    const applicant = createElement("div", "pkp-applicant-panel");
+    const dateLine = createElement("div", "pkp-applicant-date-line");
+    const placeWrap = createElement("span", "pkp-inline-field");
+    placeWrap.appendChild(createInput({ ...approval.applicant?.placeField, type: "text" }));
+    const dateWrap = createElement("span", "pkp-inline-field");
+    dateWrap.appendChild(createInput({ ...approval.applicant?.dateField, type: "date" }));
+    dateLine.append(
+      placeWrap,
+      createElement("span", "", ", tanggal"),
+      dateWrap
+    );
+    applicant.append(
+      dateLine,
+      createElement("div", "pkp-applicant-role", approval.applicant?.roleText || ""),
+      createElement("div", "pkp-applicant-signature-space")
+    );
+    const nameWrap = createElement("div", "pkp-applicant-name-line");
+    nameWrap.appendChild(createInput({ ...approval.applicant?.nameField, type: "text" }));
+    applicant.appendChild(nameWrap);
+    approvalSection.append(official, applicant);
+    frame.appendChild(approvalSection);
+    root.appendChild(frame);
+  }
+
   function renderBlock(block) {
     const renderers = {
+      "pkp-form": renderPkpForm,
       "letter-meta": renderLetterMeta,
       recipient: renderRecipient,
       "inline-fields": renderInlineFields,
@@ -548,6 +782,33 @@
     form.querySelectorAll("textarea").forEach(resizeTextarea);
   }
 
+  function syncBoxedField(control) {
+    const container = control.closest(".char-box-field");
+    if (!container) return;
+    let value = String(control.value || "");
+    if (control.dataset.digitsOnly === "true") value = value.replace(/\D/g, "");
+    if (control.dataset.uppercase === "true") value = value.toLocaleUpperCase("id-ID");
+    if (control.maxLength > 0) value = Array.from(value).slice(0, control.maxLength).join("");
+    if (control.value !== value) control.value = value;
+    const characters = Array.from(value);
+    container.querySelectorAll(".char-box").forEach((cell, index) => {
+      const character = characters[index] || "";
+      cell.textContent = character === " " ? "\u00a0" : character;
+    });
+  }
+
+  function updateAllBoxedFields() {
+    form.querySelectorAll(".boxed-entry").forEach(syncBoxedField);
+  }
+
+  function bindBoxedFields() {
+    form.querySelectorAll(".boxed-entry").forEach((control) => {
+      control.addEventListener("input", () => syncBoxedField(control));
+      control.addEventListener("change", () => syncBoxedField(control));
+      syncBoxedField(control);
+    });
+  }
+
   function formatDateValue(value) {
     if (!/^\d{4}-\d{2}-\d{2}$/.test(value || "")) return "";
     const [year, month, day] = value.split("-").map(Number);
@@ -558,15 +819,20 @@
   function captureDraft(schema) {
     const values = {};
     const radios = {};
+    const checks = {};
     const repeatableValues = {};
 
     form.querySelectorAll("input[id], textarea[id], select[id]").forEach((control) => {
-      if (control.matches('input[type="radio"]')) return;
+      if (control.matches('input[type="radio"], input[type="checkbox"]')) return;
       values[control.id] = control.value;
     });
 
     form.querySelectorAll('input[type="radio"][name]').forEach((control) => {
       if (control.checked) radios[control.name] = control.value;
+    });
+
+    form.querySelectorAll('input[type="checkbox"][id]').forEach((control) => {
+      checks[control.id] = control.checked;
     });
 
     repeatables.forEach((state, id) => {
@@ -580,6 +846,7 @@
       savedAt: Date.now(),
       values,
       radios,
+      checks,
       repeatables: repeatableValues
     };
   }
@@ -622,11 +889,17 @@
       });
     });
 
+    Object.entries(draft.checks || {}).forEach(([id, checked]) => {
+      const control = document.getElementById(id);
+      if (control?.matches?.('input[type="checkbox"]')) control.checked = Boolean(checked);
+    });
+
     updateConditionals();
     applyConditionalCopies(schema.copyWhen);
     updateRoleSync(schema.syncRole);
     updateAllDates();
     resizeAllTextareas();
+    updateAllBoxedFields();
     resizeTitleChoice();
   }
 
@@ -676,6 +949,7 @@
 
   function buildPrintSnapshot() {
     updateAllDates();
+    updateAllBoxedFields();
 
     const snapshot = document.createElement("article");
     snapshot.className = `${form.className} print-static-paper`;
@@ -881,7 +1155,10 @@
 
     form.querySelectorAll('[data-required="true"]').forEach((control) => {
       if (!isVisible(control) || control.dataset.fieldType === "npwp") return;
-      if (String(control.value || "").trim()) return;
+      const filled = control.matches('input[type="checkbox"]')
+        ? control.checked
+        : Boolean(String(control.value || "").trim());
+      if (filled) return;
       control.classList.add("missing");
       control.setAttribute("aria-invalid", "true");
       firstInvalid ||= control;
@@ -921,6 +1198,7 @@
   }
 
   function bindInteractions(schema) {
+    bindBoxedFields();
     form.querySelectorAll('input[type="radio"]').forEach((radio) => {
       radio.addEventListener("change", () => {
         updateConditionals();
@@ -936,6 +1214,13 @@
         clearValidationSummary();
       });
       control.addEventListener("blur", () => checkNpwp(control, control.dataset.required === "true"));
+    });
+
+    form.querySelectorAll('[data-digits-only="true"]:not([data-npwp="true"])').forEach((control) => {
+      control.addEventListener("input", () => {
+        control.value = control.value.replace(/\D/g, "");
+        syncBoxedField(control);
+      });
     });
 
     form.querySelectorAll('input[type="date"]').forEach((input) => {
@@ -973,6 +1258,7 @@
     updateConditionals();
     updateAllDates();
     resizeAllTextareas();
+    updateAllBoxedFields();
     requestAnimationFrame(resizeTitleChoice);
   }
 
@@ -1005,8 +1291,9 @@
     updateRoleSync(activeSchema?.syncRole);
     updateAllDates();
     resizeAllTextareas();
+    updateAllBoxedFields();
     resizeTitleChoice();
-    document.getElementById("namaPemberi")?.focus();
+    (document.getElementById("namaPemberi") || form.querySelector('[data-required="true"]'))?.focus();
   }
 
   function renderSchema(schema) {
