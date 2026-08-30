@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "id": "aktivasi-akun-wp",
+  "title": "Formulir Aktivasi Akun Wajib Pajak",
+  "description": "Lengkapi formulir aktivasi Akun Wajib Pajak sesuai status pendaftaran dan jenis Wajib Pajak.",
+  "type": "form",
+  "renderer": "op-wbt-classic",
+  "printPageSize": "A4 portrait",
+  "blocks": [
+    {
+      "type": "aktivasi-form",
+      "header": {
+        "ministry": "KEMENTERIAN KEUANGAN REPUBLIK INDONESIA",
+        "agency": "DIREKTORAT JENDERAL PAJAK",
+        "title": "FORMULIR AKTIVASI AKUN WAJIB PAJAK",
+        "instruction": "SEMUA INFORMASI HARAP DIISI DENGAN HURUF KAPITAL/CETAK. Isi atau beri tanda x pada kotak jawaban yang sesuai. (Lihat petunjuk)"
+      },
+      "registeredStatus": {
+        "name": "wpSudahTerdaftar",
+        "label": "Wajib Pajak Sudah Terdaftar",
+        "required": true,
+        "options": [
+          { "value": "Ya", "label": "A. Ya" },
+          { "value": "Tidak", "label": "B. Tidak" }
+        ]
+      },
+      "registeredRequest": {
+        "letter": "A.",
+        "title": "PERMINTAAN AKTIVASI AKUN WAJIB PAJAK SUDAH TERDAFTAR",
+        "applicantTypes": [
+          {
+            "number": "1.",
+            "field": { "id": "jenisPenanggungJawabBadan", "label": "Penanggung jawab Wajib Pajak Badan atau Instansi Pemerintah" },
+            "label": "Penanggung jawab Wajib Pajak Badan/Instansi Pemerintah",
+            "fields": [
+              { "label": "NPWP Badan/Instansi Pemerintah", "field": { "id": "npwpBadanInstansi", "label": "NPWP Badan atau Instansi Pemerintah", "digitsOnly": true, "inputMode": "numeric", "cells": 22, "columns": 22 } },
+              { "label": "Nama Badan/Instansi Pemerintah", "field": { "id": "namaBadanInstansi", "label": "Nama Badan atau Instansi Pemerintah", "uppercase": true, "cells": 44, "columns": 22 } }
+            ]
+          },
+          {
+            "number": "2.",
+            "field": { "id": "jenisWakilWarisan", "label": "Wakil Warisan Belum Terbagi" },
+            "label": "Wakil Warisan Belum Terbagi",
+            "fields": [
+              { "label": "NIK/NPWP Warisan Belum Terbagi", "field": { "id": "nikNpwpWarisan", "label": "NIK atau NPWP Warisan Belum Terbagi", "digitsOnly": true, "inputMode": "numeric", "cells": 22, "columns": 22 } },
+              { "label": "Nama Warisan Belum Terbagi", "field": { "id": "namaWarisan", "label": "Nama Warisan Belum Terbagi", "uppercase": true, "cells": 44, "columns": 22 } }
+            ]
+          }
+        ],
+        "identityTitle": "Identitas Wajib Pajak/Penanggung Jawab/Wakil Warisan Belum Terbagi",
+        "identityFields": [
+          { "label": "NPWP", "field": { "id": "npwpPemohonTerdaftar", "label": "NPWP Wajib Pajak atau Penanggung Jawab", "digitsOnly": true, "inputMode": "numeric", "cells": 22, "columns": 22 } },
+          { "label": "Nama Wajib Pajak", "field": { "id": "namaWpTerdaftar", "label": "Nama Wajib Pajak", "uppercase": true, "cells": 44, "columns": 22 } },
+          { "label": "Email", "field": { "id": "emailWpTerdaftar", "label": "Email Wajib Pajak", "type": "email", "cells": 22, "columns": 22 } },
+          { "label": "Nomor Telepon", "field": { "id": "teleponWpTerdaftar", "label": "Nomor Telepon Wajib Pajak", "digitsOnly": true, "inputMode": "numeric", "cells": 22, "columns": 22 } }
+        ]
+      },
+      "unregisteredPersonal": {
+        "letter": "B.1.",
+        "title": "AKUN WAJIB PAJAK BELUM TERDAFTAR ORANG PRIBADI",
+        "subtitle": "IDENTITAS ORANG PRIBADI",
+        "fields": [
+          { "label": "Nomor Paspor", "field": { "id": "pasporOrangPribadi", "label": "Nomor Paspor Orang Pribadi", "uppercase": true, "cells": 22, "columns": 22 } },
+          { "label": "Nama", "field": { "id": "namaOrangPribadi", "label": "Nama Orang Pribadi", "uppercase": true, "cells": 44, "columns": 22 } },
+          { "label": "Asal Negara", "field": { "id": "asalNegaraOrangPribadi", "label": "Asal Negara Orang Pribadi", "uppercase": true, "cells": 22, "columns": 22 } },
+          { "kind": "textarea-box", "label": "Alamat", "field": { "id": "alamatOrangPribadi", "label": "Alamat Orang Pribadi", "uppercase": true, "cells": 66, "columns": 22, "rows": 3 } },
+          { "label": "Tempat Lahir", "field": { "id": "tempatLahirOrangPribadi", "label": "Tempat Lahir Orang Pribadi", "uppercase": true, "cells": 22, "columns": 22 } },
+          { "kind": "date", "label": "Tanggal Lahir", "field": { "id": "tanggalLahirOrangPribadi", "label": "Tanggal Lahir Orang Pribadi" } },
+          { "kind": "choice", "label": "Jenis Kelamin", "choice": { "name": "jenisKelaminOrangPribadi", "label": "Jenis Kelamin Orang Pribadi", "options": [ { "value": "Pria", "label": "1. Pria" }, { "value": "Wanita", "label": "2. Wanita" } ] } },
+          { "label": "Nomor Telepon", "field": { "id": "teleponOrangPribadi", "label": "Nomor Telepon Orang Pribadi", "digitsOnly": true, "inputMode": "numeric", "cells": 22, "columns": 22 } },
+          { "label": "Email", "field": { "id": "emailOrangPribadi", "label": "Email Orang Pribadi", "type": "email", "cells": 22, "columns": 22 } }
+        ]
+      },
+      "unregisteredEntity": {
+        "letter": "B.2.",
+        "title": "AKUN WAJIB PAJAK BELUM TERDAFTAR BADAN",
+        "subtitle": "IDENTITAS BADAN",
+        "fields": [
+          { "label": "Nomor Dokumen Pendirian", "field": { "id": "nomorDokumenPendirian", "label": "Nomor Dokumen Pendirian", "uppercase": true, "cells": 22, "columns": 22 } },
+          { "kind": "date", "label": "Tanggal Dokumen Pendirian", "field": { "id": "tanggalDokumenPendirian", "label": "Tanggal Dokumen Pendirian" } },
+          { "label": "NPWP/NIK Penanggungjawab", "field": { "id": "nikNpwpPenanggungJawab", "label": "NPWP atau NIK Penanggung Jawab", "digitsOnly": true, "inputMode": "numeric", "cells": 22, "columns": 22 } },
+          { "label": "Nomor Paspor Penanggungjawab", "field": { "id": "pasporPenanggungJawab", "label": "Nomor Paspor Penanggung Jawab", "uppercase": true, "cells": 22, "columns": 22 } },
+          { "label": "Nama Penanggung jawab", "field": { "id": "namaPenanggungJawab", "label": "Nama Penanggung Jawab", "uppercase": true, "cells": 44, "columns": 22 } },
+          { "label": "Nama Wajib Pajak", "field": { "id": "namaWpBadan", "label": "Nama Wajib Pajak Badan", "uppercase": true, "cells": 44, "columns": 22 } },
+          { "label": "Negara Asal", "field": { "id": "negaraAsalBadan", "label": "Negara Asal Badan", "uppercase": true, "cells": 22, "columns": 22 } },
+          { "kind": "textarea-box", "label": "Alamat", "field": { "id": "alamatBadan", "label": "Alamat Badan", "uppercase": true, "cells": 66, "columns": 22, "rows": 3 } },
+          { "label": "Nomor Telepon", "field": { "id": "teleponBadan", "label": "Nomor Telepon Badan", "digitsOnly": true, "inputMode": "numeric", "cells": 22, "columns": 22 } },
+          { "label": "Email", "field": { "id": "emailBadan", "label": "Email Badan", "type": "email", "cells": 22, "columns": 22 } }
+        ]
+      },
+      "statement": {
+        "letter": "C.",
+        "title": "PERNYATAAN",
+        "field": { "id": "persetujuanPernyataan", "label": "Persetujuan pernyataan", "required": true },
+        "text": "Dengan menyadari sepenuhnya akan segala akibatnya termasuk sanksi sesuai dengan ketentuan peraturan perundang-undangan yang berlaku, saya menyatakan bahwa apa yang saya sampaikan di atas adalah benar dan lengkap, dan saya menyetujui untuk menggunakan Akun Wajib Pajak saya sebagai sarana penerimaan surat dan dokumen perpajakan."
+      },
+      "approval": {
+        "official": { "reviewedText": "Telah diteliti:", "officerText": "Petugas,", "checks": ["Lengkap dan Benar"] },
+        "applicant": {
+          "placeField": { "id": "tempatPermohonan", "label": "Tempat permohonan", "required": true, "uppercase": true },
+          "dateField": { "id": "tanggalPermohonan", "label": "Tanggal permohonan", "required": true },
+          "roleText": "Pemohon,",
+          "nameField": { "id": "namaPemohon", "label": "Nama pemohon", "required": true, "uppercase": true }
+        }
+      }
+    }
+  ],
+  "guidance": [
+    { "title": "Cara mengisi", "items": [
+      "Pilih status Wajib Pajak sudah terdaftar atau belum terdaftar.",
+      "Isi bagian yang sesuai dengan status dan jenis Wajib Pajak.",
+      "Periksa dua halaman pratinjau A4 sebelum mencetak atau menyimpan PDF."
+    ] }
+  ]
+}
