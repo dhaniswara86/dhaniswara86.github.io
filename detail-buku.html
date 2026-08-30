@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Detail Buku Kabayan</title>
+</head>
+<body>
+
+<div id="detail"></div>
+
+<script>
+fetch("data/buku.json")
+.then(r=>r.json())
+.then(data=>{
+
+let id=new URLSearchParams(location.search).get("id");
+let book=data.find(x=>x.id===id);
+
+document.getElementById("detail").innerHTML=`
+
+<img src="${book.cover}" width="350">
+
+<h1>${book.judul}</h1>
+
+<p>${book.kategori}</p>
+
+`;
+
+});
+</script>
+
+</body>
+</html>
