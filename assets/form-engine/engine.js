@@ -922,6 +922,166 @@
     root.appendChild(frame);
   }
 
+  function renderAktivasiForm(block) {
+    const frame = createElement("div", "opwbt-frame aktivasi-frame");
+    const pages = [
+      createElement("section", "opwbt-page opwbt-page-1 aktivasi-page aktivasi-page-1"),
+      createElement("section", "opwbt-page opwbt-page-4 aktivasi-page aktivasi-page-2")
+    ];
+
+    const choiceGroup = (config, className = "") => {
+      const choices = createElement("div", `checks aktivasi-choice-group ${className}`);
+      choices.setAttribute("role", "radiogroup");
+      choices.setAttribute("aria-label", config.validationLabel || config.label || "Pilihan");
+      choices.dataset.radioGroup = config.name;
+      choices.dataset.label = config.validationLabel || config.label || "Pilihan";
+      if (config.required) choices.dataset.radioRequired = "true";
+      (config.options || []).forEach((option, index) => {
+        const label = createElement("label", "check-line opwbt-choice-line aktivasi-choice-line");
+        const input = document.createElement("input");
+        input.type = "radio";
+        input.name = config.name;
+        input.value = String(option.value ?? "");
+        input.id = `${config.name}-${index + 1}`;
+        label.append(input, createElement("span", "", option.label ?? option.value ?? ""));
+        choices.appendChild(label);
+      });
+      return choices;
+    };
+
+    const checkboxLine = (field, text, className = "") => {
+      const label = createElement("label", `opwbt-checkbox-line aktivasi-checkbox-line ${className}`);
+      const input = document.createElement("input");
+      input.type = "checkbox";
+      applyFieldMetadata(input, { ...field, type: "checkbox" });
+      label.append(input, createElement("span", "", text || ""));
+      return label;
+    };
+
+    const sectionHeading = (config) => {
+      const heading = createElement("div", "opwbt-section-heading aktivasi-section-heading");
+      heading.append(
+        createElement("span", "opwbt-section-letter", config.letter || ""),
+        createElement("strong", "", config.title || "")
+      );
+      return heading;
+    };
+
+    const fieldRow = (item, className = "") => {
+      const row = createElement("div", `aktivasi-field-row ${className} ${item.kind === "textarea-box" ? "aktivasi-multiline-row" : ""}`);
+      const label = createElement("label", "aktivasi-field-label", item.label || "");
+      const control = createElement("div", "aktivasi-field-control");
+      if (item.kind === "date") {
+        label.htmlFor = item.field.id;
+        control.appendChild(createDateControl(item.field));
+      } else if (item.kind === "choice") {
+        control.appendChild(choiceGroup(item.choice, "aktivasi-inline-choices"));
+      } else {
+        label.htmlFor = item.field.id;
+        control.appendChild(createBoxedInput(item.field));
+      }
+      row.append(label, control);
+      return row;
+    };
+
+    const fieldList = (items, className = "") => {
+      const list = createElement("div", `aktivasi-field-list ${className}`);
+      (items || []).forEach((item) => list.appendChild(fieldRow(item)));
+      return list;
+    };
+
+    const header = createElement("header", "opwbt-document-header");
+    header.append(
+      createElement("div", "opwbt-institution", block.header?.ministry || ""),
+      createElement("div", "opwbt-institution", block.header?.agency || ""),
+      createElement("div", "opwbt-document-title", block.header?.title || ""),
+      createElement("div", "opwbt-instruction", block.header?.instruction || "")
+    );
+    pages[0].appendChild(header);
+
+    const status = createElement("section", "aktivasi-status");
+    status.append(
+      createElement("span", "aktivasi-status-label", block.registeredStatus?.label || ""),
+      choiceGroup(block.registeredStatus || {}, "aktivasi-status-options")
+    );
+    pages[0].appendChild(status);
+
+    const registered = block.registeredRequest || {};
+    const registeredSection = createElement("section", "aktivasi-section aktivasi-registered-section");
+    registeredSection.appendChild(sectionHeading(registered));
+    (registered.applicantTypes || []).forEach((type) => {
+      const applicant = createElement("section", "aktivasi-applicant-block");
+      const applicantTitle = createElement("div", "aktivasi-applicant-title");
+      applicantTitle.append(
+        checkboxLine(type.field || {}, ""),
+        createElement("span", "aktivasi-item-number", type.number || ""),
+        createElement("span", "", type.label || "")
+      );
+      applicant.append(applicantTitle, fieldList(type.fields, "aktivasi-indented-fields"));
+      registeredSection.appendChild(applicant);
+    });
+    registeredSection.append(
+      createElement("div", "aktivasi-identity-title", registered.identityTitle || ""),
+      fieldList(registered.identityFields, "aktivasi-indented-fields")
+    );
+    pages[0].appendChild(registeredSection);
+
+    const addUnregisteredSection = (config, className) => {
+      const section = createElement("section", `aktivasi-section aktivasi-unregistered-section ${className}`);
+      section.append(
+        sectionHeading(config),
+        createElement("div", "aktivasi-subtitle", config.subtitle || ""),
+        fieldList(config.fields, "aktivasi-indented-fields")
+      );
+      pages[0].appendChild(section);
+    };
+    addUnregisteredSection(block.unregisteredPersonal || {}, "aktivasi-personal-section");
+    addUnregisteredSection(block.unregisteredEntity || {}, "aktivasi-entity-section");
+
+    const statement = block.statement || {};
+    const statementSection = createElement("section", "aktivasi-section aktivasi-statement-section");
+    statementSection.append(
+      sectionHeading(statement),
+      checkboxLine(statement.field || {}, statement.text || "", "aktivasi-statement-line")
+    );
+    pages[1].appendChild(statementSection);
+
+    const approval = block.approval || {};
+    const approvalSection = createElement("section", "opwbt-approval aktivasi-approval");
+    const official = createElement("div", "opwbt-official-panel");
+    official.append(
+      createElement("div", "opwbt-approval-heading", approval.official?.reviewedText || ""),
+      createElement("div", "opwbt-official-role", approval.official?.officerText || "")
+    );
+    (approval.official?.checks || []).forEach((text) => {
+      const row = createElement("div", "opwbt-official-check");
+      row.append(createElement("span", "opwbt-empty-box"), createElement("span", "", text));
+      official.appendChild(row);
+    });
+    official.appendChild(createElement("div", "opwbt-official-signature-line"));
+
+    const applicant = createElement("div", "opwbt-applicant-panel");
+    const dateLine = createElement("div", "opwbt-applicant-date");
+    dateLine.append(
+      createInput(approval.applicant?.placeField || {}),
+      createElement("span", "", ", tanggal"),
+      createDateControl(approval.applicant?.dateField || {})
+    );
+    applicant.append(
+      dateLine,
+      createElement("div", "opwbt-applicant-role", approval.applicant?.roleText || ""),
+      createElement("div", "opwbt-applicant-signature-space")
+    );
+    const nameLine = createElement("div", "opwbt-applicant-name");
+    nameLine.appendChild(createInput(approval.applicant?.nameField || {}));
+    applicant.appendChild(nameLine);
+    approvalSection.append(official, applicant);
+    pages[1].appendChild(approvalSection);
+
+    frame.append(...pages);
+    root.appendChild(frame);
+  }
+
   function renderInstansiForm(block) {
     const frame = createElement("div", "opwbt-frame badan-frame instansi-frame");
     const pages = [
@@ -1918,6 +2078,7 @@
       "pkp-form": renderPkpForm,
       "pkp-retail-form": renderPkpRetailForm,
       "business-statement-form": renderBusinessStatementForm,
+      "aktivasi-form": renderAktivasiForm,
       "instansi-form": renderInstansiForm,
       "badan-form": renderBadanForm,
       "op-wbt-form": renderOpWbtForm,
