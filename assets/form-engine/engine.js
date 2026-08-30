@@ -7,7 +7,11 @@
   ];
   const SAFE_ID = /^[a-z0-9-]+$/;
   const SAFE_CLASS = /^[A-Za-z0-9_-]+$/;
-  const SUPPORTED_RENDERERS = new Set(["kuasa-classic", "letter-classic"]);
+  const SUPPORTED_RENDERERS = new Set([
+    "kuasa-classic",
+    "letter-classic",
+    "calon-kepala-daerah-classic"
+  ]);
   const PRINT_PAYLOAD_KEY = "kabayan.printPayload.v1";
   const DRAFT_PREFIX = "kabayan.formDraft.v1:";
   const PRINT_PAYLOAD_MAX_AGE = 4 * 60 * 60 * 1000;
@@ -182,7 +186,41 @@
   }
 
   function renderParagraph(block) {
-    root.appendChild(createElement("p", block.variant === "section" ? "section" : "paragraph", block.text));
+    const variantClass = block.variant === "section" ? "section" : "paragraph";
+    root.appendChild(createElement("p", `${variantClass} ${block.className || ""}`, block.text));
+  }
+
+  function renderLetterMeta(block) {
+    const container = createElement("div", "candidate-letter-meta");
+    (block.fields || []).forEach((field) => {
+      const row = createElement("div", "candidate-letter-row");
+      const label = createElement("label", "candidate-letter-label", field.label || "");
+      label.htmlFor = field.id;
+      row.append(label, createElement("span", "colon", ":"), createInput(field));
+      container.appendChild(row);
+    });
+
+    const subject = createElement("div", "candidate-letter-row candidate-subject-row");
+    subject.append(
+      createElement("span", "candidate-letter-label", block.subjectLabel || "Hal"),
+      createElement("span", "colon", ":")
+    );
+    const subjectText = createElement("div", "candidate-subject-text");
+    (block.subjectLines || []).forEach((line, index) => {
+      if (index) subjectText.appendChild(document.createElement("br"));
+      appendText(subjectText, line);
+    });
+    subject.appendChild(subjectText);
+    container.appendChild(subject);
+    root.appendChild(container);
+  }
+
+  function renderRecipient(block) {
+    const container = createElement("div", "candidate-recipient");
+    const line = createElement("div", "candidate-recipient-line");
+    line.append(createElement("span", "", block.prefix || ""), createInput(block.field));
+    container.appendChild(line);
+    root.appendChild(container);
   }
 
   function renderFields(block, parent = root) {
@@ -193,8 +231,17 @@
   }
 
   function renderRadio(block) {
-    if (block.label) root.appendChild(createElement("p", "section", block.label));
-    const choices = createElement("div", "checks");
+    if (block.label) {
+      const heading = createElement("p", `section ${block.labelClassName || ""}`, block.label);
+      if (block.labelMarker) {
+        appendText(heading, " ");
+        heading.appendChild(createElement("sup", "", block.labelMarker));
+      }
+      root.appendChild(heading);
+    }
+    const choices = createElement("div", `checks ${block.className || ""}`);
+    choices.setAttribute("role", "radiogroup");
+    choices.setAttribute("aria-label", block.validationLabel || block.label || "Pilihan");
     choices.dataset.radioGroup = block.name;
     choices.dataset.label = block.validationLabel || block.label || "Pilihan";
     if (block.required) choices.dataset.radioRequired = "true";
@@ -224,7 +271,7 @@
   }
 
   function renderInlineSentence(block) {
-    const paragraph = createElement("p", "paragraph");
+    const paragraph = createElement("p", `paragraph ${block.className || ""}`);
     (block.segments || []).forEach((segment) => {
       if (segment.type === "text") {
         appendText(paragraph, segment.value);
@@ -359,16 +406,26 @@
     const section = createElement("section", "signature");
     const dateLine = createElement("div", "date-line");
 
-    if (block.placeField) {
+    if (block.combinedField) {
+      dateLine.appendChild(createInput({ ...block.combinedField, type: "text" }));
+    } else if (block.placeField) {
       dateLine.appendChild(createInput({ ...block.placeField, type: "text" }));
-      dateLine.appendChild(createElement("span", "comma", ","));
+      if (block.dateField) dateLine.appendChild(createElement("span", "comma", ","));
     }
     if (block.dateField) {
       dateLine.appendChild(createDateControl(block.dateField));
     }
 
     if (dateLine.childElementCount) section.appendChild(dateLine);
-    if (block.roleText) section.appendChild(createElement("div", "role-line", block.roleText));
+    if (block.roleText || block.roleMarker) {
+      const roleLine = createElement("div", "role-line");
+      roleLine.appendChild(createElement("span", "role-value", block.roleText || ""));
+      if (block.roleMarker) {
+        appendText(roleLine, " ");
+        roleLine.appendChild(createElement("sup", "role-marker", block.roleMarker));
+      }
+      section.appendChild(roleLine);
+    }
     section.appendChild(createElement("div", "sig-space"));
 
     if (block.nameField) {
@@ -387,11 +444,24 @@
       container = createElement("div", "footnotes");
       root.appendChild(container);
     }
+    if (Array.isArray(block.items)) {
+      block.items.forEach((item) => {
+        const row = createElement("div", "candidate-footnote-row");
+        row.append(
+          createElement("span", "", item.marker || ""),
+          createElement("span", "", item.text || "")
+        );
+        container.appendChild(row);
+      });
+      return;
+    }
     container.appendChild(createElement("div", "", block.text));
   }
 
   function renderBlock(block) {
     const renderers = {
+      "letter-meta": renderLetterMeta,
+      recipient: renderRecipient,
       "inline-fields": renderInlineFields,
       paragraph: renderParagraph,
       fields: renderFields,
@@ -553,6 +623,8 @@
     });
 
     updateConditionals();
+    applyConditionalCopies(schema.copyWhen);
+    updateRoleSync(schema.syncRole);
     updateAllDates();
     resizeAllTextareas();
     resizeTitleChoice();
@@ -708,6 +780,48 @@
     });
   }
 
+  function applyConditionalCopies(rules) {
+    (rules || []).forEach((rule) => {
+      const selected = form.querySelector(`input[type="radio"][name="${CSS.escape(rule.group || "")}"]:checked`);
+      if (selected?.value !== rule.value) return;
+      (rule.fields || []).forEach((mapping) => {
+        const source = document.getElementById(mapping.source);
+        const target = document.getElementById(mapping.target);
+        if (source && target) target.value = source.value;
+      });
+    });
+  }
+
+  function bindConditionalCopies(rules) {
+    (rules || []).forEach((rule) => {
+      form.querySelectorAll(`input[type="radio"][name="${CSS.escape(rule.group || "")}"]`).forEach((control) => {
+        control.addEventListener("change", () => applyConditionalCopies([rule]));
+      });
+      (rule.fields || []).forEach((mapping) => {
+        document.getElementById(mapping.source)?.addEventListener("input", () => applyConditionalCopies([rule]));
+      });
+    });
+    applyConditionalCopies(rules);
+  }
+
+  function updateRoleSync(rule) {
+    if (!rule?.group || !rule.targetSelector) return;
+    const target = form.querySelector(rule.targetSelector);
+    if (!target) return;
+    const selected = form.querySelector(`input[type="radio"][name="${CSS.escape(rule.group)}"]:checked`);
+    target.textContent = selected
+      ? `${selected.value}${rule.suffix || ""}`
+      : (rule.emptyText || "");
+  }
+
+  function bindRoleSync(rule) {
+    if (!rule?.group) return;
+    form.querySelectorAll(`input[type="radio"][name="${CSS.escape(rule.group)}"]`).forEach((control) => {
+      control.addEventListener("change", () => updateRoleSync(rule));
+    });
+    updateRoleSync(rule);
+  }
+
   function setFieldError(control, message) {
     if (!control?.id) return;
     const output = document.getElementById(`${control.id}Error`);
@@ -854,6 +968,8 @@
       ? schema.syncNames
       : (schema.syncName ? [schema.syncName] : []);
     bindNameSync(syncRules);
+    bindConditionalCopies(schema.copyWhen);
+    bindRoleSync(schema.syncRole);
     updateConditionals();
     updateAllDates();
     resizeAllTextareas();
@@ -885,6 +1001,8 @@
     });
     clearValidationSummary();
     updateConditionals();
+    applyConditionalCopies(activeSchema?.copyWhen);
+    updateRoleSync(activeSchema?.syncRole);
     updateAllDates();
     resizeAllTextareas();
     resizeTitleChoice();
