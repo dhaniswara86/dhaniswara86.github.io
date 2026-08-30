@@ -693,6 +693,7 @@
 
   function renderPkpRetailForm(block) {
     const frame = createElement("div", "pkp-form-frame pkp-retail-frame");
+    addClasses(frame, block.className);
     const header = createElement("header", "pkp-document-header");
     const institution = createElement("div", "pkp-institution");
     institution.append(
@@ -734,6 +735,15 @@
       identity.appendChild(row);
     });
     frame.appendChild(identity);
+
+    if (block.category) {
+      const category = createElement("section", "pkp-section pkp-dm-category-section");
+      category.appendChild(sectionHeading(block.category.letter || "B.", block.category.title || ""));
+      category.appendChild(
+        createCheckbox(block.category.field || {}, block.category.text || "", "pkp-dm-category-line")
+      );
+      frame.appendChild(category);
+    }
 
     const statement = createElement("section", "pkp-section pkp-statement-section pkp-retail-statement-section");
     statement.appendChild(sectionHeading(block.statement?.letter || "B.", block.statement?.title || ""));
