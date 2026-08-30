@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "id": "penetapan-pkp-toko-retail",
+  "title": "Formulir Penetapan Status Pengusaha Kena Pajak Toko Retail",
+  "description": "Lengkapi formulir penetapan status Pengusaha Kena Pajak Toko Retail sesuai dokumen sumber.",
+  "type": "form",
+  "renderer": "pkp-classic",
+  "printPageSize": "A4 portrait",
+  "blocks": [
+    {
+      "type": "pkp-retail-form",
+      "header": {
+        "ministry": "KEMENTERIAN KEUANGAN REPUBLIK INDONESIA",
+        "agency": "DIREKTORAT JENDERAL PAJAK",
+        "title": "FORMULIR PENETAPAN STATUS PENGUSAHA KENA PAJAK TOKO RETAIL",
+        "instruction": "SEMUA INFORMASI HARAP DIISI DENGAN HURUF KAPITAL/CETAK. Isi atau beri tanda x pada kotak jawaban yang sesuai.",
+        "instructionNote": "(Lihat petunjuk)"
+      },
+      "identity": {
+        "letter": "A.",
+        "title": "IDENTITAS WAJIB PAJAK",
+        "items": [
+          {
+            "number": "1.",
+            "label": "Nomor Pokok Wajib Pajak",
+            "field": {
+              "id": "npwp",
+              "label": "Nomor Pokok Wajib Pajak",
+              "validationLabel": "Nomor Pokok Wajib Pajak",
+              "type": "npwp",
+              "required": true,
+              "cells": 16,
+              "columns": 16,
+              "widthMm": 78
+            }
+          },
+          {
+            "number": "2.",
+            "label": "Nama Wajib Pajak",
+            "field": {
+              "id": "namaWajibPajak",
+              "label": "Nama Wajib Pajak",
+              "required": true,
+              "uppercase": true,
+              "cells": 50,
+              "columns": 25,
+              "widthMm": 119
+            }
+          }
+        ]
+      },
+      "statement": {
+        "letter": "B.",
+        "title": "PERNYATAAN",
+        "field": {
+          "id": "pernyataanKebenaran",
+          "label": "Pernyataan kebenaran dan kelengkapan data",
+          "required": true
+        },
+        "text": "Dengan menyadari sepenuhnya akan segala akibatnya termasuk sanksi sesuai dengan ketentuan peraturan perundang-undangan yang berlaku, saya menyatakan bahwa apa yang saya sampaikan di atas adalah benar dan lengkap, dan saya menyetujui untuk menggunakan Akun Wajib Pajak saya sebagai sarana penerimaan surat dan dokumen perpajakan."
+      },
+      "approval": {
+        "official": {
+          "reviewedText": "Telah diteliti:",
+          "officerText": "Petugas,",
+          "checks": [
+            "Lengkap dan Benar"
+          ]
+        },
+        "applicant": {
+          "roleText": "Pemohon,",
+          "placeField": {
+            "id": "tempatTtd",
+            "label": "Tempat penandatanganan",
+            "required": true
+          },
+          "dateField": {
+            "id": "tanggalTtd",
+            "label": "Tanggal penandatanganan",
+            "required": true
+          },
+          "nameField": {
+            "id": "namaPemohon",
+            "label": "Nama Pemohon",
+            "required": true,
+            "placeholder": "Nama lengkap"
+          }
+        }
+      }
+    }
+  ],
+  "syncName": {
+    "source": "namaWajibPajak",
+    "target": "namaPemohon"
+  }
+}
