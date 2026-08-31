@@ -5,18 +5,8 @@
   "renderer": "letter-classic",
   "title": "Permohonan SKB PPh Bunga Deposito, Tabungan, dan Diskonto SBI",
   "description": "Formulir interaktif permohonan Surat Keterangan Bebas Pemotongan Pajak Penghasilan atas bunga deposito dan tabungan serta diskonto Sertifikat Bank Indonesia bagi Dana Pensiun.",
-  "notice": "Isi identitas penandatangan dan Dana Pensiun, dasar pengesahan, nama bank, centang seluruh pernyataan, lalu isi tempat/tanggal dan nama penandatangan. Data hanya diproses pada perangkat Anda.",
+  "notice": "Versi sederhana yang kompatibel dengan Form Engine lama. Isi seluruh data secara manual. Tidak ada sinkronisasi otomatis atau logic kondisional. Data hanya diproses pada perangkat Anda.",
   "formTitle": "",
-  "layout": {
-    "showFormTitle": false,
-    "paper": "A4",
-    "orientation": "portrait",
-    "style": "letter-classic",
-    "fieldLayout": {
-      "labelWidthMm": 31,
-      "colonWidthMm": 4
-    }
-  },
   "blocks": [
     {
       "type": "fields",
@@ -36,19 +26,19 @@
       ]
     },
     {
-      "type": "staticField",
-      "label": "Hal",
-      "text": "Permohonan Surat Keterangan Bebas Pemotongan Pajak Penghasilan atas Bunga Deposito dan Tabungan serta Diskonto Sertifikat Bank Indonesia"
+      "type": "paragraph",
+      "text": "Hal: Permohonan Surat Keterangan Bebas Pemotongan Pajak Penghasilan atas Bunga Deposito dan Tabungan serta Diskonto Sertifikat Bank Indonesia"
     },
     {
-      "type": "inlineField",
-      "prefix": "Yth. Kepala Kantor Pelayanan Pajak ",
-      "field": {
-        "id": "kpp",
-        "label": "Nama Kantor Pelayanan Pajak",
-        "type": "text",
-        "required": true
-      }
+      "type": "fields",
+      "fields": [
+        {
+          "id": "kpp",
+          "label": "Yth. Kepala Kantor Pelayanan Pajak",
+          "type": "text",
+          "required": true
+        }
+      ]
     },
     {
       "type": "paragraph",
@@ -56,7 +46,6 @@
     },
     {
       "type": "fields",
-      "indent": true,
       "fields": [
         {
           "id": "namaPenandatangan",
@@ -68,8 +57,7 @@
           "id": "npwpPenandatangan",
           "label": "NPWP",
           "validationLabel": "NPWP penandatangan",
-          "type": "text",
-          "inputMode": "numeric",
+          "type": "npwp",
           "required": true
         },
         {
@@ -77,34 +65,22 @@
           "label": "Jabatan",
           "type": "text",
           "required": true
+        },
+        {
+          "id": "statusPenandatangan",
+          "label": "Bertindak selaku",
+          "type": "text",
+          "placeholder": "Wajib Pajak / Wakil / Kuasa",
+          "required": true
         }
       ]
     },
     {
-      "type": "choice",
-      "id": "status",
-      "label": "Bertindak selaku *)",
-      "selection": "single",
-      "required": true,
-      "display": "checkbox-style-radio",
-      "options": [
-        {
-          "value": "Wajib Pajak",
-          "label": "Wajib Pajak"
-        },
-        {
-          "value": "Wakil",
-          "label": "Wakil"
-        },
-        {
-          "value": "Kuasa",
-          "label": "Kuasa, dari Wajib Pajak"
-        }
-      ]
+      "type": "paragraph",
+      "text": "Data Wajib Pajak/Dana Pensiun:"
     },
     {
       "type": "fields",
-      "indent": true,
       "fields": [
         {
           "id": "namaWp",
@@ -116,8 +92,7 @@
           "id": "npwpWp",
           "label": "NPWP",
           "validationLabel": "NPWP Wajib Pajak",
-          "type": "text",
-          "inputMode": "numeric",
+          "type": "npwp",
           "required": true
         },
         {
@@ -149,34 +124,65 @@
       ]
     },
     {
-      "type": "inlineField",
-      "prefix": "mengajukan permohonan untuk memperoleh Surat Keterangan Bebas Pemotongan Pajak Penghasilan atas Bunga Deposito dan Tabungan serta Diskonto Sertifikat Bank Indonesia, yang ditempatkan pada atau diterbitkan oleh Bank ",
-      "field": {
-        "id": "namaBank",
-        "label": "Nama bank",
-        "type": "text",
-        "required": true
-      },
-      "suffix": "."
+      "type": "paragraph",
+      "text": "mengajukan permohonan untuk memperoleh Surat Keterangan Bebas Pemotongan Pajak Penghasilan atas Bunga Deposito dan Tabungan serta Diskonto Sertifikat Bank Indonesia, yang ditempatkan pada atau diterbitkan oleh Bank:"
     },
     {
-      "type": "checklist",
-      "requiredAll": true,
-      "items": [
+      "type": "fields",
+      "fields": [
         {
-          "id": "pernyataanSumberDana",
-          "required": true,
-          "text": "Dana yang ditempatkan tersebut di atas diperoleh dari sumber pendapatan sebagaimana dimaksud dalam Pasal 29 Undang-Undang Nomor 11 Tahun 1992 tentang Dana Pensiun dan perubahannya."
-        },
+          "id": "namaBank",
+          "label": "Nama Bank",
+          "type": "text",
+          "required": true
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Pernyataan 1: Dana yang ditempatkan tersebut di atas diperoleh dari sumber pendapatan sebagaimana dimaksud dalam Pasal 29 Undang-Undang Nomor 11 Tahun 1992 tentang Dana Pensiun dan perubahannya."
+    },
+    {
+      "type": "fields",
+      "fields": [
         {
-          "id": "pernyataanLaporanOjk",
-          "required": true,
-          "text": "Kami menyatakan bahwa kami telah menyampaikan Laporan Berkala Dana Pensiun kepada Otoritas Jasa Keuangan."
-        },
+          "id": "konfirmasiPernyataan1",
+          "label": "Konfirmasi Pernyataan 1",
+          "type": "text",
+          "placeholder": "Ya",
+          "required": true
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Pernyataan 2: Kami menyatakan bahwa kami telah menyampaikan Laporan Berkala Dana Pensiun kepada Otoritas Jasa Keuangan."
+    },
+    {
+      "type": "fields",
+      "fields": [
         {
-          "id": "pernyataanRisiko",
-          "required": true,
-          "text": "Apabila data yang kami sampaikan dalam permohonan ini tidak benar, kami bersedia menanggung segala risiko dan sanksi sesuai dengan ketentuan perundang-undangan."
+          "id": "konfirmasiPernyataan2",
+          "label": "Konfirmasi Pernyataan 2",
+          "type": "text",
+          "placeholder": "Ya",
+          "required": true
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Pernyataan 3: Apabila data yang kami sampaikan dalam permohonan ini tidak benar, kami bersedia menanggung segala risiko dan sanksi sesuai dengan ketentuan perundang-undangan."
+    },
+    {
+      "type": "fields",
+      "fields": [
+        {
+          "id": "konfirmasiPernyataan3",
+          "label": "Konfirmasi Pernyataan 3",
+          "type": "text",
+          "placeholder": "Ya",
+          "required": true
         }
       ]
     },
@@ -185,29 +191,29 @@
       "text": "Demikian permohonan ini kami sampaikan."
     },
     {
-      "type": "signatureCustom",
-      "align": "right",
-      "placeDateField": {
-        "id": "tempatTanggal",
-        "label": "Tempat dan tanggal",
-        "type": "text",
-        "placeholder": "Contoh: Bandung, 17 Juli 2026",
+      "type": "signature",
+      "placeField": {
+        "id": "tempatTtd",
+        "label": "Tempat",
+        "placeholder": "Tempat",
+        "required": true
+      },
+      "dateField": {
+        "id": "tanggalTtd",
+        "label": "Tanggal",
         "required": true
       },
       "roleText": "Wajib Pajak/Wakil/Kuasa ***)",
-      "roleSource": "status",
       "nameField": {
         "id": "namaTtd",
-        "label": "Nama lengkap penandatangan",
-        "type": "text",
-        "placeholder": "Nama lengkap penandatangan",
+        "label": "Nama penandatangan",
+        "placeholder": "Nama lengkap",
         "required": true
-      },
-      "signatureSpaceMm": 22
+      }
     },
     {
       "type": "footnote",
-      "text": "*) Beri tanda (√) pada kotak yang disediakan sesuai dengan pihak yang mengajukan permohonan."
+      "text": "*) Diisi sesuai kedudukan pihak yang mengajukan permohonan: Wajib Pajak, Wakil, atau Kuasa."
     },
     {
       "type": "footnote",
@@ -217,93 +223,5 @@
       "type": "footnote",
       "text": "***) Coret yang tidak perlu."
     }
-  ],
-  "logic": {
-    "syncRules": [
-      {
-        "when": {
-          "field": "status",
-          "equals": "Wajib Pajak"
-        },
-        "copy": [
-          {
-            "source": "namaPenandatangan",
-            "target": "namaWp"
-          },
-          {
-            "source": "npwpPenandatangan",
-            "target": "npwpWp"
-          }
-        ],
-        "mode": "live"
-      },
-      {
-        "source": "namaPenandatangan",
-        "target": "namaTtd",
-        "mode": "until-target-manual-edit"
-      },
-      {
-        "source": "status",
-        "target": "signatureRole",
-        "mode": "display"
-      }
-    ],
-    "validation": {
-      "requiredFields": [
-        "nomor",
-        "lampiran",
-        "kpp",
-        "namaPenandatangan",
-        "npwpPenandatangan",
-        "jabatan",
-        "namaWp",
-        "npwpWp",
-        "alamatWp",
-        "klu",
-        "nomorPengesahan",
-        "tanggalPengesahan",
-        "namaBank",
-        "tempatTanggal",
-        "namaTtd"
-      ],
-      "requiredChoiceGroups": [
-        "status"
-      ],
-      "requiredChecks": [
-        "pernyataanSumberDana",
-        "pernyataanLaporanOjk",
-        "pernyataanRisiko"
-      ],
-      "onInvalid": {
-        "mode": "confirm-continue",
-        "messageTemplate": "Masih ada {count} bagian yang belum diisi atau dicentang. Tetap lanjut mencetak?"
-      }
-    },
-    "reset": {
-      "confirm": true,
-      "message": "Kosongkan seluruh isi formulir?",
-      "resetManualOverrides": [
-        "namaTtd"
-      ]
-    }
-  },
-  "guide": [
-    {
-      "title": "Identitas dan dasar pengesahan Dana Pensiun",
-      "text": "Isi identitas penandatangan dan Wajib Pajak, KLU, serta nomor dan tanggal surat pengesahan pendirian Dana Pensiun oleh Menteri Keuangan atau keputusan OJK."
-    },
-    {
-      "title": "Nama bank dan pernyataan",
-      "text": "Isi nama bank tempat dana ditempatkan atau yang menerbitkan instrumen, kemudian centang ketiga pernyataan sesuai keadaan sebenarnya."
-    },
-    {
-      "title": "Tanda tangan",
-      "text": "Isi tempat dan tanggal permohonan serta nama lengkap Wajib Pajak, Wakil, atau Kuasa yang menandatangani."
-    }
-  ],
-  "sourceMigration": {
-    "sourceType": "standalone-html",
-    "preserveFieldIds": true,
-    "notes": "Model mempertahankan ID field dan logic utama dari HTML sumber agar migrasi ke Form Engine Kabayan dapat dilakukan tanpa mengubah makna formulir."
-  }
+  ]
 }
