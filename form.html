@@ -7,242 +7,245 @@
   <title>Formulir | Kabayan</title>
   <link rel="stylesheet" href="assets/form-engine/form.css?v=20260831-12">
 
-  <style id="warisDynamicSignatureStyles">
-    .waris-engine-signature-source { display: none !important; }
-
-    .waris-signature-section { margin-top: 30px; }
-
-    .waris-place-date-row,
-    .waris-signature-columns {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      gap: clamp(28px, 6vw, 72px);
+  <style id="warisSignatureV3Styles">
+    /* Komponen khusus Surat Pernyataan Pembagian Waris.
+       Tidak mengubah renderer formulir lain. */
+    .waris-v3-signature {
+      margin-top: 30px;
     }
 
-    .waris-place-date-cell {
-      grid-column: 2;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      gap: 12px;
-      margin-bottom: 14px;
+    .waris-v3-editor {
+      margin-top: 20px;
+      padding: 20px;
+      border: 1px solid #d2d2d7;
+      border-radius: 18px;
+      background: #fafafa;
     }
 
-    .waris-inline-field,
-    .waris-primary-name-field {
-      display: grid;
-      gap: 6px;
+    .waris-v3-editor-title {
+      margin: 0 0 16px;
+      font-size: 17px;
+      font-weight: 700;
     }
 
-    .waris-inline-label,
-    .waris-primary-name-label,
-    .waris-heir-label {
+    .waris-v3-date-fields {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
+    .waris-v3-field {
+      display: grid;
+      gap: 7px;
+    }
+
+    .waris-v3-field > span,
+    .waris-v3-heir-label {
       color: #515154;
       font-size: 13px;
       font-weight: 600;
     }
 
-    .waris-inline-field input,
-    .waris-primary-name-field input,
-    .waris-heir-input {
+    .waris-v3-field input,
+    .waris-v3-heir-input {
       width: 100%;
-      min-height: 42px;
+      min-height: 44px;
       box-sizing: border-box;
-    }
-
-    .waris-signature-columns { align-items: start; }
-
-    .waris-signature-column { min-width: 0; }
-
-    .waris-signature-title {
-      margin: 0 0 14px;
+      padding: 9px 11px;
+      border: 1px solid #c7c7cc;
+      border-radius: 10px;
+      background: #fff;
+      color: #1d1d1f;
       font: inherit;
-      font-weight: 600;
-      line-height: 1.35;
     }
 
-    .waris-heir-list {
+    .waris-v3-field input:focus,
+    .waris-v3-heir-input:focus {
+      border-color: #0071e3;
+      outline: 3px solid rgba(0, 113, 227, .12);
+    }
+
+    .waris-v3-field input[aria-invalid="true"],
+    .waris-v3-heir-input[aria-invalid="true"] {
+      border-color: #c62828;
+      outline: 3px solid rgba(198, 40, 40, .10);
+    }
+
+    .waris-v3-editor-columns {
       display: grid;
-      gap: 12px;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 22px;
     }
 
-    .waris-heir-item {
-      position: relative;
-      padding: 14px;
-      border: 1px solid #d2d2d7;
+    .waris-v3-editor-column {
+      min-width: 0;
+      padding: 16px;
       border-radius: 14px;
       background: #fff;
     }
 
-    .waris-heir-label {
+    .waris-v3-editor-column h3 {
+      margin: 0 0 14px;
+      font-size: 16px;
+    }
+
+    .waris-v3-heir-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .waris-v3-heir-item {
+      position: relative;
+      padding: 12px;
+      border: 1px solid #e1e1e6;
+      border-radius: 12px;
+    }
+
+    .waris-v3-heir-label {
       display: block;
       margin-bottom: 7px;
     }
 
-    .waris-heir-input[aria-invalid="true"] {
-      outline: 2px solid #c62828;
-      outline-offset: 2px;
-    }
-
-    .waris-heir-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 12px;
-    }
-
-    .waris-add-heir,
-    .waris-remove-heir {
-      appearance: none;
+    .waris-v3-remove {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      padding: 5px 9px;
       border: 0;
       border-radius: 999px;
+      background: #f2f2f7;
+      color: #6e6e73;
       cursor: pointer;
-      font: inherit;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 600;
     }
 
-    .waris-add-heir {
-      padding: 10px 15px;
+    .waris-v3-actions {
+      margin-top: 11px;
+    }
+
+    .waris-v3-add {
+      padding: 9px 14px;
+      border: 0;
+      border-radius: 999px;
       background: #0071e3;
       color: #fff;
+      cursor: pointer;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 650;
     }
 
-    .waris-add-heir:hover { background: #0065cc; }
-
-    .waris-add-heir:disabled {
+    .waris-v3-add:disabled {
       cursor: not-allowed;
-      opacity: .55;
+      opacity: .5;
     }
 
-    .waris-remove-heir {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      padding: 6px 10px;
-      background: #f2f2f7;
-      color: #6e6e73;
-    }
-
-    .waris-primary-signature-body {
-      min-height: 150px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: stretch;
-    }
-
-    .waris-stamp {
-      width: 76px;
-      min-height: 46px;
-      display: grid;
-      place-items: center;
-      align-self: center;
-      margin: 8px auto 18px;
-      border: 1px solid #8e8e93;
-      border-radius: 4px;
-      color: #515154;
-      font-size: 12px;
+    /* Preview dokumen disembunyikan di layar pengisian.
+       Saat cetak, editor hilang dan preview ini yang tampil. */
+    .waris-v3-print {
+      display: none;
     }
 
     @media (max-width: 720px) {
-      .waris-place-date-row,
-      .waris-signature-columns {
+      .waris-v3-date-fields,
+      .waris-v3-editor-columns {
         grid-template-columns: 1fr;
-        gap: 22px;
-      }
-
-      .waris-place-date-cell {
-        grid-column: 1;
-        margin-bottom: 0;
       }
     }
 
     @media print {
-      .waris-signature-section {
-        margin-top: 22px;
-        break-inside: avoid;
-        page-break-inside: avoid;
-      }
-
-      .waris-place-date-row,
-      .waris-signature-columns {
-        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
-        gap: 54px !important;
-      }
-
-      .waris-place-date-cell {
-        grid-column: 2 !important;
-        display: grid !important;
-        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
-        gap: 10px !important;
-        margin-bottom: 6px !important;
-      }
-
-      .waris-inline-label,
-      .waris-primary-name-label,
-      .waris-heir-label,
-      .waris-heir-actions,
-      .waris-remove-heir {
+      .waris-v3-editor {
         display: none !important;
       }
 
-      .waris-signature-title {
+      .waris-v3-print {
+        display: block !important;
+        margin-top: 22px;
+        color: #000;
+        font: inherit;
+      }
+
+      .waris-v3-place-date-grid,
+      .waris-v3-sign-grid {
+        display: grid !important;
+        grid-template-columns: minmax(0, 1fr) 66px minmax(0, 1fr) !important;
+        column-gap: 22px !important;
+      }
+
+      .waris-v3-place-date {
+        grid-column: 3 !important;
+        min-height: 24px;
+        margin-bottom: 4px;
+        white-space: nowrap;
+      }
+
+      .waris-v3-sign-grid {
+        align-items: start;
+      }
+
+      .waris-v3-sign-title {
         margin: 0 !important;
         line-height: 1.35 !important;
         font-weight: 400 !important;
       }
 
-      .waris-heir-list { gap: 0 !important; }
+      .waris-v3-left,
+      .waris-v3-right {
+        min-width: 0;
+      }
 
-      .waris-heir-item {
-        min-height: 105px;
+      .waris-v3-left { grid-column: 1; }
+      .waris-v3-right { grid-column: 3; }
+
+      .waris-v3-left-list {
+        margin-top: 0;
+      }
+
+      .waris-v3-print-heir {
+        min-height: 94px;
         display: flex;
         align-items: flex-end;
-        padding: 0 0 8px !important;
-        border: 0 !important;
-        border-radius: 0 !important;
-        background: transparent !important;
       }
 
-      .waris-primary-signature-body {
-        min-height: 105px;
-        justify-content: space-between;
+      .waris-v3-print-heir-name,
+      .waris-v3-primary-name {
+        min-width: 180px;
+        padding: 0 3px 3px;
+        border-bottom: 1px dotted #000;
+        text-align: center;
+        line-height: 1.2;
       }
 
-      .waris-stamp {
-        width: 64px;
-        min-height: 38px;
-        margin: 18px auto 10px;
+      .waris-v3-primary-area {
+        min-height: 94px;
+        display: flex;
+        align-items: flex-end;
+      }
+
+      .waris-v3-primary-name {
+        width: 100%;
+      }
+
+      .waris-v3-stamp {
+        grid-column: 2;
+        grid-row: 2;
+        width: 62px;
+        height: 38px;
+        display: grid;
+        place-items: center;
+        box-sizing: border-box;
+        margin-top: 22px;
         border: 1px solid #000;
-        border-radius: 0;
-        color: #000;
         font-size: 11px;
       }
 
-      .waris-inline-field input,
-      .waris-primary-name-field input,
-      .waris-heir-input {
-        min-height: 0 !important;
-        padding: 0 2px 3px !important;
-        border: 0 !important;
-        border-bottom: 1px dotted #000 !important;
-        border-radius: 0 !important;
-        background: transparent !important;
-        box-shadow: none !important;
-        color: #000 !important;
-        font: inherit !important;
-        text-align: center;
-      }
-
-      .waris-place-date-cell .waris-inline-field:first-child {
-        position: relative;
-      }
-
-      .waris-place-date-cell .waris-inline-field:first-child::after {
-        content: ",";
-        position: absolute;
-        right: -7px;
-        bottom: 3px;
+      /* Sampai 3 ahli waris, jaga blok tetap satu kesatuan seperti contoh resmi.
+         Jika lebih banyak, browser boleh memecah ke halaman berikutnya. */
+      .waris-v3-print:not(.waris-v3-many) {
+        break-inside: avoid;
+        page-break-inside: avoid;
       }
     }
   </style>
@@ -358,299 +361,337 @@
   <script src="assets/form-engine/engine.js?v=20260831-12"></script>
 
 
-  <script id="warisDynamicSignatureExtension">
+  <script id="warisSignatureV3Extension">
     (() => {
       "use strict";
 
-      const TARGET_FORM_ID = "surat-pernyataan-pembagian-waris";
-      const activeFormId = new URLSearchParams(window.location.search).get("id");
-      if (activeFormId !== TARGET_FORM_ID) return;
+      const FORM_ID = "surat-pernyataan-pembagian-waris";
+      const activeId = new URLSearchParams(location.search).get("id");
+      if (activeId !== FORM_ID) return;
 
       const MAX_HEIRS = 20;
-      let heirSerial = 0;
+      const MONTHS_ID = [
+        "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+        "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+      ];
 
-      const getField = (id) =>
-        document.getElementById(id) || document.querySelector(`[name="${id}"]`);
+      const root = document.getElementById("formRoot");
+      const printButton = document.getElementById("printBtn");
+      const resetButton = document.getElementById("resetBtn");
+      let serial = 0;
 
-      const topLevelBlock = (root, element) => {
-        if (!root || !element) return null;
-        let node = element;
-        while (node.parentElement && node.parentElement !== root) {
-          node = node.parentElement;
-        }
-        return node.parentElement === root ? node : null;
+      const clearErrorBox = () => {
+        const box = document.getElementById("errorBox");
+        if (!box) return;
+        box.textContent = "";
+        box.style.display = "";
       };
 
-      const normalizeText = (value) =>
-        String(value || "").replace(/\s+/g, " ").trim().toLowerCase();
-
-      const removeLegacyHeirSection = (root) => {
-        const legacyIds = ["namaAhliWaris2", "namaAhliWaris3", "namaAhliWaris4"];
-        const legacyBlocks = new Set();
-
-        legacyIds.forEach((id) => {
-          const field = getField(id);
-          const block = topLevelBlock(root, field);
-          if (block) legacyBlocks.add(block);
-        });
-
-        legacyBlocks.forEach((block) => block.remove());
-
-        [...root.children].forEach((child) => {
-          const text = normalizeText(child.textContent);
-          if (
-            text === "mengetahui, ahli waris lainnya:" ||
-            text === "mengetahui, ahli waris lainnya"
-          ) {
-            child.remove();
-          }
-        });
-      };
-
-      const setError = (message, target) => {
-        const errorBox = document.getElementById("errorBox");
-        if (errorBox) {
-          errorBox.textContent = message;
-          errorBox.style.display = "block";
+      const setError = (message, input) => {
+        const box = document.getElementById("errorBox");
+        if (box) {
+          box.textContent = message;
+          box.style.display = "block";
         }
-        if (target) {
-          target.setAttribute("aria-invalid", "true");
-          target.focus({ preventScroll: true });
-          target.scrollIntoView({ behavior: "smooth", block: "center" });
+        if (input) {
+          input.setAttribute("aria-invalid", "true");
+          input.focus({ preventScroll: true });
+          input.scrollIntoView({ behavior: "smooth", block: "center" });
         }
       };
 
-      const clearError = (input) => {
-        if (input) input.removeAttribute("aria-invalid");
+      const formatDateId = (iso) => {
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(iso || "")) return "";
+        const [y, m, d] = iso.split("-").map(Number);
+        if (!y || !m || !d || m < 1 || m > 12) return "";
+        return `${d} ${MONTHS_ID[m - 1]} ${y}`;
       };
 
-      const makeField = (className, labelText, input) => {
-        const wrapper = document.createElement("label");
-        wrapper.className = className;
-
-        const label = document.createElement("span");
-        label.className =
-          className === "waris-primary-name-field"
-            ? "waris-primary-name-label"
-            : "waris-inline-label";
-        label.textContent = labelText;
-
-        wrapper.append(label, input);
-        return wrapper;
+      const createInputField = (labelText, input) => {
+        const label = document.createElement("label");
+        label.className = "waris-v3-field";
+        const text = document.createElement("span");
+        text.textContent = labelText;
+        label.append(text, input);
+        return label;
       };
 
-      const installWarisSignature = () => {
-        const root = document.getElementById("formRoot");
-        if (!root || root.dataset.warisSignatureReady === "true") return false;
+      const buildComponent = () => {
+        if (!root || root.dataset.warisV3Ready === "true") return false;
 
-        removeLegacyHeirSection(root);
-
-        const placeInput = getField("tempatTtd");
-        const dateInput = getField("tanggalTtd");
-        const primaryNameInput = getField("namaAhliWarisUtama");
-        if (!placeInput || !dateInput || !primaryNameInput) return false;
-
-        const blocks = [placeInput, dateInput, primaryNameInput].map((field) =>
-          topLevelBlock(root, field)
-        );
-
-        const signatureBlock =
-          blocks[0] && blocks.every((block) => block === blocks[0])
-            ? blocks[0]
-            : blocks.find(
-                (block) =>
-                  block &&
-                  block.contains(placeInput) &&
-                  block.contains(dateInput) &&
-                  block.contains(primaryNameInput)
-              );
-
-        if (!signatureBlock) return false;
+        /* Tanda render engine selesai: field isi utama sudah tersedia. */
+        if (!document.getElementById("namaPewaris")) return false;
 
         const section = document.createElement("section");
-        section.className = "waris-signature-section";
-        section.setAttribute("aria-label", "Tanda tangan seluruh ahli waris");
+        section.className = "waris-v3-signature";
+        section.id = "warisSignatureV3";
 
-        const placeDateRow = document.createElement("div");
-        placeDateRow.className = "waris-place-date-row";
+        const editor = document.createElement("div");
+        editor.className = "waris-v3-editor no-print";
 
-        const placeDateCell = document.createElement("div");
-        placeDateCell.className = "waris-place-date-cell";
-        placeDateCell.append(
-          makeField("waris-inline-field", "Tempat", placeInput),
-          makeField("waris-inline-field", "Tanggal", dateInput)
+        const editorTitle = document.createElement("p");
+        editorTitle.className = "waris-v3-editor-title";
+        editorTitle.textContent = "Tanda tangan seluruh ahli waris";
+
+        const dateFields = document.createElement("div");
+        dateFields.className = "waris-v3-date-fields";
+
+        const place = document.createElement("input");
+        place.type = "text";
+        place.id = "warisTempatTtd";
+        place.name = "warisTempatTtd";
+        place.placeholder = "Contoh: Bandung";
+        place.autocomplete = "off";
+
+        const date = document.createElement("input");
+        date.type = "date";
+        date.id = "warisTanggalTtd";
+        date.name = "warisTanggalTtd";
+
+        dateFields.append(
+          createInputField("Tempat", place),
+          createInputField("Tanggal", date)
         );
-        placeDateRow.appendChild(placeDateCell);
 
         const columns = document.createElement("div");
-        columns.className = "waris-signature-columns";
+        columns.className = "waris-v3-editor-columns";
 
         const left = document.createElement("div");
-        left.className = "waris-signature-column waris-signature-left";
-
-        const leftTitle = document.createElement("p");
-        leftTitle.className = "waris-signature-title";
+        left.className = "waris-v3-editor-column";
+        const leftTitle = document.createElement("h3");
         leftTitle.textContent = "Mengetahui,";
-
         const list = document.createElement("div");
-        list.className = "waris-heir-list";
-        list.id = "warisHeirList";
-
+        list.className = "waris-v3-heir-list";
+        list.id = "warisHeirListV3";
         const actions = document.createElement("div");
-        actions.className = "waris-heir-actions no-print";
-
-        const addButton = document.createElement("button");
-        addButton.type = "button";
-        addButton.className = "waris-add-heir";
-        addButton.id = "addWarisHeirBtn";
-        addButton.textContent = "+ Tambah Ahli Waris";
-
-        actions.appendChild(addButton);
+        actions.className = "waris-v3-actions";
+        const add = document.createElement("button");
+        add.type = "button";
+        add.className = "waris-v3-add";
+        add.textContent = "+ Tambah Ahli Waris";
+        actions.appendChild(add);
         left.append(leftTitle, list, actions);
 
         const right = document.createElement("div");
-        right.className = "waris-signature-column waris-signature-right";
-
-        const rightTitle = document.createElement("p");
-        rightTitle.className = "waris-signature-title";
+        right.className = "waris-v3-editor-column";
+        const rightTitle = document.createElement("h3");
         rightTitle.textContent = "Yang membuat pernyataan,";
-
-        const rightBody = document.createElement("div");
-        rightBody.className = "waris-primary-signature-body";
-
-        const stamp = document.createElement("div");
-        stamp.className = "waris-stamp";
-        stamp.textContent = "Meterai";
-
-        const nameField = makeField(
-          "waris-primary-name-field",
-          "Nama ahli waris yang membuat pernyataan",
-          primaryNameInput
+        const primary = document.createElement("input");
+        primary.type = "text";
+        primary.id = "warisNamaUtama";
+        primary.name = "warisNamaUtama";
+        primary.placeholder = "Nama lengkap";
+        primary.autocomplete = "off";
+        right.append(
+          rightTitle,
+          createInputField("Nama ahli waris yang membuat pernyataan", primary)
         );
 
-        rightBody.append(stamp, nameField);
-        right.append(rightTitle, rightBody);
-
         columns.append(left, right);
-        section.append(placeDateRow, columns);
+        editor.append(editorTitle, dateFields, columns);
 
-        signatureBlock.parentNode.insertBefore(section, signatureBlock);
-        signatureBlock.classList.add("waris-engine-signature-source");
-        signatureBlock.setAttribute("aria-hidden", "true");
+        /* Struktur cetak dibuat terpisah total dari input editor dan engine. */
+        const printView = document.createElement("div");
+        printView.className = "waris-v3-print";
 
-        const renumberHeirs = () => {
-          const items = [...list.querySelectorAll(".waris-heir-item")];
+        const placeDateGrid = document.createElement("div");
+        placeDateGrid.className = "waris-v3-place-date-grid";
+        const placeDateText = document.createElement("div");
+        placeDateText.className = "waris-v3-place-date";
+        placeDateGrid.appendChild(placeDateText);
 
-          items.forEach((item, index) => {
-            const label = item.querySelector(".waris-heir-label");
-            const input = item.querySelector(".waris-heir-input");
+        const signGrid = document.createElement("div");
+        signGrid.className = "waris-v3-sign-grid";
 
+        const printLeft = document.createElement("div");
+        printLeft.className = "waris-v3-left";
+        const printLeftTitle = document.createElement("p");
+        printLeftTitle.className = "waris-v3-sign-title";
+        printLeftTitle.textContent = "Mengetahui,";
+        const printHeirs = document.createElement("div");
+        printHeirs.className = "waris-v3-left-list";
+        printLeft.append(printLeftTitle, printHeirs);
+
+        const printRight = document.createElement("div");
+        printRight.className = "waris-v3-right";
+        const printRightTitle = document.createElement("p");
+        printRightTitle.className = "waris-v3-sign-title";
+        printRightTitle.textContent = "Yang membuat pernyataan,";
+        const primaryArea = document.createElement("div");
+        primaryArea.className = "waris-v3-primary-area";
+        const primaryName = document.createElement("div");
+        primaryName.className = "waris-v3-primary-name";
+        primaryArea.appendChild(primaryName);
+        printRight.append(printRightTitle, primaryArea);
+
+        const stamp = document.createElement("div");
+        stamp.className = "waris-v3-stamp";
+        stamp.textContent = "Meterai";
+
+        /* Judul berada pada grid row yang sama; isi tanda tangan di row berikutnya. */
+        printLeftTitle.style.gridColumn = "1";
+        printLeftTitle.style.gridRow = "1";
+        printRightTitle.style.gridColumn = "3";
+        printRightTitle.style.gridRow = "1";
+        printHeirs.style.gridColumn = "1";
+        printHeirs.style.gridRow = "2";
+        primaryArea.style.gridColumn = "3";
+        primaryArea.style.gridRow = "2";
+
+        signGrid.append(printLeftTitle, printRightTitle, printHeirs, stamp, primaryArea);
+        printView.append(placeDateGrid, signGrid);
+        section.append(editor, printView);
+        root.appendChild(section);
+
+        const heirInputs = () => [...list.querySelectorAll(".waris-v3-heir-input")];
+
+        const renumber = () => {
+          const inputs = heirInputs();
+          inputs.forEach((input, index) => {
+            const item = input.closest(".waris-v3-heir-item");
+            const label = item?.querySelector(".waris-v3-heir-label");
+            const remove = item?.querySelector(".waris-v3-remove");
             if (label) label.textContent = `Nama ahli waris ${index + 1}`;
-            if (input) {
-              input.setAttribute("aria-label", `Nama ahli waris ${index + 1}`);
-              input.placeholder = `Nama ahli waris ${index + 1}`;
-            }
+            input.placeholder = `Nama ahli waris ${index + 1}`;
+            input.setAttribute("aria-label", `Nama ahli waris ${index + 1}`);
+            if (remove) remove.hidden = inputs.length <= 1;
+          });
+          add.disabled = inputs.length >= MAX_HEIRS;
+        };
 
-            const remove = item.querySelector(".waris-remove-heir");
-            if (remove) remove.hidden = items.length <= 1;
+        const syncPrint = () => {
+          const formatted = formatDateId(date.value);
+          placeDateText.textContent = [place.value.trim(), formatted]
+            .filter(Boolean)
+            .join(", ");
+
+          printHeirs.replaceChildren();
+          heirInputs().forEach((input) => {
+            const row = document.createElement("div");
+            row.className = "waris-v3-print-heir";
+            const name = document.createElement("div");
+            name.className = "waris-v3-print-heir-name";
+            name.textContent = input.value.trim();
+            row.appendChild(name);
+            printHeirs.appendChild(row);
           });
 
-          addButton.disabled = items.length >= MAX_HEIRS;
-          addButton.setAttribute("aria-disabled", String(addButton.disabled));
+          primaryName.textContent = primary.value.trim();
+          printView.classList.toggle("waris-v3-many", heirInputs().length > 3);
         };
 
         const addHeir = (value = "") => {
-          const current = list.querySelectorAll(".waris-heir-item").length;
-          if (current >= MAX_HEIRS) return null;
-
-          heirSerial += 1;
+          if (heirInputs().length >= MAX_HEIRS) return null;
+          serial += 1;
 
           const item = document.createElement("div");
-          item.className = "waris-heir-item";
+          item.className = "waris-v3-heir-item";
 
           const label = document.createElement("label");
-          label.className = "waris-heir-label";
+          label.className = "waris-v3-heir-label";
 
           const input = document.createElement("input");
           input.type = "text";
-          input.className = "waris-heir-input";
-          input.id = `ahliWarisMengetahui_${heirSerial}`;
-          input.name = "ahliWarisMengetahui[]";
+          input.className = "waris-v3-heir-input";
+          input.id = `warisAhliWaris_${serial}`;
+          input.name = "warisAhliWaris[]";
           input.autocomplete = "off";
-          input.required = true;
           input.value = value;
           label.htmlFor = input.id;
 
           const remove = document.createElement("button");
           remove.type = "button";
-          remove.className = "waris-remove-heir no-print";
+          remove.className = "waris-v3-remove";
           remove.textContent = "Hapus";
-          remove.setAttribute("aria-label", "Hapus ahli waris ini");
-
-          input.addEventListener("input", () => clearError(input));
           remove.addEventListener("click", () => {
             item.remove();
-            renumberHeirs();
+            renumber();
+            syncPrint();
+          });
+
+          input.addEventListener("input", () => {
+            input.removeAttribute("aria-invalid");
+            syncPrint();
           });
 
           item.append(label, input, remove);
           list.appendChild(item);
-          renumberHeirs();
-
+          renumber();
+          syncPrint();
           return input;
         };
 
-        addButton.addEventListener("click", () => {
+        add.addEventListener("click", () => {
           const input = addHeir();
-          if (input) input.focus();
+          input?.focus();
+        });
+
+        [place, date, primary].forEach((input) => {
+          input.addEventListener("input", () => {
+            input.removeAttribute("aria-invalid");
+            syncPrint();
+          });
+          input.addEventListener("change", syncPrint);
         });
 
         addHeir();
+        syncPrint();
 
-        const resetButton = document.getElementById("resetBtn");
         if (resetButton) {
           resetButton.addEventListener("click", () => {
-            window.setTimeout(() => {
+            setTimeout(() => {
+              place.value = "";
+              date.value = "";
+              primary.value = "";
+              serial = 0;
               list.replaceChildren();
-              heirSerial = 0;
               addHeir();
+              clearErrorBox();
+              syncPrint();
             }, 0);
           });
         }
 
-        const printButton = document.getElementById("printBtn");
         if (printButton) {
-          printButton.addEventListener(
-            "click",
-            (event) => {
-              const inputs = [...list.querySelectorAll(".waris-heir-input")];
-              const empty = inputs.find((input) => !input.value.trim());
+          /* Capture: validasi custom dijalankan sebelum handler print milik engine. */
+          printButton.addEventListener("click", (event) => {
+            clearErrorBox();
 
-              if (!empty) return;
+            const checks = [
+              [place, "Isi tempat penandatanganan."],
+              [date, "Isi tanggal penandatanganan."],
+              [primary, "Isi nama ahli waris yang membuat pernyataan."]
+            ];
 
+            for (const [input, message] of checks) {
+              if (!input.value.trim()) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+                setError(message, input);
+                return;
+              }
+            }
+
+            const emptyHeir = heirInputs().find((input) => !input.value.trim());
+            if (emptyHeir) {
               event.preventDefault();
               event.stopImmediatePropagation();
-              setError(
-                "Isi nama seluruh ahli waris pada bagian Mengetahui sebelum membuat pratinjau cetak.",
-                empty
-              );
-            },
-            true
-          );
+              setError("Isi nama seluruh ahli waris pada bagian Mengetahui.", emptyHeir);
+              return;
+            }
+
+            syncPrint();
+          }, true);
         }
 
-        root.dataset.warisSignatureReady = "true";
+        root.dataset.warisV3Ready = "true";
         return true;
       };
 
-      const root = document.getElementById("formRoot");
-
-      if (!installWarisSignature() && root) {
+      if (!buildComponent() && root) {
         const observer = new MutationObserver(() => {
-          removeLegacyHeirSection(root);
-          if (installWarisSignature()) observer.disconnect();
+          if (buildComponent()) observer.disconnect();
         });
-
         observer.observe(root, { childList: true, subtree: true });
       }
     })();
