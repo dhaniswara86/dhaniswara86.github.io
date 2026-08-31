@@ -1,0 +1,146 @@
+{
+  "schemaVersion": 1,
+  "id": "surat-pernyataan-pembagian-waris",
+  "type": "letter",
+  "renderer": "letter-classic",
+  "title": "Surat Pernyataan Pembagian Waris",
+  "description": "Formulir interaktif Surat Pernyataan Pembagian Waris atas tanah dan/atau bangunan.",
+  "notice": "Isi identitas pewaris, data objek tanah dan/atau bangunan, serta nama seluruh ahli waris yang menandatangani surat. Data hanya diproses pada perangkat Anda.",
+  "formTitle": "SURAT PERNYATAAN PEMBAGIAN WARIS",
+  "blocks": [
+    {
+      "type": "paragraph",
+      "text": "Saya yang bertanda tangan di bawah ini adalah ahli waris dari:"
+    },
+    {
+      "type": "fields",
+      "fields": [
+        {
+          "id": "namaPewaris",
+          "label": "nama",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "nikNpwpPewaris",
+          "label": "NIK/NPWP",
+          "validationLabel": "NIK/NPWP pewaris",
+          "type": "npwp",
+          "required": true
+        },
+        {
+          "id": "alamatPewaris",
+          "label": "alamat",
+          "type": "textarea",
+          "rows": 2,
+          "required": true
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "dengan ini menyatakan bahwa saya telah menerima pembagian waris berupa tanah dan/atau bangunan dengan data objek pajak sebagai berikut:"
+    },
+    {
+      "type": "fields",
+      "fields": [
+        {
+          "id": "nop",
+          "label": "Nomor Objek Pajak",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "nib",
+          "label": "Nomor Identifikasi Bidang Tanah",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "alamatObjek",
+          "label": "alamat tanah dan/atau bangunan",
+          "type": "textarea",
+          "rows": 2,
+          "required": true
+        },
+        {
+          "id": "luasTanah",
+          "label": "luas tanah (m²)",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "luasBangunan",
+          "label": "luas bangunan (m²)",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "nilaiPengalihan",
+          "label": "nilai pengalihan (Rp)",
+          "type": "text",
+          "required": true
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Demikian surat pernyataan ini dibuat dengan sebenar-benarnya dan ditandatangani oleh seluruh ahli waris."
+    },
+    {
+      "type": "paragraph",
+      "text": "Mengetahui, ahli waris lainnya:"
+    },
+    {
+      "type": "fields",
+      "fields": [
+        {
+          "id": "namaAhliWaris2",
+          "label": "Ahli waris 2",
+          "type": "text",
+          "required": false
+        },
+        {
+          "id": "namaAhliWaris3",
+          "label": "Ahli waris 3",
+          "type": "text",
+          "required": false
+        },
+        {
+          "id": "namaAhliWaris4",
+          "label": "Ahli waris 4",
+          "type": "text",
+          "required": false
+        }
+      ]
+    },
+    {
+      "type": "signature",
+      "placeField": {
+        "id": "tempatTtd",
+        "label": "Tempat",
+        "placeholder": "Tempat",
+        "required": true
+      },
+      "dateField": {
+        "id": "tanggalTtd",
+        "label": "Tanggal",
+        "required": true
+      },
+      "roleText": "Yang membuat pernyataan,",
+      "nameField": {
+        "id": "namaAhliWarisUtama",
+        "label": "Nama ahli waris yang membuat pernyataan",
+        "placeholder": "Nama lengkap",
+        "required": true
+      }
+    },
+    {
+      "type": "footnote",
+      "text": "Seluruh ahli waris wajib menandatangani surat. Jika ahli waris lebih dari 4 orang, nama dan tanda tangan ahli waris lainnya dapat ditambahkan pada hasil cetak sesuai kebutuhan."
+    }
+  ],
+  "currencyFields": [
+    "nilaiPengalihan"
+  ]
+}
