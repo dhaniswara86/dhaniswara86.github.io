@@ -8,6 +8,7 @@
   const URL_ATTRIBUTES = new Set(["src", "href", "srcdoc", "action", "formaction"]);
   const DEFAULT_PAGE_SIZE = Object.freeze({ widthMm: 210, heightMm: 297 });
   const WARIS_SCHEMA_ID = "surat-pernyataan-pembagian-waris";
+  const SKB_TANAH_SCHEMA_ID = "permohonan-skb-pph-pengalihan-tanah-bangunan";
 
   const title = document.getElementById("previewTitle");
   const message = document.getElementById("printMessage");
@@ -66,6 +67,15 @@
 
 
   function prepareSchemaSpecificPreview(documentNode, payload) {
+    if (payload.schemaId === SKB_TANAH_SCHEMA_ID) {
+      documentNode.classList.add("print-static-skb-tanah");
+      documentNode.dataset.schemaId = SKB_TANAH_SCHEMA_ID;
+      documentNode.querySelectorAll(".skb-v1-editor").forEach((node) => node.remove());
+      const view = documentNode.querySelector(".skb-v1-print");
+      if (view) view.style.removeProperty("display");
+      return;
+    }
+
     if (payload.schemaId !== WARIS_SCHEMA_ID) return;
 
     documentNode.classList.add("print-static-waris");
