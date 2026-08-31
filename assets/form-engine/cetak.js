@@ -7,6 +7,7 @@
   const FORBIDDEN_ELEMENTS = "script, style, link, iframe, object, embed, input, textarea, select, button";
   const URL_ATTRIBUTES = new Set(["src", "href", "srcdoc", "action", "formaction"]);
   const DEFAULT_PAGE_SIZE = Object.freeze({ widthMm: 210, heightMm: 297 });
+  const WARIS_SCHEMA_ID = "surat-pernyataan-pembagian-waris";
 
   const title = document.getElementById("previewTitle");
   const message = document.getElementById("printMessage");
@@ -63,6 +64,39 @@
     return document.importNode(root, true);
   }
 
+
+  function prepareSchemaSpecificPreview(documentNode, payload) {
+    if (payload.schemaId !== WARIS_SCHEMA_ID) return;
+
+    documentNode.classList.add("print-static-waris");
+    documentNode.dataset.schemaId = WARIS_SCHEMA_ID;
+
+    /*
+      Editor interaktif tidak diperlukan pada halaman cetak. Hanya struktur
+      .waris-v3-print yang dipertahankan.
+    */
+    documentNode.querySelectorAll(".waris-v3-editor").forEach((node) => node.remove());
+
+    const printView = documentNode.querySelector(".waris-v3-print");
+    if (!printView) return;
+
+    printView.classList.add("waris-v3-static");
+
+    /*
+      Bersihkan style display yang mungkin ikut terserialisasi dari halaman form.
+      Posisi grid diatur sepenuhnya oleh CSS cetak.html.
+    */
+    printView.style.removeProperty("display");
+
+    const grid = printView.querySelector(".waris-v3-sign-grid");
+    if (grid) {
+      grid.querySelectorAll(".waris-v3-sign-title, .waris-v3-left-list, .waris-v3-stamp, .waris-v3-primary-area")
+        .forEach((node) => {
+          node.style.removeProperty("display");
+        });
+    }
+  }
+
   function normalizedPageSize(value) {
     const widthMm = Number(value?.widthMm);
     const heightMm = Number(value?.heightMm);
@@ -91,6 +125,7 @@
       const payload = readPayload();
       applyPageSize(payload.pageSize);
       const documentNode = sanitizeMarkup(payload.markup);
+      prepareSchemaSpecificPreview(documentNode, payload);
       mount.replaceChildren(documentNode);
       title.textContent = payload.title || "Pratinjau Cetak";
       document.title = `${payload.title || "Pratinjau Cetak"} | Kabayan`;
