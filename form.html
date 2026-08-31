@@ -8,22 +8,56 @@
   <link rel="stylesheet" href="assets/form-engine/form.css?v=20260831-12">
 
   <style id="warisDynamicSignatureStyles">
-    .waris-signature-layout {
+    .waris-engine-signature-source { display: none !important; }
+
+    .waris-signature-section { margin-top: 30px; }
+
+    .waris-place-date-row,
+    .waris-signature-columns {
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       gap: clamp(28px, 6vw, 72px);
-      align-items: start;
-      margin-top: 28px;
     }
 
-    .waris-signature-left {
-      min-width: 0;
-      padding-top: 48px;
+    .waris-place-date-cell {
+      grid-column: 2;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 12px;
+      margin-bottom: 14px;
     }
 
-    .waris-signature-left-title {
-      margin: 0 0 14px;
+    .waris-inline-field,
+    .waris-primary-name-field {
+      display: grid;
+      gap: 6px;
+    }
+
+    .waris-inline-label,
+    .waris-primary-name-label,
+    .waris-heir-label {
+      color: #515154;
+      font-size: 13px;
       font-weight: 600;
+    }
+
+    .waris-inline-field input,
+    .waris-primary-name-field input,
+    .waris-heir-input {
+      width: 100%;
+      min-height: 42px;
+      box-sizing: border-box;
+    }
+
+    .waris-signature-columns { align-items: start; }
+
+    .waris-signature-column { min-width: 0; }
+
+    .waris-signature-title {
+      margin: 0 0 14px;
+      font: inherit;
+      font-weight: 600;
+      line-height: 1.35;
     }
 
     .waris-heir-list {
@@ -42,15 +76,6 @@
     .waris-heir-label {
       display: block;
       margin-bottom: 7px;
-      color: #515154;
-      font-size: 13px;
-      font-weight: 600;
-    }
-
-    .waris-heir-input {
-      width: 100%;
-      min-height: 42px;
-      box-sizing: border-box;
     }
 
     .waris-heir-input[aria-invalid="true"] {
@@ -82,8 +107,11 @@
       color: #fff;
     }
 
-    .waris-add-heir:hover {
-      background: #0065cc;
+    .waris-add-heir:hover { background: #0065cc; }
+
+    .waris-add-heir:disabled {
+      cursor: not-allowed;
+      opacity: .55;
     }
 
     .waris-remove-heir {
@@ -95,59 +123,109 @@
       color: #6e6e73;
     }
 
-    .waris-signature-right {
-      min-width: 0;
+    .waris-primary-signature-body {
+      min-height: 150px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: stretch;
+    }
+
+    .waris-stamp {
+      width: 76px;
+      min-height: 46px;
+      display: grid;
+      place-items: center;
+      align-self: center;
+      margin: 8px auto 18px;
+      border: 1px solid #8e8e93;
+      border-radius: 4px;
+      color: #515154;
+      font-size: 12px;
     }
 
     @media (max-width: 720px) {
-      .waris-signature-layout {
+      .waris-place-date-row,
+      .waris-signature-columns {
         grid-template-columns: 1fr;
-        gap: 26px;
+        gap: 22px;
       }
 
-      .waris-signature-left {
-        padding-top: 0;
+      .waris-place-date-cell {
+        grid-column: 1;
+        margin-bottom: 0;
       }
     }
 
     @media print {
-      .waris-signature-layout {
-        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
-        gap: 54px !important;
+      .waris-signature-section {
+        margin-top: 22px;
         break-inside: avoid;
         page-break-inside: avoid;
-        margin-top: 20px;
       }
 
-      .waris-signature-left {
-        padding-top: 34px;
+      .waris-place-date-row,
+      .waris-signature-columns {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+        gap: 54px !important;
       }
 
-      .waris-heir-list {
-        gap: 0;
+      .waris-place-date-cell {
+        grid-column: 2 !important;
+        display: grid !important;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+        gap: 10px !important;
+        margin-bottom: 6px !important;
       }
 
-      .waris-heir-item {
-        min-height: 82px;
-        display: flex;
-        align-items: flex-end;
-        padding: 0 0 8px;
-        border: 0;
-        border-radius: 0;
-        background: transparent;
-      }
-
+      .waris-inline-label,
+      .waris-primary-name-label,
       .waris-heir-label,
       .waris-heir-actions,
       .waris-remove-heir {
         display: none !important;
       }
 
-      .waris-heir-input {
-        min-height: 0;
-        padding: 0 !important;
+      .waris-signature-title {
+        margin: 0 !important;
+        line-height: 1.35 !important;
+        font-weight: 400 !important;
+      }
+
+      .waris-heir-list { gap: 0 !important; }
+
+      .waris-heir-item {
+        min-height: 105px;
+        display: flex;
+        align-items: flex-end;
+        padding: 0 0 8px !important;
         border: 0 !important;
-        border-bottom: 1px solid #000 !important;
+        border-radius: 0 !important;
+        background: transparent !important;
+      }
+
+      .waris-primary-signature-body {
+        min-height: 105px;
+        justify-content: space-between;
+      }
+
+      .waris-stamp {
+        width: 64px;
+        min-height: 38px;
+        margin: 18px auto 10px;
+        border: 1px solid #000;
+        border-radius: 0;
+        color: #000;
+        font-size: 11px;
+      }
+
+      .waris-inline-field input,
+      .waris-primary-name-field input,
+      .waris-heir-input {
+        min-height: 0 !important;
+        padding: 0 2px 3px !important;
+        border: 0 !important;
+        border-bottom: 1px dotted #000 !important;
         border-radius: 0 !important;
         background: transparent !important;
         box-shadow: none !important;
@@ -155,8 +233,20 @@
         font: inherit !important;
         text-align: center;
       }
+
+      .waris-place-date-cell .waris-inline-field:first-child {
+        position: relative;
+      }
+
+      .waris-place-date-cell .waris-inline-field:first-child::after {
+        content: ",";
+        position: absolute;
+        right: -7px;
+        bottom: 3px;
+      }
     }
   </style>
+
 </head>
 <body id="top">
   <header class="site-nav no-print">
@@ -267,6 +357,7 @@
   </script>
   <script src="assets/form-engine/engine.js?v=20260831-12"></script>
 
+
   <script id="warisDynamicSignatureExtension">
     (() => {
       "use strict";
@@ -290,6 +381,32 @@
         return node.parentElement === root ? node : null;
       };
 
+      const normalizeText = (value) =>
+        String(value || "").replace(/\s+/g, " ").trim().toLowerCase();
+
+      const removeLegacyHeirSection = (root) => {
+        const legacyIds = ["namaAhliWaris2", "namaAhliWaris3", "namaAhliWaris4"];
+        const legacyBlocks = new Set();
+
+        legacyIds.forEach((id) => {
+          const field = getField(id);
+          const block = topLevelBlock(root, field);
+          if (block) legacyBlocks.add(block);
+        });
+
+        legacyBlocks.forEach((block) => block.remove());
+
+        [...root.children].forEach((child) => {
+          const text = normalizeText(child.textContent);
+          if (
+            text === "mengetahui, ahli waris lainnya:" ||
+            text === "mengetahui, ahli waris lainnya"
+          ) {
+            child.remove();
+          }
+        });
+      };
+
       const setError = (message, target) => {
         const errorBox = document.getElementById("errorBox");
         if (errorBox) {
@@ -303,13 +420,30 @@
         }
       };
 
-      const clearHeirError = (input) => {
+      const clearError = (input) => {
         if (input) input.removeAttribute("aria-invalid");
+      };
+
+      const makeField = (className, labelText, input) => {
+        const wrapper = document.createElement("label");
+        wrapper.className = className;
+
+        const label = document.createElement("span");
+        label.className =
+          className === "waris-primary-name-field"
+            ? "waris-primary-name-label"
+            : "waris-inline-label";
+        label.textContent = labelText;
+
+        wrapper.append(label, input);
+        return wrapper;
       };
 
       const installWarisSignature = () => {
         const root = document.getElementById("formRoot");
         if (!root || root.dataset.warisSignatureReady === "true") return false;
+
+        removeLegacyHeirSection(root);
 
         const placeInput = getField("tempatTtd");
         const dateInput = getField("tanggalTtd");
@@ -333,15 +467,29 @@
 
         if (!signatureBlock) return false;
 
-        const layout = document.createElement("section");
-        layout.className = "waris-signature-layout";
-        layout.setAttribute("aria-label", "Tanda tangan seluruh ahli waris");
+        const section = document.createElement("section");
+        section.className = "waris-signature-section";
+        section.setAttribute("aria-label", "Tanda tangan seluruh ahli waris");
+
+        const placeDateRow = document.createElement("div");
+        placeDateRow.className = "waris-place-date-row";
+
+        const placeDateCell = document.createElement("div");
+        placeDateCell.className = "waris-place-date-cell";
+        placeDateCell.append(
+          makeField("waris-inline-field", "Tempat", placeInput),
+          makeField("waris-inline-field", "Tanggal", dateInput)
+        );
+        placeDateRow.appendChild(placeDateCell);
+
+        const columns = document.createElement("div");
+        columns.className = "waris-signature-columns";
 
         const left = document.createElement("div");
-        left.className = "waris-signature-left";
+        left.className = "waris-signature-column waris-signature-left";
 
         const leftTitle = document.createElement("p");
-        leftTitle.className = "waris-signature-left-title";
+        leftTitle.className = "waris-signature-title";
         leftTitle.textContent = "Mengetahui,";
 
         const list = document.createElement("div");
@@ -361,32 +509,62 @@
         left.append(leftTitle, list, actions);
 
         const right = document.createElement("div");
-        right.className = "waris-signature-right";
+        right.className = "waris-signature-column waris-signature-right";
 
-        signatureBlock.parentNode.insertBefore(layout, signatureBlock);
-        right.appendChild(signatureBlock);
-        layout.append(left, right);
+        const rightTitle = document.createElement("p");
+        rightTitle.className = "waris-signature-title";
+        rightTitle.textContent = "Yang membuat pernyataan,";
+
+        const rightBody = document.createElement("div");
+        rightBody.className = "waris-primary-signature-body";
+
+        const stamp = document.createElement("div");
+        stamp.className = "waris-stamp";
+        stamp.textContent = "Meterai";
+
+        const nameField = makeField(
+          "waris-primary-name-field",
+          "Nama ahli waris yang membuat pernyataan",
+          primaryNameInput
+        );
+
+        rightBody.append(stamp, nameField);
+        right.append(rightTitle, rightBody);
+
+        columns.append(left, right);
+        section.append(placeDateRow, columns);
+
+        signatureBlock.parentNode.insertBefore(section, signatureBlock);
+        signatureBlock.classList.add("waris-engine-signature-source");
+        signatureBlock.setAttribute("aria-hidden", "true");
 
         const renumberHeirs = () => {
           const items = [...list.querySelectorAll(".waris-heir-item")];
+
           items.forEach((item, index) => {
             const label = item.querySelector(".waris-heir-label");
             const input = item.querySelector(".waris-heir-input");
+
             if (label) label.textContent = `Nama ahli waris ${index + 1}`;
-            if (input) input.setAttribute("aria-label", `Nama ahli waris ${index + 1}`);
+            if (input) {
+              input.setAttribute("aria-label", `Nama ahli waris ${index + 1}`);
+              input.placeholder = `Nama ahli waris ${index + 1}`;
+            }
 
             const remove = item.querySelector(".waris-remove-heir");
             if (remove) remove.hidden = items.length <= 1;
           });
+
           addButton.disabled = items.length >= MAX_HEIRS;
           addButton.setAttribute("aria-disabled", String(addButton.disabled));
         };
 
         const addHeir = (value = "") => {
           const current = list.querySelectorAll(".waris-heir-item").length;
-          if (current >= MAX_HEIRS) return;
+          if (current >= MAX_HEIRS) return null;
 
           heirSerial += 1;
+
           const item = document.createElement("div");
           item.className = "waris-heir-item";
 
@@ -398,7 +576,6 @@
           input.className = "waris-heir-input";
           input.id = `ahliWarisMengetahui_${heirSerial}`;
           input.name = "ahliWarisMengetahui[]";
-          input.placeholder = "Nama lengkap";
           input.autocomplete = "off";
           input.required = true;
           input.value = value;
@@ -410,7 +587,7 @@
           remove.textContent = "Hapus";
           remove.setAttribute("aria-label", "Hapus ahli waris ini");
 
-          input.addEventListener("input", () => clearHeirError(input));
+          input.addEventListener("input", () => clearError(input));
           remove.addEventListener("click", () => {
             item.remove();
             renumberHeirs();
@@ -419,6 +596,7 @@
           item.append(label, input, remove);
           list.appendChild(item);
           renumberHeirs();
+
           return input;
         };
 
@@ -447,6 +625,7 @@
             (event) => {
               const inputs = [...list.querySelectorAll(".waris-heir-input")];
               const empty = inputs.find((input) => !input.value.trim());
+
               if (!empty) return;
 
               event.preventDefault();
@@ -465,10 +644,13 @@
       };
 
       const root = document.getElementById("formRoot");
+
       if (!installWarisSignature() && root) {
         const observer = new MutationObserver(() => {
+          removeLegacyHeirSection(root);
           if (installWarisSignature()) observer.disconnect();
         });
+
         observer.observe(root, { childList: true, subtree: true });
       }
     })();
