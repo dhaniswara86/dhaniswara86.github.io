@@ -712,6 +712,261 @@
     }
   </style>
 
+
+  <style id="skbDepositoPdfStyle">
+    /* Renderer khusus SKB PPh bunga deposito/tabungan/diskonto SBI.
+       Hanya aktif pada elemen .skbdep-editor; tidak mengubah engine global. */
+    .skbdep-editor {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 26px 30px 18px;
+      border: 1px solid #8e8e93;
+      color: #1d1d1f;
+      background: #fff;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 15px;
+      line-height: 1.28;
+      text-align: left;
+    }
+
+    .skbdep-editor * { box-sizing: border-box; }
+
+    .skbdep-top-row,
+    .skbdep-data-row {
+      display: grid;
+      align-items: baseline;
+      column-gap: 7px;
+      min-height: 28px;
+    }
+
+    .skbdep-top-row {
+      grid-template-columns: 72px 10px minmax(0, 1fr);
+    }
+
+    .skbdep-data-row {
+      grid-template-columns: 205px 10px minmax(0, 1fr);
+    }
+
+    .skbdep-person .skbdep-data-row {
+      grid-template-columns: 70px 10px minmax(0, 1fr);
+    }
+
+    .skbdep-label { grid-column: 1; }
+    .skbdep-colon { grid-column: 2; text-align: center; }
+
+    .skbdep-editor input[type="text"],
+    .skbdep-editor input[type="date"] {
+      grid-column: 3;
+      width: 100%;
+      min-width: 0;
+      height: 25px;
+      padding: 2px 3px 1px;
+      border: 0;
+      border-bottom: 1px dotted #6e6e73;
+      border-radius: 0;
+      background: transparent;
+      color: #1d1d1f;
+      font: inherit;
+      outline: none;
+    }
+
+    .skbdep-editor input[type="text"]:focus,
+    .skbdep-editor input[type="date"]:focus {
+      border-bottom-color: #0071e3;
+      background: #f4f9ff;
+    }
+
+    .skbdep-hal {
+      align-items: start;
+      margin-bottom: 15px;
+    }
+
+    .skbdep-hal-text {
+      grid-column: 3;
+      line-height: 1.25;
+    }
+
+    .skbdep-kpp {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      margin: 0 0 16px;
+      white-space: nowrap;
+    }
+
+    .skbdep-kpp input {
+      flex: 1 1 auto;
+      width: auto !important;
+      grid-column: auto !important;
+    }
+
+    .skbdep-intro {
+      margin: 0 0 7px 38px;
+    }
+
+    .skbdep-person {
+      width: min(355px, 100%);
+      margin: 0 0 11px 25px;
+    }
+
+    .skbdep-status-title {
+      margin: 3px 0 7px;
+    }
+
+    .skbdep-choice-stack {
+      display: grid;
+      gap: 6px;
+      margin-bottom: 7px;
+    }
+
+    .skbdep-choice-line,
+    .skbdep-choice-pair {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .skbdep-choice-pair {
+      gap: 42px;
+    }
+
+    .skbdep-check-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .skbdep-editor input[type="radio"],
+    .skbdep-editor input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 25px;
+      height: 25px;
+      flex: 0 0 25px;
+      margin: 0;
+      border: 1px solid #6e6e73;
+      border-radius: 0;
+      background: #fff;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+    }
+
+    .skbdep-editor input[type="radio"]::before,
+    .skbdep-editor input[type="checkbox"]::before {
+      content: "✓";
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1;
+      transform: scale(0);
+    }
+
+    .skbdep-editor input[type="radio"]:checked::before,
+    .skbdep-editor input[type="checkbox"]:checked::before {
+      transform: scale(1);
+    }
+
+    .skbdep-wp-data {
+      width: min(560px, 100%);
+      margin: 0 0 11px 25px;
+    }
+
+    .skbdep-request {
+      margin: 7px 0 8px;
+      text-align: justify;
+    }
+
+    .skbdep-inline-bank {
+      display: inline-flex;
+      width: 225px;
+      max-width: 42%;
+      vertical-align: baseline;
+      margin: 0 3px;
+    }
+
+    .skbdep-inline-bank input {
+      width: 100% !important;
+      height: 22px !important;
+    }
+
+    .skbdep-declarations {
+      display: grid;
+      gap: 9px;
+      margin: 7px 0 10px;
+    }
+
+    .skbdep-declaration {
+      display: grid;
+      grid-template-columns: 27px minmax(0, 1fr);
+      gap: 8px;
+      align-items: start;
+      text-align: justify;
+    }
+
+    .skbdep-declaration input { margin-top: 1px !important; }
+
+    .skbdep-closing { margin: 8px 0 0 38px; }
+
+    .skbdep-signature {
+      width: 295px;
+      margin: 13px 10px 0 auto;
+      text-align: left;
+    }
+
+    .skbdep-sign-date {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 5px;
+      align-items: baseline;
+      margin-bottom: 3px;
+    }
+
+    .skbdep-sign-date input {
+      grid-column: auto !important;
+    }
+
+    .skbdep-role {
+      margin: 3px 0 0;
+    }
+
+    .skbdep-sign-space { height: 48px; }
+
+    .skbdep-sign-name input {
+      width: 165px !important;
+      margin-left: 0;
+      grid-column: auto !important;
+    }
+
+    .skbdep-footnotes {
+      margin-top: 12px;
+      font-size: 12px;
+      line-height: 1.3;
+    }
+
+    .skbdep-footnote {
+      display: grid;
+      grid-template-columns: 34px minmax(0,1fr);
+      gap: 0;
+    }
+
+    .skbdep-editor [aria-invalid="true"] {
+      background: #fff2f2 !important;
+      outline: 1px solid #d70015;
+      outline-offset: 1px;
+    }
+
+    @media (max-width: 720px) {
+      .skbdep-editor { padding: 20px 18px; font-size: 14px; }
+      .skbdep-data-row { grid-template-columns: minmax(130px, 40%) 8px minmax(0,1fr); }
+      .skbdep-person .skbdep-data-row { grid-template-columns: 68px 8px minmax(0,1fr); }
+      .skbdep-choice-pair { gap: 18px; flex-wrap: wrap; }
+      .skbdep-inline-bank { width: 180px; max-width: 60%; }
+      .skbdep-signature { width: min(280px, 80%); }
+    }
+  </style>
+
 </head>
 <body id="top">
   <header class="site-nav no-print">
@@ -1937,6 +2192,278 @@
 
     if (!install() && root) {
       const observer = new MutationObserver(() => { if (install()) observer.disconnect(); });
+      observer.observe(root, {childList:true, subtree:true});
+    }
+  })();
+  </script>
+
+
+  <script id="skbDepositoPdfRenderer">
+  (() => {
+    "use strict";
+
+    const TARGET = "permohonan-skb-pph-bunga-deposito-tabungan-diskonto-sbi";
+    const activeId = new URLSearchParams(location.search).get("id");
+    if (activeId !== TARGET) return;
+
+    const PRINT_PAYLOAD_KEY = "kabayan.printPayload.v1";
+    const root = document.getElementById("formRoot");
+    const errorBox = document.getElementById("errorBox");
+    const printBtn = document.getElementById("printBtn");
+    const resetBtn = document.getElementById("resetBtn");
+
+    const escapeHtml = (value) => String(value ?? "")
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+
+    const val = (id) => document.getElementById(id)?.value?.trim() || "";
+    const checked = (id) => Boolean(document.getElementById(id)?.checked);
+    const role = () => document.querySelector('input[name="skbdepStatus"]:checked')?.value || "";
+
+    const formatDate = (iso) => {
+      if (!iso || !/^\d{4}-\d{2}-\d{2}$/.test(iso)) return "";
+      const [y,m,d] = iso.split("-").map(Number);
+      const names = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
+      if (!y || m < 1 || m > 12 || d < 1 || d > 31) return "";
+      return `${d} ${names[m-1]} ${y}`;
+    };
+
+    const showError = (text, target) => {
+      if (errorBox) {
+        errorBox.textContent = text;
+        errorBox.style.display = "block";
+      }
+      if (target) {
+        target.setAttribute("aria-invalid", "true");
+        target.focus({preventScroll:true});
+        target.scrollIntoView({behavior:"smooth", block:"center"});
+      }
+    };
+
+    const clearError = () => {
+      if (errorBox) {
+        errorBox.textContent = "";
+        errorBox.style.display = "none";
+      }
+      root?.querySelectorAll('[aria-invalid="true"]').forEach((n) => n.removeAttribute("aria-invalid"));
+    };
+
+    const input = (id, attrs = "") => `<input id="${id}" type="text" ${attrs}>`;
+
+    const renderEditor = () => {
+      if (!root || root.dataset.skbdepReady === "1") return false;
+      if (root.querySelector(".loading-message")) return false;
+
+      root.innerHTML = `
+        <section class="skbdep-editor" aria-label="Permohonan SKB PPh bunga deposito, tabungan, dan diskonto SBI">
+          <div class="skbdep-top-row"><label class="skbdep-label" for="skbdepNomor">Nomor</label><span class="skbdep-colon">:</span>${input("skbdepNomor", "required")}</div>
+          <div class="skbdep-top-row"><label class="skbdep-label" for="skbdepLampiran">Lampiran</label><span class="skbdep-colon">:</span>${input("skbdepLampiran", "required")}</div>
+          <div class="skbdep-top-row skbdep-hal"><span class="skbdep-label">Hal</span><span class="skbdep-colon">:</span><div class="skbdep-hal-text">Permohonan Surat Keterangan Bebas Pemotongan Pajak Penghasilan atas Bunga Deposito dan Tabungan serta Diskonto Sertifikat Bank Indonesia</div></div>
+
+          <label class="skbdep-kpp">Yth. Kepala Kantor Pelayanan Pajak ${input("skbdepKpp", "required aria-label='Kantor Pelayanan Pajak'")}</label>
+
+          <p class="skbdep-intro">Yang bertanda tangan di bawah ini:</p>
+          <div class="skbdep-person">
+            <div class="skbdep-data-row"><label class="skbdep-label" for="skbdepNamaPemohon">Nama</label><span class="skbdep-colon">:</span>${input("skbdepNamaPemohon", "required")}</div>
+            <div class="skbdep-data-row"><label class="skbdep-label" for="skbdepNpwpPemohon">NPWP</label><span class="skbdep-colon">:</span>${input("skbdepNpwpPemohon", "required inputmode='numeric'")}</div>
+            <div class="skbdep-data-row"><label class="skbdep-label" for="skbdepJabatan">Jabatan</label><span class="skbdep-colon">:</span>${input("skbdepJabatan", "required")}</div>
+          </div>
+
+          <p class="skbdep-status-title">Bertindak selaku *)</p>
+          <div class="skbdep-choice-stack" role="radiogroup" aria-label="Bertindak selaku">
+            <div class="skbdep-choice-line">
+              <label class="skbdep-check-label"><input type="radio" name="skbdepStatus" value="Wajib Pajak"><span>Wajib Pajak</span></label>
+            </div>
+            <div class="skbdep-choice-pair">
+              <label class="skbdep-check-label"><input type="radio" name="skbdepStatus" value="Wakil"><span>Wakil</span></label>
+              <label class="skbdep-check-label"><input type="radio" name="skbdepStatus" value="Kuasa"><span>Kuasa, dari Wajib Pajak</span></label>
+            </div>
+          </div>
+
+          <div class="skbdep-wp-data">
+            <div class="skbdep-data-row"><label class="skbdep-label" for="skbdepNamaWp">Nama</label><span class="skbdep-colon">:</span>${input("skbdepNamaWp", "required")}</div>
+            <div class="skbdep-data-row"><label class="skbdep-label" for="skbdepNpwpWp">NPWP</label><span class="skbdep-colon">:</span>${input("skbdepNpwpWp", "required inputmode='numeric'")}</div>
+            <div class="skbdep-data-row"><label class="skbdep-label" for="skbdepAlamatWp">Alamat</label><span class="skbdep-colon">:</span>${input("skbdepAlamatWp", "required")}</div>
+            <div class="skbdep-data-row"><label class="skbdep-label" for="skbdepKlu">KLU</label><span class="skbdep-colon">:</span>${input("skbdepKlu", "required")}</div>
+            <div class="skbdep-data-row"><label class="skbdep-label" for="skbdepNomorPengesahan">Nomor KMK/KDK OJK**)</label><span class="skbdep-colon">:</span>${input("skbdepNomorPengesahan", "required")}</div>
+            <div class="skbdep-data-row"><label class="skbdep-label" for="skbdepTanggalPengesahan">Tanggal KMK/KDK OJK**)</label><span class="skbdep-colon">:</span>${input("skbdepTanggalPengesahan", "required placeholder='Contoh: 17 Juli 2026'")}</div>
+          </div>
+
+          <p class="skbdep-request">mengajukan permohonan untuk memperoleh Surat Keterangan Bebas Pemotongan Pajak Penghasilan atas Bunga Deposito dan Tabungan serta Diskonto Sertifikat Bank Indonesia, yang ditempatkan pada atau diterbitkan oleh Bank <span class="skbdep-inline-bank">${input("skbdepBank", "required aria-label='Nama bank'")}</span>.</p>
+
+          <div class="skbdep-declarations">
+            <label class="skbdep-declaration"><input id="skbdepDecl1" type="checkbox"><span>Dana yang ditempatkan tersebut di atas diperoleh dari sumber pendapatan sebagaimana dimaksud dalam Pasal 29 Undang-Undang Nomor 11 Tahun 1992 tentang Dana Pensiun dan perubahannya.</span></label>
+            <label class="skbdep-declaration"><input id="skbdepDecl2" type="checkbox"><span>Kami menyatakan bahwa kami telah menyampaikan Laporan Berkala Dana Pensiun kepada Otoritas Jasa Keuangan.</span></label>
+            <label class="skbdep-declaration"><input id="skbdepDecl3" type="checkbox"><span>Apabila data yang kami sampaikan dalam permohonan ini tidak benar, kami bersedia menanggung segala risiko dan sanksi sesuai dengan ketentuan perundang-undangan.</span></label>
+          </div>
+
+          <p class="skbdep-closing">Demikian permohonan ini kami sampaikan.</p>
+
+          <section class="skbdep-signature" aria-label="Tanda tangan">
+            <div class="skbdep-sign-date">
+              ${input("skbdepTempat", "required placeholder='Tempat' aria-label='Tempat penandatanganan'")}
+              <input id="skbdepTanggal" type="date" required aria-label="Tanggal penandatanganan">
+            </div>
+            <div class="skbdep-role">Wajib Pajak/Wakil/Kuasa ***)</div>
+            <div class="skbdep-sign-space"></div>
+            <div class="skbdep-sign-name">${input("skbdepNamaTtd", "required placeholder='Nama lengkap' aria-label='Nama penandatangan'")}</div>
+          </section>
+
+          <div class="skbdep-footnotes">
+            <div class="skbdep-footnote"><strong>*)</strong><span>Beri tanda (√) pada kotak yang disediakan sesuai dengan pihak yang mengajukan permohonan</span></div>
+            <div class="skbdep-footnote"><strong>**)</strong><span>Berdasarkan pengesahan pendirian Dana Pensiun</span></div>
+            <div class="skbdep-footnote"><strong>***)</strong><span>Coret yang tidak perlu</span></div>
+          </div>
+        </section>`;
+
+      root.dataset.skbdepReady = "1";
+      root.querySelectorAll("input").forEach((node) => {
+        node.addEventListener("input", () => node.removeAttribute("aria-invalid"));
+        node.addEventListener("change", () => node.removeAttribute("aria-invalid"));
+      });
+      return true;
+    };
+
+    const box = (on) => `<span style="display:inline-grid;width:18px;height:18px;border:1px solid #000;place-items:center;vertical-align:middle;margin-right:7px;font-size:14px;font-weight:700;line-height:1;">${on ? "✓" : ""}</span>`;
+    const dotted = (value, width="160px", align="left") => `<span style="display:inline-block;min-width:${width};padding:0 3px 2px;border-bottom:1px dotted #000;text-align:${align};">${escapeHtml(value) || "&nbsp;"}</span>`;
+
+    const staticRow = (label, value, labelWidth="185px") => `
+      <div style="display:grid;grid-template-columns:${labelWidth} 12px minmax(0,1fr);align-items:baseline;min-height:21px;column-gap:4px;">
+        <span>${escapeHtml(label)}</span><span style="text-align:center;">:</span><span style="border-bottom:1px dotted #000;min-height:18px;padding:0 3px 1px;">${escapeHtml(value) || "&nbsp;"}</span>
+      </div>`;
+
+    const buildPrintMarkup = () => {
+      const status = role();
+      const place = val("skbdepTempat");
+      const date = formatDate(document.getElementById("skbdepTanggal")?.value || "");
+      const placeDate = [place, date].filter(Boolean).join(", ");
+
+      return `
+<article class="paper print-static-paper" data-schema-id="${TARGET}" style="width:210mm;min-height:297mm;margin:0 auto;padding:16mm 17mm 13mm;box-sizing:border-box;background:#fff;color:#000;font-family:Arial,Helvetica,sans-serif;font-size:10.3pt;line-height:1.18;">
+  <div style="border:1px solid #777;padding:8mm 9mm 6mm;box-sizing:border-box;">
+    ${staticRow("Nomor", val("skbdepNomor"), "52px")}
+    ${staticRow("Lampiran", val("skbdepLampiran"), "52px")}
+    <div style="display:grid;grid-template-columns:52px 12px minmax(0,1fr);align-items:start;column-gap:4px;margin-bottom:6mm;">
+      <span>Hal</span><span style="text-align:center;">:</span><span>Permohonan Surat Keterangan Bebas Pemotongan Pajak Penghasilan atas Bunga Deposito dan Tabungan serta Diskonto Sertifikat Bank Indonesia</span>
+    </div>
+
+    <div style="margin-bottom:5mm;">Yth. Kepala Kantor Pelayanan Pajak ${dotted(val("skbdepKpp"), "185px")}</div>
+
+    <div style="margin-left:10mm;margin-bottom:2mm;">Yang bertanda tangan di bawah ini:</div>
+    <div style="width:78mm;margin-left:6mm;margin-bottom:3mm;">
+      ${staticRow("Nama", val("skbdepNamaPemohon"), "22mm")}
+      ${staticRow("NPWP", val("skbdepNpwpPemohon"), "22mm")}
+      ${staticRow("Jabatan", val("skbdepJabatan"), "22mm")}
+    </div>
+
+    <div style="margin-bottom:2mm;">Bertindak selaku *)</div>
+    <div style="display:grid;gap:2mm;margin-bottom:1.5mm;">
+      <div>${box(status === "Wajib Pajak")}Wajib Pajak</div>
+      <div style="display:flex;gap:21mm;align-items:center;"><span>${box(status === "Wakil")}Wakil</span><span>${box(status === "Kuasa")}Kuasa, dari Wajib Pajak</span></div>
+    </div>
+
+    <div style="width:112mm;margin-left:6mm;margin-bottom:3mm;">
+      ${staticRow("Nama", val("skbdepNamaWp"), "50mm")}
+      ${staticRow("NPWP", val("skbdepNpwpWp"), "50mm")}
+      ${staticRow("Alamat", val("skbdepAlamatWp"), "50mm")}
+      ${staticRow("KLU", val("skbdepKlu"), "50mm")}
+      ${staticRow("Nomor KMK/KDK OJK**)", val("skbdepNomorPengesahan"), "50mm")}
+      ${staticRow("Tanggal KMK/KDK OJK**)", val("skbdepTanggalPengesahan"), "50mm")}
+    </div>
+
+    <div style="margin:2mm 0 3mm;text-align:justify;">mengajukan permohonan untuk memperoleh Surat Keterangan Bebas Pemotongan Pajak Penghasilan atas Bunga Deposito dan Tabungan serta Diskonto Sertifikat Bank Indonesia, yang ditempatkan pada atau diterbitkan oleh Bank ${dotted(val("skbdepBank"), "48mm")}.</div>
+
+    <div style="display:grid;gap:2.5mm;margin:2mm 0 3mm;">
+      <div style="display:grid;grid-template-columns:20px minmax(0,1fr);gap:7px;align-items:start;text-align:justify;">${box(checked("skbdepDecl1"))}<span>Dana yang ditempatkan tersebut di atas diperoleh dari sumber pendapatan sebagaimana dimaksud dalam Pasal 29 Undang-Undang Nomor 11 Tahun 1992 tentang Dana Pensiun dan perubahannya.</span></div>
+      <div style="display:grid;grid-template-columns:20px minmax(0,1fr);gap:7px;align-items:start;text-align:justify;">${box(checked("skbdepDecl2"))}<span>Kami menyatakan bahwa kami telah menyampaikan Laporan Berkala Dana Pensiun kepada Otoritas Jasa Keuangan.</span></div>
+      <div style="display:grid;grid-template-columns:20px minmax(0,1fr);gap:7px;align-items:start;text-align:justify;">${box(checked("skbdepDecl3"))}<span>Apabila data yang kami sampaikan dalam permohonan ini tidak benar, kami bersedia menanggung segala risiko dan sanksi sesuai dengan ketentuan perundang-undangan.</span></div>
+    </div>
+
+    <div style="margin-left:10mm;">Demikian permohonan ini kami sampaikan.</div>
+
+    <div style="width:65mm;margin:5mm 4mm 0 auto;break-inside:avoid;page-break-inside:avoid;">
+      <div>${escapeHtml(placeDate) || "&nbsp;"}</div>
+      <div style="margin-top:1mm;">Wajib Pajak/Wakil/Kuasa ***)</div>
+      <div style="height:16mm;"></div>
+      <div>${dotted(val("skbdepNamaTtd"), "44mm")}</div>
+    </div>
+
+    <div style="margin-top:4mm;font-size:8.5pt;line-height:1.25;">
+      <div style="display:grid;grid-template-columns:11mm 1fr;"><strong>*)</strong><span>Beri tanda (√) pada kotak yang disediakan sesuai dengan pihak yang mengajukan permohonan</span></div>
+      <div style="display:grid;grid-template-columns:11mm 1fr;"><strong>**)</strong><span>Berdasarkan pengesahan pendirian Dana Pensiun</span></div>
+      <div style="display:grid;grid-template-columns:11mm 1fr;"><strong>***)</strong><span>Coret yang tidak perlu</span></div>
+    </div>
+  </div>
+</article>`;
+    };
+
+    const validate = () => {
+      clearError();
+      const requiredIds = [
+        "skbdepNomor","skbdepLampiran","skbdepKpp","skbdepNamaPemohon","skbdepNpwpPemohon","skbdepJabatan",
+        "skbdepNamaWp","skbdepNpwpWp","skbdepAlamatWp","skbdepKlu","skbdepNomorPengesahan","skbdepTanggalPengesahan",
+        "skbdepBank","skbdepTempat","skbdepTanggal","skbdepNamaTtd"
+      ];
+      for (const id of requiredIds) {
+        const node = document.getElementById(id);
+        if (!node?.value?.trim()) {
+          showError("Lengkapi seluruh bagian formulir sebelum membuat pratinjau cetak.", node);
+          return false;
+        }
+      }
+      if (!role()) {
+        showError("Pilih salah satu: Wajib Pajak, Wakil, atau Kuasa.", document.querySelector('input[name="skbdepStatus"]'));
+        return false;
+      }
+      for (const id of ["skbdepDecl1","skbdepDecl2","skbdepDecl3"]) {
+        const node = document.getElementById(id);
+        if (!node?.checked) {
+          showError("Centang ketiga pernyataan sebelum membuat pratinjau cetak.", node);
+          return false;
+        }
+      }
+      return true;
+    };
+
+    printBtn?.addEventListener("click", (event) => {
+      if (activeId !== TARGET || root?.dataset.skbdepReady !== "1") return;
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      if (!validate()) return;
+
+      const payload = {
+        version: 1,
+        schemaId: TARGET,
+        title: "Permohonan SKB PPh Bunga Deposito, Tabungan, dan Diskonto SBI",
+        markup: buildPrintMarkup(),
+        pageSize: {widthMm:210, heightMm:297},
+        expiresAt: Date.now() + 30 * 60 * 1000
+      };
+      sessionStorage.setItem(PRINT_PAYLOAD_KEY, JSON.stringify(payload));
+      location.assign("cetak.html");
+    }, true);
+
+    resetBtn?.addEventListener("click", (event) => {
+      if (activeId !== TARGET || root?.dataset.skbdepReady !== "1") return;
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      if (!confirm("Kosongkan seluruh isi formulir?")) return;
+      root.querySelectorAll("input").forEach((node) => {
+        if (node.type === "radio" || node.type === "checkbox") node.checked = false;
+        else node.value = "";
+        node.removeAttribute("aria-invalid");
+      });
+      clearError();
+      document.getElementById("skbdepNomor")?.focus();
+    }, true);
+
+    if (!renderEditor() && root) {
+      const observer = new MutationObserver(() => {
+        if (renderEditor()) observer.disconnect();
+      });
       observer.observe(root, {childList:true, subtree:true});
     }
   })();
