@@ -6,6 +6,157 @@
   <meta name="description" content="Kabayan Form Engine">
   <title>Formulir | Kabayan</title>
   <link rel="stylesheet" href="assets/form-engine/form.css?v=20260831-12">
+
+  <style id="warisDynamicSignatureStyles">
+    .waris-signature-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: clamp(28px, 6vw, 72px);
+      align-items: start;
+      margin-top: 28px;
+    }
+
+    .waris-signature-left {
+      min-width: 0;
+      padding-top: 48px;
+    }
+
+    .waris-signature-left-title {
+      margin: 0 0 14px;
+      font-weight: 600;
+    }
+
+    .waris-heir-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .waris-heir-item {
+      position: relative;
+      padding: 14px;
+      border: 1px solid #d2d2d7;
+      border-radius: 14px;
+      background: #fff;
+    }
+
+    .waris-heir-label {
+      display: block;
+      margin-bottom: 7px;
+      color: #515154;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .waris-heir-input {
+      width: 100%;
+      min-height: 42px;
+      box-sizing: border-box;
+    }
+
+    .waris-heir-input[aria-invalid="true"] {
+      outline: 2px solid #c62828;
+      outline-offset: 2px;
+    }
+
+    .waris-heir-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .waris-add-heir,
+    .waris-remove-heir {
+      appearance: none;
+      border: 0;
+      border-radius: 999px;
+      cursor: pointer;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .waris-add-heir {
+      padding: 10px 15px;
+      background: #0071e3;
+      color: #fff;
+    }
+
+    .waris-add-heir:hover {
+      background: #0065cc;
+    }
+
+    .waris-remove-heir {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 6px 10px;
+      background: #f2f2f7;
+      color: #6e6e73;
+    }
+
+    .waris-signature-right {
+      min-width: 0;
+    }
+
+    @media (max-width: 720px) {
+      .waris-signature-layout {
+        grid-template-columns: 1fr;
+        gap: 26px;
+      }
+
+      .waris-signature-left {
+        padding-top: 0;
+      }
+    }
+
+    @media print {
+      .waris-signature-layout {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+        gap: 54px !important;
+        break-inside: avoid;
+        page-break-inside: avoid;
+        margin-top: 20px;
+      }
+
+      .waris-signature-left {
+        padding-top: 34px;
+      }
+
+      .waris-heir-list {
+        gap: 0;
+      }
+
+      .waris-heir-item {
+        min-height: 82px;
+        display: flex;
+        align-items: flex-end;
+        padding: 0 0 8px;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+      }
+
+      .waris-heir-label,
+      .waris-heir-actions,
+      .waris-remove-heir {
+        display: none !important;
+      }
+
+      .waris-heir-input {
+        min-height: 0;
+        padding: 0 !important;
+        border: 0 !important;
+        border-bottom: 1px solid #000 !important;
+        border-radius: 0 !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        color: #000 !important;
+        font: inherit !important;
+        text-align: center;
+      }
+    }
+  </style>
 </head>
 <body id="top">
   <header class="site-nav no-print">
@@ -115,5 +266,213 @@
     }
   </script>
   <script src="assets/form-engine/engine.js?v=20260831-12"></script>
+
+  <script id="warisDynamicSignatureExtension">
+    (() => {
+      "use strict";
+
+      const TARGET_FORM_ID = "surat-pernyataan-pembagian-waris";
+      const activeFormId = new URLSearchParams(window.location.search).get("id");
+      if (activeFormId !== TARGET_FORM_ID) return;
+
+      const MAX_HEIRS = 20;
+      let heirSerial = 0;
+
+      const getField = (id) =>
+        document.getElementById(id) || document.querySelector(`[name="${id}"]`);
+
+      const topLevelBlock = (root, element) => {
+        if (!root || !element) return null;
+        let node = element;
+        while (node.parentElement && node.parentElement !== root) {
+          node = node.parentElement;
+        }
+        return node.parentElement === root ? node : null;
+      };
+
+      const setError = (message, target) => {
+        const errorBox = document.getElementById("errorBox");
+        if (errorBox) {
+          errorBox.textContent = message;
+          errorBox.style.display = "block";
+        }
+        if (target) {
+          target.setAttribute("aria-invalid", "true");
+          target.focus({ preventScroll: true });
+          target.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+      };
+
+      const clearHeirError = (input) => {
+        if (input) input.removeAttribute("aria-invalid");
+      };
+
+      const installWarisSignature = () => {
+        const root = document.getElementById("formRoot");
+        if (!root || root.dataset.warisSignatureReady === "true") return false;
+
+        const placeInput = getField("tempatTtd");
+        const dateInput = getField("tanggalTtd");
+        const primaryNameInput = getField("namaAhliWarisUtama");
+        if (!placeInput || !dateInput || !primaryNameInput) return false;
+
+        const blocks = [placeInput, dateInput, primaryNameInput].map((field) =>
+          topLevelBlock(root, field)
+        );
+
+        const signatureBlock =
+          blocks[0] && blocks.every((block) => block === blocks[0])
+            ? blocks[0]
+            : blocks.find(
+                (block) =>
+                  block &&
+                  block.contains(placeInput) &&
+                  block.contains(dateInput) &&
+                  block.contains(primaryNameInput)
+              );
+
+        if (!signatureBlock) return false;
+
+        const layout = document.createElement("section");
+        layout.className = "waris-signature-layout";
+        layout.setAttribute("aria-label", "Tanda tangan seluruh ahli waris");
+
+        const left = document.createElement("div");
+        left.className = "waris-signature-left";
+
+        const leftTitle = document.createElement("p");
+        leftTitle.className = "waris-signature-left-title";
+        leftTitle.textContent = "Mengetahui,";
+
+        const list = document.createElement("div");
+        list.className = "waris-heir-list";
+        list.id = "warisHeirList";
+
+        const actions = document.createElement("div");
+        actions.className = "waris-heir-actions no-print";
+
+        const addButton = document.createElement("button");
+        addButton.type = "button";
+        addButton.className = "waris-add-heir";
+        addButton.id = "addWarisHeirBtn";
+        addButton.textContent = "+ Tambah Ahli Waris";
+
+        actions.appendChild(addButton);
+        left.append(leftTitle, list, actions);
+
+        const right = document.createElement("div");
+        right.className = "waris-signature-right";
+
+        signatureBlock.parentNode.insertBefore(layout, signatureBlock);
+        right.appendChild(signatureBlock);
+        layout.append(left, right);
+
+        const renumberHeirs = () => {
+          const items = [...list.querySelectorAll(".waris-heir-item")];
+          items.forEach((item, index) => {
+            const label = item.querySelector(".waris-heir-label");
+            const input = item.querySelector(".waris-heir-input");
+            if (label) label.textContent = `Nama ahli waris ${index + 1}`;
+            if (input) input.setAttribute("aria-label", `Nama ahli waris ${index + 1}`);
+
+            const remove = item.querySelector(".waris-remove-heir");
+            if (remove) remove.hidden = items.length <= 1;
+          });
+          addButton.disabled = items.length >= MAX_HEIRS;
+          addButton.setAttribute("aria-disabled", String(addButton.disabled));
+        };
+
+        const addHeir = (value = "") => {
+          const current = list.querySelectorAll(".waris-heir-item").length;
+          if (current >= MAX_HEIRS) return;
+
+          heirSerial += 1;
+          const item = document.createElement("div");
+          item.className = "waris-heir-item";
+
+          const label = document.createElement("label");
+          label.className = "waris-heir-label";
+
+          const input = document.createElement("input");
+          input.type = "text";
+          input.className = "waris-heir-input";
+          input.id = `ahliWarisMengetahui_${heirSerial}`;
+          input.name = "ahliWarisMengetahui[]";
+          input.placeholder = "Nama lengkap";
+          input.autocomplete = "off";
+          input.required = true;
+          input.value = value;
+          label.htmlFor = input.id;
+
+          const remove = document.createElement("button");
+          remove.type = "button";
+          remove.className = "waris-remove-heir no-print";
+          remove.textContent = "Hapus";
+          remove.setAttribute("aria-label", "Hapus ahli waris ini");
+
+          input.addEventListener("input", () => clearHeirError(input));
+          remove.addEventListener("click", () => {
+            item.remove();
+            renumberHeirs();
+          });
+
+          item.append(label, input, remove);
+          list.appendChild(item);
+          renumberHeirs();
+          return input;
+        };
+
+        addButton.addEventListener("click", () => {
+          const input = addHeir();
+          if (input) input.focus();
+        });
+
+        addHeir();
+
+        const resetButton = document.getElementById("resetBtn");
+        if (resetButton) {
+          resetButton.addEventListener("click", () => {
+            window.setTimeout(() => {
+              list.replaceChildren();
+              heirSerial = 0;
+              addHeir();
+            }, 0);
+          });
+        }
+
+        const printButton = document.getElementById("printBtn");
+        if (printButton) {
+          printButton.addEventListener(
+            "click",
+            (event) => {
+              const inputs = [...list.querySelectorAll(".waris-heir-input")];
+              const empty = inputs.find((input) => !input.value.trim());
+              if (!empty) return;
+
+              event.preventDefault();
+              event.stopImmediatePropagation();
+              setError(
+                "Isi nama seluruh ahli waris pada bagian Mengetahui sebelum membuat pratinjau cetak.",
+                empty
+              );
+            },
+            true
+          );
+        }
+
+        root.dataset.warisSignatureReady = "true";
+        return true;
+      };
+
+      const root = document.getElementById("formRoot");
+      if (!installWarisSignature() && root) {
+        const observer = new MutationObserver(() => {
+          if (installWarisSignature()) observer.disconnect();
+        });
+        observer.observe(root, { childList: true, subtree: true });
+      }
+    })();
+  </script>
+
 </body>
 </html>
