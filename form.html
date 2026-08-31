@@ -251,52 +251,359 @@
   </style>
 
 
-  <style id="skbPphTanahBangunanV1Styles">
-    .skb-v1-editor { display: grid; gap: 18px; margin-top: 18px; }
-    .skb-v1-card { padding: 20px; border: 1px solid #d2d2d7; border-radius: 18px; background: #fff; }
-    .skb-v1-card h2 { margin: 0 0 5px; font-size: 18px; letter-spacing: -.02em; }
-    .skb-v1-card > p { margin: 0 0 15px; color: #6e6e73; font-size: 13px; line-height: 1.45; }
-    .skb-v1-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 13px 16px; }
-    .skb-v1-grid.three { grid-template-columns: repeat(3,minmax(0,1fr)); }
-    .skb-v1-field { display: grid; gap: 6px; min-width: 0; }
-    .skb-v1-field.full { grid-column: 1 / -1; }
-    .skb-v1-field > span, .skb-v1-group-title { color: #515154; font-size: 12px; font-weight: 650; }
-    .skb-v1-field input, .skb-v1-field textarea, .skb-v1-field select {
-      width: 100%; min-height: 42px; padding: 9px 11px; box-sizing: border-box;
-      border: 1px solid #c7c7cc; border-radius: 10px; background:#fff; color:#1d1d1f; font:inherit;
+  <style id="skbPphTanahBangunanV2Styles">
+    /* =========================================================
+       Permohonan SKB PPh Tanah/Bangunan — editor bergaya surat.
+       Mengikuti bahasa visual renderer letter-classic (Hibah):
+       naskah langsung, label : garis isian, tanpa kartu dashboard.
+       ========================================================= */
+    .skb-v1-editor {
+      display: block;
+      margin: 0;
+      color: #1d1d1f;
+      font-size: 16px;
+      line-height: 1.55;
     }
-    .skb-v1-field textarea { min-height: 82px; resize: vertical; }
-    .skb-v1-field input:focus, .skb-v1-field textarea:focus, .skb-v1-field select:focus {
-      outline: none; border-color:#0071e3; box-shadow:0 0 0 3px rgba(0,113,227,.10);
+
+    .skb-v1-editor-title {
+      max-width: 680px;
+      margin: 0 auto 34px;
+      font-size: 21px;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.3;
+      text-align: center;
     }
-    .skb-v1-field input[aria-invalid="true"], .skb-v1-field textarea[aria-invalid="true"] { border-color:#c62828; }
-    .skb-v1-options { display:flex; flex-wrap:wrap; gap:10px 18px; margin-top:8px; }
-    .skb-v1-option { display:inline-flex; align-items:flex-start; gap:8px; font-size:14px; line-height:1.35; }
-    .skb-v1-option input { margin-top:3px; }
-    .skb-v1-toggle-box { margin-top: 12px; padding: 13px 14px; border-radius: 12px; background:#f5f5f7; }
-    .skb-v1-table-editor { margin-top:12px; overflow-x:auto; }
-    .skb-v1-table-editor table { width:100%; min-width:680px; border-collapse:separate; border-spacing:0 8px; }
-    .skb-v1-table-editor th { padding:0 8px 3px; color:#6e6e73; font-size:11px; text-align:left; }
-    .skb-v1-table-editor td { padding:0 4px; vertical-align:middle; }
-    .skb-v1-table-editor input { width:100%; min-height:38px; padding:7px 9px; border:1px solid #c7c7cc; border-radius:9px; }
-    .skb-v1-row-no { width:42px; text-align:center; color:#515154; font-size:13px; }
-    .skb-v1-remove-row, .skb-v1-add-row { border:0; border-radius:999px; cursor:pointer; font:inherit; font-size:12px; font-weight:650; }
-    .skb-v1-remove-row { padding:7px 10px; background:#f2f2f7; color:#6e6e73; }
-    .skb-v1-add-row { padding:9px 13px; background:#0071e3; color:#fff; margin-top:7px; }
-    .skb-v1-add-row:disabled { opacity:.5; cursor:not-allowed; }
-    .skb-v1-attachments { display:grid; gap:9px; }
-    .skb-v1-attachment { display:flex; align-items:flex-start; gap:9px; font-size:13px; line-height:1.4; }
-    .skb-v1-attachment input { margin-top:3px; }
-    .skb-v1-subattachments { display:grid; gap:7px; margin:2px 0 4px 28px; }
-    .skb-v1-print { display:none; }
-    @media (max-width:760px) {
-      .skb-v1-grid, .skb-v1-grid.three { grid-template-columns:1fr; }
-      .skb-v1-field.full { grid-column:auto; }
-      .skb-v1-card { padding:16px; }
+
+    .skb-v1-card {
+      margin: 0 0 22px;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
     }
+
+    .skb-v1-card h2 {
+      margin: 0 0 9px;
+      color: #1d1d1f;
+      font-size: 16px;
+      font-weight: 400;
+      letter-spacing: normal;
+      line-height: 1.5;
+    }
+
+    .skb-v1-card h2:empty { display: none; }
+
+    .skb-v1-card > p {
+      margin: -3px 0 10px;
+      color: #6e6e73;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .skb-v1-letter-paragraph {
+      margin: 0 0 10px;
+    }
+
+    .skb-v1-grid,
+    .skb-v1-grid.three {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    .skb-v1-field,
+    .skb-v1-static-line {
+      display: grid;
+      grid-template-columns: minmax(190px, 34%) 14px minmax(0, 1fr);
+      column-gap: 7px;
+      align-items: start;
+      min-width: 0;
+      margin: 0;
+      padding: 0;
+    }
+
+    .skb-v1-field::after {
+      content: ":";
+      grid-column: 2;
+      grid-row: 1;
+      padding-top: 5px;
+      color: #1d1d1f;
+    }
+
+    .skb-v1-field > span {
+      grid-column: 1;
+      grid-row: 1;
+      padding-top: 5px;
+      color: #1d1d1f;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.4;
+    }
+
+    .skb-v1-field input,
+    .skb-v1-field textarea,
+    .skb-v1-field select {
+      grid-column: 3;
+      grid-row: 1;
+      width: 100%;
+      min-width: 0;
+      min-height: 34px;
+      box-sizing: border-box;
+      padding: 4px 5px 3px;
+      border: 0;
+      border-bottom: 1px solid #b5b5ba;
+      border-radius: 0;
+      background: transparent;
+      color: #1d1d1f;
+      font: inherit;
+      outline: none;
+    }
+
+    .skb-v1-field textarea {
+      min-height: 54px;
+      padding-top: 5px;
+      resize: vertical;
+    }
+
+    .skb-v1-field input:focus,
+    .skb-v1-field textarea:focus,
+    .skb-v1-field select:focus {
+      border-bottom-color: #0071e3;
+      box-shadow: 0 1px 0 #0071e3;
+    }
+
+    .skb-v1-field input[aria-invalid="true"],
+    .skb-v1-field textarea[aria-invalid="true"] {
+      border-bottom-color: #c62828;
+      box-shadow: 0 1px 0 #c62828;
+    }
+
+    .skb-v1-static-line > span:first-child {
+      grid-column: 1;
+      padding-top: 5px;
+    }
+
+    .skb-v1-static-colon {
+      grid-column: 2;
+      padding-top: 5px;
+      text-align: center;
+    }
+
+    .skb-v1-static-value {
+      grid-column: 3;
+      min-height: 34px;
+      padding: 5px 5px 3px;
+      border-bottom: 1px solid transparent;
+    }
+
+    .skb-v1-group-title {
+      margin: 10px 0 4px;
+      color: #1d1d1f;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.5;
+    }
+
+    .skb-v1-options {
+      display: grid;
+      gap: 5px;
+      margin: 3px 0 13px 32px;
+    }
+
+    .skb-v1-option {
+      display: inline-flex;
+      align-items: flex-start;
+      gap: 8px;
+      color: #1d1d1f;
+      font-size: 15px;
+      line-height: 1.45;
+    }
+
+    .skb-v1-option input,
+    .skb-v1-attachment input {
+      width: 16px;
+      height: 16px;
+      flex: 0 0 16px;
+      margin: 3px 0 0;
+      accent-color: #0071e3;
+    }
+
+    .skb-v1-condition-control {
+      margin: 3px 0 8px;
+      padding: 8px 10px;
+      border-left: 3px solid #0071e3;
+      background: #f5f9ff;
+      color: #424245;
+      font-size: 13px;
+    }
+
+    .skb-v1-toggle-box {
+      margin: 4px 0 16px 24px;
+      padding: 4px 0 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+    }
+
+    .skb-v1-table-editor {
+      margin: 14px 0 20px;
+      overflow-x: auto;
+    }
+
+    .skb-v1-table-editor > div:first-child {
+      margin-bottom: 7px;
+    }
+
+    .skb-v1-table-editor > div:first-child > div:not(.skb-v1-group-title) {
+      color: #6e6e73;
+      font-size: 12px;
+    }
+
+    .skb-v1-table-editor table {
+      width: 100%;
+      min-width: 650px;
+      border-collapse: collapse;
+      border-spacing: 0;
+      background: #fff;
+    }
+
+    .skb-v1-table-editor th,
+    .skb-v1-table-editor td {
+      border: 1px solid #b8b8bd;
+      padding: 5px 6px;
+      vertical-align: middle;
+    }
+
+    .skb-v1-table-editor th {
+      background: #fafafa;
+      color: #1d1d1f;
+      font-size: 12px;
+      font-weight: 500;
+      text-align: center;
+    }
+
+    .skb-v1-table-editor td { padding: 2px 5px; }
+
+    .skb-v1-table-editor input {
+      width: 100%;
+      min-height: 34px;
+      padding: 4px 3px;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      color: #1d1d1f;
+      font: inherit;
+      outline: none;
+    }
+
+    .skb-v1-table-editor input:focus {
+      box-shadow: inset 0 -2px 0 #0071e3;
+    }
+
+    .skb-v1-row-no {
+      width: 44px;
+      color: #515154;
+      font-size: 13px;
+      text-align: center;
+    }
+
+    .skb-v1-remove-row,
+    .skb-v1-add-row {
+      border: 0;
+      border-radius: 999px;
+      cursor: pointer;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .skb-v1-remove-row {
+      padding: 6px 9px;
+      background: #f2f2f7;
+      color: #6e6e73;
+    }
+
+    .skb-v1-add-row {
+      margin-top: 9px;
+      padding: 8px 13px;
+      background: #0071e3;
+      color: #fff;
+    }
+
+    .skb-v1-add-row:disabled { opacity: .5; cursor: not-allowed; }
+
+    .skb-v1-attachments {
+      display: grid;
+      gap: 7px;
+      margin-top: 6px;
+    }
+
+    .skb-v1-attachment {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      color: #1d1d1f;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .skb-v1-subattachments {
+      display: grid;
+      gap: 6px;
+      margin: 6px 0 0 30px;
+    }
+
+    .skb-v1-sign-editor {
+      width: min(360px, 100%);
+      margin: 22px 0 0 auto;
+    }
+
+    .skb-v1-print { display: none; }
+
+    @media (max-width: 700px) {
+      .skb-v1-editor { font-size: 15px; }
+      .skb-v1-editor-title { font-size: 18px; margin-bottom: 26px; }
+
+      .skb-v1-field,
+      .skb-v1-static-line {
+        grid-template-columns: 1fr;
+        margin-bottom: 9px;
+      }
+
+      .skb-v1-field::after,
+      .skb-v1-static-colon { display: none; }
+
+      .skb-v1-field > span,
+      .skb-v1-field input,
+      .skb-v1-field textarea,
+      .skb-v1-static-line > span:first-child,
+      .skb-v1-static-value {
+        grid-column: 1;
+      }
+
+      .skb-v1-field > span,
+      .skb-v1-static-line > span:first-child {
+        padding-top: 0;
+        color: #515154;
+        font-size: 13px;
+        font-weight: 600;
+      }
+
+      .skb-v1-field input,
+      .skb-v1-field textarea,
+      .skb-v1-static-value {
+        grid-row: 2;
+      }
+
+      .skb-v1-options { margin-left: 0; }
+      .skb-v1-toggle-box { margin-left: 0; }
+      .skb-v1-sign-editor { width: 100%; }
+    }
+
     @media print {
-      .skb-v1-editor { display:none!important; }
-      .skb-v1-print { display:block!important; color:#000; font-family:Arial,Helvetica,sans-serif; font-size:10.5pt; line-height:1.35; }
+      .skb-v1-editor { display: none !important; }
+      .skb-v1-print { display: block !important; color:#000; font-family:Arial,Helvetica,sans-serif; font-size:10.5pt; line-height:1.35; }
       .skb-v1-page { min-height:250mm; box-sizing:border-box; }
       .skb-v1-page:not(:last-child) { break-after:page; page-break-after:always; }
       .skb-v1-doc-title { margin:0 0 22px; text-align:center; font-size:13pt; line-height:1.3; }
@@ -785,7 +1092,7 @@
   </script>
 
 
-  <script id="skbPphTanahBangunanV1Extension">
+  <script id="skbPphTanahBangunanV2Extension">
   (() => {
     "use strict";
     const FORM_ID = "permohonan-skb-pph-pengalihan-tanah-bangunan";
@@ -840,6 +1147,16 @@
       if (opts.required) input.dataset.required = "1";
       wrap.append(caption, input);
       return wrap;
+    }
+
+    function staticLine(label, value) {
+      const row = el("div", "skb-v1-static-line");
+      row.append(
+        el("span", "", label),
+        el("span", "skb-v1-static-colon", ":"),
+        el("span", "skb-v1-static-value", value)
+      );
+      return row;
     }
 
     function card(title, desc="") {
@@ -935,53 +1252,102 @@
     }
 
     const editor = el("div","skb-v1-editor no-print");
+    const editorTitle = el("h1","skb-v1-editor-title","PERMOHONAN SURAT KETERANGAN BEBAS PAJAK PENGHASILAN ATAS PENGHASILAN DARI PENGALIHAN HAK ATAS TANAH DAN/ATAU BANGUNAN");
 
-    const c1=card("Surat dan tujuan permohonan");
-    const g1=el("div","skb-v1-grid three");
-    g1.append(field("skbNomor","Nomor"), field("skbLampiran","Lampiran"), field("skbKpp","Kantor Pelayanan Pajak tujuan", "text", {placeholder:"Contoh: KPP Pratama Bandung ...", required:true}));
+    const c1=card("");
+    const g1=el("div","skb-v1-grid");
+    g1.append(
+      field("skbNomor","Nomor"),
+      field("skbLampiran","Lampiran"),
+      staticLine("Hal","Permohonan Surat Keterangan Bebas Pajak Penghasilan atas Penghasilan dari Pengalihan Hak atas Tanah dan/atau Bangunan"),
+      field("skbKpp","Yth. Kepala Kantor Pelayanan Pajak", "text", {placeholder:"Contoh: KPP Pratama Bandung ...", required:true})
+    );
     c1.appendChild(g1);
 
-    const c2=card("Identitas pihak yang mengajukan", "Pilih kapasitas pihak yang menandatangani permohonan.");
-    const g2=el("div","skb-v1-grid three");
-    g2.append(field("skbPemohonNama","Nama", "text", {required:true}), field("skbPemohonNpwp","NPWP", "text", {required:true}), field("skbPemohonJabatan","Jabatan", "text", {required:true}));
+    const c2=card("Yang bertanda tangan di bawah ini:");
+    const g2=el("div","skb-v1-grid");
+    g2.append(
+      field("skbPemohonNama","Nama", "text", {required:true}),
+      field("skbPemohonNpwp","NPWP", "text", {required:true}),
+      field("skbPemohonJabatan","Jabatan", "text", {required:true})
+    );
     c2.appendChild(g2);
-    c2.append(el("div","skb-v1-group-title","Bertindak selaku"));
+    c2.append(el("div","skb-v1-group-title","Bertindak selaku *)"));
     const roles=el("div","skb-v1-options");
-    roles.append(optionRadio("skbPeran","Wajib Pajak","Wajib Pajak"), optionRadio("skbPeran","Wakil dari Wajib Pajak","Wakil dari Wajib Pajak"), optionRadio("skbPeran","Kuasa dari Wajib Pajak","Kuasa dari Wajib Pajak"));
+    roles.append(
+      optionRadio("skbPeran","Wajib Pajak","Wajib Pajak"),
+      optionRadio("skbPeran","Wakil dari Wajib Pajak","Wakil dari Wajib Pajak"),
+      optionRadio("skbPeran","Kuasa dari Wajib Pajak","Kuasa dari Wajib Pajak")
+    );
     c2.appendChild(roles);
 
-    const c3=card("Data Wajib Pajak");
+    const c3=card("");
     const g3=el("div","skb-v1-grid");
-    g3.append(field("skbWpNama","Nama", "text", {required:true}), field("skbWpNpwp","NPWP", "text", {required:true}), field("skbWpAlamat","Alamat", "textarea", {full:true,rows:2,required:true}), field("skbWpKlu","KLU", "text", {required:true}));
+    g3.append(
+      field("skbWpNama","Nama", "text", {required:true}),
+      field("skbWpNpwp","NPWP", "text", {required:true}),
+      field("skbWpAlamat","Alamat", "textarea", {full:true,rows:2,required:true}),
+      field("skbWpKlu","KLU", "text", {required:true})
+    );
     c3.appendChild(g3);
 
-    const c4=card("Alasan permohonan");
-    c4.appendChild(field("skbAlasan","Alasan memperoleh SKB PPh", "textarea", {full:true,rows:4,required:true}));
+    const c4=card("");
+    c4.appendChild(el("p","skb-v1-letter-paragraph","mengajukan permohonan untuk memperoleh Surat Keterangan Bebas (SKB) Pajak Penghasilan atas Penghasilan dari Pengalihan Hak atas Tanah dan/atau Bangunan dengan alasan:"));
+    c4.appendChild(field("skbAlasan","alasan", "textarea", {full:true,rows:3,required:true}));
 
-    const c5=card("Data penerima dan pemberi waris", "Bagian ini hanya diisi apabila alasan permohonan terkait pengalihan karena waris.");
-    const warisToggle=optionCheck("skbWarisAktif","Permohonan ini terkait pengalihan karena waris"); c5.appendChild(warisToggle);
+    const c5=card("Data Penerima dan Pemberi Waris: **)", "Bagian ini hanya diisi apabila alasan pengajuan permohonan terkait pengalihan harta berupa tanah dan/atau bangunan karena waris.");
+    const warisToggle=optionCheck("skbWarisAktif","Aktifkan bagian data waris");
+    warisToggle.classList.add("skb-v1-condition-control");
+    c5.appendChild(warisToggle);
     const warisBox=el("div","skb-v1-toggle-box");
-    const tableA=buildRepeatableTable("A","A. Ahli Waris dengan NIK telah diaktivasi atau ber-NPWP","");
-    const tableB=buildRepeatableTable("B","B. Ahli Waris dengan NIK belum diaktivasi atau Non-NPWP","");
+    const tableA=buildRepeatableTable("A","A. Pihak penerima pengalihan hak atas tanah dan/atau bangunan – Ahli Waris dengan NIK Telah Diaktivasi atau Ber-NPWP","");
+    const tableB=buildRepeatableTable("B","B. Pihak penerima pengalihan hak atas tanah dan/atau bangunan – Ahli Waris dengan NIK Belum Diaktivasi atau Non-NPWP","");
     const giverGrid=el("div","skb-v1-grid");
-    giverGrid.append(field("skbPemberiNama","Nama Pemberi Waris"), field("skbPemberiId","NPWP/NIK Pemberi Waris"), field("skbPemberiAlamat","Alamat Pemberi Waris","textarea",{full:true,rows:2}));
-    warisBox.append(tableA,tableB,el("div","skb-v1-group-title","Data Pemberi Waris"),giverGrid); c5.appendChild(warisBox);
+    giverGrid.append(
+      field("skbPemberiNama","Nama"),
+      field("skbPemberiId","NPWP/NIK"),
+      field("skbPemberiAlamat","Alamat","textarea",{full:true,rows:2})
+    );
+    warisBox.append(tableA,tableB,el("div","skb-v1-group-title","Data Pemberi Waris:"),giverGrid);
+    c5.appendChild(warisBox);
 
-    const c6=card("Bagian bersyarat lainnya");
-    const reportToggle=optionCheck("skbPelaporanAktif","Penghasilan telah dilaporkan dalam SPT Tahunan dan/atau PPh telah dilunasi");
-    const reportGrid=el("div","skb-v1-toggle-box"); reportGrid.appendChild(field("skbTahunPelunasan","Tahun pelaporan/pelunasan","text",{placeholder:"YYYY",maxlength:4,inputmode:"numeric"}));
-    const bookToggle=optionCheck("skbNilaiBukuAktif","Pengalihan terkait persetujuan penggunaan nilai buku dalam penggabungan/peleburan/pengambilalihan usaha");
-    const bookGrid=el("div","skb-v1-toggle-box"); const bg=el("div","skb-v1-grid"); bg.append(field("skbNomorSk","Nomor Surat Keputusan"),field("skbTanggalSk","Tanggal Surat Keputusan","date",{min:"1900-01-01",max:"2100-12-31"})); bookGrid.appendChild(bg);
+    const c6=card("");
+    const reportToggle=optionCheck("skbPelaporanAktif","Penghasilan atas pengalihan hak atas tanah dan/atau bangunan tersebut telah dilaporkan dalam SPT Tahunan Pajak Penghasilan (PPh) dan/atau PPh atas penghasilan tersebut telah dilunasi. ***)");
+    reportToggle.classList.add("skb-v1-condition-control");
+    const reportGrid=el("div","skb-v1-toggle-box");
+    reportGrid.appendChild(field("skbTahunPelunasan","tahun","text",{placeholder:"YYYY",maxlength:4,inputmode:"numeric"}));
+    const bookToggle=optionCheck("skbNilaiBukuAktif","Permohonan terkait persetujuan penggunaan nilai buku atas pengalihan harta dalam rangka penggabungan/peleburan/pengambilalihan usaha. ****)");
+    bookToggle.classList.add("skb-v1-condition-control");
+    const bookGrid=el("div","skb-v1-toggle-box");
+    const bg=el("div","skb-v1-grid");
+    bg.append(
+      field("skbNomorSk","Nomor Surat Keputusan"),
+      field("skbTanggalSk","tanggal","date",{min:"1900-01-01",max:"2100-12-31"})
+    );
+    bookGrid.appendChild(bg);
     c6.append(reportToggle,reportGrid,bookToggle,bookGrid);
 
-    const c7=card("Data Objek Pajak", "Format sumber menyatakan bagian ini hanya untuk 1 (satu) objek pengalihan tanah dan/atau bangunan.");
+    const c7=card("Dengan data Objek Pajak sebagai berikut:", "Bagian ini hanya untuk 1 (satu) objek pengalihan tanah dan/atau bangunan yang diajukan permohonan Surat Keterangan Bebas.");
     const g7=el("div","skb-v1-grid");
-    g7.append(field("skbNop","Nomor Objek Pajak (NOP)","text",{required:true}),field("skbNib","Nomor Identifikasi Bidang Tanah (NIB)","text",{required:true}),field("skbAlamatObjek","Alamat Tanah dan/atau Bangunan","textarea",{full:true,rows:2,required:true}),field("skbNomorKeputusan","Nomor Keputusan"),field("skbLuasTanah","Luas tanah (m²)","text",{required:true}),field("skbLuasBangunan","Luas bangunan (m²)","text",{required:true}),field("skbNilaiPengalihan","Nilai Pengalihan (Rp)","text",{required:true,inputmode:"numeric"}));
+    g7.append(
+      field("skbNop","Nomor Objek Pajak (NOP)","text",{required:true}),
+      field("skbNib","Nomor Identifikasi Bidang Tanah (NIB)","text",{required:true}),
+      field("skbAlamatObjek","Alamat Tanah dan/atau Bangunan","textarea",{full:true,rows:2,required:true}),
+      field("skbNomorKeputusan","Nomor Keputusan"),
+      field("skbLuasTanah","Luas tanah (m²)","text",{required:true}),
+      field("skbLuasBangunan","Luas bangunan (m²)","text",{required:true}),
+      field("skbNilaiPengalihan","Nilai Pengalihan (Rp)","text",{required:true,inputmode:"numeric"})
+    );
     c7.appendChild(g7);
 
-    const c8=card("Lawan transaksi");
+    const c8=card("Dengan lawan transaksi sebagai berikut:");
     const g8=el("div","skb-v1-grid");
-    g8.append(field("skbLawanNama","Nama","text",{required:true}),field("skbLawanId","NPWP/NIK","text",{required:true}),field("skbLawanAlamat","Alamat","textarea",{full:true,rows:2,required:true})); c8.appendChild(g8);
+    g8.append(
+      field("skbLawanNama","Nama","text",{required:true}),
+      field("skbLawanId","NPWP/NIK","text",{required:true}),
+      field("skbLawanAlamat","Alamat","textarea",{full:true,rows:2,required:true})
+    );
+    c8.appendChild(g8);
 
     const attachmentTexts = [
       "Salinan SPPT PBB",
@@ -1002,18 +1368,37 @@
       "Salinan bukti pembayaran atau penyetoran Pajak Penghasilan berupa salinan Surat Setoran Pajak atau Sarana Administrasi Lain yang Disamakan dengan Surat Setoran Pajak",
       "Salinan surat keterangan penelitian formal bukti pemenuhan kewajiban penyetoran Pajak Penghasilan atas penghasilan dari pengalihan hak atas tanah dan/atau bangunan atau perjanjian pengikatan jual beli atas tanah dan/atau bangunan beserta perubahannya"
     ];
-    const c9=card("Daftar lampiran", "Centang dokumen yang dilampirkan bersama permohonan.");
+    const c9=card("Untuk kelengkapan permohonan SKB, bersama ini kami lampirkan sebagai berikut:");
     const attWrap=el("div","skb-v1-attachments");
-    attachmentTexts.forEach((t,i)=>{ const lab=el("label","skb-v1-attachment"); const inp=document.createElement("input"); inp.type="checkbox"; inp.id=`skbAtt${i+1}`; lab.append(inp,document.createTextNode(`${i+1}. ${t}`)); attWrap.appendChild(lab); });
-    const subWrap=el("div","skb-v1-subattachments"); subTexts.forEach((t,i)=>{ const lab=el("label","skb-v1-attachment"); const inp=document.createElement("input"); inp.type="checkbox"; inp.id=`skbAtt10${String.fromCharCode(97+i)}`; lab.append(inp,document.createTextNode(`${String.fromCharCode(97+i)}. ${t}`)); subWrap.appendChild(lab); });
+    attachmentTexts.forEach((t,i)=>{
+      const lab=el("label","skb-v1-attachment");
+      const inp=document.createElement("input");
+      inp.type="checkbox"; inp.id=`skbAtt${i+1}`;
+      lab.append(inp,document.createTextNode(`${i+1}. ${t}`));
+      attWrap.appendChild(lab);
+    });
+    const subWrap=el("div","skb-v1-subattachments");
+    subTexts.forEach((t,i)=>{
+      const lab=el("label","skb-v1-attachment");
+      const inp=document.createElement("input");
+      inp.type="checkbox"; inp.id=`skbAtt10${String.fromCharCode(97+i)}`;
+      lab.append(inp,document.createTextNode(`${String.fromCharCode(97+i)}. ${t}`));
+      subWrap.appendChild(lab);
+    });
     c9.append(attWrap,subWrap);
 
-    const c10=card("Pernyataan dan tanda tangan");
-    const declaration=optionCheck("skbDeclaration","Saya menyatakan bahwa data dan dokumen yang disampaikan benar dan/atau sesuai dengan kondisi sebenarnya dan bersedia menerima sanksi serta konsekuensi sesuai ketentuan perundang-undangan apabila terdapat ketidakbenaran."); c10.appendChild(declaration);
-    const g10=el("div","skb-v1-grid three"); g10.style.marginTop="14px";
-    g10.append(field("skbTempatTtd","Tempat","text",{required:true}),field("skbTanggalTtd","Tanggal","date",{required:true,min:"1900-01-01",max:"2100-12-31"}),field("skbNamaTtd","Nama penandatangan","text",{required:true})); c10.appendChild(g10);
+    const c10=card("");
+    const declaration=optionCheck("skbDeclaration","Dengan ini kami menyatakan bahwa data dan dokumen yang kami sampaikan adalah benar dan/atau sesuai dengan kondisi sebenarnya, apabila diketahui terdapat ketidakbenaran atas data dan dokumen yang kami sampaikan kami bersedia menerima segala sanksi dan konsekuensinya sesuai dengan ketentuan perundang-undangan.");
+    c10.appendChild(declaration);
+    const g10=el("div","skb-v1-grid skb-v1-sign-editor");
+    g10.append(
+      field("skbTempatTtd","Tempat","text",{required:true}),
+      field("skbTanggalTtd","Tanggal","date",{required:true,min:"1900-01-01",max:"2100-12-31"}),
+      field("skbNamaTtd","Nama penandatangan","text",{required:true})
+    );
+    c10.appendChild(g10);
 
-    editor.append(c1,c2,c3,c4,c5,c6,c7,c8,c9,c10);
+    editor.append(editorTitle,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10);
 
     const printView=el("div","skb-v1-print");
     const p1=el("section","skb-v1-page"), p2=el("section","skb-v1-page"), p3=el("section","skb-v1-page");
@@ -1069,10 +1454,10 @@
     function fail(msg,node){ const b=byId("errorBox"); if(b){b.textContent=msg;b.style.display="block";} if(node){node.setAttribute("aria-invalid","true");node.focus({preventScroll:true});node.scrollIntoView({behavior:"smooth",block:"center"});} }
 
     function install() {
-      if (!root || root.dataset.skbV1Ready === "true") return false;
+      if (!root || root.dataset.skbV2Ready === "true") return false;
       if (!root.textContent.includes("Lengkapi data permohonan pada bagian di bawah ini.")) return false;
       root.replaceChildren(editor,printView);
-      root.dataset.skbV1Ready="true";
+      root.dataset.skbV2Ready="true";
 
       const money=byId("skbNilaiPengalihan"); money?.addEventListener("input",()=>{ const pos=money.selectionStart; money.value=formatMoney(money.value); syncPrint(); });
       const year=byId("skbTahunPelunasan"); year?.addEventListener("input",()=>{year.value=year.value.replace(/\D/g,"").slice(0,4);syncPrint();});
