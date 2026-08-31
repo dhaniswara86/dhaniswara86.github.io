@@ -251,9 +251,9 @@
   </style>
 
 
-  <style id="skbPphTanahBangunanV2Styles">
+  <style id="skbPphTanahBangunanV3Styles">
     /* =========================================================
-       Permohonan SKB PPh Tanah/Bangunan — editor bergaya surat.
+       Permohonan SKB PPh Tanah/Bangunan — editor bergaya surat + logic Petunjuk Pengisian.
        Mengikuti bahasa visual renderer letter-classic (Hibah):
        naskah langsung, label : garis isian, tanpa kartu dashboard.
        ========================================================= */
@@ -599,6 +599,85 @@
       .skb-v1-options { margin-left: 0; }
       .skb-v1-toggle-box { margin-left: 0; }
       .skb-v1-sign-editor { width: 100%; }
+    }
+
+
+
+    /* Logic-aware controls derived from Petunjuk Pengisian IX.1. */
+    .skb-v1-reason-help {
+      margin: 7px 0 0 calc(34% + 28px);
+      color: #6e6e73;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .skb-v1-logic-note {
+      margin: 8px 0 18px calc(34% + 28px);
+      padding: 9px 12px;
+      border-left: 3px solid #0071e3;
+      background: #f5f9ff;
+      color: #424245;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .skb-v1-conditional-section[hidden],
+    .skb-v1-field[hidden],
+    .skb-v1-attachment[hidden],
+    .skb-v1-subattachments[hidden] {
+      display: none !important;
+    }
+
+    .skb-v1-required-badge {
+      display: inline-flex;
+      margin-left: 7px;
+      padding: 1px 7px;
+      border-radius: 999px;
+      background: #fff1f0;
+      color: #b42318;
+      font-size: 10px;
+      font-weight: 700;
+      line-height: 1.7;
+      white-space: nowrap;
+    }
+
+    .skb-v1-attachment.is-required {
+      font-weight: 600;
+    }
+
+    .skb-v1-other-toggle {
+      margin: 11px 0 0 25px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: #0071e3;
+      cursor: pointer;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .skb-v1-other-toggle:hover { text-decoration: underline; }
+
+    .skb-v1-reason-select select {
+      line-height: 1.45;
+    }
+
+    .skb-v1-table-editor .skb-v1-group-title {
+      font-weight: 600;
+    }
+
+    .skb-v1-section-divider {
+      height: 1px;
+      margin: 25px 0 21px;
+      background: #e5e5ea;
+    }
+
+    @media (max-width: 700px) {
+      .skb-v1-reason-help,
+      .skb-v1-logic-note {
+        margin-left: 0;
+      }
     }
 
     @media print {
@@ -1091,10 +1170,10 @@
     })();
   </script>
 
-
-  <script id="skbPphTanahBangunanV2Extension">
+  <script id="skbPphTanahBangunanV3Extension">
   (() => {
     "use strict";
+
     const FORM_ID = "permohonan-skb-pph-pengalihan-tanah-bangunan";
     if (new URLSearchParams(location.search).get("id") !== FORM_ID) return;
 
@@ -1103,7 +1182,72 @@
     const resetButton = document.getElementById("resetBtn");
     const MONTHS = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
     const MAX_ROWS = 30;
-    let serialA = 0, serialB = 0;
+    let serialA = 0;
+    let serialB = 0;
+    let showOtherAttachments = false;
+    let lastApplicantName = "";
+
+    const REASONS = Object.freeze({
+      a: {
+        short: "Penghasilan di bawah PTKP; nilai bruto pengalihan kurang dari Rp60.000.000,00 dan bukan jumlah yang dipecah-pecah",
+        text: "mempunyai penghasilan di bawah Penghasilan Tidak Kena Pajak yang melakukan pengalihan hak atas tanah dan/atau bangunan dengan jumlah bruto pengalihannya kurang dari Rp60.000.000,00 (enam puluh juta rupiah) dan bukan merupakan jumlah yang dipecah-pecah",
+        attachments: ["skbAtt1","skbAtt2","skbAtt3"]
+      },
+      b: {
+        short: "Pengalihan tanah dan/atau bangunan dengan cara hibah",
+        text: "melakukan pengalihan harta berupa tanah dan/atau bangunan dengan cara hibah yang memenuhi ketentuan Pasal 4 ayat (3) huruf a Undang-Undang Pajak Penghasilan",
+        attachments: ["skbAtt4"]
+      },
+      c: {
+        short: "Pengalihan tanah dan/atau bangunan karena waris",
+        text: "melakukan pengalihan harta berupa tanah dan/atau bangunan karena waris yang memenuhi ketentuan Pasal 4 ayat (3) huruf b Undang-Undang Pajak Penghasilan",
+        attachments: ["skbAtt5"],
+        waris: true
+      },
+      d: {
+        short: "Penggabungan, peleburan, atau pemekaran usaha dengan penggunaan nilai buku",
+        text: "melakukan pengalihan harta berupa tanah dan/atau bangunan dalam rangka penggabungan, peleburan, atau pemekaran usaha yang telah ditetapkan oleh Menteri Keuangan untuk menggunakan nilai buku",
+        attachments: ["skbAtt6","skbAtt7"],
+        nilaiBuku: true
+      },
+      e: {
+        short: "Bangun guna serah, bangun serah guna, atau pemanfaatan BMN",
+        text: "melakukan pengalihan harta berupa bangunan dalam rangka melaksanakan perjanjian bangun guna serah, bangun serah guna, atau pemanfaatan barang milik negara berupa tanah dan/atau bangunan",
+        attachments: ["skbAtt8"]
+      },
+      f: {
+        short: "Pihak yang melakukan pengalihan tidak termasuk subjek pajak",
+        text: "tidak termasuk subjek pajak yang melakukan pengalihan harta berupa tanah dan/atau bangunan",
+        attachments: ["skbAtt9"]
+      },
+      g: {
+        short: "Penghasilan pengalihan telah dilaporkan dalam SPT Tahunan dan/atau PPh telah dilunasi",
+        text: "penghasilan atas pengalihan hak atas tanah dan/atau bangunan tersebut telah dilaporkan dalam Surat Pemberitahuan Tahunan Pajak Penghasilan dan/atau Pajak Penghasilan atas penghasilan tersebut telah dilunasi",
+        attachments: ["skbAtt10","skbAtt10a","skbAtt10b","skbAtt10c"],
+        pelaporan: true
+      }
+    });
+
+    const ATTACHMENT_TEXTS = [
+      "Salinan SPPT PBB",
+      "Surat pernyataan berpenghasilan di bawah penghasilan tidak kena pajak dengan jumlah bruto pengalihan hak atas tanah dan/atau bangunan kurang dari Rp60.000.000,00 (enam puluh juta rupiah)",
+      "Salinan kartu keluarga",
+      "Surat pernyataan hibah",
+      "Surat pernyataan pembagian waris",
+      "Salinan keputusan Direktur Jenderal Pajak mengenai persetujuan penggunaan nilai buku atas pengalihan harta dalam rangka penggabungan, peleburan, atau pemekaran usaha",
+      "Daftar pengalihan hak atas tanah dan/atau bangunan atau perjanjian pengikatan jual beli atas tanah dan/atau bangunan beserta perubahannya terhadap badan yang melakukan pengalihan harta dalam rangka penggabungan, peleburan, atau pemekaran usaha yang telah ditetapkan oleh Menteri untuk menggunakan nilai buku",
+      "Salinan dokumen perjanjian bangun guna serah, bangun serah guna, atau pemanfaatan barang milik negara berupa tanah dan/atau bangunan",
+      "Salinan dokumen yang menunjukkan bahwa orang pribadi atau badan bukan merupakan subjek pajak",
+      "Dokumen kelengkapan berupa"
+    ];
+
+    const SUB_TEXTS = [
+      "Salinan Surat Pemberitahuan Tahunan Pajak Penghasilan",
+      "Objek tanah dan/atau bangunan yang diajukan permohonan Surat Keterangan Bebas",
+      "Daftar seluruh pengalihan hak atas tanah dan/atau bangunan yang telah dilaporkan dalam Surat Pemberitahuan Tahunan Pajak Penghasilan dan/atau Pajak Penghasilan yang telah dilunasi",
+      "Salinan bukti pembayaran atau penyetoran Pajak Penghasilan berupa salinan Surat Setoran Pajak atau Sarana Administrasi Lain yang Disamakan dengan Surat Setoran Pajak",
+      "Salinan surat keterangan penelitian formal bukti pemenuhan kewajiban penyetoran Pajak Penghasilan atas penghasilan dari pengalihan hak atas tanah dan/atau bangunan atau perjanjian pengikatan jual beli atas tanah dan/atau bangunan beserta perubahannya"
+    ];
 
     const el = (tag, cls, text) => {
       const node = document.createElement(tag);
@@ -1115,16 +1259,21 @@
     const val = (id) => (byId(id)?.value || "").trim();
     const checked = (id) => !!byId(id)?.checked;
     const box = (yes) => yes ? "☒" : "☐";
+    const roleValue = () => document.querySelector('input[name="skbPeran"]:checked')?.value || "";
+    const reasonCode = () => byId("skbAlasanKode")?.value || "";
+    const reason = () => REASONS[reasonCode()] || null;
+
     const fmtDate = (iso) => {
       if (!/^\d{4}-\d{2}-\d{2}$/.test(iso || "")) return "";
       const [y,m,d] = iso.split("-").map(Number);
       const dt = new Date(Date.UTC(y,m-1,d));
-      if (y < 1900 || y > 2100 || m<1 || m>12 || dt.getUTCFullYear()!==y || dt.getUTCMonth()!==m-1 || dt.getUTCDate()!==d) return "";
+      if (y < 1900 || y > 2100 || m < 1 || m > 12 || dt.getUTCFullYear() !== y || dt.getUTCMonth() !== m-1 || dt.getUTCDate() !== d) return "";
       return `${d} ${MONTHS[m-1]} ${y}`;
     };
+
     const formatMoney = (raw) => {
-      const digits = String(raw||"").replace(/\D/g,"");
-      return digits ? digits.replace(/\B(?=(\d{3})+(?!\d))/g,".") : "";
+      const digits = String(raw || "").replace(/\D/g, "");
+      return digits ? digits.replace(/\B(?=(\d{3})+(?!\d))/g, ".") : "";
     };
 
     function field(id, label, type="text", opts={}) {
@@ -1138,24 +1287,43 @@
         input = document.createElement("input");
         input.type = type;
       }
-      input.id = id; input.name = id;
+      input.id = id;
+      input.name = id;
       if (opts.placeholder) input.placeholder = opts.placeholder;
       if (opts.inputmode) input.inputMode = opts.inputmode;
       if (opts.maxlength) input.maxLength = opts.maxlength;
       if (opts.min) input.min = opts.min;
       if (opts.max) input.max = opts.max;
       if (opts.required) input.dataset.required = "1";
+      if (opts.readonly) input.readOnly = true;
       wrap.append(caption, input);
+      return wrap;
+    }
+
+    function selectField(id, label, options, opts={}) {
+      const wrap = el("label", "skb-v1-field skb-v1-reason-select");
+      const caption = el("span", "", label);
+      const select = document.createElement("select");
+      select.id = id;
+      select.name = id;
+      if (opts.required) select.dataset.required = "1";
+      const empty = document.createElement("option");
+      empty.value = "";
+      empty.textContent = "Pilih alasan permohonan";
+      select.appendChild(empty);
+      options.forEach(({value, text}) => {
+        const option = document.createElement("option");
+        option.value = value;
+        option.textContent = text;
+        select.appendChild(option);
+      });
+      wrap.append(caption, select);
       return wrap;
     }
 
     function staticLine(label, value) {
       const row = el("div", "skb-v1-static-line");
-      row.append(
-        el("span", "", label),
-        el("span", "skb-v1-static-colon", ":"),
-        el("span", "skb-v1-static-value", value)
-      );
+      row.append(el("span", "", label), el("span", "skb-v1-static-colon", ":"), el("span", "skb-v1-static-value", value));
       return row;
     }
 
@@ -1169,325 +1337,608 @@
     function optionRadio(name, value, label) {
       const lab = el("label", "skb-v1-option");
       const input = document.createElement("input");
-      input.type="radio"; input.name=name; input.value=value;
+      input.type = "radio";
+      input.name = name;
+      input.value = value;
       lab.append(input, document.createTextNode(label));
       return lab;
     }
 
     function optionCheck(id, label) {
       const lab = el("label", "skb-v1-option");
-      const input = document.createElement("input"); input.type="checkbox"; input.id=id; input.name=id;
+      const input = document.createElement("input");
+      input.type = "checkbox";
+      input.id = id;
+      input.name = id;
       lab.append(input, document.createTextNode(label));
       return lab;
     }
 
-    function buildRepeatableTable(kind, title, subtitle) {
+    function buildRepeatableTable(kind, title) {
       const wrap = el("div", "skb-v1-table-editor");
       const head = el("div");
-      head.append(el("div","skb-v1-group-title", title));
-      if (subtitle) head.append(el("div","", subtitle));
+      head.append(el("div", "skb-v1-group-title", title));
       const table = document.createElement("table");
       table.innerHTML = '<thead><tr><th style="width:55px">No.</th><th style="width:24%">NIK/NPWP</th><th style="width:27%">Nama</th><th>Alamat</th><th style="width:70px"></th></tr></thead><tbody></tbody>';
       const tbody = table.querySelector("tbody");
-      const add = el("button","skb-v1-add-row", "+ Tambah Ahli Waris"); add.type="button";
+      const add = el("button", "skb-v1-add-row", "+ Tambah Ahli Waris");
+      add.type = "button";
       wrap.append(head, table, add);
 
       const rows = () => [...tbody.querySelectorAll("tr")];
       const renumber = () => {
-        rows().forEach((row,i) => {
-          row.querySelector(".skb-v1-row-no").textContent = String(i+1);
-          const rm = row.querySelector(".skb-v1-remove-row"); if (rm) rm.hidden = rows().length <= 1;
+        rows().forEach((row, i) => {
+          row.querySelector(".skb-v1-row-no").textContent = String(i + 1);
+          const rm = row.querySelector(".skb-v1-remove-row");
+          if (rm) rm.hidden = rows().length <= 1;
         });
         add.disabled = rows().length >= MAX_ROWS;
       };
+
       const addRow = (values={}, silent=false) => {
         if (rows().length >= MAX_ROWS) return;
         const serial = kind === "A" ? ++serialA : ++serialB;
         const tr = document.createElement("tr");
-        const tdNo = el("td","skb-v1-row-no");
+        const tdNo = el("td", "skb-v1-row-no");
         const makeTd = (suffix, value) => {
           const td = document.createElement("td");
           const inp = document.createElement("input");
-          inp.type="text"; inp.className=`skb-v1-heir-${kind.toLowerCase()}-${suffix}`;
-          inp.id=`skbHeir${kind}_${suffix}_${serial}`; inp.value=value||"";
+          inp.type = "text";
+          inp.className = `skb-v1-heir-${kind.toLowerCase()}-${suffix}`;
+          inp.id = `skbHeir${kind}_${suffix}_${serial}`;
+          inp.value = value || "";
           inp.addEventListener("input", syncPrint);
-          td.appendChild(inp); return td;
+          td.appendChild(inp);
+          return td;
         };
-        const rmTd=document.createElement("td");
-        const rm=el("button","skb-v1-remove-row","Hapus"); rm.type="button";
-        rm.addEventListener("click",()=>{tr.remove();renumber();syncPrint();}); rmTd.appendChild(rm);
-        tr.append(tdNo, makeTd("id",values.id), makeTd("nama",values.nama), makeTd("alamat",values.alamat), rmTd);
-        tbody.appendChild(tr); renumber(); if (!silent) syncPrint();
+        const rmTd = document.createElement("td");
+        const rm = el("button", "skb-v1-remove-row", "Hapus");
+        rm.type = "button";
+        rm.addEventListener("click", () => { tr.remove(); renumber(); syncPrint(); });
+        rmTd.appendChild(rm);
+        tr.append(tdNo, makeTd("id", values.id), makeTd("nama", values.nama), makeTd("alamat", values.alamat), rmTd);
+        tbody.appendChild(tr);
+        renumber();
+        if (!silent) syncPrint();
       };
-      add.addEventListener("click",()=>addRow());
+
+      add.addEventListener("click", () => addRow());
       addRow({}, true);
-      wrap._rows = rows; wrap._addRow = addRow;
+      wrap._rows = rows;
+      wrap._addRow = addRow;
       return wrap;
     }
 
     function printKV(label, value) {
-      const tr=document.createElement("tr");
-      const a=el("td","skb-v1-print-label",label), b=el("td","skb-v1-colon",":"), c=el("td","skb-v1-line",value||"");
-      tr.append(a,b,c); return tr;
+      const tr = document.createElement("tr");
+      tr.append(el("td", "skb-v1-print-label", label), el("td", "skb-v1-colon", ":"), el("td", "skb-v1-line", value || ""));
+      return tr;
     }
 
     function printTable(rows) {
-      const t=el("table","skb-v1-print-table");
-      const tb=document.createElement("tbody"); rows.forEach(r=>tb.appendChild(printKV(r[0],r[1]))); t.appendChild(tb); return t;
+      const t = el("table", "skb-v1-print-table");
+      const tb = document.createElement("tbody");
+      rows.forEach((r) => tb.appendChild(printKV(r[0], r[1])));
+      t.appendChild(tb);
+      return t;
     }
 
     function inheritancePrintTable(kind) {
-      const t=el("table","skb-v1-heir-table");
-      t.innerHTML='<thead><tr><th style="width:9%">Nomor Urut</th><th style="width:25%">NIK/NPWP</th><th style="width:27%">Nama</th><th>Alamat</th></tr></thead>';
-      const tb=document.createElement("tbody");
+      const t = el("table", "skb-v1-heir-table");
+      t.innerHTML = '<thead><tr><th style="width:9%">Nomor Urut</th><th style="width:25%">NIK/NPWP</th><th style="width:27%">Nama</th><th>Alamat</th></tr></thead>';
+      const tb = document.createElement("tbody");
       const rowNodes = kind === "A" ? tableA._rows() : tableB._rows();
-      rowNodes.forEach((row,i)=>{
-        const tr=document.createElement("tr");
-        const get=(suffix)=>row.querySelector(`.skb-v1-heir-${kind.toLowerCase()}-${suffix}`)?.value.trim()||"";
-        [String(i+1),get("id"),get("nama"),get("alamat")].forEach(x=>tr.appendChild(el("td","",x)));
+      const filled = rowNodes.filter((row) => [...row.querySelectorAll("input")].some((n) => n.value.trim()));
+      const source = filled.length ? filled : rowNodes.slice(0, 1);
+      source.forEach((row, i) => {
+        const tr = document.createElement("tr");
+        const get = (suffix) => row.querySelector(`.skb-v1-heir-${kind.toLowerCase()}-${suffix}`)?.value.trim() || "";
+        [String(i + 1), get("id"), get("nama"), get("alamat")].forEach((x) => tr.appendChild(el("td", "", x)));
         tb.appendChild(tr);
       });
-      if (!rowNodes.length) { const tr=document.createElement("tr"); ["1","","",""] .forEach(x=>tr.appendChild(el("td","",x))); tb.appendChild(tr); }
-      t.appendChild(tb); return t;
+      t.appendChild(tb);
+      return t;
     }
 
-    const editor = el("div","skb-v1-editor no-print");
-    const editorTitle = el("h1","skb-v1-editor-title","PERMOHONAN SURAT KETERANGAN BEBAS PAJAK PENGHASILAN ATAS PENGHASILAN DARI PENGALIHAN HAK ATAS TANAH DAN/ATAU BANGUNAN");
+    const editor = el("div", "skb-v1-editor no-print");
+    const editorTitle = el("h1", "skb-v1-editor-title", "PERMOHONAN SURAT KETERANGAN BEBAS PAJAK PENGHASILAN ATAS PENGHASILAN DARI PENGALIHAN HAK ATAS TANAH DAN/ATAU BANGUNAN");
 
-    const c1=card("");
-    const g1=el("div","skb-v1-grid");
-    g1.append(
-      field("skbNomor","Nomor"),
-      field("skbLampiran","Lampiran"),
-      staticLine("Hal","Permohonan Surat Keterangan Bebas Pajak Penghasilan atas Penghasilan dari Pengalihan Hak atas Tanah dan/atau Bangunan"),
-      field("skbKpp","Yth. Kepala Kantor Pelayanan Pajak", "text", {placeholder:"Contoh: KPP Pratama Bandung ...", required:true})
+    const c1 = card("");
+    c1.append(
+      field("skbNomor", "Nomor", "text", {required:true, placeholder:"Nomor surat"}),
+      field("skbLampiran", "Lampiran", "text", {required:true, placeholder:"Jumlah dokumen yang dilampirkan"}),
+      staticLine("Hal", "Permohonan Surat Keterangan Bebas Pajak Penghasilan atas Penghasilan dari Pengalihan Hak atas Tanah dan/atau Bangunan"),
+      field("skbKpp", "Yth. Kepala Kantor Pelayanan Pajak", "text", {placeholder:"Contoh: KPP Pratama Bandung ...", required:true})
     );
-    c1.appendChild(g1);
 
-    const c2=card("Yang bertanda tangan di bawah ini:");
-    const g2=el("div","skb-v1-grid");
-    g2.append(
-      field("skbPemohonNama","Nama", "text", {required:true}),
-      field("skbPemohonNpwp","NPWP", "text", {required:true}),
-      field("skbPemohonJabatan","Jabatan", "text", {required:true})
-    );
-    c2.appendChild(g2);
-    c2.append(el("div","skb-v1-group-title","Bertindak selaku *)"));
-    const roles=el("div","skb-v1-options");
+    const c2 = card("Yang bertanda tangan di bawah ini:");
+    const applicantNameField = field("skbPemohonNama", "Nama", "text", {required:true});
+    const applicantIdField = field("skbPemohonNpwp", "NPWP/NIK", "text", {required:true});
+    const applicantPositionField = field("skbPemohonJabatan", "Jabatan", "text", {required:true});
+    c2.append(applicantNameField, applicantIdField, applicantPositionField);
+    c2.append(el("div", "skb-v1-group-title", "Bertindak selaku *)"));
+    const roles = el("div", "skb-v1-options");
     roles.append(
-      optionRadio("skbPeran","Wajib Pajak","Wajib Pajak"),
-      optionRadio("skbPeran","Wakil dari Wajib Pajak","Wakil dari Wajib Pajak"),
-      optionRadio("skbPeran","Kuasa dari Wajib Pajak","Kuasa dari Wajib Pajak")
+      optionRadio("skbPeran", "Wajib Pajak", "Wajib Pajak"),
+      optionRadio("skbPeran", "Wakil dari Wajib Pajak", "Wakil dari Wajib Pajak"),
+      optionRadio("skbPeran", "Kuasa dari Wajib Pajak", "Kuasa dari Wajib Pajak")
     );
     c2.appendChild(roles);
 
-    const c3=card("");
-    const g3=el("div","skb-v1-grid");
-    g3.append(
-      field("skbWpNama","Nama", "text", {required:true}),
-      field("skbWpNpwp","NPWP", "text", {required:true}),
-      field("skbWpAlamat","Alamat", "textarea", {full:true,rows:2,required:true}),
-      field("skbWpKlu","KLU", "text", {required:true})
+    const c3 = card("");
+    c3.append(
+      field("skbWpNama", "Nama", "text", {required:true}),
+      field("skbWpNpwp", "NPWP/NIK", "text", {required:true}),
+      field("skbWpAlamat", "Alamat", "textarea", {rows:2, required:true, placeholder:"Alamat lengkap"}),
+      field("skbWpKlu", "KLU", "text", {required:true})
     );
-    c3.appendChild(g3);
 
-    const c4=card("");
-    c4.appendChild(el("p","skb-v1-letter-paragraph","mengajukan permohonan untuk memperoleh Surat Keterangan Bebas (SKB) Pajak Penghasilan atas Penghasilan dari Pengalihan Hak atas Tanah dan/atau Bangunan dengan alasan:"));
-    c4.appendChild(field("skbAlasan","alasan", "textarea", {full:true,rows:3,required:true}));
+    const c4 = card("");
+    c4.appendChild(el("p", "skb-v1-letter-paragraph", "mengajukan permohonan untuk memperoleh Surat Keterangan Bebas (SKB) Pajak Penghasilan atas Penghasilan dari Pengalihan Hak atas Tanah dan/atau Bangunan dengan alasan:"));
+    c4.appendChild(selectField("skbAlasanKode", "alasan", Object.entries(REASONS).map(([value, item]) => ({value, text:`${value}. ${item.short}`})), {required:true}));
+    const reasonHelp = el("div", "skb-v1-reason-help", "Petunjuk pengisian mensyaratkan memilih salah satu alasan a sampai g.");
+    const reasonLogic = el("div", "skb-v1-logic-note", "Pilih alasan permohonan untuk menampilkan bagian dan lampiran yang relevan.");
+    c4.append(reasonHelp, reasonLogic);
 
-    const c5=card("Data Penerima dan Pemberi Waris: **)", "Bagian ini hanya diisi apabila alasan pengajuan permohonan terkait pengalihan harta berupa tanah dan/atau bangunan karena waris.");
-    const warisToggle=optionCheck("skbWarisAktif","Aktifkan bagian data waris");
-    warisToggle.classList.add("skb-v1-condition-control");
-    c5.appendChild(warisToggle);
-    const warisBox=el("div","skb-v1-toggle-box");
-    const tableA=buildRepeatableTable("A","A. Pihak penerima pengalihan hak atas tanah dan/atau bangunan – Ahli Waris dengan NIK Telah Diaktivasi atau Ber-NPWP","");
-    const tableB=buildRepeatableTable("B","B. Pihak penerima pengalihan hak atas tanah dan/atau bangunan – Ahli Waris dengan NIK Belum Diaktivasi atau Non-NPWP","");
-    const giverGrid=el("div","skb-v1-grid");
-    giverGrid.append(
-      field("skbPemberiNama","Nama"),
-      field("skbPemberiId","NPWP/NIK"),
-      field("skbPemberiAlamat","Alamat","textarea",{full:true,rows:2})
-    );
-    warisBox.append(tableA,tableB,el("div","skb-v1-group-title","Data Pemberi Waris:"),giverGrid);
+    const c5 = card("Data Penerima dan Pemberi Waris: **)", "Bagian ini muncul otomatis hanya untuk alasan pengalihan karena waris.");
+    c5.classList.add("skb-v1-conditional-section");
+    const warisBox = el("div", "skb-v1-toggle-box");
+    const tableA = buildRepeatableTable("A", "A. Pihak penerima pengalihan hak atas tanah dan/atau bangunan - Ahli Waris dengan NIK Telah Diaktivasi atau Ber-NPWP");
+    const tableB = buildRepeatableTable("B", "B. Pihak penerima pengalihan hak atas tanah dan/atau bangunan - Ahli Waris dengan NIK Belum Diaktivasi atau Non-NPWP");
+    const giverTitle = el("div", "skb-v1-group-title", "Data Pemberi Waris:");
+    const giverNameField = field("skbPemberiNama", "Nama");
+    const giverIdField = field("skbPemberiId", "NPWP/NIK");
+    const giverAddressField = field("skbPemberiAlamat", "Alamat", "textarea", {rows:2});
+    warisBox.append(tableA, tableB, giverTitle, giverNameField, giverIdField, giverAddressField);
     c5.appendChild(warisBox);
 
-    const c6=card("");
-    const reportToggle=optionCheck("skbPelaporanAktif","Penghasilan atas pengalihan hak atas tanah dan/atau bangunan tersebut telah dilaporkan dalam SPT Tahunan Pajak Penghasilan (PPh) dan/atau PPh atas penghasilan tersebut telah dilunasi. ***)");
-    reportToggle.classList.add("skb-v1-condition-control");
-    const reportGrid=el("div","skb-v1-toggle-box");
-    reportGrid.appendChild(field("skbTahunPelunasan","tahun","text",{placeholder:"YYYY",maxlength:4,inputmode:"numeric"}));
-    const bookToggle=optionCheck("skbNilaiBukuAktif","Permohonan terkait persetujuan penggunaan nilai buku atas pengalihan harta dalam rangka penggabungan/peleburan/pengambilalihan usaha. ****)");
-    bookToggle.classList.add("skb-v1-condition-control");
-    const bookGrid=el("div","skb-v1-toggle-box");
-    const bg=el("div","skb-v1-grid");
-    bg.append(
-      field("skbNomorSk","Nomor Surat Keputusan"),
-      field("skbTanggalSk","tanggal","date",{min:"1900-01-01",max:"2100-12-31"})
-    );
-    bookGrid.appendChild(bg);
-    c6.append(reportToggle,reportGrid,bookToggle,bookGrid);
+    const reportSection = card("");
+    reportSection.classList.add("skb-v1-conditional-section");
+    reportSection.appendChild(el("p", "skb-v1-letter-paragraph", "Penghasilan atas pengalihan hak atas tanah dan/atau bangunan tersebut telah dilaporkan dalam SPT Tahunan Pajak Penghasilan (PPh) dan/atau PPh atas penghasilan tersebut telah dilunasi. ***"));
+    const reportYearField = field("skbTahunPelunasan", "tahun", "text", {placeholder:"YYYY", maxlength:4, inputmode:"numeric"});
+    reportSection.appendChild(reportYearField);
 
-    const c7=card("Dengan data Objek Pajak sebagai berikut:", "Bagian ini hanya untuk 1 (satu) objek pengalihan tanah dan/atau bangunan yang diajukan permohonan Surat Keterangan Bebas.");
-    const g7=el("div","skb-v1-grid");
-    g7.append(
-      field("skbNop","Nomor Objek Pajak (NOP)","text",{required:true}),
-      field("skbNib","Nomor Identifikasi Bidang Tanah (NIB)","text",{required:true}),
-      field("skbAlamatObjek","Alamat Tanah dan/atau Bangunan","textarea",{full:true,rows:2,required:true}),
-      field("skbNomorKeputusan","Nomor Keputusan"),
-      field("skbLuasTanah","Luas tanah (m²)","text",{required:true}),
-      field("skbLuasBangunan","Luas bangunan (m²)","text",{required:true}),
-      field("skbNilaiPengalihan","Nilai Pengalihan (Rp)","text",{required:true,inputmode:"numeric"})
-    );
-    c7.appendChild(g7);
+    const bookSection = card("");
+    bookSection.classList.add("skb-v1-conditional-section");
+    bookSection.appendChild(el("p", "skb-v1-letter-paragraph", "Nomor Surat Keputusan Persetujuan Penggunaan Nilai Buku Atas Pengalihan Harta Dalam Rangka Penggabungan/Peleburan/Pemekaran/Pengambilalihan Usaha: ****)"));
+    const bookNumberField = field("skbNomorSk", "Nomor Surat Keputusan");
+    const bookDateField = field("skbTanggalSk", "tanggal", "date", {min:"1900-01-01", max:"2100-12-31"});
+    bookSection.append(bookNumberField, bookDateField);
 
-    const c8=card("Dengan lawan transaksi sebagai berikut:");
-    const g8=el("div","skb-v1-grid");
-    g8.append(
-      field("skbLawanNama","Nama","text",{required:true}),
-      field("skbLawanId","NPWP/NIK","text",{required:true}),
-      field("skbLawanAlamat","Alamat","textarea",{full:true,rows:2,required:true})
+    const c7 = card("Dengan data Objek Pajak sebagai berikut:", "Hanya untuk 1 (satu) objek pengalihan. Alamat setidaknya memuat RT/RW, Kelurahan, Kecamatan, Kota/Kabupaten, dan Provinsi.");
+    const objectDecisionField = field("skbNomorKeputusan", "Nomor Keputusan", "text", {readonly:true});
+    c7.append(
+      field("skbNop", "Nomor Objek Pajak (NOP)", "text", {required:true}),
+      field("skbNib", "Nomor Identifikasi Bidang Tanah (NIB)", "text", {required:true}),
+      field("skbAlamatObjek", "Alamat Tanah dan/atau Bangunan", "textarea", {rows:3, required:true, placeholder:"RT/RW, Kelurahan, Kecamatan, Kota/Kabupaten, Provinsi"}),
+      objectDecisionField,
+      field("skbLuasTanah", "Luas tanah (m²)", "text", {required:true}),
+      field("skbLuasBangunan", "Luas bangunan (m²)", "text", {required:true}),
+      field("skbNilaiPengalihan", "Nilai Pengalihan (Rp)", "text", {required:true, inputmode:"numeric"})
     );
-    c8.appendChild(g8);
 
-    const attachmentTexts = [
-      "Salinan SPPT PBB",
-      "Surat pernyataan berpenghasilan di bawah penghasilan tidak kena pajak dengan jumlah bruto pengalihan hak atas tanah dan/atau bangunan kurang dari Rp60.000.000,00 (enam puluh juta rupiah)",
-      "Salinan kartu keluarga",
-      "Surat pernyataan hibah",
-      "Surat pernyataan pembagian waris",
-      "Salinan keputusan Direktur Jenderal Pajak mengenai persetujuan penggunaan nilai buku atas pengalihan harta dalam rangka penggabungan, peleburan, atau pemekaran usaha",
-      "Daftar pengalihan hak atas tanah dan/atau bangunan atau perjanjian pengikatan jual beli atas tanah dan/atau bangunan beserta perubahannya terhadap badan yang melakukan pengalihan harta dalam rangka penggabungan, peleburan, atau pemekaran usaha yang telah ditetapkan oleh Menteri untuk menggunakan nilai buku",
-      "Salinan dokumen perjanjian bangun guna serah, bangun serah guna, atau pemanfaatan barang milik negara berupa tanah dan/atau bangunan",
-      "Salinan dokumen yang menunjukkan bahwa orang pribadi atau badan bukan merupakan subjek pajak",
-      "Dokumen kelengkapan berupa"
-    ];
-    const subTexts = [
-      "Salinan Surat Pemberitahuan Tahunan Pajak Penghasilan",
-      "Objek tanah dan/atau bangunan yang diajukan permohonan Surat Keterangan Bebas",
-      "Daftar seluruh pengalihan hak atas tanah dan/atau bangunan yang telah dilaporkan dalam Surat Pemberitahuan Tahunan Pajak Penghasilan dan/atau Pajak Penghasilan yang telah dilunasi",
-      "Salinan bukti pembayaran atau penyetoran Pajak Penghasilan berupa salinan Surat Setoran Pajak atau Sarana Administrasi Lain yang Disamakan dengan Surat Setoran Pajak",
-      "Salinan surat keterangan penelitian formal bukti pemenuhan kewajiban penyetoran Pajak Penghasilan atas penghasilan dari pengalihan hak atas tanah dan/atau bangunan atau perjanjian pengikatan jual beli atas tanah dan/atau bangunan beserta perubahannya"
-    ];
-    const c9=card("Untuk kelengkapan permohonan SKB, bersama ini kami lampirkan sebagai berikut:");
-    const attWrap=el("div","skb-v1-attachments");
-    attachmentTexts.forEach((t,i)=>{
-      const lab=el("label","skb-v1-attachment");
-      const inp=document.createElement("input");
-      inp.type="checkbox"; inp.id=`skbAtt${i+1}`;
-      lab.append(inp,document.createTextNode(`${i+1}. ${t}`));
+    const c8 = card("Dengan lawan transaksi sebagai berikut:");
+    c8.append(
+      field("skbLawanNama", "Nama", "text", {required:true}),
+      field("skbLawanId", "NPWP/NIK", "text", {required:true}),
+      field("skbLawanAlamat", "Alamat", "textarea", {rows:2, required:true})
+    );
+
+    const c9 = card("Untuk kelengkapan permohonan SKB, bersama ini kami lampirkan sebagai berikut:");
+    const attWrap = el("div", "skb-v1-attachments");
+    const attachmentLabels = new Map();
+    ATTACHMENT_TEXTS.forEach((text, index) => {
+      const id = `skbAtt${index + 1}`;
+      const lab = el("label", "skb-v1-attachment");
+      lab.dataset.attachmentId = id;
+      const inp = document.createElement("input");
+      inp.type = "checkbox";
+      inp.id = id;
+      const number = el("span", "", `${index + 1}. ${text}`);
+      const badge = el("span", "skb-v1-required-badge", "Wajib");
+      badge.hidden = true;
+      lab.append(inp, number, badge);
+      attachmentLabels.set(id, lab);
       attWrap.appendChild(lab);
     });
-    const subWrap=el("div","skb-v1-subattachments");
-    subTexts.forEach((t,i)=>{
-      const lab=el("label","skb-v1-attachment");
-      const inp=document.createElement("input");
-      inp.type="checkbox"; inp.id=`skbAtt10${String.fromCharCode(97+i)}`;
-      lab.append(inp,document.createTextNode(`${String.fromCharCode(97+i)}. ${t}`));
+
+    const subWrap = el("div", "skb-v1-subattachments");
+    const subLabels = new Map();
+    SUB_TEXTS.forEach((text, index) => {
+      const suffix = String.fromCharCode(97 + index);
+      const id = `skbAtt10${suffix}`;
+      const lab = el("label", "skb-v1-attachment");
+      lab.dataset.attachmentId = id;
+      const inp = document.createElement("input");
+      inp.type = "checkbox";
+      inp.id = id;
+      const labelText = el("span", "", `${suffix}. ${text}`);
+      const badge = el("span", "skb-v1-required-badge", "Wajib");
+      badge.hidden = true;
+      lab.append(inp, labelText, badge);
+      subLabels.set(id, lab);
       subWrap.appendChild(lab);
     });
-    c9.append(attWrap,subWrap);
 
-    const c10=card("");
-    const declaration=optionCheck("skbDeclaration","Dengan ini kami menyatakan bahwa data dan dokumen yang kami sampaikan adalah benar dan/atau sesuai dengan kondisi sebenarnya, apabila diketahui terdapat ketidakbenaran atas data dan dokumen yang kami sampaikan kami bersedia menerima segala sanksi dan konsekuensinya sesuai dengan ketentuan perundang-undangan.");
+    const showOtherButton = el("button", "skb-v1-other-toggle", "Tampilkan lampiran lainnya");
+    showOtherButton.type = "button";
+    showOtherButton.addEventListener("click", () => {
+      showOtherAttachments = !showOtherAttachments;
+      showOtherButton.textContent = showOtherAttachments ? "Sembunyikan lampiran lainnya" : "Tampilkan lampiran lainnya";
+      syncAttachmentLogic();
+    });
+    c9.append(attWrap, subWrap, showOtherButton);
+
+    const c10 = card("");
+    const declaration = optionCheck("skbDeclaration", "Dengan ini kami menyatakan bahwa data dan dokumen yang kami sampaikan adalah benar dan/atau sesuai dengan kondisi sebenarnya, apabila diketahui terdapat ketidakbenaran atas data dan dokumen yang kami sampaikan kami bersedia menerima segala sanksi dan konsekuensinya sesuai dengan ketentuan perundang-undangan.");
     c10.appendChild(declaration);
-    const g10=el("div","skb-v1-grid skb-v1-sign-editor");
-    g10.append(
-      field("skbTempatTtd","Tempat","text",{required:true}),
-      field("skbTanggalTtd","Tanggal","date",{required:true,min:"1900-01-01",max:"2100-12-31"}),
-      field("skbNamaTtd","Nama penandatangan","text",{required:true})
+    const signEditor = el("div", "skb-v1-sign-editor");
+    signEditor.append(
+      field("skbTempatTtd", "Tempat", "text", {required:true}),
+      field("skbTanggalTtd", "Tanggal", "date", {required:true, min:"1900-01-01", max:"2100-12-31"}),
+      field("skbNamaTtd", "Nama penandatangan", "text", {required:true})
     );
-    c10.appendChild(g10);
+    c10.appendChild(signEditor);
 
-    editor.append(editorTitle,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10);
+    editor.append(editorTitle, c1, c2, c3, c4, c5, reportSection, bookSection, c7, c8, c9, c10);
 
-    const printView=el("div","skb-v1-print");
-    const p1=el("section","skb-v1-page"), p2=el("section","skb-v1-page"), p3=el("section","skb-v1-page");
-    printView.append(p1,p2,p3);
+    const printView = el("div", "skb-v1-print");
+    const p1 = el("section", "skb-v1-page");
+    const p2 = el("section", "skb-v1-page");
+    const p3 = el("section", "skb-v1-page");
+    printView.append(p1, p2, p3);
 
-    function setEnabled(container, yes) {
-      container.querySelectorAll("input,textarea,select,button").forEach(node=>{ node.disabled=!yes; });
-      container.style.opacity = yes ? "1" : ".55";
+    function setEnabled(container, enabled) {
+      container.hidden = !enabled;
+      container.querySelectorAll("input,textarea,select,button").forEach((node) => { node.disabled = !enabled; });
     }
 
-    function roleValue() { return document.querySelector('input[name="skbPeran"]:checked')?.value || ""; }
+    function requiredAttachmentIds() {
+      return new Set(reason()?.attachments || []);
+    }
+
+    function syncAttachmentLogic() {
+      const required = requiredAttachmentIds();
+      const code = reasonCode();
+      const all = new Map([...attachmentLabels, ...subLabels]);
+      all.forEach((label, id) => {
+        const isRequired = required.has(id);
+        label.classList.toggle("is-required", isRequired);
+        const badge = label.querySelector(".skb-v1-required-badge");
+        if (badge) badge.hidden = !isRequired;
+        label.hidden = !(isRequired || showOtherAttachments);
+      });
+
+      const att10Visible = code === "g" || showOtherAttachments || checked("skbAtt10");
+      subWrap.hidden = !att10Visible;
+
+      // Nomor 45 adalah kelompok dokumen. Jika sublampiran dicentang, parent ikut dicentang.
+      const anySub = [...subLabels.keys()].some((id) => checked(id));
+      if (anySub && byId("skbAtt10")) byId("skbAtt10").checked = true;
+    }
+
+    function syncLogic() {
+      const code = reasonCode();
+      const data = reason();
+      const role = roleValue();
+
+      setEnabled(c5, code === "c");
+      setEnabled(reportSection, code === "g");
+      setEnabled(bookSection, code === "d");
+
+      const showPosition = role === "Wakil dari Wajib Pajak";
+      applicantPositionField.hidden = !showPosition;
+      const positionInput = byId("skbPemohonJabatan");
+      if (positionInput) positionInput.disabled = !showPosition;
+
+      objectDecisionField.hidden = code !== "d";
+      const objectDecisionInput = byId("skbNomorKeputusan");
+      if (objectDecisionInput) {
+        objectDecisionInput.disabled = code !== "d";
+        objectDecisionInput.value = code === "d" ? val("skbNomorSk") : "";
+      }
+
+      if (data) {
+        const parts = [];
+        if (data.waris) parts.push("Data ahli waris dan pemberi waris wajib diisi.");
+        if (data.nilaiBuku) parts.push("Nomor dan tanggal Surat Keputusan penggunaan nilai buku wajib diisi.");
+        if (data.pelaporan) parts.push("Tahun pelaporan/pelunasan wajib diisi.");
+        const count = data.attachments.length;
+        parts.push(`${count} jenis lampiran utama ditandai wajib sesuai petunjuk pengisian.`);
+        if (code === "g") parts.push("Untuk dokumen kelengkapan nomor 10, sublampiran a-c wajib dan sekurang-kurangnya salah satu dari d/e harus tersedia.");
+        reasonLogic.textContent = parts.join(" ");
+      } else {
+        reasonLogic.textContent = "Pilih alasan permohonan untuk menampilkan bagian dan lampiran yang relevan.";
+      }
+
+      syncAttachmentLogic();
+      syncPrint();
+    }
+
     function attachmentMark(id) { return box(checked(id)); }
 
     function syncPrint() {
+      if (!p1 || !p2 || !p3) return;
+      const code = reasonCode();
+      const selectedReason = reason();
+      const isWaris = code === "c";
+      const isReported = code === "g";
+      const isBook = code === "d";
+
       p1.replaceChildren(); p2.replaceChildren(); p3.replaceChildren();
-      const title=el("h1","skb-v1-doc-title","PERMOHONAN SURAT KETERANGAN BEBAS PAJAK PENGHASILAN ATAS PENGHASILAN DARI PENGALIHAN HAK ATAS TANAH DAN/ATAU BANGUNAN"); p1.appendChild(title);
-      p1.append(printTable([["Nomor",val("skbNomor")],["Lampiran",val("skbLampiran")],["Hal","Permohonan Surat Keterangan Bebas Pajak Penghasilan atas Penghasilan dari Pengalihan Hak atas Tanah dan/atau Bangunan"]]));
-      const kpp=el("p","",`Yth. Kepala Kantor Pelayanan Pajak ${val("skbKpp")}`); p1.appendChild(kpp);
-      p1.append(el("p","","Yang bertanda tangan di bawah ini:"), printTable([["Nama",val("skbPemohonNama")],["NPWP",val("skbPemohonNpwp")],["Jabatan",val("skbPemohonJabatan")]]));
-      p1.appendChild(el("p","","Bertindak selaku:"));
-      const rl=el("div","skb-v1-role-list"); ["Wajib Pajak","Wakil dari Wajib Pajak","Kuasa dari Wajib Pajak"].forEach(r=>rl.appendChild(el("div","",`${box(roleValue()===r)} ${r}`))); p1.appendChild(rl);
-      p1.append(printTable([["Nama",val("skbWpNama")],["NPWP",val("skbWpNpwp")],["Alamat",val("skbWpAlamat")],["KLU",val("skbWpKlu")]]));
-      p1.appendChild(el("p","",`mengajukan permohonan untuk memperoleh Surat Keterangan Bebas (SKB) Pajak Penghasilan atas Penghasilan dari Pengalihan Hak atas Tanah dan/atau Bangunan dengan alasan: ${val("skbAlasan")}`));
-      p1.appendChild(el("h3","","Data Penerima dan Pemberi Waris:**)"));
-      p1.appendChild(el("p","","A. Pihak penerima pengalihan hak atas tanah dan/atau bangunan – Ahli Waris dengan NIK Telah Diaktivasi atau Ber-NPWP")); p1.appendChild(inheritancePrintTable("A"));
-      p1.appendChild(el("p","","B. Pihak penerima pengalihan hak atas tanah dan/atau bangunan – Ahli Waris dengan NIK Belum Diaktivasi atau Non-NPWP")); p1.appendChild(inheritancePrintTable("B"));
-      p1.appendChild(el("h3","","Data Pemberi Waris:")); p1.appendChild(printTable([["Nama",val("skbPemberiNama")],["NPWP/NIK",val("skbPemberiId")],["Alamat",val("skbPemberiAlamat")]]));
+      p1.appendChild(el("h2", "skb-v1-doc-title", "PERMOHONAN SURAT KETERANGAN BEBAS PAJAK PENGHASILAN ATAS PENGHASILAN DARI PENGALIHAN HAK ATAS TANAH DAN/ATAU BANGUNAN"));
+      p1.appendChild(printTable([
+        ["Nomor", val("skbNomor")],
+        ["Lampiran", val("skbLampiran")],
+        ["Hal", "Permohonan Surat Keterangan Bebas Pajak Penghasilan atas Penghasilan dari Pengalihan Hak atas Tanah dan/atau Bangunan"]
+      ]));
+      p1.appendChild(el("p", "", `Yth. Kepala Kantor Pelayanan Pajak ${val("skbKpp")}`));
+      p1.appendChild(el("p", "", "Yang bertanda tangan di bawah ini:"));
+      p1.appendChild(printTable([
+        ["Nama", val("skbPemohonNama")],
+        ["NPWP/NIK", val("skbPemohonNpwp")],
+        ["Jabatan", roleValue() === "Wakil dari Wajib Pajak" ? val("skbPemohonJabatan") : ""]
+      ]));
+      p1.appendChild(el("p", "", "Bertindak selaku *)"));
+      const roleList = el("div", "skb-v1-role-list");
+      ["Wajib Pajak", "Wakil dari Wajib Pajak", "Kuasa dari Wajib Pajak"].forEach((r) => roleList.appendChild(el("div", "", `${box(roleValue() === r)} ${r}`)));
+      p1.appendChild(roleList);
+      p1.appendChild(printTable([
+        ["Nama", val("skbWpNama")],
+        ["NPWP/NIK", val("skbWpNpwp")],
+        ["Alamat", val("skbWpAlamat")],
+        ["KLU", val("skbWpKlu")]
+      ]));
+      p1.appendChild(el("p", "", `mengajukan permohonan untuk memperoleh Surat Keterangan Bebas (SKB) Pajak Penghasilan atas Penghasilan dari Pengalihan Hak atas Tanah dan/atau Bangunan dengan alasan: ${selectedReason?.text || ""}.`));
 
-      p2.appendChild(el("p","",`Penghasilan atas pengalihan hak atas tanah dan/atau bangunan tersebut telah dilaporkan dalam SPT Tahunan Pajak Penghasilan (PPh) dan/atau PPh atas penghasilan tersebut telah dilunasi tahun ${checked("skbPelaporanAktif") ? val("skbTahunPelunasan") : ""}. ***)`));
-      p2.appendChild(el("p","","Terlampir objek tanah dan/atau bangunan yang diajukan permohonan surat keterangan bebas dan daftar seluruh pengalihan hak atas tanah dan/atau bangunan yang telah dilaporkan dalam surat pemberitahuan tahunan pajak penghasilan dan/atau pajak penghasilan yang telah dilunasi."));
-      p2.appendChild(el("p","",`Nomor Surat Keputusan Persetujuan Penggunaan Nilai Buku Atas Pengalihan Harta Dalam Rangka Penggabungan/Peleburan/Pengambilalihan Usaha ${checked("skbNilaiBukuAktif") ? val("skbNomorSk") : ""} tanggal ${checked("skbNilaiBukuAktif") ? fmtDate(val("skbTanggalSk")) : ""}; file dokumen surat keputusan dan data objek pajak sebagaimana terlampir. ****)`));
-      p2.appendChild(el("h3","","Dengan data Objek Pajak sebagai berikut:"));
-      p2.appendChild(printTable([["Nomor Objek Pajak (NOP)",val("skbNop")],["Nomor Identifikasi Bidang Tanah (NIB)",val("skbNib")],["Alamat Tanah dan/atau Bangunan",val("skbAlamatObjek")],["Nomor Keputusan",val("skbNomorKeputusan")],["Luas tanah dan/atau bangunan (Meter Persegi)",[val("skbLuasTanah"),val("skbLuasBangunan")].join(" / ")],["Nilai Pengalihan",val("skbNilaiPengalihan") ? `Rp${val("skbNilaiPengalihan")}` : ""]]));
-      p2.appendChild(el("h3","","Dengan lawan transaksi sebagai berikut:")); p2.appendChild(printTable([["Nama",val("skbLawanNama")],["NPWP/NIK",val("skbLawanId")],["Alamat",val("skbLawanAlamat")]]));
-      p2.appendChild(el("p","","Untuk kelengkapan permohonan SKB, bersama ini kami lampirkan sebagai berikut:"));
-      const ol=el("ol","skb-v1-attach-list");
-      attachmentTexts.slice(0,9).forEach((t,i)=>{const li=el("li","",`${attachmentMark(`skbAtt${i+1}`)} ${t}`); ol.appendChild(li);});
-      const li10=el("li","",`${attachmentMark("skbAtt10")} ${attachmentTexts[9]}:`); const subol=el("ol","skb-v1-attach-sub");
-      subTexts.slice(0,3).forEach((t,i)=>subol.appendChild(el("li","",`${attachmentMark(`skbAtt10${String.fromCharCode(97+i)}`)} ${t}`))); li10.appendChild(subol); ol.appendChild(li10); p2.appendChild(ol);
+      if (isWaris) {
+        p1.appendChild(el("h3", "", "Data Penerima dan Pemberi Waris: **)") );
+        p1.appendChild(el("p", "", "A. Pihak penerima pengalihan hak atas tanah dan/atau bangunan - Ahli Waris dengan NIK Telah Diaktivasi atau Ber-NPWP"));
+        p1.appendChild(inheritancePrintTable("A"));
+        p1.appendChild(el("p", "", "B. Pihak penerima pengalihan hak atas tanah dan/atau bangunan - Ahli Waris dengan NIK Belum Diaktivasi atau Non-NPWP"));
+        p1.appendChild(inheritancePrintTable("B"));
+        p1.appendChild(el("h3", "", "Data Pemberi Waris:"));
+        p1.appendChild(printTable([["Nama", val("skbPemberiNama")], ["NPWP/NIK", val("skbPemberiId")], ["Alamat", val("skbPemberiAlamat")]]));
+      }
 
-      const cont=el("ol","skb-v1-attach-sub"); cont.start=4;
-      subTexts.slice(3).forEach((t,j)=>cont.appendChild(el("li","",`${attachmentMark(`skbAtt10${String.fromCharCode(100+j)}`)} ${t}`))); p3.appendChild(cont);
-      const dec=el("div","skb-v1-declaration"); dec.append(el("div","",box(checked("skbDeclaration"))),el("div","","Dengan ini kami menyatakan bahwa data dan dokumen yang kami sampaikan adalah benar dan/atau sesuai dengan kondisi sebenarnya, apabila diketahui terdapat ketidakbenaran atas data dan dokumen yang kami sampaikan kami bersedia menerima segala sanksi dan konsekuensinya sesuai dengan ketentuan perundang-undangan.")); p3.appendChild(dec);
-      const sign=el("div","skb-v1-sign"); sign.append(el("div","skb-v1-sign-place",[val("skbTempatTtd"),fmtDate(val("skbTanggalTtd"))].filter(Boolean).join(", ")),el("div","",roleValue()||"Wajib Pajak/Wakil/Kuasa"),el("div","skb-v1-sign-space"),el("div","skb-v1-sign-name",val("skbNamaTtd"))); p3.appendChild(sign);
-      const notes=el("div","skb-v1-footnotes");
-      const note=(mark,content)=>{const n=el("div","skb-v1-footnote");n.append(el("div","",mark),el("div","",content));return n;};
-      notes.append(note("*)","Beri tanda (√) pada kotak yang disediakan sesuai dengan pihak yang mengajukan permohonan."),note("**)","Hanya diisi jika alasan pengajuan permohonan adalah terkait pengalihan harta berupa tanah dan/atau bangunan karena waris."));
-      const n3=note("***)","Hanya diisi jika alasan pengajuan permohonan adalah terkait pengalihan hak atas tanah dan/atau bangunan telah dilaporkan dalam SPT Tahunan Pajak Penghasilan (PPh) dan/atau PPh atas penghasilan tersebut telah dilunasi dan atas pengalihan hak tersebut belum dibuatkan akta, keputusan, perjanjian, kesepakatan, atau risalah lelang oleh pejabat yang berwenang. Digunakan untuk alasan pengecualian pengenaan Pajak Penghasilan berdasarkan Peraturan Pemerintah Nomor 34 Tahun 2016 atas penghasilan dari pengalihan hak atas tanah dan/atau bangunan sebelum tanggal 7 September 2016; atau pengecualian pengenaan Pajak Penghasilan berdasarkan Peraturan Pemerintah Nomor 40 Tahun 2016 atas penghasilan dari pengalihan hak atas tanah dan/atau bangunan sebelum tanggal 17 Oktober 2016."); notes.appendChild(n3);
-      notes.append(note("****)","Hanya diisi jika alasan pengajuan permohonan adalah terkait pengalihan harta berupa tanah dan/atau bangunan dalam rangka penggabungan, peleburan, atau pemekaran usaha yang telah ditetapkan oleh Menteri untuk menggunakan nilai buku."),note("*****)","Hanya diisi untuk 1 (satu) objek pengalihan tanah dan/atau bangunan yang diajukan permohonan Surat Keterangan Bebas."),note("******)","Coret yang tidak perlu.")); p3.appendChild(notes);
+      if (isReported) {
+        p2.appendChild(el("p", "", `Penghasilan atas pengalihan hak atas tanah dan/atau bangunan tersebut telah dilaporkan dalam SPT Tahunan Pajak Penghasilan (PPh) dan/atau PPh atas penghasilan tersebut telah dilunasi tahun ${val("skbTahunPelunasan")}. ***)`));
+        p2.appendChild(el("p", "", "Terlampir objek tanah dan/atau bangunan yang diajukan permohonan surat keterangan bebas dan daftar seluruh pengalihan hak atas tanah dan/atau bangunan yang telah dilaporkan dalam surat pemberitahuan tahunan pajak penghasilan dan/atau pajak penghasilan yang telah dilunasi."));
+      }
+
+      if (isBook) {
+        p2.appendChild(el("p", "", `Nomor Surat Keputusan Persetujuan Penggunaan Nilai Buku Atas Pengalihan Harta Dalam Rangka Penggabungan/Peleburan/Pemekaran/Pengambilalihan Usaha ${val("skbNomorSk")} tanggal ${fmtDate(val("skbTanggalSk"))}; file dokumen surat keputusan dan data objek pajak sebagaimana terlampir. ****)`));
+      }
+
+      p2.appendChild(el("h3", "", "Dengan data Objek Pajak sebagai berikut:"));
+      p2.appendChild(printTable([
+        ["Nomor Objek Pajak (NOP)", val("skbNop")],
+        ["Nomor Identifikasi Bidang Tanah (NIB)", val("skbNib")],
+        ["Alamat Tanah dan/atau Bangunan", val("skbAlamatObjek")],
+        ["Nomor Keputusan", isBook ? val("skbNomorSk") : ""],
+        ["Luas tanah dan/atau bangunan (Meter Persegi)", [val("skbLuasTanah"), val("skbLuasBangunan")].join(" / ")],
+        ["Nilai Pengalihan", val("skbNilaiPengalihan") ? `Rp${val("skbNilaiPengalihan")}` : ""]
+      ]));
+      p2.appendChild(el("h3", "", "Dengan lawan transaksi sebagai berikut:"));
+      p2.appendChild(printTable([["Nama", val("skbLawanNama")], ["NPWP/NIK", val("skbLawanId")], ["Alamat", val("skbLawanAlamat")]]));
+      p2.appendChild(el("p", "", "Untuk kelengkapan permohonan SKB, bersama ini kami lampirkan sebagai berikut:"));
+      const ol = el("ol", "skb-v1-attach-list");
+      ATTACHMENT_TEXTS.slice(0, 9).forEach((text, i) => ol.appendChild(el("li", "", `${attachmentMark(`skbAtt${i+1}`)} ${text}`)));
+      const li10 = el("li", "", `${attachmentMark("skbAtt10")} ${ATTACHMENT_TEXTS[9]}:`);
+      const subol = el("ol", "skb-v1-attach-sub");
+      SUB_TEXTS.slice(0, 3).forEach((text, i) => subol.appendChild(el("li", "", `${attachmentMark(`skbAtt10${String.fromCharCode(97+i)}`)} ${text}`)));
+      li10.appendChild(subol);
+      ol.appendChild(li10);
+      p2.appendChild(ol);
+
+      const cont = el("ol", "skb-v1-attach-sub");
+      cont.start = 4;
+      SUB_TEXTS.slice(3).forEach((text, j) => cont.appendChild(el("li", "", `${attachmentMark(`skbAtt10${String.fromCharCode(100+j)}`)} ${text}`)));
+      p3.appendChild(cont);
+
+      const dec = el("div", "skb-v1-declaration");
+      dec.append(el("div", "", box(checked("skbDeclaration"))), el("div", "", "Dengan ini kami menyatakan bahwa data dan dokumen yang kami sampaikan adalah benar dan/atau sesuai dengan kondisi sebenarnya, apabila diketahui terdapat ketidakbenaran atas data dan dokumen yang kami sampaikan kami bersedia menerima segala sanksi dan konsekuensinya sesuai dengan ketentuan perundang-undangan."));
+      p3.appendChild(dec);
+
+      const sign = el("div", "skb-v1-sign");
+      sign.append(
+        el("div", "skb-v1-sign-place", [val("skbTempatTtd"), fmtDate(val("skbTanggalTtd"))].filter(Boolean).join(", ")),
+        el("div", "", roleValue() || "Wajib Pajak/Wakil/Kuasa"),
+        el("div", "skb-v1-sign-space"),
+        el("div", "skb-v1-sign-name", val("skbNamaTtd"))
+      );
+      p3.appendChild(sign);
+
+      const notes = el("div", "skb-v1-footnotes");
+      const note = (mark, content) => { const n = el("div", "skb-v1-footnote"); n.append(el("div", "", mark), el("div", "", content)); return n; };
+      notes.append(
+        note("*)", "Beri tanda (√) pada kotak yang disediakan sesuai dengan pihak yang mengajukan permohonan."),
+        note("**)", "Hanya diisi jika alasan pengajuan permohonan adalah terkait pengalihan harta berupa tanah dan/atau bangunan karena waris."),
+        note("***)", "Hanya diisi jika alasan pengajuan permohonan adalah terkait pengalihan hak atas tanah dan/atau bangunan telah dilaporkan dalam SPT Tahunan Pajak Penghasilan (PPh) dan/atau PPh atas penghasilan tersebut telah dilunasi dan atas pengalihan hak tersebut belum dibuatkan akta, keputusan, perjanjian, kesepakatan, atau risalah lelang oleh pejabat yang berwenang."),
+        note("****)", "Hanya diisi jika alasan pengajuan permohonan adalah terkait pengalihan harta berupa tanah dan/atau bangunan dalam rangka penggabungan, peleburan, atau pemekaran usaha yang telah ditetapkan oleh Menteri untuk menggunakan nilai buku."),
+        note("*****)", "Hanya diisi untuk 1 (satu) objek pengalihan tanah dan/atau bangunan yang diajukan permohonan Surat Keterangan Bebas."),
+        note("******)", "Coret yang tidak perlu.")
+      );
+      p3.appendChild(notes);
     }
 
-    function clearError(){ const b=byId("errorBox"); if(b){b.textContent="";b.style.display="";} }
-    function fail(msg,node){ const b=byId("errorBox"); if(b){b.textContent=msg;b.style.display="block";} if(node){node.setAttribute("aria-invalid","true");node.focus({preventScroll:true});node.scrollIntoView({behavior:"smooth",block:"center"});} }
+    function clearError() {
+      const b = byId("errorBox");
+      if (b) { b.textContent = ""; b.style.display = ""; }
+      root?.querySelectorAll('[aria-invalid="true"]').forEach((n) => n.removeAttribute("aria-invalid"));
+    }
+
+    function fail(msg, node) {
+      const b = byId("errorBox");
+      if (b) { b.textContent = msg; b.style.display = "block"; }
+      if (node) {
+        node.setAttribute("aria-invalid", "true");
+        node.focus({preventScroll:true});
+        node.scrollIntoView({behavior:"smooth", block:"center"});
+      }
+    }
+
+    function validateAttachments(event) {
+      const code = reasonCode();
+      const required = requiredAttachmentIds();
+      for (const id of required) {
+        if (!checked(id)) {
+          event.preventDefault(); event.stopImmediatePropagation();
+          fail("Centang seluruh lampiran yang wajib sesuai alasan permohonan.", byId(id));
+          return false;
+        }
+      }
+      if (code === "g" && !(checked("skbAtt10d") || checked("skbAtt10e"))) {
+        event.preventDefault(); event.stopImmediatePropagation();
+        fail("Untuk alasan pelaporan/pelunasan, lampirkan sekurang-kurangnya salah satu: bukti pembayaran/penyetoran PPh atau surat keterangan penelitian formal.", byId("skbAtt10d"));
+        return false;
+      }
+      return true;
+    }
 
     function install() {
-      if (!root || root.dataset.skbV2Ready === "true") return false;
+      if (!root || root.dataset.skbV3Ready === "true") return false;
       if (!root.textContent.includes("Lengkapi data permohonan pada bagian di bawah ini.")) return false;
-      root.replaceChildren(editor,printView);
-      root.dataset.skbV2Ready="true";
+      root.replaceChildren(editor, printView);
+      root.dataset.skbV3Ready = "true";
 
-      const money=byId("skbNilaiPengalihan"); money?.addEventListener("input",()=>{ const pos=money.selectionStart; money.value=formatMoney(money.value); syncPrint(); });
-      const year=byId("skbTahunPelunasan"); year?.addEventListener("input",()=>{year.value=year.value.replace(/\D/g,"").slice(0,4);syncPrint();});
-      root.querySelectorAll("input,textarea,select").forEach(n=>{ n.addEventListener("input",()=>{n.removeAttribute("aria-invalid");syncPrint();}); n.addEventListener("change",syncPrint); });
-      document.querySelectorAll('input[name="skbPeran"]').forEach(n=>n.addEventListener("change",syncPrint));
-      const syncConditions=()=>{ setEnabled(warisBox,checked("skbWarisAktif")); setEnabled(reportGrid,checked("skbPelaporanAktif")); setEnabled(bookGrid,checked("skbNilaiBukuAktif")); syncPrint(); };
-      byId("skbWarisAktif")?.addEventListener("change",syncConditions); byId("skbPelaporanAktif")?.addEventListener("change",syncConditions); byId("skbNilaiBukuAktif")?.addEventListener("change",syncConditions); syncConditions();
+      const money = byId("skbNilaiPengalihan");
+      money?.addEventListener("input", () => { money.value = formatMoney(money.value); syncPrint(); });
+      const year = byId("skbTahunPelunasan");
+      year?.addEventListener("input", () => { year.value = year.value.replace(/\D/g, "").slice(0, 4); syncPrint(); });
 
-      resetButton?.addEventListener("click",()=>setTimeout(()=>{root.querySelectorAll("input,textarea").forEach(n=>{ if(n.type==="radio"||n.type==="checkbox") n.checked=false; else n.value=""; n.removeAttribute("aria-invalid"); }); tableA._rows().slice(1).forEach(r=>r.remove()); tableB._rows().slice(1).forEach(r=>r.remove()); tableA._rows()[0]?.querySelectorAll("input").forEach(n=>n.value=""); tableB._rows()[0]?.querySelectorAll("input").forEach(n=>n.value=""); syncConditions(); clearError();},0));
+      root.querySelectorAll("input,textarea,select").forEach((node) => {
+        node.addEventListener("input", () => {
+          node.removeAttribute("aria-invalid");
+          if (node.id === "skbNomorSk" && reasonCode() === "d") byId("skbNomorKeputusan").value = node.value;
+          if (node.id === "skbPemohonNama") {
+            const signName = byId("skbNamaTtd");
+            if (signName && (!signName.value || signName.value === lastApplicantName)) signName.value = node.value;
+            lastApplicantName = node.value;
+          }
+          syncAttachmentLogic();
+          syncPrint();
+        });
+        node.addEventListener("change", () => {
+          node.removeAttribute("aria-invalid");
+          if (node.id === "skbAlasanKode" || node.name === "skbPeran") syncLogic();
+          else { syncAttachmentLogic(); syncPrint(); }
+        });
+      });
 
-      printButton?.addEventListener("click",event=>{
+      document.querySelectorAll('input[name="skbPeran"]').forEach((node) => node.addEventListener("change", syncLogic));
+      byId("skbAlasanKode")?.addEventListener("change", syncLogic);
+
+      resetButton?.addEventListener("click", () => setTimeout(() => {
+        root.querySelectorAll("input,textarea,select").forEach((node) => {
+          if (node.type === "radio" || node.type === "checkbox") node.checked = false;
+          else node.value = "";
+          node.removeAttribute("aria-invalid");
+        });
+        tableA._rows().slice(1).forEach((r) => r.remove());
+        tableB._rows().slice(1).forEach((r) => r.remove());
+        tableA._rows()[0]?.querySelectorAll("input").forEach((n) => n.value = "");
+        tableB._rows()[0]?.querySelectorAll("input").forEach((n) => n.value = "");
+        showOtherAttachments = false;
+        showOtherButton.textContent = "Tampilkan lampiran lainnya";
+        lastApplicantName = "";
         clearError();
-        const req=["skbKpp","skbPemohonNama","skbPemohonNpwp","skbPemohonJabatan","skbWpNama","skbWpNpwp","skbWpAlamat","skbWpKlu","skbAlasan","skbNop","skbNib","skbAlamatObjek","skbLuasTanah","skbLuasBangunan","skbNilaiPengalihan","skbLawanNama","skbLawanId","skbLawanAlamat","skbTempatTtd","skbTanggalTtd","skbNamaTtd"];
-        for(const id of req){ const n=byId(id); if(!n?.value.trim()){event.preventDefault();event.stopImmediatePropagation();fail(`Lengkapi ${n?.closest("label")?.querySelector("span")?.textContent || "field wajib"}.`,n);return;} }
-        if(!roleValue()){event.preventDefault();event.stopImmediatePropagation();fail("Pilih pihak yang mengajukan permohonan.",document.querySelector('input[name="skbPeran"]'));return;}
-        if(!fmtDate(val("skbTanggalTtd"))){event.preventDefault();event.stopImmediatePropagation();fail("Tanggal penandatanganan tidak valid.",byId("skbTanggalTtd"));return;}
-        if(checked("skbPelaporanAktif") && !/^\d{4}$/.test(val("skbTahunPelunasan"))){event.preventDefault();event.stopImmediatePropagation();fail("Isi tahun pelaporan/pelunasan dengan 4 digit.",byId("skbTahunPelunasan"));return;}
-        if(checked("skbNilaiBukuAktif") && (!val("skbNomorSk") || !fmtDate(val("skbTanggalSk")))){event.preventDefault();event.stopImmediatePropagation();fail("Lengkapi nomor dan tanggal Surat Keputusan penggunaan nilai buku.",!val("skbNomorSk")?byId("skbNomorSk"):byId("skbTanggalSk"));return;}
-        if(checked("skbWarisAktif")){
-          const rows=[...tableA._rows(),...tableB._rows()]; const filled=rows.filter(r=>[...r.querySelectorAll("input")].some(n=>n.value.trim()));
-          if(!filled.length){event.preventDefault();event.stopImmediatePropagation();fail("Tambahkan sekurang-kurangnya satu ahli waris.",tableA._rows()[0]?.querySelector("input"));return;}
-          for(const r of filled){for(const n of r.querySelectorAll("input")){if(!n.value.trim()){event.preventDefault();event.stopImmediatePropagation();fail("Lengkapi NIK/NPWP, nama, dan alamat ahli waris pada baris yang digunakan.",n);return;}}}
-          for(const id of ["skbPemberiNama","skbPemberiId","skbPemberiAlamat"]){const n=byId(id);if(!n.value.trim()){event.preventDefault();event.stopImmediatePropagation();fail("Lengkapi Data Pemberi Waris.",n);return;}}
+        syncLogic();
+      }, 0));
+
+      printButton?.addEventListener("click", (event) => {
+        clearError();
+        const req = [
+          "skbNomor","skbLampiran","skbKpp","skbPemohonNama","skbPemohonNpwp","skbWpNama","skbWpNpwp","skbWpAlamat","skbWpKlu","skbAlasanKode",
+          "skbNop","skbNib","skbAlamatObjek","skbLuasTanah","skbLuasBangunan","skbNilaiPengalihan","skbLawanNama","skbLawanId","skbLawanAlamat",
+          "skbTempatTtd","skbTanggalTtd","skbNamaTtd"
+        ];
+        for (const id of req) {
+          const node = byId(id);
+          if (!node?.value.trim()) {
+            event.preventDefault(); event.stopImmediatePropagation();
+            fail(`Lengkapi ${node?.closest("label")?.querySelector("span")?.textContent || "field wajib"}.`, node);
+            return;
+          }
         }
-        if(!checked("skbDeclaration")){event.preventDefault();event.stopImmediatePropagation();fail("Centang pernyataan kebenaran data dan dokumen.",byId("skbDeclaration"));return;}
+
+        if (!roleValue()) {
+          event.preventDefault(); event.stopImmediatePropagation();
+          fail("Pilih pihak yang mengajukan permohonan.", document.querySelector('input[name="skbPeran"]'));
+          return;
+        }
+
+        if (roleValue() === "Wakil dari Wajib Pajak" && !val("skbPemohonJabatan")) {
+          event.preventDefault(); event.stopImmediatePropagation();
+          fail("Jabatan wajib diisi untuk pihak yang bertindak sebagai Wakil dari Wajib Pajak.", byId("skbPemohonJabatan"));
+          return;
+        }
+
+        if (!fmtDate(val("skbTanggalTtd"))) {
+          event.preventDefault(); event.stopImmediatePropagation();
+          fail("Tanggal penandatanganan tidak valid.", byId("skbTanggalTtd"));
+          return;
+        }
+
+        const code = reasonCode();
+        if (code === "g" && !/^\d{4}$/.test(val("skbTahunPelunasan"))) {
+          event.preventDefault(); event.stopImmediatePropagation();
+          fail("Isi tahun pelaporan/pelunasan dengan 4 digit.", byId("skbTahunPelunasan"));
+          return;
+        }
+
+        if (code === "d" && (!val("skbNomorSk") || !fmtDate(val("skbTanggalSk")))) {
+          event.preventDefault(); event.stopImmediatePropagation();
+          fail("Lengkapi nomor dan tanggal Surat Keputusan penggunaan nilai buku.", !val("skbNomorSk") ? byId("skbNomorSk") : byId("skbTanggalSk"));
+          return;
+        }
+
+        if (code === "c") {
+          const rows = [...tableA._rows(), ...tableB._rows()];
+          const filled = rows.filter((r) => [...r.querySelectorAll("input")].some((n) => n.value.trim()));
+          if (!filled.length) {
+            event.preventDefault(); event.stopImmediatePropagation();
+            fail("Tambahkan sekurang-kurangnya satu ahli waris.", tableA._rows()[0]?.querySelector("input"));
+            return;
+          }
+          for (const row of filled) {
+            for (const node of row.querySelectorAll("input")) {
+              if (!node.value.trim()) {
+                event.preventDefault(); event.stopImmediatePropagation();
+                fail("Lengkapi NIK/NPWP, nama, dan alamat ahli waris pada baris yang digunakan.", node);
+                return;
+              }
+            }
+          }
+          for (const id of ["skbPemberiNama","skbPemberiId","skbPemberiAlamat"]) {
+            const node = byId(id);
+            if (!node.value.trim()) {
+              event.preventDefault(); event.stopImmediatePropagation();
+              fail("Lengkapi Data Pemberi Waris.", node);
+              return;
+            }
+          }
+        }
+
+        if (!validateAttachments(event)) return;
+
+        if (!checked("skbDeclaration")) {
+          event.preventDefault(); event.stopImmediatePropagation();
+          fail("Centang pernyataan kebenaran data dan dokumen.", byId("skbDeclaration"));
+          return;
+        }
         syncPrint();
-      },true);
-      syncPrint(); return true;
+      }, true);
+
+      syncLogic();
+      syncPrint();
+      return true;
     }
-    if(!install() && root){const obs=new MutationObserver(()=>{if(install())obs.disconnect();});obs.observe(root,{childList:true,subtree:true});}
+
+    if (!install() && root) {
+      const observer = new MutationObserver(() => { if (install()) observer.disconnect(); });
+      observer.observe(root, {childList:true, subtree:true});
+    }
   })();
   </script>
 
