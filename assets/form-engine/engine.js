@@ -18,6 +18,7 @@
   const PRINT_PAYLOAD_KEY = "kabayan.printPayload.v1";
   const DRAFT_PREFIX = "kabayan.formDraft.v1:";
   const PRINT_PAYLOAD_MAX_AGE = 4 * 60 * 60 * 1000;
+  const DEFAULT_PAGE_SIZE = Object.freeze({ widthMm: 210, heightMm: 297, label: "A4" });
 
   const form = document.getElementById("dynamicForm");
   const root = document.getElementById("formRoot");
@@ -52,6 +53,31 @@
 
   function appendText(parent, text) {
     parent.appendChild(document.createTextNode(String(text ?? "")));
+  }
+
+  function parsePrintPageSize(value) {
+    const normalized = String(value || "A4 portrait").trim();
+    if (/^A4(?:\s+portrait)?$/i.test(normalized)) return { ...DEFAULT_PAGE_SIZE };
+
+    const match = normalized.match(/^(\d+(?:\.\d+)?)mm\s+(\d+(?:\.\d+)?)mm$/i);
+    if (!match) {
+      throw new Error("Ukuran kertas harus berupa “A4 portrait” atau pasangan ukuran milimeter, misalnya “215.9mm 330.2mm”.");
+    }
+
+    const widthMm = Number(match[1]);
+    const heightMm = Number(match[2]);
+    if (widthMm < 100 || widthMm > 500 || heightMm < 100 || heightMm > 500) {
+      throw new Error("Ukuran kertas berada di luar batas yang didukung.");
+    }
+    return { widthMm, heightMm, label: `${widthMm} × ${heightMm} mm` };
+  }
+
+  function applyPaperSize(schema) {
+    const pageSize = parsePrintPageSize(schema.printPageSize);
+    document.documentElement.style.setProperty("--paper-w", `${pageSize.widthMm}mm`);
+    document.documentElement.style.setProperty("--paper-h", `${pageSize.heightMm}mm`);
+    form.dataset.paperSize = pageSize.label;
+    return pageSize;
   }
 
   function validationLabel(field) {
@@ -2134,6 +2160,7 @@
     if (!SUPPORTED_RENDERERS.has(schema.renderer)) {
       throw new Error(`Renderer ${schema.renderer || "tanpa nama"} belum tersedia pada tahap pilot.`);
     }
+    parsePrintPageSize(schema.printPageSize);
     if (!Array.isArray(schema.blocks)) throw new Error("Daftar blok formulir tidak tersedia.");
   }
 
@@ -2384,12 +2411,14 @@
   function openStaticPrintPage() {
     try {
       storeDraft(activeSchema);
+      const pageSize = parsePrintPageSize(activeSchema.printPageSize);
       const payload = {
         version: 1,
         schemaId: activeSchema.id,
         title: activeSchema.title,
         createdAt: Date.now(),
         expiresAt: Date.now() + PRINT_PAYLOAD_MAX_AGE,
+        pageSize,
         markup: buildPrintSnapshot()
       };
       sessionStorage.setItem(PRINT_PAYLOAD_KEY, JSON.stringify(payload));
@@ -2705,6 +2734,7 @@
     form.className = "paper";
     form.classList.add(schema.renderer);
     form.dataset.formId = schema.id;
+    applyPaperSize(schema);
     renderTitle(schema);
     schema.blocks.forEach(renderBlock);
     assertUniqueControlIds();

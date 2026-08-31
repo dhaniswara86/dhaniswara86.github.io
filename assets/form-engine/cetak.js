@@ -6,6 +6,7 @@
   const MAX_MARKUP_LENGTH = 1_000_000;
   const FORBIDDEN_ELEMENTS = "script, style, link, iframe, object, embed, input, textarea, select, button";
   const URL_ATTRIBUTES = new Set(["src", "href", "srcdoc", "action", "formaction"]);
+  const DEFAULT_PAGE_SIZE = Object.freeze({ widthMm: 210, heightMm: 297 });
 
   const title = document.getElementById("previewTitle");
   const message = document.getElementById("printMessage");
@@ -62,9 +63,33 @@
     return document.importNode(root, true);
   }
 
+  function normalizedPageSize(value) {
+    const widthMm = Number(value?.widthMm);
+    const heightMm = Number(value?.heightMm);
+    if (!Number.isFinite(widthMm) || !Number.isFinite(heightMm)
+      || widthMm < 100 || widthMm > 500 || heightMm < 100 || heightMm > 500) {
+      return { ...DEFAULT_PAGE_SIZE };
+    }
+    return { widthMm, heightMm };
+  }
+
+  function applyPageSize(value) {
+    const pageSize = normalizedPageSize(value);
+    const width = `${pageSize.widthMm}mm`;
+    const height = `${pageSize.heightMm}mm`;
+    document.documentElement.style.setProperty("--paper-w", width);
+    document.documentElement.style.setProperty("--paper-h", height);
+
+    const style = document.createElement("style");
+    style.id = "dynamicPageSize";
+    style.textContent = `@page{size:${width} ${height};margin:0}`;
+    document.head.appendChild(style);
+  }
+
   function loadPreview() {
     try {
       const payload = readPayload();
+      applyPageSize(payload.pageSize);
       const documentNode = sanitizeMarkup(payload.markup);
       mount.replaceChildren(documentNode);
       title.textContent = payload.title || "Pratinjau Cetak";
