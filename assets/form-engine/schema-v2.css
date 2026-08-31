@@ -1,0 +1,136 @@
+/* Kabayan Form Engine v2 — additive schema styles. */
+.fe-document {
+  --fe-label-width: 42mm;
+  --fe-colon-width: 5mm;
+  color: #000;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10.5pt;
+  line-height: 1.35;
+}
+.fe-form-title {
+  max-width: 165mm;
+  margin: 0 auto 9mm;
+  font-size: 14pt;
+  line-height: 1.25;
+  text-align: center;
+}
+.fe-paragraph { margin: 4mm 0; text-align: justify; }
+.fe-fields { margin: 2mm 0 4mm; }
+.fe-indent { margin-left: 8mm; }
+.fe-field-row {
+  display: grid;
+  grid-template-columns: minmax(0,var(--fe-label-width)) var(--fe-colon-width) minmax(0,1fr);
+  align-items: start;
+  min-height: 6.3mm;
+}
+.fe-field-label { grid-column: 1; padding-top: .7mm; }
+.fe-field-colon { grid-column: 2; padding-top: .7mm; text-align: center; }
+.fe-control,
+.fe-inline-control,
+.fe-signature input,
+.fe-signature textarea,
+.fe-signature select {
+  width: 100%;
+  min-width: 0;
+  height: 6mm;
+  box-sizing: border-box;
+  border: 0;
+  border-bottom: .25mm dotted #555;
+  border-radius: 0;
+  padding: .3mm 1mm;
+  background: transparent;
+  color: #000;
+  font: inherit;
+  outline: none;
+}
+textarea.fe-control { min-height: 11mm; height: auto; resize: vertical; line-height: 1.25; }
+.fe-control:focus,
+.fe-inline-control:focus,
+.fe-signature input:focus { background: #eff6ff; box-shadow: inset 0 -1px 0 #0071e3; }
+.fe-control[aria-invalid="true"],
+.fe-field-row .missing { background: #fff1f2; box-shadow: inset 0 -1px 0 #d70015; }
+.fe-static-value { grid-column: 3; padding: .7mm 1mm 1mm; }
+.fe-inline-field {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 1mm;
+  margin: 4mm 0;
+  text-align: justify;
+}
+.fe-inline-control { width: 62mm; flex: 1 1 45mm; display: inline-block; }
+.fe-choice { margin: 3mm 0 4mm; padding: 0; border: 0; min-width: 0; }
+.fe-choice-title { margin: 0 0 2mm; padding: 0; font-weight: 400; }
+.fe-choice-options { display: grid; gap: 1.5mm; }
+.fe-choice-option,
+.fe-check-item { display: grid; grid-template-columns: 7mm minmax(0,1fr); gap: 2mm; align-items: start; cursor: pointer; }
+.fe-choice-option input,
+.fe-check-item input {
+  appearance: none;
+  width: 5.5mm;
+  height: 5.5mm;
+  margin: .2mm 0 0;
+  border: .25mm solid #666;
+  border-radius: 0;
+  background: #fff;
+  display: grid;
+  place-content: center;
+}
+.fe-choice-option input::before,
+.fe-check-item input::before { content: "✓"; font-size: 4.3mm; font-weight: 700; transform: scale(0); }
+.fe-choice-option input:checked::before,
+.fe-check-item input:checked::before { transform: scale(1); }
+.fe-choice[aria-invalid="true"],
+.fe-check-item[aria-invalid="true"] { outline: 1px solid #d70015; outline-offset: 1mm; }
+.fe-checklist { display: grid; gap: 2.4mm; margin: 4mm 0; }
+.fe-checklist-title { margin: 0 0 1mm; }
+.fe-signature { width: 74mm; margin: 9mm 3mm 0 auto; }
+.fe-signature-right { margin-left: auto; margin-right: 3mm; }
+.fe-signature-top { display: grid; grid-template-columns: 1fr 1fr; gap: 2mm; }
+.fe-signature-role { margin-top: 1.5mm; }
+.fe-signature-space { height: 22mm; }
+.fe-signature-place-date,
+.fe-signature-name { display: block; }
+.fe-footnote { margin-top: 1.4mm; font-size: 9pt; line-height: 1.3; }
+.fe-unsupported { margin: 3mm 0; padding: 2mm; border: 1px solid #d70015; color: #d70015; }
+
+/* Static preview produced by engine.js */
+.fe-static-document .fe-print-value {
+  display: block;
+  min-height: 5.7mm;
+  padding: .4mm 1mm .6mm;
+  border-bottom: .25mm dotted #555;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.fe-static-document .fe-print-inline-value {
+  display: inline-block;
+  min-width: 38mm;
+  flex: 1 1 45mm;
+}
+.fe-static-document .fe-print-check {
+  width: 5.5mm;
+  height: 5.5mm;
+  display: inline-grid;
+  place-content: center;
+  border: .25mm solid #666;
+  font-weight: 700;
+  line-height: 1;
+}
+.fe-static-document .fe-signature .fe-print-value { text-align: left; }
+
+@media (max-width: 720px) {
+  .fe-field-row { grid-template-columns: minmax(95px,34%) 18px minmax(0,1fr); }
+  .fe-indent { margin-left: 0; }
+}
+
+@media print {
+  .fe-document { color: #000 !important; }
+  .fe-control,
+  .fe-inline-control,
+  .fe-signature input,
+  .fe-signature textarea,
+  .fe-signature select { background: transparent !important; box-shadow: none !important; color: #000 !important; }
+  .fe-choice-option input,
+  .fe-check-item input { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
