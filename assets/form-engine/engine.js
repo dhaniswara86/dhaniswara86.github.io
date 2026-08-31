@@ -61,7 +61,7 @@
 
     const match = normalized.match(/^(\d+(?:\.\d+)?)mm\s+(\d+(?:\.\d+)?)mm$/i);
     if (!match) {
-      throw new Error("Ukuran kertas harus berupa “A4 portrait” atau pasangan ukuran milimeter, misalnya “215.9mm 330.2mm”.");
+      throw new Error("Ukuran kertas harus berupa “A4 portrait” atau pasangan ukuran milimeter, misalnya “215mm 330mm”.");
     }
 
     const widthMm = Number(match[1]);
