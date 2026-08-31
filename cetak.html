@@ -8,7 +8,145 @@
   <link rel="stylesheet" href="assets/form-engine/form.css?v=20260831-12">
   <link rel="stylesheet" href="assets/form-engine/print.css?v=20260831-12" media="print">
   <link rel="stylesheet" href="assets/form-engine/cetak.css?v=20260831-12">
-  <script src="assets/form-engine/cetak.js?v=20260831-12" defer></script>
+
+  <style id="warisStaticPrintStyles">
+    /*
+      Layout khusus Surat Pernyataan Pembagian Waris pada cetak.html.
+      CSS ini harus berada di halaman cetak karena markup statis yang
+      dikirim dari form.html tidak membawa stylesheet inline form.
+    */
+    .print-static-paper .waris-v3-editor {
+      display: none !important;
+    }
+
+    .print-static-paper .waris-v3-print {
+      display: block !important;
+      margin-top: 22px;
+      color: #000;
+      font: inherit;
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .print-static-paper .waris-v3-print.waris-v3-many {
+      break-inside: auto;
+      page-break-inside: auto;
+    }
+
+    .print-static-paper .waris-v3-place-date-grid,
+    .print-static-paper .waris-v3-sign-grid {
+      display: grid !important;
+      grid-template-columns: minmax(0, 1fr) 66px minmax(0, 1fr) !important;
+      column-gap: 22px !important;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .print-static-paper .waris-v3-place-date {
+      grid-column: 3 !important;
+      min-width: 0;
+      min-height: 24px;
+      margin: 0 0 6px;
+      white-space: nowrap;
+      text-align: left;
+      line-height: 1.35;
+    }
+
+    .print-static-paper .waris-v3-sign-grid {
+      align-items: start;
+    }
+
+    /*
+      Jangan bergantung pada style="" hasil serialisasi.
+      Posisi juga dikunci berdasarkan class/order agar Safari stabil.
+    */
+    .print-static-paper .waris-v3-sign-grid > .waris-v3-sign-title:first-child {
+      grid-column: 1 !important;
+      grid-row: 1 !important;
+    }
+
+    .print-static-paper .waris-v3-sign-grid > .waris-v3-sign-title:nth-child(2) {
+      grid-column: 3 !important;
+      grid-row: 1 !important;
+    }
+
+    .print-static-paper .waris-v3-left-list {
+      grid-column: 1 !important;
+      grid-row: 2 !important;
+      min-width: 0;
+      margin: 0;
+    }
+
+    .print-static-paper .waris-v3-stamp {
+      grid-column: 2 !important;
+      grid-row: 2 !important;
+      align-self: start;
+      width: 62px;
+      height: 38px;
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      margin-top: 22px;
+      border: 1px solid #000;
+      font-size: 11px;
+      line-height: 1;
+    }
+
+    .print-static-paper .waris-v3-primary-area {
+      grid-column: 3 !important;
+      grid-row: 2 !important;
+      min-width: 0;
+      min-height: 94px;
+      display: flex !important;
+      align-items: flex-end;
+    }
+
+    .print-static-paper .waris-v3-sign-title {
+      margin: 0 !important;
+      padding: 0 !important;
+      font: inherit;
+      font-weight: 400 !important;
+      line-height: 1.35 !important;
+    }
+
+    .print-static-paper .waris-v3-print-heir {
+      min-height: 94px;
+      display: flex !important;
+      align-items: flex-end;
+      min-width: 0;
+    }
+
+    .print-static-paper .waris-v3-print-heir-name,
+    .print-static-paper .waris-v3-primary-name {
+      width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+      padding: 0 3px 3px;
+      border-bottom: 1px dotted #000;
+      text-align: center;
+      line-height: 1.2;
+      overflow-wrap: anywhere;
+    }
+
+    .print-static-paper .waris-v3-primary-name {
+      width: 100%;
+    }
+
+    @media print {
+      .print-static-paper .waris-v3-print {
+        margin-top: 22px;
+      }
+
+      .print-static-paper .waris-v3-place-date-grid,
+      .print-static-paper .waris-v3-sign-grid {
+        grid-template-columns: minmax(0, 1fr) 66px minmax(0, 1fr) !important;
+        column-gap: 22px !important;
+      }
+    }
+  </style>
+
+  <script src="assets/form-engine/cetak.js?v=20260831-13" defer></script>
 </head>
 <body class="static-print-page">
   <header class="static-print-toolbar no-print">

@@ -403,7 +403,9 @@
       const formatDateId = (iso) => {
         if (!/^\d{4}-\d{2}-\d{2}$/.test(iso || "")) return "";
         const [y, m, d] = iso.split("-").map(Number);
-        if (!y || !m || !d || m < 1 || m > 12) return "";
+        if (!y || !m || !d || m < 1 || m > 12 || y < 1900 || y > 2100) return "";
+        const check = new Date(Date.UTC(y, m - 1, d));
+        if (check.getUTCFullYear() !== y || check.getUTCMonth() !== m - 1 || check.getUTCDate() !== d) return "";
         return `${d} ${MONTHS_ID[m - 1]} ${y}`;
       };
 
@@ -445,6 +447,8 @@
 
         const date = document.createElement("input");
         date.type = "date";
+        date.min = "1900-01-01";
+        date.max = "2100-12-31";
         date.id = "warisTanggalTtd";
         date.name = "warisTanggalTtd";
 
@@ -670,6 +674,13 @@
                 setError(message, input);
                 return;
               }
+            }
+
+            if (!formatDateId(date.value)) {
+              event.preventDefault();
+              event.stopImmediatePropagation();
+              setError("Tanggal penandatanganan tidak valid.", date);
+              return;
             }
 
             const emptyHeir = heirInputs().find((input) => !input.value.trim());
