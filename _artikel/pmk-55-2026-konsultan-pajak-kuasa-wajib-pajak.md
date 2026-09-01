@@ -34,13 +34,6 @@ custom_js:
   - "/assets/js/pmk-55-2026-kuasa-wajib-pajak.js"
 ---
 
-<section class="kuasa26-lead" aria-labelledby="jawaban-singkat">
-  <div class="kuasa26-kicker">Berlaku sejak 24 Agustus 2026</div>
-  <h2 id="jawaban-singkat">Jawaban singkatnya: pilih perannya, periksa kelayakannya, lalu buat Surat Kuasa Khusus</h2>
-  <p>Wajib Pajak dapat menunjuk <strong>Konsultan Pajak, Pihak Lain, atau Keluarga</strong> sebagai kuasa. Ketiganya tidak menempuh jalur yang sama. Konsultan menggunakan Izin Konsultan Pajak, Pihak Lain menggunakan Surat Keterangan Terdaftar, sedangkan Keluarga menggunakan bukti hubungan keluarga.</p>
-  <p>Akan tetapi, ketiga jalur tersebut mempunyai satu titik temu: <strong>tidak seorang pun dapat bertindak sebagai kuasa hanya berdasarkan izin, SKT, kartu keluarga, hubungan kerja, atau kepercayaan pribadi.</strong> Penunjukannya tetap harus dituangkan dalam Surat Kuasa Khusus.</p>
-</section>
-
 <figure class="kuasa26-hero-image">
   <img src="/assets/img/pmk-55-2026-alur-kuasa-wajib-pajak.webp" width="1536" height="1024" loading="eager" decoding="async" alt="Ilustrasi tiga jalur Kuasa Wajib Pajak: Konsultan Pajak, Pihak Lain yang kompeten, dan Keluarga, yang terhubung menuju dokumen penugasan Wajib Pajak.">
   <figcaption>Tiga identitas penerima kuasa, tiga bukti kelayakan, dan satu titik temu berupa Surat Kuasa Khusus.</figcaption>
@@ -50,7 +43,7 @@ custom_js:
   <span class="kuasa26-alert__icon" aria-hidden="true">!</span>
   <div>
     <strong>Bedakan “boleh menjadi kuasa” dengan “telah diberi kuasa”.</strong>
-    <p>Izin Konsultan Pajak atau SKT membuktikan kelayakan profesional. Bukti hubungan keluarga membuktikan seseorang masuk jalur Keluarga. Surat Kuasa Khusus membuktikan bahwa orang tersebut benar-benar ditunjuk untuk menangani urusan perpajakan tertentu.</p>
+    <p>Izin Konsultan Pajak atau Surat Keterangan Terdaftar membuktikan kelayakan profesional. Bukti hubungan keluarga membuktikan seseorang masuk jalur Keluarga. Namun ketiganya membutuhkan Surat Kuasa Khusus untuk membuktikan bahwa orang tersebut benar-benar ditunjuk untuk menangani urusan perpajakan tertentu.</p>
   </div>
 </aside>
 
