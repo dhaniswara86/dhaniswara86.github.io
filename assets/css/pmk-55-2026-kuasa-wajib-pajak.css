@@ -1,11 +1,34 @@
+:root {
+  --kuasa26-black: var(--black, #000000);
+  --kuasa26-ink: var(--near-black, #1d1d1f);
+  --kuasa26-white: var(--white, #ffffff);
+  --kuasa26-off-white: var(--off-white, #f5f5f7);
+  --kuasa26-soft-gray: var(--soft-gray, #e8e8ed);
+  --kuasa26-medium-gray: var(--medium-gray, #86868b);
+  --kuasa26-blue: var(--blue, #0071e3);
+  --kuasa26-blue-hover: var(--blue-hover, #0077ed);
+  --kuasa26-blue-soft: #eef6ff;
+  --kuasa26-blue-border: #d5e7f8;
+  --kuasa26-yellow: var(--yellow, #ffcc00);
+  --kuasa26-yellow-soft: #fff9e6;
+  --kuasa26-orange-soft: var(--orange-soft, #fff7e8);
+  --kuasa26-shadow: rgba(20, 43, 76, 0.08);
+}
+
 .kuasa26-lead {
   position: relative;
   overflow: hidden;
   margin: 0 0 1.5rem;
   padding: clamp(1.3rem, 3vw, 2rem);
-  border: 1px solid rgba(24, 86, 75, 0.18);
+  border: 1px solid var(--kuasa26-blue-border);
   border-radius: 22px;
-  background: linear-gradient(135deg, #edf8f4 0%, #fffaf0 100%);
+  background:
+    radial-gradient(
+      circle at 92% 12%,
+      rgba(255, 204, 0, 0.2),
+      transparent 26%
+    ),
+    linear-gradient(145deg, #f7fbff 0%, var(--kuasa26-blue-soft) 100%);
 }
 
 .kuasa26-lead::after {
@@ -13,7 +36,7 @@
   position: absolute;
   right: -0.1em;
   bottom: -0.45em;
-  color: rgba(17, 91, 78, 0.07);
+  color: rgba(0, 113, 227, 0.07);
   font: 800 clamp(7rem, 21vw, 13rem)/1 sans-serif;
   pointer-events: none;
 }
@@ -28,8 +51,8 @@
   margin-bottom: 0.75rem;
   padding: 0.3rem 0.7rem;
   border-radius: 999px;
-  background: #165e52;
-  color: #fff;
+  background: var(--kuasa26-ink);
+  color: var(--kuasa26-white);
   font-size: 0.78rem;
   font-weight: 800;
   letter-spacing: 0.06em;
@@ -47,16 +70,16 @@
   gap: 0.9rem;
   margin: 1.5rem 0;
   padding: 1.1rem 1.2rem;
-  border: 1px solid #e4c266;
-  border-left: 5px solid #d49800;
+  border: 1px solid #f2df9b;
+  border-left: 5px solid var(--kuasa26-yellow);
   border-radius: 14px;
-  background: #fff9e8;
+  background: var(--kuasa26-yellow-soft);
 }
 
 .kuasa26-alert--soft {
-  border-color: #a9cec6;
-  border-left-color: #347c6f;
-  background: #f1f8f6;
+  border-color: var(--kuasa26-blue-border);
+  border-left-color: var(--kuasa26-blue);
+  background: var(--kuasa26-blue-soft);
 }
 
 .kuasa26-alert__icon {
@@ -65,8 +88,8 @@
   height: 2rem;
   place-items: center;
   border-radius: 50%;
-  background: #174f47;
-  color: #fff;
+  background: var(--kuasa26-ink);
+  color: var(--kuasa26-white);
   font-weight: 900;
 }
 
@@ -89,14 +112,14 @@
   grid-template-columns: auto 1fr;
   gap: 0.85rem;
   padding: 1rem;
-  border: 1px solid #dde7e4;
+  border: 1px solid var(--kuasa26-soft-gray);
   border-radius: 16px;
-  background: #fff;
-  box-shadow: 0 8px 24px rgba(30, 73, 66, 0.06);
+  background: var(--kuasa26-white);
+  box-shadow: 0 8px 24px var(--kuasa26-shadow);
 }
 
 .kuasa26-points li > span {
-  color: #b17d00;
+  color: var(--kuasa26-blue);
   font-size: 0.8rem;
   font-weight: 900;
   letter-spacing: 0.08em;
@@ -110,26 +133,26 @@
 .kuasa26-flow {
   margin: 1.4rem 0 2.2rem;
   padding: clamp(1rem, 3vw, 1.7rem);
-  border: 1px solid #dce8e5;
+  border: 1px solid var(--kuasa26-soft-gray);
   border-radius: 22px;
-  background: #f8fbfa;
+  background: var(--kuasa26-off-white);
 }
 
 .kuasa26-flow__node {
   max-width: 660px;
   margin: 0 auto;
   padding: 0.9rem 1rem;
-  border: 1px solid #b7d3cc;
+  border: 1px solid var(--kuasa26-blue-border);
   border-radius: 14px;
-  background: #fff;
+  background: var(--kuasa26-white);
   text-align: center;
-  box-shadow: 0 5px 16px rgba(28, 82, 73, 0.05);
+  box-shadow: 0 5px 16px var(--kuasa26-shadow);
 }
 
 .kuasa26-flow__node small {
   display: block;
   margin-bottom: 0.2rem;
-  color: #56716c;
+  color: #515154;
   font-size: 0.74rem;
   font-weight: 800;
   letter-spacing: 0.05em;
@@ -138,19 +161,30 @@
 
 .kuasa26-flow__node--start,
 .kuasa26-flow__node--finish {
-  border-color: #185f53;
-  background: #185f53;
-  color: #fff;
+  border-color: var(--kuasa26-ink);
+  background: var(--kuasa26-ink);
+  color: var(--kuasa26-white);
+}
+
+.kuasa26-flow__node--finish {
+  border-color: var(--kuasa26-blue);
+  background:
+    linear-gradient(
+      90deg,
+      #083b8f,
+      var(--kuasa26-blue) 48%,
+      #26a3cf 100%
+    );
 }
 
 .kuasa26-flow__node--start small,
 .kuasa26-flow__node--finish small {
-  color: #d2eee8;
+  color: rgba(255, 255, 255, 0.75);
 }
 
 .kuasa26-flow__arrow {
   padding: 0.35rem;
-  color: #2c7568;
+  color: var(--kuasa26-blue);
   font-size: 1.35rem;
   font-weight: 900;
   text-align: center;
@@ -164,9 +198,9 @@
 
 .kuasa26-flow__branches section {
   padding: 1rem;
-  border: 1px solid #d9e4e1;
+  border: 1px solid var(--kuasa26-soft-gray);
   border-radius: 14px;
-  background: #fff;
+  background: var(--kuasa26-white);
 }
 
 .kuasa26-flow__branches span {
@@ -175,8 +209,8 @@
   height: 1.8rem;
   place-items: center;
   border-radius: 50%;
-  background: #e5f2ee;
-  color: #165e52;
+  background: var(--kuasa26-blue-soft);
+  color: var(--kuasa26-blue);
   font-weight: 900;
 }
 
@@ -193,7 +227,7 @@
 .kuasa26-table-wrap {
   margin: 1rem 0 2rem;
   overflow-x: auto;
-  border: 1px solid #dde6e4;
+  border: 1px solid var(--kuasa26-soft-gray);
   border-radius: 16px;
 }
 
@@ -208,18 +242,18 @@
 .kuasa26-table th,
 .kuasa26-table td {
   padding: 0.8rem 0.9rem;
-  border-bottom: 1px solid #e4ebe9;
+  border-bottom: 1px solid var(--kuasa26-soft-gray);
   text-align: left;
   vertical-align: top;
 }
 
 .kuasa26-table th {
-  background: #174f47;
-  color: #fff;
+  background: #111113;
+  color: var(--kuasa26-white);
 }
 
 .kuasa26-table tbody tr:nth-child(even) {
-  background: #f7faf9;
+  background: #fbfbfd;
 }
 
 .kuasa26-table tbody tr:last-child td {
@@ -227,7 +261,7 @@
 }
 
 .kuasa26-table--calendar td:first-child {
-  color: #945f00;
+  color: var(--kuasa26-blue);
   font-weight: 800;
   white-space: nowrap;
 }
@@ -247,9 +281,9 @@
 .kuasa26-levels section {
   position: relative;
   padding: 1.1rem;
-  border: 1px solid #dce7e4;
+  border: 1px solid var(--kuasa26-soft-gray);
   border-radius: 16px;
-  background: linear-gradient(180deg, #fff 0%, #f7fbfa 100%);
+  background: linear-gradient(180deg, var(--kuasa26-white) 0%, #f7fbff 100%);
 }
 
 .kuasa26-levels__badge {
@@ -258,8 +292,14 @@
   height: 2.5rem;
   place-items: center;
   border-radius: 12px;
-  background: #165e52;
-  color: #fff;
+  background:
+    linear-gradient(
+      145deg,
+      #083b8f,
+      var(--kuasa26-blue) 68%,
+      #26a3cf
+    );
+  color: var(--kuasa26-white);
   font-size: 1.15rem;
   font-weight: 900;
 }
@@ -278,7 +318,8 @@
   margin: 1rem 0 2rem;
   padding: 1rem 1.1rem;
   border-radius: 12px;
-  background: #f3f0e4;
+  border: 1px solid #f2dfbd;
+  background: var(--kuasa26-orange-soft);
 }
 
 .kuasa26-highlight-grid {
@@ -287,9 +328,9 @@
 
 .kuasa26-highlight-grid section {
   padding: 1rem 1.1rem;
-  border-left: 4px solid #c1901b;
+  border-left: 4px solid var(--kuasa26-yellow);
   border-radius: 0 12px 12px 0;
-  background: #fffbf0;
+  background: var(--kuasa26-yellow-soft);
 }
 
 .kuasa26-highlight-grid p {
@@ -307,9 +348,9 @@
   position: relative;
   margin: 0.55rem 0;
   padding: 0.75rem 0.9rem 0.75rem 2.5rem;
-  border: 1px solid #e1e9e7;
+  border: 1px solid var(--kuasa26-soft-gray);
   border-radius: 12px;
-  background: #fff;
+  background: var(--kuasa26-white);
 }
 
 .kuasa26-checks li::before {
@@ -317,7 +358,7 @@
   position: absolute;
   left: 0.85rem;
   top: 0.72rem;
-  color: #19705f;
+  color: var(--kuasa26-blue);
   font-weight: 900;
 }
 
@@ -327,9 +368,9 @@
 
 .kuasa26-actions section {
   padding: 1rem 1.1rem;
-  border: 1px solid #dce6e3;
+  border: 1px solid var(--kuasa26-soft-gray);
   border-radius: 16px;
-  background: #f9fbfa;
+  background: #fbfbfd;
 }
 
 .kuasa26-actions h3 {
@@ -352,8 +393,8 @@
 .kuasa26-disclaimer {
   margin-top: 1.5rem;
   padding-top: 1rem;
-  border-top: 1px solid #dce4e2;
-  color: #60706d;
+  border-top: 1px solid var(--kuasa26-soft-gray);
+  color: var(--kuasa26-medium-gray);
   font-size: 0.86rem;
 }
 
