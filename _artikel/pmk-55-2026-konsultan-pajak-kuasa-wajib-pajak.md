@@ -1,10 +1,10 @@
 ---
 layout: artikel-editorial
 title: "Saya Konsultan, Pihak Lain, atau Keluarga? Alur Menjadi Kuasa Wajib Pajak"
-hero_title: "Menjadi Kuasa Wajib Pajak: Jalurnya Berbeda untuk Setiap Peran"
+hero_title: "Menjadi Kuasa Wajib Pajak:"
 description: "Panduan berbasis peran untuk Konsultan Pajak, Pihak Lain, dan Keluarga yang akan bertindak sebagai Kuasa Wajib Pajak berdasarkan PMK 44 Tahun 2026 dan PMK 55 Tahun 2026."
-excerpt: "Konsultan menggunakan izin, Pihak Lain menggunakan SKT, sedangkan Keluarga menggunakan bukti hubungan keluarga. Ketiganya tetap memerlukan Surat Kuasa Khusus."
-summary: "Tentukan terlebih dahulu status penerima kuasa. Konsultan Pajak harus memiliki izin aktif dan sesuai kelas. Pihak Lain harus memiliki SKK dan SKT, dengan ketentuan transisi sampai 31 Desember 2026. Keluarga tidak memerlukan bukti kompetensi, tetapi wajib membuktikan hubungan keluarga. Semua jalur bertemu pada Surat Kuasa Khusus."
+excerpt: "Konsultan menggunakan izin, Pihak Lain menggunakan Surat Keterangan Terdaftar, sedangkan Keluarga menggunakan bukti hubungan keluarga. Ketiganya tetap memerlukan Surat Kuasa Khusus."
+summary: "Tentukan terlebih dahulu status penerima kuasa. Konsultan Pajak harus memiliki izin konsultan pajak aktif dan sesuai kelas. Pihak Lain harus memiliki Surat Keterangan Kompetensi (SKK) dan Surat Keterangan Terdaftar (SKT), dengan ketentuan transisi sampai 31 Desember 2026. Keluarga tidak memerlukan bukti kompetensi, tetapi wajib membuktikan hubungan keluarga. Semua jalur dapat menjadi kuasa setelah memiliki Surat Kuasa Khusus."
 summary_label: "Pilih jalur Anda"
 sidebar_note: "Izin, SKT, atau hubungan keluarga menentukan kelayakan penerima kuasa. Surat Kuasa Khusus menentukan tindakan apa yang boleh dilakukan. Keduanya tidak boleh tertukar."
 hero_accent: "Konsultan · Pihak Lain · Keluarga"
