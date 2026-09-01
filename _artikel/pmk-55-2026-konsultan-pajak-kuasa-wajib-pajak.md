@@ -10,7 +10,7 @@ sidebar_note: "Izin, SKT, atau hubungan keluarga menentukan kelayakan penerima k
 hero_accent: "Konsultan · Pihak Lain · Keluarga"
 permalink: /pmk-55-2026-konsultan-pajak-kuasa-wajib-pajak.html
 date: 2026-09-01 08:00:00 +0700
-date_modified: 2026-09-01 13:30:00 +0700
+date_modified: 2026-09-01 14:15:00 +0700
 author: "Angga Sukma Dhaniswara"
 category: "Administrasi Pajak"
 tags:
@@ -27,9 +27,11 @@ legal_basis:
   - "PP 50 Tahun 2022"
 reading_time: "12 menit"
 featured: false
-image: "/assets/images/artikel/pmk-55-2026-alur-kuasa-wajib-pajak.png"
+image: "/assets/img/pmk-55-2026-alur-kuasa-wajib-pajak.webp"
 custom_css:
   - "/assets/css/pmk-55-2026-kuasa-wajib-pajak.css"
+custom_js:
+  - "/assets/js/pmk-55-2026-kuasa-wajib-pajak.js"
 ---
 
 <section class="kuasa26-lead" aria-labelledby="jawaban-singkat">
@@ -40,7 +42,7 @@ custom_css:
 </section>
 
 <figure class="kuasa26-hero-image">
-  <img src="/assets/images/artikel/pmk-55-2026-alur-kuasa-wajib-pajak.png" width="1536" height="1024" loading="eager" decoding="async" alt="Ilustrasi tiga jalur Kuasa Wajib Pajak: Konsultan Pajak, Pihak Lain yang kompeten, dan Keluarga, yang terhubung menuju dokumen penugasan Wajib Pajak.">
+  <img src="/assets/img/pmk-55-2026-alur-kuasa-wajib-pajak.webp" width="1536" height="1024" loading="eager" decoding="async" alt="Ilustrasi tiga jalur Kuasa Wajib Pajak: Konsultan Pajak, Pihak Lain yang kompeten, dan Keluarga, yang terhubung menuju dokumen penugasan Wajib Pajak.">
   <figcaption>Tiga identitas penerima kuasa, tiga bukti kelayakan, dan satu titik temu berupa Surat Kuasa Khusus.</figcaption>
 </figure>
 
@@ -58,15 +60,35 @@ custom_css:
 
 <div class="kuasa26-first-gate">
   <section>
-    <div class="kuasa26-first-gate__label">Jalur wakil</div>
-    <h3>Bertindak karena kedudukan hukum</h3>
-    <p>Direksi atau pengurus badan, wali, kurator, atau pihak lain yang menurut ketentuan berkedudukan sebagai wakil Wajib Pajak mengikuti jalur “wakil”. Mereka tidak otomatis menjadi Pihak Lain hanya karena melakukan tindakan untuk Wajib Pajak.</p>
+    <div class="kuasa26-first-gate__icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="8.5" cy="7" r="3"></circle>
+        <path d="M3 20v-1.5A5.5 5.5 0 0 1 8.5 13H10"></path>
+        <path d="M17 11l4 1.5v3.1c0 2.35-1.47 4.36-4 5.4-2.53-1.04-4-3.05-4-5.4v-3.1L17 11z"></path>
+        <path d="m15.6 15.8 1 1 1.9-2"></path>
+      </svg>
+    </div>
+    <div>
+      <div class="kuasa26-first-gate__label">Jalur wakil</div>
+      <h3>Bertindak karena kedudukan hukum</h3>
+      <p>Direksi atau pengurus badan, wali, kurator, atau pihak lain yang menurut ketentuan berkedudukan sebagai wakil Wajib Pajak mengikuti jalur “wakil”. Mereka tidak otomatis menjadi Pihak Lain hanya karena melakukan tindakan untuk Wajib Pajak.</p>
+    </div>
   </section>
   <div class="kuasa26-first-gate__or" aria-hidden="true">atau</div>
   <section>
-    <div class="kuasa26-first-gate__label">Jalur kuasa</div>
-    <h3>Bertindak karena pemberian kuasa</h3>
-    <p>Jika tidak berkedudukan sebagai wakil, seseorang harus menentukan statusnya sebagai Konsultan Pajak, Pihak Lain, atau Keluarga dan menerima Surat Kuasa Khusus.</p>
+    <div class="kuasa26-first-gate__icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 3h8l4 4v14H6z"></path>
+        <path d="M14 3v5h5"></path>
+        <path d="M9 12h6M9 16h3"></path>
+        <path d="m14 18 4-4 2 2-4 4-2 .5z"></path>
+      </svg>
+    </div>
+    <div>
+      <div class="kuasa26-first-gate__label">Jalur kuasa</div>
+      <h3>Bertindak karena pemberian kuasa</h3>
+      <p>Jika tidak berkedudukan sebagai wakil, seseorang harus menentukan statusnya sebagai Konsultan Pajak, Pihak Lain, atau Keluarga dan menerima Surat Kuasa Khusus.</p>
+    </div>
   </section>
 </div>
 
@@ -74,28 +96,40 @@ custom_css:
 
 <h2 id="pilih-peran">Pilih peran Anda</h2>
 
-<nav class="kuasa26-role-picker" aria-label="Pilih jalur Kuasa Wajib Pajak">
-  <a href="#konsultan-pajak" data-role="KP">
+<p class="kuasa26-role-instruction">Pilih satu kartu untuk membuka jalurnya. Klik kembali kartu yang aktif untuk menyembunyikan pilihan.</p>
+
+<nav class="kuasa26-role-picker" aria-label="Pilih jalur Kuasa Wajib Pajak" data-role-selector>
+  <button type="button" data-role="KP" data-role-choice="konsultan-pajak" aria-controls="konsultan-pajak" aria-expanded="false">
     <span class="kuasa26-role-picker__number">01</span>
     <strong>Saya Konsultan Pajak</strong>
     <small>Izin aktif dan kelas A/B/C</small>
-    <span class="kuasa26-role-picker__link">Buka jalur →</span>
-  </a>
-  <a href="#pihak-lain" data-role="PL">
+    <span class="kuasa26-role-picker__link" data-role-action>Buka jalur →</span>
+  </button>
+  <button type="button" data-role="PL" data-role-choice="pihak-lain" aria-controls="pihak-lain" aria-expanded="false">
     <span class="kuasa26-role-picker__number">02</span>
     <strong>Saya Pihak Lain</strong>
     <small>SKK dan SKT yang masih berlaku</small>
-    <span class="kuasa26-role-picker__link">Buka jalur →</span>
-  </a>
-  <a href="#keluarga" data-role="KL">
+    <span class="kuasa26-role-picker__link" data-role-action>Buka jalur →</span>
+  </button>
+  <button type="button" data-role="KL" data-role-choice="keluarga" aria-controls="keluarga" aria-expanded="false">
     <span class="kuasa26-role-picker__number">03</span>
     <strong>Saya Keluarga</strong>
     <small>KK atau pernyataan hubungan keluarga</small>
-    <span class="kuasa26-role-picker__link">Buka jalur →</span>
-  </a>
+    <span class="kuasa26-role-picker__link" data-role-action>Buka jalur →</span>
+  </button>
 </nav>
 
-<section class="kuasa26-role-section kuasa26-role-section--consultant" id="konsultan-pajak" aria-labelledby="judul-konsultan">
+<div class="kuasa26-role-selection-state" data-role-state aria-live="polite">
+  <span aria-hidden="true">↓</span>
+  <p data-role-message>Belum ada peran yang dipilih. Detail jalur masih disembunyikan.</p>
+</div>
+
+<noscript>
+  <style>.kuasa26-role-section[hidden]{display:block!important}</style>
+  <p class="kuasa26-noscript">JavaScript tidak aktif. Seluruh jalur ditampilkan agar isi artikel tetap dapat dibaca.</p>
+</noscript>
+
+<section class="kuasa26-role-section kuasa26-role-section--consultant" id="konsultan-pajak" aria-labelledby="judul-konsultan" data-role-panel="konsultan-pajak" tabindex="-1" hidden>
   <header class="kuasa26-role-header">
     <div class="kuasa26-role-header__icon" aria-hidden="true">KP</div>
     <div>
@@ -144,7 +178,7 @@ custom_css:
   <p class="kuasa26-role-conclusion"><strong>Ringkasnya:</strong> izin aktif → kelas sesuai → terdaftar di DJP → Surat Kuasa Khusus → akses elektronik → bertindak sesuai kuasa → menjaga kepatuhan profesi.</p>
 </section>
 
-<section class="kuasa26-role-section kuasa26-role-section--other" id="pihak-lain" aria-labelledby="judul-pihak-lain">
+<section class="kuasa26-role-section kuasa26-role-section--other" id="pihak-lain" aria-labelledby="judul-pihak-lain" data-role-panel="pihak-lain" tabindex="-1" hidden>
   <header class="kuasa26-role-header">
     <div class="kuasa26-role-header__icon" aria-hidden="true">PL</div>
     <div>
@@ -187,7 +221,7 @@ custom_css:
   <p class="kuasa26-role-conclusion"><strong>Ringkasnya:</strong> pastikan benar bertindak sebagai kuasa → peroleh SKK dan SKT → cek kelas dan masa berlaku → terdaftar di DJP → Surat Kuasa Khusus → akses elektronik → bertindak sesuai kuasa.</p>
 </section>
 
-<section class="kuasa26-role-section kuasa26-role-section--family" id="keluarga" aria-labelledby="judul-keluarga">
+<section class="kuasa26-role-section kuasa26-role-section--family" id="keluarga" aria-labelledby="judul-keluarga" data-role-panel="keluarga" tabindex="-1" hidden>
   <header class="kuasa26-role-header">
     <div class="kuasa26-role-header__icon" aria-hidden="true">KL</div>
     <div>
