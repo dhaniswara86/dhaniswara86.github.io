@@ -1,252 +1,318 @@
 ---
 layout: artikel-editorial
-title: "PMK 55 Tahun 2026: Peta Baru Konsultan Pajak dan Kuasa Wajib Pajak"
-hero_title: "Bukan Cukup Punya Surat Kuasa: Ada Kompetensi, Registrasi, dan Pengawasan"
-description: "Resume singkat PMK 55 Tahun 2026 tentang Konsultan Pajak dan Pihak Lain yang Bertindak sebagai Kuasa Wajib Pajak, dilengkapi peta alur pikir, kelas izin, kewajiban, sanksi, dan masa transisi."
-excerpt: "PMK 55 Tahun 2026 membangun ekosistem profesi yang lebih lengkap: konsultan, kantor konsultan pajak, asosiasi, dan pihak lain yang bertindak sebagai kuasa Wajib Pajak."
-summary: "PMK 55 Tahun 2026 tidak hanya mengatur izin konsultan pajak. Regulasi ini menata kompetensi, kantor konsultan pajak, asosiasi profesi, pendidikan profesional berkelanjutan, pelaporan, pengawasan, serta registrasi pihak lain yang bertindak sebagai kuasa Wajib Pajak."
-summary_label: "Resume singkat"
-sidebar_note: "Bedakan kelayakan profesional seseorang dengan keabsahan penunjukannya untuk suatu urusan pajak. Izin atau SKT tidak menggantikan surat kuasa khusus."
-hero_accent: "PMK 55 Tahun 2026"
+title: "Saya Konsultan, Pihak Lain, atau Keluarga? Alur Menjadi Kuasa Wajib Pajak"
+hero_title: "Menjadi Kuasa Wajib Pajak: Jalurnya Berbeda untuk Setiap Peran"
+description: "Panduan berbasis peran untuk Konsultan Pajak, Pihak Lain, dan Keluarga yang akan bertindak sebagai Kuasa Wajib Pajak berdasarkan PMK 44 Tahun 2026 dan PMK 55 Tahun 2026."
+excerpt: "Konsultan menggunakan izin, Pihak Lain menggunakan SKT, sedangkan Keluarga menggunakan bukti hubungan keluarga. Ketiganya tetap memerlukan Surat Kuasa Khusus."
+summary: "Tentukan terlebih dahulu status penerima kuasa. Konsultan Pajak harus memiliki izin aktif dan sesuai kelas. Pihak Lain harus memiliki SKK dan SKT, dengan ketentuan transisi sampai 31 Desember 2026. Keluarga tidak memerlukan bukti kompetensi, tetapi wajib membuktikan hubungan keluarga. Semua jalur bertemu pada Surat Kuasa Khusus."
+summary_label: "Pilih jalur Anda"
+sidebar_note: "Izin, SKT, atau hubungan keluarga menentukan kelayakan penerima kuasa. Surat Kuasa Khusus menentukan tindakan apa yang boleh dilakukan. Keduanya tidak boleh tertukar."
+hero_accent: "Konsultan · Pihak Lain · Keluarga"
 permalink: /pmk-55-2026-konsultan-pajak-kuasa-wajib-pajak.html
 date: 2026-09-01 08:00:00 +0700
-date_modified: 2026-09-01 08:00:00 +0700
+date_modified: 2026-09-01 13:30:00 +0700
 author: "Angga Sukma Dhaniswara"
-category: "Regulasi Perpajakan"
+category: "Administrasi Pajak"
 tags:
+  - PMK 44 Tahun 2026
   - PMK 55 Tahun 2026
   - Konsultan Pajak
   - Kuasa Wajib Pajak
-  - Kantor Konsultan Pajak
+  - Surat Kuasa Khusus
   - Surat Keterangan Terdaftar
-  - Pendidikan Profesional Berkelanjutan
+  - Keluarga Wajib Pajak
 legal_basis:
-  - "PMK 55 Tahun 2026"
   - "PMK 44 Tahun 2026"
+  - "PMK 55 Tahun 2026"
   - "PP 50 Tahun 2022"
-reading_time: "8 menit"
+reading_time: "12 menit"
 featured: false
+image: "/assets/images/artikel/pmk-55-2026-alur-kuasa-wajib-pajak.png"
 custom_css:
   - "/assets/css/pmk-55-2026-kuasa-wajib-pajak.css"
 ---
 
 <section class="kuasa26-lead" aria-labelledby="jawaban-singkat">
   <div class="kuasa26-kicker">Berlaku sejak 24 Agustus 2026</div>
-  <h2 id="jawaban-singkat">Intinya: yang ditata bukan hanya orangnya, tetapi seluruh ekosistem profesinya</h2>
-  <p><strong>PMK 55 Tahun 2026</strong> memperluas fokus pengaturan dari izin konsultan pajak menjadi satu rangkaian utuh: kompetensi, izin praktik, bentuk dan tata kelola kantor, asosiasi profesi, pendidikan berkelanjutan, pelaporan, pengawasan, serta registrasi pihak lain yang bertindak sebagai kuasa Wajib Pajak.</p>
-  <p>Peraturan ditetapkan pada 22 Juli 2026, diundangkan pada 24 Agustus 2026 dalam Berita Negara Republik Indonesia Tahun 2026 Nomor 589, dan berlaku sejak tanggal diundangkan.</p>
+  <h2 id="jawaban-singkat">Jawaban singkatnya: pilih perannya, periksa kelayakannya, lalu buat Surat Kuasa Khusus</h2>
+  <p>Wajib Pajak dapat menunjuk <strong>Konsultan Pajak, Pihak Lain, atau Keluarga</strong> sebagai kuasa. Ketiganya tidak menempuh jalur yang sama. Konsultan menggunakan Izin Konsultan Pajak, Pihak Lain menggunakan Surat Keterangan Terdaftar, sedangkan Keluarga menggunakan bukti hubungan keluarga.</p>
+  <p>Akan tetapi, ketiga jalur tersebut mempunyai satu titik temu: <strong>tidak seorang pun dapat bertindak sebagai kuasa hanya berdasarkan izin, SKT, kartu keluarga, hubungan kerja, atau kepercayaan pribadi.</strong> Penunjukannya tetap harus dituangkan dalam Surat Kuasa Khusus.</p>
 </section>
 
-<aside class="kuasa26-alert" aria-label="Perbedaan izin dan surat kuasa">
+<figure class="kuasa26-hero-image">
+  <img src="/assets/images/artikel/pmk-55-2026-alur-kuasa-wajib-pajak.png" width="1536" height="1024" loading="eager" decoding="async" alt="Ilustrasi tiga jalur Kuasa Wajib Pajak: Konsultan Pajak, Pihak Lain yang kompeten, dan Keluarga, yang terhubung menuju dokumen penugasan Wajib Pajak.">
+  <figcaption>Tiga identitas penerima kuasa, tiga bukti kelayakan, dan satu titik temu berupa Surat Kuasa Khusus.</figcaption>
+</figure>
+
+<aside class="kuasa26-alert" aria-label="Perbedaan kelayakan dan penunjukan">
   <span class="kuasa26-alert__icon" aria-hidden="true">!</span>
   <div>
-    <strong>Izin profesi bukan surat kuasa.</strong>
-    <p>PMK 55 Tahun 2026 menjawab apakah seseorang layak dan terdaftar secara profesional. Penunjukan untuk menangani urusan pajak tertentu tetap harus dibaca bersama <a href="https://jdih.kemenkeu.go.id/dok/pmk-44-tahun-2026" target="_blank" rel="noopener">PMK 44 Tahun 2026</a> dan <a href="https://jdih.kemenkeu.go.id/dok/pp-50-tahun-2022" target="_blank" rel="noopener">PP 50 Tahun 2022</a>, termasuk kebutuhan surat kuasa khusus.</p>
+    <strong>Bedakan “boleh menjadi kuasa” dengan “telah diberi kuasa”.</strong>
+    <p>Izin Konsultan Pajak atau SKT membuktikan kelayakan profesional. Bukti hubungan keluarga membuktikan seseorang masuk jalur Keluarga. Surat Kuasa Khusus membuktikan bahwa orang tersebut benar-benar ditunjuk untuk menangani urusan perpajakan tertentu.</p>
   </div>
 </aside>
 
-<h2 id="resume">Resume PMK 55 Tahun 2026 dalam enam pokok</h2>
+<h2 id="sebelum-memilih">Sebelum memilih jalur: apakah Anda wakil atau kuasa?</h2>
 
-<ol class="kuasa26-points">
-  <li><span>01</span><div><strong>Pengawasan diperluas.</strong><p>Objek pengawasan mencakup konsultan pajak, Kantor Konsultan Pajak (KKP), asosiasi konsultan pajak, dan pihak lain yang bertindak sebagai kuasa Wajib Pajak.</p></div></li>
-  <li><span>02</span><div><strong>Kompetensi menjadi pintu masuk utama.</strong><p>Surat Keterangan Kompetensi (SKK) diperoleh melalui ujian kompetensi. Untuk izin konsultan, pemohon juga harus lulus ujian profesi yang diselenggarakan asosiasi.</p></div></li>
-  <li><span>03</span><div><strong>Ruang layanan tetap bertingkat.</strong><p>Izin dan kompetensi dibagi menjadi tingkat A, B, dan C. Semakin tinggi tingkatnya, semakin luas jenis Wajib Pajak yang dapat dilayani.</p></div></li>
-  <li><span>04</span><div><strong>KKP menjadi entitas yang berizin.</strong><p>Kantor dapat berbentuk perseorangan, persekutuan perdata, firma, atau perseroan terbatas, dengan syarat komposisi pengelola dan sistem pengendalian mutu.</p></div></li>
-  <li><span>05</span><div><strong>Kepatuhan profesi bersifat berkelanjutan.</strong><p>Konsultan wajib menjaga independensi, menaati kode etik dan standar profesi, memenuhi SKP pendidikan profesional berkelanjutan, serta menyampaikan laporan.</p></div></li>
-  <li><span>06</span><div><strong>“Pihak lain” masuk jalur registrasi.</strong><p>Orang selain konsultan pajak dan keluarga yang hendak bertindak sebagai kuasa Wajib Pajak harus memiliki SKK dan Surat Keterangan Terdaftar (SKT) sesuai tingkat kompetensinya.</p></div></li>
-</ol>
+<p>Pertanyaan pertama bukan langsung “dokumen apa yang harus disiapkan?”, melainkan <strong>atas dasar apa seseorang bertindak untuk Wajib Pajak?</strong></p>
 
-<h2 id="peta-alur">Peta alur pikir: apakah seseorang dapat bertindak sebagai kuasa?</h2>
-
-<p>Gunakan tiga lapis pemeriksaan. Urutannya penting karena orang yang kompeten belum tentu telah ditunjuk secara sah, sedangkan surat kuasa tidak dapat memperluas batas kompetensi profesional penerimanya.</p>
-
-<div class="kuasa26-flow" role="img" aria-label="Peta alur pemeriksaan calon kuasa Wajib Pajak">
-  <div class="kuasa26-flow__node kuasa26-flow__node--start">
-    <small>Mulai</small>
-    <strong>Wajib Pajak membutuhkan kuasa</strong>
-  </div>
-  <div class="kuasa26-flow__arrow" aria-hidden="true">↓</div>
-  <div class="kuasa26-flow__node">
-    <small>Lapis 1 · Identitas</small>
-    <strong>Siapa calon kuasanya?</strong>
-  </div>
-  <div class="kuasa26-flow__branches">
-    <section>
-      <span>A</span>
-      <h3>Keluarga</h3>
-      <p>Bukan “pihak lain” dalam definisi PMK 55/2026. Periksa ketentuan kuasa dalam PP 50/2022 dan PMK 44/2026.</p>
-    </section>
-    <section>
-      <span>B</span>
-      <h3>Konsultan pajak</h3>
-      <p>Periksa izin praktik, tingkat A/B/C, keanggotaan asosiasi, dan status sanksinya.</p>
-    </section>
-    <section>
-      <span>C</span>
-      <h3>Pihak lain</h3>
-      <p>Periksa SKK dan SKT yang masih berlaku serta tingkat A/B/C yang tercantum.</p>
-    </section>
-  </div>
-  <div class="kuasa26-flow__arrow" aria-hidden="true">↓</div>
-  <div class="kuasa26-flow__node">
-    <small>Lapis 2 · Kesesuaian ruang lingkup</small>
-    <strong>Apakah kelas izin/SKT mencakup Wajib Pajak yang akan diwakili?</strong>
-  </div>
-  <div class="kuasa26-flow__arrow" aria-hidden="true">↓</div>
-  <div class="kuasa26-flow__node">
-    <small>Lapis 3 · Penunjukan perkara</small>
-    <strong>Apakah surat kuasa khususnya sah dan menyebut urusan perpajakan yang ditangani?</strong>
-  </div>
-  <div class="kuasa26-flow__arrow" aria-hidden="true">↓</div>
-  <div class="kuasa26-flow__node kuasa26-flow__node--finish">
-    <small>Sesudah bertindak</small>
-    <strong>Jaga etika, independensi, pelaporan, PPL, dan kesiapan pemeriksaan</strong>
-  </div>
+<div class="kuasa26-first-gate">
+  <section>
+    <div class="kuasa26-first-gate__label">Jalur wakil</div>
+    <h3>Bertindak karena kedudukan hukum</h3>
+    <p>Direksi atau pengurus badan, wali, kurator, atau pihak lain yang menurut ketentuan berkedudukan sebagai wakil Wajib Pajak mengikuti jalur “wakil”. Mereka tidak otomatis menjadi Pihak Lain hanya karena melakukan tindakan untuk Wajib Pajak.</p>
+  </section>
+  <div class="kuasa26-first-gate__or" aria-hidden="true">atau</div>
+  <section>
+    <div class="kuasa26-first-gate__label">Jalur kuasa</div>
+    <h3>Bertindak karena pemberian kuasa</h3>
+    <p>Jika tidak berkedudukan sebagai wakil, seseorang harus menentukan statusnya sebagai Konsultan Pajak, Pihak Lain, atau Keluarga dan menerima Surat Kuasa Khusus.</p>
+  </section>
 </div>
 
-<h2 id="dua-lapis">Dua dokumen yang tidak boleh tertukar</h2>
+<p class="kuasa26-note"><strong>Contoh penting:</strong> pegawai perusahaan yang hanya menyiapkan data atau memberi keterangan belum tentu bertindak sebagai kuasa. Namun, ketika ia mengajukan permohonan, menandatangani, menerima keputusan, menghadiri proses atas nama Wajib Pajak, atau menjalankan hak Wajib Pajak, dasar kewenangannya harus diperiksa.</p>
 
-<div class="kuasa26-table-wrap" tabindex="0" aria-label="Perbandingan kelayakan profesi dan penunjukan sebagai kuasa">
+<h2 id="pilih-peran">Pilih peran Anda</h2>
+
+<nav class="kuasa26-role-picker" aria-label="Pilih jalur Kuasa Wajib Pajak">
+  <a href="#konsultan-pajak" data-role="KP">
+    <span class="kuasa26-role-picker__number">01</span>
+    <strong>Saya Konsultan Pajak</strong>
+    <small>Izin aktif dan kelas A/B/C</small>
+    <span class="kuasa26-role-picker__link">Buka jalur →</span>
+  </a>
+  <a href="#pihak-lain" data-role="PL">
+    <span class="kuasa26-role-picker__number">02</span>
+    <strong>Saya Pihak Lain</strong>
+    <small>SKK dan SKT yang masih berlaku</small>
+    <span class="kuasa26-role-picker__link">Buka jalur →</span>
+  </a>
+  <a href="#keluarga" data-role="KL">
+    <span class="kuasa26-role-picker__number">03</span>
+    <strong>Saya Keluarga</strong>
+    <small>KK atau pernyataan hubungan keluarga</small>
+    <span class="kuasa26-role-picker__link">Buka jalur →</span>
+  </a>
+</nav>
+
+<section class="kuasa26-role-section kuasa26-role-section--consultant" id="konsultan-pajak" aria-labelledby="judul-konsultan">
+  <header class="kuasa26-role-header">
+    <div class="kuasa26-role-header__icon" aria-hidden="true">KP</div>
+    <div>
+      <div class="kuasa26-role-header__eyebrow">Jalur 01</div>
+      <h2 id="judul-konsultan">Jika saya Konsultan Pajak, apa yang harus saya lakukan?</h2>
+      <p>Fokus pemeriksaannya adalah izin, kelas layanan, status sanksi, registrasi dalam sistem DJP, dan keberlanjutan kepatuhan profesi.</p>
+    </div>
+  </header>
+
+  <div class="kuasa26-requirement-strip">
+    <span><strong>Dokumen kunci</strong>Izin Konsultan Pajak</span>
+    <span><strong>Klasifikasi</strong>Tingkat A, B, atau C</span>
+    <span><strong>Masa penugasan</strong>Sesuai Surat Kuasa Khusus</span>
+  </div>
+
+  <ol class="kuasa26-role-steps">
+    <li><span>1</span><div><strong>Pastikan izin masih berlaku.</strong><p>Izin tidak boleh sedang dibekukan atau telah dicabut. Konsultan yang sedang dikenai sanksi tersebut tidak dapat ditunjuk sebagai kuasa.</p></div></li>
+    <li><span>2</span><div><strong>Cocokkan kelas izin dengan Wajib Pajak.</strong><p>Jangan mulai dari surat kuasanya. Mulailah dari profil Wajib Pajak, lalu pastikan tingkat A, B, atau C pada izin memang mencakup Wajib Pajak yang akan diwakili.</p></div></li>
+    <li><span>3</span><div><strong>Pastikan izin terdaftar dalam sistem DJP.</strong><p>Izin aktif disampaikan melalui Portal Wajib Pajak atau KPP/KP2KP. Jika data telah tersedia melalui integrasi sistem, konsultan dianggap telah melakukan pendaftaran.</p></div></li>
+    <li><span>4</span><div><strong>Terima Surat Kuasa Khusus.</strong><p>Surat harus mencantumkan status sebagai Konsultan Pajak, identitas dan NPWP, urusan perpajakan, jenis dan periode pajak, serta masa berlaku kuasa.</p></div></li>
+    <li><span>5</span><div><strong>Dapatkan persetujuan akses elektronik.</strong><p>Jika penugasan dilakukan melalui Portal Wajib Pajak, pemberi kuasa harus memberikan akses. Surat kuasa dan akses sistem merupakan dua lapisan yang saling melengkapi.</p></div></li>
+    <li><span>6</span><div><strong>Bertindak dalam batas izin dan kuasa.</strong><p>Konsultan hanya dapat melakukan tindakan yang dikuasakan dan tidak dapat melimpahkan kuasa tersebut kepada orang lain.</p></div></li>
+    <li><span>7</span><div><strong>Jaga keberlanjutan profesi.</strong><p>Penuhi keanggotaan asosiasi, PPL, pelaporan, kode etik, standar profesi, independensi, dan kewajiban KKP apabila jasa diberikan melalui kantor.</p></div></li>
+  </ol>
+
+  <h3 id="kelas-izin">Periksa kelas sebelum menerima penugasan</h3>
+
+  <div class="kuasa26-levels">
+    <section>
+      <div class="kuasa26-levels__badge">A</div>
+      <h4>Orang pribadi terbatas</h4>
+      <p>Wajib Pajak orang pribadi, kecuali orang pribadi yang berdomisili di negara mitra Persetujuan Penghindaran Pajak Berganda (P3B).</p>
+    </section>
+    <section>
+      <div class="kuasa26-levels__badge">B</div>
+      <h4>Orang pribadi dan badan</h4>
+      <p>Belum mencakup badan PMA, bentuk usaha tetap, serta orang atau badan yang berdomisili di negara mitra P3B.</p>
+    </section>
+    <section>
+      <div class="kuasa26-levels__badge">C</div>
+      <h4>Seluruh Wajib Pajak</h4>
+      <p>Mencakup seluruh Wajib Pajak orang pribadi dan badan.</p>
+    </section>
+  </div>
+
+  <p class="kuasa26-role-conclusion"><strong>Ringkasnya:</strong> izin aktif → kelas sesuai → terdaftar di DJP → Surat Kuasa Khusus → akses elektronik → bertindak sesuai kuasa → menjaga kepatuhan profesi.</p>
+</section>
+
+<section class="kuasa26-role-section kuasa26-role-section--other" id="pihak-lain" aria-labelledby="judul-pihak-lain">
+  <header class="kuasa26-role-header">
+    <div class="kuasa26-role-header__icon" aria-hidden="true">PL</div>
+    <div>
+      <div class="kuasa26-role-header__eyebrow">Jalur 02</div>
+      <h2 id="judul-pihak-lain">Jika saya Pihak Lain, apa yang harus saya lakukan?</h2>
+      <p>Pihak Lain adalah orang selain Konsultan Pajak dan Keluarga yang akan bertindak sebagai kuasa. Fokusnya adalah kompetensi yang dibuktikan dengan SKK dan SKT.</p>
+    </div>
+  </header>
+
+  <div class="kuasa26-requirement-strip">
+    <span><strong>Dokumen kunci</strong>SKK dan SKT</span>
+    <span><strong>Klasifikasi</strong>Tingkat A, B, atau C</span>
+    <span><strong>Masa berlaku SKT</strong>3 tahun</span>
+  </div>
+
+  <ol class="kuasa26-role-steps">
+    <li><span>1</span><div><strong>Tentukan apakah saya benar-benar bertindak sebagai kuasa.</strong><p>Membantu menyiapkan dokumen tidak selalu berarti menjadi kuasa. Namun, apabila saya menjalankan hak atau kewajiban atas nama Wajib Pajak, jalur kuasa harus digunakan.</p></div></li>
+    <li><span>2</span><div><strong>Ikuti ujian kompetensi dan peroleh SKK.</strong><p>SKK menunjukkan tingkat kompetensi perpajakan A, B, atau C. Ketentuan ujian kompetensi Konsultan Pajak berlaku secara mutatis mutandis bagi Pihak Lain.</p></div></li>
+    <li><span>3</span><div><strong>Pastikan SKT telah diterbitkan.</strong><p>SKT diterbitkan bersamaan dengan SKK, mempunyai klasifikasi yang sama, dan berlaku selama tiga tahun. SKT tidak boleh sedang dibekukan atau dicabut.</p></div></li>
+    <li><span>4</span><div><strong>Daftarkan SKT dalam sistem DJP.</strong><p>SKT aktif harus tersedia dalam administrasi DJP melalui Portal Wajib Pajak, KPP/KP2KP, atau integrasi sistem.</p></div></li>
+    <li><span>5</span><div><strong>Cocokkan kelas SKT.</strong><p>Seperti konsultan, Pihak Lain tidak boleh bertindak melampaui klasifikasi A, B, atau C yang tercantum pada SKT.</p></div></li>
+    <li><span>6</span><div><strong>Terima Surat Kuasa Khusus dan akses elektronik.</strong><p>Surat mencantumkan status sebagai Pihak Lain dan nomor SKT. Apabila tindakan dilakukan secara elektronik, Wajib Pajak memberikan persetujuan akses Portal.</p></div></li>
+    <li><span>7</span><div><strong>Patuhi batas kewenangan dan larangan.</strong><p>Jaga integritas dan kerahasiaan, jangan menyesatkan Wajib Pajak, merekayasa pelanggaran, menawarkan manfaat kepada pejabat, atau melimpahkan kuasa.</p></div></li>
+  </ol>
+
+  <aside class="kuasa26-transition" aria-labelledby="transisi-2026">
+    <div class="kuasa26-transition__date">31<br><small>DES 2026</small></div>
+    <div>
+      <h3 id="transisi-2026">Masih ada jalur transisi sampai 31 Desember 2026</h3>
+      <p>Orang selain Konsultan Pajak yang memiliki sertifikat brevet atau ijazah formal bidang perpajakan paling rendah Diploma III dari perguruan tinggi berakreditasi A masih dapat ditunjuk sampai tanggal tersebut.</p>
+      <ul>
+        <li>Surat Kuasa Khusus dibuat dalam bentuk kertas.</li>
+        <li>Lampirkan fotokopi brevet atau ijazah.</li>
+        <li>Sampaikan langsung melalui KPP atau KP2KP.</li>
+        <li>Surat kuasa tetap berlaku sampai urusan yang dikuasakan selesai.</li>
+      </ul>
+    </div>
+  </aside>
+
+  <p class="kuasa26-role-conclusion"><strong>Ringkasnya:</strong> pastikan benar bertindak sebagai kuasa → peroleh SKK dan SKT → cek kelas dan masa berlaku → terdaftar di DJP → Surat Kuasa Khusus → akses elektronik → bertindak sesuai kuasa.</p>
+</section>
+
+<section class="kuasa26-role-section kuasa26-role-section--family" id="keluarga" aria-labelledby="judul-keluarga">
+  <header class="kuasa26-role-header">
+    <div class="kuasa26-role-header__icon" aria-hidden="true">KL</div>
+    <div>
+      <div class="kuasa26-role-header__eyebrow">Jalur 03</div>
+      <h2 id="judul-keluarga">Jika saya Keluarga, apa yang harus saya lakukan?</h2>
+      <p>Keluarga tidak perlu membuktikan kompetensi perpajakan. Sebagai gantinya, hubungan keluarga dan ruang lingkup pemberian kuasa harus dibuktikan dengan jelas.</p>
+    </div>
+  </header>
+
+  <div class="kuasa26-requirement-strip">
+    <span><strong>Dokumen kunci</strong>KK atau surat pernyataan</span>
+    <span><strong>Bukti kompetensi</strong>Tidak disyaratkan</span>
+    <span><strong>Klasifikasi A/B/C</strong>Tidak berlaku</span>
+  </div>
+
+  <ol class="kuasa26-role-steps">
+    <li><span>1</span><div><strong>Pastikan hubungan termasuk definisi Keluarga.</strong><p>Keluarga meliputi suami, istri, serta keluarga sedarah atau semenda sampai dengan derajat kedua.</p></div></li>
+    <li><span>2</span><div><strong>Siapkan bukti hubungan keluarga.</strong><p>Gunakan salinan Kartu Keluarga jika penerima dan pemberi kuasa berada dalam KK yang sama. Jika tidak, gunakan surat pernyataan hubungan keluarga dari pemberi kuasa.</p></div></li>
+    <li><span>3</span><div><strong>Tidak perlu mengurus izin, SKK, atau SKT.</strong><p>Keluarga dikecualikan dari persyaratan kompetensi. Namun, pengecualian ini tidak berarti keluarga dapat bertindak tanpa Surat Kuasa Khusus.</p></div></li>
+    <li><span>4</span><div><strong>Buat Surat Kuasa Khusus.</strong><p>Cantumkan status sebagai Keluarga, jenis hubungan keluarga, urusan perpajakan, jenis dan periode pajak, serta masa berlaku kuasa.</p></div></li>
+    <li><span>5</span><div><strong>Dapatkan persetujuan akses elektronik.</strong><p>Jika tindakan dilakukan melalui Portal Wajib Pajak, pemberi kuasa memberikan akses melalui sistem. Jangan menggunakan kata sandi pribadi sebagai pengganti pemberian akses.</p></div></li>
+    <li><span>6</span><div><strong>Bertindak hanya dalam ruang lingkup kuasa.</strong><p>Keluarga tetap wajib menaati ketentuan perpajakan, menjaga kerahasiaan, tidak menghalangi proses perpajakan, dan tidak melimpahkan kuasa.</p></div></li>
+  </ol>
+
+  <aside class="kuasa26-alert kuasa26-alert--soft">
+    <span class="kuasa26-alert__icon" aria-hidden="true">i</span>
+    <div>
+      <strong>Jalur Keluarga terutama relevan bagi Wajib Pajak orang pribadi.</strong>
+      <p>Definisi Keluarga mensyaratkan hubungan dengan Wajib Pajak. Untuk Wajib Pajak badan, periksa terlebih dahulu siapa yang berkedudukan sebagai wakil badan. Jika orang yang akan ditunjuk bukan wakil, pilih jalur Konsultan Pajak atau Pihak Lain sesuai kondisinya.</p>
+    </div>
+  </aside>
+
+  <p class="kuasa26-role-conclusion"><strong>Ringkasnya:</strong> pastikan hubungan keluarga → siapkan KK atau surat pernyataan → buat Surat Kuasa Khusus → berikan akses elektronik → bertindak sesuai kuasa.</p>
+</section>
+
+<h2 id="titik-temu">Titik temu ketiga jalur: Surat Kuasa Khusus</h2>
+
+<p>Setelah lolos pemeriksaan peran, ketiga jalur kembali bertemu. Berdasarkan PMK 44 Tahun 2026, Surat Kuasa Khusus dapat dibuat secara elektronik atau dalam bentuk kertas dan paling sedikit harus memuat unsur berikut.</p>
+
+<div class="kuasa26-converge">
+  <div class="kuasa26-converge__paths" aria-hidden="true">
+    <span>Konsultan</span><span>Pihak Lain</span><span>Keluarga</span>
+  </div>
+  <div class="kuasa26-converge__arrow" aria-hidden="true">↓</div>
+  <section>
+    <h3>Checklist Surat Kuasa Khusus</h3>
+    <ul class="kuasa26-checks">
+      <li>Nama, NPWP, dan tanda tangan Wajib Pajak pemberi kuasa.</li>
+      <li>Nama, NPWP, dan tanda tangan penerima kuasa.</li>
+      <li>Status penerima: Konsultan Pajak, Pihak Lain, atau Keluarga.</li>
+      <li>Hak atau kewajiban perpajakan tertentu yang dikuasakan.</li>
+      <li>Jenis pajak serta Masa Pajak, Bagian Tahun Pajak, atau Tahun Pajak.</li>
+      <li>Masa berlaku Surat Kuasa Khusus.</li>
+      <li>Bea meterai yang terutang telah dilunasi.</li>
+      <li>Dokumen hubungan keluarga, khusus untuk jalur Keluarga.</li>
+    </ul>
+  </section>
+</div>
+
+<div class="kuasa26-guardrails">
+  <section><span>1</span><div><strong>Satu orang kuasa</strong><p>Satu Surat Kuasa Khusus hanya berlaku untuk satu penerima kuasa.</p></div></section>
+  <section><span>2</span><div><strong>Satu ruang lingkup tertentu</strong><p>Kuasa hanya berlaku untuk hak atau kewajiban yang dicantumkan.</p></div></section>
+  <section><span>3</span><div><strong>Tidak dapat dilimpahkan</strong><p>Penerima kuasa tidak dapat meneruskan kewenangannya kepada orang lain.</p></div></section>
+  <section><span>4</span><div><strong>Akses diberikan terpisah</strong><p>Untuk tindakan elektronik, Wajib Pajak harus memberikan persetujuan akses Portal.</p></div></section>
+</div>
+
+<h2 id="perbandingan">Bandingkan tiga jalur dalam satu tabel</h2>
+
+<div class="kuasa26-table-wrap" tabindex="0" aria-label="Perbandingan Konsultan Pajak, Pihak Lain, dan Keluarga sebagai Kuasa Wajib Pajak">
   <table class="kuasa26-table">
     <thead>
-      <tr><th>Pertanyaan</th><th>Kelayakan profesional</th><th>Penunjukan untuk perkara tertentu</th></tr>
+      <tr><th>Pemeriksaan</th><th>Konsultan Pajak</th><th>Pihak Lain</th><th>Keluarga</th></tr>
     </thead>
     <tbody>
-      <tr><td>Apa yang dibuktikan?</td><td>Orang tersebut kompeten, berizin, atau terdaftar.</td><td>Orang tersebut benar-benar diberi kewenangan oleh Wajib Pajak.</td></tr>
-      <tr><td>Dokumen utama</td><td>Izin konsultan pajak; atau SKK dan SKT bagi pihak lain.</td><td>Surat kuasa khusus dan dokumen pendukung sesuai PMK 44/2026.</td></tr>
-      <tr><td>Ruang lingkup</td><td>Dibatasi tingkat A, B, atau C.</td><td>Dibatasi tindakan atau urusan yang tertulis dalam surat kuasa.</td></tr>
-      <tr><td>Akibat jika tidak terpenuhi</td><td>Calon kuasa tidak memenuhi kapasitas profesional yang disyaratkan.</td><td>Tindakannya dapat tidak diterima karena kewenangan tidak terbukti.</td></tr>
+      <tr><td>Bukti kelayakan</td><td>Izin Konsultan Pajak</td><td>SKK dan SKT</td><td>Bukti hubungan keluarga</td></tr>
+      <tr><td>Kelas A/B/C</td><td>Mengikuti izin</td><td>Mengikuti SKT</td><td>Tidak berlaku</td></tr>
+      <tr><td>Terdaftar dalam sistem DJP</td><td>Wajib</td><td>Wajib</td><td>Tidak disyaratkan seperti dua jalur profesional</td></tr>
+      <tr><td>Surat Kuasa Khusus</td><td>Wajib</td><td>Wajib</td><td>Wajib</td></tr>
+      <tr><td>Dokumen tambahan</td><td>Nomor izin</td><td>Nomor SKT</td><td>KK atau surat pernyataan hubungan keluarga</td></tr>
+      <tr><td>Akses Portal Wajib Pajak</td><td>Jika bertindak elektronik</td><td>Jika bertindak elektronik</td><td>Jika bertindak elektronik</td></tr>
+      <tr><td>Dapat melimpahkan kuasa</td><td>Tidak</td><td>Tidak</td><td>Tidak</td></tr>
+      <tr><td>Wajib menjaga integritas dan kerahasiaan</td><td>Ya</td><td>Ya</td><td>Ya</td></tr>
     </tbody>
   </table>
 </div>
 
-<h2 id="kelas-izin">Apa arti tingkat A, B, dan C?</h2>
+<h2 id="kewajiban-bersama">Setelah ditunjuk, apa kewajiban semua kuasa?</h2>
 
-<div class="kuasa26-levels">
-  <section>
-    <div class="kuasa26-levels__badge">A</div>
-    <h3>Orang pribadi terbatas</h3>
-    <p>Memberikan jasa kepada Wajib Pajak orang pribadi, kecuali orang pribadi yang berdomisili di negara mitra Persetujuan Penghindaran Pajak Berganda.</p>
-  </section>
-  <section>
-    <div class="kuasa26-levels__badge">B</div>
-    <h3>Orang pribadi dan badan</h3>
-    <p>Mencakup orang pribadi dan badan, tetapi belum mencakup badan penanaman modal asing, bentuk usaha tetap, serta orang atau badan yang berdomisili di negara mitra P3B.</p>
-  </section>
-  <section>
-    <div class="kuasa26-levels__badge">C</div>
-    <h3>Seluruh Wajib Pajak</h3>
-    <p>Memberikan jasa di bidang perpajakan kepada seluruh Wajib Pajak orang pribadi dan badan.</p>
-  </section>
+<div class="kuasa26-shared-duties">
+  <section><div aria-hidden="true">01</div><strong>Patuhi ketentuan perpajakan</strong><p>Kuasa tidak boleh menggunakan kewenangannya untuk menghalangi pelaksanaan ketentuan.</p></section>
+  <section><div aria-hidden="true">02</div><strong>Jaga integritas dan etika</strong><p>Kedudukan sebagai kuasa menuntut tindakan yang dapat dipertanggungjawabkan.</p></section>
+  <section><div aria-hidden="true">03</div><strong>Jaga kerahasiaan</strong><p>Informasi Wajib Pajak hanya digunakan untuk pelaksanaan penugasan.</p></section>
+  <section><div aria-hidden="true">04</div><strong>Tetap dalam batas kuasa</strong><p>Jangan melakukan tindakan di luar urusan dan periode yang dicantumkan.</p></section>
 </div>
-
-<p class="kuasa26-note"><strong>Konsekuensi praktis:</strong> pemeriksaan kelas izin/SKT harus dilakukan sebelum surat kuasa ditandatangani. Kewenangan yang ditulis dalam surat kuasa tidak dapat menembus batas kelas profesional.</p>
-
-<h2 id="izin-konsultan">Pintu masuk menjadi konsultan pajak</h2>
-
-<p>Pasal 5 memuat persyaratan izin yang cukup ketat. Di antaranya, pemohon harus warga negara Indonesia, memiliki kompetensi perpajakan, lulus ujian profesi oleh asosiasi, berpendidikan paling rendah sarjana atau sederajat, memiliki NPWP, memenuhi persyaratan integritas, serta tidak berstatus pegawai atau pejabat pemerintah, lembaga negara, BUMN, atau BUMD.</p>
-
-<div class="kuasa26-highlight-grid">
-  <section>
-    <strong>Dua gerbang</strong>
-    <p>SKK membuktikan kompetensi. Sertifikat lulus ujian profesi membuktikan kesiapan menjalankan profesi.</p>
-  </section>
-  <section>
-    <strong>Masa jeda lima tahun</strong>
-    <p>Mantan pegawai Kementerian Keuangan pada prinsipnya baru dapat mengajukan izin setelah melewati lima tahun sejak berhenti atau pensiun.</p>
-  </section>
-  <section>
-    <strong>Pengalaman untuk tingkat lebih tinggi</strong>
-    <p>Tingkat B mensyaratkan pengalaman kumulatif paling singkat satu tahun dalam tiga tahun terakhir; tingkat C paling singkat dua tahun.</p>
-  </section>
-  <section>
-    <strong>Pengungkapan hubungan</strong>
-    <p>Pemohon wajib mengungkapkan hubungan pekerjaan, usaha, kepemilikan, penguasaan, atau keluarga yang relevan.</p>
-  </section>
-</div>
-
-<h2 id="kkp">Kantor Konsultan Pajak juga harus berizin</h2>
-
-<p>PMK 55/2026 mengakui empat bentuk KKP: perseorangan, persekutuan perdata, firma, dan perseroan terbatas. Setiap bentuk memiliki persyaratan komposisi konsultan pada struktur pendiri, sekutu, direksi, atau komisaris. KKP juga wajib memiliki domisili yang jelas, bukti kepemilikan atau penggunaan kantor, serta <strong>sistem pengendalian mutu</strong>.</p>
-
-<p>Pesan kebijakannya jelas: kualitas layanan tidak hanya bergantung pada izin individu. Organisasi tempat jasa diberikan juga harus mempunyai tata kelola yang dapat diperiksa.</p>
-
-<h2 id="kewajiban">Kalender kepatuhan yang perlu dipantau</h2>
-
-<div class="kuasa26-table-wrap" tabindex="0" aria-label="Kalender kepatuhan konsultan pajak">
-  <table class="kuasa26-table kuasa26-table--calendar">
-    <thead><tr><th>Tenggat/masa</th><th>Kewajiban</th><th>Catatan</th></tr></thead>
-    <tbody>
-      <tr><td>30 hari kerja</td><td>Menjadi anggota asosiasi</td><td>Dihitung sejak izin diterbitkan atau sejak tidak lagi menjadi anggota asosiasi.</td></tr>
-      <tr><td>Setiap tahun</td><td>PPL: 20/30/45 SKP</td><td>Tingkat A/B/C masing-masing 20, 30, dan 45 SKP; sebagian besar harus terstruktur.</td></tr>
-      <tr><td>31 Januari</td><td>Laporan PPL</td><td>Disampaikan untuk kegiatan tahun sebelumnya.</td></tr>
-      <tr><td>30 hari kerja</td><td>Lapor perubahan data</td><td>Termasuk perubahan alamat tempat tinggal atau tempat kegiatan usaha.</td></tr>
-      <tr><td>30 April</td><td>Laporan tahunan konsultan/KKP</td><td>Memuat profil, tempat kegiatan, kepatuhan SPT, jenis jasa, klien, periode penugasan, dan imbalan jasa.</td></tr>
-      <tr><td>3 tahun</td><td>Masa berlaku SKK dan SKT</td><td>Perpanjangan SKK dilakukan melalui ujian penyegaran sesuai ketentuan.</td></tr>
-    </tbody>
-  </table>
-</div>
-
-<h2 id="larangan-sanksi">Larangan dan sanksi: integritas ditempatkan di pusat</h2>
-
-<p>Konsultan dilarang menyesatkan klien, menerima permintaan untuk merekayasa atau melanggar ketentuan perpajakan, menawarkan manfaat kepada pejabat perpajakan, menerima hadiah yang tidak semestinya, melakukan pemerasan, atau merangkap jabatan yang dilarang.</p>
-
-<p>Direktorat Jenderal Pajak dapat melakukan pemeriksaan rutin maupun khusus. Sanksinya berupa teguran tertulis, pembekuan izin, atau pencabutan izin. Sanksi tertentu dapat dijatuhkan tidak berurutan dan dapat diumumkan kepada publik. Mekanisme pembekuan dan pencabutan juga berlaku bagi pihak lain pemegang SKT.</p>
-
-<h2 id="transisi">Apa yang terjadi pada izin dan sertifikat lama?</h2>
-
-<ul class="kuasa26-checks">
-  <li>Izin praktik lama diperlakukan sebagai izin berdasarkan PMK 55/2026.</li>
-  <li>Permohonan yang masih diproses mengikuti ketentuan peralihan dalam Pasal 60.</li>
-  <li>Asosiasi yang telah terdaftar tetap diakui.</li>
-  <li>Sanksi yang telah dijatuhkan tetap berjalan sampai masa berlakunya berakhir.</li>
-  <li>Panitia Penyelenggara Sertifikasi Konsultan Pajak tetap bekerja sampai 31 Desember 2026.</li>
-  <li>Asosiasi wajib mulai menyelenggarakan ujian profesi paling lambat 31 Desember 2026.</li>
-</ul>
 
 <aside class="kuasa26-alert kuasa26-alert--soft">
-  <span class="kuasa26-alert__icon" aria-hidden="true">↺</span>
+  <span class="kuasa26-alert__icon" aria-hidden="true">✓</span>
   <div>
-    <strong>Regulasi lama dicabut.</strong>
-    <p>Sejak PMK 55 Tahun 2026 berlaku, PMK 111/PMK.03/2014 tentang Konsultan Pajak sebagaimana diubah dengan PMK 175/PMK.01/2022 dinyatakan tidak berlaku.</p>
+    <strong>Tanggung jawab perpajakan tetap berada pada Wajib Pajak.</strong>
+    <p>Pemberian kuasa tidak memindahkan tanggung jawab substantif Wajib Pajak. Karena itu, pemberi kuasa tetap harus mengetahui tindakan yang dilakukan, dokumen yang disampaikan, dan konsekuensi perpajakannya.</p>
   </div>
 </aside>
 
-<h2 id="dampak-praktis">Dampak praktis bagi Wajib Pajak dan penyedia jasa</h2>
+<h2 id="berakhirnya-kuasa">Kapan pemberian kuasa berakhir?</h2>
 
-<div class="kuasa26-actions">
-  <section>
-    <h3>Bagi Wajib Pajak</h3>
-    <ul>
-      <li>Verifikasi izin atau SKT calon kuasa sebelum penunjukan.</li>
-      <li>Cocokkan tingkat A/B/C dengan profil Wajib Pajak yang akan diwakili.</li>
-      <li>Pastikan surat kuasa khusus menyebut tindakan dan urusan perpajakan secara jelas.</li>
-      <li>Jangan menganggap kartu nama, hubungan kerja, atau surat kuasa umum sebagai pengganti persyaratan profesi.</li>
-    </ul>
-  </section>
-  <section>
-    <h3>Bagi konsultan dan KKP</h3>
-    <ul>
-      <li>Petakan ulang izin, SKK, kelas layanan, dan status keanggotaan asosiasi.</li>
-      <li>Bangun kalender PPL dan pelaporan dengan penanggung jawab yang jelas.</li>
-      <li>Dokumentasikan konflik kepentingan dan pengendalian mutu kantor.</li>
-      <li>Perbarui kontrak, prosedur penerimaan klien, dan arsip penugasan agar siap diperiksa.</li>
-    </ul>
-  </section>
-</div>
+<p>Pemberian kuasa berakhir apabila masa berlaku Surat Kuasa Khusus habis, Wajib Pajak mencabut kuasa, izin Konsultan Pajak atau SKT dibekukan/dicabut, atau penerima kuasa dipidana karena tindak pidana perpajakan maupun tindak pidana lainnya. Ketika kuasa berakhir, akses pada Portal Wajib Pajak juga berakhir.</p>
 
 <h2 id="kesimpulan">Kesimpulan</h2>
 
-<p><strong>PMK 55 Tahun 2026 menggeser pendekatan dari izin individual menuju tata kelola profesi.</strong> Konsultan, kantor, asosiasi, dan pihak lain yang bertindak sebagai kuasa ditempatkan dalam satu rantai kompetensi, registrasi, kepatuhan, dan pengawasan.</p>
+<p>Cara paling sederhana memahami ketentuan Kuasa Wajib Pajak adalah menggunakan tiga pertanyaan berurutan:</p>
 
-<p>Cara membaca yang paling aman adalah selalu memakai tiga pertanyaan: <em>siapa orangnya, sejauh apa kelas kewenangannya, dan untuk urusan apa ia diberi surat kuasa?</em> Hanya setelah ketiganya terjawab, seorang kuasa dapat bertindak pada koridor yang tepat.</p>
+<ol class="kuasa26-closing-questions">
+  <li><span>Siapa saya?</span>Konsultan Pajak, Pihak Lain, Keluarga, atau sebenarnya wakil Wajib Pajak?</li>
+  <li><span>Apa bukti kelayakan saya?</span>Izin, SKT, atau dokumen hubungan keluarga?</li>
+  <li><span>Apa yang dikuasakan kepada saya?</span>Urusan, jenis pajak, periode, dan masa berlaku apa yang tertulis dalam Surat Kuasa Khusus?</li>
+</ol>
+
+<p><strong>Konsultan menggunakan izin. Pihak Lain menggunakan SKT. Keluarga menggunakan bukti hubungan keluarga. Ketiganya menggunakan Surat Kuasa Khusus.</strong> Dengan alur ini, Wajib Pajak dapat memilih orang yang tepat sekaligus memastikan setiap tindakan mempunyai dasar kewenangan yang jelas.</p>
 
 <h2 id="dasar-hukum">Dasar hukum dan referensi</h2>
 
 <ul class="kuasa26-references">
-  <li>Peraturan Menteri Keuangan Nomor 55 Tahun 2026 tentang Konsultan Pajak dan Pihak Lain yang Bertindak sebagai Kuasa Wajib Pajak, BNRI Tahun 2026 Nomor 589.</li>
   <li><a href="https://jdih.kemenkeu.go.id/dok/pmk-44-tahun-2026" target="_blank" rel="noopener">Peraturan Menteri Keuangan Nomor 44 Tahun 2026</a> tentang Persyaratan untuk Menjadi Kuasa di Bidang Perpajakan dan Tata Cara Pelaksanaan Hak dan Pemenuhan Kewajiban Kuasa di Bidang Perpajakan.</li>
+  <li>Peraturan Menteri Keuangan Nomor 55 Tahun 2026 tentang Konsultan Pajak dan Pihak Lain yang Bertindak sebagai Kuasa Wajib Pajak, BNRI Tahun 2026 Nomor 589.</li>
   <li><a href="https://jdih.kemenkeu.go.id/dok/pp-50-tahun-2022" target="_blank" rel="noopener">Peraturan Pemerintah Nomor 50 Tahun 2022</a> tentang Tata Cara Pelaksanaan Hak dan Pemenuhan Kewajiban Perpajakan.</li>
 </ul>
 
-<p class="kuasa26-disclaimer">Artikel ini merupakan ringkasan untuk membantu pemetaan awal. Untuk penerapan pada kasus tertentu, periksa naskah regulasi, status izin/SKT, dokumen penunjukan, serta fakta penugasan yang sebenarnya.</p>
+<p class="kuasa26-disclaimer">Artikel ini merupakan panduan pemetaan awal. Untuk penerapan pada kasus tertentu, periksa kedudukan wakil, status izin/SKT, hubungan keluarga, isi Surat Kuasa Khusus, serta fakta tindakan yang akan dilakukan.</p>
