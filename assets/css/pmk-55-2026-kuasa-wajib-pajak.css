@@ -210,10 +210,67 @@
   background: var(--kuasa26-orange-soft);
 }
 
-.kuasa26-role-instruction {
-  margin: -0.35rem 0 1rem;
-  color: #6e6e73;
-  font-size: 0.9rem;
+.kuasa26-role-explorer {
+  position: relative;
+}
+
+.kuasa26-role-radio {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.kuasa26-role-callout {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.85rem;
+  align-items: center;
+  margin: 0.4rem 0 1.1rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--kuasa26-blue-border);
+  border-radius: 17px;
+  background:
+    linear-gradient(135deg, var(--kuasa26-blue-soft), rgba(255, 255, 255, 0.94));
+  color: #31536f;
+  box-shadow: 0 10px 28px rgba(20, 43, 76, 0.07);
+}
+
+.kuasa26-role-callout__pulse {
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  background: var(--kuasa26-blue);
+  box-shadow: 0 0 0 0 rgba(0, 113, 227, 0.3);
+  animation: kuasa26-pulse 2s ease-out infinite;
+}
+
+.kuasa26-role-callout strong {
+  display: block;
+  color: var(--kuasa26-ink);
+  font-size: 1rem;
+}
+
+.kuasa26-role-callout p {
+  margin: 0.15rem 0 0;
+  font-size: 0.86rem;
+}
+
+.kuasa26-role-callout > svg {
+  width: 1.4rem;
+  color: var(--kuasa26-blue);
+}
+
+@keyframes kuasa26-pulse {
+  70% {
+    box-shadow: 0 0 0 10px rgba(0, 113, 227, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 113, 227, 0);
+  }
 }
 
 .kuasa26-role-picker {
@@ -223,10 +280,10 @@
   margin: 1rem 0 2.5rem;
 }
 
-.kuasa26-role-picker button {
+.kuasa26-role-picker label {
   position: relative;
   display: flex;
-  min-height: 190px;
+  min-height: 220px;
   flex-direction: column;
   padding: 1.1rem;
   overflow: hidden;
@@ -236,8 +293,8 @@
     linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(249, 249, 251, 0.94));
   color: var(--kuasa26-ink);
   cursor: pointer;
-  font: inherit;
   text-align: left;
+  user-select: none;
   -webkit-tap-highlight-color: transparent;
   transition:
     border-color 0.2s ease,
@@ -247,7 +304,7 @@
     transform 0.2s ease;
 }
 
-.kuasa26-role-picker button::after {
+.kuasa26-role-picker label::after {
   position: absolute;
   right: -0.25em;
   bottom: -0.45em;
@@ -257,30 +314,85 @@
   font-weight: 900;
 }
 
-.kuasa26-role-picker button:nth-child(1) {
+.kuasa26-role-picker label:nth-child(1) {
   border-top: 5px solid var(--kuasa26-blue);
 }
 
-.kuasa26-role-picker button:nth-child(2) {
+.kuasa26-role-picker label:nth-child(2) {
   border-top: 5px solid var(--kuasa26-cyan);
 }
 
-.kuasa26-role-picker button:nth-child(3) {
+.kuasa26-role-picker label:nth-child(3) {
   border-top: 5px solid var(--kuasa26-yellow);
 }
 
-.kuasa26-role-picker button:hover {
+.kuasa26-role-picker label:hover {
   border-color: var(--kuasa26-blue-border);
   box-shadow: 0 14px 32px var(--kuasa26-shadow);
   transform: translateY(-3px);
 }
 
-.kuasa26-role-picker button:focus-visible {
+.kuasa26-role-picker__icon {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  width: 2.9rem;
+  height: 2.9rem;
+  place-items: center;
+  border-radius: 14px;
+  background: var(--kuasa26-blue-soft);
+  color: var(--kuasa26-blue);
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.kuasa26-role-picker label:nth-child(2) .kuasa26-role-picker__icon {
+  background: var(--kuasa26-cyan-soft);
+  color: var(--kuasa26-cyan-dark);
+}
+
+.kuasa26-role-picker label:nth-child(3) .kuasa26-role-picker__icon {
+  background: var(--kuasa26-yellow-soft);
+  color: #9b6a00;
+}
+
+.kuasa26-role-picker__icon svg {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+.kuasa26-role-picker__check {
+  position: absolute;
+  z-index: 2;
+  top: 0.85rem;
+  right: 0.85rem;
+  display: none;
+  width: 1.8rem;
+  height: 1.8rem;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--kuasa26-blue);
+  color: var(--kuasa26-white);
+  box-shadow: 0 6px 14px rgba(0, 113, 227, 0.25);
+}
+
+.kuasa26-role-picker__check svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+#kuasa26-role-consultant:focus-visible ~ .kuasa26-role-picker label[for="kuasa26-role-consultant"],
+#kuasa26-role-other:focus-visible ~ .kuasa26-role-picker label[for="kuasa26-role-other"],
+#kuasa26-role-family:focus-visible ~ .kuasa26-role-picker label[for="kuasa26-role-family"] {
   outline: 3px solid rgba(0, 113, 227, 0.3);
   outline-offset: 3px;
 }
 
-.kuasa26-role-picker button.is-active {
+#kuasa26-role-consultant:checked ~ .kuasa26-role-picker label[for="kuasa26-role-consultant"],
+#kuasa26-role-other:checked ~ .kuasa26-role-picker label[for="kuasa26-role-other"],
+#kuasa26-role-family:checked ~ .kuasa26-role-picker label[for="kuasa26-role-family"] {
   border-color: var(--kuasa26-ink);
   background:
     radial-gradient(circle at 90% 5%, rgba(38, 163, 207, 0.3), transparent 34%),
@@ -290,12 +402,28 @@
   transform: translateY(-3px);
 }
 
-.kuasa26-role-picker button.is-active::after {
+#kuasa26-role-consultant:checked ~ .kuasa26-role-picker label[for="kuasa26-role-consultant"]::after,
+#kuasa26-role-other:checked ~ .kuasa26-role-picker label[for="kuasa26-role-other"]::after,
+#kuasa26-role-family:checked ~ .kuasa26-role-picker label[for="kuasa26-role-family"]::after {
   color: rgba(255, 255, 255, 0.065);
 }
 
+#kuasa26-role-consultant:checked ~ .kuasa26-role-picker label[for="kuasa26-role-consultant"] .kuasa26-role-picker__icon,
+#kuasa26-role-other:checked ~ .kuasa26-role-picker label[for="kuasa26-role-other"] .kuasa26-role-picker__icon,
+#kuasa26-role-family:checked ~ .kuasa26-role-picker label[for="kuasa26-role-family"] .kuasa26-role-picker__icon {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--kuasa26-white);
+  transform: scale(1.04);
+}
+
+#kuasa26-role-consultant:checked ~ .kuasa26-role-picker label[for="kuasa26-role-consultant"] .kuasa26-role-picker__check,
+#kuasa26-role-other:checked ~ .kuasa26-role-picker label[for="kuasa26-role-other"] .kuasa26-role-picker__check,
+#kuasa26-role-family:checked ~ .kuasa26-role-picker label[for="kuasa26-role-family"] .kuasa26-role-picker__check {
+  display: grid;
+}
+
 .kuasa26-role-picker__number {
-  margin-bottom: auto;
+  margin-top: 0.8rem;
   color: var(--kuasa26-blue);
   font-size: 0.75rem;
   font-weight: 850;
@@ -305,7 +433,7 @@
 .kuasa26-role-picker strong {
   position: relative;
   z-index: 1;
-  margin-top: 1.2rem;
+  margin-top: 0.45rem;
   font-size: 1.05rem;
 }
 
@@ -317,7 +445,9 @@
   line-height: 1.45;
 }
 
-.kuasa26-role-picker button.is-active small {
+#kuasa26-role-consultant:checked ~ .kuasa26-role-picker label[for="kuasa26-role-consultant"] small,
+#kuasa26-role-other:checked ~ .kuasa26-role-picker label[for="kuasa26-role-other"] small,
+#kuasa26-role-family:checked ~ .kuasa26-role-picker label[for="kuasa26-role-family"] small {
   color: rgba(255, 255, 255, 0.68);
 }
 
@@ -330,11 +460,15 @@
   font-weight: 750;
 }
 
-.kuasa26-role-picker button.is-active .kuasa26-role-picker__number {
+#kuasa26-role-consultant:checked ~ .kuasa26-role-picker label[for="kuasa26-role-consultant"] .kuasa26-role-picker__number,
+#kuasa26-role-other:checked ~ .kuasa26-role-picker label[for="kuasa26-role-other"] .kuasa26-role-picker__number,
+#kuasa26-role-family:checked ~ .kuasa26-role-picker label[for="kuasa26-role-family"] .kuasa26-role-picker__number {
   color: var(--kuasa26-yellow);
 }
 
-.kuasa26-role-picker button.is-active .kuasa26-role-picker__link {
+#kuasa26-role-consultant:checked ~ .kuasa26-role-picker label[for="kuasa26-role-consultant"] .kuasa26-role-picker__link,
+#kuasa26-role-other:checked ~ .kuasa26-role-picker label[for="kuasa26-role-other"] .kuasa26-role-picker__link,
+#kuasa26-role-family:checked ~ .kuasa26-role-picker label[for="kuasa26-role-family"] .kuasa26-role-picker__link {
   color: #77c7ff;
 }
 
@@ -357,34 +491,45 @@
     color 0.2s ease;
 }
 
-.kuasa26-role-selection-state span {
-  color: var(--kuasa26-blue);
-  font-weight: 900;
-}
-
 .kuasa26-role-selection-state p {
   margin: 0;
   font-size: 0.86rem;
 }
 
-.kuasa26-role-selection-state.has-selection {
+.kuasa26-role-state-selected {
+  display: none;
+}
+
+#kuasa26-role-consultant:checked ~ .kuasa26-role-selection-state,
+#kuasa26-role-other:checked ~ .kuasa26-role-selection-state,
+#kuasa26-role-family:checked ~ .kuasa26-role-selection-state {
   border-style: solid;
   border-color: var(--kuasa26-blue-border);
   background: var(--kuasa26-blue-soft);
   color: #31536f;
 }
 
-.kuasa26-noscript {
-  margin: 1rem 0;
-  padding: 0.85rem 1rem;
-  border-radius: 14px;
-  background: var(--kuasa26-yellow-soft);
-  color: #6d4b14;
-  font-size: 0.88rem;
+#kuasa26-role-consultant:checked ~ .kuasa26-role-selection-state .kuasa26-role-state-default,
+#kuasa26-role-other:checked ~ .kuasa26-role-selection-state .kuasa26-role-state-default,
+#kuasa26-role-family:checked ~ .kuasa26-role-selection-state .kuasa26-role-state-default {
+  display: none;
 }
 
-.kuasa26-role-section[hidden] {
-  display: none !important;
+#kuasa26-role-consultant:checked ~ .kuasa26-role-selection-state .kuasa26-role-state-consultant,
+#kuasa26-role-other:checked ~ .kuasa26-role-selection-state .kuasa26-role-state-other,
+#kuasa26-role-family:checked ~ .kuasa26-role-selection-state .kuasa26-role-state-family {
+  display: block;
+}
+
+.kuasa26-role-explorer > .kuasa26-role-section {
+  display: none;
+}
+
+#kuasa26-role-consultant:checked ~ #konsultan-pajak,
+#kuasa26-role-other:checked ~ #pihak-lain,
+#kuasa26-role-family:checked ~ #keluarga {
+  display: block;
+  animation: kuasa26-panel-in 0.38s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .kuasa26-role-section {
@@ -399,10 +544,6 @@
   border-radius: 26px;
   background:
     linear-gradient(180deg, var(--role-soft) 0, var(--kuasa26-white) 260px);
-}
-
-.kuasa26-role-section.is-active {
-  animation: kuasa26-panel-in 0.38s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 @keyframes kuasa26-panel-in {
@@ -898,8 +1039,8 @@
     grid-template-columns: 1fr;
   }
 
-  .kuasa26-role-picker button {
-    min-height: 150px;
+  .kuasa26-role-picker label {
+    min-height: 185px;
   }
 
   .kuasa26-role-header {
@@ -925,9 +1066,12 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .kuasa26-role-picker button,
+  .kuasa26-role-picker label,
+  .kuasa26-role-callout__pulse,
   .kuasa26-role-selection-state,
-  .kuasa26-role-section.is-active {
+  #kuasa26-role-consultant:checked ~ #konsultan-pajak,
+  #kuasa26-role-other:checked ~ #pihak-lain,
+  #kuasa26-role-family:checked ~ #keluarga {
     animation: none;
     transition: none;
   }
@@ -940,6 +1084,14 @@
 
   .kuasa26-hero-image {
     border-radius: 18px;
+  }
+
+  .kuasa26-role-callout {
+    grid-template-columns: auto 1fr;
+  }
+
+  .kuasa26-role-callout > svg {
+    display: none;
   }
 
   .kuasa26-role-section {
@@ -956,15 +1108,26 @@
 @media print {
   .kuasa26-lead,
   .kuasa26-hero-image,
-  .kuasa26-role-picker button,
+  .kuasa26-role-picker label,
   .kuasa26-first-gate section,
   .kuasa26-table-wrap {
     box-shadow: none;
   }
 
-  .kuasa26-role-picker button,
+  .kuasa26-role-picker label,
   .kuasa26-role-section {
     break-inside: avoid;
+  }
+
+  .kuasa26-role-picker,
+  .kuasa26-role-callout,
+  .kuasa26-role-selection-state {
+    display: none;
+  }
+
+  .kuasa26-role-explorer > .kuasa26-role-section {
+    display: block !important;
+    animation: none !important;
   }
 
   .kuasa26-table-wrap {
