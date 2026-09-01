@@ -10,7 +10,7 @@ sidebar_note: "Izin, SKT, atau hubungan keluarga menentukan kelayakan penerima k
 hero_accent: "Konsultan · Pihak Lain · Keluarga"
 permalink: /pmk-55-2026-konsultan-pajak-kuasa-wajib-pajak.html
 date: 2026-09-01 08:00:00 +0700
-date_modified: 2026-09-01 14:15:00 +0700
+date_modified: 2026-09-01 14:45:00 +0700
 author: "Angga Sukma Dhaniswara"
 category: "Administrasi Pajak"
 tags:
@@ -96,40 +96,78 @@ custom_js:
 
 <h2 id="pilih-peran">Pilih peran Anda</h2>
 
-<p class="kuasa26-role-instruction">Pilih satu kartu untuk membuka jalurnya. Klik kembali kartu yang aktif untuk menyembunyikan pilihan.</p>
+<div class="kuasa26-role-explorer" data-role-explorer>
+  <input class="kuasa26-role-radio" type="radio" name="kuasa26-role" id="kuasa26-role-consultant" value="konsultan-pajak" data-role-input aria-controls="konsultan-pajak">
+  <input class="kuasa26-role-radio" type="radio" name="kuasa26-role" id="kuasa26-role-other" value="pihak-lain" data-role-input aria-controls="pihak-lain">
+  <input class="kuasa26-role-radio" type="radio" name="kuasa26-role" id="kuasa26-role-family" value="keluarga" data-role-input aria-controls="keluarga">
 
-<nav class="kuasa26-role-picker" aria-label="Pilih jalur Kuasa Wajib Pajak" data-role-selector>
-  <button type="button" data-role="KP" data-role-choice="konsultan-pajak" aria-controls="konsultan-pajak" aria-expanded="false">
-    <span class="kuasa26-role-picker__number">01</span>
-    <strong>Saya Konsultan Pajak</strong>
-    <small>Izin aktif dan kelas A/B/C</small>
-    <span class="kuasa26-role-picker__link" data-role-action>Buka jalur →</span>
-  </button>
-  <button type="button" data-role="PL" data-role-choice="pihak-lain" aria-controls="pihak-lain" aria-expanded="false">
-    <span class="kuasa26-role-picker__number">02</span>
-    <strong>Saya Pihak Lain</strong>
-    <small>SKK dan SKT yang masih berlaku</small>
-    <span class="kuasa26-role-picker__link" data-role-action>Buka jalur →</span>
-  </button>
-  <button type="button" data-role="KL" data-role-choice="keluarga" aria-controls="keluarga" aria-expanded="false">
-    <span class="kuasa26-role-picker__number">03</span>
-    <strong>Saya Keluarga</strong>
-    <small>KK atau pernyataan hubungan keluarga</small>
-    <span class="kuasa26-role-picker__link" data-role-action>Buka jalur →</span>
-  </button>
-</nav>
+  <div class="kuasa26-role-callout">
+    <span class="kuasa26-role-callout__pulse" aria-hidden="true"></span>
+    <div>
+      <strong>Pilih salah satu</strong>
+      <p>Klik kartu yang paling menggambarkan posisi Anda. Rincian jalur akan terbuka tepat di bawah pilihan.</p>
+    </div>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M12 4v15"></path><path d="m6 13 6 6 6-6"></path>
+    </svg>
+  </div>
 
-<div class="kuasa26-role-selection-state" data-role-state aria-live="polite">
-  <span aria-hidden="true">↓</span>
-  <p data-role-message>Belum ada peran yang dipilih. Detail jalur masih disembunyikan.</p>
-</div>
+  <nav class="kuasa26-role-picker" aria-label="Pilih jalur Kuasa Wajib Pajak">
+    <label for="kuasa26-role-consultant" data-role="KP" data-role-choice="konsultan-pajak">
+      <span class="kuasa26-role-picker__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="7" width="18" height="13" rx="3"></rect>
+          <path d="M8 7V5h8v2M3 12h18M9 15h6"></path>
+        </svg>
+      </span>
+      <span class="kuasa26-role-picker__number">01</span>
+      <strong>Saya Konsultan Pajak</strong>
+      <small>Izin aktif dan kelas A/B/C</small>
+      <span class="kuasa26-role-picker__link">Lihat rincian ↓</span>
+      <span class="kuasa26-role-picker__check" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 12 4 4 8-8"></path></svg>
+      </span>
+    </label>
+    <label for="kuasa26-role-other" data-role="PL" data-role-choice="pihak-lain">
+      <span class="kuasa26-role-picker__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="10" r="6"></circle>
+          <path d="m8.5 15-1 6 4.5-2 4.5 2-1-6M9.5 10.2l1.7 1.7 3.5-3.7"></path>
+        </svg>
+      </span>
+      <span class="kuasa26-role-picker__number">02</span>
+      <strong>Saya Pihak Lain</strong>
+      <small>SKK dan SKT yang masih berlaku</small>
+      <span class="kuasa26-role-picker__link">Lihat rincian ↓</span>
+      <span class="kuasa26-role-picker__check" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 12 4 4 8-8"></path></svg>
+      </span>
+    </label>
+    <label for="kuasa26-role-family" data-role="KL" data-role-choice="keluarga">
+      <span class="kuasa26-role-picker__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="8" cy="8" r="3"></circle><circle cx="16.5" cy="9" r="2.5"></circle>
+          <path d="M2.5 20v-1.5A5.5 5.5 0 0 1 8 13a5.5 5.5 0 0 1 5.5 5.5V20M14 14.2a4.5 4.5 0 0 1 7.5 3.3V20"></path>
+        </svg>
+      </span>
+      <span class="kuasa26-role-picker__number">03</span>
+      <strong>Saya Keluarga</strong>
+      <small>KK atau pernyataan hubungan keluarga</small>
+      <span class="kuasa26-role-picker__link">Lihat rincian ↓</span>
+      <span class="kuasa26-role-picker__check" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 12 4 4 8-8"></path></svg>
+      </span>
+    </label>
+  </nav>
 
-<noscript>
-  <style>.kuasa26-role-section[hidden]{display:block!important}</style>
-  <p class="kuasa26-noscript">JavaScript tidak aktif. Seluruh jalur ditampilkan agar isi artikel tetap dapat dibaca.</p>
-</noscript>
+  <div class="kuasa26-role-selection-state" aria-live="polite">
+    <p class="kuasa26-role-state-default">Belum ada peran yang dipilih.</p>
+    <p class="kuasa26-role-state-selected kuasa26-role-state-consultant"><strong>Konsultan Pajak dipilih.</strong> Rincian jalur ditampilkan di bawah.</p>
+    <p class="kuasa26-role-state-selected kuasa26-role-state-other"><strong>Pihak Lain dipilih.</strong> Rincian jalur ditampilkan di bawah.</p>
+    <p class="kuasa26-role-state-selected kuasa26-role-state-family"><strong>Keluarga dipilih.</strong> Rincian jalur ditampilkan di bawah.</p>
+  </div>
 
-<section class="kuasa26-role-section kuasa26-role-section--consultant" id="konsultan-pajak" aria-labelledby="judul-konsultan" data-role-panel="konsultan-pajak" tabindex="-1" hidden>
+<section class="kuasa26-role-section kuasa26-role-section--consultant" id="konsultan-pajak" aria-labelledby="judul-konsultan" data-role-panel="konsultan-pajak" tabindex="-1">
   <header class="kuasa26-role-header">
     <div class="kuasa26-role-header__icon" aria-hidden="true">KP</div>
     <div>
@@ -178,7 +216,7 @@ custom_js:
   <p class="kuasa26-role-conclusion"><strong>Ringkasnya:</strong> izin aktif → kelas sesuai → terdaftar di DJP → Surat Kuasa Khusus → akses elektronik → bertindak sesuai kuasa → menjaga kepatuhan profesi.</p>
 </section>
 
-<section class="kuasa26-role-section kuasa26-role-section--other" id="pihak-lain" aria-labelledby="judul-pihak-lain" data-role-panel="pihak-lain" tabindex="-1" hidden>
+<section class="kuasa26-role-section kuasa26-role-section--other" id="pihak-lain" aria-labelledby="judul-pihak-lain" data-role-panel="pihak-lain" tabindex="-1">
   <header class="kuasa26-role-header">
     <div class="kuasa26-role-header__icon" aria-hidden="true">PL</div>
     <div>
@@ -221,7 +259,7 @@ custom_js:
   <p class="kuasa26-role-conclusion"><strong>Ringkasnya:</strong> pastikan benar bertindak sebagai kuasa → peroleh SKK dan SKT → cek kelas dan masa berlaku → terdaftar di DJP → Surat Kuasa Khusus → akses elektronik → bertindak sesuai kuasa.</p>
 </section>
 
-<section class="kuasa26-role-section kuasa26-role-section--family" id="keluarga" aria-labelledby="judul-keluarga" data-role-panel="keluarga" tabindex="-1" hidden>
+<section class="kuasa26-role-section kuasa26-role-section--family" id="keluarga" aria-labelledby="judul-keluarga" data-role-panel="keluarga" tabindex="-1">
   <header class="kuasa26-role-header">
     <div class="kuasa26-role-header__icon" aria-hidden="true">KL</div>
     <div>
@@ -256,6 +294,8 @@ custom_js:
 
   <p class="kuasa26-role-conclusion"><strong>Ringkasnya:</strong> pastikan hubungan keluarga → siapkan KK atau surat pernyataan → buat Surat Kuasa Khusus → berikan akses elektronik → bertindak sesuai kuasa.</p>
 </section>
+
+</div>
 
 <h2 id="titik-temu">Titik temu ketiga jalur: Surat Kuasa Khusus</h2>
 
