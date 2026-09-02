@@ -70,11 +70,9 @@
       white-space: nowrap;
     }
     .brand-logo { width: auto; height: 18px; object-fit: contain; }
-    .brand-fallback { font-weight: 700; letter-spacing: -0.02em; }
     .desktop-menu { display: flex; align-items: center; justify-content: center; gap: 31px; }
     .desktop-menu a { color: #424245; font-size: 12px; white-space: nowrap; }
-    .desktop-menu a:hover,
-    .desktop-menu a[aria-current="page"] { color: #000000; }
+    .desktop-menu a:hover { color: #000000; }
     .nav-actions { display: flex; align-items: center; gap: 4px; }
     .nav-icon,
     .menu-toggle {
@@ -100,7 +98,6 @@
       padding: 30px 28px;
       background: rgba(250, 250, 252, 0.98);
       backdrop-filter: blur(22px);
-      -webkit-backdrop-filter: blur(22px);
     }
     .mobile-menu.active { display: block; }
     .mobile-menu a {
@@ -437,9 +434,9 @@
 <body id="top">
   <header class="site-nav">
     <div class="nav-inner">
-      <a class="nav-brand" href="index.html" aria-label="Beranda Kabayan">
-        <img class="brand-logo" src="assets/img/logo-kabayan.png" alt="" onerror="this.hidden=true" />
-        <span class="brand-fallback">Kabayan</span>
+      <a class="nav-brand" href="index.html">
+        <img class="brand-logo" src="images/LogoASD.svg" alt="Logo dhaniswara86" />
+        <span>| <strong>dhaniswara86</strong></span>
       </a>
 
       <nav class="desktop-menu" aria-label="Navigasi utama">
@@ -447,26 +444,27 @@
         <a href="buku.html">Buku</a>
         <a href="formulir.html">Formulir</a>
         <a href="aplikasi.html">Aplikasi</a>
-        <a href="kalkulator.html" aria-current="page">Kalkulator</a>
+        <a href="kalkulator.html">Kalkulator</a>
         <a href="artikel.html">Artikel</a>
         <a href="hotnews.html">Hot News</a>
       </nav>
 
       <div class="nav-actions">
-        <a class="nav-icon" href="#kategori" aria-label="Lihat kategori kalkulator">⌕</a>
+        <a class="nav-icon" href="#kategori" aria-label="Lihat kategori">⌕</a>
         <button class="menu-toggle" id="menuToggle" type="button" aria-label="Buka menu" aria-expanded="false" aria-controls="mobileMenu">☰</button>
       </div>
     </div>
   </header>
 
-  <nav class="mobile-menu" id="mobileMenu" aria-label="Navigasi seluler">
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Navigasi mobile">
     <a href="index.html">Beranda</a>
     <a href="buku.html">Buku</a>
     <a href="formulir.html">Formulir</a>
     <a href="aplikasi.html">Aplikasi</a>
-    <a href="kalkulator.html" aria-current="page">Kalkulator</a>
+    <a href="kalkulator.html">Kalkulator</a>
     <a href="artikel.html">Artikel</a>
     <a href="hotnews.html">Hot News</a>
+    <a href="ruang-belajar.html">Ruang Belajar</a>
   </nav>
 
   <main>
@@ -668,7 +666,6 @@
         const isOpen = mobileMenu.classList.toggle("active");
         document.body.classList.toggle("menu-open", isOpen);
         menuToggle.setAttribute("aria-expanded", String(isOpen));
-        menuToggle.setAttribute("aria-label", isOpen ? "Tutup menu" : "Buka menu");
         menuToggle.textContent = isOpen ? "×" : "☰";
       });
 
@@ -677,7 +674,6 @@
           mobileMenu.classList.remove("active");
           document.body.classList.remove("menu-open");
           menuToggle.setAttribute("aria-expanded", "false");
-          menuToggle.setAttribute("aria-label", "Buka menu");
           menuToggle.textContent = "☰";
         });
       });
