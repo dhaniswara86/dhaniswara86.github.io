@@ -4074,458 +4074,6 @@ body.mega-menu-open {
 }
 </style>
 
-
-<style id="kabayanOriginalSplitHeroStyles">
-/* =========================================================
-   ORIGINAL KABAYAN — split hero
-   Basis visual/fungsi tetap index original.
-   Copy + karakter di kiri, slideshow kategori di kanan.
-   ========================================================= */
-.hero {
-  width: 100%;
-  height: auto !important;
-  min-height: calc(100svh - var(--nav-height) - var(--announcement-height)) !important;
-  display: grid !important;
-  grid-template-columns: minmax(0, 0.88fr) minmax(500px, 1.12fr);
-  align-items: center;
-  gap: clamp(28px, 4vw, 72px);
-  padding: clamp(48px, 6.5vh, 82px) max(24px, calc((100vw - var(--max-width)) / 2)) 34px !important;
-  background:
-    radial-gradient(circle at 78% 64%, rgba(26,119,255,.13), transparent 28%),
-    linear-gradient(180deg, #ffffff 0%, #ffffff 64%, #f3f7ff 100%) !important;
-  text-align: left !important;
-}
-
-.hero-copy {
-  position: relative;
-  z-index: 5;
-  width: 100% !important;
-  max-width: 570px;
-  margin: 0 !important;
-  padding: 10px 0 0;
-  text-align: left;
-}
-
-.hero .eyebrow {
-  margin: 0 0 10px;
-  font-size: 18px;
-}
-
-.hero-title-row {
-  display: flex;
-  align-items: flex-end;
-  gap: clamp(12px, 1.8vw, 24px);
-  width: 100%;
-}
-
-.hero h1 {
-  min-width: 0;
-  flex: 1 1 auto;
-  margin: 0;
-  font-size: clamp(48px, 4.75vw, 72px) !important;
-  line-height: .97 !important;
-  text-align: left;
-}
-
-.hero-gradient {
-  display: block;
-  margin-top: 2px;
-}
-
-.hero-description { display: none !important; }
-
-.hero-actions {
-  justify-content: flex-start !important;
-  margin-top: 27px !important;
-}
-
-.hero-character-wrap {
-  width: clamp(105px, 9.5vw, 145px);
-  flex: 0 0 auto;
-  margin: 0 0 -7px;
-  pointer-events: none;
-}
-
-.hero-character {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: contain;
-  filter: drop-shadow(0 18px 24px rgba(20, 45, 82, .10));
-}
-
-.hero-visual {
-  position: relative;
-  z-index: 3;
-  width: 100% !important;
-  height: min(690px, calc(100svh - var(--nav-height) - var(--announcement-height) - 82px)) !important;
-  min-height: 520px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-.hero-visual .hero-glow {
-  right: 0;
-  bottom: 4%;
-  left: 50%;
-  width: min(640px, 49vw);
-  height: 320px;
-  opacity: .78;
-}
-
-.hero-showcase-slider {
-  width: min(680px, 100%) !important;
-  height: 100% !important;
-  min-height: 500px !important;
-}
-
-.hero-showcase-viewport,
-.hero-showcase-slide,
-.hero-showcase-link {
-  height: 100% !important;
-}
-
-.hero-showcase-link {
-  width: 100% !important;
-  justify-content: center !important;
-}
-
-.hero-showcase-image-wrap {
-  flex: 1 1 auto !important;
-  min-height: 280px !important;
-}
-
-.hero-showcase-image {
-  width: min(300px, 31vh, 31vw) !important;
-  max-height: min(300px, 34vh) !important;
-}
-
-.hero-showcase-caption {
-  width: min(610px, calc(100% - 76px)) !important;
-  min-height: 142px !important;
-  grid-template-rows: 14px 36px minmax(45px, auto) 22px !important;
-  padding-bottom: 30px !important;
-}
-
-.hero-showcase-arrow {
-  top: 42% !important;
-}
-
-@media (max-width: 1080px) {
-  .hero {
-    grid-template-columns: minmax(0, .9fr) minmax(430px, 1.1fr);
-    gap: 26px;
-    padding-right: 26px !important;
-    padding-left: 26px !important;
-  }
-
-  .hero h1 {
-    font-size: clamp(48px, 5.6vw, 66px) !important;
-  }
-
-  .hero-description {
-    font-size: 18px !important;
-  }
-
-  .hero-character-wrap {
-    width: 105px;
-    margin: 0 0 -5px;
-  }
-
-  .hero-showcase-image {
-    width: min(260px, 29vh, 29vw) !important;
-  }
-}
-
-@media (max-width: 900px) {
-  .hero {
-    min-height: 0 !important;
-    grid-template-columns: 1fr;
-    gap: 30px;
-    padding: 58px 22px 26px !important;
-    text-align: center !important;
-  }
-
-  .hero-copy {
-    max-width: 760px;
-    margin: 0 auto !important;
-    text-align: center;
-  }
-
-  .hero-title-row {
-    width: min(620px, 100%);
-    justify-content: center;
-    margin: 0 auto;
-  }
-
-  .hero h1 {
-    flex: 0 1 auto;
-    text-align: left;
-  }
-
-  .hero-actions {
-    justify-content: center !important;
-  }
-
-  .hero-character-wrap {
-    width: 100px;
-    margin: 0 0 -4px;
-  }
-
-  .hero-visual {
-    width: min(760px, 100%) !important;
-    height: 520px !important;
-    min-height: 0 !important;
-    margin: 0 auto !important;
-  }
-
-  .hero-showcase-slider {
-    min-height: 500px !important;
-  }
-
-  .hero-showcase-image {
-    width: min(245px, 48vw) !important;
-    max-height: 245px !important;
-  }
-}
-
-@media (max-width: 680px) {
-  .hero {
-    gap: 18px;
-    padding: 42px 16px 18px !important;
-  }
-
-  .hero .eyebrow {
-    font-size: 15px;
-  }
-
-  .hero h1 {
-    font-size: clamp(40px, 12vw, 53px) !important;
-  }
-
-  .hero-title-row {
-    gap: 9px;
-  }
-
-  .hero-actions {
-    margin-top: 20px !important;
-  }
-
-  .hero-character-wrap {
-    width: 78px;
-    margin: 0 0 -3px;
-  }
-
-  .hero-visual {
-    height: 465px !important;
-  }
-
-  .hero-showcase-slider {
-    min-height: 445px !important;
-  }
-
-  .hero-showcase-image {
-    width: min(210px, 52vw) !important;
-    max-height: 205px !important;
-  }
-
-  .hero-showcase-caption {
-    min-height: 150px !important;
-  }
-}
-
-@media (max-height: 720px) and (min-width: 901px) {
-  .hero {
-    padding-top: 30px !important;
-    padding-bottom: 20px !important;
-  }
-
-  .hero h1 {
-    font-size: clamp(44px, 5vw, 61px) !important;
-  }
-
-  .hero-actions {
-    margin-top: 17px !important;
-  }
-
-  .hero-character-wrap {
-    width: 88px;
-    margin: 0 0 -3px;
-  }
-
-  .hero-visual {
-    height: calc(100vh - var(--nav-height) - var(--announcement-height) - 48px) !important;
-    min-height: 400px !important;
-  }
-
-  .hero-showcase-slider {
-    min-height: 390px !important;
-  }
-
-  .hero-showcase-image {
-    width: min(220px, 28vh) !important;
-    max-height: 200px !important;
-  }
-
-  .hero-showcase-caption {
-    min-height: 120px !important;
-    padding-bottom: 22px !important;
-  }
-}
-</style>
-
-
-<style id="kabayanSimpleHeroOverride">
-/* =========================================================
-   Hero sederhana: Kabayan kiri, headline kanan
-   ========================================================= */
-.kabayan-simple-hero {
-  min-height: 680px !important;
-  height: auto !important;
-  display: flex !important;
-  align-items: center;
-  padding: 90px 24px 72px !important;
-  background:
-    radial-gradient(circle at 30% 70%, rgba(0,113,227,.08), transparent 32%),
-    #ffffff !important;
-  text-align: left !important;
-}
-
-.kabayan-simple-inner {
-  width: min(1120px, 100%);
-  display: grid;
-  grid-template-columns: minmax(280px, .85fr) minmax(440px, 1.15fr);
-  align-items: center;
-  gap: clamp(54px, 7vw, 100px);
-  margin: 0 auto;
-}
-
-.kabayan-simple-character-wrap {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  min-height: 430px;
-}
-
-.kabayan-simple-character {
-  width: min(330px, 100%);
-  max-height: 500px;
-  object-fit: contain;
-  filter: drop-shadow(0 24px 28px rgba(22,44,78,.12));
-}
-
-.kabayan-simple-copy {
-  min-width: 0;
-}
-
-.kabayan-simple-copy .eyebrow {
-  margin: 0 0 12px;
-  color: var(--medium-gray);
-  font-size: 18px;
-  font-weight: 600;
-}
-
-.kabayan-simple-copy h1 {
-  margin: 0;
-  color: var(--near-black);
-  font-size: clamp(54px, 6.7vw, 90px) !important;
-  font-weight: 700;
-  letter-spacing: -0.065em;
-  line-height: .96 !important;
-}
-
-.kabayan-simple-copy .hero-gradient {
-  display: block;
-  background: linear-gradient(90deg, #093b91 2%, #0071e3 48%, #25a6d9 78%, #ffb800 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-}
-
-.kabayan-simple-copy .hero-actions {
-  justify-content: flex-start;
-  margin-top: 28px;
-}
-
-/* Matikan komponen slideshow lama jika masih tertinggal di CSS. */
-.hero-visual,
-.hero-showcase-slider,
-.hero-showcase-viewport,
-.hero-showcase-slide,
-.hero-showcase-arrow,
-.hero-showcase-dots,
-.hero-glow {
-  display: none !important;
-}
-
-@media (max-width: 900px) {
-  .kabayan-simple-hero {
-    min-height: auto !important;
-    padding: 74px 24px 64px !important;
-  }
-
-  .kabayan-simple-inner {
-    grid-template-columns: minmax(220px, .72fr) minmax(0, 1.28fr);
-    gap: 38px;
-  }
-
-  .kabayan-simple-character-wrap {
-    min-height: 330px;
-  }
-
-  .kabayan-simple-character {
-    width: min(255px, 100%);
-    max-height: 370px;
-  }
-
-  .kabayan-simple-copy h1 {
-    font-size: clamp(46px, 7.8vw, 68px) !important;
-  }
-}
-
-@media (max-width: 680px) {
-  .kabayan-simple-hero {
-    padding: 58px 20px 52px !important;
-    text-align: center !important;
-  }
-
-  .kabayan-simple-inner {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-
-  .kabayan-simple-character-wrap {
-    order: 1;
-    min-height: 0;
-  }
-
-  .kabayan-simple-character {
-    width: min(210px, 58vw);
-    max-height: 300px;
-  }
-
-  .kabayan-simple-copy {
-    order: 2;
-  }
-
-  .kabayan-simple-copy .eyebrow {
-    font-size: 15px;
-  }
-
-  .kabayan-simple-copy h1 {
-    font-size: clamp(45px, 12vw, 58px) !important;
-  }
-
-  .kabayan-simple-copy .hero-actions {
-    justify-content: center;
-    margin-top: 23px;
-  }
-}
-</style>
-
 </head>
 <body id="top">
 <header class="site-nav">
@@ -4784,21 +4332,120 @@ body.mega-menu-open {
       Temukan buku, formulir, dan aplikasi perpajakan dalam satu tempat.
       <button aria-controls="collectionMegaMenu" aria-expanded="false" aria-haspopup="true" class="collection-menu-trigger" id="collectionMenuTrigger" type="button">Lihat Koleksi<span aria-hidden="true">⌄</span></button>
 </div>
-<section class="hero kabayan-simple-hero">
-<div class="kabayan-simple-inner">
-  <div class="kabayan-simple-character-wrap">
-    <img class="kabayan-simple-character" src="assets/img/kabayan-character.png" alt="Karakter Kabayan" />
-  </div>
-  <div class="kabayan-simple-copy">
-    <p class="eyebrow">Katalog Bahan Pelayanan</p>
-    <h1>
-      Urusan Pajak.
-      <span class="hero-gradient hero-rotating-line" id="heroRotatingLine">Lebih Sederhana.</span>
-    </h1>
-    <div class="hero-actions">
-      <a class="button button-primary" href="jelajahi.html">Jelajahi Kabayan</a>
-    </div>
-  </div>
+<section class="hero">
+<div class="hero-copy">
+<p class="eyebrow">Katalog Bahan Pelayanan</p>
+<h1>
+          Urusan Pajak.
+          <span class="hero-gradient hero-rotating-line" id="heroRotatingLine">Lebih Sederhana.</span>
+</h1>
+<p class="hero-description">
+          Buku, formulir, aplikasi, template, dan artikel perpajakan
+          dalam satu tempat yang praktis dan gratis.
+        </p>
+<div class="hero-actions">
+<a class="button button-primary" href="jelajahi.html">
+            Jelajahi Kabayan
+          </a>
+</div>
+</div>
+<div class="hero-visual">
+<div class="hero-glow"></div>
+<div aria-label="Jelajahi kategori utama Kabayan" aria-roledescription="carousel" class="hero-showcase-slider" id="heroCategorySlider" role="region" tabindex="0">
+<div class="hero-showcase-viewport">
+<article aria-hidden="false" class="hero-showcase-slide active">
+<a class="hero-showcase-link" href="formulir.html">
+<div class="hero-showcase-image-wrap"><img alt="Mockup Formulir Perpajakan" class="hero-showcase-image" src="images/jelajahi-lineup-formulir.webp" decoding="async" fetchpriority="high" width="1254" height="1254"/></div>
+<div class="hero-showcase-caption">
+<span class="hero-showcase-category">Administrasi</span>
+<h2>Formulir Perpajakan</h2>
+<p>Temukan, isi, dan siapkan dokumen perpajakan sesuai kebutuhan.</p>
+<span class="hero-showcase-detail">Buka formulir ›</span>
+</div>
+</a>
+</article>
+<article aria-hidden="true" class="hero-showcase-slide">
+<a class="hero-showcase-link" href="kalkulator.html">
+<div class="hero-showcase-image-wrap"><img alt="Mockup Kalkulator Pajak" class="hero-showcase-image" data-src="images/jelajahi-lineup-kalkulator.webp" decoding="async" width="1254" height="1254"/></div>
+<div class="hero-showcase-caption">
+<span class="hero-showcase-category">Hitung</span>
+<h2>Kalkulator Pajak</h2>
+<p>Hitung kewajiban pajak dengan lebih praktis dan mudah dipahami.</p>
+<span class="hero-showcase-detail">Buka kalkulator ›</span>
+</div>
+</a>
+</article>
+<article aria-hidden="true" class="hero-showcase-slide">
+<a class="hero-showcase-link" href="converter-xml-coretax.html">
+<div class="hero-showcase-image-wrap"><img alt="Mockup Converter XML" class="hero-showcase-image" data-src="images/jelajahi-lineup-converter.webp" decoding="async" width="1254" height="1254"/></div>
+<div class="hero-showcase-caption">
+<span class="hero-showcase-category">Coretax</span>
+<h2>Converter XML</h2>
+<p>Ubah data Excel menjadi XML Coretax melalui alur yang lebih praktis.</p>
+<span class="hero-showcase-detail">Buka converter ›</span>
+</div>
+</a>
+</article>
+<article aria-hidden="true" class="hero-showcase-slide">
+<a class="hero-showcase-link" href="buku.html">
+<div class="hero-showcase-image-wrap"><img alt="Mockup Buku Digital" class="hero-showcase-image" data-src="images/jelajahi-lineup-buku.webp" decoding="async" width="1254" height="1254"/></div>
+<div class="hero-showcase-caption">
+<span class="hero-showcase-category">Pembelajaran</span>
+<h2>Buku Digital</h2>
+<p>Pelajari perpajakan melalui materi yang lebih terstruktur.</p>
+<span class="hero-showcase-detail">Lihat buku ›</span>
+</div>
+</a>
+</article>
+<article aria-hidden="true" class="hero-showcase-slide">
+<a class="hero-showcase-link" href="aplikasi.html">
+<div class="hero-showcase-image-wrap"><img alt="Mockup Aplikasi Perpajakan" class="hero-showcase-image" data-src="images/jelajahi-aplikasi.webp" decoding="async" width="1254" height="1254"/></div>
+<div class="hero-showcase-caption">
+<span class="hero-showcase-category">Perangkat</span>
+<h2>Aplikasi Perpajakan</h2>
+<p>Temukan installer, arsip aplikasi, dan perangkat pendukung perpajakan.</p>
+<span class="hero-showcase-detail">Buka aplikasi ›</span>
+</div>
+</a>
+</article>
+<article aria-hidden="true" class="hero-showcase-slide">
+<a class="hero-showcase-link" href="artikel.html">
+<div class="hero-showcase-image-wrap"><img alt="Mockup Artikel Pajak" class="hero-showcase-image" data-src="images/jelajahi-lineup-artikel.webp" decoding="async" width="1254" height="1254"/></div>
+<div class="hero-showcase-caption">
+<span class="hero-showcase-category">Pengetahuan</span>
+<h2>Artikel Pajak</h2>
+<p>Pahami ketentuan pajak dengan penjelasan yang lebih sederhana.</p>
+<span class="hero-showcase-detail">Baca artikel ›</span>
+</div>
+</a>
+</article>
+<article aria-hidden="true" class="hero-showcase-slide">
+<a class="hero-showcase-link" href="hotnews.html">
+<div class="hero-showcase-image-wrap"><img alt="Mockup Hot News" class="hero-showcase-image" data-src="images/jelajahi-hot-news.webp" decoding="async" width="1254" height="1254"/></div>
+<div class="hero-showcase-caption">
+<span class="hero-showcase-category">Terbaru</span>
+<h2>Hot News</h2>
+<p>Ikuti pembaruan regulasi dan informasi perpajakan yang perlu cepat diketahui.</p>
+<span class="hero-showcase-detail">Lihat Hot News ›</span>
+</div>
+</a>
+</article>
+<article aria-hidden="true" class="hero-showcase-slide">
+<a class="hero-showcase-link" href="ruang-belajar.html">
+<div class="hero-showcase-image-wrap"><img alt="Mockup Ruang Belajar" class="hero-showcase-image" data-src="images/jelajahi-ruang-belajar.webp" decoding="async" width="1254" height="1254"/></div>
+<div class="hero-showcase-caption">
+<span class="hero-showcase-category">Pembelajaran</span>
+<h2>Ruang Belajar</h2>
+<p>Belajar melalui materi dan pembelajaran terpandu dalam satu ruang.</p>
+<span class="hero-showcase-detail">Masuk ruang belajar ›</span>
+</div>
+</a>
+</article>
+</div>
+<button aria-label="Kategori sebelumnya" class="hero-showcase-arrow hero-showcase-prev" type="button">‹</button>
+<button aria-label="Kategori berikutnya" class="hero-showcase-arrow hero-showcase-next" type="button">›</button>
+<div aria-label="Pilih kategori" class="hero-showcase-dots"></div>
+</div>
 </div>
 </section>
 <section class="full-panel panel-light">
@@ -6086,22 +5733,254 @@ body.mega-menu-open {
   loadLatestArticle();
 })();
 </script>
-<script id="heroRotatingTaglineScript">
+<script id="heroViewportFitScript">
 (() => {
-  const line = document.getElementById("heroRotatingLine");
-  if (line) line.textContent = "Lebih Sederhana.";
+  "use strict";
+
+  const root = document.documentElement;
+  const announcement = document.querySelector(".announcement");
+
+  if (!announcement) return;
+
+  const syncAnnouncementHeight = () => {
+    const height = Math.ceil(announcement.getBoundingClientRect().height);
+    root.style.setProperty("--announcement-height", `${height}px`);
+  };
+
+  syncAnnouncementHeight();
+
+  window.addEventListener("load", syncAnnouncementHeight, { once: true });
+  window.addEventListener("resize", syncAnnouncementHeight, { passive: true });
+  window.addEventListener("orientationchange", syncAnnouncementHeight, { passive: true });
+
+  if ("ResizeObserver" in window) {
+    const observer = new ResizeObserver(syncAnnouncementHeight);
+    observer.observe(announcement);
+  }
+})();
+</script>
+<script id="heroRotatingTaglineScript">
+  (function () {
+    const line = document.getElementById('heroRotatingLine');
+    if (!line) return;
+
+    const phrases = [
+      'Lebih Sederhana.',
+      'Lebih Mudah.',
+      'Lebih Praktis.'
+    ];
+
+    let index = 0;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (reduceMotion) {
+      line.textContent = phrases[0];
+      return;
+    }
+
+    window.setInterval(() => {
+      line.classList.add('is-switching');
+
+      window.setTimeout(() => {
+        index = (index + 1) % phrases.length;
+        line.textContent = phrases[index];
+        line.classList.remove('is-switching');
+      }, 240);
+    }, 2600);
+  })();
+</script>
+<script id="heroCategorySlideshowScript">
+(() => {
+  "use strict";
+
+  const slider = document.getElementById("heroCategorySlider");
+  if (!slider) return;
+
+  const slides = Array.from(slider.querySelectorAll(".hero-showcase-slide"));
+  const prev = slider.querySelector(".hero-showcase-prev");
+  const next = slider.querySelector(".hero-showcase-next");
+  const dotsWrap = slider.querySelector(".hero-showcase-dots");
+  if (!slides.length || !prev || !next || !dotsWrap) return;
+
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const AUTOPLAY_DELAY = 3900;
+  let index = 0;
+  let timer = null;
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let changeToken = 0;
+
+  const normalize = (value) => (value + slides.length) % slides.length;
+  const getImage = (slideIndex) =>
+    slides[normalize(slideIndex)]?.querySelector(".hero-showcase-image");
+
+  function ensureImage(slideIndex, priority = "auto") {
+    const normalized = normalize(slideIndex);
+    const image = getImage(normalized);
+    if (!image) return Promise.resolve();
+
+    if (priority !== "auto") image.fetchPriority = priority;
+
+    const source = image.dataset.src;
+    if (source && !image.getAttribute("src")) {
+      image.src = source;
+      image.removeAttribute("data-src");
+    }
+
+    const finishDecode = () => {
+      image.dataset.loaded = "true";
+      if (typeof image.decode === "function") {
+        return image.decode().catch(() => {});
+      }
+      return Promise.resolve();
+    };
+
+    if (image.complete && image.naturalWidth > 0) return finishDecode();
+
+    return new Promise((resolve) => {
+      const done = () => finishDecode().finally(resolve);
+      image.addEventListener("load", done, { once: true });
+      image.addEventListener("error", resolve, { once: true });
+    });
+  }
+
+  function preloadAround(centerIndex) {
+    // Hanya satu slide berikutnya yang dimuat di latar belakang.
+    // Ini menjaga initial load ringan, tetapi memastikan transisi berikutnya siap.
+    ensureImage(centerIndex + 1, "low");
+  }
+
+  const dots = slides.map((_, slideIndex) => {
+    const dot = document.createElement("button");
+    dot.type = "button";
+    dot.className = "hero-showcase-dot";
+    dot.setAttribute("aria-label", `Tampilkan kategori ${slideIndex + 1}`);
+    dot.addEventListener("click", async () => {
+      stop();
+      await showSlide(slideIndex);
+      schedule();
+    });
+    dotsWrap.appendChild(dot);
+    return dot;
+  });
+
+  async function showSlide(nextIndex) {
+    const targetIndex = normalize(nextIndex);
+    if (targetIndex === index && slides[index].classList.contains("active")) {
+      preloadAround(index);
+      return;
+    }
+
+    const token = ++changeToken;
+    await ensureImage(targetIndex, "high");
+    if (token !== changeToken) return;
+
+    index = targetIndex;
+
+    slides.forEach((slide, slideIndex) => {
+      const active = slideIndex === index;
+      slide.classList.toggle("active", active);
+      slide.setAttribute("aria-hidden", String(!active));
+      const link = slide.querySelector("a");
+      if (link) link.tabIndex = active ? 0 : -1;
+    });
+
+    dots.forEach((dot, dotIndex) => {
+      const active = dotIndex === index;
+      dot.classList.toggle("active", active);
+      dot.setAttribute("aria-current", active ? "true" : "false");
+    });
+
+    preloadAround(index);
+  }
+
+  function stop() {
+    if (timer !== null) {
+      window.clearTimeout(timer);
+      timer = null;
+    }
+  }
+
+  function schedule() {
+    stop();
+    if (reduceMotion.matches || slides.length < 2 || document.hidden) return;
+
+    timer = window.setTimeout(async () => {
+      timer = null;
+      await showSlide(index + 1);
+      schedule();
+    }, AUTOPLAY_DELAY);
+  }
+
+  prev.addEventListener("click", async () => {
+    stop();
+    await showSlide(index - 1);
+    schedule();
+  });
+
+  next.addEventListener("click", async () => {
+    stop();
+    await showSlide(index + 1);
+    schedule();
+  });
+
+  slider.addEventListener("keydown", async (event) => {
+    if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+    event.preventDefault();
+    stop();
+    await showSlide(index + (event.key === "ArrowRight" ? 1 : -1));
+    schedule();
+  });
+
+  slider.addEventListener("touchstart", (event) => {
+    const touch = event.changedTouches[0];
+    touchStartX = touch.screenX;
+    touchStartY = touch.screenY;
+    stop();
+  }, { passive: true });
+
+  slider.addEventListener("touchend", async (event) => {
+    const touch = event.changedTouches[0];
+    const dx = touchStartX - touch.screenX;
+    const dy = touchStartY - touch.screenY;
+
+    if (Math.abs(dx) > 42 && Math.abs(dx) > Math.abs(dy)) {
+      await showSlide(index + (dx > 0 ? 1 : -1));
+    }
+    schedule();
+  }, { passive: true });
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) stop();
+    else schedule();
+  });
+
+  reduceMotion.addEventListener?.("change", () => {
+    if (reduceMotion.matches) stop();
+    else schedule();
+  });
+
+  // Slide pertama sudah ada di HTML; tandai dan preload hanya slide berikutnya.
+  const firstImage = getImage(0);
+  if (firstImage) firstImage.dataset.loaded = "true";
+
+  slides.forEach((slide, slideIndex) => {
+    const active = slideIndex === 0;
+    slide.classList.toggle("active", active);
+    slide.setAttribute("aria-hidden", String(!active));
+    const link = slide.querySelector("a");
+    if (link) link.tabIndex = active ? 0 : -1;
+  });
+
+  dots.forEach((dot, dotIndex) => {
+    const active = dotIndex === 0;
+    dot.classList.toggle("active", active);
+    dot.setAttribute("aria-current", active ? "true" : "false");
+  });
+
+  preloadAround(0);
+  schedule();
 })();
 </script>
 </body>
 </html>
-@media (max-width: 680px) {
-  .hero-title-row {
-    width: min(430px, 100%);
-    align-items: flex-end;
-  }
-  .hero h1 {
-    font-size: clamp(34px, 10.4vw, 46px) !important;
-  }
-}
-
-
