@@ -12,10 +12,6 @@
 <meta content="website" property="og:type"/>
 <link href="https://dhaniswara86.id/" rel="canonical"/>
 <title>Kabayan by Angga Sukma Dhaniswara</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,500;1,600;1,700&display=swap" rel="stylesheet">
-
 <style>
     :root {
       --black: #000000;
@@ -4078,417 +4074,6 @@ body.mega-menu-open {
 }
 </style>
 
-
-<style id="bazilInspiredKabayanStyles">
-/* =========================================================
-   KABAYAN — editorial / interactive redesign
-   Inspired by the visual language of Bazil.fr, rebuilt for
-   a tax utility / learning platform.
-   ========================================================= */
-:root {
-  --bz-ink: #111111;
-  --bz-paper: #f5f3ef;
-  --bz-white: #ffffff;
-  --bz-line: rgba(17,17,17,.18);
-  --bz-blue: #0a5cff;
-  --bz-acid: #dfff00;
-  --bz-red: #ef3d2f;
-  --bz-nav: 48px;
-}
-
-html { scroll-behavior: smooth; }
-body {
-  background: var(--bz-paper);
-  color: var(--bz-ink);
-  font-family: "Inter Tight", Arial, Helvetica, sans-serif;
-  font-feature-settings: "ss01" 1, "cv05" 1;
-  letter-spacing: -.025em;
-}
-main.bz-home { padding-top: var(--nav-height); }
-
-/* Navigation deliberately quiet: the content becomes the identity. */
-.site-nav {
-  border-bottom: 1px solid rgba(17,17,17,.12);
-  background: rgba(245,243,239,.88);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-}
-.nav-inner { width: min(1440px, calc(100% - 44px)); }
-.nav-brand,
-.desktop-menu a,
-.desktop-menu .nav-menu-link { color: var(--bz-ink); font-family: "Inter Tight", sans-serif; }
-.desktop-menu { gap: 25px; }
-.collection-search-trigger, .menu-toggle { color: var(--bz-ink); }
-
-.bz-announcement {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  min-height: 42px;
-  padding: 9px 20px;
-  border-bottom: 1px solid rgba(17,17,17,.12);
-  background: var(--bz-acid) !important;
-  color: var(--bz-ink) !important;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: -.015em;
-  animation: none !important;
-}
-.bz-announcement .collection-menu-trigger {
-  color: var(--bz-ink) !important;
-  font-weight: 800;
-  animation: none !important;
-}
-
-.bz-hero {
-  min-height: calc(100svh - var(--nav-height) - 42px);
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  gap: 28px;
-  padding: clamp(22px,3.2vw,48px) clamp(18px,3.5vw,58px) clamp(24px,3vw,46px);
-  background: var(--bz-paper);
-  border-bottom: 1px solid var(--bz-line);
-}
-.bz-hero-meta,
-.bz-section-head,
-.bz-hero-bottom {
-  display: grid;
-  grid-template-columns: 100px 1fr 1fr;
-  align-items: start;
-  gap: 24px;
-  font-size: 12px;
-  font-weight: 650;
-  letter-spacing: -.01em;
-}
-.bz-hero-meta p { margin: 0; }
-.bz-hero-meta p:first-child { grid-column: 1 / 3; }
-.bz-hero-meta p:last-child { justify-self: end; }
-.bz-hero-title-wrap {
-  align-self: center;
-  padding-top: 2vh;
-}
-.bz-intro {
-  width: min(420px, 44vw);
-  margin: 0 0 clamp(22px,4vh,50px) auto;
-  font-size: clamp(15px,1.35vw,20px);
-  font-weight: 550;
-  line-height: 1.25;
-}
-.bz-hero-title {
-  margin: 0;
-  font-size: clamp(72px, 11.8vw, 190px);
-  font-weight: 850;
-  letter-spacing: -.075em;
-  line-height: .75;
-  text-transform: none;
-}
-.bz-hero-title > span { display: block; white-space: nowrap; }
-.bz-hero-title .bz-outline {
-  margin-left: clamp(18px,7vw,120px);
-  color: transparent;
-  -webkit-text-stroke: clamp(1.4px,.12vw,2.2px) var(--bz-ink);
-  text-stroke: clamp(1.4px,.12vw,2.2px) var(--bz-ink);
-}
-.bz-hero-bottom { align-items: end; }
-.bz-hero-bottom > p {
-  grid-column: 1 / 3;
-  width: min(560px, 100%);
-  margin: 0;
-  font-size: clamp(16px,1.5vw,22px);
-  font-weight: 550;
-  line-height: 1.2;
-}
-.bz-arrow-link {
-  justify-self: end;
-  display: inline-flex;
-  align-items: center;
-  gap: 18px;
-  padding-bottom: 5px;
-  border-bottom: 1px solid currentColor;
-  color: var(--bz-ink);
-  font-size: 15px;
-  font-weight: 750;
-  text-decoration: none;
-}
-.bz-arrow-link span { font-size: 25px; line-height: 1; transition: transform .25s ease; }
-.bz-arrow-link:hover span { transform: translate(4px,4px); }
-
-.bz-explore,
-.bz-editorial,
-.bz-news,
-.bz-about {
-  padding: clamp(28px,3vw,48px) clamp(18px,3.5vw,58px) clamp(70px,8vw,130px);
-  border-bottom: 1px solid var(--bz-line);
-}
-.bz-section-head {
-  min-height: 36px;
-  padding-bottom: 18px;
-  border-bottom: 1px solid currentColor;
-  font-size: 12px;
-}
-.bz-section-head > * { margin: 0; }
-.bz-section-index { font-variant-numeric: tabular-nums; }
-.bz-section-head > p:nth-child(2) { font-weight: 800; }
-.bz-section-head > :last-child { justify-self: end; text-align: right; }
-.bz-section-head > a { color: inherit; text-decoration: none; font-weight: 750; }
-.bz-section-note { opacity: .62; }
-
-.bz-explore { background: #fff; }
-.bz-explore-layout {
-  display: grid;
-  grid-template-columns: minmax(0,1.25fr) minmax(320px,.75fr);
-  gap: clamp(30px,5vw,84px);
-  padding-top: clamp(28px,4vw,64px);
-}
-.bz-menu-list { min-width: 0; }
-.bz-menu-item {
-  display: grid;
-  grid-template-columns: 44px minmax(0,1fr) 38px;
-  align-items: center;
-  min-height: clamp(72px,7.3vw,116px);
-  border-bottom: 1px solid rgba(17,17,17,.22);
-  color: var(--bz-ink);
-  text-decoration: none;
-  transition: padding-left .32s cubic-bezier(.22,1,.36,1);
-}
-.bz-menu-item:first-child { border-top: 1px solid rgba(17,17,17,.22); }
-.bz-menu-no { align-self: start; padding-top: 18px; font-size: 10px; font-weight: 700; }
-.bz-menu-text {
-  overflow: hidden;
-  font-size: clamp(41px,6vw,94px);
-  font-weight: 820;
-  letter-spacing: -.065em;
-  line-height: .9;
-  white-space: nowrap;
-  color: transparent;
-  -webkit-text-stroke: 1.15px var(--bz-ink);
-  text-stroke: 1.15px var(--bz-ink);
-  transition: color .22s ease, -webkit-text-stroke-color .22s ease, transform .32s cubic-bezier(.22,1,.36,1);
-}
-.bz-menu-arrow { justify-self: end; font-size: 24px; opacity: 0; transform: translate(-8px,8px); transition: opacity .22s ease, transform .28s ease; }
-.bz-menu-item:hover,
-.bz-menu-item:focus-visible,
-.bz-menu-item.is-active { padding-left: 8px; outline: none; }
-.bz-menu-item:hover .bz-menu-text,
-.bz-menu-item:focus-visible .bz-menu-text,
-.bz-menu-item.is-active .bz-menu-text { color: var(--bz-ink); -webkit-text-stroke-color: transparent; }
-.bz-menu-item:hover .bz-menu-arrow,
-.bz-menu-item:focus-visible .bz-menu-arrow,
-.bz-menu-item.is-active .bz-menu-arrow { opacity: 1; transform: translate(0,0); }
-
-.bz-preview { position: sticky; top: calc(var(--nav-height) + 26px); height: fit-content; }
-.bz-preview-frame {
-  position: relative;
-  aspect-ratio: 4 / 5;
-  overflow: hidden;
-  background: var(--bz-paper);
-}
-.bz-preview-slide {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  grid-template-rows: 1fr auto;
-  margin: 0;
-  padding: clamp(20px,2.2vw,34px);
-  opacity: 0;
-  pointer-events: none;
-  transform: scale(1.035);
-  transition: opacity .35s ease, transform .55s cubic-bezier(.22,1,.36,1);
-}
-.bz-preview-slide.is-active { opacity: 1; transform: scale(1); }
-.bz-preview-slide img {
-  width: 100%; height: 100%; min-height: 0; object-fit: contain;
-  filter: drop-shadow(0 28px 27px rgba(13,31,55,.18));
-}
-.bz-preview-slide figcaption {
-  display: grid; grid-template-columns: 100px 1fr; gap: 20px;
-  align-items: start; padding-top: 18px; border-top: 1px solid var(--bz-line);
-}
-.bz-preview-slide figcaption span { font-size: 10px; font-weight: 750; text-transform: uppercase; letter-spacing: .08em; }
-.bz-preview-slide figcaption strong { font-size: clamp(16px,1.5vw,21px); line-height: 1.08; font-weight: 650; }
-.bz-preview-counter { display: flex; gap: 5px; justify-content: flex-end; padding-top: 10px; font-size: 11px; font-weight: 750; }
-
-.bz-marquee {
-  overflow: hidden;
-  padding: 15px 0 17px;
-  border-bottom: 1px solid var(--bz-line);
-  background: var(--bz-ink);
-  color: var(--bz-white);
-}
-.bz-marquee-track {
-  width: max-content;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  animation: bzMarquee 26s linear infinite;
-  font-size: clamp(26px,3vw,48px);
-  font-weight: 820;
-  letter-spacing: -.045em;
-  line-height: 1;
-}
-.bz-marquee-track i { font-style: normal; opacity: .42; }
-@keyframes bzMarquee { to { transform: translateX(-50%); } }
-
-.bz-editorial { min-height: 92svh; }
-.bz-editorial-light { background: var(--bz-paper); }
-.bz-editorial-dark { background: #101010; color: #f5f3ef; --bz-line: rgba(245,243,239,.26); }
-.bz-editorial-blue { background: #0a5cff; color: #fff; --bz-line: rgba(255,255,255,.3); }
-.bz-editorial-grid {
-  display: grid;
-  grid-template-columns: minmax(0,1.03fr) minmax(330px,.97fr);
-  gap: clamp(40px,7vw,120px);
-  align-items: center;
-  min-height: 70svh;
-  padding-top: clamp(40px,5vw,80px);
-}
-.bz-editorial-copy h2,
-.bz-news-item h2,
-.bz-about h2 {
-  margin: 0;
-  font-size: clamp(60px,8vw,126px);
-  font-weight: 840;
-  letter-spacing: -.075em;
-  line-height: .82;
-}
-.bz-editorial-copy h2 em,
-.bz-news-item h2 em,
-.bz-about h2 em { font-style: normal; color: transparent; -webkit-text-stroke: 1.25px currentColor; }
-.bz-editorial-copy > p {
-  width: min(580px,100%);
-  margin: clamp(28px,4vw,58px) 0 0;
-  font-size: clamp(17px,1.6vw,23px);
-  font-weight: 520;
-  line-height: 1.3;
-}
-.bz-editorial-object {
-  position: relative;
-  min-height: min(58vw,660px);
-  display: block;
-  overflow: hidden;
-  color: inherit;
-  text-decoration: none;
-  transition: transform .35s cubic-bezier(.22,1,.36,1);
-}
-.bz-editorial-object:hover { transform: translateY(-8px); }
-.bz-object-arrow { position: absolute; right: 24px; bottom: 20px; font-size: 34px; }
-.bz-object-label { position: absolute; top: 20px; left: 22px; font-size: 10px; font-weight: 800; letter-spacing: .09em; }
-.bz-book-object { background: var(--bz-acid); color: var(--bz-ink); display: grid; place-items: center; }
-.bz-book-cover {
-  width: min(58%,330px); aspect-ratio: .72; display: flex; align-items: flex-end;
-  padding: 26px; background: #fff; border: 1px solid rgba(17,17,17,.22);
-  box-shadow: 28px 31px 0 rgba(17,17,17,.98);
-  font-size: clamp(42px,5vw,76px); font-weight: 850; letter-spacing: -.065em; line-height: .83;
-  transform: rotate(-5deg);
-}
-.bz-code-object { background: #e8ff73; color: #111; padding: clamp(30px,4vw,60px); display: grid; align-content: center; }
-.bz-code-toolbar { position: absolute; top: 20px; left: 22px; display: flex; gap: 7px; }
-.bz-code-toolbar span { width: 9px; height: 9px; border-radius: 50%; background: #111; opacity: .32; }
-.bz-code-object pre { margin: 0; white-space: pre-wrap; font: 600 clamp(17px,2vw,29px)/1.45 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; letter-spacing: -.04em; }
-.bz-app-object { background: #fff; color: #111; padding: clamp(24px,3vw,44px); display: grid; grid-template-columns: .36fr 1fr; gap: 16px; align-items: stretch; }
-.bz-app-rail { display: flex; flex-direction: column; gap: 7px; padding-top: 44px; }
-.bz-app-rail span { padding: 11px 12px; border-bottom: 1px solid rgba(17,17,17,.18); font-size: 11px; font-weight: 750; }
-.bz-app-window { align-self: center; min-height: 70%; display: flex; flex-direction: column; justify-content: flex-end; padding: 22px; background: #f1f1f1; }
-.bz-app-window > span { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; font-weight: 700; }
-.bz-app-window strong { margin-top: auto; font-size: clamp(52px,6vw,96px); letter-spacing: -.075em; line-height: .8; }
-.bz-app-window small { margin-top: 12px; font-size: 12px; font-weight: 650; }
-
-.bz-news { background: #fff; }
-.bz-news-grid { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--bz-line); }
-.bz-news-item {
-  position: relative;
-  min-height: 760px;
-  overflow: hidden;
-  padding: clamp(30px,3vw,48px) clamp(18px,3vw,48px) 40px 0;
-  border-right: 1px solid var(--bz-line);
-}
-.bz-news-item + .bz-news-item { padding-left: clamp(18px,3vw,48px); padding-right: 0; border-right: 0; }
-.bz-news-topline { display: flex; justify-content: space-between; gap: 20px; padding-bottom: 18px; border-bottom: 1px solid var(--bz-line); font-size: 11px; font-weight: 800; }
-.bz-news-item h2 { position: relative; z-index: 2; margin-top: clamp(42px,5vw,72px); font-size: clamp(52px,5.7vw,90px); }
-.bz-news-item > p { position: relative; z-index: 2; width: min(480px,90%); margin: 30px 0 0; font-size: 18px; line-height: 1.3; }
-.bz-news-actions { position: relative; z-index: 3; display: flex; flex-wrap: wrap; gap: 18px; margin-top: 26px; }
-.bz-news-actions a { color: inherit; font-size: 13px; font-weight: 800; text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 4px; }
-.bz-news-word { position: absolute; right: -3%; bottom: -4%; font-size: clamp(150px,19vw,330px); font-weight: 900; letter-spacing: -.09em; line-height: .7; color: transparent; -webkit-text-stroke: 1px rgba(17,17,17,.17); transform: rotate(-7deg); }
-.bz-live-dot { display: inline-block; width: 7px; height: 7px; margin-right: 5px; border-radius: 50%; background: var(--bz-red); animation: bzPulse 1.8s infinite; }
-@keyframes bzPulse { 70% { box-shadow: 0 0 0 8px rgba(239,61,47,0); } 0% { box-shadow: 0 0 0 0 rgba(239,61,47,.35); } }
-
-.bz-about { min-height: 78svh; background: var(--bz-acid); }
-.bz-about-grid { display: grid; grid-template-columns: 1fr .7fr; gap: clamp(50px,8vw,140px); align-items: end; min-height: 58svh; padding-top: 50px; }
-.bz-about h2 { font-size: clamp(72px,10vw,160px); }
-.bz-about-copy { padding-bottom: 2vw; }
-.bz-about-copy > p:first-child { margin: 0; font-size: clamp(18px,1.8vw,26px); line-height: 1.25; }
-.bz-signature { margin: 42px 0 0; font-size: clamp(28px,3vw,48px); font-weight: 830; letter-spacing: -.055em; }
-.bz-about-links { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 34px; }
-.bz-about-links a { color: inherit; font-size: 13px; font-weight: 800; text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 4px; }
-
-footer { background: #111; color: rgba(255,255,255,.72); }
-footer .disclaimer { border-color: rgba(255,255,255,.16); color: rgba(255,255,255,.6); }
-footer .disclaimer strong, footer .footer-links a { color: #fff; }
-
-@media (max-width: 980px) {
-  .bz-hero-meta, .bz-section-head, .bz-hero-bottom { grid-template-columns: 58px 1fr 1fr; }
-  .bz-explore-layout { grid-template-columns: 1fr; }
-  .bz-preview { position: relative; top: auto; order: -1; width: min(520px,100%); margin-left: auto; }
-  .bz-preview-frame { aspect-ratio: 16 / 10; }
-  .bz-preview-slide { padding: 20px; }
-  .bz-preview-slide img { max-height: 78%; }
-  .bz-editorial-grid { grid-template-columns: 1fr; }
-  .bz-editorial-object { min-height: 560px; }
-  .bz-news-grid { grid-template-columns: 1fr; }
-  .bz-news-item, .bz-news-item + .bz-news-item { min-height: 620px; padding-left: 0; padding-right: 0; border-right: 0; border-bottom: 1px solid var(--bz-line); }
-  .bz-about-grid { grid-template-columns: 1fr; }
-}
-
-@media (max-width: 680px) {
-  .nav-inner { width: calc(100% - 28px); }
-  .bz-announcement { justify-content: space-between; padding: 9px 14px; font-size: 10px; text-align: left; }
-  .bz-announcement { white-space: normal; }
-  .bz-announcement .collection-menu-trigger { flex-shrink: 0; font-size: 10px; }
-  .bz-hero { min-height: calc(100svh - var(--nav-height) - 52px); padding: 20px 15px 24px; }
-  .bz-hero-meta, .bz-section-head, .bz-hero-bottom { grid-template-columns: 42px 1fr; gap: 12px; }
-  .bz-hero-meta p:first-child { grid-column: 1 / 2; }
-  .bz-hero-meta p:last-child { grid-column: 2; justify-self: end; }
-  .bz-intro { width: 78%; margin-left: auto; font-size: 14px; }
-  .bz-hero-title { font-size: clamp(60px,20.2vw,88px); line-height: .8; }
-  .bz-hero-title .bz-outline { margin-left: 0; }
-  .bz-hero-bottom > p { grid-column: 1 / -1; font-size: 15px; }
-  .bz-arrow-link { grid-column: 2; margin-top: 15px; font-size: 13px; }
-  .bz-explore, .bz-editorial, .bz-news, .bz-about { padding: 22px 15px 66px; }
-  .bz-section-head > :nth-child(2) { grid-column: 2; }
-  .bz-section-head > :last-child { grid-column: 2; justify-self: start; text-align: left; margin-top: 3px; }
-  .bz-section-note { display: none; }
-  .bz-explore-layout { padding-top: 25px; gap: 24px; }
-  .bz-preview { width: 100%; margin: 0; }
-  .bz-preview-frame { aspect-ratio: 1 / 1.02; }
-  .bz-preview-slide figcaption { grid-template-columns: 74px 1fr; gap: 10px; }
-  .bz-menu-item { grid-template-columns: 30px minmax(0,1fr) 28px; min-height: 68px; }
-  .bz-menu-no { padding-top: 13px; font-size: 8px; }
-  .bz-menu-text { font-size: clamp(34px,10.8vw,48px); }
-  .bz-menu-arrow { font-size: 19px; }
-  .bz-marquee-track { animation-duration: 19s; }
-  .bz-editorial { min-height: auto; }
-  .bz-editorial-grid { min-height: auto; padding-top: 44px; gap: 42px; }
-  .bz-editorial-copy h2, .bz-about h2 { font-size: clamp(54px,16vw,78px); }
-  .bz-editorial-copy > p { font-size: 16px; margin-top: 26px; }
-  .bz-editorial-object { min-height: 440px; }
-  .bz-app-object { grid-template-columns: 1fr; }
-  .bz-app-rail { flex-direction: row; flex-wrap: wrap; padding-top: 30px; }
-  .bz-app-rail span { border: 1px solid rgba(17,17,17,.18); border-radius: 99px; padding: 7px 10px; }
-  .bz-app-window { min-height: 260px; }
-  .bz-news-item, .bz-news-item + .bz-news-item { min-height: 560px; }
-  .bz-news-item h2 { font-size: clamp(48px,14vw,68px); }
-  .bz-news-item > p { width: 100%; font-size: 16px; }
-  .bz-news-word { font-size: 150px; }
-  .bz-about-grid { min-height: auto; padding-top: 46px; gap: 50px; }
-  .bz-about-copy > p:first-child { font-size: 17px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .bz-marquee-track, .bz-live-dot { animation: none !important; }
-  .bz-preview-slide, .bz-menu-item, .bz-menu-text, .bz-menu-arrow, .bz-editorial-object { transition: none !important; }
-}
-</style>
-
 </head>
 <body id="top">
 <header class="site-nav">
@@ -4742,217 +4327,404 @@ footer .disclaimer strong, footer .footer-links a { color: #fff; }
 <a href="artikel.html">Artikel</a>
 <a class="nav-hotnews" href="hotnews.html"><span aria-hidden="true" class="nav-hotnews-icon">🔥</span><span>Hot News</span></a>
 </nav>
-<main class="bz-home">
-<div class="announcement bz-announcement">
-  Buku, formulir, aplikasi, template, dan artikel perpajakan dalam satu tempat yang praktis dan gratis.
-  <button aria-controls="collectionMegaMenu" aria-expanded="false" aria-haspopup="true" class="collection-menu-trigger" id="collectionMenuTrigger" type="button">Lihat Koleksi<span aria-hidden="true">⌄</span></button>
+<main>
+<div class="announcement">
+      Temukan buku, formulir, dan aplikasi perpajakan dalam satu tempat.
+      <button aria-controls="collectionMegaMenu" aria-expanded="false" aria-haspopup="true" class="collection-menu-trigger" id="collectionMenuTrigger" type="button">Lihat Koleksi<span aria-hidden="true">⌄</span></button>
 </div>
-
-<section class="bz-hero" id="beranda">
-  <div class="bz-hero-meta">
-    <p>Katalog Bahan Pelayanan</p>
-    <p>Perpajakan · Praktis · Gratis</p>
-  </div>
-
-  <div class="bz-hero-title-wrap">
-    <p class="bz-intro">Kabayan membantu Anda menemukan yang dibutuhkan, tanpa membuat urusan pajak terasa lebih rumit.</p>
-    <h1 class="bz-hero-title" aria-label="Urusan Pajak. Lebih Mudah.">
-      <span>Urusan Pajak.</span>
-      <span class="bz-outline">Lebih Mudah.</span>
-    </h1>
-  </div>
-
-  <div class="bz-hero-bottom">
-    <p>Buku, formulir, aplikasi, template, kalkulator, dan artikel perpajakan dalam satu ruang yang lebih sederhana.</p>
-    <a class="bz-arrow-link" href="#jelajahi">Jelajahi Kabayan <span aria-hidden="true">↘</span></a>
-  </div>
-</section>
-
-<section class="bz-explore" id="jelajahi">
-  <div class="bz-section-head">
-    <span class="bz-section-index">01</span>
-    <p>Pilih yang Anda butuhkan.</p>
-    <p class="bz-section-note">Arahkan kursor ke menu untuk melihat pratinjau. Klik untuk membuka.</p>
-  </div>
-
-  <div class="bz-explore-layout">
-    <nav class="bz-menu-list" aria-label="Kategori utama Kabayan">
-      <a class="bz-menu-item is-active" href="formulir.html" data-bz-preview="0">
-        <span class="bz-menu-no">01</span><span class="bz-menu-text">Formulir Pajak</span><span class="bz-menu-arrow">↗</span>
-      </a>
-      <a class="bz-menu-item" href="kalkulator.html" data-bz-preview="1">
-        <span class="bz-menu-no">02</span><span class="bz-menu-text">Kalkulator Pajak</span><span class="bz-menu-arrow">↗</span>
-      </a>
-      <a class="bz-menu-item" href="converter-xml-coretax.html" data-bz-preview="2">
-        <span class="bz-menu-no">03</span><span class="bz-menu-text">Converter XML</span><span class="bz-menu-arrow">↗</span>
-      </a>
-      <a class="bz-menu-item" href="buku.html" data-bz-preview="3">
-        <span class="bz-menu-no">04</span><span class="bz-menu-text">Buku Digital</span><span class="bz-menu-arrow">↗</span>
-      </a>
-      <a class="bz-menu-item" href="aplikasi.html" data-bz-preview="4">
-        <span class="bz-menu-no">05</span><span class="bz-menu-text">Aplikasi Pajak</span><span class="bz-menu-arrow">↗</span>
-      </a>
-      <a class="bz-menu-item" href="artikel.html" data-bz-preview="5">
-        <span class="bz-menu-no">06</span><span class="bz-menu-text">Artikel Pajak</span><span class="bz-menu-arrow">↗</span>
-      </a>
-      <a class="bz-menu-item" href="hotnews.html" data-bz-preview="6">
-        <span class="bz-menu-no">07</span><span class="bz-menu-text">Hot News</span><span class="bz-menu-arrow">↗</span>
-      </a>
-      <a class="bz-menu-item" href="ruang-belajar.html" data-bz-preview="7">
-        <span class="bz-menu-no">08</span><span class="bz-menu-text">Ruang Belajar</span><span class="bz-menu-arrow">↗</span>
-      </a>
-    </nav>
-
-    <div class="bz-preview" aria-live="polite">
-      <div class="bz-preview-frame">
-        <figure class="bz-preview-slide is-active" data-bz-slide="0">
-          <img src="images/jelajahi-lineup-formulir.webp" alt="Pratinjau Formulir Perpajakan" decoding="async" fetchpriority="high">
-          <figcaption><span>Administrasi</span><strong>Temukan, isi, dan siapkan dokumen perpajakan.</strong></figcaption>
-        </figure>
-        <figure class="bz-preview-slide" data-bz-slide="1">
-          <img data-src="images/jelajahi-lineup-kalkulator.webp" alt="Pratinjau Kalkulator Pajak" decoding="async">
-          <figcaption><span>Hitung</span><strong>Alat bantu hitung yang lebih praktis dan mudah dipahami.</strong></figcaption>
-        </figure>
-        <figure class="bz-preview-slide" data-bz-slide="2">
-          <img data-src="images/jelajahi-lineup-converter.webp" alt="Pratinjau Converter XML Coretax" decoding="async">
-          <figcaption><span>Coretax</span><strong>Ubah data Excel menjadi XML melalui alur yang lebih praktis.</strong></figcaption>
-        </figure>
-        <figure class="bz-preview-slide" data-bz-slide="3">
-          <img data-src="images/jelajahi-lineup-buku.webp" alt="Pratinjau Buku Digital" decoding="async">
-          <figcaption><span>Pembelajaran</span><strong>Materi perpajakan yang lebih terstruktur.</strong></figcaption>
-        </figure>
-        <figure class="bz-preview-slide" data-bz-slide="4">
-          <img data-src="images/jelajahi-aplikasi.webp" alt="Pratinjau Aplikasi Perpajakan" decoding="async">
-          <figcaption><span>Perangkat</span><strong>Installer, arsip aplikasi, dan perangkat pendukung.</strong></figcaption>
-        </figure>
-        <figure class="bz-preview-slide" data-bz-slide="5">
-          <img data-src="images/jelajahi-lineup-artikel.webp" alt="Pratinjau Artikel Pajak" decoding="async">
-          <figcaption><span>Pengetahuan</span><strong>Ketentuan pajak dijelaskan dengan bahasa yang lebih sederhana.</strong></figcaption>
-        </figure>
-        <figure class="bz-preview-slide" data-bz-slide="6">
-          <img data-src="images/jelajahi-hot-news.webp" alt="Pratinjau Hot News" decoding="async">
-          <figcaption><span>Terbaru</span><strong>Informasi perpajakan yang perlu lebih cepat diketahui.</strong></figcaption>
-        </figure>
-        <figure class="bz-preview-slide" data-bz-slide="7">
-          <img data-src="images/jelajahi-ruang-belajar.webp" alt="Pratinjau Ruang Belajar" decoding="async">
-          <figcaption><span>Belajar</span><strong>Materi dan pembelajaran terpandu dalam satu ruang.</strong></figcaption>
-        </figure>
-      </div>
-      <div class="bz-preview-counter"><span id="bzPreviewCurrent">01</span><span>/</span><span>08</span></div>
-    </div>
-  </div>
-</section>
-
-<div class="bz-marquee" aria-hidden="true">
-  <div class="bz-marquee-track">
-    <span>FORMULIR</span><i>—</i><span>BUKU</span><i>—</i><span>KALKULATOR</span><i>—</i><span>CORETAX</span><i>—</i><span>APLIKASI</span><i>—</i><span>ARTIKEL</span><i>—</i><span>HOT NEWS</span><i>—</i><span>RUANG BELAJAR</span><i>—</i>
-    <span>FORMULIR</span><i>—</i><span>BUKU</span><i>—</i><span>KALKULATOR</span><i>—</i><span>CORETAX</span><i>—</i><span>APLIKASI</span><i>—</i><span>ARTIKEL</span><i>—</i><span>HOT NEWS</span><i>—</i><span>RUANG BELAJAR</span><i>—</i>
-  </div>
+<section class="hero">
+<div class="hero-copy">
+<p class="eyebrow">Katalog Bahan Pelayanan</p>
+<h1>
+          Urusan Pajak.
+          <span class="hero-gradient hero-rotating-line" id="heroRotatingLine">Lebih Sederhana.</span>
+</h1>
+<p class="hero-description">
+          Buku, formulir, aplikasi, template, dan artikel perpajakan
+          dalam satu tempat yang praktis dan gratis.
+        </p>
+<div class="hero-actions">
+<a class="button button-primary" href="jelajahi.html">
+            Jelajahi Kabayan
+          </a>
 </div>
-
-<section class="bz-editorial bz-editorial-light" id="buku">
-  <div class="bz-section-head">
-    <span class="bz-section-index">02</span>
-    <p>Buku Digital</p>
-    <a href="buku.html">Lihat semua buku ↗</a>
-  </div>
-  <div class="bz-editorial-grid">
-    <div class="bz-editorial-copy">
-      <h2>Pengetahuan yang<br><em>lebih terstruktur.</em></h2>
-      <p>Pelajari perpajakan melalui modul, e-book, petunjuk teknis, dan referensi yang dirancang untuk pembelajaran mandiri.</p>
-    </div>
-    <a class="bz-editorial-object bz-book-object" href="buku.html" aria-label="Buka Buku Digital">
-      <span class="bz-object-label">KABAYAN / BOOKS</span>
-      <span class="bz-book-cover">Buku<br>Digital</span>
-      <span class="bz-object-arrow">↗</span>
-    </a>
-  </div>
+</div>
+<div class="hero-visual">
+<div class="hero-glow"></div>
+<div aria-label="Jelajahi kategori utama Kabayan" aria-roledescription="carousel" class="hero-showcase-slider" id="heroCategorySlider" role="region" tabindex="0">
+<div class="hero-showcase-viewport">
+<article aria-hidden="false" class="hero-showcase-slide active">
+<a class="hero-showcase-link" href="formulir.html">
+<div class="hero-showcase-image-wrap"><img alt="Mockup Formulir Perpajakan" class="hero-showcase-image" src="images/jelajahi-lineup-formulir.webp" decoding="async" fetchpriority="high" width="1254" height="1254"/></div>
+<div class="hero-showcase-caption">
+<span class="hero-showcase-category">Administrasi</span>
+<h2>Formulir Perpajakan</h2>
+<p>Temukan, isi, dan siapkan dokumen perpajakan sesuai kebutuhan.</p>
+<span class="hero-showcase-detail">Buka formulir ›</span>
+</div>
+</a>
+</article>
+<article aria-hidden="true" class="hero-showcase-slide">
+<a class="hero-showcase-link" href="kalkulator.html">
+<div class="hero-showcase-image-wrap"><img alt="Mockup Kalkulator Pajak" class="hero-showcase-image" data-src="images/jelajahi-lineup-kalkulator.webp" decoding="async" width="1254" height="1254"/></div>
+<div class="hero-showcase-caption">
+<span class="hero-showcase-category">Hitung</span>
+<h2>Kalkulator Pajak</h2>
+<p>Hitung kewajiban pajak dengan lebih praktis dan mudah dipahami.</p>
+<span class="hero-showcase-detail">Buka kalkulator ›</span>
+</div>
+</a>
+</article>
+<article aria-hidden="true" class="hero-showcase-slide">
+<a class="hero-showcase-link" href="converter-xml-coretax.html">
+<div class="hero-showcase-image-wrap"><img alt="Mockup Converter XML" class="hero-showcase-image" data-src="images/jelajahi-lineup-converter.webp" decoding="async" width="1254" height="1254"/></div>
+<div class="hero-showcase-caption">
+<span class="hero-showcase-category">Coretax</span>
+<h2>Converter XML</h2>
+<p>Ubah data Excel menjadi XML Coretax melalui alur yang lebih praktis.</p>
+<span class="hero-showcase-detail">Buka converter ›</span>
+</div>
+</a>
+</article>
+<article aria-hidden="true" class="hero-showcase-slide">
+<a class="hero-showcase-link" href="buku.html">
+<div class="hero-showcase-image-wrap"><img alt="Mockup Buku Digital" class="hero-showcase-image" data-src="images/jelajahi-lineup-buku.webp" decoding="async" width="1254" height="1254"/></div>
+<div class="hero-showcase-caption">
+<span class="hero-showcase-category">Pembelajaran</span>
+<h2>Buku Digital</h2>
+<p>Pelajari perpajakan melalui materi yang lebih terstruktur.</p>
+<span class="hero-showcase-detail">Lihat buku ›</span>
+</div>
+</a>
+</article>
+<article aria-hidden="true" class="hero-showcase-slide">
+<a class="hero-showcase-link" href="aplikasi.html">
+<div class="hero-showcase-image-wrap"><img alt="Mockup Aplikasi Perpajakan" class="hero-showcase-image" data-src="images/jelajahi-aplikasi.webp" decoding="async" width="1254" height="1254"/></div>
+<div class="hero-showcase-caption">
+<span class="hero-showcase-category">Perangkat</span>
+<h2>Aplikasi Perpajakan</h2>
+<p>Temukan installer, arsip aplikasi, dan perangkat pendukung perpajakan.</p>
+<span class="hero-showcase-detail">Buka aplikasi ›</span>
+</div>
+</a>
+</article>
+<article aria-hidden="true" class="hero-showcase-slide">
+<a class="hero-showcase-link" href="artikel.html">
+<div class="hero-showcase-image-wrap"><img alt="Mockup Artikel Pajak" class="hero-showcase-image" data-src="images/jelajahi-lineup-artikel.webp" decoding="async" width="1254" height="1254"/></div>
+<div class="hero-showcase-caption">
+<span class="hero-showcase-category">Pengetahuan</span>
+<h2>Artikel Pajak</h2>
+<p>Pahami ketentuan pajak dengan penjelasan yang lebih sederhana.</p>
+<span class="hero-showcase-detail">Baca artikel ›</span>
+</div>
+</a>
+</article>
+<article aria-hidden="true" class="hero-showcase-slide">
+<a class="hero-showcase-link" href="hotnews.html">
+<div class="hero-showcase-image-wrap"><img alt="Mockup Hot News" class="hero-showcase-image" data-src="images/jelajahi-hot-news.webp" decoding="async" width="1254" height="1254"/></div>
+<div class="hero-showcase-caption">
+<span class="hero-showcase-category">Terbaru</span>
+<h2>Hot News</h2>
+<p>Ikuti pembaruan regulasi dan informasi perpajakan yang perlu cepat diketahui.</p>
+<span class="hero-showcase-detail">Lihat Hot News ›</span>
+</div>
+</a>
+</article>
+<article aria-hidden="true" class="hero-showcase-slide">
+<a class="hero-showcase-link" href="ruang-belajar.html">
+<div class="hero-showcase-image-wrap"><img alt="Mockup Ruang Belajar" class="hero-showcase-image" data-src="images/jelajahi-ruang-belajar.webp" decoding="async" width="1254" height="1254"/></div>
+<div class="hero-showcase-caption">
+<span class="hero-showcase-category">Pembelajaran</span>
+<h2>Ruang Belajar</h2>
+<p>Belajar melalui materi dan pembelajaran terpandu dalam satu ruang.</p>
+<span class="hero-showcase-detail">Masuk ruang belajar ›</span>
+</div>
+</a>
+</article>
+</div>
+<button aria-label="Kategori sebelumnya" class="hero-showcase-arrow hero-showcase-prev" type="button">‹</button>
+<button aria-label="Kategori berikutnya" class="hero-showcase-arrow hero-showcase-next" type="button">›</button>
+<div aria-label="Pilih kategori" class="hero-showcase-dots"></div>
+</div>
+</div>
 </section>
-
-<section class="bz-editorial bz-editorial-dark" id="coretax">
-  <div class="bz-section-head">
-    <span class="bz-section-index">03</span>
-    <p>Converter XML Coretax</p>
-    <a href="converter-xml-coretax.html">Buka Converter ↗</a>
-  </div>
-  <div class="bz-editorial-grid">
-    <div class="bz-editorial-copy">
-      <h2>Hasil cepat.<br><em>Tanpa ribet.</em></h2>
-      <p>Converter Excel ke XML Coretax untuk membantu pembuatan bukti potong/pungut dalam jumlah banyak dengan metode impor XML yang lebih praktis.</p>
-    </div>
-    <a class="bz-editorial-object bz-code-object" href="converter-xml-coretax.html" aria-label="Buka Converter XML Coretax">
-      <div class="bz-code-toolbar"><span></span><span></span><span></span></div>
-      <pre><code>&lt;Kabayan&gt;
-  &lt;Excel&gt;data&lt;/Excel&gt;
-  &lt;Validasi&gt;ok&lt;/Validasi&gt;
-  &lt;Coretax&gt;XML&lt;/Coretax&gt;
-&lt;/Kabayan&gt;</code></pre>
-      <span class="bz-object-arrow">↗</span>
-    </a>
-  </div>
+<section class="full-panel panel-light">
+<div class="panel-content">
+<p class="section-kicker">Buku Digital</p>
+<h2 class="section-title">
+          Pengetahuan yang lebih terstruktur.
+        </h2>
+<p class="section-description">
+          Pelajari perpajakan melalui modul, e-book, petunjuk teknis, <br/>
+          yang dirancang untuk pembelajaran mandiri.
+        </p>
+<div class="section-actions">
+<a class="button button-primary" href="buku.html">
+            Lihat buku
+          </a>
+<a class="button button-outline" href="converter-xml-unifikasi.html">
+            Materi terbaru
+          </a>
+</div>
+<div aria-hidden="true" class="folder-stage">
+<div class="folder-back"></div>
+<div class="document"></div>
+<div class="folder-front"></div>
+</div>
+</div>
 </section>
-
-<section class="bz-editorial bz-editorial-blue" id="aplikasi">
-  <div class="bz-section-head">
-    <span class="bz-section-index">04</span>
-    <p>Aplikasi Perpajakan</p>
-    <a href="aplikasi.html">Buka portal ↗</a>
-  </div>
-  <div class="bz-editorial-grid">
-    <div class="bz-editorial-copy">
-      <h2>Perangkat yang tepat.<br><em>Di satu tempat.</em></h2>
-      <p>Temukan aplikasi e-SPT, e-Faktur, formulir elektronik, arsip aplikasi, dan perangkat pendukung untuk kebutuhan administrasi perpajakan.</p>
-    </div>
-    <a class="bz-editorial-object bz-app-object" href="aplikasi.html" aria-label="Buka Aplikasi Perpajakan">
-      <div class="bz-app-rail"><span>e-SPT</span><span>e-Faktur</span><span>e-Bupot</span><span>Arsip</span></div>
-      <div class="bz-app-window"><span>Portal Aplikasi</span><strong>KABAYAN</strong><small>Installer · Arsip · Pendukung</small></div>
-      <span class="bz-object-arrow">↗</span>
-    </a>
-  </div>
+<section class="full-panel panel-dark" id="coretax">
+<div class="panel-content">
+<p class="section-kicker">Converter XML Coretax</p>
+<h2 class="section-title">
+          Hasil cepat . Tanpa Ribet.
+        </h2>
+<p class="section-description">
+          Temukan Converter Excel ke XML Coretax, untuk pembuatan bukti potong/pungut dalam jumlah banyak dengan metode skema impor XML yang praktis.
+        </p>
+<div class="section-actions">
+<a class="button button-primary" href="converter-xml-coretax.html">
+            Buka Converter
+          </a>
+</div>
+<div aria-hidden="true" class="dark-visual">
+<div class="screen">
+<div class="screen-card one">
+<div class="screen-icon">⌘</div>
+<strong>Excel ke XML</strong>
+<span>Siapkan data lebih terstruktur.</span>
+</div>
+<div class="screen-card two">
+<div class="screen-icon">✓</div>
+<strong>Validasi Data</strong>
+<span>Periksa sebelum digunakan.</span>
+</div>
+</div>
+</div>
+</div>
 </section>
-
-<section class="bz-news" id="artikel">
-  <div class="bz-section-head">
-    <span class="bz-section-index">05</span>
-    <p>Baca dan tetap terbarui.</p>
-    <p class="bz-section-note">Penjelasan yang lebih sederhana, informasi yang lebih cepat.</p>
-  </div>
-  <div class="bz-news-grid">
-    <article class="bz-news-item">
-      <div class="bz-news-topline"><span>Artikel Pajak</span><span>01</span></div>
-      <h2>Penjelasan pajak.<br><em>Lebih mudah dipahami.</em></h2>
-      <p>Pembahasan perpajakan yang ringkas, terstruktur, dan relevan untuk membantu memahami ketentuan secara praktis.</p>
-      <div class="bz-news-actions"><a href="artikel.html">Baca artikel ↗</a><a href="artikel.html" id="latestArticleButton">Artikel terbaru ↗</a></div>
-      <div class="bz-news-word" aria-hidden="true">READ</div>
-    </article>
-    <article class="bz-news-item bz-news-hot" id="hot-news">
-      <div class="bz-news-topline"><span><i class="bz-live-dot"></i> Hot News</span><span>02</span></div>
-      <h2>Informasi terbaru.<br><em>Lebih cepat diketahui.</em></h2>
-      <p>Pembaruan regulasi, pengumuman penting, dan isu perpajakan yang perlu segera diperhatikan.</p>
-      <div class="bz-news-actions"><a href="hotnews.html">Lihat Hot News ↗</a><a href="hotnews-arsip.html">Buka arsip ↗</a></div>
-      <div class="bz-news-word" aria-hidden="true">NOW</div>
-    </article>
-  </div>
+<section class="full-panel applications-panel" id="aplikasi">
+<div class="panel-content">
+<p class="section-kicker">Aplikasi Perpajakan</p>
+<h2 class="section-title">
+          Installer dan perangkat pendukung.
+        </h2>
+<p class="section-description">
+          Temukan aplikasi e-SPT, e-Faktur, formulir elektronik,
+          dan perangkat pendukung untuk kebutuhan administrasi
+          maupun pengelolaan data perpajakan untuk periode sebelum implementasi Coretax.
+        </p>
+<div class="section-actions">
+<a class="button button-primary" href="aplikasi.html">
+            Buka portal aplikasi
+          </a>
+<a class="button button-outline" href="buku.html">
+            Lihat petunjuk
+          </a>
+</div>
+<div aria-hidden="true" class="application-stage">
+<div class="application-window">
+<div class="application-toolbar">
+<span class="toolbar-dot"></span>
+<span class="toolbar-dot"></span>
+<span class="toolbar-dot"></span>
+</div>
+<div class="application-body">
+<div class="application-sidebar">
+<span class="sidebar-label">Kategori</span>
+<div class="sidebar-item active">
+<span class="sidebar-icon">A</span>
+<span>Semua aplikasi</span>
+</div>
+<div class="sidebar-item">
+<span class="sidebar-icon">S</span>
+<span>e-SPT</span>
+</div>
+<div class="sidebar-item">
+<span class="sidebar-icon">F</span>
+<span>e-Faktur</span>
+</div>
+<div class="sidebar-item">
+<span class="sidebar-icon">P</span>
+<span>Pendukung</span>
+</div>
+</div>
+<div class="application-content">
+<div class="application-content-header">
+<div>
+<strong>Portal Aplikasi</strong>
+<span>Installer dan arsip perpajakan</span>
+</div>
+<div class="application-search">
+                    Cari aplikasi...
+                  </div>
+</div>
+<div class="application-list">
+<div class="application-row">
+<span class="application-row-icon">EF</span>
+<span>
+<strong>e-Faktur</strong>
+<small>Installer dan database</small>
+</span>
+<span class="application-status">
+                      Arsip
+                    </span>
+</div>
+<div class="application-row">
+<span class="application-row-icon">21</span>
+<span>
+<strong>e-SPT Masa PPh Pasal 21</strong>
+<small>Aplikasi desktop</small>
+</span>
+<span class="application-status">
+                      Arsip
+                    </span>
+</div>
+<div class="application-row">
+<span class="application-row-icon">APP</span>
+<span>
+<strong>Aplikasi Pendukung e-SPT</strong>
+<small>Komponen prasyarat</small>
+</span>
+<span class="application-status support">
+                      Pendukung
+                    </span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
-
-<section class="bz-about" id="tentang">
-  <div class="bz-section-head">
-    <span class="bz-section-index">06</span>
-    <p>Tentang Kabayan</p>
-    <a href="#top">Kembali ke atas ↑</a>
-  </div>
-  <div class="bz-about-grid">
-    <h2>Dibuat untuk<br><em>berbagi.</em></h2>
-    <div class="bz-about-copy">
-      <p><strong>Kabayan</strong> (Katalog Bahan Pelayanan) adalah ruang edukasi pribadi untuk membagikan pengetahuan, buku digital, formulir, aplikasi, template, dan alat bantu perpajakan secara lebih sederhana dan terstruktur.</p>
-      <p class="bz-signature">Angga Sukma Dhaniswara.</p>
-      <div class="bz-about-links">
-        <a href="tentang.html">Tentang Penulis ↗</a>
-        <a href="https://www.instagram.com/dhaniswara86/" rel="noopener noreferrer" target="_blank">Instagram ↗</a>
-        <a aria-label="Hubungi Angga melalui email" href="#" id="emailLink">Email ↗</a>
-      </div>
-    </div>
-  </div>
+<section class="showcase-section" id="artikel">
+<div class="showcase-grid">
+<article class="showcase-card article-showcase">
+<div class="showcase-copy">
+<span class="showcase-kicker">Artikel Pajak</span>
+<h3>Penjelasan pajak.<br/>Lebih mudah dipahami.</h3>
+<p>
+          Temukan pembahasan perpajakan yang ringkas, terstruktur,
+          dan relevan untuk membantu memahami ketentuan secara praktis.
+        </p>
+<div class="showcase-actions">
+<a class="showcase-button primary" href="artikel.html">
+            Baca artikel
+          </a>
+<a class="showcase-button secondary" href="artikel.html" id="latestArticleButton">
+            Artikel terbaru
+          </a>
+</div>
+</div>
+<div aria-hidden="true" class="showcase-visual article-visual">
+<div class="article-glow"></div>
+<div class="editorial-card editorial-card-back">
+<span class="editorial-chip">PPh</span>
+<strong>Panduan perpajakan yang lebih sederhana.</strong>
+<span class="editorial-line"></span>
+<span class="editorial-line short"></span>
+<span class="editorial-line"></span>
+</div>
+<div class="editorial-card editorial-card-front">
+<div class="editorial-top">
+<span>KABAYAN</span>
+<span>ARTIKEL</span>
+</div>
+<span class="editorial-chip blue">Terbaru</span>
+<strong id="latestArticleVisualTitle">
+            Artikel perpajakan terbaru.
+          </strong>
+<span class="editorial-line dark"></span>
+<span class="editorial-line short"></span>
+<span class="editorial-line"></span>
+<span class="editorial-line short"></span>
+</div>
+</div>
+</article>
+<article class="showcase-card hotnews-showcase" id="hot-news">
+<div class="showcase-copy">
+<span class="showcase-kicker hot">
+<span aria-hidden="true" class="hot-dot"></span>
+          Hot News
+        </span>
+<h3>Informasi terbaru.<br/>Lebih cepat diketahui.</h3>
+<p>
+          Ikuti pembaruan regulasi, pengumuman penting,
+          dan isu perpajakan yang perlu segera diperhatikan.
+        </p>
+<div class="showcase-actions">
+<a class="showcase-button primary" href="hotnews.html">
+            Lihat Hot News
+          </a>
+<a class="showcase-button secondary" href="artikel.html">
+            Semua informasi
+          </a>
+</div>
+</div>
+<div aria-hidden="true" class="showcase-visual hotnews-visual">
+<div class="news-orbit orbit-one"></div>
+<div class="news-orbit orbit-two"></div>
+<div class="news-screen">
+<div class="news-screen-top">
+<span class="news-brand">KABAYAN NEWS</span>
+<span class="news-status">
+<span></span>
+              TERBARU
+            </span>
+</div>
+<div class="news-headline-card">
+<span>Hot News</span>
+<strong>
+              Pembaruan perpajakan dalam satu halaman.
+            </strong>
+<small>
+              Ringkas, aktual, dan mudah dipahami.
+            </small>
+</div>
+<div class="news-mini-grid">
+<div class="news-mini-card">
+<span>01</span>
+<strong>Regulasi terbaru</strong>
+</div>
+<div class="news-mini-card">
+<span>02</span>
+<strong>Pengumuman penting</strong>
+</div>
+<div class="news-mini-card">
+<span>03</span>
+<strong>Isu perpajakan</strong>
+</div>
+</div>
+</div>
+</div>
+</article>
+</div>
+</section>
+<section class="about" id="tentang">
+<div class="about-inner">
+<h2>
+          Dibuat untuk berbagi.
+          <span class="personal-name">
+            Angga Sukma Dhaniswara.
+          </span>
+</h2>
+<p>
+<b>Kabayan</b> (Katalog Bahan Pelayanan) adalah ruang edukasi pribadi untuk membagikan
+          pengetahuan, buku digital, formulir, aplikasi, template,
+          dan alat bantu perpajakan secara lebih sederhana dan terstruktur.
+        </p>
+<div class="section-actions">
+<a class="button button-primary" href="tentang.html">
+            Tentang Penulis
+          </a>
+<a class="button button-outline" href="https://www.instagram.com/dhaniswara86/" rel="noopener noreferrer" target="_blank">
+            Profil Instagram
+          </a>
+<a aria-label="Hubungi Angga melalui email" class="button button-outline" href="#" id="emailLink">
+            Hubungi via Email
+          </a>
+</div>
+</div>
 </section>
 </main>
 <div aria-describedby="latestHotNewsSummary" aria-label="Hot News terbaru" aria-labelledby="latestHotNewsTitle" aria-modal="true" class="latest-hotnews-popup" hidden="" id="latestHotNewsPopup" role="dialog">
@@ -5961,82 +5733,254 @@ footer .disclaimer strong, footer .footer-links a { color: #fff; }
   loadLatestArticle();
 })();
 </script>
-
-
-
-
-<script id="bazilInspiredKabayanScript">
+<script id="heroViewportFitScript">
 (() => {
   "use strict";
 
-  const items = Array.from(document.querySelectorAll(".bz-menu-item[data-bz-preview]"));
-  const slides = Array.from(document.querySelectorAll(".bz-preview-slide[data-bz-slide]"));
-  const counter = document.getElementById("bzPreviewCurrent");
+  const root = document.documentElement;
+  const announcement = document.querySelector(".announcement");
+
+  if (!announcement) return;
+
+  const syncAnnouncementHeight = () => {
+    const height = Math.ceil(announcement.getBoundingClientRect().height);
+    root.style.setProperty("--announcement-height", `${height}px`);
+  };
+
+  syncAnnouncementHeight();
+
+  window.addEventListener("load", syncAnnouncementHeight, { once: true });
+  window.addEventListener("resize", syncAnnouncementHeight, { passive: true });
+  window.addEventListener("orientationchange", syncAnnouncementHeight, { passive: true });
+
+  if ("ResizeObserver" in window) {
+    const observer = new ResizeObserver(syncAnnouncementHeight);
+    observer.observe(announcement);
+  }
+})();
+</script>
+<script id="heroRotatingTaglineScript">
+  (function () {
+    const line = document.getElementById('heroRotatingLine');
+    if (!line) return;
+
+    const phrases = [
+      'Lebih Sederhana.',
+      'Lebih Mudah.',
+      'Lebih Praktis.'
+    ];
+
+    let index = 0;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (reduceMotion) {
+      line.textContent = phrases[0];
+      return;
+    }
+
+    window.setInterval(() => {
+      line.classList.add('is-switching');
+
+      window.setTimeout(() => {
+        index = (index + 1) % phrases.length;
+        line.textContent = phrases[index];
+        line.classList.remove('is-switching');
+      }, 240);
+    }, 2600);
+  })();
+</script>
+<script id="heroCategorySlideshowScript">
+(() => {
+  "use strict";
+
+  const slider = document.getElementById("heroCategorySlider");
+  if (!slider) return;
+
+  const slides = Array.from(slider.querySelectorAll(".hero-showcase-slide"));
+  const prev = slider.querySelector(".hero-showcase-prev");
+  const next = slider.querySelector(".hero-showcase-next");
+  const dotsWrap = slider.querySelector(".hero-showcase-dots");
+  if (!slides.length || !prev || !next || !dotsWrap) return;
+
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  if (!items.length || !slides.length) return;
-
-  let activeIndex = 0;
+  const AUTOPLAY_DELAY = 3900;
+  let index = 0;
   let timer = null;
-  let userInteracting = false;
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let changeToken = 0;
 
-  function ensureImage(index) {
-    const img = slides[index]?.querySelector("img[data-src]");
-    if (!img) return;
-    img.src = img.dataset.src;
-    img.removeAttribute("data-src");
+  const normalize = (value) => (value + slides.length) % slides.length;
+  const getImage = (slideIndex) =>
+    slides[normalize(slideIndex)]?.querySelector(".hero-showcase-image");
+
+  function ensureImage(slideIndex, priority = "auto") {
+    const normalized = normalize(slideIndex);
+    const image = getImage(normalized);
+    if (!image) return Promise.resolve();
+
+    if (priority !== "auto") image.fetchPriority = priority;
+
+    const source = image.dataset.src;
+    if (source && !image.getAttribute("src")) {
+      image.src = source;
+      image.removeAttribute("data-src");
+    }
+
+    const finishDecode = () => {
+      image.dataset.loaded = "true";
+      if (typeof image.decode === "function") {
+        return image.decode().catch(() => {});
+      }
+      return Promise.resolve();
+    };
+
+    if (image.complete && image.naturalWidth > 0) return finishDecode();
+
+    return new Promise((resolve) => {
+      const done = () => finishDecode().finally(resolve);
+      image.addEventListener("load", done, { once: true });
+      image.addEventListener("error", resolve, { once: true });
+    });
   }
 
-  function activate(index) {
-    activeIndex = (index + items.length) % items.length;
-    ensureImage(activeIndex);
-    ensureImage((activeIndex + 1) % items.length);
+  function preloadAround(centerIndex) {
+    // Hanya satu slide berikutnya yang dimuat di latar belakang.
+    // Ini menjaga initial load ringan, tetapi memastikan transisi berikutnya siap.
+    ensureImage(centerIndex + 1, "low");
+  }
 
-    items.forEach((item, i) => item.classList.toggle("is-active", i === activeIndex));
-    slides.forEach((slide, i) => slide.classList.toggle("is-active", i === activeIndex));
-    if (counter) counter.textContent = String(activeIndex + 1).padStart(2, "0");
+  const dots = slides.map((_, slideIndex) => {
+    const dot = document.createElement("button");
+    dot.type = "button";
+    dot.className = "hero-showcase-dot";
+    dot.setAttribute("aria-label", `Tampilkan kategori ${slideIndex + 1}`);
+    dot.addEventListener("click", async () => {
+      stop();
+      await showSlide(slideIndex);
+      schedule();
+    });
+    dotsWrap.appendChild(dot);
+    return dot;
+  });
+
+  async function showSlide(nextIndex) {
+    const targetIndex = normalize(nextIndex);
+    if (targetIndex === index && slides[index].classList.contains("active")) {
+      preloadAround(index);
+      return;
+    }
+
+    const token = ++changeToken;
+    await ensureImage(targetIndex, "high");
+    if (token !== changeToken) return;
+
+    index = targetIndex;
+
+    slides.forEach((slide, slideIndex) => {
+      const active = slideIndex === index;
+      slide.classList.toggle("active", active);
+      slide.setAttribute("aria-hidden", String(!active));
+      const link = slide.querySelector("a");
+      if (link) link.tabIndex = active ? 0 : -1;
+    });
+
+    dots.forEach((dot, dotIndex) => {
+      const active = dotIndex === index;
+      dot.classList.toggle("active", active);
+      dot.setAttribute("aria-current", active ? "true" : "false");
+    });
+
+    preloadAround(index);
   }
 
   function stop() {
-    if (timer) window.clearTimeout(timer);
-    timer = null;
+    if (timer !== null) {
+      window.clearTimeout(timer);
+      timer = null;
+    }
   }
 
   function schedule() {
     stop();
-    if (reduceMotion.matches || userInteracting || document.hidden) return;
-    timer = window.setTimeout(() => {
-      activate(activeIndex + 1);
+    if (reduceMotion.matches || slides.length < 2 || document.hidden) return;
+
+    timer = window.setTimeout(async () => {
+      timer = null;
+      await showSlide(index + 1);
       schedule();
-    }, 3400);
+    }, AUTOPLAY_DELAY);
   }
 
-  items.forEach((item, index) => {
-    item.addEventListener("pointerenter", () => {
-      userInteracting = true;
-      stop();
-      activate(index);
-    });
-    item.addEventListener("focus", () => {
-      userInteracting = true;
-      stop();
-      activate(index);
-    });
-    item.addEventListener("pointerleave", () => {
-      userInteracting = false;
-      schedule();
-    });
-    item.addEventListener("blur", () => {
-      userInteracting = false;
-      schedule();
-    });
+  prev.addEventListener("click", async () => {
+    stop();
+    await showSlide(index - 1);
+    schedule();
   });
 
-  document.addEventListener("visibilitychange", schedule);
-  reduceMotion.addEventListener?.("change", schedule);
-  activate(0);
+  next.addEventListener("click", async () => {
+    stop();
+    await showSlide(index + 1);
+    schedule();
+  });
+
+  slider.addEventListener("keydown", async (event) => {
+    if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+    event.preventDefault();
+    stop();
+    await showSlide(index + (event.key === "ArrowRight" ? 1 : -1));
+    schedule();
+  });
+
+  slider.addEventListener("touchstart", (event) => {
+    const touch = event.changedTouches[0];
+    touchStartX = touch.screenX;
+    touchStartY = touch.screenY;
+    stop();
+  }, { passive: true });
+
+  slider.addEventListener("touchend", async (event) => {
+    const touch = event.changedTouches[0];
+    const dx = touchStartX - touch.screenX;
+    const dy = touchStartY - touch.screenY;
+
+    if (Math.abs(dx) > 42 && Math.abs(dx) > Math.abs(dy)) {
+      await showSlide(index + (dx > 0 ? 1 : -1));
+    }
+    schedule();
+  }, { passive: true });
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) stop();
+    else schedule();
+  });
+
+  reduceMotion.addEventListener?.("change", () => {
+    if (reduceMotion.matches) stop();
+    else schedule();
+  });
+
+  // Slide pertama sudah ada di HTML; tandai dan preload hanya slide berikutnya.
+  const firstImage = getImage(0);
+  if (firstImage) firstImage.dataset.loaded = "true";
+
+  slides.forEach((slide, slideIndex) => {
+    const active = slideIndex === 0;
+    slide.classList.toggle("active", active);
+    slide.setAttribute("aria-hidden", String(!active));
+    const link = slide.querySelector("a");
+    if (link) link.tabIndex = active ? 0 : -1;
+  });
+
+  dots.forEach((dot, dotIndex) => {
+    const active = dotIndex === 0;
+    dot.classList.toggle("active", active);
+    dot.setAttribute("aria-current", active ? "true" : "false");
+  });
+
+  preloadAround(0);
   schedule();
 })();
 </script>
-
 </body>
 </html>
