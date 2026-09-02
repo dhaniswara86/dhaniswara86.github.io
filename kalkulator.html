@@ -137,31 +137,29 @@
       margin: 0 auto;
       padding: 0 24px 8px;
       display: grid;
-      grid-auto-flow: column;
-      grid-auto-columns: minmax(170px, 1fr);
+      grid-template-columns: repeat(5, minmax(0, 1fr));
       gap: 22px;
-      overflow-x: auto;
-      overscroll-behavior-inline: contain;
-      scroll-snap-type: x proximity;
-      scrollbar-width: none;
     }
-    .category-rail::-webkit-scrollbar { display: none; }
     .category-item {
       min-width: 0;
       text-align: center;
-      scroll-snap-align: start;
       outline: none;
     }
     .category-visual {
-      width: 108px;
-      height: 108px;
+      width: 118px;
+      height: 118px;
       margin: 0 auto 12px;
       position: relative;
       overflow: hidden;
-      border-radius: 24px;
+      border-radius: 28px;
+      background: #eef6ff;
       transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
       box-shadow: 0 10px 26px rgba(34, 61, 104, 0.11);
     }
+    .category-item:nth-child(2) .category-visual { background: #fff3d5; }
+    .category-item:nth-child(3) .category-visual { background: linear-gradient(145deg, #123d72, #087cb4); }
+    .category-item:nth-child(4) .category-visual { background: #eef4fb; }
+    .category-item:nth-child(5) .category-visual { background: #e3faef; }
     .category-icon {
       position: absolute;
       inset: 0;
@@ -186,7 +184,7 @@
     }
     .category-note { display: block; margin-top: 5px; color: var(--muted); font-size: 12px; }
 
-    .lineup-section { padding: 88px 0 94px; overflow: hidden; background: var(--soft); }
+    .lineup-section { padding: 88px 0 94px; background: var(--soft); }
     .section-head {
       width: min(var(--max), 100%);
       margin: 0 auto 34px;
@@ -209,25 +207,21 @@
     .lineup-shell { position: relative; width: min(var(--max), 100%); margin: 0 auto; }
     .lineup-track {
       display: grid;
-      grid-auto-flow: column;
-      grid-auto-columns: minmax(340px, 410px);
+      grid-template-columns: repeat(6, minmax(0, 1fr));
       gap: 22px;
-      padding: 0 24px 18px;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      overscroll-behavior-inline: contain;
-      scrollbar-width: none;
+      padding: 0 24px;
     }
-    .lineup-track::-webkit-scrollbar { display: none; }
     .lineup-card {
       position: relative;
+      grid-column: span 2;
       min-height: 610px;
       overflow: hidden;
       border-radius: var(--radius);
-      scroll-snap-align: start;
       box-shadow: 0 10px 28px rgba(0, 0, 0, 0.055);
       transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.28s ease;
     }
+    .lineup-card:nth-child(4) { grid-column: 2 / span 2; }
+    .lineup-card:nth-child(5) { grid-column: 4 / span 2; }
     .lineup-card:hover { transform: translateY(-5px); box-shadow: 0 18px 40px rgba(0, 0, 0, 0.085); }
     .lineup-card:focus-visible { outline: 3px solid rgba(0, 113, 227, 0.45); outline-offset: 4px; }
     .card-copy { position: relative; z-index: 4; padding: 34px 32px 0; }
@@ -291,31 +285,6 @@
     .card-xml .card-link { color: #ffffff; }
     .card-government { background: linear-gradient(180deg, #f8fbff, #e5effb); }
     .card-refund { background: linear-gradient(180deg, #f0fff9, #d1f6e8); }
-    .scroll-controls {
-      width: min(var(--max), 100%);
-      margin: 18px auto 0;
-      padding: 0 24px;
-      display: flex;
-      justify-content: flex-end;
-      gap: 12px;
-    }
-    .scroll-button {
-      width: 44px;
-      height: 44px;
-      border: 0;
-      border-radius: 50%;
-      background: #d9d9de;
-      color: var(--ink);
-      display: grid;
-      place-items: center;
-      font-size: 26px;
-      line-height: 1;
-      cursor: pointer;
-      transition: background 0.2s ease, transform 0.2s ease;
-    }
-    .scroll-button:hover { background: #c9c9cf; transform: scale(1.03); }
-    .scroll-button:disabled { opacity: 0.42; cursor: default; transform: none; }
-
     .detail-section { padding: 92px 24px; background: #ffffff; }
     .detail-inner { width: min(var(--max), 100%); margin: 0 auto; }
     .detail-head { max-width: 960px; margin-bottom: 48px; }
@@ -410,6 +379,18 @@
     .footer-links { display: flex; gap: 18px; }
     .footer-links a:hover { color: var(--blue); }
 
+    @media (max-width: 1080px) {
+      .category-rail { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .lineup-track { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .lineup-card,
+      .lineup-card:nth-child(4) { grid-column: auto; }
+      .lineup-card:nth-child(5) {
+        grid-column: 1 / -1;
+        width: calc(50% - 11px);
+        justify-self: center;
+      }
+    }
+
     @media (max-width: 900px) {
       .desktop-menu { display: none; }
       .menu-toggle { display: grid; }
@@ -425,16 +406,18 @@
       .hero h1 { font-size: clamp(50px, 15vw, 68px); }
       .hero-sub { font-size: 24px; }
       .category-nav { padding-bottom: 48px; }
-      .category-rail { grid-auto-columns: 150px; padding-inline: 20px; gap: 10px; }
+      .category-rail { grid-template-columns: repeat(2, minmax(0, 1fr)); padding-inline: 20px; gap: 24px 12px; }
       .section-head { align-items: flex-start; flex-direction: column; padding-inline: 20px; }
       .section-head h2 { font-size: 46px; }
       .lineup-section { padding: 66px 0 72px; }
-      .lineup-track { grid-auto-columns: min(86vw, 380px); padding-inline: 20px; }
+      .lineup-track { grid-template-columns: 1fr; padding-inline: 20px; }
+      .lineup-card,
+      .lineup-card:nth-child(4),
+      .lineup-card:nth-child(5) { grid-column: auto; width: auto; }
       .lineup-card { min-height: 590px; }
       .card-copy { padding: 30px 27px 0; }
       .card-copy h3 { font-size: 31px; }
       .card-copy p { font-size: 16px; }
-      .scroll-controls { padding-inline: 20px; }
       .detail-section { padding: 68px 20px; }
       .detail-head h2 { font-size: 44px; }
       .detail-head p { font-size: 18px; }
@@ -531,7 +514,7 @@
       </div>
 
       <div class="lineup-shell">
-        <div class="lineup-track" id="lineupTrack" tabindex="0" aria-label="Pilihan kalkulator Kabayan">
+        <div class="lineup-track" aria-label="Pilihan kalkulator Kabayan">
           <a class="lineup-card card-pph21" data-link="pph21" href="kalkulator-pasal21.html">
             <div class="card-copy">
               <span class="card-kicker">Pajak Penghasilan</span>
@@ -584,10 +567,6 @@
         </div>
       </div>
 
-      <div class="scroll-controls" aria-label="Kontrol carousel">
-        <button class="scroll-button" id="lineupPrev" type="button" aria-label="Geser ke kiri">‹</button>
-        <button class="scroll-button" id="lineupNext" type="button" aria-label="Geser ke kanan">›</button>
-      </div>
     </section>
 
     <section class="detail-section" id="rincian">
@@ -703,31 +682,6 @@
         });
       });
     }
-
-    const track = document.getElementById("lineupTrack");
-    const prev = document.getElementById("lineupPrev");
-    const next = document.getElementById("lineupNext");
-
-    function updateScrollButtons() {
-      if (!track || !prev || !next) return;
-      const maxScroll = track.scrollWidth - track.clientWidth;
-      prev.disabled = track.scrollLeft <= 4;
-      next.disabled = track.scrollLeft >= maxScroll - 4;
-    }
-
-    function moveTrack(direction) {
-      if (!track) return;
-      const card = track.querySelector(".lineup-card");
-      const gap = 22;
-      const distance = card ? card.getBoundingClientRect().width + gap : 400;
-      track.scrollBy({ left: direction * distance, behavior: "smooth" });
-    }
-
-    prev?.addEventListener("click", () => moveTrack(-1));
-    next?.addEventListener("click", () => moveTrack(1));
-    track?.addEventListener("scroll", updateScrollButtons, { passive: true });
-    window.addEventListener("resize", updateScrollButtons);
-    updateScrollButtons();
 
     const contactEmailButton = document.getElementById("contactEmailButton");
     if (contactEmailButton) {
