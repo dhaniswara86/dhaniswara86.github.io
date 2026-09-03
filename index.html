@@ -182,34 +182,6 @@
     .btn-secondary{background:rgba(255,255,255,.02);border-color:rgba(255,255,255,.12);color:#edf4ff}
     .btn-ghost{background:transparent;border-color:var(--line);color:#cdd9ef;padding:10px 12px}
 
-    .meta-strip{
-      display:grid;grid-template-columns:repeat(4, minmax(0,1fr));gap:12px;margin-top:22px
-    }
-    .meta-box{
-      border:1px solid rgba(255,255,255,.08);border-radius:18px;background:rgba(255,255,255,.02);
-      padding:14px;display:flex;align-items:center;gap:12px
-    }
-    .meta-icon{width:44px;height:44px;border-radius:14px;border:1px solid var(--line);display:grid;place-items:center;font-size:22px;background:rgba(255,255,255,.02)}
-    .meta-box strong{display:block;font-size:16px;letter-spacing:-.04em;color:#ffd166}
-    .meta-box span{display:block;font-size:12px;color:var(--muted);line-height:1.45}
-
-    .hero-side{padding:18px;display:grid;gap:14px;align-content:start}
-    .side-label{display:flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:#d9e5ff}
-    .side-label i{width:9px;height:9px;border:2px solid var(--pink);border-radius:50%;display:inline-block}
-    .side-item{display:grid;grid-template-columns:50px 1fr;gap:12px;padding:14px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.02)}
-    .side-icon{width:50px;height:50px;border-radius:16px;border:1px solid var(--line);display:grid;place-items:center;font-size:24px;color:#dfebff}
-    .side-item strong{display:block;font-size:14px;margin-bottom:4px}
-    .side-item p,.quote-box p{margin:0;color:var(--muted);font-size:14px;line-height:1.55}
-    .quote-box,.stats-box{padding:16px;border:1px solid var(--line);border-radius:20px;background:rgba(255,255,255,.02)}
-    .quote-mark{font-size:44px;line-height:.85;color:var(--blue);font-weight:900}
-    .quote-box b{color:var(--blue-2)}
-    .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:8px}
-    .stat strong{display:block;font-size:18px;letter-spacing:-.04em;color:var(--gold)}
-    .stat span{display:block;font-size:12px;color:var(--muted);line-height:1.4}
-
-    .category-deck{
-      display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:stretch
-    }
     .deck-arrow{
       width:56px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(180deg, rgba(12,20,37,.82), rgba(7,12,22,.94));
       color:#d6e3f8;font-size:28px;display:grid;place-items:center;transition:.22s ease
@@ -231,9 +203,9 @@
     .deck-number{font-size:12px;font-weight:800;color:var(--blue-2);letter-spacing:.08em}
     .deck-name{font-size:12px;font-weight:760;letter-spacing:.04em;color:#eff4ff;text-transform:uppercase;margin-top:2px}
     .deck-arrow-mini{font-size:21px;color:#9fc1ff}
-    .deck-thumb{position:relative;height:108px;display:grid;place-items:center}
+    .deck-thumb{position:relative;height:118px;display:grid;place-items:center}
     .deck-thumb:before{content:"";position:absolute;width:96px;height:96px;border-radius:50%;background:radial-gradient(circle, rgba(47,124,255,.20), rgba(47,124,255,.04) 65%, transparent 72%);filter:blur(.2px)}
-    .deck-thumb img{position:relative;max-height:108px;object-fit:contain;filter:drop-shadow(0 12px 24px rgba(0,0,0,.30))}
+    .deck-thumb img{position:relative;max-width:150px;max-height:118px;object-fit:contain;filter:drop-shadow(0 12px 24px rgba(0,0,0,.30))}
     .deck-card p{margin:0;color:var(--muted);font-size:13px;line-height:1.5;min-height:58px}
     .card-cta{margin-top:auto;display:inline-flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.025);font-size:13px;font-weight:650;color:#edf3ff}
     .card-cta .box{width:20px;height:20px;border-radius:6px;border:1px solid rgba(255,255,255,.18);display:grid;place-items:center;font-size:11px;color:#cfe0ff}
@@ -256,7 +228,6 @@
       .hero{min-height:auto}
       .hero-top{grid-template-columns:1fr;}
       .hero-side{grid-template-columns:1fr 1fr}
-      .meta-strip{grid-template-columns:repeat(2, minmax(0,1fr))}
       .deck-track{grid-template-columns:repeat(3, minmax(0,1fr))}
     }
     @media (max-width:900px){
@@ -267,7 +238,6 @@
       .hero-main{padding:16px}
       .headline{font-size:clamp(44px,10vw,64px)}
       .hero-side{grid-template-columns:1fr}
-      .meta-strip{grid-template-columns:1fr 1fr}
       .category-deck{grid-template-columns:1fr}
       .deck-arrow{display:none}
       .deck-track{grid-template-columns:repeat(2, minmax(0,1fr))}
@@ -283,7 +253,6 @@
       .hero-visual,.hero-main,.hero-side{padding:14px}
       .visual-stage{min-height:370px}
       .hero-mascot{max-height:410px}
-      .meta-strip{grid-template-columns:1fr}
       .deck-track{grid-template-columns:1fr}
       .stats-grid{grid-template-columns:1fr}
       .footer-links{gap:10px;font-size:12px}
@@ -370,13 +339,6 @@
                 <button class="btn-ghost" id="nextBtn" type="button" aria-label="Slide berikutnya">→</button>
               </div>
             </div>
-
-            <div class="meta-strip">
-              <div class="meta-box"><div class="meta-icon">👥</div><div><strong>500K+</strong><span>Pengguna terdaftar<br/>bersama Kabayan</span></div></div>
-              <div class="meta-box"><div class="meta-icon">✓</div><div><strong>100%</strong><span>Informasi resmi<br/>sumber terpercaya</span></div></div>
-              <div class="meta-box"><div class="meta-icon">⚡</div><div><strong>Cepat</strong><span>Proses praktis<br/>dan efisien</span></div></div>
-              <div class="meta-box"><div class="meta-icon">🔒</div><div><strong>Aman</strong><span>Data dan akses<br/>lebih terjamin</span></div></div>
-            </div>
           </section>
 
           <aside class="hero-side panel">
@@ -458,6 +420,7 @@
         cta:'Mulai Belajar',
         summary:'Materi perpajakan yang lebih terstruktur agar lebih cepat dipahami.',
         icon:'⌁',
+        deckImage:'assets/img/deck-pengetahuan.webp',
         action:'Baca Materi'
       },
       {
@@ -474,6 +437,7 @@
         cta:'Akses Formulir',
         summary:'Unduh berbagai formulir pajak resmi dengan cepat dan mudah.',
         icon:'▣',
+        deckImage:'assets/img/deck-formulir.webp',
         action:'Buka Formulir'
       },
       {
@@ -490,6 +454,7 @@
         cta:'Lihat Buku',
         summary:'Referensi buku dan panduan pajak yang rapi dan mudah dicari.',
         icon:'□',
+        deckImage:'assets/img/deck-buku.webp',
         action:'Lihat Buku'
       },
       {
@@ -506,6 +471,7 @@
         cta:'Buka Kalkulator',
         summary:'Perhitungan pajak yang praktis dan mudah dipahami.',
         icon:'＋',
+        deckImage:'assets/img/deck-kalkulator.webp',
         action:'Mulai Hitung'
       },
       {
@@ -522,6 +488,7 @@
         cta:'Buka Aplikasi',
         summary:'Berbagai aplikasi pajak digital untuk mendukung layanan dan pelaporan.',
         icon:'⌘',
+        deckImage:'assets/img/deck-aplikasi.webp',
         action:'Masuk Aplikasi'
       },
       {
@@ -538,6 +505,7 @@
         cta:'Baca Berita',
         summary:'Informasi dan pembaruan perpajakan penting yang disajikan ringkas.',
         icon:'◌',
+        deckImage:'assets/img/deck-berita.webp',
         action:'Lihat Berita'
       }
     ];
@@ -575,7 +543,7 @@
           </div>
           <div class="deck-arrow-mini">→</div>
         </div>
-        <div class="deck-thumb"><img src="${slide.image}" alt="" aria-hidden="true"></div>
+        <div class="deck-thumb"><img src="${slide.deckImage}" alt="" aria-hidden="true"></div>
         <p>${slide.summary}</p>
         <span class="card-cta"><span class="box">${slide.icon}</span><span>${slide.action}</span></span>
       `;
