@@ -4122,7 +4122,21 @@ body.mega-menu-open {
   max-width:760px;margin:0;color:#080b11;
   font-size:clamp(58px,6.7vw,112px);font-weight:800;letter-spacing:-.075em;line-height:.91;
 }
-.hybrid-headline .hybrid-accent{color:var(--hy-blue)}
+.hybrid-headline .hybrid-accent{
+  display:inline-block;
+  background:linear-gradient(90deg,
+    #124aa8 0%,
+    #0f63d8 28%,
+    #1593df 52%,
+    #36a9c8 68%,
+    #7aa987 84%,
+    #b7a43a 100%
+  );
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  color:transparent;
+}
 .hybrid-description{
   max-width:600px;margin:28px 0 0;color:var(--hy-muted);
   font-size:clamp(16px,1.2vw,19px);line-height:1.72;
@@ -4462,11 +4476,11 @@ body.mega-menu-open {
 <section class="hybrid-hero-wrap" id="home">
   <div class="hybrid-shell hybrid-hero">
     <div class="hybrid-copy">
-      <div class="hybrid-eyebrow" id="hybridEyebrow">01 / PENGETAHUAN</div>
-      <h1 class="hybrid-headline" id="hybridHeadline">Urusan Pajak.<br><span class="hybrid-accent">Lebih Mudah.</span></h1>
-      <p class="hybrid-description" id="hybridDescription">Pengetahuan perpajakan yang lebih terstruktur, ringkas, dan mudah dipahami untuk membantu Anda menemukan jawaban lebih cepat.</p>
+      <div class="hybrid-eyebrow" id="hybridEyebrow">01 / BUKU</div>
+      <h1 class="hybrid-headline" id="hybridHeadline">Belajar Pajak.<br><span class="hybrid-accent">Lebih Terarah.</span></h1>
+      <p class="hybrid-description" id="hybridDescription">Kumpulan buku dan pedoman perpajakan yang dirancang untuk membantu memahami prosedur dan praktik dengan langkah yang jelas.</p>
       <div class="hybrid-actions">
-        <a class="hybrid-btn-primary" id="hybridPrimaryCta" href="artikel.html">Mulai Belajar <span>↗</span></a>
+        <a class="hybrid-btn-primary" id="hybridPrimaryCta" href="buku.html">Lihat Buku <span>↗</span></a>
         <a class="hybrid-btn-secondary" href="jelajahi.html">Lihat Semua Layanan</a>
       </div>
     </div>
@@ -4476,9 +4490,9 @@ body.mega-menu-open {
       <div class="hybrid-axis-h"></div>
       <div class="hybrid-axis-v"></div>
       <div class="hybrid-mascot-wrap">
-        <img class="hybrid-mascot" id="hybridMascot" src="assets/img/kabayan-pengetahuan.webp" alt="Kabayan menunjukkan ikon buku pengetahuan" />
+        <img class="hybrid-mascot" id="hybridMascot" src="assets/img/kabayan-buku.webp" alt="Kabayan membawa buku pajak" />
       </div>
-      <div class="hybrid-floating hybrid-floating-one">KATEGORI AKTIF<strong id="hybridFloatingCategory">Pengetahuan</strong></div>
+      <div class="hybrid-floating hybrid-floating-one">KATEGORI AKTIF<strong id="hybridFloatingCategory">Buku</strong></div>
       <div class="hybrid-floating hybrid-floating-two">KABAYAN 1.0<strong>Mudah · Praktis · Gratis</strong></div>
     </div>
   </div>
@@ -6031,12 +6045,12 @@ body.mega-menu-open {
 (() => {
   "use strict";
   const sliderData = [
-    {name:'Pengetahuan',label:'01 / PENGETAHUAN',href:'artikel.html',image:'assets/img/kabayan-pengetahuan.webp',alt:'Kabayan menunjukkan ikon buku pengetahuan',headline:'Urusan Pajak.<br><span class="hybrid-accent">Lebih Mudah.</span>',description:'Pengetahuan perpajakan yang lebih terstruktur, ringkas, dan mudah dipahami untuk membantu Anda menemukan jawaban lebih cepat.',cta:'Mulai Belajar'},
-    {name:'Formulir Pajak',label:'02 / FORMULIR PAJAK',href:'formulir.html',image:'assets/img/kabayan-formulir.webp',alt:'Kabayan menunjukkan formulir pajak',headline:'Formulir Pajak.<br><span class="hybrid-accent">Lebih Praktis.</span>',description:'Temukan formulir yang dibutuhkan tanpa harus mencari ke banyak tempat. Pilih, isi, dan gunakan dengan lebih sederhana.',cta:'Buka Formulir'},
-    {name:'Buku Pajak',label:'03 / BUKU PAJAK',href:'buku.html',image:'assets/img/kabayan-buku.webp',alt:'Kabayan membawa buku pajak',headline:'Belajar Pajak.<br><span class="hybrid-accent">Lebih Terarah.</span>',description:'Kumpulan buku dan pedoman perpajakan yang dirancang untuk membantu memahami prosedur dan praktik dengan langkah yang jelas.',cta:'Lihat Buku Pajak'},
+    {name:'Buku',label:'01 / BUKU',href:'buku.html',image:'assets/img/kabayan-buku.webp',alt:'Kabayan membawa buku pajak',headline:'Belajar Pajak.<br><span class="hybrid-accent">Lebih Terarah.</span>',description:'Kumpulan buku dan pedoman perpajakan yang dirancang untuk membantu memahami prosedur dan praktik dengan langkah yang jelas.',cta:'Lihat Buku'},
+    {name:'Formulir',label:'02 / FORMULIR',href:'formulir.html',image:'assets/img/kabayan-formulir.webp',alt:'Kabayan menunjukkan formulir pajak',headline:'Formulir Pajak.<br><span class="hybrid-accent">Lebih Praktis.</span>',description:'Temukan formulir yang dibutuhkan tanpa harus mencari ke banyak tempat. Pilih, isi, dan gunakan dengan lebih sederhana.',cta:'Buka Formulir'},
+    {name:'Aplikasi',label:'03 / APLIKASI',href:'aplikasi.html',image:'assets/img/kabayan-aplikasi.webp',alt:'Kabayan menunjukkan aplikasi pajak',headline:'Pekerjaan Pajak.<br><span class="hybrid-accent">Lebih Efisien.</span>',description:'Akses converter, alat bantu, dan aplikasi pajak dalam satu ekosistem yang dibuat untuk memangkas pekerjaan berulang.',cta:'Lihat Aplikasi'},
     {name:'Kalkulator',label:'04 / KALKULATOR',href:'kalkulator.html',image:'assets/img/kabayan-kalkulator.webp',alt:'Kabayan menunjukkan kalkulator',headline:'Hitung Pajak.<br><span class="hybrid-accent">Lebih Cepat.</span>',description:'Gunakan kalkulator pajak yang fokus pada kebutuhan nyata dengan tampilan yang bersih dan hasil yang mudah dipahami.',cta:'Buka Kalkulator'},
-    {name:'Aplikasi Pajak',label:'05 / APLIKASI PAJAK',href:'aplikasi.html',image:'assets/img/kabayan-aplikasi.webp',alt:'Kabayan menunjukkan aplikasi pajak',headline:'Pekerjaan Pajak.<br><span class="hybrid-accent">Lebih Efisien.</span>',description:'Akses converter, alat bantu, dan aplikasi pajak dalam satu ekosistem yang dibuat untuk memangkas pekerjaan berulang.',cta:'Lihat Aplikasi'},
-    {name:'Berita Pajak',label:'06 / BERITA PAJAK',href:'hotnews.html',image:'assets/img/kabayan-berita.webp',alt:'Kabayan membawa megafon untuk berita pajak',headline:'Informasi Pajak.<br><span class="hybrid-accent">Lebih Ringkas.</span>',description:'Ikuti pembaruan aturan dan informasi perpajakan penting tanpa harus membaca informasi yang terlalu panjang dan berlapis.',cta:'Baca Berita Pajak'}
+    {name:'Artikel',label:'05 / ARTIKEL',href:'artikel.html',image:'assets/img/kabayan-pengetahuan.webp',alt:'Kabayan menunjukkan pengetahuan dan artikel pajak',headline:'Artikel Pajak.<br><span class="hybrid-accent">Lebih Mudah Dipahami.</span>',description:'Pengetahuan perpajakan yang lebih terstruktur, ringkas, dan mudah dipahami untuk membantu Anda menemukan jawaban lebih cepat.',cta:'Baca Artikel'},
+    {name:'Hot News',label:'06 / HOT NEWS',href:'hotnews.html',image:'assets/img/kabayan-berita.webp',alt:'Kabayan membawa megafon untuk Hot News',headline:'Informasi Pajak.<br><span class="hybrid-accent">Lebih Ringkas.</span>',description:'Ikuti pembaruan aturan dan informasi perpajakan penting tanpa harus membaca informasi yang terlalu panjang dan berlapis.',cta:'Lihat Hot News'}
   ];
 
   const categories = document.getElementById('hybridCategories');
