@@ -4104,7 +4104,7 @@ body.mega-menu-open {
 }
 .hybrid-shell{width:min(1480px,calc(100% - 48px));margin:0 auto;position:relative;z-index:1}
 .hybrid-hero{
-  min-height:calc(100vh - var(--nav-height));
+  min-height:calc(100svh - var(--nav-height) - 86px);
   display:grid;
   grid-template-columns:1.05fr 1fr;
   align-items:center;
@@ -4149,8 +4149,8 @@ body.mega-menu-open {
 .hybrid-btn-primary{border:1px solid var(--hy-blue);background:var(--hy-blue);color:#fff;box-shadow:0 12px 28px rgba(10,102,255,.2)}
 .hybrid-btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 34px rgba(10,102,255,.28)}
 .hybrid-btn-primary.is-yellow{
-  border-color:#ffc91b;
-  background:#ffc91b;
+  border-color:#F7C948;
+  background:#F7C948;
   color:#1d1d1f;
   box-shadow:0 12px 28px rgba(255,201,27,.24);
 }
@@ -4187,7 +4187,67 @@ body.mega-menu-open {
 }
 .hybrid-floating strong{display:block;margin-top:3px;color:#15191f;font-size:13px}
 .hybrid-floating-one{top:18%;right:3%}.hybrid-floating-two{bottom:15%;left:3%}
-.hybrid-category-rail{position:relative;z-index:2;border-top:1px solid var(--hy-line);border-bottom:1px solid var(--hy-line);background:rgba(255,255,255,.88)}
+
+.hybrid-hero-wrap::after{
+  content:"";
+  position:absolute;
+  z-index:0;
+  right:0;
+  bottom:0;
+  left:0;
+  height:118px;
+  pointer-events:none;
+  background:linear-gradient(to bottom,rgba(255,255,255,0),rgba(248,250,253,.82));
+}
+.hybrid-scroll-cue{
+  position:absolute;
+  z-index:8;
+  bottom:12px;
+  left:50%;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:7px 12px;
+  border:0;
+  border-radius:999px;
+  background:rgba(255,255,255,.84);
+  color:#7a8491;
+  box-shadow:0 7px 24px rgba(25,45,75,.06);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.035em;
+  text-decoration:none;
+  transform:translateX(-50%);
+  transition:color .2s ease,background .2s ease,box-shadow .2s ease;
+}
+.hybrid-scroll-cue:hover{
+  background:#fff;
+  color:var(--hy-blue);
+  box-shadow:0 9px 28px rgba(25,45,75,.10);
+}
+.hybrid-scroll-cue-arrow{
+  display:inline-block;
+  color:var(--hy-blue);
+  font-size:14px;
+  line-height:1;
+  animation:hybridScrollHint 1.8s ease-in-out infinite;
+}
+@keyframes hybridScrollHint{
+  0%,100%{transform:translateY(-1px);opacity:.62}
+  50%{transform:translateY(4px);opacity:1}
+}
+.hybrid-category-rail{
+  position:relative;
+  z-index:3;
+  scroll-margin-top:var(--nav-height);
+  border-top:1px solid var(--hy-line);
+  border-bottom:1px solid var(--hy-line);
+  background:rgba(255,255,255,.92);
+  box-shadow:0 -12px 32px rgba(26,46,77,.035);
+}
+
 .hybrid-rail-inner{display:grid;grid-template-columns:54px 1fr 54px;align-items:stretch;min-height:128px}
 .hybrid-rail-arrow{border:0;background:transparent;color:#8a929e;font-size:28px;transition:.2s}
 .hybrid-rail-arrow:hover{color:var(--hy-blue);background:#f8fbff}
@@ -4203,6 +4263,18 @@ body.mega-menu-open {
 .hybrid-category-number{display:block;margin-bottom:11px;color:#9aa1ab;font-size:12px}
 .hybrid-category.active .hybrid-category-number{color:var(--hy-blue);font-weight:800}
 .hybrid-category-name{font-size:13px;font-weight:750;line-height:1.3}
+@media(max-height:860px) and (min-width:761px){
+  .hybrid-hero{
+    min-height:calc(100svh - var(--nav-height) - 78px);
+    padding-top:26px;
+    padding-bottom:32px;
+  }
+  .hybrid-stage{min-height:560px}
+  .hybrid-mascot-wrap{height:530px}
+  .hybrid-headline{font-size:clamp(52px,6.1vw,92px)}
+  .hybrid-description{margin-top:20px;line-height:1.55}
+  .hybrid-actions{margin-top:24px}
+}
 @media(max-width:1100px){
   .hybrid-hero{grid-template-columns:1fr 1fr}
   .hybrid-stage{min-height:560px}.hybrid-mascot-wrap{width:44vw;height:530px}.hybrid-orbit{width:440px;height:440px}
@@ -4210,7 +4282,8 @@ body.mega-menu-open {
 }
 @media(max-width:760px){
   .hybrid-shell{width:min(100% - 28px,1480px)}
-  .hybrid-hero{min-height:auto;grid-template-columns:1fr;gap:10px;padding:54px 0 50px}
+  .hybrid-hero{min-height:auto;grid-template-columns:1fr;gap:10px;padding:54px 0 72px}
+  .hybrid-scroll-cue{bottom:14px;font-size:10px}
   .hybrid-copy{padding:0}.hybrid-description{font-size:15px}.hybrid-actions{margin-top:26px}
   .hybrid-stage{min-height:480px}.hybrid-mascot-wrap{width:90vw;height:465px}.hybrid-orbit{width:390px;height:390px}
   .hybrid-floating{display:none}
@@ -4223,7 +4296,8 @@ body.mega-menu-open {
   .hybrid-stage{min-height:430px}.hybrid-mascot-wrap{height:420px}
 }
 @media(prefers-reduced-motion:reduce){
-  .hybrid-mascot,.hybrid-category,.hybrid-btn-primary,.hybrid-btn-secondary{transition:none!important}
+  .hybrid-mascot,.hybrid-category,.hybrid-btn-primary,.hybrid-btn-secondary,.hybrid-scroll-cue{transition:none!important}
+  .hybrid-scroll-cue-arrow{animation:none!important}
 }
 </style>
 
@@ -4284,6 +4358,21 @@ body.mega-menu-open {
 }
 </style>
 
+
+<style id="kabayanSoftYellowCtaOverride">
+.hybrid-btn-primary.is-yellow{
+  background:#F7C948 !important;
+  border-color:#F7C948 !important;
+  color:#1D1D1F !important;
+  box-shadow:0 12px 28px rgba(247,201,72,.22) !important;
+}
+.hybrid-btn-primary.is-yellow:hover{
+  background:#F4BE32 !important;
+  border-color:#F4BE32 !important;
+  color:#1D1D1F !important;
+  box-shadow:0 16px 34px rgba(244,190,50,.28) !important;
+}
+</style>
 </head>
 <body id="top">
 <header class="site-nav">
@@ -4565,9 +4654,13 @@ body.mega-menu-open {
       <div class="hybrid-floating hybrid-floating-two">KABAYAN 1.0<strong>Mudah · Praktis · Gratis</strong></div>
     </div>
   </div>
+  <a class="hybrid-scroll-cue" href="#hybridCategoryRail" aria-label="Jelajahi kategori Kabayan di bawah">
+    <span>Jelajahi Kabayan</span>
+    <span class="hybrid-scroll-cue-arrow" aria-hidden="true">↓</span>
+  </a>
 </section>
 
-<section class="hybrid-category-rail" aria-label="Kategori Kabayan">
+<section class="hybrid-category-rail" id="hybridCategoryRail" aria-label="Kategori Kabayan">
   <div class="hybrid-shell hybrid-rail-inner">
     <button class="hybrid-rail-arrow" id="hybridPrevBtn" type="button" aria-label="Kategori sebelumnya">‹</button>
     <div class="hybrid-categories" id="hybridCategories"></div>
