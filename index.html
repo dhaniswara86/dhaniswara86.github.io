@@ -4188,8 +4188,21 @@ body.mega-menu-open {
 .hybrid-category:hover{background:#fbfcfe;color:#1e232b}
 .hybrid-category.active{background:#f8fbff;color:#0b0d12}
 .hybrid-category.active::after{content:"";position:absolute;left:18px;right:18px;bottom:0;height:3px;border-radius:999px 999px 0 0;background:var(--hy-blue)}
-.hybrid-category-number{display:block;margin-bottom:11px;color:#9aa1ab;font-size:12px}
+.hybrid-category-number{display:block;margin-bottom:7px;color:#9aa1ab;font-size:12px}
 .hybrid-category.active .hybrid-category-number{color:var(--hy-blue);font-weight:800}
+.hybrid-category-icon{
+  width:38px;
+  height:38px;
+  display:block;
+  margin:0 0 8px;
+  object-fit:contain;
+  opacity:.62;
+  filter:saturate(.82);
+  transform:scale(.96);
+  transition:opacity .22s ease,transform .22s ease,filter .22s ease;
+}
+.hybrid-category:hover .hybrid-category-icon{opacity:.84;filter:saturate(.95);transform:scale(1)}
+.hybrid-category.active .hybrid-category-icon{opacity:1;filter:saturate(1);transform:scale(1.04)}
 .hybrid-category-name{font-size:13px;font-weight:750;line-height:1.3}
 @media(max-width:1100px){
   .hybrid-hero{grid-template-columns:1fr 1fr}
@@ -4203,7 +4216,8 @@ body.mega-menu-open {
   .hybrid-stage{min-height:480px}.hybrid-mascot-wrap{width:90vw;height:465px}.hybrid-orbit{width:390px;height:390px}
   .hybrid-floating{display:none}
   .hybrid-rail-inner{grid-template-columns:42px 1fr 42px}.hybrid-categories{grid-template-columns:repeat(6,minmax(145px,1fr))}
-  .hybrid-category{padding:18px 14px}
+  .hybrid-category{padding:15px 14px}
+  .hybrid-category-icon{width:32px;height:32px;margin-bottom:7px}
 }
 @media(max-width:440px){
   .hybrid-headline{font-size:49px}
@@ -4212,6 +4226,21 @@ body.mega-menu-open {
 }
 @media(prefers-reduced-motion:reduce){
   .hybrid-mascot,.hybrid-category,.hybrid-btn-primary,.hybrid-btn-secondary{transition:none!important}
+}
+</style>
+
+
+<style id="kabayanMatchedPrimaryButtonColor">
+/* Tombol yang diminta disamakan dengan warna tombol utama hero (Buka Kalkulator). */
+.kabayan-match-hero-blue {
+  background: #0a66ff !important;
+  border-color: #0a66ff !important;
+  color: #ffffff !important;
+}
+.kabayan-match-hero-blue:hover {
+  background: #0a66ff !important;
+  border-color: #0a66ff !important;
+  color: #ffffff !important;
 }
 </style>
 
@@ -4517,7 +4546,7 @@ body.mega-menu-open {
           yang dirancang untuk pembelajaran mandiri.
         </p>
 <div class="section-actions">
-<a class="button button-primary" href="buku.html">
+<a class="button button-primary kabayan-match-hero-blue" href="buku.html">
             Lihat buku
           </a>
 <a class="button button-outline" href="converter-xml-unifikasi.html">
@@ -4541,7 +4570,7 @@ body.mega-menu-open {
           Temukan Converter Excel ke XML Coretax, untuk pembuatan bukti potong/pungut dalam jumlah banyak dengan metode skema impor XML yang praktis.
         </p>
 <div class="section-actions">
-<a class="button button-primary" href="converter-xml-coretax.html">
+<a class="button button-primary kabayan-match-hero-blue" href="converter-xml-coretax.html">
             Buka Converter
           </a>
 </div>
@@ -4573,7 +4602,7 @@ body.mega-menu-open {
           maupun pengelolaan data perpajakan untuk periode sebelum implementasi Coretax.
         </p>
 <div class="section-actions">
-<a class="button button-primary" href="aplikasi.html">
+<a class="button button-primary kabayan-match-hero-blue" href="aplikasi.html">
             Buka portal aplikasi
           </a>
 <a class="button button-outline" href="buku.html">
@@ -4666,7 +4695,7 @@ body.mega-menu-open {
           dan relevan untuk membantu memahami ketentuan secara praktis.
         </p>
 <div class="showcase-actions">
-<a class="showcase-button primary" href="artikel.html">
+<a class="showcase-button primary kabayan-match-hero-blue" href="artikel.html">
             Baca artikel
           </a>
 <a class="showcase-button secondary" href="artikel.html" id="latestArticleButton">
@@ -4711,7 +4740,7 @@ body.mega-menu-open {
           dan isu perpajakan yang perlu segera diperhatikan.
         </p>
 <div class="showcase-actions">
-<a class="showcase-button primary" href="hotnews.html">
+<a class="showcase-button primary kabayan-match-hero-blue" href="hotnews.html">
             Lihat Hot News
           </a>
 <a class="showcase-button secondary" href="artikel.html">
@@ -4772,7 +4801,7 @@ body.mega-menu-open {
           dan alat bantu perpajakan secara lebih sederhana dan terstruktur.
         </p>
 <div class="section-actions">
-<a class="button button-primary" href="tentang.html">
+<a class="button button-primary kabayan-match-hero-blue" href="tentang.html">
             Tentang Penulis
           </a>
 <a class="button button-outline" href="https://www.instagram.com/dhaniswara86/" rel="noopener noreferrer" target="_blank">
@@ -6045,12 +6074,12 @@ body.mega-menu-open {
 (() => {
   "use strict";
   const sliderData = [
-    {name:'Buku',label:'01 / BUKU',href:'buku.html',image:'assets/img/kabayan-buku.webp',alt:'Kabayan membawa buku pajak',headline:'Belajar Pajak.<br><span class="hybrid-accent">Lebih Terarah.</span>',description:'Kumpulan buku dan pedoman perpajakan yang dirancang untuk membantu memahami prosedur dan praktik dengan langkah yang jelas.',cta:'Lihat Buku'},
-    {name:'Formulir',label:'02 / FORMULIR',href:'formulir.html',image:'assets/img/kabayan-formulir.webp',alt:'Kabayan menunjukkan formulir pajak',headline:'Formulir Pajak.<br><span class="hybrid-accent">Lebih Praktis.</span>',description:'Temukan formulir yang dibutuhkan tanpa harus mencari ke banyak tempat. Pilih, isi, dan gunakan dengan lebih sederhana.',cta:'Buka Formulir'},
-    {name:'Aplikasi',label:'03 / APLIKASI',href:'aplikasi.html',image:'assets/img/kabayan-aplikasi.webp',alt:'Kabayan menunjukkan aplikasi pajak',headline:'Pekerjaan Pajak.<br><span class="hybrid-accent">Lebih Efisien.</span>',description:'Akses converter, alat bantu, dan aplikasi pajak dalam satu ekosistem yang dibuat untuk memangkas pekerjaan berulang.',cta:'Lihat Aplikasi'},
-    {name:'Kalkulator',label:'04 / KALKULATOR',href:'kalkulator.html',image:'assets/img/kabayan-kalkulator.webp',alt:'Kabayan menunjukkan kalkulator',headline:'Hitung Pajak.<br><span class="hybrid-accent">Lebih Cepat.</span>',description:'Gunakan kalkulator pajak yang fokus pada kebutuhan nyata dengan tampilan yang bersih dan hasil yang mudah dipahami.',cta:'Buka Kalkulator'},
-    {name:'Artikel',label:'05 / ARTIKEL',href:'artikel.html',image:'assets/img/kabayan-pengetahuan.webp',alt:'Kabayan menunjukkan pengetahuan dan artikel pajak',headline:'Artikel Pajak.<br><span class="hybrid-accent">Lebih Mudah Dipahami.</span>',description:'Pengetahuan perpajakan yang lebih terstruktur, ringkas, dan mudah dipahami untuk membantu Anda menemukan jawaban lebih cepat.',cta:'Baca Artikel'},
-    {name:'Hot News',label:'06 / HOT NEWS',href:'hotnews.html',image:'assets/img/kabayan-berita.webp',alt:'Kabayan membawa megafon untuk Hot News',headline:'Informasi Pajak.<br><span class="hybrid-accent">Lebih Ringkas.</span>',description:'Ikuti pembaruan aturan dan informasi perpajakan penting tanpa harus membaca informasi yang terlalu panjang dan berlapis.',cta:'Lihat Hot News'}
+    {name:'Buku',label:'01 / BUKU',href:'buku.html',icon:'assets/img/deck-buku.webp',image:'assets/img/kabayan-buku.webp',alt:'Kabayan membawa buku pajak',headline:'Belajar Pajak.<br><span class="hybrid-accent">Lebih Terarah.</span>',description:'Kumpulan buku dan pedoman perpajakan yang dirancang untuk membantu memahami prosedur dan praktik dengan langkah yang jelas.',cta:'Lihat Buku'},
+    {name:'Formulir',label:'02 / FORMULIR',href:'formulir.html',icon:'assets/img/deck-formulir.webp',image:'assets/img/kabayan-formulir.webp',alt:'Kabayan menunjukkan formulir pajak',headline:'Formulir Pajak.<br><span class="hybrid-accent">Lebih Praktis.</span>',description:'Temukan formulir yang dibutuhkan tanpa harus mencari ke banyak tempat. Pilih, isi, dan gunakan dengan lebih sederhana.',cta:'Buka Formulir'},
+    {name:'Aplikasi',label:'03 / APLIKASI',href:'aplikasi.html',icon:'assets/img/deck-aplikasi.webp',image:'assets/img/kabayan-aplikasi.webp',alt:'Kabayan menunjukkan aplikasi pajak',headline:'Pekerjaan Pajak.<br><span class="hybrid-accent">Lebih Efisien.</span>',description:'Akses converter, alat bantu, dan aplikasi pajak dalam satu ekosistem yang dibuat untuk memangkas pekerjaan berulang.',cta:'Lihat Aplikasi'},
+    {name:'Kalkulator',label:'04 / KALKULATOR',href:'kalkulator.html',icon:'assets/img/deck-kalkulator.webp',image:'assets/img/kabayan-kalkulator.webp',alt:'Kabayan menunjukkan kalkulator',headline:'Hitung Pajak.<br><span class="hybrid-accent">Lebih Cepat.</span>',description:'Gunakan kalkulator pajak yang fokus pada kebutuhan nyata dengan tampilan yang bersih dan hasil yang mudah dipahami.',cta:'Buka Kalkulator'},
+    {name:'Artikel',label:'05 / ARTIKEL',href:'artikel.html',icon:'assets/img/deck-pengetahuan.webp',image:'assets/img/kabayan-pengetahuan.webp',alt:'Kabayan menunjukkan pengetahuan dan artikel pajak',headline:'Artikel Pajak.<br><span class="hybrid-accent">Lebih Mudah Dipahami.</span>',description:'Pengetahuan perpajakan yang lebih terstruktur, ringkas, dan mudah dipahami untuk membantu Anda menemukan jawaban lebih cepat.',cta:'Baca Artikel'},
+    {name:'Hot News',label:'06 / HOT NEWS',href:'hotnews.html',icon:'assets/img/deck-berita.webp',image:'assets/img/kabayan-berita.webp',alt:'Kabayan membawa megafon untuk Hot News',headline:'Informasi Pajak.<br><span class="hybrid-accent">Lebih Ringkas.</span>',description:'Ikuti pembaruan aturan dan informasi perpajakan penting tanpa harus membaca informasi yang terlalu panjang dan berlapis.',cta:'Lihat Hot News'}
   ];
 
   const categories = document.getElementById('hybridCategories');
@@ -6071,7 +6100,9 @@ body.mega-menu-open {
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'hybrid-category' + (index === 0 ? ' active' : '');
-    button.innerHTML = `<span class="hybrid-category-number">${String(index+1).padStart(2,'0')}</span><span class="hybrid-category-name">${slide.name}</span>`;
+    button.innerHTML = `<span class="hybrid-category-number">${String(index+1).padStart(2,'0')}</span><img class="hybrid-category-icon" src="${slide.icon}" alt="" aria-hidden="true"><span class="hybrid-category-name">${slide.name}</span>`;
+    const categoryIcon = button.querySelector('.hybrid-category-icon');
+    if (categoryIcon) categoryIcon.addEventListener('error', () => { categoryIcon.style.display = 'none'; });
     button.addEventListener('click',() => { activate(index); resetAutoplay(); });
     categories.appendChild(button);
   });
