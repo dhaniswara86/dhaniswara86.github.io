@@ -191,6 +191,7 @@
       display:grid;grid-template-columns:repeat(6, minmax(0,1fr));gap:14px
     }
     .deck-card{
+      cursor:pointer;
       border:1px solid var(--line);border-radius:22px;padding:14px 14px 16px;
       background:linear-gradient(180deg, rgba(11,18,31,.90), rgba(7,12,20,.95));
       min-height:240px;display:flex;flex-direction:column;gap:10px;position:relative;overflow:hidden;
@@ -203,11 +204,11 @@
     .deck-number{font-size:12px;font-weight:800;color:var(--blue-2);letter-spacing:.08em}
     .deck-name{font-size:12px;font-weight:760;letter-spacing:.04em;color:#eff4ff;text-transform:uppercase;margin-top:2px}
     .deck-arrow-mini{font-size:21px;color:#9fc1ff}
-    .deck-thumb{position:relative;height:118px;display:grid;place-items:center}
-    .deck-thumb:before{content:"";position:absolute;width:96px;height:96px;border-radius:50%;background:radial-gradient(circle, rgba(47,124,255,.20), rgba(47,124,255,.04) 65%, transparent 72%);filter:blur(.2px)}
-    .deck-thumb img{position:relative;max-width:150px;max-height:118px;object-fit:contain;filter:drop-shadow(0 12px 24px rgba(0,0,0,.30))}
+    .deck-thumb{position:relative;height:132px;display:grid;place-items:center}
+    .deck-thumb:before{content:"";position:absolute;width:112px;height:112px;border-radius:50%;background:radial-gradient(circle, rgba(47,124,255,.18), rgba(47,124,255,.05) 66%, transparent 74%);filter:blur(.2px)}
+    .deck-thumb img{position:relative;max-width:172px;max-height:126px;object-fit:contain;filter:drop-shadow(0 12px 24px rgba(0,0,0,.30))}
     .deck-card p{margin:0;color:var(--muted);font-size:13px;line-height:1.5;min-height:58px}
-    .card-cta{margin-top:auto;display:inline-flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.025);font-size:13px;font-weight:650;color:#edf3ff}
+    .card-cta{margin-top:auto;display:inline-flex;text-decoration:none;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.025);font-size:13px;font-weight:650;color:#edf3ff}
     .card-cta .box{width:20px;height:20px;border-radius:6px;border:1px solid rgba(255,255,255,.18);display:grid;place-items:center;font-size:11px;color:#cfe0ff}
 
     footer{padding:16px 18px 22px;border-top:1px solid var(--line);background:rgba(2,8,16,.38);position:relative;z-index:1}
@@ -392,7 +393,8 @@
         summary:'Materi perpajakan yang lebih terstruktur agar lebih cepat dipahami.',
         icon:'⌁',
         deckImage:'assets/img/deck-pengetahuan.webp',
-        action:'Baca Materi'
+        action:'Baca Materi',
+        cardHref:'buku.html'
       },
       {
         index:'02',
@@ -409,7 +411,8 @@
         summary:'Unduh berbagai formulir pajak resmi dengan cepat dan mudah.',
         icon:'▣',
         deckImage:'assets/img/deck-formulir.webp',
-        action:'Buka Formulir'
+        action:'Buka Formulir',
+        cardHref:'formulir.html'
       },
       {
         index:'03',
@@ -426,7 +429,8 @@
         summary:'Referensi buku dan panduan pajak yang rapi dan mudah dicari.',
         icon:'□',
         deckImage:'assets/img/deck-buku.webp',
-        action:'Lihat Buku'
+        action:'Lihat Buku',
+        cardHref:'buku.html'
       },
       {
         index:'04',
@@ -443,7 +447,8 @@
         summary:'Perhitungan pajak yang praktis dan mudah dipahami.',
         icon:'＋',
         deckImage:'assets/img/deck-kalkulator.webp',
-        action:'Mulai Hitung'
+        action:'Mulai Hitung',
+        cardHref:'kalkulator.html'
       },
       {
         index:'05',
@@ -460,7 +465,8 @@
         summary:'Berbagai aplikasi pajak digital untuk mendukung layanan dan pelaporan.',
         icon:'⌘',
         deckImage:'assets/img/deck-aplikasi.webp',
-        action:'Masuk Aplikasi'
+        action:'Masuk Aplikasi',
+        cardHref:'aplikasi.html'
       },
       {
         index:'06',
@@ -477,7 +483,8 @@
         summary:'Informasi dan pembaruan perpajakan penting yang disajikan ringkas.',
         icon:'◌',
         deckImage:'assets/img/deck-berita.webp',
-        action:'Lihat Berita'
+        action:'Lihat Berita',
+        cardHref:'hotnews.html'
       }
     ];
 
@@ -502,9 +509,10 @@
       visualButton.addEventListener('click', () => { activate(index); resetAutoplay(); });
       visualIndex.appendChild(visualButton);
 
-      const card = document.createElement('button');
-      card.type = 'button';
+      const card = document.createElement('div');
       card.className = 'deck-card' + (index === 0 ? ' active' : '');
+      card.setAttribute('role', 'button');
+      card.setAttribute('tabindex', '0');
       card.setAttribute('aria-label', slide.name);
       card.innerHTML = `
         <div class="deck-top">
@@ -516,9 +524,20 @@
         </div>
         <div class="deck-thumb"><img src="${slide.deckImage}" alt="" aria-hidden="true"></div>
         <p>${slide.summary}</p>
-        <span class="card-cta"><span class="box">${slide.icon}</span><span>${slide.action}</span></span>
+        <a class="card-cta" href="${slide.cardHref}"><span class="box">${slide.icon}</span><span>${slide.action}</span></a>
       `;
-      card.addEventListener('click', () => { activate(index); resetAutoplay(); });
+      card.addEventListener('click', (event) => {
+        if (event.target.closest('.card-cta')) return;
+        activate(index);
+        resetAutoplay();
+      });
+      card.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          activate(index);
+          resetAutoplay();
+        }
+      });
       deckTrack.appendChild(card);
     });
 
