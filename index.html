@@ -4,556 +4,451 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#ffffff" />
-  <meta name="description" content="KABAYAN white mode dengan aset karakter Kabayan untuk Pengetahuan, Formulir, Buku, Kalkulator, Aplikasi, dan Berita." />
-  <title>KABAYAN — White Mode v3</title>
+  <title>KABAYAN — Urusan Pajak. Lebih Mudah.</title>
   <style>
-
     :root{
-      --bg:#ffffff;
-      --bg-2:#f7f9fc;
-      --bg-3:#eef4ff;
-      --panel:#ffffff;
-      --panel-2:#f8fbff;
-      --line:#e7ebf2;
-      --line-2:#d8e0eb;
-      --line-strong:#b8cdf5;
-      --text:#11151d;
-      --muted:#687385;
-      --muted-2:#79869a;
-      --blue:#1668ff;
-      --blue-2:#4a8cff;
-      --green:#27a86f;
-      --gold:#d99516;
-      --pink:#ef4e82;
+      --blue:#0a66ff;
+      --blue-2:#2f7cff;
+      --ink:#0b0d12;
+      --muted:#68707c;
+      --line:#e9edf2;
+      --line-strong:#d8dee8;
+      --surface:#f7f9fc;
+      --white:#fff;
       --radius:24px;
-      --shadow:0 24px 70px rgba(29,51,92,.10);
-      --max:1560px;
-      --header-h:74px;
+      --shadow:0 24px 70px rgba(20,41,78,.10);
     }
 
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{
       margin:0;
-      min-height:100vh;
-      background:
-        radial-gradient(circle at 18% 14%, rgba(22,104,255,.055), transparent 28%),
-        radial-gradient(circle at 82% 12%, rgba(22,104,255,.04), transparent 25%),
-        linear-gradient(180deg,#fff 0%,#fbfcff 100%);
-      color:var(--text);
-      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family:Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color:var(--ink);
+      background:#fff;
       overflow-x:hidden;
-      -webkit-font-smoothing:antialiased;
     }
-    body.menu-open{overflow:hidden}
-    img{display:block;max-width:100%}
-    a{text-decoration:none;color:inherit}
-    button{font:inherit;cursor:pointer}
+    button,a{font:inherit}
+    button{cursor:pointer}
 
     .page-grid{
-      position:fixed;inset:0;pointer-events:none;z-index:-3;
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:-1;
       background-image:
-        linear-gradient(to right, rgba(36,69,122,.045) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(36,69,122,.035) 1px, transparent 1px);
-      background-size:82px 82px;
-      mask-image:linear-gradient(to bottom,rgba(0,0,0,.65),rgba(0,0,0,.2) 76%,transparent);
+        linear-gradient(to right, rgba(15,38,76,.045) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(15,38,76,.035) 1px, transparent 1px);
+      background-size:120px 120px;
+      mask-image:linear-gradient(to bottom, rgba(0,0,0,.65), rgba(0,0,0,.12) 72%, transparent);
     }
-    .shell{width:min(var(--max),calc(100% - 30px));margin:0 auto}
-    .site-wrap{
-      width:min(1660px,calc(100% - 14px));
-      margin:14px auto;
-      border:1px solid var(--line-2);
-      border-radius:30px;
-      background:rgba(255,255,255,.93);
-      box-shadow:0 18px 55px rgba(34,56,94,.08),inset 0 1px 0 #fff;
-      overflow:hidden;
-      position:relative;
-    }
-    .site-wrap:after{
-      content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
-      background:radial-gradient(circle at 22% 44%,rgba(22,104,255,.035),transparent 30%);
-    }
+
+    .shell{width:min(1480px, calc(100% - 48px)); margin:0 auto}
 
     header{
-      position:sticky;top:0;z-index:40;height:var(--header-h);
-      background:rgba(255,255,255,.90);backdrop-filter:blur(18px);
-      border-bottom:1px solid var(--line);
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:rgba(255,255,255,.86);
+      backdrop-filter:blur(18px);
+      border-bottom:1px solid rgba(226,232,240,.8);
     }
-    .nav{height:100%;display:flex;align-items:center;justify-content:space-between;gap:18px;position:relative;z-index:2}
-    .brand{display:flex;align-items:center;gap:12px;font-size:19px;font-weight:800;letter-spacing:-.04em;color:#10141b}
-    .brand img{width:36px;height:36px;object-fit:contain;filter:drop-shadow(0 7px 14px rgba(22,104,255,.15))}
-    .navlinks{display:flex;align-items:center;gap:clamp(14px,1.55vw,30px)}
-    .navlinks a{font-size:13px;color:#3c4656;padding:8px 0;position:relative;transition:.22s ease;white-space:nowrap}
-    .navlinks a:hover,.navlinks a[aria-current="page"]{color:#11151d}
-    .navlinks a:hover:after,.navlinks a[aria-current="page"]:after{
-      content:"";position:absolute;left:0;right:0;bottom:-18px;height:2px;border-radius:999px;background:var(--blue)
+    .nav{
+      height:76px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:28px;
     }
-    .hotnews-link:after{display:none!important}
-    .hotnews-link::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--pink);margin:0 7px 1px 0}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:-.04em;font-size:20px}
+    .brand-mark{
+      width:38px;height:38px;border-radius:14px;
+      display:grid;place-items:center;background:#eef5ff;color:var(--blue);
+      font-weight:900;border:1px solid #dbe9ff;
+    }
+    .navlinks{display:flex;align-items:center;gap:clamp(14px,1.7vw,28px)}
+    .navlinks a{font-size:13px;color:#363c45;text-decoration:none;transition:.2s;white-space:nowrap}
+    .navlinks a:hover{color:var(--blue)}
     .nav-cta{
-      display:inline-flex;align-items:center;justify-content:center;gap:10px;
-      padding:12px 20px;min-width:146px;border-radius:14px;
-      background:linear-gradient(180deg,#2d7cfd,#1668e8);border:1px solid rgba(22,104,255,.2);
-      font-size:14px;font-weight:700;color:#fff;box-shadow:0 12px 26px rgba(22,104,255,.18);transition:.22s ease;
+      border:1px solid var(--line-strong);background:#fff;border-radius:999px;
+      padding:11px 18px;color:#171a20;text-decoration:none;font-size:13px;font-weight:700;
     }
-    .nav-cta:hover{transform:translateY(-1px);box-shadow:0 15px 30px rgba(22,104,255,.24)}
-    .mobile-toggle{display:none;width:42px;height:42px;border:1px solid var(--line-2);border-radius:50%;padding:0;background:#fff;color:#11151d;font-size:18px;line-height:1}
-    .mobile-menu{display:none;position:fixed;left:0;right:0;top:var(--header-h);z-index:39;background:rgba(255,255,255,.985);border-bottom:1px solid var(--line);padding:14px 0 24px;box-shadow:0 20px 45px rgba(22,37,64,.08)}
+    .navlinks .hotnews-link{font-weight:750}
+    .navlinks .hotnews-link::before{
+      content:"";display:inline-block;width:6px;height:6px;margin:0 6px 2px 0;
+      border-radius:50%;background:#ff3c76;
+    }
+    .mobile-toggle{
+      width:42px;height:42px;display:none;place-items:center;padding:0;border:1px solid var(--line-strong);
+      border-radius:50%;background:#fff;color:var(--ink);font-size:19px;line-height:1;
+    }
+    .mobile-menu{
+      position:fixed;z-index:49;top:76px;right:0;left:0;display:none;
+      padding:24px max(24px,calc((100vw - 1480px)/2 + 24px)) 34px;
+      background:rgba(255,255,255,.98);border-bottom:1px solid var(--line);backdrop-filter:blur(18px);
+    }
     .mobile-menu.open{display:block}
-    .mobile-menu a{display:block;padding:10px 0;font-size:28px;font-weight:780;letter-spacing:-.04em;color:#11151d}
-    .mobile-menu a:last-child{color:var(--pink)}
-
-    main{position:relative;z-index:1}
-    .hero{padding:18px;display:grid;gap:18px;min-height:calc(100vh - var(--header-h) - 30px);grid-template-rows:auto 1fr auto}
-    .hero-top{display:grid;grid-template-columns:320px 1fr 296px;gap:18px;align-items:stretch}
-    .panel{border:1px solid var(--line);border-radius:24px;background:linear-gradient(180deg,rgba(255,255,255,.97),rgba(249,251,255,.94));box-shadow:0 12px 32px rgba(37,61,99,.055),inset 0 1px 0 #fff}
-
-    .hero-visual{position:relative;overflow:hidden;padding:18px 18px 20px;display:flex;flex-direction:column}
-    .micro-copy{font-size:11px;line-height:1.5;letter-spacing:.08em;text-transform:uppercase;color:#657186}
-    .visual-index{position:absolute;left:18px;top:50%;transform:translateY(-50%);display:grid;gap:22px;z-index:3}
-    .visual-index button{display:flex;align-items:center;gap:10px;background:none;border:0;color:#97a6be;padding:0;font-size:28px;font-weight:800;opacity:.48;transition:.2s ease}
-    .visual-index button:before{content:"";width:16px;height:1px;background:var(--blue)}
-    .visual-index button.active{opacity:1;color:#2a5cae}
-    .visual-stage{position:relative;flex:1;display:grid;place-items:center;min-height:450px;margin-top:4px}
-    .visual-stage::before,.visual-stage::after,.orbit-a,.orbit-b,.orbit-c{content:"";position:absolute;border:1px solid rgba(22,104,255,.13);border-radius:50%}
-    .visual-stage::before{width:100%;max-width:430px;aspect-ratio:1}
-    .visual-stage::after{width:76%;max-width:330px;aspect-ratio:1}
-    .orbit-a{width:88%;max-width:380px;aspect-ratio:1}
-    .orbit-b{width:58%;max-width:250px;aspect-ratio:1}
-    .orbit-c{width:104%;max-width:460px;aspect-ratio:1;border-style:dashed;opacity:.38}
-    .hero-mascot{position:relative;z-index:2;width:min(100%,360px);max-height:520px;object-fit:contain;filter:drop-shadow(0 22px 28px rgba(24,52,96,.16));transition:opacity .28s ease,transform .45s ease}
-    .hero-mascot.switching{opacity:0;transform:translateY(18px) scale(.97)}
-    .glow-floor{position:absolute;left:50%;bottom:34px;transform:translateX(-50%);width:72%;height:40px;border-radius:50%;border:1px solid rgba(22,104,255,.16);box-shadow:0 0 24px rgba(22,104,255,.09),inset 0 0 16px rgba(22,104,255,.035)}
-    .visual-footer{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;margin-top:auto}
-    .status{display:flex;align-items:center;gap:8px;color:#2c8a61;font-size:13px}
-    .status i{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 12px rgba(39,168,111,.25)}
-
-    .hero-main{padding:18px 20px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
-    .hello{display:flex;align-items:center;gap:10px;color:#57667d;font-size:14px}
-    .hello .dot{width:10px;height:10px;border-radius:50%;background:var(--blue);box-shadow:0 0 12px rgba(22,104,255,.3)}
-    .title-wrap{margin-top:6px}
-    .eyebrow{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:16px}
-    .headline{margin:0;font-size:clamp(52px,5.5vw,92px);line-height:.93;letter-spacing:-.075em;font-weight:840;max-width:860px;color:#11151d}
-    .headline .accent{color:var(--blue)}
-    .subcopy{margin:10px 0 0;color:#5d6b80;font-size:clamp(18px,1.5vw,22px)}
-    .description{margin:18px 0 0;max-width:760px;color:var(--muted);font-size:15px;line-height:1.7}
-    .hero-actions{display:flex;align-items:center;gap:12px;margin-top:24px;flex-wrap:wrap}
-    .btn-primary,.btn-secondary,.btn-ghost{display:inline-flex;align-items:center;justify-content:center;gap:10px;border-radius:14px;padding:12px 18px;font-size:14px;font-weight:700;transition:.22s ease;border:1px solid transparent}
-    .btn-primary{background:linear-gradient(180deg,#2d7cfd,#1668e8);border-color:rgba(22,104,255,.18);color:#fff;box-shadow:0 12px 28px rgba(22,104,255,.18)}
-    .btn-primary:hover{transform:translateY(-1px)}
-    .btn-secondary{background:#fff;border-color:var(--line-2);color:#161b24}
-    .btn-ghost{background:#fff;border-color:var(--line);color:#56637a;padding:10px 12px}
-    .btn-secondary:hover,.btn-ghost:hover{border-color:#bcd0f8;color:var(--blue)}
-
-    .meta-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:22px}
-    .meta-box{border:1px solid var(--line);border-radius:18px;background:#fff;padding:14px;display:flex;align-items:center;gap:12px}
-    .meta-icon{width:44px;height:44px;border-radius:14px;border:1px solid var(--line);display:grid;place-items:center;font-size:22px;background:#f7faff}
-    .meta-box strong{display:block;font-size:16px;letter-spacing:-.04em;color:#b67b0d}
-    .meta-box span{display:block;font-size:12px;color:var(--muted);line-height:1.45}
-
-    .hero-side{padding:18px;display:grid;gap:14px;align-content:start}
-    .side-label{display:flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:#42506a}
-    .side-label i{width:9px;height:9px;border:2px solid var(--pink);border-radius:50%;display:inline-block}
-    .side-item{display:grid;grid-template-columns:50px 1fr;gap:12px;padding:14px;border:1px solid var(--line);border-radius:18px;background:#fff}
-    .side-icon{width:50px;height:50px;border-radius:16px;border:1px solid var(--line);display:grid;place-items:center;font-size:24px;color:#41679f;background:#f8fbff}
-    .side-item strong{display:block;font-size:14px;margin-bottom:4px;color:#18202d}
-    .side-item p,.quote-box p{margin:0;color:var(--muted);font-size:14px;line-height:1.55}
-    .quote-box,.stats-box{padding:16px;border:1px solid var(--line);border-radius:20px;background:#fff}
-    .quote-mark{font-size:44px;line-height:.85;color:var(--blue);font-weight:900}
-    .quote-box b{color:var(--blue)}
-    .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:8px}
-    .stat strong{display:block;font-size:18px;letter-spacing:-.04em;color:#bd7b0b}
-    .stat span{display:block;font-size:12px;color:var(--muted);line-height:1.4}
-
-    .category-deck{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:stretch}
-    .deck-arrow{width:56px;border:1px solid var(--line);border-radius:20px;background:#fff;color:#5d6b80;font-size:28px;display:grid;place-items:center;transition:.22s ease;box-shadow:0 8px 20px rgba(29,51,92,.04)}
-    .deck-arrow:hover{border-color:#b9cdf4;color:var(--blue)}
-    .deck-track{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px}
-    .deck-card{border:1px solid var(--line);border-radius:22px;padding:14px 14px 16px;background:#fff;min-height:240px;display:flex;flex-direction:column;gap:10px;position:relative;overflow:hidden;transition:.24s ease;box-shadow:0 8px 22px rgba(32,54,90,.035)}
-    .deck-card:hover{transform:translateY(-2px);border-color:#c4d5f5;box-shadow:0 14px 28px rgba(32,54,90,.07)}
-    .deck-card.active{border-color:rgba(22,104,255,.42);box-shadow:0 13px 30px rgba(22,104,255,.08)}
-    .deck-card.active::after{content:"";position:absolute;left:14px;right:14px;bottom:0;height:3px;background:var(--blue);border-radius:999px 999px 0 0}
-    .deck-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
-    .deck-number{font-size:12px;font-weight:800;color:var(--blue);letter-spacing:.08em}
-    .deck-name{font-size:12px;font-weight:760;letter-spacing:.04em;color:#1a2130;text-transform:uppercase;margin-top:2px}
-    .deck-arrow-mini{font-size:21px;color:#7ea7ef}
-    .deck-thumb{position:relative;height:108px;display:grid;place-items:center}
-    .deck-thumb:before{content:"";position:absolute;width:96px;height:96px;border-radius:50%;background:radial-gradient(circle,rgba(22,104,255,.11),rgba(22,104,255,.025) 65%,transparent 72%)}
-    .deck-thumb img{position:relative;max-height:108px;object-fit:contain;filter:drop-shadow(0 11px 17px rgba(23,49,91,.12))}
-    .deck-card p{margin:0;color:var(--muted);font-size:13px;line-height:1.5;min-height:58px}
-    .card-cta{margin-top:auto;display:inline-flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:#fbfcff;font-size:13px;font-weight:650;color:#263247}
-    .card-cta .box{width:20px;height:20px;border-radius:6px;border:1px solid #dce5f3;display:grid;place-items:center;font-size:11px;color:#4b6f9e;background:#fff}
-
-    footer{padding:16px 18px 22px;border-top:1px solid var(--line);background:rgba(250,252,255,.86);position:relative;z-index:1}
-    .footer-inner{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:18px}
-    .footer-brand{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:800;color:#131821}
-    .footer-brand img{width:34px;height:34px;object-fit:contain}
-    .footer-links{display:flex;justify-content:center;flex-wrap:wrap;gap:16px;color:#768296;font-size:13px}
-    .social{display:flex;align-items:center;gap:10px;color:#5b677a;font-size:13px}
-    .social-badge{width:28px;height:28px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;background:#fff}
-
-    @media (max-width:1420px){.hero-top{grid-template-columns:290px 1fr 280px}.deck-track{grid-template-columns:repeat(3,minmax(0,1fr))}}
-    @media (max-width:1200px){
-      .navlinks,.nav>.nav-cta{display:none}.mobile-toggle{display:grid}.hero{min-height:auto}.hero-top{grid-template-columns:1fr}.hero-side{grid-template-columns:1fr 1fr}.meta-strip{grid-template-columns:repeat(2,minmax(0,1fr))}.deck-track{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .mobile-menu a{
+      display:block;padding:10px 0;color:var(--ink);font-size:28px;font-weight:780;
+      letter-spacing:-.04em;text-decoration:none;
     }
-    @media (max-width:900px){
-      .site-wrap{margin:0;border-radius:0;border-left:0;border-right:0}.shell{width:min(100% - 24px,var(--max))}.hero{padding:14px}.visual-index{display:none}.hero-main{padding:16px}.headline{font-size:clamp(44px,10vw,64px)}.hero-side{grid-template-columns:1fr}.meta-strip{grid-template-columns:1fr 1fr}.category-deck{grid-template-columns:1fr}.deck-arrow{display:none}.deck-track{grid-template-columns:repeat(2,minmax(0,1fr))}.footer-inner{grid-template-columns:1fr;justify-items:start}.footer-links{justify-content:flex-start}
-    }
-    @media (max-width:620px){
-      :root{--header-h:68px}.shell{width:min(100% - 18px,var(--max))}.brand img{width:32px;height:32px}.brand span{font-size:18px}.mobile-menu a{font-size:24px}.hero-visual,.hero-main,.hero-side{padding:14px}.visual-stage{min-height:370px}.hero-mascot{max-height:410px}.meta-strip{grid-template-columns:1fr}.deck-track{grid-template-columns:1fr}.stats-grid{grid-template-columns:1fr}.footer-links{gap:10px;font-size:12px}.social{flex-wrap:wrap}
+    .mobile-menu a:last-child{color:#ff3c76}
+    body.menu-open{overflow:hidden}
+
+    .hero{
+      min-height:calc(100vh - 76px);
+      display:grid;
+      grid-template-columns:1.05fr 1fr;
+      align-items:center;
+      gap:3vw;
+      padding:48px 0 56px;
+      position:relative;
     }
 
+    .hero-copy{padding-left:clamp(0px,2vw,28px)}
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:10px;
+      color:var(--blue);font-weight:800;font-size:12px;letter-spacing:.13em;text-transform:uppercase;
+      margin-bottom:22px;
+    }
+    .eyebrow:before{content:"";width:28px;height:2px;background:var(--blue)}
+    h1{
+      margin:0;
+      font-size:clamp(58px,6.7vw,112px);
+      line-height:.91;
+      letter-spacing:-.075em;
+      max-width:760px;
+      font-weight:800;
+    }
+    h1 .accent{color:var(--blue)}
+    .hero-description{
+      max-width:600px;margin:28px 0 0;color:#5b626d;
+      font-size:clamp(16px,1.2vw,19px);line-height:1.72;
+    }
+    .hero-actions{display:flex;align-items:center;gap:14px;margin-top:34px;flex-wrap:wrap}
+    .btn-primary,.btn-secondary{
+      border-radius:999px;padding:15px 24px;text-decoration:none;font-weight:750;font-size:14px;
+      transition:.25s ease;display:inline-flex;align-items:center;gap:10px;
+    }
+    .btn-primary{background:var(--blue);color:white;border:1px solid var(--blue);box-shadow:0 12px 28px rgba(10,102,255,.2)}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 34px rgba(10,102,255,.28)}
+    .btn-secondary{background:#fff;color:#15181e;border:1px solid var(--line-strong)}
+
+    .stage{
+      min-height:660px;
+      position:relative;
+      display:grid;
+      place-items:center;
+      isolation:isolate;
+    }
+    .stage:before{
+      content:"";position:absolute;width:min(44vw,620px);aspect-ratio:1;border-radius:50%;
+      background:radial-gradient(circle at 50% 50%, rgba(10,102,255,.11), rgba(10,102,255,.035) 45%, transparent 70%);
+      z-index:-2;
+    }
+    .orbit,.orbit:before,.orbit:after{position:absolute;border:1px solid #e3eaf4;border-radius:50%;content:""}
+    .orbit{width:520px;height:520px;z-index:-1}
+    .orbit:before{inset:54px}
+    .orbit:after{inset:122px}
+    .axis-h,.axis-v{position:absolute;background:#e7ecf3;z-index:-1}
+    .axis-h{height:1px;width:90%;left:5%}
+    .axis-v{width:1px;height:86%;top:7%}
+
+    .mascot-wrap{
+      position:relative;
+      width:min(38vw,560px);
+      height:620px;
+      display:flex;align-items:flex-end;justify-content:center;
+    }
+    .mascot{
+      max-width:100%;max-height:100%;object-fit:contain;
+      filter:drop-shadow(0 28px 24px rgba(27,45,74,.16));
+      transition:opacity .35s ease, transform .5s cubic-bezier(.2,.8,.2,1);
+      user-select:none;
+    }
+    .mascot.switching{opacity:0;transform:translateY(18px) scale(.965)}
+
+    .floating-label{
+      position:absolute;background:rgba(255,255,255,.88);backdrop-filter:blur(10px);
+      border:1px solid #e4eaf2;border-radius:18px;padding:12px 15px;
+      box-shadow:0 10px 30px rgba(21,37,61,.08);font-size:12px;color:#69717d;
+    }
+    .floating-label strong{display:block;color:#15191f;font-size:13px;margin-top:3px}
+    .fl-one{top:18%;right:3%}.fl-two{bottom:15%;left:3%}
+
+    .category-rail{
+      border-top:1px solid var(--line);
+      border-bottom:1px solid var(--line);
+      background:rgba(255,255,255,.72);
+    }
+    .rail-inner{
+      display:grid;grid-template-columns:54px 1fr 54px;align-items:stretch;
+      min-height:128px;
+    }
+    .rail-arrow{border:0;background:transparent;color:#8a929e;font-size:28px;transition:.2s}
+    .rail-arrow:hover{color:var(--blue);background:#f8fbff}
+    .categories{display:grid;grid-template-columns:repeat(6,1fr);overflow:hidden}
+    .category{
+      border:0;border-left:1px solid var(--line);background:white;padding:22px 18px;text-align:left;
+      color:#8b929c;transition:.25s ease;position:relative;
+    }
+    .category:last-child{border-right:1px solid var(--line)}
+    .category:hover{background:#fbfcfe;color:#1e232b}
+    .category.active{color:var(--ink);background:#f8fbff}
+    .category.active:after{content:"";position:absolute;left:18px;right:18px;bottom:0;height:3px;background:var(--blue);border-radius:999px 999px 0 0}
+    .category-number{font-size:12px;color:#9aa1ab;display:block;margin-bottom:11px}
+    .category.active .category-number{color:var(--blue);font-weight:800}
+    .category-name{font-size:13px;font-weight:750;line-height:1.3}
+
+    .section{padding:110px 0}
+    .section-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:44px}
+    .section-kicker{color:var(--blue);font-weight:800;letter-spacing:.12em;font-size:11px;text-transform:uppercase}
+    .section h2{font-size:clamp(40px,4vw,64px);line-height:1;letter-spacing:-.055em;margin:10px 0 0}
+    .section-head p{max-width:520px;color:var(--muted);line-height:1.65;margin:0}
+
+    .service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .service-card{
+      min-height:360px;border:1px solid var(--line);border-radius:26px;background:#fff;
+      padding:28px;position:relative;overflow:hidden;transition:.3s ease;text-decoration:none;color:inherit;
+    }
+    .service-card:hover{transform:translateY(-5px);box-shadow:var(--shadow);border-color:#dce5f2}
+    .service-index{font-size:12px;color:var(--blue);font-weight:800}
+    .service-card h3{font-size:28px;letter-spacing:-.045em;margin:16px 0 10px}
+    .service-card p{max-width:330px;color:#707783;line-height:1.6;font-size:14px;margin:0}
+    .service-icon{
+      position:absolute;right:-12px;bottom:-15px;width:190px;height:190px;border-radius:50%;
+      background:linear-gradient(145deg,#f4f8ff,#edf4ff);border:1px solid #e1ecff;
+      display:grid;place-items:center;font-size:54px;color:var(--blue);font-weight:900;
+    }
+
+    .closing{
+      background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+      padding:92px 0;
+    }
+    .closing-box{display:grid;grid-template-columns:1fr auto;align-items:center;gap:30px}
+    .closing h2{font-size:clamp(42px,5vw,74px);letter-spacing:-.06em;margin:0;line-height:.98}
+    .closing p{color:var(--muted);margin:18px 0 0;font-size:16px}
+
+    footer{padding:34px 0 46px;color:#7c838d;font-size:12px}
+    .footer-inner{display:flex;justify-content:space-between;gap:25px;align-items:center}
+
+    @media (max-width:1100px){
+      .navlinks,.nav > .nav-cta{display:none}
+      .mobile-toggle{display:grid}
+      .hero{grid-template-columns:1fr 1fr}
+      .stage{min-height:560px}.mascot-wrap{height:530px;width:44vw}.orbit{width:440px;height:440px}
+      .categories{overflow-x:auto;grid-template-columns:repeat(6,minmax(150px,1fr))}
+      .service-grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:760px){
+      .shell{width:min(100% - 28px,1480px)}
+      .nav{height:68px}.nav-cta{padding:9px 14px}.mobile-menu{top:68px}
+      .hero{min-height:auto;grid-template-columns:1fr;padding-top:54px;gap:10px}
+      .hero-copy{padding:0}.hero-description{font-size:15px}.hero-actions{margin-top:26px}
+      .stage{min-height:480px}.mascot-wrap{width:90vw;height:465px}.orbit{width:390px;height:390px}
+      .floating-label{display:none}
+      .rail-inner{grid-template-columns:42px 1fr 42px}.categories{grid-template-columns:repeat(6,minmax(145px,1fr))}
+      .category{padding:18px 14px}.section{padding:80px 0}.section-head{display:block}.section-head p{margin-top:18px}
+      .service-grid{grid-template-columns:1fr}.service-card{min-height:300px}
+      .closing-box{grid-template-columns:1fr}.closing-box .btn-primary{justify-self:start}.footer-inner{display:block}.footer-inner span{display:block;margin-top:10px}
+    }
   </style>
 </head>
 <body>
-  <div class="page-grid" aria-hidden="true"></div>
+  <div class="page-grid"></div>
 
-  <div class="site-wrap">
-    <header>
-      <div class="shell nav">
-        <a class="brand" href="index.html" aria-label="Kabayan — Beranda">
-          <img src="assets/img/kabayan-main.webp" alt="Logo Kabayan" />
-          <span>Kabayan</span>
-        </a>
-
-        <nav class="navlinks" aria-label="Navigasi utama">
-          <a href="index.html" aria-current="page">Beranda</a>
-          <a href="buku.html">Buku</a>
-          <a href="formulir.html">Formulir</a>
-          <a href="aplikasi.html">Aplikasi</a>
-          <a href="kalkulator.html">Kalkulator</a>
-          <a href="artikel.html">Artikel</a>
-          <a class="hotnews-link" href="hotnews.html">Hot News</a>
-        </nav>
-
-        <a href="jelajahi.html" class="nav-cta">Jelajahi <span>↗</span></a>
-        <button class="mobile-toggle" id="mobileToggle" type="button" aria-label="Buka menu" aria-expanded="false" aria-controls="mobileMenu">☰</button>
-      </div>
-    </header>
-
-    <nav class="mobile-menu" id="mobileMenu" aria-label="Navigasi mobile">
-      <div class="shell">
-        <a href="index.html">Beranda</a>
+  <header>
+    <div class="shell nav">
+      <a class="brand" href="index.html" aria-label="Kabayan — Beranda" style="text-decoration:none;color:inherit"><div class="brand-mark">K</div><span>KABAYAN</span></a>
+      <nav class="navlinks" aria-label="Navigasi utama">
+        <a href="index.html" aria-current="page">Beranda</a>
         <a href="buku.html">Buku</a>
         <a href="formulir.html">Formulir</a>
         <a href="aplikasi.html">Aplikasi</a>
         <a href="kalkulator.html">Kalkulator</a>
         <a href="artikel.html">Artikel</a>
-        <a href="hotnews.html">Hot News</a>
-      </div>
-    </nav>
+        <a class="hotnews-link" href="hotnews.html">Hot News</a>
+      </nav>
+      <a href="jelajahi.html" class="nav-cta">Jelajahi</a>
+      <button class="mobile-toggle" id="mobileToggle" type="button" aria-label="Buka menu" aria-expanded="false" aria-controls="mobileMenu">☰</button>
+    </div>
+  </header>
 
-    <main>
-      <section class="hero shell">
-        <div class="hero-top">
-          <aside class="hero-visual panel">
-            <div class="micro-copy">Kabayan 1.0<br/>Pajak Itu Mudah</div>
-            <div class="visual-index" id="visualIndex" aria-hidden="true"></div>
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Navigasi mobile">
+    <a href="index.html">Beranda</a>
+    <a href="buku.html">Buku</a>
+    <a href="formulir.html">Formulir</a>
+    <a href="aplikasi.html">Aplikasi</a>
+    <a href="kalkulator.html">Kalkulator</a>
+    <a href="artikel.html">Artikel</a>
+    <a href="hotnews.html">Hot News</a>
+  </nav>
 
-            <div class="visual-stage">
-              <span class="orbit-a"></span>
-              <span class="orbit-b"></span>
-              <span class="orbit-c"></span>
-              <img class="hero-mascot" id="heroMascot" src="assets/img/kabayan-pengetahuan.webp" alt="Kabayan Pengetahuan" />
-              <div class="glow-floor"></div>
-            </div>
-
-            <div class="visual-footer">
-              <div>
-                <div class="micro-copy">Sistem Informasi<br/>Pajak Indonesia</div>
-                <div class="status"><i></i><span>Terhubung</span></div>
-              </div>
-              <div class="micro-copy" id="sideTinyLabel">01 / Pengetahuan</div>
-            </div>
-          </aside>
-
-          <section class="hero-main panel" aria-live="polite">
-            <div>
-              <div class="hello"><span class="dot"></span><span>Selamat datang di Kabayan</span></div>
-              <div class="title-wrap">
-                <div class="eyebrow" id="eyebrow">01 / PENGETAHUAN</div>
-                <h1 class="headline" id="headline">Urusan <span class="accent">Pajak.</span><br/>Lebih <span class="accent">Mudah.</span></h1>
-                <p class="subcopy" id="subcopy">Katalog Bahan Pelayanan.</p>
-                <p class="description" id="description">Belajar, memahami, dan menyelesaikan urusan pajak dalam satu tempat yang sederhana, praktis, dan mudah digunakan.</p>
-              </div>
-
-              <div class="hero-actions">
-                <a class="btn-primary" id="primaryCta" href="artikel.html">Mulai Belajar <span>↗</span></a>
-                <a class="btn-secondary" href="jelajahi.html">Lihat Semua Layanan</a>
-                <button class="btn-ghost" id="prevBtn" type="button" aria-label="Slide sebelumnya">←</button>
-                <button class="btn-ghost" id="nextBtn" type="button" aria-label="Slide berikutnya">→</button>
-              </div>
-            </div>
-
-            <div class="meta-strip">
-              <div class="meta-box"><div class="meta-icon">👥</div><div><strong>500K+</strong><span>Pengguna terdaftar<br/>bersama Kabayan</span></div></div>
-              <div class="meta-box"><div class="meta-icon">✓</div><div><strong>100%</strong><span>Informasi resmi<br/>sumber terpercaya</span></div></div>
-              <div class="meta-box"><div class="meta-icon">⚡</div><div><strong>Cepat</strong><span>Proses praktis<br/>dan efisien</span></div></div>
-              <div class="meta-box"><div class="meta-icon">🔒</div><div><strong>Aman</strong><span>Data dan akses<br/>lebih terjamin</span></div></div>
-            </div>
-          </section>
-
-          <aside class="hero-side panel">
-            <div class="side-label"><i></i><span>Platform Edukasi Pajak</span></div>
-            <article class="side-item">
-              <div class="side-icon">⌂</div>
-              <div><strong>Belajar Interaktif</strong><p>Materi pajak disusun interaktif agar mudah dipahami.</p></div>
-            </article>
-            <article class="side-item">
-              <div class="side-icon">🛡</div>
-              <div><strong>Sumber Terpercaya</strong><p>Informasi resmi dan terkini langsung dari otoritas pajak.</p></div>
-            </article>
-            <article class="side-item">
-              <div class="side-icon">⏲</div>
-              <div><strong>Akses 24/7</strong><p>Kapan pun dan di mana pun, Kabayan selalu siap membantu.</p></div>
-            </article>
-            <div class="quote-box">
-              <div class="quote-mark">“</div>
-              <p>Pajak yang dipahami, masa depan yang terencana. Bersama <b>Kabayan</b>, semuanya jadi lebih mudah.</p>
-            </div>
-            <div class="stats-box">
-              <div class="side-label" style="margin-bottom:12px"><span style="width:8px;height:8px;border-radius:50%;background:var(--gold);display:inline-block"></span><span>Komitmen Kami</span></div>
-              <div class="stats-grid">
-                <div class="stat"><strong>250+</strong><span>Formulir<br/>Tersedia</span></div>
-                <div class="stat"><strong>50+</strong><span>Aplikasi<br/>Terintegrasi</span></div>
-                <div class="stat"><strong>100+</strong><span>Artikel &amp;<br/>Panduan</span></div>
-              </div>
-            </div>
-          </aside>
-        </div>
-
-        <section class="category-deck" aria-label="Kategori layanan Kabayan">
-          <button class="deck-arrow" id="deckPrev" type="button" aria-label="Kategori sebelumnya">‹</button>
-          <div class="deck-track" id="deckTrack"></div>
-          <button class="deck-arrow" id="deckNext" type="button" aria-label="Kategori berikutnya">›</button>
-        </section>
-      </section>
-    </main>
-
-    <footer>
-      <div class="shell footer-inner">
-        <div class="footer-brand">
-          <img src="assets/img/kabayan-main.webp" alt="Kabayan" />
-          <span>Kabayan</span>
-        </div>
-        <div class="footer-links">
-          <span>© 2026 Kabayan. Semua hak dilindungi.</span>
-          <span>|</span>
-          <span>Kebijakan Privasi</span>
-          <span>|</span>
-          <span>Syarat &amp; Ketentuan</span>
-          <span>|</span>
-          <span>Tentang Kami</span>
-        </div>
-        <div class="social">
-          <span>Ikuti Kami</span>
-          <span class="social-badge">f</span>
-          <span class="social-badge">◎</span>
-          <span class="social-badge">◉</span>
-          <span class="social-badge">𝕏</span>
+  <main>
+    <section class="shell hero" id="home">
+      <div class="hero-copy">
+        <div class="eyebrow" id="eyebrow">01 / PENGETAHUAN</div>
+        <h1 id="headline">Urusan Pajak.<br><span class="accent">Lebih Mudah.</span></h1>
+        <p class="hero-description" id="description">Belajar, memahami, dan menyelesaikan urusan pajak dalam satu tempat yang sederhana, praktis, dan mudah digunakan.</p>
+        <div class="hero-actions">
+          <a class="btn-primary" id="primaryCta" href="artikel.html">Jelajahi Kabayan <span>↗</span></a>
+          <a class="btn-secondary" href="jelajahi.html">Lihat Semua Layanan</a>
         </div>
       </div>
-    </footer>
-  </div>
+
+      <div class="stage" aria-live="polite">
+        <div class="orbit"></div><div class="axis-h"></div><div class="axis-v"></div>
+        <div class="mascot-wrap">
+          <img class="mascot" id="mascot" src="assets/img/kabayan-pengetahuan.png" alt="Karakter Kabayan untuk Pengetahuan Pajak" />
+        </div>
+        <div class="floating-label fl-one">KATEGORI AKTIF<strong id="floatingCategory">Pengetahuan</strong></div>
+        <div class="floating-label fl-two">KABAYAN 1.0<strong>Mudah · Praktis · Gratis</strong></div>
+      </div>
+    </section>
+
+    <section class="category-rail" aria-label="Kategori Kabayan">
+      <div class="shell rail-inner">
+        <button class="rail-arrow" id="prevBtn" aria-label="Kategori sebelumnya">‹</button>
+        <div class="categories" id="categories"></div>
+        <button class="rail-arrow" id="nextBtn" aria-label="Kategori berikutnya">›</button>
+      </div>
+    </section>
+
+    <section class="shell section" id="jelajah">
+      <div class="section-head">
+        <div><div class="section-kicker">Jelajahi Kabayan</div><h2>Satu tempat.<br>Banyak kebutuhan.</h2></div>
+        <p>Setiap kategori dirancang sebagai jalan pintas menuju kebutuhan perpajakan yang paling sering digunakan, tanpa tampilan yang ramai dan membingungkan.</p>
+      </div>
+      <div class="service-grid">
+        <a class="service-card" href="artikel.html"><span class="service-index">01</span><h3>Pengetahuan</h3><p>Materi perpajakan yang disusun lebih terstruktur agar lebih cepat dipahami.</p><div class="service-icon">⌁</div></a>
+        <a class="service-card" href="formulir.html"><span class="service-index">02</span><h3>Formulir Pajak</h3><p>Temukan dan gunakan formulir perpajakan yang Anda perlukan dalam satu katalog.</p><div class="service-icon">▤</div></a>
+        <a class="service-card" href="buku.html"><span class="service-index">03</span><h3>Buku Pajak</h3><p>Kumpulan buku dan pedoman praktis untuk membantu pekerjaan perpajakan sehari-hari.</p><div class="service-icon">□</div></a>
+        <a class="service-card" href="kalkulator.html"><span class="service-index">04</span><h3>Kalkulator</h3><p>Perhitungan pajak yang praktis, fokus, dan mudah digunakan dari berbagai perangkat.</p><div class="service-icon">＋</div></a>
+        <a class="service-card" href="aplikasi.html"><span class="service-index">05</span><h3>Aplikasi Pajak</h3><p>Berbagai alat bantu digital dan converter untuk pekerjaan pajak yang lebih efisien.</p><div class="service-icon">⌘</div></a>
+        <a class="service-card" href="hotnews.html"><span class="service-index">06</span><h3>Berita Pajak</h3><p>Informasi dan pembaruan perpajakan penting yang disajikan secara ringkas.</p><div class="service-icon">◌</div></a>
+      </div>
+    </section>
+
+    <section class="closing">
+      <div class="shell closing-box">
+        <div><h2>Pajak tidak harus<br>terasa rumit.</h2><p>Kabayan membantu menyederhanakan langkahnya.</p></div>
+        <a href="#home" class="btn-primary">Mulai dari atas ↑</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-inner"><strong>KABAYAN</strong><span>Pengetahuan · Formulir · Buku · Kalkulator · Aplikasi · Berita Pajak</span><span>© 2026</span></div>
+  </footer>
 
   <script>
     const slides = [
       {
-        index:'01',
-        tiny:'01 / Pengetahuan',
-        name:'Pengetahuan',
-        label:'01 / PENGETAHUAN',
-        headline:'Urusan <span class="accent">Pajak.</span><br/>Lebih <span class="accent">Mudah.</span>',
-        subcopy:'Katalog Bahan Pelayanan.',
-        description:'Belajar, memahami, dan menyelesaikan urusan pajak dalam satu tempat yang sederhana, praktis, dan mudah digunakan.',
-        image:'assets/img/kabayan-pengetahuan.webp',
-        alt:'Kabayan Pengetahuan dengan ikon buku',
-        href:'artikel.html',
-        cta:'Mulai Belajar',
-        summary:'Materi perpajakan yang lebih terstruktur agar lebih cepat dipahami.',
-        icon:'⌁',
-        action:'Baca Materi'
+        name:'Pengetahuan', label:'01 / PENGETAHUAN', href:'artikel.html', image:'assets/img/kabayan-pengetahuan.png',
+        alt:'Kabayan menunjukkan ikon buku pengetahuan',
+        headline:'Urusan Pajak.<br><span class="accent">Lebih Mudah.</span>',
+        description:'Pengetahuan perpajakan yang lebih terstruktur, ringkas, dan mudah dipahami untuk membantu Anda menemukan jawaban lebih cepat.',
+        cta:'Mulai Belajar'
       },
       {
-        index:'02',
-        tiny:'02 / Formulir',
-        name:'Formulir Pajak',
-        label:'02 / FORMULIR PAJAK',
-        headline:'Formulir <span class="accent">Pajak.</span><br/>Lebih <span class="accent">Praktis.</span>',
-        subcopy:'Semua formulir dalam satu tempat.',
-        description:'Temukan, unduh, dan gunakan formulir perpajakan yang Anda perlukan tanpa harus berpindah-pindah halaman.',
-        image:'assets/img/kabayan-formulir.webp',
+        name:'Formulir Pajak', label:'02 / FORMULIR PAJAK', href:'formulir.html', image:'assets/img/kabayan-formulir.png',
         alt:'Kabayan menunjukkan formulir pajak',
-        href:'formulir.html',
-        cta:'Akses Formulir',
-        summary:'Unduh berbagai formulir pajak resmi dengan cepat dan mudah.',
-        icon:'▣',
-        action:'Buka Formulir'
+        headline:'Formulir Pajak.<br><span class="accent">Lebih Praktis.</span>',
+        description:'Temukan formulir yang dibutuhkan tanpa harus mencari ke banyak tempat. Pilih, isi, dan gunakan dengan lebih sederhana.',
+        cta:'Buka Formulir'
       },
       {
-        index:'03',
-        tiny:'03 / Buku',
-        name:'Buku Pajak',
-        label:'03 / BUKU PAJAK',
-        headline:'Buku <span class="accent">Pajak.</span><br/>Lebih <span class="accent">Terarah.</span>',
-        subcopy:'Panduan dan referensi praktis.',
-        description:'Kumpulan buku, e-book, dan panduan pajak untuk membantu memahami prosedur, layanan, dan praktik sehari-hari.',
-        image:'assets/img/kabayan-buku.webp',
+        name:'Buku Pajak', label:'03 / BUKU PAJAK', href:'buku.html', image:'assets/img/kabayan-buku.png',
         alt:'Kabayan membawa buku pajak',
-        href:'buku.html',
-        cta:'Lihat Buku',
-        summary:'Referensi buku dan panduan pajak yang rapi dan mudah dicari.',
-        icon:'□',
-        action:'Lihat Buku'
+        headline:'Belajar Pajak.<br><span class="accent">Lebih Terarah.</span>',
+        description:'Kumpulan buku dan pedoman perpajakan yang dirancang untuk membantu memahami prosedur dan praktik dengan langkah yang jelas.',
+        cta:'Lihat Buku Pajak'
       },
       {
-        index:'04',
-        tiny:'04 / Kalkulator',
-        name:'Kalkulator',
-        label:'04 / KALKULATOR',
-        headline:'Hitung <span class="accent">Pajak.</span><br/>Lebih <span class="accent">Cepat.</span>',
-        subcopy:'Perhitungan pajak yang efisien.',
-        description:'Gunakan kalkulator pajak yang fokus, jelas, dan mudah dipakai untuk berbagai kebutuhan perhitungan perpajakan.',
-        image:'assets/img/kabayan-kalkulator.webp',
-        alt:'Kabayan dengan kalkulator pajak',
-        href:'kalkulator.html',
-        cta:'Buka Kalkulator',
-        summary:'Perhitungan pajak yang praktis dan mudah dipahami.',
-        icon:'＋',
-        action:'Mulai Hitung'
+        name:'Kalkulator', label:'04 / KALKULATOR', href:'kalkulator.html', image:'assets/img/kabayan-kalkulator.png',
+        alt:'Kabayan menunjukkan kalkulator',
+        headline:'Hitung Pajak.<br><span class="accent">Lebih Cepat.</span>',
+        description:'Gunakan kalkulator pajak yang fokus pada kebutuhan nyata dengan tampilan yang bersih dan hasil yang mudah dipahami.',
+        cta:'Buka Kalkulator'
       },
       {
-        index:'05',
-        tiny:'05 / Aplikasi',
-        name:'Aplikasi Pajak',
-        label:'05 / APLIKASI PAJAK',
-        headline:'Aplikasi <span class="accent">Pajak.</span><br/>Lebih <span class="accent">Efisien.</span>',
-        subcopy:'Tools digital untuk pekerjaan pajak.',
-        description:'Akses converter, alat bantu, dan aplikasi pajak yang membantu menyederhanakan pekerjaan berulang menjadi lebih efisien.',
-        image:'assets/img/kabayan-aplikasi.webp',
-        alt:'Kabayan menunjukkan aplikasi pajak di smartphone',
-        href:'aplikasi.html',
-        cta:'Buka Aplikasi',
-        summary:'Berbagai aplikasi pajak digital untuk mendukung layanan dan pelaporan.',
-        icon:'⌘',
-        action:'Masuk Aplikasi'
+        name:'Aplikasi Pajak', label:'05 / APLIKASI PAJAK', href:'aplikasi.html', image:'assets/img/kabayan-aplikasi.png',
+        alt:'Kabayan menunjukkan aplikasi pajak',
+        headline:'Pekerjaan Pajak.<br><span class="accent">Lebih Efisien.</span>',
+        description:'Akses converter, alat bantu, dan aplikasi pajak dalam satu ekosistem yang dibuat untuk memangkas pekerjaan berulang.',
+        cta:'Lihat Aplikasi'
       },
       {
-        index:'06',
-        tiny:'06 / Berita',
-        name:'Berita Pajak',
-        label:'06 / BERITA PAJAK',
-        headline:'Informasi <span class="accent">Pajak.</span><br/>Lebih <span class="accent">Ringkas.</span>',
-        subcopy:'Update terbaru dalam bahasa yang sederhana.',
-        description:'Ikuti pembaruan aturan, kebijakan, dan kabar penting perpajakan tanpa harus membaca informasi yang berlapis-lapis.',
-        image:'assets/img/kabayan-berita.webp',
+        name:'Berita Pajak', label:'06 / BERITA PAJAK', href:'hotnews.html', image:'assets/img/kabayan-berita.png',
         alt:'Kabayan membawa megafon untuk berita pajak',
-        href:'hotnews.html',
-        cta:'Baca Berita',
-        summary:'Informasi dan pembaruan perpajakan penting yang disajikan ringkas.',
-        icon:'◌',
-        action:'Lihat Berita'
+        headline:'Informasi Pajak.<br><span class="accent">Lebih Ringkas.</span>',
+        description:'Ikuti pembaruan aturan dan informasi perpajakan penting tanpa harus membaca informasi yang terlalu panjang dan berlapis.',
+        cta:'Baca Berita Pajak'
       }
     ];
 
-    const deckTrack = document.getElementById('deckTrack');
-    const visualIndex = document.getElementById('visualIndex');
-    const heroMascot = document.getElementById('heroMascot');
-    const eyebrow = document.getElementById('eyebrow');
-    const headline = document.getElementById('headline');
-    const subcopy = document.getElementById('subcopy');
-    const description = document.getElementById('description');
-    const primaryCta = document.getElementById('primaryCta');
-    const sideTinyLabel = document.getElementById('sideTinyLabel');
-
     let activeIndex = 0;
-    let autoplay = null;
+    let autoplay;
+    const categories = document.getElementById('categories');
+    const mascot = document.getElementById('mascot');
+    const headline = document.getElementById('headline');
+    const description = document.getElementById('description');
+    const eyebrow = document.getElementById('eyebrow');
+    const floatingCategory = document.getElementById('floatingCategory');
+    const primaryCta = document.getElementById('primaryCta');
 
     slides.forEach((slide, index) => {
-      const visualButton = document.createElement('button');
-      visualButton.type = 'button';
-      visualButton.innerHTML = slide.index;
-      visualButton.className = index === 0 ? 'active' : '';
-      visualButton.addEventListener('click', () => { activate(index); resetAutoplay(); });
-      visualIndex.appendChild(visualButton);
-
-      const card = document.createElement('button');
-      card.type = 'button';
-      card.className = 'deck-card' + (index === 0 ? ' active' : '');
-      card.setAttribute('aria-label', slide.name);
-      card.innerHTML = `
-        <div class="deck-top">
-          <div>
-            <div class="deck-number">${slide.index}</div>
-            <div class="deck-name">${slide.name}</div>
-          </div>
-          <div class="deck-arrow-mini">→</div>
-        </div>
-        <div class="deck-thumb"><img src="${slide.image}" alt="" aria-hidden="true"></div>
-        <p>${slide.summary}</p>
-        <span class="card-cta"><span class="box">${slide.icon}</span><span>${slide.action}</span></span>
-      `;
-      card.addEventListener('click', () => { activate(index); resetAutoplay(); });
-      deckTrack.appendChild(card);
+      const button = document.createElement('button');
+      button.className = 'category' + (index === 0 ? ' active' : '');
+      button.innerHTML = `<span class="category-number">${String(index+1).padStart(2,'0')}</span><span class="category-name">${slide.name}</span>`;
+      button.addEventListener('click', () => { activate(index); stopAutoplay(); });
+      categories.appendChild(button);
     });
 
     function activate(index){
       activeIndex = (index + slides.length) % slides.length;
       const slide = slides[activeIndex];
-
-      document.querySelectorAll('.deck-card').forEach((el, i) => el.classList.toggle('active', i === activeIndex));
-      document.querySelectorAll('.visual-index button').forEach((el, i) => el.classList.toggle('active', i === activeIndex));
-
-      heroMascot.classList.add('switching');
-      window.setTimeout(() => {
-        heroMascot.src = slide.image;
-        heroMascot.alt = slide.alt;
-        eyebrow.textContent = slide.label;
+      document.querySelectorAll('.category').forEach((el,i)=>el.classList.toggle('active',i===activeIndex));
+      mascot.classList.add('switching');
+      window.setTimeout(()=>{
+        mascot.src = slide.image;
+        mascot.alt = slide.alt;
         headline.innerHTML = slide.headline;
-        subcopy.textContent = slide.subcopy;
         description.textContent = slide.description;
-        sideTinyLabel.textContent = slide.tiny;
-        primaryCta.innerHTML = `${slide.cta} <span>↗</span>`;
+        eyebrow.textContent = slide.label;
+        floatingCategory.textContent = slide.name;
+        primaryCta.firstChild.textContent = slide.cta + ' ';
         primaryCta.href = slide.href;
-        heroMascot.classList.remove('switching');
-      }, 180);
+        mascot.classList.remove('switching');
+      },220);
     }
 
-    function goPrev(){ activate(activeIndex - 1); resetAutoplay(); }
-    function goNext(){ activate(activeIndex + 1); resetAutoplay(); }
-
-    function startAutoplay(){ autoplay = setInterval(() => activate(activeIndex + 1), 6500); }
-    function stopAutoplay(){ clearInterval(autoplay); }
-    function resetAutoplay(){ stopAutoplay(); startAutoplay(); }
-
-    document.getElementById('prevBtn').addEventListener('click', goPrev);
-    document.getElementById('nextBtn').addEventListener('click', goNext);
-    document.getElementById('deckPrev').addEventListener('click', goPrev);
-    document.getElementById('deckNext').addEventListener('click', goNext);
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft') goPrev();
-      if (e.key === 'ArrowRight') goNext();
+    document.getElementById('prevBtn').addEventListener('click',()=>{activate(activeIndex-1);stopAutoplay()});
+    document.getElementById('nextBtn').addEventListener('click',()=>{activate(activeIndex+1);stopAutoplay()});
+    document.addEventListener('keydown',(e)=>{
+      if(e.key==='ArrowLeft'){activate(activeIndex-1);stopAutoplay()}
+      if(e.key==='ArrowRight'){activate(activeIndex+1);stopAutoplay()}
     });
+
+    function startAutoplay(){autoplay=setInterval(()=>activate(activeIndex+1),6500)}
+    function stopAutoplay(){clearInterval(autoplay)}
 
     const mobileToggle = document.getElementById('mobileToggle');
     const mobileMenu = document.getElementById('mobileMenu');
-    mobileToggle.addEventListener('click', () => {
+    mobileToggle.addEventListener('click',()=>{
       const open = mobileMenu.classList.toggle('open');
       document.body.classList.toggle('menu-open', open);
       mobileToggle.setAttribute('aria-expanded', String(open));
       mobileToggle.setAttribute('aria-label', open ? 'Tutup menu' : 'Buka menu');
       mobileToggle.textContent = open ? '×' : '☰';
     });
-    mobileMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        mobileMenu.classList.remove('open');
-        document.body.classList.remove('menu-open');
-        mobileToggle.setAttribute('aria-expanded', 'false');
-        mobileToggle.setAttribute('aria-label', 'Buka menu');
-        mobileToggle.textContent = '☰';
-      });
-    });
+    mobileMenu.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{
+      mobileMenu.classList.remove('open');
+      document.body.classList.remove('menu-open');
+      mobileToggle.setAttribute('aria-expanded','false');
+      mobileToggle.setAttribute('aria-label','Buka menu');
+      mobileToggle.textContent='☰';
+    }));
 
     startAutoplay();
   </script>
