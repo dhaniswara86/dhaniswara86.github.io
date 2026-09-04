@@ -2,59 +2,398 @@
 <html lang="id">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="robots" content="noindex,nofollow">
   <meta name="description" content="Gerbang masuk ruang internal Saung Kabayan untuk layanan PAP.">
   <title>Masuk | Saung Kabayan</title>
+
+  <!-- CSS proyek lama tetap dipakai. -->
   <link rel="stylesheet" href="assets/css/saung.css">
+
+  <style>
+    :root{
+      --kabayan-blue:#0867d7;
+      --kabayan-blue-dark:#0757bb;
+      --ink:#13233d;
+      --muted:#69778c;
+      --line:rgba(20,62,105,.13);
+      --card:rgba(255,255,255,.88);
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;}
+
+    body{
+      font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      color:var(--ink);
+      background:#fff;
+    }
+
+    /* =========================================================
+       BACKGROUND MOCKUP
+       - WebP
+       - proporsional
+       - tidak menangkap klik
+       ========================================================= */
+    .auth-page{
+      position:relative;
+      min-height:100svh;
+      overflow:hidden;
+      isolation:isolate;
+      background:#fff;
+    }
+
+    .auth-page::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      z-index:-3;
+      pointer-events:none;
+      background-image:url("assets/img/saung-kabayan-bg.webp");
+      background-repeat:no-repeat;
+      background-position:right center;
+      background-size:auto 100vh;
+      background-color:#fff;
+    }
+
+    /* Lapisan putih transparan untuk menjaga form tetap terbaca.
+       Area kanan hampir tidak disentuh agar Kabayan dan saung tetap kuat. */
+    .auth-page::after{
+      content:"";
+      position:fixed;
+      inset:0;
+      z-index:-2;
+      pointer-events:none;
+      background:linear-gradient(
+        90deg,
+        rgba(255,255,255,.995) 0%,
+        rgba(255,255,255,.985) 23%,
+        rgba(255,255,255,.88) 35%,
+        rgba(255,255,255,.34) 45%,
+        rgba(255,255,255,0) 57%
+      );
+    }
+
+    /* =========================================================
+       LAYOUT
+       Hanya form login yang berada di area putih kiri.
+       ========================================================= */
+    .auth-shell{
+      position:relative;
+      z-index:1;
+      min-height:100svh;
+      width:100%;
+      display:grid;
+      grid-template-columns:minmax(330px,430px) minmax(0,1fr);
+      align-items:start;
+      padding:
+        clamp(150px,20vh,220px)
+        clamp(28px,5vw,78px)
+        clamp(80px,10vh,120px);
+    }
+
+    .auth-panel{
+      grid-column:1;
+      width:100%;
+      max-width:405px;
+    }
+
+    .auth-card{
+      width:100%;
+      padding:26px;
+      border:1px solid rgba(20,62,105,.10);
+      border-radius:24px;
+      background:var(--card);
+      backdrop-filter:blur(14px) saturate(115%);
+      -webkit-backdrop-filter:blur(14px) saturate(115%);
+      box-shadow:0 20px 58px rgba(30,70,115,.12);
+    }
+
+    .eyebrow{
+      margin:0 0 8px;
+      color:var(--kabayan-blue);
+      font-size:12px;
+      line-height:1.2;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.14em;
+    }
+
+    .auth-card h1{
+      margin:0;
+      color:#172944;
+      font-size:clamp(29px,2.6vw,38px);
+      line-height:1.04;
+      letter-spacing:-.045em;
+      font-weight:800;
+    }
+
+    .auth-description{
+      margin:10px 0 20px;
+      max-width:330px;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.55;
+    }
+
+    .form{
+      display:grid;
+      gap:13px;
+    }
+
+    .field{
+      display:grid;
+      gap:7px;
+    }
+
+    .field label{
+      color:#35445b;
+      font-size:12px;
+      font-weight:750;
+    }
+
+    .field input{
+      width:100%;
+      height:47px;
+      border:1px solid var(--line);
+      border-radius:13px;
+      outline:none;
+      padding:0 14px;
+      background:rgba(255,255,255,.93);
+      color:#172944;
+      font:inherit;
+      font-size:14px;
+      transition:border-color .18s ease,box-shadow .18s ease,background .18s ease;
+    }
+
+    .field input::placeholder{color:#a4adba}
+
+    .field input:focus{
+      border-color:rgba(8,103,215,.55);
+      background:#fff;
+      box-shadow:0 0 0 4px rgba(8,103,215,.09);
+    }
+
+    .form-status{
+      min-height:0;
+      margin:0;
+      color:#b42318;
+      font-size:12px;
+      line-height:1.4;
+    }
+
+    .button.submit{
+      width:100%;
+      min-height:49px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      border:0;
+      border-radius:13px;
+      background:var(--kabayan-blue);
+      color:#fff;
+      font:inherit;
+      font-size:14px;
+      font-weight:780;
+      cursor:pointer;
+      box-shadow:0 10px 25px rgba(8,103,215,.22);
+      transition:transform .18s ease,background .18s ease,box-shadow .18s ease;
+    }
+
+    .button.submit:hover{
+      background:var(--kabayan-blue-dark);
+      transform:translateY(-1px);
+      box-shadow:0 14px 29px rgba(8,103,215,.26);
+    }
+
+    .button.submit:active{transform:translateY(0)}
+
+    .auth-links{
+      display:flex;
+      justify-content:space-between;
+      gap:18px;
+      padding-top:16px;
+      margin-top:16px;
+      border-top:1px solid rgba(20,62,105,.09);
+    }
+
+    .auth-links a{
+      color:#52627a;
+      text-decoration:none;
+      font-size:12px;
+      font-weight:700;
+    }
+
+    .auth-links a:hover{color:var(--kabayan-blue)}
+
+    /* =========================================================
+       LAPTOP PENDEK
+       ========================================================= */
+    @media (min-width:761px) and (max-height:760px){
+      .auth-shell{
+        padding-top:clamp(96px,14vh,125px);
+        padding-bottom:45px;
+      }
+
+      .auth-card{padding:22px}
+      .auth-description{margin-bottom:16px}
+      .field input{height:44px}
+      .button.submit{min-height:46px}
+    }
+
+    /* =========================================================
+       TABLET
+       ========================================================= */
+    @media (max-width:1050px) and (min-width:761px){
+      .auth-page::before{
+        background-position:66% center;
+      }
+
+      .auth-page::after{
+        background:linear-gradient(
+          90deg,
+          rgba(255,255,255,1) 0%,
+          rgba(255,255,255,.99) 34%,
+          rgba(255,255,255,.80) 49%,
+          rgba(255,255,255,.14) 68%,
+          rgba(255,255,255,0) 78%
+        );
+      }
+
+      .auth-shell{
+        grid-template-columns:minmax(320px,390px) minmax(0,1fr);
+        padding-left:32px;
+        padding-right:32px;
+      }
+    }
+
+    /* =========================================================
+       MOBILE
+       Artwork menjadi hero di atas dan form berada di bawah.
+       ========================================================= */
+    @media (max-width:760px){
+      .auth-page{
+        overflow:auto;
+      }
+
+      .auth-page::before{
+        position:absolute;
+        inset:0 0 auto 0;
+        height:40svh;
+        min-height:280px;
+        max-height:370px;
+        background-size:cover;
+        background-position:73% center;
+      }
+
+      .auth-page::after{
+        position:absolute;
+        inset:0 0 auto 0;
+        height:41svh;
+        min-height:290px;
+        max-height:385px;
+        background:linear-gradient(
+          180deg,
+          rgba(255,255,255,0) 0%,
+          rgba(255,255,255,0) 58%,
+          rgba(255,255,255,.72) 82%,
+          #fff 100%
+        );
+      }
+
+      .auth-shell{
+        display:block;
+        min-height:100svh;
+        padding:calc(min(40svh,370px) + 8px) 18px 30px;
+      }
+
+      .auth-panel{
+        width:100%;
+        max-width:520px;
+        margin:0 auto;
+      }
+
+      .auth-card{
+        padding:22px 18px 18px;
+        border-radius:22px;
+        background:rgba(255,255,255,.97);
+        box-shadow:0 18px 50px rgba(30,70,115,.12);
+      }
+
+      .auth-card h1{
+        font-size:31px;
+      }
+    }
+
+    @media (max-width:390px){
+      .auth-shell{
+        padding-left:14px;
+        padding-right:14px;
+      }
+
+      .auth-card{
+        padding-left:16px;
+        padding-right:16px;
+      }
+    }
+
+    @media (prefers-reduced-motion:reduce){
+      *,*::before,*::after{
+        transition:none!important;
+        scroll-behavior:auto!important;
+      }
+    }
+  </style>
 </head>
 <body class="auth-page">
-  <div class="access-notice"><strong>Ruang internal</strong> · akses hanya untuk akun yang telah disetujui</div>
   <main class="auth-shell">
-    <section class="auth-brand" aria-label="Tentang Saung Kabayan">
-      <a class="auth-logo" href="https://dhaniswara86.id/">
-        <img src="assets/img/LogoASD.svg" alt="Dhaniswara86">
-        <span>Saung Kabayan</span>
-      </a>
-      <div class="auth-copy">
-        <p class="eyebrow">Ruang internal Kabayan</p>
-        <h1>Proses PAP.<span>Satu pintu.</span></h1>
-        <p>Temukan kode layanan, alur kerja, jangka waktu, dan referensi penyelesaian administrasi perpajakan dalam satu ruang yang tertata.</p>
-        <div class="auth-points">
-          <div class="auth-point">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
-            <strong>Pencarian cepat</strong><span>Cari kode, layanan, atau dasar hukum.</span>
-          </div>
-          <div class="auth-point">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v16H5zM8 8h8M8 12h8M8 16h5"/></svg>
-            <strong>Panduan terstruktur</strong><span>Informasi kerja pada satu halaman.</span>
-          </div>
-          <div class="auth-point">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10V7a5 5 0 0 1 10 0v3M5 10h14v11H5z"/></svg>
-            <strong>Akses terbatas</strong><span>Akun harus disetujui oleh admin.</span>
-          </div>
-        </div>
-      </div>
-      <p class="auth-foot">Kabayan · Katalog Bahan Pelayanan</p>
-    </section>
-
-    <section class="auth-panel">
-      <a class="auth-mobile-brand" href="https://dhaniswara86.id/"><img src="assets/img/LogoASD.svg" alt=""> Saung Kabayan</a>
+    <section class="auth-panel" aria-label="Login Saung Kabayan">
       <div class="auth-card">
         <p class="eyebrow">Wilujeng sumping</p>
-        <h2>Masuk ke Saung.</h2>
-        <p>Gunakan akun yang telah memperoleh persetujuan dari admin.</p>
+        <h1>Masuk ke Saung.</h1>
+        <p class="auth-description">Gunakan akun yang telah memperoleh persetujuan dari admin.</p>
+
         <form class="form" id="loginForm">
-          <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="username" placeholder="nama@contoh.go.id" required></div>
-          <div class="field"><label for="password">Password</label><input id="password" name="password" type="password" autocomplete="current-password" placeholder="Masukkan password" minlength="6" required></div>
-          <p class="form-help">Akses diberikan setelah identitas dan kebutuhan akun ditinjau admin.</p>
+          <div class="field">
+            <label for="email">Email</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              autocomplete="username"
+              placeholder="nama@contoh.go.id"
+              required>
+          </div>
+
+          <div class="field">
+            <label for="password">Password</label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              autocomplete="current-password"
+              placeholder="Masukkan password"
+              minlength="6"
+              required>
+          </div>
+
           <p class="form-status" id="loginStatus" aria-live="polite"></p>
-          <button class="button submit" type="submit">Masuk ke Saung <span aria-hidden="true">→</span></button>
+
+          <button class="button submit" type="submit">
+            Masuk ke Saung <span aria-hidden="true">→</span>
+          </button>
         </form>
-        <div class="auth-links"><a href="daftar.html">Ajukan akses</a><a href="lupa-password.html">Lupa password?</a></div>
+
+        <div class="auth-links">
+          <a href="daftar.html">Ajukan akses</a>
+          <a href="lupa-password.html">Lupa password?</a>
+        </div>
       </div>
     </section>
   </main>
+
+  <!-- Script login lama tetap dipertahankan agar logika Supabase tidak berubah. -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="assets/js/supabase-config.js"></script>
   <script src="assets/js/supabase-client.js"></script>
