@@ -23,8 +23,10 @@
     *,*::before,*::after{box-sizing:border-box}
     html,body{margin:0;width:100%;min-height:100%;background:var(--page)}
     body{
-      min-height:100svh;
-      overflow-x:hidden;
+      height:100vh;
+      height:100dvh;
+      min-height:0;
+      overflow:hidden;
       color:var(--navy);
       font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
       -webkit-font-smoothing:antialiased;
@@ -35,7 +37,9 @@
 
     .page{
       width:100%;
-      min-height:100svh;
+      height:100vh;
+      height:100dvh;
+      min-height:0;
       display:grid;
       grid-template-columns:minmax(430px,38%) minmax(0,62%);
       background:var(--page);
@@ -47,11 +51,13 @@
       position:relative;
       z-index:5;
       min-width:0;
-      min-height:100svh;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      padding:clamp(28px,4.2vw,72px) clamp(26px,4.5vw,76px);
+      min-height:0;
+      height:100%;
+      display:grid;
+      grid-template-rows:auto minmax(0,1fr) auto;
+      align-items:start;
+      padding:clamp(20px,3vh,32px) clamp(26px,4.5vw,76px);
+      overflow:hidden;
       background:
         radial-gradient(circle at 92% 6%,rgba(224,239,255,.86) 0 13%,rgba(247,250,255,0) 34%),
         linear-gradient(180deg,#fff 0%,#fbfdff 72%,#f7faff 100%);
@@ -73,9 +79,10 @@
     }
 
     .brand{
-      position:absolute;
-      top:clamp(26px,4.2vh,52px);
-      left:clamp(26px,4.5vw,76px);
+      position:relative;
+      top:auto;
+      left:auto;
+      z-index:2;
       display:inline-flex;
       align-items:center;
       gap:13px;
@@ -88,9 +95,11 @@
     .brand-name span{display:block}
 
     .login-card{
+      min-height:0;
       width:100%;
       max-width:470px;
-      margin:clamp(74px,8vh,104px) 0 42px;
+      align-self:center;
+      margin:14px 0;
       padding:clamp(30px,3.2vw,46px) clamp(28px,3.2vw,44px) 28px;
       border:1px solid rgba(207,222,239,.96);
       border-radius:34px;
@@ -179,9 +188,10 @@
     .auth-links a:hover{text-decoration:underline}
 
     .access-note{
-      position:absolute;
-      left:clamp(26px,4.5vw,76px);
-      bottom:clamp(22px,3.5vh,42px);
+      position:relative;
+      left:auto;
+      bottom:auto;
+      align-self:end;
       max-width:430px;
       display:flex;align-items:center;gap:9px;
       color:#7487a2;font-size:13px;line-height:1.4;
@@ -192,7 +202,8 @@
     .hero{
       position:relative;
       min-width:0;
-      min-height:100svh;
+      min-height:0;
+      height:100%;
       overflow:hidden;
       background:#ddebfa;
     }
@@ -237,29 +248,46 @@
     @media (max-width:1240px){
       .page{grid-template-columns:minmax(410px,41%) minmax(0,59%)}
       .left{padding-left:34px;padding-right:34px}
-      .brand,.access-note{left:34px}
       .login-card{max-width:440px}
       .hero-img{object-position:59% center}
     }
 
-    /* Short laptop screens: keep the full left panel visible instead of clipping. */
-    @media (max-height:820px) and (min-width:901px){
-      .left{justify-content:flex-start;padding-top:28px;padding-bottom:26px}
-      .brand{position:relative;top:auto;left:auto;margin-bottom:22px}
-      .login-card{margin:0;padding:28px 34px 24px;max-width:445px}
-      .eyebrow{margin-bottom:16px}
-      h1{font-size:46px}
-      .intro{margin:12px 0 21px;font-size:15px}
-      .form{gap:13px}
-      .input-shell,.submit{height:52px}
-      .auth-links{margin-top:14px;padding-top:14px}
-      .access-note{position:relative;left:auto;bottom:auto;margin-top:18px}
+    /* Laptop/desktop dengan viewport pendek: kompres vertikal tanpa memotong logo. */
+    @media (max-height:900px) and (min-width:901px){
+      .left{padding-top:18px;padding-bottom:18px}
+      .brand-mark{width:42px;height:42px}
+      .brand-name{font-size:18px}
+      .login-card{margin:10px 0;padding:25px 34px 22px;max-width:445px;border-radius:30px}
+      .eyebrow{margin-bottom:14px;font-size:12px}
+      h1{font-size:44px}
+      .intro{margin:11px 0 18px;font-size:14px}
+      .form{gap:11px}
+      .field{gap:6px}
+      .field label{font-size:13px}
+      .input-shell,.submit{height:50px}
+      .auth-links{margin-top:12px;padding-top:12px}
+      .access-note{font-size:12px}
+      .access-note svg{width:18px;height:18px}
+    }
+
+    @media (max-height:740px) and (min-width:901px){
+      .left{padding-top:12px;padding-bottom:12px}
+      .brand-mark{width:36px;height:36px}
+      .brand-name{font-size:16px}
+      .login-card{margin:6px 0;padding:20px 30px 18px}
+      .eyebrow{margin-bottom:11px}
+      h1{font-size:39px}
+      .intro{margin:8px 0 14px;font-size:13px}
+      .form{gap:9px}
+      .input-shell,.submit{height:46px}
+      .auth-links{margin-top:9px;padding-top:9px}
+      .access-note{font-size:11px}
     }
 
     /* Tablet/mobile */
     @media (max-width:900px){
-      body{overflow:auto}
-      .page{display:flex;flex-direction:column;overflow:visible}
+      body{height:auto;min-height:100%;overflow:auto}
+      .page{height:auto;min-height:100svh;display:flex;flex-direction:column;overflow:visible}
       .hero{order:0;min-height:310px;height:39svh}
       .hero-img{object-position:60% 45%}
       .hero::before{inset:auto 0 0 0;width:auto;height:48%;background:linear-gradient(0deg,#fff 0%,rgba(255,255,255,.58) 48%,rgba(255,255,255,0) 100%)}
@@ -268,7 +296,7 @@
       .tagline strong,.tagline span{font-size:14px}
       .tagline-line{width:40px;height:3px;margin-top:10px}
 
-      .left{order:1;min-height:auto;padding:0 22px 34px;background:#fff}
+      .left{order:1;height:auto;min-height:auto;display:flex;flex-direction:column;overflow:visible;padding:0 22px 34px;background:#fff}
       .left::after{display:none}
       .brand{
         z-index:8;top:-290px;left:22px;
