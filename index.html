@@ -3169,6 +3169,18 @@ body.mega-menu-open {
 </style>
 
 
+<style id="hybridCategoryLinkFix">
+/* Rail kategori sekarang berupa tautan ke halaman masing-masing. */
+.hybrid-category{
+  text-decoration:none;
+  cursor:pointer;
+}
+.hybrid-category:focus-visible{
+  outline:2px solid var(--hy-blue);
+  outline-offset:-2px;
+}
+</style>
+
 <style id="megaMendungBackdropStyles">
 /* =========================================================
    Backdrop Mega Mendung Cirebon untuk hero Kabayan
@@ -4983,12 +4995,12 @@ if (mobileToggle) {
   let autoplay = null;
 
   sliderData.forEach((slide,index) => {
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.className = 'hybrid-category' + (index === 0 ? ' active' : '');
-    button.innerHTML = `<span class="hybrid-category-number">${String(index+1).padStart(2,'0')}</span><span class="hybrid-category-name">${slide.name}</span>`;
-    button.addEventListener('click',() => { activate(index); resetAutoplay(); });
-    categories.appendChild(button);
+    const link = document.createElement('a');
+    link.className = 'hybrid-category' + (index === 0 ? ' active' : '');
+    link.href = slide.href;
+    link.setAttribute('aria-label', `Buka ${slide.name}`);
+    link.innerHTML = `<span class="hybrid-category-number">${String(index+1).padStart(2,'0')}</span><span class="hybrid-category-name">${slide.name}</span>`;
+    categories.appendChild(link);
   });
 
   function activate(index){
