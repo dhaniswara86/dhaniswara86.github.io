@@ -13,6 +13,7 @@
 <link href="https://dhaniswara86.id/" rel="canonical"/>
 <title>Kabayan by Angga Sukma Dhaniswara</title>
 <style>
+
     :root {
       --black: #000000;
       --near-black: #1d1d1f;
@@ -213,121 +214,11 @@
       padding-top: var(--nav-height);
     }
 
-    .announcement {
-      padding: 13px 20px;
-      background: var(--blue);
-      color: var(--white);
-      font-size: 14px;
-      text-align: center;
-      animation: announcementBarSettle 1.8s cubic-bezier(0.4, 0, 0.2, 1) 0.15s forwards;
-    }
+    
 
     /* Apple-inspired announcement intro:
        bar tampil biru sesaat, lalu bertransisi halus ke abu-abu. */
-    @keyframes announcementBarSettle {
-      0%,
-      35% {
-        background: var(--blue);
-        color: var(--white);
-      }
-
-      100% {
-        background: var(--off-white);
-        color: #3a3a3c;
-      }
-    }
-
-    .announcement a {
-      color: var(--blue);
-      text-decoration: none;
-    }
-
-    .announcement a:hover {
-      text-decoration: underline;
-    }
-
-    .hero {
-      position: relative;
-      min-height: 760px;
-      overflow: hidden;
-      padding: 72px 20px 0;
-      background:
-        radial-gradient(
-          circle at 50% 79%,
-          rgba(26, 119, 255, 0.15),
-          transparent 31%
-        ),
-        linear-gradient(
-          180deg,
-          #ffffff 0%,
-          #ffffff 60%,
-          #f3f7ff 100%
-        );
-      text-align: center;
-    }
-
-    .hero-copy {
-      position: relative;
-      z-index: 3;
-      width: min(920px, 100%);
-      margin: 0 auto;
-    }
-
-    .eyebrow {
-      margin: 0 0 8px;
-      color: var(--medium-gray);
-      font-size: 18px;
-      font-weight: 600;
-    }
-
-    .hero h1 {
-      margin: 0;
-      color: var(--near-black);
-      font-size: clamp(52px, 7.3vw, 92px);
-      font-weight: 700;
-      letter-spacing: -0.065em;
-      line-height: 0.96;
-    }
-
-    .hero-gradient {
-      display: block;
-      background:
-        linear-gradient(
-          90deg,
-          #093b91 2%,
-          #0071e3 42%,
-          #25a6d9 68%,
-          #ffb800 100%
-        );
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-
-    .hero-description {
-      max-width: 720px;
-      margin: 25px auto 0;
-      color: #424245;
-      font-size: clamp(20px, 2.3vw, 28px);
-      font-weight: 400;
-      letter-spacing: -0.025em;
-      line-height: 1.24;
-    }
-
-    .hero-rotating-line {
-      display: block;
-      min-height: 1.08em;
-      transition: opacity 0.28s ease, transform 0.28s ease;
-      will-change: opacity, transform;
-    }
-
-    .hero-rotating-line.is-switching {
-      opacity: 0;
-      transform: translateY(8px);
-    }
-
-    .hero-actions,
-    .section-actions {
+    .section-actions{
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
@@ -375,212 +266,51 @@
       color: var(--white);
     }
 
-    .hero-visual {
-      position: relative;
-      z-index: 2;
-      width: min(850px, 94vw);
-      height: 520px;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      margin: 18px auto 0;
-    }
+    
 
-    .hero-glow {
-      position: absolute;
-      bottom: -125px;
-      left: 50%;
-      width: 680px;
-      height: 350px;
-      border-radius: 50%;
-      background:
-        radial-gradient(
-          ellipse,
-          rgba(0, 113, 227, 0.30),
-          rgba(70, 161, 255, 0.10) 40%,
-          transparent 72%
-        );
-      filter: blur(17px);
-      transform: translateX(-50%);
-      pointer-events: none;
-    }
+    
 
-    .hero-book-slider {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      outline: none;
-    }
+    
 
-    .hero-book-viewport {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-    }
+    
 
-    .hero-book-track {
-      height: 100%;
-      display: flex;
-      transition:
-        transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
-      will-change: transform;
-    }
+    
 
-    .hero-book-slide {
-      min-width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-    }
+    
 
-    .hero-book-link {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      flex-direction: column;
-      color: inherit;
-      text-decoration: none;
-    }
+    
 
-    .hero-book-image {
-      position: relative;
-      width: 100%;
-      height: 360px;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-    }
+    
 
-    .hero-book-image::after {
-      position: absolute;
-      z-index: 0;
-      bottom: 27px;
-      left: 50%;
-      width: 250px;
-      height: 38px;
-      border-radius: 50%;
-      background: rgba(15, 39, 74, 0.15);
-      filter: blur(17px);
-      content: "";
-      transform: translateX(-50%);
-    }
+    
 
-    .hero-book-image img {
-      position: relative;
-      z-index: 2;
-      width: min(410px, 73vw);
-      height: 350px;
-      object-fit: contain;
-      filter:
-        drop-shadow(0 30px 27px rgba(15, 34, 67, 0.24));
-      transition: transform 0.4s ease;
-    }
+    
 
-    .hero-book-link:hover .hero-book-image img {
-      transform: translateY(-5px) scale(1.02);
-    }
+    
 
-    .hero-book-caption {
-      width: min(630px, calc(100% - 90px));
-      min-height: 145px;
-      padding: 13px 20px 38px;
-      text-align: center;
-    }
+    
 
-    .hero-book-category {
-      color: var(--medium-gray);
-      font-size: 12px;
-      font-weight: 600;
-    }
+    
 
-    .hero-book-caption h2 {
-      margin: 6px 0 7px;
-      color: var(--near-black);
-      font-size: clamp(19px, 2.4vw, 27px);
-      font-weight: 650;
-      letter-spacing: -0.035em;
-      line-height: 1.14;
-    }
+    
 
-    .hero-book-detail {
-      color: var(--blue);
-      font-size: 14px;
-    }
+    
 
-    .slider-arrow {
-      position: absolute;
-      z-index: 10;
-      top: 41%;
-      width: 44px;
-      height: 44px;
-      display: grid;
-      place-items: center;
-      border: 0;
-      border-radius: 50%;
-      background: rgba(232, 232, 237, 0.90);
-      color: var(--near-black);
-      cursor: pointer;
-      font-size: 31px;
-      line-height: 1;
-      opacity: 0;
-      transition:
-        opacity 0.2s ease,
-        background 0.2s ease;
-      transform: translateY(-50%);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-    }
+    
 
-    .hero-book-slider:hover .slider-arrow,
-    .hero-book-slider:focus-within .slider-arrow {
-      opacity: 1;
-    }
+    
 
-    .slider-arrow:hover {
-      background: rgba(214, 214, 219, 0.96);
-    }
+    
 
-    .slider-arrow-prev {
-      left: 7px;
-    }
+    
 
-    .slider-arrow-next {
-      right: 7px;
-    }
+    
 
-    .slider-dots {
-      position: absolute;
-      z-index: 10;
-      right: 0;
-      bottom: 6px;
-      left: 0;
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-    }
+    
 
-    .slider-dot {
-      width: 7px;
-      height: 7px;
-      padding: 0;
-      border: 0;
-      border-radius: 50%;
-      background: #b6b6ba;
-      cursor: pointer;
-      transition:
-        width 0.25s ease,
-        border-radius 0.25s ease,
-        background 0.25s ease;
-    }
+    
 
-    .slider-dot.active {
-      width: 24px;
-      border-radius: 99px;
-      background: var(--near-black);
-    }
+    
 
     .full-panel {
       min-height: 710px;
@@ -1042,312 +772,80 @@
       color: var(--blue);
     }
 
-    .grid-section {
-      padding: 12px;
-      background: var(--white);
-    }
+    
 
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-    }
+    
 
-    .feature-card {
-      position: relative;
-      min-height: 610px;
-      overflow: hidden;
-      padding: 65px 32px 0;
-      text-align: center;
-    }
+    
 
-    .feature-card.light {
-      background: var(--off-white);
-      color: var(--near-black);
-    }
+    
 
-    .feature-card h3 {
-      margin: 0;
-      font-size: clamp(36px, 4.4vw, 52px);
-      font-weight: 700;
-      letter-spacing: -0.05em;
-      line-height: 1.03;
-    }
+    
 
-    .feature-card p {
-      max-width: 500px;
-      margin: 14px auto 0;
-      color: #515154;
-      font-size: 19px;
-      line-height: 1.27;
-    }
+    
 
-    .simple-link {
-      display: inline-block;
-      margin-top: 18px;
-      color: var(--blue);
-      font-size: 17px;
-      text-decoration: none;
-    }
+    
 
-    .simple-link:hover {
-      text-decoration: underline;
-    }
+    
 
-    .article-stack {
-      position: absolute;
-      right: 0;
-      bottom: -22px;
-      left: 0;
-      height: 330px;
-    }
+    
 
-    .article-sheet {
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      width: 230px;
-      height: 300px;
-      padding: 30px;
-      border-radius: 16px 16px 0 0;
-      background: var(--white);
-      box-shadow: 0 26px 50px rgba(32, 32, 36, 0.16);
-      text-align: left;
-    }
+    
 
-    .article-sheet.back {
-      transform:
-        translateX(-80%)
-        rotate(-8deg)
-        scale(0.92);
-    }
+    
 
-    .article-sheet.front {
-      z-index: 2;
-      transform:
-        translateX(-20%)
-        rotate(5deg);
-    }
+    
 
-    .sheet-line {
-      height: 8px;
-      margin-bottom: 15px;
-      border-radius: 99px;
-      background: #d8d8dd;
-    }
+    
 
-    .sheet-line.title {
-      width: 65%;
-      height: 14px;
-      margin-bottom: 28px;
-      background: var(--near-black);
-    }
+    
 
-    .sheet-line.short {
-      width: 72%;
-    }
+    
 
 
-    .article-card {
-      background: linear-gradient(180deg, #f5f5f7 0%, #ffffff 100%);
-    }
+    
 
-    .hot-news-card {
-      position: relative;
-      isolation: isolate;
-      background:
-        radial-gradient(circle at 78% 86%, rgba(255, 78, 64, 0.18), transparent 31%),
-        linear-gradient(160deg, #fff7f5 0%, #ffffff 54%, #f5f7ff 100%);
-      color: var(--near-black);
-    }
+    
 
-    .hot-news-card::before {
-      position: absolute;
-      z-index: -1;
-      top: -110px;
-      right: -90px;
-      width: 280px;
-      height: 280px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255, 59, 48, 0.12), transparent 69%);
-      content: "";
-    }
+    
 
-    .hot-news-copy {
-      position: relative;
-      z-index: 3;
-    }
+    
 
-    .hot-news-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 15px;
-      padding: 7px 11px;
-      border: 1px solid rgba(255, 59, 48, 0.16);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.78);
-      color: #d92d20;
-      font-size: 12px;
-      font-weight: 750;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-    }
+    
 
-    .hot-news-pulse {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #ff3b30;
-      box-shadow: 0 0 0 0 rgba(255, 59, 48, 0.34);
-      animation: hotNewsPulse 2s infinite;
-    }
+    
 
-    .hot-news-card p { max-width: 520px; }
-    .hot-news-link { color: #d92d20; }
-    .hot-news-link:hover { color: #b42318; }
+    
+    
+    
 
-    .hot-news-visual {
-      position: absolute;
-      right: 0;
-      bottom: -8px;
-      left: 0;
-      height: 350px;
-      display: grid;
-      place-items: end center;
-      overflow: hidden;
-      pointer-events: none;
-    }
+    
 
-    .news-device {
-      width: min(520px, 86%);
-      min-height: 310px;
-      overflow: hidden;
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      border-radius: 24px 24px 7px 7px;
-      background: rgba(255, 255, 255, 0.95);
-      box-shadow: 0 30px 70px rgba(47, 37, 51, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.8);
-      transform: perspective(900px) rotateX(4deg);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-    }
+    
 
-    .news-device-bar {
-      min-height: 43px;
-      display: grid;
-      align-items: center;
-      grid-template-columns: 20px 1fr 20px;
-      gap: 8px;
-      padding: 0 16px;
-      border-bottom: 1px solid var(--soft-gray);
-      background: #f7f7f9;
-      color: #515154;
-      font-size: 10px;
-      letter-spacing: 0.06em;
-      text-align: center;
-    }
+    
 
-    .news-device-bar > span:first-child {
-      width: 11px;
-      height: 11px;
-      border-radius: 50%;
-      background: #d2d2d7;
-    }
+    
 
-    .news-live-dot {
-      width: 9px;
-      height: 9px;
-      justify-self: end;
-      border-radius: 50%;
-      background: #ff3b30;
-    }
+    
 
-    .news-main-card {
-      margin: 17px 17px 10px;
-      padding: 19px;
-      border-radius: 17px;
-      background: linear-gradient(135deg, #2d0a0a, #9e201a 58%, #ef4e3f);
-      color: var(--white);
-      text-align: left;
-    }
+    
 
-    .news-breaking {
-      display: inline-block;
-      margin-bottom: 12px;
-      padding: 5px 8px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.16);
-      color: #ffd8d4;
-      font-size: 8px;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-    }
+    
 
-    .news-main-card strong {
-      display: block;
-      font-size: 20px;
-      letter-spacing: -0.035em;
-      line-height: 1.1;
-    }
+    
 
-    .news-main-card small {
-      display: block;
-      margin-top: 8px;
-      color: rgba(255, 255, 255, 0.72);
-      font-size: 10px;
-    }
+    
 
-    .news-list {
-      display: grid;
-      gap: 7px;
-      padding: 0 17px 18px;
-    }
+    
 
-    .news-row {
-      display: grid;
-      align-items: center;
-      grid-template-columns: 34px minmax(0, 1fr);
-      gap: 11px;
-      padding: 10px 11px;
-      border: 1px solid var(--soft-gray);
-      border-radius: 13px;
-      background: var(--white);
-      text-align: left;
-    }
+    
 
-    .news-row-icon {
-      width: 32px;
-      height: 32px;
-      display: grid;
-      place-items: center;
-      border-radius: 10px;
-      background: #fff0ee;
-      color: #d92d20;
-      font-size: 10px;
-      font-weight: 800;
-    }
+    
 
-    .news-row strong {
-      display: block;
-      font-size: 11px;
-      letter-spacing: -0.02em;
-    }
+    
 
-    .news-row small {
-      display: block;
-      margin-top: 2px;
-      color: var(--medium-gray);
-      font-size: 8px;
-    }
-
-    @keyframes hotNewsPulse {
-      0% { box-shadow: 0 0 0 0 rgba(255, 59, 48, 0.34); }
-      65% { box-shadow: 0 0 0 8px rgba(255, 59, 48, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(255, 59, 48, 0); }
-    }
-
+    
 
     /* =========================================================
        Panel Artikel & Hot News
@@ -2007,77 +1505,39 @@
         display: grid;
       }
 
-      .feature-grid {
-        grid-template-columns: 1fr;
-      }
+      
 
-      .feature-card {
-        min-height: 570px;
-      }
+      
 
-      .hot-news-visual {
-        height: 335px;
-      }
+      
     }
 
     @media (max-width: 680px) {
-      .announcement {
-        padding-right: 28px;
-        padding-left: 28px;
-        font-size: 13px;
-      }
+      
 
-      .hero {
-        min-height: 690px;
-        padding-top: 54px;
-      }
+      
 
-      .eyebrow {
-        font-size: 15px;
-      }
+      
 
-      .hero-description {
-        font-size: 20px;
-      }
+      
 
       .button {
         font-size: 15px;
       }
 
-      .hero-visual {
-        width: 100%;
-        height: 490px;
-        margin-top: 18px;
-      }
+      
 
-      .hero-book-image {
-        height: 335px;
-      }
+      
 
-      .hero-book-image img {
-        height: 320px;
-      }
+      
 
-      .hero-book-caption {
-        width: calc(100% - 54px);
-        min-height: 145px;
-        padding-right: 10px;
-        padding-left: 10px;
-      }
+      
 
-      .slider-arrow {
-        width: 39px;
-        height: 39px;
-        opacity: 1;
-      }
+      
 
-      .slider-arrow-prev {
-        left: 0;
-      }
+      
 
-      .slider-arrow-next {
-        right: 0;
-      }
+      
 
       .full-panel {
         min-height: 650px;
@@ -2171,22 +1631,13 @@
         right: 25px;
       }
 
-      .feature-card {
-        min-height: 535px;
-        padding-top: 47px;
-      }
+      
 
-      .hot-news-card {
-        min-height: 590px;
-      }
+      
 
-      .hot-news-visual {
-        height: 345px;
-      }
+      
 
-      .news-device {
-        width: min(470px, 90%);
-      }
+      
 
       .footer-inner {
         align-items: flex-start;
@@ -2199,12 +1650,9 @@
         display: none;
       }
 
-      .hero h1 {
-        font-size: 49px;
-      }
+      
 
-      .hero-actions,
-      .section-actions {
+      .section-actions{
         gap: 12px;
       }
 
@@ -2266,9 +1714,7 @@
         transition: none !important;
       }
 
-      .hot-news-pulse {
-        animation: none !important;
-      }
+      
     }
 
 
@@ -3019,6 +2465,7 @@
         margin-top: 11px;
       }
     }
+
 </style>
 <style>
 /* =========================================================
@@ -3495,586 +2942,6 @@ body.mega-menu-open {
   .nav-mega-backdrop { transition: none !important; }
 }
 </style>
-<style id="heroViewportFitStyles">
-/* =========================================================
-   Hero awal — fit satu layar
-   Menjaga area navbar + announcement + hero/slideshow
-   tetap berada dalam viewport awal tanpa memotong slider.
-   ========================================================= */
-:root {
-  --hero-screen-height: 100vh;
-  --announcement-height: 47px;
-}
-
-@supports (height: 100svh) {
-  :root {
-    --hero-screen-height: 100svh;
-  }
-}
-
-.hero {
-  height: calc(
-    var(--hero-screen-height)
-    - var(--nav-height)
-    - var(--announcement-height)
-  );
-  min-height: 0;
-  display: flex;
-  flex-direction: column;
-  padding: clamp(18px, 4svh, 42px) 20px 0;
-}
-
-.hero-copy {
-  flex: 0 0 auto;
-}
-
-.eyebrow {
-  margin-bottom: clamp(4px, 0.8svh, 8px);
-  font-size: clamp(14px, 2svh, 18px);
-}
-
-.hero h1 {
-  font-size: clamp(44px, min(6.2vw, 8svh), 80px);
-  line-height: 0.94;
-}
-
-.hero-description {
-  max-width: 680px;
-  margin-top: clamp(10px, 2svh, 18px);
-  font-size: clamp(16px, min(2vw, 2.7svh), 24px);
-  line-height: 1.18;
-}
-
-.hero-actions {
-  gap: 12px;
-  margin-top: clamp(12px, 2.2svh, 20px);
-}
-
-.hero .button {
-  min-height: clamp(36px, 5.2svh, 44px);
-  padding: clamp(7px, 1svh, 10px) 18px;
-  font-size: clamp(14px, 1.65svh, 16px);
-}
-
-.hero-visual {
-  width: min(850px, 94vw);
-  height: auto;
-  min-height: 0;
-  flex: 1 1 auto;
-  margin-top: clamp(4px, 1.2svh, 12px);
-}
-
-.hero-book-link {
-  justify-content: flex-start;
-}
-
-.hero-book-image {
-  height: auto;
-  min-height: 0;
-  flex: 1 1 auto;
-  align-items: center;
-}
-
-.hero-book-image img {
-  width: min(380px, 68vw);
-  height: 100%;
-  max-height: 100%;
-  object-fit: contain;
-}
-
-.hero-book-caption {
-  width: min(630px, calc(100% - 80px));
-  min-height: 0;
-  flex: 0 0 auto;
-  padding: 6px 20px clamp(22px, 3svh, 30px);
-}
-
-.hero-book-caption h2 {
-  margin: 4px 0 5px;
-  font-size: clamp(17px, min(2vw, 2.7svh), 24px);
-}
-
-.hero-book-category {
-  font-size: clamp(10px, 1.35svh, 12px);
-}
-
-.hero-book-detail {
-  font-size: clamp(12px, 1.55svh, 14px);
-}
-
-.slider-dots {
-  bottom: clamp(4px, 0.8svh, 6px);
-}
-
-@media (max-width: 680px) {
-  .hero {
-    min-height: 0;
-    padding: clamp(14px, 2.6svh, 24px) 16px 0;
-  }
-
-  .hero h1 {
-    font-size: clamp(36px, 11.5vw, 48px);
-  }
-
-  .hero-description {
-    max-width: 540px;
-    margin-top: clamp(8px, 1.5svh, 13px);
-    font-size: clamp(15px, 4.45vw, 19px);
-    line-height: 1.17;
-  }
-
-  .hero-actions {
-    gap: 7px;
-    margin-top: clamp(9px, 1.6svh, 13px);
-  }
-
-  .hero .button {
-    min-height: 36px;
-    padding: 6px 11px;
-    font-size: 13px;
-  }
-
-  .hero-visual {
-    width: 100%;
-    height: auto;
-    min-height: 0;
-    margin-top: 5px;
-  }
-
-  .hero-book-image {
-    height: auto;
-  }
-
-  .hero-book-image img {
-    width: min(330px, 75vw);
-    height: 100%;
-    max-height: 100%;
-  }
-
-  .hero-book-caption {
-    width: calc(100% - 50px);
-    min-height: 0;
-    padding: 4px 10px clamp(22px, 3svh, 27px);
-  }
-
-  .hero-book-caption h2 {
-    margin: 3px 0 4px;
-    font-size: clamp(16px, 4.7vw, 20px);
-    line-height: 1.1;
-  }
-
-  .slider-arrow {
-    top: 43%;
-  }
-}
-
-/* Laptop / HP dengan layar pendek: rapatkan copy agar slideshow tetap utuh. */
-@media (max-height: 720px) {
-  .hero {
-    padding-top: 12px;
-  }
-
-  .eyebrow {
-    margin-bottom: 3px;
-    font-size: 13px;
-  }
-
-  .hero h1 {
-    font-size: clamp(34px, min(5.5vw, 6.8svh), 58px);
-  }
-
-  .hero-description {
-    margin-top: 8px;
-    font-size: clamp(14px, min(1.7vw, 2.45svh), 17px);
-    line-height: 1.15;
-  }
-
-  .hero-actions {
-    gap: 7px;
-    margin-top: 8px;
-  }
-
-  .hero .button {
-    min-height: 34px;
-    padding: 5px 13px;
-    font-size: 13px;
-  }
-
-  .hero-book-caption {
-    padding-top: 3px;
-    padding-bottom: 18px;
-  }
-
-  .hero-book-caption h2 {
-    margin: 2px 0 3px;
-    font-size: 16px;
-  }
-
-  .hero-book-category {
-    font-size: 10px;
-  }
-
-  .hero-book-detail {
-    font-size: 12px;
-  }
-}
-
-@media (max-width: 680px) and (max-height: 720px) {
-  .hero {
-    padding-right: 12px;
-    padding-left: 12px;
-  }
-
-  .hero h1 {
-    font-size: clamp(34px, 10.6vw, 41px);
-  }
-
-  .hero-description {
-    font-size: clamp(14px, 4vw, 16px);
-  }
-
-  .hero .button {
-    padding-right: 9px;
-    padding-left: 9px;
-    font-size: 12px;
-  }
-
-  .hero-book-caption {
-    width: calc(100% - 38px);
-    padding-bottom: 18px;
-  }
-}
-</style>
-<style id="kabayanOriginalHeadingBookSizeFix">
-/*
-  Penyesuaian ringan pada ORIGINAL index:
-  1) Hero headline memakai skala yang sama dengan .section-title.
-  2) Mockup buku pada hero dibuat lebih kecil tanpa mengubah slider.
-*/
-.hero h1 {
-  font-size: clamp(43px, 6vw, 72px) !important;
-  line-height: 1 !important;
-}
-
-.hero-book-image img {
-  width: min(315px, 58vw) !important;
-  height: auto !important;
-  max-height: 82% !important;
-  object-fit: contain;
-}
-
-.hero-book-image::after {
-  width: 205px;
-  height: 32px;
-}
-
-@media (max-width: 680px) {
-  .hero-book-image img {
-    width: min(270px, 64vw) !important;
-    max-height: 80% !important;
-  }
-
-  .hero-book-image::after {
-    width: 175px;
-    height: 28px;
-  }
-}
-</style>
-
-<style id="heroLargeCategorySlideshowStyles">
-/* =========================================================
-   Hero Kabayan — large center-focus category slideshow
-   Berdiri bebas tanpa card/container di belakang mockup.
-   ========================================================= */
-.hero-visual {
-  position: relative;
-  z-index: 2;
-  width: min(920px, 96vw) !important;
-  height: auto !important;
-  min-height: 0 !important;
-  flex: 1 1 auto;
-  align-items: stretch !important;
-  margin: clamp(24px, 3.2svh, 34px) auto 0 !important;
-  padding: 0 0 clamp(16px, 2.2svh, 24px);
-}
-
-.hero-visual .hero-glow {
-  bottom: -82px;
-  width: min(760px, 78vw);
-  height: 250px;
-  opacity: .68;
-  filter: blur(25px);
-}
-
-.hero-showcase-slider {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  height: 100%;
-  min-height: 330px;
-  outline: none;
-}
-
-.hero-showcase-viewport {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  min-height: inherit;
-}
-
-.hero-showcase-slide {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  pointer-events: none;
-  transform: scale(.985);
-  transition:
-    opacity .48s cubic-bezier(.4, 0, .2, 1),
-    transform .58s cubic-bezier(.22, 1, .36, 1);
-}
-
-.hero-showcase-slide.active {
-  z-index: 3;
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(0) scale(1);
-}
-
-.hero-showcase-link {
-  width: min(720px, 100%);
-  height: 100%;
-  min-height: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: inherit;
-  text-decoration: none;
-}
-
-.hero-showcase-image-wrap {
-  position: relative;
-  width: 100%;
-  min-height: 0;
-  flex: 1 1 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.hero-showcase-image-wrap::after {
-  position: absolute;
-  z-index: 0;
-  bottom: 8%;
-  left: 50%;
-  width: min(240px, 40vw);
-  height: 30px;
-  border-radius: 50%;
-  background: rgba(18, 43, 81, .13);
-  filter: blur(18px);
-  content: "";
-  transform: translateX(-50%);
-}
-
-.hero-showcase-image {
-  position: relative;
-  z-index: 2;
-  width: min(265px, 29svh, 56vw);
-  max-height: min(255px, 32svh);
-  object-fit: contain;
-  filter: drop-shadow(0 28px 28px rgba(19, 44, 80, .22));
-  transform: none;
-}
-
-.hero-showcase-caption {
-  width: min(650px, calc(100% - 76px));
-  flex: 0 0 auto;
-  min-height: 126px;
-  display: grid;
-  grid-template-rows: 14px 34px minmax(42px, auto) 22px;
-  align-content: start;
-  padding: 2px 18px 28px;
-  text-align: center;
-}
-
-.hero-showcase-category {
-  color: var(--medium-gray);
-  font-size: 11px;
-  font-weight: 650;
-  letter-spacing: .045em;
-  text-transform: uppercase;
-}
-
-.hero-showcase-caption h2 {
-  align-self: center;
-  margin: 5px 0 6px;
-  color: var(--near-black);
-  font-size: clamp(20px, min(2.3vw, 2.8svh), 27px);
-  font-weight: 650;
-  letter-spacing: -.035em;
-  line-height: 1.12;
-}
-
-.hero-showcase-caption p {
-  align-self: start;
-  margin: 0;
-  color: #515154;
-  font-size: clamp(13px, min(1.45vw, 1.8svh), 16px);
-  line-height: 1.35;
-}
-
-.hero-showcase-detail {
-  display: inline-block;
-  margin-top: 7px;
-  color: var(--blue);
-  font-size: 13px;
-  font-weight: 500;
-}
-
-.hero-showcase-arrow {
-  position: absolute;
-  z-index: 10;
-  top: 39%;
-  width: 43px;
-  height: 43px;
-  display: grid;
-  place-items: center;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background: rgba(232, 232, 237, .84);
-  color: var(--near-black);
-  cursor: pointer;
-  font-size: 28px;
-  line-height: 1;
-  opacity: .72;
-  transform: translateY(-50%);
-  transition: opacity .2s ease;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-}
-
-.hero-showcase-prev { left: 4px; }
-.hero-showcase-next { right: 4px; }
-
-.hero-showcase-dots {
-  position: absolute;
-  z-index: 10;
-  right: 0;
-  bottom: 3px;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  gap: 7px;
-}
-
-.hero-showcase-dot {
-  width: 7px;
-  height: 7px;
-  padding: 0;
-  border: 0;
-  border-radius: 99px;
-  background: #b6b6ba;
-  cursor: pointer;
-  transition: width .25s ease, background .25s ease;
-}
-
-.hero-showcase-dot.active {
-  width: 23px;
-  background: var(--near-black);
-}
-
-/* Komponen rail dan slider buku lama tidak dipakai di hero. */
-.hero-category-stage,
-.hero-category-rail,
-.hero-category-item,
-.hero-book-slider,
-.hero-book-viewport,
-.hero-book-track,
-.hero-book-slide,
-.slider-arrow,
-.slider-dots {
-  display: none !important;
-}
-
-@media (max-width: 680px) {
-  .hero-visual {
-    width: 100% !important;
-    margin-top: clamp(20px, 2.8svh, 28px) !important;
-    padding-bottom: 14px;
-  }
-
-  .hero-showcase-slider {
-    min-height: 310px;
-  }
-
-  .hero-showcase-image {
-    width: min(195px, 24svh, 54vw);
-    max-height: min(188px, 24svh);
-  }
-
-  .hero-showcase-caption {
-    width: calc(100% - 46px);
-    min-height: 138px;
-    grid-template-rows: 12px 30px minmax(54px, auto) 20px;
-    padding: 2px 8px 27px;
-  }
-
-  .hero-showcase-caption h2 {
-    margin-top: 4px;
-    font-size: clamp(18px, 5vw, 21px);
-  }
-
-  .hero-showcase-caption p {
-    font-size: 13px;
-    line-height: 1.3;
-  }
-
-  .hero-showcase-category { font-size: 9px; }
-  .hero-showcase-detail { margin-top: 5px; font-size: 12px; }
-
-  .hero-showcase-arrow {
-    top: 40%;
-    width: 38px;
-    height: 38px;
-    font-size: 25px;
-    opacity: .88;
-  }
-
-  .hero-showcase-prev { left: 0; }
-  .hero-showcase-next { right: 0; }
-}
-
-@media (max-height: 720px) and (min-width: 681px) {
-  .hero-visual {
-    margin-top: 14px !important;
-    padding-bottom: 10px;
-  }
-
-  .hero-showcase-slider { min-height: 250px; }
-  .hero-showcase-image {
-    width: min(205px, 25svh);
-    max-height: 190px;
-  }
-  .hero-showcase-caption { min-height: 112px; grid-template-rows: 12px 27px minmax(38px, auto) 18px; padding-bottom: 20px; }
-  .hero-showcase-caption h2 { font-size: 18px; }
-  .hero-showcase-caption p { font-size: 12px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-showcase-slide,
-  .hero-showcase-image,
-  .hero-showcase-arrow,
-  .hero-showcase-dot {
-    transition: none !important;
-  }
-}
-</style>
-
-
 <style id="kabayanHybridHeroStyles">
 /* =========================================================
    Hybrid Hero — desain hero baru + header/konten ORIGINAL
@@ -5780,14 +4647,7 @@ body.mega-menu-open {
       closeMegaMenu({ returnFocus: true });
     }
   });
-
-  window.addEventListener("resize", () => {
-    if (window.innerWidth < 1) {
-      closeMegaMenu();
-    }
-  });
-
-  if (mobileToggle) {
+if (mobileToggle) {
     mobileToggle.addEventListener("click", () => {
       if (megaMenu.classList.contains("active")) {
         closeMegaMenu();
@@ -5853,10 +4713,8 @@ body.mega-menu-open {
   const collectionMenu = document.getElementById('collectionMegaMenu');
   const collectionBackdrop = document.getElementById('megaMenuBackdrop');
   const collectionTrigger = document.getElementById('collectionMenuTrigger');
-  const mobileMenu = document.getElementById('mobileMenu');
   const mobileToggle = document.getElementById('menuToggle');
   const desktopQuery = window.matchMedia('(min-width: 901px) and (hover: hover) and (pointer: fine)');
-  let activeName = null;
   let closeTimer = null;
 
   if (!links.length || !menu || !backdrop) return;
@@ -5877,7 +4735,6 @@ body.mega-menu-open {
   function setPanel(name) {
     panels.forEach(panel => panel.classList.toggle('active', panel.dataset.navPanel === name));
     links.forEach(link => link.classList.toggle('mega-active', link.dataset.navMenu === name));
-    activeName = name;
   }
 
   function openMenu(name) {
@@ -5898,7 +4755,6 @@ body.mega-menu-open {
     menu.setAttribute('aria-hidden', 'true');
     backdrop.setAttribute('aria-hidden', 'true');
     links.forEach(link => link.classList.remove('mega-active'));
-    activeName = null;
   }
 
   function scheduleClose(delay = 240) {
@@ -6099,256 +4955,6 @@ body.mega-menu-open {
   loadLatestArticle();
 })();
 </script>
-<script id="heroViewportFitScript">
-(() => {
-  "use strict";
-
-  const root = document.documentElement;
-  const announcement = document.querySelector(".announcement");
-
-  if (!announcement) return;
-
-  const syncAnnouncementHeight = () => {
-    const height = Math.ceil(announcement.getBoundingClientRect().height);
-    root.style.setProperty("--announcement-height", `${height}px`);
-  };
-
-  syncAnnouncementHeight();
-
-  window.addEventListener("load", syncAnnouncementHeight, { once: true });
-  window.addEventListener("resize", syncAnnouncementHeight, { passive: true });
-  window.addEventListener("orientationchange", syncAnnouncementHeight, { passive: true });
-
-  if ("ResizeObserver" in window) {
-    const observer = new ResizeObserver(syncAnnouncementHeight);
-    observer.observe(announcement);
-  }
-})();
-</script>
-<script id="heroRotatingTaglineScript">
-  (function () {
-    const line = document.getElementById('heroRotatingLine');
-    if (!line) return;
-
-    const phrases = [
-      'Lebih Sederhana.',
-      'Lebih Mudah.',
-      'Lebih Praktis.'
-    ];
-
-    let index = 0;
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    if (reduceMotion) {
-      line.textContent = phrases[0];
-      return;
-    }
-
-    window.setInterval(() => {
-      line.classList.add('is-switching');
-
-      window.setTimeout(() => {
-        index = (index + 1) % phrases.length;
-        line.textContent = phrases[index];
-        line.classList.remove('is-switching');
-      }, 240);
-    }, 2600);
-  })();
-</script>
-<script id="heroCategorySlideshowScript">
-(() => {
-  "use strict";
-
-  const slider = document.getElementById("heroCategorySlider");
-  if (!slider) return;
-
-  const slides = Array.from(slider.querySelectorAll(".hero-showcase-slide"));
-  const prev = slider.querySelector(".hero-showcase-prev");
-  const next = slider.querySelector(".hero-showcase-next");
-  const dotsWrap = slider.querySelector(".hero-showcase-dots");
-  if (!slides.length || !prev || !next || !dotsWrap) return;
-
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const AUTOPLAY_DELAY = 3900;
-  let index = 0;
-  let timer = null;
-  let touchStartX = 0;
-  let touchStartY = 0;
-  let changeToken = 0;
-
-  const normalize = (value) => (value + slides.length) % slides.length;
-  const getImage = (slideIndex) =>
-    slides[normalize(slideIndex)]?.querySelector(".hero-showcase-image");
-
-  function ensureImage(slideIndex, priority = "auto") {
-    const normalized = normalize(slideIndex);
-    const image = getImage(normalized);
-    if (!image) return Promise.resolve();
-
-    if (priority !== "auto") image.fetchPriority = priority;
-
-    const source = image.dataset.src;
-    if (source && !image.getAttribute("src")) {
-      image.src = source;
-      image.removeAttribute("data-src");
-    }
-
-    const finishDecode = () => {
-      image.dataset.loaded = "true";
-      if (typeof image.decode === "function") {
-        return image.decode().catch(() => {});
-      }
-      return Promise.resolve();
-    };
-
-    if (image.complete && image.naturalWidth > 0) return finishDecode();
-
-    return new Promise((resolve) => {
-      const done = () => finishDecode().finally(resolve);
-      image.addEventListener("load", done, { once: true });
-      image.addEventListener("error", resolve, { once: true });
-    });
-  }
-
-  function preloadAround(centerIndex) {
-    // Hanya satu slide berikutnya yang dimuat di latar belakang.
-    // Ini menjaga initial load ringan, tetapi memastikan transisi berikutnya siap.
-    ensureImage(centerIndex + 1, "low");
-  }
-
-  const dots = slides.map((_, slideIndex) => {
-    const dot = document.createElement("button");
-    dot.type = "button";
-    dot.className = "hero-showcase-dot";
-    dot.setAttribute("aria-label", `Tampilkan kategori ${slideIndex + 1}`);
-    dot.addEventListener("click", async () => {
-      stop();
-      await showSlide(slideIndex);
-      schedule();
-    });
-    dotsWrap.appendChild(dot);
-    return dot;
-  });
-
-  async function showSlide(nextIndex) {
-    const targetIndex = normalize(nextIndex);
-    if (targetIndex === index && slides[index].classList.contains("active")) {
-      preloadAround(index);
-      return;
-    }
-
-    const token = ++changeToken;
-    await ensureImage(targetIndex, "high");
-    if (token !== changeToken) return;
-
-    index = targetIndex;
-
-    slides.forEach((slide, slideIndex) => {
-      const active = slideIndex === index;
-      slide.classList.toggle("active", active);
-      slide.setAttribute("aria-hidden", String(!active));
-      const link = slide.querySelector("a");
-      if (link) link.tabIndex = active ? 0 : -1;
-    });
-
-    dots.forEach((dot, dotIndex) => {
-      const active = dotIndex === index;
-      dot.classList.toggle("active", active);
-      dot.setAttribute("aria-current", active ? "true" : "false");
-    });
-
-    preloadAround(index);
-  }
-
-  function stop() {
-    if (timer !== null) {
-      window.clearTimeout(timer);
-      timer = null;
-    }
-  }
-
-  function schedule() {
-    stop();
-    if (reduceMotion.matches || slides.length < 2 || document.hidden) return;
-
-    timer = window.setTimeout(async () => {
-      timer = null;
-      await showSlide(index + 1);
-      schedule();
-    }, AUTOPLAY_DELAY);
-  }
-
-  prev.addEventListener("click", async () => {
-    stop();
-    await showSlide(index - 1);
-    schedule();
-  });
-
-  next.addEventListener("click", async () => {
-    stop();
-    await showSlide(index + 1);
-    schedule();
-  });
-
-  slider.addEventListener("keydown", async (event) => {
-    if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
-    event.preventDefault();
-    stop();
-    await showSlide(index + (event.key === "ArrowRight" ? 1 : -1));
-    schedule();
-  });
-
-  slider.addEventListener("touchstart", (event) => {
-    const touch = event.changedTouches[0];
-    touchStartX = touch.screenX;
-    touchStartY = touch.screenY;
-    stop();
-  }, { passive: true });
-
-  slider.addEventListener("touchend", async (event) => {
-    const touch = event.changedTouches[0];
-    const dx = touchStartX - touch.screenX;
-    const dy = touchStartY - touch.screenY;
-
-    if (Math.abs(dx) > 42 && Math.abs(dx) > Math.abs(dy)) {
-      await showSlide(index + (dx > 0 ? 1 : -1));
-    }
-    schedule();
-  }, { passive: true });
-
-  document.addEventListener("visibilitychange", () => {
-    if (document.hidden) stop();
-    else schedule();
-  });
-
-  reduceMotion.addEventListener?.("change", () => {
-    if (reduceMotion.matches) stop();
-    else schedule();
-  });
-
-  // Slide pertama sudah ada di HTML; tandai dan preload hanya slide berikutnya.
-  const firstImage = getImage(0);
-  if (firstImage) firstImage.dataset.loaded = "true";
-
-  slides.forEach((slide, slideIndex) => {
-    const active = slideIndex === 0;
-    slide.classList.toggle("active", active);
-    slide.setAttribute("aria-hidden", String(!active));
-    const link = slide.querySelector("a");
-    if (link) link.tabIndex = active ? 0 : -1;
-  });
-
-  dots.forEach((dot, dotIndex) => {
-    const active = dotIndex === 0;
-    dot.classList.toggle("active", active);
-    dot.setAttribute("aria-current", active ? "true" : "false");
-  });
-
-  preloadAround(0);
-  schedule();
-})();
-</script>
-
 <script id="kabayanHybridHeroScript">
 (() => {
   "use strict";
