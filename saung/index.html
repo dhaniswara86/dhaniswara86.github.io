@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
-  <meta name="description" content="Gerbang masuk prototipe Saung Kabayan.">
+  <meta name="description" content="Gerbang masuk ruang internal Saung Kabayan untuk layanan PAP.">
   <title>Masuk | Saung Kabayan</title>
   <link rel="stylesheet" href="assets/css/saung.css">
 </head>
 <body class="auth-page">
-  <div class="prototype-note"><strong>Prototipe desain</strong> · autentikasi produksi belum diaktifkan</div>
+  <div class="access-notice"><strong>Ruang internal</strong> · akses hanya untuk akun yang telah disetujui</div>
   <main class="auth-shell">
     <section class="auth-brand" aria-label="Tentang Saung Kabayan">
       <a class="auth-logo" href="https://dhaniswara86.id/">
@@ -47,21 +47,17 @@
         <form class="form" id="loginForm">
           <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="username" placeholder="nama@contoh.go.id" required></div>
           <div class="field"><label for="password">Password</label><input id="password" name="password" type="password" autocomplete="current-password" placeholder="Masukkan password" minlength="6" required></div>
-          <p class="form-help">Pada versi produksi, password dibuat sendiri setelah akun disetujui.</p>
+          <p class="form-help">Akses diberikan setelah identitas dan kebutuhan akun ditinjau admin.</p>
           <p class="form-status" id="loginStatus" aria-live="polite"></p>
           <button class="button submit" type="submit">Masuk ke Saung <span aria-hidden="true">→</span></button>
         </form>
-        <div class="auth-links"><a href="daftar.html">Ajukan akses</a><a href="#" onclick="return false">Lupa password?</a></div>
-        <div class="demo-box">
-          <strong>Jelajahi prototipe</strong>
-          <div class="demo-actions">
-            <button class="button small secondary" type="button" data-demo-role="member">Sebagai anggota</button>
-            <button class="button small secondary" type="button" data-demo-role="admin">Sebagai admin</button>
-          </div>
-        </div>
+        <div class="auth-links"><a href="daftar.html">Ajukan akses</a><a href="lupa-password.html">Lupa password?</a></div>
       </div>
     </section>
   </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="assets/js/supabase-config.js"></script>
+  <script src="assets/js/supabase-client.js"></script>
   <script src="assets/js/saung.js"></script>
 </body>
 </html>

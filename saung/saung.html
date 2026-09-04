@@ -9,11 +9,11 @@
   <link rel="stylesheet" href="assets/css/saung.css">
 </head>
 <body data-protected="true">
-  <div class="prototype-note"><strong>Prototipe desain</strong> · data diambil dari daftar layanan CTAS yang diberikan</div>
+  <div class="access-notice"><strong>Ruang internal</strong> · materi digunakan sesuai kewenangan dan SOP yang berlaku</div>
   <header class="site-nav">
     <div class="nav-inner">
       <a class="nav-brand" href="saung.html"><img src="assets/img/LogoASD.svg" alt="Dhaniswara86"><span class="nav-brand-divider"></span><span class="nav-brand-name">Saung <b>Kabayan</b></span></a>
-      <nav class="desktop-menu" aria-label="Navigasi Saung"><a href="saung.html" aria-current="page">Pustaka PAP</a><a href="#perpustakaan">Kelompok Layanan</a><a href="admin.html">Administrasi Akses</a></nav>
+      <nav class="desktop-menu" aria-label="Navigasi Saung"><a href="saung.html" aria-current="page">Pustaka PAP</a><a href="#perpustakaan">Kelompok Layanan</a><a href="admin.html" data-admin-only hidden>Administrasi Akses</a></nav>
       <div class="nav-actions">
         <span class="user-chip"><span class="user-avatar" data-user-initial>A</span><span data-user-name>Anggota Saung</span></span>
         <button class="icon-button" type="button" data-logout aria-label="Keluar"><svg viewBox="0 0 24 24"><path d="M10 5H5v14h5M14 8l4 4-4 4M8 12h10"/></svg></button>
@@ -21,14 +21,14 @@
       </div>
     </div>
   </header>
-  <nav class="mobile-menu" id="mobileMenu" aria-label="Menu seluler"><a href="saung.html">Pustaka PAP</a><a href="#perpustakaan">Kelompok Layanan</a><a href="admin.html">Administrasi Akses</a><button type="button" data-logout>Keluar</button></nav>
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Menu seluler"><a href="saung.html">Pustaka PAP</a><a href="#perpustakaan">Kelompok Layanan</a><a href="admin.html" data-admin-only hidden>Administrasi Akses</a><button type="button" data-logout>Keluar</button></nav>
 
   <main>
     <section class="saung-hero">
       <div class="container">
         <div class="saung-intro">
           <div><p class="eyebrow">Ruang internal · Penyelesaian Administrasi Perpajakan</p><h1>Proses bisnis.<span>Lebih cepat ditemukan.</span></h1></div>
-          <div class="intro-meta"><div class="intro-meta-row"><span>Koleksi</span><strong>76 layanan</strong></div><div class="intro-meta-row"><span>Kelompok</span><strong>24 kode CTAS</strong></div><div class="intro-meta-row"><span>Pembaruan data</span><strong>6 Agu 2026</strong></div></div>
+          <div class="intro-meta"><div class="intro-meta-row"><span>Koleksi</span><strong id="catalogTotal">Memuat...</strong></div><div class="intro-meta-row"><span>Kelompok</span><strong id="groupTotal">Memuat...</strong></div><div class="intro-meta-row"><span>Akses</span><strong>Internal</strong></div></div>
         </div>
         <label class="search-shell" for="serviceSearch">
           <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
@@ -52,7 +52,7 @@
 
     <section class="library" id="perpustakaan">
       <div class="container">
-        <div class="section-head"><div><p class="eyebrow">Pustaka PAP</p><h2>Semua layanan dalam satu tempat.</h2><p>Pilih layanan untuk melihat ringkasan, jangka waktu, dasar hukum, dan kerangka proses internalnya.</p></div></div>
+        <div class="section-head"><div><p class="eyebrow">Pustaka PAP</p><h2>Semua layanan dalam satu tempat.</h2><p>Pilih layanan untuk melihat kode, jangka waktu, dan dasar hukum yang tersedia.</p></div></div>
         <div class="filter-bar" role="search">
           <div class="filter-control"><label for="librarySearch">Cari layanan</label><input id="librarySearch" type="search" autocomplete="off" placeholder="Kode, layanan, atau peraturan"></div>
           <div class="filter-control"><label for="prefixFilter">Kelompok CTAS</label><select id="prefixFilter"><option value="">Semua kelompok</option></select></div>
@@ -67,7 +67,9 @@
     </section>
   </main>
   <footer><div class="container footer-inner"><span>Saung Kabayan · Ruang internal</span><span>Materi perlu diverifikasi dengan ketentuan dan SOP yang berlaku.</span></div></footer>
-  <script src="assets/js/saung-data.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="assets/js/supabase-config.js"></script>
+  <script src="assets/js/supabase-client.js"></script>
   <script src="assets/js/saung.js"></script>
 </body>
 </html>

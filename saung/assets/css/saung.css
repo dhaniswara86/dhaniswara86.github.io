@@ -32,8 +32,12 @@ button, input, select, textarea { font: inherit; }
 button, a { -webkit-tap-highlight-color: transparent; }
 a { color: inherit; }
 [hidden] { display: none !important; }
+body[data-protected="true"] main,
+body[data-protected="true"] footer { visibility: hidden; }
+body[data-protected="true"].auth-ready main,
+body[data-protected="true"].auth-ready footer { visibility: visible; }
 
-.prototype-note {
+.access-notice {
   position: relative;
   z-index: 1200;
   padding: 7px 18px;
@@ -42,7 +46,7 @@ a { color: inherit; }
   font-size: 11px;
   text-align: center;
 }
-.prototype-note strong { color: #fff; }
+.access-notice strong { color: #fff; }
 
 .site-nav {
   position: sticky;
@@ -142,10 +146,6 @@ a { color: inherit; }
 .submit { width: 100%; border-radius: 12px; }
 .auth-links { display: flex; justify-content: space-between; gap: 16px; margin-top: 20px; font-size: 12px; }
 .auth-links a { color: var(--blue); text-decoration: none; }
-.demo-box { margin-top: 23px; padding: 14px; border: 1px dashed #c8d6e8; border-radius: 14px; background: #f6faff; }
-.demo-box strong { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .06em; }
-.demo-actions { display: flex; gap: 8px; margin-top: 10px; }
-.demo-actions button { flex: 1; }
 
 /* Main search surface */
 .saung-hero { padding: 64px 0 42px; background: radial-gradient(circle at 52% 110%, rgba(0,113,227,.14), transparent 38%), linear-gradient(#fff 0%, #fff 54%, #f4f8ff 100%); }
@@ -246,6 +246,7 @@ a { color: inherit; }
 .status-pending { background: #fff6e5; color: var(--orange); }
 .status-approved { background: #eaf8ee; color: var(--green); }
 .status-rejected { background: #fff0ef; color: var(--red); }
+.status-suspended { background: #f0f0f2; color: #515154; }
 .request-actions { display: flex; gap: 6px; }
 .admin-empty { padding: 42px; color: var(--muted); text-align: center; }
 
@@ -285,7 +286,6 @@ footer { padding: 27px 0; border-top: 1px solid #e5e5ea; background: #fff; }
   .nav-brand-name { font-size: 12px; }
   .auth-panel { padding: 22px 14px; }
   .auth-card { padding: 25px 21px; border-radius: 22px; }
-  .demo-actions { flex-direction: column; }
   .saung-hero { padding: 45px 0 34px; }
   .saung-intro h1 { font-size: 48px; }
   .intro-meta { display: none; }
