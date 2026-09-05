@@ -1031,6 +1031,409 @@
       a{text-decoration:none}
     }
   </style>
+
+  <style id="kabayanVividEditorialPalette">
+    /* =========================================================
+       Kabayan Editorial — high contrast, tetap bersih
+       ========================================================= */
+    :root{
+      --ink:#101012;
+      --blue:#0866d8;
+      --blue-2:#0f79f2;
+      --navy:#082a52;
+      --navy-2:#0b3568;
+      --yellow:#ffd84a;
+      --yellow-soft:#fff3b0;
+      --red:#ff3b30;
+      --sky:#eaf3ff;
+      --sky-2:#dcecff;
+      --soft:#f5f5f7;
+      --line:#dfe3e8;
+    }
+
+    body{
+      background:#ffffff;
+      color:var(--ink);
+    }
+
+    /* Hero: lebih hidup, tetapi masih editorial */
+    .article-hero{
+      background:
+        radial-gradient(circle at 82% 18%, rgba(255,216,74,.34), transparent 22%),
+        linear-gradient(135deg,#ffffff 0%,#f7fbff 58%,#eaf3ff 100%) !important;
+      border-bottom:1px solid #cfd8e5 !important;
+    }
+
+    .hero-cloud{
+      opacity:.18 !important;
+      filter:saturate(1.15);
+    }
+
+    .hero-index{
+      color:var(--navy) !important;
+    }
+
+    .hero-index::before{
+      width:38px !important;
+      height:2px !important;
+      background:var(--blue) !important;
+    }
+
+    .hero-title{
+      color:#0d0d10 !important;
+    }
+
+    .hero-accent{
+      color:var(--blue) !important;
+    }
+
+    .hero-lead{
+      color:#31363d !important;
+    }
+
+    .hero-meta{
+      color:#5e6670 !important;
+    }
+
+    .hero-companion::before{
+      width:315px !important;
+      height:315px !important;
+      background:
+        radial-gradient(circle at 36% 35%,#ffffff 0 17%,transparent 18%),
+        linear-gradient(145deg,#ffd84a 0%,#ffec8b 45%,#d9eaff 100%) !important;
+      box-shadow:0 25px 60px rgba(8,42,82,.10);
+    }
+
+    .hero-note{
+      border:1px solid rgba(8,102,216,.18) !important;
+      border-top:4px solid var(--blue) !important;
+      background:#ffffff !important;
+      box-shadow:0 18px 42px rgba(8,42,82,.12) !important;
+    }
+
+    .hero-note small{
+      color:var(--blue) !important;
+    }
+
+    .button{
+      border-color:#c7ccd3 !important;
+    }
+
+    .button-primary{
+      border-color:var(--navy) !important;
+      background:var(--navy) !important;
+    }
+
+    .button-primary:hover{
+      background:#061f3d !important;
+    }
+
+    /* INTINYA: signature kuning Kabayan */
+    .summary-section{
+      padding-top:62px !important;
+      padding-bottom:62px !important;
+      background:#ffffff !important;
+    }
+
+    .summary-wrap{
+      position:relative;
+      overflow:hidden;
+      grid-template-columns:155px minmax(0,1fr) !important;
+      gap:46px !important;
+      padding:38px 42px !important;
+      border:0 !important;
+      border-radius:28px;
+      background:
+        linear-gradient(120deg,#ffd84a 0%,#ffe77e 60%,#fff1ad 100%);
+      box-shadow:0 20px 50px rgba(91,73,0,.09);
+    }
+
+    .summary-wrap::before{
+      position:absolute;
+      right:-90px;
+      bottom:-105px;
+      width:300px;
+      height:300px;
+      border-radius:50%;
+      background:
+        linear-gradient(rgba(255,255,255,.28),rgba(255,255,255,.28)),
+        url("{{ '/assets/img/mega-mendung-cirebon.webp' | relative_url }}") center/cover;
+      content:"";
+      opacity:.42;
+      transform:rotate(-10deg);
+    }
+
+    .summary-label{
+      color:#5c4a00 !important;
+    }
+
+    .summary-number{
+      color:#15120a !important;
+    }
+
+    .summary-copy{
+      z-index:1;
+    }
+
+    .summary-copy::after{
+      display:none !important;
+    }
+
+    .summary-copy strong{
+      color:#111 !important;
+    }
+
+    .summary-copy p{
+      color:#332d13 !important;
+    }
+
+    /* Body: chapter lebih tegas */
+    .article-body h2{
+      border-top:2px solid #111 !important;
+    }
+
+    .article-body h2::before{
+      color:var(--blue) !important;
+      font-weight:900 !important;
+    }
+
+    .article-body h3{
+      color:var(--navy) !important;
+    }
+
+    /* TOC: active state lebih jelas */
+    #articleToc{
+      border-top:1px solid #cfd6df !important;
+    }
+
+    #articleToc a{
+      position:relative;
+      padding:12px 10px 12px 12px !important;
+      border-bottom:1px solid #e2e6eb !important;
+      color:#7d838b !important;
+      transition:background .18s ease,color .18s ease,border-color .18s ease;
+    }
+
+    #articleToc a.is-active{
+      color:#111 !important;
+      background:var(--sky) !important;
+      font-weight:800 !important;
+      border-left:4px solid var(--blue) !important;
+      padding-left:10px !important;
+    }
+
+    #articleToc a.is-active::before{
+      color:var(--blue) !important;
+    }
+
+    .sidebar-note{
+      color:#6f7780 !important;
+    }
+
+    /* Checklist groups: beri bidang lembut pada bagian A/B/C jika heading langsung sebelum checklist */
+    .article-body h3 + p:has(input[type="checkbox"]),
+    .article-body h3 + ul.task-list,
+    .article-body h3 + ul.checklist{
+      margin-top:18px !important;
+    }
+
+    .article-body p:has(input[type="checkbox"]){
+      padding:17px 18px;
+      border:1px solid #d8e2ef;
+      border-radius:16px;
+      background:#f7fbff;
+      box-shadow:inset 4px 0 0 var(--blue);
+    }
+
+    .article-body .task-list,
+    .article-body .checklist{
+      padding:17px 18px !important;
+      border:1px solid #d8e2ef;
+      border-radius:16px;
+      background:#f7fbff;
+      box-shadow:inset 4px 0 0 var(--blue);
+    }
+
+    .article-body input[type="checkbox"]{
+      border-color:#6d7783 !important;
+      background:#fff !important;
+      box-shadow:0 0 0 1px rgba(255,255,255,.7) !important;
+    }
+
+    .article-body input[type="checkbox"]:checked{
+      border-color:var(--blue) !important;
+      background:var(--blue) !important;
+      box-shadow:0 0 0 3px rgba(8,102,216,.12) !important;
+    }
+
+    /* Callouts: warna lebih tegas */
+    .article-body blockquote{
+      border-left:5px solid var(--blue) !important;
+      background:linear-gradient(135deg,#eaf3ff,#f5f9ff) !important;
+      color:#213b5a !important;
+      box-shadow:0 14px 32px rgba(8,102,216,.07);
+    }
+
+    .article-body blockquote::before{
+      color:var(--blue) !important;
+    }
+
+    .article-body .callout-warning{
+      border-left-color:#d6a800 !important;
+      background:linear-gradient(135deg,#fff5bf,#fff9df) !important;
+      color:#493d13 !important;
+    }
+
+    .article-body .callout-warning::before{
+      color:#8e6b00 !important;
+    }
+
+    .article-body .callout-example{
+      border-left-color:#19191b !important;
+      background:linear-gradient(135deg,#efeff2,#f8f8fa) !important;
+    }
+
+    .article-body .callout-update{
+      border-left-color:var(--red) !important;
+      background:linear-gradient(135deg,#ffe7e5,#fff4f3) !important;
+    }
+
+    /* Dasar hukum: gelap dan berwibawa */
+    .article-body .legal-basis,
+    .article-body .dasar-hukum{
+      position:relative;
+      overflow:hidden;
+      padding:32px 34px !important;
+      border:0 !important;
+      border-radius:22px;
+      background:
+        linear-gradient(135deg,var(--navy) 0%,var(--navy-2) 72%,#0f4d92 100%) !important;
+      color:#ffffff !important;
+      box-shadow:0 20px 45px rgba(8,42,82,.18);
+    }
+
+    .article-body .legal-basis::after,
+    .article-body .dasar-hukum::after{
+      position:absolute;
+      right:-60px;
+      bottom:-80px;
+      width:240px;
+      height:240px;
+      border-radius:50%;
+      background:
+        linear-gradient(rgba(255,255,255,.1),rgba(255,255,255,.1)),
+        url("{{ '/assets/img/mega-mendung-cirebon.webp' | relative_url }}") center/cover;
+      content:"";
+      opacity:.3;
+    }
+
+    .article-body .legal-basis::before,
+    .article-body .dasar-hukum::before{
+      color:#9fcaff !important;
+      position:relative;
+      z-index:1;
+    }
+
+    .article-body .legal-basis *,
+    .article-body .dasar-hukum *{
+      position:relative;
+      z-index:1;
+      color:#ffffff !important;
+    }
+
+    /* Tables */
+    .article-body th{
+      background:var(--navy) !important;
+    }
+
+    .article-body tr:nth-child(even) td{
+      background:#f1f6fc !important;
+    }
+
+    /* Tags */
+    .article-tag{
+      background:var(--sky) !important;
+      color:#174d87 !important;
+    }
+
+    /* Author */
+    .author-signature{
+      background:linear-gradient(180deg,#fff,#f8fbff) !important;
+    }
+
+    .author-logo{
+      border-color:#cdd9e6 !important;
+      box-shadow:0 10px 24px rgba(8,42,82,.08);
+    }
+
+    .author-link{
+      color:var(--blue) !important;
+    }
+
+    /* Closing: lebih hidup */
+    .article-closing{
+      background:var(--navy) !important;
+    }
+
+    .article-closing::before{
+      background:
+        linear-gradient(90deg,rgba(8,42,82,.98),rgba(8,42,82,.84),rgba(8,42,82,.55)),
+        url("{{ '/assets/img/mega-mendung-cirebon.webp' | relative_url }}") center/cover no-repeat !important;
+      opacity:.72 !important;
+    }
+
+    .closing-kicker{
+      color:#b9d8ff !important;
+    }
+
+    .closing-link{
+      background:var(--yellow) !important;
+      color:#1b1605 !important;
+      box-shadow:0 12px 28px rgba(255,216,74,.16);
+    }
+
+    .closing-link:hover{
+      background:#ffe36d !important;
+    }
+
+    /* Header: sedikit lebih tegas */
+    .site-nav{
+      border-bottom-color:#dfe3e8 !important;
+      background:rgba(255,255,255,.94) !important;
+    }
+
+    .nav-brand{
+      color:#101012 !important;
+    }
+
+    .nav-cta{
+      background:var(--navy) !important;
+    }
+
+    .nav-cta:hover{
+      background:#061f3d !important;
+    }
+
+    @media(max-width:680px){
+      .summary-wrap{
+        padding:28px 24px !important;
+      }
+
+      .article-body p:has(input[type="checkbox"]),
+      .article-body .task-list,
+      .article-body .checklist{
+        padding:15px 14px !important;
+        border-radius:14px;
+      }
+
+      .article-body .legal-basis,
+      .article-body .dasar-hukum{
+        padding:24px 22px !important;
+        border-radius:18px;
+      }
+    }
+  </style>
+
 </head>
 
 <body id="top">
