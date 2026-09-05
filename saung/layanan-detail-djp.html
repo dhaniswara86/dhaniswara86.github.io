@@ -40,10 +40,8 @@
     .requirement-basis a { text-decoration: none; }
     .requirement-basis a:hover { text-decoration: underline; }
     .requirement-tag { padding: 4px 7px; border-radius: 999px; background: #eef1f5; color: #4d5968; font-size: 10px; font-weight: 750; text-transform: uppercase; }
-    .requirement input:checked + span strong { color: #5c6570; text-decoration: line-through; }
     .data-notice { display: flex; gap: 11px; margin-top: 16px; padding: 14px 15px; border: 1px solid #eadca8; border-radius: 14px; background: #fffaf0; color: #665423; font-size: 13px; line-height: 1.55; }
     .data-notice b { flex: 0 0 auto; width: 22px; height: 22px; display: grid; place-items: center; border-radius: 50%; background: #ffe9a8; }
-    .deadline-layout { display: grid; grid-template-columns: minmax(190px,235px) 1fr; align-items: stretch; gap: clamp(22px,4vw,42px); }
     .calendar-card { overflow: hidden; min-height: 235px; border: 1px solid #b9d5f4; border-radius: 22px; background: #f7fbff; box-shadow: 0 18px 42px rgba(16,99,190,.12); }
     .calendar-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 17px; background: var(--blue); color: #fff; font-size: 12px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; }
     .calendar-rings { display: flex; gap: 7px; }
@@ -51,13 +49,6 @@
     .calendar-body { display: grid; min-height: 181px; place-content: center; padding: 20px; text-align: center; }
     .calendar-value { color: #0867c8; font-size: clamp(62px,8vw,94px); font-weight: 820; line-height: .82; letter-spacing: -.07em; }
     .calendar-unit { margin-top: 14px; color: #24415e; font-size: 15px; font-weight: 780; letter-spacing: .05em; text-transform: uppercase; }
-    .deadline-copy { display: flex; flex-direction: column; justify-content: center; }
-    .deadline-copy h2 { margin: 7px 0 10px; font-size: clamp(27px,3vw,38px); letter-spacing: -.045em; }
-    .deadline-full { margin: 0; color: #263747; font-size: 18px; font-weight: 740; line-height: 1.5; }
-    .deadline-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 22px; }
-    .deadline-meta div { padding: 14px 15px; border: 1px solid #dce6f0; border-radius: 14px; background: #fbfdff; }
-    .deadline-meta span { display: block; color: var(--muted); font-size: 11px; font-weight: 760; letter-spacing: .055em; text-transform: uppercase; }
-    .deadline-meta strong { display: block; margin-top: 7px; font-size: 13px; line-height: 1.5; }
     .pdf-empty { padding: 27px; border: 1px dashed #b8c6d7; border-radius: 16px; background: #f8fafc; text-align: center; }
     .pdf-icon { width: 48px; height: 48px; display: grid; place-items: center; margin: 0 auto 12px; border-radius: 14px; background: #fff0ef; color: #b42318; font-weight: 800; }
     .pdf-empty strong { display: block; font-size: 17px; }
@@ -100,10 +91,93 @@
       .requirement { grid-template-columns: auto 1fr; }
       .requirement-tag { grid-column: 2; width: fit-content; }
       .legal-grid { grid-template-columns: 1fr; }
-      .deadline-layout { grid-template-columns: 1fr; }
-      .calendar-card { width: min(100%,280px); }
-      .deadline-meta { grid-template-columns: 1fr; }
       .pdf-frame { height: 520px; }
+    }
+
+    /* Dossier layanan: hierarki visual, SLA utama, dan checklist interaktif. */
+    .service-detail-page { background:
+      radial-gradient(circle at 8% 8%,rgba(32,132,238,.08),transparent 24rem),
+      radial-gradient(circle at 92% 30%,rgba(51,189,150,.06),transparent 22rem),
+      #f4f7fb; }
+    .detail-shell { max-width: 1320px; }
+    .back-link { padding: 8px 11px; border-radius: 10px; transition: background .18s ease,transform .18s ease; }
+    .back-link:hover { background: #e7f2ff; transform: translateX(-2px); }
+    .detail-hero { position: relative; overflow: hidden; border-color: #d5e4f2; background:
+      radial-gradient(circle at 84% 15%,rgba(255,255,255,.94) 0 9rem,transparent 9.2rem),
+      linear-gradient(135deg,#ffffff 0%,#f3f9ff 53%,#e7f3ff 100%); box-shadow: 0 28px 70px rgba(27,82,134,.12); }
+    .detail-hero::before { position: absolute; right: -90px; bottom: -145px; width: 340px; height: 340px; border: 70px solid rgba(13,110,211,.055); border-radius: 50%; content: ""; pointer-events: none; }
+    .hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0,1fr) minmax(230px,285px); align-items: center; gap: clamp(30px,5vw,70px); }
+    .detail-hero h1 { max-width: 820px; }
+    .detail-lead { max-width: 690px; }
+    .detail-status { box-shadow: inset 0 0 0 1px rgba(22,114,51,.08); }
+    .summary-strip { border-bottom: 0; }
+    .hero-sla.calendar-card { position: relative; min-height: 285px; border: 1px solid rgba(255,255,255,.9); background: rgba(255,255,255,.88); box-shadow: 0 24px 55px rgba(8,79,151,.18); backdrop-filter: blur(14px); }
+    .hero-sla .calendar-top { padding: 16px 18px; background: linear-gradient(135deg,#0878e3,#075bb7); }
+    .hero-sla .calendar-body { min-height: 214px; }
+    .hero-sla .calendar-value { font-size: clamp(76px,8vw,108px); }
+    .hero-sla .calendar-unit { font-size: 14px; }
+    .calendar-caption { display: block; max-width: 190px; margin: 13px auto 0; color: #5d7186; font-size: 12px; font-weight: 650; line-height: 1.45; text-transform: none; letter-spacing: 0; }
+    .content-section { border-color: #dce5ee; box-shadow: 0 14px 35px rgba(27,63,98,.055); }
+    .requirements-overview { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: end; gap: 18px; margin: -4px 0 22px; padding: 18px; border: 1px solid #d9e8f7; border-radius: 17px; background: linear-gradient(135deg,#f5faff,#edf6ff); }
+    .progress-copy { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+    .progress-copy strong { font-size: 15px; }
+    .progress-copy span { color: #315d85; font-size: 13px; font-weight: 720; }
+    .progress-track { overflow: hidden; height: 9px; margin-top: 11px; border-radius: 999px; background: #d8e6f4; }
+    .progress-bar { width: 0; height: 100%; border-radius: inherit; background: linear-gradient(90deg,#0878e3,#24aa85); transition: width .28s ease; }
+    .filter-row { display: flex; flex-wrap: wrap; gap: 7px; }
+    .filter-button { min-height: 34px; padding: 7px 11px; border: 1px solid #cbdbea; border-radius: 999px; background: rgba(255,255,255,.78); color: #36536e; font: inherit; font-size: 12px; font-weight: 740; cursor: pointer; transition: border-color .18s ease,background .18s ease,color .18s ease; }
+    .filter-button:hover { border-color: #86b9e9; }
+    .filter-button.active { border-color: var(--blue); background: var(--blue); color: #fff; }
+    .requirement-list { gap: 12px; }
+    .requirement { position: relative; grid-template-columns: auto 1fr auto; padding: 18px; border-left-width: 4px; background: #fff; box-shadow: 0 7px 20px rgba(29,65,100,.045); cursor: default; }
+    .requirement[data-group="wajib"] { border-left-color: #1780e7; }
+    .requirement[data-group="kondisional"] { border-left-color: #e49a25; }
+    .requirement[data-group="prasyarat"] { border-left-color: #805ad5; }
+    .requirement[data-group="informasi"] { border-left-color: #2d9b77; }
+    .requirement[hidden] { display: none; }
+    .requirement-check { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 12px; background: #f0f6fc; cursor: pointer; }
+    .requirement input { margin: 0; }
+    .requirement-title { cursor: pointer; }
+    .requirement input:checked ~ .requirement-content .requirement-title { color: #64707d; text-decoration: line-through; }
+    .requirement-details { margin-top: 11px; }
+    .requirement-details summary { width: fit-content; color: #28618f; font-size: 12px; font-weight: 740; cursor: pointer; list-style: none; }
+    .requirement-details summary::-webkit-details-marker { display: none; }
+    .requirement-details summary::after { margin-left: 6px; content: "+"; }
+    .requirement-details[open] summary::after { content: "−"; }
+    .requirement-basis { padding: 11px 12px; border-radius: 10px; background: #f2f7fb; }
+    .requirement-tag { font-style: normal; }
+    .requirement[data-group="wajib"] .requirement-tag { background: #e5f2ff; color: #0867c8; }
+    .requirement[data-group="kondisional"] .requirement-tag { background: #fff1d9; color: #9a5b00; }
+    .requirement[data-group="prasyarat"] .requirement-tag { background: #efe8ff; color: #6840bd; }
+    .requirement[data-group="informasi"] .requirement-tag { background: #e1f6ef; color: #147154; }
+    .side-card:first-child { overflow: hidden; border-color: #cfe1f1; background: linear-gradient(155deg,#fff,#f2f8ff); box-shadow: 0 15px 35px rgba(28,72,115,.08); }
+    .side-heading { display: flex; align-items: center; gap: 10px; margin: 0 0 19px; font-size: 17px; }
+    .side-heading-icon { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 11px; background: var(--blue); color: #fff; }
+    .side-heading-icon svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; }
+    .verified-line { display: flex; align-items: center; gap: 8px; color: #146b36; }
+    .verified-line::before { flex: 0 0 auto; width: 8px; height: 8px; border-radius: 50%; background: #2aa75b; box-shadow: 0 0 0 4px rgba(42,167,91,.12); content: ""; }
+    .quick-nav { display: grid; gap: 7px; }
+    .quick-nav a { display: flex; align-items: center; justify-content: space-between; min-height: 40px; padding: 8px 10px; border-radius: 10px; color: #294e70; font-size: 13px; font-weight: 700; text-decoration: none; }
+    .quick-nav a:hover { background: #edf6ff; }
+    .quick-nav a::after { content: "↓"; color: var(--blue); }
+    @media (max-width: 980px) {
+      .hero-grid { grid-template-columns: minmax(0,1fr) 235px; gap: 28px; }
+      .hero-sla.calendar-card { min-height: 245px; }
+      .hero-sla .calendar-body { min-height: 174px; }
+    }
+    @media (max-width: 760px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-sla.calendar-card { width: min(100%,300px); min-height: 230px; }
+      .hero-sla .calendar-body { min-height: 160px; }
+      .requirements-overview { grid-template-columns: 1fr; align-items: start; }
+    }
+    @media (max-width: 680px) {
+      .detail-hero h1 { font-size: clamp(36px,12vw,52px); }
+      .summary-strip { margin-top: 25px; }
+      .requirement { grid-template-columns: auto 1fr; padding: 15px; }
+      .requirement-tag { grid-column: 2; }
+      .filter-row { overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
+      .filter-button { flex: 0 0 auto; }
     }
   </style>
 </head>
@@ -165,6 +239,16 @@
         return {value:entries[0][1],unit:entries[0][2].toLowerCase()};
       }
 
+      function requirementGroup(tag) {
+        const value = String(tag || "").toLowerCase();
+        if (value.includes("wajib")) return "wajib";
+        if (value.includes("kondisional") || value.includes("opsional")) return "kondisional";
+        if (value.includes("prasyarat")) return "prasyarat";
+        return "informasi";
+      }
+
+      const filterLabels = {all:"Semua",wajib:"Wajib",kondisional:"Kondisional",prasyarat:"Prasyarat",informasi:"Informasi"};
+
       function renderError() {
         root.innerHTML = `<div class="page-error"><h1>Layanan tidak ditemukan.</h1><p>Kode layanan tidak tersedia atau tautan yang dibuka tidak lengkap.</p><a class="action-link primary" href="layanan-perpajakan-djp.html">Kembali ke matriks</a></div>`;
       }
@@ -174,6 +258,11 @@
         const needsDetail = !Array.isArray(item.requirements) && genericDocs.test(item.docs || "");
         const verified = item.requirements_status === "verified-regulation";
         const deadline = deadlineParts(item.sla);
+        const groups = requirements.reduce((result,requirement) => {
+          const group = requirementGroup(requirement.tag);
+          result[group] = (result[group] || 0) + 1;
+          return result;
+        },{});
         const pdfPath = `assets/docs/layanan/${encodeURIComponent(item.id)}/alur-proses.pdf`;
         const storageKey = `djp-checklist-${item.id}`;
         let checked = {};
@@ -182,9 +271,17 @@
         root.innerHTML = `
           <a class="back-link" href="layanan-perpajakan-djp.html">← Kembali ke matriks layanan</a>
           <article class="detail-hero">
-            <div class="detail-kicker"><span class="detail-code">${escapeHTML(item.id)}</span><span class="detail-status">${escapeHTML(item.status)}</span></div>
-            <h1>${escapeHTML(item.name)}</h1>
-            <p class="detail-lead">Panduan ringkas untuk menyiapkan permohonan, memeriksa batas waktu penyelesaian, dan membuka dokumen alur proses apabila tersedia.</p>
+            <div class="hero-grid">
+              <div class="hero-copy">
+                <div class="detail-kicker"><span class="detail-code">${escapeHTML(item.id)}</span><span class="detail-status">${escapeHTML(item.status)}</span></div>
+                <h1>${escapeHTML(item.name)}</h1>
+                <p class="detail-lead">Siapkan dokumen yang sesuai, periksa batas waktu layanan, dan gunakan sumber resmi sebagai rujukan pengajuan.</p>
+              </div>
+              <div class="hero-sla calendar-card" aria-label="Batas waktu penyelesaian ${escapeHTML(item.sla)}">
+                <div class="calendar-top"><span>Batas waktu</span><span class="calendar-rings" aria-hidden="true"><i></i><i></i></span></div>
+                <div class="calendar-body"><strong class="calendar-value">${escapeHTML(deadline.value)}</strong><span class="calendar-unit">${escapeHTML(deadline.unit)}</span><small class="calendar-caption">Mulai dihitung: ${escapeHTML(item.start)}</small></div>
+              </div>
+            </div>
             <div class="summary-strip">
               <div class="summary-item"><span>Unit</span><strong>${escapeHTML(item.unit)}</strong></div>
               <div class="summary-item"><span>Saluran</span><strong>${escapeHTML(item.channel)}</strong></div>
@@ -196,26 +293,16 @@
             <div class="detail-main">
               <section class="content-section" id="persyaratan">
                 <div class="section-headline"><div><span class="section-eyebrow">Sebelum mengajukan</span><h2>Persyaratan dokumen</h2></div><span class="section-badge">${needsDetail ? "Perlu perincian" : verified ? `${requirements.length} butir · terverifikasi` : `${requirements.length} butir`}</span></div>
-                <div class="requirement-list">${requirements.length ? requirements.map((req,index) => `<label class="requirement"><input type="checkbox" data-requirement="${index}" ${checked[index] ? "checked" : ""}><span><strong>${escapeHTML(req.name)}</strong><small>${escapeHTML(req.note)}</small>${req.basis || req.format ? `<span class="requirement-basis">${req.basis ? `<span>Dasar: ${escapeHTML(req.basis)}</span>` : ""}${req.format ? `<span>Format: ${escapeHTML(req.format)}</span>` : ""}${req.source ? `<a href="${escapeHTML(req.source)}" target="_blank" rel="noopener">Buka regulasi ↗</a>` : ""}</span>` : ""}</span><em class="requirement-tag">${escapeHTML(req.tag)}</em></label>`).join("") : `<div class="pdf-empty"><strong>Persyaratan belum tersedia.</strong><p>Daftar dokumen perlu ditambahkan setelah diverifikasi terhadap ketentuan layanan.</p></div>`}</div>
+                ${requirements.length ? `<div class="requirements-overview">
+                  <div><div class="progress-copy"><strong>Kesiapan dokumen</strong><span id="progressText">0 dari ${requirements.length} selesai</span></div><div class="progress-track" role="progressbar" aria-label="Kesiapan dokumen" aria-valuemin="0" aria-valuemax="${requirements.length}" aria-valuenow="0"><div class="progress-bar" id="progressBar"></div></div></div>
+                  <div class="filter-row" aria-label="Saring persyaratan">${["all","wajib","kondisional","prasyarat","informasi"].filter(group => group === "all" || groups[group]).map((group,index) => `<button class="filter-button${index === 0 ? " active" : ""}" type="button" data-filter="${group}" aria-pressed="${index === 0 ? "true" : "false"}">${filterLabels[group]}${group === "all" ? "" : ` · ${groups[group]}`}</button>`).join("")}</div>
+                </div>` : ""}
+                <div class="requirement-list">${requirements.length ? requirements.map((req,index) => {
+                  const group = requirementGroup(req.tag);
+                  const hasDetails = req.basis || req.format || req.source;
+                  return `<article class="requirement" data-group="${group}"><label class="requirement-check" for="requirement-${index}" aria-label="Tandai ${escapeHTML(req.name)} telah disiapkan"><input id="requirement-${index}" type="checkbox" data-requirement="${index}" ${checked[index] ? "checked" : ""}></label><div class="requirement-content"><label class="requirement-title" for="requirement-${index}"><strong>${escapeHTML(req.name)}</strong></label><small>${escapeHTML(req.note)}</small>${hasDetails ? `<details class="requirement-details"><summary>Lihat dasar dan format</summary><span class="requirement-basis">${req.basis ? `<span>Dasar: ${escapeHTML(req.basis)}</span>` : ""}${req.format ? `<span>Format: ${escapeHTML(req.format)}</span>` : ""}${req.source ? `<a href="${escapeHTML(req.source)}" target="_blank" rel="noopener">Buka regulasi ↗</a>` : ""}</span></details>` : ""}</div><em class="requirement-tag">${escapeHTML(req.tag)}</em></article>`;
+                }).join("") : `<div class="pdf-empty"><strong>Persyaratan belum tersedia.</strong><p>Daftar dokumen perlu ditambahkan setelah diverifikasi terhadap ketentuan layanan.</p></div>`}</div>
                 <div class="data-notice"><b>i</b><span>${needsDetail ? "Basis data saat ini baru memuat persyaratan umum. Jangan menjadikan daftar ini sebagai satu-satunya dasar pemeriksaan sampai rincian dokumen diverifikasi." : verified ? `Rincian ini telah dicocokkan dengan ketentuan yang disebutkan pada setiap butir. Terakhir ditelaah ${escapeHTML(item.reviewed_at || "5 September 2026")}.` : "Checklist disusun dari ringkasan dokumen pada matriks. Pastikan kembali bentuk dokumen dan ketentuan teknis pada sumber resmi."}</span></div>
-              </section>
-
-              <section class="content-section" id="batas-waktu">
-                <div class="deadline-layout">
-                  <div class="calendar-card" aria-label="Batas waktu penyelesaian ${escapeHTML(item.sla)}">
-                    <div class="calendar-top"><span>Batas waktu</span><span class="calendar-rings" aria-hidden="true"><i></i><i></i></span></div>
-                    <div class="calendar-body"><strong class="calendar-value">${escapeHTML(deadline.value)}</strong><span class="calendar-unit">${escapeHTML(deadline.unit)}</span></div>
-                  </div>
-                  <div class="deadline-copy">
-                    <span class="section-eyebrow">Jangka waktu layanan</span>
-                    <h2>Berapa lama prosesnya?</h2>
-                    <p class="deadline-full">${escapeHTML(item.sla)}</p>
-                    <div class="deadline-meta">
-                      <div><span>Mulai dihitung</span><strong>${escapeHTML(item.start)}</strong></div>
-                      <div><span>Jika melewati batas</span><strong>${escapeHTML(item.overdue)}</strong></div>
-                    </div>
-                  </div>
-                </div>
               </section>
 
               <section class="content-section" id="dokumen-alur">
@@ -231,16 +318,39 @@
             </div>
 
             <aside class="detail-sidebar">
-              <div class="side-card"><span class="side-label">Pemohon</span><strong class="side-value">${escapeHTML(item.applicant)}</strong><div class="side-rule"></div><span class="side-label">Kategori</span><strong class="side-value">${escapeHTML(item.category)}</strong><div class="side-rule"></div><span class="side-label">Status persyaratan</span><strong class="side-value">${verified ? "Terverifikasi terhadap regulasi" : needsDetail ? "Belum diperinci" : "Ringkasan awal"}</strong><div class="side-rule"></div><span class="side-label">Terakhir ditelaah</span><strong class="side-value">${escapeHTML(item.reviewed_at || "5 September 2026")}</strong></div>
+              <div class="side-card"><h2 class="side-heading"><span class="side-heading-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 3h10v4H7zM6 5H4v16h16V5h-2M8 12h8M8 16h6"/></svg></span>Ringkasan layanan</h2><span class="side-label">Pemohon</span><strong class="side-value">${escapeHTML(item.applicant)}</strong><div class="side-rule"></div><span class="side-label">Kategori</span><strong class="side-value">${escapeHTML(item.category)}</strong><div class="side-rule"></div><span class="side-label">Status persyaratan</span><strong class="side-value${verified ? " verified-line" : ""}">${verified ? "Terverifikasi terhadap regulasi" : needsDetail ? "Belum diperinci" : "Ringkasan awal"}</strong><div class="side-rule"></div><span class="side-label">Terakhir ditelaah</span><strong class="side-value">${escapeHTML(item.reviewed_at || "5 September 2026")}</strong></div>
+              <div class="side-card"><span class="side-label">Navigasi cepat</span><div class="quick-nav"><a href="#persyaratan">Persyaratan dokumen</a><a href="#dokumen-alur">PDF alur proses</a><a href="#ketentuan">Dasar hukum</a></div></div>
               <div class="side-card"><span class="side-label">Sumber resmi</span><strong class="side-value">Buka regulasi untuk memeriksa ketentuan lengkap dan perubahan terakhir.</strong><a class="action-link" href="${escapeHTML(item.source)}" target="_blank" rel="noopener">Buka sumber resmi ↗</a></div>
               <div class="side-card"><span class="side-label">Catatan operasional</span><strong class="side-value">${escapeHTML(item.note)}</strong></div>
             </aside>
           </div>`;
 
-        root.querySelectorAll("[data-requirement]").forEach(input => input.addEventListener("change", () => {
+        const checklistInputs = [...root.querySelectorAll("[data-requirement]")];
+        const updateProgress = () => {
+          const completed = checklistInputs.filter(input => input.checked).length;
+          const percentage = checklistInputs.length ? Math.round((completed / checklistInputs.length) * 100) : 0;
+          const progressText = document.getElementById("progressText");
+          const progressBar = document.getElementById("progressBar");
+          const progressTrack = progressBar?.parentElement;
+          if (progressText) progressText.textContent = `${completed} dari ${checklistInputs.length} selesai · ${percentage}%`;
+          if (progressBar) progressBar.style.width = `${percentage}%`;
+          if (progressTrack) progressTrack.setAttribute("aria-valuenow",String(completed));
+        };
+        checklistInputs.forEach(input => input.addEventListener("change", () => {
           checked[input.dataset.requirement] = input.checked;
           localStorage.setItem(storageKey, JSON.stringify(checked));
+          updateProgress();
         }));
+        root.querySelectorAll("[data-filter]").forEach(button => button.addEventListener("click", () => {
+          const filter = button.dataset.filter;
+          root.querySelectorAll("[data-filter]").forEach(item => {
+            const active = item === button;
+            item.classList.toggle("active",active);
+            item.setAttribute("aria-pressed",String(active));
+          });
+          root.querySelectorAll(".requirement[data-group]").forEach(card => { card.hidden = filter !== "all" && card.dataset.group !== filter; });
+        }));
+        updateProgress();
 
         fetch(pdfPath,{method:"HEAD",cache:"no-store"}).then(response => {
           const status = document.getElementById("pdfStatus");
