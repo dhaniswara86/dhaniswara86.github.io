@@ -520,6 +520,320 @@
     }
 
   </style>
+
+<style id="kabayanCleanHeaderStyles">
+  /* =========================================================
+     Header Kabayan — clean / konsisten dengan halaman terbaru
+     ========================================================= */
+  :root {
+    --kabayan-nav-height: 58px;
+    --kabayan-nav-max: 1180px;
+  }
+
+  .mobile-nav-checkbox {
+    position: fixed;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .site-nav {
+    position: fixed;
+    z-index: 1300;
+    top: 0;
+    right: 0;
+    left: 0;
+    min-height: var(--kabayan-nav-height);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.055);
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: saturate(180%) blur(18px);
+    -webkit-backdrop-filter: saturate(180%) blur(18px);
+  }
+
+  .site-nav .nav-inner {
+    width: min(var(--kabayan-nav-max), calc(100% - 36px));
+    min-height: var(--kabayan-nav-height);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  .site-nav .nav-brand {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 8px;
+    color: #1d1d1f;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .site-nav .brand-logo {
+    width: auto;
+    height: 20px;
+    display: block;
+    object-fit: contain;
+  }
+
+  .desktop-menu {
+    display: flex;
+    flex: 1 1 auto;
+    align-items: center;
+    justify-content: center;
+    gap: 27px;
+  }
+
+  .desktop-menu a {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--kabayan-nav-height);
+    color: #515154;
+    font-size: 12px;
+    font-weight: 560;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .desktop-menu a::after {
+    position: absolute;
+    right: 0;
+    bottom: 10px;
+    left: 0;
+    height: 1.5px;
+    background: #1d1d1f;
+    content: "";
+    opacity: 0;
+    transform: scaleX(0.35);
+    transition: opacity .2s ease, transform .2s ease;
+  }
+
+  .desktop-menu a:hover,
+  .desktop-menu a[aria-current="page"] {
+    color: #000;
+  }
+
+  .desktop-menu a:hover::after,
+  .desktop-menu a[aria-current="page"]::after {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+
+  .nav-hotnews {
+    gap: 7px !important;
+  }
+
+  .nav-hotnews-dot {
+    width: 7px;
+    height: 7px;
+    display: inline-block;
+    flex: 0 0 7px;
+    border-radius: 50%;
+    background: #ff3b30;
+    box-shadow: 0 0 0 0 rgba(255, 59, 48, .35);
+    animation: kabayanHotPulse 2.1s ease-out infinite;
+  }
+
+  @keyframes kabayanHotPulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 59, 48, .34); }
+    60%, 100% { box-shadow: 0 0 0 7px rgba(255, 59, 48, 0); }
+  }
+
+  .nav-actions {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .nav-cta {
+    min-height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 15px;
+    border-radius: 999px;
+    background: #000;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 650;
+    line-height: 1;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .nav-cta:hover {
+    background: #242426;
+    color: #fff;
+  }
+
+  .menu-toggle {
+    width: 38px;
+    height: 38px;
+    display: none;
+    place-items: center;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: #1d1d1f;
+    cursor: pointer;
+    font-size: 22px;
+    line-height: 1;
+  }
+
+  .menu-toggle:hover {
+    background: rgba(0, 0, 0, .055);
+  }
+
+  .menu-icon-close {
+    display: none;
+  }
+
+  .mobile-menu {
+    position: fixed;
+    z-index: 1250;
+    top: var(--kabayan-nav-height);
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: calc(100dvh - var(--kabayan-nav-height));
+    display: block;
+    overflow-y: auto;
+    padding: 26px 24px 44px;
+    background: rgba(255, 255, 255, .985);
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-8px);
+    transition: opacity .2s ease, transform .2s ease, visibility .2s ease;
+  }
+
+  #mobileNavToggle:checked ~ .mobile-menu {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  #mobileNavToggle:checked ~ .site-nav .menu-icon-open {
+    display: none;
+  }
+
+  #mobileNavToggle:checked ~ .site-nav .menu-icon-close {
+    display: block;
+  }
+
+  .mobile-menu a {
+    display: grid;
+    grid-template-columns: 42px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 8px;
+    padding: 15px 0;
+    border-bottom: 1px solid #ededf0;
+    color: #1d1d1f;
+    font-size: clamp(24px, 7vw, 34px);
+    font-weight: 700;
+    letter-spacing: -.045em;
+    line-height: 1.05;
+    text-decoration: none;
+  }
+
+  .mobile-menu a[aria-current="page"] {
+    color: #0071e3;
+  }
+
+  .mobile-menu-index {
+    color: #a1a1a6;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .08em;
+  }
+
+  .mobile-menu .mobile-hot-dot {
+    width: 8px;
+    height: 8px;
+    justify-self: end;
+    border-radius: 50%;
+    background: #ff3b30;
+  }
+
+  .mobile-menu .mobile-menu-cta {
+    grid-template-columns: minmax(0, 1fr) auto;
+    margin-top: 22px;
+    padding: 17px 19px;
+    border: 0;
+    border-radius: 18px;
+    background: #000;
+    color: #fff;
+    font-size: 18px;
+    letter-spacing: -.025em;
+  }
+
+  @supports selector(body:has(#mobileNavToggle:checked)) {
+    body:has(#mobileNavToggle:checked) {
+      overflow: hidden;
+    }
+  }
+
+  /* Header fixed: beri ruang pada konten tanpa mengubah layout artikel. */
+  body {
+    padding-top: var(--kabayan-nav-height);
+  }
+
+  /* Hilangkan kompensasi lama bila stylesheet eksternal memilikinya. */
+  .announcement {
+    margin-top: 0;
+  }
+
+  @media (max-width: 960px) {
+    .desktop-menu,
+    .nav-cta {
+      display: none !important;
+    }
+
+    .menu-toggle {
+      display: grid;
+    }
+
+    .site-nav .nav-inner {
+      width: calc(100% - 28px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nav-hotnews-dot {
+      animation: none;
+    }
+
+    .desktop-menu a::after,
+    .mobile-menu {
+      transition: none !important;
+    }
+  }
+
+  @media print {
+    .site-nav,
+    .mobile-menu,
+    .mobile-nav-checkbox {
+      display: none !important;
+    }
+
+    body {
+      padding-top: 0 !important;
+    }
+  }
+</style>
+
 </head>
 
 <body
@@ -548,129 +862,104 @@
     aria-hidden="true"
   ></div>
 
-  <!-- Navigasi utama -->
+  <!-- Navigasi Kabayan — clean -->
+  <input
+    class="mobile-nav-checkbox"
+    id="mobileNavToggle"
+    type="checkbox"
+    aria-label="Buka atau tutup menu navigasi"
+  >
+
   <header class="site-nav">
     <div class="nav-inner">
       <a
         class="nav-brand"
         href="{{ '/' | relative_url }}"
-        aria-label="Beranda dhaniswara86"
+        aria-label="Kabayan — Kembali ke beranda"
       >
         <img
           class="brand-logo"
           src="{{ '/assets/img/LogoASD.svg' | relative_url }}"
-          alt="Logo ASD"
+          alt="Logo Kabayan"
         >
-
-        <span>
-          | <strong>dhaniswara86</strong>
-        </span>
+        <span>Kabayan</span>
       </a>
 
-      <nav
-        class="desktop-menu"
-        aria-label="Navigasi utama"
-      >
-        <a href="{{ '/' | relative_url }}">
-          Beranda
-        </a>
-
-        <a href="{{ '/buku.html' | relative_url }}">
-          Buku
-        </a>
-
-        <a href="{{ '/formulir.html' | relative_url }}">
-          Formulir
-        </a>
-
-        <a href="{{ '/aplikasi.html' | relative_url }}">
-          Aplikasi
-        </a>
-
-        <a href="{{ '/kalkulator.html' | relative_url }}">
-          Kalkulator
-        </a>
-
-        <a href="{{ '/artikel.html' | relative_url }}">
-          Artikel
-        </a>
-
+      <nav class="desktop-menu" aria-label="Navigasi utama">
+        <a href="{{ '/buku.html' | relative_url }}">Buku</a>
+        <a href="{{ '/formulir.html' | relative_url }}">Formulir</a>
+        <a href="{{ '/kalkulator.html' | relative_url }}">Kalkulator</a>
+        <a href="{{ '/aplikasi.html' | relative_url }}">Aplikasi</a>
+        <a href="{{ '/artikel.html' | relative_url }}">Artikel</a>
         <a
           class="nav-hotnews"
           href="{{ '/hotnews.html' | relative_url }}"
           aria-current="page"
         >
-          <span
-            class="nav-hotnews-icon"
-            aria-hidden="true"
-          >
-            🔥
-          </span>
-
-          <span>
-            Hot News
-          </span>
+          <span class="nav-hotnews-dot" aria-hidden="true"></span>
+          <span>Hot News</span>
         </a>
       </nav>
 
-      <button
-        id="menuToggle"
-        class="menu-toggle"
-        type="button"
-        aria-label="Buka menu"
-        aria-expanded="false"
-        aria-controls="mobileMenu"
-      >
-        ☰
-      </button>
+      <div class="nav-actions">
+        <a
+          class="nav-cta"
+          href="{{ '/hotnews.html' | relative_url }}"
+        >
+          Jelajahi Hot News ↗
+        </a>
+
+        <label
+          class="menu-toggle"
+          for="mobileNavToggle"
+          aria-label="Buka atau tutup menu"
+        >
+          <span class="menu-icon-open" aria-hidden="true">☰</span>
+          <span class="menu-icon-close" aria-hidden="true">×</span>
+        </label>
+      </div>
     </div>
   </header>
 
-  <!-- Navigasi seluler -->
-  <nav
-    id="mobileMenu"
-    class="mobile-menu"
-    aria-label="Navigasi seluler"
-  >
+  <nav class="mobile-menu" aria-label="Navigasi mobile">
     <a href="{{ '/' | relative_url }}">
-      Beranda
+      <span class="mobile-menu-index">00</span>
+      <span>Beranda</span>
     </a>
-
     <a href="{{ '/buku.html' | relative_url }}">
-      Buku
+      <span class="mobile-menu-index">01</span>
+      <span>Buku</span>
     </a>
-
     <a href="{{ '/formulir.html' | relative_url }}">
-      Formulir
+      <span class="mobile-menu-index">02</span>
+      <span>Formulir</span>
     </a>
-
-    <a href="{{ '/aplikasi.html' | relative_url }}">
-      Aplikasi
-    </a>
-
     <a href="{{ '/kalkulator.html' | relative_url }}">
-      Kalkulator
+      <span class="mobile-menu-index">03</span>
+      <span>Kalkulator</span>
     </a>
-
+    <a href="{{ '/aplikasi.html' | relative_url }}">
+      <span class="mobile-menu-index">04</span>
+      <span>Aplikasi</span>
+    </a>
     <a href="{{ '/artikel.html' | relative_url }}">
-      Artikel
+      <span class="mobile-menu-index">05</span>
+      <span>Artikel</span>
     </a>
-
     <a
-      class="nav-hotnews"
       href="{{ '/hotnews.html' | relative_url }}"
       aria-current="page"
     >
-      <span
-        class="nav-hotnews-icon"
-        aria-hidden="true"
-      >
-        🔥
-      </span>
-
-      <span>
-        Hot News
-      </span>
+      <span class="mobile-menu-index">06</span>
+      <span>Hot News</span>
+      <span class="mobile-hot-dot" aria-hidden="true"></span>
+    </a>
+    <a
+      class="mobile-menu-cta"
+      href="{{ '/hotnews.html' | relative_url }}"
+    >
+      <span>Jelajahi Hot News</span>
+      <span aria-hidden="true">↗</span>
     </a>
   </nav>
 
@@ -1044,12 +1333,6 @@
     (function () {
       "use strict";
 
-      const menuToggle =
-        document.getElementById("menuToggle");
-
-      const mobileMenu =
-        document.getElementById("mobileMenu");
-
       const progressBar =
         document.getElementById("readingProgress");
 
@@ -1064,88 +1347,6 @@
 
       const articleSidebar =
         document.getElementById("articleSidebar");
-
-      function closeMenu() {
-        if (!menuToggle || !mobileMenu) {
-          return;
-        }
-
-        mobileMenu.classList.remove("active");
-        document.body.classList.remove("menu-open");
-
-        menuToggle.setAttribute(
-          "aria-expanded",
-          "false"
-        );
-
-        menuToggle.setAttribute(
-          "aria-label",
-          "Buka menu"
-        );
-
-        menuToggle.textContent = "☰";
-      }
-
-      if (menuToggle && mobileMenu) {
-        menuToggle.addEventListener(
-          "click",
-          function () {
-            const isOpen =
-              mobileMenu.classList.toggle("active");
-
-            document.body.classList.toggle(
-              "menu-open",
-              isOpen
-            );
-
-            menuToggle.setAttribute(
-              "aria-expanded",
-              String(isOpen)
-            );
-
-            menuToggle.setAttribute(
-              "aria-label",
-              isOpen
-                ? "Tutup menu"
-                : "Buka menu"
-            );
-
-            menuToggle.textContent =
-              isOpen
-                ? "×"
-                : "☰";
-          }
-        );
-
-        mobileMenu
-          .querySelectorAll("a")
-          .forEach(
-            function (link) {
-              link.addEventListener(
-                "click",
-                closeMenu
-              );
-            }
-          );
-
-        document.addEventListener(
-          "keydown",
-          function (event) {
-            if (event.key === "Escape") {
-              closeMenu();
-            }
-          }
-        );
-
-        window.addEventListener(
-          "resize",
-          function () {
-            if (window.innerWidth > 900) {
-              closeMenu();
-            }
-          }
-        );
-      }
 
       function updateScrollUi() {
         const documentHeight =
