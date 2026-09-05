@@ -583,6 +583,174 @@
     .article-body td{padding:13px 14px;border-bottom:1px solid #dedee3;vertical-align:top}
     .article-body tr:nth-child(even) td{background:#fafafa}
 
+
+    /* =========================================================
+       Checklist artikel — kontras tinggi dan tetap interaktif
+       ========================================================= */
+    .article-body input[type="checkbox"],
+    .article-body .task-list-item input[type="checkbox"],
+    .article-body .checklist input[type="checkbox"],
+    .article-body [data-checklist] input[type="checkbox"]{
+      -webkit-appearance:none !important;
+      appearance:none !important;
+      width:20px !important;
+      height:20px !important;
+      min-width:20px !important;
+      min-height:20px !important;
+      display:inline-grid !important;
+      place-content:center !important;
+      margin:0 9px 0 1px !important;
+      padding:0 !important;
+      vertical-align:-3px !important;
+      border:1.8px solid #8d8d93 !important;
+      border-radius:6px !important;
+      background:#fff !important;
+      opacity:1 !important;
+      visibility:visible !important;
+      box-shadow:none !important;
+      cursor:pointer;
+    }
+
+    .article-body input[type="checkbox"]::before,
+    .article-body .task-list-item input[type="checkbox"]::before,
+    .article-body .checklist input[type="checkbox"]::before,
+    .article-body [data-checklist] input[type="checkbox"]::before{
+      width:10px;
+      height:6px;
+      border-left:2px solid #fff;
+      border-bottom:2px solid #fff;
+      content:"";
+      opacity:0;
+      transform:translateY(-1px) rotate(-45deg) scale(.65);
+      transform-origin:center;
+      transition:opacity .12s ease,transform .12s ease;
+    }
+
+    .article-body input[type="checkbox"]:checked,
+    .article-body .task-list-item input[type="checkbox"]:checked,
+    .article-body .checklist input[type="checkbox"]:checked,
+    .article-body [data-checklist] input[type="checkbox"]:checked{
+      border-color:var(--blue) !important;
+      background:var(--blue) !important;
+    }
+
+    .article-body input[type="checkbox"]:checked::before,
+    .article-body .task-list-item input[type="checkbox"]:checked::before,
+    .article-body .checklist input[type="checkbox"]:checked::before,
+    .article-body [data-checklist] input[type="checkbox"]:checked::before{
+      opacity:1;
+      transform:translateY(-1px) rotate(-45deg) scale(1);
+    }
+
+    /* Disabled checkbox dari Markdown/Jekyll tetap jelas terbaca. */
+    .article-body input[type="checkbox"]:disabled{
+      opacity:1 !important;
+      cursor:default;
+    }
+
+    .article-body input[type="checkbox"]:focus-visible{
+      outline:3px solid rgba(10,102,216,.18) !important;
+      outline-offset:2px;
+    }
+
+    /* Variasi struktur checklist yang umum dipakai Markdown/custom HTML. */
+    .article-body .task-list-item,
+    .article-body .checklist-item,
+    .article-body .check-item,
+    .article-body [data-checklist-item]{
+      list-style:none !important;
+    }
+
+    .article-body ul.task-list,
+    .article-body ul.checklist,
+    .article-body ol.task-list,
+    .article-body ol.checklist{
+      padding-left:0 !important;
+      list-style:none !important;
+    }
+
+    .article-body .task-list-item,
+    .article-body .checklist-item,
+    .article-body .check-item,
+    .article-body [data-checklist-item]{
+      position:relative;
+      margin:.72em 0 !important;
+      padding-left:0 !important;
+    }
+
+    .article-body label:has(> input[type="checkbox"]),
+    .article-body .task-list-item label,
+    .article-body .checklist-item label{
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+      cursor:pointer;
+    }
+
+    .article-body label:has(> input[type="checkbox"]) > input[type="checkbox"],
+    .article-body .task-list-item label > input[type="checkbox"],
+    .article-body .checklist-item label > input[type="checkbox"]{
+      flex:0 0 20px;
+      margin-top:4px !important;
+      margin-right:0 !important;
+    }
+
+    /* Checklist yang ditulis langsung di dalam paragraf tetap mendapat ruang. */
+    .article-body p > input[type="checkbox"],
+    .article-body li > input[type="checkbox"]{
+      margin-right:10px !important;
+    }
+
+    /* Tombol kontrol checklist, misalnya Reset checklist. */
+    .article-body button,
+    .article-body .checklist-reset,
+    .article-body [data-checklist-reset]{
+      min-height:40px;
+      padding:9px 16px;
+      border:1px solid #d4d4d9;
+      border-radius:999px;
+      background:#fff;
+      color:#1d1d1f;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+      font-size:13px;
+      font-weight:700;
+      line-height:1;
+      cursor:pointer;
+    }
+
+    .article-body button:hover,
+    .article-body .checklist-reset:hover,
+    .article-body [data-checklist-reset]:hover{
+      border-color:#a9a9af;
+      background:#f7f7f9;
+    }
+
+    @media(max-width:680px){
+      .article-body input[type="checkbox"],
+      .article-body .task-list-item input[type="checkbox"],
+      .article-body .checklist input[type="checkbox"],
+      .article-body [data-checklist] input[type="checkbox"]{
+        width:21px !important;
+        height:21px !important;
+        min-width:21px !important;
+        min-height:21px !important;
+      }
+
+      .article-body label:has(> input[type="checkbox"]) > input[type="checkbox"],
+      .article-body .task-list-item label > input[type="checkbox"],
+      .article-body .checklist-item label > input[type="checkbox"]{
+        flex-basis:21px;
+      }
+    }
+
+    @media print{
+      .article-body input[type="checkbox"]{
+        -webkit-print-color-adjust:exact;
+        print-color-adjust:exact;
+      }
+    }
+
+
     /* Sidebar */
     .article-sidebar{
       position:sticky;
