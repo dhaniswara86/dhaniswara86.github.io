@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
-  <meta name="description" content="Persyaratan, alur proses, SLA, dan dasar hukum layanan perpajakan DJP.">
+  <meta name="description" content="Persyaratan, batas waktu penyelesaian, dan dasar hukum layanan perpajakan DJP.">
   <title>Detail Layanan DJP | Saung Kabayan</title>
   <link rel="stylesheet" href="assets/css/saung.css">
   <style>
@@ -18,7 +18,7 @@
     .detail-status { background: #eaf8ee; color: #167233; }
     .detail-hero h1 { max-width: 990px; margin: 18px 0 0; font-size: clamp(34px,5vw,62px); line-height: 1.01; letter-spacing: -.058em; }
     .detail-lead { max-width: 800px; margin: 18px 0 0; color: var(--muted); font-size: 16px; line-height: 1.65; }
-    .summary-strip { display: grid; grid-template-columns: 1.1fr .8fr 1fr 1.2fr; margin-top: 33px; border-top: 1px solid #dfe5ec; border-bottom: 1px solid #dfe5ec; }
+    .summary-strip { display: grid; grid-template-columns: .8fr 1fr 1.2fr; margin-top: 33px; border-top: 1px solid #dfe5ec; border-bottom: 1px solid #dfe5ec; }
     .summary-item { min-width: 0; padding: 19px 18px 19px 0; }
     .summary-item + .summary-item { padding-left: 18px; border-left: 1px solid #dfe5ec; }
     .summary-item span,.section-eyebrow,.side-label { display: block; color: var(--muted); font-size: 11px; font-weight: 760; letter-spacing: .055em; text-transform: uppercase; }
@@ -43,13 +43,21 @@
     .requirement input:checked + span strong { color: #5c6570; text-decoration: line-through; }
     .data-notice { display: flex; gap: 11px; margin-top: 16px; padding: 14px 15px; border: 1px solid #eadca8; border-radius: 14px; background: #fffaf0; color: #665423; font-size: 13px; line-height: 1.55; }
     .data-notice b { flex: 0 0 auto; width: 22px; height: 22px; display: grid; place-items: center; border-radius: 50%; background: #ffe9a8; }
-    .process-list { position: relative; display: grid; gap: 0; }
-    .process-step { position: relative; display: grid; grid-template-columns: 39px 1fr; gap: 14px; padding-bottom: 22px; }
-    .process-step:last-child { padding-bottom: 0; }
-    .process-step:not(:last-child)::before { position: absolute; top: 34px; bottom: 2px; left: 17px; width: 1px; background: #cfdae7; content: ""; }
-    .step-number { position: relative; z-index: 1; width: 35px; height: 35px; display: grid; place-items: center; border: 1px solid #bcd1e8; border-radius: 50%; background: #f3f8fe; color: var(--blue); font-size: 12px; font-weight: 800; }
-    .process-step h3 { margin: 3px 0 5px; font-size: 16px; }
-    .process-step p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.55; }
+    .deadline-layout { display: grid; grid-template-columns: minmax(190px,235px) 1fr; align-items: stretch; gap: clamp(22px,4vw,42px); }
+    .calendar-card { overflow: hidden; min-height: 235px; border: 1px solid #b9d5f4; border-radius: 22px; background: #f7fbff; box-shadow: 0 18px 42px rgba(16,99,190,.12); }
+    .calendar-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 17px; background: var(--blue); color: #fff; font-size: 12px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; }
+    .calendar-rings { display: flex; gap: 7px; }
+    .calendar-rings i { width: 8px; height: 8px; border: 2px solid #fff; border-radius: 50%; opacity: .9; }
+    .calendar-body { display: grid; min-height: 181px; place-content: center; padding: 20px; text-align: center; }
+    .calendar-value { color: #0867c8; font-size: clamp(62px,8vw,94px); font-weight: 820; line-height: .82; letter-spacing: -.07em; }
+    .calendar-unit { margin-top: 14px; color: #24415e; font-size: 15px; font-weight: 780; letter-spacing: .05em; text-transform: uppercase; }
+    .deadline-copy { display: flex; flex-direction: column; justify-content: center; }
+    .deadline-copy h2 { margin: 7px 0 10px; font-size: clamp(27px,3vw,38px); letter-spacing: -.045em; }
+    .deadline-full { margin: 0; color: #263747; font-size: 18px; font-weight: 740; line-height: 1.5; }
+    .deadline-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 22px; }
+    .deadline-meta div { padding: 14px 15px; border: 1px solid #dce6f0; border-radius: 14px; background: #fbfdff; }
+    .deadline-meta span { display: block; color: var(--muted); font-size: 11px; font-weight: 760; letter-spacing: .055em; text-transform: uppercase; }
+    .deadline-meta strong { display: block; margin-top: 7px; font-size: 13px; line-height: 1.5; }
     .pdf-empty { padding: 27px; border: 1px dashed #b8c6d7; border-radius: 16px; background: #f8fafc; text-align: center; }
     .pdf-icon { width: 48px; height: 48px; display: grid; place-items: center; margin: 0 auto 12px; border-radius: 14px; background: #fff0ef; color: #b42318; font-weight: 800; }
     .pdf-empty strong { display: block; font-size: 17px; }
@@ -77,7 +85,6 @@
     @media (max-width: 980px) {
       .summary-strip { grid-template-columns: repeat(2,minmax(0,1fr)); }
       .summary-item:nth-child(3) { padding-left: 0; border-left: 0; border-top: 1px solid #dfe5ec; }
-      .summary-item:nth-child(4) { border-top: 1px solid #dfe5ec; }
       .detail-layout { grid-template-columns: 1fr; }
       .detail-sidebar { position: static; grid-row: 1; grid-template-columns: repeat(2,minmax(0,1fr)); }
     }
@@ -93,6 +100,9 @@
       .requirement { grid-template-columns: auto 1fr; }
       .requirement-tag { grid-column: 2; width: fit-content; }
       .legal-grid { grid-template-columns: 1fr; }
+      .deadline-layout { grid-template-columns: 1fr; }
+      .calendar-card { width: min(100%,280px); }
+      .deadline-meta { grid-template-columns: 1fr; }
       .pdf-frame { height: 520px; }
     }
   </style>
@@ -140,6 +150,21 @@
         return text.replace(/,\s+dan\s+/gi,", ").split(/,\s*/).map(name => ({name:name.trim(),note:"Periksa bentuk, masa berlaku, dan penandatangan sesuai ketentuan.",tag:"Disiapkan"})).filter(item => item.name);
       }
 
+      function deadlineParts(sla) {
+        const text = String(sla || "").trim();
+        const entries = [...text.matchAll(/(\d+)\s*(hari kerja|hari kalender|hari|bulan|jam|tahun)/gi)];
+        if (!entries.length) {
+          if (/tidak (?:ditetapkan|ada)|belum ditetapkan/i.test(text)) return {value:"—",unit:"Tidak ditetapkan"};
+          return {value:"Saat",unit:"Pelayanan"};
+        }
+        const units = [...new Set(entries.map(entry => entry[2].toLowerCase()))];
+        if (units.length === 1) {
+          const values = [...new Set(entries.map(entry => Number(entry[1])))].sort((a,b) => a-b);
+          return {value:values.length === 1 ? String(values[0]) : `${values[0]}–${values.at(-1)}`,unit:units[0]};
+        }
+        return {value:entries[0][1],unit:entries[0][2].toLowerCase()};
+      }
+
       function renderError() {
         root.innerHTML = `<div class="page-error"><h1>Layanan tidak ditemukan.</h1><p>Kode layanan tidak tersedia atau tautan yang dibuka tidak lengkap.</p><a class="action-link primary" href="layanan-perpajakan-djp.html">Kembali ke matriks</a></div>`;
       }
@@ -148,6 +173,7 @@
         const requirements = requirementItems(item);
         const needsDetail = !Array.isArray(item.requirements) && genericDocs.test(item.docs || "");
         const verified = item.requirements_status === "verified-regulation";
+        const deadline = deadlineParts(item.sla);
         const pdfPath = `assets/docs/layanan/${encodeURIComponent(item.id)}/alur-proses.pdf`;
         const storageKey = `djp-checklist-${item.id}`;
         let checked = {};
@@ -158,9 +184,8 @@
           <article class="detail-hero">
             <div class="detail-kicker"><span class="detail-code">${escapeHTML(item.id)}</span><span class="detail-status">${escapeHTML(item.status)}</span></div>
             <h1>${escapeHTML(item.name)}</h1>
-            <p class="detail-lead">Panduan ringkas untuk menyiapkan permohonan, memeriksa jangka waktu penyelesaian, dan membuka dokumen alur proses apabila tersedia.</p>
+            <p class="detail-lead">Panduan ringkas untuk menyiapkan permohonan, memeriksa batas waktu penyelesaian, dan membuka dokumen alur proses apabila tersedia.</p>
             <div class="summary-strip">
-              <div class="summary-item"><span>Jangka waktu</span><strong>${escapeHTML(item.sla)}</strong></div>
               <div class="summary-item"><span>Unit</span><strong>${escapeHTML(item.unit)}</strong></div>
               <div class="summary-item"><span>Saluran</span><strong>${escapeHTML(item.channel)}</strong></div>
               <div class="summary-item"><span>Produk layanan</span><strong>${escapeHTML(item.output)}</strong></div>
@@ -175,14 +200,21 @@
                 <div class="data-notice"><b>i</b><span>${needsDetail ? "Basis data saat ini baru memuat persyaratan umum. Jangan menjadikan daftar ini sebagai satu-satunya dasar pemeriksaan sampai rincian dokumen diverifikasi." : verified ? `Rincian ini telah dicocokkan dengan ketentuan yang disebutkan pada setiap butir. Terakhir ditelaah ${escapeHTML(item.reviewed_at || "5 September 2026")}.` : "Checklist disusun dari ringkasan dokumen pada matriks. Pastikan kembali bentuk dokumen dan ketentuan teknis pada sumber resmi."}</span></div>
               </section>
 
-              <section class="content-section" id="alur">
-                <div class="section-headline"><div><span class="section-eyebrow">Ringkasan proses</span><h2>Alur penyelesaian</h2></div><span class="section-badge">5 tahap</span></div>
-                <div class="process-list">
-                  <div class="process-step"><span class="step-number">1</span><div><h3>Siapkan persyaratan</h3><p>Lengkapi dokumen yang relevan dan pastikan data permohonan konsisten.</p></div></div>
-                  <div class="process-step"><span class="step-number">2</span><div><h3>Sampaikan permohonan</h3><p>Gunakan ${escapeHTML(item.channel)}.</p></div></div>
-                  <div class="process-step"><span class="step-number">3</span><div><h3>Awal penghitungan SLA</h3><p>${escapeHTML(item.start)}.</p></div></div>
-                  <div class="process-step"><span class="step-number">4</span><div><h3>Penyelesaian oleh unit</h3><p>Jangka waktu yang dicantumkan: ${escapeHTML(item.sla)}.</p></div></div>
-                  <div class="process-step"><span class="step-number">5</span><div><h3>Produk diterbitkan</h3><p>${escapeHTML(item.output)}.</p></div></div>
+              <section class="content-section" id="batas-waktu">
+                <div class="deadline-layout">
+                  <div class="calendar-card" aria-label="Batas waktu penyelesaian ${escapeHTML(item.sla)}">
+                    <div class="calendar-top"><span>Batas waktu</span><span class="calendar-rings" aria-hidden="true"><i></i><i></i></span></div>
+                    <div class="calendar-body"><strong class="calendar-value">${escapeHTML(deadline.value)}</strong><span class="calendar-unit">${escapeHTML(deadline.unit)}</span></div>
+                  </div>
+                  <div class="deadline-copy">
+                    <span class="section-eyebrow">Jangka waktu layanan</span>
+                    <h2>Berapa lama prosesnya?</h2>
+                    <p class="deadline-full">${escapeHTML(item.sla)}</p>
+                    <div class="deadline-meta">
+                      <div><span>Mulai dihitung</span><strong>${escapeHTML(item.start)}</strong></div>
+                      <div><span>Jika melewati batas</span><strong>${escapeHTML(item.overdue)}</strong></div>
+                    </div>
+                  </div>
                 </div>
               </section>
 
