@@ -34,7 +34,11 @@
     .requirement:hover { border-color: #b7d2f1; background: #f7fbff; }
     .requirement input { width: 19px; height: 19px; margin: 1px 0 0; accent-color: var(--blue); }
     .requirement strong { display: block; font-size: 15px; line-height: 1.4; }
-    .requirement small { display: block; margin-top: 5px; color: var(--muted); font-size: 12px; line-height: 1.45; }
+    .requirement small { display: block; margin-top: 5px; color: var(--muted); font-size: 13px; line-height: 1.5; }
+    .requirement-basis { display: flex; flex-wrap: wrap; gap: 7px 12px; margin-top: 9px; }
+    .requirement-basis span,.requirement-basis a { color: #315676; font-size: 12px; font-weight: 650; line-height: 1.45; }
+    .requirement-basis a { text-decoration: none; }
+    .requirement-basis a:hover { text-decoration: underline; }
     .requirement-tag { padding: 4px 7px; border-radius: 999px; background: #eef1f5; color: #4d5968; font-size: 10px; font-weight: 750; text-transform: uppercase; }
     .requirement input:checked + span strong { color: #5c6570; text-decoration: line-through; }
     .data-notice { display: flex; gap: 11px; margin-top: 16px; padding: 14px 15px; border: 1px solid #eadca8; border-radius: 14px; background: #fffaf0; color: #665423; font-size: 13px; line-height: 1.55; }
@@ -119,21 +123,15 @@
       const escapeHTML = value => String(value ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;");
       const serviceId = new URLSearchParams(location.search).get("id") || "";
       const genericDocs = /dokumen pendukung sesuai ketentuan layanan/i;
-      const requirementOverrides = {
-        "KPP-053": [
-          {name:"Surat permohonan SKB untuk setiap jenis pemotongan/pemungutan PPh",note:"Gunakan format Lampiran PER-8/PJ/2025 huruf B angka VI.1.",tag:"Wajib"},
-          {name:"Lembar penghitungan Pajak Penghasilan yang diperkirakan akan terutang",note:"Wajib bagi pemohon berdasarkan kondisi Pasal 71 huruf a, b, atau c.",tag:"Kondisional"},
-          {name:"Pemenuhan persyaratan untuk memperoleh Surat Keterangan Fiskal",note:"Merupakan prasyarat permohonan sebagaimana Pasal 72 ayat (6).",tag:"Prasyarat"}
-        ]
-      };
-
       function requirementItems(item) {
-        if (requirementOverrides[item.id]) return requirementOverrides[item.id];
         if (Array.isArray(item.requirements) && item.requirements.length) {
           return item.requirements.map(requirement => ({
             name: requirement.name || requirement.document || "Dokumen persyaratan",
             note: requirement.note || requirement.condition || "Pastikan dokumen masih berlaku dan dapat dibaca.",
-            tag: requirement.status || (requirement.required === false ? "Kondisional" : "Wajib")
+            tag: requirement.status || (requirement.required === false ? "Kondisional" : "Wajib"),
+            basis: requirement.basis || "",
+            format: requirement.format || "",
+            source: requirement.source || item.source || ""
           }));
         }
         const text = String(item.docs || "").trim();
@@ -148,7 +146,8 @@
 
       function render(item) {
         const requirements = requirementItems(item);
-        const needsDetail = !requirementOverrides[item.id] && !Array.isArray(item.requirements) && genericDocs.test(item.docs || "");
+        const needsDetail = !Array.isArray(item.requirements) && genericDocs.test(item.docs || "");
+        const verified = item.requirements_status === "verified-regulation";
         const pdfPath = `assets/docs/layanan/${encodeURIComponent(item.id)}/alur-proses.pdf`;
         const storageKey = `djp-checklist-${item.id}`;
         let checked = {};
@@ -171,9 +170,9 @@
           <div class="detail-layout">
             <div class="detail-main">
               <section class="content-section" id="persyaratan">
-                <div class="section-headline"><div><span class="section-eyebrow">Sebelum mengajukan</span><h2>Persyaratan dokumen</h2></div><span class="section-badge">${needsDetail ? "Perlu perincian" : `${requirements.length} butir`}</span></div>
-                <div class="requirement-list">${requirements.length ? requirements.map((req,index) => `<label class="requirement"><input type="checkbox" data-requirement="${index}" ${checked[index] ? "checked" : ""}><span><strong>${escapeHTML(req.name)}</strong><small>${escapeHTML(req.note)}</small></span><em class="requirement-tag">${escapeHTML(req.tag)}</em></label>`).join("") : `<div class="pdf-empty"><strong>Persyaratan belum tersedia.</strong><p>Daftar dokumen perlu ditambahkan setelah diverifikasi terhadap ketentuan layanan.</p></div>`}</div>
-                <div class="data-notice"><b>i</b><span>${needsDetail ? "Basis data saat ini baru memuat persyaratan umum. Jangan menjadikan daftar ini sebagai satu-satunya dasar pemeriksaan sampai rincian dokumen diverifikasi." : "Checklist disusun dari ringkasan dokumen pada matriks. Pastikan kembali bentuk dokumen dan ketentuan teknis pada sumber resmi."}</span></div>
+                <div class="section-headline"><div><span class="section-eyebrow">Sebelum mengajukan</span><h2>Persyaratan dokumen</h2></div><span class="section-badge">${needsDetail ? "Perlu perincian" : verified ? `${requirements.length} butir · terverifikasi` : `${requirements.length} butir`}</span></div>
+                <div class="requirement-list">${requirements.length ? requirements.map((req,index) => `<label class="requirement"><input type="checkbox" data-requirement="${index}" ${checked[index] ? "checked" : ""}><span><strong>${escapeHTML(req.name)}</strong><small>${escapeHTML(req.note)}</small>${req.basis || req.format ? `<span class="requirement-basis">${req.basis ? `<span>Dasar: ${escapeHTML(req.basis)}</span>` : ""}${req.format ? `<span>Format: ${escapeHTML(req.format)}</span>` : ""}${req.source ? `<a href="${escapeHTML(req.source)}" target="_blank" rel="noopener">Buka regulasi ↗</a>` : ""}</span>` : ""}</span><em class="requirement-tag">${escapeHTML(req.tag)}</em></label>`).join("") : `<div class="pdf-empty"><strong>Persyaratan belum tersedia.</strong><p>Daftar dokumen perlu ditambahkan setelah diverifikasi terhadap ketentuan layanan.</p></div>`}</div>
+                <div class="data-notice"><b>i</b><span>${needsDetail ? "Basis data saat ini baru memuat persyaratan umum. Jangan menjadikan daftar ini sebagai satu-satunya dasar pemeriksaan sampai rincian dokumen diverifikasi." : verified ? `Rincian ini telah dicocokkan dengan ketentuan yang disebutkan pada setiap butir. Terakhir ditelaah ${escapeHTML(item.reviewed_at || "5 September 2026")}.` : "Checklist disusun dari ringkasan dokumen pada matriks. Pastikan kembali bentuk dokumen dan ketentuan teknis pada sumber resmi."}</span></div>
               </section>
 
               <section class="content-section" id="alur">
@@ -200,7 +199,7 @@
             </div>
 
             <aside class="detail-sidebar">
-              <div class="side-card"><span class="side-label">Pemohon</span><strong class="side-value">${escapeHTML(item.applicant)}</strong><div class="side-rule"></div><span class="side-label">Kategori</span><strong class="side-value">${escapeHTML(item.category)}</strong><div class="side-rule"></div><span class="side-label">Terakhir ditelaah</span><strong class="side-value">5 September 2026</strong></div>
+              <div class="side-card"><span class="side-label">Pemohon</span><strong class="side-value">${escapeHTML(item.applicant)}</strong><div class="side-rule"></div><span class="side-label">Kategori</span><strong class="side-value">${escapeHTML(item.category)}</strong><div class="side-rule"></div><span class="side-label">Status persyaratan</span><strong class="side-value">${verified ? "Terverifikasi terhadap regulasi" : needsDetail ? "Belum diperinci" : "Ringkasan awal"}</strong><div class="side-rule"></div><span class="side-label">Terakhir ditelaah</span><strong class="side-value">${escapeHTML(item.reviewed_at || "5 September 2026")}</strong></div>
               <div class="side-card"><span class="side-label">Sumber resmi</span><strong class="side-value">Buka regulasi untuk memeriksa ketentuan lengkap dan perubahan terakhir.</strong><a class="action-link" href="${escapeHTML(item.source)}" target="_blank" rel="noopener">Buka sumber resmi ↗</a></div>
               <div class="side-card"><span class="side-label">Catatan operasional</span><strong class="side-value">${escapeHTML(item.note)}</strong></div>
             </aside>
