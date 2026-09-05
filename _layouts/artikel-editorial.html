@@ -38,8 +38,284 @@
     <meta property="article:tag" content="{{ tag | escape }}">
   {% endfor %}
 
-  <link rel="stylesheet" href="{{ '/assets/css/kabayan-nav.css' | relative_url }}?v=20260808-3">
   <link rel="stylesheet" href="{{ '/assets/css/artikel-editorial.css' | relative_url }}?v=20260808-3">
+
+  <style id="kabayanCleanNavStyles">
+    :root {
+      --kabayan-nav-height: 64px;
+      --kabayan-nav-max: 1280px;
+      --kabayan-nav-ease: cubic-bezier(.2,.8,.2,1);
+    }
+
+    .mobile-nav-checkbox {
+      position: fixed;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .site-nav {
+      position: fixed;
+      z-index: 1300;
+      top: 0;
+      right: 0;
+      left: 0;
+      min-height: var(--kabayan-nav-height);
+      border-bottom: 1px solid rgba(12,18,28,.06);
+      background: rgba(255,255,255,.94);
+      box-shadow: 0 8px 30px rgba(21,35,57,.035);
+      backdrop-filter: saturate(160%) blur(18px);
+      -webkit-backdrop-filter: saturate(160%) blur(18px);
+    }
+
+    .nav-inner {
+      width: min(var(--kabayan-nav-max), calc(100% - 48px));
+      min-height: var(--kabayan-nav-height);
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      margin: 0 auto;
+    }
+
+    .nav-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      flex-shrink: 0;
+      color: #111318;
+      font-size: 13px;
+      font-weight: 650;
+      letter-spacing: -.02em;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .brand-logo {
+      width: auto;
+      height: 19px;
+      max-width: none;
+      display: block;
+      flex-shrink: 0;
+      object-fit: contain;
+    }
+
+    .desktop-menu {
+      display: flex;
+      align-items: center;
+      gap: clamp(20px,2.2vw,34px);
+      margin-left: auto;
+    }
+
+    .desktop-menu a {
+      position: relative;
+      padding: 22px 0 20px;
+      color: #555b65;
+      font-size: 12px;
+      font-weight: 540;
+      line-height: 1;
+      letter-spacing: -.01em;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .desktop-menu a::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: 14px;
+      left: 0;
+      height: 1.5px;
+      border-radius: 99px;
+      background: #111318;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform .26s var(--kabayan-nav-ease);
+    }
+
+    .desktop-menu a:hover,
+    .desktop-menu a[aria-current="page"] { color: #111318; }
+
+    .desktop-menu a:hover::after,
+    .desktop-menu a[aria-current="page"]::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    .nav-hotnews {
+      display: inline-flex !important;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-hotnews-dot {
+      width: 6px;
+      height: 6px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: #ff3b30;
+      box-shadow: 0 0 0 0 rgba(255,59,48,.28);
+      animation: kabayanHotPulse 2.2s ease-out infinite;
+    }
+
+    @keyframes kabayanHotPulse {
+      0% { box-shadow: 0 0 0 0 rgba(255,59,48,.28); }
+      70% { box-shadow: 0 0 0 7px rgba(255,59,48,0); }
+      100% { box-shadow: 0 0 0 0 rgba(255,59,48,0); }
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-cta {
+      min-height: 38px;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 15px;
+      border: 1px solid #111318;
+      border-radius: 999px;
+      background: #111318;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 650;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: transform .22s ease, box-shadow .22s ease;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 9px 22px rgba(0,0,0,.13);
+    }
+
+    .menu-toggle {
+      width: 38px;
+      height: 38px;
+      display: none;
+      place-items: center;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: transparent;
+      color: #111318;
+      cursor: pointer;
+      font-size: 20px;
+      line-height: 1;
+    }
+
+    .menu-icon-close { display: none; }
+
+    .mobile-menu {
+      position: fixed;
+      z-index: 1250;
+      top: var(--kabayan-nav-height);
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: calc(100dvh - var(--kabayan-nav-height));
+      overflow-y: auto;
+      visibility: hidden;
+      padding: 28px max(24px, calc((100vw - var(--kabayan-nav-max))/2 + 24px)) 44px;
+      background: rgba(255,255,255,.985);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-8px);
+      transition: opacity .22s ease, transform .22s ease, visibility .22s ease;
+    }
+
+    .mobile-menu-head {
+      margin-bottom: 18px;
+      color: #8a9099;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .mobile-menu > a:not(.mobile-menu-cta) {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      align-items: baseline;
+      padding: 12px 0;
+      border-bottom: 1px solid #eceef1;
+      color: #111318;
+      font-size: clamp(27px,8vw,38px);
+      font-weight: 680;
+      letter-spacing: -.045em;
+      line-height: 1.05;
+      text-decoration: none;
+    }
+
+    .mobile-menu > a:not(.mobile-menu-cta) > span {
+      color: #9aa0a8;
+      font-size: 11px;
+      font-weight: 650;
+      letter-spacing: .04em;
+    }
+
+    .mobile-menu a[aria-current="page"] { color: #0a66ff; }
+
+    .mobile-menu-cta {
+      margin-top: 24px;
+      min-height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 18px;
+      border-radius: 999px;
+      background: #111318;
+      color: #fff;
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    #mobileNavToggle:checked ~ .site-nav .menu-icon-open { display: none; }
+    #mobileNavToggle:checked ~ .site-nav .menu-icon-close { display: block; }
+    #mobileNavToggle:checked ~ .mobile-menu {
+      visibility: visible;
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    main { padding-top: var(--kabayan-nav-height); }
+
+    @supports selector(body:has(#mobileNavToggle:checked)) {
+      body:has(#mobileNavToggle:checked) { overflow: hidden; }
+    }
+
+    @media (max-width: 980px) {
+      .desktop-menu { display: none; }
+      .menu-toggle { display: grid; }
+    }
+
+    @media (max-width: 680px) {
+      .nav-inner { width: calc(100% - 28px); gap: 14px; }
+      .nav-cta { display: none; }
+      .mobile-menu { padding-right: 20px; padding-left: 20px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .nav-hotnews-dot { animation: none !important; }
+      .mobile-menu,
+      .desktop-menu a::after,
+      .nav-cta { transition: none !important; }
+    }
+
+    @media print {
+      .mobile-nav-checkbox,
+      .site-nav,
+      .mobile-menu { display: none !important; }
+      main { padding-top: 0 !important; }
+    }
+  </style>
+
 
   {% if page.custom_css %}
     {% for css in page.custom_css %}
@@ -56,7 +332,44 @@
 
   <div class="reading-progress" id="readingProgress" aria-hidden="true"></div>
 
-  {% include site-header.html %}
+  <input class="mobile-nav-checkbox" id="mobileNavToggle" type="checkbox" aria-label="Buka atau tutup menu navigasi">
+
+  <header class="site-nav" id="siteNav">
+    <div class="nav-inner">
+      <a class="nav-brand" href="{{ '/index.html' | relative_url }}" aria-label="Kabayan — Kembali ke beranda">
+        <img class="brand-logo" src="{{ '/images/LogoASD.svg' | relative_url }}" alt="Logo dhaniswara86">
+        <span><strong>Kabayan</strong></span>
+      </a>
+
+      <nav class="desktop-menu" aria-label="Navigasi utama">
+        <a href="{{ '/buku.html' | relative_url }}">Buku</a>
+        <a href="{{ '/formulir.html' | relative_url }}">Formulir</a>
+        <a href="{{ '/kalkulator.html' | relative_url }}">Kalkulator</a>
+        <a href="{{ '/aplikasi.html' | relative_url }}">Aplikasi</a>
+        <a href="{{ '/artikel.html' | relative_url }}" aria-current="page">Artikel</a>
+        <a class="nav-hotnews" href="{{ '/hotnews.html' | relative_url }}"><span class="nav-hotnews-dot" aria-hidden="true"></span>Hot News</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a class="nav-cta" href="artikel.html">Jelajahi Artikel <span aria-hidden="true">↗</span></a>
+        <label class="menu-toggle" for="mobileNavToggle" aria-label="Buka atau tutup menu">
+          <span class="menu-icon-open" aria-hidden="true">☰</span>
+          <span class="menu-icon-close" aria-hidden="true">×</span>
+        </label>
+      </div>
+    </div>
+  </header>
+
+  <nav class="mobile-menu" aria-label="Navigasi mobile">
+    <div class="mobile-menu-head">Jelajahi Kabayan</div>
+    <a href="{{ '/buku.html' | relative_url }}"><span>01</span>Buku</a>
+    <a href="{{ '/formulir.html' | relative_url }}"><span>02</span>Formulir</a>
+    <a href="{{ '/kalkulator.html' | relative_url }}"><span>03</span>Kalkulator</a>
+    <a href="{{ '/aplikasi.html' | relative_url }}"><span>04</span>Aplikasi</a>
+    <a href="{{ '/artikel.html' | relative_url }}" aria-current="page"><span>05</span>Artikel</a>
+    <a href="{{ '/hotnews.html' | relative_url }}"><span>06</span>Hot News</a>
+    <a class="mobile-menu-cta" href="artikel.html"><b>Jelajahi Artikel</b><span aria-hidden="true">↗</span></a>
+  </nav>
 
   <main>
     <article>
@@ -194,7 +507,6 @@
 
   {% include site-footer.html %}
 
-  <script src="{{ '/assets/js/kabayan-nav.js' | relative_url }}?v=20260808-3"></script>
   <script src="{{ '/assets/js/artikel-editorial.js' | relative_url }}?v=20260808-3"></script>
 
   {% if page.custom_js %}
