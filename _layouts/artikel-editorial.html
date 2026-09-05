@@ -1534,9 +1534,159 @@
     }
   </style>
 
+
+<style id="kabayanRoleSafeRender">
+  .article-render-safe {
+    padding-top: 0 !important;
+  }
+
+  .article-render-safe .reading-progress {
+    display: none !important;
+  }
+
+  .article-render-safe .site-nav {
+    position: relative !important;
+    top: auto !important;
+    transform: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: #ffffff !important;
+  }
+
+  .article-render-safe .article-hero {
+    isolation: auto !important;
+    contain: none !important;
+    transform: none !important;
+  }
+
+  .article-render-safe .hero-cloud {
+    display: none !important;
+  }
+
+  .article-render-safe .summary-section {
+    padding: 34px 20px !important;
+    background: #ffffff !important;
+  }
+
+  .article-render-safe .summary-wrap {
+    width: min(920px, 100%) !important;
+    display: block !important;
+    min-height: 0 !important;
+    margin: 0 auto !important;
+    padding: 26px 28px !important;
+    overflow: visible !important;
+    border: 1px solid #ead179 !important;
+    border-radius: 20px !important;
+    background: #fff5bf !important;
+    box-shadow: none !important;
+  }
+
+  .article-render-safe .summary-wrap::before,
+  .article-render-safe .summary-copy::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  .article-render-safe .summary-wrap > div:first-child {
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .article-render-safe .summary-label,
+  .article-render-safe .summary-number {
+    display: inline-block !important;
+    margin: 0 !important;
+  }
+
+  .article-render-safe .summary-number {
+    font-size: 22px !important;
+    line-height: 1 !important;
+  }
+
+  .article-render-safe .summary-copy {
+    max-width: none !important;
+    padding: 0 !important;
+  }
+
+  .article-render-safe .article-shell {
+    padding: 44px 20px 82px !important;
+    background: #ffffff !important;
+  }
+
+  .article-render-safe .article-layout {
+    width: min(900px, 100%) !important;
+    max-width: 900px !important;
+    display: block !important;
+    margin: 0 auto !important;
+    transform: none !important;
+    contain: none !important;
+  }
+
+  .article-render-safe .article-body {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    transform: none !important;
+    contain: none !important;
+    content-visibility: visible !important;
+  }
+
+  .article-render-safe .article-sidebar {
+    display: none !important;
+    position: static !important;
+    top: auto !important;
+  }
+
+  .article-render-safe .role-table-wrapper,
+  .article-render-safe .presentation-viewer,
+  .article-render-safe .role-card,
+  .article-render-safe .problem-item {
+    transform: none !important;
+    will-change: auto !important;
+    contain: none !important;
+  }
+
+  .article-render-safe .role-table-wrapper {
+    box-shadow: none !important;
+  }
+
+  .article-render-safe .reveal,
+  .article-render-safe .reveal.is-visible {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  @media (max-width: 760px) {
+    .article-render-safe .article-shell {
+      padding: 32px 16px 64px !important;
+    }
+
+    .article-render-safe .summary-section {
+      padding: 24px 16px !important;
+    }
+
+    .article-render-safe .summary-wrap {
+      padding: 22px 20px !important;
+      border-radius: 16px !important;
+    }
+
+    .article-render-safe .article-body {
+      font-size: 17px !important;
+    }
+  }
+</style>
+
 </head>
 
-<body id="top">
+<body
+  id="top"
+  data-render-mode="{{ page.render_mode | default: 'standard' }}"
+  class="{% if page.render_mode == 'safe' %}article-render-safe{% endif %}"
+>
   {% assign months = "Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember" | split: "," %}
   {% if page.date %}
     {% assign month_number = page.date | date: "%-m" | minus: 1 %}
@@ -2036,6 +2186,10 @@
     function initLayoutHelpers() {
       resetMobileMenu();
 
+      var safeMode =
+        document.body &&
+        document.body.getAttribute("data-render-mode") === "safe";
+
       var year = byId("currentYear");
       if (year) year.textContent = new Date().getFullYear();
 
@@ -2048,13 +2202,13 @@
 
       setupLegacyChecklist();
 
-      /*
-       * Jalankan TOC setelah custom_js mendapat kesempatan menginisialisasi diri.
-       * setTimeout(0) tetap ringan, tetapi menghindari duplikasi TOC.
-       */
-      window.setTimeout(setupToc, 0);
-
-      updateProgress();
+      if (!safeMode) {
+        window.setTimeout(setupToc, 0);
+        updateProgress();
+      } else {
+        var progress = byId("readingProgress");
+        if (progress) progress.style.width = "0";
+      }
     }
 
     if (document.readyState === "loading") {
@@ -2063,30 +2217,26 @@
       initLayoutHelpers();
     }
 
-    window.addEventListener("scroll", updateProgress, { passive: true });
-    window.addEventListener("resize", updateProgress);
+    if (
+      !document.body ||
+      document.body.getAttribute("data-render-mode") !== "safe"
+    ) {
+      window.addEventListener("scroll", updateProgress, { passive: true });
+      window.addEventListener("resize", updateProgress);
+    }
+
     window.addEventListener("pageshow", function () {
       resetMobileMenu();
-      updateProgress();
+
+      if (
+        !document.body ||
+        document.body.getAttribute("data-render-mode") !== "safe"
+      ) {
+        updateProgress();
+      }
     });
   })();
   </script>
-<script>
-    (() => {
-      const toc = document.getElementById("articleToc");
-      if (!toc) return;
 
-      const normalize = () => {
-        Array.from(toc.querySelectorAll("a")).forEach((link, index) => {
-          if (!link.dataset.index) link.dataset.index = String(index + 1).padStart(2, "0");
-          if (link.classList.contains("active")) link.classList.add("is-active");
-        });
-      };
-
-      normalize();
-      const observer = new MutationObserver(normalize);
-      observer.observe(toc, { childList: true, subtree: true, attributes: true, attributeFilter: ["class"] });
-    })();
-  </script>
 </body>
 </html>
