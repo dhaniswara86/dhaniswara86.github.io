@@ -52,7 +52,7 @@ custom_css:
   - /assets/css/roleakses-v2.css?v=20260818-1
 
 custom_js:
-  - /assets/js/roleakses-v3.js?v=20260814-4
+  - /assets/js/roleakses-v4-stable.js?v=20260906-1
 ---
 
 <div class="role-article">
