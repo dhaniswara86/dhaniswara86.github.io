@@ -37,11 +37,8 @@
     <meta property="article:tag" content="{{ tag | escape }}">
   {% endfor %}
 
-  {% if page.custom_css %}
-    {% for css in page.custom_css %}
-      <link rel="stylesheet" href="{{ css | relative_url }}">
-    {% endfor %}
-  {% endif %}
+  <!-- Compatibility foundation untuk komponen artikel lama/interaktif -->
+  <link rel="stylesheet" href="{{ '/assets/css/artikel-editorial.css' | relative_url }}?v=20260905-compat1">
 
   <style>
     :root{
@@ -583,174 +580,6 @@
     .article-body td{padding:13px 14px;border-bottom:1px solid #dedee3;vertical-align:top}
     .article-body tr:nth-child(even) td{background:#fafafa}
 
-
-    /* =========================================================
-       Checklist artikel — kontras tinggi dan tetap interaktif
-       ========================================================= */
-    .article-body input[type="checkbox"],
-    .article-body .task-list-item input[type="checkbox"],
-    .article-body .checklist input[type="checkbox"],
-    .article-body [data-checklist] input[type="checkbox"]{
-      -webkit-appearance:none !important;
-      appearance:none !important;
-      width:20px !important;
-      height:20px !important;
-      min-width:20px !important;
-      min-height:20px !important;
-      display:inline-grid !important;
-      place-content:center !important;
-      margin:0 9px 0 1px !important;
-      padding:0 !important;
-      vertical-align:-3px !important;
-      border:1.8px solid #8d8d93 !important;
-      border-radius:6px !important;
-      background:#fff !important;
-      opacity:1 !important;
-      visibility:visible !important;
-      box-shadow:none !important;
-      cursor:pointer;
-    }
-
-    .article-body input[type="checkbox"]::before,
-    .article-body .task-list-item input[type="checkbox"]::before,
-    .article-body .checklist input[type="checkbox"]::before,
-    .article-body [data-checklist] input[type="checkbox"]::before{
-      width:10px;
-      height:6px;
-      border-left:2px solid #fff;
-      border-bottom:2px solid #fff;
-      content:"";
-      opacity:0;
-      transform:translateY(-1px) rotate(-45deg) scale(.65);
-      transform-origin:center;
-      transition:opacity .12s ease,transform .12s ease;
-    }
-
-    .article-body input[type="checkbox"]:checked,
-    .article-body .task-list-item input[type="checkbox"]:checked,
-    .article-body .checklist input[type="checkbox"]:checked,
-    .article-body [data-checklist] input[type="checkbox"]:checked{
-      border-color:var(--blue) !important;
-      background:var(--blue) !important;
-    }
-
-    .article-body input[type="checkbox"]:checked::before,
-    .article-body .task-list-item input[type="checkbox"]:checked::before,
-    .article-body .checklist input[type="checkbox"]:checked::before,
-    .article-body [data-checklist] input[type="checkbox"]:checked::before{
-      opacity:1;
-      transform:translateY(-1px) rotate(-45deg) scale(1);
-    }
-
-    /* Disabled checkbox dari Markdown/Jekyll tetap jelas terbaca. */
-    .article-body input[type="checkbox"]:disabled{
-      opacity:1 !important;
-      cursor:default;
-    }
-
-    .article-body input[type="checkbox"]:focus-visible{
-      outline:3px solid rgba(10,102,216,.18) !important;
-      outline-offset:2px;
-    }
-
-    /* Variasi struktur checklist yang umum dipakai Markdown/custom HTML. */
-    .article-body .task-list-item,
-    .article-body .checklist-item,
-    .article-body .check-item,
-    .article-body [data-checklist-item]{
-      list-style:none !important;
-    }
-
-    .article-body ul.task-list,
-    .article-body ul.checklist,
-    .article-body ol.task-list,
-    .article-body ol.checklist{
-      padding-left:0 !important;
-      list-style:none !important;
-    }
-
-    .article-body .task-list-item,
-    .article-body .checklist-item,
-    .article-body .check-item,
-    .article-body [data-checklist-item]{
-      position:relative;
-      margin:.72em 0 !important;
-      padding-left:0 !important;
-    }
-
-    .article-body label:has(> input[type="checkbox"]),
-    .article-body .task-list-item label,
-    .article-body .checklist-item label{
-      display:flex;
-      align-items:flex-start;
-      gap:10px;
-      cursor:pointer;
-    }
-
-    .article-body label:has(> input[type="checkbox"]) > input[type="checkbox"],
-    .article-body .task-list-item label > input[type="checkbox"],
-    .article-body .checklist-item label > input[type="checkbox"]{
-      flex:0 0 20px;
-      margin-top:4px !important;
-      margin-right:0 !important;
-    }
-
-    /* Checklist yang ditulis langsung di dalam paragraf tetap mendapat ruang. */
-    .article-body p > input[type="checkbox"],
-    .article-body li > input[type="checkbox"]{
-      margin-right:10px !important;
-    }
-
-    /* Tombol kontrol checklist, misalnya Reset checklist. */
-    .article-body button,
-    .article-body .checklist-reset,
-    .article-body [data-checklist-reset]{
-      min-height:40px;
-      padding:9px 16px;
-      border:1px solid #d4d4d9;
-      border-radius:999px;
-      background:#fff;
-      color:#1d1d1f;
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-      font-size:13px;
-      font-weight:700;
-      line-height:1;
-      cursor:pointer;
-    }
-
-    .article-body button:hover,
-    .article-body .checklist-reset:hover,
-    .article-body [data-checklist-reset]:hover{
-      border-color:#a9a9af;
-      background:#f7f7f9;
-    }
-
-    @media(max-width:680px){
-      .article-body input[type="checkbox"],
-      .article-body .task-list-item input[type="checkbox"],
-      .article-body .checklist input[type="checkbox"],
-      .article-body [data-checklist] input[type="checkbox"]{
-        width:21px !important;
-        height:21px !important;
-        min-width:21px !important;
-        min-height:21px !important;
-      }
-
-      .article-body label:has(> input[type="checkbox"]) > input[type="checkbox"],
-      .article-body .task-list-item label > input[type="checkbox"],
-      .article-body .checklist-item label > input[type="checkbox"]{
-        flex-basis:21px;
-      }
-    }
-
-    @media print{
-      .article-body input[type="checkbox"]{
-        -webkit-print-color-adjust:exact;
-        print-color-adjust:exact;
-      }
-    }
-
-
     /* Sidebar */
     .article-sidebar{
       position:sticky;
@@ -1031,8 +860,7 @@
       a{text-decoration:none}
     }
   </style>
-
-  <style id="kabayanVividEditorialPalette">
+<style id="kabayanVividEditorialPalette">
     /* =========================================================
        Kabayan Editorial — high contrast, tetap bersih
        ========================================================= */
@@ -1230,41 +1058,8 @@
       color:#6f7780 !important;
     }
 
-    /* Checklist groups: beri bidang lembut pada bagian A/B/C jika heading langsung sebelum checklist */
-    .article-body h3 + p:has(input[type="checkbox"]),
-    .article-body h3 + ul.task-list,
-    .article-body h3 + ul.checklist{
-      margin-top:18px !important;
-    }
+    /* Interactive checklist mengikuti stylesheet komponennya masing-masing. */
 
-    .article-body p:has(input[type="checkbox"]){
-      padding:17px 18px;
-      border:1px solid #d8e2ef;
-      border-radius:16px;
-      background:#f7fbff;
-      box-shadow:inset 4px 0 0 var(--blue);
-    }
-
-    .article-body .task-list,
-    .article-body .checklist{
-      padding:17px 18px !important;
-      border:1px solid #d8e2ef;
-      border-radius:16px;
-      background:#f7fbff;
-      box-shadow:inset 4px 0 0 var(--blue);
-    }
-
-    .article-body input[type="checkbox"]{
-      border-color:#6d7783 !important;
-      background:#fff !important;
-      box-shadow:0 0 0 1px rgba(255,255,255,.7) !important;
-    }
-
-    .article-body input[type="checkbox"]:checked{
-      border-color:var(--blue) !important;
-      background:var(--blue) !important;
-      box-shadow:0 0 0 3px rgba(8,102,216,.12) !important;
-    }
 
     /* Callouts: warna lebih tegas */
     .article-body blockquote{
@@ -1434,6 +1229,160 @@
     }
   </style>
 
+  <style id="kabayanCompatibilityLayer">
+    /* =========================================================
+       Compatibility layer
+       - layout baru tetap dominan
+       - komponen interaktif memakai CSS lama / custom_css sendiri
+       ========================================================= */
+    :root{
+      /* Alias variabel yang masih dipakai komponen legacy. */
+      --black:#000000;
+      --near-black:#1d1d1f;
+      --white:#ffffff;
+      --off-white:#f5f5f7;
+      --soft-gray:#e8e8ed;
+      --medium-gray:#86868b;
+      --blue-hover:#0077ed;
+      --green:#248a3d;
+      --green-soft:#edf8ef;
+      --orange:#bf5b00;
+      --orange-soft:#fff7e8;
+      --red-soft:#fff0ee;
+      --purple:#8944ab;
+      --purple-soft:#f5eff9;
+      --nav-height:var(--nav-h);
+      --max-width:var(--max);
+      --article-width:var(--article);
+    }
+
+    /* artikel-editorial.css lama memberi padding ke main; layout baru memakai padding body. */
+    main{padding-top:0 !important}
+
+    /* Base CSS lama memakai .mobile-menu.active. Paksa kembali ke mekanisme checkbox baru. */
+    .mobile-menu{display:block !important}
+    #mobileNavToggle:not(:checked) ~ .mobile-menu{
+      visibility:hidden !important;
+      opacity:0 !important;
+      pointer-events:none !important;
+      transform:translateY(-8px) !important;
+    }
+    #mobileNavToggle:checked ~ .mobile-menu{
+      visibility:visible !important;
+      opacity:1 !important;
+      pointer-events:auto !important;
+      transform:translateY(0) !important;
+    }
+
+    /* TOC khusus dari JS artikel lama menggunakan class .active. */
+    #articleToc a.active,
+    #articleToc a.is-active{
+      color:#111 !important;
+      background:var(--sky,#eaf3ff) !important;
+      font-weight:800 !important;
+      border-left:4px solid var(--blue,#0866d8) !important;
+      padding-left:10px !important;
+    }
+    #articleToc a.active::before,
+    #articleToc a.is-active::before{color:var(--blue,#0866d8) !important}
+
+    /* Jangan beri typography editorial pada kertas/form interaktif. */
+    .article-body :is(.skb-paper,#formulir-interaktif,.paper,.skb-app) :is(p,li,h1,h2,h3,h4,label,input,textarea,select,button,table,th,td){
+      letter-spacing:normal;
+    }
+
+    /* SKB Potput: mode cetak pada CSS lama merujuk nama layout lama. */
+    @media print{
+      body.print-skb-form .site-nav,
+      body.print-skb-form .mobile-menu,
+      body.print-skb-form .mobile-nav-checkbox,
+      body.print-skb-form .reading-progress,
+      body.print-skb-form main > article > .article-hero,
+      body.print-skb-form .summary-section,
+      body.print-skb-form .article-shell,
+      body.print-skb-form .author-signature,
+      body.print-skb-form .article-closing,
+      body.print-skb-form .site-footer,
+      body.print-skb-form .skb-toolbar,
+      body.print-skb-form .skb-screen-note{
+        display:none !important;
+      }
+      body.print-skb-form{padding-top:0 !important;background:#fff !important}
+      body.print-skb-form main{display:block !important;padding:0 !important}
+      body.print-skb-form .skb-print-portal{display:block !important}
+
+      /* Surat Kuasa Khusus embedded form */
+      body.print-skk .site-nav,
+      body.print-skk .mobile-menu,
+      body.print-skk .mobile-nav-checkbox,
+      body.print-skk .reading-progress,
+      body.print-skk .article-hero,
+      body.print-skk .summary-section,
+      body.print-skk .author-signature,
+      body.print-skk .article-closing,
+      body.print-skk .site-footer{
+        display:none !important;
+      }
+      body.print-skk{padding-top:0 !important;background:#fff !important}
+    }
+  </style>
+  <style id="kabayanHeroFactsStyles">
+    .hero-facts{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:1px;
+      max-width:740px;
+      margin-top:28px;
+      overflow:hidden;
+      border:1px solid rgba(8,42,82,.13);
+      border-radius:18px;
+      background:rgba(8,42,82,.11);
+    }
+    .hero-fact{
+      min-width:0;
+      padding:15px 17px;
+      background:rgba(255,255,255,.82);
+    }
+    .hero-fact strong{
+      display:block;
+      color:var(--navy,#082a52);
+      font-size:18px;
+      font-weight:800;
+      letter-spacing:-.035em;
+      line-height:1.1;
+    }
+    .hero-fact span{
+      display:block;
+      margin-top:5px;
+      color:#626a74;
+      font-size:10.5px;
+      line-height:1.35;
+    }
+    .hero-page-image{
+      width:min(420px,100%);
+      max-height:440px;
+      margin:0;
+      overflow:hidden;
+      border:1px solid rgba(8,42,82,.12);
+      border-radius:28px;
+      background:#fff;
+      box-shadow:0 24px 48px rgba(8,42,82,.13);
+    }
+    .hero-page-image img{width:100%;height:100%;max-height:440px;object-fit:cover}
+    @media(max-width:680px){
+      .hero-facts{grid-template-columns:1fr 1fr;margin-top:22px}
+      .hero-fact{padding:13px 14px}
+      .hero-fact strong{font-size:16px}
+      .hero-page-image{max-width:330px}
+    }
+  </style>
+  {% if page.custom_css %}
+    {% for css in page.custom_css %}
+      <!-- Dimuat terakhir agar komponen artikel/interaktif mempertahankan desain aslinya. -->
+      <link rel="stylesheet" href="{{ css | relative_url }}">
+    {% endfor %}
+  {% endif %}
+
 </head>
 
 <body id="top">
@@ -1530,6 +1479,17 @@
               {% if page.legal_basis %}<span>{{ page.legal_basis }}</span>{% endif %}
             </div>
 
+            {% if page.hero_stats %}
+              <div class="hero-facts" aria-label="Fakta utama artikel">
+                {% for stat in page.hero_stats limit: 4 %}
+                  <div class="hero-fact">
+                    <strong>{{ stat.value }}</strong>
+                    <span>{{ stat.label }}</span>
+                  </div>
+                {% endfor %}
+              </div>
+            {% endif %}
+
             <div class="hero-actions">
               <a class="button button-primary" href="#articleContent">Mulai membaca ↓</a>
               {% for action in page.hero_links %}
@@ -1541,11 +1501,20 @@
           </div>
 
           <div class="hero-companion reveal" aria-hidden="true">
-            <img
-              class="hero-kabayan"
-              src="{{ '/assets/img/kabayan-pengetahuan.webp' | relative_url }}"
-              alt=""
-            >
+            {% if page.image %}
+              <figure class="hero-page-image">
+                <img
+                  src="{{ page.image | relative_url }}"
+                  alt="{{ page.image_alt | default: page.title | escape }}"
+                >
+              </figure>
+            {% else %}
+              <img
+                class="hero-kabayan"
+                src="{{ '/assets/img/kabayan-pengetahuan.webp' | relative_url }}"
+                alt=""
+              >
+            {% endif %}
             <div class="hero-note">
               <small>Kabayan / Editorial</small>
               <strong>Pajak dijelaskan dengan bahasa yang lebih tertata.</strong>
@@ -1755,6 +1724,54 @@
         });
       }
 
+
+
+      /* Checklist legacy: dipakai antara lain oleh SKB PPh Potput. */
+      const legacyCheckboxes = Array.from(document.querySelectorAll("[data-check]"));
+      const legacyChecklistBar = document.getElementById("progressBar");
+      const legacyChecklistText = document.getElementById("progressText");
+      const legacyChecklistReset = document.getElementById("resetChecklist");
+
+      if (legacyCheckboxes.length && legacyChecklistBar && legacyChecklistText) {
+        const checklistKey = "kabayan-checklist:" + (document.body.dataset.articleKey || location.pathname);
+
+        const readChecklistState = () => {
+          try { return JSON.parse(localStorage.getItem(checklistKey) || "[]"); }
+          catch (error) { return []; }
+        };
+
+        const saveChecklistState = () => {
+          try {
+            localStorage.setItem(checklistKey, JSON.stringify(legacyCheckboxes.map(box => box.checked)));
+          } catch (error) {}
+        };
+
+        const renderChecklistState = () => {
+          const done = legacyCheckboxes.filter(box => box.checked).length;
+          const total = legacyCheckboxes.length;
+          const percent = total ? Math.round((done / total) * 100) : 0;
+          legacyChecklistBar.style.width = percent + "%";
+          legacyChecklistText.textContent = `${done} dari ${total} butir selesai (${percent}%)`;
+        };
+
+        const storedState = readChecklistState();
+        legacyCheckboxes.forEach((box, index) => {
+          box.checked = Boolean(storedState[index]);
+          box.addEventListener("change", () => {
+            saveChecklistState();
+            renderChecklistState();
+          });
+        });
+
+        legacyChecklistReset?.addEventListener("click", () => {
+          legacyCheckboxes.forEach(box => { box.checked = false; });
+          try { localStorage.removeItem(checklistKey); } catch (error) {}
+          renderChecklistState();
+        });
+
+        renderChecklistState();
+      }
+
       const revealItems = Array.from(document.querySelectorAll(".reveal"));
       if ("IntersectionObserver" in window) {
         const revealObserver = new IntersectionObserver(entries => {
@@ -1778,5 +1795,23 @@
       <script src="{{ js | relative_url }}"></script>
     {% endfor %}
   {% endif %}
+
+  <script>
+    (() => {
+      const toc = document.getElementById("articleToc");
+      if (!toc) return;
+
+      const normalize = () => {
+        Array.from(toc.querySelectorAll("a")).forEach((link, index) => {
+          if (!link.dataset.index) link.dataset.index = String(index + 1).padStart(2, "0");
+          if (link.classList.contains("active")) link.classList.add("is-active");
+        });
+      };
+
+      normalize();
+      const observer = new MutationObserver(normalize);
+      observer.observe(toc, { childList: true, subtree: true, attributes: true, attributeFilter: ["class"] });
+    })();
+  </script>
 </body>
 </html>
