@@ -70,7 +70,6 @@
       -webkit-font-smoothing:antialiased;
       text-rendering:optimizeLegibility;
     }
-    body:has(#mobileNavToggle:checked){overflow:hidden}
     a{color:inherit}
     button,input{font:inherit}
     img{display:block;max-width:100%}
@@ -200,6 +199,7 @@
       position:fixed;
       z-index:1450;
       top:var(--nav-h);right:0;bottom:0;left:0;
+      height:calc(100vh - var(--nav-h));
       height:calc(100dvh - var(--nav-h));
       display:block;
       overflow-y:auto;
@@ -766,9 +766,8 @@
 
     /* Reveal */
     .reveal{
-      opacity:0;
-      transform:translateY(20px);
-      transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1);
+      opacity:1;
+      transform:none;
     }
     .reveal.is-visible{opacity:1;transform:none}
 
@@ -1214,7 +1213,6 @@
         padding:28px 24px !important;
       }
 
-      .article-body p:has(input[type="checkbox"]),
       .article-body .task-list,
       .article-body .checklist{
         padding:15px 14px !important;
@@ -1383,6 +1381,159 @@
     {% endfor %}
   {% endif %}
 
+  <style id="kabayanOuterShellGuard">
+    /*
+      Guard dimuat SETELAH page.custom_css.
+      Hanya mengunci shell/layout, tidak menimpa komponen isi artikel.
+    */
+    @media screen {
+      html,
+      body {
+        opacity: 1 !important;
+        visibility: visible !important;
+      }
+
+      body {
+        display: block !important;
+        min-height: 100% !important;
+      }
+
+      body > main,
+      main > article,
+      .article-hero,
+      .summary-section,
+      .article-shell,
+      .author-signature,
+      .article-closing,
+      .site-footer {
+        opacity: 1 !important;
+        visibility: visible !important;
+      }
+
+      body > main {
+        display: block !important;
+        padding-top: 0 !important;
+      }
+
+      .article-hero,
+      .summary-section,
+      .article-shell,
+      .author-signature,
+      .article-closing,
+      .site-footer {
+        position: relative;
+      }
+
+      .reveal {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+      }
+
+      .mobile-menu {
+        display: block !important;
+      }
+
+      #mobileNavToggle:not(:checked) ~ .mobile-menu {
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        transform: translateY(-8px) !important;
+      }
+
+      #mobileNavToggle:checked ~ .mobile-menu {
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        transform: translateY(0) !important;
+      }
+    }
+
+    @media screen and (max-width: 960px) {
+      .article-layout {
+        width: 100% !important;
+        max-width: 100% !important;
+        grid-template-columns: minmax(0, 1fr) !important;
+      }
+
+      .article-body {
+        min-width: 0 !important;
+        max-width: 100% !important;
+      }
+
+      .article-sidebar {
+        position: static !important;
+        top: auto !important;
+        min-width: 0 !important;
+      }
+    }
+
+    @media screen and (max-width: 680px) {
+      .hero-grid,
+      .article-layout,
+      .article-body,
+      .summary-wrap,
+      .author-signature-inner,
+      .closing-inner {
+        min-width: 0 !important;
+        max-width: 100% !important;
+      }
+
+      .article-body input,
+      .article-body textarea,
+      .article-body select,
+      .article-body button {
+        max-width: 100%;
+      }
+    }
+  </style>
+
+
+  <style id="kabayanArticleScrollStability">
+    /*
+      Stabilitas render artikel panjang:
+      - anchor jump tidak memakai smooth scroll
+      - fixed header tidak memakai backdrop-filter GPU-heavy
+      - mobile overlay juga memakai background solid
+    */
+    html {
+      scroll-behavior: auto !important;
+    }
+
+    .site-nav {
+      background: rgba(255,255,255,.985) !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      transform: none !important;
+      will-change: auto !important;
+    }
+
+    .mobile-menu {
+      background: #ffffff !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      will-change: auto !important;
+    }
+
+    .reading-progress {
+      will-change: width;
+    }
+
+    /* Kurangi layer kompositor yang tidak perlu pada halaman artikel panjang. */
+    .article-sidebar,
+    .article-shell,
+    .article-body {
+      transform: none !important;
+      will-change: auto !important;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      html {
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+
 </head>
 
 <body id="top">
@@ -1397,6 +1548,7 @@
     class="mobile-nav-checkbox"
     id="mobileNavToggle"
     type="checkbox"
+    autocomplete="off"
     aria-label="Buka atau tutup menu navigasi"
   >
 
@@ -1617,186 +1769,309 @@
     </div>
   </footer>
 
-  <script>
-    (() => {
-      "use strict";
-
-      const progress = document.getElementById("readingProgress");
-      const body = document.getElementById("articleBody");
-      const toc = document.getElementById("articleToc");
-      const sidebar = document.getElementById("articleSidebar");
-      const copyButton = document.getElementById("copyLinkButton");
-      const year = document.getElementById("currentYear");
-
-      if (year) year.textContent = new Date().getFullYear();
-
-      function updateProgress() {
-        if (!progress) return;
-        const max = document.documentElement.scrollHeight - window.innerHeight;
-        const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
-        progress.style.width = Math.max(0, Math.min(100, pct)) + "%";
-      }
-
-      window.addEventListener("scroll", updateProgress, { passive: true });
-      window.addEventListener("resize", updateProgress);
-      updateProgress();
-
-      function slugify(value) {
-        return String(value || "")
-          .normalize("NFD")
-          .replace(/[\u0300-\u036f]/g, "")
-          .toLowerCase()
-          .replace(/[^a-z0-9]+/g, "-")
-          .replace(/^-+|-+$/g, "");
-      }
-
-      if (body && toc && sidebar) {
-        const headings = Array.from(body.querySelectorAll("h2"));
-        if (!headings.length) {
-          sidebar.hidden = true;
-        } else {
-          const used = new Set();
-
-          headings.forEach((heading, index) => {
-            let base = heading.id || slugify(heading.textContent) || `bagian-${index + 1}`;
-            let id = base;
-            let n = 2;
-            while (
-              used.has(id) ||
-              (document.getElementById(id) && document.getElementById(id) !== heading)
-            ) {
-              id = `${base}-${n++}`;
-            }
-            heading.id = id;
-            used.add(id);
-
-            const chapter = String(index + 1).padStart(2, "0");
-            heading.dataset.chapter = `${chapter} / BAGIAN`;
-
-            const link = document.createElement("a");
-            link.href = `#${id}`;
-            link.dataset.target = id;
-            link.dataset.index = chapter;
-            link.textContent = heading.textContent.trim();
-            toc.appendChild(link);
-          });
-
-          const links = Array.from(toc.querySelectorAll("a"));
-
-          function activate(id) {
-            links.forEach(link => {
-              const active = link.dataset.target === id;
-              link.classList.toggle("is-active", active);
-              if (active) link.setAttribute("aria-current", "location");
-              else link.removeAttribute("aria-current");
-            });
-          }
-
-          activate(headings[0].id);
-
-          if ("IntersectionObserver" in window) {
-            const observer = new IntersectionObserver(entries => {
-              const visible = entries
-                .filter(entry => entry.isIntersecting)
-                .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
-
-              if (visible.length) activate(visible[0].target.id);
-            }, {
-              rootMargin: "-18% 0px -68% 0px",
-              threshold: [0, 1]
-            });
-
-            headings.forEach(heading => observer.observe(heading));
-          }
-        }
-      }
-
-      if (copyButton) {
-        copyButton.addEventListener("click", async () => {
-          const original = copyButton.textContent.trim();
-          try {
-            await navigator.clipboard.writeText(window.location.href);
-            copyButton.textContent = "Tautan tersalin";
-          } catch (error) {
-            copyButton.textContent = "Gagal menyalin";
-          }
-          setTimeout(() => { copyButton.textContent = original; }, 1600);
-        });
-      }
-
-
-
-      /* Checklist legacy: dipakai antara lain oleh SKB PPh Potput. */
-      const legacyCheckboxes = Array.from(document.querySelectorAll("[data-check]"));
-      const legacyChecklistBar = document.getElementById("progressBar");
-      const legacyChecklistText = document.getElementById("progressText");
-      const legacyChecklistReset = document.getElementById("resetChecklist");
-
-      if (legacyCheckboxes.length && legacyChecklistBar && legacyChecklistText) {
-        const checklistKey = "kabayan-checklist:" + (document.body.dataset.articleKey || location.pathname);
-
-        const readChecklistState = () => {
-          try { return JSON.parse(localStorage.getItem(checklistKey) || "[]"); }
-          catch (error) { return []; }
-        };
-
-        const saveChecklistState = () => {
-          try {
-            localStorage.setItem(checklistKey, JSON.stringify(legacyCheckboxes.map(box => box.checked)));
-          } catch (error) {}
-        };
-
-        const renderChecklistState = () => {
-          const done = legacyCheckboxes.filter(box => box.checked).length;
-          const total = legacyCheckboxes.length;
-          const percent = total ? Math.round((done / total) * 100) : 0;
-          legacyChecklistBar.style.width = percent + "%";
-          legacyChecklistText.textContent = `${done} dari ${total} butir selesai (${percent}%)`;
-        };
-
-        const storedState = readChecklistState();
-        legacyCheckboxes.forEach((box, index) => {
-          box.checked = Boolean(storedState[index]);
-          box.addEventListener("change", () => {
-            saveChecklistState();
-            renderChecklistState();
-          });
-        });
-
-        legacyChecklistReset?.addEventListener("click", () => {
-          legacyCheckboxes.forEach(box => { box.checked = false; });
-          try { localStorage.removeItem(checklistKey); } catch (error) {}
-          renderChecklistState();
-        });
-
-        renderChecklistState();
-      }
-
-      const revealItems = Array.from(document.querySelectorAll(".reveal"));
-      if ("IntersectionObserver" in window) {
-        const revealObserver = new IntersectionObserver(entries => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("is-visible");
-              revealObserver.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.12 });
-
-        revealItems.forEach(item => revealObserver.observe(item));
-      } else {
-        revealItems.forEach(item => item.classList.add("is-visible"));
-      }
-    })();
-  </script>
-
   {% if page.custom_js %}
     {% for js in page.custom_js %}
       <script src="{{ js | relative_url }}"></script>
     {% endfor %}
   {% endif %}
 
-  <script>
+  
+
+  <script id="kabayanArticleSafeScript">
+  (function () {
+    "use strict";
+
+    function byId(id) {
+      return document.getElementById(id);
+    }
+
+    function toArray(list) {
+      return Array.prototype.slice.call(list || []);
+    }
+
+    function pad2(value) {
+      value = String(value);
+      return value.length < 2 ? "0" + value : value;
+    }
+
+    function slugify(value) {
+      var text = String(value || "");
+      try {
+        if (text.normalize) {
+          text = text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        }
+      } catch (error) {}
+      return text
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+    }
+
+    function resetMobileMenu() {
+      var toggle = byId("mobileNavToggle");
+      if (toggle) toggle.checked = false;
+    }
+
+    function updateProgress() {
+      var progress = byId("readingProgress");
+      if (!progress) return;
+
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      var pct = max > 0 ? (window.pageYOffset / max) * 100 : 0;
+      pct = Math.max(0, Math.min(100, pct));
+      progress.style.width = pct + "%";
+    }
+
+    function copyCurrentUrl(button) {
+      var original = button.textContent.replace(/^\s+|\s+$/g, "");
+      var done = function (text) {
+        button.textContent = text;
+        window.setTimeout(function () {
+          button.textContent = original;
+        }, 1600);
+      };
+
+      if (
+        navigator.clipboard &&
+        typeof navigator.clipboard.writeText === "function"
+      ) {
+        navigator.clipboard.writeText(window.location.href).then(
+          function () { done("Tautan tersalin"); },
+          function () { fallbackCopy(); }
+        );
+        return;
+      }
+
+      fallbackCopy();
+
+      function fallbackCopy() {
+        var textarea = document.createElement("textarea");
+        textarea.value = window.location.href;
+        textarea.setAttribute("readonly", "");
+        textarea.style.position = "fixed";
+        textarea.style.left = "-9999px";
+        document.body.appendChild(textarea);
+        textarea.select();
+
+        try {
+          document.execCommand("copy");
+          done("Tautan tersalin");
+        } catch (error) {
+          done("Gagal menyalin");
+        }
+
+        document.body.removeChild(textarea);
+      }
+    }
+
+    function setupLegacyChecklist() {
+      var boxes = toArray(document.querySelectorAll("[data-check]"));
+      var bar = byId("progressBar");
+      var text = byId("progressText");
+      var reset = byId("resetChecklist");
+
+      if (!boxes.length || !bar || !text) return;
+
+      var key = "kabayan-checklist:" + window.location.pathname;
+
+      function readState() {
+        try {
+          return JSON.parse(window.localStorage.getItem(key) || "[]");
+        } catch (error) {
+          return [];
+        }
+      }
+
+      function saveState() {
+        try {
+          window.localStorage.setItem(
+            key,
+            JSON.stringify(
+              boxes.map(function (box) { return !!box.checked; })
+            )
+          );
+        } catch (error) {}
+      }
+
+      function render() {
+        var done = boxes.filter(function (box) { return box.checked; }).length;
+        var total = boxes.length;
+        var percent = total ? Math.round((done / total) * 100) : 0;
+
+        bar.style.width = percent + "%";
+        text.textContent =
+          done + " dari " + total + " butir selesai (" + percent + "%)";
+      }
+
+      var stored = readState();
+
+      boxes.forEach(function (box, index) {
+        box.checked = !!stored[index];
+        box.addEventListener("change", function () {
+          saveState();
+          render();
+        });
+      });
+
+      if (reset) {
+        reset.addEventListener("click", function () {
+          boxes.forEach(function (box) { box.checked = false; });
+          try { window.localStorage.removeItem(key); } catch (error) {}
+          render();
+        });
+      }
+
+      render();
+    }
+
+    function setupToc() {
+      var body = byId("articleBody");
+      var toc = byId("articleToc");
+      var sidebar = byId("articleSidebar");
+      if (!body || !toc || !sidebar) return;
+
+      var headings = toArray(body.querySelectorAll("h2"));
+      if (!headings.length) {
+        sidebar.hidden = true;
+        return;
+      }
+
+      /*
+       * Beri custom_js kesempatan membuat TOC sendiri.
+       * Jika #articleToc sudah berisi link, layout hanya menormalisasi.
+       */
+      var links = toArray(toc.querySelectorAll("a"));
+      var builtByLayout = links.length === 0;
+
+      if (builtByLayout) {
+        var used = {};
+
+        headings.forEach(function (heading, index) {
+          var base = heading.id || slugify(heading.textContent) || ("bagian-" + (index + 1));
+          var id = base;
+          var n = 2;
+
+          while (
+            used[id] ||
+            (byId(id) && byId(id) !== heading)
+          ) {
+            id = base + "-" + n;
+            n += 1;
+          }
+
+          heading.id = id;
+          used[id] = true;
+
+          var chapter = pad2(index + 1);
+          heading.setAttribute("data-chapter", chapter + " / BAGIAN");
+
+          var link = document.createElement("a");
+          link.href = "#" + id;
+          link.setAttribute("data-target", id);
+          link.setAttribute("data-index", chapter);
+          link.textContent = heading.textContent.replace(/^\s+|\s+$/g, "");
+          toc.appendChild(link);
+        });
+
+        links = toArray(toc.querySelectorAll("a"));
+      } else {
+        links.forEach(function (link, index) {
+          if (!link.getAttribute("data-index")) {
+            link.setAttribute("data-index", pad2(index + 1));
+          }
+          if (link.className.indexOf("active") !== -1) {
+            link.classList.add("is-active");
+          }
+        });
+      }
+
+      /*
+       * Hanya layout yang mengelola active state bila layout sendiri
+       * yang membangun TOC. Ini mencegah duel dengan custom_js artikel.
+       */
+      if (builtByLayout && links.length) {
+        function activate(id) {
+          links.forEach(function (link) {
+            var active = link.getAttribute("data-target") === id;
+            if (active) {
+              link.classList.add("is-active");
+              link.setAttribute("aria-current", "location");
+            } else {
+              link.classList.remove("is-active");
+              link.removeAttribute("aria-current");
+            }
+          });
+        }
+
+        activate(headings[0].id);
+
+        if ("IntersectionObserver" in window) {
+          var observer = new IntersectionObserver(
+            function (entries) {
+              var visible = entries.filter(function (entry) {
+                return entry.isIntersecting;
+              });
+
+              visible.sort(function (a, b) {
+                return a.boundingClientRect.top - b.boundingClientRect.top;
+              });
+
+              if (visible.length) {
+                activate(visible[0].target.id);
+              }
+            },
+            {
+              rootMargin: "-18% 0px -68% 0px",
+              threshold: [0, 1]
+            }
+          );
+
+          headings.forEach(function (heading) {
+            observer.observe(heading);
+          });
+        }
+      }
+    }
+
+    function initLayoutHelpers() {
+      resetMobileMenu();
+
+      var year = byId("currentYear");
+      if (year) year.textContent = new Date().getFullYear();
+
+      var copyButton = byId("copyLinkButton");
+      if (copyButton) {
+        copyButton.addEventListener("click", function () {
+          copyCurrentUrl(copyButton);
+        });
+      }
+
+      setupLegacyChecklist();
+
+      /*
+       * Jalankan TOC setelah custom_js mendapat kesempatan menginisialisasi diri.
+       * setTimeout(0) tetap ringan, tetapi menghindari duplikasi TOC.
+       */
+      window.setTimeout(setupToc, 0);
+
+      updateProgress();
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initLayoutHelpers);
+    } else {
+      initLayoutHelpers();
+    }
+
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    window.addEventListener("resize", updateProgress);
+    window.addEventListener("pageshow", function () {
+      resetMobileMenu();
+      updateProgress();
+    });
+  })();
+  </script>
+<script>
     (() => {
       const toc = document.getElementById("articleToc");
       if (!toc) return;
