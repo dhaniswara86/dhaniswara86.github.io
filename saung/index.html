@@ -12,6 +12,8 @@
     :root{
       --blue:#126fe8;
       --blue-dark:#075fcf;
+      --yellow:#F6C453;
+      --yellow-dark:#E7AC2E;
       --navy:#10294d;
       --text:#637895;
       --line:#d7e3f0;
@@ -170,12 +172,12 @@
     .form-status{min-height:18px;margin:-4px 0 -4px;color:#b42318;font-size:13px;line-height:1.35}
     .submit{
       height:58px;border:0;border-radius:15px;display:flex;align-items:center;justify-content:center;gap:14px;
-      background:linear-gradient(135deg,#2082fa 0%,var(--blue) 58%,var(--blue-dark) 100%);
-      color:#fff;font-size:16px;font-weight:820;cursor:pointer;
-      box-shadow:0 13px 28px rgba(18,111,232,.23);
+      background:linear-gradient(135deg,#FFD66B 0%,var(--yellow) 56%,var(--yellow-dark) 100%);
+      color:#10294d;font-size:16px;font-weight:850;cursor:pointer;
+      box-shadow:0 13px 28px rgba(231,172,46,.24);
       transition:transform .18s ease,box-shadow .18s ease;
     }
-    .submit:hover{transform:translateY(-1px);box-shadow:0 16px 34px rgba(18,111,232,.28)}
+    .submit:hover{transform:translateY(-1px);box-shadow:0 16px 34px rgba(231,172,46,.32);filter:brightness(1.015)}
     .submit:active{transform:translateY(0)}
     .submit .arrow{font-size:22px;line-height:1}
 
@@ -228,22 +230,6 @@
       background:rgba(255,255,255,.78);
     }
 
-    /* Replaces/covers the wording baked into the old artwork. */
-    .tagline{
-      position:absolute;
-      z-index:4;
-      top:0;
-      right:0;
-      width:min(310px,36%);
-      min-width:245px;
-      padding:clamp(27px,3vw,42px) clamp(28px,3vw,42px) clamp(24px,2.7vw,36px);
-      border-bottom-left-radius:58px;
-      background:rgba(241,248,255,.985);
-      box-shadow:0 12px 34px rgba(29,63,112,.06);
-    }
-    .tagline strong,.tagline span{display:block;color:#10294d;font-size:clamp(16px,1.3vw,20px);line-height:1.15;font-weight:820}
-    .tagline-line{width:54px;height:4px;border-radius:999px;background:var(--blue);margin-top:15px}
-
     /* Smaller desktop / laptop */
     @media (max-width:1240px){
       .page{grid-template-columns:minmax(410px,41%) minmax(0,59%)}
@@ -292,9 +278,6 @@
       .hero-img{object-position:60% 45%}
       .hero::before{inset:auto 0 0 0;width:auto;height:48%;background:linear-gradient(0deg,#fff 0%,rgba(255,255,255,.58) 48%,rgba(255,255,255,0) 100%)}
       .hero::after{display:none}
-      .tagline{width:auto;min-width:0;padding:18px 22px 17px;border-bottom-left-radius:34px}
-      .tagline strong,.tagline span{font-size:14px}
-      .tagline-line{width:40px;height:3px;margin-top:10px}
 
       .left{order:1;height:auto;min-height:auto;display:flex;flex-direction:column;overflow:visible;padding:0 22px 34px;background:#fff}
       .left::after{display:none}
@@ -313,8 +296,6 @@
     @media (max-width:520px){
       .hero{height:34svh;min-height:250px}
       .hero-img{object-position:63% 47%}
-      .tagline{padding:14px 16px 13px;border-bottom-left-radius:28px}
-      .tagline strong,.tagline span{font-size:12px}
       .left{padding-left:16px;padding-right:16px}
       .brand{left:16px;top:-235px;padding:7px 9px}.brand-mark{width:34px;height:34px}.brand-name{font-size:14px}
       .login-card{margin-top:-27px;padding:27px 20px 22px;border-radius:24px}
@@ -384,7 +365,7 @@
         </form>
 
         <div class="auth-links">
-          <a href="daftar.html">Ajukan akses</a>
+          <a href="daftar.html">Permintaan Akses</a>
           <span class="divider" aria-hidden="true"></span>
           <a href="lupa-password.html">Lupa password?</a>
         </div>
@@ -398,11 +379,6 @@
 
     <section class="hero" aria-label="Ilustrasi Saung Kabayan">
       <img class="hero-img" src="assets/img/saung-kabayan-hero.webp" alt="Kabayan bekerja di saung bambu">
-      <div class="tagline" aria-label="Tagline">
-        <strong>Pajak Tumbuh.</strong>
-        <span>Indonesia Tangguh</span>
-        <div class="tagline-line" aria-hidden="true"></div>
-      </div>
     </section>
   </main>
 
