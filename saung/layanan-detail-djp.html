@@ -118,34 +118,43 @@
     .hero-sla .calendar-unit { font-size: 14px; }
     .calendar-caption { display: block; max-width: 190px; margin: 13px auto 0; color: #5d7186; font-size: 12px; font-weight: 650; line-height: 1.45; text-transform: none; letter-spacing: 0; }
     .content-section { border-color: #dce5ee; box-shadow: 0 14px 35px rgba(27,63,98,.055); }
-    .requirements-overview { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: end; gap: 18px; margin: -4px 0 22px; padding: 18px; border: 1px solid #d9e8f7; border-radius: 17px; background: linear-gradient(135deg,#f5faff,#edf6ff); }
+    .requirements-overview { margin: -4px 0 22px; padding: 18px; border: 1px solid #d9e8f7; border-radius: 17px; background: linear-gradient(135deg,#f5faff,#edf6ff); }
     .progress-copy { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
     .progress-copy strong { font-size: 15px; }
     .progress-copy span { color: #315d85; font-size: 13px; font-weight: 720; }
     .progress-track { overflow: hidden; height: 9px; margin-top: 11px; border-radius: 999px; background: #d8e6f4; }
     .progress-bar { width: 0; height: 100%; border-radius: inherit; background: linear-gradient(90deg,#0878e3,#24aa85); transition: width .28s ease; }
-    .filter-row { display: flex; flex-wrap: wrap; gap: 7px; }
-    .filter-button { min-height: 34px; padding: 7px 11px; border: 1px solid #cbdbea; border-radius: 999px; background: rgba(255,255,255,.78); color: #36536e; font: inherit; font-size: 12px; font-weight: 740; cursor: pointer; transition: border-color .18s ease,background .18s ease,color .18s ease; }
-    .filter-button:hover { border-color: #86b9e9; }
-    .filter-button.active { border-color: var(--blue); background: var(--blue); color: #fff; }
-    .requirement-list { gap: 12px; }
-    .requirement { position: relative; grid-template-columns: auto 1fr auto; padding: 18px; border-left-width: 4px; background: #fff; box-shadow: 0 7px 20px rgba(29,65,100,.045); cursor: default; }
-    .requirement[data-group="wajib"] { border-left-color: #1780e7; }
-    .requirement[data-group="kondisional"] { border-left-color: #e49a25; }
-    .requirement[data-group="prasyarat"] { border-left-color: #805ad5; }
-    .requirement[data-group="informasi"] { border-left-color: #2d9b77; }
-    .requirement[hidden] { display: none; }
-    .requirement-check { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 12px; background: #f0f6fc; cursor: pointer; }
+    .requirement-tip { margin: 12px 0 0; color: #526b82; font-size: 13px; line-height: 1.5; }
+    .requirement-list { display: grid; gap: 12px; }
+    .requirement-group { overflow: hidden; border: 1px solid #dbe4ed; border-radius: 16px; background: #fff; }
+    .requirement-group > summary { display: flex; align-items: center; gap: 11px; min-height: 56px; padding: 12px 16px; background: #f8fafc; cursor: pointer; list-style: none; }
+    .requirement-group > summary::-webkit-details-marker { display: none; }
+    .group-dot { flex: 0 0 auto; width: 10px; height: 10px; border-radius: 50%; }
+    .requirement-group[data-group="wajib"] .group-dot { background: #1780e7; }
+    .requirement-group[data-group="kondisional"] .group-dot { background: #e49a25; }
+    .requirement-group[data-group="prasyarat"] .group-dot { background: #805ad5; }
+    .requirement-group[data-group="informasi"] .group-dot { background: #2d9b77; }
+    .group-title { font-size: 14px; font-weight: 790; }
+    .group-count { margin-left: auto; color: #657587; font-size: 12px; font-weight: 700; }
+    .group-chevron { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; background: #eaf0f6; color: #45617b; font-size: 15px; transition: transform .2s ease; }
+    .requirement-group[open] .group-chevron { transform: rotate(180deg); }
+    .requirement-group-body { border-top: 1px solid #e3e9ef; }
+    .requirement { position: relative; grid-template-columns: auto minmax(0,1fr) auto; align-items: start; gap: 13px; padding: 14px 16px; border: 0; border-bottom: 1px solid #edf0f4; border-radius: 0; background: #fff; box-shadow: none; cursor: default; }
+    .requirement:last-child { border-bottom: 0; }
+    .requirement:hover { border-color: #edf0f4; background: #fbfdff; }
+    .requirement-check { display: grid; place-items: center; width: 30px; height: 30px; cursor: pointer; }
     .requirement input { margin: 0; }
     .requirement-title { cursor: pointer; }
+    .requirement-title strong { font-size: 15px; }
     .requirement input:checked ~ .requirement-content .requirement-title { color: #64707d; text-decoration: line-through; }
-    .requirement-details { margin-top: 11px; }
+    .requirement-content > small { margin-top: 3px; }
+    .requirement-details { margin-top: 7px; }
     .requirement-details summary { width: fit-content; color: #28618f; font-size: 12px; font-weight: 740; cursor: pointer; list-style: none; }
     .requirement-details summary::-webkit-details-marker { display: none; }
     .requirement-details summary::after { margin-left: 6px; content: "+"; }
     .requirement-details[open] summary::after { content: "−"; }
-    .requirement-basis { padding: 11px 12px; border-radius: 10px; background: #f2f7fb; }
-    .requirement-tag { font-style: normal; }
+    .requirement-basis { padding: 9px 10px; border-radius: 9px; background: #f2f7fb; }
+    .requirement-tag { align-self: center; padding: 4px 8px; font-style: normal; }
     .requirement[data-group="wajib"] .requirement-tag { background: #e5f2ff; color: #0867c8; }
     .requirement[data-group="kondisional"] .requirement-tag { background: #fff1d9; color: #9a5b00; }
     .requirement[data-group="prasyarat"] .requirement-tag { background: #efe8ff; color: #6840bd; }
@@ -169,15 +178,13 @@
       .hero-grid { grid-template-columns: 1fr; }
       .hero-sla.calendar-card { width: min(100%,300px); min-height: 230px; }
       .hero-sla .calendar-body { min-height: 160px; }
-      .requirements-overview { grid-template-columns: 1fr; align-items: start; }
     }
     @media (max-width: 680px) {
       .detail-hero h1 { font-size: clamp(36px,12vw,52px); }
       .summary-strip { margin-top: 25px; }
-      .requirement { grid-template-columns: auto 1fr; padding: 15px; }
-      .requirement-tag { grid-column: 2; }
-      .filter-row { overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
-      .filter-button { flex: 0 0 auto; }
+      .requirement { grid-template-columns: auto minmax(0,1fr); padding: 13px 12px; }
+      .requirement-tag { grid-column: 2; justify-self: start; }
+      .requirement-group > summary { padding: 11px 13px; }
     }
   </style>
 </head>
@@ -247,7 +254,16 @@
         return "informasi";
       }
 
-      const filterLabels = {all:"Semua",wajib:"Wajib",kondisional:"Kondisional",prasyarat:"Prasyarat",informasi:"Informasi"};
+      const groupLabels = {wajib:"Dokumen wajib",kondisional:"Dokumen kondisional",prasyarat:"Prasyarat layanan",informasi:"Informasi pendukung"};
+      const groupOrder = ["wajib","kondisional","prasyarat","informasi"];
+      const sentenceCase = value => {
+        const text = String(value || "").trim();
+        return text ? text.charAt(0).toUpperCase() + text.slice(1) : text;
+      };
+      const showRequirementNote = note => {
+        const text = String(note || "").trim();
+        return text && !/^Periksa bentuk, masa berlaku, dan penandatangan sesuai ketentuan\.?$/i.test(text);
+      };
 
       function renderError() {
         root.innerHTML = `<div class="page-error"><h1>Layanan tidak ditemukan.</h1><p>Kode layanan tidak tersedia atau tautan yang dibuka tidak lengkap.</p><a class="action-link primary" href="layanan-perpajakan-djp.html">Kembali ke matriks</a></div>`;
@@ -258,9 +274,9 @@
         const needsDetail = !Array.isArray(item.requirements) && genericDocs.test(item.docs || "");
         const verified = item.requirements_status === "verified-regulation";
         const deadline = deadlineParts(item.sla);
-        const groups = requirements.reduce((result,requirement) => {
-          const group = requirementGroup(requirement.tag);
-          result[group] = (result[group] || 0) + 1;
+        const groupedRequirements = requirements.map((requirement,index) => ({requirement,index})).reduce((result,entry) => {
+          const group = requirementGroup(entry.requirement.tag);
+          (result[group] ||= []).push(entry);
           return result;
         },{});
         const pdfPath = `assets/docs/layanan/${encodeURIComponent(item.id)}/alur-proses.pdf`;
@@ -294,14 +310,13 @@
               <section class="content-section" id="persyaratan">
                 <div class="section-headline"><div><span class="section-eyebrow">Sebelum mengajukan</span><h2>Persyaratan dokumen</h2></div><span class="section-badge">${needsDetail ? "Perlu perincian" : verified ? `${requirements.length} butir · terverifikasi` : `${requirements.length} butir`}</span></div>
                 ${requirements.length ? `<div class="requirements-overview">
-                  <div><div class="progress-copy"><strong>Kesiapan dokumen</strong><span id="progressText">0 dari ${requirements.length} selesai</span></div><div class="progress-track" role="progressbar" aria-label="Kesiapan dokumen" aria-valuemin="0" aria-valuemax="${requirements.length}" aria-valuenow="0"><div class="progress-bar" id="progressBar"></div></div></div>
-                  <div class="filter-row" aria-label="Saring persyaratan">${["all","wajib","kondisional","prasyarat","informasi"].filter(group => group === "all" || groups[group]).map((group,index) => `<button class="filter-button${index === 0 ? " active" : ""}" type="button" data-filter="${group}" aria-pressed="${index === 0 ? "true" : "false"}">${filterLabels[group]}${group === "all" ? "" : ` · ${groups[group]}`}</button>`).join("")}</div>
+                  <div class="progress-copy"><strong>Kesiapan dokumen</strong><span id="progressText">0 dari ${requirements.length} selesai</span></div><div class="progress-track" role="progressbar" aria-label="Kesiapan dokumen" aria-valuemin="0" aria-valuemax="${requirements.length}" aria-valuenow="0"><div class="progress-bar" id="progressBar"></div></div>
+                  <p class="requirement-tip">Pastikan dokumen masih berlaku, dapat dibaca, dan ditandatangani oleh pihak yang berwenang. Buka rincian hanya ketika Anda memerlukan dasar hukum atau format dokumen.</p>
                 </div>` : ""}
-                <div class="requirement-list">${requirements.length ? requirements.map((req,index) => {
-                  const group = requirementGroup(req.tag);
+                <div class="requirement-list">${requirements.length ? groupOrder.filter(group => groupedRequirements[group]?.length).map((group,groupIndex) => `<details class="requirement-group" data-group="${group}" ${groupIndex === 0 ? "open" : ""}><summary><span class="group-dot" aria-hidden="true"></span><span class="group-title">${groupLabels[group]}</span><span class="group-count">${groupedRequirements[group].length} butir</span><span class="group-chevron" aria-hidden="true">⌄</span></summary><div class="requirement-group-body">${groupedRequirements[group].map(({requirement:req,index}) => {
                   const hasDetails = req.basis || req.format || req.source;
-                  return `<article class="requirement" data-group="${group}"><label class="requirement-check" for="requirement-${index}" aria-label="Tandai ${escapeHTML(req.name)} telah disiapkan"><input id="requirement-${index}" type="checkbox" data-requirement="${index}" ${checked[index] ? "checked" : ""}></label><div class="requirement-content"><label class="requirement-title" for="requirement-${index}"><strong>${escapeHTML(req.name)}</strong></label><small>${escapeHTML(req.note)}</small>${hasDetails ? `<details class="requirement-details"><summary>Lihat dasar dan format</summary><span class="requirement-basis">${req.basis ? `<span>Dasar: ${escapeHTML(req.basis)}</span>` : ""}${req.format ? `<span>Format: ${escapeHTML(req.format)}</span>` : ""}${req.source ? `<a href="${escapeHTML(req.source)}" target="_blank" rel="noopener">Buka regulasi ↗</a>` : ""}</span></details>` : ""}</div><em class="requirement-tag">${escapeHTML(req.tag)}</em></article>`;
-                }).join("") : `<div class="pdf-empty"><strong>Persyaratan belum tersedia.</strong><p>Daftar dokumen perlu ditambahkan setelah diverifikasi terhadap ketentuan layanan.</p></div>`}</div>
+                  return `<article class="requirement" data-group="${group}"><label class="requirement-check" for="requirement-${index}" aria-label="Tandai ${escapeHTML(req.name)} telah disiapkan"><input id="requirement-${index}" type="checkbox" data-requirement="${index}" ${checked[index] ? "checked" : ""}></label><div class="requirement-content"><label class="requirement-title" for="requirement-${index}"><strong>${escapeHTML(sentenceCase(req.name))}</strong></label>${showRequirementNote(req.note) ? `<small>${escapeHTML(req.note)}</small>` : ""}${hasDetails ? `<details class="requirement-details"><summary>Lihat dasar dan format</summary><span class="requirement-basis">${req.basis ? `<span>Dasar: ${escapeHTML(req.basis)}</span>` : ""}${req.format ? `<span>Format: ${escapeHTML(req.format)}</span>` : ""}${req.source ? `<a href="${escapeHTML(req.source)}" target="_blank" rel="noopener">Buka regulasi ↗</a>` : ""}</span></details>` : ""}</div><em class="requirement-tag">${escapeHTML(req.tag)}</em></article>`;
+                }).join("")}</div></details>`).join("") : `<div class="pdf-empty"><strong>Persyaratan belum tersedia.</strong><p>Daftar dokumen perlu ditambahkan setelah diverifikasi terhadap ketentuan layanan.</p></div>`}</div>
                 <div class="data-notice"><b>i</b><span>${needsDetail ? "Basis data saat ini baru memuat persyaratan umum. Jangan menjadikan daftar ini sebagai satu-satunya dasar pemeriksaan sampai rincian dokumen diverifikasi." : verified ? `Rincian ini telah dicocokkan dengan ketentuan yang disebutkan pada setiap butir. Terakhir ditelaah ${escapeHTML(item.reviewed_at || "5 September 2026")}.` : "Checklist disusun dari ringkasan dokumen pada matriks. Pastikan kembali bentuk dokumen dan ketentuan teknis pada sumber resmi."}</span></div>
               </section>
 
@@ -340,15 +355,6 @@
           checked[input.dataset.requirement] = input.checked;
           localStorage.setItem(storageKey, JSON.stringify(checked));
           updateProgress();
-        }));
-        root.querySelectorAll("[data-filter]").forEach(button => button.addEventListener("click", () => {
-          const filter = button.dataset.filter;
-          root.querySelectorAll("[data-filter]").forEach(item => {
-            const active = item === button;
-            item.classList.toggle("active",active);
-            item.setAttribute("aria-pressed",String(active));
-          });
-          root.querySelectorAll(".requirement[data-group]").forEach(card => { card.hidden = filter !== "all" && card.dataset.group !== filter; });
         }));
         updateProgress();
 
