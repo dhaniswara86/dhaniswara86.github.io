@@ -1,5 +1,6 @@
 ---
 layout: artikel-editorial
+render_mode: safe
 
 title: "Memahami Role Akses Coretax: Siapa Boleh Melakukan Apa?"
 hero_title: "Memahami Role Akses Coretax."
@@ -52,7 +53,7 @@ custom_css:
   - /assets/css/roleakses-v2.css?v=20260818-1
 
 custom_js:
-  - /assets/js/roleakses-v4-stable.js?v=20260906-1
+  - /assets/js/roleakses-v5-render-safe.js?v=20260906-1
 ---
 
 <div class="role-article">
