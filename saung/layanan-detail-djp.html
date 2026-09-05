@@ -65,6 +65,11 @@
     .legal-block span { color: var(--muted); font-size: 11px; font-weight: 750; text-transform: uppercase; }
     .legal-block p { margin: 7px 0 0; font-size: 14px; line-height: 1.58; }
     .legal-block a { color: var(--blue); overflow-wrap: anywhere; }
+    .filing-deadline { display: grid; grid-template-columns: auto minmax(0,1fr) auto; align-items: center; gap: 16px; margin-top: 18px; padding: 18px 20px; border: 1px solid #f1c98f; border-radius: 18px; background: linear-gradient(135deg,#fffaf0,#fff4df); box-shadow: 0 12px 28px rgba(146,91,13,.08); }
+    .filing-deadline-icon { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 14px; background: #fff; color: #a45e00; font-size: 21px; box-shadow: inset 0 0 0 1px #f1d7ae; }
+    .filing-deadline span { display: block; color: #8a560e; font-size: 11px; font-weight: 800; letter-spacing: .055em; text-transform: uppercase; }
+    .filing-deadline strong { display: block; margin-top: 5px; color: #402b0e; font-size: 15px; line-height: 1.5; }
+    .filing-deadline small { max-width: 220px; color: #76562d; font-size: 12px; font-weight: 650; line-height: 1.45; text-align: right; }
     .detail-sidebar { position: sticky; top: calc(var(--nav-height) + 18px); display: grid; gap: 13px; }
     .side-card { padding: 21px; border: 1px solid #dfe5ec; border-radius: 18px; background: #fff; }
     .side-value { display: block; margin-top: 7px; font-size: 15px; line-height: 1.5; }
@@ -92,6 +97,8 @@
       .requirement-tag { grid-column: 2; width: fit-content; }
       .legal-grid { grid-template-columns: 1fr; }
       .pdf-frame { height: 520px; }
+      .filing-deadline { grid-template-columns: auto minmax(0,1fr); padding: 15px; }
+      .filing-deadline small { grid-column: 2; max-width: none; text-align: left; }
     }
 
     /* Dossier layanan: hierarki visual, SLA utama, dan checklist interaktif. */
@@ -273,7 +280,7 @@
         const requirements = requirementItems(item);
         const needsDetail = !Array.isArray(item.requirements) && genericDocs.test(item.docs || "");
         const verified = item.requirements_status === "verified-regulation";
-        const deadline = deadlineParts(item.sla);
+        const deadline = item.calendar_value && item.calendar_unit ? {value:item.calendar_value,unit:item.calendar_unit} : deadlineParts(item.sla);
         const groupedRequirements = requirements.map((requirement,index) => ({requirement,index})).reduce((result,entry) => {
           const group = requirementGroup(entry.requirement.tag);
           (result[group] ||= []).push(entry);
@@ -294,7 +301,7 @@
                 <p class="detail-lead">Siapkan dokumen yang sesuai, periksa batas waktu layanan, dan gunakan sumber resmi sebagai rujukan pengajuan.</p>
               </div>
               <div class="hero-sla calendar-card" aria-label="Batas waktu penyelesaian ${escapeHTML(item.sla)}">
-                <div class="calendar-top"><span>Batas waktu</span><span class="calendar-rings" aria-hidden="true"><i></i><i></i></span></div>
+                <div class="calendar-top"><span>${escapeHTML(item.calendar_label || "Batas waktu")}</span><span class="calendar-rings" aria-hidden="true"><i></i><i></i></span></div>
                 <div class="calendar-body"><strong class="calendar-value">${escapeHTML(deadline.value)}</strong><span class="calendar-unit">${escapeHTML(deadline.unit)}</span><small class="calendar-caption">Mulai dihitung: ${escapeHTML(item.start)}</small></div>
               </div>
             </div>
@@ -304,6 +311,8 @@
               <div class="summary-item"><span>Produk layanan</span><strong>${escapeHTML(item.output)}</strong></div>
             </div>
           </article>
+
+          ${item.filing_deadline ? `<section class="filing-deadline" aria-label="Batas waktu mengajukan upaya hukum"><span class="filing-deadline-icon" aria-hidden="true">⏱</span><div><span>Batas waktu mengajukan</span><strong>${escapeHTML(item.filing_deadline)}</strong></div><small>${escapeHTML(item.filing_deadline_basis || "Periksa regulasi yang berlaku")}</small></section>` : ""}
 
           <div class="detail-layout">
             <div class="detail-main">
@@ -328,7 +337,7 @@
 
               <section class="content-section" id="ketentuan">
                 <div class="section-headline"><div><span class="section-eyebrow">Ketentuan layanan</span><h2>SLA dan dasar hukum</h2></div></div>
-                <div class="legal-grid"><div class="legal-block"><span>Jika SLA terlampaui</span><p>${escapeHTML(item.overdue)}</p></div><div class="legal-block"><span>Dasar hukum utama</span><p>${escapeHTML(item.basis)}</p></div></div>
+                <div class="legal-grid">${item.intake_sla ? `<div class="legal-block"><span>Layanan penerimaan berkas</span><p>${escapeHTML(item.intake_sla)}</p></div>` : ""}<div class="legal-block"><span>Jika SLA terlampaui</span><p>${escapeHTML(item.overdue)}</p></div><div class="legal-block"><span>Dasar hukum utama</span><p>${escapeHTML(item.basis)}</p></div></div>
               </section>
             </div>
 
