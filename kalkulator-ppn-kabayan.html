@@ -1070,6 +1070,100 @@ main{
 }
 </style>
 
+
+<style id="kabayanPpnHeroIconStyles">
+/* Kabayan PPN hero icon — presentation only */
+.hero{
+  border-bottom:1px solid #dde4ec!important;
+}
+
+.ppn-hero-grid{
+  position:relative;
+  z-index:1;
+  width:100%;
+  display:grid;
+  grid-template-columns:minmax(0,1.04fr) minmax(300px,380px);
+  align-items:center;
+  gap:clamp(38px,5vw,84px);
+}
+
+.ppn-hero-copy{
+  min-width:0;
+}
+
+.ppn-hero-visual{
+  position:relative;
+  min-height:360px;
+  display:grid;
+  place-items:center;
+  isolation:isolate;
+}
+
+.ppn-hero-orb{
+  position:absolute;
+  z-index:-1;
+  width:300px;
+  height:300px;
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 35% 30%, rgba(255,255,255,.88) 0 12%, transparent 13%),
+    linear-gradient(145deg,#ffe16a 0%,#ffef9c 42%,#dbeaff 100%);
+  box-shadow:0 26px 55px rgba(8,42,82,.10);
+}
+
+.ppn-kabayan-icon{
+  width:min(320px,88%);
+  height:auto;
+  display:block;
+  object-fit:contain;
+  object-position:center bottom;
+  filter:drop-shadow(0 22px 28px rgba(8,42,82,.16));
+}
+
+@media(max-width:960px){
+  .ppn-hero-grid{
+    grid-template-columns:1fr;
+    gap:24px;
+  }
+
+  .ppn-hero-visual{
+    width:min(440px,100%);
+    min-height:290px;
+    justify-self:start;
+  }
+
+  .ppn-hero-orb{
+    width:250px;
+    height:250px;
+  }
+
+  .ppn-kabayan-icon{
+    width:240px;
+  }
+}
+
+@media(max-width:680px){
+  .ppn-hero-visual{
+    min-height:240px;
+  }
+
+  .ppn-hero-orb{
+    width:210px;
+    height:210px;
+  }
+
+  .ppn-kabayan-icon{
+    width:205px;
+  }
+}
+
+@media print{
+  .ppn-hero-visual{
+    display:none!important;
+  }
+}
+</style>
+
 </head>
 <body id="top">
 
@@ -1118,10 +1212,21 @@ main{
 
 <main>
 <section class="hero">
-<span class="eyebrow">Kabayan · Kalkulator Perpajakan</span>
+    <div class="ppn-hero-grid">
+      <div class="ppn-hero-copy">
+        <span class="eyebrow">Kabayan · Kalkulator Perpajakan</span>
 <h1>Hitung PPN <br> <span>jauh lebih mudah.</span></h1>
 <p>Pilih mekanisme pengenaan, masukkan nilai transaksi, lalu kalkulator akan menampilkan DPP, tarif, rumus, dan PPN terutang.</p>
-</section>
+      </div>
+      <div class="ppn-hero-visual" aria-hidden="true">
+        <div class="ppn-hero-orb"></div>
+        <img
+          class="ppn-kabayan-icon"
+          src="assets/img/kabayan-ppn.webp"
+          alt="Kabayan sedang duduk memeriksa Faktur Pajak dan kalkulator PPN 12 persen">
+      </div>
+    </div>
+    </section>
 <section class="app-shell" id="kalkulator">
 <article class="calculator-card">
 <header class="card-head">
