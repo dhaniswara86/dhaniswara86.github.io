@@ -20,7 +20,7 @@ tags:
 
 author: "Angga Sukma Dhaniswara"
 date: 2026-07-17
-date_modified: 2026-07-24
+date_modified: 2026-09-06
 legal_basis: "PMK 44/2026 & PMK 15/2025"
 reading_time: "± 18 menit baca"
 
@@ -31,7 +31,7 @@ permalink: /01-kuasa.html
 sidebar_note: "Pegawai yang memberikan data atau keterangan tidak otomatis menjadi Kuasa Wajib Pajak. Perhatikan kedudukan formal dan tindakan yang dilakukan."
 
 custom_css:
-  - /assets/css/kuasa-wajib-pajak.css
+  - /assets/css/kuasa-wajib-pajak.css?v=20260906-2
 
 custom_js:
   - /assets/js/kuasa-wajib-pajak.js
