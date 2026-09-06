@@ -135,9 +135,9 @@
   margin: 35px 0;
 }
 
-.kuasa-article .table-wrap th {
-  background: var(--off-white);
-  color: var(--near-black);
+.kuasa-article .table-wrap thead th {
+  background: #0b315d !important;
+  color: #ffffff !important;
   font-size: 12px;
   font-weight: 650;
   letter-spacing: 0;
@@ -549,6 +549,77 @@
 
   body.print-skk #formulir-interaktif .detail-list.single-purpose .detail-label {
     display:none !important;
+  }
+}
+
+/* =========================================================
+   PERBAIKAN RINGKASAN PADA LAYAR HP
+   Komponen ini dibuat oleh layout dan berada di luar .kuasa-article.
+   Aturan berikut membatalkan grid desktop !important yang membuat
+   kolom teks terlalu sempit pada viewport kecil.
+   ========================================================= */
+@media screen and (max-width: 680px) {
+  .summary-section .summary-wrap {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    display: block !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 0 !important;
+    padding: 22px 20px !important;
+    overflow: hidden !important;
+    border-radius: 20px !important;
+  }
+
+  .summary-section .summary-wrap::before {
+    display: none !important;
+    content: none !important;
+  }
+
+  .summary-section .summary-wrap > div:first-child {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: flex-end !important;
+    justify-content: space-between !important;
+    gap: 16px !important;
+    margin: 0 0 20px !important;
+  }
+
+  .summary-section .summary-label,
+  .summary-section .summary-number {
+    margin: 0 !important;
+  }
+
+  .summary-section .summary-copy {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    padding: 0 !important;
+  }
+
+  .summary-section .summary-copy::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  .summary-section .summary-copy strong {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    font-size: clamp(30px, 10vw, 42px) !important;
+    line-height: 1.05 !important;
+    overflow-wrap: anywhere;
+  }
+
+  .summary-section .summary-copy p {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 16px 0 0 !important;
+    font-size: 16px !important;
+    line-height: 1.65 !important;
+    overflow-wrap: anywhere;
   }
 }
 
