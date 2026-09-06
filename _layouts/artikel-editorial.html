@@ -1680,6 +1680,95 @@
   }
 </style>
 
+
+<style id="kabayanReadingCompanionStyles">
+  /* Kabayan membaca — visual companion yang lebih tenang */
+  .hero-companion-reading{
+    min-height:430px !important;
+    align-items:flex-end !important;
+    justify-content:center !important;
+  }
+
+  .hero-companion-reading::before{
+    width:340px !important;
+    height:340px !important;
+    bottom:22px !important;
+    background:
+      radial-gradient(circle at 36% 35%, rgba(255,255,255,.92) 0 17%, transparent 18%),
+      linear-gradient(145deg,#ffd84a 0%,#ffeb88 46%,#dcecff 100%) !important;
+    box-shadow:0 24px 56px rgba(8,42,82,.10);
+  }
+
+  .hero-kabayan-reading{
+    width:min(390px,100%) !important;
+    max-height:470px !important;
+    object-fit:contain !important;
+    object-position:center bottom !important;
+    filter:drop-shadow(0 26px 34px rgba(24,48,78,.15)) !important;
+  }
+
+  /* Kartu editorial lama tidak lagi dipakai. */
+  .hero-note{
+    display:none !important;
+  }
+
+  .closing-kabayan-reading{
+    width:min(330px,100%) !important;
+    max-height:360px !important;
+    object-fit:contain !important;
+    object-position:center bottom !important;
+  }
+
+  @media(max-width:960px){
+    .hero-companion-reading{
+      min-height:310px !important;
+      justify-content:flex-start !important;
+    }
+
+    .hero-companion-reading::before{
+      width:270px !important;
+      height:270px !important;
+      right:auto !important;
+      left:10px !important;
+      bottom:10px !important;
+    }
+
+    .hero-kabayan-reading{
+      width:285px !important;
+      max-height:325px !important;
+    }
+  }
+
+  @media(max-width:680px){
+    .hero-companion-reading{
+      min-height:250px !important;
+      margin-top:2px !important;
+    }
+
+    .hero-companion-reading::before{
+      width:220px !important;
+      height:220px !important;
+      left:0 !important;
+    }
+
+    .hero-kabayan-reading{
+      width:235px !important;
+      max-height:270px !important;
+    }
+
+    .closing-kabayan-reading{
+      width:220px !important;
+      max-height:245px !important;
+    }
+  }
+
+  @media print{
+    .hero-companion-reading{
+      display:none !important;
+    }
+  }
+</style>
+
 </head>
 
 <body
@@ -1802,25 +1891,12 @@
             </div>
           </div>
 
-          <div class="hero-companion reveal" aria-hidden="true">
-            {% if page.image %}
-              <figure class="hero-page-image">
-                <img
-                  src="{{ page.image | relative_url }}"
-                  alt="{{ page.image_alt | default: page.title | escape }}"
-                >
-              </figure>
-            {% else %}
-              <img
-                class="hero-kabayan"
-                src="{{ '/assets/img/kabayan-pengetahuan.webp' | relative_url }}"
-                alt=""
-              >
-            {% endif %}
-            <div class="hero-note">
-              <small>Kabayan / Editorial</small>
-              <strong>Pajak dijelaskan dengan bahasa yang lebih tertata.</strong>
-            </div>
+          <div class="hero-companion hero-companion-reading reveal" aria-hidden="true">
+            <img
+              class="hero-kabayan hero-kabayan-reading"
+              src="{{ '/assets/img/kabayan-membaca.webp' | relative_url }}"
+              alt=""
+            >
           </div>
         </div>
       </header>
