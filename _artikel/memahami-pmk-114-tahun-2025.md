@@ -44,7 +44,7 @@ sidebar_note: "Jangan menentukan perlakuan pajak hanya dari nama transaksinya. P
 
 custom_css:
   - /assets/css/jasakonstruksi.css?v=20260906-1
-  - /assets/css/pmk-114-2025.css?v=20260906-1
+  - /assets/css/pmk-114-2025.css?v=20260906-3
 
 custom_js:
   - /assets/js/pmk-114-2025.js?v=20260906-1
