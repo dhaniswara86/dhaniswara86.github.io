@@ -28,10 +28,13 @@ reading_time: "± 18 menit baca"
 # agar URL artikel lama tetap dipertahankan.
 permalink: /01-kuasa.html
 
+summary_label: "Ringkasan cepat"
+summary: "Surat Kuasa Khusus diperlukan ketika seseorang yang bukan Wajib Pajak sendiri dan bukan Wakil Wajib Pajak diberi kewenangan untuk menjalankan hak atau memenuhi kewajiban perpajakan tertentu atas nama Wajib Pajak. Pegawai yang hanya membantu pemeriksaan, menyiapkan data, atau memberikan keterangan berdasarkan pekerjaannya tidak otomatis menjadi kuasa. Khusus tahun 2026, terdapat ketentuan peralihan bagi pemegang brevet atau ijazah perpajakan tertentu sampai dengan 31 Desember 2026."
+
 sidebar_note: "Pegawai yang memberikan data atau keterangan tidak otomatis menjadi Kuasa Wajib Pajak. Perhatikan kedudukan formal dan tindakan yang dilakukan."
 
 custom_css:
-  - /assets/css/kuasa-wajib-pajak.css?v=20260906-2
+  - /assets/css/kuasa-wajib-pajak.css?v=20260906-3
 
 custom_js:
   - /assets/js/kuasa-wajib-pajak.js
