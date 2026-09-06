@@ -2597,3 +2597,150 @@
   }
 }
 
+/* =========================================================
+   RUMUS DASAR NPPN — Kabayan Formula Highlight
+   Override lokal agar tidak memengaruhi artikel lain.
+   ========================================================= */
+
+.nppn-article .jk-formula-box.nppn-formula-box {
+  position: relative;
+  overflow: hidden;
+  margin: 34px 0 38px;
+  padding: clamp(34px, 5vw, 54px) clamp(24px, 5vw, 48px);
+  border: 1px solid rgba(255, 255, 255, .08);
+  border-radius: 26px;
+  background:
+    radial-gradient(circle at 92% 12%, rgba(255, 216, 74, .16), transparent 27%),
+    linear-gradient(145deg, #082a52 0%, #0a3568 62%, #0d427d 100%);
+  box-shadow: 0 22px 48px rgba(8, 42, 82, .16);
+  color: #fff;
+  text-align: center;
+}
+
+.nppn-article .jk-formula-box.nppn-formula-box::after {
+  position: absolute;
+  right: -72px;
+  bottom: -92px;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .045);
+  content: "";
+  pointer-events: none;
+}
+
+.nppn-article .nppn-formula-label {
+  position: relative;
+  z-index: 1;
+  display: block;
+  margin: 0 0 22px;
+  color: #b9d8ff !important;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Arial, sans-serif;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  letter-spacing: .14em !important;
+  line-height: 1.2 !important;
+  text-transform: uppercase;
+}
+
+.nppn-article .nppn-formula-title {
+  position: relative;
+  z-index: 1;
+  display: block;
+  margin: 0;
+  color: #fff !important;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Arial, sans-serif !important;
+  font-size: clamp(30px, 4.2vw, 48px) !important;
+  font-weight: 760 !important;
+  letter-spacing: -.045em !important;
+  line-height: 1.08 !important;
+}
+
+.nppn-article .nppn-formula-equals {
+  color: #ffd84a !important;
+}
+
+.nppn-article .nppn-formula-expression {
+  position: relative;
+  z-index: 1;
+  max-width: 820px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 8px 14px;
+  margin: 22px auto 0;
+  color: #fff !important;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Arial, sans-serif !important;
+  font-size: clamp(25px, 3.7vw, 42px) !important;
+  font-weight: 720 !important;
+  letter-spacing: -.04em !important;
+  line-height: 1.16 !important;
+}
+
+.nppn-article .nppn-formula-expression > span {
+  color: #fff !important;
+}
+
+.nppn-article .nppn-formula-operator {
+  color: #ffd84a !important;
+  font-weight: 850 !important;
+}
+
+.nppn-article .nppn-formula-expression .nppn-formula-accent {
+  color: #ffd84a !important;
+}
+
+@media (max-width: 620px) {
+  .nppn-article .jk-formula-box.nppn-formula-box {
+    margin: 28px 0 32px;
+    padding: 30px 20px;
+    border-radius: 21px;
+  }
+
+  .nppn-article .nppn-formula-label {
+    margin-bottom: 17px;
+    font-size: 10px !important;
+  }
+
+  .nppn-article .nppn-formula-title {
+    font-size: clamp(27px, 8.2vw, 36px) !important;
+  }
+
+  .nppn-article .nppn-formula-expression {
+    display: grid;
+    gap: 7px;
+    margin-top: 18px;
+    font-size: clamp(23px, 7vw, 31px) !important;
+  }
+
+  .nppn-article .nppn-formula-operator {
+    font-size: .85em !important;
+  }
+}
+
+@media print {
+  .nppn-article .jk-formula-box.nppn-formula-box {
+    border: 1.5px solid #082a52 !important;
+    background: #fff !important;
+    box-shadow: none !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .nppn-article .nppn-formula-label {
+    color: #31536f !important;
+  }
+
+  .nppn-article .nppn-formula-title,
+  .nppn-article .nppn-formula-expression > span {
+    color: #082a52 !important;
+  }
+
+  .nppn-article .nppn-formula-equals,
+  .nppn-article .nppn-formula-operator,
+  .nppn-article .nppn-formula-expression .nppn-formula-accent {
+    color: #9a7400 !important;
+  }
+}
+
