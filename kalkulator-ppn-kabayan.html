@@ -368,39 +368,752 @@ main{padding-top:var(--nav-height)}
   }
 </style>
 
+
+<style id="kabayanPpnWorkspaceStyles">
+:root{
+  --kab-navy:#082a52;
+  --kab-blue:#0866d8;
+  --kab-yellow:#ffd84a;
+  --kab-green:#188038;
+  --kab-red:#ff3b30;
+  --kab-soft:#f5f5f7;
+  --kab-line:#e2e6eb;
+  --kab-ink:#111214;
+  --nav-height:58px;
+  --max-width:1180px;
+}
+
+/* ===== HEADER BARU ===== */
+body{
+  padding-top:var(--nav-height)!important;
+  background:#fff!important;
+}
+
+body.menu-open{overflow:auto!important}
+
+.mobile-nav-checkbox{
+  position:fixed;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+  clip:rect(0 0 0 0);
+  clip-path:inset(50%);
+  white-space:nowrap;
+}
+
+.site-header{
+  position:fixed!important;
+  z-index:1500!important;
+  top:0!important;
+  right:0!important;
+  left:0!important;
+  min-height:var(--nav-height)!important;
+  border-bottom:1px solid rgba(0,0,0,.065)!important;
+  background:rgba(255,255,255,.97)!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+
+.nav-wrap{
+  width:min(var(--max-width),calc(100% - 36px))!important;
+  height:var(--nav-height)!important;
+  min-height:var(--nav-height)!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:28px!important;
+  margin:0 auto!important;
+}
+
+.brand{
+  display:inline-flex!important;
+  flex:0 0 auto!important;
+  align-items:center!important;
+  gap:8px!important;
+  color:#111!important;
+  font-size:13px!important;
+  font-weight:760!important;
+  letter-spacing:0!important;
+  text-decoration:none!important;
+  white-space:nowrap!important;
+}
+
+.brand-logo{
+  width:auto!important;
+  height:20px!important;
+  display:block!important;
+  object-fit:contain!important;
+}
+
+.desktop-nav{
+  display:flex!important;
+  flex:1 1 auto!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:27px!important;
+}
+
+.desktop-nav a{
+  position:relative!important;
+  min-height:var(--nav-height)!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  padding:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  color:#515154!important;
+  font-size:12px!important;
+  font-weight:560!important;
+  text-decoration:none!important;
+  white-space:nowrap!important;
+}
+
+.desktop-nav a::after{
+  position:absolute;
+  right:0;
+  bottom:10px;
+  left:0;
+  height:1.5px;
+  background:#111;
+  content:"";
+  opacity:0;
+  transform:scaleX(.35);
+  transition:opacity .2s ease,transform .2s ease;
+}
+
+.desktop-nav a:hover,
+.desktop-nav a[aria-current="page"]{
+  color:#000!important;
+  background:transparent!important;
+}
+
+.desktop-nav a:hover::after,
+.desktop-nav a[aria-current="page"]::after{
+  opacity:1;
+  transform:scaleX(1);
+}
+
+.nav-hotnews{
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:7px!important;
+}
+
+.nav-hotnews-dot{
+  width:7px;
+  height:7px;
+  flex:0 0 7px;
+  border-radius:50%;
+  background:var(--kab-red);
+  box-shadow:0 0 0 0 rgba(255,59,48,.34);
+  animation:ppnHotPulse 2.1s ease-out infinite;
+}
+
+@keyframes ppnHotPulse{
+  0%{box-shadow:0 0 0 0 rgba(255,59,48,.34)}
+  60%,100%{box-shadow:0 0 0 7px rgba(255,59,48,0)}
+}
+
+.nav-actions{
+  display:flex;
+  flex:0 0 auto;
+  align-items:center;
+  gap:8px;
+}
+
+.nav-cta{
+  min-height:36px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:8px 15px;
+  border-radius:999px;
+  background:var(--kab-navy);
+  color:#fff;
+  font-size:12px;
+  font-weight:700;
+  text-decoration:none;
+  white-space:nowrap;
+}
+
+.nav-cta:hover{background:#061f3d}
+
+.menu-toggle{
+  width:38px!important;
+  height:38px!important;
+  display:none!important;
+  place-items:center!important;
+  border:0!important;
+  border-radius:50%!important;
+  background:transparent!important;
+  color:#111!important;
+  cursor:pointer!important;
+  font-size:22px!important;
+  line-height:1!important;
+}
+
+.menu-icon-close{display:none}
+
+.mobile-menu{
+  position:fixed!important;
+  z-index:1450!important;
+  top:var(--nav-height)!important;
+  right:0!important;
+  bottom:0!important;
+  left:0!important;
+  height:calc(100vh - var(--nav-height))!important;
+  height:calc(100dvh - var(--nav-height))!important;
+  display:block!important;
+  overflow-y:auto!important;
+  padding:26px 24px 44px!important;
+  background:#fff!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  visibility:hidden!important;
+  opacity:0!important;
+  pointer-events:none!important;
+  transform:translateY(-8px)!important;
+  transition:opacity .2s ease,transform .2s ease,visibility .2s ease!important;
+}
+
+#mobileNavToggle:checked ~ .mobile-menu{
+  visibility:visible!important;
+  opacity:1!important;
+  pointer-events:auto!important;
+  transform:none!important;
+}
+
+#mobileNavToggle:checked ~ .site-header .menu-icon-open{display:none!important}
+#mobileNavToggle:checked ~ .site-header .menu-icon-close{display:block!important}
+
+.mobile-menu a{
+  display:grid!important;
+  grid-template-columns:42px minmax(0,1fr) auto!important;
+  align-items:center!important;
+  gap:8px!important;
+  padding:15px 0!important;
+  border-bottom:1px solid #ededf0!important;
+  color:#1d1d1f!important;
+  font-size:clamp(24px,7vw,34px)!important;
+  font-weight:720!important;
+  letter-spacing:-.045em!important;
+  line-height:1.05!important;
+  text-decoration:none!important;
+}
+
+.mobile-menu a[aria-current="page"]{color:var(--kab-blue)!important}
+
+.mobile-menu-index{
+  color:#a1a1a6!important;
+  font-size:11px!important;
+  font-weight:800!important;
+  letter-spacing:.08em!important;
+}
+
+.mobile-hot-dot{
+  width:8px;
+  height:8px;
+  justify-self:end;
+  border-radius:50%;
+  background:var(--kab-red);
+}
+
+.mobile-menu .mobile-menu-cta{
+  grid-template-columns:minmax(0,1fr) auto!important;
+  margin-top:22px!important;
+  padding:17px 19px!important;
+  border:0!important;
+  border-radius:18px!important;
+  background:var(--kab-navy)!important;
+  color:#fff!important;
+  font-size:18px!important;
+  letter-spacing:-.025em!important;
+}
+
+/* ===== HERO PPN ===== */
+main{
+  padding-top:0!important;
+}
+
+.hero{
+  position:relative!important;
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  overflow:hidden!important;
+  padding:70px max(24px,calc((100vw - 1180px)/2)) 72px!important;
+  background:
+    radial-gradient(circle at 82% 18%,rgba(255,216,74,.28),transparent 22%),
+    linear-gradient(135deg,#fff 0%,#f8fbff 56%,#eaf3ff 100%)!important;
+  text-align:left!important;
+}
+
+.hero::before{
+  position:absolute;
+  top:-110px;
+  right:-110px;
+  width:680px;
+  height:590px;
+  background:
+    linear-gradient(90deg,rgba(255,255,255,.92),rgba(255,255,255,.22)),
+    url("assets/img/mega-mendung-cirebon.webp") center/cover no-repeat;
+  content:"";
+  opacity:.13;
+  pointer-events:none;
+}
+
+.eyebrow{
+  position:relative;
+  z-index:1;
+  display:flex!important;
+  align-items:center!important;
+  gap:10px!important;
+  width:max-content!important;
+  margin:0 0 22px!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  color:var(--kab-blue)!important;
+  font-size:11px!important;
+  font-weight:850!important;
+  letter-spacing:.13em!important;
+  text-transform:uppercase!important;
+}
+
+.eyebrow::before{
+  width:34px!important;
+  height:2px!important;
+  border-radius:0!important;
+  background:var(--kab-blue)!important;
+  box-shadow:none!important;
+}
+
+.hero h1{
+  position:relative;
+  z-index:1;
+  max-width:900px!important;
+  margin:0!important;
+  color:var(--kab-ink)!important;
+  font-size:clamp(58px,7vw,92px)!important;
+  font-weight:770!important;
+  line-height:.91!important;
+  letter-spacing:-.068em!important;
+}
+
+.hero h1 span{
+  color:var(--kab-blue)!important;
+  background:none!important;
+  -webkit-text-fill-color:currentColor!important;
+}
+
+.hero p{
+  position:relative;
+  z-index:1;
+  max-width:760px!important;
+  margin:25px 0 0!important;
+  color:#424950!important;
+  font-size:clamp(18px,2vw,22px)!important;
+  line-height:1.52!important;
+  letter-spacing:-.025em!important;
+}
+
+/* ===== WORKSPACE ===== */
+.app-shell{
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:76px max(24px,calc((100vw - 1180px)/2)) 96px!important;
+  background:#f4f6f9!important;
+}
+
+.calculator-card{
+  width:100%!important;
+  max-width:1180px!important;
+  margin:0 auto!important;
+  overflow:hidden!important;
+  border:1px solid #dbe1e8!important;
+  border-radius:28px!important;
+  background:#fff!important;
+  box-shadow:0 22px 58px rgba(8,42,82,.08)!important;
+}
+
+.card-head{
+  position:relative!important;
+  overflow:hidden!important;
+  padding:28px 30px 25px!important;
+  border-bottom:1px solid #dfe4ea!important;
+  background:#fff!important;
+}
+
+.card-head::before{
+  display:block;
+  margin-bottom:12px;
+  color:var(--kab-blue);
+  content:"01 / KALKULATOR PPN";
+  font-size:10px;
+  font-weight:850;
+  letter-spacing:.12em;
+}
+
+.card-head h2{
+  margin:0!important;
+  color:#111!important;
+  font-size:clamp(31px,3.8vw,48px)!important;
+  font-weight:760!important;
+  letter-spacing:-.05em!important;
+  line-height:1.02!important;
+}
+
+.status-badge{
+  border-color:#d6eadc!important;
+  background:#eef9f1!important;
+  color:#18763a!important;
+}
+
+.calc-grid{
+  grid-template-columns:minmax(0,1.08fr) minmax(360px,.92fr)!important;
+  min-height:600px!important;
+}
+
+.form-panel{
+  padding:32px!important;
+  border-right:1px solid #e0e4ea!important;
+  background:#fff!important;
+}
+
+.result-panel{
+  padding:32px!important;
+  background:#f8fafc!important;
+}
+
+.field label{
+  color:#35383d!important;
+  font-weight:700!important;
+}
+
+.control,
+.money-wrap input{
+  min-height:55px!important;
+  border-color:#cfd6df!important;
+  border-radius:15px!important;
+}
+
+.control:focus,
+.money-wrap input:focus{
+  border-color:var(--kab-blue)!important;
+  box-shadow:0 0 0 4px rgba(8,102,216,.10)!important;
+}
+
+.info-box,
+.luxury-goods-link,
+.dpp-list-link{
+  border-color:#d9e7f5!important;
+  border-radius:17px!important;
+  background:#eef6ff!important;
+  color:#42566a!important;
+}
+
+.luxury-goods-link-icon,
+.dpp-list-link-icon{
+  color:var(--kab-blue)!important;
+  box-shadow:none!important;
+}
+
+.luxury-goods-link a,
+.dpp-list-link a{
+  color:var(--kab-blue)!important;
+}
+
+.include-option{
+  border-color:#dfe4ea!important;
+  border-radius:16px!important;
+  background:#fafbfc!important;
+}
+
+.include-option input{
+  accent-color:var(--kab-blue)!important;
+}
+
+.btn{
+  min-height:47px!important;
+  border-radius:999px!important;
+  font-weight:700!important;
+}
+
+.btn-primary{
+  background:var(--kab-navy)!important;
+  box-shadow:none!important;
+}
+
+.btn-primary:hover{
+  background:#061f3d!important;
+  transform:none!important;
+  box-shadow:none!important;
+}
+
+.btn-secondary{
+  border-color:#cfd5dc!important;
+  background:#fff!important;
+}
+
+.result-top{
+  margin-bottom:20px!important;
+}
+
+.result-title{
+  color:#111!important;
+  font-size:19px!important;
+  font-weight:740!important;
+}
+
+.tax-highlight{
+  position:relative!important;
+  overflow:hidden!important;
+  padding:24px!important;
+  border:0!important;
+  border-radius:22px!important;
+  background:
+    radial-gradient(circle at 90% 8%,rgba(255,216,74,.20),transparent 28%),
+    linear-gradient(145deg,#082a52 0%,#0b376c 72%,#0f4b91 100%)!important;
+  box-shadow:none!important;
+}
+
+.tax-highlight span{
+  color:#a9d1ff!important;
+}
+
+.tax-highlight strong{
+  color:#fff!important;
+}
+
+.tax-highlight small{
+  color:rgba(255,255,255,.72)!important;
+}
+
+.result-list{
+  border-color:#dfe4ea!important;
+  border-radius:18px!important;
+}
+
+.result-row{
+  border-color:#e6e9ed!important;
+}
+
+.formula-box{
+  border:0!important;
+  border-radius:18px!important;
+  background:#fff4bd!important;
+}
+
+.formula-box b{
+  color:#5c4a00!important;
+}
+
+.formula-box code{
+  color:#3f3300!important;
+  font-weight:650!important;
+}
+
+.mini-btn{
+  min-height:42px!important;
+  border-radius:999px!important;
+}
+
+/* Below cards */
+.below-card{
+  width:100%!important;
+  max-width:1180px!important;
+  margin:20px auto 0!important;
+  gap:16px!important;
+}
+
+.content-card{
+  border:1px solid #dfe3e8!important;
+  border-radius:22px!important;
+  background:#fff!important;
+  box-shadow:none!important;
+}
+
+.content-card h3{
+  color:#111!important;
+  font-size:21px!important;
+  font-weight:740!important;
+}
+
+.guide-list li::before{
+  background:#eaf3ff!important;
+  color:var(--kab-blue)!important;
+}
+
+.source-item a{
+  color:var(--kab-blue)!important;
+}
+
+.disclaimer{
+  width:100%!important;
+  max-width:1180px!important;
+  margin:20px auto 0!important;
+  border-color:#f0dfbd!important;
+  border-radius:18px!important;
+  background:#fff7e8!important;
+}
+
+/* Footer */
+.site-footer{
+  padding:0!important;
+  background:#f5f5f7!important;
+  color:#6e6e73!important;
+  text-align:left!important;
+}
+
+.footer-disclaimer{
+  width:min(980px,calc(100% - 40px))!important;
+  margin:0 auto!important;
+  padding:23px 0!important;
+  border-bottom:1px solid #d2d2d7!important;
+}
+
+.footer-inner{
+  width:min(980px,calc(100% - 40px))!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:20px!important;
+  margin:0 auto!important;
+  padding:21px 0 27px!important;
+}
+
+.footer-links{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  gap:18px!important;
+}
+
+.toast{
+  border-radius:999px!important;
+  background:#1d1d1f!important;
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:960px){
+  .desktop-nav,.nav-cta{display:none!important}
+  .menu-toggle{display:grid!important}
+  .nav-wrap{width:calc(100% - 28px)!important}
+
+  .calc-grid{
+    grid-template-columns:1fr!important;
+  }
+
+  .form-panel{
+    border-right:0!important;
+    border-bottom:1px solid #e0e4ea!important;
+  }
+}
+
+@media(max-width:680px){
+  :root{--nav-height:54px}
+
+  .hero{
+    padding:40px 18px 48px!important;
+  }
+
+  .hero h1{
+    font-size:clamp(48px,14vw,65px)!important;
+  }
+
+  .hero p{
+    margin-top:19px!important;
+    font-size:17px!important;
+  }
+
+  .app-shell{
+    padding:50px 12px 72px!important;
+  }
+
+  .calculator-card{
+    border-radius:21px!important;
+  }
+
+  .card-head,
+  .form-panel,
+  .result-panel{
+    padding:22px 19px!important;
+  }
+
+  .card-head-top{
+    display:block!important;
+  }
+
+  .status-badge{
+    margin-top:14px!important;
+  }
+
+  .below-card{
+    grid-template-columns:1fr!important;
+  }
+
+  .footer-inner{
+    align-items:flex-start!important;
+    flex-direction:column!important;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .nav-hotnews-dot{animation:none!important}
+  .mobile-menu,.desktop-nav a::after{transition:none!important}
+}
+
+@media print{
+  .site-header,.mobile-menu,.mobile-nav-checkbox{display:none!important}
+  body{padding-top:0!important}
+}
+</style>
+
 </head>
 <body id="top">
 
+
+<input class="mobile-nav-checkbox" id="mobileNavToggle" type="checkbox" autocomplete="off" aria-label="Buka atau tutup menu navigasi">
+
 <header class="site-header">
-<div class="nav-wrap">
-<a aria-label="Beranda Kabayan" class="brand" href="index.html">
-<span class="brand-mark">ASD</span>
-<span>dhaniswara86</span>
-</a>
-<nav aria-label="Navigasi utama" class="desktop-nav">
-<a href="index.html">Beranda</a>
-<a href="buku.html">Buku</a>
-<a href="formulir.html">Formulir</a>
-<a href="aplikasi.html">Aplikasi</a>
-<a href="kalkulator.html">Kalkulator</a>
-<a href="artikel.html">Artikel</a>
-<a class="nav-hotnews" href="hotnews.html">
-<span aria-hidden="true" class="nav-hotnews-icon">🔥</span>
-<span>Hot News</span></a>
-</nav>
-<button aria-expanded="false" aria-label="Buka menu" class="menu-toggle" id="menuToggle" type="button">☰</button>
-</div>
+  <div class="nav-wrap">
+    <a class="brand" href="index.html" aria-label="Kabayan — Kembali ke beranda">
+      <img class="brand-logo" src="assets/img/LogoASD.svg" alt="Logo Kabayan">
+      <span>Kabayan</span>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Navigasi utama">
+      <a href="buku.html">Buku</a>
+      <a href="formulir.html">Formulir</a>
+      <a href="kalkulator.html" aria-current="page">Kalkulator</a>
+      <a href="aplikasi.html">Aplikasi</a>
+      <a href="artikel.html">Artikel</a>
+      <a class="nav-hotnews" href="hotnews.html">
+        <span class="nav-hotnews-dot" aria-hidden="true"></span>
+        <span>Hot News</span>
+      </a>
+    </nav>
+
+    <div class="nav-actions">
+      <a class="nav-cta" href="jelajahi.html">Jelajahi Kabayan ↗</a>
+      <label class="menu-toggle" for="mobileNavToggle" aria-label="Buka atau tutup menu">
+        <span class="menu-icon-open" aria-hidden="true">☰</span>
+        <span class="menu-icon-close" aria-hidden="true">×</span>
+      </label>
+    </div>
+  </div>
 </header>
-<nav aria-label="Navigasi seluler" class="mobile-menu" id="mobileMenu">
-<a href="index.html">Beranda</a>
-<a href="buku.html">Buku</a>
-<a href="formulir.html">Formulir</a>
-<a href="aplikasi.html">Aplikasi</a>
-<a href="kalkulator.html">Kalkulator</a>
-<a href="artikel.html">Artikel</a>
-<a class="nav-hotnews" href="hotnews.html">
-<span aria-hidden="true" class="nav-hotnews-icon">🔥</span>
-<span>Hot News</span></a>
+
+<nav class="mobile-menu" aria-label="Navigasi mobile">
+  <a href="index.html"><span class="mobile-menu-index">00</span><span>Beranda</span></a>
+  <a href="buku.html"><span class="mobile-menu-index">01</span><span>Buku</span></a>
+  <a href="formulir.html"><span class="mobile-menu-index">02</span><span>Formulir</span></a>
+  <a href="kalkulator.html" aria-current="page"><span class="mobile-menu-index">03</span><span>Kalkulator</span></a>
+  <a href="aplikasi.html"><span class="mobile-menu-index">04</span><span>Aplikasi</span></a>
+  <a href="artikel.html"><span class="mobile-menu-index">05</span><span>Artikel</span></a>
+  <a href="hotnews.html"><span class="mobile-menu-index">06</span><span>Hot News</span><span class="mobile-hot-dot" aria-hidden="true"></span></a>
+  <a class="mobile-menu-cta" href="jelajahi.html"><span>Jelajahi Kabayan</span><span aria-hidden="true">↗</span></a>
 </nav>
 
 <main>
@@ -1024,28 +1737,14 @@ main{padding-top:var(--nav-height)}
       updateStaticPreview();
     })();
   </script>
-<script>
-(() => {
-  const menuToggle = document.getElementById("menuToggle");
-  const mobileMenu = document.getElementById("mobileMenu");
-  if (menuToggle && mobileMenu) {
-    menuToggle.addEventListener("click", () => {
-      const isOpen = mobileMenu.classList.toggle("active");
-      document.body.classList.toggle("menu-open", isOpen);
-      menuToggle.setAttribute("aria-expanded", String(isOpen));
-      menuToggle.textContent = isOpen ? "×" : "☰";
-    });
-    mobileMenu.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", () => {
-        mobileMenu.classList.remove("active");
-        document.body.classList.remove("menu-open");
-        menuToggle.setAttribute("aria-expanded", "false");
-        menuToggle.textContent = "☰";
-      });
-    });
-  }
-  const year = document.getElementById("currentYear");
+
+<script id="kabayanPpnCurrentYear">
+(function () {
+  "use strict";
+  var year = document.getElementById("currentYear");
   if (year) year.textContent = new Date().getFullYear();
 })();
-</script></body>
+</script>
+
+</body>
 </html>
