@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="id"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/><meta content="Tabel Kode Akun Pajak dan Kode Jenis Setoran berdasarkan Lampiran B PER-8/PJ/2026." name="description"/><meta content="Angga Sukma Dhaniswara" name="author"/><meta content="#f5f5f7" name="theme-color"/><link href="https://dhaniswara86.id/kap-kjs.html" rel="canonical"/><meta content="Kode Akun Pajak dan Kode Jenis Setoran | Kabayan" property="og:title"/><meta content="Tabel Kode Akun Pajak dan Kode Jenis Setoran berdasarkan Lampiran B PER-8/PJ/2026." property="og:description"/><meta content="https://dhaniswara86.id/kap-kjs.html" property="og:url"/><meta content="website" property="og:type"/><title>Kode Akun Pajak dan Kode Jenis Setoran | Kabayan</title><style>
 :root{--text:#1d1d1f;--muted:#6e6e73;--tertiary:#86868b;--white:#fff;--section:#f5f5f7;--line:#e1e1e6;--blue:#0071e3;--blue-hover:#0077ed;--nav-h:48px;--max:1320px}
 *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:72px}body{margin:0;overflow-x:hidden;background:#fff;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,Helvetica,sans-serif;line-height:1.47059;letter-spacing:-.015em;-webkit-font-smoothing:antialiased}a{color:inherit}button,input{font:inherit}button{cursor:pointer}
@@ -662,175 +663,323 @@ footer{background:var(--kab-navy);color:rgba(255,255,255,.66)}
   footer{color:#000;background:#fff}
 }
 
-</style></head>
+
+
+/* =========================================================
+   FIX ROWSPAN / STICKY GROUP CONTEXT
+   Menjaga No., KAP, dan Jenis Pajak terlihat saat baris
+   pertama sebuah kelompok sudah bergeser di bawah header.
+   ========================================================= */
+:root{
+  --reference-toolbar-height:66px;
+  --reference-thead-height:76px;
+}
+
+/* Header tabel harus berada di bawah navbar + sticky search. */
+#kapKjsTable thead th,
+#kapKjsSearchTable thead th{
+  top:calc(
+    var(--nav-h) +
+    var(--reference-toolbar-height) +
+    18px
+  ) !important;
+}
+
+/* Sel rowspan tetap menjadi batas area sticky untuk konteks kelompok. */
+#kapKjsTable .group-context-cell{
+  position:relative;
+  vertical-align:top !important;
+}
+
+/*
+  Inner content sticky di dalam tinggi rowspan.
+  Jadi saat KJS 100 sudah lewat di balik thead, angka kelompok/KAP/
+  nama pajak masih terlihat sampai kelompok berikutnya masuk.
+*/
+#kapKjsTable .group-sticky-value{
+  position:sticky;
+  z-index:3;
+  top:calc(
+    var(--nav-h) +
+    var(--reference-toolbar-height) +
+    var(--reference-thead-height) +
+    30px
+  );
+  display:block;
+  width:100%;
+}
+
+/* No. dibuat sedikit lebih jelas ketika sedang menjadi context label. */
+#kapKjsTable .col-no .group-sticky-value{
+  color:#525b66;
+  font-weight:800;
+  text-align:center;
+}
+
+/* KAP tetap mempertahankan badge kuning. */
+#kapKjsTable .col-kap .group-sticky-value{
+  text-align:left;
+}
+
+#kapKjsTable .col-pajak .group-sticky-value{
+  color:#1d1d1f;
+  font-weight:750;
+}
+
+/* Hindari konteks sticky menempel pada mode cetak. */
+@media print{
+  #kapKjsTable .group-sticky-value{
+    position:static !important;
+  }
+
+  #kapKjsTable thead th,
+  #kapKjsSearchTable thead th{
+    top:auto !important;
+  }
+}
+
+/* Pada HP tabel desktop tidak ditampilkan, jadi tidak perlu sticky context. */
+@media(max-width:680px){
+  #kapKjsTable .group-sticky-value{
+    position:static !important;
+  }
+}
+
+</style>
+<style id="kapKjsTableStickyFixV2">
+  /* =========================================================
+     FIX FINAL — sticky table tanpa tumpang tindih baris
+     ========================================================= */
+
+  :root{
+    --reference-thead-height:76px;
+  }
+
+  /*
+    Search toolbar tetap terlihat di atas tabel, tetapi tidak ikut
+    menjadi sticky layer. Hero sudah memiliki search utama, jadi
+    tidak perlu ada dua layer sticky sekaligus.
+  */
+  .sticky-toolbar-shell{
+    position:relative !important;
+    top:auto !important;
+    z-index:auto !important;
+    margin-bottom:16px !important;
+    padding:0 !important;
+    background:transparent !important;
+    backdrop-filter:none !important;
+    -webkit-backdrop-filter:none !important;
+  }
+
+  /*
+    Header tabel hanya menempel tepat di bawah navbar Kabayan.
+    Tidak ada lagi offset toolbar yang meninggalkan area kosong.
+  */
+  #kapKjsTable thead th,
+  #kapKjsSearchTable thead th{
+    position:sticky !important;
+    top:var(--nav-h) !important;
+    z-index:12 !important;
+  }
+
+  /*
+    Identitas kelompok (No/KAP/Jenis Pajak) menempel tepat di bawah
+    header tabel, bukan di bawah toolbar yang sudah tidak sticky.
+  */
+  #kapKjsTable .group-sticky-value{
+    top:calc(
+      var(--nav-h) +
+      var(--reference-thead-height) +
+      10px
+    ) !important;
+  }
+
+  /*
+    Agar row pertama tidak terlihat "menembus" area di atas thead.
+  */
+  #kapKjsTable thead,
+  #kapKjsSearchTable thead{
+    position:relative;
+    z-index:12;
+  }
+
+  #kapKjsTable thead th,
+  #kapKjsSearchTable thead th{
+    background:#0d3769 !important;
+    box-shadow:0 1px 0 #0d3769;
+  }
+
+  /*
+    Rowspan context memakai background solid agar teks/baris di
+    belakang tidak terlihat saat elemen sedang sticky.
+  */
+  #kapKjsTable .group-context-cell{
+    background:#f6f9fd !important;
+  }
+
+  #kapKjsTable .col-no.group-context-cell{
+    background:#ffffff !important;
+  }
+
+  #kapKjsTable .group-sticky-value{
+    background:inherit;
+  }
+
+  @media(max-width:680px){
+    #kapKjsTable thead th,
+    #kapKjsSearchTable thead th{
+      position:static !important;
+      top:auto !important;
+    }
+
+    #kapKjsTable .group-sticky-value{
+      position:static !important;
+      top:auto !important;
+    }
+  }
+
+  @media print{
+    .sticky-toolbar-shell{
+      display:none !important;
+    }
+
+    #kapKjsTable thead th,
+    #kapKjsSearchTable thead th,
+    #kapKjsTable .group-sticky-value{
+      position:static !important;
+      top:auto !important;
+    }
+  }
+</style>
+
+</head>
 <body id="top">
-<input
-  class="mobile-nav-checkbox"
-  id="mobileNavToggle"
-  type="checkbox"
-  autocomplete="off"
-  aria-label="Buka atau tutup menu navigasi"
->
-
+<input aria-label="Buka atau tutup menu navigasi" autocomplete="off" class="mobile-nav-checkbox" id="mobileNavToggle" type="checkbox"/>
 <header class="site-nav">
-  <div class="nav-inner">
-    <a
-      class="nav-brand"
-      href="index.html"
-      aria-label="Kabayan — Kembali ke beranda"
-    >
-      <img
-        class="brand-logo"
-        src="assets/img/LogoASD.svg"
-        alt="Logo Kabayan"
-      >
-      <span>Kabayan</span>
-    </a>
-
-    <nav class="desktop-menu" aria-label="Navigasi utama">
-      <a href="buku.html">Buku</a>
-      <a href="formulir.html">Formulir</a>
-      <a href="kalkulator.html">Kalkulator</a>
-      <a href="aplikasi.html">Aplikasi</a>
-      <a href="artikel.html" aria-current="page">Artikel</a>
-      <a class="nav-hotnews" href="hotnews.html">
-        <span class="nav-hotnews-dot" aria-hidden="true"></span>
-        <span>Hot News</span>
-      </a>
-    </nav>
-
-    <div class="nav-actions">
-      <a class="nav-cta" href="artikel.html">Jelajahi Artikel ↗</a>
-
-      <label
-        class="menu-toggle"
-        for="mobileNavToggle"
-        aria-label="Buka atau tutup menu"
-      >
-        <span class="menu-icon-open" aria-hidden="true">☰</span>
-        <span class="menu-icon-close" aria-hidden="true">×</span>
-      </label>
-    </div>
-  </div>
+<div class="nav-inner">
+<a aria-label="Kabayan — Kembali ke beranda" class="nav-brand" href="index.html">
+<img alt="Logo Kabayan" class="brand-logo" src="assets/img/LogoASD.svg"/>
+<span>Kabayan</span>
+</a>
+<nav aria-label="Navigasi utama" class="desktop-menu">
+<a href="buku.html">Buku</a>
+<a href="formulir.html">Formulir</a>
+<a href="kalkulator.html">Kalkulator</a>
+<a href="aplikasi.html">Aplikasi</a>
+<a aria-current="page" href="artikel.html">Artikel</a>
+<a class="nav-hotnews" href="hotnews.html">
+<span aria-hidden="true" class="nav-hotnews-dot"></span>
+<span>Hot News</span>
+</a>
+</nav>
+<div class="nav-actions">
+<a class="nav-cta" href="artikel.html">Jelajahi Artikel ↗</a>
+<label aria-label="Buka atau tutup menu" class="menu-toggle" for="mobileNavToggle">
+<span aria-hidden="true" class="menu-icon-open">☰</span>
+<span aria-hidden="true" class="menu-icon-close">×</span>
+</label>
+</div>
+</div>
 </header>
-
-<nav class="mobile-menu" aria-label="Navigasi mobile">
-  <a href="index.html">
-    <span class="mobile-menu-index">00</span>
-    <span>Beranda</span>
-  </a>
-  <a href="buku.html">
-    <span class="mobile-menu-index">01</span>
-    <span>Buku</span>
-  </a>
-  <a href="formulir.html">
-    <span class="mobile-menu-index">02</span>
-    <span>Formulir</span>
-  </a>
-  <a href="kalkulator.html">
-    <span class="mobile-menu-index">03</span>
-    <span>Kalkulator</span>
-  </a>
-  <a href="aplikasi.html">
-    <span class="mobile-menu-index">04</span>
-    <span>Aplikasi</span>
-  </a>
-  <a href="artikel.html" aria-current="page">
-    <span class="mobile-menu-index">05</span>
-    <span>Artikel</span>
-  </a>
-  <a href="hotnews.html">
-    <span class="mobile-menu-index">06</span>
-    <span>Hot News</span>
-    <span class="mobile-hot-dot" aria-hidden="true"></span>
-  </a>
-
-  <a class="mobile-menu-cta" href="artikel.html">
-    <span>Jelajahi Artikel</span>
-    <span aria-hidden="true">↗</span>
-  </a>
+<nav aria-label="Navigasi mobile" class="mobile-menu">
+<a href="index.html">
+<span class="mobile-menu-index">00</span>
+<span>Beranda</span>
+</a>
+<a href="buku.html">
+<span class="mobile-menu-index">01</span>
+<span>Buku</span>
+</a>
+<a href="formulir.html">
+<span class="mobile-menu-index">02</span>
+<span>Formulir</span>
+</a>
+<a href="kalkulator.html">
+<span class="mobile-menu-index">03</span>
+<span>Kalkulator</span>
+</a>
+<a href="aplikasi.html">
+<span class="mobile-menu-index">04</span>
+<span>Aplikasi</span>
+</a>
+<a aria-current="page" href="artikel.html">
+<span class="mobile-menu-index">05</span>
+<span>Artikel</span>
+</a>
+<a href="hotnews.html">
+<span class="mobile-menu-index">06</span>
+<span>Hot News</span>
+<span aria-hidden="true" class="mobile-hot-dot"></span>
+</a>
+<a class="mobile-menu-cta" href="artikel.html">
+<span>Jelajahi Artikel</span>
+<span aria-hidden="true">↗</span>
+</a>
 </nav>
 <main>
 <section class="hero reference-hero">
-  <div class="reference-hero-inner">
-    <div class="reference-hero-copy">
-      <div class="reference-kicker">07 / REFERENSI PAJAK</div>
-      <h1>KAP &amp; KJS.<span>Lebih cepat ditemukan.</span></h1>
-      <p class="reference-lead">Cari kode pembayaran pajak berdasarkan Kode Akun Pajak, Kode Jenis Setoran, jenis pajak, jenis setoran, atau keterangannya.</p>
-
-      <label class="hero-search-box" for="tableSearch">
-        <span class="hero-search-icon" aria-hidden="true">⌕</span>
-        <input aria-label="Cari KAP, KJS, jenis pajak, setoran, atau keterangan"
-               autocomplete="off"
-               class="search-input hero-search-input"
-               id="tableSearch"
-               placeholder="Cari KAP, KJS, PPh, PPN, setoran, atau keterangan..."
-               type="search">
-        <button aria-label="Hapus pencarian" class="clear-search" id="clearSearch" type="button">×</button>
-      </label>
-
-      <div class="reference-stats">
-        <div class="reference-stat"><strong>52</strong><span>Kode Akun Pajak</span></div>
-        <div class="reference-stat"><strong>203</strong><span>Kombinasi KAP–KJS</span></div>
-        <div class="reference-stat reference-stat-rule"><strong>PER-8/PJ/2026</strong><span>Lampiran B</span></div>
-      </div>
-    </div>
-
-    <div class="reference-hero-visual" aria-hidden="true">
-      <div class="reference-mendung"></div>
-      <div class="reference-halo"></div>
-      <img class="reference-kabayan" src="assets/img/kabayan-membaca.webp" alt="">
-      <div class="reference-code-card reference-code-card-a">
-        <small>KAP</small><strong>411121</strong><span>PPh Pasal 21</span>
-      </div>
-      <div class="reference-code-card reference-code-card-b">
-        <small>KJS</small><strong>100</strong><span>Setoran Masa</span>
-      </div>
-    </div>
-  </div>
+<div class="reference-hero-inner">
+<div class="reference-hero-copy">
+<div class="reference-kicker">07 / REFERENSI PAJAK</div>
+<h1>KAP &amp; KJS.<span>Lebih cepat ditemukan.</span></h1>
+<p class="reference-lead">Cari kode pembayaran pajak berdasarkan Kode Akun Pajak, Kode Jenis Setoran, jenis pajak, jenis setoran, atau keterangannya.</p>
+<label class="hero-search-box" for="tableSearch">
+<span aria-hidden="true" class="hero-search-icon">⌕</span>
+<input aria-label="Cari KAP, KJS, jenis pajak, setoran, atau keterangan" autocomplete="off" class="search-input hero-search-input" id="tableSearch" placeholder="Cari KAP, KJS, PPh, PPN, setoran, atau keterangan..." type="search"/>
+<button aria-label="Hapus pencarian" class="clear-search" id="clearSearch" type="button">×</button>
+</label>
+<div class="reference-stats">
+<div class="reference-stat"><strong>52</strong><span>Kode Akun Pajak</span></div>
+<div class="reference-stat"><strong>203</strong><span>Kombinasi KAP–KJS</span></div>
+<div class="reference-stat reference-stat-rule"><strong>PER-8/PJ/2026</strong><span>Lampiran B</span></div>
+</div>
+</div>
+<div aria-hidden="true" class="reference-hero-visual">
+<div class="reference-mendung"></div>
+<div class="reference-halo"></div>
+<img alt="" class="reference-kabayan" src="assets/img/kabayan-membaca.webp"/>
+<div class="reference-code-card reference-code-card-a">
+<small>KAP</small><strong>411121</strong><span>PPh Pasal 21</span>
+</div>
+<div class="reference-code-card reference-code-card-b">
+<small>KJS</small><strong>100</strong><span>Setoran Masa</span>
+</div>
+</div>
+</div>
 </section>
-
-<section class="category-rail-section" aria-labelledby="categoryTitle">
-  <div class="category-rail-inner">
-    <div class="category-rail-heading">
-      <span id="categoryTitle">Cari berdasarkan kelompok</span>
-      <button class="category-chip is-active" type="button" data-category="all">Semua</button>
-    </div>
-    <div class="category-rail" id="categoryRail">
-      <button class="category-chip" type="button" data-category="pph">PPh</button>
-      <button class="category-chip" type="button" data-category="ppn">PPN &amp; PPnBM</button>
-      <button class="category-chip" type="button" data-category="pbb">PBB</button>
-      <button class="category-chip" type="button" data-category="meterai">Bea Meterai</button>
-      <button class="category-chip" type="button" data-category="dtp">Pajak DTP</button>
-      <button class="category-chip" type="button" data-category="penagihan">Penagihan</button>
-      <button class="category-chip" type="button" data-category="karbon">Pajak Karbon</button>
-    </div>
-  </div>
+<section aria-labelledby="categoryTitle" class="category-rail-section">
+<div class="category-rail-inner">
+<div class="category-rail-heading">
+<span id="categoryTitle">Cari berdasarkan kelompok</span>
+<button class="category-chip is-active" data-category="all" type="button">Semua</button>
+</div>
+<div class="category-rail" id="categoryRail">
+<button class="category-chip" data-category="pph" type="button">PPh</button>
+<button class="category-chip" data-category="ppn" type="button">PPN &amp; PPnBM</button>
+<button class="category-chip" data-category="pbb" type="button">PBB</button>
+<button class="category-chip" data-category="meterai" type="button">Bea Meterai</button>
+<button class="category-chip" data-category="dtp" type="button">Pajak DTP</button>
+<button class="category-chip" data-category="penagihan" type="button">Penagihan</button>
+<button class="category-chip" data-category="karbon" type="button">Pajak Karbon</button>
+</div>
+</div>
 </section>
-
 <section class="catalog-section" id="tabel-kap-kjs"><div class="catalog-inner"><div class="catalog-heading reference-catalog-heading">
-  <div class="reference-kicker">02 / REFERENSI</div>
-  <h2>Temukan kode yang Anda perlukan.</h2>
-  <div class="subcopy">Gunakan pencarian atau filter kelompok untuk mempersempit daftar. Pada perangkat seluler, hasil ditampilkan sebagai kartu agar lebih mudah dibaca.</div>
+<div class="reference-kicker">02 / REFERENSI</div>
+<h2>Temukan kode yang Anda perlukan.</h2>
+<div class="subcopy">Gunakan pencarian atau filter kelompok untuk mempersempit daftar. Pada perangkat seluler, hasil ditampilkan sebagai kartu agar lebih mudah dibaca.</div>
 </div>
-
 <div class="sticky-toolbar-shell">
-  <div class="sticky-toolbar">
-    <label class="sticky-search-box" for="tableSearchSticky">
-      <span aria-hidden="true" class="search-icon">⌕</span>
-      <input aria-label="Cari dalam tabel KAP dan KJS"
-             autocomplete="off"
-             class="search-input"
-             id="tableSearchSticky"
-             placeholder="Cari KAP / KJS / jenis pajak..."
-             type="search">
-      <button aria-label="Hapus pencarian" class="sticky-clear-search" id="stickyClearSearch" type="button">×</button>
-    </label>
-    <button class="toolbar-button secondary" id="resetTable" type="button">Tampilkan Semua</button>
-    <button class="toolbar-button" id="printTable" type="button">Cetak Tabel</button>
-  </div>
+<div class="sticky-toolbar">
+<label class="sticky-search-box" for="tableSearchSticky">
+<span aria-hidden="true" class="search-icon">⌕</span>
+<input aria-label="Cari dalam tabel KAP dan KJS" autocomplete="off" class="search-input" id="tableSearchSticky" placeholder="Cari KAP / KJS / jenis pajak..." type="search"/>
+<button aria-label="Hapus pencarian" class="sticky-clear-search" id="stickyClearSearch" type="button">×</button>
+</label>
+<button class="toolbar-button secondary" id="resetTable" type="button">Tampilkan Semua</button>
+<button class="toolbar-button" id="printTable" type="button">Cetak Tabel</button>
 </div>
-
+</div>
 <div class="result-bar"><p id="resultCount">Memuat data tabel...</p><p>Saat pencarian aktif, hanya baris KJS yang benar-benar cocok yang ditampilkan.</p></div>
 <div class="table-card"><div class="table-header"><div><h3>Kode Akun Pajak dan Kode Jenis Setoran</h3><p>Lampiran B PER-8/PJ/2026</p></div><span class="table-badge">Kabayan / PER-8/PJ/2026</span></div><div class="table-scroll"><table aria-label="Daftar Kode Akun Pajak dan Kode Jenis Setoran" id="kapKjsTable">
 <thead>
@@ -845,9 +994,9 @@ footer{background:var(--kab-navy);color:rgba(255,255,255,.66)}
 </thead>
 <tbody>
 <tr class="group-start">
-<td class="col-no" rowspan="7">1</td>
-<td class="col-kap" rowspan="7"><code>411111</code></td>
-<td class="col-pajak" rowspan="7">Pajak Penghasilan (PPh) Minyak Bumi</td>
+<td class="col-no group-context-cell" rowspan="7"><div class="group-sticky-value">1</div></td>
+<td class="col-kap group-context-cell" rowspan="7"><div class="group-sticky-value"><code>411111</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="7"><div class="group-sticky-value">Pajak Penghasilan (PPh) Minyak Bumi</div></td>
 <td class="col-kjs"><code>100</code></td>
 <td class="col-setoran">Masa PPh Minyak Bumi</td>
 <td class="col-keterangan">untuk pembayaran masa PPh Minyak Bumi</td>
@@ -883,9 +1032,9 @@ footer{background:var(--kab-navy);color:rgba(255,255,255,.66)}
 <td class="col-keterangan">untuk pembayaran PPh Minyak Bumi atas Sanksi Kenaikan Pengungkapan Ketidakbenaran Pengisian Surat Pemberitahuan Pasal 8 ayat (4) UU KUP</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="7">2</td>
-<td class="col-kap" rowspan="7"><code>411112</code></td>
-<td class="col-pajak" rowspan="7">PPh Gas Alam</td>
+<td class="col-no group-context-cell" rowspan="7"><div class="group-sticky-value">2</div></td>
+<td class="col-kap group-context-cell" rowspan="7"><div class="group-sticky-value"><code>411112</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="7"><div class="group-sticky-value">PPh Gas Alam</div></td>
 <td class="col-kjs"><code>100</code></td>
 <td class="col-setoran">Masa PPh Gas Alam</td>
 <td class="col-keterangan">untuk pembayaran masa PPh Gas Alam</td>
@@ -921,9 +1070,9 @@ footer{background:var(--kab-navy);color:rgba(255,255,255,.66)}
 <td class="col-keterangan">untuk pembayaran PPh Gas Alam atas Sanksi Kenaikan Pengungkapan Ketidakbenaran Pengisian Surat Pemberitahuan Pasal 8 ayat (4) UU KUP</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="3">3</td>
-<td class="col-kap" rowspan="3"><code>411113</code></td>
-<td class="col-pajak" rowspan="3">PPh Panas Bumi</td>
+<td class="col-no group-context-cell" rowspan="3"><div class="group-sticky-value">3</div></td>
+<td class="col-kap group-context-cell" rowspan="3"><div class="group-sticky-value"><code>411113</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="3"><div class="group-sticky-value">PPh Panas Bumi</div></td>
 <td class="col-kjs"><code>100</code></td>
 <td class="col-setoran">Masa PPh Panas Bumi</td>
 <td class="col-keterangan">untuk pembayaran masa PPh Panas Bumi</td>
@@ -939,9 +1088,9 @@ footer{background:var(--kab-navy);color:rgba(255,255,255,.66)}
 <td class="col-keterangan">untuk pembayaran PPh Panas Bumi yang masih harus dibayar yang tercantum dalam STP, SKP, SK Keberatan, SK Non-Keberatan, Putusan Banding, Putusan Peninjauan Kembali, atau SK Persetujuan Bersama</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="3">4</td>
-<td class="col-kap" rowspan="3"><code>411119</code></td>
-<td class="col-pajak" rowspan="3">PPh Migas Lainnya</td>
+<td class="col-no group-context-cell" rowspan="3"><div class="group-sticky-value">4</div></td>
+<td class="col-kap group-context-cell" rowspan="3"><div class="group-sticky-value"><code>411119</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="3"><div class="group-sticky-value">PPh Migas Lainnya</div></td>
 <td class="col-kjs"><code>100</code></td>
 <td class="col-setoran">Masa PPh Migas Lainnya</td>
 <td class="col-keterangan">untuk pembayaran masa PPh Migas Lainnya</td>
@@ -957,9 +1106,9 @@ footer{background:var(--kab-navy);color:rgba(255,255,255,.66)}
 <td class="col-keterangan">untuk pembayaran PPh Migas Lainnya yang masih harus dibayar yang tercantum dalam STP, SKP, SK Keberatan, SK Non-Keberatan, Putusan Banding, Putusan Peninjauan Kembali, atau SK Persetujuan Bersama</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="5">5</td>
-<td class="col-kap" rowspan="5"><code>411121</code></td>
-<td class="col-pajak" rowspan="5">PPh Pasal 21</td>
+<td class="col-no group-context-cell" rowspan="5"><div class="group-sticky-value">5</div></td>
+<td class="col-kap group-context-cell" rowspan="5"><div class="group-sticky-value"><code>411121</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="5"><div class="group-sticky-value">PPh Pasal 21</div></td>
 <td class="col-kjs"><code>100</code></td>
 <td class="col-setoran">Masa PPh Pasal 21</td>
 <td class="col-keterangan">untuk pembayaran PPh Pasal 21 yang masih harus disetor yang tercantum dalam Surat Pemberitahuan (SPT) Masa PPh Pasal 21 termasuk SPT pembetulan sebelum dilakukan pemeriksaan</td>
@@ -985,9 +1134,9 @@ footer{background:var(--kab-navy);color:rgba(255,255,255,.66)}
 <td class="col-keterangan">untuk pembayaran PPh Pasal 21 atas Sanksi Kenaikan Pengungkapan Ketidakbenaran Pengisian Surat Pemberitahuan Pasal 8 ayat (4) UU KUP</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="8">6</td>
-<td class="col-kap" rowspan="8"><code>411122</code></td>
-<td class="col-pajak" rowspan="8">PPh Pasal 22</td>
+<td class="col-no group-context-cell" rowspan="8"><div class="group-sticky-value">6</div></td>
+<td class="col-kap group-context-cell" rowspan="8"><div class="group-sticky-value"><code>411122</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="8"><div class="group-sticky-value">PPh Pasal 22</div></td>
 <td class="col-kjs"><code>100</code></td>
 <td class="col-setoran">Masa PPh Pasal 22</td>
 <td class="col-keterangan">untuk pembayaran PPh Pasal 22 yang harus disetor yang tercantum dalam SPT Masa PPh Unifikasi termasuk SPT pembetulan sebelum dilakukan pemeriksaan</td>
@@ -1028,9 +1177,9 @@ footer{background:var(--kab-navy);color:rgba(255,255,255,.66)}
 <td class="col-keterangan">untuk pembayaran PPh Pasal 22 yang dipungut oleh Pemungut Instansi Pemerintah yang tercantum dalam SPT Masa PPh Unifikasi termasuk SPT pembetulan sebelum dilakukan pemeriksaan</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="3">7</td>
-<td class="col-kap" rowspan="3"><code>411123</code></td>
-<td class="col-pajak" rowspan="3">PPh Pasal 22 Impor</td>
+<td class="col-no group-context-cell" rowspan="3"><div class="group-sticky-value">7</div></td>
+<td class="col-kap group-context-cell" rowspan="3"><div class="group-sticky-value"><code>411123</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="3"><div class="group-sticky-value">PPh Pasal 22 Impor</div></td>
 <td class="col-kjs"><code>100</code></td>
 <td class="col-setoran">Masa PPh Pasal 22 Impor</td>
 <td class="col-keterangan">untuk pembayaran PPh Pasal 22 atas transaksi impor</td>
@@ -1046,9 +1195,9 @@ footer{background:var(--kab-navy);color:rgba(255,255,255,.66)}
 <td class="col-keterangan">untuk pembayaran PPh Pasal 22 Impor yang masih harus dibayar yang tercantum dalam STP, SKP, SK Keberatan, SK Non-Keberatan, Putusan Banding, Putusan Peninjauan Kembali, atau SK Persetujuan Bersama</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="5">8</td>
-<td class="col-kap" rowspan="5"><code>411124</code></td>
-<td class="col-pajak" rowspan="5">PPh Pasal 23</td>
+<td class="col-no group-context-cell" rowspan="5"><div class="group-sticky-value">8</div></td>
+<td class="col-kap group-context-cell" rowspan="5"><div class="group-sticky-value"><code>411124</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="5"><div class="group-sticky-value">PPh Pasal 23</div></td>
 <td class="col-kjs"><code>100</code></td>
 <td class="col-setoran">Masa PPh Pasal 23</td>
 <td class="col-keterangan">untuk pembayaran PPh Pasal 23 yang harus disetor yang tercantum dalam SPT Masa PPh Unifikasi termasuk SPT pembetulan sebelum dilakukan pemeriksaan</td>
@@ -1074,9 +1223,9 @@ footer{background:var(--kab-navy);color:rgba(255,255,255,.66)}
 <td class="col-keterangan">untuk pembayaran PPh Pasal 23 atas Sanksi Kenaikan Pengungkapan Ketidakbenaran Pengisian Surat Pemberitahuan Pasal 8 ayat (4) UU KUP</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="7">9</td>
-<td class="col-kap" rowspan="7"><code>411125</code></td>
-<td class="col-pajak" rowspan="7">PPh Pasal 25/29 Orang Pribadi</td>
+<td class="col-no group-context-cell" rowspan="7"><div class="group-sticky-value">9</div></td>
+<td class="col-kap group-context-cell" rowspan="7"><div class="group-sticky-value"><code>411125</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="7"><div class="group-sticky-value">PPh Pasal 25/29 Orang Pribadi</div></td>
 <td class="col-kjs"><code>100</code></td>
 <td class="col-setoran">Masa PPh Pasal 25 Orang Pribadi</td>
 <td class="col-keterangan">untuk pembayaran masa PPh Pasal 25 Orang Pribadi yang terutang</td>
@@ -1112,9 +1261,9 @@ footer{background:var(--kab-navy);color:rgba(255,255,255,.66)}
 <td class="col-keterangan">untuk pembayaran PPh Pasal 25 Orang Pribadi atas Sanksi Kenaikan Pengungkapan Ketidakbenaran Pengisian Surat Pemberitahuan Pasal 8 ayat (4) UU KUP</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="9">10</td>
-<td class="col-kap" rowspan="9"><code>411126</code></td>
-<td class="col-pajak" rowspan="9">PPh Pasal 25/29 Badan</td>
+<td class="col-no group-context-cell" rowspan="9"><div class="group-sticky-value">10</div></td>
+<td class="col-kap group-context-cell" rowspan="9"><div class="group-sticky-value"><code>411126</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="9"><div class="group-sticky-value">PPh Pasal 25/29 Badan</div></td>
 <td class="col-kjs"><code>100</code></td>
 <td class="col-setoran">Masa PPh Pasal 25 Badan</td>
 <td class="col-keterangan">untuk pembayaran Masa PPh Pasal 25 Badan yang terutang</td>
@@ -1160,9 +1309,9 @@ footer{background:var(--kab-navy);color:rgba(255,255,255,.66)}
 <td class="col-keterangan">untuk pembayaran pajak tambahan berdasarkan Domestic Minimum Top-Up Tax (DMTT) yang tercantum dalam SPT Tahunan PPh dalam rangka melaksanakan GlobE termasuk SPT pembetulan sebelum dilakukan Pemeriksaan</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="6">11</td>
-<td class="col-kap" rowspan="6"><code>411127</code></td>
-<td class="col-pajak" rowspan="6">PPh Pasal 26</td>
+<td class="col-no group-context-cell" rowspan="6"><div class="group-sticky-value">11</div></td>
+<td class="col-kap group-context-cell" rowspan="6"><div class="group-sticky-value"><code>411127</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="6"><div class="group-sticky-value">PPh Pasal 26</div></td>
 <td class="col-kjs"><code>100</code></td>
 <td class="col-setoran">Masa PPh Pasal 26</td>
 <td class="col-keterangan">untuk pembayaran PPh Pasal 26 yang masih harus disetor yang tercantum dalam SPT Masa PPh Pasal 21 termasuk SPT pembetulan sebelum dilakukan pemeriksaan</td>
@@ -1193,9 +1342,9 @@ footer{background:var(--kab-navy);color:rgba(255,255,255,.66)}
 <td class="col-keterangan">untuk pembayaran PPh Pasal 26 atas Sanksi Kenaikan Pengungkapan Ketidakbenaran Pengisian Surat Pemberitahuan Pasal 8 ayat (4) UU KUP</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="19">12</td>
-<td class="col-kap" rowspan="19"><code>411128</code></td>
-<td class="col-pajak" rowspan="19">PPh Final</td>
+<td class="col-no group-context-cell" rowspan="19"><div class="group-sticky-value">12</div></td>
+<td class="col-kap group-context-cell" rowspan="19"><div class="group-sticky-value"><code>411128</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="19"><div class="group-sticky-value">PPh Final</div></td>
 <td class="col-kjs"><code>100</code></td>
 <td class="col-setoran">Masa PPh Final</td>
 <td class="col-keterangan">untuk pembayaran masa PPh Final yang masih harus disetor yang tercantum dalam SPT Masa Unifikasi termasuk SPT pembetulan sebelum dilakukan pemeriksaan</td>
@@ -1291,9 +1440,9 @@ footer{background:var(--kab-navy);color:rgba(255,255,255,.66)}
 <td class="col-keterangan">untuk pembayaran PPh Final Pasal 15 atas penghasilan dari imbalan yang dibayarkan atau terutang kepada perusahaan pelayaran luar negeri sehubungan dengan pengangkutan orang dan/atau barang selain berdasarkan perjanjian charter, yang disetor sendiri oleh perusahaan pelayaran luar negeri</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="8">13</td>
-<td class="col-kap" rowspan="8"><code>411129</code></td>
-<td class="col-pajak" rowspan="8">PPh Non-Migas Lainnya</td>
+<td class="col-no group-context-cell" rowspan="8"><div class="group-sticky-value">13</div></td>
+<td class="col-kap group-context-cell" rowspan="8"><div class="group-sticky-value"><code>411129</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="8"><div class="group-sticky-value">PPh Non-Migas Lainnya</div></td>
 <td class="col-kjs"><code>100</code></td>
 <td class="col-setoran">PPh Non-Migas Lainnya</td>
 <td class="col-keterangan">untuk pembayaran masa PPh Non-Migas lainnya selain PPh Pasal 15 atas jasa penerbangan dalam negeri</td>
@@ -1334,9 +1483,9 @@ footer{background:var(--kab-navy);color:rgba(255,255,255,.66)}
 <td class="col-keterangan">untuk pembayaran PPh Pasal 15 atas jasa penerbangan dalam negeri yang memperoleh penghasilan berdasarkan perjanjian (bersifat nonfinal) yang tercantum dalam SPT Masa Unifikasi termasuk SPT pembetulan sebelum dilakukan pemeriksaan</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="16">14</td>
-<td class="col-kap" rowspan="16"><code>411211</code></td>
-<td class="col-pajak" rowspan="16">Pajak Pertambahan Nilai (PPN) Dalam Negeri</td>
+<td class="col-no group-context-cell" rowspan="16"><div class="group-sticky-value">14</div></td>
+<td class="col-kap group-context-cell" rowspan="16"><div class="group-sticky-value"><code>411211</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="16"><div class="group-sticky-value">Pajak Pertambahan Nilai (PPN) Dalam Negeri</div></td>
 <td class="col-kjs"><code>100</code></td>
 <td class="col-setoran">Setoran Masa PPN Dalam Negeri</td>
 <td class="col-keterangan">untuk pembayaran pajak yang masih harus dibayar yang tercantum dalam SPT Masa PPN Dalam Negeri termasuk SPT pembetulan sebelum dilakukan pemeriksaan</td>
@@ -1417,9 +1566,9 @@ footer{background:var(--kab-navy);color:rgba(255,255,255,.66)}
 <td class="col-keterangan">untuk pembayaran PPN Dalam Negeri yang dipungut oleh Pemungut Instansi Pemerintah yang tercantum dalam SPT Masa PPN Dalam Negeri atau SPT Masa Pemungut PPN Non-PKP termasuk SPT pembetulan sebelum dilakukan pemeriksaan</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="8">15</td>
-<td class="col-kap" rowspan="8"><code>411212</code></td>
-<td class="col-pajak" rowspan="8">PPN Impor</td>
+<td class="col-no group-context-cell" rowspan="8"><div class="group-sticky-value">15</div></td>
+<td class="col-kap group-context-cell" rowspan="8"><div class="group-sticky-value"><code>411212</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="8"><div class="group-sticky-value">PPN Impor</div></td>
 <td class="col-kjs"><code>100</code></td>
 <td class="col-setoran">Setoran Masa PPN Impor</td>
 <td class="col-keterangan">untuk pembayaran PPN terutang pada saat impor BKP</td>
@@ -1460,9 +1609,9 @@ footer{background:var(--kab-navy);color:rgba(255,255,255,.66)}
 <td class="col-keterangan">untuk pembayaran PPN Impor yang dipungut oleh Pemungut Instansi Pemerintah</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="6">16</td>
-<td class="col-kap" rowspan="6"><code>411219</code></td>
-<td class="col-pajak" rowspan="6">PPN Lainnya</td>
+<td class="col-no group-context-cell" rowspan="6"><div class="group-sticky-value">16</div></td>
+<td class="col-kap group-context-cell" rowspan="6"><div class="group-sticky-value"><code>411219</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="6"><div class="group-sticky-value">PPN Lainnya</div></td>
 <td class="col-kjs"><code>100</code></td>
 <td class="col-setoran">Setoran Masa PPN Lainnya</td>
 <td class="col-keterangan">untuk pembayaran PPN Lainnya yang terutang</td>
@@ -1493,9 +1642,9 @@ footer{background:var(--kab-navy);color:rgba(255,255,255,.66)}
 <td class="col-keterangan">untuk pembayaran PPN Lainnya atas Sanksi Kenaikan Pengungkapan Ketidakbenaran Pengisian Surat Pemberitahuan Pasal 8 ayat (4) UU KUP</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="12">17</td>
-<td class="col-kap" rowspan="12"><code>411221</code></td>
-<td class="col-pajak" rowspan="12">Pajak Penjualan atas Barang Mewah (PPnBM) Dalam Negeri</td>
+<td class="col-no group-context-cell" rowspan="12"><div class="group-sticky-value">17</div></td>
+<td class="col-kap group-context-cell" rowspan="12"><div class="group-sticky-value"><code>411221</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="12"><div class="group-sticky-value">Pajak Penjualan atas Barang Mewah (PPnBM) Dalam Negeri</div></td>
 <td class="col-kjs"><code>100</code></td>
 <td class="col-setoran">Setoran Masa PPnBM Dalam Negeri</td>
 <td class="col-keterangan">untuk pembayaran PPnBM Dalam Negeri yang masih harus dibayar yang tercantum dalam SPT Masa PPN Dalam Negeri</td>
@@ -1556,9 +1705,9 @@ footer{background:var(--kab-navy);color:rgba(255,255,255,.66)}
 <td class="col-keterangan">untuk pembayaran PPnBM Dalam Negeri yang dipungut oleh Pemungut Instansi Pemerintah yang tercantum dalam SPT Masa PPN Dalam Negeri atau SPT Masa Pemungut PPN Non-PKP termasuk SPT pembetulan sebelum dilakukan pemeriksaan</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="5">18</td>
-<td class="col-kap" rowspan="5"><code>411222</code></td>
-<td class="col-pajak" rowspan="5">PPnBM Impor</td>
+<td class="col-no group-context-cell" rowspan="5"><div class="group-sticky-value">18</div></td>
+<td class="col-kap group-context-cell" rowspan="5"><div class="group-sticky-value"><code>411222</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="5"><div class="group-sticky-value">PPnBM Impor</div></td>
 <td class="col-kjs"><code>100</code></td>
 <td class="col-setoran">Setoran Masa PPnBM Impor</td>
 <td class="col-keterangan">untuk pembayaran PPnBM terutang pada saat impor BKP</td>
@@ -1584,9 +1733,9 @@ footer{background:var(--kab-navy);color:rgba(255,255,255,.66)}
 <td class="col-keterangan">untuk pembayaran PPnBM Impor yang dipungut oleh Pemungut Instansi Pemerintah</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="2">19</td>
-<td class="col-kap" rowspan="2"><code>411229</code></td>
-<td class="col-pajak" rowspan="2">PPnBM Lainnya</td>
+<td class="col-no group-context-cell" rowspan="2"><div class="group-sticky-value">19</div></td>
+<td class="col-kap group-context-cell" rowspan="2"><div class="group-sticky-value"><code>411229</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="2"><div class="group-sticky-value">PPnBM Lainnya</div></td>
 <td class="col-kjs"><code>100</code></td>
 <td class="col-setoran">Setoran Masa PPnBM Lainnya</td>
 <td class="col-keterangan">untuk pembayaran PPnBM Lainnya yang terutang</td>
@@ -1597,9 +1746,9 @@ footer{background:var(--kab-navy);color:rgba(255,255,255,.66)}
 <td class="col-keterangan">untuk pembayaran PPnBM Lainnya yang masih harus dibayar yang tercantum dalam STP, SKP, SK Keberatan, SK Non-Keberatan, Putusan Banding, atau Putusan Peninjauan Kembali</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="2">20</td>
-<td class="col-kap" rowspan="2"><code>411313</code></td>
-<td class="col-pajak" rowspan="2">Pajak Bumi dan Bangunan (PBB) Sektor Perkebunan</td>
+<td class="col-no group-context-cell" rowspan="2"><div class="group-sticky-value">20</div></td>
+<td class="col-kap group-context-cell" rowspan="2"><div class="group-sticky-value"><code>411313</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="2"><div class="group-sticky-value">Pajak Bumi dan Bangunan (PBB) Sektor Perkebunan</div></td>
 <td class="col-kjs"><code>300</code></td>
 <td class="col-setoran">Tagihan/Ketetapan PBB Sektor Perkebunan</td>
 <td class="col-keterangan">untuk pembayaran PBB Sektor Perkebunan yang masih harus dibayar yang tercantum dalam Surat Pemberitahuan Pajak Terutang (SPPT), Surat Tagihan Pajak PBB (STP PBB), Surat Ketetapan Pajak PBB (SKP PBB), SK Keberatan, SK Non-Keberatan, Putusan Banding, atau Putusan Peninjauan Kembali</td>
@@ -1610,9 +1759,9 @@ footer{background:var(--kab-navy);color:rgba(255,255,255,.66)}
 <td class="col-keterangan">untuk pembayaran PBB Sektor Perkebunan atas Pengungkapan Ketidakbenaran Perbuatan Pasal 8 ayat (3) UU KUP</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="2">21</td>
-<td class="col-kap" rowspan="2"><code>411314</code></td>
-<td class="col-pajak" rowspan="2">PBB Sektor Perhutanan</td>
+<td class="col-no group-context-cell" rowspan="2"><div class="group-sticky-value">21</div></td>
+<td class="col-kap group-context-cell" rowspan="2"><div class="group-sticky-value"><code>411314</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="2"><div class="group-sticky-value">PBB Sektor Perhutanan</div></td>
 <td class="col-kjs"><code>300</code></td>
 <td class="col-setoran">Tagihan/Ketetapan PBB Sektor Perhutanan</td>
 <td class="col-keterangan">untuk pembayaran PBB Sektor Perhutanan yang masih harus dibayar yang tercantum dalam SPPT, STP PBB, SKP PBB, SK Keberatan, SK Non-Keberatan, Putusan Banding, atau Putusan Peninjauan Kembali</td>
@@ -1623,9 +1772,9 @@ footer{background:var(--kab-navy);color:rgba(255,255,255,.66)}
 <td class="col-keterangan">untuk pembayaran PBB Sektor Perhutanan atas Pengungkapan Ketidakbenaran Perbuatan Pasal 8 ayat (3) UU KUP</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="2">22</td>
-<td class="col-kap" rowspan="2"><code>411315</code></td>
-<td class="col-pajak" rowspan="2">PBB Sektor Pertambangan untuk Pertambangan Mineral dan Batubara</td>
+<td class="col-no group-context-cell" rowspan="2"><div class="group-sticky-value">22</div></td>
+<td class="col-kap group-context-cell" rowspan="2"><div class="group-sticky-value"><code>411315</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="2"><div class="group-sticky-value">PBB Sektor Pertambangan untuk Pertambangan Mineral dan Batubara</div></td>
 <td class="col-kjs"><code>300</code></td>
 <td class="col-setoran">Tagihan/Ketetapan PBB Sektor Pertambangan untuk Pertambangan Mineral dan Batubara</td>
 <td class="col-keterangan">untuk pembayaran PBB Sektor Pertambangan untuk Pertambangan Mineral dan Batubara yang masih harus dibayar yang tercantum dalam SPPT, STP PBB, SKP PBB, SK Keberatan, SK Non-Keberatan, Putusan Banding, atau Putusan Peninjauan Kembali</td>
@@ -1636,9 +1785,9 @@ footer{background:var(--kab-navy);color:rgba(255,255,255,.66)}
 <td class="col-keterangan">untuk pembayaran PBB Sektor Pertambangan untuk Pertambangan Mineral dan Batubara atas Pengungkapan Ketidakbenaran Perbuatan Pasal 8 ayat (3) UU KUP</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="2">23</td>
-<td class="col-kap" rowspan="2"><code>411316</code></td>
-<td class="col-pajak" rowspan="2">PBB Sektor Pertambangan untuk Pertambangan Minyak Bumi dan Gas Bumi</td>
+<td class="col-no group-context-cell" rowspan="2"><div class="group-sticky-value">23</div></td>
+<td class="col-kap group-context-cell" rowspan="2"><div class="group-sticky-value"><code>411316</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="2"><div class="group-sticky-value">PBB Sektor Pertambangan untuk Pertambangan Minyak Bumi dan Gas Bumi</div></td>
 <td class="col-kjs"><code>300</code></td>
 <td class="col-setoran">Tagihan/Ketetapan PBB Sektor Pertambangan untuk Pertambangan Minyak Bumi dan Gas Bumi</td>
 <td class="col-keterangan">untuk pembayaran PBB Sektor Pertambangan untuk Pertambangan Minyak Bumi dan Gas Bumi yang masih harus dibayar yang tercantum dalam SPPT, STP PBB, SKP PBB, SK Keberatan, SK Non-Keberatan, Putusan Banding, atau Putusan Peninjauan Kembali</td>
@@ -1649,9 +1798,9 @@ footer{background:var(--kab-navy);color:rgba(255,255,255,.66)}
 <td class="col-keterangan">untuk pembayaran PBB Sektor Pertambangan untuk Pertambangan Minyak Bumi dan Gas Bumi atas Pengungkapan Ketidakbenaran Perbuatan Pasal 8 ayat (3) UU KUP</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="2">24</td>
-<td class="col-kap" rowspan="2"><code>411317</code></td>
-<td class="col-pajak" rowspan="2">PBB Sektor Pertambangan untuk Pertambangan Panas Bumi</td>
+<td class="col-no group-context-cell" rowspan="2"><div class="group-sticky-value">24</div></td>
+<td class="col-kap group-context-cell" rowspan="2"><div class="group-sticky-value"><code>411317</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="2"><div class="group-sticky-value">PBB Sektor Pertambangan untuk Pertambangan Panas Bumi</div></td>
 <td class="col-kjs"><code>300</code></td>
 <td class="col-setoran">Tagihan/Ketetapan PBB Sektor Pertambangan untuk Pertambangan Panas Bumi</td>
 <td class="col-keterangan">untuk pembayaran PBB Sektor Pertambangan untuk Pertambangan Panas Bumi yang masih harus dibayar yang tercantum dalam SPPT, STP PBB, SKP PBB, SK Keberatan, SK Non-Keberatan, Putusan Banding, atau Putusan Peninjauan Kembali</td>
@@ -1662,9 +1811,9 @@ footer{background:var(--kab-navy);color:rgba(255,255,255,.66)}
 <td class="col-keterangan">untuk pembayaran PBB Sektor Pertambangan untuk Pertambangan Panas Bumi atas Pengungkapan Ketidakbenaran Perbuatan Pasal 8 ayat (3) UU KUP</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="2">25</td>
-<td class="col-kap" rowspan="2"><code>411319</code></td>
-<td class="col-pajak" rowspan="2">PBB Sektor Lainnya</td>
+<td class="col-no group-context-cell" rowspan="2"><div class="group-sticky-value">25</div></td>
+<td class="col-kap group-context-cell" rowspan="2"><div class="group-sticky-value"><code>411319</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="2"><div class="group-sticky-value">PBB Sektor Lainnya</div></td>
 <td class="col-kjs"><code>300</code></td>
 <td class="col-setoran">Tagihan/Ketetapan PBB Sektor Lainnya</td>
 <td class="col-keterangan">untuk pembayaran PBB Sektor Lainnya yang masih harus dibayar yang tercantum dalam SPPT, STP PBB, SKP PBB, SK Keberatan, SK Non-Keberatan, Putusan Banding, atau Putusan Peninjauan Kembali</td>
@@ -1675,9 +1824,9 @@ footer{background:var(--kab-navy);color:rgba(255,255,255,.66)}
 <td class="col-keterangan">untuk pembayaran PBB Sektor Lainnya atas Pengungkapan Ketidakbenaran Perbuatan Pasal 8 ayat (3) UU KUP</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="10">26</td>
-<td class="col-kap" rowspan="10"><code>411611</code></td>
-<td class="col-pajak" rowspan="10">Bea Meterai</td>
+<td class="col-no group-context-cell" rowspan="10"><div class="group-sticky-value">26</div></td>
+<td class="col-kap group-context-cell" rowspan="10"><div class="group-sticky-value"><code>411611</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="10"><div class="group-sticky-value">Bea Meterai</div></td>
 <td class="col-kjs"><code>100</code></td>
 <td class="col-setoran">Setoran Bea Meterai dengan SSP</td>
 <td class="col-keterangan">untuk pembayaran Bea Meterai dengan SSP</td>
@@ -1728,9 +1877,9 @@ footer{background:var(--kab-navy);color:rgba(255,255,255,.66)}
 <td class="col-keterangan">untuk penyetoran Bea Meterai atas pemungutan Bea Meterai yang tercantum dalam SPT Masa Bea Meterai termasuk SPT pembetulan sebelum dilakukan pemeriksaan</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="2">27</td>
-<td class="col-kap" rowspan="2"><code>411612</code></td>
-<td class="col-pajak" rowspan="2">Penjualan Benda Meterai</td>
+<td class="col-no group-context-cell" rowspan="2"><div class="group-sticky-value">27</div></td>
+<td class="col-kap group-context-cell" rowspan="2"><div class="group-sticky-value"><code>411612</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="2"><div class="group-sticky-value">Penjualan Benda Meterai</div></td>
 <td class="col-kjs"><code>100</code></td>
 <td class="col-setoran">Penyetoran Hasil Penjualan Meterai Tempel</td>
 <td class="col-keterangan">untuk penyetoran hasil penjualan Meterai Tempel</td>
@@ -1741,9 +1890,9 @@ footer{background:var(--kab-navy);color:rgba(255,255,255,.66)}
 <td class="col-keterangan">untuk penyetoran hasil penjualan Meterai Tempel yang masih harus dibayar yang tercantum dalam STP, SKP, SK Keberatan, SK Non-Keberatan, Putusan Banding, atau Putusan Peninjauan Kembali</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="2">28</td>
-<td class="col-kap" rowspan="2"><code>411613</code></td>
-<td class="col-pajak" rowspan="2">Pajak Penjualan Batubara</td>
+<td class="col-no group-context-cell" rowspan="2"><div class="group-sticky-value">28</div></td>
+<td class="col-kap group-context-cell" rowspan="2"><div class="group-sticky-value"><code>411613</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="2"><div class="group-sticky-value">Pajak Penjualan Batubara</div></td>
 <td class="col-kjs"><code>100</code></td>
 <td class="col-setoran">Pajak Penjualan Batubara</td>
 <td class="col-keterangan">untuk pembayaran Pajak Penjualan Batubara</td>
@@ -1754,9 +1903,9 @@ footer{background:var(--kab-navy);color:rgba(255,255,255,.66)}
 <td class="col-keterangan">untuk pembayaran Pajak Penjualan Batubara yang masih harus dibayar yang tercantum dalam STP, SKP, SK Keberatan, SK Non-Keberatan, Putusan Banding, atau Putusan Peninjauan Kembali</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="6">29</td>
-<td class="col-kap" rowspan="6"><code>411618</code></td>
-<td class="col-pajak" rowspan="6">Pajak Tidak Langsung Lainnya Deposit Pajak</td>
+<td class="col-no group-context-cell" rowspan="6"><div class="group-sticky-value">29</div></td>
+<td class="col-kap group-context-cell" rowspan="6"><div class="group-sticky-value"><code>411618</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="6"><div class="group-sticky-value">Pajak Tidak Langsung Lainnya Deposit Pajak</div></td>
 <td class="col-kjs"><code>100</code></td>
 <td class="col-setoran">Setoran untuk Deposit Pajak</td>
 <td class="col-keterangan">untuk pembayaran Deposit Pajak</td>
@@ -1787,9 +1936,9 @@ footer{background:var(--kab-navy);color:rgba(255,255,255,.66)}
 <td class="col-keterangan">untuk pembayaran pajak tambahan berdasarkan Domestic Minimum Top-Up Tax (DMTT)</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="6">30</td>
-<td class="col-kap" rowspan="6"><code>411619</code></td>
-<td class="col-pajak" rowspan="6">Pajak Tidak Langsung Lainnya</td>
+<td class="col-no group-context-cell" rowspan="6"><div class="group-sticky-value">30</div></td>
+<td class="col-kap group-context-cell" rowspan="6"><div class="group-sticky-value"><code>411619</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="6"><div class="group-sticky-value">Pajak Tidak Langsung Lainnya</div></td>
 <td class="col-kjs"><code>100</code></td>
 <td class="col-setoran">Setoran Masa Pajak Tidak Langsung Lainnya</td>
 <td class="col-keterangan">untuk pembayaran Pajak Tidak Langsung Lainnya yang terutang</td>
@@ -1820,17 +1969,17 @@ footer{background:var(--kab-navy);color:rgba(255,255,255,.66)}
 <td class="col-keterangan">untuk pembayaran Pajak Tidak Langsung Lainnya yang dipungut oleh Pemungut Instansi Pemerintah</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="1">31</td>
-<td class="col-kap" rowspan="1"><code>411621</code></td>
-<td class="col-pajak" rowspan="1">Bunga Penagihan PPh</td>
+<td class="col-no group-context-cell" rowspan="1"><div class="group-sticky-value">31</div></td>
+<td class="col-kap group-context-cell" rowspan="1"><div class="group-sticky-value"><code>411621</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="1"><div class="group-sticky-value">Bunga Penagihan PPh</div></td>
 <td class="col-kjs"><code>300</code></td>
 <td class="col-setoran">Tagihan/Ketetapan atas Bunga Penagihan PPh</td>
 <td class="col-keterangan">untuk pembayaran Bunga Penagihan PPh yang masih harus dibayar yang tercantum dalam STP, SKP, SK Keberatan, SK Non-Keberatan, Putusan Banding, Putusan Peninjauan Kembali, atau SK Persetujuan Bersama</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="2">32</td>
-<td class="col-kap" rowspan="2"><code>411622</code></td>
-<td class="col-pajak" rowspan="2">Bunga Penagihan PPN</td>
+<td class="col-no group-context-cell" rowspan="2"><div class="group-sticky-value">32</div></td>
+<td class="col-kap group-context-cell" rowspan="2"><div class="group-sticky-value"><code>411622</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="2"><div class="group-sticky-value">Bunga Penagihan PPN</div></td>
 <td class="col-kjs"><code>100</code></td>
 <td class="col-setoran">Bunga Penagihan PPN Impor</td>
 <td class="col-keterangan">untuk pembayaran Bunga Penagihan PPN Impor</td>
@@ -1841,129 +1990,129 @@ footer{background:var(--kab-navy);color:rgba(255,255,255,.66)}
 <td class="col-keterangan">untuk pembayaran Bunga Penagihan PPN yang masih harus dibayar yang tercantum dalam STP, SKP, SK Keberatan, SK Non-Keberatan, Putusan Banding, atau Putusan Peninjauan Kembali</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="1">33</td>
-<td class="col-kap" rowspan="1"><code>411623</code></td>
-<td class="col-pajak" rowspan="1">Bunga Penagihan PPnBM</td>
+<td class="col-no group-context-cell" rowspan="1"><div class="group-sticky-value">33</div></td>
+<td class="col-kap group-context-cell" rowspan="1"><div class="group-sticky-value"><code>411623</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="1"><div class="group-sticky-value">Bunga Penagihan PPnBM</div></td>
 <td class="col-kjs"><code>300</code></td>
 <td class="col-setoran">Tagihan/Ketetapan atas Bunga Penagihan PPnBM</td>
 <td class="col-keterangan">untuk pembayaran Bunga Penagihan PPnBM yang masih harus dibayar yang tercantum dalam STP, SKP, SK Keberatan, SK Non-Keberatan, Putusan Banding, atau Putusan Peninjauan Kembali</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="1">34</td>
-<td class="col-kap" rowspan="1"><code>411629</code></td>
-<td class="col-pajak" rowspan="1">Bunga Penagihan Pajak Lainnya</td>
+<td class="col-no group-context-cell" rowspan="1"><div class="group-sticky-value">34</div></td>
+<td class="col-kap group-context-cell" rowspan="1"><div class="group-sticky-value"><code>411629</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="1"><div class="group-sticky-value">Bunga Penagihan Pajak Lainnya</div></td>
 <td class="col-kjs"><code>300</code></td>
 <td class="col-setoran">Tagihan/Ketetapan atas Bunga Penagihan Pajak Lainnya</td>
 <td class="col-keterangan">untuk pembayaran Bunga Penagihan Pajak Lainnya yang masih harus dibayar yang tercantum dalam STP, SKP, SK Keberatan, SK Non-Keberatan, Putusan Banding, Putusan Peninjauan Kembali, atau SK Persetujuan Bersama</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="1">35</td>
-<td class="col-kap" rowspan="1"><code>411141</code></td>
-<td class="col-pajak" rowspan="1">PPh Pasal 21 Ditanggung Pemerintah</td>
+<td class="col-no group-context-cell" rowspan="1"><div class="group-sticky-value">35</div></td>
+<td class="col-kap group-context-cell" rowspan="1"><div class="group-sticky-value"><code>411141</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="1"><div class="group-sticky-value">PPh Pasal 21 Ditanggung Pemerintah</div></td>
 <td class="col-kjs"><code>800</code></td>
 <td class="col-setoran">PPh Pasal 21 Ditanggung Pemerintah</td>
 <td class="col-keterangan">untuk pembayaran PPh Pasal 21 Ditanggung Pemerintah</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="1">36</td>
-<td class="col-kap" rowspan="1"><code>411142</code></td>
-<td class="col-pajak" rowspan="1">PPh Pasal 22 Ditanggung Pemerintah</td>
+<td class="col-no group-context-cell" rowspan="1"><div class="group-sticky-value">36</div></td>
+<td class="col-kap group-context-cell" rowspan="1"><div class="group-sticky-value"><code>411142</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="1"><div class="group-sticky-value">PPh Pasal 22 Ditanggung Pemerintah</div></td>
 <td class="col-kjs"><code>800</code></td>
 <td class="col-setoran">PPh Pasal 22 Ditanggung Pemerintah</td>
 <td class="col-keterangan">untuk pembayaran PPh Pasal 22 Ditanggung Pemerintah</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="1">37</td>
-<td class="col-kap" rowspan="1"><code>411143</code></td>
-<td class="col-pajak" rowspan="1">PPh Pasal 22 Impor Ditanggung Pemerintah</td>
+<td class="col-no group-context-cell" rowspan="1"><div class="group-sticky-value">37</div></td>
+<td class="col-kap group-context-cell" rowspan="1"><div class="group-sticky-value"><code>411143</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="1"><div class="group-sticky-value">PPh Pasal 22 Impor Ditanggung Pemerintah</div></td>
 <td class="col-kjs"><code>800</code></td>
 <td class="col-setoran">PPh Pasal 22 Impor Ditanggung Pemerintah</td>
 <td class="col-keterangan">untuk pembayaran PPh Pasal 22 Impor Ditanggung Pemerintah</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="1">38</td>
-<td class="col-kap" rowspan="1"><code>411144</code></td>
-<td class="col-pajak" rowspan="1">PPh Pasal 23 Ditanggung Pemerintah</td>
+<td class="col-no group-context-cell" rowspan="1"><div class="group-sticky-value">38</div></td>
+<td class="col-kap group-context-cell" rowspan="1"><div class="group-sticky-value"><code>411144</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="1"><div class="group-sticky-value">PPh Pasal 23 Ditanggung Pemerintah</div></td>
 <td class="col-kjs"><code>800</code></td>
 <td class="col-setoran">PPh Pasal 23 Ditanggung Pemerintah</td>
 <td class="col-keterangan">untuk pembayaran PPh Pasal 23 Ditanggung Pemerintah</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="1">39</td>
-<td class="col-kap" rowspan="1"><code>411145</code></td>
-<td class="col-pajak" rowspan="1">PPh Pasal 25/29 Orang Pribadi Ditanggung Pemerintah</td>
+<td class="col-no group-context-cell" rowspan="1"><div class="group-sticky-value">39</div></td>
+<td class="col-kap group-context-cell" rowspan="1"><div class="group-sticky-value"><code>411145</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="1"><div class="group-sticky-value">PPh Pasal 25/29 Orang Pribadi Ditanggung Pemerintah</div></td>
 <td class="col-kjs"><code>800</code></td>
 <td class="col-setoran">PPh Pasal 25/29 Orang Pribadi Ditanggung Pemerintah</td>
 <td class="col-keterangan">untuk pembayaran PPh Pasal 25/29 Orang Pribadi Ditanggung Pemerintah</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="1">40</td>
-<td class="col-kap" rowspan="1"><code>411146</code></td>
-<td class="col-pajak" rowspan="1">PPh Pasal 25/29 Badan Ditanggung Pemerintah</td>
+<td class="col-no group-context-cell" rowspan="1"><div class="group-sticky-value">40</div></td>
+<td class="col-kap group-context-cell" rowspan="1"><div class="group-sticky-value"><code>411146</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="1"><div class="group-sticky-value">PPh Pasal 25/29 Badan Ditanggung Pemerintah</div></td>
 <td class="col-kjs"><code>800</code></td>
 <td class="col-setoran">PPh Pasal 25/29 Badan Ditanggung Pemerintah</td>
 <td class="col-keterangan">untuk pembayaran PPh Pasal 25/29 Badan Ditanggung Pemerintah</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="1">41</td>
-<td class="col-kap" rowspan="1"><code>411147</code></td>
-<td class="col-pajak" rowspan="1">PPh Pasal 26 Ditanggung Pemerintah</td>
+<td class="col-no group-context-cell" rowspan="1"><div class="group-sticky-value">41</div></td>
+<td class="col-kap group-context-cell" rowspan="1"><div class="group-sticky-value"><code>411147</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="1"><div class="group-sticky-value">PPh Pasal 26 Ditanggung Pemerintah</div></td>
 <td class="col-kjs"><code>800</code></td>
 <td class="col-setoran">PPh Pasal Pasal 26 Ditanggung Pemerintah</td>
 <td class="col-keterangan">untuk pembayaran PPh Pasal 26 Ditanggung Pemerintah</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="1">42</td>
-<td class="col-kap" rowspan="1"><code>411148</code></td>
-<td class="col-pajak" rowspan="1">PPh Final Ditanggung Pemerintah</td>
+<td class="col-no group-context-cell" rowspan="1"><div class="group-sticky-value">42</div></td>
+<td class="col-kap group-context-cell" rowspan="1"><div class="group-sticky-value"><code>411148</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="1"><div class="group-sticky-value">PPh Final Ditanggung Pemerintah</div></td>
 <td class="col-kjs"><code>800</code></td>
 <td class="col-setoran">PPh Final Ditanggung Pemerintah</td>
 <td class="col-keterangan">untuk pembayaran PPh Final Ditanggung Pemerintah</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="1">43</td>
-<td class="col-kap" rowspan="1"><code>411149</code></td>
-<td class="col-pajak" rowspan="1">PPh Non-Migas Lainnya Ditanggung Pemerintah</td>
+<td class="col-no group-context-cell" rowspan="1"><div class="group-sticky-value">43</div></td>
+<td class="col-kap group-context-cell" rowspan="1"><div class="group-sticky-value"><code>411149</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="1"><div class="group-sticky-value">PPh Non-Migas Lainnya Ditanggung Pemerintah</div></td>
 <td class="col-kjs"><code>800</code></td>
 <td class="col-setoran">PPh Non Migas Lainnya Ditanggung Pemerintah</td>
 <td class="col-keterangan">untuk pembayaran PPh Non Migas Lainnya Ditanggung Pemerintah</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="1">44</td>
-<td class="col-kap" rowspan="1"><code>411241</code></td>
-<td class="col-pajak" rowspan="1">PPN Ditanggung Pemerintah</td>
+<td class="col-no group-context-cell" rowspan="1"><div class="group-sticky-value">44</div></td>
+<td class="col-kap group-context-cell" rowspan="1"><div class="group-sticky-value"><code>411241</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="1"><div class="group-sticky-value">PPN Ditanggung Pemerintah</div></td>
 <td class="col-kjs"><code>800</code></td>
 <td class="col-setoran">PPN Ditanggung Pemerintah</td>
 <td class="col-keterangan">untuk pembayaran PPN Ditanggung Pemerintah</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="1">45</td>
-<td class="col-kap" rowspan="1"><code>411242</code></td>
-<td class="col-pajak" rowspan="1">PPnBM Ditanggung Pemerintah dalam Rangka Penanganan Pandemi</td>
+<td class="col-no group-context-cell" rowspan="1"><div class="group-sticky-value">45</div></td>
+<td class="col-kap group-context-cell" rowspan="1"><div class="group-sticky-value"><code>411242</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="1"><div class="group-sticky-value">PPnBM Ditanggung Pemerintah dalam Rangka Penanganan Pandemi</div></td>
 <td class="col-kjs"><code>800</code></td>
 <td class="col-setoran">PPnBM Ditanggung Pemerintah dalam Rangka Penanganan Pandemi</td>
 <td class="col-keterangan">untuk pembayaran PPnBM Ditanggung Pemerintah dalam Rangka Penanganan Pandemi</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="1">46</td>
-<td class="col-kap" rowspan="1"><code>411243</code></td>
-<td class="col-pajak" rowspan="1">PPnBM Ditanggung Pemerintah</td>
+<td class="col-no group-context-cell" rowspan="1"><div class="group-sticky-value">46</div></td>
+<td class="col-kap group-context-cell" rowspan="1"><div class="group-sticky-value"><code>411243</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="1"><div class="group-sticky-value">PPnBM Ditanggung Pemerintah</div></td>
 <td class="col-kjs"><code>800</code></td>
 <td class="col-setoran">PPnBM Ditanggung Pemerintah</td>
 <td class="col-keterangan">untuk pembayaran PPnBM Ditanggung Pemerintah</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="1">47</td>
-<td class="col-kap" rowspan="1"><code>411631</code></td>
-<td class="col-pajak" rowspan="1">Bunga Penagihan PPh Ditanggung Pemerintah</td>
+<td class="col-no group-context-cell" rowspan="1"><div class="group-sticky-value">47</div></td>
+<td class="col-kap group-context-cell" rowspan="1"><div class="group-sticky-value"><code>411631</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="1"><div class="group-sticky-value">Bunga Penagihan PPh Ditanggung Pemerintah</div></td>
 <td class="col-kjs"><code>800</code></td>
 <td class="col-setoran">Bunga Penagihan PPh Ditanggung Pemerintah</td>
 <td class="col-keterangan">untuk pembayaran Bunga Penagihan PPh Ditanggung Pemerintah</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="4">48</td>
-<td class="col-kap" rowspan="4"><code>411641</code></td>
-<td class="col-pajak" rowspan="4">Pajak Eksternalitas – Karbon</td>
+<td class="col-no group-context-cell" rowspan="4"><div class="group-sticky-value">48</div></td>
+<td class="col-kap group-context-cell" rowspan="4"><div class="group-sticky-value"><code>411641</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="4"><div class="group-sticky-value">Pajak Eksternalitas – Karbon</div></td>
 <td class="col-kjs"><code>100</code></td>
 <td class="col-setoran">Setoran Masa Pajak Eksternalitas - Karbon</td>
 <td class="col-keterangan">untuk pembayaran masa Pajak Eksternalitas - Karbon</td>
@@ -1984,33 +2133,33 @@ footer{background:var(--kab-navy);color:rgba(255,255,255,.66)}
 <td class="col-keterangan">untuk pembayaran Pajak Eksternalitas – Karbon yang masih harus dibayar yang tercantum dalam STP, SKP, SK Keberatan, SK Non-Keberatan, Putusan Banding, Putusan Peninjauan Kembali, atau SK Persetujuan Bersama</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="1">49</td>
-<td class="col-kap" rowspan="1"><code>411651</code></td>
-<td class="col-pajak" rowspan="1">Denda Penagihan PPh</td>
+<td class="col-no group-context-cell" rowspan="1"><div class="group-sticky-value">49</div></td>
+<td class="col-kap group-context-cell" rowspan="1"><div class="group-sticky-value"><code>411651</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="1"><div class="group-sticky-value">Denda Penagihan PPh</div></td>
 <td class="col-kjs"><code>300</code></td>
 <td class="col-setoran">Tagihan/Ketetapan atas Denda Penagihan PPh</td>
 <td class="col-keterangan">untuk pembayaran Denda Penagihan PPh yang masih harus dibayar yang tercantum dalam STP, SKP, SK Keberatan, SK Non-Keberatan, Putusan Banding, Putusan Peninjauan Kembali, atau SK Persetujuan Bersama</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="1">50</td>
-<td class="col-kap" rowspan="1"><code>411652</code></td>
-<td class="col-pajak" rowspan="1">Denda Penagihan PPN</td>
+<td class="col-no group-context-cell" rowspan="1"><div class="group-sticky-value">50</div></td>
+<td class="col-kap group-context-cell" rowspan="1"><div class="group-sticky-value"><code>411652</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="1"><div class="group-sticky-value">Denda Penagihan PPN</div></td>
 <td class="col-kjs"><code>300</code></td>
 <td class="col-setoran">Tagihan/Ketetapan atas Denda Penagihan PPN</td>
 <td class="col-keterangan">untuk pembayaran Denda Penagihan PPN yang masih harus dibayar yang tercantum dalam STP, SKP, SK Keberatan, SK Non-Keberatan, Putusan Banding, atau Putusan Peninjauan Kembali</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="1">51</td>
-<td class="col-kap" rowspan="1"><code>411653</code></td>
-<td class="col-pajak" rowspan="1">Denda Penagihan PPnBM</td>
+<td class="col-no group-context-cell" rowspan="1"><div class="group-sticky-value">51</div></td>
+<td class="col-kap group-context-cell" rowspan="1"><div class="group-sticky-value"><code>411653</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="1"><div class="group-sticky-value">Denda Penagihan PPnBM</div></td>
 <td class="col-kjs"><code>300</code></td>
 <td class="col-setoran">Tagihan/Ketetapan atas Denda Penagihan PPnBM</td>
 <td class="col-keterangan">untuk pembayaran Denda Penagihan PPnBM yang masih harus dibayar yang tercantum dalam STP, SKP, SK Keberatan, SK Non-Keberatan, Putusan Banding, atau Putusan Peninjauan Kembali</td>
 </tr>
 <tr class="group-start">
-<td class="col-no" rowspan="1">52</td>
-<td class="col-kap" rowspan="1"><code>411659</code></td>
-<td class="col-pajak" rowspan="1">Denda Penagihan Pajak Lainnya</td>
+<td class="col-no group-context-cell" rowspan="1"><div class="group-sticky-value">52</div></td>
+<td class="col-kap group-context-cell" rowspan="1"><div class="group-sticky-value"><code>411659</code></div></td>
+<td class="col-pajak group-context-cell" rowspan="1"><div class="group-sticky-value">Denda Penagihan Pajak Lainnya</div></td>
 <td class="col-kjs"><code>300</code></td>
 <td class="col-setoran">Tagihan/Ketetapan atas Denda Penagihan Pajak Lainnya</td>
 <td class="col-keterangan">untuk pembayaran Denda Penagihan Pajak Lainnya yang masih harus dibayar yang tercantum dalam STP, SKP, SK Keberatan, SK Non-Keberatan, Putusan Banding, Putusan Peninjauan Kembali, atau SK Persetujuan Bersama</td>
@@ -2354,5 +2503,30 @@ footer{background:var(--kab-navy);color:rgba(255,255,255,.66)}
   document.getElementById("currentYear").textContent = new Date().getFullYear();
   applySearch();
 })();
-</script></body>
+</script>
+<script id="kapKjsStickyOffsetFix">
+(function () {
+  "use strict";
+
+  function updateTableHeaderHeight() {
+    var tableHead = document.querySelector("#kapKjsTable thead");
+    if (!tableHead) return;
+
+    document.documentElement.style.setProperty(
+      "--reference-thead-height",
+      Math.ceil(tableHead.getBoundingClientRect().height) + "px"
+    );
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", updateTableHeaderHeight);
+  } else {
+    updateTableHeaderHeight();
+  }
+
+  window.addEventListener("resize", updateTableHeaderHeight);
+  window.addEventListener("pageshow", updateTableHeaderHeight);
+})();
+</script>
+</body>
 </html>
