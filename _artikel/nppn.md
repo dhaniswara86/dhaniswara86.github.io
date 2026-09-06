@@ -52,7 +52,7 @@ sidebar_note: "NPPN bukan tarif pajak. Persentase norma digunakan untuk menentuk
 
 custom_css:
   - /assets/css/jasakonstruksi.css?v=20260818-1
-  - /assets/css/nppn.css?v=20260820-10
+  - /assets/css/nppn.css?v=20260906-1
 
 custom_js:
   - /assets/js/nppn-data.js?v=20260819-1
@@ -73,9 +73,16 @@ Pada dasarnya, cara paling ideal untuk menentukan besar penghasilan neto adalah 
 Dengan NPPN, penghasilan neto dihitung dengan mengalikan <strong>peredaran bruto</strong> dari kegiatan usaha atau pekerjaan bebas dengan <strong>persentase norma</strong> yang besarnya bergantung pada jenis kegiatan dan wilayahnya.
 </p>
 
-<div class="jk-formula-box">
-<span>Rumus dasar</span>
-<strong>Penghasilan Neto = <br>Penghasilan Bruto × Persentase NPPN</strong>
+<div class="jk-formula-box nppn-formula-box">
+<span class="nppn-formula-label">Rumus dasar</span>
+<strong class="nppn-formula-title">
+  Penghasilan Neto <span class="nppn-formula-equals">=</span>
+</strong>
+<div class="nppn-formula-expression" aria-label="Penghasilan Bruto dikali Persentase NPPN">
+  <span>Penghasilan Bruto</span>
+  <span class="nppn-formula-operator" aria-hidden="true">×</span>
+  <span class="nppn-formula-accent">Persentase NPPN</span>
+</div>
 </div>
 
 <div class="jk-callout jk-callout-blue">
