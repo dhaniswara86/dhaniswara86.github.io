@@ -1,0 +1,2379 @@
+---
+---
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  {% assign meta_description = page.description | default: page.excerpt | default: site.description %}
+  <title>{{ page.title | escape }} | Kabayan</title>
+  <meta name="description" content="{{ meta_description | strip_html | normalize_whitespace | escape }}">
+  <meta name="author" content="{{ page.author | default: site.author.name | default: 'Angga Sukma Dhaniswara' | escape }}">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="{{ page.title | escape }}">
+  <meta property="og:description" content="{{ meta_description | strip_html | normalize_whitespace | escape }}">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta property="og:locale" content="id_ID">
+  <meta property="og:site_name" content="Kabayan by Angga Sukma Dhaniswara">
+
+  {% if page.image %}
+    <meta property="og:image" content="{{ page.image | absolute_url }}">
+  {% endif %}
+  {% if page.date %}
+    <meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">
+  {% endif %}
+  {% if page.date_modified %}
+    <meta property="article:modified_time" content="{{ page.date_modified | date_to_xmlschema }}">
+  {% endif %}
+  {% if page.category %}
+    <meta property="article:section" content="{{ page.category | escape }}">
+  {% endif %}
+  {% for tag in page.tags %}
+    <meta property="article:tag" content="{{ tag | escape }}">
+  {% endfor %}
+
+  <!-- Compatibility foundation untuk komponen artikel lama/interaktif -->
+  <link rel="stylesheet" href="{{ '/assets/css/artikel-editorial.css' | relative_url }}?v=20260905-compat1">
+
+  <style>
+    :root{
+      --ink:#101012;
+      --muted:#6e6e73;
+      --line:#e7e7eb;
+      --soft:#f5f5f7;
+      --blue:#0a66d8;
+      --blue-2:#0f79f2;
+      --yellow:#ffd84a;
+      --red:#ff3b30;
+      --paper:#fff;
+      --nav-h:58px;
+      --max:1180px;
+      --article:740px;
+      --sidebar:245px;
+      --radius:28px;
+      font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Segoe UI",Arial,sans-serif;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-h) + 18px)}
+    body{
+      margin:0;
+      padding-top:var(--nav-h);
+      overflow-x:hidden;
+      background:#fff;
+      color:var(--ink);
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+    }
+    a{color:inherit}
+    button,input{font:inherit}
+    img{display:block;max-width:100%}
+
+    .reading-progress{
+      position:fixed;
+      z-index:1600;
+      top:0;
+      left:0;
+      width:0;
+      height:2px;
+      background:var(--blue);
+      pointer-events:none;
+    }
+
+    /* HEADER */
+    .mobile-nav-checkbox{
+      position:fixed;
+      width:1px;height:1px;
+      overflow:hidden;
+      clip:rect(0 0 0 0);
+      clip-path:inset(50%);
+      white-space:nowrap;
+    }
+    .site-nav{
+      position:fixed;
+      z-index:1500;
+      top:0;right:0;left:0;
+      min-height:var(--nav-h);
+      border-bottom:1px solid rgba(0,0,0,.055);
+      background:rgba(255,255,255,.90);
+      backdrop-filter:saturate(180%) blur(18px);
+      -webkit-backdrop-filter:saturate(180%) blur(18px);
+    }
+    .nav-inner{
+      width:min(var(--max),calc(100% - 36px));
+      min-height:var(--nav-h);
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:28px;
+    }
+    .nav-brand{
+      display:inline-flex;
+      flex:0 0 auto;
+      align-items:center;
+      gap:8px;
+      color:#1d1d1f;
+      font-size:13px;
+      font-weight:750;
+      text-decoration:none;
+      white-space:nowrap;
+    }
+    .brand-logo{width:auto;height:20px;object-fit:contain}
+    .desktop-menu{
+      display:flex;
+      flex:1 1 auto;
+      justify-content:center;
+      align-items:center;
+      gap:27px;
+    }
+    .desktop-menu a{
+      position:relative;
+      min-height:var(--nav-h);
+      display:inline-flex;
+      align-items:center;
+      color:#515154;
+      font-size:12px;
+      font-weight:560;
+      text-decoration:none;
+      white-space:nowrap;
+    }
+    .desktop-menu a::after{
+      position:absolute;
+      right:0;bottom:10px;left:0;
+      height:1.5px;
+      background:#111;
+      content:"";
+      opacity:0;
+      transform:scaleX(.35);
+      transition:opacity .2s ease,transform .2s ease;
+    }
+    .desktop-menu a:hover,.desktop-menu a[aria-current="page"]{color:#000}
+    .desktop-menu a:hover::after,.desktop-menu a[aria-current="page"]::after{opacity:1;transform:scaleX(1)}
+    .nav-hotnews{gap:7px!important}
+    .nav-hotnews-dot{
+      width:7px;height:7px;flex:0 0 7px;border-radius:50%;
+      background:var(--red);
+      box-shadow:0 0 0 0 rgba(255,59,48,.34);
+      animation:hotPulse 2.1s ease-out infinite;
+    }
+    @keyframes hotPulse{
+      0%{box-shadow:0 0 0 0 rgba(255,59,48,.34)}
+      60%,100%{box-shadow:0 0 0 7px rgba(255,59,48,0)}
+    }
+    .nav-actions{display:flex;align-items:center;gap:8px}
+    .nav-cta{
+      min-height:36px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:8px 15px;
+      border-radius:999px;
+      background:#000;
+      color:#fff;
+      font-size:12px;
+      font-weight:680;
+      line-height:1;
+      text-decoration:none;
+      white-space:nowrap;
+    }
+    .nav-cta:hover{background:#272729}
+    .menu-toggle{
+      width:38px;height:38px;
+      display:none;
+      place-items:center;
+      border:0;border-radius:50%;
+      background:transparent;
+      color:#1d1d1f;
+      cursor:pointer;
+      font-size:22px;
+      line-height:1;
+    }
+    .menu-icon-close{display:none}
+    .mobile-menu{
+      position:fixed;
+      z-index:1450;
+      top:var(--nav-h);right:0;bottom:0;left:0;
+      height:calc(100vh - var(--nav-h));
+      height:calc(100dvh - var(--nav-h));
+      display:block;
+      overflow-y:auto;
+      padding:26px 24px 44px;
+      background:rgba(255,255,255,.985);
+      visibility:hidden;
+      opacity:0;
+      pointer-events:none;
+      transform:translateY(-8px);
+      transition:opacity .2s ease,transform .2s ease,visibility .2s ease;
+    }
+    #mobileNavToggle:checked~.mobile-menu{
+      visibility:visible;opacity:1;pointer-events:auto;transform:translateY(0);
+    }
+    #mobileNavToggle:checked~.site-nav .menu-icon-open{display:none}
+    #mobileNavToggle:checked~.site-nav .menu-icon-close{display:block}
+    .mobile-menu a{
+      display:grid;
+      grid-template-columns:42px minmax(0,1fr) auto;
+      align-items:center;
+      gap:8px;
+      padding:15px 0;
+      border-bottom:1px solid #ededf0;
+      color:#1d1d1f;
+      font-size:clamp(24px,7vw,34px);
+      font-weight:720;
+      letter-spacing:-.045em;
+      line-height:1.05;
+      text-decoration:none;
+    }
+    .mobile-menu a[aria-current="page"]{color:var(--blue)}
+    .mobile-menu-index{color:#a1a1a6;font-size:11px;font-weight:800;letter-spacing:.08em}
+    .mobile-menu .mobile-hot-dot{width:8px;height:8px;justify-self:end;border-radius:50%;background:var(--red)}
+    .mobile-menu .mobile-menu-cta{
+      grid-template-columns:minmax(0,1fr) auto;
+      margin-top:22px;padding:17px 19px;border:0;border-radius:18px;
+      background:#000;color:#fff;font-size:18px;letter-spacing:-.025em;
+    }
+
+    /* HERO */
+    .article-hero{
+      position:relative;
+      isolation:isolate;
+      overflow:hidden;
+      border-bottom:1px solid var(--line);
+      background:#fff;
+    }
+    .hero-cloud{
+      position:absolute;
+      z-index:-2;
+      top:-50px;
+      right:-120px;
+      width:min(760px,58vw);
+      height:calc(100% + 110px);
+      background:
+        linear-gradient(90deg,rgba(255,255,255,.98),rgba(255,255,255,.2)),
+        url("{{ '/assets/img/mega-mendung-cirebon.webp' | relative_url }}") center/cover no-repeat;
+      opacity:.10;
+      transform:rotate(-3deg) scale(1.05);
+      pointer-events:none;
+    }
+    .hero-grid{
+      width:min(var(--max),calc(100% - 48px));
+      min-height:620px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:minmax(0,1.25fr) minmax(300px,.75fr);
+      align-items:center;
+      gap:clamp(44px,6vw,92px);
+      padding:62px 0 72px;
+    }
+    .hero-copy{min-width:0}
+    .hero-index{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-bottom:27px;
+      color:#75757a;
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .hero-index::before{width:34px;height:1px;background:#b8b8bd;content:""}
+    .hero-title{
+      max-width:850px;
+      margin:0;
+      font-size:clamp(48px,6.7vw,96px);
+      font-weight:760;
+      letter-spacing:-.067em;
+      line-height:.93;
+      text-wrap:balance;
+    }
+    .hero-accent{
+      display:block;
+      color:var(--blue);
+    }
+    .hero-lead{
+      max-width:720px;
+      margin:28px 0 0;
+      color:#4e4e52;
+      font-size:clamp(18px,2vw,24px);
+      letter-spacing:-.025em;
+      line-height:1.42;
+    }
+    .hero-meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px 17px;
+      margin-top:28px;
+      color:#77777c;
+      font-size:13px;
+      line-height:1.4;
+    }
+    .hero-meta span,.hero-meta time{display:inline-flex;align-items:center;gap:7px}
+    .hero-meta span+span::before,.hero-meta time+span::before{content:"•";color:#c2c2c7}
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:29px;
+    }
+    .button{
+      min-height:42px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:7px;
+      padding:9px 17px;
+      border:1px solid #d8d8dd;
+      border-radius:999px;
+      background:#fff;
+      color:#252528;
+      cursor:pointer;
+      font-size:13px;
+      font-weight:650;
+      text-decoration:none;
+    }
+    .button:hover{border-color:#bdbdc2}
+    .button-primary{border-color:#000;background:#000;color:#fff}
+    .button-primary:hover{background:#252527;color:#fff}
+    .hero-companion{
+      position:relative;
+      min-height:440px;
+      display:flex;
+      align-items:flex-end;
+      justify-content:center;
+    }
+    .hero-companion::before{
+      position:absolute;
+      right:8%;
+      bottom:16px;
+      width:300px;height:300px;
+      border-radius:50%;
+      background:#f2f7ff;
+      content:"";
+      z-index:-1;
+    }
+    .hero-kabayan{
+      width:min(360px,100%);
+      max-height:455px;
+      object-fit:contain;
+      object-position:center bottom;
+      filter:drop-shadow(0 24px 35px rgba(27,53,85,.13));
+    }
+    .hero-note{
+      position:absolute;
+      top:45px;right:-2px;
+      width:180px;
+      padding:18px 18px 17px;
+      border:1px solid #e3e7ed;
+      border-radius:18px;
+      background:rgba(255,255,255,.96);
+      box-shadow:0 16px 38px rgba(31,50,72,.08);
+      transform:rotate(3deg);
+    }
+    .hero-note small{
+      display:block;margin-bottom:8px;color:var(--blue);
+      font-size:10px;font-weight:850;letter-spacing:.1em;text-transform:uppercase;
+    }
+    .hero-note strong{display:block;font-size:15px;line-height:1.25;letter-spacing:-.025em}
+
+    /* SUMMARY / INTINYA */
+    .summary-section{
+      padding:72px 24px;
+      background:#fff;
+    }
+    .summary-wrap{
+      width:min(980px,100%);
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:150px minmax(0,1fr);
+      gap:48px;
+      padding:42px 0;
+      border-top:1px solid #111;
+      border-bottom:1px solid var(--line);
+    }
+    .summary-label{
+      color:#5f5f64;
+      font-size:11px;
+      font-weight:850;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .summary-number{
+      display:block;
+      margin-top:12px;
+      font-size:64px;
+      font-weight:760;
+      letter-spacing:-.06em;
+      line-height:.9;
+    }
+    .summary-copy{
+      position:relative;
+      max-width:720px;
+      padding-right:110px;
+    }
+    .summary-copy::after{
+      position:absolute;
+      top:0;right:0;
+      width:82px;height:82px;
+      border-radius:50%;
+      background:
+        linear-gradient(rgba(255,255,255,.76),rgba(255,255,255,.76)),
+        url("{{ '/assets/img/mega-mendung-cirebon.webp' | relative_url }}") center/cover;
+      content:"";
+    }
+    .summary-copy strong{
+      display:block;
+      margin:0 0 12px;
+      font-size:clamp(30px,4vw,48px);
+      letter-spacing:-.05em;
+      line-height:1;
+    }
+    .summary-copy p{
+      margin:0;
+      color:#444449;
+      font-size:18px;
+      line-height:1.65;
+    }
+
+    /* ARTICLE LAYOUT */
+    .article-shell{padding:70px 24px 92px;background:#fff}
+    .article-layout{
+      width:min(1040px,100%);
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:minmax(0,var(--article)) var(--sidebar);
+      align-items:start;
+      gap:64px;
+    }
+    .article-body{
+      min-width:0;
+      color:#26262a;
+      font-family:Georgia,"Times New Roman",serif;
+      font-size:18px;
+      line-height:1.78;
+    }
+    .article-body>*:first-child{margin-top:0}
+    .article-body p{margin:0 0 1.45em}
+    .article-body h2,
+    .article-body h3,
+    .article-body h4{
+      font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Arial,sans-serif;
+      color:#111;
+    }
+    .article-body h2{
+      position:relative;
+      margin:92px 0 27px;
+      padding-top:29px;
+      border-top:1px solid #19191b;
+      font-size:clamp(34px,4.3vw,52px);
+      font-weight:760;
+      letter-spacing:-.055em;
+      line-height:1.02;
+    }
+    .article-body h2::before{
+      display:block;
+      margin-bottom:13px;
+      color:var(--blue);
+      content:attr(data-chapter);
+      font-size:11px;
+      font-weight:850;
+      letter-spacing:.13em;
+      text-transform:uppercase;
+    }
+    .article-body h3{
+      margin:52px 0 18px;
+      font-size:27px;
+      font-weight:720;
+      letter-spacing:-.035em;
+      line-height:1.15;
+    }
+    .article-body h4{margin:38px 0 14px;font-size:21px;letter-spacing:-.025em}
+    .article-body a{color:#055fc7;text-decoration-thickness:1px;text-underline-offset:3px}
+    .article-body strong{color:#171719}
+    .article-body ul,.article-body ol{margin:0 0 1.55em;padding-left:1.4em}
+    .article-body li{margin:.45em 0}
+    .article-body img{height:auto;margin:30px auto;border-radius:16px}
+    .article-body figure{margin:36px 0}
+    .article-body figcaption{
+      margin-top:10px;color:#7a7a7f;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+      font-size:12px;line-height:1.5;
+    }
+
+    /* Callouts */
+    .article-body blockquote{
+      position:relative;
+      margin:38px 0;
+      padding:28px 30px 28px 34px;
+      border:0;
+      border-left:4px solid var(--blue);
+      background:#f3f7fd;
+      color:#2c3c50;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+      font-size:16px;
+      line-height:1.65;
+    }
+    .article-body blockquote::before{
+      display:block;
+      margin-bottom:9px;
+      color:var(--blue);
+      content:"CATATAN KABAYAN";
+      font-size:10px;
+      font-weight:850;
+      letter-spacing:.11em;
+    }
+    .article-body .callout-warning{
+      border-left-color:#e6b400;background:#fff9df;color:#493d13;
+    }
+    .article-body .callout-warning::before{color:#a57b00;content:"PERHATIAN"}
+    .article-body .callout-example{
+      border-left-color:#1d1d1f;background:#f5f5f7;color:#333;
+    }
+    .article-body .callout-example::before{color:#1d1d1f;content:"CONTOH"}
+    .article-body .callout-update{
+      border-left-color:var(--red);background:#fff2f1;color:#532321;
+    }
+    .article-body .callout-update::before{color:var(--red);content:"UPDATE"}
+
+    /* Legal basis */
+    .article-body .legal-basis,
+    .article-body .dasar-hukum{
+      margin:46px 0;
+      padding:30px 32px;
+      border:1px solid #dbe4ef;
+      background:#f7faff;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+    }
+    .article-body .legal-basis::before,
+    .article-body .dasar-hukum::before{
+      display:block;
+      margin-bottom:16px;
+      color:var(--blue);
+      content:"DASAR HUKUM";
+      font-size:10px;
+      font-weight:850;
+      letter-spacing:.12em;
+    }
+
+    /* Tables */
+    .article-body table{
+      width:100%;
+      margin:38px 0;
+      border-collapse:collapse;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+      font-size:14px;
+      line-height:1.5;
+    }
+    .article-body th{
+      padding:13px 14px;
+      background:#151517;
+      color:#fff;
+      font-weight:700;
+      text-align:left;
+    }
+    .article-body td{padding:13px 14px;border-bottom:1px solid #dedee3;vertical-align:top}
+    .article-body tr:nth-child(even) td{background:#fafafa}
+
+    /* Sidebar */
+    .article-sidebar{
+      position:sticky;
+      top:calc(var(--nav-h) + 28px);
+      min-width:0;
+    }
+    .toc-kicker{
+      display:block;
+      margin-bottom:17px;
+      color:#8a8a90;
+      font-size:10px;
+      font-weight:850;
+      letter-spacing:.13em;
+      text-transform:uppercase;
+    }
+    #articleToc{display:grid;gap:0;border-top:1px solid #dedee3}
+    #articleToc a{
+      display:grid;
+      grid-template-columns:32px minmax(0,1fr);
+      gap:8px;
+      padding:12px 0;
+      border-bottom:1px solid #ededf0;
+      color:#8b8b90;
+      font-size:12px;
+      line-height:1.35;
+      text-decoration:none;
+    }
+    #articleToc a::before{
+      color:#b7b7bc;
+      content:attr(data-index);
+      font-size:10px;
+      font-weight:800;
+      letter-spacing:.05em;
+    }
+    #articleToc a.is-active{color:#111;font-weight:700}
+    #articleToc a.is-active::before{color:var(--blue)}
+    .sidebar-note{
+      margin-top:22px;
+      padding-top:18px;
+      border-top:1px solid #e6e6ea;
+      color:#8a8a90;
+      font-size:11px;
+      line-height:1.55;
+    }
+
+    /* Tags + updated */
+    .article-tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:58px;
+      padding-top:24px;
+      border-top:1px solid #e5e5e8;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+    }
+    .article-tag{
+      padding:7px 11px;border-radius:999px;background:#f2f2f4;
+      color:#56565b;font-size:11px;font-weight:700;
+    }
+    .article-updated{
+      margin-top:18px;
+      color:#8a8a90;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+      font-size:11px;
+    }
+
+    /* Author */
+    .author-signature{
+      padding:56px 24px 70px;
+      border-top:1px solid var(--line);
+      background:#fff;
+    }
+    .author-signature-inner{
+      width:min(900px,100%);
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:72px minmax(0,1fr) auto;
+      align-items:center;
+      gap:22px;
+    }
+    .author-logo{
+      width:72px;height:72px;
+      display:grid;place-items:center;
+      border:1px solid #e1e1e6;
+      border-radius:50%;
+      background:#fff;
+    }
+    .author-logo img{width:55%;height:55%;object-fit:contain}
+    .author-kicker{
+      display:block;margin-bottom:5px;color:#99999e;
+      font-size:10px;font-weight:850;letter-spacing:.12em;text-transform:uppercase;
+    }
+    .author-copy strong{font-size:19px;letter-spacing:-.025em}
+    .author-copy p{margin:5px 0 0;color:#77777c;font-size:13px;line-height:1.5}
+    .author-link{color:var(--blue);font-size:13px;font-weight:700;text-decoration:none}
+
+    /* Closing */
+    .article-closing{
+      position:relative;
+      overflow:hidden;
+      background:#071b34;
+      color:#fff;
+    }
+    .article-closing::before{
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(90deg,rgba(7,27,52,.98),rgba(7,27,52,.82),rgba(7,27,52,.60)),
+        url("{{ '/assets/img/mega-mendung-cirebon.webp' | relative_url }}") center/cover no-repeat;
+      content:"";
+      opacity:.52;
+    }
+    .closing-inner{
+      position:relative;
+      width:min(var(--max),calc(100% - 48px));
+      min-height:450px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:minmax(0,1fr) minmax(260px,.55fr);
+      align-items:end;
+      gap:54px;
+      padding:72px 0 0;
+    }
+    .closing-copy{align-self:center;padding-bottom:68px}
+    .closing-kicker{
+      display:block;margin-bottom:18px;color:#9fcaff;
+      font-size:11px;font-weight:850;letter-spacing:.13em;text-transform:uppercase;
+    }
+    .closing-copy h2{
+      max-width:700px;margin:0;
+      font-size:clamp(46px,6.3vw,84px);
+      font-weight:760;
+      letter-spacing:-.065em;
+      line-height:.93;
+    }
+    .closing-copy p{
+      max-width:560px;margin:21px 0 0;color:rgba(255,255,255,.72);
+      font-size:17px;line-height:1.5;
+    }
+    .closing-link{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      margin-top:28px;
+      padding:11px 17px;
+      border-radius:999px;
+      background:var(--yellow);
+      color:#17120a;
+      font-size:13px;
+      font-weight:800;
+      text-decoration:none;
+    }
+    .closing-kabayan{
+      width:min(360px,100%);
+      max-height:390px;
+      object-fit:contain;
+      object-position:center bottom;
+      filter:drop-shadow(0 24px 34px rgba(0,0,0,.22));
+    }
+
+    /* Footer */
+    .site-footer{background:#f5f5f7;color:#737378}
+    .disclaimer{
+      width:min(980px,calc(100% - 40px));
+      margin:0 auto;
+      padding:22px 0;
+      border-bottom:1px solid #d6d6da;
+      font-size:11px;
+      line-height:1.55;
+    }
+    .footer-inner{
+      width:min(980px,calc(100% - 40px));
+      margin:0 auto;
+      padding:20px 0 27px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      font-size:11px;
+    }
+    .footer-inner p{margin:0}
+    .footer-links{display:flex;flex-wrap:wrap;gap:17px}
+    .footer-links a{color:#4e4e52;text-decoration:none}
+
+    /* Reveal */
+    .reveal{
+      opacity:1;
+      transform:none;
+    }
+    .reveal.is-visible{opacity:1;transform:none}
+
+    @media(max-width:960px){
+      .desktop-menu,.nav-cta{display:none}
+      .menu-toggle{display:grid}
+      .nav-inner{width:calc(100% - 28px)}
+      .hero-grid{
+        min-height:0;
+        grid-template-columns:1fr;
+        gap:28px;
+        padding:48px 0 50px;
+      }
+      .hero-companion{min-height:320px;justify-content:flex-start}
+      .hero-kabayan{width:280px;max-height:330px}
+      .hero-note{right:auto;left:230px;top:34px}
+      .summary-wrap{grid-template-columns:110px 1fr;gap:32px}
+      .article-layout{grid-template-columns:1fr;gap:40px}
+      .article-sidebar{
+        position:relative;
+        top:auto;
+        order:-1;
+        padding-bottom:18px;
+        border-bottom:1px solid var(--line);
+      }
+      #articleToc{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:20px}
+      .author-signature-inner{grid-template-columns:62px 1fr}
+      .author-link{grid-column:1/-1}
+      .closing-inner{grid-template-columns:1fr 260px}
+    }
+
+    @media(max-width:680px){
+      :root{--nav-h:54px}
+      .hero-grid{width:calc(100% - 36px);padding:34px 0 38px}
+      .hero-index{margin-bottom:20px}
+      .hero-title{font-size:clamp(44px,13vw,64px)}
+      .hero-lead{margin-top:20px;font-size:18px}
+      .hero-meta{margin-top:22px}
+      .hero-actions{margin-top:22px}
+      .hero-companion{min-height:260px}
+      .hero-kabayan{width:230px;max-height:270px}
+      .hero-note{left:175px;top:14px;width:155px;padding:14px}
+      .summary-section{padding:48px 18px}
+      .summary-wrap{grid-template-columns:1fr;gap:22px;padding:30px 0}
+      .summary-number{font-size:48px}
+      .summary-copy{padding-right:0}
+      .summary-copy::after{display:none}
+      .summary-copy p{font-size:16px}
+      .article-shell{padding:54px 18px 70px}
+      .article-body{font-size:17px;line-height:1.75}
+      .article-body h2{margin-top:70px;font-size:38px}
+      #articleToc{grid-template-columns:1fr}
+      .article-body table{display:block;overflow-x:auto;white-space:normal}
+      .author-signature{padding:44px 18px 56px}
+      .author-signature-inner{grid-template-columns:54px 1fr;gap:15px}
+      .author-logo{width:54px;height:54px}
+      .closing-inner{
+        width:calc(100% - 36px);
+        min-height:0;
+        grid-template-columns:1fr;
+        gap:10px;
+        padding-top:54px;
+      }
+      .closing-copy{padding-bottom:10px}
+      .closing-copy h2{font-size:52px}
+      .closing-kabayan{width:230px;justify-self:end}
+      .footer-inner{align-items:flex-start;flex-direction:column}
+    }
+
+    @media(prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}
+      *{animation:none!important;transition:none!important}
+      .reveal{opacity:1;transform:none}
+    }
+
+    @media print{
+      .site-nav,.mobile-menu,.mobile-nav-checkbox,.reading-progress,
+      .hero-actions,.article-sidebar,.article-closing,.site-footer{display:none!important}
+      body{padding-top:0}
+      .article-hero{border:0}
+      .hero-grid{min-height:0;padding:20px 0}
+      .hero-companion{display:none}
+      .hero-copy{grid-column:1/-1}
+      .summary-section{padding:25px 0}
+      .article-shell{padding:20px 0}
+      .article-layout{display:block;width:100%}
+      .article-body{font-size:11pt;line-height:1.55}
+      .article-body h2{break-after:avoid}
+      a{text-decoration:none}
+    }
+  </style>
+<style id="kabayanVividEditorialPalette">
+    /* =========================================================
+       Kabayan Editorial — high contrast, tetap bersih
+       ========================================================= */
+    :root{
+      --ink:#101012;
+      --blue:#0866d8;
+      --blue-2:#0f79f2;
+      --navy:#082a52;
+      --navy-2:#0b3568;
+      --yellow:#ffd84a;
+      --yellow-soft:#fff3b0;
+      --red:#ff3b30;
+      --sky:#eaf3ff;
+      --sky-2:#dcecff;
+      --soft:#f5f5f7;
+      --line:#dfe3e8;
+    }
+
+    body{
+      background:#ffffff;
+      color:var(--ink);
+    }
+
+    /* Hero: lebih hidup, tetapi masih editorial */
+    .article-hero{
+      background:
+        radial-gradient(circle at 82% 18%, rgba(255,216,74,.34), transparent 22%),
+        linear-gradient(135deg,#ffffff 0%,#f7fbff 58%,#eaf3ff 100%) !important;
+      border-bottom:1px solid #cfd8e5 !important;
+    }
+
+    .hero-cloud{
+      opacity:.18 !important;
+      filter:saturate(1.15);
+    }
+
+    .hero-index{
+      color:var(--navy) !important;
+    }
+
+    .hero-index::before{
+      width:38px !important;
+      height:2px !important;
+      background:var(--blue) !important;
+    }
+
+    .hero-title{
+      color:#0d0d10 !important;
+    }
+
+    .hero-accent{
+      color:var(--blue) !important;
+    }
+
+    .hero-lead{
+      color:#31363d !important;
+    }
+
+    .hero-meta{
+      color:#5e6670 !important;
+    }
+
+    .hero-companion::before{
+      width:315px !important;
+      height:315px !important;
+      background:
+        radial-gradient(circle at 36% 35%,#ffffff 0 17%,transparent 18%),
+        linear-gradient(145deg,#ffd84a 0%,#ffec8b 45%,#d9eaff 100%) !important;
+      box-shadow:0 25px 60px rgba(8,42,82,.10);
+    }
+
+    .hero-note{
+      border:1px solid rgba(8,102,216,.18) !important;
+      border-top:4px solid var(--blue) !important;
+      background:#ffffff !important;
+      box-shadow:0 18px 42px rgba(8,42,82,.12) !important;
+    }
+
+    .hero-note small{
+      color:var(--blue) !important;
+    }
+
+    .button{
+      border-color:#c7ccd3 !important;
+    }
+
+    .button-primary{
+      border-color:var(--navy) !important;
+      background:var(--navy) !important;
+    }
+
+    .button-primary:hover{
+      background:#061f3d !important;
+    }
+
+    /* INTINYA: signature kuning Kabayan */
+    .summary-section{
+      padding-top:62px !important;
+      padding-bottom:62px !important;
+      background:#ffffff !important;
+    }
+
+    .summary-wrap{
+      position:relative;
+      overflow:hidden;
+      grid-template-columns:155px minmax(0,1fr) !important;
+      gap:46px !important;
+      padding:38px 42px !important;
+      border:0 !important;
+      border-radius:28px;
+      background:
+        linear-gradient(120deg,#ffd84a 0%,#ffe77e 60%,#fff1ad 100%);
+      box-shadow:0 20px 50px rgba(91,73,0,.09);
+    }
+
+    .summary-wrap::before{
+      position:absolute;
+      right:-90px;
+      bottom:-105px;
+      width:300px;
+      height:300px;
+      border-radius:50%;
+      background:
+        linear-gradient(rgba(255,255,255,.28),rgba(255,255,255,.28)),
+        url("{{ '/assets/img/mega-mendung-cirebon.webp' | relative_url }}") center/cover;
+      content:"";
+      opacity:.42;
+      transform:rotate(-10deg);
+    }
+
+    .summary-label{
+      color:#5c4a00 !important;
+    }
+
+    .summary-number{
+      color:#15120a !important;
+    }
+
+    .summary-copy{
+      z-index:1;
+    }
+
+    .summary-copy::after{
+      display:none !important;
+    }
+
+    .summary-copy strong{
+      color:#111 !important;
+    }
+
+    .summary-copy p{
+      color:#332d13 !important;
+    }
+
+    /* Body: chapter lebih tegas */
+    .article-body h2{
+      border-top:2px solid #111 !important;
+    }
+
+    .article-body h2::before{
+      color:var(--blue) !important;
+      font-weight:900 !important;
+    }
+
+    .article-body h3{
+      color:var(--navy) !important;
+    }
+
+    /* TOC: active state lebih jelas */
+    #articleToc{
+      border-top:1px solid #cfd6df !important;
+    }
+
+    #articleToc a{
+      position:relative;
+      padding:12px 10px 12px 12px !important;
+      border-bottom:1px solid #e2e6eb !important;
+      color:#7d838b !important;
+      transition:background .18s ease,color .18s ease,border-color .18s ease;
+    }
+
+    #articleToc a.is-active{
+      color:#111 !important;
+      background:var(--sky) !important;
+      font-weight:800 !important;
+      border-left:4px solid var(--blue) !important;
+      padding-left:10px !important;
+    }
+
+    #articleToc a.is-active::before{
+      color:var(--blue) !important;
+    }
+
+    .sidebar-note{
+      color:#6f7780 !important;
+    }
+
+    /* Interactive checklist mengikuti stylesheet komponennya masing-masing. */
+
+
+    /* Callouts: warna lebih tegas */
+    .article-body blockquote{
+      border-left:5px solid var(--blue) !important;
+      background:linear-gradient(135deg,#eaf3ff,#f5f9ff) !important;
+      color:#213b5a !important;
+      box-shadow:0 14px 32px rgba(8,102,216,.07);
+    }
+
+    .article-body blockquote::before{
+      color:var(--blue) !important;
+    }
+
+    .article-body .callout-warning{
+      border-left-color:#d6a800 !important;
+      background:linear-gradient(135deg,#fff5bf,#fff9df) !important;
+      color:#493d13 !important;
+    }
+
+    .article-body .callout-warning::before{
+      color:#8e6b00 !important;
+    }
+
+    .article-body .callout-example{
+      border-left-color:#19191b !important;
+      background:linear-gradient(135deg,#efeff2,#f8f8fa) !important;
+    }
+
+    .article-body .callout-update{
+      border-left-color:var(--red) !important;
+      background:linear-gradient(135deg,#ffe7e5,#fff4f3) !important;
+    }
+
+    /* Dasar hukum: gelap dan berwibawa */
+    .article-body .legal-basis,
+    .article-body .dasar-hukum{
+      position:relative;
+      overflow:hidden;
+      padding:32px 34px !important;
+      border:0 !important;
+      border-radius:22px;
+      background:
+        linear-gradient(135deg,var(--navy) 0%,var(--navy-2) 72%,#0f4d92 100%) !important;
+      color:#ffffff !important;
+      box-shadow:0 20px 45px rgba(8,42,82,.18);
+    }
+
+    .article-body .legal-basis::after,
+    .article-body .dasar-hukum::after{
+      position:absolute;
+      right:-60px;
+      bottom:-80px;
+      width:240px;
+      height:240px;
+      border-radius:50%;
+      background:
+        linear-gradient(rgba(255,255,255,.1),rgba(255,255,255,.1)),
+        url("{{ '/assets/img/mega-mendung-cirebon.webp' | relative_url }}") center/cover;
+      content:"";
+      opacity:.3;
+    }
+
+    .article-body .legal-basis::before,
+    .article-body .dasar-hukum::before{
+      color:#9fcaff !important;
+      position:relative;
+      z-index:1;
+    }
+
+    .article-body .legal-basis *,
+    .article-body .dasar-hukum *{
+      position:relative;
+      z-index:1;
+      color:#ffffff !important;
+    }
+
+    /* Tables */
+    .article-body th{
+      background:var(--navy) !important;
+    }
+
+    .article-body tr:nth-child(even) td{
+      background:#f1f6fc !important;
+    }
+
+    /* Tags */
+    .article-tag{
+      background:var(--sky) !important;
+      color:#174d87 !important;
+    }
+
+    /* Author */
+    .author-signature{
+      background:linear-gradient(180deg,#fff,#f8fbff) !important;
+    }
+
+    .author-logo{
+      border-color:#cdd9e6 !important;
+      box-shadow:0 10px 24px rgba(8,42,82,.08);
+    }
+
+    .author-link{
+      color:var(--blue) !important;
+    }
+
+    /* Closing: lebih hidup */
+    .article-closing{
+      background:var(--navy) !important;
+    }
+
+    .article-closing::before{
+      background:
+        linear-gradient(90deg,rgba(8,42,82,.98),rgba(8,42,82,.84),rgba(8,42,82,.55)),
+        url("{{ '/assets/img/mega-mendung-cirebon.webp' | relative_url }}") center/cover no-repeat !important;
+      opacity:.72 !important;
+    }
+
+    .closing-kicker{
+      color:#b9d8ff !important;
+    }
+
+    .closing-link{
+      background:var(--yellow) !important;
+      color:#1b1605 !important;
+      box-shadow:0 12px 28px rgba(255,216,74,.16);
+    }
+
+    .closing-link:hover{
+      background:#ffe36d !important;
+    }
+
+    /* Header: sedikit lebih tegas */
+    .site-nav{
+      border-bottom-color:#dfe3e8 !important;
+      background:rgba(255,255,255,.94) !important;
+    }
+
+    .nav-brand{
+      color:#101012 !important;
+    }
+
+    .nav-cta{
+      background:var(--navy) !important;
+    }
+
+    .nav-cta:hover{
+      background:#061f3d !important;
+    }
+
+    @media(max-width:680px){
+      .summary-section{
+        padding:36px 18px !important;
+      }
+
+      .summary-wrap{
+        grid-template-columns:minmax(0,1fr) !important;
+        gap:18px !important;
+        padding:28px 24px !important;
+        border-radius:24px;
+      }
+
+      .summary-wrap > div:first-child{
+        position:relative;
+        z-index:2;
+        display:flex;
+        align-items:baseline;
+        gap:10px;
+      }
+
+      .summary-label,
+      .summary-number{
+        display:inline-block;
+        margin:0 !important;
+      }
+
+      .summary-label{
+        font-size:10px;
+      }
+
+      .summary-number{
+        font-size:24px;
+        line-height:1;
+        letter-spacing:-.035em;
+      }
+
+      .summary-copy{
+        position:relative;
+        z-index:2;
+        width:100%;
+        max-width:none;
+        min-width:0;
+        padding:0 !important;
+      }
+
+      .summary-copy strong{
+        margin-bottom:14px;
+        font-size:clamp(32px,10vw,40px);
+        line-height:1.02;
+      }
+
+      .summary-copy p{
+        max-width:none;
+        font-size:17px;
+        line-height:1.55;
+      }
+
+      .summary-wrap::before{
+        right:-54px;
+        bottom:-62px;
+        width:175px;
+        height:175px;
+        opacity:.20;
+        pointer-events:none;
+      }
+
+      .article-body .task-list,
+      .article-body .checklist{
+        padding:15px 14px !important;
+        border-radius:14px;
+      }
+
+      .article-body .legal-basis,
+      .article-body .dasar-hukum{
+        padding:24px 22px !important;
+        border-radius:18px;
+      }
+    }
+  </style>
+
+  <style id="kabayanCompatibilityLayer">
+    /* =========================================================
+       Compatibility layer
+       - layout baru tetap dominan
+       - komponen interaktif memakai CSS lama / custom_css sendiri
+       ========================================================= */
+    :root{
+      /* Alias variabel yang masih dipakai komponen legacy. */
+      --black:#000000;
+      --near-black:#1d1d1f;
+      --white:#ffffff;
+      --off-white:#f5f5f7;
+      --soft-gray:#e8e8ed;
+      --medium-gray:#86868b;
+      --blue-hover:#0077ed;
+      --green:#248a3d;
+      --green-soft:#edf8ef;
+      --orange:#bf5b00;
+      --orange-soft:#fff7e8;
+      --red-soft:#fff0ee;
+      --purple:#8944ab;
+      --purple-soft:#f5eff9;
+      --nav-height:var(--nav-h);
+      --max-width:var(--max);
+      --article-width:var(--article);
+    }
+
+    /* artikel-editorial.css lama memberi padding ke main; layout baru memakai padding body. */
+    main{padding-top:0 !important}
+
+    /* Base CSS lama memakai .mobile-menu.active. Paksa kembali ke mekanisme checkbox baru. */
+    .mobile-menu{display:block !important}
+    #mobileNavToggle:not(:checked) ~ .mobile-menu{
+      visibility:hidden !important;
+      opacity:0 !important;
+      pointer-events:none !important;
+      transform:translateY(-8px) !important;
+    }
+    #mobileNavToggle:checked ~ .mobile-menu{
+      visibility:visible !important;
+      opacity:1 !important;
+      pointer-events:auto !important;
+      transform:translateY(0) !important;
+    }
+
+    /* TOC khusus dari JS artikel lama menggunakan class .active. */
+    #articleToc a.active,
+    #articleToc a.is-active{
+      color:#111 !important;
+      background:var(--sky,#eaf3ff) !important;
+      font-weight:800 !important;
+      border-left:4px solid var(--blue,#0866d8) !important;
+      padding-left:10px !important;
+    }
+    #articleToc a.active::before,
+    #articleToc a.is-active::before{color:var(--blue,#0866d8) !important}
+
+    /* Jangan beri typography editorial pada kertas/form interaktif. */
+    .article-body :is(.skb-paper,#formulir-interaktif,.paper,.skb-app) :is(p,li,h1,h2,h3,h4,label,input,textarea,select,button,table,th,td){
+      letter-spacing:normal;
+    }
+
+    /* SKB Potput: mode cetak pada CSS lama merujuk nama layout lama. */
+    @media print{
+      body.print-skb-form .site-nav,
+      body.print-skb-form .mobile-menu,
+      body.print-skb-form .mobile-nav-checkbox,
+      body.print-skb-form .reading-progress,
+      body.print-skb-form main > article > .article-hero,
+      body.print-skb-form .summary-section,
+      body.print-skb-form .article-shell,
+      body.print-skb-form .author-signature,
+      body.print-skb-form .article-closing,
+      body.print-skb-form .site-footer,
+      body.print-skb-form .skb-toolbar,
+      body.print-skb-form .skb-screen-note{
+        display:none !important;
+      }
+      body.print-skb-form{padding-top:0 !important;background:#fff !important}
+      body.print-skb-form main{display:block !important;padding:0 !important}
+      body.print-skb-form .skb-print-portal{display:block !important}
+
+      /* Surat Kuasa Khusus embedded form */
+      body.print-skk .site-nav,
+      body.print-skk .mobile-menu,
+      body.print-skk .mobile-nav-checkbox,
+      body.print-skk .reading-progress,
+      body.print-skk .article-hero,
+      body.print-skk .summary-section,
+      body.print-skk .author-signature,
+      body.print-skk .article-closing,
+      body.print-skk .site-footer{
+        display:none !important;
+      }
+      body.print-skk{padding-top:0 !important;background:#fff !important}
+    }
+  </style>
+  <style id="kabayanHeroFactsStyles">
+    .hero-facts{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:1px;
+      max-width:740px;
+      margin-top:28px;
+      overflow:hidden;
+      border:1px solid rgba(8,42,82,.13);
+      border-radius:18px;
+      background:rgba(8,42,82,.11);
+    }
+    .hero-fact{
+      min-width:0;
+      padding:15px 17px;
+      background:rgba(255,255,255,.82);
+    }
+    .hero-fact strong{
+      display:block;
+      color:var(--navy,#082a52);
+      font-size:18px;
+      font-weight:800;
+      letter-spacing:-.035em;
+      line-height:1.1;
+    }
+    .hero-fact span{
+      display:block;
+      margin-top:5px;
+      color:#626a74;
+      font-size:10.5px;
+      line-height:1.35;
+    }
+    .hero-page-image{
+      width:min(420px,100%);
+      max-height:440px;
+      margin:0;
+      overflow:hidden;
+      border:1px solid rgba(8,42,82,.12);
+      border-radius:28px;
+      background:#fff;
+      box-shadow:0 24px 48px rgba(8,42,82,.13);
+    }
+    .hero-page-image img{width:100%;height:100%;max-height:440px;object-fit:cover}
+    @media(max-width:680px){
+      .hero-facts{grid-template-columns:1fr 1fr;margin-top:22px}
+      .hero-fact{padding:13px 14px}
+      .hero-fact strong{font-size:16px}
+      .hero-page-image{max-width:330px}
+    }
+  </style>
+  {% if page.custom_css %}
+    {% for css in page.custom_css %}
+      <!-- Dimuat terakhir agar komponen artikel/interaktif mempertahankan desain aslinya. -->
+      <link rel="stylesheet" href="{{ css | relative_url }}">
+    {% endfor %}
+  {% endif %}
+
+  <style id="kabayanOuterShellGuard">
+    /*
+      Guard dimuat SETELAH page.custom_css.
+      Hanya mengunci shell/layout, tidak menimpa komponen isi artikel.
+    */
+    @media screen {
+      html,
+      body {
+        opacity: 1 !important;
+        visibility: visible !important;
+      }
+
+      body {
+        display: block !important;
+        min-height: 100% !important;
+      }
+
+      body > main,
+      main > article,
+      .article-hero,
+      .summary-section,
+      .article-shell,
+      .author-signature,
+      .article-closing,
+      .site-footer {
+        opacity: 1 !important;
+        visibility: visible !important;
+      }
+
+      body > main {
+        display: block !important;
+        padding-top: 0 !important;
+      }
+
+      .article-hero,
+      .summary-section,
+      .article-shell,
+      .author-signature,
+      .article-closing,
+      .site-footer {
+        position: relative;
+      }
+
+      .reveal {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+      }
+
+      .mobile-menu {
+        display: block !important;
+      }
+
+      #mobileNavToggle:not(:checked) ~ .mobile-menu {
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        transform: translateY(-8px) !important;
+      }
+
+      #mobileNavToggle:checked ~ .mobile-menu {
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        transform: translateY(0) !important;
+      }
+    }
+
+    @media screen and (max-width: 960px) {
+      .article-layout {
+        width: 100% !important;
+        max-width: 100% !important;
+        grid-template-columns: minmax(0, 1fr) !important;
+      }
+
+      .article-body {
+        min-width: 0 !important;
+        max-width: 100% !important;
+      }
+
+      .article-sidebar {
+        position: static !important;
+        top: auto !important;
+        min-width: 0 !important;
+      }
+    }
+
+    @media screen and (max-width: 680px) {
+      .hero-grid,
+      .article-layout,
+      .article-body,
+      .summary-wrap,
+      .author-signature-inner,
+      .closing-inner {
+        min-width: 0 !important;
+        max-width: 100% !important;
+      }
+
+      .article-body input,
+      .article-body textarea,
+      .article-body select,
+      .article-body button {
+        max-width: 100%;
+      }
+    }
+  </style>
+
+
+  <style id="kabayanArticleScrollStability">
+    /*
+      Stabilitas render artikel panjang:
+      - anchor jump tidak memakai smooth scroll
+      - fixed header tidak memakai backdrop-filter GPU-heavy
+      - mobile overlay juga memakai background solid
+    */
+    html {
+      scroll-behavior: auto !important;
+    }
+
+    .site-nav {
+      background: rgba(255,255,255,.985) !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      transform: none !important;
+      will-change: auto !important;
+    }
+
+    .mobile-menu {
+      background: #ffffff !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      will-change: auto !important;
+    }
+
+    .reading-progress {
+      will-change: width;
+    }
+
+    /* Kurangi layer kompositor yang tidak perlu pada halaman artikel panjang. */
+    .article-sidebar,
+    .article-shell,
+    .article-body {
+      transform: none !important;
+      will-change: auto !important;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      html {
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+
+
+<style id="kabayanRoleSafeRender">
+  .article-render-safe {
+    padding-top: 0 !important;
+  }
+
+  .article-render-safe .reading-progress {
+    display: none !important;
+  }
+
+  .article-render-safe .site-nav {
+    position: relative !important;
+    top: auto !important;
+    transform: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: #ffffff !important;
+  }
+
+  .article-render-safe .article-hero {
+    isolation: auto !important;
+    contain: none !important;
+    transform: none !important;
+  }
+
+  .article-render-safe .hero-cloud {
+    display: none !important;
+  }
+
+  .article-render-safe .summary-section {
+    padding: 34px 20px !important;
+    background: #ffffff !important;
+  }
+
+  .article-render-safe .summary-wrap {
+    width: min(920px, 100%) !important;
+    display: block !important;
+    min-height: 0 !important;
+    margin: 0 auto !important;
+    padding: 26px 28px !important;
+    overflow: visible !important;
+    border: 1px solid #ead179 !important;
+    border-radius: 20px !important;
+    background: #fff5bf !important;
+    box-shadow: none !important;
+  }
+
+  .article-render-safe .summary-wrap::before,
+  .article-render-safe .summary-copy::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  .article-render-safe .summary-wrap > div:first-child {
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .article-render-safe .summary-label,
+  .article-render-safe .summary-number {
+    display: inline-block !important;
+    margin: 0 !important;
+  }
+
+  .article-render-safe .summary-number {
+    font-size: 22px !important;
+    line-height: 1 !important;
+  }
+
+  .article-render-safe .summary-copy {
+    max-width: none !important;
+    padding: 0 !important;
+  }
+
+  .article-render-safe .article-shell {
+    padding: 44px 20px 82px !important;
+    background: #ffffff !important;
+  }
+
+  .article-render-safe .article-layout {
+    width: min(900px, 100%) !important;
+    max-width: 900px !important;
+    display: block !important;
+    margin: 0 auto !important;
+    transform: none !important;
+    contain: none !important;
+  }
+
+  .article-render-safe .article-body {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    transform: none !important;
+    contain: none !important;
+    content-visibility: visible !important;
+  }
+
+  .article-render-safe .article-sidebar {
+    display: none !important;
+    position: static !important;
+    top: auto !important;
+  }
+
+  .article-render-safe .role-table-wrapper,
+  .article-render-safe .presentation-viewer,
+  .article-render-safe .role-card,
+  .article-render-safe .problem-item {
+    transform: none !important;
+    will-change: auto !important;
+    contain: none !important;
+  }
+
+  .article-render-safe .role-table-wrapper {
+    box-shadow: none !important;
+  }
+
+  .article-render-safe .reveal,
+  .article-render-safe .reveal.is-visible {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  @media (max-width: 760px) {
+    .article-render-safe .article-shell {
+      padding: 32px 16px 64px !important;
+    }
+
+    .article-render-safe .summary-section {
+      padding: 24px 16px !important;
+    }
+
+    .article-render-safe .summary-wrap {
+      padding: 22px 20px !important;
+      border-radius: 16px !important;
+    }
+
+    .article-render-safe .article-body {
+      font-size: 17px !important;
+    }
+  }
+</style>
+
+
+<style id="kabayanReadingCompanionStyles">
+  /* Kabayan membaca — visual companion yang lebih tenang */
+  .hero-companion-reading{
+    min-height:430px !important;
+    align-items:flex-end !important;
+    justify-content:center !important;
+  }
+
+  .hero-companion-reading::before{
+    width:340px !important;
+    height:340px !important;
+    bottom:22px !important;
+    background:
+      radial-gradient(circle at 36% 35%, rgba(255,255,255,.92) 0 17%, transparent 18%),
+      linear-gradient(145deg,#ffd84a 0%,#ffeb88 46%,#dcecff 100%) !important;
+    box-shadow:0 24px 56px rgba(8,42,82,.10);
+  }
+
+  .hero-kabayan-reading{
+    width:min(390px,100%) !important;
+    max-height:470px !important;
+    object-fit:contain !important;
+    object-position:center bottom !important;
+    filter:drop-shadow(0 26px 34px rgba(24,48,78,.15)) !important;
+  }
+
+  /* Kartu editorial lama tidak lagi dipakai. */
+  .hero-note{
+    display:none !important;
+  }
+
+  .closing-kabayan-reading{
+    width:min(330px,100%) !important;
+    max-height:360px !important;
+    object-fit:contain !important;
+    object-position:center bottom !important;
+  }
+
+  @media(max-width:960px){
+    .hero-companion-reading{
+      min-height:310px !important;
+      justify-content:flex-start !important;
+    }
+
+    .hero-companion-reading::before{
+      width:270px !important;
+      height:270px !important;
+      right:auto !important;
+      left:10px !important;
+      bottom:10px !important;
+    }
+
+    .hero-kabayan-reading{
+      width:285px !important;
+      max-height:325px !important;
+    }
+  }
+
+  @media(max-width:680px){
+    .hero-companion-reading{
+      min-height:250px !important;
+      margin-top:2px !important;
+    }
+
+    .hero-companion-reading::before{
+      width:220px !important;
+      height:220px !important;
+      left:0 !important;
+    }
+
+    .hero-kabayan-reading{
+      width:235px !important;
+      max-height:270px !important;
+    }
+
+    .closing-kabayan-reading{
+      width:220px !important;
+      max-height:245px !important;
+    }
+  }
+
+  @media print{
+    .hero-companion-reading{
+      display:none !important;
+    }
+  }
+</style>
+
+</head>
+
+<body
+  id="top"
+  data-render-mode="{{ page.render_mode | default: 'standard' }}"
+  class="{% if page.render_mode == 'safe' %}article-render-safe{% endif %}"
+>
+  {% assign months = "Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember" | split: "," %}
+  {% if page.date %}
+    {% assign month_number = page.date | date: "%-m" | minus: 1 %}
+  {% endif %}
+
+  <div class="reading-progress" id="readingProgress" aria-hidden="true"></div>
+
+  <input
+    class="mobile-nav-checkbox"
+    id="mobileNavToggle"
+    type="checkbox"
+    autocomplete="off"
+    aria-label="Buka atau tutup menu navigasi"
+  >
+
+  <header class="site-nav">
+    <div class="nav-inner">
+      <a class="nav-brand" href="{{ '/' | relative_url }}" aria-label="Kabayan — Kembali ke beranda">
+        <img class="brand-logo" src="{{ '/assets/img/LogoASD.svg' | relative_url }}" alt="Logo Kabayan">
+        <span>Kabayan</span>
+      </a>
+
+      <nav class="desktop-menu" aria-label="Navigasi utama">
+        <a href="{{ '/buku.html' | relative_url }}">Buku</a>
+        <a href="{{ '/formulir.html' | relative_url }}">Formulir</a>
+        <a href="{{ '/kalkulator.html' | relative_url }}">Kalkulator</a>
+        <a href="{{ '/aplikasi.html' | relative_url }}">Aplikasi</a>
+        <a href="{{ '/artikel.html' | relative_url }}" aria-current="page">Artikel</a>
+        <a class="nav-hotnews" href="{{ '/hotnews.html' | relative_url }}">
+          <span class="nav-hotnews-dot" aria-hidden="true"></span>
+          <span>Hot News</span>
+        </a>
+      </nav>
+
+      <div class="nav-actions">
+        <a class="nav-cta" href="{{ '/artikel.html' | relative_url }}">Jelajahi Artikel ↗</a>
+        <label class="menu-toggle" for="mobileNavToggle" aria-label="Buka atau tutup menu">
+          <span class="menu-icon-open" aria-hidden="true">☰</span>
+          <span class="menu-icon-close" aria-hidden="true">×</span>
+        </label>
+      </div>
+    </div>
+  </header>
+
+  <nav class="mobile-menu" aria-label="Navigasi mobile">
+    <a href="{{ '/' | relative_url }}"><span class="mobile-menu-index">00</span><span>Beranda</span></a>
+    <a href="{{ '/buku.html' | relative_url }}"><span class="mobile-menu-index">01</span><span>Buku</span></a>
+    <a href="{{ '/formulir.html' | relative_url }}"><span class="mobile-menu-index">02</span><span>Formulir</span></a>
+    <a href="{{ '/kalkulator.html' | relative_url }}"><span class="mobile-menu-index">03</span><span>Kalkulator</span></a>
+    <a href="{{ '/aplikasi.html' | relative_url }}"><span class="mobile-menu-index">04</span><span>Aplikasi</span></a>
+    <a href="{{ '/artikel.html' | relative_url }}" aria-current="page"><span class="mobile-menu-index">05</span><span>Artikel</span></a>
+    <a href="{{ '/hotnews.html' | relative_url }}">
+      <span class="mobile-menu-index">06</span><span>Hot News</span><span class="mobile-hot-dot" aria-hidden="true"></span>
+    </a>
+    <a class="mobile-menu-cta" href="{{ '/artikel.html' | relative_url }}">
+      <span>Jelajahi Artikel</span><span aria-hidden="true">↗</span>
+    </a>
+  </nav>
+
+  <main>
+    <article>
+      <header class="article-hero">
+        <div class="hero-cloud" aria-hidden="true"></div>
+
+        <div class="hero-grid">
+          <div class="hero-copy reveal">
+            <div class="hero-index">
+              Artikel / {{ page.category | default: "Pajak" }}
+            </div>
+
+            <h1 class="hero-title">
+              {{ page.hero_title | default: page.title }}
+              {% if page.hero_accent %}
+                <span class="hero-accent">{{ page.hero_accent }}</span>
+              {% endif %}
+            </h1>
+
+            {% if page.excerpt or page.description %}
+              <p class="hero-lead">
+                {{ page.excerpt | default: page.description }}
+              </p>
+            {% endif %}
+
+            <div class="hero-meta">
+              <span>{{ page.author | default: site.author.name | default: "Angga Sukma Dhaniswara" }}</span>
+              {% if page.date %}
+                <time datetime="{{ page.date | date_to_xmlschema }}">
+                  {{ page.date | date: "%-d" }} {{ months[month_number] }} {{ page.date | date: "%Y" }}
+                </time>
+              {% endif %}
+              {% if page.reading_time %}<span>{{ page.reading_time }}</span>{% endif %}
+              {% if page.legal_basis %}<span>{{ page.legal_basis }}</span>{% endif %}
+            </div>
+
+            {% if page.hero_stats %}
+              <div class="hero-facts" aria-label="Fakta utama artikel">
+                {% for stat in page.hero_stats limit: 4 %}
+                  <div class="hero-fact">
+                    <strong>{{ stat.value }}</strong>
+                    <span>{{ stat.label }}</span>
+                  </div>
+                {% endfor %}
+              </div>
+            {% endif %}
+
+            <div class="hero-actions">
+              <a class="button button-primary" href="#articleContent">Mulai membaca ↓</a>
+              {% for action in page.hero_links %}
+                <a class="button" href="{{ action.href }}">{{ action.label }}</a>
+              {% endfor %}
+              <button class="button" id="copyLinkButton" type="button">Salin tautan</button>
+              <button class="button" type="button" onclick="window.print()">Cetak</button>
+            </div>
+          </div>
+
+          <div class="hero-companion hero-companion-reading reveal" aria-hidden="true">
+            <img
+              class="hero-kabayan hero-kabayan-reading"
+              src="{{ '/assets/img/kabayan-membaca.webp' | relative_url }}"
+              alt=""
+            >
+          </div>
+        </div>
+      </header>
+
+      {% if page.summary or page.excerpt or page.description %}
+        <section class="summary-section reveal">
+          <div class="summary-wrap">
+            <div>
+              <span class="summary-label">Ringkasan</span>
+              <span class="summary-number">01</span>
+            </div>
+            <div class="summary-copy">
+              <strong>{{ page.summary_label | default: "Intinya." }}</strong>
+              <p>{{ page.summary | default: page.excerpt | default: page.description }}</p>
+            </div>
+          </div>
+        </section>
+      {% endif %}
+
+      <section class="article-shell" id="articleContent">
+        <div class="article-layout">
+          <div class="article-body" id="articleBody">
+            {{ content }}
+
+            {% if page.tags %}
+              <div class="article-tags" aria-label="Topik artikel">
+                {% for tag in page.tags %}
+                  <span class="article-tag">{{ tag }}</span>
+                {% endfor %}
+              </div>
+            {% endif %}
+
+            {% if page.date_modified %}
+              <div class="article-updated">
+                Terakhir diperbarui: {{ page.date_modified | date: "%-d-%m-%Y" }}
+              </div>
+            {% endif %}
+          </div>
+
+          <aside class="article-sidebar" id="articleSidebar">
+            <span class="toc-kicker">Dalam artikel ini</span>
+            <nav id="articleToc" aria-label="Daftar isi"></nav>
+            {% if page.sidebar_note %}
+              <div class="sidebar-note">{{ page.sidebar_note }}</div>
+            {% endif %}
+          </aside>
+        </div>
+      </section>
+    </article>
+
+    <section class="author-signature reveal">
+      <div class="author-signature-inner">
+        <div class="author-logo">
+          <img src="{{ '/assets/img/LogoASD.svg' | relative_url }}" alt="Logo ASD">
+        </div>
+        <div class="author-copy">
+          <span class="author-kicker">Ditulis oleh</span>
+          <strong>{{ page.author | default: site.author.name | default: "Angga Sukma Dhaniswara" }}</strong>
+          <p>Kabayan — Katalog Bahan Pelayanan. Berbagi materi, referensi, dan alat bantu perpajakan.</p>
+        </div>
+        <a class="author-link" href="{{ '/artikel.html' | relative_url }}">Jelajahi artikel lainnya →</a>
+      </div>
+    </section>
+
+    <section class="article-closing">
+      <div class="closing-inner">
+        <div class="closing-copy reveal">
+          <span class="closing-kicker">Kabayan / Artikel</span>
+          <h2>Sudah paham?<br>Lanjut belajar.</h2>
+          <p>Temukan artikel lain, panduan, buku digital, dan penjelasan perpajakan yang lebih mudah diikuti.</p>
+          <a class="closing-link" href="{{ '/artikel.html' | relative_url }}">Jelajahi Artikel ↗</a>
+        </div>
+        <img
+          class="closing-kabayan reveal"
+          src="{{ '/assets/img/kabayan-pengetahuan.webp' | relative_url }}"
+          alt="Kabayan"
+          loading="lazy"
+        >
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="disclaimer">
+      <strong>Disclaimer:</strong>
+      Kabayan merupakan situs edukasi perpajakan pribadi dan bukan situs resmi Direktorat Jenderal Pajak atau instansi pemerintah. Informasi perlu diperiksa kembali dengan ketentuan terbaru sebelum digunakan.
+    </div>
+    <div class="footer-inner">
+      <p>© <span id="currentYear"></span> Angga Sukma Dhaniswara.</p>
+      <div class="footer-links">
+        <a href="{{ '/' | relative_url }}">Beranda</a>
+        <a href="{{ '/artikel.html' | relative_url }}">Artikel</a>
+        <a href="{{ '/hotnews.html' | relative_url }}">Hot News</a>
+        <a href="#top">Kembali ke atas</a>
+      </div>
+    </div>
+  </footer>
+
+  {% if page.custom_js %}
+    {% for js in page.custom_js %}
+      <script src="{{ js | relative_url }}"></script>
+    {% endfor %}
+  {% endif %}
+
+  
+
+  <script id="kabayanArticleSafeScript">
+  (function () {
+    "use strict";
+
+    function byId(id) {
+      return document.getElementById(id);
+    }
+
+    function toArray(list) {
+      return Array.prototype.slice.call(list || []);
+    }
+
+    function pad2(value) {
+      value = String(value);
+      return value.length < 2 ? "0" + value : value;
+    }
+
+    function slugify(value) {
+      var text = String(value || "");
+      try {
+        if (text.normalize) {
+          text = text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        }
+      } catch (error) {}
+      return text
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+    }
+
+    function resetMobileMenu() {
+      var toggle = byId("mobileNavToggle");
+      if (toggle) toggle.checked = false;
+    }
+
+    function updateProgress() {
+      var progress = byId("readingProgress");
+      if (!progress) return;
+
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      var pct = max > 0 ? (window.pageYOffset / max) * 100 : 0;
+      pct = Math.max(0, Math.min(100, pct));
+      progress.style.width = pct + "%";
+    }
+
+    function copyCurrentUrl(button) {
+      var original = button.textContent.replace(/^\s+|\s+$/g, "");
+      var done = function (text) {
+        button.textContent = text;
+        window.setTimeout(function () {
+          button.textContent = original;
+        }, 1600);
+      };
+
+      if (
+        navigator.clipboard &&
+        typeof navigator.clipboard.writeText === "function"
+      ) {
+        navigator.clipboard.writeText(window.location.href).then(
+          function () { done("Tautan tersalin"); },
+          function () { fallbackCopy(); }
+        );
+        return;
+      }
+
+      fallbackCopy();
+
+      function fallbackCopy() {
+        var textarea = document.createElement("textarea");
+        textarea.value = window.location.href;
+        textarea.setAttribute("readonly", "");
+        textarea.style.position = "fixed";
+        textarea.style.left = "-9999px";
+        document.body.appendChild(textarea);
+        textarea.select();
+
+        try {
+          document.execCommand("copy");
+          done("Tautan tersalin");
+        } catch (error) {
+          done("Gagal menyalin");
+        }
+
+        document.body.removeChild(textarea);
+      }
+    }
+
+    function setupLegacyChecklist() {
+      var boxes = toArray(document.querySelectorAll("[data-check]"));
+      var bar = byId("progressBar");
+      var text = byId("progressText");
+      var reset = byId("resetChecklist");
+
+      if (!boxes.length || !bar || !text) return;
+
+      var key = "kabayan-checklist:" + window.location.pathname;
+
+      function readState() {
+        try {
+          return JSON.parse(window.localStorage.getItem(key) || "[]");
+        } catch (error) {
+          return [];
+        }
+      }
+
+      function saveState() {
+        try {
+          window.localStorage.setItem(
+            key,
+            JSON.stringify(
+              boxes.map(function (box) { return !!box.checked; })
+            )
+          );
+        } catch (error) {}
+      }
+
+      function render() {
+        var done = boxes.filter(function (box) { return box.checked; }).length;
+        var total = boxes.length;
+        var percent = total ? Math.round((done / total) * 100) : 0;
+
+        bar.style.width = percent + "%";
+        text.textContent =
+          done + " dari " + total + " butir selesai (" + percent + "%)";
+      }
+
+      var stored = readState();
+
+      boxes.forEach(function (box, index) {
+        box.checked = !!stored[index];
+        box.addEventListener("change", function () {
+          saveState();
+          render();
+        });
+      });
+
+      if (reset) {
+        reset.addEventListener("click", function () {
+          boxes.forEach(function (box) { box.checked = false; });
+          try { window.localStorage.removeItem(key); } catch (error) {}
+          render();
+        });
+      }
+
+      render();
+    }
+
+    function setupToc() {
+      var body = byId("articleBody");
+      var toc = byId("articleToc");
+      var sidebar = byId("articleSidebar");
+      if (!body || !toc || !sidebar) return;
+
+      var headings = toArray(body.querySelectorAll("h2"));
+      if (!headings.length) {
+        sidebar.hidden = true;
+        return;
+      }
+
+      /*
+       * Beri custom_js kesempatan membuat TOC sendiri.
+       * Jika #articleToc sudah berisi link, layout hanya menormalisasi.
+       */
+      var links = toArray(toc.querySelectorAll("a"));
+      var builtByLayout = links.length === 0;
+
+      if (builtByLayout) {
+        var used = {};
+
+        headings.forEach(function (heading, index) {
+          var base = heading.id || slugify(heading.textContent) || ("bagian-" + (index + 1));
+          var id = base;
+          var n = 2;
+
+          while (
+            used[id] ||
+            (byId(id) && byId(id) !== heading)
+          ) {
+            id = base + "-" + n;
+            n += 1;
+          }
+
+          heading.id = id;
+          used[id] = true;
+
+          var chapter = pad2(index + 1);
+          heading.setAttribute("data-chapter", chapter + " / BAGIAN");
+
+          var link = document.createElement("a");
+          link.href = "#" + id;
+          link.setAttribute("data-target", id);
+          link.setAttribute("data-index", chapter);
+          link.textContent = heading.textContent.replace(/^\s+|\s+$/g, "");
+          toc.appendChild(link);
+        });
+
+        links = toArray(toc.querySelectorAll("a"));
+      } else {
+        links.forEach(function (link, index) {
+          if (!link.getAttribute("data-index")) {
+            link.setAttribute("data-index", pad2(index + 1));
+          }
+          if (link.className.indexOf("active") !== -1) {
+            link.classList.add("is-active");
+          }
+        });
+      }
+
+      /*
+       * Hanya layout yang mengelola active state bila layout sendiri
+       * yang membangun TOC. Ini mencegah duel dengan custom_js artikel.
+       */
+      if (builtByLayout && links.length) {
+        function activate(id) {
+          links.forEach(function (link) {
+            var active = link.getAttribute("data-target") === id;
+            if (active) {
+              link.classList.add("is-active");
+              link.setAttribute("aria-current", "location");
+            } else {
+              link.classList.remove("is-active");
+              link.removeAttribute("aria-current");
+            }
+          });
+        }
+
+        activate(headings[0].id);
+
+        if ("IntersectionObserver" in window) {
+          var observer = new IntersectionObserver(
+            function (entries) {
+              var visible = entries.filter(function (entry) {
+                return entry.isIntersecting;
+              });
+
+              visible.sort(function (a, b) {
+                return a.boundingClientRect.top - b.boundingClientRect.top;
+              });
+
+              if (visible.length) {
+                activate(visible[0].target.id);
+              }
+            },
+            {
+              rootMargin: "-18% 0px -68% 0px",
+              threshold: [0, 1]
+            }
+          );
+
+          headings.forEach(function (heading) {
+            observer.observe(heading);
+          });
+        }
+      }
+    }
+
+    function initLayoutHelpers() {
+      resetMobileMenu();
+
+      var safeMode =
+        document.body &&
+        document.body.getAttribute("data-render-mode") === "safe";
+
+      var year = byId("currentYear");
+      if (year) year.textContent = new Date().getFullYear();
+
+      var copyButton = byId("copyLinkButton");
+      if (copyButton) {
+        copyButton.addEventListener("click", function () {
+          copyCurrentUrl(copyButton);
+        });
+      }
+
+      setupLegacyChecklist();
+
+      if (!safeMode) {
+        window.setTimeout(setupToc, 0);
+        updateProgress();
+      } else {
+        var progress = byId("readingProgress");
+        if (progress) progress.style.width = "0";
+      }
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initLayoutHelpers);
+    } else {
+      initLayoutHelpers();
+    }
+
+    if (
+      !document.body ||
+      document.body.getAttribute("data-render-mode") !== "safe"
+    ) {
+      window.addEventListener("scroll", updateProgress, { passive: true });
+      window.addEventListener("resize", updateProgress);
+    }
+
+    window.addEventListener("pageshow", function () {
+      resetMobileMenu();
+
+      if (
+        !document.body ||
+        document.body.getAttribute("data-render-mode") !== "safe"
+      ) {
+        updateProgress();
+      }
+    });
+  })();
+  </script>
+
+</body>
+</html>
