@@ -570,6 +570,102 @@ body,
 }
 
 /* =========================================================
+   Permukaan gelap Kabayan
+   Mengganti hitam pekat dengan navy yang lebih hidup serta
+   menjaga tipografi tetap terang pada semua elemen anak.
+   ========================================================= */
+.article-body .se-utility .se-authority-signature,
+.se-utility .se-authority-signature {
+  background: linear-gradient(145deg, #16466f, #1d628f) !important;
+  color: #ffffff !important;
+  box-shadow: 0 16px 34px rgba(15, 56, 91, 0.18);
+}
+
+.article-body .se-utility .se-authority-signature strong,
+.se-utility .se-authority-signature strong {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff;
+}
+
+.article-body .se-utility .se-authority-signature small,
+.se-utility .se-authority-signature small {
+  color: #e1effa !important;
+  -webkit-text-fill-color: #e1effa;
+}
+
+.article-body .se-utility .se-closing,
+.se-utility .se-closing {
+  background:
+    radial-gradient(circle at 90% 10%, rgba(92, 181, 255, 0.25), transparent 31%),
+    linear-gradient(145deg, #173b5d, #1d5680) !important;
+}
+
+.article-body .se-utility .se-closing .se-eyebrow,
+.se-utility .se-closing .se-eyebrow {
+  color: #ffd66b !important;
+  -webkit-text-fill-color: #ffd66b;
+}
+
+.article-body .se-utility .se-closing p,
+.se-utility .se-closing p {
+  color: #edf5fc !important;
+}
+
+/* Netralisasi garis hitam dari dekorasi heading layout artikel. */
+.article-body .se-utility .se-closing h2,
+.article-body .se-utility .se-closing h2::before,
+.article-body .se-utility .se-closing h2::after,
+.se-utility .se-closing h2,
+.se-utility .se-closing h2::before,
+.se-utility .se-closing h2::after {
+  border-color: rgba(255, 255, 255, 0.22) !important;
+  background-color: transparent !important;
+}
+
+.article-body .se-utility .se-closing h2::before,
+.article-body .se-utility .se-closing h2::after,
+.se-utility .se-closing h2::before,
+.se-utility .se-closing h2::after {
+  color: #ffd66b !important;
+  -webkit-text-fill-color: #ffd66b;
+}
+
+.se-utility .se-authority-signature ::selection,
+.se-utility .se-closing ::selection {
+  background: #ffd66b;
+  color: #102a43;
+  -webkit-text-fill-color: #102a43;
+}
+
+@media print {
+  .article-body .se-utility .se-authority-signature,
+  .se-utility .se-authority-signature,
+  .article-body .se-utility .se-closing,
+  .se-utility .se-closing {
+    border: 1px solid #999999 !important;
+    background: #ffffff !important;
+    box-shadow: none;
+    color: #000000 !important;
+  }
+
+  .article-body .se-utility .se-authority-signature strong,
+  .article-body .se-utility .se-authority-signature small,
+  .se-utility .se-authority-signature strong,
+  .se-utility .se-authority-signature small {
+    color: #000000 !important;
+    -webkit-text-fill-color: #000000;
+  }
+
+  .article-body .se-utility .se-closing h2::before,
+  .article-body .se-utility .se-closing h2::after,
+  .se-utility .se-closing h2::before,
+  .se-utility .se-closing h2::after {
+    color: #000000 !important;
+    -webkit-text-fill-color: #000000;
+  }
+}
+
+/* =========================================================
    Kontras blok penutup
    Menahan aturan warna global artikel agar elemen anak tetap
    terbaca pada permukaan navy.
