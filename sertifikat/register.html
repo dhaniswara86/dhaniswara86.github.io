@@ -155,6 +155,9 @@ th{background:#f8fafc;color:#78828e;font-size:9px;letter-spacing:.08em;text-tran
 .btn-danger{background:#b42318;color:#fff;border-color:#b42318;box-shadow:0 8px 22px rgba(180,35,24,.14)}
 .btn-danger:hover{background:#912018;border-color:#912018}
 .row-actions{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.check-cell{width:46px;text-align:center}
+.row-check,.head-check{width:18px;height:18px;accent-color:#0b57d0;cursor:pointer}
+.selected-count{font-size:13px;font-weight:800;color:#5f6368;white-space:nowrap}
 .inline-actions{display:flex;gap:10px;flex-wrap:wrap}
 @media(max-width:1180px){
   .hero-shell,.page-head{grid-template-columns:1fr}
@@ -199,7 +202,7 @@ th{background:#f8fafc;color:#78828e;font-size:9px;letter-spacing:.08em;text-tran
         <div class="page-copy">
           <div class="kicker">Admin / Register</div>
           <h1>Register Sertifikat.</h1>
-          <p>Daftar seluruh sertifikat yang telah diterbitkan dari Kabayan. Kabayan divisualkan sedang mencatat untuk menegaskan fungsi register dan pencatatan administratif. Sertifikat dapat dibatalkan atau dihapus permanen oleh admin. Gunakan Hapus hanya jika data memang ingin dihilangkan dari Register dan tidak lagi dapat diverifikasi.</p>
+          <p>Daftar seluruh sertifikat yang telah diterbitkan dari Kabayan. Kabayan divisualkan sedang mencatat untuk menegaskan fungsi register dan pencatatan administratif. Sertifikat dapat dibatalkan atau dihapus permanen oleh admin. Centang data yang ingin dihapus, lalu pilih Hapus Terpilih. Data yang tidak dicentang tidak akan dihapus.</p>
         </div>
         <div class="page-hero">
           <img src="assets/kabayan-register.webp" alt="Kabayan sedang mencatat">
@@ -216,7 +219,8 @@ th{background:#f8fafc;color:#78828e;font-size:9px;letter-spacing:.08em;text-tran
         <input id="search" type="text" placeholder="Cari nama, nomor sertifikat, instansi...">
         <div class="inline-actions">
           <button class="btn btn-outline" id="refresh">Muat Ulang</button>
-          <button class="btn btn-danger" id="deleteAll">Hapus Semua</button>
+          <span class="selected-count" id="selectedCount">0 dipilih</span>
+          <button class="btn btn-danger" id="deleteSelected" disabled>Hapus Terpilih</button>
           <a class="btn btn-accent" href="index.html">Kembali ke Generator</a>
         </div>
       </div>
@@ -229,6 +233,7 @@ th{background:#f8fafc;color:#78828e;font-size:9px;letter-spacing:.08em;text-tran
         <table>
           <thead>
             <tr>
+              <th class="check-cell"><input class="head-check" id="selectVisible" type="checkbox" aria-label="Pilih semua data yang tampil"></th>
               <th>Status</th>
               <th>Nomor</th>
               <th>Nama</th>
@@ -240,7 +245,7 @@ th{background:#f8fafc;color:#78828e;font-size:9px;letter-spacing:.08em;text-tran
             </tr>
           </thead>
           <tbody id="body">
-            <tr><td colspan="8">Memuat...</td></tr>
+            <tr><td colspan="9">Memuat...</td></tr>
           </tbody>
         </table>
       </div>
@@ -252,13 +257,35 @@ th{background:#f8fafc;color:#78828e;font-size:9px;letter-spacing:.08em;text-tran
 <script src="supabase-config.js"></script>
 <script>
 let sb,rows=[];
+const selectedIds=new Set();
+let visibleIds=[];
 const body=document.getElementById('body'),err=document.getElementById('err');
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
 function fmtDate(v){if(!v)return '—';try{return new Intl.DateTimeFormat('id-ID',{dateStyle:'medium',timeStyle:'short'}).format(new Date(v))}catch{return v}}
+
+function updateSelectionUI(){
+ const btn=document.getElementById('deleteSelected');
+ const count=document.getElementById('selectedCount');
+ const head=document.getElementById('selectVisible');
+ const total=selectedIds.size;
+ count.textContent=total+' dipilih';
+ btn.disabled=total===0;
+ if(head){
+  const visibleSelected=visibleIds.filter(id=>selectedIds.has(id)).length;
+  head.checked=visibleIds.length>0 && visibleSelected===visibleIds.length;
+  head.indeterminate=visibleSelected>0 && visibleSelected<visibleIds.length;
+ }
+}
+function toggleVisible(checked){
+ visibleIds.forEach(id=>checked?selectedIds.add(id):selectedIds.delete(id));
+ render();
+}
 function render(){
  const q=document.getElementById('search').value.trim().toLowerCase();
  const data=rows.filter(r=>!q||[r.certificate_number,r.recipient_name,r.institution,r.issuer,r.event_date].some(v=>String(v||'').toLowerCase().includes(q)));
+ visibleIds=data.map(r=>r.id);
  body.innerHTML=data.length?data.map(r=>`<tr>
+ <td class="check-cell"><input class="row-check" type="checkbox" data-check="${r.id}" ${selectedIds.has(r.id)?'checked':''} aria-label="Pilih ${esc(r.certificate_number)}"></td>
  <td><span class="state ${r.status==='valid'?'valid':'revoked'}">${r.status==='valid'?'VALID':'DIBATALKAN'}</span></td>
  <td>${esc(r.certificate_number)}</td>
  <td>${esc(r.recipient_name)}</td>
@@ -270,7 +297,7 @@ function render(){
  ${r.status==='valid'?`<button class="action revoke" data-revoke="${r.id}">Batalkan</button>`:''}
  <button class="action delete" data-delete="${r.id}" data-number="${esc(r.certificate_number)}" data-name="${esc(r.recipient_name)}">Hapus</button>
  </div></td>
- </tr>`).join(''):'<tr><td colspan="8">Tidak ada data.</td></tr>';
+ </tr>`).join(''):'<tr><td colspan="9">Tidak ada data.</td></tr>';
  document.getElementById('countAll').textContent=rows.length;
  document.getElementById('countValid').textContent=rows.filter(r=>r.status==='valid').length;
  document.getElementById('countRevoked').textContent=rows.filter(r=>r.status==='revoked').length;
@@ -280,6 +307,11 @@ function render(){
    b.dataset.number,
    b.dataset.name
  ));
+ body.querySelectorAll('[data-check]').forEach(cb=>cb.onchange=()=>{
+   cb.checked?selectedIds.add(cb.dataset.check):selectedIds.delete(cb.dataset.check);
+   updateSelectionUI();
+ });
+ updateSelectionUI();
 }
 async function guard(){
  sb=KabayanSupabase.getClient();
@@ -294,11 +326,12 @@ async function load(){
   const {data,error}=await sb.from('certificates').select('id,certificate_number,recipient_name,institution,event_date,issuer,status,issued_at,revoked_at').order('issued_at',{ascending:false}).limit(1000);
   if(error)throw error;
   rows=data||[];
+  selectedIds.clear();
   render();
  }catch(e){
   err.textContent=e.message;
   err.classList.add('show');
-  body.innerHTML='<tr><td colspan="8">Gagal memuat.</td></tr>';
+  body.innerHTML='<tr><td colspan="9">Gagal memuat.</td></tr>';
  }
 }
 async function revoke(id){
@@ -311,57 +344,45 @@ async function revoke(id){
 }
 
 
-async function deleteAllCertificates(){
+async function deleteSelectedCertificates(){
+ const ids=[...selectedIds];
+ if(ids.length===0){
+  alert('Belum ada data yang dicentang.');
+  return;
+ }
+
+ const selectedRows=rows.filter(r=>selectedIds.has(r.id));
+ const preview=selectedRows.slice(0,5).map(r=>'• '+r.certificate_number+' — '+r.recipient_name).join('\n');
+ const more=selectedRows.length>5?'\n• +'+(selectedRows.length-5)+' data lainnya':'';
+ const ok=confirm(
+  'HAPUS DATA YANG DICENTANG?\n\n'+
+  'Jumlah data: '+ids.length+'\n\n'+preview+more+
+  '\n\nHanya data yang dicentang yang akan dihapus permanen. Data lain tetap tersimpan.'
+ );
+ if(!ok)return;
+
+ const typed=prompt('Konfirmasi terakhir. Ketik HAPUS:');
+ if(typed!=='HAPUS'){
+  alert('Penghapusan dibatalkan.');
+  return;
+ }
+
+ const btn=document.getElementById('deleteSelected');
+ const oldText=btn.textContent;
+ btn.disabled=true;
+ btn.textContent='Menghapus...';
  try{
-  if(!sb && !await guard())return;
-
-  const {count,error:countError}=await sb
-   .from('certificates')
-   .select('id',{count:'exact',head:true});
-  if(countError)throw countError;
-
-  const total=count||0;
-  if(total===0){
-   alert('Register sudah kosong. Tidak ada data yang perlu dihapus.');
-   return;
-  }
-
-  const ok=confirm(
-   'HAPUS SEMUA DATA SERTIFIKAT?\n\n'+
-   'Total data yang akan dihapus: '+total+
-   '\n\nSemua sertifikat VALID maupun DIBATALKAN akan dihapus permanen dari Supabase. '+
-   'QR yang sudah diterbitkan tidak lagi dapat diverifikasi. Tindakan ini tidak dapat dibatalkan.'
-  );
-  if(!ok)return;
-
-  const typed=prompt(
-   'Konfirmasi terakhir.\n\nKetik persis: HAPUS SEMUA'
-  );
-  if(typed!=='HAPUS SEMUA'){
-   alert('Penghapusan semua data dibatalkan.');
-   return;
-  }
-
-  const btn=document.getElementById('deleteAll');
-  const oldText=btn.textContent;
-  btn.disabled=true;
-  btn.textContent='Menghapus...';
-
-  try{
-   const {error}=await sb
-    .from('certificates')
-    .delete()
-    .not('id','is',null);
-   if(error)throw error;
-
-   await load();
-   alert(total+' data sertifikat berhasil dihapus permanen.');
-  }finally{
-   btn.disabled=false;
-   btn.textContent=oldText;
-  }
+  const {error}=await sb.from('certificates').delete().in('id',ids);
+  if(error)throw error;
+  selectedIds.clear();
+  await load();
+  alert(ids.length+' data terpilih berhasil dihapus.');
  }catch(e){
-  alert('Gagal menghapus semua data: '+(e.message||e));
+  alert('Gagal menghapus data terpilih: '+(e.message||e));
+  updateSelectionUI();
+ }finally{
+  btn.textContent=oldText;
+  updateSelectionUI();
  }
 }
 
@@ -390,7 +411,8 @@ async function deleteCertificate(id, number, name){
 
 document.getElementById('search').addEventListener('input',render);
 document.getElementById('refresh').onclick=load;
-document.getElementById('deleteAll').onclick=deleteAllCertificates;
+document.getElementById('deleteSelected').onclick=deleteSelectedCertificates;
+document.getElementById('selectVisible').onchange=e=>toggleVisible(e.target.checked);
 document.getElementById('logout').onclick=async()=>{try{await sb.auth.signOut()}finally{location.replace('index.html')}};
 load();
 </script>
