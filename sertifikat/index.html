@@ -259,6 +259,82 @@
     details summary{cursor:pointer;color:#111318;font-size:12px;font-weight:720}
     .positions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}
 
+
+    /* certificate number builder */
+    .number-mode{
+      display:grid;grid-template-columns:repeat(3,1fr);gap:7px;padding:5px;
+      border:1px solid #e2e7ee;border-radius:16px;background:#f6f8fb;margin-bottom:16px;
+    }
+    .number-mode label{margin:0;cursor:pointer}
+    .number-mode input{position:absolute;opacity:0;pointer-events:none}
+    .number-mode span{
+      min-height:38px;display:flex;align-items:center;justify-content:center;padding:8px 9px;
+      border-radius:12px;color:#737c88;font-size:10.5px;font-weight:760;text-align:center;
+      transition:background .2s ease,color .2s ease,box-shadow .2s ease;
+    }
+    .number-mode input:checked + span{
+      background:#fff;color:#111318;box-shadow:0 4px 14px rgba(25,45,75,.08);
+    }
+    .number-panel{display:none}
+    .number-panel.is-active{display:block}
+    .builder-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .builder-grid .full{grid-column:1/-1}
+    .number-preview{
+      margin-top:14px;padding:15px;border:1px solid #dfe8f3;border-radius:17px;
+      background:linear-gradient(180deg,#fbfdff,#f6f9fd);
+    }
+    .number-preview-head{
+      display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:11px;
+    }
+    .number-preview-head span:first-child{
+      color:#88929e;font-size:9px;font-weight:820;letter-spacing:.11em;text-transform:uppercase;
+    }
+    .number-state{
+      display:inline-flex;align-items:center;gap:6px;padding:5px 8px;border-radius:999px;
+      background:#fff1d6;color:#956a09;font-size:9px;font-weight:800;
+    }
+    .number-state.ok{background:#e5f7ef;color:#2d8a69}
+    .number-examples{display:grid;gap:6px}
+    .number-example{
+      padding:9px 11px;border-radius:11px;background:#fff;border:1px solid #e8edf3;
+      color:#111318;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+      font-size:11px;word-break:break-all;
+    }
+    .number-range{
+      display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;
+    }
+    .range-item{padding:10px;border-radius:12px;background:#fff;border:1px solid #e8edf3}
+    .range-item small{display:block;color:#98a1ac;font-size:8.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase}
+    .range-item strong{
+      display:block;margin-top:5px;color:#111318;font-size:10.5px;font-weight:720;
+      word-break:break-all;line-height:1.4;
+    }
+    .number-warning{
+      display:none;margin-top:8px;padding:9px 10px;border-radius:11px;background:#fff7ed;
+      color:#9a5b13;font-size:10px;line-height:1.45;
+    }
+    .number-warning.show{display:block}
+    .token-help{
+      display:flex;flex-wrap:wrap;gap:5px;margin-top:8px
+    }
+    .token-help button{
+      padding:5px 7px;border:1px solid #dfe5ec;border-radius:999px;background:#fff;
+      color:#6d7681;font-size:9px;font-weight:720;cursor:pointer;
+    }
+    .token-help button:hover{border-color:#a9c6ea;color:#0a66ff}
+    .number-apply{
+      width:100%;margin-top:12px;
+    }
+    .number-summary{
+      margin-top:10px;color:#7d8792;font-size:10.5px;line-height:1.5;
+    }
+    @media(max-width:640px){
+      .builder-grid{grid-template-columns:1fr}
+      .builder-grid .full{grid-column:auto}
+      .number-mode{grid-template-columns:1fr}
+      .number-range{grid-template-columns:1fr}
+    }
+
     /* preview */
     .previewCard{position:sticky;top:calc(var(--nav-height) + 18px);padding:0;overflow:hidden;border-radius:28px}
     .previewHeader{
@@ -478,7 +554,7 @@
               <div><span class="step-number">02</span></div>
               <h2>Upload Excel</h2>
             </div>
-            <p class="sub">Header yang disarankan: nomor_sertifikat, nama, instansi, detail_sertifikat, tanggal, penandatangan, jabatan, kode_verifikasi.</p>
+            <p class="sub">Header yang disarankan: nama, instansi, detail_sertifikat, tanggal, penandatangan, jabatan, kode_verifikasi. Kolom nomor_sertifikat hanya diperlukan jika nomor diambil dari Excel.</p>
 
             <div class="drop" id="excelDrop">
               <strong>Tarik Excel ke sini</strong>
@@ -495,9 +571,146 @@
             </div>
           </section>
 
-          <section class="card" id="mapCard" style="display:none">
+
+          <section class="card" id="numberCard">
             <div class="card-head">
               <div><span class="step-number">03</span></div>
+              <h2>Nomor Sertifikat</h2>
+            </div>
+            <p class="sub">Pilih sumber nomor. Kabayan dapat membaca nomor dari Excel, membuat nomor berurutan otomatis, atau memakai satu nomor yang sama untuk seluruh penerima.</p>
+
+            <div class="number-mode" role="radiogroup" aria-label="Mode nomor sertifikat">
+              <label>
+                <input type="radio" name="numberMode" value="auto" checked>
+                <span>Generate Otomatis</span>
+              </label>
+              <label>
+                <input type="radio" name="numberMode" value="excel">
+                <span>Dari Excel</span>
+              </label>
+              <label>
+                <input type="radio" name="numberMode" value="single">
+                <span>Satu Nomor</span>
+              </label>
+            </div>
+
+            <div class="number-panel is-active" data-number-panel="auto">
+              <div class="builder-grid">
+                <div class="full">
+                  <label>Preset Format</label>
+                  <select id="numberPreset">
+                    <option value="kanwil">Kanwil — KET-001/WPJ.09/2026</option>
+                    <option value="kpp" selected>KPP — KET-001/WPJ.09/KP.0907/2026</option>
+                    <option value="general">Umum — CERT-0001/2026</option>
+                    <option value="custom">Custom</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label>Prefix</label>
+                  <input type="text" id="numberPrefix" value="KET" placeholder="KET">
+                </div>
+                <div>
+                  <label>Nomor Awal</label>
+                  <input type="number" id="numberStart" value="1" min="0" step="1">
+                </div>
+                <div>
+                  <label>Jumlah Digit</label>
+                  <select id="numberDigits">
+                    <option value="1">Tanpa padding</option>
+                    <option value="2">2 digit — 01</option>
+                    <option value="3" selected>3 digit — 001</option>
+                    <option value="4">4 digit — 0001</option>
+                    <option value="5">5 digit — 00001</option>
+                  </select>
+                </div>
+                <div>
+                  <label>Tahun</label>
+                  <input type="text" id="numberYear" value="2026" inputmode="numeric" placeholder="2026">
+                </div>
+                <div>
+                  <label>Kode Kanwil</label>
+                  <input type="text" id="numberKanwil" value="WPJ.09" placeholder="WPJ.09">
+                </div>
+                <div>
+                  <label>Kode KPP <span style="font-weight:500;color:#98a2b3">(opsional)</span></label>
+                  <input type="text" id="numberKpp" value="KP.0907" placeholder="KP.0907">
+                  <div class="number-warning" id="kppWarning">Format yang disarankan: <strong>KP.XXXX</strong>, contoh KP.0907. Peringatan ini tidak memblokir proses.</div>
+                </div>
+
+                <div class="full" id="customNumberFields" style="display:none">
+                  <div class="builder-grid">
+                    <div>
+                      <label>Kode Kegiatan</label>
+                      <input type="text" id="numberEvent" value="" placeholder="INKLUSI">
+                    </div>
+                    <div>
+                      <label>Bulan</label>
+                      <input type="text" id="numberMonth" value="" placeholder="07">
+                    </div>
+                    <div class="full">
+                      <label>Format Custom</label>
+                      <input type="text" id="numberPattern" value="{PREFIX}-{SEQ}/{KANWIL}/{KPP}/{YEAR}">
+                      <div class="token-help" aria-label="Token format">
+                        <button type="button" data-token="{PREFIX}">{PREFIX}</button>
+                        <button type="button" data-token="{SEQ}">{SEQ}</button>
+                        <button type="button" data-token="{KANWIL}">{KANWIL}</button>
+                        <button type="button" data-token="{KPP}">{KPP}</button>
+                        <button type="button" data-token="{YEAR}">{YEAR}</button>
+                        <button type="button" data-token="{MONTH}">{MONTH}</button>
+                        <button type="button" data-token="{EVENT}">{EVENT}</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="number-preview">
+                <div class="number-preview-head">
+                  <span>Preview Nomor</span>
+                  <span class="number-state" id="numberState">Belum diterapkan</span>
+                </div>
+                <div class="number-examples" id="numberExamples">
+                  <div class="number-example">KET-001/WPJ.09/KP.0907/2026</div>
+                  <div class="number-example">KET-002/WPJ.09/KP.0907/2026</div>
+                  <div class="number-example">KET-003/WPJ.09/KP.0907/2026</div>
+                </div>
+                <div class="number-range">
+                  <div class="range-item"><small>Nomor pertama</small><strong id="firstNumber">KET-001/WPJ.09/KP.0907/2026</strong></div>
+                  <div class="range-item"><small>Nomor terakhir</small><strong id="lastNumber">Upload Excel untuk menghitung</strong></div>
+                </div>
+                <div class="number-summary" id="numberSummary">Nomor belum diterapkan ke data sertifikat.</div>
+              </div>
+
+              <button class="btn btn-accent number-apply" id="applyNumbering" type="button">Gunakan Nomor Ini</button>
+            </div>
+
+            <div class="number-panel" data-number-panel="excel">
+              <div class="note" style="margin-top:0">
+                Nomor sertifikat akan diambil dari kolom Excel yang dipetakan sebagai <strong>Nomor Sertifikat</strong>.
+                Kabayan akan mendeteksi nomor kosong dan duplikat.
+              </div>
+              <div class="number-preview">
+                <div class="number-preview-head"><span>Status Excel</span><span class="number-state" id="excelNumberState">Menunggu Excel</span></div>
+                <div class="number-summary" id="excelNumberSummary">Upload Excel lalu pastikan kolom nomor_sertifikat terpetakan.</div>
+              </div>
+            </div>
+
+            <div class="number-panel" data-number-panel="single">
+              <label>Satu nomor untuk seluruh sertifikat</label>
+              <input type="text" id="singleNumber" value="KET-119/WPJ.09/2026" placeholder="KET-119/WPJ.09/2026">
+              <div class="number-preview">
+                <div class="number-preview-head"><span>Preview Nomor</span><span class="number-state" id="singleNumberState">Belum diterapkan</span></div>
+                <div class="number-example" id="singleNumberPreview">KET-119/WPJ.09/2026</div>
+                <div class="number-summary">Nomor yang sama akan digunakan untuk seluruh penerima pada file Excel.</div>
+              </div>
+              <button class="btn btn-accent number-apply" id="applySingleNumber" type="button">Gunakan Nomor Ini</button>
+            </div>
+          </section>
+
+          <section class="card" id="mapCard" style="display:none">
+            <div class="card-head">
+              <div><span class="step-number">04</span></div>
               <h2>Pemetaan Kolom</h2>
             </div>
             <p class="sub">Kabayan mencoba mengenali kolom otomatis. Ubah dropdown jika nama header Excel berbeda.</p>
@@ -506,7 +719,7 @@
 
           <section class="card">
             <div class="card-head">
-              <div><span class="step-number">04</span></div>
+              <div><span class="step-number">05</span></div>
               <h2>Generate</h2>
             </div>
             <p class="sub">Nama panjang dan detail kegiatan akan menyesuaikan otomatis pada area sertifikat.</p>
@@ -641,7 +854,7 @@ const defaults = {
 let pos = {...defaults};
 
 const fieldDefs = [
-  ['nomor_sertifikat','Nomor Sertifikat',true,['nomor_sertifikat','nomor sertifikat','nomor','no sertifikat','no_sertifikat']],
+  ['nomor_sertifikat','Nomor Sertifikat',false,['nomor_sertifikat','nomor sertifikat','nomor','no sertifikat','no_sertifikat']],
   ['nama','Nama Penerima',true,['nama','nama penerima','nama_penerima','peserta']],
   ['instansi','Instansi / Unit',false,['instansi','sekolah','unit','unit kerja','unit_kerja']],
   ['detail_sertifikat','Detail Sertifikat',false,['detail_sertifikat','detail sertifikat','detail','keterangan','nama kegiatan','kegiatan']],
@@ -651,6 +864,174 @@ const fieldDefs = [
   ['kode_verifikasi','Kode Verifikasi',false,['kode_verifikasi','kode verifikasi','kode','verification_code']]
 ];
 let mapping = {};
+
+let numberMode = 'auto';
+let numberingApplied = false;
+let appliedNumberConfig = null;
+let appliedSingleNumber = '';
+
+function currentNumberConfig(){
+  return {
+    preset: document.getElementById('numberPreset')?.value || 'kpp',
+    prefix: (document.getElementById('numberPrefix')?.value || '').trim(),
+    start: Math.max(0, parseInt(document.getElementById('numberStart')?.value || '0',10) || 0),
+    digits: Math.max(1, parseInt(document.getElementById('numberDigits')?.value || '3',10) || 3),
+    year: (document.getElementById('numberYear')?.value || '').trim(),
+    kanwil: (document.getElementById('numberKanwil')?.value || '').trim(),
+    kpp: (document.getElementById('numberKpp')?.value || '').trim(),
+    event: (document.getElementById('numberEvent')?.value || '').trim(),
+    month: (document.getElementById('numberMonth')?.value || '').trim(),
+    pattern: (document.getElementById('numberPattern')?.value || '{PREFIX}-{SEQ}/{KANWIL}/{KPP}/{YEAR}').trim()
+  };
+}
+
+function padSequence(n,digits){
+  const raw=String(Math.max(0,Number(n)||0));
+  return digits<=1 ? raw : raw.padStart(digits,'0');
+}
+
+function cleanNumberResult(value){
+  return String(value||'')
+    .replace(/\/{2,}/g,'/')
+    .replace(/-\/+/g,'/')
+    .replace(/\/+-/g,'/')
+    .replace(/^\//,'')
+    .replace(/\/$/,'')
+    .replace(/-{2,}/g,'-')
+    .replace(/-\s*$/,'')
+    .trim();
+}
+
+function generateNumberAt(index,config=currentNumberConfig()){
+  const seq=padSequence(config.start + Math.max(0,index||0), config.digits);
+  const prefix=(config.prefix||'').replace(/-+$/,'');
+  const parts={
+    PREFIX:prefix, SEQ:seq, YEAR:config.year, KANWIL:config.kanwil,
+    KPP:config.kpp, MONTH:config.month, EVENT:config.event
+  };
+
+  if(config.preset==='kanwil'){
+    const first=[prefix,seq].filter(Boolean).join('-');
+    return [first,config.kanwil,config.year].filter(Boolean).join('/');
+  }
+  if(config.preset==='kpp'){
+    const first=[prefix,seq].filter(Boolean).join('-');
+    return [first,config.kanwil,config.kpp,config.year].filter(Boolean).join('/');
+  }
+  if(config.preset==='general'){
+    const first=[prefix||'CERT',seq].filter(Boolean).join('-');
+    return [first,config.year].filter(Boolean).join('/');
+  }
+
+  let out=config.pattern||'{PREFIX}-{SEQ}/{KANWIL}/{KPP}/{YEAR}';
+  Object.entries(parts).forEach(([key,val])=>{
+    const re=new RegExp('\\{'+key+'(?::0?(\\d+))?\\}','g');
+    out=out.replace(re,(match,width)=>{
+      if(key==='SEQ' && width) return padSequence(config.start + Math.max(0,index||0), parseInt(width,10));
+      return val;
+    });
+  });
+  return cleanNumberResult(out);
+}
+
+function setNumberingDirty(){
+  if(numberMode==='auto'){
+    numberingApplied=false; appliedNumberConfig=null;
+    const s=document.getElementById('numberState');
+    if(s){s.textContent='Belum diterapkan';s.classList.remove('ok')}
+  }else if(numberMode==='single'){
+    numberingApplied=false; appliedSingleNumber='';
+    const s=document.getElementById('singleNumberState');
+    if(s){s.textContent='Belum diterapkan';s.classList.remove('ok')}
+  }
+  updateNumberingUI();
+  applyMappingAndRefresh();
+}
+
+function resolvedCertificateNumber(r,index){
+  if(numberMode==='excel'){
+    return mapping.nomor_sertifikat ? String(r[mapping.nomor_sertifikat] ?? '').trim() : '';
+  }
+  if(numberMode==='single'){
+    return numberingApplied ? appliedSingleNumber : '';
+  }
+  return (numberingApplied && appliedNumberConfig) ? generateNumberAt(index,appliedNumberConfig) : '';
+}
+
+function updateNumberingUI(){
+  const panels=document.querySelectorAll('[data-number-panel]');
+  panels.forEach(p=>p.classList.toggle('is-active',p.dataset.numberPanel===numberMode));
+
+  const custom=document.getElementById('customNumberFields');
+  if(custom) custom.style.display=(document.getElementById('numberPreset')?.value==='custom')?'block':'none';
+
+  const config=currentNumberConfig();
+  const examples=document.getElementById('numberExamples');
+  if(examples){
+    examples.innerHTML=[0,1,2].map(i=>`<div class="number-example">${escapeHtml(generateNumberAt(i,config))}</div>`).join('');
+  }
+  const first=document.getElementById('firstNumber');
+  if(first) first.textContent=generateNumberAt(0,config);
+  const last=document.getElementById('lastNumber');
+  if(last) last.textContent=records.length ? generateNumberAt(Math.max(0,records.length-1),config) : 'Upload Excel untuk menghitung';
+
+  const summary=document.getElementById('numberSummary');
+  if(summary){
+    summary.textContent=records.length
+      ? `${records.length} penerima terdeteksi. ${numberingApplied && numberMode==='auto' ? 'Nomor sudah diterapkan ke preview.' : 'Periksa rentang nomor lalu klik “Gunakan Nomor Ini”.'}`
+      : 'Upload Excel untuk menghitung rentang nomor berdasarkan jumlah penerima.';
+  }
+
+  const kpp=document.getElementById('numberKpp')?.value.trim()||'';
+  const warning=document.getElementById('kppWarning');
+  if(warning){
+    const show=kpp && !/^KP\.\d{4}$/i.test(kpp);
+    warning.classList.toggle('show',show);
+  }
+
+  const single=document.getElementById('singleNumber')?.value.trim()||'';
+  const singlePreview=document.getElementById('singleNumberPreview');
+  if(singlePreview) singlePreview.textContent=single||'—';
+
+  updateExcelNumberStatus();
+}
+
+function updateExcelNumberStatus(){
+  const state=document.getElementById('excelNumberState');
+  const summary=document.getElementById('excelNumberSummary');
+  if(!state||!summary)return;
+  if(!records.length){
+    state.textContent='Menunggu Excel';state.classList.remove('ok');
+    summary.textContent='Upload Excel lalu pastikan kolom nomor_sertifikat terpetakan.';
+    return;
+  }
+  if(!mapping.nomor_sertifikat){
+    state.textContent='Kolom belum dipetakan';state.classList.remove('ok');
+    summary.textContent='Pilih kolom Excel untuk “Nomor Sertifikat” pada bagian Pemetaan Kolom.';
+    return;
+  }
+  const nums=records.map(r=>String(r[mapping.nomor_sertifikat]??'').trim());
+  const empty=nums.filter(n=>!n).length;
+  const seen=new Set(),dups=new Set();
+  nums.filter(Boolean).forEach(n=>{if(seen.has(n))dups.add(n);else seen.add(n)});
+  if(!empty && !dups.size){
+    state.textContent='Siap';state.classList.add('ok');
+    summary.textContent=`${nums.length} nomor ditemukan. Tidak ada nomor kosong atau duplikat.`;
+  }else{
+    state.textContent='Perlu diperiksa';state.classList.remove('ok');
+    summary.textContent=`${empty} nomor kosong • ${dups.size} nomor duplikat.`;
+  }
+}
+
+function numberingIsReady(){
+  if(numberMode==='auto') return numberingApplied && !!appliedNumberConfig;
+  if(numberMode==='single') return numberingApplied && !!appliedSingleNumber;
+  if(numberMode==='excel'){
+    if(!mapping.nomor_sertifikat || !records.length) return false;
+    return records.every(r=>String(r[mapping.nomor_sertifikat]??'').trim());
+  }
+  return false;
+}
 
 function norm(s){return String(s??'').trim().toLowerCase().replace(/[_-]+/g,' ').replace(/\s+/g,' ')}
 function escapeHtml(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
@@ -677,15 +1058,38 @@ bg.onload = ()=>renderCurrent();
 document.getElementById('useDemo').onclick = ()=>{
   if(bgObjectUrl) URL.revokeObjectURL(bgObjectUrl);
   bgObjectUrl=null;
-  bg.src='assets/template-demo.png';
+  bg.src='assets/template-sertifikat.png';
   document.getElementById('bgMeta').textContent='Template: assets/template-sertifikat.png';
 };
 
-document.getElementById('bgInput').addEventListener('change',e=>{
+document.getElementById('bgInput').addEventListener('change',async e=>{
   const f=e.target.files[0]; if(!f)return;
-  if(bgObjectUrl) URL.revokeObjectURL(bgObjectUrl);
-  bgObjectUrl=URL.createObjectURL(f); bg.src=bgObjectUrl;
-  document.getElementById('bgMeta').textContent='Template custom: '+f.name;
+  const meta=document.getElementById('bgMeta');
+  try{
+    if(f.type==='application/pdf' || /\.pdf$/i.test(f.name)){
+      meta.textContent='Membaca PDF: '+f.name+'...';
+      const bytes=await f.arrayBuffer();
+      if(window.pdfjsLib){
+        pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+      }
+      const pdf=await pdfjsLib.getDocument({data:bytes}).promise;
+      const page=await pdf.getPage(1);
+      const viewport=page.getViewport({scale:2});
+      const temp=document.createElement('canvas');
+      temp.width=Math.round(viewport.width);temp.height=Math.round(viewport.height);
+      await page.render({canvasContext:temp.getContext('2d'),viewport}).promise;
+      bg.src=temp.toDataURL('image/png');
+      meta.textContent='Template PDF custom: '+f.name+' • halaman 1';
+    }else{
+      if(bgObjectUrl) URL.revokeObjectURL(bgObjectUrl);
+      bgObjectUrl=URL.createObjectURL(f); bg.src=bgObjectUrl;
+      meta.textContent='Template gambar custom: '+f.name;
+    }
+  }catch(err){
+    console.error(err);
+    meta.textContent='Gagal membaca template: '+f.name;
+    alert('Template tidak dapat dibaca: '+err.message);
+  }
 });
 document.getElementById('showLabels').onchange=renderCurrent;
 document.getElementById('showQr').onchange=renderCurrent;
@@ -738,17 +1142,19 @@ function buildMapping(){
   host.querySelectorAll('[data-map]').forEach(el=>el.addEventListener('change',()=>{mapping[el.dataset.map]=el.value;applyMappingAndRefresh()}));
 }
 
-function mappedRecord(r){
+function mappedRecord(r,index){
   const out={};
   fieldDefs.forEach(([key])=>out[key]=mapping[key]?r[mapping[key]]:'');
+  const idx=Number.isInteger(index)?index:Math.max(0,records.indexOf(r));
+  out.nomor_sertifikat=resolvedCertificateNumber(r,idx);
   if(!out.kode_verifikasi){
     const base=(out.nomor_sertifikat||'KBY')+'-'+(out.nama||'PESERTA');
     out.kode_verifikasi=btoa(unescape(encodeURIComponent(base))).replace(/[^A-Za-z0-9]/g,'').slice(0,18).toUpperCase();
   }
   return out;
 }
-function validation(r){
-  const m=mappedRecord(r);
+function validation(r,index){
+  const m=mappedRecord(r,index);
   const issues=[];
   if(!String(m.nama).trim())issues.push('nama kosong');
   if(!String(m.nomor_sertifikat).trim())issues.push('nomor kosong');
@@ -756,11 +1162,11 @@ function validation(r){
 }
 function applyMappingAndRefresh(){
   currentIndex=Math.min(currentIndex,Math.max(0,records.length-1));
-  refreshStats();refreshTable();renderCurrent();syncButtons();
+  updateNumberingUI();refreshStats();refreshTable();renderCurrent();syncButtons();
 }
 function refreshStats(){
   let valid=0,warn=0;
-  records.forEach(r=>validation(r).length?warn++:valid++);
+  records.forEach((r,i)=>validation(r,i).length?warn++:valid++);
   document.getElementById('statRows').textContent=records.length;
   document.getElementById('statValid').textContent=valid;
   document.getElementById('statWarn').textContent=warn;
@@ -769,13 +1175,15 @@ function refreshTable(){
   const body=document.getElementById('dataBody');
   if(!records.length){body.innerHTML='<tr><td colspan="6" style="color:#98a2b3">Belum ada data.</td></tr>';return}
   body.innerHTML=records.slice(0,100).map((r,i)=>{
-    const m=mappedRecord(r), issues=validation(r), status=issues.length?`<span class="pill warn">Cek</span>`:`<span class="pill ok">Valid</span>`;
+    const m=mappedRecord(r,i), issues=validation(r,i), status=issues.length?`<span class="pill warn">Cek</span>`:`<span class="pill ok">Valid</span>`;
     return `<tr><td>${i+1}</td><td>${status}</td><td>${escapeHtml(m.nomor_sertifikat)}</td><td>${escapeHtml(m.nama)}</td><td>${escapeHtml(m.instansi)}</td><td>${escapeHtml(m.tanggal)}</td></tr>`;
   }).join('');
 }
 function syncButtons(){
   const ready=records.length>0;
-  ['downloadCurrent','downloadCombined','downloadZip','prevBtn','nextBtn'].forEach(id=>document.getElementById(id).disabled=!ready);
+  const outputReady=ready && numberingIsReady() && records.every((r,i)=>!validation(r,i).length);
+  ['prevBtn','nextBtn'].forEach(id=>document.getElementById(id).disabled=!ready);
+  ['downloadCurrent','downloadCombined','downloadZip'].forEach(id=>document.getElementById(id).disabled=!outputReady);
 }
 
 document.getElementById('prevBtn').onclick=()=>{if(records.length){currentIndex=(currentIndex-1+records.length)%records.length;renderCurrent()}}
@@ -906,8 +1314,8 @@ async function renderRecord(m){
 }
 
 async function renderCurrent(){
-  const m=records.length?mappedRecord(records[currentIndex]):{
-    nomor_sertifikat:'KET-XXX/XXXX/2026',nama:"Mu'min Mursalin, S.Pd., M.Pd.",instansi:'SMPN 39 Bandung',
+  const m=records.length?mappedRecord(records[currentIndex],currentIndex):{
+    nomor_sertifikat:(numberMode==='auto'?generateNumberAt(0,currentNumberConfig()):numberMode==='single'?(document.getElementById('singleNumber')?.value||'KET-XXX/2026'):'KET-XXX/2026'),nama:"Mu'min Mursalin, S.Pd., M.Pd.",instansi:'SMPN 39 Bandung',
     detail_sertifikat:'Sebagai Peserta dalam Kegiatan Bimbingan Teknis Program Inklusi Perpajakan dan Insersi Materi Perpajakan Jenjang Sekolah Menengah Pertama di Lingkungan Kantor Wilayah DJP Jawa Barat I',tanggal:'Selasa, 21 Juli 2026',
     penandatangan:'Yunirwansyah',jabatan:'Kepala Kantor Wilayah DJP Jawa Barat I',kode_verifikasi:'KBY-DEMO'
   };
@@ -929,7 +1337,7 @@ function hideProgress(){setTimeout(()=>document.getElementById('progress').style
 
 document.getElementById('downloadCurrent').onclick=async()=>{
   if(!records.length)return;await renderCurrent();
-  canvas.toBlob(blob=>saveAs(blob,`preview_${safeName(mappedRecord(records[currentIndex]).nama)}.png`),'image/png');
+  canvas.toBlob(blob=>saveAs(blob,`preview_${safeName(mappedRecord(records[currentIndex],currentIndex).nama)}.png`),'image/png');
 };
 
 async function canvasJpegFor(m){
@@ -943,7 +1351,7 @@ document.getElementById('downloadCombined').onclick=async()=>{
   const pdf=new jsPDF({orientation:'landscape',unit:'mm',format:'a4',compress:true});
   for(let i=0;i<records.length;i++){
     setProgress(Math.round((i/records.length)*100),`Membuat halaman ${i+1} dari ${records.length}...`);
-    const data=await canvasJpegFor(mappedRecord(records[i]));
+    const data=await canvasJpegFor(mappedRecord(records[i],i));
     if(i>0)pdf.addPage('a4','landscape');
     pdf.addImage(data,'JPEG',0,0,297,210,undefined,'FAST');
     await new Promise(r=>setTimeout(r,0));
@@ -958,7 +1366,7 @@ document.getElementById('downloadZip').onclick=async()=>{
   const {jsPDF}=window.jspdf;
   const zip=new JSZip();
   for(let i=0;i<records.length;i++){
-    const m=mappedRecord(records[i]);
+    const m=mappedRecord(records[i],i);
     setProgress(Math.round((i/records.length)*100),`Membuat PDF ${i+1} dari ${records.length}: ${m.nama||''}`);
     const data=await canvasJpegFor(m);
     const pdf=new jsPDF({orientation:'landscape',unit:'mm',format:'a4',compress:true});
@@ -974,6 +1382,72 @@ document.getElementById('downloadZip').onclick=async()=>{
   saveAs(blob,`sertifikat_${records.length}_peserta.zip`);
   setProgress(100,'ZIP selesai.');currentIndex=0;await renderCurrent();hideProgress();
 };
+
+
+function initNumberBuilder(){
+  document.querySelectorAll('input[name="numberMode"]').forEach(radio=>{
+    radio.addEventListener('change',()=>{
+      if(!radio.checked)return;
+      numberMode=radio.value;
+      numberingApplied=(numberMode==='excel');
+      appliedNumberConfig=null;appliedSingleNumber='';
+      updateNumberingUI();
+      applyMappingAndRefresh();
+    });
+  });
+
+  const autoIds=['numberPreset','numberPrefix','numberStart','numberDigits','numberYear','numberKanwil','numberKpp','numberEvent','numberMonth','numberPattern'];
+  autoIds.forEach(id=>{
+    const el=document.getElementById(id);
+    if(!el)return;
+    el.addEventListener('input',()=>{if(numberMode==='auto')setNumberingDirty();else updateNumberingUI()});
+    el.addEventListener('change',()=>{if(numberMode==='auto')setNumberingDirty();else updateNumberingUI()});
+  });
+
+  document.querySelectorAll('[data-token]').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const input=document.getElementById('numberPattern');
+      if(!input)return;
+      const token=btn.dataset.token;
+      const start=input.selectionStart??input.value.length;
+      const end=input.selectionEnd??start;
+      input.value=input.value.slice(0,start)+token+input.value.slice(end);
+      input.focus();input.setSelectionRange(start+token.length,start+token.length);
+      setNumberingDirty();
+    });
+  });
+
+  document.getElementById('applyNumbering')?.addEventListener('click',()=>{
+    const cfg=currentNumberConfig();
+    if(!cfg.prefix && cfg.preset!=='custom'){
+      alert('Isi prefix nomor sertifikat terlebih dahulu.');
+      return;
+    }
+    numberingApplied=true;
+    appliedNumberConfig={...cfg};
+    const s=document.getElementById('numberState');
+    if(s){s.textContent='Diterapkan';s.classList.add('ok')}
+    updateNumberingUI();
+    applyMappingAndRefresh();
+  });
+
+  document.getElementById('singleNumber')?.addEventListener('input',()=>{
+    if(numberMode==='single')setNumberingDirty();else updateNumberingUI();
+  });
+  document.getElementById('applySingleNumber')?.addEventListener('click',()=>{
+    const value=document.getElementById('singleNumber')?.value.trim()||'';
+    if(!value){alert('Isi nomor sertifikat terlebih dahulu.');return}
+    numberingApplied=true;appliedSingleNumber=value;
+    const s=document.getElementById('singleNumberState');
+    if(s){s.textContent='Diterapkan';s.classList.add('ok')}
+    updateNumberingUI();
+    applyMappingAndRefresh();
+  });
+
+  numberMode=document.querySelector('input[name="numberMode"]:checked')?.value||'auto';
+  updateNumberingUI();
+}
+initNumberBuilder();
 
 renderCurrent();
 </script>
