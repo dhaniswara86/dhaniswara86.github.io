@@ -7,6 +7,9 @@
   <meta name="theme-color" content="#ffffff" />
   <link rel="canonical" href="https://dhaniswara86.id/sertifikat/" />
   <title>Generator Sertifikat | Kabayan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root{
@@ -443,17 +446,17 @@
               <div><span class="step-number">01</span></div>
               <h2>Template Sertifikat</h2>
             </div>
-            <p class="sub">Gunakan template demo atau upload background PNG/JPG milik Anda. Rasio ideal A4 landscape (±1,414:1).</p>
+            <p class="sub">Template bawaan sudah dikalibrasi dari halaman kosong PDF yang Anda kirim. Anda juga dapat upload PDF/PNG/JPG lain.</p>
 
             <div class="actions">
-              <button class="btn btn-soft" id="useDemo">Gunakan Demo</button>
+              <button class="btn btn-soft" id="useDemo">Gunakan Template PDF</button>
               <label class="btn btn-outline" style="margin:0;cursor:pointer">
-                Upload Background
-                <input id="bgInput" type="file" accept="image/png,image/jpeg" hidden>
+                Upload PDF / Gambar
+                <input id="bgInput" type="file" accept="application/pdf,image/png,image/jpeg" hidden>
               </label>
             </div>
 
-            <div class="filemeta" id="bgMeta">Template: assets/template-demo.png</div>
+            <div class="filemeta" id="bgMeta">Template: assets/template-sertifikat.png</div>
 
             <div class="switchrow">
               <span>Tampilkan label bawaan (Sertifikat, diberikan kepada)</span>
@@ -610,12 +613,13 @@
 <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
 <script>
 const canvas = document.getElementById('certCanvas');
 const ctx = canvas.getContext('2d');
 const bg = new Image();
-bg.src = 'assets/template-demo.png';
+bg.src = 'assets/template-sertifikat.png';
 
 let records = [];
 let headers = [];
@@ -623,15 +627,16 @@ let currentIndex = 0;
 let bgObjectUrl = null;
 
 const defaults = {
-  titleX:128,titleY:260,
-  numberX:128,numberY:315,
-  labelX:128,labelY:390,
-  nameX:128,nameY:445,
-  institutionX:128,institutionY:500,
-  detailX:128,detailY:548,
-  dateX:128,dateY:665,
-  qrX:128,qrY:760,
-  signerX:255,signerY:812
+  // Kalibrasi dari PDF asli 842 x 595 pt -> canvas 1440 x 1018 px.
+  titleX:127,titleY:276,
+  numberX:127,numberY:319,
+  labelX:127,labelY:395,
+  nameX:127,nameY:452,
+  institutionX:127,institutionY:502,
+  detailX:127,detailY:534,
+  dateX:127,dateY:630,
+  qrX:130,qrY:753,
+  signerX:125,signerY:888
 };
 let pos = {...defaults};
 
@@ -673,7 +678,7 @@ document.getElementById('useDemo').onclick = ()=>{
   if(bgObjectUrl) URL.revokeObjectURL(bgObjectUrl);
   bgObjectUrl=null;
   bg.src='assets/template-demo.png';
-  document.getElementById('bgMeta').textContent='Template: assets/template-demo.png';
+  document.getElementById('bgMeta').textContent='Template: assets/template-sertifikat.png';
 };
 
 document.getElementById('bgInput').addEventListener('change',e=>{
@@ -782,16 +787,18 @@ function drawBackground(){
   else {ctx.fillStyle='#f7f8fa';ctx.fillRect(0,0,canvas.width,canvas.height)}
 }
 
+const CERT_FONT='"Montserrat", Arial, sans-serif';
+
 function fitText(text,maxWidth,startPx,minPx,weight='700'){
   let size=startPx;
-  ctx.font=`${weight} ${size}px Inter, Arial, sans-serif`;
+  ctx.font=`${weight} ${size}px ${CERT_FONT}`;
   while(size>minPx && ctx.measureText(text).width>maxWidth){
-    size-=1;ctx.font=`${weight} ${size}px Inter, Arial, sans-serif`;
+    size-=1;ctx.font=`${weight} ${size}px ${CERT_FONT}`;
   }
   return size;
 }
-function wrapLines(text,maxWidth,fontPx,weight='650',maxLines=5){
-  ctx.font=`${weight} ${fontPx}px Inter, Arial, sans-serif`;
+function wrapLines(text,maxWidth,fontPx,weight='700',maxLines=5){
+  ctx.font=`${weight} ${fontPx}px ${CERT_FONT}`;
   const words=String(text||'').split(/\s+/).filter(Boolean), lines=[];let line='';
   for(const word of words){
     const test=line?line+' '+word:word;
@@ -810,38 +817,62 @@ function makeQrCanvas(text,size=110){
 }
 async function renderRecord(m){
   drawBackground();
-  const navy='#0b2c59', gold='#d19a24';
+
+  // Warna diambil dari PDF sumber.
+  const navy='#012449';
+  const gold='#c6912b';
   ctx.textBaseline='alphabetic';
+
+  // Montserrat Bold adalah font yang tertanam pada PDF sumber.
   const showLabels=document.getElementById('showLabels').checked;
 
   if(showLabels){
-    ctx.fillStyle=gold;ctx.font='800 58px Inter, Arial, sans-serif';ctx.fillText('Sertifikat',pos.titleX,pos.titleY);
-    ctx.fillStyle=navy;ctx.font='750 30px Inter, Arial, sans-serif';ctx.fillText('Nomor : '+(m.nomor_sertifikat||'—'),pos.numberX,pos.numberY);
-    ctx.font='750 28px Inter, Arial, sans-serif';ctx.fillText('diberikan kepada',pos.labelX,pos.labelY);
-  } else {
-    ctx.fillStyle=navy;ctx.font='750 30px Inter, Arial, sans-serif';
+    ctx.fillStyle=gold;
+    ctx.font=`800 57px ${CERT_FONT}`;
+    ctx.fillText('Sertifikat',pos.titleX,pos.titleY);
+
+    ctx.fillStyle=navy;
+    ctx.font=`700 28px ${CERT_FONT}`;
+    ctx.fillText('Nomor : '+(m.nomor_sertifikat||'—'),pos.numberX,pos.numberY);
+
+    ctx.font=`700 27px ${CERT_FONT}`;
+    ctx.fillText('diberikan kepada',pos.labelX,pos.labelY);
+  }else{
+    ctx.fillStyle=navy;
+    ctx.font=`700 28px ${CERT_FONT}`;
     if(m.nomor_sertifikat)ctx.fillText(m.nomor_sertifikat,pos.numberX,pos.numberY);
   }
 
   const name=String(m.nama||'Nama Penerima');
-  const nameSize=fitText(name,820,42,24,'800');
-  ctx.font=`800 ${nameSize}px Inter, Arial, sans-serif`;ctx.fillStyle=navy;
+  // Area aman PDF asli: sekitar x 74 pt s.d. x 647 pt.
+  const nameSize=fitText(name,980,41,25,'700');
+  ctx.font=`700 ${nameSize}px ${CERT_FONT}`;
+  ctx.fillStyle=navy;
   ctx.fillText(name,pos.nameX,pos.nameY);
-  const nameW=Math.min(ctx.measureText(name).width,820);
-  ctx.fillRect(pos.nameX,pos.nameY+7,nameW,2);
 
-  ctx.font='750 27px Inter, Arial, sans-serif';
-  if(m.instansi)ctx.fillText(String(m.instansi),pos.institutionX,pos.institutionY);
+  const nameW=Math.min(ctx.measureText(name).width,980);
+  ctx.fillRect(pos.nameX,pos.nameY+5,nameW,2);
+
+  if(m.instansi){
+    ctx.font=`700 28px ${CERT_FONT}`;
+    ctx.fillText(String(m.instansi),pos.institutionX,pos.institutionY);
+  }
 
   const detail=String(m.detail_sertifikat||'Detail sertifikat / kegiatan.');
-  let detailSize=23, lines=wrapLines(detail,835,detailSize,'650',5);
-  if(lines.length>=5 && detail.length>260){detailSize=20;lines=wrapLines(detail,835,detailSize,'650',6)}
-  ctx.font=`650 ${detailSize}px Inter, Arial, sans-serif`;
-  lines.forEach((line,i)=>ctx.fillText(line,pos.detailX,pos.detailY+i*(detailSize+10)));
+  let detailSize=22;
+  let lines=wrapLines(detail,985,detailSize,'700',5);
+  if(lines.length>=5 && detail.length>300){
+    detailSize=20;
+    lines=wrapLines(detail,985,detailSize,'700',6);
+  }
+  ctx.font=`700 ${detailSize}px ${CERT_FONT}`;
+  const lineHeight=detailSize+10; // ±32 px, sesuai baseline PDF sumber
+  lines.forEach((line,i)=>ctx.fillText(line,pos.detailX,pos.detailY+i*lineHeight));
 
   if(m.tanggal){
-    const y=pos.detailY+lines.length*(detailSize+10)+8;
-    ctx.font='700 23px Inter, Arial, sans-serif';ctx.fillText('pada '+String(m.tanggal),pos.dateX,Math.max(pos.dateY,y));
+    const naturalY=pos.detailY+lines.length*lineHeight;
+    ctx.font=`700 22px ${CERT_FONT}`;
+    ctx.fillText('pada '+String(m.tanggal),pos.dateX,Math.max(pos.dateY,naturalY));
   }
 
   const showQr=document.getElementById('showQr').checked;
@@ -849,27 +880,36 @@ async function renderRecord(m){
     const code=String(m.kode_verifikasi||'KBY-DEMO');
     const verify=document.getElementById('verifyBase').value+encodeURIComponent(code);
     try{
-      const qr=await makeQrCanvas(verify,110);
-      if(qr)ctx.drawImage(qr,pos.qrX,pos.qrY,110,110);
-      ctx.fillStyle=navy;ctx.font='600 14px Inter, Arial, sans-serif';
-      ctx.fillText('QR verifikasi Kabayan',pos.qrX,pos.qrY+132);
-      ctx.fillText(code,pos.qrX,pos.qrY+153);
+      const qr=await makeQrCanvas(verify,108);
+      if(qr)ctx.drawImage(qr,pos.qrX,pos.qrY,108,110);
+      // Tidak ada caption di bawah QR agar sama dengan layout PDF sumber.
     }catch(e){console.warn('QR gagal',e)}
   }
 
   if(m.penandatangan || m.jabatan){
-    ctx.fillStyle=navy;
-    ctx.font='600 14px Inter, Arial, sans-serif';ctx.fillText('Penandatangan / pejabat:',pos.signerX,pos.signerY);
-    if(m.penandatangan){ctx.font='750 22px Inter, Arial, sans-serif';ctx.fillText(String(m.penandatangan),pos.signerX,pos.signerY+32)}
-    if(m.jabatan){ctx.font='700 18px Inter, Arial, sans-serif';ctx.fillText(String(m.jabatan),pos.signerX,pos.signerY+60)}
+    ctx.fillStyle='#000000';
+    ctx.font=`700 12px ${CERT_FONT}`;
+    ctx.fillText('Ditandatangani secara elektronik',pos.signerX,pos.signerY);
+
+    ctx.fillStyle='#1b2952';
+    if(m.penandatangan){
+      ctx.font=`700 23px ${CERT_FONT}`;
+      ctx.fillText(String(m.penandatangan),pos.signerX,pos.signerY+29);
+    }
+    if(m.jabatan){
+      const jabatan=String(m.jabatan);
+      const jabSize=fitText(jabatan,610,23,17,'700');
+      ctx.font=`700 ${jabSize}px ${CERT_FONT}`;
+      ctx.fillText(jabatan,pos.signerX,pos.signerY+61);
+    }
   }
 }
 
 async function renderCurrent(){
   const m=records.length?mappedRecord(records[currentIndex]):{
-    nomor_sertifikat:'KET-XXX/XXXX/2026',nama:'Nama Penerima Sertifikat',instansi:'Instansi / Unit',
-    detail_sertifikat:'Sebagai Peserta dalam Kegiatan ...',tanggal:'Selasa, 21 Juli 2026',
-    penandatangan:'Nama Penandatangan',jabatan:'Jabatan Penandatangan',kode_verifikasi:'KBY-DEMO'
+    nomor_sertifikat:'KET-XXX/XXXX/2026',nama:"Mu'min Mursalin, S.Pd., M.Pd.",instansi:'SMPN 39 Bandung',
+    detail_sertifikat:'Sebagai Peserta dalam Kegiatan Bimbingan Teknis Program Inklusi Perpajakan dan Insersi Materi Perpajakan Jenjang Sekolah Menengah Pertama di Lingkungan Kantor Wilayah DJP Jawa Barat I',tanggal:'Selasa, 21 Juli 2026',
+    penandatangan:'Yunirwansyah',jabatan:'Kepala Kantor Wilayah DJP Jawa Barat I',kode_verifikasi:'KBY-DEMO'
   };
   await renderRecord(m);
   document.getElementById('pageInfo').textContent=records.length?`${currentIndex+1} / ${records.length}`:'0 / 0';
