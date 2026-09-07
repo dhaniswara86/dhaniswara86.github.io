@@ -152,6 +152,8 @@ th{background:#f8fafc;color:#78828e;font-size:9px;letter-spacing:.08em;text-tran
 }
 .action.revoke{color:#b42318}
 .action.delete{color:#fff;background:#b42318;border-color:#b42318}
+.btn-danger{background:#b42318;color:#fff;border-color:#b42318;box-shadow:0 8px 22px rgba(180,35,24,.14)}
+.btn-danger:hover{background:#912018;border-color:#912018}
 .row-actions{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
 .inline-actions{display:flex;gap:10px;flex-wrap:wrap}
 @media(max-width:1180px){
@@ -214,6 +216,7 @@ th{background:#f8fafc;color:#78828e;font-size:9px;letter-spacing:.08em;text-tran
         <input id="search" type="text" placeholder="Cari nama, nomor sertifikat, instansi...">
         <div class="inline-actions">
           <button class="btn btn-outline" id="refresh">Muat Ulang</button>
+          <button class="btn btn-danger" id="deleteAll">Hapus Semua</button>
           <a class="btn btn-accent" href="index.html">Kembali ke Generator</a>
         </div>
       </div>
@@ -307,6 +310,61 @@ async function revoke(id){
  }catch(e){alert(e.message)}
 }
 
+
+async function deleteAllCertificates(){
+ try{
+  if(!sb && !await guard())return;
+
+  const {count,error:countError}=await sb
+   .from('certificates')
+   .select('id',{count:'exact',head:true});
+  if(countError)throw countError;
+
+  const total=count||0;
+  if(total===0){
+   alert('Register sudah kosong. Tidak ada data yang perlu dihapus.');
+   return;
+  }
+
+  const ok=confirm(
+   'HAPUS SEMUA DATA SERTIFIKAT?\n\n'+
+   'Total data yang akan dihapus: '+total+
+   '\n\nSemua sertifikat VALID maupun DIBATALKAN akan dihapus permanen dari Supabase. '+
+   'QR yang sudah diterbitkan tidak lagi dapat diverifikasi. Tindakan ini tidak dapat dibatalkan.'
+  );
+  if(!ok)return;
+
+  const typed=prompt(
+   'Konfirmasi terakhir.\n\nKetik persis: HAPUS SEMUA'
+  );
+  if(typed!=='HAPUS SEMUA'){
+   alert('Penghapusan semua data dibatalkan.');
+   return;
+  }
+
+  const btn=document.getElementById('deleteAll');
+  const oldText=btn.textContent;
+  btn.disabled=true;
+  btn.textContent='Menghapus...';
+
+  try{
+   const {error}=await sb
+    .from('certificates')
+    .delete()
+    .not('id','is',null);
+   if(error)throw error;
+
+   await load();
+   alert(total+' data sertifikat berhasil dihapus permanen.');
+  }finally{
+   btn.disabled=false;
+   btn.textContent=oldText;
+  }
+ }catch(e){
+  alert('Gagal menghapus semua data: '+(e.message||e));
+ }
+}
+
 async function deleteCertificate(id, number, name){
  const label=[number,name].filter(Boolean).join(' — ');
  const ok=confirm(
@@ -332,6 +390,7 @@ async function deleteCertificate(id, number, name){
 
 document.getElementById('search').addEventListener('input',render);
 document.getElementById('refresh').onclick=load;
+document.getElementById('deleteAll').onclick=deleteAllCertificates;
 document.getElementById('logout').onclick=async()=>{try{await sb.auth.signOut()}finally{location.replace('index.html')}};
 load();
 </script>
