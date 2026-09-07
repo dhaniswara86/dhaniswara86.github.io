@@ -7,7 +7,7 @@
   <meta name="description" content="Generator sertifikat massal dari Excel. Preview, PDF gabungan, PDF per peserta dan ZIP.">
   <style>
     :root{
-      --ink:#102655;--blue:#243c8c;--yellow:#ffd31a;--bg:#f5f7fb;--card:#fff;
+      --ink:#111111;--blue:#0d2d57;--yellow:#ffc91b;--bg:#f6f6f2;--card:#fff;
       --muted:#667085;--line:#e4e7ec;--ok:#067647;--warn:#b54708;--danger:#b42318;
     }
     *{box-sizing:border-box}
@@ -20,11 +20,11 @@
     .badge{font-size:12px;padding:6px 10px;border-radius:999px;background:#eef2ff;color:var(--blue);font-weight:700}
     main{max-width:1440px;margin:0 auto;padding:32px}
     .hero{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:24px}
-    .hero h1{font-size:42px;line-height:1.05;margin:0 0 10px;color:var(--ink);letter-spacing:-.04em}
+    .hero h1{font-size:56px;line-height:.98;margin:0 0 14px;color:var(--ink);letter-spacing:-.055em}
     .hero p{margin:0;color:var(--muted);max-width:760px;font-size:17px}
     .layout{display:grid;grid-template-columns:420px 1fr;gap:24px;align-items:start}
     .stack{display:grid;gap:16px}
-    .card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:0 8px 28px rgba(16,38,85,.04)}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:none}
     .card h2{font-size:17px;margin:0 0 6px;color:var(--ink)}
     .sub{font-size:13px;color:var(--muted);margin-bottom:16px;line-height:1.5}
     .drop{border:1.5px dashed #b8c3d9;border-radius:16px;padding:18px;text-align:center;background:#fafbff;cursor:pointer;transition:.2s}
@@ -88,8 +88,8 @@
 <main>
   <section class="hero">
     <div>
-      <h1>Satu Excel.<br>Ratusan sertifikat.</h1>
-      <p>Upload data peserta, cek preview, lalu hasilkan PDF per peserta, PDF gabungan, atau ZIP. Pemrosesan prototipe ini berjalan di browser.</p>
+      <h1>Sertifikat.<br>Lebih Praktis.</h1>
+      <p>Siapkan data di Excel, lakukan pengecekan, lalu hasilkan banyak sertifikat dalam satu alur yang lebih sederhana.</p>
     </div>
   </section>
 
@@ -217,15 +217,15 @@ let currentIndex = 0;
 let bgObjectUrl = null;
 
 const defaults = {
-  titleX:128,titleY:260,
-  numberX:128,numberY:315,
-  labelX:128,labelY:390,
-  nameX:128,nameY:445,
-  institutionX:128,institutionY:500,
-  detailX:128,detailY:548,
-  dateX:128,dateY:665,
-  qrX:128,qrY:760,
-  signerX:255,signerY:812
+  titleX:72,titleY:245,
+  numberX:72,numberY:304,
+  labelX:72,labelY:390,
+  nameX:72,nameY:468,
+  institutionX:72,institutionY:520,
+  detailX:72,detailY:590,
+  dateX:72,dateY:765,
+  qrX:1168,qrY:770,
+  signerX:72,signerY:820
 };
 let pos = {...defaults};
 
@@ -409,33 +409,33 @@ async function renderRecord(m){
   const showLabels=document.getElementById('showLabels').checked;
 
   if(showLabels){
-    ctx.fillStyle=gold;ctx.font='800 58px Inter, Arial, sans-serif';ctx.fillText('Sertifikat',pos.titleX,pos.titleY);
-    ctx.fillStyle=navy;ctx.font='750 30px Inter, Arial, sans-serif';ctx.fillText('Nomor : '+(m.nomor_sertifikat||'—'),pos.numberX,pos.numberY);
-    ctx.font='750 28px Inter, Arial, sans-serif';ctx.fillText('diberikan kepada',pos.labelX,pos.labelY);
+    ctx.fillStyle='#111111';ctx.font='800 72px Inter, Arial, sans-serif';ctx.fillText('Sertifikat.',pos.titleX,pos.titleY);
+    ctx.fillStyle='#6b6b68';ctx.font='700 22px Inter, Arial, sans-serif';ctx.fillText('NOMOR / '+(m.nomor_sertifikat||'—'),pos.numberX,pos.numberY);
+    ctx.fillStyle='#111111';ctx.font='700 18px Inter, Arial, sans-serif';ctx.fillText('DIBERIKAN KEPADA',pos.labelX,pos.labelY);
   } else {
     ctx.fillStyle=navy;ctx.font='750 30px Inter, Arial, sans-serif';
     if(m.nomor_sertifikat)ctx.fillText(m.nomor_sertifikat,pos.numberX,pos.numberY);
   }
 
   const name=String(m.nama||'Nama Penerima');
-  const nameSize=fitText(name,820,42,24,'800');
-  ctx.font=`800 ${nameSize}px Inter, Arial, sans-serif`;ctx.fillStyle=navy;
+  const nameSize=fitText(name,930,52,28,'800');
+  ctx.font=`800 ${nameSize}px Inter, Arial, sans-serif`;ctx.fillStyle='#111111';
   ctx.fillText(name,pos.nameX,pos.nameY);
-  const nameW=Math.min(ctx.measureText(name).width,820);
-  ctx.fillRect(pos.nameX,pos.nameY+7,nameW,2);
+  const nameW=Math.min(ctx.measureText(name).width,930);
+  ctx.fillStyle='#ffc91b';ctx.fillRect(pos.nameX,pos.nameY+10,nameW,5);ctx.fillStyle='#111111';
 
-  ctx.font='750 27px Inter, Arial, sans-serif';
+  ctx.font='700 24px Inter, Arial, sans-serif';
   if(m.instansi)ctx.fillText(String(m.instansi),pos.institutionX,pos.institutionY);
 
   const detail=String(m.detail_sertifikat||'Detail sertifikat / kegiatan.');
-  let detailSize=23, lines=wrapLines(detail,835,detailSize,'650',5);
-  if(lines.length>=5 && detail.length>260){detailSize=20;lines=wrapLines(detail,835,detailSize,'650',6)}
-  ctx.font=`650 ${detailSize}px Inter, Arial, sans-serif`;
+  let detailSize=22, lines=wrapLines(detail,860,detailSize,'600',5);
+  if(lines.length>=5 && detail.length>260){detailSize=19;lines=wrapLines(detail,860,detailSize,'600',6)}
+  ctx.font=`600 ${detailSize}px Inter, Arial, sans-serif`;
   lines.forEach((line,i)=>ctx.fillText(line,pos.detailX,pos.detailY+i*(detailSize+10)));
 
   if(m.tanggal){
     const y=pos.detailY+lines.length*(detailSize+10)+8;
-    ctx.font='700 23px Inter, Arial, sans-serif';ctx.fillText('pada '+String(m.tanggal),pos.dateX,Math.max(pos.dateY,y));
+    ctx.font='700 23px Inter, Arial, sans-serif';ctx.fillText('PELAKSANAAN / '+String(m.tanggal),pos.dateX,Math.max(pos.dateY,y));
   }
 
   const showQr=document.getElementById('showQr').checked;
@@ -443,17 +443,17 @@ async function renderRecord(m){
     const code=String(m.kode_verifikasi||'KBY-DEMO');
     const verify=document.getElementById('verifyBase').value+encodeURIComponent(code);
     try{
-      const qr=await makeQrCanvas(verify,110);
-      if(qr)ctx.drawImage(qr,pos.qrX,pos.qrY,110,110);
+      const qr=await makeQrCanvas(verify,92);
+      if(qr)ctx.drawImage(qr,pos.qrX,pos.qrY,92,92);
       ctx.fillStyle=navy;ctx.font='600 14px Inter, Arial, sans-serif';
-      ctx.fillText('QR verifikasi Kabayan',pos.qrX,pos.qrY+132);
-      ctx.fillText(code,pos.qrX,pos.qrY+153);
+      ctx.fillText('QR VERIFIKASI',pos.qrX,pos.qrY+111);
+      ctx.fillText(code,pos.qrX,pos.qrY+130);
     }catch(e){console.warn('QR gagal',e)}
   }
 
   if(m.penandatangan || m.jabatan){
     ctx.fillStyle=navy;
-    ctx.font='600 14px Inter, Arial, sans-serif';ctx.fillText('Penandatangan / pejabat:',pos.signerX,pos.signerY);
+    ctx.font='600 14px Inter, Arial, sans-serif';ctx.fillText('PENANDATANGAN',pos.signerX,pos.signerY);
     if(m.penandatangan){ctx.font='750 22px Inter, Arial, sans-serif';ctx.fillText(String(m.penandatangan),pos.signerX,pos.signerY+32)}
     if(m.jabatan){ctx.font='700 18px Inter, Arial, sans-serif';ctx.fillText(String(m.jabatan),pos.signerX,pos.signerY+60)}
   }
