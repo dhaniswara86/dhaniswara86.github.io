@@ -247,7 +247,7 @@
     }
     .drop strong{display:block;color:#111318;font-size:14px;margin-bottom:5px}
     .drop small{color:#8a929d;font-size:11px}
-    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+    .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:14px}
     .stat{padding:12px;border:1px solid #e8edf3;border-radius:15px;background:#fafbfd}
     .stat b{display:block;color:#111318;font-size:22px;font-weight:760;letter-spacing:-.04em}
     .stat span{font-size:9px;color:#8a929d;text-transform:uppercase;letter-spacing:.08em}
@@ -554,7 +554,7 @@
               <div><span class="step-number">02</span></div>
               <h2>Upload Excel</h2>
             </div>
-            <p class="sub">Header yang disarankan: nama, instansi, detail_sertifikat, tanggal, penandatangan, jabatan, kode_verifikasi. Kolom nomor_sertifikat hanya diperlukan jika nomor diambil dari Excel.</p>
+            <p class="sub">Header yang disarankan: nama, instansi, detail_sertifikat, tanggal, penandatangan, jabatan, kode_verifikasi. Nomor sertifikat diatur dari web.</p>
 
             <div class="drop" id="excelDrop">
               <strong>Tarik Excel ke sini</strong>
@@ -583,10 +583,6 @@
               <label>
                 <input type="radio" name="numberMode" value="auto" checked>
                 <span>Generate Otomatis</span>
-              </label>
-              <label>
-                <input type="radio" name="numberMode" value="excel">
-                <span>Dari Excel</span>
               </label>
               <label>
                 <input type="radio" name="numberMode" value="single">
@@ -683,17 +679,6 @@
               </div>
 
               <button class="btn btn-accent number-apply" id="applyNumbering" type="button">Gunakan Nomor Ini</button>
-            </div>
-
-            <div class="number-panel" data-number-panel="excel">
-              <div class="note" style="margin-top:0">
-                Nomor sertifikat akan diambil dari kolom Excel yang dipetakan sebagai <strong>Nomor Sertifikat</strong>.
-                Kabayan akan mendeteksi nomor kosong dan duplikat.
-              </div>
-              <div class="number-preview">
-                <div class="number-preview-head"><span>Status Excel</span><span class="number-state" id="excelNumberState">Menunggu Excel</span></div>
-                <div class="number-summary" id="excelNumberSummary">Upload Excel lalu pastikan kolom nomor_sertifikat terpetakan.</div>
-              </div>
             </div>
 
             <div class="number-panel" data-number-panel="single">
@@ -854,7 +839,6 @@ const defaults = {
 let pos = {...defaults};
 
 const fieldDefs = [
-  ['nomor_sertifikat','Nomor Sertifikat',false,['nomor_sertifikat','nomor sertifikat','nomor','no sertifikat','no_sertifikat']],
   ['nama','Nama Penerima',true,['nama','nama penerima','nama_penerima','peserta']],
   ['instansi','Instansi / Unit',false,['instansi','sekolah','unit','unit kerja','unit_kerja']],
   ['detail_sertifikat','Detail Sertifikat',false,['detail_sertifikat','detail sertifikat','detail','keterangan','nama kegiatan','kegiatan']],
@@ -949,9 +933,6 @@ function setNumberingDirty(){
 }
 
 function resolvedCertificateNumber(r,index){
-  if(numberMode==='excel'){
-    return mapping.nomor_sertifikat ? String(r[mapping.nomor_sertifikat] ?? '').trim() : '';
-  }
   if(numberMode==='single'){
     return numberingApplied ? appliedSingleNumber : '';
   }
@@ -993,43 +974,12 @@ function updateNumberingUI(){
   const singlePreview=document.getElementById('singleNumberPreview');
   if(singlePreview) singlePreview.textContent=single||'—';
 
-  updateExcelNumberStatus();
 }
 
-function updateExcelNumberStatus(){
-  const state=document.getElementById('excelNumberState');
-  const summary=document.getElementById('excelNumberSummary');
-  if(!state||!summary)return;
-  if(!records.length){
-    state.textContent='Menunggu Excel';state.classList.remove('ok');
-    summary.textContent='Upload Excel lalu pastikan kolom nomor_sertifikat terpetakan.';
-    return;
-  }
-  if(!mapping.nomor_sertifikat){
-    state.textContent='Kolom belum dipetakan';state.classList.remove('ok');
-    summary.textContent='Pilih kolom Excel untuk “Nomor Sertifikat” pada bagian Pemetaan Kolom.';
-    return;
-  }
-  const nums=records.map(r=>String(r[mapping.nomor_sertifikat]??'').trim());
-  const empty=nums.filter(n=>!n).length;
-  const seen=new Set(),dups=new Set();
-  nums.filter(Boolean).forEach(n=>{if(seen.has(n))dups.add(n);else seen.add(n)});
-  if(!empty && !dups.size){
-    state.textContent='Siap';state.classList.add('ok');
-    summary.textContent=`${nums.length} nomor ditemukan. Tidak ada nomor kosong atau duplikat.`;
-  }else{
-    state.textContent='Perlu diperiksa';state.classList.remove('ok');
-    summary.textContent=`${empty} nomor kosong • ${dups.size} nomor duplikat.`;
-  }
-}
 
 function numberingIsReady(){
   if(numberMode==='auto') return numberingApplied && !!appliedNumberConfig;
   if(numberMode==='single') return numberingApplied && !!appliedSingleNumber;
-  if(numberMode==='excel'){
-    if(!mapping.nomor_sertifikat || !records.length) return false;
-    return records.every(r=>String(r[mapping.nomor_sertifikat]??'').trim());
-  }
   return false;
 }
 
@@ -1267,11 +1217,11 @@ async function renderRecord(m){
   }
 
   const detail=String(m.detail_sertifikat||'Detail sertifikat / kegiatan.');
-  let detailSize=22;
-  let lines=wrapLines(detail,985,detailSize,'700',5);
+  let detailSize=21;
+  let lines=wrapLines(detail,760,detailSize,'700',5);
   if(lines.length>=5 && detail.length>300){
-    detailSize=20;
-    lines=wrapLines(detail,985,detailSize,'700',6);
+    detailSize=19;
+    lines=wrapLines(detail,760,detailSize,'700',6);
   }
   ctx.font=`700 ${detailSize}px ${CERT_FONT}`;
   const lineHeight=detailSize+10; // ±32 px, sesuai baseline PDF sumber
@@ -1389,7 +1339,7 @@ function initNumberBuilder(){
     radio.addEventListener('change',()=>{
       if(!radio.checked)return;
       numberMode=radio.value;
-      numberingApplied=(numberMode==='excel');
+      numberingApplied=false;
       appliedNumberConfig=null;appliedSingleNumber='';
       updateNumberingUI();
       applyMappingAndRefresh();
@@ -1400,8 +1350,8 @@ function initNumberBuilder(){
   autoIds.forEach(id=>{
     const el=document.getElementById(id);
     if(!el)return;
-    el.addEventListener('input',()=>{if(numberMode==='auto')setNumberingDirty();else updateNumberingUI()});
-    el.addEventListener('change',()=>{if(numberMode==='auto')setNumberingDirty();else updateNumberingUI()});
+    el.addEventListener('input',()=>{if(numberMode==='auto')setNumberingDirty(); else if(numberMode==='single') updateNumberingUI(); else updateNumberingUI()});
+    el.addEventListener('change',()=>{if(numberMode==='auto')setNumberingDirty(); else if(numberMode==='single') updateNumberingUI(); else updateNumberingUI()});
   });
 
   document.querySelectorAll('[data-token]').forEach(btn=>{
