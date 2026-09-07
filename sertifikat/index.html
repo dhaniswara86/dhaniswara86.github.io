@@ -1,535 +1,331 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Kabayan — Generator Sertifikat</title>
-  <meta name="description" content="Generator sertifikat massal dari Excel. Preview, PDF gabungan, PDF per peserta dan ZIP.">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Akses Generator Sertifikat Kabayan." />
+  <meta name="theme-color" content="#ffffff" />
+  <title>Generator Sertifikat | Kabayan</title>
   <style>
     :root{
-      --ink:#111111;--blue:#0d2d57;--yellow:#ffc91b;--bg:#f6f6f2;--card:#fff;
-      --muted:#667085;--line:#e4e7ec;--ok:#067647;--warn:#b54708;--danger:#b42318;
+      --black:#000;
+      --near-black:#111318;
+      --ink:#1d1d1f;
+      --white:#fff;
+      --off-white:#f5f5f7;
+      --soft:#e8e8ed;
+      --muted:#6e6e73;
+      --blue:#0a66ff;
+      --blue-deep:#0b4cac;
+      --yellow:#f7c948;
+      --red:#ff3b30;
+      --green:#3eaa80;
+      --nav-height:64px;
+      --max-width:1280px;
+      --ease:cubic-bezier(.22,1,.36,1);
     }
     *{box-sizing:border-box}
-    body{margin:0;font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:#101828}
-    button,input,select,textarea{font:inherit}
-    .topbar{height:72px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:20}
-    .brand{display:flex;align-items:center;gap:12px;font-weight:800;color:var(--ink)}
-    .brandmark{width:36px;height:36px;border:3px solid var(--ink);border-radius:11px;display:grid;place-items:center}
-    .brandmark:after{content:"";width:15px;height:15px;background:var(--yellow);border-radius:4px}
-    .badge{font-size:12px;padding:6px 10px;border-radius:999px;background:#eef2ff;color:var(--blue);font-weight:700}
-    main{max-width:1440px;margin:0 auto;padding:32px}
-    .hero{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:24px}
-    .hero h1{font-size:56px;line-height:.98;margin:0 0 14px;color:var(--ink);letter-spacing:-.055em}
-    .hero p{margin:0;color:var(--muted);max-width:760px;font-size:17px}
-    .layout{display:grid;grid-template-columns:420px 1fr;gap:24px;align-items:start}
-    .stack{display:grid;gap:16px}
-    .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:none}
-    .card h2{font-size:17px;margin:0 0 6px;color:var(--ink)}
-    .sub{font-size:13px;color:var(--muted);margin-bottom:16px;line-height:1.5}
-    .drop{border:1.5px dashed #b8c3d9;border-radius:16px;padding:18px;text-align:center;background:#fafbff;cursor:pointer;transition:.2s}
-    .drop:hover{border-color:var(--blue);background:#f5f7ff}
-    .drop strong{display:block;color:var(--ink);margin-bottom:4px}
-    .drop small{color:var(--muted)}
-    .actions{display:flex;flex-wrap:wrap;gap:10px}
-    .btn{border:0;border-radius:12px;padding:11px 15px;font-weight:750;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px}
-    .btn-primary{background:var(--ink);color:#fff}
-    .btn-accent{background:var(--yellow);color:#1b2a4e}
-    .btn-soft{background:#eef2f8;color:var(--ink)}
-    .btn-outline{background:#fff;color:var(--ink);border:1px solid var(--line)}
-    .btn:disabled{opacity:.45;cursor:not-allowed}
-    .filemeta{font-size:13px;color:var(--muted);margin-top:10px}
-    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
-    .stat{background:#f8fafc;border:1px solid var(--line);border-radius:14px;padding:12px}
-    .stat b{display:block;font-size:20px;color:var(--ink)}
-    .stat span{font-size:11px;color:var(--muted)}
-    .formrow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-    label{font-size:12px;font-weight:700;color:#344054;display:block;margin-bottom:6px}
-    input[type=text],input[type=number],select{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 11px;background:#fff;color:#101828}
-    .switchrow{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid #f1f3f6}
-    .switchrow:first-child{border-top:0}
-    .switchrow span{font-size:13px}
-    .previewCard{padding:0;overflow:hidden}
-    .previewHeader{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 18px;border-bottom:1px solid var(--line)}
-    .previewHeader h2{margin:0;font-size:16px}
-    .canvasWrap{background:#e9edf5;padding:22px;display:flex;justify-content:center;overflow:auto}
-    canvas{display:block;max-width:100%;height:auto;background:white;box-shadow:0 18px 55px rgba(16,38,85,.15);border-radius:4px}
-    .previewFooter{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-top:1px solid var(--line);gap:12px}
-    .pager{display:flex;align-items:center;gap:8px}
-    .statusline{font-size:13px;color:var(--muted)}
-    .tableWrap{overflow:auto;max-height:300px;border:1px solid var(--line);border-radius:14px}
-    table{border-collapse:collapse;width:100%;font-size:12px}
-    th,td{text-align:left;padding:9px 10px;border-bottom:1px solid #eef0f4;white-space:nowrap}
-    th{position:sticky;top:0;background:#f8fafc;color:#475467}
-    .pill{font-size:11px;padding:4px 8px;border-radius:999px;font-weight:700}
-    .pill.ok{background:#ecfdf3;color:var(--ok)}
-    .pill.warn{background:#fff7ed;color:var(--warn)}
-    details{border-top:1px solid var(--line);margin-top:14px;padding-top:14px}
-    details summary{cursor:pointer;font-weight:750;color:var(--ink);font-size:13px}
-    .positions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
-    .note{font-size:12px;color:#475467;background:#f8fafc;border-radius:12px;padding:11px 12px;line-height:1.5}
-    .progress{display:none;margin-top:12px}
-    .bar{height:8px;background:#eef2f6;border-radius:999px;overflow:hidden}
-    .bar>span{display:block;height:100%;width:0;background:var(--blue);transition:.2s}
-    .progressText{font-size:12px;color:var(--muted);margin-top:6px}
-    .footnote{font-size:11px;color:#98a2b3;margin-top:18px;line-height:1.5}
-    @media(max-width:980px){
-      main{padding:20px}.layout{grid-template-columns:1fr}.hero{align-items:flex-start;flex-direction:column}
-      .hero h1{font-size:34px}.topbar{padding:0 18px}.formrow{grid-template-columns:1fr}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;overflow-x:hidden;background:#fff;color:var(--near-black);
+      font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,Helvetica,sans-serif;
+      line-height:1.45;letter-spacing:-.015em;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+    }
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%}
+    button,input{font:inherit}
+
+    /* progress + nav copied conceptually from kalkulator */
+    .page-progress{position:fixed;z-index:1400;top:0;left:0;width:100%;height:2px;pointer-events:none}
+    .page-progress span{display:block;width:48%;height:100%;background:linear-gradient(90deg,#0a66ff,#31a9d1,#d3b646)}
+    .site-nav{
+      position:fixed;z-index:1000;top:0;right:0;left:0;min-height:var(--nav-height);
+      background:rgba(255,255,255,.88);backdrop-filter:saturate(160%) blur(18px);
+      -webkit-backdrop-filter:saturate(160%) blur(18px);
+      box-shadow:0 1px 0 rgba(12,18,28,.05);
+    }
+    .nav-inner{
+      width:min(var(--max-width),calc(100% - 48px));min-height:var(--nav-height);
+      display:flex;align-items:center;gap:32px;margin:0 auto;
+    }
+    .nav-brand{
+      display:inline-flex;align-items:center;gap:9px;flex-shrink:0;color:#111318;
+      font-size:13px;font-weight:650;letter-spacing:-.02em;
+    }
+    .brand-logo{width:auto;height:19px;max-width:none;object-fit:contain}
+    .nav-brand strong{font-weight:720}
+    .desktop-menu{display:flex;align-items:center;gap:clamp(20px,2.2vw,34px);margin-left:auto}
+    .desktop-menu a{
+      position:relative;padding:22px 0 20px;color:#555b65;font-size:12px;font-weight:540;line-height:1;
+      white-space:nowrap;
+    }
+    .desktop-menu a::after{
+      content:"";position:absolute;right:0;bottom:14px;left:0;height:1.5px;border-radius:99px;
+      background:#111318;transform:scaleX(0);transform-origin:right;transition:transform .26s var(--ease);
+    }
+    .desktop-menu a:hover::after{transform:scaleX(1);transform-origin:left}
+    .nav-back{
+      min-height:38px;display:inline-flex;align-items:center;gap:7px;padding:9px 15px;
+      border:1px solid #111318;border-radius:999px;background:#111318;color:#fff;
+      font-size:11px;font-weight:650;transition:transform .22s ease,box-shadow .22s ease;
+    }
+    .nav-back:hover{transform:translateY(-1px);box-shadow:0 9px 22px rgba(0,0,0,.13)}
+
+    main{padding-top:var(--nav-height)}
+    .login-hero{
+      position:relative;overflow:hidden;min-height:calc(100svh - var(--nav-height));
+      display:flex;align-items:center;background:#fff;
+    }
+    .login-hero::before{
+      content:"";position:absolute;inset:0;pointer-events:none;
+      background-image:
+        linear-gradient(to right,rgba(15,38,76,.035) 1px,transparent 1px),
+        linear-gradient(to bottom,rgba(15,38,76,.026) 1px,transparent 1px);
+      background-size:120px 120px;
+      mask-image:linear-gradient(to bottom,rgba(0,0,0,.56),rgba(0,0,0,.1) 80%,transparent);
+    }
+    .hero-shell{
+      position:relative;z-index:2;width:min(1480px,calc(100% - 48px));margin:0 auto;
+      display:grid;grid-template-columns:1.04fr 1fr;align-items:center;gap:4vw;padding:52px 0 68px;
+    }
+    .hero-copy{padding-left:clamp(0px,2vw,28px)}
+    .hero-eyebrow{
+      display:inline-flex;align-items:center;gap:10px;margin-bottom:22px;color:var(--blue);
+      font-size:12px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;
+    }
+    .hero-eyebrow::before{content:"";width:28px;height:2px;background:var(--blue)}
+    .hero-title{
+      max-width:760px;margin:0;color:#080b11;font-size:clamp(58px,6.2vw,104px);
+      font-weight:800;letter-spacing:-.075em;line-height:.91;
+    }
+    .hero-accent{
+      display:inline-block;
+      background:linear-gradient(90deg,#124aa8 0%,#0f63d8 28%,#1593df 52%,#36a9c8 68%,#7aa987 84%,#b7a43a 100%);
+      -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
+    }
+    .hero-description{
+      max-width:610px;margin:28px 0 0;color:#5d6674;font-size:clamp(16px,1.2vw,19px);line-height:1.72;
+    }
+    .feature-row{
+      display:flex;flex-wrap:wrap;gap:8px;margin-top:28px;
+    }
+    .feature-pill{
+      display:inline-flex;align-items:center;gap:7px;padding:8px 11px;border-radius:999px;
+      border:1px solid #dfe4ea;background:rgba(255,255,255,.86);color:#5d6674;
+      font-size:11px;font-weight:680;
+    }
+    .feature-pill::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--green)}
+
+    .login-stage{position:relative;min-height:650px;display:grid;place-items:center;isolation:isolate}
+    .hero-cloud{
+      position:absolute;z-index:-2;width:min(52vw,720px);height:min(43vw,600px);
+      background:url("../assets/img/mega-mendung-cirebon.webp") center/contain no-repeat;opacity:.66;
+      filter:saturate(.9);
+    }
+    .hero-mascot{
+      position:absolute;z-index:-1;right:-10px;bottom:8px;width:min(25vw,330px);max-height:440px;
+      object-fit:contain;filter:drop-shadow(0 24px 22px rgba(27,45,74,.14));
+      opacity:.95;user-select:none;pointer-events:none;
+    }
+
+    .login-card{
+      position:relative;width:min(470px,92%);padding:30px;border:1px solid #dfe8f3;border-radius:30px;
+      background:rgba(255,255,255,.94);box-shadow:0 34px 75px rgba(29,64,110,.14);
+      backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+    }
+    .login-head{
+      display:flex;align-items:center;justify-content:space-between;padding-bottom:18px;border-bottom:1px solid #edf0f4;
+      color:#7d8792;font-size:10px;font-weight:780;letter-spacing:.08em;text-transform:uppercase;
+    }
+    .login-status{display:inline-flex;align-items:center;gap:6px;color:var(--green)}
+    .login-status::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--green)}
+    .login-title{margin:28px 0 8px;font-size:34px;font-weight:780;letter-spacing:-.045em}
+    .login-note{margin:0 0 24px;color:#7b838e;font-size:13px;line-height:1.6}
+    .field{margin-top:16px}
+    .field label{display:block;margin-bottom:8px;color:#747d89;font-size:11px;font-weight:700}
+    .field input{
+      width:100%;height:52px;padding:0 15px;border:1px solid #dfe4ea;border-radius:14px;
+      background:#fff;color:#111318;outline:none;transition:border .2s ease,box-shadow .2s ease;
+    }
+    .field input:focus{border-color:#9dbfea;box-shadow:0 0 0 4px rgba(10,102,255,.07)}
+    .login-actions{display:grid;gap:10px;margin-top:24px}
+    .btn-primary,.btn-secondary{
+      min-height:50px;display:flex;align-items:center;justify-content:center;gap:9px;padding:13px 20px;
+      border-radius:999px;font-size:14px;font-weight:750;cursor:pointer;
+      transition:transform .25s ease,box-shadow .25s ease,background .25s ease;
+    }
+    .btn-primary{border:1px solid var(--yellow);background:var(--yellow);color:#1d1d1f;box-shadow:0 12px 28px rgba(247,201,72,.22)}
+    .btn-primary:hover{background:#f4be32;border-color:#f4be32;transform:translateY(-2px);box-shadow:0 16px 34px rgba(244,190,50,.28)}
+    .btn-secondary{border:1px solid #d8e0eb;background:#fff;color:#15181e}
+    .btn-secondary:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(20,35,55,.08)}
+    .login-foot{
+      margin-top:18px;padding-top:18px;border-top:1px solid #edf0f4;color:#8a929d;font-size:11px;line-height:1.55;
+    }
+    .error{
+      display:none;margin-top:14px;padding:10px 12px;border-radius:12px;background:#fff1f0;color:#b42318;
+      font-size:12px;font-weight:650;
+    }
+
+    .security-strip{
+      padding:26px 24px;background:#f5f5f7;border-top:1px solid #eceef2;
+    }
+    .security-inner{
+      width:min(1220px,100%);margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+    }
+    .security-item{padding:18px 20px;border-left:1px solid #dfe4ea}
+    .security-item:first-child{border-left:0}
+    .security-num{display:block;margin-bottom:8px;color:#a0a7b0;font-size:10px;font-weight:800;letter-spacing:.08em}
+    .security-item strong{display:block;font-size:14px}
+    .security-item p{margin:5px 0 0;color:#7c8591;font-size:12px;line-height:1.5}
+
+    .site-footer{padding:26px 24px 34px;background:#fff;color:#6e6e73}
+    .footer-inner{
+      width:min(1220px,100%);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:20px;font-size:12px
+    }
+
+    .hero-eyebrow,.hero-title,.hero-description,.feature-row{
+      opacity:0;transform:translateY(22px);animation:heroEnter .72s var(--ease) both
+    }
+    .hero-eyebrow{animation-delay:.08s}.hero-title{animation-delay:.17s}.hero-description{animation-delay:.27s}.feature-row{animation-delay:.36s}
+    .login-card{opacity:0;transform:translateY(26px) scale(.98);animation:cardEnter .85s var(--ease) .25s forwards}
+    .hero-cloud{opacity:0;transform:scale(.97);animation:cloudEnter 1.05s var(--ease) .48s forwards,cloudBreath 8.5s ease-in-out 1.6s infinite}
+    .hero-mascot{animation:mascotFloat 5.8s ease-in-out 1.4s infinite}
+    @keyframes heroEnter{to{opacity:1;transform:translateY(0)}}
+    @keyframes cardEnter{to{opacity:1;transform:translateY(0) scale(1)}}
+    @keyframes cloudEnter{to{opacity:.66;transform:scale(1)}}
+    @keyframes cloudBreath{0%,100%{scale:1;translate:0 0}50%{scale:1.02;translate:0 -5px}}
+    @keyframes mascotFloat{0%,100%{translate:0 0}50%{translate:0 -8px}}
+
+    @media(max-width:900px){
+      .desktop-menu{display:none}
+      .nav-inner{width:min(100% - 28px,var(--max-width))}
+      .hero-shell{grid-template-columns:1fr;gap:16px;width:min(100% - 28px,1480px);padding:54px 0 64px}
+      .login-hero{min-height:auto}
+      .login-stage{min-height:570px}
+      .hero-cloud{width:min(96vw,620px);height:min(78vw,500px)}
+      .hero-mascot{width:min(46vw,260px);right:0}
+    }
+    @media(max-width:640px){
+      .hero-title{font-size:49px}.hero-description{font-size:15px}
+      .login-stage{min-height:520px}.login-card{padding:24px;border-radius:24px}
+      .hero-mascot{opacity:.30;right:-20px}
+      .security-inner{grid-template-columns:1fr}.security-item{border-left:0;border-top:1px solid #dfe4ea}.security-item:first-child{border-top:0}
+      .footer-inner{align-items:flex-start;flex-direction:column}
+    }
+    @media(prefers-reduced-motion:reduce){
+      *{animation:none!important;transition:none!important}
+      .hero-eyebrow,.hero-title,.hero-description,.feature-row,.login-card,.hero-cloud{opacity:1!important;transform:none!important}
     }
   </style>
 </head>
 <body>
-<header class="topbar">
-  <div class="brand"><span class="brandmark"></span><span>Kabayan</span><span class="badge">Generator Sertifikat</span></div>
-  <a class="btn btn-outline" href="contoh-data-sertifikat.xlsx" download>Unduh Excel Contoh</a>
-</header>
+  <div class="page-progress" aria-hidden="true"><span></span></div>
 
-<main>
-  <section class="hero">
-    <div>
-      <h1>Sertifikat.<br>Lebih Praktis.</h1>
-      <p>Siapkan data di Excel, lakukan pengecekan, lalu hasilkan banyak sertifikat dalam satu alur yang lebih sederhana.</p>
+  <header class="site-nav">
+    <div class="nav-inner">
+      <a class="nav-brand" href="../index.html" aria-label="Kabayan — Beranda">
+        <img class="brand-logo" src="../images/LogoASD.svg" alt="Logo Kabayan" />
+        <span><strong>Kabayan</strong></span>
+      </a>
+      <nav class="desktop-menu" aria-label="Navigasi utama">
+        <a href="../buku.html">Buku</a>
+        <a href="../formulir.html">Formulir</a>
+        <a href="../kalkulator.html">Kalkulator</a>
+        <a href="../aplikasi.html">Aplikasi</a>
+        <a href="../artikel.html">Artikel</a>
+        <a href="../hotnews.html">Hot News</a>
+      </nav>
+      <a class="nav-back" href="../aplikasi.html">Kembali ke Aplikasi <span>↗</span></a>
     </div>
-  </section>
+  </header>
 
-  <div class="layout">
-    <aside class="stack">
-      <section class="card">
-        <h2>1. Template sertifikat</h2>
-        <div class="sub">Gunakan template demo atau upload background PNG/JPG milik Anda. Rasio ideal A4 landscape (±1,414:1).</div>
-        <div class="actions">
-          <button class="btn btn-soft" id="useDemo">Gunakan Demo</button>
-          <label class="btn btn-outline" style="margin:0;cursor:pointer">Upload Background
-            <input id="bgInput" type="file" accept="image/png,image/jpeg" hidden>
-          </label>
-        </div>
-        <div class="filemeta" id="bgMeta">Template: assets/template-demo.png</div>
-        <div class="switchrow">
-          <span>Tampilkan label bawaan (Sertifikat, diberikan kepada)</span>
-          <input type="checkbox" id="showLabels" checked>
-        </div>
-        <div class="switchrow">
-          <span>Tampilkan QR verifikasi</span>
-          <input type="checkbox" id="showQr" checked>
-        </div>
-        <div style="margin-top:10px">
-          <label>Basis URL verifikasi</label>
-          <input type="text" id="verifyBase" value="https://dhaniswara86.id/sertifikat/verifikasi.html?id=">
-        </div>
-      </section>
-
-      <section class="card">
-        <h2>2. Upload Excel</h2>
-        <div class="sub">Header yang disarankan: nomor_sertifikat, nama, instansi, detail_sertifikat, tanggal, penandatangan, jabatan, kode_verifikasi.</div>
-        <div class="drop" id="excelDrop">
-          <strong>Tarik Excel ke sini</strong>
-          <small>atau klik untuk memilih .xlsx / .xls</small>
-          <input id="excelInput" type="file" accept=".xlsx,.xls" hidden>
-        </div>
-        <div class="filemeta" id="excelMeta">Belum ada file yang dipilih.</div>
-        <div class="stats">
-          <div class="stat"><b id="statRows">0</b><span>baris</span></div>
-          <div class="stat"><b id="statValid">0</b><span>valid</span></div>
-          <div class="stat"><b id="statWarn">0</b><span>perlu cek</span></div>
-        </div>
-      </section>
-
-      <section class="card" id="mapCard" style="display:none">
-        <h2>3. Pemetaan kolom</h2>
-        <div class="sub">Kabayan mencoba mengenali kolom otomatis. Ubah dropdown jika nama header Excel Anda berbeda.</div>
-        <div id="mapping"></div>
-      </section>
-
-      <section class="card">
-        <h2>4. Generate</h2>
-        <div class="sub">PDF dihasilkan dari canvas, sehingga nama panjang dan detail kegiatan dapat menyesuaikan otomatis.</div>
-        <div class="actions">
-          <button class="btn btn-accent" id="downloadCurrent" disabled>PNG Preview</button>
-          <button class="btn btn-primary" id="downloadCombined" disabled>PDF Gabungan</button>
-          <button class="btn btn-soft" id="downloadZip" disabled>ZIP PDF</button>
-        </div>
-        <div class="progress" id="progress">
-          <div class="bar"><span id="barFill"></span></div>
-          <div class="progressText" id="progressText">Menyiapkan...</div>
-        </div>
-        <div class="note" style="margin-top:14px">
-          QR pada prototipe ini adalah QR verifikasi Kabayan, bukan tanda tangan elektronik resmi. Untuk produksi resmi, gunakan template dan mekanisme penandatanganan yang memang berwenang.
-        </div>
-
-        <details>
-          <summary>Pengaturan posisi (advanced)</summary>
-          <div class="positions" id="positions"></div>
-          <div class="actions" style="margin-top:10px"><button class="btn btn-outline" id="resetPos">Reset posisi</button></div>
-        </details>
-      </section>
-    </aside>
-
-    <section class="stack">
-      <section class="card previewCard">
-        <div class="previewHeader">
-          <div><h2>Preview sertifikat</h2><div class="statusline" id="previewStatus">Upload Excel untuk memulai.</div></div>
-          <div class="pager">
-            <button class="btn btn-outline" id="prevBtn" disabled>←</button>
-            <span class="statusline" id="pageInfo">0 / 0</span>
-            <button class="btn btn-outline" id="nextBtn" disabled>→</button>
+  <main>
+    <section class="login-hero">
+      <div class="hero-shell">
+        <div class="hero-copy">
+          <div class="hero-eyebrow">APLIKASI / SERTIFIKAT</div>
+          <h1 class="hero-title">Sertifikat.<br><span class="hero-accent">Lebih Praktis.</span></h1>
+          <p class="hero-description">
+            Kelola data peserta, preview, dan pembuatan sertifikat massal dari Excel dalam satu alur.
+            Desain sertifikat tetap menggunakan template kegiatan Anda — yang berubah hanya cara mengelolanya.
+          </p>
+          <div class="feature-row" aria-label="Fitur">
+            <span class="feature-pill">Upload Excel</span>
+            <span class="feature-pill">Preview Otomatis</span>
+            <span class="feature-pill">PDF & ZIP</span>
+            <span class="feature-pill">QR Verifikasi</span>
           </div>
         </div>
-        <div class="canvasWrap"><canvas id="certCanvas" width="1440" height="1018"></canvas></div>
-        <div class="previewFooter">
-          <span class="statusline">Auto-fit nama • auto-wrap detail • QR unik</span>
-          <span class="pill warn" id="recordPill">Belum ada data</span>
-        </div>
-      </section>
 
-      <section class="card">
-        <h2>Data yang terbaca</h2>
-        <div class="sub">Tabel ini hanya untuk pengecekan cepat sebelum generate.</div>
-        <div class="tableWrap">
-          <table>
-            <thead><tr><th>#</th><th>Status</th><th>Nomor</th><th>Nama</th><th>Instansi</th><th>Tanggal</th></tr></thead>
-            <tbody id="dataBody"><tr><td colspan="6" style="color:#98a2b3">Belum ada data.</td></tr></tbody>
-          </table>
+        <div class="login-stage">
+          <div class="hero-cloud" aria-hidden="true"></div>
+          <img class="hero-mascot" src="../assets/img/kabayan-aplikasi.webp" alt="" aria-hidden="true" />
+
+          <section class="login-card" aria-labelledby="loginTitle">
+            <div class="login-head">
+              <span>Generator Sertifikat</span>
+              <span class="login-status">Siap digunakan</span>
+            </div>
+            <h2 class="login-title" id="loginTitle">Masuk ke aplikasi.</h2>
+            <p class="login-note">Gunakan akun admin untuk mengelola batch sertifikat dan data penerima.</p>
+
+            <form id="loginForm" novalidate>
+              <div class="field">
+                <label for="email">Email / Username</label>
+                <input id="email" name="email" type="text" autocomplete="username" placeholder="admin@kabayan" required />
+              </div>
+              <div class="field">
+                <label for="password">Password</label>
+                <input id="password" name="password" type="password" autocomplete="current-password" placeholder="••••••••" required />
+              </div>
+              <div class="error" id="loginError">Isi email/username dan password terlebih dahulu.</div>
+              <div class="login-actions">
+                <button class="btn-primary" type="submit">Masuk ke Generator <span>→</span></button>
+                <a class="btn-secondary" href="../aplikasi.html">Kembali ke Kabayan</a>
+              </div>
+            </form>
+
+            <div class="login-foot">
+              <strong>Prototype antarmuka.</strong> Login ini belum menjadi autentikasi keamanan.
+              Pada versi produksi, form ini dapat dihubungkan ke Supabase Auth.
+            </div>
+          </section>
         </div>
-        <div class="footnote">Tip: untuk produksi besar, simpan hanya metadata sertifikat dan kode verifikasi ke database. File PDF dapat dibuat on-demand atau diunduh massal.</div>
-      </section>
+      </div>
     </section>
-  </div>
-</main>
 
-<div id="qrScratch" style="position:fixed;left:-99999px;top:-99999px"></div>
+    <section class="security-strip">
+      <div class="security-inner">
+        <div class="security-item"><span class="security-num">01 / DATA</span><strong>Data tetap terstruktur.</strong><p>Excel dibaca dan divalidasi sebelum sertifikat dibuat.</p></div>
+        <div class="security-item"><span class="security-num">02 / TEMPLATE</span><strong>Desain sertifikat tetap.</strong><p>Template resmi kegiatan tidak diubah oleh tampilan aplikasi.</p></div>
+        <div class="security-item"><span class="security-num">03 / OUTPUT</span><strong>Unduh sekaligus.</strong><p>Hasil dapat dibuat menjadi PDF gabungan atau ZIP per peserta.</p></div>
+      </div>
+    </section>
+  </main>
 
-<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>© <span id="year"></span> Kabayan.</p>
+      <a href="../index.html">Beranda</a>
+    </div>
+  </footer>
 
-<script>
-const canvas = document.getElementById('certCanvas');
-const ctx = canvas.getContext('2d');
-const bg = new Image();
-bg.src = 'assets/template-demo.png';
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
 
-let records = [];
-let headers = [];
-let currentIndex = 0;
-let bgObjectUrl = null;
-
-const defaults = {
-  titleX:72,titleY:245,
-  numberX:72,numberY:304,
-  labelX:72,labelY:390,
-  nameX:72,nameY:468,
-  institutionX:72,institutionY:520,
-  detailX:72,detailY:590,
-  dateX:72,dateY:765,
-  qrX:1168,qrY:770,
-  signerX:72,signerY:820
-};
-let pos = {...defaults};
-
-const fieldDefs = [
-  ['nomor_sertifikat','Nomor Sertifikat',true,['nomor_sertifikat','nomor sertifikat','nomor','no sertifikat','no_sertifikat']],
-  ['nama','Nama Penerima',true,['nama','nama penerima','nama_penerima','peserta']],
-  ['instansi','Instansi / Unit',false,['instansi','sekolah','unit','unit kerja','unit_kerja']],
-  ['detail_sertifikat','Detail Sertifikat',false,['detail_sertifikat','detail sertifikat','detail','keterangan','nama kegiatan','kegiatan']],
-  ['tanggal','Tanggal Pelaksanaan',false,['tanggal','tanggal pelaksanaan','tanggal_pelaksanaan','tgl']],
-  ['penandatangan','Penandatangan',false,['penandatangan','nama penandatangan','signer']],
-  ['jabatan','Jabatan',false,['jabatan','jabatan penandatangan','jabatan_penandatangan']],
-  ['kode_verifikasi','Kode Verifikasi',false,['kode_verifikasi','kode verifikasi','kode','verification_code']]
-];
-let mapping = {};
-
-function norm(s){return String(s??'').trim().toLowerCase().replace(/[_-]+/g,' ').replace(/\s+/g,' ')}
-function escapeHtml(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
-function safeName(s){return String(s||'sertifikat').replace(/[^\w\-]+/g,'_').replace(/_+/g,'_').slice(0,90)}
-
-function initPositions(){
-  const host = document.getElementById('positions');
-  const entries = [
-    ['titleY','Y Judul'],['numberY','Y Nomor'],['labelY','Y Label'],
-    ['nameY','Y Nama'],['institutionY','Y Instansi'],['detailY','Y Detail'],
-    ['dateY','Y Tanggal'],['qrY','Y QR']
-  ];
-  host.innerHTML = entries.map(([k,l])=>`<div><label>${l}</label><input type="number" data-pos="${k}" value="${pos[k]}"></div>`).join('');
-  host.querySelectorAll('[data-pos]').forEach(el=>{
-    el.addEventListener('input',()=>{pos[el.dataset.pos]=Number(el.value); renderCurrent()})
-  });
-}
-initPositions();
-
-document.getElementById('resetPos').onclick = ()=>{pos={...defaults};initPositions();renderCurrent()}
-
-bg.onload = ()=>renderCurrent();
-
-document.getElementById('useDemo').onclick = ()=>{
-  if(bgObjectUrl) URL.revokeObjectURL(bgObjectUrl);
-  bgObjectUrl=null;
-  bg.src='assets/template-demo.png';
-  document.getElementById('bgMeta').textContent='Template: assets/template-demo.png';
-};
-
-document.getElementById('bgInput').addEventListener('change',e=>{
-  const f=e.target.files[0]; if(!f)return;
-  if(bgObjectUrl) URL.revokeObjectURL(bgObjectUrl);
-  bgObjectUrl=URL.createObjectURL(f); bg.src=bgObjectUrl;
-  document.getElementById('bgMeta').textContent='Template custom: '+f.name;
-});
-document.getElementById('showLabels').onchange=renderCurrent;
-document.getElementById('showQr').onchange=renderCurrent;
-document.getElementById('verifyBase').oninput=renderCurrent;
-
-const drop=document.getElementById('excelDrop'), input=document.getElementById('excelInput');
-drop.onclick=()=>input.click();
-['dragenter','dragover'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.style.borderColor='#243c8c'}));
-['dragleave','drop'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.style.borderColor=''}));
-drop.addEventListener('drop',e=>{const f=e.dataTransfer.files[0]; if(f) readExcel(f)});
-input.addEventListener('change',e=>{const f=e.target.files[0]; if(f) readExcel(f)});
-
-function readExcel(file){
-  document.getElementById('excelMeta').textContent='Membaca '+file.name+'...';
-  const reader=new FileReader();
-  reader.onload=evt=>{
-    try{
-      const wb=XLSX.read(evt.target.result,{type:'array',cellDates:true});
-      const ws=wb.Sheets[wb.SheetNames[0]];
-      const json=XLSX.utils.sheet_to_json(ws,{defval:'',raw:false});
-      headers=json.length?Object.keys(json[0]):[];
-      records=json;
-      autoMap();
-      buildMapping();
-      applyMappingAndRefresh();
-      document.getElementById('excelMeta').textContent=`${file.name} • sheet: ${wb.SheetNames[0]}`;
-    }catch(err){
-      console.error(err); alert('Excel tidak dapat dibaca: '+err.message);
-      document.getElementById('excelMeta').textContent='Gagal membaca file.';
-    }
-  };
-  reader.readAsArrayBuffer(file);
-}
-
-function autoMap(){
-  mapping={};
-  fieldDefs.forEach(([key,label,required,aliases])=>{
-    const hit=headers.find(h=>aliases.includes(norm(h)));
-    mapping[key]=hit||'';
-  });
-}
-
-function buildMapping(){
-  const host=document.getElementById('mapping');
-  document.getElementById('mapCard').style.display='block';
-  host.innerHTML=fieldDefs.map(([key,label,required])=>{
-    const opts=['<option value="">— tidak dipakai —</option>'].concat(headers.map(h=>`<option value="${escapeHtml(h)}" ${mapping[key]===h?'selected':''}>${escapeHtml(h)}</option>`));
-    return `<div style="margin-bottom:10px"><label>${label}${required?' *':''}</label><select data-map="${key}">${opts.join('')}</select></div>`;
-  }).join('');
-  host.querySelectorAll('[data-map]').forEach(el=>el.addEventListener('change',()=>{mapping[el.dataset.map]=el.value;applyMappingAndRefresh()}));
-}
-
-function mappedRecord(r){
-  const out={};
-  fieldDefs.forEach(([key])=>out[key]=mapping[key]?r[mapping[key]]:'');
-  if(!out.kode_verifikasi){
-    const base=(out.nomor_sertifikat||'KBY')+'-'+(out.nama||'PESERTA');
-    out.kode_verifikasi=btoa(unescape(encodeURIComponent(base))).replace(/[^A-Za-z0-9]/g,'').slice(0,18).toUpperCase();
-  }
-  return out;
-}
-function validation(r){
-  const m=mappedRecord(r);
-  const issues=[];
-  if(!String(m.nama).trim())issues.push('nama kosong');
-  if(!String(m.nomor_sertifikat).trim())issues.push('nomor kosong');
-  return issues;
-}
-function applyMappingAndRefresh(){
-  currentIndex=Math.min(currentIndex,Math.max(0,records.length-1));
-  refreshStats();refreshTable();renderCurrent();syncButtons();
-}
-function refreshStats(){
-  let valid=0,warn=0;
-  records.forEach(r=>validation(r).length?warn++:valid++);
-  document.getElementById('statRows').textContent=records.length;
-  document.getElementById('statValid').textContent=valid;
-  document.getElementById('statWarn').textContent=warn;
-}
-function refreshTable(){
-  const body=document.getElementById('dataBody');
-  if(!records.length){body.innerHTML='<tr><td colspan="6" style="color:#98a2b3">Belum ada data.</td></tr>';return}
-  body.innerHTML=records.slice(0,100).map((r,i)=>{
-    const m=mappedRecord(r), issues=validation(r), status=issues.length?`<span class="pill warn">Cek</span>`:`<span class="pill ok">Valid</span>`;
-    return `<tr><td>${i+1}</td><td>${status}</td><td>${escapeHtml(m.nomor_sertifikat)}</td><td>${escapeHtml(m.nama)}</td><td>${escapeHtml(m.instansi)}</td><td>${escapeHtml(m.tanggal)}</td></tr>`;
-  }).join('');
-}
-function syncButtons(){
-  const ready=records.length>0;
-  ['downloadCurrent','downloadCombined','downloadZip','prevBtn','nextBtn'].forEach(id=>document.getElementById(id).disabled=!ready);
-}
-
-document.getElementById('prevBtn').onclick=()=>{if(records.length){currentIndex=(currentIndex-1+records.length)%records.length;renderCurrent()}}
-document.getElementById('nextBtn').onclick=()=>{if(records.length){currentIndex=(currentIndex+1)%records.length;renderCurrent()}}
-
-function drawBackground(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  if(bg.complete && bg.naturalWidth) ctx.drawImage(bg,0,0,canvas.width,canvas.height);
-  else {ctx.fillStyle='#f7f8fa';ctx.fillRect(0,0,canvas.width,canvas.height)}
-}
-
-function fitText(text,maxWidth,startPx,minPx,weight='700'){
-  let size=startPx;
-  ctx.font=`${weight} ${size}px Inter, Arial, sans-serif`;
-  while(size>minPx && ctx.measureText(text).width>maxWidth){
-    size-=1;ctx.font=`${weight} ${size}px Inter, Arial, sans-serif`;
-  }
-  return size;
-}
-function wrapLines(text,maxWidth,fontPx,weight='650',maxLines=5){
-  ctx.font=`${weight} ${fontPx}px Inter, Arial, sans-serif`;
-  const words=String(text||'').split(/\s+/).filter(Boolean), lines=[];let line='';
-  for(const word of words){
-    const test=line?line+' '+word:word;
-    if(ctx.measureText(test).width<=maxWidth) line=test;
-    else{if(line)lines.push(line);line=word;if(lines.length>=maxLines-1)break}
-  }
-  if(line && lines.length<maxLines) lines.push(line);
-  return lines;
-}
-function makeQrCanvas(text,size=110){
-  return new Promise(resolve=>{
-    const host=document.getElementById('qrScratch');host.innerHTML='';
-    new QRCode(host,{text,width:size,height:size,correctLevel:QRCode.CorrectLevel.M});
-    setTimeout(()=>resolve(host.querySelector('canvas')||host.querySelector('img')),20);
-  });
-}
-async function renderRecord(m){
-  drawBackground();
-  const navy='#0b2c59', gold='#d19a24';
-  ctx.textBaseline='alphabetic';
-  const showLabels=document.getElementById('showLabels').checked;
-
-  if(showLabels){
-    ctx.fillStyle='#111111';ctx.font='800 72px Inter, Arial, sans-serif';ctx.fillText('Sertifikat.',pos.titleX,pos.titleY);
-    ctx.fillStyle='#6b6b68';ctx.font='700 22px Inter, Arial, sans-serif';ctx.fillText('NOMOR / '+(m.nomor_sertifikat||'—'),pos.numberX,pos.numberY);
-    ctx.fillStyle='#111111';ctx.font='700 18px Inter, Arial, sans-serif';ctx.fillText('DIBERIKAN KEPADA',pos.labelX,pos.labelY);
-  } else {
-    ctx.fillStyle=navy;ctx.font='750 30px Inter, Arial, sans-serif';
-    if(m.nomor_sertifikat)ctx.fillText(m.nomor_sertifikat,pos.numberX,pos.numberY);
-  }
-
-  const name=String(m.nama||'Nama Penerima');
-  const nameSize=fitText(name,930,52,28,'800');
-  ctx.font=`800 ${nameSize}px Inter, Arial, sans-serif`;ctx.fillStyle='#111111';
-  ctx.fillText(name,pos.nameX,pos.nameY);
-  const nameW=Math.min(ctx.measureText(name).width,930);
-  ctx.fillStyle='#ffc91b';ctx.fillRect(pos.nameX,pos.nameY+10,nameW,5);ctx.fillStyle='#111111';
-
-  ctx.font='700 24px Inter, Arial, sans-serif';
-  if(m.instansi)ctx.fillText(String(m.instansi),pos.institutionX,pos.institutionY);
-
-  const detail=String(m.detail_sertifikat||'Detail sertifikat / kegiatan.');
-  let detailSize=22, lines=wrapLines(detail,860,detailSize,'600',5);
-  if(lines.length>=5 && detail.length>260){detailSize=19;lines=wrapLines(detail,860,detailSize,'600',6)}
-  ctx.font=`600 ${detailSize}px Inter, Arial, sans-serif`;
-  lines.forEach((line,i)=>ctx.fillText(line,pos.detailX,pos.detailY+i*(detailSize+10)));
-
-  if(m.tanggal){
-    const y=pos.detailY+lines.length*(detailSize+10)+8;
-    ctx.font='700 23px Inter, Arial, sans-serif';ctx.fillText('PELAKSANAAN / '+String(m.tanggal),pos.dateX,Math.max(pos.dateY,y));
-  }
-
-  const showQr=document.getElementById('showQr').checked;
-  if(showQr){
-    const code=String(m.kode_verifikasi||'KBY-DEMO');
-    const verify=document.getElementById('verifyBase').value+encodeURIComponent(code);
-    try{
-      const qr=await makeQrCanvas(verify,92);
-      if(qr)ctx.drawImage(qr,pos.qrX,pos.qrY,92,92);
-      ctx.fillStyle=navy;ctx.font='600 14px Inter, Arial, sans-serif';
-      ctx.fillText('QR VERIFIKASI',pos.qrX,pos.qrY+111);
-      ctx.fillText(code,pos.qrX,pos.qrY+130);
-    }catch(e){console.warn('QR gagal',e)}
-  }
-
-  if(m.penandatangan || m.jabatan){
-    ctx.fillStyle=navy;
-    ctx.font='600 14px Inter, Arial, sans-serif';ctx.fillText('PENANDATANGAN',pos.signerX,pos.signerY);
-    if(m.penandatangan){ctx.font='750 22px Inter, Arial, sans-serif';ctx.fillText(String(m.penandatangan),pos.signerX,pos.signerY+32)}
-    if(m.jabatan){ctx.font='700 18px Inter, Arial, sans-serif';ctx.fillText(String(m.jabatan),pos.signerX,pos.signerY+60)}
-  }
-}
-
-async function renderCurrent(){
-  const m=records.length?mappedRecord(records[currentIndex]):{
-    nomor_sertifikat:'KET-XXX/XXXX/2026',nama:'Nama Penerima Sertifikat',instansi:'Instansi / Unit',
-    detail_sertifikat:'Sebagai Peserta dalam Kegiatan ...',tanggal:'Selasa, 21 Juli 2026',
-    penandatangan:'Nama Penandatangan',jabatan:'Jabatan Penandatangan',kode_verifikasi:'KBY-DEMO'
-  };
-  await renderRecord(m);
-  document.getElementById('pageInfo').textContent=records.length?`${currentIndex+1} / ${records.length}`:'0 / 0';
-  document.getElementById('previewStatus').textContent=records.length?`${m.nama||'Tanpa nama'} • ${m.nomor_sertifikat||'tanpa nomor'}`:'Upload Excel untuk memulai.';
-  const issues=records.length?validation(records[currentIndex]):['belum ada data'];
-  const pill=document.getElementById('recordPill');
-  pill.className='pill '+(issues.length?'warn':'ok');
-  pill.textContent=issues.length?(records.length?'Perlu dicek: '+issues.join(', '):'Belum ada data'):'Data valid';
-}
-
-function setProgress(pct,text){
-  const p=document.getElementById('progress');p.style.display='block';
-  document.getElementById('barFill').style.width=pct+'%';
-  document.getElementById('progressText').textContent=text;
-}
-function hideProgress(){setTimeout(()=>document.getElementById('progress').style.display='none',1000)}
-
-document.getElementById('downloadCurrent').onclick=async()=>{
-  if(!records.length)return;await renderCurrent();
-  canvas.toBlob(blob=>saveAs(blob,`preview_${safeName(mappedRecord(records[currentIndex]).nama)}.png`),'image/png');
-};
-
-async function canvasJpegFor(m){
-  await renderRecord(m);
-  return canvas.toDataURL('image/jpeg',0.93);
-}
-
-document.getElementById('downloadCombined').onclick=async()=>{
-  if(!records.length)return;
-  const {jsPDF}=window.jspdf;
-  const pdf=new jsPDF({orientation:'landscape',unit:'mm',format:'a4',compress:true});
-  for(let i=0;i<records.length;i++){
-    setProgress(Math.round((i/records.length)*100),`Membuat halaman ${i+1} dari ${records.length}...`);
-    const data=await canvasJpegFor(mappedRecord(records[i]));
-    if(i>0)pdf.addPage('a4','landscape');
-    pdf.addImage(data,'JPEG',0,0,297,210,undefined,'FAST');
-    await new Promise(r=>setTimeout(r,0));
-  }
-  setProgress(100,'PDF gabungan selesai.');
-  pdf.save(`sertifikat_gabungan_${records.length}_peserta.pdf`);
-  currentIndex=0;await renderCurrent();hideProgress();
-};
-
-document.getElementById('downloadZip').onclick=async()=>{
-  if(!records.length)return;
-  const {jsPDF}=window.jspdf;
-  const zip=new JSZip();
-  for(let i=0;i<records.length;i++){
-    const m=mappedRecord(records[i]);
-    setProgress(Math.round((i/records.length)*100),`Membuat PDF ${i+1} dari ${records.length}: ${m.nama||''}`);
-    const data=await canvasJpegFor(m);
-    const pdf=new jsPDF({orientation:'landscape',unit:'mm',format:'a4',compress:true});
-    pdf.addImage(data,'JPEG',0,0,297,210,undefined,'FAST');
-    const arr=pdf.output('arraybuffer');
-    zip.file(`${String(i+1).padStart(3,'0')}_${safeName(m.nomor_sertifikat)}_${safeName(m.nama)}.pdf`,arr);
-    await new Promise(r=>setTimeout(r,0));
-  }
-  setProgress(96,'Mengompresi ZIP...');
-  const blob=await zip.generateAsync({type:'blob',compression:'DEFLATE',compressionOptions:{level:6}},meta=>{
-    setProgress(96+Math.round(meta.percent*.04),'Mengompresi ZIP...');
-  });
-  saveAs(blob,`sertifikat_${records.length}_peserta.zip`);
-  setProgress(100,'ZIP selesai.');currentIndex=0;await renderCurrent();hideProgress();
-};
-
-renderCurrent();
-</script>
+    document.getElementById("loginForm").addEventListener("submit", function(e){
+      e.preventDefault();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+      const err = document.getElementById("loginError");
+      if(!email || !password){
+        err.style.display = "block";
+        return;
+      }
+      err.style.display = "none";
+      // Prototype only: belum autentikasi. Nanti ganti bagian ini dengan Supabase Auth.
+      window.location.href = "generator.html";
+    });
+  </script>
 </body>
 </html>
