@@ -151,6 +151,8 @@ th{background:#f8fafc;color:#78828e;font-size:9px;letter-spacing:.08em;text-tran
   border:1px solid #d8e0eb;background:#fff;border-radius:999px;padding:7px 11px;font-size:10px;font-weight:750;cursor:pointer
 }
 .action.revoke{color:#b42318}
+.action.delete{color:#fff;background:#b42318;border-color:#b42318}
+.row-actions{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
 .inline-actions{display:flex;gap:10px;flex-wrap:wrap}
 @media(max-width:1180px){
   .hero-shell,.page-head{grid-template-columns:1fr}
@@ -195,7 +197,7 @@ th{background:#f8fafc;color:#78828e;font-size:9px;letter-spacing:.08em;text-tran
         <div class="page-copy">
           <div class="kicker">Admin / Register</div>
           <h1>Register Sertifikat.</h1>
-          <p>Daftar seluruh sertifikat yang telah diterbitkan dari Kabayan. Kabayan divisualkan sedang mencatat untuk menegaskan fungsi register dan pencatatan administratif. Sertifikat yang tidak berlaku dibatalkan, bukan dihapus, sehingga histori nomor dan verifikasi tetap terjaga.</p>
+          <p>Daftar seluruh sertifikat yang telah diterbitkan dari Kabayan. Kabayan divisualkan sedang mencatat untuk menegaskan fungsi register dan pencatatan administratif. Sertifikat dapat dibatalkan atau dihapus permanen oleh admin. Gunakan Hapus hanya jika data memang ingin dihilangkan dari Register dan tidak lagi dapat diverifikasi.</p>
         </div>
         <div class="page-hero">
           <img src="assets/kabayan-register.webp" alt="Kabayan sedang mencatat">
@@ -261,12 +263,20 @@ function render(){
  <td>${esc(r.event_date||'—')}</td>
  <td>${esc(r.issuer||'—')}</td>
  <td>${esc(fmtDate(r.issued_at))}</td>
- <td>${r.status==='valid'?`<button class="action revoke" data-revoke="${r.id}">Batalkan</button>`:'—'}</td>
+ <td><div class="row-actions">
+ ${r.status==='valid'?`<button class="action revoke" data-revoke="${r.id}">Batalkan</button>`:''}
+ <button class="action delete" data-delete="${r.id}" data-number="${esc(r.certificate_number)}" data-name="${esc(r.recipient_name)}">Hapus</button>
+ </div></td>
  </tr>`).join(''):'<tr><td colspan="8">Tidak ada data.</td></tr>';
  document.getElementById('countAll').textContent=rows.length;
  document.getElementById('countValid').textContent=rows.filter(r=>r.status==='valid').length;
  document.getElementById('countRevoked').textContent=rows.filter(r=>r.status==='revoked').length;
  body.querySelectorAll('[data-revoke]').forEach(b=>b.onclick=()=>revoke(b.dataset.revoke));
+ body.querySelectorAll('[data-delete]').forEach(b=>b.onclick=()=>deleteCertificate(
+   b.dataset.delete,
+   b.dataset.number,
+   b.dataset.name
+ ));
 }
 async function guard(){
  sb=KabayanSupabase.getClient();
@@ -296,6 +306,30 @@ async function revoke(id){
   await load();
  }catch(e){alert(e.message)}
 }
+
+async function deleteCertificate(id, number, name){
+ const label=[number,name].filter(Boolean).join(' — ');
+ const ok=confirm(
+   'HAPUS PERMANEN sertifikat ini?\n\n'+label+
+   '\n\nData akan dihapus dari Supabase dan QR verifikasi tidak lagi menemukan sertifikat ini. Tindakan ini tidak dapat dibatalkan.'
+ );
+ if(!ok)return;
+
+ const typed=prompt('Untuk melanjutkan, ketik HAPUS:');
+ if(typed!=='HAPUS'){
+   alert('Penghapusan dibatalkan.');
+   return;
+ }
+
+ try{
+  const {error}=await sb.from('certificates').delete().eq('id',id);
+  if(error)throw error;
+  await load();
+ }catch(e){
+  alert('Gagal menghapus: '+(e.message||e));
+ }
+}
+
 document.getElementById('search').addEventListener('input',render);
 document.getElementById('refresh').onclick=load;
 document.getElementById('logout').onclick=async()=>{try{await sb.auth.signOut()}finally{location.replace('index.html')}};
