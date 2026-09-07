@@ -153,35 +153,22 @@
     }
     .hero-description{max-width:620px;margin:24px 0 0;color:#5d6674;font-size:17px;line-height:1.7}
     .hero-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:28px}
-    .hero-stage{position:relative;min-height:310px;display:grid;place-items:center;isolation:isolate}
-    .hero-cloud{
-      position:absolute;z-index:-2;width:min(45vw,600px);height:360px;
-      background:url("../assets/img/mega-mendung-cirebon.webp") center/contain no-repeat;
-      opacity:.58;
+    .hero-stage{
+      position:relative;
+      min-height:430px;
+      display:grid;
+      place-items:center;
+      overflow:visible;
     }
-    .hero-mascot{
-      position:absolute;z-index:-1;right:-8px;bottom:-34px;width:min(24vw,280px);max-height:360px;
-      object-fit:contain;opacity:.96;filter:drop-shadow(0 24px 20px rgba(27,45,74,.15));
-      pointer-events:none;user-select:none;
+    .hero-figure{
+      width:min(100%,650px);
+      max-height:560px;
+      object-fit:contain;
+      display:block;
+      filter:drop-shadow(0 18px 42px rgba(28,50,80,.10));
+      user-select:none;
+      pointer-events:none;
     }
-    .hero-process{
-      width:min(480px,92%);padding:25px;border:1px solid #dfe8f3;border-radius:30px;background:rgba(255,255,255,.94);
-      box-shadow:0 30px 70px rgba(29,64,110,.13);backdrop-filter:blur(12px);
-    }
-    .process-head{
-      display:flex;align-items:center;justify-content:space-between;padding-bottom:17px;border-bottom:1px solid #edf0f4;
-      color:#7d8792;font-size:10px;font-weight:780;letter-spacing:.08em;text-transform:uppercase;
-    }
-    .process-status{display:inline-flex;align-items:center;gap:6px;color:var(--green)}
-    .process-status::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--green)}
-    .process-flow{display:grid;grid-template-columns:1fr 28px 1fr 28px 1fr;gap:7px;align-items:center;margin-top:22px}
-    .process-node{min-height:116px;padding:15px;border:1px solid #e4eaf2;border-radius:18px;background:#fff}
-    .process-node small{display:block;color:#9aa1aa;font-size:8px;font-weight:800;letter-spacing:.11em}
-    .process-node strong{display:block;margin-top:10px;font-size:18px;letter-spacing:-.04em}
-    .process-node i{display:block;width:42px;height:6px;margin-top:16px;border-radius:99px;background:#e9eef5}
-    .process-node:nth-child(3) i{background:linear-gradient(90deg,#0a66ff,#36a7d0)}
-    .process-node:nth-child(5) i{background:#f7c948}
-    .process-arrow{text-align:center;color:#9aa5b1;font-size:18px}
 
     /* common buttons */
     .btn{
@@ -391,14 +378,10 @@
     /* motion */
     .hero-eyebrow,.hero-title,.hero-description,.hero-actions{opacity:0;transform:translateY(22px);animation:heroEnter .72s var(--ease) both}
     .hero-eyebrow{animation-delay:.06s}.hero-title{animation-delay:.15s}.hero-description{animation-delay:.24s}.hero-actions{animation-delay:.33s}
-    .hero-process{opacity:0;transform:translateY(28px) scale(.98);animation:processEnter .82s var(--ease) .24s forwards}
-    .hero-cloud{opacity:0;transform:scale(.97);animation:cloudEnter 1.05s var(--ease) .45s forwards,cloudBreath 8.5s ease-in-out 1.6s infinite}
-    .hero-mascot{animation:mascotFloat 5.8s ease-in-out 1.4s infinite}
+    .hero-figure{opacity:0;transform:translateY(24px) scale(.985);animation:figureEnter .85s var(--ease) .24s forwards,figureFloat 5.6s ease-in-out 1.3s infinite}
     @keyframes heroEnter{to{opacity:1;transform:translateY(0)}}
-    @keyframes processEnter{to{opacity:1;transform:translateY(0) scale(1)}}
-    @keyframes cloudEnter{to{opacity:.58;transform:scale(1)}}
-    @keyframes cloudBreath{0%,100%{scale:1;translate:0 0}50%{scale:1.02;translate:0 -5px}}
-    @keyframes mascotFloat{0%,100%{translate:0 0}50%{translate:0 -7px}}
+    @keyframes figureEnter{to{opacity:1;transform:translateY(0) scale(1)}}
+    @keyframes figureFloat{0%,100%{translate:0 0}50%{translate:0 -8px}}
 
     @media(max-width:1060px){
       .layout{grid-template-columns:340px minmax(0,1fr)}
@@ -407,15 +390,13 @@
     @media(max-width:900px){
       .desktop-menu,.nav-cta{display:none}.menu-toggle{display:grid}.nav-inner{width:min(100% - 28px,var(--max-width))}
       .hero-shell{grid-template-columns:1fr;gap:12px;width:min(100% - 28px,var(--max-width));padding:48px 0 58px}
-      .hero-stage{min-height:300px}.hero-cloud{width:min(96vw,600px)}
-      .hero-mascot{width:min(45vw,250px)}
+      .hero-stage{min-height:320px}
       .workspace{padding:68px 18px 90px}.workspace-head{align-items:flex-start;flex-direction:column}
       .layout{grid-template-columns:1fr}.previewCard{position:relative;top:auto}
     }
     @media(max-width:640px){
       .hero-title{font-size:49px}.hero-description{font-size:15px}
-      .hero-process{width:100%;padding:20px}.process-flow{grid-template-columns:1fr}.process-arrow{transform:rotate(90deg)}
-      .hero-mascot{opacity:.28;right:-18px}
+      .hero-figure{width:min(100%,540px);max-height:470px}
       .workspace-title{font-size:48px}.positions{grid-template-columns:1fr}
       .canvasWrap{padding:22px 10px}.previewHeader{align-items:flex-start;flex-direction:column}
       .previewFooter{align-items:flex-start;flex-direction:column}
@@ -423,7 +404,7 @@
     }
     @media(prefers-reduced-motion:reduce){
       html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}
-      .hero-eyebrow,.hero-title,.hero-description,.hero-actions,.hero-process,.hero-cloud{opacity:1!important;transform:none!important}
+      .hero-eyebrow,.hero-title,.hero-description,.hero-actions,.hero-figure{opacity:1!important;transform:none!important}
     }
   </style>
 </head>
@@ -477,8 +458,7 @@
           <div class="hero-eyebrow">APLIKASI / SERTIFIKAT</div>
           <h1 class="hero-title">Sertifikat.<br><span class="hero-accent">Lebih Praktis.</span></h1>
           <p class="hero-description">
-            Dari Excel menjadi sertifikat dalam satu alur. Upload data, periksa hasil, lalu unduh PDF gabungan
-            atau ZIP per peserta — tanpa mengubah desain sertifikat yang Anda gunakan.
+            Dari Excel menjadi sertifikat dalam satu alur. Upload data, periksa hasil, lalu unduh PDF gabungan atau ZIP per peserta — tanpa mengubah desain sertifikat yang Anda gunakan.
           </p>
           <div class="hero-actions">
             <a class="btn btn-accent" href="#generator">Buat Sertifikat <span aria-hidden="true">↓</span></a>
@@ -487,18 +467,7 @@
         </div>
 
         <div class="hero-stage" aria-hidden="true">
-          <div class="hero-cloud"></div>
-          <img class="hero-mascot" src="../assets/img/kabayan-aplikasi.webp" alt="" />
-          <div class="hero-process">
-            <div class="process-head"><span>Generator Sertifikat</span><span class="process-status">Siap digunakan</span></div>
-            <div class="process-flow">
-              <div class="process-node"><small>01 / INPUT</small><strong>EXCEL</strong><i></i></div>
-              <div class="process-arrow">→</div>
-              <div class="process-node"><small>02 / CHECK</small><strong>PREVIEW</strong><i></i></div>
-              <div class="process-arrow">→</div>
-              <div class="process-node"><small>03 / OUTPUT</small><strong>PDF / ZIP</strong><i></i></div>
-            </div>
-          </div>
+          <img class="hero-figure" src="assets/kabayan-piagam-hero.png" alt="Kabayan memegang piagam" />
         </div>
       </div>
     </section>
