@@ -34,7 +34,7 @@ sidebar_note: "Jangan tertukar antara password dan passphrase. Password digunaka
 
 custom_css:
   - /assets/css/jasakonstruksi.css?v=20260814-1
-  - /assets/css/sertifikat-elektronik-coretax.css?v=20260907-contrast2
+  - /assets/css/sertifikat-elektronik-coretax.css?v=20260907-contrast3
 
 custom_js:
   - /assets/js/sertifikat-elektronik-coretax.js?v=20260818-role-slider4
