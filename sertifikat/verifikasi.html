@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kabayan — Verifikasi Sertifikat</title>
+<style>
+body{margin:0;background:#f5f7fb;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#101828}
+.wrap{max-width:720px;margin:70px auto;padding:24px}.card{background:#fff;border:1px solid #e4e7ec;border-radius:24px;padding:30px;box-shadow:0 18px 60px rgba(16,38,85,.08)}
+.brand{font-weight:850;color:#102655;font-size:20px}.ok{display:inline-block;margin:18px 0 8px;background:#ecfdf3;color:#067647;padding:7px 12px;border-radius:999px;font-weight:800;font-size:12px}
+h1{color:#102655;letter-spacing:-.03em}.code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#f8fafc;border-radius:12px;padding:14px;word-break:break-all}
+.note{margin-top:22px;background:#fff7ed;color:#9a3412;padding:14px;border-radius:14px;font-size:13px;line-height:1.5}
+</style></head>
+<body><div class="wrap"><div class="card">
+<div class="brand">Kabayan • Verifikasi Sertifikat</div>
+<span class="ok">MODE PROTOTIPE</span>
+<h1>QR berhasil dibaca</h1>
+<p>Kode verifikasi:</p><div class="code" id="code">—</div>
+<div class="note">Halaman ini belum terhubung ke database. Pada versi produksi, kode di atas akan dicocokkan dengan tabel sertifikat di Supabase dan menampilkan nama, nomor sertifikat, kegiatan, tanggal, serta status valid/tidak valid.</div>
+</div></div>
+<script>const p=new URLSearchParams(location.search);document.getElementById('code').textContent=p.get('id')||'Kode tidak tersedia';</script>
+</body></html>
