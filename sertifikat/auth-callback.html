@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Memproses Akses | Kabayan Sertifikat</title><style>
+:root{
+  --ink:#111318;--muted:#6e6e73;--blue:#0a66ff;--yellow:#f7c948;
+  --green:#3eaa80;--red:#b42318;--bg:#f5f7fb;--line:#e1e7ee;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;letter-spacing:-.015em}
+a{color:inherit}
+.wrap{width:min(1040px,calc(100% - 32px));margin:0 auto;padding:56px 0 90px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:36px}
+.brand{font-size:13px;font-weight:800;text-decoration:none}
+.topnav{display:flex;gap:13px;align-items:center;font-size:12px}
+.card{background:#fff;border:1px solid var(--line);border-radius:26px;padding:28px;box-shadow:0 22px 60px rgba(25,45,75,.08)}
+.kicker{display:inline-flex;align-items:center;gap:9px;color:var(--blue);font-size:10px;font-weight:820;letter-spacing:.12em;text-transform:uppercase}
+.kicker::before{content:"";width:24px;height:2px;background:var(--blue)}
+h1{margin:18px 0 12px;font-size:clamp(42px,6vw,72px);line-height:.93;letter-spacing:-.065em}
+.lead{max-width:670px;margin:0;color:#707a86;font-size:15px;line-height:1.65}
+label{display:block;margin:0 0 7px;color:#707a86;font-size:10.5px;font-weight:760}
+input{width:100%;min-height:48px;padding:11px 13px;border:1px solid #dfe4ea;border-radius:13px;background:#fff;outline:none;font:inherit}
+input:focus{border-color:#9dbfea;box-shadow:0 0 0 4px rgba(10,102,255,.07)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
+.grid .full{grid-column:1/-1}
+.btn{min-height:45px;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 17px;border-radius:999px;border:1px solid transparent;font:inherit;font-size:13px;font-weight:750;text-decoration:none;cursor:pointer}
+.btn-primary{background:#111318;color:#fff}
+.btn-accent{background:var(--yellow);color:#1d1d1f}
+.btn-outline{background:#fff;border-color:#d8e0eb;color:#15181e}
+.message{display:none;margin-top:14px;padding:11px 13px;border-radius:13px;font-size:12px;line-height:1.5}
+.message.show{display:block}.message.error{background:#fff1f0;color:#b42318}.message.ok{background:#ecfdf3;color:#067647}
+.state{display:inline-flex;align-items:center;padding:6px 10px;border-radius:999px;font-size:10px;font-weight:800}
+.state.valid{background:#ecfdf3;color:#067647}.state.revoked{background:#fff1f0;color:#b42318}.state.neutral{background:#eef2f6;color:#66707c}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.grid .full{grid-column:auto}.top{align-items:flex-start;flex-direction:column}.card{padding:22px}}
+</style></head>
+<body><div class="wrap"><div class="card"><div class="kicker">KABAYAN / AUTH</div><h1>Memproses akses.</h1>
+<p class="lead" id="status">Membaca link autentikasi Supabase...</p><div class="message error" id="err"></div></div></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script>
+<script>
+const rawHash=location.hash,rawSearch=location.search;
+const hp=new URLSearchParams(rawHash.replace(/^#/,''));
+const sp=new URLSearchParams(rawSearch);
+const type=hp.get('type')||sp.get('type')||'';
+const status=document.getElementById('status'),err=document.getElementById('err');
+let moved=false;
+function route(event,session){
+ if(moved||!session)return;moved=true;
+ if(type==='invite')location.replace('set-password.html');
+ else if(type==='recovery'||event==='PASSWORD_RECOVERY')location.replace('reset-password.html');
+ else location.replace('index.html');
+}
+(async()=>{
+ try{
+   const sb=KabayanSupabase.getClient();
+   sb.auth.onAuthStateChange((event,session)=>route(event,session));
+   const {data:{session},error}=await sb.auth.getSession();
+   if(error)throw error;
+   if(session)route('',session);
+   setTimeout(()=>{
+     if(!moved){err.textContent='Link tidak valid, sudah kedaluwarsa, atau session tidak terbentuk. Kirim invitation/reset baru.';err.classList.add('show');status.textContent='Akses belum dapat diproses.'}
+   },1500);
+ }catch(e){err.textContent=e.message;err.classList.add('show');status.textContent='Terjadi kesalahan.'}
+})();
+</script></body></html>

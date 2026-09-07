@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Register Sertifikat | Kabayan</title><style>
+:root{
+  --ink:#111318;--muted:#6e6e73;--blue:#0a66ff;--yellow:#f7c948;
+  --green:#3eaa80;--red:#b42318;--bg:#f5f7fb;--line:#e1e7ee;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;letter-spacing:-.015em}
+a{color:inherit}
+.wrap{width:min(1040px,calc(100% - 32px));margin:0 auto;padding:56px 0 90px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:36px}
+.brand{font-size:13px;font-weight:800;text-decoration:none}
+.topnav{display:flex;gap:13px;align-items:center;font-size:12px}
+.card{background:#fff;border:1px solid var(--line);border-radius:26px;padding:28px;box-shadow:0 22px 60px rgba(25,45,75,.08)}
+.kicker{display:inline-flex;align-items:center;gap:9px;color:var(--blue);font-size:10px;font-weight:820;letter-spacing:.12em;text-transform:uppercase}
+.kicker::before{content:"";width:24px;height:2px;background:var(--blue)}
+h1{margin:18px 0 12px;font-size:clamp(42px,6vw,72px);line-height:.93;letter-spacing:-.065em}
+.lead{max-width:670px;margin:0;color:#707a86;font-size:15px;line-height:1.65}
+label{display:block;margin:0 0 7px;color:#707a86;font-size:10.5px;font-weight:760}
+input{width:100%;min-height:48px;padding:11px 13px;border:1px solid #dfe4ea;border-radius:13px;background:#fff;outline:none;font:inherit}
+input:focus{border-color:#9dbfea;box-shadow:0 0 0 4px rgba(10,102,255,.07)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
+.grid .full{grid-column:1/-1}
+.btn{min-height:45px;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 17px;border-radius:999px;border:1px solid transparent;font:inherit;font-size:13px;font-weight:750;text-decoration:none;cursor:pointer}
+.btn-primary{background:#111318;color:#fff}
+.btn-accent{background:var(--yellow);color:#1d1d1f}
+.btn-outline{background:#fff;border-color:#d8e0eb;color:#15181e}
+.message{display:none;margin-top:14px;padding:11px 13px;border-radius:13px;font-size:12px;line-height:1.5}
+.message.show{display:block}.message.error{background:#fff1f0;color:#b42318}.message.ok{background:#ecfdf3;color:#067647}
+.state{display:inline-flex;align-items:center;padding:6px 10px;border-radius:999px;font-size:10px;font-weight:800}
+.state.valid{background:#ecfdf3;color:#067647}.state.revoked{background:#fff1f0;color:#b42318}.state.neutral{background:#eef2f6;color:#66707c}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.grid .full{grid-column:auto}.top{align-items:flex-start;flex-direction:column}.card{padding:22px}}
+
+.toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:24px 0}
+.toolbar input{flex:1;min-width:240px}
+.tablewrap{overflow:auto;border:1px solid var(--line);border-radius:18px}
+table{border-collapse:collapse;width:100%;background:#fff;font-size:12px}
+th,td{padding:12px;border-bottom:1px solid #edf0f3;text-align:left;white-space:nowrap}
+th{background:#f8fafc;color:#78828e;font-size:9px;letter-spacing:.08em;text-transform:uppercase;position:sticky;top:0}
+td.detail{white-space:normal;min-width:280px;line-height:1.5}
+.action{border:1px solid #d8e0eb;background:#fff;border-radius:999px;padding:6px 9px;font-size:10px;font-weight:750;cursor:pointer}
+.action.revoke{color:#b42318}
+.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0}
+.metric{padding:16px;border:1px solid var(--line);border-radius:16px;background:#fff}.metric b{display:block;font-size:26px}.metric span{font-size:10px;color:#7c8692}
+@media(max-width:700px){.summary{grid-template-columns:1fr}}
+</style></head>
+<body><div class="wrap">
+<div class="top"><a class="brand" href="../index.html">Kabayan</a><div class="topnav"><a href="index.html">Generator</a><button class="action" id="logout">Keluar</button></div></div>
+<div class="card"><div class="kicker">ADMIN / REGISTER</div><h1>Register Sertifikat.</h1>
+<p class="lead">Daftar sertifikat yang telah diterbitkan. Sertifikat yang tidak berlaku dibatalkan, bukan dihapus.</p>
+<div class="summary"><div class="metric"><b id="countAll">0</b><span>Total</span></div><div class="metric"><b id="countValid">0</b><span>Valid</span></div><div class="metric"><b id="countRevoked">0</b><span>Dibatalkan</span></div></div>
+<div class="toolbar"><input id="search" type="text" placeholder="Cari nama, nomor sertifikat, instansi..."><button class="btn btn-outline" id="refresh">Muat Ulang</button></div>
+<div class="message error" id="err"></div>
+<div class="tablewrap"><table><thead><tr><th>Status</th><th>Nomor</th><th>Nama</th><th>Instansi</th><th>Tanggal</th><th>Penerbit</th><th>Terbit</th><th>Aksi</th></tr></thead><tbody id="body"><tr><td colspan="8">Memuat...</td></tr></tbody></table></div>
+</div></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script>
+<script>
+let sb,rows=[];
+const body=document.getElementById('body'),err=document.getElementById('err');
+function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+function fmtDate(v){if(!v)return '—';try{return new Intl.DateTimeFormat('id-ID',{dateStyle:'medium',timeStyle:'short'}).format(new Date(v))}catch{return v}}
+function render(){
+ const q=document.getElementById('search').value.trim().toLowerCase();
+ const data=rows.filter(r=>!q||[r.certificate_number,r.recipient_name,r.institution,r.issuer,r.event_date].some(v=>String(v||'').toLowerCase().includes(q)));
+ body.innerHTML=data.length?data.map(r=>`<tr>
+ <td><span class="state ${r.status==='valid'?'valid':'revoked'}">${r.status==='valid'?'VALID':'DIBATALKAN'}</span></td>
+ <td>${esc(r.certificate_number)}</td><td>${esc(r.recipient_name)}</td><td>${esc(r.institution||'—')}</td>
+ <td>${esc(r.event_date||'—')}</td><td>${esc(r.issuer||'—')}</td><td>${esc(fmtDate(r.issued_at))}</td>
+ <td>${r.status==='valid'?`<button class="action revoke" data-revoke="${r.id}">Batalkan</button>`:'—'}</td></tr>`).join(''):'<tr><td colspan="8">Tidak ada data.</td></tr>';
+ document.getElementById('countAll').textContent=rows.length;
+ document.getElementById('countValid').textContent=rows.filter(r=>r.status==='valid').length;
+ document.getElementById('countRevoked').textContent=rows.filter(r=>r.status==='revoked').length;
+ body.querySelectorAll('[data-revoke]').forEach(b=>b.onclick=()=>revoke(b.dataset.revoke));
+}
+async function guard(){
+ sb=KabayanSupabase.getClient();
+ const {data:{session}}=await sb.auth.getSession();
+ if(!session){location.replace('index.html');return false}
+ return true;
+}
+async function load(){
+ err.classList.remove('show');
+ try{
+  if(!await guard())return;
+  const {data,error}=await sb.from('certificates').select('id,certificate_number,recipient_name,institution,event_date,issuer,status,issued_at,revoked_at').order('issued_at',{ascending:false}).limit(1000);
+  if(error)throw error;rows=data||[];render();
+ }catch(e){err.textContent=e.message;err.classList.add('show');body.innerHTML='<tr><td colspan="8">Gagal memuat.</td></tr>'}
+}
+async function revoke(id){
+ if(!confirm('Batalkan sertifikat ini? Nomor tetap disimpan dalam register.'))return;
+ try{
+  const {error}=await sb.from('certificates').update({status:'revoked',revoked_at:new Date().toISOString()}).eq('id',id);
+  if(error)throw error;await load();
+ }catch(e){alert(e.message)}
+}
+document.getElementById('search').addEventListener('input',render);
+document.getElementById('refresh').onclick=load;
+document.getElementById('logout').onclick=async()=>{try{await sb.auth.signOut()}finally{location.replace('index.html')}};
+load();
+</script></body></html>

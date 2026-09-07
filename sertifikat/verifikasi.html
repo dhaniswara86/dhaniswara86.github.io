@@ -1,21 +1,84 @@
 <!doctype html>
-<html lang="id">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Kabayan — Verifikasi Sertifikat</title>
-<style>
-body{margin:0;background:#f5f7fb;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#101828}
-.wrap{max-width:720px;margin:70px auto;padding:24px}.card{background:#fff;border:1px solid #e4e7ec;border-radius:24px;padding:30px;box-shadow:0 18px 60px rgba(16,38,85,.08)}
-.brand{font-weight:850;color:#102655;font-size:20px}.ok{display:inline-block;margin:18px 0 8px;background:#ecfdf3;color:#067647;padding:7px 12px;border-radius:999px;font-weight:800;font-size:12px}
-h1{color:#102655;letter-spacing:-.03em}.code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#f8fafc;border-radius:12px;padding:14px;word-break:break-all}
-.note{margin-top:22px;background:#fff7ed;color:#9a3412;padding:14px;border-radius:14px;font-size:13px;line-height:1.5}
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Verifikasi Sertifikat | Kabayan</title><style>
+:root{
+  --ink:#111318;--muted:#6e6e73;--blue:#0a66ff;--yellow:#f7c948;
+  --green:#3eaa80;--red:#b42318;--bg:#f5f7fb;--line:#e1e7ee;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;letter-spacing:-.015em}
+a{color:inherit}
+.wrap{width:min(1040px,calc(100% - 32px));margin:0 auto;padding:56px 0 90px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:36px}
+.brand{font-size:13px;font-weight:800;text-decoration:none}
+.topnav{display:flex;gap:13px;align-items:center;font-size:12px}
+.card{background:#fff;border:1px solid var(--line);border-radius:26px;padding:28px;box-shadow:0 22px 60px rgba(25,45,75,.08)}
+.kicker{display:inline-flex;align-items:center;gap:9px;color:var(--blue);font-size:10px;font-weight:820;letter-spacing:.12em;text-transform:uppercase}
+.kicker::before{content:"";width:24px;height:2px;background:var(--blue)}
+h1{margin:18px 0 12px;font-size:clamp(42px,6vw,72px);line-height:.93;letter-spacing:-.065em}
+.lead{max-width:670px;margin:0;color:#707a86;font-size:15px;line-height:1.65}
+label{display:block;margin:0 0 7px;color:#707a86;font-size:10.5px;font-weight:760}
+input{width:100%;min-height:48px;padding:11px 13px;border:1px solid #dfe4ea;border-radius:13px;background:#fff;outline:none;font:inherit}
+input:focus{border-color:#9dbfea;box-shadow:0 0 0 4px rgba(10,102,255,.07)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
+.grid .full{grid-column:1/-1}
+.btn{min-height:45px;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 17px;border-radius:999px;border:1px solid transparent;font:inherit;font-size:13px;font-weight:750;text-decoration:none;cursor:pointer}
+.btn-primary{background:#111318;color:#fff}
+.btn-accent{background:var(--yellow);color:#1d1d1f}
+.btn-outline{background:#fff;border-color:#d8e0eb;color:#15181e}
+.message{display:none;margin-top:14px;padding:11px 13px;border-radius:13px;font-size:12px;line-height:1.5}
+.message.show{display:block}.message.error{background:#fff1f0;color:#b42318}.message.ok{background:#ecfdf3;color:#067647}
+.state{display:inline-flex;align-items:center;padding:6px 10px;border-radius:999px;font-size:10px;font-weight:800}
+.state.valid{background:#ecfdf3;color:#067647}.state.revoked{background:#fff1f0;color:#b42318}.state.neutral{background:#eef2f6;color:#66707c}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.grid .full{grid-column:auto}.top{align-items:flex-start;flex-direction:column}.card{padding:22px}}
+
+.verify-icon{width:78px;height:78px;display:grid;place-items:center;margin:24px 0 10px;border-radius:24px;background:#eef2f6;font-size:34px;font-weight:900}
+.verify-icon.valid{background:#ecfdf3;color:#067647}.verify-icon.revoked{background:#fff1f0;color:#b42318}.verify-icon.missing{background:#f2f4f7;color:#667085}
+.info{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:24px}
+.info div{padding:14px;border:1px solid var(--line);border-radius:15px;background:#fff}
+.info small{display:block;color:#8a939f;font-size:9px;font-weight:800;letter-spacing:.07em;text-transform:uppercase}
+.info strong{display:block;margin-top:5px;font-size:13px;line-height:1.45}
+.info .wide{grid-column:1/-1}
+.code{margin-top:16px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10px;color:#8a939f;word-break:break-all}
+@media(max-width:700px){.info{grid-template-columns:1fr}.info .wide{grid-column:auto}}
 </style></head>
-<body><div class="wrap"><div class="card">
-<div class="brand">Kabayan • Verifikasi Sertifikat</div>
-<span class="ok">MODE PROTOTIPE</span>
-<h1>QR berhasil dibaca</h1>
-<p>Kode verifikasi:</p><div class="code" id="code">—</div>
-<div class="note">Halaman ini belum terhubung ke database. Pada versi produksi, kode di atas akan dicocokkan dengan tabel sertifikat di Supabase dan menampilkan nama, nomor sertifikat, kegiatan, tanggal, serta status valid/tidak valid.</div>
+<body><div class="wrap">
+<div class="top"><a class="brand" href="../index.html">Kabayan</a><div class="topnav"><a href="index.html">Generator</a></div></div>
+<div class="card"><div class="kicker">PUBLIK / VERIFIKASI</div><div class="verify-icon missing" id="icon">…</div>
+<h1 id="title">Memeriksa sertifikat.</h1><p class="lead" id="lead">Kabayan sedang mencocokkan kode QR dengan Register Sertifikat.</p>
+<div class="message error" id="err"></div><div class="info" id="info" style="display:none"></div><div class="code" id="code"></div>
 </div></div>
-<script>const p=new URLSearchParams(location.search);document.getElementById('code').textContent=p.get('id')||'Kode tidak tersedia';</script>
-</body></html>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script>
+<script>
+const p=new URLSearchParams(location.search),code=p.get('id')||'';
+const icon=document.getElementById('icon'),title=document.getElementById('title'),lead=document.getElementById('lead'),info=document.getElementById('info'),err=document.getElementById('err');
+document.getElementById('code').textContent=code?`Verification ID: ${code}`:'';
+function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+function item(label,value,wide=false){return `<div class="${wide?'wide':''}"><small>${esc(label)}</small><strong>${esc(value||'—')}</strong></div>`}
+(async()=>{
+ try{
+  if(!/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(code))throw new Error('Kode verifikasi tidak valid.');
+  const sb=KabayanSupabase.getClient();
+  const {data,error}=await sb.rpc('verify_certificate',{p_code:code});
+  if(error)throw error;
+  const r=Array.isArray(data)?data[0]:data;
+  if(!r){
+    icon.textContent='?';icon.className='verify-icon missing';title.textContent='Sertifikat tidak ditemukan.';
+    lead.textContent='Kode verifikasi tidak tercatat dalam Register Sertifikat Kabayan.';return;
+  }
+  const valid=r.status==='valid';
+  icon.textContent=valid?'✓':'×';icon.className='verify-icon '+(valid?'valid':'revoked');
+  title.textContent=valid?'Sertifikat valid.':'Sertifikat dibatalkan.';
+  lead.textContent=valid?'Data sertifikat cocok dengan Register Sertifikat Kabayan.':'Sertifikat tercatat, tetapi statusnya telah dibatalkan oleh penerbit.';
+  info.style.display='grid';
+  info.innerHTML=[
+    item('Nomor Sertifikat',r.certificate_number,true),item('Nama Penerima',r.recipient_name),
+    item('Instansi',r.institution),item('Tanggal Kegiatan',r.event_date),item('Penerbit',r.issuer),
+    item('Penandatangan',r.signer_name),item('Jabatan',r.signer_title),
+    item('Detail Sertifikat',r.certificate_detail,true),
+    item('Status',valid?'VALID':'DIBATALKAN')
+  ].join('');
+ }catch(e){icon.textContent='!';icon.className='verify-icon missing';title.textContent='Verifikasi belum dapat dilakukan.';lead.textContent='Periksa konfigurasi atau kode QR.';err.textContent=e.message;err.classList.add('show')}
+})();
+</script></body></html>

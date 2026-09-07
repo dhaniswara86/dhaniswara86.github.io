@@ -383,6 +383,42 @@
     @keyframes figureEnter{to{opacity:1;transform:translateY(0) scale(1)}}
     @keyframes figureFloat{0%,100%{translate:0 0}50%{translate:0 -8px}}
 
+
+    /* authentication gate */
+    .auth-gate{
+      position:fixed;z-index:2000;inset:0;display:grid;place-items:center;padding:24px;
+      background:rgba(247,249,252,.94);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+    }
+    .auth-gate.is-hidden{display:none}
+    .auth-card{
+      width:min(480px,100%);padding:30px;border:1px solid #dfe8f3;border-radius:28px;background:#fff;
+      box-shadow:0 34px 75px rgba(29,64,110,.14);
+    }
+    .auth-kicker{display:flex;align-items:center;gap:9px;color:var(--blue);font-size:10px;font-weight:820;letter-spacing:.12em;text-transform:uppercase}
+    .auth-kicker::before{content:"";width:24px;height:2px;background:var(--blue)}
+    .auth-card h2{margin:18px 0 8px;font-size:38px;line-height:1;letter-spacing:-.055em}
+    .auth-card p{margin:0;color:#737d89;font-size:13px;line-height:1.6}
+    .auth-fields{display:grid;gap:13px;margin-top:24px}
+    .auth-actions{display:grid;gap:9px;margin-top:18px}
+    .auth-message{display:none;margin-top:13px;padding:10px 12px;border-radius:12px;font-size:11px;line-height:1.45}
+    .auth-message.show{display:block}
+    .auth-message.error{background:#fff1f0;color:#b42318}
+    .auth-message.ok{background:#ecfdf3;color:#067647}
+    .auth-links{display:flex;justify-content:space-between;gap:12px;margin-top:15px;font-size:11px}
+    .auth-links button{border:0;background:transparent;color:#5b6b80;padding:0;text-decoration:underline}
+    .auth-user{
+      display:none;align-items:center;gap:8px;margin-left:8px;padding-left:12px;border-left:1px solid #e5e9ef;
+      color:#66707c;font-size:10px;
+    }
+    .auth-user.is-visible{display:flex}
+    .auth-user a,.auth-user button{border:0;background:transparent;color:#111318;font-size:10px;font-weight:700;padding:0;text-decoration:none}
+    .publish-box{margin-top:14px;padding:14px;border:1px solid #dce7f4;border-radius:16px;background:#f7faff}
+    .publish-box strong{display:block;font-size:12px;color:#111318}
+    .publish-box p{margin:5px 0 11px;color:#75808d;font-size:10.5px;line-height:1.5}
+    .publish-status{margin-top:9px;font-size:10.5px;color:#7a8490;line-height:1.45}
+    .publish-status.ok{color:#067647}
+    .publish-status.error{color:#b42318}
+
     @media(max-width:1060px){
       .layout{grid-template-columns:340px minmax(0,1fr)}
       .desktop-menu{gap:18px}
@@ -432,6 +468,11 @@
 
       <div class="nav-actions">
         <a class="nav-cta" href="#generator">Mulai Generate <span aria-hidden="true">↓</span></a>
+        <div class="auth-user" id="authUser">
+          <span id="authEmail"></span>
+          <a href="register.html">Register</a>
+          <button type="button" id="logoutButton">Keluar</button>
+        </div>
         <label class="menu-toggle" for="mobileNavToggle" aria-label="Buka atau tutup menu" aria-controls="mobileMenu">
           <span class="menu-icon-open" aria-hidden="true">☰</span>
           <span class="menu-icon-close" aria-hidden="true">×</span>
@@ -451,6 +492,38 @@
     <a class="mobile-menu-cta" href="#generator"><b>Buka generator</b><span aria-hidden="true">↓</span></a>
   </nav>
 
+  <section class="auth-gate" id="authGate" aria-label="Login administrator">
+    <div class="auth-card">
+      <div class="auth-kicker">ADMIN / SERTIFIKAT</div>
+      <h2>Masuk ke Kabayan.</h2>
+      <p>Generator dan Register Sertifikat hanya dapat digunakan oleh akun yang telah diundang.</p>
+
+      <form id="loginForm">
+        <div class="auth-fields">
+          <div>
+            <label for="loginEmail">Email</label>
+            <input type="text" id="loginEmail" autocomplete="username" placeholder="nama@contoh.go.id" required>
+          </div>
+          <div>
+            <label for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" autocomplete="current-password" placeholder="••••••••" required>
+          </div>
+        </div>
+        <div class="auth-actions">
+          <button class="btn btn-accent" type="submit" id="loginButton">Masuk</button>
+        </div>
+      </form>
+
+      <div class="auth-message error" id="authError"></div>
+      <div class="auth-message ok" id="authOk"></div>
+
+      <div class="auth-links">
+        <button type="button" id="forgotPasswordButton">Lupa password?</button>
+        <span id="configHint">Akses menggunakan Supabase Auth.</span>
+      </div>
+    </div>
+  </section>
+
   <main>
     <section class="generator-hero">
       <div class="hero-shell">
@@ -467,7 +540,7 @@
         </div>
 
         <div class="hero-stage" aria-hidden="true">
-          <img class="hero-figure" src="assets/kabayan-piagam-hero.webp" alt="Kabayan memegang piagam" />
+          <img class="hero-figure" src="assets/kabayan-piagam-hero.png" alt="Kabayan memegang piagam" />
         </div>
       </div>
     </section>
@@ -676,12 +749,28 @@
               <div><span class="step-number">05</span></div>
               <h2>Generate</h2>
             </div>
-            <p class="sub">Nama panjang dan detail kegiatan akan menyesuaikan otomatis pada area sertifikat.</p>
+            <p class="sub">Periksa data, tentukan unit penerbit, lalu terbitkan ke Register Kabayan sebelum mengunduh PDF final.</p>
+
+            <div style="margin-bottom:12px">
+              <label>Unit Penerbit</label>
+              <input type="text" id="issuerName" placeholder="Contoh: KPP Pratama ... / Kanwil DJP ..." />
+            </div>
 
             <div class="actions">
               <button class="btn btn-outline" id="downloadCurrent" disabled>PNG Preview</button>
+            </div>
+
+            <div class="publish-box">
+              <strong>Terbitkan ke Register Sertifikat</strong>
+              <p>Setelah diterbitkan, setiap penerima memiliki verification code unik dan QR pada PDF dapat diverifikasi secara online.</p>
+              <button class="btn btn-accent" id="publishCertificates" type="button" disabled>Terbitkan Sertifikat</button>
+              <div class="publish-status" id="publishStatus">Belum diterbitkan.</div>
+            </div>
+
+            <div class="actions" style="margin-top:12px">
               <button class="btn btn-accent" id="downloadCombined" disabled>PDF Gabungan</button>
               <button class="btn btn-primary" id="downloadZip" disabled>ZIP PDF</button>
+              <a class="btn btn-outline" href="register.html">Lihat Register</a>
             </div>
 
             <div class="progress" id="progress">
@@ -690,7 +779,7 @@
             </div>
 
             <div class="note">
-              QR pada prototipe adalah QR verifikasi Kabayan, bukan tanda tangan elektronik resmi.
+              QR verifikasi Kabayan akan aktif setelah sertifikat diterbitkan ke Register.
               Untuk penggunaan resmi, gunakan template dan mekanisme penandatanganan yang berwenang.
             </div>
 
@@ -775,6 +864,10 @@
 
   <div id="qrScratch" style="position:fixed;left:-99999px;top:-99999px"></div>
 
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
@@ -817,6 +910,35 @@ const fieldDefs = [
   ['kode_verifikasi','Kode Verifikasi',false,['kode_verifikasi','kode verifikasi','kode','verification_code']]
 ];
 let mapping = {};
+let verificationCodes = [];
+let batchPublished = false;
+let publishedBatchId = null;
+let currentAuthUser = null;
+let sbClient = null;
+
+function uuidv4(){
+  if(window.crypto && typeof window.crypto.randomUUID === 'function'){
+    return window.crypto.randomUUID();
+  }
+  const bytes=new Uint8Array(16);
+  crypto.getRandomValues(bytes);
+  bytes[6]=(bytes[6]&0x0f)|0x40;
+  bytes[8]=(bytes[8]&0x3f)|0x80;
+  const hex=[...bytes].map(b=>b.toString(16).padStart(2,'0')).join('');
+  return `${hex.slice(0,8)}-${hex.slice(8,12)}-${hex.slice(12,16)}-${hex.slice(16,20)}-${hex.slice(20)}`;
+}
+function ensureVerificationCodes(){
+  verificationCodes = records.map((_,i)=>verificationCodes[i] || uuidv4());
+}
+function invalidatePublication(){
+  batchPublished=false;
+  publishedBatchId=null;
+  const status=document.getElementById('publishStatus');
+  if(status){
+    status.textContent='Belum diterbitkan.';
+    status.className='publish-status';
+  }
+}
 
 let numberMode = 'auto';
 let numberingApplied = false;
@@ -888,6 +1010,7 @@ function generateNumberAt(index,config=currentNumberConfig()){
 }
 
 function setNumberingDirty(){
+  invalidatePublication();
   if(numberMode==='auto'){
     numberingApplied=false; appliedNumberConfig=null;
     const s=document.getElementById('numberState');
@@ -1031,6 +1154,9 @@ function readExcel(file){
       const json=XLSX.utils.sheet_to_json(ws,{defval:'',raw:false});
       headers=json.length?Object.keys(json[0]):[];
       records=json;
+      verificationCodes=[];
+      ensureVerificationCodes();
+      invalidatePublication();
       autoMap();
       buildMapping();
       applyMappingAndRefresh();
@@ -1066,10 +1192,8 @@ function mappedRecord(r,index){
   fieldDefs.forEach(([key])=>out[key]=mapping[key]?r[mapping[key]]:'');
   const idx=Number.isInteger(index)?index:Math.max(0,records.indexOf(r));
   out.nomor_sertifikat=resolvedCertificateNumber(r,idx);
-  if(!out.kode_verifikasi){
-    const base=(out.nomor_sertifikat||'KBY')+'-'+(out.nama||'PESERTA');
-    out.kode_verifikasi=btoa(unescape(encodeURIComponent(base))).replace(/[^A-Za-z0-9]/g,'').slice(0,18).toUpperCase();
-  }
+  ensureVerificationCodes();
+  out.kode_verifikasi=verificationCodes[idx] || uuidv4();
   return out;
 }
 function validation(r,index){
@@ -1080,6 +1204,7 @@ function validation(r,index){
   return issues;
 }
 function applyMappingAndRefresh(){
+  if(batchPublished) invalidatePublication();
   currentIndex=Math.min(currentIndex,Math.max(0,records.length-1));
   updateNumberingUI();refreshStats();refreshTable();renderCurrent();syncButtons();
 }
@@ -1102,7 +1227,11 @@ function syncButtons(){
   const ready=records.length>0;
   const outputReady=ready && numberingIsReady() && records.every((r,i)=>!validation(r,i).length);
   ['prevBtn','nextBtn'].forEach(id=>document.getElementById(id).disabled=!ready);
-  ['downloadCurrent','downloadCombined','downloadZip'].forEach(id=>document.getElementById(id).disabled=!outputReady);
+  document.getElementById('downloadCurrent').disabled=!outputReady;
+  const publish=document.getElementById('publishCertificates');
+  if(publish) publish.disabled=!(outputReady && currentAuthUser && !batchPublished);
+  document.getElementById('downloadCombined').disabled=!(outputReady && batchPublished);
+  document.getElementById('downloadZip').disabled=!(outputReady && batchPublished);
 }
 
 document.getElementById('prevBtn').onclick=()=>{if(records.length){currentIndex=(currentIndex-1+records.length)%records.length;renderCurrent()}}
@@ -1303,6 +1432,208 @@ document.getElementById('downloadZip').onclick=async()=>{
 };
 
 
+
+function showAuthMessage(kind,text){
+  const err=document.getElementById('authError');
+  const ok=document.getElementById('authOk');
+  if(err){err.classList.remove('show');err.textContent=''}
+  if(ok){ok.classList.remove('show');ok.textContent=''}
+  const target=kind==='ok'?ok:err;
+  if(target){target.textContent=text;target.classList.add('show')}
+}
+function absolutePage(name){
+  return new URL(name, window.location.href).href;
+}
+async function initAuth(){
+  const gate=document.getElementById('authGate');
+  const userBox=document.getElementById('authUser');
+  const configHint=document.getElementById('configHint');
+
+  if(!window.KabayanSupabase || !window.KabayanSupabase.isConfigured()){
+    if(configHint) configHint.textContent='Isi supabase-config.js terlebih dahulu.';
+    showAuthMessage('error','Supabase belum dikonfigurasi. Isi Project URL dan Publishable Key pada supabase-config.js.');
+    return;
+  }
+
+  try{
+    sbClient=window.KabayanSupabase.getClient();
+
+    const originalHash=window.location.hash;
+    const originalSearch=window.location.search;
+    if(/type=invite/.test(originalHash+originalSearch)){
+      // Bila invitation langsung diarahkan ke index, selesaikan session lalu pindah ke halaman set password.
+      setTimeout(()=>{ window.location.href='set-password.html'; },500);
+      return;
+    }
+    if(/type=recovery/.test(originalHash+originalSearch)){
+      setTimeout(()=>{ window.location.href='reset-password.html'; },500);
+      return;
+    }
+
+    const {data:{session}}=await sbClient.auth.getSession();
+    applyAuthSession(session);
+
+    sbClient.auth.onAuthStateChange((event,session)=>{
+      if(event==='PASSWORD_RECOVERY'){
+        window.location.href='reset-password.html';
+        return;
+      }
+      applyAuthSession(session);
+    });
+  }catch(err){
+    console.error(err);
+    showAuthMessage('error',err.message||'Gagal menghubungkan Supabase.');
+  }
+}
+function applyAuthSession(session){
+  currentAuthUser=session?.user || null;
+  const gate=document.getElementById('authGate');
+  const userBox=document.getElementById('authUser');
+  const authEmail=document.getElementById('authEmail');
+
+  if(currentAuthUser){
+    gate?.classList.add('is-hidden');
+    userBox?.classList.add('is-visible');
+    if(authEmail) authEmail.textContent=currentAuthUser.email||'Admin';
+  }else{
+    gate?.classList.remove('is-hidden');
+    userBox?.classList.remove('is-visible');
+  }
+  syncButtons();
+}
+
+document.getElementById('loginForm')?.addEventListener('submit',async e=>{
+  e.preventDefault();
+  if(!window.KabayanSupabase?.isConfigured()){
+    showAuthMessage('error','Supabase belum dikonfigurasi.');
+    return;
+  }
+  const email=document.getElementById('loginEmail').value.trim();
+  const password=document.getElementById('loginPassword').value;
+  const btn=document.getElementById('loginButton');
+  btn.disabled=true;btn.textContent='Memeriksa...';
+  try{
+    sbClient=sbClient||window.KabayanSupabase.getClient();
+    const {data,error}=await sbClient.auth.signInWithPassword({email,password});
+    if(error)throw error;
+    showAuthMessage('ok','Login berhasil.');
+    applyAuthSession(data.session);
+  }catch(err){
+    showAuthMessage('error',err.message||'Email atau password tidak sesuai.');
+  }finally{
+    btn.disabled=false;btn.textContent='Masuk';
+  }
+});
+
+document.getElementById('forgotPasswordButton')?.addEventListener('click',async()=>{
+  const email=document.getElementById('loginEmail').value.trim();
+  if(!email){
+    showAuthMessage('error','Isi email terlebih dahulu, lalu klik Lupa password.');
+    return;
+  }
+  try{
+    sbClient=sbClient||window.KabayanSupabase.getClient();
+    const {error}=await sbClient.auth.resetPasswordForEmail(email,{
+      redirectTo:absolutePage('reset-password.html')
+    });
+    if(error)throw error;
+    showAuthMessage('ok','Email reset password telah dikirim. Periksa inbox Anda.');
+  }catch(err){
+    showAuthMessage('error',err.message||'Gagal mengirim email reset password.');
+  }
+});
+
+document.getElementById('logoutButton')?.addEventListener('click',async()=>{
+  try{
+    sbClient=sbClient||window.KabayanSupabase.getClient();
+    await sbClient.auth.signOut();
+  }catch(err){console.error(err)}
+  currentAuthUser=null;
+  applyAuthSession(null);
+});
+
+document.getElementById('issuerName')?.addEventListener('input',()=>{
+  if(batchPublished) invalidatePublication();
+  syncButtons();
+});
+
+document.getElementById('publishCertificates')?.addEventListener('click',async()=>{
+  const btn=document.getElementById('publishCertificates');
+  const status=document.getElementById('publishStatus');
+
+  if(!currentAuthUser){
+    status.textContent='Silakan login terlebih dahulu.';
+    status.className='publish-status error';
+    return;
+  }
+  if(!records.length || !numberingIsReady()){
+    status.textContent='Lengkapi Excel dan nomor sertifikat terlebih dahulu.';
+    status.className='publish-status error';
+    return;
+  }
+
+  const issuer=document.getElementById('issuerName').value.trim();
+  if(!issuer){
+    status.textContent='Isi Unit Penerbit terlebih dahulu.';
+    status.className='publish-status error';
+    document.getElementById('issuerName').focus();
+    return;
+  }
+
+  ensureVerificationCodes();
+  const batchId=uuidv4();
+  const payload=records.map((r,i)=>{
+    const m=mappedRecord(r,i);
+    return {
+      batch_id:batchId,
+      verification_code:m.kode_verifikasi,
+      certificate_number:m.nomor_sertifikat,
+      recipient_name:m.nama,
+      institution:m.instansi||null,
+      certificate_detail:m.detail_sertifikat||null,
+      event_name:null,
+      event_date:m.tanggal||null,
+      issuer:issuer,
+      signer_name:m.penandatangan||null,
+      signer_title:m.jabatan||null,
+      status:'valid',
+      created_by:currentAuthUser.id
+    };
+  });
+
+  btn.disabled=true;
+  btn.textContent='Menerbitkan...';
+  status.textContent=`Menyimpan ${payload.length} sertifikat ke Register...`;
+  status.className='publish-status';
+
+  try{
+    sbClient=sbClient||window.KabayanSupabase.getClient();
+    const {data,error}=await sbClient
+      .from('certificates')
+      .insert(payload)
+      .select('id, verification_code, certificate_number');
+
+    if(error)throw error;
+
+    batchPublished=true;
+    publishedBatchId=batchId;
+    status.textContent=`✓ ${data?.length || payload.length} sertifikat berhasil diterbitkan. QR sekarang dapat diverifikasi.`;
+    status.className='publish-status ok';
+    await renderCurrent();
+    syncButtons();
+  }catch(err){
+    console.error(err);
+    status.textContent='Gagal menerbitkan: '+(err.message||'Terjadi kesalahan.');
+    status.className='publish-status error';
+    batchPublished=false;
+    syncButtons();
+  }finally{
+    btn.textContent='Terbitkan Sertifikat';
+    if(!batchPublished) btn.disabled=false;
+  }
+});
+
+
 function initNumberBuilder(){
   document.querySelectorAll('input[name="numberMode"]').forEach(radio=>{
     radio.addEventListener('change',()=>{
@@ -1367,6 +1698,7 @@ function initNumberBuilder(){
   updateNumberingUI();
 }
 initNumberBuilder();
+initAuth();
 
 renderCurrent();
 </script>
