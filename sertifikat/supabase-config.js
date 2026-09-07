@@ -3,8 +3,8 @@
 // JANGAN pernah menaruh Secret Key / service_role di file frontend.
 
 window.KABAYAN_SUPABASE_CONFIG = {
-  url: "GANTI_DENGAN_PROJECT_URL",
-  publishableKey: "GANTI_DENGAN_PUBLISHABLE_KEY"
+  url: "https://nwvycbrzbvpjujnupvfb.supabase.co",
+  publishableKey: "sb_publishable_eAuFwLkAILa8zkUXeCMb-g_NOvlBoeK"
 };
 
 window.KabayanSupabase = {
