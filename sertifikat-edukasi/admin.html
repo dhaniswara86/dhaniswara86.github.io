@@ -683,6 +683,158 @@ body:not(.login-mode) .login{
   }
 }
 
+
+/* ===========================================================
+   LOGIN SAUNG v3.1.1 — FULLSCREEN FIX
+   Memutus login dari constraint layout dashboard lama.
+   =========================================================== */
+
+body.login-mode{
+  margin:0!important;
+  overflow:hidden!important;
+  background:#fff!important;
+}
+
+body.login-mode > .wrap{
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:0!important;
+}
+
+/* Login dibuat layer viewport penuh agar tidak lagi terpengaruh
+   max-width, grid, atau positioning dashboard. */
+body.login-mode #loginView{
+  position:fixed!important;
+  inset:0!important;
+  z-index:9999!important;
+  display:block!important;
+  width:100vw!important;
+  height:100vh!important;
+  min-height:100vh!important;
+  margin:0!important;
+  padding:0!important;
+  overflow:hidden!important;
+  background:#fff!important;
+}
+
+body.login-mode .saung-login-shell{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  min-height:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  display:grid!important;
+  grid-template-columns:minmax(480px,38%) minmax(0,62%)!important;
+  background:#fff!important;
+}
+
+body.login-mode .saung-login-left{
+  width:100%!important;
+  min-width:0!important;
+  min-height:100%!important;
+  padding:28px 58px 30px 68px!important;
+  justify-content:center!important;
+  background:
+    radial-gradient(circle at 96% 16%,rgba(15,104,210,.09),transparent 28%),
+    linear-gradient(180deg,#fff 0%,#f8fbff 100%)!important;
+}
+
+body.login-mode .saung-login-left::after{
+  right:-235px!important;
+  width:470px!important;
+}
+
+body.login-mode .saung-login-card{
+  width:min(440px,100%)!important;
+  max-width:440px!important;
+  margin:0!important;
+}
+
+body.login-mode .saung-login-brand{
+  top:28px!important;
+  left:68px!important;
+}
+
+body.login-mode .saung-login-foot{
+  left:68px!important;
+  bottom:28px!important;
+}
+
+body.login-mode .saung-login-visual{
+  display:block!important;
+  position:relative!important;
+  width:100%!important;
+  min-width:0!important;
+  height:100%!important;
+  min-height:100%!important;
+  overflow:hidden!important;
+  background:
+    linear-gradient(90deg,rgba(255,255,255,.42) 0%,rgba(255,255,255,.10) 16%,rgba(255,255,255,0) 33%),
+    url('assets/saung-admin-login.webp') center center/cover no-repeat!important;
+}
+
+/* Pada desain referensi, visual kanan dibiarkan bersih. */
+body.login-mode .saung-visual-copy{
+  display:none!important;
+}
+
+/* Pastikan elemen dashboard tidak ikut mengambil ruang di belakang login. */
+body.login-mode #appView{
+  display:none!important;
+}
+
+@media(max-width:1050px){
+  body.login-mode .saung-login-shell{
+    grid-template-columns:minmax(450px,44%) minmax(0,56%)!important;
+  }
+  body.login-mode .saung-login-left{
+    padding-left:42px!important;
+    padding-right:38px!important;
+  }
+  body.login-mode .saung-login-brand,
+  body.login-mode .saung-login-foot{
+    left:42px!important;
+  }
+}
+
+@media(max-width:820px){
+  body.login-mode{
+    overflow:auto!important;
+  }
+  body.login-mode #loginView{
+    position:fixed!important;
+    overflow:auto!important;
+  }
+  body.login-mode .saung-login-shell{
+    position:relative!important;
+    display:block!important;
+    min-height:100svh!important;
+  }
+  body.login-mode .saung-login-left{
+    min-height:100svh!important;
+    padding:96px 20px 76px!important;
+  }
+  body.login-mode .saung-login-card{
+    width:min(500px,100%)!important;
+    max-width:500px!important;
+    margin:0 auto!important;
+  }
+  body.login-mode .saung-login-brand{
+    left:22px!important;
+    top:22px!important;
+  }
+  body.login-mode .saung-login-foot{
+    left:22px!important;
+    bottom:20px!important;
+  }
+  body.login-mode .saung-login-visual{
+    display:none!important;
+  }
+}
+
 </style>
 </head>
 <body class="login-mode">
