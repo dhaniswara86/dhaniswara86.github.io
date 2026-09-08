@@ -248,6 +248,46 @@
 
 
 
+
+    /* progressive wizard */
+    .wizard-card{
+      transition:opacity .22s ease,transform .22s ease,border-color .22s ease,box-shadow .22s ease;
+    }
+    .wizard-card.is-locked{display:none}
+    .wizard-card.is-active{
+      border-color:#bfd7f7;
+      box-shadow:0 18px 42px rgba(34,78,130,.08);
+    }
+    .wizard-card.is-complete{
+      border-color:#d8e9df;
+      background:linear-gradient(180deg,#fff 0%,#fbfffc 100%);
+    }
+    .wizard-card.is-complete .step-number{
+      background:#eaf7ef;color:#067647;
+    }
+    .step-continue{
+      margin-top:14px;padding-top:14px;border-top:1px solid #edf1f5;
+      display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;
+    }
+    .step-continue small{color:#7c8793;font-size:10px;line-height:1.45}
+    .wizard-note{
+      margin-top:10px;padding:10px 12px;border-radius:12px;background:#f6f8fb;color:#6f7a87;
+      font-size:10px;line-height:1.5;
+    }
+    .flow-step.is-locked{opacity:.38}
+    .flow-step.is-active{
+      border-color:#b8d3f7;background:#f7fbff;
+      box-shadow:0 8px 20px rgba(10,102,255,.06);
+    }
+    .flow-step.is-active .flow-index{background:var(--blue);color:#fff}
+    .flow-step.is-complete{
+      border-color:#d8e9df;background:#fbfffc;
+    }
+    .flow-step.is-complete .flow-index{background:#eaf7ef;color:#067647}
+    .flow-step.is-complete b::after{
+      content:" ✓";color:#067647;font-weight:850;
+    }
+
     /* alur utama 4 langkah */
     .flow-strip{
       width:min(1220px,100%);margin:0 auto 24px;
@@ -720,20 +760,20 @@
           <h2 class="workspace-title">4 Langkah.<br>Selesai.</h2>
         </div>
         <p class="workspace-note">
-          Gunakan alur utama dari kiri ke kanan. Template sertifikat bawaan sudah siap dipakai; penggantian template dipisahkan sebagai pengaturan opsional.
+          Selesaikan satu tahap terlebih dahulu. Tahap berikutnya akan muncul otomatis setelah tahap sebelumnya selesai. Pengaturan template sertifikat tetap dipisahkan sebagai opsi.
         </p>
       </div>
 
       <div class="flow-strip" aria-label="Empat langkah generator sertifikat">
-        <div class="flow-step"><div class="flow-index">01</div><div><b>Unduh Excel</b><span>Gunakan template data Kabayan.</span></div></div>
-        <div class="flow-step"><div class="flow-index">02</div><div><b>Atur Nomor</b><span>Tentukan format dan nomor awal.</span></div></div>
-        <div class="flow-step"><div class="flow-index">03</div><div><b>Upload Excel</b><span>Masukkan data peserta yang sudah diisi.</span></div></div>
-        <div class="flow-step is-final"><div class="flow-index">04</div><div><b>Generate</b><span>Periksa, terbitkan, lalu unduh.</span></div></div>
+        <div class="flow-step is-active" id="flowStep1"><div class="flow-index">01</div><div><b>Unduh Excel</b><span>Gunakan template data Kabayan.</span></div></div>
+        <div class="flow-step is-locked" id="flowStep2"><div class="flow-index">02</div><div><b>Atur Nomor</b><span>Tentukan format dan nomor awal.</span></div></div>
+        <div class="flow-step is-locked" id="flowStep3"><div class="flow-index">03</div><div><b>Upload Excel</b><span>Masukkan data peserta yang sudah diisi.</span></div></div>
+        <div class="flow-step is-final is-locked" id="flowStep4"><div class="flow-index">04</div><div><b>Generate</b><span>Periksa, terbitkan, lalu unduh.</span></div></div>
       </div>
 
       <div class="layout">
         <aside class="stack">
-          <section class="card" id="excelTemplateCard">
+          <section class="card wizard-card is-active" id="excelTemplateCard" data-wizard-step="1">
             <div class="card-head">
               <div><span class="step-number">01</span></div>
               <h2>Unduh Template Excel</h2>
@@ -742,14 +782,19 @@
             <div class="download-template-box">
               <strong>Template Data Sertifikat</strong>
               <p>Unduh, isi data peserta, lalu simpan sebagai .xlsx. Nomor sertifikat tidak perlu ditulis di Excel.</p>
-              <a class="btn btn-accent" href="contoh-data-sertifikat.xlsx" download>Unduh Template Excel</a>
+              <a class="btn btn-accent" id="downloadExcelTemplate" href="contoh-data-sertifikat.xlsx" download>Unduh Template Excel</a>
               <div class="field-chips" aria-label="Kolom template">
                 <span>nama</span><span>instansi</span><span>detail_sertifikat</span><span>tanggal</span><span>penandatangan</span><span>jabatan</span>
               </div>
             </div>
+            <div class="step-continue">
+              <small>Template Excel sudah Anda miliki atau sudah selesai diunduh?</small>
+              <button class="btn btn-primary" id="continueStep2" type="button">Lanjut ke Tahap 2 →</button>
+            </div>
+            <div class="wizard-note" id="step1Hint">Tahap berikutnya belum ditampilkan agar fokus tetap pada satu langkah.</div>
           </section>
 
-          <section class="card" id="numberCard">
+          <section class="card wizard-card is-locked" id="numberCard" data-wizard-step="2">
             <div class="card-head">
               <div><span class="step-number">02</span></div>
               <h2>Nomor Sertifikat</h2>
@@ -855,7 +900,7 @@
                 <div class="number-summary" id="numberSummary">Nomor belum diterapkan ke data sertifikat.</div>
               </div>
 
-              <button class="btn btn-accent number-apply" id="applyNumbering" type="button">Gunakan Nomor Ini</button>
+              <button class="btn btn-accent number-apply" id="applyNumbering" type="button">Gunakan Nomor Ini &amp; Lanjut →</button>
             </div>
 
             <div class="number-panel" data-number-panel="single">
@@ -866,11 +911,11 @@
                 <div class="number-example" id="singleNumberPreview">KET-119/WPJ.09/2026</div>
                 <div class="number-summary">Nomor yang sama akan digunakan untuk seluruh penerima pada file Excel.</div>
               </div>
-              <button class="btn btn-accent number-apply" id="applySingleNumber" type="button">Gunakan Nomor Ini</button>
+              <button class="btn btn-accent number-apply" id="applySingleNumber" type="button">Gunakan Nomor Ini &amp; Lanjut →</button>
             </div>
           </section>
 
-          <section class="card">
+          <section class="card wizard-card is-locked" id="uploadExcelCard" data-wizard-step="3">
             <div class="card-head">
               <div><span class="step-number">03</span></div>
               <h2>Upload Excel</h2>
@@ -883,7 +928,7 @@
               <input id="excelInput" type="file" accept=".xlsx,.xls" hidden>
             </div>
 
-            <div class="filemeta" id="excelMeta">Belum ada file yang dipilih.</div>
+            <div class="filemeta" id="excelMeta">Belum ada file yang dipilih.</div><div class="wizard-note">Setelah Excel berhasil dibaca, Tahap 4 akan muncul otomatis.</div>
 
             <div class="stats">
               <div class="stat"><b id="statRows">0</b><span>Baris</span></div>
@@ -901,7 +946,7 @@
             <div id="mapping"></div>
           </section>
 
-          <section class="card">
+          <section class="card wizard-card is-locked" id="generateCard" data-wizard-step="4">
             <div class="card-head">
               <div><span class="step-number">04</span></div>
               <h2>Generate Sertifikat</h2>
@@ -942,7 +987,7 @@
           </section>
 
           <details class="optional-card" id="templateSettings">
-            <summary>Pengaturan Template Sertifikat <span style="color:#8993a0;font-size:10px;font-weight:650">Opsional</span></summary>
+            <summary>Pengaturan Template Sertifikat <span style="color:#8993a0;font-size:10px;font-weight:650">Opsional • Di luar alur utama</span></summary>
             <div class="optional-body">
               <span class="optional-label">Tidak perlu dibuka setiap kali</span>
               <p class="sub">Template bawaan sudah siap dipakai. Buka bagian ini hanya jika ingin mengganti PDF/gambar sertifikat, mengatur QR, atau menggeser posisi teks.</p>
@@ -1349,6 +1394,9 @@ function readExcel(file){
       buildMapping();
       applyMappingAndRefresh();
       document.getElementById('excelMeta').textContent=`${file.name} • sheet: ${wb.SheetNames[0]}`;
+      if(records.length){
+        setWizardStep(4,{scroll:true});
+      }
     }catch(err){
       console.error(err); alert('Excel tidak dapat dibaca: '+err.message);
       document.getElementById('excelMeta').textContent='Gagal membaca file.';
@@ -1822,6 +1870,39 @@ document.getElementById('publishCertificates')?.addEventListener('click',async()
 });
 
 
+
+function setWizardStep(step,{scroll=false}={}){
+  step=Math.max(1,Math.min(4,Number(step)||1));
+  for(let i=1;i<=4;i++){
+    const flow=document.getElementById('flowStep'+i);
+    const card=document.querySelector(`[data-wizard-step="${i}"]`);
+    if(flow){
+      flow.classList.toggle('is-complete',i<step);
+      flow.classList.toggle('is-active',i===step);
+      flow.classList.toggle('is-locked',i>step);
+    }
+    if(card){
+      card.classList.toggle('is-complete',i<step);
+      card.classList.toggle('is-active',i===step);
+      card.classList.toggle('is-locked',i>step);
+    }
+  }
+  if(scroll){
+    const card=document.querySelector(`[data-wizard-step="${step}"]`);
+    setTimeout(()=>card?.scrollIntoView({behavior:'smooth',block:'start'}),80);
+  }
+}
+
+document.getElementById('continueStep2')?.addEventListener('click',()=>{
+  setWizardStep(2,{scroll:true});
+});
+
+document.getElementById('downloadExcelTemplate')?.addEventListener('click',()=>{
+  const hint=document.getElementById('step1Hint');
+  if(hint) hint.textContent='Template sedang diunduh. Setelah siap, klik “Lanjut ke Tahap 2”.';
+});
+
+
 function initNumberBuilder(){
   document.querySelectorAll('input[name="numberMode"]').forEach(radio=>{
     radio.addEventListener('change',()=>{
@@ -1867,6 +1948,7 @@ function initNumberBuilder(){
     if(s){s.textContent='Diterapkan';s.classList.add('ok')}
     updateNumberingUI();
     applyMappingAndRefresh();
+    setWizardStep(3,{scroll:true});
   });
 
   document.getElementById('singleNumber')?.addEventListener('input',()=>{
@@ -1880,12 +1962,14 @@ function initNumberBuilder(){
     if(s){s.textContent='Diterapkan';s.classList.add('ok')}
     updateNumberingUI();
     applyMappingAndRefresh();
+    setWizardStep(3,{scroll:true});
   });
 
   numberMode=document.querySelector('input[name="numberMode"]:checked')?.value||'auto';
   updateNumberingUI();
 }
 initNumberBuilder();
+setWizardStep(1);
 initAuth();
 
 renderCurrent();
