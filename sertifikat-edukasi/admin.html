@@ -358,9 +358,334 @@ body{
   .login .card > *{grid-column:1}
 }
 
+
+/* ===========================================================
+   LOGIN SAUNG KABAYAN v3.1
+   Referensi komposisi: login Saung Kabayan
+   =========================================================== */
+
+.login-mode{
+  overflow:hidden;
+  background:#fff;
+}
+.login-mode .wrap{
+  width:100%;
+  max-width:none;
+  padding:0;
+}
+.login-mode .topbar{
+  display:none;
+}
+.login-mode .login{
+  min-height:100vh;
+  display:block;
+}
+
+.saung-login-shell{
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:minmax(520px,42%) minmax(0,58%);
+  background:#f7fbff;
+}
+
+.saung-login-left{
+  position:relative;
+  min-height:100vh;
+  padding:26px 50px 28px 68px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 88% 18%,rgba(10,102,255,.08),transparent 30%),
+    radial-gradient(circle at 16% 82%,rgba(247,201,72,.09),transparent 26%),
+    linear-gradient(180deg,#ffffff 0%,#f7fbff 100%);
+}
+.saung-login-left::after{
+  content:"";
+  position:absolute;
+  right:-250px;
+  top:-10vh;
+  width:530px;
+  height:120vh;
+  border-radius:50%;
+  background:rgba(255,255,255,.72);
+  box-shadow:-30px 0 60px rgba(43,91,135,.04);
+  pointer-events:none;
+}
+
+.saung-login-brand{
+  position:absolute;
+  top:28px;
+  left:68px;
+  z-index:3;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  color:#12376d;
+}
+.saung-login-brand img{
+  width:44px;
+  height:40px;
+  object-fit:contain;
+}
+.saung-login-brand div{
+  display:grid;
+  line-height:1.05;
+}
+.saung-login-brand b{
+  font-size:15px;
+  font-weight:850;
+}
+.saung-login-brand span{
+  margin-top:4px;
+  font-size:10px;
+  font-weight:720;
+  color:#6c84a0;
+  letter-spacing:.03em;
+}
+
+.saung-login-card{
+  position:relative;
+  z-index:4;
+  width:min(440px,100%);
+  margin-left:0;
+  padding:30px 34px 24px;
+  border:1px solid #cddff2;
+  border-radius:26px;
+  background:rgba(255,255,255,.93);
+  box-shadow:0 28px 68px rgba(46,83,123,.10);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+}
+
+.saung-kicker{
+  display:block;
+  margin-bottom:14px;
+  color:#6982a0;
+  font-size:10px;
+  font-weight:850;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+}
+
+.saung-login-card h1{
+  margin:0 0 10px!important;
+  font-size:44px!important;
+  line-height:.96!important;
+  letter-spacing:-.055em!important;
+  color:#12376d;
+}
+.saung-login-card h1 span{
+  color:#12376d;
+}
+.saung-login-card p{
+  margin:0 0 22px!important;
+  color:#6b829e;
+  font-size:13px!important;
+  line-height:1.65!important;
+}
+
+.saung-login-form{
+  display:grid;
+  gap:14px;
+}
+.saung-login-form .field{
+  gap:7px;
+}
+.saung-login-form .field label{
+  font-size:11px;
+  font-weight:800;
+  color:#1b3f6b;
+}
+.saung-input-wrap{
+  position:relative;
+  display:flex;
+  align-items:center;
+}
+.saung-input-wrap input{
+  width:100%;
+  height:52px;
+  padding:0 48px 0 45px!important;
+  border:1px solid #ceddf0!important;
+  border-radius:15px!important;
+  background:#fff!important;
+  color:#16365c!important;
+  font-size:14px!important;
+  box-shadow:none!important;
+}
+.saung-input-wrap input::placeholder{
+  color:#9eb0c6;
+}
+.saung-input-wrap input:focus{
+  border-color:#86b7ec!important;
+  box-shadow:0 0 0 4px rgba(10,102,255,.07)!important;
+}
+.saung-input-icon{
+  position:absolute;
+  left:16px;
+  z-index:2;
+  color:#7d9abb;
+  font-size:16px;
+  pointer-events:none;
+}
+.saung-eye{
+  position:absolute;
+  right:14px;
+  width:30px;
+  height:30px;
+  border:0;
+  background:transparent;
+  color:#7d9abb;
+  font-size:15px;
+  cursor:pointer;
+}
+.saung-login-button{
+  width:100%;
+  min-height:53px;
+  margin-top:4px;
+  justify-content:center;
+  gap:16px;
+  border-radius:15px;
+  background:linear-gradient(135deg,#ffd568,#f2b92d);
+  color:#0d2e58;
+  font-size:14px;
+  font-weight:850;
+  box-shadow:0 10px 24px rgba(204,151,18,.18);
+}
+.saung-login-button span{
+  font-size:22px;
+  line-height:1;
+}
+
+.saung-divider{
+  height:1px;
+  margin:18px 0 13px;
+  background:#e5ebf3;
+}
+.saung-login-help{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:11px;
+  color:#768aa2;
+  font-size:10px;
+  font-weight:720;
+}
+.saung-login-card .msg{
+  margin:14px 0 0;
+}
+
+.saung-login-foot{
+  position:absolute;
+  left:68px;
+  bottom:28px;
+  z-index:4;
+  display:flex;
+  gap:9px;
+  align-items:center;
+  color:#8294aa;
+  font-size:10px;
+}
+
+.saung-login-visual{
+  position:relative;
+  min-height:100vh;
+  overflow:hidden;
+  background:
+    linear-gradient(90deg,rgba(255,255,255,.68) 0%,rgba(255,255,255,.13) 25%,rgba(255,255,255,0) 48%),
+    url('assets/saung-admin-login.webp') center/cover no-repeat;
+}
+.saung-login-visual::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(180deg,rgba(8,35,70,.02),rgba(8,35,70,.04)),
+    radial-gradient(circle at 72% 22%,rgba(255,231,120,.15),transparent 28%);
+  pointer-events:none;
+}
+.saung-visual-copy{
+  position:absolute;
+  z-index:2;
+  left:8%;
+  bottom:6%;
+  max-width:390px;
+  padding:18px 20px;
+  border:1px solid rgba(255,255,255,.48);
+  border-radius:22px;
+  background:rgba(255,255,255,.17);
+  color:#fff;
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  box-shadow:0 12px 36px rgba(0,0,0,.10);
+}
+.saung-visual-copy .pill{
+  background:rgba(255,255,255,.84);
+  color:#174475;
+}
+.saung-visual-copy h2{
+  margin:12px 0 0;
+  font-size:30px;
+  line-height:1.02;
+  letter-spacing:-.045em;
+  text-shadow:0 2px 16px rgba(0,0,0,.18);
+}
+
+/* Once logged in, admin layout returns to v3.0 */
+body:not(.login-mode) .login{
+  display:none;
+}
+
+@media(max-width:1100px){
+  .saung-login-shell{
+    grid-template-columns:minmax(480px,48%) minmax(0,52%);
+  }
+  .saung-login-left{
+    padding-left:46px;
+    padding-right:38px;
+  }
+  .saung-login-brand,
+  .saung-login-foot{
+    left:46px;
+  }
+}
+
+@media(max-width:820px){
+  .login-mode{
+    overflow:auto;
+  }
+  .saung-login-shell{
+    grid-template-columns:1fr;
+    min-height:100svh;
+  }
+  .saung-login-left{
+    min-height:100svh;
+    padding:100px 20px 82px;
+  }
+  .saung-login-left::after{
+    display:none;
+  }
+  .saung-login-brand{
+    top:24px;
+    left:22px;
+  }
+  .saung-login-card{
+    width:min(500px,100%);
+    margin:auto;
+  }
+  .saung-login-foot{
+    left:22px;
+    bottom:22px;
+  }
+  .saung-login-visual{
+    display:none;
+  }
+}
+
 </style>
 </head>
-<body>
+<body class="login-mode">
 <div class="wrap">
 <div class="topbar">
   <a class="brand" href="../index.html"><img src="assets/logo-kabayan.svg" alt="Kabayan"><span>Kabayan / Sertifikat Edukasi</span></a>
@@ -368,16 +693,67 @@ body{
 </div>
 
 <section class="login" id="loginView">
-  <div class="card">
-    <span class="pill">Admin / Edukasi</span>
-    <h1 style="font-size:42px;line-height:.96;letter-spacing:-.06em;margin:16px 0 10px">Kelola Kegiatan.</h1>
-    <p class="muted" style="font-size:12px;line-height:1.6">Atur dua fase kegiatan, Pretest, Posttest, Evaluasi, dan penerbitan sertifikat.</p>
-    <div class="grid" style="margin-top:20px">
-      <div class="field"><label>Email</label><input id="loginEmail" type="email" autocomplete="email"></div>
-      <div class="field"><label>Password</label><input id="loginPassword" type="password" autocomplete="current-password"></div>
-      <button class="btn btn-yellow" id="loginBtn">Masuk</button>
+  <div class="saung-login-shell">
+    <div class="saung-login-left">
+      <div class="saung-login-brand">
+        <img src="assets/logo-kabayan.svg" alt="Kabayan">
+        <div>
+          <b>Sertifikat Edukasi</b>
+          <span>Admin Kabayan</span>
+        </div>
+      </div>
+
+      <div class="saung-login-card">
+        <span class="saung-kicker">Wilujeng Sumping</span>
+        <h1>Masuk ke<br><span>Saung Admin.</span></h1>
+        <p>Kelola kegiatan edukasi, peserta, soal, evaluasi, sertifikat, dan laporan dalam satu ruang kerja.</p>
+
+        <div class="saung-login-form">
+          <div class="field">
+            <label>Email</label>
+            <div class="saung-input-wrap">
+              <span class="saung-input-icon">✉</span>
+              <input id="loginEmail" type="email" autocomplete="email" placeholder="nama@contoh.go.id">
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Password</label>
+            <div class="saung-input-wrap">
+              <span class="saung-input-icon">▢</span>
+              <input id="loginPassword" type="password" autocomplete="current-password" placeholder="Masukkan password">
+              <button type="button" class="saung-eye" id="toggleLoginPassword" aria-label="Tampilkan password">◉</button>
+            </div>
+          </div>
+
+          <button class="btn btn-yellow saung-login-button" id="loginBtn">
+            Masuk ke Saung <span>→</span>
+          </button>
+        </div>
+
+        <div class="saung-divider"></div>
+
+        <div class="saung-login-help">
+          <span>Akses khusus admin Sertifikat Edukasi</span>
+          <span>•</span>
+          <span>Supabase Auth</span>
+        </div>
+
+        <div class="msg err" id="loginErr"></div>
+      </div>
+
+      <div class="saung-login-foot">
+        <span>◈</span>
+        <span>Akses terbatas untuk akun admin yang telah terdaftar.</span>
+      </div>
     </div>
-    <div class="msg err" id="loginErr"></div>
+
+    <div class="saung-login-visual" aria-hidden="true">
+      <div class="saung-visual-copy">
+        <span class="pill">Kabayan Sertifikat Edukasi</span>
+        <h2>Kelola edukasi<br>dalam suasana<br>yang lebih hangat.</h2>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -670,7 +1046,7 @@ async function guard(){
   sb=window.KabayanKegiatanSupabase.getClient();const {data:{session}}=await sb.auth.getSession();
   if(session){showApp();return true}return false
 }
-function showApp(){$('loginView').style.display='none';$('appView').classList.add('show');$('logoutBtn').style.display='inline-flex';loadEvents()}
+function showApp(){document.body.classList.remove('login-mode');$('loginView').style.display='none';$('appView').classList.add('show');$('logoutBtn').style.display='inline-flex';loadEvents()}
 $('loginBtn').onclick=async()=>{try{sb=window.KabayanKegiatanSupabase.getClient();const {error}=await sb.auth.signInWithPassword({email:$('loginEmail').value.trim(),password:$('loginPassword').value});if(error)throw error;showApp()}catch(e){msg('loginErr',e.message)}};
 $('logoutBtn').onclick=async()=>{await sb.auth.signOut();location.reload()};
 
@@ -1593,6 +1969,18 @@ $('excelPosttest').onclick=()=>exportTestExcel('posttest');
 $('printEvaluation').onclick=printEvaluationReport;
 $('excelEvaluation').onclick=exportEvaluationExcel;
 $('exportAllReports').onclick=exportAllReports;
+
+
+const toggleLoginPassword=$('toggleLoginPassword');
+if(toggleLoginPassword){
+  toggleLoginPassword.onclick=()=>{
+    const input=$('loginPassword');
+    const show=input.type==='password';
+    input.type=show?'text':'password';
+    toggleLoginPassword.textContent=show?'◌':'◉';
+    toggleLoginPassword.setAttribute('aria-label',show?'Sembunyikan password':'Tampilkan password');
+  };
+}
 
 guard();
 </script>
