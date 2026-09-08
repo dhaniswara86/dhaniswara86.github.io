@@ -6,7 +6,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 <style>
 :root{--ink:#111318;--muted:#707985;--blue:#0a66ff;--navy:#102655;--yellow:#f7c948;--line:#dfe6ef;--bg:#f5f8fc;--green:#067647;--red:#b42318;--orange:#b54708}
 *{box-sizing:border-box}html,body{margin:0}body{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color:var(--ink);background:radial-gradient(circle at 10% 0,rgba(10,102,255,.07),transparent 28%),radial-gradient(circle at 95% 10%,rgba(247,201,72,.10),transparent 30%),#f7f9fc;letter-spacing:-.015em}
@@ -326,7 +326,7 @@ const CERT_POS={
   institutionX:127,institutionY:502,
   detailX:127,detailY:534,
   dateX:127,dateY:630,
-  qrX:130,qrY:753,
+  qrX:128,qrY:730,
   signerX:125,signerY:888
 };
 
@@ -385,6 +385,7 @@ function formatCertificateDate(value){
 
 async function prepareCertificateQr(){
   preparedQrData=null;
+
   const c=certificateData || {};
   const verifyCode=c.verification_code || progress?.verification_code || '';
   if(!verifyCode) return null;
@@ -392,11 +393,43 @@ async function prepareCertificateQr(){
   const verify=new URL('verifikasi.html?id='+verifyCode,location.href).href;
 
   try{
-    if(window.QRCode && typeof QRCode.toDataURL==='function'){
-      preparedQrData=await QRCode.toDataURL(verify,{margin:1,width:320});
+    if(typeof window.QRCode!=='function'){
+      throw new Error('Library QR Code belum termuat.');
     }
+
+    const host=document.createElement('div');
+    host.style.position='fixed';
+    host.style.left='-99999px';
+    host.style.top='-99999px';
+    host.style.width='320px';
+    host.style.height='320px';
+    document.body.appendChild(host);
+
+    new window.QRCode(host,{
+      text:verify,
+      width:320,
+      height:320,
+      colorDark:'#000000',
+      colorLight:'#ffffff',
+      correctLevel:window.QRCode.CorrectLevel.M
+    });
+
+    await new Promise(resolve=>setTimeout(resolve,80));
+
+    const canvas=host.querySelector('canvas');
+    const img=host.querySelector('img');
+
+    if(canvas){
+      preparedQrData=canvas.toDataURL('image/png');
+    }else if(img?.src){
+      preparedQrData=img.src;
+    }else{
+      throw new Error('QR Code gagal dirender.');
+    }
+
+    host.remove();
   }catch(e){
-    console.warn('QR gagal dibuat.',e);
+    console.error('QR gagal dibuat:',e);
     preparedQrData=null;
   }
 
@@ -504,10 +537,23 @@ async function prepareOfficialCertificate(){
   if(preparedQrData){
     try{
       const qrImg=await loadImage(preparedQrData);
-      ctx.drawImage(qrImg,CERT_POS.qrX,CERT_POS.qrY,108,110);
+
+      // White quiet-zone backing so the QR remains highly scannable.
+      ctx.fillStyle='#ffffff';
+      ctx.fillRect(CERT_POS.qrX-8,CERT_POS.qrY-8,126,126);
+      ctx.drawImage(qrImg,CERT_POS.qrX,CERT_POS.qrY,110,110);
+
+      ctx.fillStyle='#000000';
+      ctx.font=`700 11px ${CERT_FONT}`;
+      ctx.fillText('Scan untuk verifikasi',CERT_POS.qrX,CERT_POS.qrY+127);
     }catch(e){
       console.warn('QR tidak dapat ditempelkan.',e);
     }
+  }else{
+    // Visible fallback so a missing QR is never silent.
+    ctx.fillStyle='#b42318';
+    ctx.font=`700 11px ${CERT_FONT}`;
+    ctx.fillText('QR verifikasi gagal dibuat',CERT_POS.qrX,CERT_POS.qrY+20);
   }
 
   // Penandatangan
@@ -581,7 +627,7 @@ async function renderCertificate(){
     await prepareOfficialCertificate();
     $('pdfBtn').disabled=false;
     $('pdfBtn').textContent='Unduh Sertifikat PDF';
-    $('pdfMsg').textContent='PDF siap diunduh dengan desain sertifikat internal.';
+    $('pdfMsg').textContent=preparedQrData?'PDF siap diunduh. QR verifikasi sudah terpasang.':'PDF siap, tetapi QR gagal dibuat. Silakan refresh halaman sebelum mengunduh.';
     $('pdfBtn').onclick=downloadCertificate;
   }catch(e){
     console.error(e);
