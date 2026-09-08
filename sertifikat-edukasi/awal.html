@@ -99,6 +99,12 @@ a{color:inherit}
   .hero-main h1{font-size:40px}
   .card{padding:18px}
 }
+
+.choice-group{display:grid;gap:8px}
+.choice{display:flex;align-items:center;gap:10px;padding:11px 12px;border:1px solid #e1e7ee;border-radius:13px;background:#fbfcfe;font-size:12px;cursor:pointer}
+.choice:has(input:checked){border-color:#f2c94c;background:#fff8db;box-shadow:0 0 0 2px rgba(247,201,72,.12)}
+.choice input{accent-color:#d8a900}
+.req{color:#d92d20}
 </style>
 </head>
 <body>
@@ -209,34 +215,93 @@ function renderAttendance(){
   $('content').innerHTML=`
     <span class="pill">Tahap 1</span>
     <h2>Daftar Hadir</h2>
-    <p class="muted" style="font-size:11px;line-height:1.65">Lengkapi identitas Anda. Gunakan email yang sama nanti saat membuka Tahap Akhir.</p>
+    <p class="muted" style="font-size:11px;line-height:1.65">
+      Lengkapi data berikut. Email yang sama digunakan untuk masuk ke Tahap Akhir.
+    </p>
+
     <div class="grid two" style="margin-top:16px">
-      <div class="field"><label>Nama lengkap</label><input id="pName"></div>
-      <div class="field"><label>Email</label><input id="pEmail" type="email"></div>
-      <div class="field"><label>Instansi / Nama WP</label><input id="pInstitution"></div>
-      <div class="field"><label>No. HP (opsional)</label><input id="pPhone"></div>
+      <div class="field">
+        <label>Nama Peserta / Penerima Sertifikat <span class="req">*</span></label>
+        <input id="pParticipantName" placeholder="Nama lengkap peserta">
+      </div>
+
+      <div class="field">
+        <label>Nama Wajib Pajak <span class="req">*</span></label>
+        <input id="pTaxpayerName" placeholder="Nama lengkap Wajib Pajak Orang Pribadi atau Badan">
+      </div>
+
+      <div class="field">
+        <label>Nomor Handphone <span class="req">*</span></label>
+        <input id="pPhone" inputmode="numeric" placeholder="Contoh: 081234567890">
+      </div>
+
+      <div class="field">
+        <label>Email <span class="req">*</span></label>
+        <input id="pEmail" type="email" placeholder="nama@email.com">
+      </div>
     </div>
-    <button class="btn btn-yellow" id="attendanceBtn" style="margin-top:14px">Simpan & Lanjut Pretest →</button>
+
+    <div class="grid two" style="margin-top:16px">
+      <div class="field">
+        <label>Berapakah usia Anda? <span class="req">*</span></label>
+        <div class="choice-group">
+          ${['<20','21-30','31-40','41-50','>50'].map(v=>`
+            <label class="choice"><input type="radio" name="ageRange" value="${v}"><span>${v}</span></label>
+          `).join('')}
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Jenis Kelamin <span class="req">*</span></label>
+        <div class="choice-group">
+          ${['Laki-laki','Perempuan'].map(v=>`
+            <label class="choice"><input type="radio" name="gender" value="${v}"><span>${v}</span></label>
+          `).join('')}
+        </div>
+      </div>
+    </div>
+
+    <button class="btn btn-yellow" id="attendanceBtn" style="margin-top:16px">
+      Simpan & Lanjut Pretest →
+    </button>
   `;
   $('attendanceBtn').onclick=submitAttendance;
 }
 
 async function submitAttendance(){
   try {
-    const name=$('pName').value.trim(),email=$('pEmail').value.trim();
-    if(!name||!email) throw new Error('Nama dan email wajib diisi.');
-    const {data,error}=await sb.rpc('public_start_external_participant',{
+    const participantName=$('pParticipantName').value.trim();
+    const taxpayerName=$('pTaxpayerName').value.trim();
+    const phone=$('pPhone').value.trim();
+    const email=$('pEmail').value.trim();
+    const ageRange=document.querySelector('input[name="ageRange"]:checked')?.value;
+    const gender=document.querySelector('input[name="gender"]:checked')?.value;
+
+    if(!participantName) throw new Error('Nama peserta wajib diisi.');
+    if(!taxpayerName) throw new Error('Nama Wajib Pajak wajib diisi.');
+    if(!phone) throw new Error('Nomor Handphone wajib diisi.');
+    if(!/^[0-9+() -]{7,20}$/.test(phone)) throw new Error('Nomor Handphone tidak valid.');
+    if(!email) throw new Error('Email wajib diisi.');
+    if(!ageRange) throw new Error('Usia wajib dipilih.');
+    if(!gender) throw new Error('Jenis kelamin wajib dipilih.');
+
+    const {data,error}=await sb.rpc('public_start_external_participant_v2',{
       p_event_code:code,
-      p_name:name,
+      p_participant_name:participantName,
+      p_taxpayer_name:taxpayerName,
+      p_phone:phone,
       p_email:email,
-      p_institution:$('pInstitution').value.trim()||null,
-      p_phone:$('pPhone').value.trim()||null
+      p_age_range:ageRange,
+      p_gender:gender
     });
+
     if(error) throw error;
     token=data;
     localStorage.setItem('kabayan_edukasi_'+eventData.event_id,token);
     await refresh();
-  } catch(e) { err(e.message) }
+  } catch(e) {
+    err(e.message);
+  }
 }
 
 async function refresh(){

@@ -140,17 +140,40 @@ a{color:inherit}.wrap{width:min(1220px,calc(100% - 28px));margin:auto;padding:22
       </div>
 
       <div class="card" id="evaluationPanel" style="display:none">
-        <div class="section-title"><div><h2>Evaluasi Kegiatan</h2><p>Pertanyaan evaluasi juga dinamis per kegiatan.</p></div><button class="btn btn-outline" id="defaultEvalBtn">Gunakan Template Evaluasi</button></div>
+        <div class="section-title">
+          <div>
+            <h2>Evaluasi Kegiatan</h2>
+            <p>Form evaluasi terstruktur pada Tahap Akhir.</p>
+          </div>
+          <span class="status published">TERSTRUKTUR</span>
+        </div>
+
         <div class="grid two">
-          <div class="field"><label>Pertanyaan</label><textarea id="evalText"></textarea></div>
-          <div class="grid">
-            <div class="field"><label>Tipe jawaban</label><select id="evalType"><option value="rating">Skala 1–5</option><option value="text">Teks / Saran</option></select></div>
-            <div class="field"><label>Urutan</label><input id="evalOrder" type="number" min="1" value="1"></div>
+          <div class="card" style="background:#fbfcfe;box-shadow:none">
+            <span class="pill">Selalu tampil</span>
+            <h3 style="margin:12px 0 6px">No. 11–13</h3>
+            <p class="muted" style="font-size:11px;line-height:1.6">
+              11. Matrix penilaian kegiatan penyuluhan (7 pernyataan)<br>
+              12. Saran dan masukan kegiatan<br>
+              13. Pernah menggunakan Coretax DJP? (Ya/Tidak)
+            </p>
+          </div>
+
+          <div class="card" style="background:#fbfcfe;box-shadow:none">
+            <span class="pill">Jika No. 13 = Ya</span>
+            <h3 style="margin:12px 0 6px">No. 14–17</h3>
+            <p class="muted" style="font-size:11px;line-height:1.6">
+              14. Matrix pengalaman penggunaan Coretax (10 pernyataan)<br>
+              15. Usulan penyempurnaan Coretax<br>
+              16. Pernah melaporkan SPT Tahunan PPh melalui Coretax?<br>
+              17. Dibimbing/diasistensi langsung oleh petugas pajak?
+            </p>
           </div>
         </div>
-        <div class="actions" style="margin:12px 0 14px"><button class="btn btn-yellow" id="saveEvalBtn">Simpan Pertanyaan</button><button class="btn btn-outline" id="clearEvalBtn">Kosongkan</button></div>
-        <div class="tablewrap"><table class="table"><thead><tr><th>No</th><th>Pertanyaan</th><th>Tipe</th><th>Aksi</th></tr></thead><tbody id="evalRows"></tbody></table></div>
-        <div class="msg ok" id="evalOk"></div><div class="msg err" id="evalErr"></div>
+
+        <div class="msg ok show" style="margin-top:14px">
+          Jika peserta menjawab <b>Tidak</b> pada No. 13, evaluasi langsung selesai dan No. 14–17 tidak ditampilkan.
+        </div>
       </div>
 
       <div class="card" id="monitorPanel" style="display:none">
@@ -201,7 +224,7 @@ async function selectEvent(id,scroll=true){
   $('editorTitle').textContent='Pengaturan Kegiatan';$('eventStatus').className='status '+currentEvent.status;$('eventStatus').textContent=currentEvent.status.toUpperCase();
   $('publishEventBtn').disabled=currentEvent.status==='published';$('closeEventBtn').disabled=currentEvent.status==='closed';
   ['phasePanel','questionPanel','evaluationPanel','monitorPanel'].forEach(id=>$(id).style.display='block');
-  renderPhases();renderEvents();renderCopySources();await loadQuestions();await loadEvaluations();await loadParticipants();if(scroll)$('phasePanel').scrollIntoView({behavior:'smooth',block:'start'})
+  renderPhases();renderEvents();renderCopySources();await loadQuestions();await loadParticipants();if(scroll)$('phasePanel').scrollIntoView({behavior:'smooth',block:'start'})
 }
 function renderPhases(){
   if(!currentEvent)return;
@@ -297,14 +320,6 @@ $('copyPretestBtn').onclick=async()=>{
 };
 
 $('copyBtn').onclick=async()=>{try{if(!currentEvent)throw new Error('Pilih kegiatan tujuan.');const source=$('copySource').value;if(!source)throw new Error('Pilih kegiatan sumber.');const {data,error}=await sb.from('external_questions').select('*').eq('event_id',source).eq('test_type',currentTest).eq('active',true).order('sort_order');if(error)throw error;if(!data?.length)throw new Error('Kegiatan sumber belum memiliki soal.');const rows=data.map(q=>({event_id:currentEvent.id,test_type:currentTest,category:q.category,question_text:q.question_text,option_a:q.option_a,option_b:q.option_b,option_c:q.option_c,option_d:q.option_d,correct_answer:q.correct_answer,weight:q.weight,sort_order:q.sort_order,active:true}));const res=await sb.from('external_questions').insert(rows);if(res.error)throw res.error;msg('questionOk',`${rows.length} soal disalin.`,true);loadQuestions()}catch(e){msg('questionErr',e.message)}};
-
-function clearEval(){$('evalText').value='';$('evalType').value='rating';$('evalOrder').value=1;editingEval=null;$('saveEvalBtn').textContent='Simpan Pertanyaan'}
-$('clearEvalBtn').onclick=clearEval;
-async function loadEvaluations(){if(!currentEvent)return;const {data,error}=await sb.from('external_evaluation_questions').select('*').eq('event_id',currentEvent.id).order('sort_order');if(error)return msg('evalErr',error.message);$('evalRows').innerHTML=(data||[]).map((q,i)=>`<tr><td>${i+1}</td><td>${esc(q.question_text)}</td><td>${q.question_type==='rating'?'Skala 1–5':'Teks'}</td><td><div class="actions"><button class="btn btn-outline" data-eedit="${q.id}">Edit</button><button class="btn btn-red" data-edel="${q.id}">Hapus</button></div></td></tr>`).join('')||'<tr><td colspan="4" class="muted">Belum ada pertanyaan evaluasi.</td></tr>';document.querySelectorAll('[data-eedit]').forEach(b=>b.onclick=()=>editEval(b.dataset.eedit,data));document.querySelectorAll('[data-edel]').forEach(b=>b.onclick=()=>deleteEval(b.dataset.edel))}
-function editEval(id,data){const q=data.find(x=>x.id===id);if(!q)return;editingEval=q;$('evalText').value=q.question_text;$('evalType').value=q.question_type;$('evalOrder').value=q.sort_order;$('saveEvalBtn').textContent='Update Pertanyaan'}
-$('saveEvalBtn').onclick=async()=>{try{if(!currentEvent)throw new Error('Pilih kegiatan.');const row={event_id:currentEvent.id,question_text:$('evalText').value.trim(),question_type:$('evalType').value,sort_order:Number($('evalOrder').value)||1,required:true,active:true};if(!row.question_text)throw new Error('Pertanyaan wajib diisi.');const res=editingEval?await sb.from('external_evaluation_questions').update(row).eq('id',editingEval.id):await sb.from('external_evaluation_questions').insert(row);if(res.error)throw res.error;clearEval();msg('evalOk','Pertanyaan evaluasi tersimpan.',true);loadEvaluations()}catch(e){msg('evalErr',e.message)}};
-async function deleteEval(id){if(!confirm('Hapus pertanyaan evaluasi ini?'))return;const {error}=await sb.from('external_evaluation_questions').delete().eq('id',id);if(error)return msg('evalErr',error.message);loadEvaluations()}
-$('defaultEvalBtn').onclick=async()=>{try{if(!currentEvent)throw new Error('Pilih kegiatan.');const defaults=[['Materi sesuai dengan kebutuhan saya.','rating',1],['Materi disampaikan dengan jelas.','rating',2],['Narasumber menguasai materi.','rating',3],['Kegiatan ini bermanfaat bagi saya.','rating',4],['Saran / masukan untuk kegiatan berikutnya.','text',5]].map(x=>({event_id:currentEvent.id,question_text:x[0],question_type:x[1],sort_order:x[2],required:true,active:true}));const {error}=await sb.from('external_evaluation_questions').insert(defaults);if(error)throw error;msg('evalOk','Template evaluasi ditambahkan.',true);loadEvaluations()}catch(e){msg('evalErr',e.message)}};
 
 async function loadParticipants(){if(!currentEvent)return;const {data,error}=await sb.from('external_participants').select('*').eq('event_id',currentEvent.id).order('created_at',{ascending:false});if(error)return;const rows=data||[];$('mHadir').textContent=rows.filter(x=>x.attendance_completed).length;$('mPre').textContent=rows.filter(x=>x.pretest_completed).length;$('mPost').textContent=rows.filter(x=>x.posttest_completed).length;$('mEval').textContent=rows.filter(x=>x.evaluation_completed).length;$('mCert').textContent=rows.filter(x=>x.certificate_issued).length;$('participantRows').innerHTML=rows.map(p=>`<tr><td>${esc(p.name)}</td><td>${esc(p.email)}</td><td>${p.attendance_completed?'✓':'—'}</td><td>${p.pretest_completed?'✓ '+(p.pretest_score??''):'—'}</td><td>${p.posttest_completed?'✓ '+(p.posttest_score??''):'—'}</td><td>${p.evaluation_completed?'✓':'—'}</td><td>${p.certificate_issued?'✓':(p.evaluation_completed && Number(p.posttest_score||0)<Number(currentEvent.minimum_posttest_score??70)?'Tidak Lulus':'—')}</td></tr>`).join('')||'<tr><td colspan="7" class="muted">Belum ada peserta.</td></tr>'}
 $('refreshParticipants').onclick=loadParticipants;
