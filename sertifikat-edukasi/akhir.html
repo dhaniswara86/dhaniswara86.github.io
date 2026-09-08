@@ -48,7 +48,7 @@ a{color:inherit}.wrap{width:min(1220px,calc(100% - 28px));margin:auto;padding:22
 </div></div>
 <script src="supabase-config.js"></script>
 <script>
-let sb=null,eventData=null,token=null,progress=null;const $=id=>document.getElementById(id),code=new URLSearchParams(location.search).get('kode')||'';
+let sb=null,eventData=null,token=null,progress=null,certificateData=null;const $=id=>document.getElementById(id),code=new URLSearchParams(location.search).get('kode')||'';
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
 function err(t){$('err').textContent=t;$('err').className='msg show err'}
 function steps(n){for(let i=1;i<=3;i++){const el=$('s'+i);el.classList.toggle('done',i<n);el.classList.toggle('active',i===n)}}
@@ -56,23 +56,35 @@ async function init(){try{if(!code)throw new Error('Kode kegiatan tidak tersedia
 function renderClosed(){$('content').innerHTML='<div class="donebox"><span class="pill">Belum Dibuka</span><h2>Tahap Akhir Belum Dibuka.</h2><p class="muted">Posttest, Evaluasi, dan Sertifikat akan tersedia setelah dibuka oleh panitia.</p></div>'}
 function renderIdentify(){steps(1);$('content').innerHTML=`<span class="pill">Identifikasi Peserta</span><h2 style="font-size:30px;letter-spacing:-.045em;margin:14px 0 8px">Lanjutkan Kegiatan.</h2><p class="muted" style="font-size:11px">Masukkan email yang sama dengan yang Anda gunakan pada Daftar Hadir / Pretest.</p><div class="field" style="margin-top:16px"><label>Email</label><input id="resumeEmail" type="email" placeholder="nama@email.com"></div><button class="btn btn-yellow" id="resumeBtn" style="margin-top:14px">Lanjut →</button>`;$('resumeBtn').onclick=resume}
 async function resume(){try{const email=$('resumeEmail').value.trim();if(!email)throw new Error('Email wajib diisi.');const {data,error}=await sb.rpc('public_resume_external_participant',{p_event_code:code,p_email:email});if(error)throw error;token=data;localStorage.setItem('kabayan_edukasi_'+eventData.event_id,token);await refresh()}catch(e){err(e.message)}}
+async function fetchCertificate(){
+  const {data,error}=await sb.rpc('public_get_external_certificate_by_token',{p_token:token});
+  if(error) throw error;
+  if(data?.length){
+    certificateData=data[0];
+    return certificateData;
+  }
+  certificateData=null;
+  return null;
+}
+
 async function refresh(){
   const {data,error}=await sb.rpc('public_get_external_progress',{p_token:token});
-  if(error)throw error;
-  if(!data?.length)throw new Error('Data peserta tidak ditemukan.');
+  if(error) throw error;
+  if(!data?.length) throw new Error('Data peserta tidak ditemukan.');
+
   progress=data[0];
 
-  if(!progress.attendance_completed||(progress.pretest_required&&!progress.pretest_completed))
+  if(!progress.attendance_completed || (progress.pretest_required && !progress.pretest_completed))
     throw new Error('Tahap awal belum lengkap.');
 
-  if(progress.posttest_required&&!progress.posttest_completed)
+  if(progress.posttest_required && !progress.posttest_completed)
     return loadPosttest();
 
-  if(progress.evaluation_required&&!progress.evaluation_completed)
+  if(progress.evaluation_required && !progress.evaluation_completed)
     return loadEvaluation();
 
-  if(progress.certificate_issued)
-    return renderCertificate();
+  const cert = await fetchCertificate();
+  if(cert) return renderCertificate();
 
   const minScore=Number(progress.minimum_posttest_score??70);
   const postScore=Number(progress.posttest_score??0);
@@ -82,6 +94,7 @@ async function refresh(){
 
   return renderPendingCertificate();
 }
+
 async function loadPosttest(){try{steps(1);const {data,error}=await sb.rpc('public_get_external_questions',{p_token:token,p_test_type:'posttest'});if(error)throw error;if(!data?.length)throw new Error('Posttest belum tersedia. Hubungi panitia.');$('content').innerHTML=`<span class="pill">Tahap 3</span><h2 style="font-size:30px;letter-spacing:-.045em;margin:14px 0 8px">Posttest</h2><p class="muted" style="font-size:11px">Jawab seluruh soal untuk melanjutkan ke Evaluasi. Sertifikat hanya diberikan jika nilai Posttest memenuhi batas minimum kegiatan.</p><form id="testForm">${data.map((q,i)=>`<div class="question"><h3>${i+1}. ${esc(q.question_text)}</h3>${[['A',q.option_a],['B',q.option_b],['C',q.option_c],['D',q.option_d]].map(o=>`<label class="option"><input type="radio" name="q_${q.id}" value="${o[0]}"> <span><b>${o[0]}.</b> ${esc(o[1])}</span></label>`).join('')}</div>`).join('')}<button class="btn btn-yellow" style="margin-top:15px">Kirim Posttest →</button></form>`;$('testForm').onsubmit=e=>submitPosttest(e,data)}catch(e){err(e.message)}}
 async function submitPosttest(e,questions){e.preventDefault();try{const ans={};for(const q of questions){const v=document.querySelector(`input[name="q_${q.id}"]:checked`)?.value;if(!v)throw new Error('Semua soal wajib dijawab.');ans[q.id]=v}const {error}=await sb.rpc('public_submit_external_test',{p_token:token,p_test_type:'posttest',p_answers:ans});if(error)throw error;await refresh()}catch(e){err(e.message)}}
 
@@ -258,12 +271,108 @@ function renderPendingCertificate(){
   $('content').innerHTML=`<div class="donebox">
     <span class="pill">Memproses</span>
     <h2>Menyiapkan Sertifikat.</h2>
-    <p class="muted">Syarat nilai telah terpenuhi. Sistem sedang memeriksa penerbitan sertifikat.</p>
+    <p class="muted">
+      Seluruh syarat sudah terpenuhi. Sistem sedang mengambil data sertifikat dari database.
+    </p>
+    <button class="btn btn-yellow" id="retryCertBtn" style="margin-top:16px">Muat Sertifikat</button>
   </div>`;
-  setTimeout(refresh,700);
+  $('retryCertBtn').onclick=refresh;
+  setTimeout(()=>refresh().catch(e=>err(e.message)),1200);
 }
 
-function renderCertificate(){steps(3);$('content').innerHTML=`<div class="donebox"><span class="pill">Selesai ✓</span><h2>Sertifikat Anda Terbit.</h2><p class="muted">${esc(progress.participant_name)}<br><b>${esc(progress.certificate_number)}</b></p><div class="actions" style="justify-content:center;margin-top:18px"><button class="btn btn-yellow" id="pdfBtn">Unduh PDF</button><a class="btn btn-outline" target="_blank" href="verifikasi.html?id=${encodeURIComponent(progress.verification_code)}">Verifikasi Sertifikat</a></div></div>`;$('pdfBtn').onclick=downloadCertificate}
-async function downloadCertificate(){const {jsPDF}=window.jspdf;const doc=new jsPDF({orientation:'landscape',unit:'mm',format:'a4'});doc.setFillColor(248,250,253);doc.rect(0,0,297,210,'F');doc.setDrawColor(16,38,85);doc.setLineWidth(1.2);doc.roundedRect(12,12,273,186,5,5);doc.setTextColor(16,38,85);doc.setFont('helvetica','bold');doc.setFontSize(26);doc.text('SERTIFIKAT',148.5,44,{align:'center'});doc.setFontSize(10);doc.text(progress.certificate_number,148.5,54,{align:'center'});doc.setTextColor(80,90,105);doc.setFont('helvetica','normal');doc.setFontSize(11);doc.text('Diberikan kepada',148.5,78,{align:'center'});doc.setTextColor(17,19,24);doc.setFont('helvetica','bold');doc.setFontSize(24);doc.text(progress.participant_name,148.5,94,{align:'center'});doc.setFontSize(12);doc.text('sebagai peserta dalam kegiatan',148.5,110,{align:'center'});doc.setFontSize(15);doc.text(progress.event_name,148.5,121,{align:'center',maxWidth:190});doc.setFont('helvetica','normal');doc.setFontSize(10);doc.text([progress.event_date,progress.issuer].filter(Boolean).join(' • '),148.5,137,{align:'center'});const verify=new URL('verifikasi.html?id='+progress.verification_code,location.href).href;const qr=await QRCode.toDataURL(verify,{margin:1,width:240});doc.addImage(qr,'PNG',250,157,24,24);doc.setFontSize(7);doc.text('Verifikasi QR',262,185,{align:'center'});doc.save('sertifikat-'+progress.participant_name.replace(/[^a-z0-9]+/gi,'-').toLowerCase()+'.pdf')}
+function renderCertificate(){
+  steps(3);
+
+  const c=certificateData || {};
+  const recipient=c.recipient_name || progress?.participant_name || '';
+  const certNumber=c.certificate_number || progress?.certificate_number || '';
+  const verifyCode=c.verification_code || progress?.verification_code || '';
+
+  $('content').innerHTML=`<div class="donebox">
+    <span class="pill">Selesai ✓</span>
+    <h2>Sertifikat Anda Terbit.</h2>
+    <p class="muted">
+      ${esc(recipient)}<br>
+      <b>${esc(certNumber)}</b>
+    </p>
+
+    <div class="actions" style="justify-content:center;margin-top:18px">
+      <button class="btn btn-yellow" id="pdfBtn">Unduh Sertifikat PDF</button>
+      <a class="btn btn-outline" target="_blank"
+         href="verifikasi.html?id=${encodeURIComponent(verifyCode)}">
+         Verifikasi Sertifikat
+      </a>
+    </div>
+
+    <div style="margin-top:14px;font-size:10px;color:#7a8591">
+      Kode verifikasi: ${esc(verifyCode)}
+    </div>
+  </div>`;
+
+  $('pdfBtn').onclick=downloadCertificate;
+}
+
+async function downloadCertificate(){
+  const c=certificateData || {};
+  const recipient=c.recipient_name || progress?.participant_name || '';
+  const certNumber=c.certificate_number || progress?.certificate_number || '';
+  const eventName=c.event_name || progress?.event_name || '';
+  const eventDate=c.event_date || progress?.event_date || '';
+  const issuer=c.issuer || progress?.issuer || '';
+  const verifyCode=c.verification_code || progress?.verification_code || '';
+
+  if(!verifyCode || !certNumber){
+    throw new Error('Data sertifikat belum lengkap. Silakan muat ulang halaman.');
+  }
+
+  const {jsPDF}=window.jspdf;
+  const doc=new jsPDF({orientation:'landscape',unit:'mm',format:'a4'});
+
+  doc.setFillColor(248,250,253);
+  doc.rect(0,0,297,210,'F');
+
+  doc.setDrawColor(16,38,85);
+  doc.setLineWidth(1.2);
+  doc.roundedRect(12,12,273,186,5,5);
+
+  doc.setTextColor(16,38,85);
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(26);
+  doc.text('SERTIFIKAT',148.5,44,{align:'center'});
+
+  doc.setFontSize(10);
+  doc.text(certNumber,148.5,54,{align:'center'});
+
+  doc.setTextColor(80,90,105);
+  doc.setFont('helvetica','normal');
+  doc.setFontSize(11);
+  doc.text('Diberikan kepada',148.5,78,{align:'center'});
+
+  doc.setTextColor(17,19,24);
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(24);
+  doc.text(recipient,148.5,94,{align:'center',maxWidth:210});
+
+  doc.setFontSize(12);
+  doc.text('sebagai peserta dalam kegiatan',148.5,110,{align:'center'});
+
+  doc.setFontSize(15);
+  doc.text(eventName,148.5,121,{align:'center',maxWidth:190});
+
+  doc.setFont('helvetica','normal');
+  doc.setFontSize(10);
+  doc.text([eventDate,issuer].filter(Boolean).join(' • '),148.5,137,{align:'center'});
+
+  const verify=new URL('verifikasi.html?id='+verifyCode,location.href).href;
+  const qr=await QRCode.toDataURL(verify,{margin:1,width:240});
+  doc.addImage(qr,'PNG',250,157,24,24);
+
+  doc.setFontSize(7);
+  doc.text('Verifikasi QR',262,185,{align:'center'});
+
+  const safeName=(recipient||'sertifikat').replace(/[^a-z0-9]+/gi,'-').toLowerCase();
+  doc.save('sertifikat-'+safeName+'.pdf');
+}
+
 init();
 </script></body></html>
