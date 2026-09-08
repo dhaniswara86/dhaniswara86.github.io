@@ -183,6 +183,39 @@ a{color:inherit}.wrap{width:min(1220px,calc(100% - 28px));margin:auto;padding:22
         <div class="metric-grid"><div class="metric"><b id="mHadir">0</b><span>Hadir</span></div><div class="metric"><b id="mPre">0</b><span>Pretest</span></div><div class="metric"><b id="mPost">0</b><span>Posttest</span></div><div class="metric"><b id="mEval">0</b><span>Evaluasi</span></div><div class="metric"><b id="mCert">0</b><span>Sertifikat</span></div></div>
         <div class="tablewrap"><table class="table"><thead><tr><th>Nama</th><th>Email</th><th>Hadir</th><th>Pretest</th><th>Posttest</th><th>Evaluasi</th><th>Sertifikat</th></tr></thead><tbody id="participantRows"></tbody></table></div>
       </div>
+
+      <div class="card" id="certificatePanel" style="display:none">
+        <div class="section-title">
+          <div>
+            <h2>Kelola Sertifikat</h2>
+            <p>Cabut sertifikat untuk mempertahankan riwayat, atau hapus permanen jika benar-benar diperlukan.</p>
+          </div>
+          <button class="btn btn-outline" id="refreshCertificates">Muat Ulang</button>
+        </div>
+
+        <div class="msg show" style="display:block;background:#fff8db;color:#7a5b00;margin-bottom:14px">
+          <b>Disarankan: gunakan Cabut Sertifikat.</b> Sertifikat yang dicabut tetap tercatat dan halaman verifikasi akan menunjukkan status dicabut.
+          <b>Hapus Permanen</b> menghilangkan record sertifikat dan nomor tidak akan digunakan kembali.
+        </div>
+
+        <div class="tablewrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Nomor</th>
+                <th>Penerima</th>
+                <th>Status</th>
+                <th>Terbit</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="certificateRows"></tbody>
+          </table>
+        </div>
+
+        <div class="msg ok" id="certificateOk"></div>
+        <div class="msg err" id="certificateErr"></div>
+      </div>
     </section>
   </div>
 </main>
@@ -218,15 +251,15 @@ function renderEvents(){
 }
 function renderCopySources(){$('copySource').innerHTML='<option value="">Salin dari kegiatan...</option>'+events.filter(e=>e.id!==currentEvent?.id).map(e=>`<option value="${e.id}">${esc(e.title)}</option>`).join('')}
 
-$('newEventBtn').onclick=()=>{currentEvent=null;editingQuestion=null;editingEval=null;['eventTitle','eventCode','eventDate','eventIssuer','eventSignerName','eventSignerTitle'].forEach(id=>$(id).value='');$('eventPattern').value='SERT-{SEQ}/{YEAR}';$('eventSeq').value=1;$('eventMinPosttest').value=70;$('editorTitle').textContent='Buat Kegiatan';$('eventStatus').className='status draft';$('eventStatus').textContent='DRAFT';$('publishEventBtn').disabled=true;$('closeEventBtn').disabled=true;['phasePanel','questionPanel','evaluationPanel','monitorPanel'].forEach(id=>$(id).style.display='none');renderEvents();renderCopySources()};
+$('newEventBtn').onclick=()=>{currentEvent=null;editingQuestion=null;editingEval=null;['eventTitle','eventCode','eventDate','eventIssuer','eventSignerName','eventSignerTitle'].forEach(id=>$(id).value='');$('eventPattern').value='SERT-{SEQ}/{YEAR}';$('eventSeq').value=1;$('eventMinPosttest').value=70;$('editorTitle').textContent='Buat Kegiatan';$('eventStatus').className='status draft';$('eventStatus').textContent='DRAFT';$('publishEventBtn').disabled=true;$('closeEventBtn').disabled=true;['phasePanel','questionPanel','evaluationPanel','monitorPanel','certificatePanel'].forEach(id=>$(id).style.display='none');renderEvents();renderCopySources()};
 
 async function selectEvent(id,scroll=true){
   currentEvent=events.find(e=>e.id===id);if(!currentEvent)return;
   $('eventTitle').value=currentEvent.title||'';$('eventCode').value=currentEvent.code||'';$('eventDate').value=currentEvent.event_date||'';$('eventIssuer').value=currentEvent.issuer||'';$('eventSignerName').value=currentEvent.signer_name||'';$('eventSignerTitle').value=currentEvent.signer_title||'';$('eventPattern').value=currentEvent.number_pattern||'SERT-{SEQ}/{YEAR}';$('eventSeq').value=currentEvent.next_sequence||1;$('eventMinPosttest').value=currentEvent.minimum_posttest_score??70;
   $('editorTitle').textContent='Pengaturan Kegiatan';$('eventStatus').className='status '+currentEvent.status;$('eventStatus').textContent=currentEvent.status.toUpperCase();
   $('publishEventBtn').disabled=currentEvent.status==='published';$('closeEventBtn').disabled=currentEvent.status==='closed';
-  ['phasePanel','questionPanel','evaluationPanel','monitorPanel'].forEach(id=>$(id).style.display='block');
-  renderPhases();renderEvents();renderCopySources();await loadQuestions();await loadParticipants();if(scroll)$('phasePanel').scrollIntoView({behavior:'smooth',block:'start'})
+  ['phasePanel','questionPanel','evaluationPanel','monitorPanel','certificatePanel'].forEach(id=>$(id).style.display='block');
+  renderPhases();renderEvents();renderCopySources();await loadQuestions();await loadParticipants();await loadCertificates();if(scroll)$('phasePanel').scrollIntoView({behavior:'smooth',block:'start'})
 }
 function renderPhases(){
   if(!currentEvent)return;
@@ -323,8 +356,186 @@ $('copyPretestBtn').onclick=async()=>{
 
 $('copyBtn').onclick=async()=>{try{if(!currentEvent)throw new Error('Pilih kegiatan tujuan.');const source=$('copySource').value;if(!source)throw new Error('Pilih kegiatan sumber.');const {data,error}=await sb.from('external_questions').select('*').eq('event_id',source).eq('test_type',currentTest).eq('active',true).order('sort_order');if(error)throw error;if(!data?.length)throw new Error('Kegiatan sumber belum memiliki soal.');const rows=data.map(q=>({event_id:currentEvent.id,test_type:currentTest,category:q.category,question_text:q.question_text,option_a:q.option_a,option_b:q.option_b,option_c:q.option_c,option_d:q.option_d,correct_answer:q.correct_answer,weight:q.weight,sort_order:q.sort_order,active:true}));const res=await sb.from('external_questions').insert(rows);if(res.error)throw res.error;msg('questionOk',`${rows.length} soal disalin.`,true);loadQuestions()}catch(e){msg('questionErr',e.message)}};
 
-async function loadParticipants(){if(!currentEvent)return;const {data,error}=await sb.from('external_participants').select('*').eq('event_id',currentEvent.id).order('created_at',{ascending:false});if(error)return;const rows=data||[];$('mHadir').textContent=rows.filter(x=>x.attendance_completed).length;$('mPre').textContent=rows.filter(x=>x.pretest_completed).length;$('mPost').textContent=rows.filter(x=>x.posttest_completed).length;$('mEval').textContent=rows.filter(x=>x.evaluation_completed).length;$('mCert').textContent=rows.filter(x=>x.certificate_issued).length;$('participantRows').innerHTML=rows.map(p=>`<tr><td>${esc(p.name)}</td><td>${esc(p.email)}</td><td>${p.attendance_completed?'✓':'—'}</td><td>${p.pretest_completed?'✓ '+(p.pretest_score??''):'—'}</td><td>${p.posttest_completed?'✓ '+(p.posttest_score??''):'—'}</td><td>${p.evaluation_completed?'✓':'—'}</td><td>${p.certificate_issued?'✓':(p.evaluation_completed && Number(p.posttest_score||0)<Number(currentEvent.minimum_posttest_score??70)?'Tidak Lulus':'—')}</td></tr>`).join('')||'<tr><td colspan="7" class="muted">Belum ada peserta.</td></tr>'}
-$('refreshParticipants').onclick=loadParticipants;
+async function loadParticipants(){
+  if(!currentEvent)return;
+
+  const [{data:rows,error},{data:certs,error:certError}]=await Promise.all([
+    sb.from('external_participants')
+      .select('*')
+      .eq('event_id',currentEvent.id)
+      .order('created_at',{ascending:false}),
+    sb.from('external_certificates')
+      .select('participant_id,status,certificate_number')
+      .eq('event_id',currentEvent.id)
+  ]);
+
+  if(error)return msg('eventErr',error.message);
+  if(certError)return msg('eventErr',certError.message);
+
+  const participants=rows||[];
+  const certMap=new Map((certs||[]).map(c=>[c.participant_id,c]));
+
+  $('mHadir').textContent=participants.filter(x=>x.attendance_completed).length;
+  $('mPre').textContent=participants.filter(x=>x.pretest_completed).length;
+  $('mPost').textContent=participants.filter(x=>x.posttest_completed).length;
+  $('mEval').textContent=participants.filter(x=>x.evaluation_completed).length;
+  $('mCert').textContent=(certs||[]).filter(c=>c.status==='valid').length;
+
+  $('participantRows').innerHTML=participants.map(p=>{
+    const cert=certMap.get(p.id);
+    let certLabel='—';
+
+    if(cert?.status==='valid'){
+      certLabel='<span class="status published">VALID</span>';
+    }else if(cert?.status==='revoked'){
+      certLabel='<span class="status closed">DICABUT</span>';
+    }else if(p.certificate_admin_state==='deleted'){
+      certLabel='<span class="status closed">DIHAPUS</span>';
+    }else if(p.evaluation_completed && Number(p.posttest_score||0)<Number(currentEvent.minimum_posttest_score??70)){
+      certLabel='Tidak Lulus';
+    }
+
+    return `<tr>
+      <td>${esc(p.name)}</td>
+      <td>${esc(p.email)}</td>
+      <td>${p.attendance_completed?'✓':'—'}</td>
+      <td>${p.pretest_completed?'✓ '+(p.pretest_score??''):'—'}</td>
+      <td>${p.posttest_completed?'✓ '+(p.posttest_score??''):'—'}</td>
+      <td>${p.evaluation_completed?'✓':'—'}</td>
+      <td>${certLabel}</td>
+    </tr>`;
+  }).join('')||'<tr><td colspan="7" class="muted">Belum ada peserta.</td></tr>';
+}
+
+$('refreshParticipants').onclick=async()=>{
+  await loadParticipants();
+  await loadCertificates();
+};
+
+function certificateStatusBadge(status){
+  if(status==='valid') return '<span class="status published">VALID</span>';
+  if(status==='revoked') return '<span class="status closed">DICABUT</span>';
+  return `<span class="status draft">${esc(status||'-')}</span>`;
+}
+
+function formatAdminDate(value){
+  if(!value)return '—';
+  try{
+    return new Intl.DateTimeFormat('id-ID',{
+      day:'2-digit',month:'short',year:'numeric',
+      hour:'2-digit',minute:'2-digit'
+    }).format(new Date(value));
+  }catch{
+    return value;
+  }
+}
+
+async function loadCertificates(){
+  if(!currentEvent)return;
+
+  const {data,error}=await sb.from('external_certificates')
+    .select('*')
+    .eq('event_id',currentEvent.id)
+    .order('issued_at',{ascending:false});
+
+  if(error){
+    return msg('certificateErr',error.message);
+  }
+
+  const rows=data||[];
+  $('mCert').textContent=rows.filter(c=>c.status==='valid').length;
+
+  $('certificateRows').innerHTML=rows.map(c=>`
+    <tr>
+      <td><b>${esc(c.certificate_number)}</b><div class="muted" style="margin-top:4px;font-size:9px">${esc(c.verification_code)}</div></td>
+      <td>${esc(c.recipient_name)}</td>
+      <td>${certificateStatusBadge(c.status)}</td>
+      <td>${formatAdminDate(c.issued_at)}</td>
+      <td>
+        <div class="actions">
+          ${c.status==='valid'
+            ? `<button class="btn btn-outline" data-revoke-cert="${c.id}">Cabut</button>`
+            : `<button class="btn btn-green" data-restore-cert="${c.id}">Aktifkan Kembali</button>`}
+          <button class="btn btn-red" data-delete-cert="${c.id}" data-cert-number="${esc(c.certificate_number)}">Hapus Permanen</button>
+        </div>
+      </td>
+    </tr>
+  `).join('')||'<tr><td colspan="5" class="muted">Belum ada sertifikat pada kegiatan ini.</td></tr>';
+
+  document.querySelectorAll('[data-revoke-cert]').forEach(btn=>{
+    btn.onclick=()=>revokeCertificate(btn.dataset.revokeCert);
+  });
+
+  document.querySelectorAll('[data-restore-cert]').forEach(btn=>{
+    btn.onclick=()=>restoreCertificate(btn.dataset.restoreCert);
+  });
+
+  document.querySelectorAll('[data-delete-cert]').forEach(btn=>{
+    btn.onclick=()=>deleteCertificate(btn.dataset.deleteCert,btn.dataset.certNumber);
+  });
+}
+
+async function revokeCertificate(id){
+  if(!confirm(
+    'Cabut sertifikat ini?\n\n'+
+    'Sertifikat tetap tersimpan, tetapi status verifikasi akan menjadi DICABUT dan peserta tidak dapat mengunduh sertifikat valid.'
+  ))return;
+
+  const {error}=await sb.rpc('admin_revoke_external_certificate',{
+    p_certificate_id:id
+  });
+
+  if(error)return msg('certificateErr',error.message);
+
+  msg('certificateOk','Sertifikat berhasil dicabut.',true);
+  await loadCertificates();
+  await loadParticipants();
+}
+
+async function restoreCertificate(id){
+  if(!confirm('Aktifkan kembali sertifikat yang dicabut ini?'))return;
+
+  const {error}=await sb.rpc('admin_restore_external_certificate',{
+    p_certificate_id:id
+  });
+
+  if(error)return msg('certificateErr',error.message);
+
+  msg('certificateOk','Sertifikat berhasil diaktifkan kembali.',true);
+  await loadCertificates();
+  await loadParticipants();
+}
+
+async function deleteCertificate(id,number){
+  const ok=confirm(
+    'HAPUS PERMANEN sertifikat '+number+'?\n\n'+
+    'Tindakan ini menghapus record sertifikat dari database. Nomor sertifikat tidak akan digunakan kembali.'
+  );
+  if(!ok)return;
+
+  const typed=prompt(
+    'Untuk memastikan, ketik HAPUS lalu tekan OK.'
+  );
+
+  if(typed!=='HAPUS'){
+    return msg('certificateErr','Penghapusan dibatalkan karena konfirmasi tidak sesuai.');
+  }
+
+  const {error}=await sb.rpc('admin_delete_external_certificate',{
+    p_certificate_id:id
+  });
+
+  if(error)return msg('certificateErr',error.message);
+
+  msg('certificateOk','Sertifikat berhasil dihapus permanen.',true);
+  await loadCertificates();
+  await loadParticipants();
+}
+
+$('refreshCertificates').onclick=async()=>{
+  await loadCertificates();
+  await loadParticipants();
+};
 guard();
 </script>
 </body></html>

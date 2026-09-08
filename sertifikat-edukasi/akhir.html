@@ -119,7 +119,11 @@ async function refresh(){
     return loadEvaluation();
 
   const cert = await fetchCertificate();
+  if(cert?.certificate_status==='revoked') return renderRevokedCertificate();
   if(cert) return renderCertificate();
+
+  if(progress.certificate_admin_state==='deleted')
+    return renderDeletedCertificate();
 
   const minScore=Number(progress.minimum_posttest_score??70);
   const postScore=Number(progress.posttest_score??0);
@@ -283,6 +287,38 @@ async function submitStructuredEvaluation(e){
   }catch(e){
     err(e.message);
   }
+}
+
+function renderRevokedCertificate(){
+  steps(3);
+  const c=certificateData||{};
+  $('content').innerHTML=`<div class="donebox">
+    <span class="pill" style="background:#fff1f0;color:#b42318">Dicabut</span>
+    <h2>Sertifikat Telah Dicabut.</h2>
+    <p class="muted">
+      Nomor: <b>${esc(c.certificate_number||'')}</b><br><br>
+      Sertifikat ini telah dicabut oleh admin dan tidak dapat digunakan sebagai sertifikat valid.
+      Silakan hubungi panitia apabila Anda memerlukan informasi lebih lanjut.
+    </p>
+    <div class="actions" style="justify-content:center;margin-top:18px">
+      <a class="btn btn-outline" target="_blank"
+         href="verifikasi.html?id=${encodeURIComponent(c.verification_code||'')}">
+         Lihat Status Verifikasi
+      </a>
+    </div>
+  </div>`;
+}
+
+function renderDeletedCertificate(){
+  steps(3);
+  $('content').innerHTML=`<div class="donebox">
+    <span class="pill" style="background:#fff1f0;color:#b42318">Tidak Tersedia</span>
+    <h2>Sertifikat Telah Dihapus.</h2>
+    <p class="muted">
+      Sertifikat Anda telah dihapus oleh admin dan tidak lagi tersedia untuk diunduh.
+      Silakan hubungi panitia jika Anda memerlukan klarifikasi.
+    </p>
+  </div>`;
 }
 
 function renderNotEligible(){
