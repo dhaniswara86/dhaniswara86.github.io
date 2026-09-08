@@ -187,9 +187,46 @@ a{color:inherit}.wrap{width:min(1220px,calc(100% - 28px));margin:auto;padding:22
       </div>
 
       <div class="card" id="monitorPanel" style="display:none">
-        <div class="section-title"><div><h2>Monitor Peserta</h2><p>Sertifikat hanya terbit jika seluruh tahap selesai dan nilai Posttest minimal 70 atau sesuai batas kegiatan.</p></div><button class="btn btn-outline" id="refreshParticipants">Muat Ulang</button></div>
+        <div class="section-title">
+          <div>
+            <h2>Monitor Peserta</h2>
+            <p>Sertifikat hanya terbit jika seluruh tahap selesai dan nilai Posttest minimal 70 atau sesuai batas kegiatan.</p>
+          </div>
+          <div class="actions">
+            <span class="muted" id="selectedParticipantCount" style="font-size:10px">0 dipilih</span>
+            <button class="btn btn-red" id="deleteSelectedParticipants" disabled>Hapus Terpilih</button>
+            <button class="btn btn-outline" id="refreshParticipants">Muat Ulang</button>
+          </div>
+        </div>
+
+        <div class="msg show" style="display:block;background:#fff8db;color:#7a5b00;margin-bottom:14px">
+          <b>Perhatian:</b> Menghapus peserta akan menghapus permanen data Daftar Hadir, jawaban Pretest/Posttest,
+          hasil Evaluasi, dan Sertifikat peserta tersebut. Nomor sertifikat yang pernah terbit tidak digunakan kembali.
+        </div>
+
         <div class="metric-grid"><div class="metric"><b id="mHadir">0</b><span>Hadir</span></div><div class="metric"><b id="mPre">0</b><span>Pretest</span></div><div class="metric"><b id="mPost">0</b><span>Posttest</span></div><div class="metric"><b id="mEval">0</b><span>Evaluasi</span></div><div class="metric"><b id="mCert">0</b><span>Sertifikat</span></div></div>
-        <div class="tablewrap"><table class="table"><thead><tr><th>Nama</th><th>Email</th><th>Hadir</th><th>Pretest</th><th>Posttest</th><th>Evaluasi</th><th>Sertifikat</th></tr></thead><tbody id="participantRows"></tbody></table></div>
+
+        <div class="tablewrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th style="width:42px"><input type="checkbox" id="participantSelectAll" aria-label="Pilih semua peserta"></th>
+                <th>Nama</th>
+                <th>Email</th>
+                <th>Hadir</th>
+                <th>Pretest</th>
+                <th>Posttest</th>
+                <th>Evaluasi</th>
+                <th>Sertifikat</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="participantRows"></tbody>
+          </table>
+        </div>
+
+        <div class="msg ok" id="participantOk"></div>
+        <div class="msg err" id="participantErr"></div>
       </div>
 
       <div class="card" id="certificatePanel" style="display:none">
@@ -287,7 +324,7 @@ a{color:inherit}.wrap{width:min(1220px,calc(100% - 28px));margin:auto;padding:22
 
 <script src="supabase-config.js"></script>
 <script>
-let sb=null,events=[],currentEvent=null,currentTest='pretest',editingQuestion=null,editingEval=null;
+let sb=null,events=[],currentEvent=null,currentTest='pretest',editingQuestion=null,editingEval=null,participantSelection=new Set();
 const $=id=>document.getElementById(id);
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
 function msg(id,text,ok=false){const el=$(id);el.textContent=text;el.className='msg show '+(ok?'ok':'err');setTimeout(()=>el.classList.remove('show'),4500)}
@@ -420,8 +457,48 @@ $('copyPretestBtn').onclick=async()=>{
 
 $('copyBtn').onclick=async()=>{try{if(!currentEvent)throw new Error('Pilih kegiatan tujuan.');const source=$('copySource').value;if(!source)throw new Error('Pilih kegiatan sumber.');const {data,error}=await sb.from('external_questions').select('*').eq('event_id',source).eq('test_type',currentTest).eq('active',true).order('sort_order');if(error)throw error;if(!data?.length)throw new Error('Kegiatan sumber belum memiliki soal.');const rows=data.map(q=>({event_id:currentEvent.id,test_type:currentTest,category:q.category,question_text:q.question_text,option_a:q.option_a,option_b:q.option_b,option_c:q.option_c,option_d:q.option_d,correct_answer:q.correct_answer,weight:q.weight,sort_order:q.sort_order,active:true}));const res=await sb.from('external_questions').insert(rows);if(res.error)throw res.error;msg('questionOk',`${rows.length} soal disalin.`,true);loadQuestions()}catch(e){msg('questionErr',e.message)}};
 
+function syncParticipantSelectionUI(){
+  const boxes=[...document.querySelectorAll('.participant-check')];
+  const checked=boxes.filter(b=>b.checked);
+
+  participantSelection=new Set(checked.map(b=>b.value));
+
+  $('selectedParticipantCount').textContent=participantSelection.size+' dipilih';
+  $('deleteSelectedParticipants').disabled=participantSelection.size===0;
+
+  const all=$('participantSelectAll');
+  if(all){
+    all.checked=boxes.length>0 && checked.length===boxes.length;
+    all.indeterminate=checked.length>0 && checked.length<boxes.length;
+  }
+}
+
+function wireParticipantSelection(){
+  const all=$('participantSelectAll');
+  const boxes=[...document.querySelectorAll('.participant-check')];
+
+  if(all){
+    all.onchange=()=>{
+      boxes.forEach(box=>box.checked=all.checked);
+      syncParticipantSelectionUI();
+    };
+  }
+
+  boxes.forEach(box=>{
+    box.onchange=syncParticipantSelectionUI;
+  });
+
+  document.querySelectorAll('[data-delete-participant]').forEach(btn=>{
+    btn.onclick=()=>deleteParticipants([btn.dataset.deleteParticipant],1);
+  });
+
+  syncParticipantSelectionUI();
+}
+
 async function loadParticipants(){
   if(!currentEvent)return;
+
+  participantSelection.clear();
 
   const [{data:rows,error},{data:certs,error:certError}]=await Promise.all([
     sb.from('external_participants')
@@ -433,8 +510,8 @@ async function loadParticipants(){
       .eq('event_id',currentEvent.id)
   ]);
 
-  if(error)return msg('eventErr',error.message);
-  if(certError)return msg('eventErr',certError.message);
+  if(error)return msg('participantErr',error.message);
+  if(certError)return msg('participantErr',certError.message);
 
   const participants=rows||[];
   const certMap=new Map((certs||[]).map(c=>[c.participant_id,c]));
@@ -460,6 +537,7 @@ async function loadParticipants(){
     }
 
     return `<tr>
+      <td><input class="participant-check" type="checkbox" value="${p.id}" aria-label="Pilih ${esc(p.name)}"></td>
       <td>${esc(p.name)}</td>
       <td>${esc(p.email)}</td>
       <td>${p.attendance_completed?'✓':'—'}</td>
@@ -467,9 +545,50 @@ async function loadParticipants(){
       <td>${p.posttest_completed?'✓ '+(p.posttest_score??''):'—'}</td>
       <td>${p.evaluation_completed?'✓':'—'}</td>
       <td>${certLabel}</td>
+      <td><button class="btn btn-red" data-delete-participant="${p.id}">Hapus</button></td>
     </tr>`;
-  }).join('')||'<tr><td colspan="7" class="muted">Belum ada peserta.</td></tr>';
+  }).join('')||'<tr><td colspan="9" class="muted">Belum ada peserta.</td></tr>';
+
+  wireParticipantSelection();
 }
+
+async function deleteParticipants(ids,knownCount=null){
+  const clean=[...new Set((ids||[]).filter(Boolean))];
+  if(!clean.length)return;
+
+  const count=knownCount??clean.length;
+  const wording=count===1?'peserta ini':count+' peserta yang dipilih';
+
+  const ok=confirm(
+    'Hapus permanen '+wording+'?\n\n'+
+    'Data kehadiran, Pretest, Posttest, Evaluasi, dan Sertifikat yang terkait juga akan dihapus.\n\n'+
+    'Tindakan ini tidak dapat dibatalkan.'
+  );
+  if(!ok)return;
+
+  const typed=prompt('Untuk memastikan, ketik HAPUS lalu tekan OK.');
+  if(typed!=='HAPUS'){
+    return msg('participantErr','Penghapusan dibatalkan karena konfirmasi tidak sesuai.');
+  }
+
+  const {data,error}=await sb.rpc('admin_delete_external_participants',{
+    p_participant_ids:clean
+  });
+
+  if(error)return msg('participantErr',error.message);
+
+  const deleted=Number(data??count);
+  participantSelection.clear();
+
+  msg('participantOk',deleted+' peserta berhasil dihapus permanen.',true);
+
+  await loadParticipants();
+  await loadCertificates();
+}
+
+$('deleteSelectedParticipants').onclick=()=>{
+  deleteParticipants([...participantSelection]);
+};
 
 $('refreshParticipants').onclick=async()=>{
   await loadParticipants();
