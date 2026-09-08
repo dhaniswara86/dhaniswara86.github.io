@@ -113,11 +113,12 @@ a{color:inherit}.wrap{width:min(1220px,calc(100% - 28px));margin:auto;padding:22
 
       <div class="card" id="questionPanel" style="display:none">
         <div class="section-title">
-          <div><h2>Pretest & Posttest</h2><p>Soal dapat berbeda pada setiap kegiatan.</p></div>
+          <div><h2>Pretest & Posttest</h2><p>Soal dapat berbeda pada setiap kegiatan. Pada tab Posttest tersedia tombol <b>Salin dari Pretest</b>.</p></div>
           <div class="tabs"><button class="tab active" data-test="pretest">Pretest</button><button class="tab" data-test="posttest">Posttest</button></div>
         </div>
         <div class="actions" style="margin-bottom:14px">
           <label class="btn btn-outline" style="cursor:pointer">Import Excel<input id="questionImport" type="file" accept=".xlsx,.xls" hidden></label>
+          <button class="btn btn-yellow" id="copyPretestBtn" style="display:none">Salin dari Pretest</button>
           <select id="copySource" style="min-height:42px;border:1px solid #d9e2ec;border-radius:999px;padding:0 12px;font:inherit;font-size:10px"><option value="">Salin dari kegiatan...</option></select>
           <button class="btn btn-outline" id="copyBtn">Salin Test Ini</button>
         </div>
@@ -220,7 +221,14 @@ $('saveEventBtn').onclick=async()=>{try{const row={title:$('eventTitle').value.t
 $('publishEventBtn').onclick=async()=>{if(!currentEvent)return;const {error}=await sb.from('external_events').update({status:'published',initial_phase_open:true,final_phase_open:false,updated_at:new Date().toISOString()}).eq('id',currentEvent.id);if(error)return msg('eventErr',error.message);msg('eventOk','Kegiatan dipublish. Fase Awal dibuka; Fase Akhir tetap ditutup.',true);await loadEvents()};
 $('closeEventBtn').onclick=async()=>{if(!currentEvent||!confirm('Tutup seluruh kegiatan? Kedua fase akan ditutup.'))return;const {error}=await sb.from('external_events').update({status:'closed',initial_phase_open:false,final_phase_open:false,updated_at:new Date().toISOString()}).eq('id',currentEvent.id);if(error)return msg('eventErr',error.message);await loadEvents()};
 
-document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{currentTest=b.dataset.test;document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===b));editingQuestion=null;clearQuestion();loadQuestions()});
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{
+  currentTest=b.dataset.test;
+  document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===b));
+  $('copyPretestBtn').style.display=currentTest==='posttest'?'inline-flex':'none';
+  editingQuestion=null;
+  clearQuestion();
+  loadQuestions();
+});
 function clearQuestion(){['qText','qA','qB','qC','qD','qCategory'].forEach(id=>$(id).value='');$('qCorrect').value='A';$('qWeight').value=1;$('qOrder').value=1;editingQuestion=null;$('saveQuestionBtn').textContent='Simpan Soal'}
 $('clearQuestionBtn').onclick=clearQuestion;
 async function loadQuestions(){if(!currentEvent)return;const {data,error}=await sb.from('external_questions').select('*').eq('event_id',currentEvent.id).eq('test_type',currentTest).order('sort_order');if(error)return msg('questionErr',error.message);$('questionRows').innerHTML=(data||[]).map((q,i)=>`<tr><td>${i+1}</td><td><b>${esc(q.question_text)}</b><div class="muted" style="margin-top:5px">${esc(q.option_a)} / ${esc(q.option_b)} / ${esc(q.option_c)} / ${esc(q.option_d)}</div></td><td>${q.correct_answer}</td><td>${q.weight}</td><td><div class="actions"><button class="btn btn-outline" data-edit="${q.id}">Edit</button><button class="btn btn-red" data-del="${q.id}">Hapus</button></div></td></tr>`).join('')||'<tr><td colspan="5" class="muted">Belum ada soal.</td></tr>';document.querySelectorAll('[data-edit]').forEach(b=>b.onclick=()=>editQuestion(b.dataset.edit,data));document.querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>deleteQuestion(b.dataset.del))}
@@ -228,6 +236,65 @@ function editQuestion(id,data){const q=data.find(x=>x.id===id);if(!q)return;edit
 $('saveQuestionBtn').onclick=async()=>{try{if(!currentEvent)throw new Error('Pilih kegiatan.');const row={event_id:currentEvent.id,test_type:currentTest,question_text:$('qText').value.trim(),option_a:$('qA').value.trim(),option_b:$('qB').value.trim(),option_c:$('qC').value.trim(),option_d:$('qD').value.trim(),correct_answer:$('qCorrect').value,weight:Number($('qWeight').value)||1,category:$('qCategory').value.trim()||null,sort_order:Number($('qOrder').value)||1};if(!row.question_text||!row.option_a||!row.option_b||!row.option_c||!row.option_d)throw new Error('Pertanyaan dan semua pilihan wajib diisi.');const res=editingQuestion?await sb.from('external_questions').update(row).eq('id',editingQuestion.id):await sb.from('external_questions').insert(row);if(res.error)throw res.error;clearQuestion();msg('questionOk','Soal tersimpan.',true);loadQuestions()}catch(e){msg('questionErr',e.message)}};
 async function deleteQuestion(id){if(!confirm('Hapus soal ini?'))return;const {error}=await sb.from('external_questions').delete().eq('id',id);if(error)return msg('questionErr',error.message);loadQuestions()}
 $('questionImport').onchange=async e=>{try{if(!currentEvent)throw new Error('Pilih kegiatan dahulu.');const file=e.target.files[0];if(!file)return;const buf=await file.arrayBuffer();const wb=XLSX.read(buf,{type:'array'});const rows=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{defval:''});const inserts=rows.filter(r=>['pretest','posttest'].includes(String(r.tipe||'').toLowerCase())).map((r,i)=>({event_id:currentEvent.id,test_type:String(r.tipe).toLowerCase(),category:String(r.kategori||'').trim()||null,question_text:String(r.pertanyaan||'').trim(),option_a:String(r.opsi_a||'').trim(),option_b:String(r.opsi_b||'').trim(),option_c:String(r.opsi_c||'').trim(),option_d:String(r.opsi_d||'').trim(),correct_answer:String(r.jawaban_benar||'').trim().toUpperCase(),weight:Number(r.bobot)||1,sort_order:Number(r.urutan)||i+1})).filter(r=>r.question_text&&['A','B','C','D'].includes(r.correct_answer));if(!inserts.length)throw new Error('Tidak ada baris soal valid.');const {error}=await sb.from('external_questions').insert(inserts);if(error)throw error;msg('questionOk',`${inserts.length} soal berhasil diimport.`,true);loadQuestions()}catch(err){msg('questionErr',err.message)}finally{e.target.value=''}};
+
+$('copyPretestBtn').onclick=async()=>{
+  try{
+    if(!currentEvent)throw new Error('Pilih kegiatan dahulu.');
+    if(currentTest!=='posttest')throw new Error('Buka tab Posttest terlebih dahulu.');
+
+    const {data:pre,error:preErr}=await sb
+      .from('external_questions')
+      .select('*')
+      .eq('event_id',currentEvent.id)
+      .eq('test_type','pretest')
+      .eq('active',true)
+      .order('sort_order');
+
+    if(preErr)throw preErr;
+    if(!pre?.length)throw new Error('Pretest kegiatan ini belum memiliki soal.');
+
+    const {count:postCount,error:postErr}=await sb
+      .from('external_questions')
+      .select('id',{count:'exact',head:true})
+      .eq('event_id',currentEvent.id)
+      .eq('test_type','posttest')
+      .eq('active',true);
+
+    if(postErr)throw postErr;
+
+    if((postCount||0)>0){
+      const ok=confirm(
+        'Posttest sudah memiliki '+postCount+' soal.\n\n'+
+        'Salinan dari Pretest akan DITAMBAHKAN, bukan mengganti soal yang sudah ada.\n\nLanjutkan?'
+      );
+      if(!ok)return;
+    }
+
+    const rows=pre.map(q=>({
+      event_id:currentEvent.id,
+      test_type:'posttest',
+      category:q.category,
+      question_text:q.question_text,
+      option_a:q.option_a,
+      option_b:q.option_b,
+      option_c:q.option_c,
+      option_d:q.option_d,
+      correct_answer:q.correct_answer,
+      weight:q.weight,
+      sort_order:q.sort_order,
+      active:true
+    }));
+
+    const {error}=await sb.from('external_questions').insert(rows);
+    if(error)throw error;
+
+    msg('questionOk',rows.length+' soal Pretest berhasil disalin ke Posttest.',true);
+    await loadQuestions();
+  }catch(e){
+    msg('questionErr',e.message);
+  }
+};
+
 $('copyBtn').onclick=async()=>{try{if(!currentEvent)throw new Error('Pilih kegiatan tujuan.');const source=$('copySource').value;if(!source)throw new Error('Pilih kegiatan sumber.');const {data,error}=await sb.from('external_questions').select('*').eq('event_id',source).eq('test_type',currentTest).eq('active',true).order('sort_order');if(error)throw error;if(!data?.length)throw new Error('Kegiatan sumber belum memiliki soal.');const rows=data.map(q=>({event_id:currentEvent.id,test_type:currentTest,category:q.category,question_text:q.question_text,option_a:q.option_a,option_b:q.option_b,option_c:q.option_c,option_d:q.option_d,correct_answer:q.correct_answer,weight:q.weight,sort_order:q.sort_order,active:true}));const res=await sb.from('external_questions').insert(rows);if(res.error)throw res.error;msg('questionOk',`${rows.length} soal disalin.`,true);loadQuestions()}catch(e){msg('questionErr',e.message)}};
 
 function clearEval(){$('evalText').value='';$('evalType').value='rating';$('evalOrder').value=1;editingEval=null;$('saveEvalBtn').textContent='Simpan Pertanyaan'}
