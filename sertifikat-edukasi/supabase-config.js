@@ -1,8 +1,8 @@
 // Kabayan Sertifikat Kegiatan — project Supabase TERPISAH dari Sertifikat Internal.
 // Isi hanya Project URL + Publishable Key / anon key. Jangan taruh service_role di browser.
 window.KABAYAN_KEGIATAN_SUPABASE_CONFIG = {
-  url: "GANTI_DENGAN_PROJECT_URL_EKSTERNAL",
-  publishableKey: "GANTI_DENGAN_PUBLISHABLE_KEY_EKSTERNAL"
+  url: "https://ndqwmxshryqpygmupcnj.supabase.co",
+  publishableKey: "sb_publishable_-BGFKcxGME4yXqX4vRtWpA_g0-Cldkg"
 };
 
 window.KabayanKegiatanSupabase = {
