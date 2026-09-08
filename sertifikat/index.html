@@ -247,9 +247,73 @@
     .positions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}
 
 
+
+    /* alur utama 4 langkah */
+    .flow-strip{
+      width:min(1220px,100%);margin:0 auto 24px;
+      display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;
+    }
+    .flow-step{
+      position:relative;display:flex;align-items:center;gap:12px;min-height:76px;padding:14px 15px;
+      border:1px solid #e2e8f0;border-radius:18px;background:#fbfcfe;
+    }
+    .flow-step::after{
+      content:"→";position:absolute;right:-10px;top:50%;transform:translateY(-50%);
+      color:#b8c1cc;font-size:16px;font-weight:800;z-index:2;
+    }
+    .flow-step:last-child::after{display:none}
+    .flow-index{
+      flex:0 0 auto;display:grid;place-items:center;width:34px;height:34px;border-radius:999px;
+      background:#eaf3ff;color:var(--blue);font-size:10px;font-weight:850;letter-spacing:.05em;
+    }
+    .flow-step b{display:block;color:#111318;font-size:12px;font-weight:770;letter-spacing:-.02em}
+    .flow-step span{display:block;margin-top:3px;color:#8a929d;font-size:9.5px;line-height:1.35}
+    .flow-step.is-final{background:#fff9e9;border-color:#f1dfaa}
+    .flow-step.is-final .flow-index{background:#ffe8a3;color:#6e5200}
+
+    .download-template-box{
+      padding:16px;border:1px solid #dce7f3;border-radius:18px;background:linear-gradient(180deg,#fbfdff,#f5f9ff)
+    }
+    .download-template-box strong{display:block;font-size:14px;color:#111318}
+    .download-template-box p{margin:7px 0 12px;color:#77818d;font-size:11px;line-height:1.5}
+    .field-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+    .field-chips span{
+      padding:5px 8px;border-radius:999px;background:#f1f4f8;color:#66717e;font-size:9px;font-weight:700
+    }
+
+    .optional-card{
+      border:1px solid #dfe6ee;border-radius:22px;background:#f8fafc;overflow:hidden;
+      box-shadow:none;
+    }
+    .optional-card>summary{
+      list-style:none;display:flex;align-items:center;justify-content:space-between;gap:14px;
+      padding:17px 18px;cursor:pointer;color:#111318;font-size:13px;font-weight:770;
+    }
+    .optional-card>summary::-webkit-details-marker{display:none}
+    .optional-card>summary::after{content:"+";display:grid;place-items:center;width:28px;height:28px;border-radius:999px;background:#fff;border:1px solid #dfe6ee;color:#526070;font-size:16px}
+    .optional-card[open]>summary::after{content:"−"}
+    .optional-body{padding:0 18px 18px}
+    .optional-label{
+      display:inline-flex;align-items:center;padding:5px 8px;border-radius:999px;background:#eef3f7;
+      color:#74808d;font-size:8.5px;font-weight:820;letter-spacing:.08em;text-transform:uppercase;margin-bottom:9px
+    }
+    .optional-body .sub{margin-bottom:14px}
+
+    .mapping-optional .card-head{margin-bottom:6px}
+    .mapping-optional .step-number{background:#f0f2f5;color:#717b87}
+    .mapping-optional{border-style:dashed;background:#fcfdff}
+
+    @media(max-width:900px){
+      .flow-strip{grid-template-columns:1fr 1fr}
+      .flow-step::after{display:none}
+    }
+    @media(max-width:560px){
+      .flow-strip{grid-template-columns:1fr}
+    }
+
     /* certificate number builder */
     .number-mode{
-      display:grid;grid-template-columns:repeat(3,1fr);gap:7px;padding:5px;
+      display:grid;grid-template-columns:repeat(2,1fr);gap:7px;padding:5px;
       border:1px solid #e2e7ee;border-radius:16px;background:#f6f8fb;margin-bottom:16px;
     }
     .number-mode label{margin:0;cursor:pointer}
@@ -635,7 +699,7 @@
           <div class="hero-eyebrow">APLIKASI / SERTIFIKAT</div>
           <h1 class="hero-title">Sertifikat.<br><span class="hero-accent">Lebih Praktis.</span></h1>
           <p class="hero-description">
-            Dari Excel menjadi sertifikat dalam satu alur. Upload data, periksa hasil, lalu unduh PDF gabungan atau ZIP per peserta — tanpa mengubah desain sertifikat yang Anda gunakan.
+            Empat langkah utama: unduh template Excel, atur nomor, upload data, lalu generate. Pengaturan template sertifikat dipisahkan agar alur utama tetap sederhana.
           </p>
           <div class="hero-actions">
             <a class="btn btn-accent" href="#generator">Buat Sertifikat <span aria-hidden="true">↓</span></a>
@@ -653,77 +717,44 @@
       <div class="workspace-head">
         <div>
           <span class="section-kicker">ALUR GENERATOR</span>
-          <h2 class="workspace-title">Buat. Periksa.<br>Unduh.</h2>
+          <h2 class="workspace-title">4 Langkah.<br>Selesai.</h2>
         </div>
         <p class="workspace-note">
-          Template sertifikat tetap menjadi milik kegiatan Anda. Kabayan hanya membantu membaca Excel,
-          menempatkan data, melakukan preview, dan menghasilkan file secara massal.
+          Gunakan alur utama dari kiri ke kanan. Template sertifikat bawaan sudah siap dipakai; penggantian template dipisahkan sebagai pengaturan opsional.
         </p>
+      </div>
+
+      <div class="flow-strip" aria-label="Empat langkah generator sertifikat">
+        <div class="flow-step"><div class="flow-index">01</div><div><b>Unduh Excel</b><span>Gunakan template data Kabayan.</span></div></div>
+        <div class="flow-step"><div class="flow-index">02</div><div><b>Atur Nomor</b><span>Tentukan format dan nomor awal.</span></div></div>
+        <div class="flow-step"><div class="flow-index">03</div><div><b>Upload Excel</b><span>Masukkan data peserta yang sudah diisi.</span></div></div>
+        <div class="flow-step is-final"><div class="flow-index">04</div><div><b>Generate</b><span>Periksa, terbitkan, lalu unduh.</span></div></div>
       </div>
 
       <div class="layout">
         <aside class="stack">
-          <section class="card">
+          <section class="card" id="excelTemplateCard">
             <div class="card-head">
               <div><span class="step-number">01</span></div>
-              <h2>Template Sertifikat</h2>
+              <h2>Unduh Template Excel</h2>
             </div>
-            <p class="sub">Template bawaan sudah dikalibrasi dari halaman kosong PDF yang Anda kirim. Anda juga dapat upload PDF/PNG/JPG lain.</p>
-
-            <div class="actions">
-              <button class="btn btn-soft" id="useDemo">Gunakan Template PDF</button>
-              <label class="btn btn-outline" style="margin:0;cursor:pointer">
-                Upload PDF / Gambar
-                <input id="bgInput" type="file" accept="application/pdf,image/png,image/jpeg" hidden>
-              </label>
-            </div>
-
-            <div class="filemeta" id="bgMeta">Template: assets/template-sertifikat.png</div>
-
-            <div class="switchrow">
-              <span>Tampilkan label bawaan (Sertifikat, diberikan kepada)</span>
-              <input type="checkbox" id="showLabels" checked>
-            </div>
-            <div class="switchrow">
-              <span>Tampilkan QR verifikasi</span>
-              <input type="checkbox" id="showQr" checked>
-            </div>
-
-            <div style="margin-top:10px">
-              <label>Basis URL verifikasi</label>
-              <input type="text" id="verifyBase" value="https://dhaniswara86.id/sertifikat/verifikasi.html?id=">
+            <p class="sub">Mulai dari file Excel Kabayan agar kolom data langsung terbaca tanpa pemetaan ulang.</p>
+            <div class="download-template-box">
+              <strong>Template Data Sertifikat</strong>
+              <p>Unduh, isi data peserta, lalu simpan sebagai .xlsx. Nomor sertifikat tidak perlu ditulis di Excel.</p>
+              <a class="btn btn-accent" href="contoh-data-sertifikat.xlsx" download>Unduh Template Excel</a>
+              <div class="field-chips" aria-label="Kolom template">
+                <span>nama</span><span>instansi</span><span>detail_sertifikat</span><span>tanggal</span><span>penandatangan</span><span>jabatan</span>
+              </div>
             </div>
           </section>
-
-          <section class="card">
-            <div class="card-head">
-              <div><span class="step-number">02</span></div>
-              <h2>Upload Excel</h2>
-            </div>
-            <p class="sub">Header yang disarankan: nama, instansi, detail_sertifikat, tanggal, penandatangan, jabatan, kode_verifikasi. Nomor sertifikat diatur dari web.</p>
-
-            <div class="drop" id="excelDrop">
-              <strong>Tarik Excel ke sini</strong>
-              <small>atau klik untuk memilih .xlsx / .xls</small>
-              <input id="excelInput" type="file" accept=".xlsx,.xls" hidden>
-            </div>
-
-            <div class="filemeta" id="excelMeta">Belum ada file yang dipilih.</div>
-
-            <div class="stats">
-              <div class="stat"><b id="statRows">0</b><span>Baris</span></div>
-              <div class="stat"><b id="statValid">0</b><span>Valid</span></div>
-              <div class="stat"><b id="statWarn">0</b><span>Perlu Cek</span></div>
-            </div>
-          </section>
-
 
           <section class="card" id="numberCard">
             <div class="card-head">
-              <div><span class="step-number">03</span></div>
+              <div><span class="step-number">02</span></div>
               <h2>Nomor Sertifikat</h2>
             </div>
-            <p class="sub">Pilih sumber nomor. Kabayan dapat membaca nomor dari Excel, membuat nomor berurutan otomatis, atau memakai satu nomor yang sama untuk seluruh penerima.</p>
+            <p class="sub">Atur nomor sertifikat sebelum mengunggah data. Pilih nomor berurutan otomatis atau satu nomor yang sama untuk seluruh penerima.</p>
 
             <div class="number-mode" role="radiogroup" aria-label="Mode nomor sertifikat">
               <label>
@@ -839,21 +870,43 @@
             </div>
           </section>
 
-          <section class="card" id="mapCard" style="display:none">
+          <section class="card">
             <div class="card-head">
-              <div><span class="step-number">04</span></div>
+              <div><span class="step-number">03</span></div>
+              <h2>Upload Excel</h2>
+            </div>
+            <p class="sub">Setelah nomor selesai diatur, upload Excel yang sudah diisi. Kabayan akan membaca data dan menampilkan preview.</p>
+
+            <div class="drop" id="excelDrop">
+              <strong>Tarik Excel ke sini</strong>
+              <small>atau klik untuk memilih .xlsx / .xls</small>
+              <input id="excelInput" type="file" accept=".xlsx,.xls" hidden>
+            </div>
+
+            <div class="filemeta" id="excelMeta">Belum ada file yang dipilih.</div>
+
+            <div class="stats">
+              <div class="stat"><b id="statRows">0</b><span>Baris</span></div>
+              <div class="stat"><b id="statValid">0</b><span>Valid</span></div>
+              <div class="stat"><b id="statWarn">0</b><span>Perlu Cek</span></div>
+            </div>
+          </section>
+
+          <section class="card mapping-optional" id="mapCard" style="display:none">
+            <div class="card-head">
+              <div><span class="step-number">OPSIONAL</span></div>
               <h2>Pemetaan Kolom</h2>
             </div>
-            <p class="sub">Kabayan mencoba mengenali kolom otomatis. Ubah dropdown jika nama header Excel berbeda.</p>
+            <p class="sub">Muncul hanya bila header Excel berbeda. Jika memakai template Kabayan, bagian ini biasanya tidak perlu diubah.</p>
             <div id="mapping"></div>
           </section>
 
           <section class="card">
             <div class="card-head">
-              <div><span class="step-number">05</span></div>
-              <h2>Generate</h2>
+              <div><span class="step-number">04</span></div>
+              <h2>Generate Sertifikat</h2>
             </div>
-            <p class="sub">Periksa data, tentukan unit penerbit, lalu terbitkan ke Register Kabayan sebelum mengunduh PDF final.</p>
+            <p class="sub">Periksa preview di sebelah kanan, isi unit penerbit, lalu terbitkan. Setelah itu PDF dan ZIP siap diunduh.</p>
 
             <div style="margin-bottom:12px">
               <label>Unit Penerbit</label>
@@ -867,7 +920,7 @@
             <div class="publish-box">
               <strong>Terbitkan ke Register Sertifikat</strong>
               <p>Setelah diterbitkan, setiap penerima memiliki verification code unik dan QR pada PDF dapat diverifikasi secara online.</p>
-              <button class="btn btn-accent" id="publishCertificates" type="button" disabled>Terbitkan Sertifikat</button>
+              <button class="btn btn-accent" id="publishCertificates" type="button" disabled>Generate &amp; Terbitkan</button>
               <div class="publish-status" id="publishStatus">Belum diterbitkan.</div>
             </div>
 
@@ -886,17 +939,48 @@
               QR verifikasi Kabayan akan aktif setelah sertifikat diterbitkan ke Register.
               Untuk penggunaan resmi, gunakan template dan mekanisme penandatanganan yang berwenang.
             </div>
-
-            <details>
-              <summary>Pengaturan posisi (advanced)</summary>
-              <div class="positions" id="positions"></div>
-              <div class="actions" style="margin-top:10px">
-                <button class="btn btn-outline" id="resetPos">Reset posisi</button>
-              </div>
-            </details>
           </section>
-        </aside>
 
+          <details class="optional-card" id="templateSettings">
+            <summary>Pengaturan Template Sertifikat <span style="color:#8993a0;font-size:10px;font-weight:650">Opsional</span></summary>
+            <div class="optional-body">
+              <span class="optional-label">Tidak perlu dibuka setiap kali</span>
+              <p class="sub">Template bawaan sudah siap dipakai. Buka bagian ini hanya jika ingin mengganti PDF/gambar sertifikat, mengatur QR, atau menggeser posisi teks.</p>
+
+              <div class="actions">
+                <button class="btn btn-soft" id="useDemo">Gunakan Template Bawaan</button>
+                <label class="btn btn-outline" style="margin:0;cursor:pointer">
+                  Upload PDF / Gambar
+                  <input id="bgInput" type="file" accept="application/pdf,image/png,image/jpeg" hidden>
+                </label>
+              </div>
+
+              <div class="filemeta" id="bgMeta">Template bawaan aktif: assets/template-sertifikat.png</div>
+
+              <div class="switchrow">
+                <span>Tampilkan label bawaan (Sertifikat, diberikan kepada)</span>
+                <input type="checkbox" id="showLabels" checked>
+              </div>
+              <div class="switchrow">
+                <span>Tampilkan QR verifikasi</span>
+                <input type="checkbox" id="showQr" checked>
+              </div>
+
+              <div style="margin-top:10px">
+                <label>Basis URL verifikasi</label>
+                <input type="text" id="verifyBase" value="https://dhaniswara86.id/sertifikat/verifikasi.html?id=">
+              </div>
+
+              <details>
+                <summary>Posisi teks dan QR (advanced)</summary>
+                <div class="positions" id="positions"></div>
+                <div class="actions" style="margin-top:10px">
+                  <button class="btn btn-outline" id="resetPos">Reset posisi</button>
+                </div>
+              </details>
+            </div>
+          </details>
+        </aside>
         <section class="stack">
           <section class="card previewCard">
             <div class="previewHeader">
@@ -1205,7 +1289,7 @@ document.getElementById('useDemo').onclick = ()=>{
   if(bgObjectUrl) URL.revokeObjectURL(bgObjectUrl);
   bgObjectUrl=null;
   bg.src='assets/template-sertifikat.png';
-  document.getElementById('bgMeta').textContent='Template: assets/template-sertifikat.png';
+  document.getElementById('bgMeta').textContent='Template bawaan aktif: assets/template-sertifikat.png';
 };
 
 document.getElementById('bgInput').addEventListener('change',async e=>{
