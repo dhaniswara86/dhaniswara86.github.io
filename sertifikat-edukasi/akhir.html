@@ -2,7 +2,7 @@
 <html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Tahap Akhir Sertifikat Edukasi | Kabayan</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script>
 <style>
 :root{--ink:#111318;--muted:#707985;--blue:#0a66ff;--navy:#102655;--yellow:#f7c948;--line:#dfe6ef;--bg:#f5f8fc;--green:#067647;--red:#b42318;--orange:#b54708}
@@ -48,7 +48,7 @@ a{color:inherit}.wrap{width:min(1220px,calc(100% - 28px));margin:auto;padding:22
 </div></div>
 <script src="supabase-config.js"></script>
 <script>
-let sb=null,eventData=null,token=null,progress=null,certificateData=null;const $=id=>document.getElementById(id),code=new URLSearchParams(location.search).get('kode')||'';
+let sb=null,eventData=null,token=null,progress=null,certificateData=null,preparedQrData=null;const $=id=>document.getElementById(id),code=new URLSearchParams(location.search).get('kode')||'';
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
 function err(t){$('err').textContent=t;$('err').className='msg show err'}
 function steps(n){for(let i=1;i<=3;i++){const el=$('s'+i);el.classList.toggle('done',i<n);el.classList.toggle('active',i===n)}}
@@ -280,7 +280,26 @@ function renderPendingCertificate(){
   setTimeout(()=>refresh().catch(e=>err(e.message)),1200);
 }
 
-function renderCertificate(){
+async function prepareCertificateQr(){
+  preparedQrData=null;
+  const c=certificateData || {};
+  const verifyCode=c.verification_code || progress?.verification_code || '';
+  if(!verifyCode) return null;
+
+  const verify=new URL('verifikasi.html?id='+verifyCode,location.href).href;
+
+  try{
+    if(window.QRCode && typeof QRCode.toDataURL==='function'){
+      preparedQrData=await QRCode.toDataURL(verify,{margin:1,width:240});
+    }
+  }catch(e){
+    console.warn('QR gagal dibuat. PDF tetap dapat diunduh tanpa QR.',e);
+    preparedQrData=null;
+  }
+  return preparedQrData;
+}
+
+async function renderCertificate(){
   steps(3);
 
   const c=certificateData || {};
@@ -297,81 +316,134 @@ function renderCertificate(){
     </p>
 
     <div class="actions" style="justify-content:center;margin-top:18px">
-      <button class="btn btn-yellow" id="pdfBtn">Unduh Sertifikat PDF</button>
+      <button class="btn btn-yellow" id="pdfBtn" disabled>Menyiapkan PDF...</button>
       <a class="btn btn-outline" target="_blank"
          href="verifikasi.html?id=${encodeURIComponent(verifyCode)}">
          Verifikasi Sertifikat
       </a>
     </div>
 
-    <div style="margin-top:14px;font-size:10px;color:#7a8591">
+    <div id="pdfMsg" style="margin-top:12px;font-size:10px;color:#7a8591">
+      Menyiapkan file sertifikat...
+    </div>
+
+    <div style="margin-top:7px;font-size:10px;color:#7a8591">
       Kode verifikasi: ${esc(verifyCode)}
     </div>
   </div>`;
 
-  $('pdfBtn').onclick=downloadCertificate;
+  await prepareCertificateQr();
+
+  const btn=$('pdfBtn');
+  btn.disabled=false;
+  btn.textContent='Unduh Sertifikat PDF';
+  $('pdfMsg').textContent=preparedQrData
+    ? 'PDF siap diunduh.'
+    : 'PDF siap diunduh. QR tidak tersedia, tetapi kode verifikasi tetap tercantum.';
+
+  btn.onclick=downloadCertificate;
 }
 
-async function downloadCertificate(){
-  const c=certificateData || {};
-  const recipient=c.recipient_name || progress?.participant_name || '';
-  const certNumber=c.certificate_number || progress?.certificate_number || '';
-  const eventName=c.event_name || progress?.event_name || '';
-  const eventDate=c.event_date || progress?.event_date || '';
-  const issuer=c.issuer || progress?.issuer || '';
-  const verifyCode=c.verification_code || progress?.verification_code || '';
+function downloadCertificate(){
+  try{
+    if(!window.jspdf || !window.jspdf.jsPDF){
+      throw new Error('Library PDF belum termuat. Silakan refresh halaman lalu coba lagi.');
+    }
 
-  if(!verifyCode || !certNumber){
-    throw new Error('Data sertifikat belum lengkap. Silakan muat ulang halaman.');
+    const c=certificateData || {};
+    const recipient=c.recipient_name || progress?.participant_name || '';
+    const certNumber=c.certificate_number || progress?.certificate_number || '';
+    const eventName=c.event_name || progress?.event_name || '';
+    const eventDate=c.event_date || progress?.event_date || '';
+    const issuer=c.issuer || progress?.issuer || '';
+    const verifyCode=c.verification_code || progress?.verification_code || '';
+
+    if(!verifyCode || !certNumber){
+      throw new Error('Data sertifikat belum lengkap. Silakan muat ulang halaman.');
+    }
+
+    const {jsPDF}=window.jspdf;
+    const doc=new jsPDF({orientation:'landscape',unit:'mm',format:'a4'});
+
+    doc.setFillColor(248,250,253);
+    doc.rect(0,0,297,210,'F');
+
+    doc.setDrawColor(16,38,85);
+    doc.setLineWidth(1.2);
+    doc.roundedRect(12,12,273,186,5,5);
+
+    doc.setTextColor(16,38,85);
+    doc.setFont('helvetica','bold');
+    doc.setFontSize(26);
+    doc.text('SERTIFIKAT',148.5,44,{align:'center'});
+
+    doc.setFontSize(10);
+    doc.text(certNumber,148.5,54,{align:'center'});
+
+    doc.setTextColor(80,90,105);
+    doc.setFont('helvetica','normal');
+    doc.setFontSize(11);
+    doc.text('Diberikan kepada',148.5,78,{align:'center'});
+
+    doc.setTextColor(17,19,24);
+    doc.setFont('helvetica','bold');
+    doc.setFontSize(24);
+    doc.text(recipient,148.5,94,{align:'center',maxWidth:210});
+
+    doc.setFontSize(12);
+    doc.text('sebagai peserta dalam kegiatan',148.5,110,{align:'center'});
+
+    doc.setFontSize(15);
+    doc.text(eventName,148.5,121,{align:'center',maxWidth:190});
+
+    doc.setFont('helvetica','normal');
+    doc.setFontSize(10);
+    doc.text([eventDate,issuer].filter(Boolean).join(' • '),148.5,137,{align:'center'});
+
+    const verify=new URL('verifikasi.html?id='+verifyCode,location.href).href;
+
+    if(preparedQrData){
+      doc.addImage(preparedQrData,'PNG',250,157,24,24);
+      doc.setFontSize(7);
+      doc.text('Verifikasi QR',262,185,{align:'center'});
+    }else{
+      doc.setFontSize(8);
+      doc.text('Verifikasi:',235,163);
+      doc.setFontSize(6.5);
+      doc.text(verify,235,168,{maxWidth:42});
+    }
+
+    doc.setFontSize(7);
+    doc.setTextColor(90,100,115);
+    doc.text('Kode verifikasi: '+verifyCode,20,188);
+
+    const safeName=(recipient||'sertifikat').replace(/[^a-z0-9]+/gi,'-').toLowerCase();
+    const fileName='sertifikat-'+safeName+'.pdf';
+
+    // Keep the actual save call synchronous inside the user's click event.
+    // This is more reliable in Safari than awaiting QR generation after the click.
+    try{
+      doc.save(fileName);
+      if($('pdfMsg')) $('pdfMsg').textContent='Perintah unduh telah dikirim ke browser.';
+    }catch(saveError){
+      console.warn('doc.save gagal, memakai fallback blob URL.',saveError);
+      const blob=doc.output('blob');
+      const url=URL.createObjectURL(blob);
+      const a=document.createElement('a');
+      a.href=url;
+      a.download=fileName;
+      a.target='_blank';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(()=>URL.revokeObjectURL(url),60000);
+      if($('pdfMsg')) $('pdfMsg').textContent='PDF dibuka melalui metode alternatif.';
+    }
+  }catch(e){
+    console.error(e);
+    err('Gagal mengunduh PDF: '+e.message);
+    if($('pdfMsg')) $('pdfMsg').textContent='Gagal membuat PDF. '+e.message;
   }
-
-  const {jsPDF}=window.jspdf;
-  const doc=new jsPDF({orientation:'landscape',unit:'mm',format:'a4'});
-
-  doc.setFillColor(248,250,253);
-  doc.rect(0,0,297,210,'F');
-
-  doc.setDrawColor(16,38,85);
-  doc.setLineWidth(1.2);
-  doc.roundedRect(12,12,273,186,5,5);
-
-  doc.setTextColor(16,38,85);
-  doc.setFont('helvetica','bold');
-  doc.setFontSize(26);
-  doc.text('SERTIFIKAT',148.5,44,{align:'center'});
-
-  doc.setFontSize(10);
-  doc.text(certNumber,148.5,54,{align:'center'});
-
-  doc.setTextColor(80,90,105);
-  doc.setFont('helvetica','normal');
-  doc.setFontSize(11);
-  doc.text('Diberikan kepada',148.5,78,{align:'center'});
-
-  doc.setTextColor(17,19,24);
-  doc.setFont('helvetica','bold');
-  doc.setFontSize(24);
-  doc.text(recipient,148.5,94,{align:'center',maxWidth:210});
-
-  doc.setFontSize(12);
-  doc.text('sebagai peserta dalam kegiatan',148.5,110,{align:'center'});
-
-  doc.setFontSize(15);
-  doc.text(eventName,148.5,121,{align:'center',maxWidth:190});
-
-  doc.setFont('helvetica','normal');
-  doc.setFontSize(10);
-  doc.text([eventDate,issuer].filter(Boolean).join(' • '),148.5,137,{align:'center'});
-
-  const verify=new URL('verifikasi.html?id='+verifyCode,location.href).href;
-  const qr=await QRCode.toDataURL(verify,{margin:1,width:240});
-  doc.addImage(qr,'PNG',250,157,24,24);
-
-  doc.setFontSize(7);
-  doc.text('Verifikasi QR',262,185,{align:'center'});
-
-  const safeName=(recipient||'sertifikat').replace(/[^a-z0-9]+/gi,'-').toLowerCase();
-  doc.save('sertifikat-'+safeName+'.pdf');
 }
 
 init();
