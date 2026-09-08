@@ -1,6 +1,9 @@
 <!doctype html>
 <html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Tahap Akhir Sertifikat Edukasi | Kabayan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script>
@@ -48,7 +51,7 @@ a{color:inherit}.wrap{width:min(1220px,calc(100% - 28px));margin:auto;padding:22
 </div></div>
 <script src="supabase-config.js"></script>
 <script>
-let sb=null,eventData=null,token=null,progress=null,certificateData=null,preparedQrData=null;const $=id=>document.getElementById(id),code=new URLSearchParams(location.search).get('kode')||'';
+let sb=null,eventData=null,token=null,progress=null,certificateData=null,preparedQrData=null,preparedCertificateJpeg=null;const $=id=>document.getElementById(id),code=new URLSearchParams(location.search).get('kode')||'';
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
 function loadScript(url){
   return new Promise((resolve,reject)=>{
@@ -312,6 +315,74 @@ function renderPendingCertificate(){
   setTimeout(()=>refresh().catch(e=>err(e.message)),1200);
 }
 
+
+const CERT_TEMPLATE_URL='assets/template-sertifikat.png';
+const CERT_FONT='"Montserrat", Arial, sans-serif';
+const CERT_POS={
+  titleX:127,titleY:276,
+  numberX:127,numberY:319,
+  labelX:127,labelY:395,
+  nameX:127,nameY:452,
+  institutionX:127,institutionY:502,
+  detailX:127,detailY:534,
+  dateX:127,dateY:630,
+  qrX:130,qrY:753,
+  signerX:125,signerY:888
+};
+
+function loadImage(src){
+  return new Promise((resolve,reject)=>{
+    const img=new Image();
+    img.onload=()=>resolve(img);
+    img.onerror=()=>reject(new Error('Gagal memuat gambar: '+src));
+    img.src=src;
+  });
+}
+
+function fitCanvasText(ctx,text,maxWidth,startPx,minPx,weight='700'){
+  let size=startPx;
+  ctx.font=`${weight} ${size}px ${CERT_FONT}`;
+  while(size>minPx && ctx.measureText(text).width>maxWidth){
+    size-=1;
+    ctx.font=`${weight} ${size}px ${CERT_FONT}`;
+  }
+  return size;
+}
+
+function wrapCanvasLines(ctx,text,maxWidth,fontPx,weight='700',maxLines=6){
+  ctx.font=`${weight} ${fontPx}px ${CERT_FONT}`;
+  const words=String(text||'').split(/\s+/).filter(Boolean);
+  const lines=[];
+  let line='';
+
+  for(const word of words){
+    const test=line?line+' '+word:word;
+    if(ctx.measureText(test).width<=maxWidth){
+      line=test;
+    }else{
+      if(line) lines.push(line);
+      line=word;
+      if(lines.length>=maxLines-1) break;
+    }
+  }
+
+  if(line && lines.length<maxLines) lines.push(line);
+  return lines;
+}
+
+function formatCertificateDate(value){
+  if(!value) return '';
+  try{
+    const d=new Date(value+'T00:00:00');
+    const txt=new Intl.DateTimeFormat('id-ID',{
+      weekday:'long',day:'numeric',month:'long',year:'numeric'
+    }).format(d);
+    return txt.charAt(0).toUpperCase()+txt.slice(1);
+  }catch(e){
+    return String(value);
+  }
+}
+
 async function prepareCertificateQr(){
   preparedQrData=null;
   const c=certificateData || {};
@@ -322,13 +393,146 @@ async function prepareCertificateQr(){
 
   try{
     if(window.QRCode && typeof QRCode.toDataURL==='function'){
-      preparedQrData=await QRCode.toDataURL(verify,{margin:1,width:240});
+      preparedQrData=await QRCode.toDataURL(verify,{margin:1,width:320});
     }
   }catch(e){
-    console.warn('QR gagal dibuat. PDF tetap dapat diunduh tanpa QR.',e);
+    console.warn('QR gagal dibuat.',e);
     preparedQrData=null;
   }
+
   return preparedQrData;
+}
+
+async function prepareOfficialCertificate(){
+  preparedCertificateJpeg=null;
+
+  const c=certificateData || {};
+  const recipient=c.recipient_name || progress?.participant_name || '';
+  const certNumber=c.certificate_number || progress?.certificate_number || '';
+  const eventName=c.event_name || progress?.event_name || '';
+  const eventDate=c.event_date || progress?.event_date || '';
+  const issuer=c.issuer || progress?.issuer || '';
+  const taxpayerName=c.taxpayer_name || '';
+  const signerName=c.signer_name || '';
+  const signerTitle=c.signer_title || '';
+  const verifyCode=c.verification_code || progress?.verification_code || '';
+
+  if(!recipient || !certNumber || !verifyCode){
+    throw new Error('Data sertifikat belum lengkap.');
+  }
+
+  if(document.fonts?.ready){
+    try{
+      await document.fonts.load('700 28px Montserrat');
+      await document.fonts.load('800 57px Montserrat');
+      await document.fonts.ready;
+    }catch(e){
+      console.warn('Font Montserrat belum siap, memakai fallback.',e);
+    }
+  }
+
+  const bg=await loadImage(CERT_TEMPLATE_URL);
+  await prepareCertificateQr();
+
+  const canvas=document.createElement('canvas');
+  canvas.width=1440;
+  canvas.height=1018;
+  const ctx=canvas.getContext('2d');
+  ctx.drawImage(bg,0,0,canvas.width,canvas.height);
+
+  const navy='#012449';
+  const gold='#c6912b';
+  ctx.textBaseline='alphabetic';
+
+  // Judul
+  ctx.fillStyle=gold;
+  ctx.font=`800 57px ${CERT_FONT}`;
+  ctx.fillText('Sertifikat',CERT_POS.titleX,CERT_POS.titleY);
+
+  // Nomor
+  ctx.fillStyle=navy;
+  ctx.font=`700 28px ${CERT_FONT}`;
+  ctx.fillText('Nomor : '+certNumber,CERT_POS.numberX,CERT_POS.numberY);
+
+  // Label penerima
+  ctx.font=`700 27px ${CERT_FONT}`;
+  ctx.fillText('diberikan kepada',CERT_POS.labelX,CERT_POS.labelY);
+
+  // Nama penerima
+  const nameSize=fitCanvasText(ctx,recipient,980,41,25,'700');
+  ctx.font=`700 ${nameSize}px ${CERT_FONT}`;
+  ctx.fillText(recipient,CERT_POS.nameX,CERT_POS.nameY);
+  const nameW=Math.min(ctx.measureText(recipient).width,980);
+  ctx.fillRect(CERT_POS.nameX,CERT_POS.nameY+5,nameW,2);
+
+  // Nama WP / instansi
+  const institution=(taxpayerName && taxpayerName.toLowerCase()!==recipient.toLowerCase())
+    ? taxpayerName
+    : '';
+  if(institution){
+    const instSize=fitCanvasText(ctx,institution,920,28,20,'700');
+    ctx.font=`700 ${instSize}px ${CERT_FONT}`;
+    ctx.fillText(institution,CERT_POS.institutionX,CERT_POS.institutionY);
+  }
+
+  // Detail sertifikat
+  let detail='Sebagai Peserta dalam Kegiatan '+eventName;
+  if(issuer) detail+=' yang diselenggarakan oleh '+issuer;
+
+  let detailSize=21;
+  let lines=wrapCanvasLines(ctx,detail,760,detailSize,'700',5);
+  if(lines.length>=5 && detail.length>250){
+    detailSize=19;
+    lines=wrapCanvasLines(ctx,detail,760,detailSize,'700',6);
+  }
+
+  ctx.font=`700 ${detailSize}px ${CERT_FONT}`;
+  const lineHeight=detailSize+10;
+  lines.forEach((line,i)=>{
+    ctx.fillText(line,CERT_POS.detailX,CERT_POS.detailY+i*lineHeight);
+  });
+
+  // Tanggal
+  const formattedDate=formatCertificateDate(eventDate);
+  if(formattedDate){
+    const naturalY=CERT_POS.detailY+lines.length*lineHeight;
+    ctx.font=`700 22px ${CERT_FONT}`;
+    ctx.fillText('pada '+formattedDate,CERT_POS.dateX,Math.max(CERT_POS.dateY,naturalY));
+  }
+
+  // QR
+  if(preparedQrData){
+    try{
+      const qrImg=await loadImage(preparedQrData);
+      ctx.drawImage(qrImg,CERT_POS.qrX,CERT_POS.qrY,108,110);
+    }catch(e){
+      console.warn('QR tidak dapat ditempelkan.',e);
+    }
+  }
+
+  // Penandatangan
+  if(signerName || signerTitle){
+    ctx.fillStyle='#000000';
+    ctx.font=`700 12px ${CERT_FONT}`;
+    ctx.fillText('Ditandatangani secara elektronik',CERT_POS.signerX,CERT_POS.signerY);
+
+    ctx.fillStyle='#1b2952';
+
+    if(signerName){
+      const signerSize=fitCanvasText(ctx,signerName,610,23,18,'700');
+      ctx.font=`700 ${signerSize}px ${CERT_FONT}`;
+      ctx.fillText(signerName,CERT_POS.signerX,CERT_POS.signerY+29);
+    }
+
+    if(signerTitle){
+      const titleSize=fitCanvasText(ctx,signerTitle,610,23,17,'700');
+      ctx.font=`700 ${titleSize}px ${CERT_FONT}`;
+      ctx.fillText(signerTitle,CERT_POS.signerX,CERT_POS.signerY+61);
+    }
+  }
+
+  preparedCertificateJpeg=canvas.toDataURL('image/jpeg',0.94);
+  return preparedCertificateJpeg;
 }
 
 async function renderCertificate(){
@@ -348,7 +552,7 @@ async function renderCertificate(){
     </p>
 
     <div class="actions" style="justify-content:center;margin-top:18px">
-      <button class="btn btn-yellow" id="pdfBtn" disabled>Menyiapkan PDF...</button>
+      <button class="btn btn-yellow" id="pdfBtn" disabled>Menyiapkan Sertifikat...</button>
       <a class="btn btn-outline" target="_blank"
          href="verifikasi.html?id=${encodeURIComponent(verifyCode)}">
          Verifikasi Sertifikat
@@ -356,7 +560,7 @@ async function renderCertificate(){
     </div>
 
     <div id="pdfMsg" style="margin-top:12px;font-size:10px;color:#7a8591">
-      Menyiapkan file sertifikat...
+      Menyiapkan PDF dengan template sertifikat internal...
     </div>
 
     <div style="margin-top:7px;font-size:10px;color:#7a8591">
@@ -365,120 +569,65 @@ async function renderCertificate(){
   </div>`;
 
   const pdfReady=await ensureJsPdf();
-  await prepareCertificateQr();
-
-  const btn=$('pdfBtn');
 
   if(!pdfReady){
-    btn.disabled=true;
-    btn.textContent='PDF belum siap';
-    $('pdfMsg').textContent='Library PDF gagal dimuat. Coba refresh halaman atau periksa koneksi internet.';
+    $('pdfBtn').disabled=true;
+    $('pdfBtn').textContent='PDF belum siap';
+    $('pdfMsg').textContent='Library PDF gagal dimuat. Silakan refresh halaman.';
     return;
   }
 
-  btn.disabled=false;
-  btn.textContent='Unduh Sertifikat PDF';
-  $('pdfMsg').textContent=preparedQrData
-    ? 'PDF siap diunduh.'
-    : 'PDF siap diunduh. QR tidak tersedia, tetapi kode verifikasi tetap tercantum.';
-
-  btn.onclick=downloadCertificate;
+  try{
+    await prepareOfficialCertificate();
+    $('pdfBtn').disabled=false;
+    $('pdfBtn').textContent='Unduh Sertifikat PDF';
+    $('pdfMsg').textContent='PDF siap diunduh dengan desain sertifikat internal.';
+    $('pdfBtn').onclick=downloadCertificate;
+  }catch(e){
+    console.error(e);
+    $('pdfBtn').disabled=true;
+    $('pdfBtn').textContent='PDF belum siap';
+    $('pdfMsg').textContent='Gagal menyiapkan template sertifikat: '+e.message;
+  }
 }
 
 function downloadCertificate(){
   try{
-    if(!window.jspdf || !window.jspdf.jsPDF){
-      throw new Error('Library PDF belum termuat. Pastikan akhir.html versi terbaru sudah terpasang lalu lakukan hard refresh.');
+    if(!window.jspdf?.jsPDF){
+      throw new Error('Library PDF belum termuat.');
+    }
+    if(!preparedCertificateJpeg){
+      throw new Error('Sertifikat belum selesai disiapkan.');
     }
 
     const c=certificateData || {};
-    const recipient=c.recipient_name || progress?.participant_name || '';
-    const certNumber=c.certificate_number || progress?.certificate_number || '';
-    const eventName=c.event_name || progress?.event_name || '';
-    const eventDate=c.event_date || progress?.event_date || '';
-    const issuer=c.issuer || progress?.issuer || '';
-    const verifyCode=c.verification_code || progress?.verification_code || '';
-
-    if(!verifyCode || !certNumber){
-      throw new Error('Data sertifikat belum lengkap. Silakan muat ulang halaman.');
-    }
+    const recipient=c.recipient_name || progress?.participant_name || 'sertifikat';
 
     const {jsPDF}=window.jspdf;
-    const doc=new jsPDF({orientation:'landscape',unit:'mm',format:'a4'});
+    const pdf=new jsPDF({
+      orientation:'landscape',
+      unit:'mm',
+      format:'a4',
+      compress:true
+    });
 
-    doc.setFillColor(248,250,253);
-    doc.rect(0,0,297,210,'F');
+    pdf.addImage(
+      preparedCertificateJpeg,
+      'JPEG',
+      0,0,297,210,
+      undefined,
+      'FAST'
+    );
 
-    doc.setDrawColor(16,38,85);
-    doc.setLineWidth(1.2);
-    doc.roundedRect(12,12,273,186,5,5);
+    const safeName=recipient
+      .replace(/[^a-z0-9]+/gi,'-')
+      .replace(/^-+|-+$/g,'')
+      .toLowerCase() || 'sertifikat';
 
-    doc.setTextColor(16,38,85);
-    doc.setFont('helvetica','bold');
-    doc.setFontSize(26);
-    doc.text('SERTIFIKAT',148.5,44,{align:'center'});
+    pdf.save('sertifikat-'+safeName+'.pdf');
 
-    doc.setFontSize(10);
-    doc.text(certNumber,148.5,54,{align:'center'});
-
-    doc.setTextColor(80,90,105);
-    doc.setFont('helvetica','normal');
-    doc.setFontSize(11);
-    doc.text('Diberikan kepada',148.5,78,{align:'center'});
-
-    doc.setTextColor(17,19,24);
-    doc.setFont('helvetica','bold');
-    doc.setFontSize(24);
-    doc.text(recipient,148.5,94,{align:'center',maxWidth:210});
-
-    doc.setFontSize(12);
-    doc.text('sebagai peserta dalam kegiatan',148.5,110,{align:'center'});
-
-    doc.setFontSize(15);
-    doc.text(eventName,148.5,121,{align:'center',maxWidth:190});
-
-    doc.setFont('helvetica','normal');
-    doc.setFontSize(10);
-    doc.text([eventDate,issuer].filter(Boolean).join(' • '),148.5,137,{align:'center'});
-
-    const verify=new URL('verifikasi.html?id='+verifyCode,location.href).href;
-
-    if(preparedQrData){
-      doc.addImage(preparedQrData,'PNG',250,157,24,24);
-      doc.setFontSize(7);
-      doc.text('Verifikasi QR',262,185,{align:'center'});
-    }else{
-      doc.setFontSize(8);
-      doc.text('Verifikasi:',235,163);
-      doc.setFontSize(6.5);
-      doc.text(verify,235,168,{maxWidth:42});
-    }
-
-    doc.setFontSize(7);
-    doc.setTextColor(90,100,115);
-    doc.text('Kode verifikasi: '+verifyCode,20,188);
-
-    const safeName=(recipient||'sertifikat').replace(/[^a-z0-9]+/gi,'-').toLowerCase();
-    const fileName='sertifikat-'+safeName+'.pdf';
-
-    // Keep the actual save call synchronous inside the user's click event.
-    // This is more reliable in Safari than awaiting QR generation after the click.
-    try{
-      doc.save(fileName);
-      if($('pdfMsg')) $('pdfMsg').textContent='Perintah unduh telah dikirim ke browser.';
-    }catch(saveError){
-      console.warn('doc.save gagal, memakai fallback blob URL.',saveError);
-      const blob=doc.output('blob');
-      const url=URL.createObjectURL(blob);
-      const a=document.createElement('a');
-      a.href=url;
-      a.download=fileName;
-      a.target='_blank';
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      setTimeout(()=>URL.revokeObjectURL(url),60000);
-      if($('pdfMsg')) $('pdfMsg').textContent='PDF dibuka melalui metode alternatif.';
+    if($('pdfMsg')){
+      $('pdfMsg').textContent='Perintah unduh sertifikat telah dikirim ke browser.';
     }
   }catch(e){
     console.error(e);

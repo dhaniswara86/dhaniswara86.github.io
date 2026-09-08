@@ -72,6 +72,8 @@ a{color:inherit}.wrap{width:min(1220px,calc(100% - 28px));margin:auto;padding:22
           <div class="field"><label>Kode link</label><input id="eventCode" placeholder="contoh: coretax-sep26"></div>
           <div class="field"><label>Tanggal</label><input id="eventDate" type="date"></div>
           <div class="field"><label>Unit penerbit</label><input id="eventIssuer"></div>
+          <div class="field"><label>Nama penandatangan sertifikat</label><input id="eventSignerName" placeholder="Contoh: Yunirwansyah"></div>
+          <div class="field"><label>Jabatan penandatangan</label><input id="eventSignerTitle" placeholder="Contoh: Kepala Kantor Wilayah DJP Jawa Barat I"></div>
           <div class="field"><label>Format nomor sertifikat</label><input id="eventPattern" value="SERT-{SEQ}/{YEAR}"></div>
           <div class="field"><label>Nomor awal</label><input id="eventSeq" type="number" min="1" value="1"></div>
           <div class="field"><label>Nilai minimum Posttest untuk Sertifikat</label><input id="eventMinPosttest" type="number" min="0" max="100" step="1" value="70"></div>
@@ -81,7 +83,7 @@ a{color:inherit}.wrap{width:min(1220px,calc(100% - 28px));margin:auto;padding:22
           <button class="btn btn-blue" id="publishEventBtn" disabled>Publish & Buka Fase Awal</button>
           <button class="btn btn-outline" id="closeEventBtn" disabled>Tutup Kegiatan</button>
         </div>
-        <div class="msg ok" id="eventOk"></div><div class="msg err" id="eventErr"></div>
+        <div class="msg ok show" style="margin-top:12px">Untuk PDF bergaya sertifikat internal, isi <b>Nama penandatangan</b> dan <b>Jabatan penandatangan</b>. Template visual mengikuti sertifikat internal DJP.</div><div class="msg ok" id="eventOk"></div><div class="msg err" id="eventErr"></div>
       </div>
 
       <div class="card" id="phasePanel" style="display:none">
@@ -216,11 +218,11 @@ function renderEvents(){
 }
 function renderCopySources(){$('copySource').innerHTML='<option value="">Salin dari kegiatan...</option>'+events.filter(e=>e.id!==currentEvent?.id).map(e=>`<option value="${e.id}">${esc(e.title)}</option>`).join('')}
 
-$('newEventBtn').onclick=()=>{currentEvent=null;editingQuestion=null;editingEval=null;['eventTitle','eventCode','eventDate','eventIssuer'].forEach(id=>$(id).value='');$('eventPattern').value='SERT-{SEQ}/{YEAR}';$('eventSeq').value=1;$('eventMinPosttest').value=70;$('editorTitle').textContent='Buat Kegiatan';$('eventStatus').className='status draft';$('eventStatus').textContent='DRAFT';$('publishEventBtn').disabled=true;$('closeEventBtn').disabled=true;['phasePanel','questionPanel','evaluationPanel','monitorPanel'].forEach(id=>$(id).style.display='none');renderEvents();renderCopySources()};
+$('newEventBtn').onclick=()=>{currentEvent=null;editingQuestion=null;editingEval=null;['eventTitle','eventCode','eventDate','eventIssuer','eventSignerName','eventSignerTitle'].forEach(id=>$(id).value='');$('eventPattern').value='SERT-{SEQ}/{YEAR}';$('eventSeq').value=1;$('eventMinPosttest').value=70;$('editorTitle').textContent='Buat Kegiatan';$('eventStatus').className='status draft';$('eventStatus').textContent='DRAFT';$('publishEventBtn').disabled=true;$('closeEventBtn').disabled=true;['phasePanel','questionPanel','evaluationPanel','monitorPanel'].forEach(id=>$(id).style.display='none');renderEvents();renderCopySources()};
 
 async function selectEvent(id,scroll=true){
   currentEvent=events.find(e=>e.id===id);if(!currentEvent)return;
-  $('eventTitle').value=currentEvent.title||'';$('eventCode').value=currentEvent.code||'';$('eventDate').value=currentEvent.event_date||'';$('eventIssuer').value=currentEvent.issuer||'';$('eventPattern').value=currentEvent.number_pattern||'SERT-{SEQ}/{YEAR}';$('eventSeq').value=currentEvent.next_sequence||1;$('eventMinPosttest').value=currentEvent.minimum_posttest_score??70;
+  $('eventTitle').value=currentEvent.title||'';$('eventCode').value=currentEvent.code||'';$('eventDate').value=currentEvent.event_date||'';$('eventIssuer').value=currentEvent.issuer||'';$('eventSignerName').value=currentEvent.signer_name||'';$('eventSignerTitle').value=currentEvent.signer_title||'';$('eventPattern').value=currentEvent.number_pattern||'SERT-{SEQ}/{YEAR}';$('eventSeq').value=currentEvent.next_sequence||1;$('eventMinPosttest').value=currentEvent.minimum_posttest_score??70;
   $('editorTitle').textContent='Pengaturan Kegiatan';$('eventStatus').className='status '+currentEvent.status;$('eventStatus').textContent=currentEvent.status.toUpperCase();
   $('publishEventBtn').disabled=currentEvent.status==='published';$('closeEventBtn').disabled=currentEvent.status==='closed';
   ['phasePanel','questionPanel','evaluationPanel','monitorPanel'].forEach(id=>$(id).style.display='block');
@@ -241,7 +243,7 @@ $('copyFinalBtn').onclick=()=>currentEvent&&copyText(finalUrl(currentEvent));
 $('openInitialBtn').onclick=()=>updatePhase('initial_phase_open',true);$('closeInitialBtn').onclick=()=>updatePhase('initial_phase_open',false);
 $('openFinalBtn').onclick=()=>updatePhase('final_phase_open',true);$('closeFinalBtn').onclick=()=>updatePhase('final_phase_open',false);
 
-$('saveEventBtn').onclick=async()=>{try{const row={title:$('eventTitle').value.trim(),code:$('eventCode').value.trim(),event_date:$('eventDate').value||null,issuer:$('eventIssuer').value.trim()||null,number_pattern:$('eventPattern').value.trim()||'SERT-{SEQ}/{YEAR}',next_sequence:Number($('eventSeq').value)||1,minimum_posttest_score:Math.max(0,Math.min(100,Number($('eventMinPosttest').value)||70)),updated_at:new Date().toISOString()};if(!row.title||!row.code)throw new Error('Nama kegiatan dan kode link wajib diisi.');let res;if(currentEvent)res=await sb.from('external_events').update(row).eq('id',currentEvent.id).select().single();else{const {data:{user}}=await sb.auth.getUser();res=await sb.from('external_events').insert({...row,created_by:user.id}).select().single()}if(res.error)throw res.error;currentEvent=res.data;msg('eventOk','Kegiatan tersimpan.',true);await loadEvents();selectEvent(currentEvent.id,false)}catch(e){msg('eventErr',e.message)}};
+$('saveEventBtn').onclick=async()=>{try{const row={title:$('eventTitle').value.trim(),code:$('eventCode').value.trim(),event_date:$('eventDate').value||null,issuer:$('eventIssuer').value.trim()||null,signer_name:$('eventSignerName').value.trim()||null,signer_title:$('eventSignerTitle').value.trim()||null,number_pattern:$('eventPattern').value.trim()||'SERT-{SEQ}/{YEAR}',next_sequence:Number($('eventSeq').value)||1,minimum_posttest_score:Math.max(0,Math.min(100,Number($('eventMinPosttest').value)||70)),updated_at:new Date().toISOString()};if(!row.title||!row.code)throw new Error('Nama kegiatan dan kode link wajib diisi.');let res;if(currentEvent)res=await sb.from('external_events').update(row).eq('id',currentEvent.id).select().single();else{const {data:{user}}=await sb.auth.getUser();res=await sb.from('external_events').insert({...row,created_by:user.id}).select().single()}if(res.error)throw res.error;currentEvent=res.data;msg('eventOk','Kegiatan tersimpan.',true);await loadEvents();selectEvent(currentEvent.id,false)}catch(e){msg('eventErr',e.message)}};
 $('publishEventBtn').onclick=async()=>{if(!currentEvent)return;const {error}=await sb.from('external_events').update({status:'published',initial_phase_open:true,final_phase_open:false,updated_at:new Date().toISOString()}).eq('id',currentEvent.id);if(error)return msg('eventErr',error.message);msg('eventOk','Kegiatan dipublish. Fase Awal dibuka; Fase Akhir tetap ditutup.',true);await loadEvents()};
 $('closeEventBtn').onclick=async()=>{if(!currentEvent||!confirm('Tutup seluruh kegiatan? Kedua fase akan ditutup.'))return;const {error}=await sb.from('external_events').update({status:'closed',initial_phase_open:false,final_phase_open:false,updated_at:new Date().toISOString()}).eq('id',currentEvent.id);if(error)return msg('eventErr',error.message);await loadEvents()};
 
