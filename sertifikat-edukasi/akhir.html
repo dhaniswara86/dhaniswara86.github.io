@@ -2,7 +2,7 @@
 <html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Tahap Akhir Sertifikat Edukasi | Kabayan</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script>
 <style>
 :root{--ink:#111318;--muted:#707985;--blue:#0a66ff;--navy:#102655;--yellow:#f7c948;--line:#dfe6ef;--bg:#f5f8fc;--green:#067647;--red:#b42318;--orange:#b54708}
@@ -50,6 +50,38 @@ a{color:inherit}.wrap{width:min(1220px,calc(100% - 28px));margin:auto;padding:22
 <script>
 let sb=null,eventData=null,token=null,progress=null,certificateData=null,preparedQrData=null;const $=id=>document.getElementById(id),code=new URLSearchParams(location.search).get('kode')||'';
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+function loadScript(url){
+  return new Promise((resolve,reject)=>{
+    const s=document.createElement('script');
+    s.src=url;
+    s.async=true;
+    s.onload=()=>resolve(true);
+    s.onerror=()=>reject(new Error('Gagal memuat '+url));
+    document.head.appendChild(s);
+  });
+}
+
+async function ensureJsPdf(){
+  if(window.jspdf?.jsPDF) return true;
+
+  const sources=[
+    'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js',
+    'https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js',
+    'https://unpkg.com/jspdf@2.5.1/dist/jspdf.umd.min.js'
+  ];
+
+  for(const url of sources){
+    try{
+      await loadScript(url);
+      if(window.jspdf?.jsPDF) return true;
+    }catch(e){
+      console.warn(e);
+    }
+  }
+
+  return false;
+}
+
 function err(t){$('err').textContent=t;$('err').className='msg show err'}
 function steps(n){for(let i=1;i<=3;i++){const el=$('s'+i);el.classList.toggle('done',i<n);el.classList.toggle('active',i===n)}}
 async function init(){try{if(!code)throw new Error('Kode kegiatan tidak tersedia.');sb=window.KabayanKegiatanSupabase.getClient();const {data,error}=await sb.rpc('public_get_external_event',{p_code:code});if(error)throw error;if(!data?.length)throw new Error('Kegiatan tidak ditemukan atau belum dipublish.');eventData=data[0];$('eventTitle').textContent=eventData.title;$('eventMeta').textContent=[eventData.event_date,eventData.issuer,'Posttest + Evaluasi + Sertifikat'].filter(Boolean).join(' • ');if(!eventData.final_phase_open)return renderClosed();token=localStorage.getItem('kabayan_edukasi_'+eventData.event_id)||null;if(token){try{await refresh();return}catch{token=null}}renderIdentify()}catch(e){err(e.message);$('content').innerHTML='<div class="muted">Tidak dapat membuka tahap akhir.</div>'}}
@@ -332,9 +364,18 @@ async function renderCertificate(){
     </div>
   </div>`;
 
+  const pdfReady=await ensureJsPdf();
   await prepareCertificateQr();
 
   const btn=$('pdfBtn');
+
+  if(!pdfReady){
+    btn.disabled=true;
+    btn.textContent='PDF belum siap';
+    $('pdfMsg').textContent='Library PDF gagal dimuat. Coba refresh halaman atau periksa koneksi internet.';
+    return;
+  }
+
   btn.disabled=false;
   btn.textContent='Unduh Sertifikat PDF';
   $('pdfMsg').textContent=preparedQrData
@@ -347,7 +388,7 @@ async function renderCertificate(){
 function downloadCertificate(){
   try{
     if(!window.jspdf || !window.jspdf.jsPDF){
-      throw new Error('Library PDF belum termuat. Silakan refresh halaman lalu coba lagi.');
+      throw new Error('Library PDF belum termuat. Pastikan akhir.html versi terbaru sudah terpasang lalu lakukan hard refresh.');
     }
 
     const c=certificateData || {};
