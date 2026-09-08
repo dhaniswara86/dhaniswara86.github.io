@@ -28,6 +28,14 @@ a{color:inherit}.wrap{width:min(1220px,calc(100% - 28px));margin:auto;padding:22
 .metric-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:13px}.metric{border:1px solid #e5eaf0;border-radius:14px;padding:12px;background:#fbfcfe}.metric b{display:block;font-size:22px;letter-spacing:-.04em}.metric span{display:block;color:#7a8590;font-size:9px;margin-top:3px}
 @media(max-width:960px){.sidebar-layout{grid-template-columns:1fr}.phase-grid,.metric-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:580px){.phase-grid,.metric-grid{grid-template-columns:1fr}}
+
+.report-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.report-card{border:1px solid #e2e8ef;border-radius:18px;padding:16px;background:#fbfcfe}
+.report-card h3{margin:9px 0 6px;font-size:17px;letter-spacing:-.035em}
+.report-card p{margin:0 0 12px;color:#74808c;font-size:10.5px;line-height:1.55}
+.report-card .actions{margin-top:10px}
+@media(max-width:760px){.report-grid{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -216,6 +224,62 @@ a{color:inherit}.wrap{width:min(1220px,calc(100% - 28px));margin:auto;padding:22
         <div class="msg ok" id="certificateOk"></div>
         <div class="msg err" id="certificateErr"></div>
       </div>
+
+      <div class="card" id="reportPanel" style="display:none">
+        <div class="section-title">
+          <div>
+            <h2>Laporan & Export</h2>
+            <p>Cetak laporan kegiatan atau ekspor data ke Excel. Data diambil langsung dari Supabase saat tombol ditekan.</p>
+          </div>
+          <button class="btn btn-yellow" id="exportAllReports">Export Semua ke Excel</button>
+        </div>
+
+        <div class="report-grid">
+          <div class="report-card">
+            <span class="pill">01</span>
+            <h3>Daftar Hadir</h3>
+            <p>Nama peserta, Nama Wajib Pajak, handphone, email, usia, jenis kelamin, dan waktu pendaftaran.</p>
+            <div class="actions">
+              <button class="btn btn-outline" id="printAttendance">Cetak</button>
+              <button class="btn btn-green" id="excelAttendance">Export Excel</button>
+            </div>
+          </div>
+
+          <div class="report-card">
+            <span class="pill">02</span>
+            <h3>Hasil Pretest</h3>
+            <p>Nilai Pretest dan jawaban setiap soal untuk seluruh peserta yang telah menyelesaikan Pretest.</p>
+            <div class="actions">
+              <button class="btn btn-outline" id="printPretest">Cetak</button>
+              <button class="btn btn-green" id="excelPretest">Export Excel</button>
+            </div>
+          </div>
+
+          <div class="report-card">
+            <span class="pill">03</span>
+            <h3>Hasil Posttest</h3>
+            <p>Nilai Posttest, status kelulusan, dan jawaban setiap soal untuk peserta yang telah menyelesaikan Posttest.</p>
+            <div class="actions">
+              <button class="btn btn-outline" id="printPosttest">Cetak</button>
+              <button class="btn btn-green" id="excelPosttest">Export Excel</button>
+            </div>
+          </div>
+
+          <div class="report-card">
+            <span class="pill">04</span>
+            <h3>Hasil Evaluasi</h3>
+            <p>Jawaban evaluasi kegiatan, termasuk matrix Likert serta pertanyaan Coretax yang bercabang.</p>
+            <div class="actions">
+              <button class="btn btn-outline" id="printEvaluation">Cetak</button>
+              <button class="btn btn-green" id="excelEvaluation">Export Excel</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="msg ok" id="reportOk"></div>
+        <div class="msg err" id="reportErr"></div>
+      </div>
+
     </section>
   </div>
 </main>
@@ -251,14 +315,14 @@ function renderEvents(){
 }
 function renderCopySources(){$('copySource').innerHTML='<option value="">Salin dari kegiatan...</option>'+events.filter(e=>e.id!==currentEvent?.id).map(e=>`<option value="${e.id}">${esc(e.title)}</option>`).join('')}
 
-$('newEventBtn').onclick=()=>{currentEvent=null;editingQuestion=null;editingEval=null;['eventTitle','eventCode','eventDate','eventIssuer','eventSignerName','eventSignerTitle'].forEach(id=>$(id).value='');$('eventPattern').value='SERT-{SEQ}/{YEAR}';$('eventSeq').value=1;$('eventMinPosttest').value=70;$('editorTitle').textContent='Buat Kegiatan';$('eventStatus').className='status draft';$('eventStatus').textContent='DRAFT';$('publishEventBtn').disabled=true;$('closeEventBtn').disabled=true;['phasePanel','questionPanel','evaluationPanel','monitorPanel','certificatePanel'].forEach(id=>$(id).style.display='none');renderEvents();renderCopySources()};
+$('newEventBtn').onclick=()=>{currentEvent=null;editingQuestion=null;editingEval=null;['eventTitle','eventCode','eventDate','eventIssuer','eventSignerName','eventSignerTitle'].forEach(id=>$(id).value='');$('eventPattern').value='SERT-{SEQ}/{YEAR}';$('eventSeq').value=1;$('eventMinPosttest').value=70;$('editorTitle').textContent='Buat Kegiatan';$('eventStatus').className='status draft';$('eventStatus').textContent='DRAFT';$('publishEventBtn').disabled=true;$('closeEventBtn').disabled=true;['phasePanel','questionPanel','evaluationPanel','monitorPanel','certificatePanel','reportPanel'].forEach(id=>$(id).style.display='none');renderEvents();renderCopySources()};
 
 async function selectEvent(id,scroll=true){
   currentEvent=events.find(e=>e.id===id);if(!currentEvent)return;
   $('eventTitle').value=currentEvent.title||'';$('eventCode').value=currentEvent.code||'';$('eventDate').value=currentEvent.event_date||'';$('eventIssuer').value=currentEvent.issuer||'';$('eventSignerName').value=currentEvent.signer_name||'';$('eventSignerTitle').value=currentEvent.signer_title||'';$('eventPattern').value=currentEvent.number_pattern||'SERT-{SEQ}/{YEAR}';$('eventSeq').value=currentEvent.next_sequence||1;$('eventMinPosttest').value=currentEvent.minimum_posttest_score??70;
   $('editorTitle').textContent='Pengaturan Kegiatan';$('eventStatus').className='status '+currentEvent.status;$('eventStatus').textContent=currentEvent.status.toUpperCase();
   $('publishEventBtn').disabled=currentEvent.status==='published';$('closeEventBtn').disabled=currentEvent.status==='closed';
-  ['phasePanel','questionPanel','evaluationPanel','monitorPanel','certificatePanel'].forEach(id=>$(id).style.display='block');
+  ['phasePanel','questionPanel','evaluationPanel','monitorPanel','certificatePanel','reportPanel'].forEach(id=>$(id).style.display='block');
   renderPhases();renderEvents();renderCopySources();await loadQuestions();await loadParticipants();await loadCertificates();if(scroll)$('phasePanel').scrollIntoView({behavior:'smooth',block:'start'})
 }
 function renderPhases(){
@@ -536,6 +600,548 @@ $('refreshCertificates').onclick=async()=>{
   await loadCertificates();
   await loadParticipants();
 };
+
+// ============================================================
+// LAPORAN & EXPORT
+// ============================================================
+
+const REPORT_Q11 = [
+  'Materi penyuluhan yang disampaikan sesuai dengan kebutuhan',
+  'Materi penyuluhan yang disampaikan mudah dipahami',
+  'Penyuluh mampu berkomunikasi dengan baik dan menjelaskan materi dengan jelas dan efektif',
+  'Penyuluh mampu menjawab pertanyaan yang ada dengan baik',
+  'Penyuluh memiliki sikap dan etika yang profesional',
+  'Kegiatan penyuluhan dilakukan dengan lancar dan efektif',
+  'Kegiatan penyuluhan membantu saya memahami perpajakan dengan lebih baik'
+];
+
+const REPORT_Q14 = [
+  'Saya pikir bahwa saya akan lebih sering menggunakan Coretax DJP',
+  'Saya menemukan bahwa Coretax DJP tidak harus dibuat serumit ini',
+  'Saya merasa penggunaan Coretax DJP mudah',
+  'Saya membutuhkan bantuan dari orang yang memiliki kemampuan teknis untuk dapat menggunakan Coretax DJP',
+  'Saya merasa fitur-fitur dalam Coretax DJP terintegrasi dengan baik',
+  'Saya merasa ada banyak hal yang belum konsisten pada Coretax DJP',
+  'Saya merasa mayoritas pengguna akan dapat mempelajari Coretax DJP dengan cepat',
+  'Saya merasa Coretax DJP membingungkan untuk digunakan',
+  'Saya merasa percaya diri mampu menggunakan Coretax DJP',
+  'Saya perlu mempelajari banyak hal terlebih dahulu sebelum dapat menggunakan Coretax DJP'
+];
+
+const LIKERT_LABELS={
+  5:'Sangat Setuju',
+  4:'Setuju',
+  3:'Cukup Setuju',
+  2:'Kurang Setuju',
+  1:'Tidak Setuju'
+};
+
+function safeFileName(value){
+  return String(value||'laporan')
+    .replace(/[^a-z0-9_-]+/gi,'-')
+    .replace(/^-+|-+$/g,'')
+    .toLowerCase();
+}
+
+function reportEventName(){
+  return currentEvent?.title||'Kegiatan';
+}
+
+function reportFileBase(){
+  return safeFileName(currentEvent?.code||currentEvent?.title||'kegiatan');
+}
+
+function formatReportDate(value){
+  if(!value)return '—';
+  try{
+    return new Intl.DateTimeFormat('id-ID',{
+      day:'2-digit',month:'long',year:'numeric'
+    }).format(new Date(value));
+  }catch{
+    return value;
+  }
+}
+
+function formatReportDateTime(value){
+  if(!value)return '—';
+  try{
+    return new Intl.DateTimeFormat('id-ID',{
+      day:'2-digit',month:'2-digit',year:'numeric',
+      hour:'2-digit',minute:'2-digit'
+    }).format(new Date(value));
+  }catch{
+    return value;
+  }
+}
+
+function optionText(q,letter){
+  if(!q||!letter)return '';
+  const key='option_'+String(letter).toLowerCase();
+  const text=q[key]||'';
+  return text ? `${letter}. ${text}` : letter;
+}
+
+function printHeader(title){
+  const eventDate=formatReportDate(currentEvent?.event_date);
+  return `
+    <div class="report-head">
+      <div class="brand">Kabayan / Sertifikat Edukasi</div>
+      <h1>${esc(title)}</h1>
+      <h2>${esc(reportEventName())}</h2>
+      <div class="meta">${esc(eventDate)}${currentEvent?.issuer?' • '+esc(currentEvent.issuer):''}</div>
+    </div>
+  `;
+}
+
+function openPrintWindow(title,bodyHtml,orientation='landscape',existingWindow=null){
+  const w=existingWindow||window.open('','_blank');
+  if(!w){
+    msg('reportErr','Popup cetak diblokir browser. Izinkan pop-up untuk situs ini.');
+    return null;
+  }
+
+  w.document.write(`<!doctype html>
+  <html lang="id">
+  <head>
+    <meta charset="utf-8">
+    <title>${esc(title)}</title>
+    <style>
+      @page{size:A4 ${orientation};margin:12mm}
+      *{box-sizing:border-box}
+      body{font-family:Arial,sans-serif;color:#111;margin:0;font-size:10pt}
+      .report-head{border-bottom:2px solid #111;padding-bottom:8px;margin-bottom:14px}
+      .report-head .brand{font-size:9pt;font-weight:700;color:#18457a}
+      .report-head h1{font-size:18pt;margin:7px 0 2px}
+      .report-head h2{font-size:12pt;margin:0 0 4px}
+      .meta{font-size:9pt;color:#555}
+      table{border-collapse:collapse;width:100%;margin:8px 0 18px}
+      th,td{border:1px solid #bbb;padding:5px 6px;vertical-align:top}
+      th{background:#f2f4f7;font-weight:700}
+      .participant{page-break-inside:avoid;margin:0 0 18px}
+      .participant + .participant{page-break-before:auto}
+      .identity{display:grid;grid-template-columns:1fr 1fr;gap:4px 18px;margin:8px 0}
+      .identity div{padding:2px 0}
+      .score{font-size:12pt;font-weight:700;margin:8px 0}
+      .status-pass{font-weight:700;color:#067647}
+      .status-fail{font-weight:700;color:#b42318}
+      .small{font-size:8.5pt;color:#555}
+      @media print{
+        button{display:none!important}
+        a{text-decoration:none;color:inherit}
+      }
+    </style>
+  </head>
+  <body>${bodyHtml}</body>
+  </html>`);
+  w.document.close();
+  w.focus();
+  setTimeout(()=>w.print(),250);
+  return w;
+}
+
+async function getReportParticipants(){
+  if(!currentEvent)throw new Error('Pilih kegiatan terlebih dahulu.');
+  const {data,error}=await sb.from('external_participants')
+    .select('*')
+    .eq('event_id',currentEvent.id)
+    .order('created_at',{ascending:true});
+  if(error)throw error;
+  return data||[];
+}
+
+async function getReportQuestions(type){
+  const {data,error}=await sb.from('external_questions')
+    .select('*')
+    .eq('event_id',currentEvent.id)
+    .eq('test_type',type)
+    .order('sort_order',{ascending:true});
+  if(error)throw error;
+  return data||[];
+}
+
+async function getReportAnswers(participantIds,type){
+  if(!participantIds.length)return [];
+  const results=[];
+  const chunkSize=100;
+
+  for(let i=0;i<participantIds.length;i+=chunkSize){
+    const ids=participantIds.slice(i,i+chunkSize);
+    const {data,error}=await sb.from('external_answers')
+      .select('*')
+      .in('participant_id',ids)
+      .eq('test_type',type);
+    if(error)throw error;
+    results.push(...(data||[]));
+  }
+  return results;
+}
+
+async function getStructuredEvaluations(){
+  const {data,error}=await sb.from('external_structured_evaluations')
+    .select('*')
+    .eq('event_id',currentEvent.id)
+    .order('created_at',{ascending:true});
+  if(error)throw error;
+  return data||[];
+}
+
+function autoWidthSheet(ws,rows,max=42){
+  const widths=[];
+  rows.forEach(row=>{
+    row.forEach((value,i)=>{
+      const len=Math.min(max,Math.max(8,String(value??'').length+2));
+      widths[i]=Math.max(widths[i]||8,len);
+    });
+  });
+  ws['!cols']=widths.map(w=>({wch:w}));
+  if(rows.length)ws['!autofilter']={ref:XLSX.utils.encode_range({r:0,c:0},{r:Math.max(0,rows.length-1),c:Math.max(0,rows[0].length-1)})};
+}
+
+function makeSheet(rows){
+  const ws=XLSX.utils.aoa_to_sheet(rows);
+  autoWidthSheet(ws,rows);
+  return ws;
+}
+
+function saveSingleSheetExcel(sheetName,rows,fileName){
+  if(!window.XLSX)throw new Error('Library Excel belum termuat.');
+  const wb=XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb,makeSheet(rows),sheetName.substring(0,31));
+  XLSX.writeFile(wb,fileName);
+}
+
+function attendanceRows(participants){
+  return [
+    ['No','Nama Peserta / Penerima Sertifikat','Nama Wajib Pajak','Nomor Handphone','Email','Usia','Jenis Kelamin','Waktu Daftar'],
+    ...participants.filter(p=>p.attendance_completed).map((p,i)=>[
+      i+1,
+      p.name||'',
+      p.taxpayer_name||p.institution||'',
+      p.phone||'',
+      p.email||'',
+      p.age_range||'',
+      p.gender||'',
+      formatReportDateTime(p.created_at)
+    ])
+  ];
+}
+
+async function buildTestReport(type){
+  const allParticipants=await getReportParticipants();
+  const participants=allParticipants.filter(p=>type==='pretest'?p.pretest_completed:p.posttest_completed);
+  const questions=await getReportQuestions(type);
+  const answers=await getReportAnswers(participants.map(p=>p.id),type);
+
+  const answerMap=new Map();
+  answers.forEach(a=>answerMap.set(`${a.participant_id}:${a.question_id}`,a));
+
+  return {participants,questions,answerMap};
+}
+
+function testExcelRows(type,data){
+  const {participants,questions,answerMap}=data;
+  const scoreKey=type==='pretest'?'pretest_score':'posttest_score';
+  const minScore=Number(currentEvent?.minimum_posttest_score??70);
+
+  const headers=[
+    'No','Nama Peserta','Nama Wajib Pajak','Email',
+    type==='pretest'?'Nilai Pretest':'Nilai Posttest'
+  ];
+
+  if(type==='posttest')headers.push('Status Kelulusan');
+
+  questions.forEach((q,i)=>headers.push(`Q${i+1}: ${q.question_text}`));
+
+  const rows=[headers];
+
+  participants.forEach((p,i)=>{
+    const row=[
+      i+1,
+      p.name||'',
+      p.taxpayer_name||p.institution||'',
+      p.email||'',
+      p[scoreKey]??''
+    ];
+
+    if(type==='posttest'){
+      row.push(Number(p.posttest_score||0)>=minScore?'Lulus':'Belum Lulus');
+    }
+
+    questions.forEach(q=>{
+      const a=answerMap.get(`${p.id}:${q.id}`);
+      if(!a){
+        row.push('');
+      }else{
+        row.push(`${optionText(q,a.answer)} | ${a.is_correct?'Benar':'Salah'}`);
+      }
+    });
+
+    rows.push(row);
+  });
+
+  return rows;
+}
+
+function testPrintHtml(type,data){
+  const {participants,questions,answerMap}=data;
+  const scoreKey=type==='pretest'?'pretest_score':'posttest_score';
+  const title=type==='pretest'?'Hasil Pretest':'Hasil Posttest';
+  const minScore=Number(currentEvent?.minimum_posttest_score??70);
+
+  let body=printHeader(title);
+
+  if(!participants.length){
+    return body+'<p>Belum ada peserta yang menyelesaikan '+title+'.</p>';
+  }
+
+  body+=participants.map((p,idx)=>{
+    let status='';
+    if(type==='posttest'){
+      const passed=Number(p.posttest_score||0)>=minScore;
+      status=`<div class="${passed?'status-pass':'status-fail'}">${passed?'LULUS':'BELUM LULUS'} • Batas minimum ${minScore}</div>`;
+    }
+
+    const answerRows=questions.map((q,i)=>{
+      const a=answerMap.get(`${p.id}:${q.id}`);
+      return `<tr>
+        <td>${i+1}</td>
+        <td>${esc(q.question_text)}</td>
+        <td>${esc(a?optionText(q,a.answer):'—')}</td>
+        <td>${a?(a.is_correct?'Benar':'Salah'):'—'}</td>
+      </tr>`;
+    }).join('');
+
+    return `<section class="participant">
+      <h3>${idx+1}. ${esc(p.name||'')}</h3>
+      <div class="identity">
+        <div><b>Nama Wajib Pajak:</b> ${esc(p.taxpayer_name||p.institution||'—')}</div>
+        <div><b>Email:</b> ${esc(p.email||'—')}</div>
+      </div>
+      <div class="score">Nilai: ${esc(p[scoreKey]??'—')}</div>
+      ${status}
+      <table>
+        <thead><tr><th style="width:34px">No</th><th>Pertanyaan</th><th>Jawaban Peserta</th><th style="width:70px">Hasil</th></tr></thead>
+        <tbody>${answerRows}</tbody>
+      </table>
+    </section>`;
+  }).join('');
+
+  return body;
+}
+
+function evaluationExcelRows(participants,evaluations){
+  const participantMap=new Map(participants.map(p=>[p.id,p]));
+
+  const headers=[
+    'No','Nama Peserta','Nama Wajib Pajak','Email',
+    ...REPORT_Q11.map((q,i)=>`11.${i+1} ${q}`),
+    '12. Saran dan Masukan',
+    '13. Pernah menggunakan Coretax DJP?',
+    ...REPORT_Q14.map((q,i)=>`14.${i+1} ${q}`),
+    '15. Usulan Penyempurnaan Coretax DJP',
+    '16. Pernah melaporkan SPT Tahunan PPh melalui Coretax DJP?',
+    '17. Dibimbing/diasistensi langsung oleh petugas pajak?'
+  ];
+
+  const rows=[headers];
+
+  evaluations.forEach((ev,i)=>{
+    const p=participantMap.get(ev.participant_id)||{};
+    const a=ev.answers||{};
+    const row=[
+      i+1,
+      p.name||'',
+      p.taxpayer_name||p.institution||'',
+      p.email||''
+    ];
+
+    for(let n=1;n<=REPORT_Q11.length;n++)row.push(a.q11?.[`q11_${n}`]??'');
+    row.push(a.q12??'');
+    row.push(a.q13??'');
+
+    for(let n=1;n<=REPORT_Q14.length;n++)row.push(a.q14?.[`q14_${n}`]??'');
+    row.push(a.q15??'');
+    row.push(a.q16??'');
+    row.push(a.q17??'');
+
+    rows.push(row);
+  });
+
+  return rows;
+}
+
+function evaluationPrintHtml(participants,evaluations){
+  const participantMap=new Map(participants.map(p=>[p.id,p]));
+  let body=printHeader('Hasil Evaluasi Kegiatan');
+
+  if(!evaluations.length)return body+'<p>Belum ada peserta yang menyelesaikan evaluasi.</p>';
+
+  body+=evaluations.map((ev,idx)=>{
+    const p=participantMap.get(ev.participant_id)||{};
+    const a=ev.answers||{};
+
+    const q11=REPORT_Q11.map((q,i)=>{
+      const val=a.q11?.[`q11_${i+1}`];
+      return `<tr><td>${i+1}</td><td>${esc(q)}</td><td>${esc(val?`${val} - ${LIKERT_LABELS[val]||''}`:'—')}</td></tr>`;
+    }).join('');
+
+    let conditional='';
+    if(a.q13==='Ya'){
+      const q14=REPORT_Q14.map((q,i)=>{
+        const val=a.q14?.[`q14_${i+1}`];
+        return `<tr><td>${i+1}</td><td>${esc(q)}</td><td>${esc(val?`${val} - ${LIKERT_LABELS[val]||''}`:'—')}</td></tr>`;
+      }).join('');
+
+      conditional=`
+        <h4>14. Pernyataan Penggunaan Coretax DJP</h4>
+        <table><thead><tr><th>No</th><th>Pernyataan</th><th>Jawaban</th></tr></thead><tbody>${q14}</tbody></table>
+        <p><b>15. Usulan Penyempurnaan Coretax:</b><br>${esc(a.q15||'—')}</p>
+        <p><b>16. Pernah melaporkan SPT Tahunan PPh melalui Coretax DJP?</b> ${esc(a.q16||'—')}</p>
+        <p><b>17. Dibimbing/diasistensi langsung oleh petugas pajak?</b> ${esc(a.q17||'—')}</p>
+      `;
+    }
+
+    return `<section class="participant">
+      <h3>${idx+1}. ${esc(p.name||'')}</h3>
+      <div class="identity">
+        <div><b>Nama Wajib Pajak:</b> ${esc(p.taxpayer_name||p.institution||'—')}</div>
+        <div><b>Email:</b> ${esc(p.email||'—')}</div>
+      </div>
+
+      <h4>11. Pernyataan Terkait Kegiatan Penyuluhan</h4>
+      <table><thead><tr><th>No</th><th>Pernyataan</th><th>Jawaban</th></tr></thead><tbody>${q11}</tbody></table>
+
+      <p><b>12. Saran dan Masukan:</b><br>${esc(a.q12||'—')}</p>
+      <p><b>13. Pernah menggunakan Coretax DJP?</b> ${esc(a.q13||'—')}</p>
+
+      ${conditional}
+    </section>`;
+  }).join('');
+
+  return body;
+}
+
+async function printAttendanceReport(){
+  try{
+    const w=window.open('','_blank');
+    if(!w)return msg('reportErr','Popup cetak diblokir browser.');
+    const participants=await getReportParticipants();
+    const rows=attendanceRows(participants);
+
+    const body=printHeader('Daftar Hadir')+
+      `<table>
+        <thead><tr>${rows[0].map(h=>`<th>${esc(h)}</th>`).join('')}</tr></thead>
+        <tbody>${rows.slice(1).map(r=>`<tr>${r.map(v=>`<td>${esc(v)}</td>`).join('')}</tr>`).join('')}</tbody>
+      </table>`;
+
+    openPrintWindow('Daftar Hadir - '+reportEventName(),body,'landscape',w);
+  }catch(e){
+    msg('reportErr',e.message);
+  }
+}
+
+async function exportAttendanceExcel(){
+  try{
+    const participants=await getReportParticipants();
+    saveSingleSheetExcel(
+      'Daftar Hadir',
+      attendanceRows(participants),
+      `daftar-hadir-${reportFileBase()}.xlsx`
+    );
+    msg('reportOk','Daftar hadir berhasil diekspor ke Excel.',true);
+  }catch(e){msg('reportErr',e.message)}
+}
+
+async function printTestReport(type){
+  let holder=null;
+  try{
+    holder=window.open('','_blank');
+    if(!holder)return msg('reportErr','Popup cetak diblokir browser.');
+    const data=await buildTestReport(type);
+    const title=type==='pretest'?'Hasil Pretest':'Hasil Posttest';
+    const body=testPrintHtml(type,data);
+    openPrintWindow(title+' - '+reportEventName(),body,'portrait',holder);
+  }catch(e){
+    if(holder&&!holder.closed)holder.close();
+    msg('reportErr',e.message);
+  }
+}
+
+async function exportTestExcel(type){
+  try{
+    const data=await buildTestReport(type);
+    const title=type==='pretest'?'Hasil Pretest':'Hasil Posttest';
+    saveSingleSheetExcel(
+      title,
+      testExcelRows(type,data),
+      `${type}-${reportFileBase()}.xlsx`
+    );
+    msg('reportOk',title+' berhasil diekspor ke Excel.',true);
+  }catch(e){msg('reportErr',e.message)}
+}
+
+async function printEvaluationReport(){
+  let holder=null;
+  try{
+    holder=window.open('','_blank');
+    if(!holder)return msg('reportErr','Popup cetak diblokir browser.');
+    const [participants,evaluations]=await Promise.all([
+      getReportParticipants(),
+      getStructuredEvaluations()
+    ]);
+    const body=evaluationPrintHtml(participants,evaluations);
+    openPrintWindow('Hasil Evaluasi - '+reportEventName(),body,'portrait',holder);
+  }catch(e){
+    if(holder&&!holder.closed)holder.close();
+    msg('reportErr',e.message);
+  }
+}
+
+async function exportEvaluationExcel(){
+  try{
+    const [participants,evaluations]=await Promise.all([
+      getReportParticipants(),
+      getStructuredEvaluations()
+    ]);
+    saveSingleSheetExcel(
+      'Hasil Evaluasi',
+      evaluationExcelRows(participants,evaluations),
+      `evaluasi-${reportFileBase()}.xlsx`
+    );
+    msg('reportOk','Hasil evaluasi berhasil diekspor ke Excel.',true);
+  }catch(e){msg('reportErr',e.message)}
+}
+
+async function exportAllReports(){
+  try{
+    if(!window.XLSX)throw new Error('Library Excel belum termuat.');
+
+    const participants=await getReportParticipants();
+    const preData=await buildTestReport('pretest');
+    const postData=await buildTestReport('posttest');
+    const evaluations=await getStructuredEvaluations();
+
+    const wb=XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb,makeSheet(attendanceRows(participants)),'Daftar Hadir');
+    XLSX.utils.book_append_sheet(wb,makeSheet(testExcelRows('pretest',preData)),'Pretest');
+    XLSX.utils.book_append_sheet(wb,makeSheet(testExcelRows('posttest',postData)),'Posttest');
+    XLSX.utils.book_append_sheet(wb,makeSheet(evaluationExcelRows(participants,evaluations)),'Evaluasi');
+
+    XLSX.writeFile(wb,`laporan-lengkap-${reportFileBase()}.xlsx`);
+    msg('reportOk','Laporan lengkap berhasil diekspor ke Excel dalam 4 sheet.',true);
+  }catch(e){msg('reportErr',e.message)}
+}
+
+$('printAttendance').onclick=printAttendanceReport;
+$('excelAttendance').onclick=exportAttendanceExcel;
+$('printPretest').onclick=()=>printTestReport('pretest');
+$('excelPretest').onclick=()=>exportTestExcel('pretest');
+$('printPosttest').onclick=()=>printTestReport('posttest');
+$('excelPosttest').onclick=()=>exportTestExcel('posttest');
+$('printEvaluation').onclick=printEvaluationReport;
+$('excelEvaluation').onclick=exportEvaluationExcel;
+$('exportAllReports').onclick=exportAllReports;
+
 guard();
 </script>
 </body></html>
