@@ -1,21 +1,65 @@
-const logo="../assets/logo-djp.png";
-function qr(id,url){
- const el=document.getElementById(id);el.innerHTML="";
- const c=document.createElement("canvas");
- QRCode.toCanvas(c,url,{width:320,errorCorrectionLevel:"H"},()=>{
-  el.appendChild(c);
-  const ctx=c.getContext("2d"),img=new Image();img.src=logo;
-  img.onload=()=>{let s=55,x=(c.width-s)/2,y=(c.height-s)/2;ctx.fillStyle="#fff";ctx.fillRect(x-8,y-8,s+16,s+16);ctx.drawImage(img,x,y,s,s)}
- })
+const QR_LOGO = "../assets/logo-djp.png";
+
+function createQR(target, url){
+
+    const box = document.getElementById(target);
+    box.innerHTML = "";
+
+    const qrBox = document.createElement("div");
+    box.appendChild(qrBox);
+
+    new QRCode(qrBox, {
+        text: url,
+        width: 280,
+        height: 280,
+        correctLevel: QRCode.CorrectLevel.H
+    });
+
 }
+
+
 function generateAll(){
- let c=document.getElementById("eventCode").value;
- qr("qr1","../awal.html?kode="+c);
- qr("qr2","../akhir.html?kode="+c);
- qr("qr3","../verifikasi.html?kode="+c);
+
+    const code = document.getElementById("eventCode").value;
+
+    createQR(
+        "qr1",
+        "https://dhaniswara86.id/sertifikat-edukasi/awal.html?kode="
+        + encodeURIComponent(code)
+    );
+
+
+    createQR(
+        "qr2",
+        "https://dhaniswara86.id/sertifikat-edukasi/akhir.html?kode="
+        + encodeURIComponent(code)
+    );
+
+
+    createQR(
+        "qr3",
+        "https://dhaniswara86.id/sertifikat-edukasi/verifikasi.html?kode="
+        + encodeURIComponent(code)
+    );
 }
+
+
 function downloadQR(id){
- let c=document.querySelector("#"+id+" canvas");if(!c)return;
- let a=document.createElement("a");a.download=id+".png";a.href=c.toDataURL();a.click();
+
+    const img = document.querySelector("#"+id+" img");
+
+    if(!img){
+        alert("QR belum dibuat");
+        return;
+    }
+
+    const a=document.createElement("a");
+    a.download=id+"-kabayan.png";
+    a.href=img.src;
+    a.click();
 }
-window.onload=generateAll;
+
+
+window.onload=function(){
+    generateAll();
+}
