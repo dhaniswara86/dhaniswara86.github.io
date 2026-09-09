@@ -835,13 +835,124 @@ body.login-mode #appView{
   }
 }
 
+
+/* ===========================================================
+   MULTI SATKER v4.0
+   =========================================================== */
+.account-context{
+  display:none;
+  align-items:center;
+  gap:9px;
+  padding:7px 11px;
+  border:1px solid #dce5ef;
+  border-radius:999px;
+  background:#fff;
+  font-size:11px;
+  font-weight:760;
+  color:#526579;
+}
+.account-context.show{display:inline-flex}
+.account-context .role-dot{
+  width:8px;height:8px;border-radius:999px;background:#0b63ce;
+}
+.account-context.satker .role-dot{background:#087a55}
+.account-context b{color:#142033}
+
+.admin-only{display:none!important}
+body.role-admin .admin-only{display:block!important}
+body.role-admin .admin-only.inline-flex{display:inline-flex!important}
+body.role-admin .admin-only.inline{display:inline!important}
+body.role-admin .admin-only.grid{display:grid!important}
+
+.unit-context{
+  margin-top:10px;
+  padding:10px 12px;
+  border:1px solid #e1e8f0;
+  border-radius:14px;
+  background:#f8fbff;
+  font-size:11px;
+  color:#5f7184;
+  line-height:1.45;
+}
+.unit-context b{color:#153960}
+
+.profile-gate{
+  position:fixed;
+  inset:0;
+  z-index:10050;
+  display:none;
+  place-items:center;
+  padding:20px;
+  background:
+    radial-gradient(circle at 20% 10%,rgba(11,99,206,.12),transparent 28%),
+    radial-gradient(circle at 82% 16%,rgba(247,201,72,.18),transparent 30%),
+    #f7fbff;
+}
+.profile-gate.show{display:grid}
+.profile-gate-card{
+  width:min(580px,100%);
+  padding:32px;
+  border:1px solid #d9e4ef;
+  border-radius:28px;
+  background:#fff;
+  box-shadow:0 28px 70px rgba(31,55,82,.12);
+}
+.profile-gate-card h2{font-size:38px;letter-spacing:-.055em;margin:12px 0 10px}
+.profile-gate-card p{font-size:13px;line-height:1.65;color:#667789}
+.profile-gate-card .field{margin-top:18px}
+
+.user-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.user-card{
+  border:1px solid #e1e8ef;
+  border-radius:20px;
+  padding:18px;
+  background:#fbfcfe;
+}
+.user-card h3{margin:0 0 6px;font-size:18px}
+.user-card p{margin:0;color:#748292;font-size:11px;line-height:1.55}
+.manage-table select{
+  min-height:38px;
+  border:1px solid #d8e1eb;
+  border-radius:10px;
+  background:#fff;
+  padding:7px 9px;
+  font:inherit;
+  font-size:11px;
+}
+.unit-filter-wrap{
+  display:none;
+  margin-top:12px;
+}
+body.role-admin .unit-filter-wrap{display:block}
+.unit-filter-wrap select{
+  width:100%;
+  min-height:43px;
+  border:1px solid #d9e2ec;
+  border-radius:13px;
+  padding:9px 11px;
+  background:#fff;
+  font:inherit;
+  font-size:12px;
+}
+.work-unit-field{display:none}
+body.role-admin .work-unit-field{display:grid}
+body.role-satker .work-unit-readonly{display:grid}
+.work-unit-readonly{display:none}
+#userManagementPanel{scroll-margin-top:165px}
+@media(max-width:760px){.user-grid{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body class="login-mode">
 <div class="wrap">
 <div class="topbar">
   <a class="brand" href="../index.html"><img src="assets/logo-kabayan.svg" alt="Kabayan"><span>Kabayan / Sertifikat Edukasi</span></a>
-  <div class="actions"><a class="btn btn-outline" href="awal.html" target="_blank">Link Awal</a><a class="btn btn-outline" href="akhir.html" target="_blank">Link Akhir</a><button class="btn btn-outline" id="logoutBtn" style="display:none">Keluar</button></div>
+  <div class="actions">
+    <span class="account-context" id="accountContext"><span class="role-dot"></span><span id="accountContextText">—</span></span>
+    <a class="btn btn-outline" href="awal.html" target="_blank">Link Awal</a>
+    <a class="btn btn-outline" href="akhir.html" target="_blank">Link Akhir</a>
+    <button class="btn btn-outline" id="logoutBtn" style="display:none">Keluar</button>
+  </div>
 </div>
 
 <section class="login" id="loginView">
@@ -909,6 +1020,24 @@ body.login-mode #appView{
   </div>
 </section>
 
+
+<section class="profile-gate" id="profileGate">
+  <div class="profile-gate-card">
+    <span class="pill">Konfigurasi Akses</span>
+    <h2 id="profileGateTitle">Profil akun belum disiapkan.</h2>
+    <p id="profileGateText">Jika ini akun pertama setelah migrasi multi-satker, jadikan akun ini sebagai Administrator pertama. Jika Administrator sudah ada, minta Admin menetapkan role akun Anda.</p>
+    <div class="field">
+      <label>Nama Admin Pertama</label>
+      <input id="bootstrapAdminName" placeholder="Nama lengkap">
+    </div>
+    <div class="actions" style="margin-top:16px">
+      <button class="btn btn-yellow" id="bootstrapAdminBtn">Jadikan Admin Pertama</button>
+      <button class="btn btn-outline" id="profileGateLogoutBtn">Keluar</button>
+    </div>
+    <div class="msg err" id="profileGateErr"></div>
+  </div>
+</section>
+
 <main class="app" id="appView">
   <section class="hero kabayan-admin-hero">
     <span class="pill">Saung Admin Kabayan</span>
@@ -925,11 +1054,17 @@ body.login-mode #appView{
     <a href="#monitorPanel">Peserta</a>
     <a href="#certificatePanel">Sertifikat</a>
     <a href="#reportPanel">Laporan</a>
+    <a class="admin-only inline" href="#userManagementPanel">Akun & Satker</a>
   </nav>
 
   <div class="sidebar-layout">
     <aside class="card">
-      <div class="section-title"><div><span class="pill">Daftar Kegiatan</span><h2 style="margin-top:10px">Kegiatan</h2><p>Pilih kegiatan untuk membuka seluruh panel pengelolaan.</p></div><button class="btn btn-yellow" id="newEventBtn">+ Baru</button></div>
+      <div class="section-title"><div><span class="pill">Daftar Kegiatan</span><h2 style="margin-top:10px">Kegiatan</h2><p id="eventListHelp">Pilih kegiatan untuk membuka seluruh panel pengelolaan.</p></div><button class="btn btn-yellow" id="newEventBtn">+ Baru</button></div>
+      <div class="unit-filter-wrap">
+        <label style="font-size:10px;font-weight:800;color:#708092">Filter Satuan Kerja</label>
+        <select id="unitFilter"><option value="">Semua Satuan Kerja</option></select>
+      </div>
+      <div class="unit-context" id="satkerContext" style="display:none"></div>
       <div class="event-list" id="eventList"></div>
     </aside>
 
@@ -941,6 +1076,8 @@ body.login-mode #appView{
           <div class="field"><label>Kode link</label><input id="eventCode" placeholder="contoh: coretax-sep26"></div>
           <div class="field"><label>Tanggal</label><input id="eventDate" type="date"></div>
           <div class="field"><label>Unit penerbit</label><input id="eventIssuer"></div>
+          <div class="field work-unit-field"><label>Satuan Kerja Pemilik Kegiatan</label><select id="eventWorkUnit"><option value="">Pilih Satuan Kerja...</option></select></div>
+          <div class="field work-unit-readonly"><label>Satuan Kerja Pemilik Kegiatan</label><input id="eventWorkUnitReadonly" readonly></div>
           <div class="field"><label>Nama penandatangan sertifikat</label><input id="eventSignerName" placeholder="Contoh: Yunirwansyah"></div>
           <div class="field"><label>Jabatan penandatangan</label><input id="eventSignerTitle" placeholder="Contoh: Kepala Kantor Wilayah DJP Jawa Barat I"></div>
           <div class="field"><label>Format nomor sertifikat</label><input id="eventPattern" value="SERT-{SEQ}/{YEAR}"></div>
@@ -1178,6 +1315,62 @@ body.login-mode #appView{
         <div class="msg err" id="reportErr"></div>
       </div>
 
+
+      <div class="card admin-only" id="userManagementPanel">
+        <div class="section-title">
+          <div>
+            <span class="pill">Administrator</span>
+            <h2 style="margin-top:10px">Akun & Satuan Kerja</h2>
+            <p>Admin melihat seluruh kegiatan. Akun Satuan Kerja hanya dapat mengakses data unitnya sendiri.</p>
+          </div>
+          <button class="btn btn-outline" id="refreshUsersBtn">Muat Ulang</button>
+        </div>
+
+        <div class="user-grid">
+          <div class="user-card">
+            <h3>Tambah Satuan Kerja</h3>
+            <p>Buat unit pemilik kegiatan. Kode dibuat singkat dan unik, misalnya KP.0907 atau KANWIL09.</p>
+            <div class="grid two" style="margin-top:14px">
+              <div class="field"><label>Kode</label><input id="newUnitCode" placeholder="KP.0907"></div>
+              <div class="field"><label>Nama Satuan Kerja</label><input id="newUnitName" placeholder="KPP Pratama ..."></div>
+            </div>
+            <button class="btn btn-yellow" id="saveUnitBtn" style="margin-top:12px">Tambah Satuan Kerja</button>
+          </div>
+
+          <div class="user-card">
+            <h3>Cara Menambah Akun</h3>
+            <p>Buat akun terlebih dahulu di <b>Supabase → Authentication → Users</b>. Setelah akun ada, kembali ke panel ini untuk menentukan role dan Satuan Kerja.</p>
+            <div class="unit-context" style="margin-top:14px">
+              <b>Admin</b> → seluruh Satuan Kerja.<br>
+              <b>Satker</b> → hanya kegiatan dan data milik unit yang dipilih.
+            </div>
+          </div>
+        </div>
+
+        <div class="section-title" style="margin-top:24px">
+          <div><h2 style="font-size:24px">Daftar Satuan Kerja</h2><p>Unit yang dapat digunakan sebagai pemilik kegiatan.</p></div>
+        </div>
+        <div class="tablewrap">
+          <table class="table">
+            <thead><tr><th>Kode</th><th>Satuan Kerja</th><th>Status</th></tr></thead>
+            <tbody id="workUnitRows"></tbody>
+          </table>
+        </div>
+
+        <div class="section-title" style="margin-top:24px">
+          <div><h2 style="font-size:24px">Pengguna</h2><p>Atur role dan Satuan Kerja untuk akun yang sudah terdaftar di Supabase Auth.</p></div>
+        </div>
+        <div class="tablewrap">
+          <table class="table manage-table">
+            <thead><tr><th>Email</th><th>Nama</th><th>Role</th><th>Satuan Kerja</th><th>Aksi</th></tr></thead>
+            <tbody id="userProfileRows"></tbody>
+          </table>
+        </div>
+
+        <div class="msg ok" id="userOk"></div>
+        <div class="msg err" id="userErr"></div>
+      </div>
+
     </section>
   </div>
 </main>
@@ -1185,7 +1378,7 @@ body.login-mode #appView{
 
 <script src="supabase-config.js"></script>
 <script>
-let sb=null,events=[],currentEvent=null,currentTest='pretest',editingQuestion=null,editingEval=null,participantSelection=new Set();
+let sb=null,events=[],currentEvent=null,currentTest='pretest',editingQuestion=null,editingEval=null,participantSelection=new Set(),currentProfile=null,workUnits=[],allAuthUsers=[],unitFilterValue='';
 const $=id=>document.getElementById(id);
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
 function msg(id,text,ok=false){const el=$(id);el.textContent=text;el.className='msg show '+(ok?'ok':'err');setTimeout(()=>el.classList.remove('show'),4500)}
@@ -1193,31 +1386,190 @@ function initialUrl(e){return new URL('awal.html?kode='+encodeURIComponent(e.cod
 function finalUrl(e){return new URL('akhir.html?kode='+encodeURIComponent(e.code),location.href).href}
 async function copyText(text){try{await navigator.clipboard.writeText(text);return true}catch{prompt('Salin link berikut:',text);return false}}
 
-async function guard(){
-  if(!window.KabayanKegiatanSupabase?.isConfigured()){msg('loginErr','Supabase Sertifikat Edukasi belum dikonfigurasi.');return false}
-  sb=window.KabayanKegiatanSupabase.getClient();const {data:{session}}=await sb.auth.getSession();
-  if(session){showApp();return true}return false
+async function loadMyProfile(){
+  const {data,error}=await sb.rpc('get_my_edu_profile');
+  if(error)throw error;
+  currentProfile=data?.[0]||null;
+  return currentProfile;
 }
-function showApp(){document.body.classList.remove('login-mode');$('loginView').style.display='none';$('appView').classList.add('show');$('logoutBtn').style.display='inline-flex';loadEvents()}
-$('loginBtn').onclick=async()=>{try{sb=window.KabayanKegiatanSupabase.getClient();const {error}=await sb.auth.signInWithPassword({email:$('loginEmail').value.trim(),password:$('loginPassword').value});if(error)throw error;showApp()}catch(e){msg('loginErr',e.message)}};
+
+function applyRoleUI(){
+  document.body.classList.remove('role-admin','role-satker');
+
+  if(!currentProfile)return;
+
+  document.body.classList.add(currentProfile.role==='admin'?'role-admin':'role-satker');
+
+  const context=$('accountContext');
+  context.className='account-context show '+(currentProfile.role==='satker'?'satker':'');
+  $('accountContextText').innerHTML=currentProfile.role==='admin'
+    ? `<b>Administrator</b> • Semua Satuan Kerja`
+    : `<b>${esc(currentProfile.work_unit_name||'Satuan Kerja')}</b> • Akun Satker`;
+
+  if(currentProfile.role==='satker'){
+    $('eventListHelp').textContent='Hanya kegiatan milik Satuan Kerja Anda yang ditampilkan.';
+    $('satkerContext').style.display='block';
+    $('satkerContext').innerHTML='<b>Satuan Kerja Anda</b><br>'+esc(currentProfile.work_unit_name||'-')+
+      (currentProfile.work_unit_code?' • '+esc(currentProfile.work_unit_code):'');
+    $('eventWorkUnitReadonly').value=[currentProfile.work_unit_code,currentProfile.work_unit_name].filter(Boolean).join(' — ');
+  }else{
+    $('eventListHelp').textContent='Administrator dapat melihat dan mengelola seluruh Satuan Kerja.';
+    $('satkerContext').style.display='none';
+  }
+}
+
+async function enterApp(){
+  try{
+    const profile=await loadMyProfile();
+
+    if(!profile){
+      document.body.classList.remove('login-mode');
+      $('loginView').style.display='none';
+      $('profileGate').classList.add('show');
+      return false;
+    }
+
+    $('profileGate').classList.remove('show');
+    document.body.classList.remove('login-mode');
+    $('loginView').style.display='none';
+    $('appView').classList.add('show');
+    $('logoutBtn').style.display='inline-flex';
+
+    applyRoleUI();
+    await loadWorkUnits();
+    await loadEvents();
+
+    if(currentProfile.role==='admin'){
+      await loadUserManagement();
+    }
+
+    return true;
+  }catch(e){
+    msg('loginErr',e.message);
+    return false;
+  }
+}
+
+async function guard(){
+  if(!window.KabayanKegiatanSupabase?.isConfigured()){
+    msg('loginErr','Supabase Sertifikat Edukasi belum dikonfigurasi.');
+    return false;
+  }
+
+  sb=window.KabayanKegiatanSupabase.getClient();
+  const {data:{session}}=await sb.auth.getSession();
+
+  if(session){
+    await enterApp();
+    return true;
+  }
+
+  return false;
+}
+
+$('loginBtn').onclick=async()=>{
+  try{
+    sb=window.KabayanKegiatanSupabase.getClient();
+    const {error}=await sb.auth.signInWithPassword({
+      email:$('loginEmail').value.trim(),
+      password:$('loginPassword').value
+    });
+    if(error)throw error;
+    await enterApp();
+  }catch(e){
+    msg('loginErr',e.message);
+  }
+};
+
+$('bootstrapAdminBtn').onclick=async()=>{
+  try{
+    const fullName=$('bootstrapAdminName').value.trim();
+    if(!fullName)throw new Error('Nama Admin wajib diisi.');
+
+    const {error}=await sb.rpc('bootstrap_first_edu_admin',{p_full_name:fullName});
+    if(error)throw error;
+
+    $('profileGate').classList.remove('show');
+    await enterApp();
+  }catch(e){
+    msg('profileGateErr',e.message);
+  }
+};
+
+$('profileGateLogoutBtn').onclick=async()=>{await sb.auth.signOut();location.reload()};
 $('logoutBtn').onclick=async()=>{await sb.auth.signOut();location.reload()};
 
-async function loadEvents(){
-  const {data,error}=await sb.from('external_events').select('*').order('created_at',{ascending:false});
-  if(error)return msg('eventErr',error.message);events=data||[];renderEvents();renderCopySources();
-  if(currentEvent){const found=events.find(x=>x.id===currentEvent.id);if(found)selectEvent(found.id,false)}
-}
-function renderEvents(){
-  $('eventList').innerHTML=events.length?events.map(e=>`<div class="event-item ${currentEvent?.id===e.id?'active':''}" data-id="${e.id}"><b>${esc(e.title)}</b><small>${esc(e.code)} • ${esc(e.event_date||'-')}</small><div style="margin-top:7px"><span class="status ${e.status}">${e.status}</span></div></div>`).join(''):'<div class="muted" style="font-size:11px">Belum ada kegiatan.</div>';
-  document.querySelectorAll('.event-item').forEach(x=>x.onclick=()=>selectEvent(x.dataset.id))
-}
-function renderCopySources(){$('copySource').innerHTML='<option value="">Salin dari kegiatan...</option>'+events.filter(e=>e.id!==currentEvent?.id).map(e=>`<option value="${e.id}">${esc(e.title)}</option>`).join('')}
+async function loadWorkUnits(){
+  const {data,error}=await sb.from('work_units')
+    .select('*')
+    .eq('active',true)
+    .order('name');
 
-$('newEventBtn').onclick=()=>{currentEvent=null;editingQuestion=null;editingEval=null;['eventTitle','eventCode','eventDate','eventIssuer','eventSignerName','eventSignerTitle'].forEach(id=>$(id).value='');$('eventPattern').value='SERT-{SEQ}/{YEAR}';$('eventSeq').value=1;$('eventMinPosttest').value=70;$('editorTitle').textContent='Buat Kegiatan';$('eventStatus').className='status draft';$('eventStatus').textContent='DRAFT';$('publishEventBtn').disabled=true;$('closeEventBtn').disabled=true;['phasePanel','questionPanel','evaluationPanel','monitorPanel','certificatePanel','reportPanel'].forEach(id=>$(id).style.display='none');renderEvents();renderCopySources()};
+  if(error)throw error;
+
+  workUnits=data||[];
+
+  const opts='<option value="">Pilih Satuan Kerja...</option>'+
+    workUnits.map(u=>`<option value="${u.id}">${esc(u.code)} — ${esc(u.name)}</option>`).join('');
+
+  $('eventWorkUnit').innerHTML=opts;
+  $('unitFilter').innerHTML='<option value="">Semua Satuan Kerja</option>'+
+    workUnits.map(u=>`<option value="${u.id}">${esc(u.code)} — ${esc(u.name)}</option>`).join('');
+}
+
+async function loadEvents(){
+  const {data,error}=await sb.from('external_events')
+    .select('*,work_units(id,code,name)')
+    .order('created_at',{ascending:false});
+
+  if(error)return msg('eventErr',error.message);
+
+  events=data||[];
+  renderEvents();
+  renderCopySources();
+
+  if(currentEvent){
+    const found=events.find(x=>x.id===currentEvent.id);
+    if(found)selectEvent(found.id,false);
+  }
+}
+
+function filteredEvents(){
+  if(currentProfile?.role!=='admin'||!unitFilterValue)return events;
+  return events.filter(e=>e.work_unit_id===unitFilterValue);
+}
+
+function renderEvents(){
+  const rows=filteredEvents();
+
+  $('eventList').innerHTML=rows.length?rows.map(e=>{
+    const unit=e.work_units?.name||'Belum ditetapkan';
+    return `<div class="event-item ${currentEvent?.id===e.id?'active':''}" data-id="${e.id}">
+      <b>${esc(e.title)}</b>
+      <small>${esc(e.code)} • ${esc(e.event_date||'-')}</small>
+      <small style="color:#416a96">${esc(unit)}</small>
+      <div style="margin-top:7px"><span class="status ${e.status}">${e.status}</span></div>
+    </div>`;
+  }).join(''):'<div class="muted" style="font-size:11px">Belum ada kegiatan.</div>';
+
+  document.querySelectorAll('.event-item').forEach(x=>x.onclick=()=>selectEvent(x.dataset.id));
+}
+
+function renderCopySources(){
+  $('copySource').innerHTML='<option value="">Salin dari kegiatan...</option>'+
+    events.filter(e=>e.id!==currentEvent?.id).map(e=>`<option value="${e.id}">${esc(e.title)}</option>`).join('');
+}
+
+$('unitFilter').onchange=e=>{
+  unitFilterValue=e.target.value;
+  renderEvents();
+};
+
+$('newEventBtn').onclick=()=>{currentEvent=null;editingQuestion=null;editingEval=null;['eventTitle','eventCode','eventDate','eventIssuer','eventSignerName','eventSignerTitle'].forEach(id=>$(id).value='');$('eventPattern').value='SERT-{SEQ}/{YEAR}';$('eventSeq').value=1;$('eventMinPosttest').value=70;$('eventWorkUnit').value=currentProfile?.role==='satker'?(currentProfile.work_unit_id||''):'';$('editorTitle').textContent='Buat Kegiatan';$('eventStatus').className='status draft';$('eventStatus').textContent='DRAFT';$('publishEventBtn').disabled=true;$('closeEventBtn').disabled=true;['phasePanel','questionPanel','evaluationPanel','monitorPanel','certificatePanel','reportPanel'].forEach(id=>$(id).style.display='none');renderEvents();renderCopySources()};
 
 async function selectEvent(id,scroll=true){
   currentEvent=events.find(e=>e.id===id);if(!currentEvent)return;
-  $('eventTitle').value=currentEvent.title||'';$('eventCode').value=currentEvent.code||'';$('eventDate').value=currentEvent.event_date||'';$('eventIssuer').value=currentEvent.issuer||'';$('eventSignerName').value=currentEvent.signer_name||'';$('eventSignerTitle').value=currentEvent.signer_title||'';$('eventPattern').value=currentEvent.number_pattern||'SERT-{SEQ}/{YEAR}';$('eventSeq').value=currentEvent.next_sequence||1;$('eventMinPosttest').value=currentEvent.minimum_posttest_score??70;
+  $('eventTitle').value=currentEvent.title||'';$('eventCode').value=currentEvent.code||'';$('eventDate').value=currentEvent.event_date||'';$('eventIssuer').value=currentEvent.issuer||'';$('eventWorkUnit').value=currentEvent.work_unit_id||'';$('eventWorkUnitReadonly').value=currentEvent.work_units?[currentEvent.work_units.code,currentEvent.work_units.name].filter(Boolean).join(' — '):[currentProfile?.work_unit_code,currentProfile?.work_unit_name].filter(Boolean).join(' — ');$('eventSignerName').value=currentEvent.signer_name||'';$('eventSignerTitle').value=currentEvent.signer_title||'';$('eventPattern').value=currentEvent.number_pattern||'SERT-{SEQ}/{YEAR}';$('eventSeq').value=currentEvent.next_sequence||1;$('eventMinPosttest').value=currentEvent.minimum_posttest_score??70;
   $('editorTitle').textContent='Pengaturan Kegiatan';$('eventStatus').className='status '+currentEvent.status;$('eventStatus').textContent=currentEvent.status.toUpperCase();
   $('publishEventBtn').disabled=currentEvent.status==='published';$('closeEventBtn').disabled=currentEvent.status==='closed';
   ['phasePanel','questionPanel','evaluationPanel','monitorPanel','certificatePanel','reportPanel'].forEach(id=>$(id).style.display='block');
@@ -1238,7 +1590,57 @@ $('copyFinalBtn').onclick=()=>currentEvent&&copyText(finalUrl(currentEvent));
 $('openInitialBtn').onclick=()=>updatePhase('initial_phase_open',true);$('closeInitialBtn').onclick=()=>updatePhase('initial_phase_open',false);
 $('openFinalBtn').onclick=()=>updatePhase('final_phase_open',true);$('closeFinalBtn').onclick=()=>updatePhase('final_phase_open',false);
 
-$('saveEventBtn').onclick=async()=>{try{const row={title:$('eventTitle').value.trim(),code:$('eventCode').value.trim(),event_date:$('eventDate').value||null,issuer:$('eventIssuer').value.trim()||null,signer_name:$('eventSignerName').value.trim()||null,signer_title:$('eventSignerTitle').value.trim()||null,number_pattern:$('eventPattern').value.trim()||'SERT-{SEQ}/{YEAR}',next_sequence:Number($('eventSeq').value)||1,minimum_posttest_score:Math.max(0,Math.min(100,Number($('eventMinPosttest').value)||70)),updated_at:new Date().toISOString()};if(!row.title||!row.code)throw new Error('Nama kegiatan dan kode link wajib diisi.');let res;if(currentEvent)res=await sb.from('external_events').update(row).eq('id',currentEvent.id).select().single();else{const {data:{user}}=await sb.auth.getUser();res=await sb.from('external_events').insert({...row,created_by:user.id}).select().single()}if(res.error)throw res.error;currentEvent=res.data;msg('eventOk','Kegiatan tersimpan.',true);await loadEvents();selectEvent(currentEvent.id,false)}catch(e){msg('eventErr',e.message)}};
+$('saveEventBtn').onclick=async()=>{
+  try{
+    const workUnitId=currentProfile?.role==='admin'
+      ? $('eventWorkUnit').value
+      : currentProfile?.work_unit_id;
+
+    if(!workUnitId)throw new Error('Satuan Kerja pemilik kegiatan wajib dipilih.');
+
+    const row={
+      title:$('eventTitle').value.trim(),
+      code:$('eventCode').value.trim(),
+      event_date:$('eventDate').value||null,
+      issuer:$('eventIssuer').value.trim()||null,
+      work_unit_id:workUnitId,
+      signer_name:$('eventSignerName').value.trim()||null,
+      signer_title:$('eventSignerTitle').value.trim()||null,
+      number_pattern:$('eventPattern').value.trim()||'SERT-{SEQ}/{YEAR}',
+      next_sequence:Number($('eventSeq').value)||1,
+      minimum_posttest_score:Math.max(0,Math.min(100,Number($('eventMinPosttest').value)||70)),
+      updated_at:new Date().toISOString()
+    };
+
+    if(!row.title||!row.code)throw new Error('Nama kegiatan dan kode link wajib diisi.');
+
+    let res;
+
+    if(currentEvent){
+      res=await sb.from('external_events')
+        .update(row)
+        .eq('id',currentEvent.id)
+        .select('*,work_units(id,code,name)')
+        .single();
+    }else{
+      const {data:{user}}=await sb.auth.getUser();
+      res=await sb.from('external_events')
+        .insert({...row,created_by:user.id})
+        .select('*,work_units(id,code,name)')
+        .single();
+    }
+
+    if(res.error)throw res.error;
+
+    currentEvent=res.data;
+    msg('eventOk','Kegiatan tersimpan.',true);
+    await loadEvents();
+    selectEvent(currentEvent.id,false);
+  }catch(e){
+    msg('eventErr',e.message);
+  }
+};
+
 $('publishEventBtn').onclick=async()=>{if(!currentEvent)return;const {error}=await sb.from('external_events').update({status:'published',initial_phase_open:true,final_phase_open:false,updated_at:new Date().toISOString()}).eq('id',currentEvent.id);if(error)return msg('eventErr',error.message);msg('eventOk','Kegiatan dipublish. Fase Awal dibuka; Fase Akhir tetap ditutup.',true);await loadEvents()};
 $('closeEventBtn').onclick=async()=>{if(!currentEvent||!confirm('Tutup seluruh kegiatan? Kedua fase akan ditutup.'))return;const {error}=await sb.from('external_events').update({status:'closed',initial_phase_open:false,final_phase_open:false,updated_at:new Date().toISOString()}).eq('id',currentEvent.id);if(error)return msg('eventErr',error.message);await loadEvents()};
 
@@ -2122,6 +2524,138 @@ $('printEvaluation').onclick=printEvaluationReport;
 $('excelEvaluation').onclick=exportEvaluationExcel;
 $('exportAllReports').onclick=exportAllReports;
 
+
+
+// ============================================================
+// ADMIN: SATUAN KERJA & USER PROFILE
+// ============================================================
+
+async function loadUserManagement(){
+  if(currentProfile?.role!=='admin')return;
+
+  await loadWorkUnits();
+
+  $('workUnitRows').innerHTML=workUnits.length
+    ? workUnits.map(u=>`<tr>
+        <td><b>${esc(u.code)}</b></td>
+        <td>${esc(u.name)}</td>
+        <td><span class="status ${u.active?'published':'closed'}">${u.active?'AKTIF':'NONAKTIF'}</span></td>
+      </tr>`).join('')
+    : '<tr><td colspan="3" class="muted">Belum ada Satuan Kerja.</td></tr>';
+
+  const {data,error}=await sb.rpc('admin_list_edu_users');
+  if(error)return msg('userErr',error.message);
+
+  allAuthUsers=data||[];
+  renderUserProfiles();
+}
+
+function renderUserProfiles(){
+  const unitOptionsFor=user=>workUnits.map(w=>`<option value="${w.id}" ${w.id===user.work_unit_id?'selected':''}>${esc(w.code)} — ${esc(w.name)}</option>`).join('');
+
+  $('userProfileRows').innerHTML=allAuthUsers.length
+    ? allAuthUsers.map(u=>`
+      <tr>
+        <td><b>${esc(u.email||'')}</b><div class="muted" style="font-size:9px;margin-top:4px">${esc(u.user_id)}</div></td>
+        <td><input id="user-name-${u.user_id}" value="${esc(u.full_name||'')}" style="min-width:170px"></td>
+        <td>
+          <select id="user-role-${u.user_id}" data-user-role="${u.user_id}">
+            <option value="">Belum diberi akses</option>
+            <option value="admin" ${u.role==='admin'?'selected':''}>Admin</option>
+            <option value="satker" ${u.role==='satker'?'selected':''}>Satuan Kerja</option>
+          </select>
+        </td>
+        <td>
+          <select id="user-unit-${u.user_id}" ${u.role==='admin'?'disabled':''}>
+            <option value="">Pilih Satuan Kerja...</option>
+            ${unitOptionsFor(u)}
+          </select>
+        </td>
+        <td>
+          <div class="actions">
+            <button class="btn btn-yellow" data-save-user="${u.user_id}">Simpan</button>
+            ${u.role?`<button class="btn btn-red" data-remove-user="${u.user_id}">Cabut Akses</button>`:''}
+          </div>
+        </td>
+      </tr>
+    `).join('')
+    : '<tr><td colspan="5" class="muted">Belum ada akun Auth.</td></tr>';
+
+  document.querySelectorAll('[data-user-role]').forEach(sel=>{
+    sel.onchange=()=>{
+      const id=sel.dataset.userRole;
+      const unit=$('user-unit-'+id);
+      unit.disabled=sel.value==='admin'||!sel.value;
+      if(sel.value==='admin')unit.value='';
+    };
+  });
+
+  document.querySelectorAll('[data-save-user]').forEach(btn=>{
+    btn.onclick=()=>saveUserProfile(btn.dataset.saveUser);
+  });
+
+  document.querySelectorAll('[data-remove-user]').forEach(btn=>{
+    btn.onclick=()=>removeUserProfile(btn.dataset.removeUser);
+  });
+}
+
+async function saveUserProfile(userId){
+  try{
+    const role=$('user-role-'+userId).value;
+    const fullName=$('user-name-'+userId).value.trim();
+    const workUnitId=$('user-unit-'+userId).value||null;
+
+    if(!role)throw new Error('Pilih role pengguna.');
+    if(role==='satker'&&!workUnitId)throw new Error('Akun Satuan Kerja wajib memiliki Satuan Kerja.');
+
+    const {error}=await sb.rpc('admin_upsert_edu_user_profile',{
+      p_user_id:userId,
+      p_full_name:fullName||null,
+      p_role:role,
+      p_work_unit_id:workUnitId
+    });
+
+    if(error)throw error;
+
+    msg('userOk','Profil akses pengguna berhasil disimpan.',true);
+    await loadUserManagement();
+  }catch(e){
+    msg('userErr',e.message);
+  }
+}
+
+async function removeUserProfile(userId){
+  if(!confirm('Cabut akses aplikasi untuk akun ini? Akun Auth tetap ada, tetapi tidak dapat membuka dashboard.'))return;
+
+  const {error}=await sb.rpc('admin_remove_edu_user_profile',{p_user_id:userId});
+  if(error)return msg('userErr',error.message);
+
+  msg('userOk','Akses pengguna berhasil dicabut.',true);
+  await loadUserManagement();
+}
+
+$('saveUnitBtn').onclick=async()=>{
+  try{
+    const code=$('newUnitCode').value.trim();
+    const name=$('newUnitName').value.trim();
+
+    if(!code||!name)throw new Error('Kode dan nama Satuan Kerja wajib diisi.');
+
+    const {error}=await sb.from('work_units').insert({code,name});
+    if(error)throw error;
+
+    $('newUnitCode').value='';
+    $('newUnitName').value='';
+    msg('userOk','Satuan Kerja berhasil ditambahkan.',true);
+
+    await loadUserManagement();
+    await loadEvents();
+  }catch(e){
+    msg('userErr',e.message);
+  }
+};
+
+$('refreshUsersBtn').onclick=loadUserManagement;
 
 const toggleLoginPassword=$('toggleLoginPassword');
 if(toggleLoginPassword){
