@@ -941,6 +941,21 @@ body.role-satker .work-unit-readonly{display:grid}
 #userManagementPanel{scroll-margin-top:165px}
 @media(max-width:760px){.user-grid{grid-template-columns:1fr}}
 
+
+.event-item{position:relative}
+.event-item .event-actions{position:absolute;right:10px;top:10px;display:flex;gap:6px;align-items:center}
+.event-menu-btn{width:34px;height:34px;border-radius:999px;border:1px solid #dce5ef;background:#fff;color:#4a5f75;font-size:18px;cursor:pointer}
+.event-menu{position:absolute;right:8px;top:48px;z-index:30;min-width:190px;padding:7px;border:1px solid #dde6ef;border-radius:14px;background:#fff;box-shadow:0 16px 34px rgba(31,55,82,.14);display:none}
+.event-menu.show{display:grid}
+.event-menu button{width:100%;border:0;background:transparent;text-align:left;padding:10px 11px;border-radius:10px;font:inherit;font-size:11px;font-weight:720;color:#35485e;cursor:pointer}
+.event-menu button:hover{background:#f7f9fc}.event-menu button.danger{color:#b42318}.event-menu button.archive{color:#8b6b00}
+.event-chip-row{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:8px}
+.event-state-active{background:#ecfdf3;color:#067647}.event-state-archived{background:#fff8db;color:#8b6b00}.event-state-deleted{background:#fff1f0;color:#b42318}
+.management-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+.management-metric{padding:16px;border:1px solid #e0e7ef;border-radius:17px;background:#fbfcfe}.management-metric b{display:block;font-size:30px}.management-metric span{font-size:10px;color:#758292}
+.activity-list{display:grid;gap:9px}.activity-item{padding:13px 14px;border:1px solid #e1e7ee;border-radius:14px;background:#fbfcfe}.activity-item b{display:block;font-size:11px}.activity-item span{display:block;margin-top:4px;color:#758292;font-size:9.5px}
+#eventManagementPanel{scroll-margin-top:165px}
+@media(max-width:850px){.management-metrics{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body class="login-mode">
@@ -1054,6 +1069,7 @@ body.role-satker .work-unit-readonly{display:grid}
     <a href="#monitorPanel">Peserta</a>
     <a href="#certificatePanel">Sertifikat</a>
     <a href="#reportPanel">Laporan</a>
+    <a href="#eventManagementPanel">Manajemen Kegiatan</a>
     <a class="admin-only inline" href="#userManagementPanel">Akun & Satker</a>
   </nav>
 
@@ -1316,7 +1332,16 @@ body.role-satker .work-unit-readonly{display:grid}
       </div>
 
 
-      <div class="card admin-only" id="userManagementPanel">
+            <div class="card" id="eventManagementPanel">
+        <div class="section-title"><div><span class="pill">Manajemen Kegiatan</span><h2 style="margin-top:10px">Aktif, Arsip, dan Riwayat</h2><p>Edit kegiatan, arsipkan tanpa menghilangkan histori, atau hapus permanen bila benar-benar diperlukan.</p></div>
+        <div class="actions"><button class="btn btn-outline" id="showActiveEvents">Aktif</button><button class="btn btn-outline" id="showArchivedEvents">Arsip</button><button class="btn btn-outline" id="showDeletedEvents">Dihapus</button><button class="btn btn-outline" id="refreshActivityBtn">Muat Riwayat</button></div></div>
+        <div class="management-metrics"><div class="management-metric"><b id="mEventActive">0</b><span>Kegiatan Aktif</span></div><div class="management-metric"><b id="mEventArchived">0</b><span>Diarsipkan</span></div><div class="management-metric"><b id="mEventDeleted">0</b><span>Dihapus</span></div><div class="management-metric"><b id="mEventTotal">0</b><span>Total Riwayat</span></div></div>
+        <div class="tablewrap"><table class="table"><thead><tr><th>Kegiatan</th><th>Tanggal</th><th>Satuan Kerja</th><th>Peserta</th><th>Sertifikat</th><th>Status</th><th>Aksi</th></tr></thead><tbody id="eventManagementRows"></tbody></table></div>
+        <div class="section-title" style="margin-top:24px"><div><h2 style="font-size:24px">Riwayat Aktivitas</h2><p>Perubahan penting yang dilakukan pada kegiatan.</p></div></div>
+        <div class="activity-list" id="activityRows"></div><div class="msg ok" id="eventManageOk"></div><div class="msg err" id="eventManageErr"></div>
+      </div>
+
+<div class="card admin-only" id="userManagementPanel">
         <div class="section-title">
           <div>
             <span class="pill">Administrator</span>
@@ -1378,7 +1403,7 @@ body.role-satker .work-unit-readonly{display:grid}
 
 <script src="supabase-config.js"></script>
 <script>
-let sb=null,events=[],currentEvent=null,currentTest='pretest',editingQuestion=null,editingEval=null,participantSelection=new Set(),currentProfile=null,workUnits=[],allAuthUsers=[],unitFilterValue='';
+let sb=null,events=[],currentEvent=null,currentTest='pretest',editingQuestion=null,editingEval=null,participantSelection=new Set(),currentProfile=null,workUnits=[],allAuthUsers=[],unitFilterValue='',eventManagementFilter='active';
 const $=id=>document.getElementById(id);
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
 function msg(id,text,ok=false){const el=$(id);el.textContent=text;el.className='msg show '+(ok?'ok':'err');setTimeout(()=>el.classList.remove('show'),4500)}
@@ -1442,7 +1467,8 @@ async function enterApp(){
     if(currentProfile.role==='admin'){
       await loadUserManagement();
     }
-
+    await loadEventManagement();
+    await loadActivityLogs();
     return true;
   }catch(e){
     msg('loginErr',e.message);
@@ -1527,6 +1553,7 @@ async function loadEvents(){
   events=data||[];
   renderEvents();
   renderCopySources();
+  await loadEventManagement();
 
   if(currentEvent){
     const found=events.find(x=>x.id===currentEvent.id);
@@ -1535,25 +1562,28 @@ async function loadEvents(){
 }
 
 function filteredEvents(){
-  if(currentProfile?.role!=='admin'||!unitFilterValue)return events;
-  return events.filter(e=>e.work_unit_id===unitFilterValue);
+  let rows=events.filter(e=>(e.lifecycle_status||'active')==='active');
+  if(currentProfile?.role==='admin'&&unitFilterValue)rows=rows.filter(e=>e.work_unit_id===unitFilterValue);
+  return rows;
 }
-
+function eventStateBadge(e){const s=e.lifecycle_status||'active';return `<span class="status ${s==='active'?'event-state-active':s==='archived'?'event-state-archived':'event-state-deleted'}">${s==='active'?'AKTIF':s==='archived'?'ARSIP':'DIHAPUS'}</span>`}
 function renderEvents(){
   const rows=filteredEvents();
-
-  $('eventList').innerHTML=rows.length?rows.map(e=>{
-    const unit=e.work_units?.name||'Belum ditetapkan';
-    return `<div class="event-item ${currentEvent?.id===e.id?'active':''}" data-id="${e.id}">
-      <b>${esc(e.title)}</b>
-      <small>${esc(e.code)} • ${esc(e.event_date||'-')}</small>
-      <small style="color:#416a96">${esc(unit)}</small>
-      <div style="margin-top:7px"><span class="status ${e.status}">${e.status}</span></div>
-    </div>`;
-  }).join(''):'<div class="muted" style="font-size:11px">Belum ada kegiatan.</div>';
-
-  document.querySelectorAll('.event-item').forEach(x=>x.onclick=()=>selectEvent(x.dataset.id));
+  $('eventList').innerHTML=rows.length?rows.map(e=>`<div class="event-item ${currentEvent?.id===e.id?'active':''}" data-id="${e.id}">
+    <div class="event-actions"><button class="event-menu-btn" data-event-menu-btn="${e.id}">⋯</button><div class="event-menu" id="event-menu-${e.id}">
+      <button data-event-edit="${e.id}">✏️ Edit Kegiatan</button><button data-event-detail="${e.id}">👁 Lihat Detail</button><button class="archive" data-event-archive="${e.id}">📦 Arsipkan</button><button class="danger" data-event-delete="${e.id}">🗑 Hapus Permanen</button>
+    </div></div>
+    <b style="padding-right:42px">${esc(e.title)}</b><small>${esc(e.code)} • ${esc(e.event_date||'-')}</small><small style="color:#416a96">${esc(e.work_units?.name||'Belum ditetapkan')}</small><div class="event-chip-row"><span class="status ${e.status}">${e.status}</span>${eventStateBadge(e)}</div></div>`).join(''):'<div class="muted" style="font-size:11px">Belum ada kegiatan aktif.</div>';
+  document.querySelectorAll('.event-item').forEach(x=>x.onclick=ev=>{if(ev.target.closest('.event-actions'))return;selectEvent(x.dataset.id)});
+  document.querySelectorAll('[data-event-menu-btn]').forEach(b=>b.onclick=e=>{e.stopPropagation();const id=b.dataset.eventMenuBtn;document.querySelectorAll('.event-menu').forEach(m=>m.classList.toggle('show',m.id==='event-menu-'+id&&!m.classList.contains('show')))});
+  document.querySelectorAll('[data-event-edit]').forEach(b=>b.onclick=e=>{e.stopPropagation();closeEventMenus();editEventFromMenu(b.dataset.eventEdit)});
+  document.querySelectorAll('[data-event-detail]').forEach(b=>b.onclick=e=>{e.stopPropagation();closeEventMenus();selectEvent(b.dataset.eventDetail)});
+  document.querySelectorAll('[data-event-archive]').forEach(b=>b.onclick=e=>{e.stopPropagation();closeEventMenus();archiveEvent(b.dataset.eventArchive)});
+  document.querySelectorAll('[data-event-delete]').forEach(b=>b.onclick=e=>{e.stopPropagation();closeEventMenus();deleteEventPermanent(b.dataset.eventDelete)});
 }
+function closeEventMenus(){document.querySelectorAll('.event-menu').forEach(m=>m.classList.remove('show'))}
+document.addEventListener('click',e=>{if(!e.target.closest('.event-actions'))closeEventMenus()});
+function editEventFromMenu(id){selectEvent(id,false);$('settingsPanel').scrollIntoView({behavior:'smooth',block:'start'});setTimeout(()=>$('eventTitle').focus(),300)}
 
 function renderCopySources(){
   $('copySource').innerHTML='<option value="">Salin dari kegiatan...</option>'+
@@ -2525,6 +2555,27 @@ $('excelEvaluation').onclick=exportEvaluationExcel;
 $('exportAllReports').onclick=exportAllReports;
 
 
+
+
+async function loadEventManagement(){
+  if(!currentProfile)return;
+  const {data,error}=await sb.rpc('list_edu_event_management',{p_filter:eventManagementFilter});if(error)return msg('eventManageErr',error.message);
+  const {data:summary}=await sb.rpc('get_edu_event_summary');if(summary?.length){const s=summary[0];$('mEventActive').textContent=s.active_count||0;$('mEventArchived').textContent=s.archived_count||0;$('mEventDeleted').textContent=s.deleted_count||0;$('mEventTotal').textContent=s.total_count||0}
+  $('eventManagementRows').innerHTML=(data||[]).length?(data||[]).map(e=>`<tr><td><b>${esc(e.title)}</b><div class="muted" style="font-size:9px">${esc(e.code||'')}</div></td><td>${esc(e.event_date||'—')}</td><td>${esc(e.work_unit_name||'—')}</td><td>${e.participant_count||0}</td><td>${e.certificate_count||0}</td><td>${eventManagementStatus(e.lifecycle_status)}</td><td><div class="actions">${e.lifecycle_status!=='deleted'?`<button class="btn btn-outline" data-manage-edit="${e.event_id}">Edit</button>`:''}${e.lifecycle_status==='active'?`<button class="btn btn-outline" data-manage-archive="${e.event_id}">Arsipkan</button>`:''}${e.lifecycle_status==='archived'?`<button class="btn btn-green" data-manage-restore="${e.event_id}">Aktifkan</button>`:''}${e.lifecycle_status!=='deleted'?`<button class="btn btn-red" data-manage-delete="${e.event_id}" data-pcount="${e.participant_count||0}" data-ccount="${e.certificate_count||0}">Hapus</button>`:''}</div></td></tr>`).join(''):'<tr><td colspan="7" class="muted">Tidak ada kegiatan.</td></tr>';
+  document.querySelectorAll('[data-manage-edit]').forEach(b=>b.onclick=()=>editEventFromMenu(b.dataset.manageEdit));
+  document.querySelectorAll('[data-manage-archive]').forEach(b=>b.onclick=()=>archiveEvent(b.dataset.manageArchive));
+  document.querySelectorAll('[data-manage-restore]').forEach(b=>b.onclick=()=>restoreArchivedEvent(b.dataset.manageRestore));
+  document.querySelectorAll('[data-manage-delete]').forEach(b=>b.onclick=()=>deleteEventPermanent(b.dataset.manageDelete,Number(b.dataset.pcount),Number(b.dataset.ccount)));
+}
+function eventManagementStatus(s){return `<span class="status ${s==='active'?'event-state-active':s==='archived'?'event-state-archived':'event-state-deleted'}">${s==='active'?'AKTIF':s==='archived'?'ARSIP':'DIHAPUS'}</span>`}
+async function archiveEvent(id){if(!confirm('Arsipkan kegiatan ini? Data peserta dan sertifikat tetap tersimpan.'))return;const {error}=await sb.rpc('archive_edu_event',{p_event_id:id});if(error)return msg('eventManageErr',error.message);if(currentEvent?.id===id)currentEvent=null;msg('eventManageOk','Kegiatan berhasil diarsipkan.',true);await loadEvents();await loadActivityLogs()}
+async function restoreArchivedEvent(id){if(!confirm('Aktifkan kembali kegiatan ini?'))return;const {error}=await sb.rpc('restore_edu_event',{p_event_id:id});if(error)return msg('eventManageErr',error.message);msg('eventManageOk','Kegiatan kembali aktif.',true);await loadEvents();await loadActivityLogs()}
+async function deleteEventPermanent(id,pcount=null,ccount=null){try{if(pcount===null||ccount===null){const {data,error}=await sb.rpc('get_edu_event_delete_impact',{p_event_id:id});if(error)throw error;const x=data?.[0]||{};pcount=Number(x.participant_count||0);ccount=Number(x.certificate_count||0)}if(!confirm(`HAPUS PERMANEN kegiatan ini?\n\nPeserta: ${pcount}\nSertifikat: ${ccount}\n\nSemua data terkait akan dihapus. Arsip lebih disarankan.`))return;const t=prompt('Ketik HAPUS KEGIATAN');if(t!=='HAPUS KEGIATAN')return;const {error}=await sb.rpc('delete_edu_event_permanently',{p_event_id:id});if(error)throw error;if(currentEvent?.id===id)currentEvent=null;msg('eventManageOk','Kegiatan berhasil dihapus permanen.',true);await loadEvents();await loadActivityLogs()}catch(e){msg('eventManageErr',e.message)}}
+async function loadActivityLogs(){const {data,error}=await sb.rpc('list_edu_activity_logs',{p_limit:60});if(error)return msg('eventManageErr',error.message);$('activityRows').innerHTML=(data||[]).map(a=>`<div class="activity-item"><b>${esc(a.action_label||a.action)}</b><span>${esc(a.event_title||'—')} • ${esc(a.work_unit_name||'—')}</span><span>${esc(a.actor_email||a.actor_name||'Sistem')} • ${formatAdminDate(a.created_at)}</span>${a.description?`<span>${esc(a.description)}</span>`:''}</div>`).join('')||'<div class="muted">Belum ada riwayat aktivitas.</div>'}
+$('showActiveEvents').onclick=async()=>{eventManagementFilter='active';await loadEventManagement()};
+$('showArchivedEvents').onclick=async()=>{eventManagementFilter='archived';await loadEventManagement()};
+$('showDeletedEvents').onclick=async()=>{eventManagementFilter='deleted';await loadEventManagement()};
+$('refreshActivityBtn').onclick=loadActivityLogs;
 
 // ============================================================
 // ADMIN: SATUAN KERJA & USER PROFILE
