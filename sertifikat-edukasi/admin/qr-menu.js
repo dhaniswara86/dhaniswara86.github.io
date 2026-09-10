@@ -12,9 +12,9 @@ const supabaseClient = supabase.createClient(
 async function loadEvents(){
 
     const {data,error}=await supabaseClient
-        .from("external_events")
-        .select("event_code,title,event_date")
-        .order("event_date",{ascending:false});
+.from("external_events")
+.select("id,code,title,event_date")
+.order("event_date",{ascending:false});
 
 
     const select=document.getElementById("eventSelect");
@@ -33,11 +33,15 @@ async function loadEvents(){
 
         const option=document.createElement("option");
 
-        option.value=item.event_code;
+        option.value=item.id;
 
         option.textContent =
-        item.event_code+" - "+item.title+
-        " ("+item.event_date+")";
+item.code+
+" - "+
+item.title+
+" ("+
+item.event_date+
+")";
 
         select.appendChild(option);
 
