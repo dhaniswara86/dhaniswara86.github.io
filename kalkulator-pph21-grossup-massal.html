@@ -592,6 +592,12 @@
       text-decoration: none;
       white-space: nowrap;
     }
+    .brand-logo {
+      width: auto;
+      height: 20px;
+      display: block;
+      object-fit: contain;
+    }
     .brand-emblem {
       width: 28px;
       height: 28px;
@@ -862,6 +868,101 @@
       box-shadow: 0 18px 52px rgba(12, 42, 76, .08);
     }
     .workspace-head + .panel { margin-top: 54px; }
+    .journey-nav {
+      width: min(var(--max-width), calc(100% - 32px));
+      margin: 48px auto 18px;
+      padding: 9px;
+      border: 1px solid #e0e5eb;
+      border-radius: 22px;
+      background: #f7f8fa;
+      box-shadow: 0 12px 34px rgba(12, 42, 76, .055);
+    }
+    .journey-track {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .journey-button {
+      width: 100%;
+      min-height: 78px;
+      display: grid;
+      grid-template-columns: 38px minmax(0, 1fr);
+      align-items: center;
+      gap: 11px;
+      padding: 11px 13px;
+      border: 1px solid transparent;
+      border-radius: 16px;
+      background: transparent;
+      color: #5f6268;
+      text-align: left;
+      transition: background .18s ease, border-color .18s ease, transform .18s ease;
+    }
+    .journey-button:not(:disabled):hover { background: #fff; transform: translateY(-1px); }
+    .journey-button:disabled { opacity: .48; }
+    .journey-number {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border: 1px solid #ccd4de;
+      border-radius: 50%;
+      background: #fff;
+      color: #777b82;
+      font-size: 13px;
+      font-weight: 820;
+    }
+    .journey-copy strong { display: block; color: #303238; font-size: 14px; }
+    .journey-copy small { display: block; margin-top: 3px; color: #7b7e84; font-size: 12px; line-height: 1.35; }
+    .journey-button.active {
+      border-color: #cfe3fa;
+      background: #fff;
+      box-shadow: 0 8px 22px rgba(8, 102, 216, .08);
+    }
+    .journey-button.active .journey-number { border-color: var(--kab-blue); background: var(--kab-blue); color: #fff; }
+    .journey-button.active .journey-copy strong { color: var(--kab-blue); }
+    .journey-button.completed .journey-number { border-color: #b9e1c8; background: #edf9f1; color: #177845; }
+    .journey-panel[hidden],
+    .journey-stage[hidden] { display: none !important; }
+    .journey-notice {
+      width: min(var(--max-width), calc(100% - 32px));
+      margin: 0 auto 14px;
+    }
+    .journey-stage { scroll-margin-top: 76px; }
+    .journey-stage .panel:first-child { margin-top: 0; }
+    .journey-intro {
+      display: grid;
+      grid-template-columns: minmax(0, .85fr) minmax(330px, 1.15fr);
+      gap: 24px;
+      align-items: stretch;
+    }
+    .template-overview {
+      min-height: 250px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 24px;
+      overflow: hidden;
+      border-radius: 18px;
+      background: var(--kab-navy);
+      color: #fff;
+    }
+    .template-overview-icon {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      border-radius: 15px;
+      background: var(--kab-yellow);
+      color: var(--kab-navy);
+    }
+    .template-overview h3 { margin: 28px 0 7px; font-size: 22px; letter-spacing: -.03em; }
+    .template-overview p { margin: 0; color: rgba(255, 255, 255, .7); font-size: 14px; }
+    .template-actions { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 18px; }
+    .template-actions .button { flex: 1 1 210px; }
+    .upload-layout.single { grid-template-columns: 1fr; }
     .panel + .panel { margin-top: 20px; }
     .panel-head { margin-bottom: 24px; }
     .panel-head h2 { color: var(--kab-ink); font-size: 28px; }
@@ -929,6 +1030,7 @@
       .nav-inner { width: calc(100% - 28px); }
       .workspace-head { grid-template-columns: 1fr; gap: 34px; padding-top: 58px; }
       .period-card { max-width: 620px; }
+      .journey-intro { grid-template-columns: 1fr; }
     }
     @media (max-width: 680px) {
       :root { --nav-height: 54px; }
@@ -938,6 +1040,11 @@
       .hero-actions .hero-cta { width: 100%; }
       .panel { width: calc(100% - 20px); padding: 21px; border-radius: 18px; }
       .workspace-head + .panel { margin-top: 26px; }
+      .journey-nav { width: calc(100% - 20px); margin-top: 26px; border-radius: 18px; }
+      .journey-notice { width: calc(100% - 20px); }
+      .journey-track { grid-template-columns: 1fr; }
+      .journey-button { min-height: 66px; }
+      .journey-button:not(.active):not(.completed) .journey-copy small { display: none; }
       .panel-head h2 { font-size: 24px; }
       .footer-inner { align-items: flex-start; flex-direction: column; }
       .footer-links { justify-content: flex-start; }
@@ -957,7 +1064,7 @@
   <header class="site-nav">
     <div class="nav-inner">
       <a class="nav-brand" href="index.html" aria-label="Kabayan — Kembali ke beranda">
-        <span class="brand-emblem" aria-hidden="true">K</span>
+        <img class="brand-logo" src="assets/img/LogoASD.svg" alt="Logo Kabayan">
         <span>Kabayan</span>
       </a>
 
@@ -998,7 +1105,7 @@
         <h1 id="pageTitle">Gross-up PPh 21.<span class="gradient-text">Sekaligus dari Excel.</span></h1>
         <p class="hero-description">Hitung tunjangan PPh pegawai tetap secara massal dengan TER bulanan, tanpa mengirim data payroll ke server.</p>
         <div class="hero-actions">
-          <a class="hero-cta hero-cta-primary" href="#simulator">Mulai menghitung</a>
+          <a class="hero-cta hero-cta-primary" href="#simulator">Mulai perjalanan</a>
           <a class="hero-cta hero-cta-secondary" href="#dasar-hukum">Lihat cara hitung</a>
         </div>
         <div class="hero-pills">
@@ -1039,18 +1146,80 @@
       </aside>
     </section>
 
-    <section class="panel" id="simulator" aria-labelledby="uploadTitle">
+    <nav class="journey-nav" id="simulator" aria-label="Tahapan kalkulator gross-up">
+      <ol class="journey-track">
+        <li>
+          <button class="journey-button active" id="journeyStep1" type="button" aria-current="step">
+            <span class="journey-number">1</span>
+            <span class="journey-copy"><strong>Unduh Template</strong><small>Siapkan format data pegawai</small></span>
+          </button>
+        </li>
+        <li>
+          <button class="journey-button" id="journeyStep2" type="button">
+            <span class="journey-number">2</span>
+            <span class="journey-copy"><strong>Unggah Excel</strong><small>Masukkan daftar pegawai</small></span>
+          </button>
+        </li>
+        <li>
+          <button class="journey-button" id="journeyStep3" type="button" disabled>
+            <span class="journey-number">3</span>
+            <span class="journey-copy"><strong>Cek dan Lihat Hasil</strong><small>Validasi dan unduh hasil</small></span>
+          </button>
+        </li>
+      </ol>
+    </nav>
+
+    <div id="excelNotice" class="notice notice-error journey-notice" role="alert"></div>
+
+    <section class="panel journey-panel" id="templateStep" aria-labelledby="templateStepTitle">
       <div class="panel-head">
         <div>
-          <h2 id="uploadTitle">Masukkan daftar pegawai</h2>
-          <p>Gunakan tiga kolom yang tersedia dalam template. “Penghasilan” berarti bruto sebelum tunjangan PPh, bukan take-home pay setelah BPJS atau potongan lain.</p>
+          <h2 id="templateStepTitle">Unduh template data pegawai</h2>
+          <p>Gunakan template agar nama kolom dan format PTKP langsung dikenali oleh kalkulator.</p>
         </div>
-        <span class="step-chip">1 · Unggah</span>
+        <span class="step-chip">Langkah 1 dari 3</span>
       </div>
 
-      <div id="excelNotice" class="notice notice-error" role="alert"></div>
+      <div class="journey-intro">
+        <div class="template-overview">
+          <span class="template-overview-icon" aria-hidden="true">
+            <svg width="27" height="27" viewBox="0 0 24 24" fill="none">
+              <path d="M7 3h7l4 4v14H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+              <path d="M14 3v5h5M8.5 12.5l4 5m0-5-4 5M8 10h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <div>
+            <h3>Satu template, banyak pegawai.</h3>
+            <p>Isi penghasilan sebelum tunjangan PPh dan status PTKP. Kalkulator akan menentukan kategori TER dan gross-up setiap pegawai.</p>
+          </div>
+        </div>
 
-      <div class="upload-layout">
+        <aside class="template-card">
+          <h3>Format tiga kolom</h3>
+          <p>Jangan mengubah judul kolom agar data dapat dikenali otomatis.</p>
+          <ol class="column-list">
+            <li><span>1</span>Nama Pegawai</li>
+            <li><span>2</span>Penghasilan Sebelum Tunjangan PPh</li>
+            <li><span>3</span>Status PTKP</li>
+          </ol>
+          <div class="template-actions">
+            <button class="button button-dark" id="downloadTemplate" type="button">Unduh template Excel</button>
+            <button class="button button-secondary" id="goToUpload" type="button">Sudah punya template? Lanjut</button>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="panel journey-panel" id="uploadStep" aria-labelledby="uploadTitle" hidden>
+      <div class="panel-head">
+        <div>
+          <h2 id="uploadTitle">Unggah Excel pegawai</h2>
+          <p>“Penghasilan” berarti bruto sebelum tunjangan PPh, bukan take-home pay setelah BPJS atau potongan lain.</p>
+        </div>
+        <span class="step-chip">Langkah 2 dari 3</span>
+      </div>
+
+      <div class="upload-layout single">
         <div>
           <div class="drop-zone" id="dropZone" aria-label="Area unggah file Excel berisi data pegawai">
             <div>
@@ -1073,27 +1242,20 @@
             <button class="button button-danger" id="removeFile" type="button">Hapus</button>
           </div>
         </div>
-
-        <aside class="template-card">
-          <h3>Format kolom</h3>
-          <p>Nama kolom harus mengikuti template agar data dapat dikenali otomatis.</p>
-          <ol class="column-list">
-            <li><span>1</span>Nama Pegawai</li>
-            <li><span>2</span>Penghasilan Sebelum Tunjangan PPh</li>
-            <li><span>3</span>Status PTKP</li>
-          </ol>
-          <button class="button button-dark" id="downloadTemplate" type="button">Unduh template Excel</button>
-        </aside>
+      </div>
+      <div class="result-actions">
+        <button class="button button-secondary" id="backToTemplate" type="button">Kembali ke template</button>
       </div>
     </section>
 
+    <div class="journey-stage" id="reviewStep" hidden>
     <section class="panel result-panel" id="previewPanel" aria-labelledby="previewTitle">
       <div class="panel-head">
         <div>
           <h2 id="previewTitle">Periksa data</h2>
           <p>Baris bermasalah tidak akan dihitung. Perbaiki file sumber lalu unggah kembali bila diperlukan.</p>
         </div>
-        <span class="step-chip">2 · Validasi</span>
+        <span class="step-chip">Langkah 3 dari 3</span>
       </div>
       <div class="stats" aria-label="Ringkasan validasi">
         <div class="stat"><span>Total baris</span><strong id="rowCount">0</strong></div>
@@ -1118,7 +1280,7 @@
       </div>
       <p class="table-note" id="previewNote"></p>
       <div class="result-actions">
-        <button class="button button-secondary" id="resetPreview" type="button">Mulai ulang</button>
+        <button class="button button-secondary" id="resetPreview" type="button">Ganti file Excel</button>
         <button class="button button-primary" id="calculateButton" type="button">Hitung gross-up</button>
       </div>
     </section>
@@ -1129,7 +1291,7 @@
           <h2 id="resultTitle">Hasil gross-up</h2>
           <p>Tunjangan PPh sama dengan PPh Pasal 21 yang dipotong, sehingga beban PPh pegawai menjadi Rp0.</p>
         </div>
-        <span class="step-chip">3 · Hasil</span>
+        <span class="step-chip">Langkah 3 dari 3</span>
       </div>
       <div class="stats" aria-label="Ringkasan hasil">
         <div class="stat"><span>Pegawai dihitung</span><strong id="calculatedCount">0</strong></div>
@@ -1173,12 +1335,13 @@
         <p>Dasar umum: PP 58 Tahun 2023 dan PMK 168 Tahun 2023. Kalkulator ini merupakan alat bantu dan tidak menggantikan pemeriksaan data payroll serta bukti potong.</p>
       </details>
     </section>
+    </div>
   </main>
 
   <footer class="site-footer">
     <div class="footer-inner">
       <div>
-        <div class="footer-brand"><span class="brand-emblem" aria-hidden="true">K</span><span>Kabayan</span></div>
+        <div class="footer-brand"><img class="brand-logo" src="assets/img/LogoASD.svg" alt=""><span>Kabayan</span></div>
         <div style="margin-top:8px">Materi dan alat bantu perpajakan dalam satu tempat.</div>
       </div>
       <div class="footer-links">
@@ -1315,6 +1478,29 @@
         box.classList.toggle("show", Boolean(message));
       }
 
+      function setJourney(requestedStep, options = {}) {
+        const scroll = options.scroll !== false;
+        const step = requestedStep === 3 && !rows.length ? 2 : requestedStep;
+        $("templateStep").hidden = step !== 1;
+        $("uploadStep").hidden = step !== 2;
+        $("reviewStep").hidden = step !== 3;
+
+        const buttons = [$("journeyStep1"), $("journeyStep2"), $("journeyStep3")];
+        buttons.forEach((button, index) => {
+          const number = index + 1;
+          button.classList.toggle("active", number === step);
+          button.classList.toggle("completed", number < step);
+          if (number === step) button.setAttribute("aria-current", "step");
+          else button.removeAttribute("aria-current");
+        });
+        $("journeyStep3").disabled = rows.length === 0;
+
+        if (scroll) {
+          const target = step === 1 ? $("templateStep") : step === 2 ? $("uploadStep") : $("reviewStep");
+          requestAnimationFrame(() => target.scrollIntoView({ behavior: "smooth", block: "start" }));
+        }
+      }
+
       function updateFileStatus(name, detail) {
         sourceName = name;
         $("fileName").textContent = name;
@@ -1361,6 +1547,7 @@
         $("calculateButton").disabled = valid.length === 0;
         $("previewPanel").classList.add("show");
         $("resultPanel").classList.remove("show");
+        setJourney(3, { scroll: false });
         $("previewPanel").scrollIntoView({ behavior: "smooth", block: "start" });
       }
 
@@ -1530,7 +1717,7 @@
         renderPreview();
       }
 
-      function resetAll() {
+      function resetAll(targetStep = 1) {
         rows = [];
         results = [];
         sourceName = "";
@@ -1539,7 +1726,7 @@
         $("previewPanel").classList.remove("show");
         $("resultPanel").classList.remove("show");
         setNotice("");
-        $("dropZone").scrollIntoView({ behavior: "smooth", block: "center" });
+        setJourney(targetStep);
       }
 
       function registerWebMCP() {
@@ -1614,10 +1801,15 @@
       $("chooseFile").addEventListener("click", () => $("fileInput").click());
       $("fileInput").addEventListener("change", event => readFile(event.target.files[0]));
       $("downloadTemplate").addEventListener("click", downloadTemplate);
+      $("goToUpload").addEventListener("click", () => setJourney(2));
+      $("backToTemplate").addEventListener("click", () => setJourney(1));
+      $("journeyStep1").addEventListener("click", () => setJourney(1));
+      $("journeyStep2").addEventListener("click", () => setJourney(2));
+      $("journeyStep3").addEventListener("click", () => setJourney(3));
       $("downloadResult").addEventListener("click", downloadResults);
       $("loadSample").addEventListener("click", loadSample);
-      $("removeFile").addEventListener("click", resetAll);
-      $("resetPreview").addEventListener("click", resetAll);
+      $("removeFile").addEventListener("click", () => resetAll(2));
+      $("resetPreview").addEventListener("click", () => resetAll(2));
       $("calculateButton").addEventListener("click", calculateAll);
       $("backToPreview").addEventListener("click", () => $("previewPanel").scrollIntoView({ behavior: "smooth", block: "start" }));
 
@@ -1631,6 +1823,7 @@
         dropZone.classList.remove("dragging");
       }));
       dropZone.addEventListener("drop", event => readFile(event.dataTransfer.files[0]));
+      setJourney(1, { scroll: false });
       registerWebMCP();
     })();
   </script>
