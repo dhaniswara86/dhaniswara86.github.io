@@ -1,7 +1,7 @@
 // Kabayan Admin QR - Supabase
 
-const SUPABASE_URL = "https://ndqwmxshryqpygmupcnj.supabase.co";
-const SUPABASE_KEY = "sb_publishable_-BGFKcxGME4yXqX4vRtWpA_g0-Cldkg";
+const SUPABASE_URL = "ISI_SUPABASE_URL";
+const SUPABASE_KEY = "ISI_SUPABASE_ANON_KEY";
 
 const supabaseClient = supabase.createClient(
     SUPABASE_URL,
