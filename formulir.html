@@ -916,8 +916,10 @@ footer{background:#f5f5f7;color:#6e6e73}.notice{width:min(1180px,calc(100% - 40p
   }
 
   function reorderExtensionButtons(host){
-    const pdfButtons = Array.from(host.querySelectorAll(':scope > .file-button')).filter(button => extensionButtonType(button) === 'pdf');
-    pdfButtons.slice(0,-1).forEach(button => button.remove());
+    ['pdf','excel'].forEach(type => {
+      const buttons = Array.from(host.querySelectorAll(':scope > .file-button')).filter(button => extensionButtonType(button) === type);
+      buttons.slice(0,-1).forEach(button => button.remove());
+    });
 
     Array.from(host.querySelectorAll(':scope > .file-button'))
       .sort((a,b) => {
