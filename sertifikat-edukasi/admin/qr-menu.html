@@ -2,56 +2,60 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Kabayan Admin QR Generator</title>
 <link rel="stylesheet" href="qr-menu.css">
 </head>
 <body>
 
-<div class="container">
+<nav class="nav">
+<div>Kabayan Admin</div>
+<div>QR Generator</div>
+</nav>
+
+<main class="container">
 
 <h1>QR Generator Kegiatan</h1>
-<p>Pilih kegiatan yang akan dibuatkan QR formulir.</p>
+<p>Buat QR Daftar Hadir, Pretest, Posttest, dan Evaluasi.</p>
 
-<div class="card">
-<label>Kegiatan</label>
-<select id="eventSelect">
-<option>Memuat kegiatan...</option>
-</select>
+<section class="card">
+<label>Pilih Kegiatan</label>
+<select id="eventSelect"></select>
 
 <button onclick="generateQR()">Generate QR</button>
-</div>
+</section>
 
-<div id="eventDetail" class="card"></div>
+<section id="detail" class="card"></section>
 
-<div class="grid">
+<section class="grid">
 
 <div class="card">
 <h2>01. Daftar Hadir + Pretest</h2>
 <div id="qr1" class="qr"></div>
 <input id="link1" readonly>
-
 <button onclick="copyLink('link1')">Copy Link</button>
-<button onclick="downloadQR('qr1','Daftar-Hadir-Pretest')">Download PNG</button>
+<button onclick="downloadQR('qr1','QR-Daftar-Hadir-Pretest')">Download PNG</button>
 </div>
-
 
 <div class="card">
 <h2>02. Posttest + Evaluasi</h2>
 <div id="qr2" class="qr"></div>
 <input id="link2" readonly>
-
 <button onclick="copyLink('link2')">Copy Link</button>
-<button onclick="downloadQR('qr2','Posttest-Evaluasi')">Download PNG</button>
+<button onclick="downloadQR('qr2','QR-Posttest-Evaluasi')">Download PNG</button>
 </div>
 
-</div>
+</section>
 
-<div class="note">
-QR Sertifikat tidak dibuat melalui halaman ini.
-</div>
+<section class="card">
+<h2>Histori Generate QR</h2>
+<table>
+<thead><tr><th>Waktu</th><th>Kegiatan</th><th>Jenis QR</th></tr></thead>
+<tbody id="history"></tbody>
+</table>
+</section>
 
-</div>
+</main>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="../library/qrcode.js"></script>
