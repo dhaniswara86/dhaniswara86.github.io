@@ -1,0 +1,1167 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Kalkulator gross-up PPh Pasal 21 massal berbasis Excel untuk pegawai tetap.">
+  <meta name="theme-color" content="#082a52">
+  <title>Kalkulator Gross-Up PPh 21 Massal | Kabayan</title>
+  <style>
+    :root {
+      --navy: #082a52;
+      --navy-2: #0d3b70;
+      --blue: #0866d8;
+      --blue-soft: #edf5ff;
+      --yellow: #ffd84a;
+      --ink: #171719;
+      --muted: #68686d;
+      --line: #dfe3e8;
+      --page: #f4f6f8;
+      --surface: #ffffff;
+      --green: #137a43;
+      --green-soft: #eaf7ef;
+      --red: #b42318;
+      --red-soft: #fff0ee;
+      --amber: #935d00;
+      --amber-soft: #fff7df;
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --shadow: 0 18px 50px rgba(10, 35, 65, .09);
+      --max: 1220px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--page);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    button, input, select { font: inherit; }
+    button { cursor: pointer; }
+    button:disabled { cursor: not-allowed; opacity: .48; }
+    a { color: inherit; }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .site-nav {
+      position: sticky;
+      z-index: 20;
+      top: 0;
+      border-bottom: 1px solid rgba(0, 0, 0, .07);
+      background: rgba(255, 255, 255, .94);
+      backdrop-filter: blur(18px) saturate(170%);
+    }
+    .nav-inner {
+      width: min(var(--max), calc(100% - 32px));
+      min-height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      margin: auto;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: .9rem;
+      font-weight: 760;
+      text-decoration: none;
+    }
+    .brand-mark {
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      border-radius: 9px;
+      background: var(--navy);
+      color: var(--yellow);
+      font-weight: 850;
+      letter-spacing: -.06em;
+    }
+    .nav-meta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--green);
+      font-size: .78rem;
+      font-weight: 700;
+    }
+    .nav-meta::before {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #27a35a;
+      content: "";
+    }
+
+    main {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 34px auto 72px;
+    }
+    .workspace-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(310px, .75fr);
+      gap: 22px;
+      align-items: stretch;
+      margin-bottom: 18px;
+    }
+    .title-card,
+    .period-card,
+    .panel,
+    .stat {
+      border: 1px solid rgba(8, 42, 82, .09);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+    .title-card {
+      position: relative;
+      overflow: hidden;
+      padding: 30px 32px;
+      border-radius: var(--radius-lg);
+      background: var(--navy);
+      color: white;
+    }
+    .title-card::after {
+      position: absolute;
+      right: -72px;
+      bottom: -112px;
+      width: 270px;
+      height: 270px;
+      border: 34px solid rgba(255, 216, 74, .18);
+      border-radius: 50%;
+      content: "";
+    }
+    .eyebrow {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 13px;
+      color: var(--yellow);
+      font-size: .78rem;
+      font-weight: 780;
+      letter-spacing: .02em;
+      text-transform: uppercase;
+    }
+    h1 {
+      position: relative;
+      z-index: 1;
+      max-width: 720px;
+      margin: 0;
+      font-size: clamp(2rem, 4.3vw, 3.35rem);
+      line-height: 1.02;
+      letter-spacing: -.055em;
+    }
+    .title-card p {
+      position: relative;
+      z-index: 1;
+      max-width: 670px;
+      margin: 15px 0 0;
+      color: rgba(255, 255, 255, .74);
+      font-size: .96rem;
+    }
+    .period-card {
+      padding: 24px;
+      border-radius: var(--radius-lg);
+    }
+    .card-kicker {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--blue);
+      font-size: .76rem;
+      font-weight: 780;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    .period-card h2,
+    .panel h2 {
+      margin: 0;
+      font-size: 1.35rem;
+      letter-spacing: -.035em;
+    }
+    .field-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .field label {
+      display: block;
+      margin-bottom: 7px;
+      color: #3f4145;
+      font-size: .82rem;
+      font-weight: 720;
+    }
+    .field select {
+      width: 100%;
+      min-height: 46px;
+      padding: 0 38px 0 13px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: white;
+      color: var(--ink);
+    }
+    .scope-note {
+      display: flex;
+      gap: 9px;
+      margin: 14px 0 0;
+      padding: 11px 12px;
+      border-radius: 12px;
+      background: var(--amber-soft);
+      color: #735000;
+      font-size: .78rem;
+      line-height: 1.45;
+    }
+
+    .panel {
+      padding: 26px;
+      border-radius: var(--radius-lg);
+      box-shadow: 0 14px 38px rgba(10, 35, 65, .065);
+    }
+    .panel + .panel { margin-top: 18px; }
+    .panel-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+    .panel-head p {
+      max-width: 680px;
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: .88rem;
+    }
+    .step-chip {
+      flex: none;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      font-size: .74rem;
+      font-weight: 760;
+    }
+    .upload-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(260px, .75fr);
+      gap: 16px;
+    }
+    .drop-zone {
+      min-height: 220px;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      border: 1.5px dashed #aebccc;
+      border-radius: var(--radius-md);
+      background: #fbfcfe;
+      text-align: center;
+      transition: border-color .16s, background .16s, transform .16s;
+    }
+    .drop-zone.dragging {
+      border-color: var(--blue);
+      background: var(--blue-soft);
+      transform: translateY(-2px);
+    }
+    .drop-icon {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 12px;
+      border-radius: 14px;
+      background: var(--navy);
+      color: var(--yellow);
+    }
+    .drop-zone strong { display: block; font-size: 1rem; }
+    .drop-zone p {
+      margin: 5px 0 15px;
+      color: var(--muted);
+      font-size: .83rem;
+    }
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 9px;
+    }
+    .button {
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 9px 15px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      font-size: .83rem;
+      font-weight: 750;
+      transition: transform .14s, box-shadow .14s, background .14s;
+    }
+    .button:hover:not(:disabled) { transform: translateY(-1px); }
+    .button-primary {
+      background: var(--blue);
+      color: white;
+      box-shadow: 0 8px 18px rgba(8, 102, 216, .2);
+    }
+    .button-dark { background: var(--navy); color: white; }
+    .button-secondary {
+      border-color: var(--line);
+      background: white;
+      color: #35373b;
+    }
+    .button-danger {
+      border-color: #f0c8c3;
+      background: white;
+      color: var(--red);
+    }
+    .template-card {
+      padding: 19px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: #fafbfc;
+    }
+    .template-card h3 { margin: 0 0 5px; font-size: .95rem; }
+    .template-card p {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: .8rem;
+    }
+    .column-list {
+      display: grid;
+      gap: 8px;
+      margin: 0 0 16px;
+      padding: 0;
+      list-style: none;
+    }
+    .column-list li {
+      display: grid;
+      grid-template-columns: 24px 1fr;
+      gap: 9px;
+      align-items: center;
+      font-size: .8rem;
+      font-weight: 650;
+    }
+    .column-list span {
+      width: 24px;
+      height: 24px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      background: white;
+      color: var(--blue);
+      box-shadow: inset 0 0 0 1px var(--line);
+      font-size: .72rem;
+    }
+    .template-card .button { width: 100%; }
+    .file-status {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 13px;
+      background: var(--green-soft);
+      color: #0b6637;
+      font-size: .82rem;
+    }
+    .file-status.show { display: flex; }
+    .file-status strong { display: block; }
+    .file-status small { display: block; color: #347452; }
+
+    .notice {
+      display: none;
+      margin: 0 0 16px;
+      padding: 12px 14px;
+      border-radius: 13px;
+      font-size: .83rem;
+    }
+    .notice.show { display: block; }
+    .notice-error { background: var(--red-soft); color: var(--red); }
+    .notice-info { background: var(--blue-soft); color: #064f9f; }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .stat {
+      padding: 17px;
+      border-radius: var(--radius-md);
+      box-shadow: none;
+    }
+    .stat span {
+      display: block;
+      color: var(--muted);
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .03em;
+    }
+    .stat strong {
+      display: block;
+      margin-top: 5px;
+      font-size: clamp(1.05rem, 2vw, 1.38rem);
+      letter-spacing: -.035em;
+    }
+    .stat.accent { border-color: rgba(8, 102, 216, .22); background: var(--blue-soft); }
+
+    .table-wrap {
+      overflow: auto;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: white;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      white-space: nowrap;
+      font-size: .78rem;
+    }
+    th, td {
+      padding: 12px 13px;
+      border-bottom: 1px solid #eceef1;
+      text-align: left;
+    }
+    th {
+      position: sticky;
+      z-index: 1;
+      top: 0;
+      background: #f7f8fa;
+      color: #51545a;
+      font-size: .7rem;
+      text-transform: uppercase;
+      letter-spacing: .025em;
+    }
+    td.num, th.num { text-align: right; }
+    tbody tr:last-child td { border-bottom: 0; }
+    tbody tr.row-error { background: #fffafa; }
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 8px;
+      border-radius: 999px;
+      font-size: .7rem;
+      font-weight: 760;
+    }
+    .status::before {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+      content: "";
+    }
+    .status-valid { background: var(--green-soft); color: var(--green); }
+    .status-error { background: var(--red-soft); color: var(--red); }
+    .table-note {
+      margin: 10px 2px 0;
+      color: var(--muted);
+      font-size: .76rem;
+    }
+    .result-panel { display: none; }
+    .result-panel.show { display: block; }
+    .result-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 9px;
+      margin-top: 17px;
+    }
+    details.method {
+      margin-top: 18px;
+      border-top: 1px solid var(--line);
+      padding-top: 16px;
+    }
+    details.method summary {
+      color: var(--blue);
+      cursor: pointer;
+      font-size: .82rem;
+      font-weight: 730;
+    }
+    details.method p,
+    details.method ul {
+      max-width: 850px;
+      color: var(--muted);
+      font-size: .8rem;
+    }
+    details.method li + li { margin-top: 5px; }
+    footer {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto 34px;
+      color: var(--muted);
+      font-size: .72rem;
+      text-align: center;
+    }
+
+    @media (max-width: 880px) {
+      .workspace-head, .upload-layout { grid-template-columns: 1fr; }
+      .stats { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 560px) {
+      main { width: min(100% - 20px, var(--max)); margin-top: 18px; }
+      .nav-inner { width: calc(100% - 24px); }
+      .nav-meta { font-size: 0; }
+      .nav-meta::after { content: "Lokal"; font-size: .75rem; }
+      .title-card, .period-card, .panel { padding: 20px; border-radius: 19px; }
+      .field-grid, .stats { grid-template-columns: 1fr; }
+      .panel-head { align-items: flex-start; flex-direction: column-reverse; }
+      .drop-zone { min-height: 200px; padding: 18px 12px; }
+      .button-row, .button-row .button { width: 100%; }
+      .result-actions { flex-direction: column; }
+      .result-actions .button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-nav">
+    <div class="nav-inner">
+      <a class="brand" href="#top" aria-label="Kabayan — Kalkulator Gross-Up PPh 21">
+        <span class="brand-mark" aria-hidden="true">K</span>
+        <span>Kabayan</span>
+      </a>
+      <span class="nav-meta">Penghitungan dilakukan di perangkat Anda</span>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="workspace-head" aria-labelledby="pageTitle">
+      <div class="title-card">
+        <span class="eyebrow">Kalkulator PPh Pasal 21</span>
+        <h1 id="pageTitle">Gross-up pegawai sekaligus dari Excel.</h1>
+        <p>Unggah daftar pegawai, periksa validasi, lalu unduh tunjangan PPh dan bruto setelah gross-up. Data tidak dikirim ke server.</p>
+      </div>
+
+      <aside class="period-card" aria-labelledby="periodTitle">
+        <span class="card-kicker">Pengaturan</span>
+        <h2 id="periodTitle">Masa pajak</h2>
+        <div class="field-grid">
+          <div class="field">
+            <label for="taxYear">Tahun pajak</label>
+            <select id="taxYear">
+              <option value="2026">2026</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="taxMonth">Bulan</label>
+            <select id="taxMonth">
+              <option value="1">Januari</option>
+              <option value="2">Februari</option>
+              <option value="3">Maret</option>
+              <option value="4">April</option>
+              <option value="5">Mei</option>
+              <option value="6">Juni</option>
+              <option value="7">Juli</option>
+              <option value="8">Agustus</option>
+              <option value="9">September</option>
+              <option value="10">Oktober</option>
+              <option value="11">November</option>
+            </select>
+          </div>
+        </div>
+        <p class="scope-note"><span aria-hidden="true">ⓘ</span><span>Konsep ini khusus pegawai tetap pada masa selain masa pajak terakhir. Desember memerlukan rekonsiliasi tahunan.</span></p>
+      </aside>
+    </section>
+
+    <section class="panel" aria-labelledby="uploadTitle">
+      <div class="panel-head">
+        <div>
+          <h2 id="uploadTitle">Masukkan daftar pegawai</h2>
+          <p>Gunakan tiga kolom yang tersedia dalam template. “Penghasilan” berarti bruto sebelum tunjangan PPh, bukan take-home pay setelah BPJS atau potongan lain.</p>
+        </div>
+        <span class="step-chip">1 · Unggah</span>
+      </div>
+
+      <div id="excelNotice" class="notice notice-error" role="alert"></div>
+
+      <div class="upload-layout">
+        <div>
+          <div class="drop-zone" id="dropZone" aria-label="Area unggah file Excel berisi data pegawai">
+            <div>
+              <span class="drop-icon" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 15V4m0 0L8 8m4-4 4 4M5 14v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <strong>Tarik file Excel ke sini</strong>
+              <p>atau pilih file .xlsx, .xls, atau .csv · maksimal 5 MB</p>
+              <div class="button-row">
+                <button class="button button-primary" id="chooseFile" type="button">Pilih file Excel</button>
+                <button class="button button-secondary" id="loadSample" type="button">Coba data contoh</button>
+              </div>
+              <input class="sr-only" id="fileInput" type="file" accept=".xlsx,.xls,.csv">
+            </div>
+          </div>
+          <div class="file-status" id="fileStatus" aria-live="polite">
+            <div><strong id="fileName">—</strong><small id="fileDetail">—</small></div>
+            <button class="button button-danger" id="removeFile" type="button">Hapus</button>
+          </div>
+        </div>
+
+        <aside class="template-card">
+          <h3>Format kolom</h3>
+          <p>Nama kolom harus mengikuti template agar data dapat dikenali otomatis.</p>
+          <ol class="column-list">
+            <li><span>1</span>Nama Pegawai</li>
+            <li><span>2</span>Penghasilan Sebelum Tunjangan PPh</li>
+            <li><span>3</span>Status PTKP</li>
+          </ol>
+          <button class="button button-dark" id="downloadTemplate" type="button">Unduh template Excel</button>
+        </aside>
+      </div>
+    </section>
+
+    <section class="panel result-panel" id="previewPanel" aria-labelledby="previewTitle">
+      <div class="panel-head">
+        <div>
+          <h2 id="previewTitle">Periksa data</h2>
+          <p>Baris bermasalah tidak akan dihitung. Perbaiki file sumber lalu unggah kembali bila diperlukan.</p>
+        </div>
+        <span class="step-chip">2 · Validasi</span>
+      </div>
+      <div class="stats" aria-label="Ringkasan validasi">
+        <div class="stat"><span>Total baris</span><strong id="rowCount">0</strong></div>
+        <div class="stat"><span>Data valid</span><strong id="validCount">0</strong></div>
+        <div class="stat"><span>Perlu diperbaiki</span><strong id="errorCount">0</strong></div>
+        <div class="stat accent"><span>Total penghasilan</span><strong id="baseTotal">Rp0</strong></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Baris</th>
+              <th>Nama Pegawai</th>
+              <th class="num">Penghasilan</th>
+              <th>PTKP</th>
+              <th>Kategori</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="previewBody"></tbody>
+        </table>
+      </div>
+      <p class="table-note" id="previewNote"></p>
+      <div class="result-actions">
+        <button class="button button-secondary" id="resetPreview" type="button">Mulai ulang</button>
+        <button class="button button-primary" id="calculateButton" type="button">Hitung gross-up</button>
+      </div>
+    </section>
+
+    <section class="panel result-panel" id="resultPanel" aria-labelledby="resultTitle">
+      <div class="panel-head">
+        <div>
+          <h2 id="resultTitle">Hasil gross-up</h2>
+          <p>Tunjangan PPh sama dengan PPh Pasal 21 yang dipotong, sehingga beban PPh pegawai menjadi Rp0.</p>
+        </div>
+        <span class="step-chip">3 · Hasil</span>
+      </div>
+      <div class="stats" aria-label="Ringkasan hasil">
+        <div class="stat"><span>Pegawai dihitung</span><strong id="calculatedCount">0</strong></div>
+        <div class="stat"><span>Total penghasilan awal</span><strong id="resultBaseTotal">Rp0</strong></div>
+        <div class="stat accent"><span>Total tunjangan PPh</span><strong id="allowanceTotal">Rp0</strong></div>
+        <div class="stat"><span>Total bruto gross-up</span><strong id="grossTotal">Rp0</strong></div>
+      </div>
+      <div class="notice notice-info show" id="periodSummary"></div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Nama Pegawai</th>
+              <th>PTKP</th>
+              <th>Kategori</th>
+              <th class="num">TER</th>
+              <th class="num">Penghasilan Awal</th>
+              <th class="num">Tunjangan PPh</th>
+              <th class="num">Bruto Gross-Up</th>
+              <th class="num">PPh 21</th>
+              <th class="num">Setelah PPh</th>
+            </tr>
+          </thead>
+          <tbody id="resultBody"></tbody>
+        </table>
+      </div>
+      <p class="table-note" id="resultNote"></p>
+      <div class="result-actions">
+        <button class="button button-secondary" id="backToPreview" type="button">Kembali ke validasi</button>
+        <button class="button button-dark" id="downloadResult" type="button">Unduh hasil Excel</button>
+      </div>
+
+      <details class="method">
+        <summary>Lihat cara penghitungan</summary>
+        <ul>
+          <li>Status PTKP dipetakan ke TER Kategori A, B, atau C.</li>
+          <li>Tunjangan dihitung secara iteratif karena tarif ditentukan dari bruto setelah tunjangan PPh.</li>
+          <li>Hasil dipilih pada titik gross-up terendah yang memenuhi: tunjangan PPh = PPh Pasal 21.</li>
+          <li>Pembulatan PPh dilakukan ke rupiah penuh ke bawah.</li>
+        </ul>
+        <p>Dasar umum: PP 58 Tahun 2023 dan PMK 168 Tahun 2023. Kalkulator ini merupakan alat bantu dan tidak menggantikan pemeriksaan data payroll serta bukti potong.</p>
+      </details>
+    </section>
+  </main>
+
+  <footer>Kabayan · Konsep Kalkulator Gross-Up PPh Pasal 21 Massal · Versi 1.0</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script>
+    (() => {
+      "use strict";
+
+      const TER_TABLES = {
+        A: [
+          [5400000,0],[5650000,.25],[5950000,.5],[6300000,.75],[6750000,1],[7500000,1.25],[8550000,1.5],[9650000,1.75],
+          [10050000,2],[10350000,2.25],[10700000,2.5],[11050000,3],[11600000,3.5],[12500000,4],[13750000,5],[15100000,6],
+          [16950000,7],[19750000,8],[24150000,9],[26450000,10],[28000000,11],[30050000,12],[32400000,13],[35400000,14],
+          [39100000,15],[43850000,16],[47800000,17],[51400000,18],[56300000,19],[62200000,20],[68600000,21],[77500000,22],
+          [89000000,23],[103000000,24],[125000000,25],[157000000,26],[206000000,27],[337000000,28],[454000000,29],[550000000,30],
+          [695000000,31],[910000000,32],[1400000000,33],[Infinity,34]
+        ],
+        B: [
+          [6200000,0],[6500000,.25],[6850000,.5],[7300000,.75],[9200000,1],[10750000,1.5],[11250000,2],[11600000,2.5],
+          [12600000,3],[13600000,4],[14950000,5],[16400000,6],[18450000,7],[21850000,8],[26000000,9],[27700000,10],
+          [29350000,11],[31450000,12],[33950000,13],[37100000,14],[41100000,15],[45800000,16],[49500000,17],[53800000,18],
+          [58500000,19],[64000000,20],[71000000,21],[80000000,22],[93000000,23],[109000000,24],[129000000,25],[163000000,26],
+          [211000000,27],[374000000,28],[459000000,29],[555000000,30],[704000000,31],[957000000,32],[1405000000,33],[Infinity,34]
+        ],
+        C: [
+          [6600000,0],[6950000,.25],[7350000,.5],[7800000,.75],[8850000,1],[9800000,1.25],[10950000,1.5],[11200000,1.75],
+          [12050000,2],[12950000,3],[14150000,4],[15550000,5],[17050000,6],[19500000,7],[22700000,8],[26600000,9],
+          [28100000,10],[30100000,11],[32600000,12],[35400000,13],[38900000,14],[43000000,15],[47400000,16],[51200000,17],
+          [55800000,18],[60400000,19],[66700000,20],[74500000,21],[83200000,22],[95600000,23],[110000000,24],[134000000,25],
+          [169000000,26],[221000000,27],[390000000,28],[463000000,29],[561000000,30],[709000000,31],[965000000,32],[1419000000,33],[Infinity,34]
+        ]
+      };
+
+      const PTKP_CATEGORY = {
+        "TK/0": "A", "TK/1": "A", "K/0": "A",
+        "TK/2": "B", "TK/3": "B", "K/1": "B", "K/2": "B",
+        "K/3": "C"
+      };
+
+      const MONTH_NAMES = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November"];
+      const MAX_PREVIEW = 100;
+      const MAX_FILE_SIZE = 5 * 1024 * 1024;
+      let rows = [];
+      let results = [];
+      let sourceName = "";
+
+      const $ = id => document.getElementById(id);
+      const money = value => new Intl.NumberFormat("id-ID", {
+        style: "currency", currency: "IDR", maximumFractionDigits: 0
+      }).format(Number(value) || 0);
+      const integer = value => new Intl.NumberFormat("id-ID").format(Number(value) || 0);
+      const rateText = value => `${String(value).replace(".", ",")}%`;
+      const cleanHeader = value => String(value || "")
+        .trim().toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+
+      function normalizePTKP(value) {
+        const compact = String(value || "").trim().toUpperCase().replace(/\s+/g, "");
+        const match = compact.match(/^(TK|K)[\/-]?([0-3])$/);
+        return match ? `${match[1]}/${match[2]}` : compact;
+      }
+
+      function parseIncome(value) {
+        if (typeof value === "number") return Number.isFinite(value) ? Math.floor(value) : NaN;
+        const source = String(value ?? "").trim();
+        if (!source || /^-/.test(source)) return NaN;
+        const digits = source.replace(/[^0-9]/g, "");
+        return digits ? Number(digits) : NaN;
+      }
+
+      function getRate(category, gross) {
+        const table = TER_TABLES[category];
+        for (const [upper, rate] of table) if (gross <= upper) return rate;
+        return 34;
+      }
+
+      function grossUp(base, category) {
+        let allowance = 0;
+        for (let i = 0; i < 500; i += 1) {
+          const gross = base + allowance;
+          const next = Math.floor(gross * getRate(category, gross) / 100);
+          if (next === allowance) break;
+          allowance = next;
+        }
+        const gross = base + allowance;
+        const rate = getRate(category, gross);
+        const tax = Math.floor(gross * rate / 100);
+        if (tax !== allowance) throw new Error("Gross-up tidak mencapai hasil yang konsisten.");
+        return { allowance, gross, rate, tax, afterTax: gross - tax };
+      }
+
+      function aliases(row) {
+        const mapped = {};
+        Object.entries(row).forEach(([key, value]) => { mapped[cleanHeader(key)] = value; });
+        return {
+          name: mapped["nama pegawai"] ?? mapped["nama"],
+          income: mapped["penghasilan sebelum tunjangan pph"] ?? mapped["penghasilan"] ?? mapped["besar penghasilan"],
+          ptkp: mapped["status ptkp"] ?? mapped["ptkp"]
+        };
+      }
+
+      function validateRows(rawRows) {
+        return rawRows.map((raw, index) => {
+          const data = aliases(raw);
+          const name = String(data.name ?? "").trim();
+          const income = parseIncome(data.income);
+          const ptkp = normalizePTKP(data.ptkp);
+          const errors = [];
+          if (!name) errors.push("Nama pegawai kosong");
+          if (!Number.isFinite(income) || income <= 0) errors.push("Penghasilan harus lebih dari Rp0");
+          if (!PTKP_CATEGORY[ptkp]) errors.push("Status PTKP tidak dikenali");
+          return {
+            rowNumber: index + 2,
+            name,
+            income: Number.isFinite(income) ? income : 0,
+            ptkp,
+            category: PTKP_CATEGORY[ptkp] || "—",
+            errors,
+            valid: errors.length === 0,
+            original: raw
+          };
+        }).filter(item => item.name || item.income || item.ptkp);
+      }
+
+      function setNotice(message) {
+        const box = $("excelNotice");
+        box.textContent = message || "";
+        box.classList.toggle("show", Boolean(message));
+      }
+
+      function updateFileStatus(name, detail) {
+        sourceName = name;
+        $("fileName").textContent = name;
+        $("fileDetail").textContent = detail;
+        $("fileStatus").classList.add("show");
+      }
+
+      function renderPreview() {
+        const body = $("previewBody");
+        body.replaceChildren();
+        const preview = rows.slice(0, MAX_PREVIEW);
+        preview.forEach(item => {
+          const tr = document.createElement("tr");
+          if (!item.valid) tr.className = "row-error";
+          const cells = [
+            item.rowNumber,
+            item.name || "—",
+            money(item.income),
+            item.ptkp || "—",
+            item.category,
+            item.valid ? "Valid" : item.errors.join(" · ")
+          ];
+          cells.forEach((value, index) => {
+            const td = document.createElement("td");
+            if (index === 2) td.className = "num";
+            if (index === 5) {
+              const status = document.createElement("span");
+              status.className = `status ${item.valid ? "status-valid" : "status-error"}`;
+              status.textContent = value;
+              td.appendChild(status);
+            } else td.textContent = value;
+            tr.appendChild(td);
+          });
+          body.appendChild(tr);
+        });
+        const valid = rows.filter(row => row.valid);
+        $("rowCount").textContent = integer(rows.length);
+        $("validCount").textContent = integer(valid.length);
+        $("errorCount").textContent = integer(rows.length - valid.length);
+        $("baseTotal").textContent = money(valid.reduce((sum, row) => sum + row.income, 0));
+        $("previewNote").textContent = rows.length > MAX_PREVIEW
+          ? `Menampilkan ${MAX_PREVIEW} dari ${integer(rows.length)} baris. Semua baris tetap diproses saat dihitung.`
+          : `Menampilkan seluruh ${integer(rows.length)} baris.`;
+        $("calculateButton").disabled = valid.length === 0;
+        $("previewPanel").classList.add("show");
+        $("resultPanel").classList.remove("show");
+        $("previewPanel").scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      function calculateAll() {
+        results = rows.filter(row => row.valid).map(row => {
+          const calc = grossUp(row.income, row.category);
+          return { ...row, ...calc };
+        });
+        renderResults();
+      }
+
+      function renderResults() {
+        const body = $("resultBody");
+        body.replaceChildren();
+        results.slice(0, MAX_PREVIEW).forEach(item => {
+          const tr = document.createElement("tr");
+          const cells = [
+            item.name, item.ptkp, item.category, rateText(item.rate),
+            money(item.income), money(item.allowance), money(item.gross), money(item.tax), money(item.afterTax)
+          ];
+          cells.forEach((value, index) => {
+            const td = document.createElement("td");
+            if (index >= 3) td.className = "num";
+            td.textContent = value;
+            tr.appendChild(td);
+          });
+          body.appendChild(tr);
+        });
+        const baseTotal = results.reduce((sum, row) => sum + row.income, 0);
+        const allowanceTotal = results.reduce((sum, row) => sum + row.allowance, 0);
+        const grossTotal = results.reduce((sum, row) => sum + row.gross, 0);
+        $("calculatedCount").textContent = integer(results.length);
+        $("resultBaseTotal").textContent = money(baseTotal);
+        $("allowanceTotal").textContent = money(allowanceTotal);
+        $("grossTotal").textContent = money(grossTotal);
+        $("periodSummary").textContent = `Masa Pajak ${MONTH_NAMES[Number($("taxMonth").value) - 1]} ${$("taxYear").value} · TER bulanan · ${integer(results.length)} pegawai valid.`;
+        $("resultNote").textContent = results.length > MAX_PREVIEW
+          ? `Tabel menampilkan ${MAX_PREVIEW} pegawai pertama. File hasil memuat seluruh ${integer(results.length)} pegawai.`
+          : `Seluruh ${integer(results.length)} hasil ditampilkan.`;
+        $("resultPanel").classList.add("show");
+        $("resultPanel").scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      function ensureXLSX() {
+        if (window.XLSX) return true;
+        setNotice("Komponen pembaca Excel belum tersedia. Periksa koneksi internet lalu muat ulang halaman.");
+        return false;
+      }
+
+      function readFile(file) {
+        setNotice("");
+        if (!file) return;
+        if (file.size > MAX_FILE_SIZE) {
+          setNotice("Ukuran file melebihi 5 MB.");
+          return;
+        }
+        if (!ensureXLSX()) return;
+        const reader = new FileReader();
+        reader.onerror = () => setNotice("File tidak dapat dibaca. Coba simpan ulang sebagai .xlsx.");
+        reader.onload = event => {
+          try {
+            const workbook = XLSX.read(event.target.result, { type: "array", cellDates: false });
+            const sheet = workbook.Sheets[workbook.SheetNames[0]];
+            const raw = XLSX.utils.sheet_to_json(sheet, { defval: "", raw: true });
+            if (!raw.length) throw new Error("Sheet pertama tidak berisi data.");
+            rows = validateRows(raw);
+            if (!rows.length) throw new Error("Tidak ada baris pegawai yang dapat dibaca.");
+            updateFileStatus(file.name, `${integer(rows.length)} baris terbaca dari sheet “${workbook.SheetNames[0]}”`);
+            renderPreview();
+          } catch (error) {
+            setNotice(error.message || "Struktur file tidak dapat dibaca.");
+          }
+        };
+        reader.readAsArrayBuffer(file);
+      }
+
+      function downloadTemplate() {
+        if (!ensureXLSX()) return;
+        const workbook = XLSX.utils.book_new();
+        const data = [
+          ["Nama Pegawai", "Penghasilan Sebelum Tunjangan PPh", "Status PTKP"],
+          ["Andi Pratama", 10000000, "TK/0"],
+          ["Siti Rahma", 15000000, "K/1"]
+        ];
+        const guide = [
+          ["PETUNJUK TEMPLATE GROSS-UP PPh PASAL 21"],
+          ["1. Jangan mengubah judul tiga kolom pada sheet Data Pegawai."],
+          ["2. Penghasilan adalah bruto sebelum tunjangan PPh."],
+          ["3. Status yang diterima: TK/0, TK/1, TK/2, TK/3, K/0, K/1, K/2, K/3."],
+          ["4. Hapus baris contoh sebelum mengisi data sebenarnya."],
+          ["5. Template ini digunakan untuk TER bulanan selain masa pajak terakhir."]
+        ];
+        const dataSheet = XLSX.utils.aoa_to_sheet(data);
+        const guideSheet = XLSX.utils.aoa_to_sheet(guide);
+        dataSheet["!cols"] = [{ wch: 26 }, { wch: 38 }, { wch: 18 }];
+        guideSheet["!cols"] = [{ wch: 88 }];
+        XLSX.utils.book_append_sheet(workbook, dataSheet, "Data Pegawai");
+        XLSX.utils.book_append_sheet(workbook, guideSheet, "Petunjuk");
+        XLSX.writeFile(workbook, "Template-Gross-Up-PPh21-Kabayan.xlsx");
+      }
+
+      function downloadResults() {
+        if (!ensureXLSX() || !results.length) return;
+        const period = `${MONTH_NAMES[Number($("taxMonth").value) - 1]} ${$("taxYear").value}`;
+        const output = results.map((item, index) => ({
+          "No.": index + 1,
+          "Nama Pegawai": item.name,
+          "Status PTKP": item.ptkp,
+          "Kategori TER": item.category,
+          "Tarif TER (%)": item.rate,
+          "Penghasilan Sebelum Tunjangan PPh": item.income,
+          "Tunjangan PPh Pasal 21": item.allowance,
+          "Penghasilan Bruto Setelah Gross-Up": item.gross,
+          "PPh Pasal 21": item.tax,
+          "Penghasilan Setelah PPh": item.afterTax,
+          "Beban PPh Pegawai": 0,
+          "Status": "Berhasil"
+        }));
+        const invalid = rows.filter(row => !row.valid).map(row => ({
+          "Baris Excel": row.rowNumber,
+          "Nama Pegawai": row.name,
+          "Penghasilan": row.income,
+          "Status PTKP": row.ptkp,
+          "Masalah": row.errors.join("; ")
+        }));
+        const totalBase = results.reduce((sum, item) => sum + item.income, 0);
+        const totalAllowance = results.reduce((sum, item) => sum + item.allowance, 0);
+        const summary = [
+          ["RINGKASAN GROSS-UP PPh PASAL 21"],
+          ["Masa Pajak", period],
+          ["File sumber", sourceName],
+          ["Pegawai dihitung", results.length],
+          ["Data bermasalah", invalid.length],
+          ["Total penghasilan sebelum tunjangan PPh", totalBase],
+          ["Total tunjangan PPh Pasal 21", totalAllowance],
+          ["Total penghasilan bruto setelah gross-up", totalBase + totalAllowance],
+          ["Total PPh Pasal 21", totalAllowance]
+        ];
+        const workbook = XLSX.utils.book_new();
+        const resultSheet = XLSX.utils.json_to_sheet(output);
+        const summarySheet = XLSX.utils.aoa_to_sheet(summary);
+        resultSheet["!cols"] = [
+          {wch:7},{wch:28},{wch:14},{wch:14},{wch:15},{wch:36},
+          {wch:26},{wch:38},{wch:21},{wch:25},{wch:20},{wch:14}
+        ];
+        summarySheet["!cols"] = [{wch:42},{wch:28}];
+        XLSX.utils.book_append_sheet(workbook, resultSheet, "Hasil Gross-Up");
+        XLSX.utils.book_append_sheet(workbook, summarySheet, "Ringkasan");
+        if (invalid.length) {
+          const invalidSheet = XLSX.utils.json_to_sheet(invalid);
+          invalidSheet["!cols"] = [{wch:13},{wch:28},{wch:20},{wch:14},{wch:48}];
+          XLSX.utils.book_append_sheet(workbook, invalidSheet, "Data Bermasalah");
+        }
+        XLSX.writeFile(workbook, `Hasil-Gross-Up-PPh21-${$("taxYear").value}-${String($("taxMonth").value).padStart(2, "0")}.xlsx`);
+      }
+
+      function loadSample() {
+        const sample = [
+          { "Nama Pegawai": "Andi Pratama", "Penghasilan Sebelum Tunjangan PPh": 10000000, "Status PTKP": "TK/0" },
+          { "Nama Pegawai": "Siti Rahma", "Penghasilan Sebelum Tunjangan PPh": 15000000, "Status PTKP": "K/1" },
+          { "Nama Pegawai": "Dewi Lestari", "Penghasilan Sebelum Tunjangan PPh": 8500000, "Status PTKP": "K/3" },
+          { "Nama Pegawai": "Data Perlu Diperbaiki", "Penghasilan Sebelum Tunjangan PPh": 7500000, "Status PTKP": "K/4" }
+        ];
+        rows = validateRows(sample);
+        updateFileStatus("Data contoh", `${rows.length} baris contoh dimuat`);
+        setNotice("");
+        renderPreview();
+      }
+
+      function resetAll() {
+        rows = [];
+        results = [];
+        sourceName = "";
+        $("fileInput").value = "";
+        $("fileStatus").classList.remove("show");
+        $("previewPanel").classList.remove("show");
+        $("resultPanel").classList.remove("show");
+        setNotice("");
+        $("dropZone").scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+
+      function registerWebMCP() {
+        const context = document.modelContext;
+        if (!context?.registerTool) return;
+        const controller = new AbortController();
+        const register = tool => Promise.resolve(context.registerTool(tool, { signal: controller.signal })).catch(() => {});
+        register({
+          name: "calculate_gross_up_batch",
+          title: "Hitung gross-up pegawai",
+          description: "Memvalidasi daftar pegawai dan menghitung tunjangan PPh Pasal 21 gross-up TER bulanan.",
+          inputSchema: {
+            type: "object",
+            properties: {
+              month: { type: "integer", minimum: 1, maximum: 11 },
+              employees: {
+                type: "array",
+                minItems: 1,
+                items: {
+                  type: "object",
+                  properties: {
+                    name: { type: "string", minLength: 1 },
+                    income: { type: "number", minimum: 0 },
+                    ptkp: { type: "string", enum: Object.keys(PTKP_CATEGORY) }
+                  },
+                  required: ["name", "income", "ptkp"],
+                  additionalProperties: false
+                }
+              }
+            },
+            required: ["employees"],
+            additionalProperties: false
+          },
+          annotations: { readOnlyHint: false, untrustedContentHint: true },
+          execute(input) {
+            if (!input || !Array.isArray(input.employees) || !input.employees.length) throw new Error("Daftar pegawai wajib diisi.");
+            if (input.month) $("taxMonth").value = String(input.month);
+            const raw = input.employees.map(item => ({
+              "Nama Pegawai": item.name,
+              "Penghasilan Sebelum Tunjangan PPh": item.income,
+              "Status PTKP": item.ptkp
+            }));
+            rows = validateRows(raw);
+            sourceName = "Data terstruktur";
+            renderPreview();
+            calculateAll();
+            return {
+              employeeCount: results.length,
+              totalAllowance: results.reduce((sum, row) => sum + row.allowance, 0),
+              totalGross: results.reduce((sum, row) => sum + row.gross, 0),
+              errorCount: rows.filter(row => !row.valid).length
+            };
+          }
+        });
+        register({
+          name: "read_gross_up_summary",
+          title: "Baca ringkasan gross-up",
+          description: "Membaca ringkasan hasil gross-up yang saat ini tampil tanpa mengubah data.",
+          inputSchema: { type: "object", properties: {}, additionalProperties: false },
+          annotations: { readOnlyHint: true, untrustedContentHint: false },
+          execute() {
+            return {
+              employeeCount: results.length,
+              totalBaseIncome: results.reduce((sum, row) => sum + row.income, 0),
+              totalAllowance: results.reduce((sum, row) => sum + row.allowance, 0),
+              totalGross: results.reduce((sum, row) => sum + row.gross, 0)
+            };
+          }
+        });
+      }
+
+      $("chooseFile").addEventListener("click", () => $("fileInput").click());
+      $("fileInput").addEventListener("change", event => readFile(event.target.files[0]));
+      $("downloadTemplate").addEventListener("click", downloadTemplate);
+      $("downloadResult").addEventListener("click", downloadResults);
+      $("loadSample").addEventListener("click", loadSample);
+      $("removeFile").addEventListener("click", resetAll);
+      $("resetPreview").addEventListener("click", resetAll);
+      $("calculateButton").addEventListener("click", calculateAll);
+      $("backToPreview").addEventListener("click", () => $("previewPanel").scrollIntoView({ behavior: "smooth", block: "start" }));
+
+      const dropZone = $("dropZone");
+      ["dragenter", "dragover"].forEach(type => dropZone.addEventListener(type, event => {
+        event.preventDefault();
+        dropZone.classList.add("dragging");
+      }));
+      ["dragleave", "drop"].forEach(type => dropZone.addEventListener(type, event => {
+        event.preventDefault();
+        dropZone.classList.remove("dragging");
+      }));
+      dropZone.addEventListener("drop", event => readFile(event.dataTransfer.files[0]));
+      registerWebMCP();
+    })();
+  </script>
+</body>
+</html>
