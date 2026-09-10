@@ -1,8 +1,8 @@
 // Kabayan QR Supabase Integration
 // Isi konfigurasi Supabase sesuai project Anda
 
-const SUPABASE_URL = "ISI_URL_SUPABASE";
-const SUPABASE_KEY = "ISI_ANON_KEY";
+const SUPABASE_URL = "https://ndqwmxshryqpygmupcnj.supabase.co";
+const SUPABASE_KEY = "sb_publishable_-BGFKcxGME4yXqX4vRtWpA_g0-Cldkg";
 
 const supabaseClient = supabase.createClient(
     SUPABASE_URL,
