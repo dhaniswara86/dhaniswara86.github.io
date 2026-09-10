@@ -1,44 +1,95 @@
 const logo="../assets/logo-djp.png";
 
 function makeQR(id,url){
- const box=document.getElementById(id);
- box.innerHTML="";
- if(typeof QRCode==="undefined"){alert("Library QR Code belum terbaca");return;}
- QRCode.toCanvas(url,{width:320,errorCorrectionLevel:"H"},(err,canvas)=>{
-  if(err){console.error(err);return;}
-  box.appendChild(canvas);
-  const ctx=canvas.getContext("2d");
-  const img=new Image();
-  img.src=logo;
-  img.onload=()=>{
-   const s=55,x=(canvas.width-s)/2,y=(canvas.height-s)/2;
-   ctx.fillStyle="#fff";
-   ctx.fillRect(x-8,y-8,s+16,s+16);
-   ctx.drawImage(img,x,y,s,s);
-  };
- });
+
+    const box=document.getElementById(id);
+    box.innerHTML="";
+
+    if(typeof QRCode==="undefined"){
+        alert("Library QR belum terbaca");
+        return;
+    }
+
+
+    const qrDiv=document.createElement("div");
+    box.appendChild(qrDiv);
+
+
+    new QRCode(qrDiv,{
+        text:url,
+        width:320,
+        height:320,
+        colorDark:"#000000",
+        colorLight:"#ffffff",
+        correctLevel:QRCode.CorrectLevel.H
+    });
+
 }
+
 
 function generateAll(){
- const c=document.getElementById("eventCode").value.trim();
- const l1=location.origin+"/sertifikat-edukasi/awal.html?kode="+encodeURIComponent(c);
- const l2=location.origin+"/sertifikat-edukasi/akhir.html?kode="+encodeURIComponent(c);
- document.getElementById("link1").value=l1;
- document.getElementById("link2").value=l2;
- makeQR("qr1",l1);
- makeQR("qr2",l2);
+
+    const code=document
+        .getElementById("eventCode")
+        .value
+        .trim();
+
+
+    if(!code){
+        alert("Kode kegiatan belum diisi");
+        return;
+    }
+
+
+    const link1 =
+    location.origin+
+    "/sertifikat-edukasi/awal.html?kode="+
+    encodeURIComponent(code);
+
+
+    const link2 =
+    location.origin+
+    "/sertifikat-edukasi/akhir.html?kode="+
+    encodeURIComponent(code);
+
+
+
+    document.getElementById("link1").value=link1;
+    document.getElementById("link2").value=link2;
+
+
+    makeQR("qr1",link1);
+    makeQR("qr2",link2);
+
 }
+
+
 
 function downloadQR(id,name){
- const c=document.querySelector("#"+id+" canvas");
- if(!c)return alert("Generate QR terlebih dahulu");
- const a=document.createElement("a");
- a.download=name+".png";
- a.href=c.toDataURL();
- a.click();
+
+    const img=document.querySelector("#"+id+" img");
+
+    if(!img){
+        alert("Generate QR terlebih dahulu");
+        return;
+    }
+
+
+    const a=document.createElement("a");
+    a.download=name+".png";
+    a.href=img.src;
+    a.click();
+
 }
 
+
+
 function copyLink(id){
- navigator.clipboard.writeText(document.getElementById(id).value);
- alert("Link berhasil disalin");
+
+navigator.clipboard.writeText(
+document.getElementById(id).value
+);
+
+alert("Link berhasil disalin");
+
 }
