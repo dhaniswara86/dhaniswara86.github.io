@@ -529,24 +529,483 @@
       .result-actions .button { width: 100%; }
     }
   </style>
+  <style id="kabayan-reference-restyle">
+    :root {
+      --kab-ink: #101012;
+      --kab-text: #1d1d1f;
+      --kab-muted: #6e6e73;
+      --kab-blue: #0866d8;
+      --kab-blue-dark: #064da4;
+      --kab-navy: #082a52;
+      --kab-yellow: #ffd84a;
+      --kab-red: #ff3b30;
+      --kab-soft: #f5f5f7;
+      --kab-white: #fff;
+      --kab-line: #e4e6ea;
+      --nav-height: 58px;
+      --max-width: 1180px;
+    }
+
+    body {
+      padding-top: var(--nav-height);
+      background: #fff;
+      color: var(--kab-text);
+    }
+
+    .mobile-nav-checkbox {
+      position: fixed;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+    .site-nav {
+      position: fixed;
+      z-index: 1500;
+      top: 0;
+      right: 0;
+      left: 0;
+      min-height: var(--nav-height);
+      border-bottom: 1px solid rgba(0, 0, 0, .065);
+      background: rgba(255, 255, 255, .97);
+      backdrop-filter: saturate(180%) blur(18px);
+    }
+    .nav-inner {
+      width: min(var(--max-width), calc(100% - 36px));
+      min-height: var(--nav-height);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+      margin: 0 auto;
+    }
+    .nav-brand {
+      display: inline-flex;
+      flex: 0 0 auto;
+      align-items: center;
+      gap: 8px;
+      color: #111;
+      font-size: 13px;
+      font-weight: 760;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .brand-emblem {
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      border-radius: 9px;
+      background: var(--kab-navy);
+      color: var(--kab-yellow);
+      font-size: 13px;
+      font-weight: 850;
+      letter-spacing: -.05em;
+    }
+    .desktop-menu {
+      display: flex;
+      flex: 1 1 auto;
+      align-items: center;
+      justify-content: center;
+      gap: 27px;
+    }
+    .desktop-menu a {
+      position: relative;
+      min-height: var(--nav-height);
+      display: inline-flex;
+      align-items: center;
+      color: #515154;
+      font-size: 12px;
+      font-weight: 560;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .desktop-menu a::after {
+      position: absolute;
+      right: 0;
+      bottom: 10px;
+      left: 0;
+      height: 1.5px;
+      background: #111;
+      content: "";
+      opacity: 0;
+      transform: scaleX(.35);
+      transition: opacity .2s ease, transform .2s ease;
+    }
+    .desktop-menu a:hover,
+    .desktop-menu a[aria-current="page"] { color: #000; }
+    .desktop-menu a:hover::after,
+    .desktop-menu a[aria-current="page"]::after { opacity: 1; transform: scaleX(1); }
+    .nav-hotnews { display: inline-flex !important; align-items: center; gap: 7px !important; }
+    .nav-hotnews-dot {
+      width: 7px;
+      height: 7px;
+      flex: 0 0 7px;
+      border-radius: 50%;
+      background: var(--kab-red);
+      box-shadow: 0 0 0 0 rgba(255, 59, 48, .34);
+      animation: kabHotPulse 2.1s ease-out infinite;
+    }
+    @keyframes kabHotPulse {
+      0% { box-shadow: 0 0 0 0 rgba(255, 59, 48, .34); }
+      60%, 100% { box-shadow: 0 0 0 7px rgba(255, 59, 48, 0); }
+    }
+    .nav-actions { display: flex; flex: 0 0 auto; align-items: center; gap: 8px; }
+    .nav-cta {
+      min-height: 36px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 15px;
+      border-radius: 999px;
+      background: var(--kab-navy);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .nav-cta:hover { background: #061f3d; }
+    .menu-toggle {
+      width: 38px;
+      height: 38px;
+      display: none;
+      place-items: center;
+      border-radius: 50%;
+      color: #111;
+      cursor: pointer;
+      font-size: 22px;
+      line-height: 1;
+    }
+    .menu-icon-close { display: none; }
+    .mobile-menu {
+      position: fixed;
+      z-index: 1450;
+      top: var(--nav-height);
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: calc(100dvh - var(--nav-height));
+      display: block;
+      overflow-y: auto;
+      padding: 26px 24px 44px;
+      background: #fff;
+      visibility: hidden;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-8px);
+      transition: opacity .2s ease, transform .2s ease, visibility .2s ease;
+    }
+    #mobileNavToggle:checked ~ .mobile-menu { visibility: visible; opacity: 1; pointer-events: auto; transform: none; }
+    #mobileNavToggle:checked ~ .site-nav .menu-icon-open { display: none; }
+    #mobileNavToggle:checked ~ .site-nav .menu-icon-close { display: block; }
+    .mobile-menu a {
+      display: grid;
+      grid-template-columns: 42px minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 8px;
+      padding: 15px 0;
+      border-bottom: 1px solid #ededf0;
+      color: #1d1d1f;
+      font-size: clamp(24px, 7vw, 34px);
+      font-weight: 720;
+      letter-spacing: -.045em;
+      line-height: 1.05;
+      text-decoration: none;
+    }
+    .mobile-menu a[aria-current="page"] { color: var(--kab-blue); }
+    .mobile-menu-index { color: #a1a1a6; font-size: 11px; font-weight: 800; letter-spacing: .08em; }
+    .mobile-hot-dot { width: 8px; height: 8px; justify-self: end; border-radius: 50%; background: var(--kab-red); }
+    .mobile-menu .mobile-menu-cta {
+      grid-template-columns: minmax(0, 1fr) auto;
+      margin-top: 22px;
+      padding: 17px 19px;
+      border: 0;
+      border-radius: 18px;
+      background: var(--kab-navy);
+      color: #fff;
+      font-size: 18px;
+      letter-spacing: -.025em;
+    }
+
+    main.page-root { width: 100%; margin: 0; }
+    .workspace-head {
+      position: relative;
+      width: 100%;
+      min-height: 540px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.16fr) minmax(330px, .84fr);
+      align-items: center;
+      gap: 56px;
+      margin: 0;
+      padding: 76px max(32px, calc((100vw - var(--max-width)) / 2)) 70px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 88% 22%, rgba(8, 102, 216, .12) 0 90px, transparent 92px),
+        radial-gradient(circle at 91% 31%, rgba(255, 216, 74, .22) 0 142px, transparent 144px),
+        linear-gradient(180deg, #fff 0%, #f7faff 100%);
+      border-bottom: 1px solid #e8eef5;
+    }
+    .title-card {
+      position: relative;
+      overflow: visible;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      color: var(--kab-text);
+      box-shadow: none;
+    }
+    .title-card::after { display: none; }
+    .title-card .eyebrow {
+      display: block;
+      margin: 0 0 17px;
+      color: var(--kab-blue);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .title-card h1 {
+      max-width: 770px;
+      margin: 0;
+      color: var(--kab-ink);
+      font-size: clamp(48px, 6vw, 78px);
+      font-weight: 780;
+      line-height: .96;
+      letter-spacing: -.07em;
+    }
+    .gradient-text {
+      display: block;
+      background: linear-gradient(90deg, var(--kab-blue) 0%, #1c82e8 56%, #44a0f4 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .title-card p.hero-description {
+      max-width: 650px;
+      margin: 22px 0 0;
+      color: var(--kab-muted);
+      font-size: 17px;
+      line-height: 1.6;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 27px; }
+    .hero-cta {
+      min-height: 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 11px 18px;
+      border: 1px solid transparent;
+      border-radius: 13px;
+      font-size: 14px;
+      font-weight: 760;
+      text-decoration: none;
+      transition: transform .16s ease, box-shadow .16s ease;
+    }
+    .hero-cta:hover { transform: translateY(-1px); }
+    .hero-cta-primary { background: var(--kab-blue); color: #fff; box-shadow: 0 10px 22px rgba(8, 102, 216, .2); }
+    .hero-cta-secondary { border-color: #d6dde7; background: #fff; color: #31343a; }
+    .hero-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 31px;
+      padding: 6px 10px;
+      border: 1px solid #dde6ef;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .78);
+      color: #51545a;
+      font-size: 12px;
+      font-weight: 680;
+    }
+    .period-card {
+      position: relative;
+      z-index: 1;
+      padding: 27px;
+      border: 1px solid rgba(8, 42, 82, .1);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, .94);
+      box-shadow: 0 24px 64px rgba(12, 49, 89, .12);
+    }
+    .period-card::before {
+      width: 54px;
+      height: 6px;
+      display: block;
+      margin-bottom: 18px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--kab-yellow), #ffb824);
+      content: "";
+    }
+    .card-kicker { color: var(--kab-blue); }
+    .period-card h2 { font-size: 25px; }
+    .field label { color: #3c4046; font-size: 14px; }
+    .field select {
+      min-height: 49px;
+      border-color: #d9dee5;
+      border-radius: 12px;
+      background: #fff;
+    }
+    .field select:focus { outline: 3px solid rgba(8, 102, 216, .14); border-color: var(--kab-blue); }
+    .scope-note { border: 1px solid #f0dda0; background: #fff9e8; }
+
+    .panel {
+      width: min(var(--max-width), calc(100% - 32px));
+      margin-right: auto;
+      margin-left: auto;
+      padding: 32px;
+      border: 1px solid #e4e8ed;
+      border-radius: 22px;
+      background: #fff;
+      box-shadow: 0 18px 52px rgba(12, 42, 76, .08);
+    }
+    .workspace-head + .panel { margin-top: 54px; }
+    .panel + .panel { margin-top: 20px; }
+    .panel-head { margin-bottom: 24px; }
+    .panel-head h2 { color: var(--kab-ink); font-size: 28px; }
+    .panel-head p { font-size: 14px; line-height: 1.6; }
+    .step-chip {
+      min-height: 38px;
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 13px;
+      border: 1px solid #dceafb;
+      background: linear-gradient(135deg, #fff, #f0f7ff);
+      box-shadow: 0 8px 20px rgba(8, 102, 216, .08);
+      font-size: 12px;
+    }
+    .drop-zone {
+      border: 1.5px dashed #a9bdd2;
+      background: linear-gradient(145deg, #f9fcff, #f3f8fd);
+    }
+    .drop-zone:hover,
+    .drop-zone.dragging { border-color: var(--kab-blue); background: #eef7ff; }
+    .drop-icon { background: var(--kab-blue); color: #fff; box-shadow: 0 10px 22px rgba(8, 102, 216, .2); }
+    .button { min-height: 44px; border-radius: 12px; font-size: 13px; }
+    .button-primary { background: var(--kab-blue); }
+    .button-primary:hover:not(:disabled) { background: var(--kab-blue-dark); }
+    .button-dark { background: var(--kab-navy); color: #fff; }
+    .button-secondary { border-color: #d9dee5; }
+    .template-card { border-color: #e1e7ee; background: #f8fafc; }
+    .column-list span { background: var(--kab-blue); color: #fff; box-shadow: none; }
+    .stats { gap: 10px; }
+    .stat { border-color: #e2e7ed; background: #fafbfc; }
+    .stat.accent { border-color: #cfe4fb; background: #eff7ff; }
+    .stat.accent strong { color: var(--kab-blue); }
+    .table-wrap { border-color: #dfe4ea; }
+    th { background: var(--kab-navy); color: #fff; }
+    tbody tr:hover { background: #f7faff; }
+    details.method { scroll-margin-top: 80px; }
+    details.method summary { color: var(--kab-blue); }
+
+    .site-footer {
+      width: 100%;
+      margin: 64px 0 0;
+      padding: 35px 0;
+      border-top: 1px solid #e7e8eb;
+      background: #f7f8fa;
+      color: var(--kab-muted);
+      font-size: 13px;
+      text-align: left;
+    }
+    .footer-inner {
+      width: min(var(--max-width), calc(100% - 36px));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+      margin: auto;
+    }
+    .footer-brand { display: flex; align-items: center; gap: 9px; color: var(--kab-ink); font-weight: 760; }
+    .footer-links { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 18px; }
+    .footer-links a { color: #515154; text-decoration: none; }
+    .footer-links a:hover { color: var(--kab-blue); }
+
+    @media (max-width: 960px) {
+      .desktop-menu, .nav-cta { display: none; }
+      .menu-toggle { display: grid; }
+      .nav-inner { width: calc(100% - 28px); }
+      .workspace-head { grid-template-columns: 1fr; gap: 34px; padding-top: 58px; }
+      .period-card { max-width: 620px; }
+    }
+    @media (max-width: 680px) {
+      :root { --nav-height: 54px; }
+      .workspace-head { min-height: 0; padding: 44px 18px 48px; }
+      .title-card h1 { font-size: clamp(42px, 13vw, 58px); }
+      .title-card p.hero-description { font-size: 16px; }
+      .hero-actions .hero-cta { width: 100%; }
+      .panel { width: calc(100% - 20px); padding: 21px; border-radius: 18px; }
+      .workspace-head + .panel { margin-top: 26px; }
+      .panel-head h2 { font-size: 24px; }
+      .footer-inner { align-items: flex-start; flex-direction: column; }
+      .footer-links { justify-content: flex-start; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+    @media print {
+      body { padding-top: 0; }
+      .site-nav, .mobile-menu, .mobile-nav-checkbox, .hero-actions, .hero-pills, .site-footer { display: none !important; }
+    }
+  </style>
 </head>
 <body>
+  <input class="mobile-nav-checkbox" id="mobileNavToggle" type="checkbox" autocomplete="off" aria-label="Buka atau tutup menu navigasi">
+
   <header class="site-nav">
     <div class="nav-inner">
-      <a class="brand" href="#top" aria-label="Kabayan — Kalkulator Gross-Up PPh 21">
-        <span class="brand-mark" aria-hidden="true">K</span>
+      <a class="nav-brand" href="index.html" aria-label="Kabayan — Kembali ke beranda">
+        <span class="brand-emblem" aria-hidden="true">K</span>
         <span>Kabayan</span>
       </a>
-      <span class="nav-meta">Penghitungan dilakukan di perangkat Anda</span>
+
+      <nav class="desktop-menu" aria-label="Navigasi utama">
+        <a href="buku.html">Buku</a>
+        <a href="formulir.html">Formulir</a>
+        <a href="kalkulator.html" aria-current="page">Kalkulator</a>
+        <a href="aplikasi.html">Aplikasi</a>
+        <a href="artikel.html">Artikel</a>
+        <a class="nav-hotnews" href="hotnews.html"><span class="nav-hotnews-dot" aria-hidden="true"></span><span>Hot News</span></a>
+      </nav>
+
+      <div class="nav-actions">
+        <a class="nav-cta" href="jelajahi.html">Jelajahi Kabayan ↗</a>
+        <label class="menu-toggle" for="mobileNavToggle" aria-label="Buka atau tutup menu">
+          <span class="menu-icon-open" aria-hidden="true">☰</span>
+          <span class="menu-icon-close" aria-hidden="true">×</span>
+        </label>
+      </div>
     </div>
   </header>
 
-  <main id="top">
+  <nav class="mobile-menu" aria-label="Navigasi mobile">
+    <a href="index.html"><span class="mobile-menu-index">00</span><span>Beranda</span></a>
+    <a href="buku.html"><span class="mobile-menu-index">01</span><span>Buku</span></a>
+    <a href="formulir.html"><span class="mobile-menu-index">02</span><span>Formulir</span></a>
+    <a href="kalkulator.html" aria-current="page"><span class="mobile-menu-index">03</span><span>Kalkulator</span></a>
+    <a href="aplikasi.html"><span class="mobile-menu-index">04</span><span>Aplikasi</span></a>
+    <a href="artikel.html"><span class="mobile-menu-index">05</span><span>Artikel</span></a>
+    <a href="hotnews.html"><span class="mobile-menu-index">06</span><span>Hot News</span><span class="mobile-hot-dot" aria-hidden="true"></span></a>
+    <a class="mobile-menu-cta" href="jelajahi.html"><span>Jelajahi Kabayan</span><span aria-hidden="true">↗</span></a>
+  </nav>
+
+  <main class="page-root" id="top">
     <section class="workspace-head" aria-labelledby="pageTitle">
       <div class="title-card">
-        <span class="eyebrow">Kalkulator PPh Pasal 21</span>
-        <h1 id="pageTitle">Gross-up pegawai sekaligus dari Excel.</h1>
-        <p>Unggah daftar pegawai, periksa validasi, lalu unduh tunjangan PPh dan bruto setelah gross-up. Data tidak dikirim ke server.</p>
+        <span class="eyebrow">11 / KALKULATOR PERPAJAKAN</span>
+        <h1 id="pageTitle">Gross-up PPh 21.<span class="gradient-text">Sekaligus dari Excel.</span></h1>
+        <p class="hero-description">Hitung tunjangan PPh pegawai tetap secara massal dengan TER bulanan, tanpa mengirim data payroll ke server.</p>
+        <div class="hero-actions">
+          <a class="hero-cta hero-cta-primary" href="#simulator">Mulai menghitung</a>
+          <a class="hero-cta hero-cta-secondary" href="#dasar-hukum">Lihat cara hitung</a>
+        </div>
+        <div class="hero-pills">
+          <span class="hero-pill">TER Bulanan</span>
+          <span class="hero-pill">Unggah Excel</span>
+          <span class="hero-pill">Data diproses lokal</span>
+        </div>
       </div>
 
       <aside class="period-card" aria-labelledby="periodTitle">
@@ -580,7 +1039,7 @@
       </aside>
     </section>
 
-    <section class="panel" aria-labelledby="uploadTitle">
+    <section class="panel" id="simulator" aria-labelledby="uploadTitle">
       <div class="panel-head">
         <div>
           <h2 id="uploadTitle">Masukkan daftar pegawai</h2>
@@ -703,7 +1162,7 @@
         <button class="button button-dark" id="downloadResult" type="button">Unduh hasil Excel</button>
       </div>
 
-      <details class="method">
+      <details class="method" id="dasar-hukum">
         <summary>Lihat cara penghitungan</summary>
         <ul>
           <li>Status PTKP dipetakan ke TER Kategori A, B, atau C.</li>
@@ -716,7 +1175,19 @@
     </section>
   </main>
 
-  <footer>Kabayan · Konsep Kalkulator Gross-Up PPh Pasal 21 Massal · Versi 1.0</footer>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand"><span class="brand-emblem" aria-hidden="true">K</span><span>Kabayan</span></div>
+        <div style="margin-top:8px">Materi dan alat bantu perpajakan dalam satu tempat.</div>
+      </div>
+      <div class="footer-links">
+        <a href="#simulator">Kalkulator</a>
+        <a href="#dasar-hukum">Cara hitung</a>
+        <a href="#top">Kembali ke atas</a>
+      </div>
+    </div>
+  </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
   <script>
