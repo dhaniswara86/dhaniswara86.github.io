@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Kabayan Admin - Histori QR</title>
+<link rel="stylesheet" href="history.css">
+</head>
+<body>
+<div class="container">
+<h1>Histori Generate QR</h1>
+<p>Riwayat pembuatan QR kegiatan edukasi Kabayan.</p>
+
+<div class="card">
+<select id="eventFilter">
+<option value="">Semua Kegiatan</option>
+</select>
+<button onclick="loadHistory()">Tampilkan</button>
+</div>
+
+<div class="card">
+<table>
+<thead>
+<tr>
+<th>Waktu</th>
+<th>Kegiatan</th>
+<th>Jenis QR</th>
+</tr>
+</thead>
+<tbody id="history"></tbody>
+</table>
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="history.js"></script>
+</body>
+</html>
