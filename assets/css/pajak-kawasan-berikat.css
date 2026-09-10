@@ -1,0 +1,237 @@
+/* Komponen khusus artikel Pajak di Kawasan Berikat.
+   Dimuat setelah artikel-editorial.css melalui front matter artikel. */
+
+.article-body h2[id="4-kapan-ppn-terutang"],
+.article-body h2[id="8-kapan-pph-terutang"] {
+  position: relative;
+  margin-top: 76px;
+  padding: 26px 28px;
+  overflow: hidden;
+  border: 1px solid rgba(8, 42, 82, .12);
+  border-radius: 22px;
+}
+
+.article-body h2[id="4-kapan-ppn-terutang"] {
+  background: linear-gradient(135deg, #fff7cf, #fffdf3);
+}
+
+.article-body h2[id="8-kapan-pph-terutang"] {
+  background: linear-gradient(135deg, #eaf5ff, #f7fbff);
+}
+
+.article-body h2[id="4-kapan-ppn-terutang"]::before,
+.article-body h2[id="8-kapan-pph-terutang"]::before {
+  display: block;
+  margin-bottom: 8px;
+  color: #6e6e73;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+
+.article-body h2[id="4-kapan-ppn-terutang"]::before {
+  content: "Fokus PPN";
+}
+
+.article-body h2[id="8-kapan-pph-terutang"]::before {
+  content: "Fokus PPh";
+}
+
+.article-body h2#ringkasan-jawaban + .kb-table-scroll {
+  border-color: rgba(0, 113, 227, .22);
+  box-shadow: 0 16px 38px rgba(0, 75, 150, .08);
+}
+
+.kb-table-scroll {
+  width: 100%;
+  margin: 24px 0 38px;
+  overflow-x: auto;
+  border: 1px solid #e3e3e8;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(29, 29, 31, .06);
+  -webkit-overflow-scrolling: touch;
+}
+
+.kb-table-scroll:focus-visible {
+  outline: 3px solid rgba(0, 113, 227, .32);
+  outline-offset: 3px;
+}
+
+.article-body .kb-table-scroll table {
+  width: 100%;
+  min-width: 720px;
+  margin: 0;
+  border: 0;
+  border-collapse: collapse;
+}
+
+.article-body .kb-table-scroll thead {
+  color: #fff;
+  background: #082a52;
+}
+
+.article-body .kb-table-scroll th,
+.article-body .kb-table-scroll td {
+  padding: 15px 16px;
+  vertical-align: top;
+  border-right: 1px solid #e3e3e8;
+  border-bottom: 1px solid #e3e3e8;
+  text-align: left;
+}
+
+.article-body .kb-table-scroll th:last-child,
+.article-body .kb-table-scroll td:last-child {
+  border-right: 0;
+}
+
+.article-body .kb-table-scroll tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.article-body .kb-table-scroll tbody tr:nth-child(even) {
+  background: #f7f9fb;
+}
+
+.kb-case-card {
+  margin: 14px 0;
+  overflow: hidden;
+  border: 1px solid #e3e3e8;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(29, 29, 31, .055);
+}
+
+.kb-case-card.is-open {
+  border-color: rgba(0, 113, 227, .35);
+}
+
+.article-body .kb-case-card > h3 {
+  margin: 0;
+}
+
+.kb-case-toggle {
+  position: relative;
+  width: 100%;
+  min-height: 68px;
+  padding: 19px 60px 19px 21px;
+  border: 0;
+  background: transparent;
+  color: #1d1d1f;
+  font: inherit;
+  font-size: 18px;
+  font-weight: 750;
+  line-height: 1.32;
+  text-align: left;
+  cursor: pointer;
+}
+
+.kb-case-toggle::after {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  width: 31px;
+  height: 31px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #0071e3;
+  color: #fff;
+  content: "+";
+  font-size: 21px;
+  font-weight: 500;
+  transform: translateY(-50%);
+}
+
+.kb-case-card.is-open .kb-case-toggle::after {
+  background: #1d1d1f;
+  content: "−";
+}
+
+.kb-case-content {
+  padding: 0 22px 23px;
+}
+
+.kb-case-content[hidden] {
+  display: none !important;
+}
+
+.article-body h2[id="12-kekeliruan-yang-harus-dihindari"] + ol {
+  padding-left: 0;
+  counter-reset: kb-error;
+  list-style: none;
+}
+
+.article-body h2[id="12-kekeliruan-yang-harus-dihindari"] + ol > li {
+  position: relative;
+  min-height: 58px;
+  margin: 12px 0;
+  padding: 15px 18px 15px 60px;
+  border-left: 4px solid #d70015;
+  border-radius: 0 14px 14px 0;
+  background: #fff2f1;
+}
+
+.article-body h2[id="12-kekeliruan-yang-harus-dihindari"] + ol > li::before {
+  position: absolute;
+  top: 15px;
+  left: 18px;
+  width: 27px;
+  height: 27px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #d70015;
+  color: #fff;
+  content: counter(kb-error);
+  counter-increment: kb-error;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+@media (max-width: 680px) {
+  .article-body h2[id="4-kapan-ppn-terutang"],
+  .article-body h2[id="8-kapan-pph-terutang"] {
+    margin-top: 58px;
+    padding: 21px 19px;
+    border-radius: 18px;
+  }
+
+  .article-body .kb-table-scroll table {
+    min-width: 660px;
+  }
+
+  .kb-case-toggle {
+    min-height: 62px;
+    padding: 17px 54px 17px 17px;
+    font-size: 16px;
+  }
+
+  .kb-case-toggle::after {
+    right: 15px;
+  }
+
+  .kb-case-content {
+    padding: 0 17px 19px;
+  }
+}
+
+@media print {
+  .kb-table-scroll {
+    overflow: visible;
+    box-shadow: none;
+  }
+
+  .article-body .kb-table-scroll table {
+    min-width: 0;
+  }
+
+  .kb-case-content[hidden] {
+    display: block !important;
+  }
+
+  .kb-case-toggle::after {
+    display: none;
+  }
+}
