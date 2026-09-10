@@ -1,75 +1,138 @@
-const SUPABASE_URL="https://ndqwmxshryqpygmupcnj.supabase.co";
-const SUPABASE_KEY="sb_publishable_-BGFKcxGME4yXqX4vRtWpA_g0-Cldkg";
+const SUPABASE_URL = "https://ndqwmxshryqpygmupcnj.supabase.co";
+const SUPABASE_KEY = "sb_publishable_-BGFKcxGME4yXqX4vRtWpA_g0-Cldkg";
 
-const supabaseClient=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-let selected=null;
+let selected = null;
 
-async function loadEvents(){
- const {data,error}=await supabaseClient.from("external_events")
- .select("id,code,title,event_date")
- .order("event_date",{ascending:false});
+async function loadEvents() {
+    const select = document.getElementById("eventSelect");
 
- const s=document.getElementById("eventSelect");
- s.innerHTML="";
+    try {
+        const { data, error } = await supabaseClient
+            .from("external_events")
+            .select("id,code,title,event_date")
+            .order("event_date", { ascending: false });
 
- if(error){s.innerHTML="<option>Gagal mengambil data</option>";return;}
+        select.innerHTML = "";
 
- data.forEach(e=>{
-  let o=document.createElement("option");
-  o.value=e.id;
-  o.dataset.code=e.code;
-  o.dataset.title=e.title;
-  o.textContent=e.code+" - "+e.title;
-  s.appendChild(o);
- });
+        if (error) throw error;
+
+        if (!data || data.length === 0) {
+            select.innerHTML = "<option>Tidak ada kegiatan</option>";
+            return;
+        }
+
+        data.forEach(item => {
+            const option = document.createElement("option");
+            option.value = item.id;
+            option.dataset.code = item.code;
+            option.dataset.title = item.title;
+            option.textContent = `${item.code} - ${item.title}`;
+            select.appendChild(option);
+        });
+
+    } catch (err) {
+        console.error("Load event error:", err);
+        select.innerHTML = "<option>Gagal mengambil kegiatan</option>";
+    }
 }
 
-function generateQR(){
- const s=document.getElementById("eventSelect");
- const e=s.options[s.selectedIndex];
 
- if(!e)return;
+async function generateQR() {
 
- selected=e;
+    const select = document.getElementById("eventSelect");
+    const event = select.options[select.selectedIndex];
 
- const l1=location.origin+"/sertifikat-edukasi/awal.html?id="+e.value;
- const l2=location.origin+"/sertifikat-edukasi/akhir.html?id="+e.value;
+    if (!event || !event.value) {
+        alert("Pilih kegiatan terlebih dahulu");
+        return;
+    }
 
- document.getElementById("link1").value=l1;
- document.getElementById("link2").value=l2;
+    selected = event;
 
- makeQR("qr1",l1);
- makeQR("qr2",l2);
+    const base = location.origin + "/sertifikat-edukasi/";
 
- addHistory(e.dataset.code,"Daftar Hadir + Pretest");
- addHistory(e.dataset.code,"Posttest + Evaluasi");
+    const linkAwal = `${base}awal.html?id=${event.value}`;
+    const linkAkhir = `${base}akhir.html?id=${event.value}`;
+
+    document.getElementById("link1").value = linkAwal;
+    document.getElementById("link2").value = linkAkhir;
+
+    makeQR("qr1", linkAwal);
+    makeQR("qr2", linkAkhir);
+
+    await saveQRHistory(event, linkAwal, "Daftar Hadir + Pretest");
+    await saveQRHistory(event, linkAkhir, "Posttest + Evaluasi");
 }
 
-function makeQR(id,text){
- const box=document.getElementById(id);
- box.innerHTML="";
- new QRCode(box,{text:text,width:260,height:260,correctLevel:QRCode.CorrectLevel.H});
+
+function makeQR(elementId, text) {
+
+    const box = document.getElementById(elementId);
+
+    if (!box) return;
+
+    box.innerHTML = "";
+
+    new QRCode(box, {
+        text: text,
+        width: 260,
+        height: 260,
+        correctLevel: QRCode.CorrectLevel.H
+    });
 }
 
-function addHistory(code,type){
- let row=document.createElement("tr");
- row.innerHTML="<td>"+new Date().toLocaleString()+"</td><td>"+code+"</td><td>"+type+"</td>";
- document.getElementById("history").prepend(row);
+
+async function saveQRHistory(event, link, type) {
+
+    const payload = {
+        event_id: event.value,
+        event_code: event.dataset.code,
+        event_title: event.dataset.title,
+        qr_type: type,
+        qr_link: link,
+        created_at: new Date().toISOString()
+    };
+
+    try {
+        const { error } = await supabaseClient
+            .from("edu_qr_logs")
+            .insert(payload);
+
+        if (error) {
+            console.error("Save QR history error:", error);
+        }
+
+    } catch (err) {
+        console.error(err);
+    }
 }
 
-function copyLink(id){
- navigator.clipboard.writeText(document.getElementById(id).value);
- alert("Link disalin");
+
+function copyLink(id) {
+
+    const input = document.getElementById(id);
+
+    navigator.clipboard.writeText(input.value)
+        .then(() => alert("Link berhasil disalin"));
 }
 
-function downloadQR(id,name){
- const img=document.querySelector("#"+id+" img");
- if(!img)return;
- let a=document.createElement("a");
- a.href=img.src;
- a.download=name+".png";
- a.click();
+
+function downloadQR(id, name) {
+
+    const img = document.querySelector(`#${id} img`);
+
+    if (!img) {
+        alert("QR belum dibuat");
+        return;
+    }
+
+    const a = document.createElement("a");
+    a.href = img.src;
+    a.download = `${name}.png`;
+    a.click();
 }
 
-window.onload=loadEvents;
+
+window.addEventListener("load", loadEvents);
