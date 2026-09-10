@@ -1,7 +1,7 @@
 // Kabayan Admin QR - Supabase
 
-const SUPABASE_URL = "https://ndqwmxshryqpygmupcnj.supabase.co";
-const SUPABASE_KEY = "sb_publishable_-BGFKcxGME4yXqX4vRtWpA_g0-Cldkg";
+const SUPABASE_URL = "ISI_SUPABASE_URL";
+const SUPABASE_KEY = "ISI_SUPABASE_ANON_KEY";
 
 const supabaseClient = supabase.createClient(
     SUPABASE_URL,
@@ -12,9 +12,9 @@ const supabaseClient = supabase.createClient(
 async function loadEvents(){
 
     const {data,error}=await supabaseClient
-    .from("external_events")
-    .select("code,title,event_date")
-    .order("event_date",{ascending:false});
+        .from("external_events")
+        .select("event_code,title,event_date")
+        .order("event_date",{ascending:false});
 
 
     const select=document.getElementById("eventSelect");
@@ -33,10 +33,10 @@ async function loadEvents(){
 
         const option=document.createElement("option");
 
-        option.value=item.code;
+        option.value=item.event_code;
 
         option.textContent =
-        item.code+" - "+item.title
+        item.event_code+" - "+item.title+
         " ("+item.event_date+")";
 
         select.appendChild(option);
