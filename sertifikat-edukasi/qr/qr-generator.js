@@ -43,13 +43,39 @@ function makeQR(id,url){
             const img=new Image();
 
             img.onload=()=>{
-                const size=60;
-                const x=(320-size)/2;
-                const y=(320-size)/2;
+                const maxWidth = 90;
+const maxHeight = 50;
 
-                ctx.fillStyle="#ffffff";
-                ctx.fillRect(x-10,y-10,size+20,size+20);
-                ctx.drawImage(img,x,y,size,size);
+let ratio = Math.min(
+    maxWidth / img.width,
+    maxHeight / img.height
+);
+
+const logoWidth = img.width * ratio;
+const logoHeight = img.height * ratio;
+
+const x = (320 - logoWidth) / 2;
+const y = (320 - logoHeight) / 2;
+
+
+// background putih agar QR tetap aman discan
+ctx.fillStyle = "#ffffff";
+ctx.fillRect(
+    x - 15,
+    y - 15,
+    logoWidth + 30,
+    logoHeight + 30
+);
+
+
+// gambar logo dengan proporsi asli
+ctx.drawImage(
+    img,
+    x,
+    y,
+    logoWidth,
+    logoHeight
+);
 
                 box.appendChild(canvas);
             };
