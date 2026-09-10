@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Kalkulator gross-up PPh Pasal 21 massal berbasis Excel untuk pegawai tetap.">
+  <meta name="description" content="Kalkulator PPh Pasal 21 massal berbasis Excel dengan pilihan gross up dan tidak gross up.">
   <meta name="theme-color" content="#082a52">
-  <title>Kalkulator Gross-Up PPh 21 Massal | Kabayan</title>
+  <title>Kalkulator PPh 21 Massal | Kabayan</title>
   <style>
     :root {
       --navy: #082a52;
@@ -855,6 +855,48 @@
       background: #fff;
     }
     .field select:focus { outline: 3px solid rgba(8, 102, 216, .14); border-color: var(--kab-blue); }
+    .calculation-mode {
+      min-width: 0;
+      margin: 18px 0 0;
+      padding: 0;
+      border: 0;
+    }
+    .calculation-mode legend {
+      margin-bottom: 9px;
+      color: #3c4046;
+      font-size: 14px;
+      font-weight: 720;
+    }
+    .mode-options { display: grid; gap: 8px; }
+    .mode-card {
+      position: relative;
+      min-height: 70px;
+      display: grid;
+      grid-template-columns: 20px minmax(0, 1fr);
+      align-items: start;
+      gap: 10px;
+      padding: 12px;
+      border: 1px solid #d9dee5;
+      border-radius: 13px;
+      background: #fff;
+      cursor: pointer;
+      transition: border-color .16s ease, background .16s ease, box-shadow .16s ease;
+    }
+    .mode-card:hover { border-color: #a9c9ec; }
+    .mode-card:has(input:checked) {
+      border-color: var(--kab-blue);
+      background: #f1f7ff;
+      box-shadow: 0 0 0 3px rgba(8, 102, 216, .09);
+    }
+    .mode-card:has(input:focus-visible) { outline: 3px solid rgba(8, 102, 216, .18); outline-offset: 2px; }
+    .mode-card input {
+      width: 18px;
+      height: 18px;
+      margin: 2px 0 0;
+      accent-color: var(--kab-blue);
+    }
+    .mode-copy strong { display: block; color: #25282d; font-size: 14px; }
+    .mode-copy small { display: block; margin-top: 2px; color: #6c7077; font-size: 12px; line-height: 1.4; }
     .scope-note { border: 1px solid #f0dda0; background: #fff9e8; }
 
     .panel {
@@ -1102,14 +1144,14 @@
     <section class="workspace-head" aria-labelledby="pageTitle">
       <div class="title-card">
         <span class="eyebrow">11 / KALKULATOR PERPAJAKAN</span>
-        <h1 id="pageTitle">Gross-up PPh 21.<span class="gradient-text">Sekaligus dari Excel.</span></h1>
-        <p class="hero-description">Hitung tunjangan PPh pegawai tetap secara massal dengan TER bulanan, tanpa mengirim data payroll ke server.</p>
+        <h1 id="pageTitle">PPh Pasal 21.<span class="gradient-text">Sekaligus dari Excel.</span></h1>
+        <p class="hero-description">Hitung PPh pegawai tetap secara massal dengan pilihan pajak ditanggung perusahaan atau dipotong dari penghasilan pegawai.</p>
         <div class="hero-actions">
           <a class="hero-cta hero-cta-primary" href="#simulator">Mulai perjalanan</a>
           <a class="hero-cta hero-cta-secondary" href="#dasar-hukum">Lihat cara hitung</a>
         </div>
         <div class="hero-pills">
-          <span class="hero-pill">TER Bulanan</span>
+          <span class="hero-pill" id="methodPill">Metode: Gross Up</span>
           <span class="hero-pill">Unggah Excel</span>
           <span class="hero-pill">Data diproses lokal</span>
         </div>
@@ -1142,11 +1184,24 @@
             </select>
           </div>
         </div>
+        <fieldset class="calculation-mode">
+          <legend>Metode pemotongan PPh</legend>
+          <div class="mode-options">
+            <label class="mode-card">
+              <input type="radio" name="calculationMode" value="gross_up" checked>
+              <span class="mode-copy"><strong>Gross Up</strong><small>Perusahaan memberi tunjangan PPh; beban pajak pegawai Rp0.</small></span>
+            </label>
+            <label class="mode-card">
+              <input type="radio" name="calculationMode" value="non_gross_up">
+              <span class="mode-copy"><strong>Tidak Gross Up</strong><small>Tanpa tunjangan PPh; pajak dipotong dari penghasilan pegawai.</small></span>
+            </label>
+          </div>
+        </fieldset>
         <p class="scope-note"><span aria-hidden="true">ⓘ</span><span>Konsep ini khusus pegawai tetap pada masa selain masa pajak terakhir. Desember memerlukan rekonsiliasi tahunan.</span></p>
       </aside>
     </section>
 
-    <nav class="journey-nav" id="simulator" aria-label="Tahapan kalkulator gross-up">
+    <nav class="journey-nav" id="simulator" aria-label="Tahapan kalkulator PPh Pasal 21">
       <ol class="journey-track">
         <li>
           <button class="journey-button active" id="journeyStep1" type="button" aria-current="step">
@@ -1190,7 +1245,7 @@
           </span>
           <div>
             <h3>Satu template, banyak pegawai.</h3>
-            <p>Isi penghasilan sebelum tunjangan PPh dan status PTKP. Kalkulator akan menentukan kategori TER dan gross-up setiap pegawai.</p>
+            <p id="templateMethodHelp">Isi penghasilan sebelum tunjangan PPh dan status PTKP. Kalkulator akan menentukan kategori TER dan tunjangan gross up setiap pegawai.</p>
           </div>
         </div>
 
@@ -1199,7 +1254,7 @@
           <p>Jangan mengubah judul kolom agar data dapat dikenali otomatis.</p>
           <ol class="column-list">
             <li><span>1</span>Nama Pegawai</li>
-            <li><span>2</span>Penghasilan Sebelum Tunjangan PPh</li>
+            <li><span>2</span>Penghasilan Bruto</li>
             <li><span>3</span>Status PTKP</li>
           </ol>
           <div class="template-actions">
@@ -1214,7 +1269,7 @@
       <div class="panel-head">
         <div>
           <h2 id="uploadTitle">Unggah Excel pegawai</h2>
-          <p>“Penghasilan” berarti bruto sebelum tunjangan PPh, bukan take-home pay setelah BPJS atau potongan lain.</p>
+          <p id="uploadIncomeHelp">“Penghasilan” berarti bruto sebelum tunjangan PPh, bukan take-home pay setelah BPJS atau potongan lain.</p>
         </div>
         <span class="step-chip">Langkah 2 dari 3</span>
       </div>
@@ -1281,23 +1336,23 @@
       <p class="table-note" id="previewNote"></p>
       <div class="result-actions">
         <button class="button button-secondary" id="resetPreview" type="button">Ganti file Excel</button>
-        <button class="button button-primary" id="calculateButton" type="button">Hitung gross-up</button>
+        <button class="button button-primary" id="calculateButton" type="button">Hitung Gross Up</button>
       </div>
     </section>
 
     <section class="panel result-panel" id="resultPanel" aria-labelledby="resultTitle">
       <div class="panel-head">
         <div>
-          <h2 id="resultTitle">Hasil gross-up</h2>
-          <p>Tunjangan PPh sama dengan PPh Pasal 21 yang dipotong, sehingga beban PPh pegawai menjadi Rp0.</p>
+          <h2 id="resultTitle">Hasil Gross Up</h2>
+          <p id="resultDescription">Tunjangan PPh sama dengan PPh Pasal 21 yang dipotong, sehingga beban PPh pegawai menjadi Rp0.</p>
         </div>
         <span class="step-chip">Langkah 3 dari 3</span>
       </div>
       <div class="stats" aria-label="Ringkasan hasil">
         <div class="stat"><span>Pegawai dihitung</span><strong id="calculatedCount">0</strong></div>
         <div class="stat"><span>Total penghasilan awal</span><strong id="resultBaseTotal">Rp0</strong></div>
-        <div class="stat accent"><span>Total tunjangan PPh</span><strong id="allowanceTotal">Rp0</strong></div>
-        <div class="stat"><span>Total bruto gross-up</span><strong id="grossTotal">Rp0</strong></div>
+        <div class="stat accent"><span id="allowanceTotalLabel">Total tunjangan PPh</span><strong id="allowanceTotal">Rp0</strong></div>
+        <div class="stat"><span id="grossTotalLabel">Total bruto setelah tunjangan</span><strong id="grossTotal">Rp0</strong></div>
       </div>
       <div class="notice notice-info show" id="periodSummary"></div>
       <div class="table-wrap">
@@ -1309,10 +1364,11 @@
               <th>Kategori</th>
               <th class="num">TER</th>
               <th class="num">Penghasilan Awal</th>
-              <th class="num">Tunjangan PPh</th>
-              <th class="num">Bruto Gross-Up</th>
+              <th class="num" id="allowanceColumnLabel">Tunjangan PPh</th>
+              <th class="num" id="grossColumnLabel">Bruto Setelah Tunjangan</th>
               <th class="num">PPh 21</th>
               <th class="num">Setelah PPh</th>
+              <th class="num">Beban PPh Pegawai</th>
             </tr>
           </thead>
           <tbody id="resultBody"></tbody>
@@ -1328,8 +1384,8 @@
         <summary>Lihat cara penghitungan</summary>
         <ul>
           <li>Status PTKP dipetakan ke TER Kategori A, B, atau C.</li>
-          <li>Tunjangan dihitung secara iteratif karena tarif ditentukan dari bruto setelah tunjangan PPh.</li>
-          <li>Hasil dipilih pada titik gross-up terendah yang memenuhi: tunjangan PPh = PPh Pasal 21.</li>
+          <li id="methodExplanationOne">Tunjangan dihitung secara iteratif karena tarif ditentukan dari bruto setelah tunjangan PPh.</li>
+          <li id="methodExplanationTwo">Hasil dipilih pada titik gross-up terendah yang memenuhi: tunjangan PPh = PPh Pasal 21.</li>
           <li>Pembulatan PPh dilakukan ke rupiah penuh ke bawah.</li>
         </ul>
         <p>Dasar umum: PP 58 Tahun 2023 dan PMK 168 Tahun 2023. Kalkulator ini merupakan alat bantu dan tidak menggantikan pemeriksaan data payroll serta bukti potong.</p>
@@ -1394,6 +1450,7 @@
       let rows = [];
       let results = [];
       let sourceName = "";
+      let calculationMode = "gross_up";
 
       const $ = id => document.getElementById(id);
       const money = value => new Intl.NumberFormat("id-ID", {
@@ -1436,7 +1493,55 @@
         const rate = getRate(category, gross);
         const tax = Math.floor(gross * rate / 100);
         if (tax !== allowance) throw new Error("Gross-up tidak mencapai hasil yang konsisten.");
-        return { allowance, gross, rate, tax, afterTax: gross - tax };
+        return { allowance, gross, rate, tax, afterTax: gross - tax, employeeTaxBurden: 0 };
+      }
+
+      function nonGrossUp(base, category) {
+        const gross = base;
+        const rate = getRate(category, gross);
+        const tax = Math.floor(gross * rate / 100);
+        return { allowance: 0, gross, rate, tax, afterTax: gross - tax, employeeTaxBurden: tax };
+      }
+
+      function modeMeta() {
+        return calculationMode === "gross_up"
+          ? {
+              label: "Gross Up",
+              slug: "Gross-Up",
+              resultTitle: "Hasil Gross Up",
+              description: "Tunjangan PPh sama dengan PPh Pasal 21 yang dipotong, sehingga beban PPh pegawai menjadi Rp0."
+            }
+          : {
+              label: "Tidak Gross Up",
+              slug: "Tidak-Gross-Up",
+              resultTitle: "Hasil Tidak Gross Up",
+              description: "Perusahaan tidak memberikan tunjangan PPh. PPh Pasal 21 dipotong dari penghasilan pegawai."
+            };
+      }
+
+      function updateModeUI() {
+        const isGrossUp = calculationMode === "gross_up";
+        const meta = modeMeta();
+        $("methodPill").textContent = `Metode: ${meta.label}`;
+        $("templateMethodHelp").textContent = isGrossUp
+          ? "Isi penghasilan sebelum tunjangan PPh dan status PTKP. Kalkulator akan menentukan kategori TER dan tunjangan gross up setiap pegawai."
+          : "Isi penghasilan bruto dan status PTKP. Kalkulator akan menghitung PPh yang dipotong dari penghasilan setiap pegawai.";
+        $("uploadIncomeHelp").textContent = isGrossUp
+          ? "“Penghasilan” berarti bruto sebelum tunjangan PPh, bukan take-home pay setelah BPJS atau potongan lain."
+          : "“Penghasilan” berarti bruto yang menjadi dasar penerapan TER, sebelum PPh Pasal 21 dipotong.";
+        $("calculateButton").textContent = isGrossUp ? "Hitung Gross Up" : "Hitung Tanpa Gross Up";
+        $("resultTitle").textContent = meta.resultTitle;
+        $("resultDescription").textContent = meta.description;
+        $("allowanceTotalLabel").textContent = isGrossUp ? "Total tunjangan PPh" : "Total PPh dipotong";
+        $("grossTotalLabel").textContent = isGrossUp ? "Total bruto setelah tunjangan" : "Total setelah PPh";
+        $("allowanceColumnLabel").textContent = isGrossUp ? "Tunjangan PPh" : "Tunjangan PPh (Rp0)";
+        $("grossColumnLabel").textContent = isGrossUp ? "Bruto Setelah Tunjangan" : "Penghasilan Bruto";
+        $("methodExplanationOne").textContent = isGrossUp
+          ? "Tunjangan dihitung secara iteratif karena tarif ditentukan dari bruto setelah tunjangan PPh."
+          : "Tidak ada tunjangan PPh; tarif TER diterapkan langsung pada penghasilan bruto pegawai.";
+        $("methodExplanationTwo").textContent = isGrossUp
+          ? "Hasil dipilih pada titik gross-up terendah yang memenuhi: tunjangan PPh = PPh Pasal 21."
+          : "PPh Pasal 21 menjadi beban pegawai dan mengurangi penghasilan setelah PPh.";
       }
 
       function aliases(row) {
@@ -1444,7 +1549,7 @@
         Object.entries(row).forEach(([key, value]) => { mapped[cleanHeader(key)] = value; });
         return {
           name: mapped["nama pegawai"] ?? mapped["nama"],
-          income: mapped["penghasilan sebelum tunjangan pph"] ?? mapped["penghasilan"] ?? mapped["besar penghasilan"],
+          income: mapped["penghasilan bruto"] ?? mapped["penghasilan sebelum tunjangan pph"] ?? mapped["penghasilan"] ?? mapped["besar penghasilan"],
           ptkp: mapped["status ptkp"] ?? mapped["ptkp"]
         };
       }
@@ -1509,6 +1614,7 @@
       }
 
       function renderPreview() {
+        results = [];
         const body = $("previewBody");
         body.replaceChildren();
         const preview = rows.slice(0, MAX_PREVIEW);
@@ -1553,7 +1659,9 @@
 
       function calculateAll() {
         results = rows.filter(row => row.valid).map(row => {
-          const calc = grossUp(row.income, row.category);
+          const calc = calculationMode === "gross_up"
+            ? grossUp(row.income, row.category)
+            : nonGrossUp(row.income, row.category);
           return { ...row, ...calc };
         });
         renderResults();
@@ -1566,7 +1674,7 @@
           const tr = document.createElement("tr");
           const cells = [
             item.name, item.ptkp, item.category, rateText(item.rate),
-            money(item.income), money(item.allowance), money(item.gross), money(item.tax), money(item.afterTax)
+            money(item.income), money(item.allowance), money(item.gross), money(item.tax), money(item.afterTax), money(item.employeeTaxBurden)
           ];
           cells.forEach((value, index) => {
             const td = document.createElement("td");
@@ -1579,11 +1687,13 @@
         const baseTotal = results.reduce((sum, row) => sum + row.income, 0);
         const allowanceTotal = results.reduce((sum, row) => sum + row.allowance, 0);
         const grossTotal = results.reduce((sum, row) => sum + row.gross, 0);
+        const taxTotal = results.reduce((sum, row) => sum + row.tax, 0);
+        const afterTaxTotal = results.reduce((sum, row) => sum + row.afterTax, 0);
         $("calculatedCount").textContent = integer(results.length);
         $("resultBaseTotal").textContent = money(baseTotal);
-        $("allowanceTotal").textContent = money(allowanceTotal);
-        $("grossTotal").textContent = money(grossTotal);
-        $("periodSummary").textContent = `Masa Pajak ${MONTH_NAMES[Number($("taxMonth").value) - 1]} ${$("taxYear").value} · TER bulanan · ${integer(results.length)} pegawai valid.`;
+        $("allowanceTotal").textContent = money(calculationMode === "gross_up" ? allowanceTotal : taxTotal);
+        $("grossTotal").textContent = money(calculationMode === "gross_up" ? grossTotal : afterTaxTotal);
+        $("periodSummary").textContent = `Masa Pajak ${MONTH_NAMES[Number($("taxMonth").value) - 1]} ${$("taxYear").value} · ${modeMeta().label} · TER bulanan · ${integer(results.length)} pegawai valid.`;
         $("resultNote").textContent = results.length > MAX_PREVIEW
           ? `Tabel menampilkan ${MAX_PREVIEW} pegawai pertama. File hasil memuat seluruh ${integer(results.length)} pegawai.`
           : `Seluruh ${integer(results.length)} hasil ditampilkan.`;
@@ -1628,17 +1738,18 @@
         if (!ensureXLSX()) return;
         const workbook = XLSX.utils.book_new();
         const data = [
-          ["Nama Pegawai", "Penghasilan Sebelum Tunjangan PPh", "Status PTKP"],
+          ["Nama Pegawai", "Penghasilan Bruto", "Status PTKP"],
           ["Andi Pratama", 10000000, "TK/0"],
           ["Siti Rahma", 15000000, "K/1"]
         ];
         const guide = [
-          ["PETUNJUK TEMPLATE GROSS-UP PPh PASAL 21"],
+          ["PETUNJUK TEMPLATE PPh PASAL 21"],
           ["1. Jangan mengubah judul tiga kolom pada sheet Data Pegawai."],
-          ["2. Penghasilan adalah bruto sebelum tunjangan PPh."],
-          ["3. Status yang diterima: TK/0, TK/1, TK/2, TK/3, K/0, K/1, K/2, K/3."],
-          ["4. Hapus baris contoh sebelum mengisi data sebenarnya."],
-          ["5. Template ini digunakan untuk TER bulanan selain masa pajak terakhir."]
+          ["2. Untuk Gross Up, penghasilan adalah bruto sebelum tunjangan PPh."],
+          ["3. Untuk Tidak Gross Up, penghasilan adalah bruto sebelum PPh Pasal 21 dipotong."],
+          ["4. Status yang diterima: TK/0, TK/1, TK/2, TK/3, K/0, K/1, K/2, K/3."],
+          ["5. Hapus baris contoh sebelum mengisi data sebenarnya."],
+          ["6. Template ini digunakan untuk TER bulanan selain masa pajak terakhir."]
         ];
         const dataSheet = XLSX.utils.aoa_to_sheet(data);
         const guideSheet = XLSX.utils.aoa_to_sheet(guide);
@@ -1646,24 +1757,26 @@
         guideSheet["!cols"] = [{ wch: 88 }];
         XLSX.utils.book_append_sheet(workbook, dataSheet, "Data Pegawai");
         XLSX.utils.book_append_sheet(workbook, guideSheet, "Petunjuk");
-        XLSX.writeFile(workbook, "Template-Gross-Up-PPh21-Kabayan.xlsx");
+        XLSX.writeFile(workbook, "Template-PPh21-Kabayan.xlsx");
       }
 
       function downloadResults() {
         if (!ensureXLSX() || !results.length) return;
         const period = `${MONTH_NAMES[Number($("taxMonth").value) - 1]} ${$("taxYear").value}`;
+        const meta = modeMeta();
         const output = results.map((item, index) => ({
           "No.": index + 1,
           "Nama Pegawai": item.name,
           "Status PTKP": item.ptkp,
           "Kategori TER": item.category,
+          "Metode Pemotongan": meta.label,
           "Tarif TER (%)": item.rate,
-          "Penghasilan Sebelum Tunjangan PPh": item.income,
+          "Penghasilan Awal": item.income,
           "Tunjangan PPh Pasal 21": item.allowance,
-          "Penghasilan Bruto Setelah Gross-Up": item.gross,
+          "Penghasilan Bruto Setelah Tunjangan": item.gross,
           "PPh Pasal 21": item.tax,
           "Penghasilan Setelah PPh": item.afterTax,
-          "Beban PPh Pegawai": 0,
+          "Beban PPh Pegawai": item.employeeTaxBurden,
           "Status": "Berhasil"
         }));
         const invalid = rows.filter(row => !row.valid).map(row => ({
@@ -1675,33 +1788,38 @@
         }));
         const totalBase = results.reduce((sum, item) => sum + item.income, 0);
         const totalAllowance = results.reduce((sum, item) => sum + item.allowance, 0);
+        const totalGross = results.reduce((sum, item) => sum + item.gross, 0);
+        const totalTax = results.reduce((sum, item) => sum + item.tax, 0);
+        const totalEmployeeTaxBurden = results.reduce((sum, item) => sum + item.employeeTaxBurden, 0);
         const summary = [
-          ["RINGKASAN GROSS-UP PPh PASAL 21"],
+          ["RINGKASAN PPh PASAL 21"],
           ["Masa Pajak", period],
+          ["Metode pemotongan", meta.label],
           ["File sumber", sourceName],
           ["Pegawai dihitung", results.length],
           ["Data bermasalah", invalid.length],
-          ["Total penghasilan sebelum tunjangan PPh", totalBase],
+          ["Total penghasilan awal", totalBase],
           ["Total tunjangan PPh Pasal 21", totalAllowance],
-          ["Total penghasilan bruto setelah gross-up", totalBase + totalAllowance],
-          ["Total PPh Pasal 21", totalAllowance]
+          ["Total penghasilan bruto setelah tunjangan", totalGross],
+          ["Total PPh Pasal 21", totalTax],
+          ["Total beban PPh pegawai", totalEmployeeTaxBurden]
         ];
         const workbook = XLSX.utils.book_new();
         const resultSheet = XLSX.utils.json_to_sheet(output);
         const summarySheet = XLSX.utils.aoa_to_sheet(summary);
         resultSheet["!cols"] = [
-          {wch:7},{wch:28},{wch:14},{wch:14},{wch:15},{wch:36},
+          {wch:7},{wch:28},{wch:14},{wch:14},{wch:21},{wch:15},{wch:36},
           {wch:26},{wch:38},{wch:21},{wch:25},{wch:20},{wch:14}
         ];
         summarySheet["!cols"] = [{wch:42},{wch:28}];
-        XLSX.utils.book_append_sheet(workbook, resultSheet, "Hasil Gross-Up");
+        XLSX.utils.book_append_sheet(workbook, resultSheet, `Hasil ${meta.label}`.slice(0, 31));
         XLSX.utils.book_append_sheet(workbook, summarySheet, "Ringkasan");
         if (invalid.length) {
           const invalidSheet = XLSX.utils.json_to_sheet(invalid);
           invalidSheet["!cols"] = [{wch:13},{wch:28},{wch:20},{wch:14},{wch:48}];
           XLSX.utils.book_append_sheet(workbook, invalidSheet, "Data Bermasalah");
         }
-        XLSX.writeFile(workbook, `Hasil-Gross-Up-PPh21-${$("taxYear").value}-${String($("taxMonth").value).padStart(2, "0")}.xlsx`);
+        XLSX.writeFile(workbook, `Hasil-PPh21-${meta.slug}-${$("taxYear").value}-${String($("taxMonth").value).padStart(2, "0")}.xlsx`);
       }
 
       function loadSample() {
@@ -1736,12 +1854,13 @@
         const register = tool => Promise.resolve(context.registerTool(tool, { signal: controller.signal })).catch(() => {});
         register({
           name: "calculate_gross_up_batch",
-          title: "Hitung gross-up pegawai",
-          description: "Memvalidasi daftar pegawai dan menghitung tunjangan PPh Pasal 21 gross-up TER bulanan.",
+          title: "Hitung PPh 21 pegawai",
+          description: "Memvalidasi daftar pegawai dan menghitung PPh Pasal 21 TER bulanan dengan metode Gross Up atau Tidak Gross Up.",
           inputSchema: {
             type: "object",
             properties: {
               month: { type: "integer", minimum: 1, maximum: 11 },
+              method: { type: "string", enum: ["gross_up", "non_gross_up"] },
               employees: {
                 type: "array",
                 minItems: 1,
@@ -1764,6 +1883,12 @@
           execute(input) {
             if (!input || !Array.isArray(input.employees) || !input.employees.length) throw new Error("Daftar pegawai wajib diisi.");
             if (input.month) $("taxMonth").value = String(input.month);
+            if (input.method) {
+              calculationMode = input.method;
+              const selected = document.querySelector(`input[name="calculationMode"][value="${calculationMode}"]`);
+              if (selected) selected.checked = true;
+              updateModeUI();
+            }
             const raw = input.employees.map(item => ({
               "Nama Pegawai": item.name,
               "Penghasilan Sebelum Tunjangan PPh": item.income,
@@ -1775,24 +1900,28 @@
             calculateAll();
             return {
               employeeCount: results.length,
+              method: calculationMode,
               totalAllowance: results.reduce((sum, row) => sum + row.allowance, 0),
               totalGross: results.reduce((sum, row) => sum + row.gross, 0),
+              totalEmployeeTaxBurden: results.reduce((sum, row) => sum + row.employeeTaxBurden, 0),
               errorCount: rows.filter(row => !row.valid).length
             };
           }
         });
         register({
           name: "read_gross_up_summary",
-          title: "Baca ringkasan gross-up",
-          description: "Membaca ringkasan hasil gross-up yang saat ini tampil tanpa mengubah data.",
+          title: "Baca ringkasan PPh 21",
+          description: "Membaca ringkasan hasil PPh Pasal 21 yang saat ini tampil tanpa mengubah data.",
           inputSchema: { type: "object", properties: {}, additionalProperties: false },
           annotations: { readOnlyHint: true, untrustedContentHint: false },
           execute() {
             return {
               employeeCount: results.length,
+              method: calculationMode,
               totalBaseIncome: results.reduce((sum, row) => sum + row.income, 0),
               totalAllowance: results.reduce((sum, row) => sum + row.allowance, 0),
-              totalGross: results.reduce((sum, row) => sum + row.gross, 0)
+              totalGross: results.reduce((sum, row) => sum + row.gross, 0),
+              totalEmployeeTaxBurden: results.reduce((sum, row) => sum + row.employeeTaxBurden, 0)
             };
           }
         });
@@ -1812,6 +1941,13 @@
       $("resetPreview").addEventListener("click", () => resetAll(2));
       $("calculateButton").addEventListener("click", calculateAll);
       $("backToPreview").addEventListener("click", () => $("previewPanel").scrollIntoView({ behavior: "smooth", block: "start" }));
+      document.querySelectorAll('input[name="calculationMode"]').forEach(input => {
+        input.addEventListener("change", event => {
+          calculationMode = event.target.value;
+          updateModeUI();
+          if (results.length) calculateAll();
+        });
+      });
 
       const dropZone = $("dropZone");
       ["dragenter", "dragover"].forEach(type => dropZone.addEventListener(type, event => {
@@ -1823,6 +1959,7 @@
         dropZone.classList.remove("dragging");
       }));
       dropZone.addEventListener("drop", event => readFile(event.dataTransfer.files[0]));
+      updateModeUI();
       setJourney(1, { scroll: false });
       registerWebMCP();
     })();
