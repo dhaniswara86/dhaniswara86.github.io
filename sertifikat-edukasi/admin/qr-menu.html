@@ -1,9 +1,9 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kabayan Admin - QR Generator</title>
+<title>Kabayan Admin QR Generator</title>
 <link rel="stylesheet" href="qr-menu.css">
 </head>
 <body>
@@ -14,31 +14,41 @@
 <p>Pilih kegiatan yang akan dibuatkan QR formulir.</p>
 
 <div class="card">
-
 <label>Kegiatan</label>
 <select id="eventSelect">
 <option>Memuat kegiatan...</option>
 </select>
 
 <button onclick="generateQR()">Generate QR</button>
-
 </div>
 
+<div id="eventDetail" class="card"></div>
 
 <div class="grid">
 
 <div class="card">
-<h3>01. Daftar Hadir + Pretest</h3>
+<h2>01. Daftar Hadir + Pretest</h2>
+<div id="qr1" class="qr"></div>
 <input id="link1" readonly>
-<div id="qr1"></div>
+
+<button onclick="copyLink('link1')">Copy Link</button>
+<button onclick="downloadQR('qr1','Daftar-Hadir-Pretest')">Download PNG</button>
 </div>
+
 
 <div class="card">
-<h3>02. Posttest + Evaluasi</h3>
+<h2>02. Posttest + Evaluasi</h2>
+<div id="qr2" class="qr"></div>
 <input id="link2" readonly>
-<div id="qr2"></div>
+
+<button onclick="copyLink('link2')">Copy Link</button>
+<button onclick="downloadQR('qr2','Posttest-Evaluasi')">Download PNG</button>
 </div>
 
+</div>
+
+<div class="note">
+QR Sertifikat tidak dibuat melalui halaman ini.
 </div>
 
 </div>
