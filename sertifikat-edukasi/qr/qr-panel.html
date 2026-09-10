@@ -1,0 +1,40 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Kabayan QR Form Generator</title>
+<link rel="stylesheet" href="qr-generator.css"></head>
+<body>
+<div class="container">
+<h1>Kabayan QR Form Generator</h1>
+<p>QR Daftar Hadir + Pretest dan Posttest + Evaluasi</p>
+
+<div class="card">
+<label>Kode Kegiatan</label>
+<input id="eventCode" value="EDU-001">
+<button onclick="generateAll()">Generate QR</button>
+</div>
+
+<div class="grid">
+<div class="card">
+<h3>01. Daftar Hadir + Pretest</h3>
+<div id="qr1"></div>
+<input id="link1" readonly>
+<button onclick="downloadQR('qr1','Daftar-Hadir-Pretest')">Download PNG</button>
+<button onclick="copyLink('link1')">Copy Link</button>
+</div>
+
+<div class="card">
+<h3>02. Posttest + Evaluasi</h3>
+<div id="qr2"></div>
+<input id="link2" readonly>
+<button onclick="downloadQR('qr2','Posttest-Evaluasi')">Download PNG</button>
+<button onclick="copyLink('link2')">Copy Link</button>
+</div>
+</div>
+
+<div class="info">
+QR Sertifikat dibuat otomatis oleh sistem sertifikat, bukan melalui halaman ini.
+</div>
+</div>
+
+<script src="../library/qrcode.min.js"></script>
+<script src="./qr-generator.js"></script>
+</body></html>
