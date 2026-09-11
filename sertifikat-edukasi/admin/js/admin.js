@@ -60,6 +60,7 @@ async function enterApp(){
     await loadWorkUnits();
     await loadEvents();
     await window.KabayanQR.init();
+    window.KabayanWorkflow?.ready();
 
     if(currentProfile.role==='admin'){
       await loadUserManagement();
@@ -180,7 +181,7 @@ function renderEvents(){
 }
 function closeEventMenus(){document.querySelectorAll('.event-menu').forEach(m=>m.classList.remove('show'))}
 document.addEventListener('click',e=>{if(!e.target.closest('.event-actions'))closeEventMenus()});
-function editEventFromMenu(id){selectEvent(id,false);$('settingsPanel').scrollIntoView({behavior:'smooth',block:'start'});setTimeout(()=>$('eventTitle').focus(),300)}
+function editEventFromMenu(id){window.KabayanWorkflow?.show(0);selectEvent(id,false);$('settingsPanel').scrollIntoView({behavior:'smooth',block:'start'});setTimeout(()=>$('eventTitle').focus(),300)}
 
 function renderCopySources(){
   $('copySource').innerHTML='<option value="">Salin dari kegiatan...</option>'+
@@ -200,7 +201,8 @@ async function selectEvent(id,scroll=true){
   $('editorTitle').textContent='Pengaturan Kegiatan';$('eventStatus').className='status '+currentEvent.status;$('eventStatus').textContent=currentEvent.status.toUpperCase();
   $('publishEventBtn').disabled=currentEvent.status==='published';$('closeEventBtn').disabled=currentEvent.status==='closed';
   ['phasePanel','questionPanel','evaluationPanel','monitorPanel','certificatePanel','reportPanel'].forEach(id=>$(id).style.display='block');
-  renderPhases();renderEvents();renderCopySources();await loadQuestions();await loadParticipants();await loadCertificates();if(scroll)$('phasePanel').scrollIntoView({behavior:'smooth',block:'start'})
+  window.KabayanWorkflow?.selected(scroll);
+  renderPhases();renderEvents();renderCopySources();await loadQuestions();await loadParticipants();await loadCertificates();if(scroll)$('settingsPanel').scrollIntoView({behavior:'smooth',block:'start'})
 }
 function renderPhases(){
   if(!currentEvent)return;
@@ -262,9 +264,11 @@ $('saveEventBtn').onclick=async()=>{
     currentEvent=res.data;
     msg('eventOk','Kegiatan tersimpan.',true);
     await loadEvents();
-    selectEvent(currentEvent.id,false);
+    await selectEvent(currentEvent.id,false);
+    return true;
   }catch(e){
     msg('eventErr',e.message);
+    return false;
   }
 };
 

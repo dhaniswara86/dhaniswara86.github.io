@@ -41,7 +41,8 @@ window.KabayanQR = (() => {
   async function generate() {
     el('qrGenerate').disabled=true;generation=null;el('qrOutput').replaceChildren();
     try {
-      const event=available.find(e=>e.id===el('qrEvent').value);
+      const event=available.find(e=>e.id===currentEvent?.id);
+      if(!event || el('qrEvent').value!==event.id) throw new Error('Muat ulang kegiatan sebelum membuat QR.');
       if(!event) throw new Error('Pilih kegiatan terlebih dahulu.');
       const results=[];
       for(const [phase,type] of [['awal','Daftar Hadir + Pretest'],['akhir','Posttest + Evaluasi']]) {
@@ -88,7 +89,7 @@ window.KabayanQR = (() => {
       el('qrHistoryStatus').textContent=result.data?.length?'Menampilkan hingga 200 histori terbaru.':'Belum ada histori QR.';
     } catch(error) {el('qrHistoryStatus').textContent='Histori gagal dimuat: '+error.message;}
   }
-  async function init() {try {await reloadEvents();await history();} catch(error){say(error.message);}}
+  async function init() {try {await reloadEvents();el('qrEvent').value=currentEvent?.id||'';el('qrOutput').replaceChildren();say('');await history();} catch(error){say(error.message);}}
   el('qrGenerate').onclick=generate;
   el('qrRefresh').onclick=init;
   el('qrHistoryRefresh').onclick=history;
