@@ -66,7 +66,7 @@
   dashboard.querySelector('.overview-top').after(focus);
   const nav=$('mainNav');
 
-  definitions.forEach(([id,label,glyph])=>{const a=document.createElement('a');a.href='#'+id;a.dataset.route=id;a.innerHTML=icons[glyph]+`<span>${label}</span>`;if(id==='userManagementPanel')a.className='admin-only';nav.append(a);});
+  definitions.slice(0,5).forEach(([id,label,glyph])=>{const a=document.createElement('a');a.href='#'+id;a.dataset.route=id;a.innerHTML=icons[glyph]+`<span>${label}</span>`;if(id==='userManagementPanel')a.className='admin-only';nav.append(a);});
   $('qrEvent').disabled=true;
   const phaseActions=document.createElement('div');phaseActions.className='actions';phaseActions.append($('publishEventBtn'),$('closeEventBtn'));$('phasePanel').append(phaseActions);
   const saveNext=document.createElement('button');saveNext.type='button';saveNext.className='btn btn-outline';saveNext.textContent='Simpan & susun tes →';saveNext.onclick=async()=>{saveNext.disabled=true;try{if(await $('saveEventBtn').onclick())navigate('questionPanel');}finally{saveNext.disabled=false;}};$('saveEventBtn').after(saveNext);
