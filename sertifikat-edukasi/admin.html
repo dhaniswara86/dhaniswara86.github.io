@@ -2,13 +2,15 @@
 <html lang="id">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Admin Sertifikat Edukasi | Kabayan</title>
+<title>Kabayan | Ruang Kerja Edukasi</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <link rel="stylesheet" href="admin/css/admin.css">
 <link rel="stylesheet" href="admin/css/qr.css">
+<link rel="stylesheet" href="admin/css/application.css?v=5.0">
 </head>
-<body class="login-mode">
+<body class="auth-pending">
+<section id="authStatus" class="auth-screen" role="status" aria-live="polite"><img src="assets/logo-kabayan.svg" alt="Kabayan"><h1 id="authTitle">Menyiapkan ruang kerja…</h1><p id="authMessage">Memeriksa sesi masuk Anda.</p><div id="authActions" hidden><button type="button" class="btn btn-yellow" id="retrySession">Coba lagi</button><button type="button" class="btn btn-outline" id="authLogout">Kembali ke login</button></div></section>
 <div class="wrap">
 <div class="topbar">
   <a class="brand" href="../index.html"><img src="assets/logo-kabayan.svg" alt="Kabayan"><span>Kabayan / Sertifikat Edukasi</span></a>
@@ -21,71 +23,9 @@
   </div>
 </div>
 
-<section class="login" id="loginView">
-  <div class="saung-login-shell">
-    <div class="saung-login-left">
-      <div class="saung-login-brand">
-        <img src="assets/logo-kabayan.svg" alt="Kabayan">
-        <div>
-          <b>Sertifikat Edukasi</b>
-          <span>Admin Kabayan</span>
-        </div>
-      </div>
-
-      <div class="saung-login-card">
-        <span class="saung-kicker">Wilujeng Sumping</span>
-        <h1>Masuk ke<br><span>Saung Admin.</span></h1>
-        <p>Kelola kegiatan edukasi, peserta, soal, evaluasi, sertifikat, dan laporan dalam satu ruang kerja.</p>
-
-        <div class="saung-login-form">
-          <div class="field">
-            <label>Email</label>
-            <div class="saung-input-wrap">
-              <span class="saung-input-icon">✉</span>
-              <input id="loginEmail" type="email" autocomplete="email" placeholder="nama@contoh.go.id">
-            </div>
-          </div>
-
-          <div class="field">
-            <label>Password</label>
-            <div class="saung-input-wrap">
-              <span class="saung-input-icon">▢</span>
-              <input id="loginPassword" type="password" autocomplete="current-password" placeholder="Masukkan password">
-              <button type="button" class="saung-eye" id="toggleLoginPassword" aria-label="Tampilkan password">◉</button>
-            </div>
-          </div>
-
-          <button class="btn btn-yellow saung-login-button" id="loginBtn">
-            Masuk ke Saung <span>→</span>
-          </button>
-        </div>
-
-        <div class="saung-divider"></div>
-
-        <div class="saung-login-help">
-          <span>Akses khusus admin Sertifikat Edukasi</span>
-          <span>•</span>
-          <span>Supabase Auth</span>
-        </div>
-
-        <div class="msg err" id="loginErr"></div>
-      </div>
-
-      <div class="saung-login-foot">
-        <span>◈</span>
-        <span>Akses terbatas untuk akun admin yang telah terdaftar.</span>
-      </div>
-    </div>
-
-    <div class="saung-login-visual" aria-hidden="true">
-      <div class="saung-visual-copy">
-        <span class="pill">Kabayan Sertifikat Edukasi</span>
-        <h2>Kelola edukasi<br>dalam suasana<br>yang lebih hangat.</h2>
-      </div>
-    </div>
-  </div>
-</section>
-
+<section class="login" id="loginView" hidden>
+<div class="login-brand-panel"><a class="login-logo" href="../index.html"><img src="assets/logo-kabayan.svg" alt="Kabayan"><span>KABAYAN</span></a><div><p class="overline">SERTIFIKAT EDUKASI</p><h1>Satu ruang.<br>Seluruh kegiatan.</h1><p>Mulai dari persiapan kegiatan hingga sertifikat peserta, kelola semuanya bersama Kabayan.</p></div><img class="login-character" src="assets/kabayan-admin.webp" alt="Karakter Kabayan"><small>Edukasi perpajakan · Ruang kerja bersama</small></div>
+<div class="login-form-panel"><div class="login-form-inner"><span class="overline">SELAMAT DATANG KEMBALI</span><h2>Masuk ke Kabayan</h2><p>Gunakan akun Admin atau Satuan Kerja Anda.</p><form id="loginForm"><div class="field"><label for="loginEmail">Email</label><input id="loginEmail" type="email" autocomplete="username" placeholder="nama@contoh.go.id" required></div><div class="field"><label for="loginPassword">Password</label><div class="password-input"><input id="loginPassword" type="password" autocomplete="current-password" placeholder="Masukkan password" required><button type="button" id="toggleLoginPassword" aria-label="Tampilkan password">Lihat</button></div></div><button type="submit" id="loginBtn" class="btn btn-yellow">Masuk ke ruang kerja →</button></form><div id="loginErr" class="msg err" role="alert"></div><p class="login-help">Belum memiliki akses? Hubungi administrator untuk menyiapkan akun Satuan Kerja Anda.</p></div><small>Akses sesuai peran dan Satuan Kerja yang ditetapkan.</small></div></section>
 
 <section class="profile-gate" id="profileGate">
   <div class="profile-gate-card">
@@ -457,10 +397,11 @@
 </div>
 
 <script src="supabase-config.js"></script>
-<script src="admin/js/admin.js"></script>
+<script src="admin/js/admin.js?v=5.0"></script>
 <script src="library/qrcode.js"></script>
-<script src="admin/js/qr.js"></script>
-<script src="admin/js/panels.js"></script>
-<script src="admin/js/password.js"></script>
+<script src="admin/js/qr.js?v=5.0"></script>
+<script src="admin/js/panels.js?v=5.0"></script>
+<script src="admin/js/dashboard.js?v=5.0"></script>
+<script src="admin/js/password.js?v=5.0"></script>
 <script src="admin/js/admin-tools.js"></script>
 </body></html>
