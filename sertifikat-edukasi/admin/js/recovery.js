@@ -6,7 +6,7 @@
  form.onsubmit=async event=>{
   event.preventDefault();if(!allowed)return;
   const password=document.getElementById('resetNew').value;
-  if(password.length<12||password!==document.getElementById('resetConfirm').value){status.textContent='Password minimal 12 karakter dan kedua isian harus sama.';return;}
+  if(password.length<8||password!==document.getElementById('resetConfirm').value){status.textContent='Password minimal 8 karakter dan kedua isian harus sama.';return;}
   button.disabled=true;
   try{const {error}=await client.auth.updateUser({password});if(error)throw error;allowed=false;form.reset();form.hidden=true;status.textContent='Password berhasil diubah. Silakan kembali ke login.';await client.auth.signOut();}
   catch(error){status.textContent=error.message;}finally{button.disabled=false;}
