@@ -235,12 +235,13 @@ $('saveEventBtn').onclick=async()=>{
       work_unit_id:workUnitId,
       signer_name:$('eventSignerName').value.trim()||null,
       signer_title:$('eventSignerTitle').value.trim()||null,
-      number_pattern:$('eventPattern').value.trim()||'SERT-{SEQ}/{YEAR}',
+      number_pattern:$('eventPattern').value.trim()||`CERT-{SEQ}/${workUnits.find(u=>u.id===workUnitId)?.code||currentProfile?.work_unit_code||''}/{YEAR}`,
       next_sequence:Number($('eventSeq').value)||1,
       minimum_posttest_score:Math.max(0,Math.min(100,Number($('eventMinPosttest').value)||70)),
       updated_at:new Date().toISOString()
     };
 
+    if(!row.number_pattern || row.number_pattern.includes('//'))throw new Error('Kode satker untuk format nomor belum tersedia. Pilih satker atau isi format nomor.');
     if(!row.title||!row.code)throw new Error('Nama kegiatan dan kode link wajib diisi.');
 
     let res;
@@ -1226,6 +1227,7 @@ function renderUserProfiles(){
         <td>
           <div class="actions">
             <button class="btn btn-yellow" data-save-user="${u.user_id}">Simpan</button>
+            ${u.role==='satker'?`<button class="btn btn-outline" data-reset-user="${u.user_id}">Kirim Reset Password</button>`:''}
             ${u.role?`<button class="btn btn-red" data-remove-user="${u.user_id}">Cabut Akses</button>`:''}
           </div>
         </td>

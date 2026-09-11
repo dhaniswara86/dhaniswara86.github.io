@@ -60,12 +60,14 @@
     if(currentEvent||!currentProfile)return;
     const unit=workUnits.find(u=>u.id===currentProfile.work_unit_id);
     document.getElementById('eventIssuer').value=currentProfile.work_unit_name||unit?.name||'';
+    const code=currentProfile.work_unit_code||unit?.code;
+    document.getElementById('eventPattern').value=code?`CERT-{SEQ}/${code}/{YEAR}`:'';
     document.getElementById('eventWorkUnit').value=currentProfile.work_unit_id||'';
     document.getElementById('eventWorkUnitReadonly').value=[currentProfile.work_unit_code||unit?.code,currentProfile.work_unit_name||unit?.name].filter(Boolean).join(' — ');
   }
   document.getElementById('newEventBtn').addEventListener('click',()=>{defaults();show(0);});
   document.getElementById('eventWorkUnit').addEventListener('change',()=>{
-    if(!currentEvent)document.getElementById('eventIssuer').value=workUnits.find(u=>u.id===document.getElementById('eventWorkUnit').value)?.name||'';
+    if(!currentEvent){const unit=workUnits.find(u=>u.id===document.getElementById('eventWorkUnit').value);document.getElementById('eventIssuer').value=unit?.name||'';document.getElementById('eventPattern').value=unit?.code?`CERT-{SEQ}/${unit.code}/{YEAR}`:'';}
   });
   function hash(){const id=location.hash.slice(1);const i=groups.findIndex(g=>g[1].includes(id));if(i>=0)show(i);else if(id==='userManagementPanel')show(6);}
   window.addEventListener('hashchange',hash);
