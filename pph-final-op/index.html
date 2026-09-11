@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Panduan interaktif Kabayan untuk mengenali penghasilan orang pribadi yang dikenai PPh Final, tidak final, atau bukan objek pajak.">
+  <meta name="theme-color" content="#082b52">
+  <title>Cek PPh Final Orang Pribadi | Kabayan</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23082b52'/%3E%3Cpath d='M14 42V18h8v10l10-10h10L30 30l13 12H32L22 32v10z' fill='%23ffd34e'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/css/pph-final.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Lewati ke isi utama</a>
+
+  <header class="site-header" id="siteHeader">
+    <div class="shell header-inner">
+      <a class="brand" href="https://dhaniswara86.id/" aria-label="Kabayan — Beranda">
+        <img class="brand-logo" src="https://dhaniswara86.id/images/LogoASD.svg" alt="Logo Kabayan">
+        <strong>Kabayan</strong>
+      </a>
+      <nav class="desktop-menu" aria-label="Navigasi utama">
+        <a href="https://dhaniswara86.id/buku.html">Buku</a>
+        <a href="https://dhaniswara86.id/formulir.html">Formulir</a>
+        <a href="https://dhaniswara86.id/kalkulator.html">Kalkulator</a>
+        <a href="https://dhaniswara86.id/aplikasi.html">Aplikasi</a>
+        <a href="https://dhaniswara86.id/artikel.html">Artikel</a>
+        <a class="hot-link" href="https://dhaniswara86.id/hotnews.html"><span aria-hidden="true"></span>Hot News</a>
+      </nav>
+      <div class="header-actions">
+        <a class="saung-link" href="https://dhaniswara86.id/saung-kabayan/index.html">Saung Kabayan <span aria-hidden="true">↗</span></a>
+        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Buka menu" aria-expanded="false" aria-controls="mobileMenu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Navigasi seluler" hidden>
+    <p>Saung Kabayan</p>
+    <a href="https://dhaniswara86.id/buku.html"><span>01</span>Buku</a>
+    <a href="https://dhaniswara86.id/formulir.html"><span>02</span>Formulir</a>
+    <a href="https://dhaniswara86.id/kalkulator.html"><span>03</span>Kalkulator</a>
+    <a href="https://dhaniswara86.id/aplikasi.html"><span>04</span>Aplikasi</a>
+    <a href="https://dhaniswara86.id/artikel.html"><span>05</span>Artikel</a>
+    <a href="https://dhaniswara86.id/hotnews.html"><span>06</span>Hot News</a>
+    <a class="mobile-saung" href="https://dhaniswara86.id/saung-kabayan/index.html">Masuk Saung Kabayan <b>↗</b></a>
+  </nav>
+
+  <main id="main">
+    <section class="finder" id="top" aria-labelledby="page-title">
+      <div class="cloud-pattern" aria-hidden="true"></div>
+      <div class="shell finder-grid">
+        <div class="finder-copy">
+          <p class="eyebrow">01 / PANDUAN INTERAKTIF</p>
+          <h1 id="page-title">Cek PPh Final.<br><span>Lebih Mudah.</span></h1>
+          <p class="lead">Pilih sumber penghasilan Anda. Kenali status pajak, tarif, pihak yang melunasi, dan cara melaporkannya—dalam dua langkah sederhana.</p>
+          <div class="updated"><span aria-hidden="true"></span> Diperbarui berdasarkan ketentuan sampai September 2026</div>
+        </div>
+
+        <div class="finder-card" aria-labelledby="finder-title">
+          <div class="step-heading">
+            <span>Langkah 1 dari 2</span>
+            <h2 id="finder-title">Penghasilan Anda berasal dari mana?</h2>
+          </div>
+
+          <div class="category-grid" id="categoryGrid" role="group" aria-label="Pilih kategori penghasilan">
+            <button class="category-button" type="button" data-category="usaha" aria-pressed="false"><span aria-hidden="true">🛍️</span><strong>Usaha</strong></button>
+            <button class="category-button" type="button" data-category="properti" aria-pressed="false"><span aria-hidden="true">🏠</span><strong>Properti</strong></button>
+            <button class="category-button" type="button" data-category="investasi" aria-pressed="false"><span aria-hidden="true">📈</span><strong>Investasi</strong></button>
+            <button class="category-button" type="button" data-category="hadiah" aria-pressed="false"><span aria-hidden="true">🎁</span><strong>Hadiah</strong></button>
+            <button class="category-button" type="button" data-category="pekerjaan" aria-pressed="false"><span aria-hidden="true">💼</span><strong>Pekerjaan</strong></button>
+            <button class="category-button" type="button" data-category="digital" aria-pressed="false"><span aria-hidden="true">◈</span><strong>Aset digital</strong></button>
+          </div>
+
+          <div class="transaction-step" id="transactionStep" hidden>
+            <div class="step-heading compact">
+              <span>Langkah 2 dari 2</span>
+              <h3 id="transactionTitle">Pilih jenis penghasilannya</h3>
+            </div>
+            <div class="transaction-options" id="transactionOptions" role="group" aria-labelledby="transactionTitle"></div>
+          </div>
+
+          <div class="finder-empty" id="finderEmpty">
+            <span aria-hidden="true">↑</span>
+            Pilih satu kategori untuk memulai pemeriksaan.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="result-section" id="hasil" aria-labelledby="resultHeading" hidden>
+      <div class="shell">
+        <p class="section-kicker">Hasil pemeriksaan awal</p>
+        <div class="result-card" id="resultCard" aria-live="polite">
+          <div class="result-topline">
+            <div>
+              <p class="result-context" id="resultContext"></p>
+              <h2 id="resultHeading"></h2>
+            </div>
+            <span class="status-badge" id="statusBadge"></span>
+          </div>
+          <p class="result-summary" id="resultSummary"></p>
+          <div class="result-facts">
+            <article><span>Tarif / perlakuan</span><strong id="resultRate"></strong></article>
+            <article><span>Pelunasan pajak</span><strong id="resultPayment"></strong></article>
+            <article><span>Pelaporan SPT</span><strong id="resultSpt"></strong></article>
+          </div>
+          <div class="result-note">
+            <strong>Yang perlu diperiksa</strong>
+            <p id="resultCheck"></p>
+          </div>
+          <div class="document-list">
+            <strong>Dokumen yang sebaiknya disimpan</strong>
+            <ul id="resultDocuments"></ul>
+          </div>
+          <p class="legal-reference" id="resultLegal"></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="status-guide" id="panduan" aria-labelledby="guide-title">
+      <div class="shell">
+        <p class="section-kicker">Kenali hasilnya</p>
+        <h2 id="guide-title">Empat status yang tidak boleh tertukar</h2>
+        <div class="status-grid">
+          <article class="status-item final"><span>Final</span><h3>PPh Final</h3><p>Pajaknya selesai ketika dipotong, dipungut, atau disetor. Tetap dilaporkan dalam SPT Tahunan.</p></article>
+          <article class="status-item regular"><span>Umum</span><h3>PPh Tidak Final</h3><p>Penghasilan dihitung kembali dalam SPT. Pajak yang sudah dipotong pada umumnya menjadi kredit pajak.</p></article>
+          <article class="status-item exempt"><span>Dikecualikan</span><h3>Bukan Objek Pajak</h3><p>Tidak dikenai PPh hanya jika seluruh syarat pengecualian benar-benar dipenuhi.</p></article>
+          <article class="status-item conditional"><span>Bersyarat</span><h3>Perlu Cek Kondisi</h3><p>Statusnya bergantung pada jenis transaksi, pihak pembayar, dokumen, atau syarat khusus.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="quick-table" aria-labelledby="table-title">
+      <div class="shell">
+        <div class="section-heading">
+          <div><p class="section-kicker">Peta cepat</p><h2 id="table-title">Penghasilan yang paling sering ditanyakan</h2></div>
+          <p>Gunakan tabel sebagai petunjuk awal. Pilih kategorinya di atas untuk membaca syarat dan kewajibannya.</p>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Jenis penghasilan</th><th>Status awal</th><th>Tarif umum</th><th>Catatan penting</th></tr></thead>
+            <tbody>
+              <tr><td>Usaha dengan omzet tertentu</td><td><span class="pill conditional">Perlu cek</span></td><td>0,5%</td><td>Tidak berlaku otomatis untuk pekerjaan bebas.</td></tr>
+              <tr><td>Penjualan tanah/bangunan</td><td><span class="pill final">Final</span></td><td>Umumnya 2,5%</td><td>Ada tarif dan pengecualian khusus.</td></tr>
+              <tr><td>Sewa tanah/bangunan</td><td><span class="pill final">Final</span></td><td>10%</td><td>Berbeda dari sewa kendaraan atau alat.</td></tr>
+              <tr><td>Bunga deposito</td><td><span class="pill final">Final</span></td><td>Umumnya 20%</td><td>Terdapat pengecualian tertentu.</td></tr>
+              <tr><td>Penjualan saham di bursa</td><td><span class="pill final">Final</span></td><td>0,1%</td><td>Dihitung dari nilai bruto penjualan.</td></tr>
+              <tr><td>Dividen dalam negeri</td><td><span class="pill conditional">Perlu cek</span></td><td>10% bila tidak dikecualikan</td><td>Pengecualian mensyaratkan investasi di Indonesia.</td></tr>
+              <tr><td>Hadiah undian</td><td><span class="pill final">Final</span></td><td>25%</td><td>Hadiah perlombaan bukan hadiah undian.</td></tr>
+              <tr><td>Jasa konstruksi</td><td><span class="pill final">Final</span></td><td>1,75%–6%</td><td>Tergantung jenis jasa dan sertifikasi.</td></tr>
+              <tr><td>Penjualan aset kripto</td><td><span class="pill conditional">Perlu cek</span></td><td>0,21% atau 1%</td><td>Tergantung sarana transaksi; mining berbeda.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="myth-section" aria-labelledby="myth-title">
+      <div class="shell myth-layout">
+        <div>
+          <p class="section-kicker light">Jangan sampai keliru</p>
+          <h2 id="myth-title">Tiga kalimat yang sering menyesatkan</h2>
+        </div>
+        <div class="myth-list">
+          <article><span>01</span><div><h3>“Sudah dipotong, berarti final.”</h3><p>Belum tentu. PPh Pasal 21 atas gaji atau jasa pada umumnya diperhitungkan kembali dalam SPT Tahunan.</p></div></article>
+          <article><span>02</span><div><h3>“Final berarti tidak perlu dilaporkan.”</h3><p>Keliru. Penghasilan dan PPh Finalnya tetap dicantumkan pada bagian penghasilan final dalam SPT.</p></div></article>
+          <article><span>03</span><div><h3>“Tidak dipotong berarti bebas pajak.”</h3><p>Belum tentu. Jika pembayar bukan pemotong, penerima penghasilan mungkin harus menyetor sendiri.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="checklist" aria-labelledby="checklist-title">
+      <div class="shell checklist-card">
+        <div><p class="section-kicker">Sebelum lapor SPT</p><h2 id="checklist-title">Periksa kembali enam hal ini</h2></div>
+        <ul>
+          <li>Seluruh sumber penghasilan sudah dicatat.</li>
+          <li>Penghasilan final dipisahkan dari penghasilan umum.</li>
+          <li>Bukti potong, pungut, atau setor sudah tersedia.</li>
+          <li>Kewajiban setor sendiri sudah diperiksa.</li>
+          <li>Syarat penghasilan bukan objek sudah dipenuhi.</li>
+          <li>Harta terkait sudah dicantumkan dalam SPT.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="references" aria-labelledby="reference-title">
+      <div class="shell">
+        <h2 id="reference-title">Rujukan utama</h2>
+        <div class="reference-links">
+          <a href="https://jdih.kemenkeu.go.id/dok/pp-20-tahun-2026/overview" target="_blank" rel="noopener">PP 20 Tahun 2026 <span aria-hidden="true">↗</span></a>
+          <a href="https://peraturan.bpk.go.id/Details/5755/pp-no-34-tahun-2016" target="_blank" rel="noopener">PP 34 Tahun 2016 <span aria-hidden="true">↗</span></a>
+          <a href="https://peraturan.bpk.go.id/Details/64693/pp-no-34-tahun-2017" target="_blank" rel="noopener">PP 34 Tahun 2017 <span aria-hidden="true">↗</span></a>
+          <a href="https://peraturan.bpk.go.id/Details/199710/pp-no-9-tahun-2022" target="_blank" rel="noopener">PP 9 Tahun 2022 <span aria-hidden="true">↗</span></a>
+          <a href="https://www.jdih.kemenkeu.go.id/dok/pmk-50-tahun-2025/overview" target="_blank" rel="noopener">PMK 50 Tahun 2025 <span aria-hidden="true">↗</span></a>
+        </div>
+        <p class="disclaimer">Materi ini merupakan panduan edukasi awal. Hasil dapat berbeda karena fakta, dokumen, status para pihak, dan ketentuan khusus pada setiap transaksi.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="shell"><strong>Kabayan</strong><span>Katalog Bahan Pelayanan · Angga Sukma Dhaniswara</span></div></footer>
+  <script src="assets/js/pph-final.js"></script>
+</body>
+</html>
