@@ -11,14 +11,17 @@ window.KabayanQR = (() => {
     return url.href;
   }
   async function reloadEvents() {
-    let query = sb.from('external_events').select('id,code,title,event_date,work_unit_id');
-    if (currentProfile.role !== 'admin') {
-      if (!currentProfile.work_unit_id) throw new Error('Satuan kerja akun tidak tersedia.');
-      query = query.eq('work_unit_id', currentProfile.work_unit_id);
+    const rows=[];
+    for(let offset=0;;offset+=500){
+      let query=sb.from('external_events').select('id,code,title,event_date,work_unit_id').order('id').range(offset,offset+499);
+      if(currentProfile.role!=='admin'){
+        if(!currentProfile.work_unit_id)throw new Error('Satuan Kerja akun tidak tersedia.');
+        query=query.eq('work_unit_id',currentProfile.work_unit_id);
+      }
+      const {data,error}=await query;if(error)throw error;
+      rows.push(...(data||[]));if(!data||data.length<500)break;
     }
-    const {data,error} = await query;
-    if(error) throw error;
-    available = data || [];
+    available=rows;
     available.sort((a,b)=>String(b.event_date||'').localeCompare(String(a.event_date||'')));
     const previous = el('qrEvent').value;
     el('qrEvent').replaceChildren(new Option('Pilih kegiatan', ''));
@@ -68,6 +71,7 @@ window.KabayanQR = (() => {
     const body=el('qrHistoryRows');body.replaceChildren();el('qrHistoryStatus').textContent='Memuat histori…';
     try {
       let query=sb.from('edu_qr_logs').select('*');
+      if(currentEvent)query=query.eq('event_id',currentEvent.id);
       if(currentProfile.role!=='admin') {
         if(!available.length){el('qrHistoryStatus').textContent='Belum ada kegiatan untuk satuan kerja ini.';return;}
         query=query.in('event_id',available.map(e=>e.id));
@@ -75,6 +79,7 @@ window.KabayanQR = (() => {
       let result=await query.order('generated_at',{ascending:false}).limit(200);
       if(result.error && /generated_at/.test(result.error.message) && ['42703','PGRST204'].includes(result.error.code)) {
         query=sb.from('edu_qr_logs').select('*');
+        if(currentEvent)query=query.eq('event_id',currentEvent.id);
         if(currentProfile.role!=='admin')query=query.in('event_id',available.map(e=>e.id));
         result=await query.order('created_at',{ascending:false}).limit(200);
       }

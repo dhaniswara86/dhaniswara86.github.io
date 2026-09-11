@@ -27,9 +27,10 @@ window.KabayanDashboard=(()=>{
       const value=document.createElement('strong');value.textContent=number(item.value);row.append(label,track,value);root.append(row);
     }
   }
-  function clear(){metrics.forEach(id=>$(id).textContent='—');$('recentEvents').replaceChildren();$('activityChart').replaceChildren();$('participantChart').replaceChildren();$('dashboardUpdated').textContent='';}
+  function clear(){metrics.forEach(id=>$(id).textContent='—');$('recentEvents').replaceChildren();$('activityChart').replaceChildren();$('participantChart').replaceChildren();$('dashboardUpdated').textContent='';$('attentionList').textContent='Memuat tindak lanjut…';}
   function render(items,participants,certificates){
     items.sort((a,b)=>String(b.created_at).localeCompare(String(a.created_at))||String(a.id).localeCompare(String(b.id)));
+    window.KabayanProcess?.focus(items);
     const values=[items.filter(e=>e.status==='published'&&(e.lifecycle_status||'active')==='active').length,participants.length,certificates.filter(c=>c.status==='valid').length,participants.filter(p=>p.evaluation_completed).length];
     metrics.forEach((id,i)=>$(id).textContent=number(values[i]));
     const now=new Date(),months=[];
@@ -54,11 +55,11 @@ window.KabayanDashboard=(()=>{
     const token=generation;running=token;$('refreshDashboard').disabled=true;$('dashboardStatus').textContent='Memperbarui ringkasan…';$('dashboardStatus').classList.remove('error');
     const profile=currentProfile;
     try{
-      const items=await rows('external_events','id,title,code,event_date,status,lifecycle_status,created_at,work_unit_id',q=>profile.role==='satker'?q.eq('work_unit_id',profile.work_unit_id):q);
+      const items=await rows('external_events','id,title,code,event_date,status,lifecycle_status,created_at,work_unit_id,final_phase_open',q=>profile.role==='satker'?q.eq('work_unit_id',profile.work_unit_id):q);
       const ids=items.map(e=>e.id);
       const [participants,certificates]=await Promise.all([children('external_participants','id,event_id,evaluation_completed',ids),children('external_certificates','id,event_id,status',ids)]);
       if(token!==generation)return;render(items,participants,certificates);$('dashboardStatus').textContent='';
-    }catch(e){if(token!==generation)return;clear();$('dashboardStatus').textContent='Ringkasan belum dapat dimuat: '+e.message+'. Gunakan Perbarui data untuk mencoba lagi. Modul lain tetap dapat dibuka.';$('dashboardStatus').classList.add('error');}
+    }catch(e){if(token!==generation)return;clear();$('attentionList').textContent='Tindak lanjut belum dapat diperiksa.';$('dashboardStatus').textContent='Ringkasan belum dapat dimuat: '+e.message+'. Gunakan Perbarui data untuk mencoba lagi. Modul lain tetap dapat dibuka.';$('dashboardStatus').classList.add('error');}
     finally{if(token===generation){running=null;$('refreshDashboard').disabled=false;}}
   }
   function start(){if(timer)return;clear();refresh();timer=setInterval(refresh,60000);}

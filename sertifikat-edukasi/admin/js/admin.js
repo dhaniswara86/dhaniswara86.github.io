@@ -58,6 +58,9 @@ async function enterApp(){
   if(entering)return false;
   entering=true;const epoch=authEpoch;authView('loading');
   try{
+    const auth=await sb.auth.getSession();
+    if(auth.error)throw auth.error;
+    window.KabayanAccountId=auth.data.session?.user?.id||null;
     const profile=await loadMyProfile();
     if(epoch!==authEpoch)return false;
     if(!profile){authView('profile');return false;}
@@ -65,7 +68,7 @@ async function enterApp(){
     if(profile.role==='satker'&&!profile.work_unit_id)throw new Error('Satuan Kerja akun belum ditetapkan. Hubungi administrator.');
     currentEvent=null;events=[];workUnits=[];allAuthUsers=[];participantSelection.clear();
     ['participantRows','certificateRows','questionRows','eventManagementRows','activityRows','userProfileRows','workUnitRows','qrHistoryRows','qrOutput'].forEach(id=>$(id)?.replaceChildren());
-    $('eventSearch').value='';
+    $('eventSearch').value='';window.KabayanDirectoryFilter='active';unitFilterValue='';
     $('newEventBtn').onclick();
     applyRoleUI();
     await loadWorkUnits();
@@ -93,7 +96,7 @@ async function guard(){
       authSubscription=sb.auth.onAuthStateChange((event,session)=>{
         if(event==='SIGNED_OUT'){
           authEpoch++;document.querySelectorAll('dialog[open]').forEach(d=>d.close());
-          window.KabayanWorkflow?.reset();
+          window.KabayanAccountId=null;window.KabayanWorkflow?.reset();
           currentProfile=null;currentEvent=null;events=[];
           document.body.classList.remove('role-admin','role-satker');
           window.KabayanDashboard?.stop();authView('login');
@@ -121,7 +124,7 @@ async function leaveApp(){
   try{
     if(sb){const {error}=await sb.auth.signOut({scope:'local'});if(error)throw error;}
     authEpoch++;currentProfile=null;currentEvent=null;events=[];
-    window.KabayanWorkflow?.reset();
+    window.KabayanAccountId=null;window.KabayanWorkflow?.reset();
     document.body.classList.remove('role-admin','role-satker');
     window.KabayanDashboard?.stop();
     history.replaceState(null,'',location.pathname+'#dashboard');
@@ -180,7 +183,7 @@ async function loadEvents(){
   events=result;renderEvents();renderCopySources();
   if(currentEvent){
     const found=events.find(x=>x.id===currentEvent.id);
-    if(found)currentEvent=found;else currentEvent=null;
+    if(found){currentEvent=found;renderPhases();}else currentEvent=null;
   }
   window.KabayanWorkflow?.sync();
   // Optional management RPCs are loaded only when their module is opened.
@@ -188,7 +191,8 @@ async function loadEvents(){
 }
 
 function filteredEvents(){
-  let rows=events.filter(e=>(e.lifecycle_status||'active')==='active');
+  const filter=window.KabayanDirectoryFilter||'active';
+  let rows=events.filter(e=>filter==='archived'?e.lifecycle_status==='archived':(e.lifecycle_status||'active')==='active'&&(filter==='completed'?e.status==='closed':e.status!=='closed'));
   if(currentProfile?.role==='admin'&&unitFilterValue)rows=rows.filter(e=>e.work_unit_id===unitFilterValue);
   const term=$('eventSearch')?.value.trim().toLocaleLowerCase('id-ID');
   if(term)rows=rows.filter(e=>[e.title,e.code,e.work_units?.name].join(' ').toLocaleLowerCase('id-ID').includes(term));
@@ -199,13 +203,14 @@ function renderEvents(){
   const rows=filteredEvents();
   $('eventList').innerHTML=rows.length?rows.map(e=>`<div class="event-item ${currentEvent?.id===e.id?'active':''}" data-id="${e.id}">
     <div class="event-actions"><button class="event-menu-btn" data-event-menu-btn="${e.id}">⋯</button><div class="event-menu" id="event-menu-${e.id}">
-      <button data-event-edit="${e.id}">✏️ Edit Kegiatan</button><button data-event-detail="${e.id}">👁 Lihat Detail</button><button class="archive" data-event-archive="${e.id}">📦 Arsipkan</button><button class="danger" data-event-delete="${e.id}">🗑 Hapus Permanen</button>
+      <button data-event-edit="${e.id}">✏️ Edit Kegiatan</button><button data-event-detail="${e.id}">👁 Lihat Detail</button>${e.lifecycle_status==='archived'?`<button data-event-restore="${e.id}">Aktifkan kembali</button>`:`<button class="archive" data-event-archive="${e.id}">Arsipkan</button>`}<button class="danger" data-event-delete="${e.id}">🗑 Hapus Permanen</button>
     </div></div>
-    <b style="padding-right:42px">${esc(e.title)}</b><small>${esc(e.code)} • ${esc(e.event_date||'-')}</small><small style="color:#416a96">${esc(e.work_units?.name||'Belum ditetapkan')}</small><div class="event-chip-row"><span class="status ${e.status}">${e.status}</span>${eventStateBadge(e)}</div></div>`).join(''):'<div class="muted" style="font-size:11px">Belum ada kegiatan aktif.</div>';
+    <b style="padding-right:42px">${esc(e.title)}</b><small>${esc(e.code)} • ${esc(e.event_date||'-')}</small><small style="color:#416a96">${esc(e.work_units?.name||'Belum ditetapkan')}</small><div class="event-chip-row"><span class="status ${e.status}">${e.status}</span>${eventStateBadge(e)}</div></div>`).join(''):'<div class="muted" style="font-size:11px">Tidak ada kegiatan pada filter ini.</div>';
   document.querySelectorAll('.event-item').forEach(x=>x.onclick=ev=>{if(ev.target.closest('.event-actions'))return;selectEvent(x.dataset.id)});
   document.querySelectorAll('[data-event-menu-btn]').forEach(b=>b.onclick=e=>{e.stopPropagation();const id=b.dataset.eventMenuBtn;document.querySelectorAll('.event-menu').forEach(m=>m.classList.toggle('show',m.id==='event-menu-'+id&&!m.classList.contains('show')))});
   document.querySelectorAll('[data-event-edit]').forEach(b=>b.onclick=e=>{e.stopPropagation();closeEventMenus();editEventFromMenu(b.dataset.eventEdit)});
   document.querySelectorAll('[data-event-detail]').forEach(b=>b.onclick=e=>{e.stopPropagation();closeEventMenus();selectEvent(b.dataset.eventDetail)});
+  document.querySelectorAll('[data-event-restore]').forEach(b=>b.onclick=e=>{e.stopPropagation();restoreArchivedEvent(b.dataset.eventRestore)});
   document.querySelectorAll('[data-event-archive]').forEach(b=>b.onclick=e=>{e.stopPropagation();closeEventMenus();archiveEvent(b.dataset.eventArchive)});
   document.querySelectorAll('[data-event-delete]').forEach(b=>b.onclick=e=>{e.stopPropagation();closeEventMenus();deleteEventPermanent(b.dataset.eventDelete)});
 }
@@ -1203,7 +1208,7 @@ function eventManagementStatus(s){return `<span class="status ${s==='active'?'ev
 async function archiveEvent(id){if(!confirm('Arsipkan kegiatan ini? Data peserta dan sertifikat tetap tersimpan.'))return;const {error}=await sb.rpc('archive_edu_event',{p_event_id:id});if(error)return msg('eventManageErr',error.message);if(currentEvent?.id===id)currentEvent=null;msg('eventManageOk','Kegiatan berhasil diarsipkan.',true);await loadEvents();await loadActivityLogs()}
 async function restoreArchivedEvent(id){if(!confirm('Aktifkan kembali kegiatan ini?'))return;const {error}=await sb.rpc('restore_edu_event',{p_event_id:id});if(error)return msg('eventManageErr',error.message);msg('eventManageOk','Kegiatan kembali aktif.',true);await loadEvents();await loadActivityLogs()}
 async function deleteEventPermanent(id,pcount=null,ccount=null){try{if(pcount===null||ccount===null){const {data,error}=await sb.rpc('get_edu_event_delete_impact',{p_event_id:id});if(error)throw error;const x=data?.[0]||{};pcount=Number(x.participant_count||0);ccount=Number(x.certificate_count||0)}if(!confirm(`HAPUS PERMANEN kegiatan ini?\n\nPeserta: ${pcount}\nSertifikat: ${ccount}\n\nSemua data terkait akan dihapus. Arsip lebih disarankan.`))return;const t=prompt('Ketik HAPUS KEGIATAN');if(t!=='HAPUS KEGIATAN')return;const {error}=await sb.rpc('delete_edu_event_permanently',{p_event_id:id});if(error)throw error;if(currentEvent?.id===id)currentEvent=null;msg('eventManageOk','Kegiatan berhasil dihapus permanen.',true);await loadEvents();await loadActivityLogs()}catch(e){msg('eventManageErr',e.message)}}
-async function loadActivityLogs(){const {data,error}=await sb.rpc('list_edu_activity_logs',{p_limit:60});if(error)return msg('eventManageErr',error.message);$('activityRows').innerHTML=(data||[]).map(a=>`<div class="activity-item"><b>${esc(a.action_label||a.action)}</b><span>${esc(a.event_title||'—')} • ${esc(a.work_unit_name||'—')}</span><span>${esc(a.actor_email||a.actor_name||'Sistem')} • ${formatAdminDate(a.created_at)}</span>${a.description?`<span>${esc(a.description)}</span>`:''}</div>`).join('')||'<div class="muted">Belum ada riwayat aktivitas.</div>'}
+async function loadActivityLogs(){$('activityStatus').textContent='Memuat riwayat…';const {data,error}=await sb.rpc('list_edu_activity_logs',{p_limit:60});if(error){$('activityStatus').textContent='Riwayat belum dapat dimuat: '+error.message;return;}$('activityStatus').textContent='Menampilkan hingga 60 aktivitas terbaru sesuai akses akun.';$('activityRows').innerHTML=(data||[]).map(a=>`<div class="activity-item"><b>${esc(a.action_label||a.action)}</b><span>${esc(a.event_title||'—')} • ${esc(a.work_unit_name||'—')}</span><span>${esc(a.actor_email||a.actor_name||'Sistem')} • ${formatAdminDate(a.created_at)}</span>${a.description?`<span>${esc(a.description)}</span>`:''}</div>`).join('')||'<div class="muted">Belum ada riwayat aktivitas.</div>'}
 $('showActiveEvents').onclick=async()=>{eventManagementFilter='active';await loadEventManagement()};
 $('showArchivedEvents').onclick=async()=>{eventManagementFilter='archived';await loadEventManagement()};
 $('showDeletedEvents').onclick=async()=>{eventManagementFilter='deleted';await loadEventManagement()};
