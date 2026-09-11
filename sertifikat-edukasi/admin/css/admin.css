@@ -990,3 +990,17 @@ body:not(.login-mode) .topbar{position:relative;top:auto}
 .fold-content[hidden]{display:none!important}
 .fold-original-title{display:none}
 .fold-panel{scroll-margin-top:20px!important}
+/* Alur enam langkah: satu halaman kerja terlihat pada satu waktu. */
+.step-page[hidden],#userManagementPanel[hidden],.workflow-footer button[hidden]{display:none!important}
+.step-page{display:grid;grid-template-columns:minmax(0,1fr);gap:18px;min-width:0}
+.step-page>*{min-width:0}
+.step-nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.step-button{display:flex;align-items:center;gap:10px;text-align:left;min-height:56px;padding:12px;border:1px solid #dfe6ef;border-radius:12px;background:#f7f9fc;font:inherit;font-size:13px;font-weight:750;color:#344761;cursor:pointer}
+.step-button.selected{background:#fff7d9;border-color:#edc341;color:#102655}
+.step-number{display:grid;place-items:center;flex-shrink:0;width:28px;height:28px;border-radius:50%;background:#e8edf4}
+.selected .step-number{background:#f7c948}
+.step-button:focus-visible{outline:3px solid #0a66ff;outline-offset:2px}
+.workflow-intro h2{margin:0 0 8px;font-size:25px}.workflow-intro p{margin:6px 0;color:#667789;overflow-wrap:anywhere}
+#workflowNote{color:#b42318}.workflow-footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.step-page #qrPanel,.step-page #qrHistoryPanel{margin-top:0}
+@media(max-width:700px){.step-nav{grid-template-columns:repeat(2,minmax(0,1fr))}.step-button{font-size:12px;padding:9px}.workflow-intro h2{font-size:21px}}
