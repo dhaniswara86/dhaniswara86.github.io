@@ -10,7 +10,7 @@
   ];
   const container=document.querySelector('.sidebar-layout > section.grid');
   const nav=document.querySelector('.admin-quick-nav');nav.replaceChildren();nav.classList.add('step-nav');
-  const pages=[];const buttons=[];let active=0;
+  const pages=[];const buttons=[];let active=0;let pending=null;
   const intro=document.createElement('div');intro.className='workflow-intro';
   const title=document.createElement('h2');const context=document.createElement('p');
   context.id='workflowContext';intro.append(title,context);container.prepend(intro);
@@ -46,8 +46,8 @@
   function show(index){
     if(index<0||index>6)return;
     if(index===6 && currentProfile?.role!=='admin')return;
-    if(index>0&&index<5&&!currentEvent){note.textContent='Simpan kegiatan pada langkah 1 atau pilih kegiatan dari daftar terlebih dahulu.';return;}
-    active=index;note.textContent='';
+    if(index>0&&index<5&&!currentEvent){pending=index;note.textContent='Simpan kegiatan pada langkah 1 atau pilih kegiatan dari daftar terlebih dahulu.';return;}
+    pending=null;active=index;note.textContent='';
     pages.forEach((page,i)=>page.hidden=i!==index);
     buttons.forEach((button,i)=>{button.classList.toggle('selected',i===index);if(i===index)button.setAttribute('aria-current','step');else button.removeAttribute('aria-current');});
     title.textContent=index===6?'Akun & Satuan Kerja':`Langkah ${index+1} — ${groups[index][0]}`;
@@ -71,6 +71,6 @@
   });
   function hash(){const id=location.hash.slice(1);const i=groups.findIndex(g=>g[1].includes(id));if(i>=0)show(i);else if(id==='userManagementPanel')show(6);}
   window.addEventListener('hashchange',hash);
-  window.KabayanWorkflow={defaults,show,selected(scroll){show(scroll?0:active);},ready(){defaults();show(0);hash();}};
+  window.KabayanWorkflow={defaults,show,selected(scroll){show(pending??(scroll?0:active));},ready(){defaults();show(0);hash();}};
   show(0);
 })();

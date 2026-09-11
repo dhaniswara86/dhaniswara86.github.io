@@ -95,4 +95,5 @@ window.KabayanQR = (() => {
   el('qrHistoryRefresh').onclick=history;
   return {init};
 })();
-guard();
+// Tunggu seluruh panel selesai dipasang sebelum memulihkan sesi dan tujuan modul.
+document.addEventListener('DOMContentLoaded',()=>{guard().catch(error=>msg('loginErr',error.message));},{once:true});

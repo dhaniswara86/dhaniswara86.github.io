@@ -50,6 +50,10 @@ async function enterApp(){
       return false;
     }
 
+    if(!location.hash && !new URLSearchParams(location.search).has('module')){
+      location.replace('dashboard.html');
+      return true;
+    }
     $('profileGate').classList.remove('show');
     document.body.classList.remove('login-mode');
     $('loginView').style.display='none';
@@ -60,6 +64,11 @@ async function enterApp(){
     await loadWorkUnits();
     await loadEvents();
     await window.KabayanQR.init();
+    const requestedEvent=new URLSearchParams(location.search).get('event');
+    if(requestedEvent){
+      if(events.some(e=>e.id===requestedEvent))await selectEvent(requestedEvent,false);
+      else msg('eventErr','Kegiatan tidak ditemukan atau tidak dapat diakses. Pilih kegiatan lain.');
+    }
     window.KabayanWorkflow?.ready();
 
     if(currentProfile.role==='admin'){
@@ -142,9 +151,12 @@ async function loadWorkUnits(){
 }
 
 async function loadEvents(){
-  const {data,error}=await sb.from('external_events')
-    .select('*,work_units(id,code,name)')
-    .order('created_at',{ascending:false});
+  let query=sb.from('external_events').select('*,work_units(id,code,name)').order('created_at',{ascending:false});
+  if(currentProfile?.role==='satker'){
+    if(!currentProfile.work_unit_id)throw new Error('Satuan Kerja belum ditetapkan.');
+    query=query.eq('work_unit_id',currentProfile.work_unit_id);
+  }
+  const {data,error}=await query;
 
   if(error)return msg('eventErr',error.message);
 
