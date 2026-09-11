@@ -147,6 +147,7 @@
     if(waiting)return;
     try{
       if(id==='accessPage'){await window.KabayanQR.init();if(requested==='qrHistoryPanel')$('qrHistoryDetails').open=true;}
+      if(id==='evaluationPanel')window.KabayanEvaluationDesigner?.open();
       if(id==='checklistPanel')await window.KabayanProcess?.readiness();
       if(id==='reportsPage')await window.KabayanProcess?.aggregate();
       if(id==='activityPage')await loadActivityLogs();
