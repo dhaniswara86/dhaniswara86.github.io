@@ -1004,3 +1004,23 @@ body:not(.login-mode) .topbar{position:relative;top:auto}
 #workflowNote{color:#b42318}.workflow-footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .step-page #qrPanel,.step-page #qrHistoryPanel{margin-top:0}
 @media(max-width:700px){.step-nav{grid-template-columns:repeat(2,minmax(0,1fr))}.step-button{font-size:12px;padding:9px}.workflow-intro h2{font-size:21px}}
+
+/* Journey: enam titik terhubung, label di bawah titik. */
+.admin-quick-nav.step-nav{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:0;padding:24px 16px 18px;overflow:visible;background:#fff;box-shadow:none}
+.step-nav .step-button:not(.admin-only){position:relative;isolation:isolate;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:10px;min-height:100px;padding:0 8px;border:0;border-radius:0;background:transparent;text-align:center;font-size:13px;line-height:1.45;color:#748195}
+.step-nav .step-button:not(.admin-only)::before{content:'';position:absolute;z-index:-1;left:0;right:0;top:20px;height:2px;background:#dce4ee}
+.step-nav .step-button:first-child::before{left:50%}
+.step-nav .step-button:nth-child(6)::before{right:50%}
+.step-nav .step-number{width:42px;height:42px;box-sizing:border-box;border:2px solid #dce4ee;background:#fff;color:#708198;font-size:15px;box-shadow:0 0 0 6px #fff}
+.step-nav .step-button.selected{color:#102655;font-weight:850}
+.step-nav .selected .step-number{background:#f7c948;border-color:#f7c948;color:#102655;box-shadow:0 0 0 6px #fff,0 0 0 8px #f9eab5}
+.step-nav .step-button:hover .step-number{border-color:#b79832}
+.step-nav .step-button.admin-only{grid-column:1/-1;justify-self:end;margin-top:12px;min-height:36px;padding:8px 12px;font-size:12px;border-radius:999px;background:#f7f9fc}
+@media(max-width:700px){
+ .admin-quick-nav.step-nav{grid-template-columns:minmax(0,1fr);padding:16px 18px}
+ .step-nav .step-button:not(.admin-only){flex-direction:row;text-align:left;justify-content:flex-start;min-height:66px;gap:16px;padding:8px 0;font-size:13px}
+ .step-nav .step-button:not(.admin-only)::before{left:20px;right:auto;top:0;bottom:0;width:2px;height:auto}
+ .step-nav .step-button:first-child::before{left:20px;top:50%}
+ .step-nav .step-button:nth-child(6)::before{right:auto;bottom:50%}
+ .step-nav .step-number{flex-shrink:0}
+}
