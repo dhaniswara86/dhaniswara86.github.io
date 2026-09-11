@@ -23,10 +23,13 @@
     const {data,error}=await sb.functions.invoke('admin-reset-satker-password',{body:{user_id:target.user_id,password:$('toolPassword').value}});
     if(error){let message='Reset gagal. Pastikan fungsi server sudah diaktifkan dan sesi admin masih berlaku.';try{message=(await error.context.json()).error||message;}catch{}throw new Error(message);}
     if(!data?.ok)throw new Error(data?.error||'Reset belum dikonfirmasi server.');
-    modal.querySelector('form').reset();$('toolStatus').textContent='Password berhasil direset. Password pengganti dapat digunakan untuk login.';
+    modal.querySelector('form').reset();
+    modal.innerHTML='<div role="status" style="text-align:center;padding:12px 0"><div aria-hidden="true" style="font-size:42px;color:#067647">✓</div><h2>Password berhasil diubah</h2><p id="resetSuccessAccount"></p><p>Silakan minta pemilik akun satker logout dan login kembali menggunakan password baru.</p></div><button type="button" class="btn btn-yellow" id="resetDone" style="width:100%">Selesai</button>';
+    $('resetSuccessAccount').textContent=target.email;
+    $('resetDone').onclick=close;$('resetDone').focus();
    }
   }catch(error){$('toolStatus').textContent=error.message;}
-  finally{busy=false;$('toolSave').disabled=false;$('toolClose').disabled=false;}
+  finally{busy=false;if($('toolSave'))$('toolSave').disabled=false;if($('toolClose'))$('toolClose').disabled=false;}
  }
  document.addEventListener('click',async event=>{
   if(currentProfile?.role!=='admin')return;
