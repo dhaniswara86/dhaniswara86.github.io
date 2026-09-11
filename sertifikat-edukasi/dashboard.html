@@ -2,40 +2,86 @@
 <html lang="id">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Dashboard Sertifikat Edukasi | Kabayan</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kabayan Dashboard Sertifikat Edukasi</title>
 <link rel="stylesheet" href="admin/css/dashboard.css">
 </head>
 <body>
-<div class="dashboard">
+
+<div class="layout">
+
+<aside>
+<h2>Kabayan</h2>
+<p>Sertifikat Edukasi</p>
+
+<a href="dashboard.html">Dashboard</a>
+<a href="admin.html">Kegiatan</a>
+<a href="admin/qr-menu.html">QR Generator</a>
+<a href="admin/qr-history.html">Histori QR</a>
+<a href="#">Peserta</a>
+<a href="#">Sertifikat</a>
+<a href="#">Laporan</a>
+</aside>
+
+<main>
+
 <header>
-  <div>
-    <h1>Kabayan</h1>
-    <p>Sertifikat Edukasi</p>
-  </div>
-  <div class="welcome">Kelola edukasi perpajakan lebih mudah</div>
+<div>
+<h1>Selamat Datang di Kabayan</h1>
+<p>Kelola edukasi perpajakan, peserta, evaluasi, dan sertifikat dalam satu tempat.</p>
+</div>
+
+<div class="kabayan-box">
+<img src="assets/kabayan.webp" onerror="this.style.display='none'">
+</div>
 </header>
 
+
 <section class="cards">
-  <div class="card"><b id="eventCount">0</b><span>Kegiatan</span></div>
-  <div class="card"><b id="participantCount">0</b><span>Peserta</span></div>
-  <div class="card"><b id="certificateCount">0</b><span>Sertifikat</span></div>
-  <div class="card"><b id="evaluationCount">0</b><span>Evaluasi</span></div>
+
+<div class="card">
+<span>Kegiatan</span>
+<b id="eventCount">0</b>
+</div>
+
+<div class="card">
+<span>Peserta</span>
+<b id="participantCount">0</b>
+</div>
+
+<div class="card">
+<span>Sertifikat</span>
+<b id="certificateCount">0</b>
+</div>
+
+<div class="card">
+<span>Evaluasi</span>
+<b id="evaluationCount">0</b>
+</div>
+
 </section>
+
+
+<section class="panel">
+<h2>Statistik Kegiatan</h2>
+<canvas id="activityChart"></canvas>
+</section>
+
 
 <section class="panel">
 <h2>Kegiatan Terbaru</h2>
 <div id="recentEvents">Memuat data...</div>
 </section>
 
-<section class="actions">
-<a href="admin.html">Dashboard Admin</a>
-<a href="admin/qr-menu.html">QR Generator</a>
-<a href="admin/qr-history.html">Histori QR</a>
-</section>
+
+</main>
 </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase-config.js"></script>
 <script src="admin/js/dashboard.js"></script>
+
 </body>
 </html>
