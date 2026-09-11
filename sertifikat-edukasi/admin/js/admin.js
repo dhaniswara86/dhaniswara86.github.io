@@ -39,80 +39,96 @@ function applyRoleUI(){
   }
 }
 
+function authView(view,message=''){
+  document.body.classList.toggle('auth-pending',view==='loading'||view==='error');
+  document.body.classList.toggle('login-mode',view==='login');
+  $('authStatus').hidden=!['loading','error'].includes(view);
+  $('authTitle').textContent=view==='error'?'Ruang kerja belum dapat dibuka':'Menyiapkan ruang kerja…';
+  $('authMessage').textContent=message||'Memeriksa sesi masuk Anda.';
+  $('authActions').hidden=view!=='error';
+  $('loginView').hidden=view!=='login';
+  $('loginView').style.display=view==='login'?'grid':'none';
+  $('profileGate').classList.toggle('show',view==='profile');
+  $('appView').classList.toggle('show',view==='app');
+  $('appView').hidden=view!=='app';
+  if(view!=='app')window.KabayanDashboard?.stop();
+}
+let entering=false,authEpoch=0;
 async function enterApp(){
+  if(entering)return false;
+  entering=true;const epoch=authEpoch;authView('loading');
   try{
     const profile=await loadMyProfile();
-
-    if(!profile){
-      document.body.classList.remove('login-mode');
-      $('loginView').style.display='none';
-      $('profileGate').classList.add('show');
-      return false;
-    }
-
-    if(!location.hash && !new URLSearchParams(location.search).has('module')){
-      location.replace('dashboard.html');
-      return true;
-    }
-    $('profileGate').classList.remove('show');
-    document.body.classList.remove('login-mode');
-    $('loginView').style.display='none';
-    $('appView').classList.add('show');
-    $('logoutBtn').style.display='inline-flex';
-
+    if(epoch!==authEpoch)return false;
+    if(!profile){authView('profile');return false;}
+    if(!['admin','satker'].includes(profile.role))throw new Error('Peran akun belum memiliki akses. Hubungi administrator.');
+    if(profile.role==='satker'&&!profile.work_unit_id)throw new Error('Satuan Kerja akun belum ditetapkan. Hubungi administrator.');
+    currentEvent=null;events=[];workUnits=[];allAuthUsers=[];participantSelection.clear();
+    ['participantRows','certificateRows','questionRows','eventManagementRows','activityRows','userProfileRows','workUnitRows','qrHistoryRows','qrOutput'].forEach(id=>$(id)?.replaceChildren());
+    $('eventSearch').value='';
+    $('newEventBtn').onclick();
     applyRoleUI();
     await loadWorkUnits();
     await loadEvents();
-    await window.KabayanQR.init();
     const requestedEvent=new URLSearchParams(location.search).get('event');
     if(requestedEvent){
       if(events.some(e=>e.id===requestedEvent))await selectEvent(requestedEvent,false);
-      else msg('eventErr','Kegiatan tidak ditemukan atau tidak dapat diakses. Pilih kegiatan lain.');
+      else window.KabayanWorkflow?.notice('Kegiatan pada tautan tidak tersedia untuk akun ini. Silakan pilih kegiatan lain.');
     }
-    window.KabayanWorkflow?.ready();
-
-    if(currentProfile.role==='admin'){
-      await loadUserManagement();
-    }
-    await loadEventManagement();
-    await loadActivityLogs();
+    if(epoch!==authEpoch)return false;
+    // Sesi tetap dipakai di semua modul; tidak ada perpindahan ke halaman login.
+    authView('app');
+    await window.KabayanWorkflow.ready();
     return true;
-  }catch(e){
-    msg('loginErr',e.message);
-    return false;
-  }
+  }catch(e){if(epoch===authEpoch)authView('error',e.message);return false;}
+  finally{entering=false;}
 }
-
+let authSubscription=null;
 async function guard(){
-  if(!window.KabayanKegiatanSupabase?.isConfigured()){
-    msg('loginErr','Supabase Sertifikat Edukasi belum dikonfigurasi.');
-    return false;
-  }
-
-  sb=window.KabayanKegiatanSupabase.getClient();
-  const {data:{session}}=await sb.auth.getSession();
-
-  if(session){
-    await enterApp();
-    return true;
-  }
-
-  return false;
+  authView('loading');
+  try{
+    if(!window.KabayanKegiatanSupabase?.isConfigured())throw new Error('Konfigurasi layanan belum tersedia. Hubungi administrator.');
+    sb=window.KabayanKegiatanSupabase.getClient();
+    if(!authSubscription){
+      authSubscription=sb.auth.onAuthStateChange((event,session)=>{
+        if(event==='SIGNED_OUT'){
+          authEpoch++;document.querySelectorAll('dialog[open]').forEach(d=>d.close());
+          window.KabayanWorkflow?.reset();
+          currentProfile=null;currentEvent=null;events=[];
+          document.body.classList.remove('role-admin','role-satker');
+          window.KabayanDashboard?.stop();authView('login');
+        }
+      });
+    }
+    const {data,error}=await sb.auth.getSession();if(error)throw error;
+    if(data.session)return await enterApp();
+    authView('login');return false;
+  }catch(e){authView('error',e.message);return false;}
 }
-
-$('loginBtn').onclick=async()=>{
+$('loginForm').onsubmit=async event=>{
+  event.preventDefault();$('loginBtn').disabled=true;$('loginErr').classList.remove('show');
   try{
     sb=window.KabayanKegiatanSupabase.getClient();
-    const {error}=await sb.auth.signInWithPassword({
-      email:$('loginEmail').value.trim(),
-      password:$('loginPassword').value
-    });
+    const {error}=await sb.auth.signInWithPassword({email:$('loginEmail').value.trim(),password:$('loginPassword').value});
     if(error)throw error;
+    $('loginPassword').value='';
     await enterApp();
-  }catch(e){
-    msg('loginErr',e.message);
-  }
+  }catch(e){authView('login');msg('loginErr',e.message);}
+  finally{$('loginBtn').disabled=false;}
 };
+$('retrySession').onclick=guard;
+async function leaveApp(){
+  try{
+    if(sb){const {error}=await sb.auth.signOut({scope:'local'});if(error)throw error;}
+    authEpoch++;currentProfile=null;currentEvent=null;events=[];
+    window.KabayanWorkflow?.reset();
+    document.body.classList.remove('role-admin','role-satker');
+    window.KabayanDashboard?.stop();
+    history.replaceState(null,'',location.pathname+'#dashboard');
+    authView('login');
+  }catch(error){window.KabayanWorkflow?.notice('Keluar belum berhasil: '+error.message);if(!$('authStatus').hidden)$('authMessage').textContent=error.message;}
+}
+$('authLogout').onclick=leaveApp;
 
 $('bootstrapAdminBtn').onclick=async()=>{
   try{
@@ -129,8 +145,8 @@ $('bootstrapAdminBtn').onclick=async()=>{
   }
 };
 
-$('profileGateLogoutBtn').onclick=async()=>{await sb.auth.signOut();location.reload()};
-$('logoutBtn').onclick=async()=>{await sb.auth.signOut();location.reload()};
+$('profileGateLogoutBtn').onclick=leaveApp;
+$('logoutBtn').onclick=leaveApp;
 
 async function loadWorkUnits(){
   const {data,error}=await sb.from('work_units')
@@ -151,29 +167,31 @@ async function loadWorkUnits(){
 }
 
 async function loadEvents(){
-  let query=sb.from('external_events').select('*,work_units(id,code,name)').order('created_at',{ascending:false});
-  if(currentProfile?.role==='satker'){
-    if(!currentProfile.work_unit_id)throw new Error('Satuan Kerja belum ditetapkan.');
-    query=query.eq('work_unit_id',currentProfile.work_unit_id);
+  const result=[];
+  for(let offset=0;;offset+=500){
+    let query=sb.from('external_events').select('*,work_units(id,code,name)').order('created_at',{ascending:false}).order('id').range(offset,offset+499);
+    if(currentProfile?.role==='satker'){
+      if(!currentProfile.work_unit_id)throw new Error('Satuan Kerja belum ditetapkan.');
+      query=query.eq('work_unit_id',currentProfile.work_unit_id);
+    }
+    const {data,error}=await query;if(error)throw error;
+    result.push(...(data||[]));if(!data||data.length<500)break;
   }
-  const {data,error}=await query;
-
-  if(error)return msg('eventErr',error.message);
-
-  events=data||[];
-  renderEvents();
-  renderCopySources();
-  await loadEventManagement();
-
+  events=result;renderEvents();renderCopySources();
   if(currentEvent){
     const found=events.find(x=>x.id===currentEvent.id);
-    if(found)selectEvent(found.id,false);
+    if(found)currentEvent=found;else currentEvent=null;
   }
+  window.KabayanWorkflow?.sync();
+  // Optional management RPCs are loaded only when their module is opened.
+  if(window.KabayanWorkflow?.active()==='eventManagementPanel')await loadEventManagement();
 }
 
 function filteredEvents(){
   let rows=events.filter(e=>(e.lifecycle_status||'active')==='active');
   if(currentProfile?.role==='admin'&&unitFilterValue)rows=rows.filter(e=>e.work_unit_id===unitFilterValue);
+  const term=$('eventSearch')?.value.trim().toLocaleLowerCase('id-ID');
+  if(term)rows=rows.filter(e=>[e.title,e.code,e.work_units?.name].join(' ').toLocaleLowerCase('id-ID').includes(term));
   return rows;
 }
 function eventStateBadge(e){const s=e.lifecycle_status||'active';return `<span class="status ${s==='active'?'event-state-active':s==='archived'?'event-state-archived':'event-state-deleted'}">${s==='active'?'AKTIF':s==='archived'?'ARSIP':'DIHAPUS'}</span>`}
@@ -214,7 +232,7 @@ async function selectEvent(id,scroll=true){
   $('publishEventBtn').disabled=currentEvent.status==='published';$('closeEventBtn').disabled=currentEvent.status==='closed';
   ['phasePanel','questionPanel','evaluationPanel','monitorPanel','certificatePanel','reportPanel'].forEach(id=>$(id).style.display='block');
   window.KabayanWorkflow?.selected(scroll);
-  renderPhases();renderEvents();renderCopySources();await loadQuestions();await loadParticipants();await loadCertificates();if(scroll)$('settingsPanel').scrollIntoView({behavior:'smooth',block:'start'})
+  renderPhases();renderEvents();renderCopySources();await loadQuestions();await loadParticipants();await loadCertificates();if(scroll)window.scrollTo({top:0,behavior:'smooth'})
 }
 function renderPhases(){
   if(!currentEvent)return;
@@ -1332,7 +1350,7 @@ if(toggleLoginPassword){
     const input=$('loginPassword');
     const show=input.type==='password';
     input.type=show?'text':'password';
-    toggleLoginPassword.textContent=show?'◌':'◉';
+    toggleLoginPassword.textContent=show?'Tutup':'Lihat';
     toggleLoginPassword.setAttribute('aria-label',show?'Sembunyikan password':'Tampilkan password');
   };
 }

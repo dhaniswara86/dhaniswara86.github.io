@@ -12,7 +12,7 @@
     catch(error){$('pwLogoutError').textContent='Logout belum berhasil: '+error.message;$('pwLogout').disabled=false;}
   };
   const button=document.createElement('button');button.type='button';button.className='btn btn-outline';button.textContent='Ganti Password';
-  document.querySelector('#appView').prepend(button);
+  document.querySelector('#accountTools').prepend(button);
   button.onclick=()=>{if(busy)return;success.hidden=true;$('passwordForm').hidden=false;dialog.querySelector('form').reset();$('pwStatus').textContent='';dialog.showModal();};
   $('pwCancel').onclick=()=>{if(!busy)dialog.close();};
   $('passwordForm').onsubmit=async event=>{
