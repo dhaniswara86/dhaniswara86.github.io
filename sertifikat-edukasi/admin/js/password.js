@@ -13,14 +13,4 @@
     try{const {error}=await sb.auth.updateUser({password:value});if(error)throw error;$('passwordForm').reset();$('pwStatus').textContent='Password berhasil diubah.';}
     catch(error){$('pwStatus').textContent=error.message;}finally{$('pwSubmit').disabled=false;}
   };
-  document.addEventListener('click',async event=>{
-    const target=event.target.closest('[data-reset-user]');if(!target)return;
-    if(currentProfile?.role!=='admin')return;
-    const user=allAuthUsers.find(u=>u.user_id===target.dataset.resetUser&&u.role==='satker');
-    if(!user?.email)return msg('userErr','Email akun satker tidak tersedia.');
-    if(!confirm(`Kirim tautan reset password ke ${user.email}?`))return;
-    target.disabled=true;
-    try{const {error}=await sb.auth.resetPasswordForEmail(user.email,{redirectTo:new URL('reset-password.html',location.href).href});if(error)throw error;msg('userOk','Permintaan reset diterima. Minta pengguna memeriksa email dan folder spam.',true);}
-    catch(error){msg('userErr',error.message);}finally{target.disabled=false;}
-  });
 })();

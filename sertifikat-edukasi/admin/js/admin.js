@@ -1188,13 +1188,16 @@ async function loadUserManagement(){
 
   await loadWorkUnits();
 
-  $('workUnitRows').innerHTML=workUnits.length
-    ? workUnits.map(u=>`<tr>
+  const unitResult=await sb.from('work_units').select('*').order('name');
+  if(unitResult.error)return msg('userErr',unitResult.error.message);
+  window.kabayanManagedUnits=unitResult.data||[];
+  $('workUnitRows').innerHTML=window.kabayanManagedUnits.length
+    ? window.kabayanManagedUnits.map(u=>`<tr>
         <td><b>${esc(u.code)}</b></td>
         <td>${esc(u.name)}</td>
-        <td><span class="status ${u.active?'published':'closed'}">${u.active?'AKTIF':'NONAKTIF'}</span></td>
+        <td><span class="status ${u.active?'published':'closed'}">${u.active?'AKTIF':'NONAKTIF'}</span></td><td><div class="actions"><button class="btn btn-outline" data-edit-unit="${u.id}">Edit / Status</button><button class="btn btn-red" data-delete-unit="${u.id}">Hapus</button></div></td>
       </tr>`).join('')
-    : '<tr><td colspan="3" class="muted">Belum ada Satuan Kerja.</td></tr>';
+    : '<tr><td colspan="4" class="muted">Belum ada Satuan Kerja.</td></tr>';
 
   const {data,error}=await sb.rpc('admin_list_edu_users');
   if(error)return msg('userErr',error.message);
@@ -1227,7 +1230,7 @@ function renderUserProfiles(){
         <td>
           <div class="actions">
             <button class="btn btn-yellow" data-save-user="${u.user_id}">Simpan</button>
-            ${u.role==='satker'?`<button class="btn btn-outline" data-reset-user="${u.user_id}">Kirim Reset Password</button>`:''}
+            ${u.role==='satker'?`<button class="btn btn-outline" data-reset-user="${u.user_id}">Reset Password</button>`:''}
             ${u.role?`<button class="btn btn-red" data-remove-user="${u.user_id}">Cabut Akses</button>`:''}
           </div>
         </td>
