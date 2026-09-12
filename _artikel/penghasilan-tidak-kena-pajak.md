@@ -2,8 +2,8 @@
 layout: artikel-editorial
 
 title: "Penghasilan Tidak Kena Pajak (PTKP): Status, Tanggungan, dan Cara Menentukannya"
-hero_title: "PTKP:"
-hero_accent: "Berapa Penghasilan yang Belum Kena Pajak?"
+hero_title: "Penghasilan:"
+hero_accent: "Tidak Kena Pajak?"
 
 excerpt: "Tidak semua penghasilan langsung dikenai pajak. Kenali PTKP, tentukan status Anda, dan pahami siapa yang dapat menjadi tanggungan."
 description: "Panduan lengkap dan mudah memahami Penghasilan Tidak Kena Pajak (PTKP), status TK/K/K-I, tanggungan keluarga, serta hubungannya dengan PPh Pasal 21."
