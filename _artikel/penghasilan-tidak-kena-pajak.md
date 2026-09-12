@@ -87,7 +87,7 @@ custom_js:
 
   <div class="ptkp-note ptkp-note-blue">
     <strong>Catatan Kabayan</strong>
-    <p>PTKP bukan berarti setiap orang menerima “diskon pajak” sebesar Rp54 juta. PTKP bekerja dengan cara <strong>mengurangi penghasilan neto</strong> ketika menentukan Penghasilan Kena Pajak.</p>
+    <p>PTKP bukan berarti setiap orang menerima “diskon pajak". PTKP bekerja dengan cara mengurangi penghasilan neto ketika menentukan Penghasilan Kena Pajak.</p>
   </div>
 </section>
 
