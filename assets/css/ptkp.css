@@ -1515,3 +1515,78 @@
     color:#000!important;
   }
 }
+
+
+/* =========================================================
+   HERO KHUSUS PTKP — KELUARGA KABAYAN
+   Gambar: /assets/img/keluarga-kabayan.webp
+   ========================================================= */
+body:has(.ptkp-utility) .hero-companion-reading{
+  min-height:500px !important;
+  align-items:flex-end !important;
+  justify-content:center !important;
+}
+
+body:has(.ptkp-utility) .hero-companion-reading::before{
+  width:360px !important;
+  height:360px !important;
+  right:2% !important;
+  bottom:24px !important;
+  background:
+    radial-gradient(circle at 38% 33%, rgba(255,255,255,.92) 0 16%, transparent 17%),
+    linear-gradient(145deg,#ffd84a 0%,#ffec8b 45%,#d9eaff 100%) !important;
+}
+
+body:has(.ptkp-utility) .hero-kabayan-reading.ptkp-family-hero-image{
+  width:min(440px,100%) !important;
+  max-height:520px !important;
+  object-fit:contain !important;
+  object-position:center bottom !important;
+  filter:drop-shadow(0 28px 38px rgba(24,48,78,.16)) !important;
+}
+
+@media(max-width:960px){
+  body:has(.ptkp-utility) .hero-companion-reading{
+    min-height:360px !important;
+    justify-content:flex-start !important;
+  }
+
+  body:has(.ptkp-utility) .hero-companion-reading::before{
+    width:285px !important;
+    height:285px !important;
+    left:8px !important;
+    right:auto !important;
+    bottom:12px !important;
+  }
+
+  body:has(.ptkp-utility) .hero-kabayan-reading.ptkp-family-hero-image{
+    width:315px !important;
+    max-height:355px !important;
+  }
+}
+
+@media(max-width:680px){
+  body:has(.ptkp-utility) .hero-companion-reading{
+    min-height:300px !important;
+    justify-content:center !important;
+  }
+
+  body:has(.ptkp-utility) .hero-companion-reading::before{
+    width:245px !important;
+    height:245px !important;
+    left:50% !important;
+    transform:translateX(-50%);
+    bottom:8px !important;
+  }
+
+  body:has(.ptkp-utility) .hero-kabayan-reading.ptkp-family-hero-image{
+    width:270px !important;
+    max-height:300px !important;
+  }
+}
+
+@media print{
+  body:has(.ptkp-utility) .hero-kabayan-reading.ptkp-family-hero-image{
+    display:none !important;
+  }
+}
