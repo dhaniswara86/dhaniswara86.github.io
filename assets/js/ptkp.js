@@ -1,6 +1,19 @@
 (() => {
   "use strict";
 
+
+  /* =========================================================
+     HERO PTKP — KELUARGA KABAYAN
+     Hanya berlaku pada artikel PTKP.
+     File harus tersedia di /assets/img/keluarga-kabayan.webp
+     ========================================================= */
+  const ptkpFamilyHero = document.querySelector(".hero-kabayan-reading");
+  if (ptkpFamilyHero && document.querySelector(".ptkp-utility")) {
+    ptkpFamilyHero.src = "/assets/img/keluarga-kabayan.webp";
+    ptkpFamilyHero.alt = "";
+    ptkpFamilyHero.classList.add("ptkp-family-hero-image");
+  }
+
   /* =========================================================
      PTKP CHECKER
      ========================================================= */
