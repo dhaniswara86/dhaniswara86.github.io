@@ -28,7 +28,7 @@ legal_basis: "UU PPh s.t.d.t.d. UU HPP, PMK 101/2016, PP 58/2023, dan PMK 168/20
 permalink: /penghasilan-tidak-kena-pajak.html
 
 summary_label: "Intinya"
-summary: "PTKP adalah bagian dari penghasilan neto Wajib Pajak Orang Pribadi yang tidak diperhitungkan sebagai Penghasilan Kena Pajak. Besarnya dipengaruhi oleh status perkawinan dan jumlah tanggungan yang memenuhi ketentuan."
+summary: "PTKP adalah batasan penghasilan Wajib Pajak Orang Pribadi yang tidak dikenai pajak. Besarnya dipengaruhi oleh status perkawinan dan jumlah tanggungan yang memenuhi ketentuan."
 
 sidebar_note: "Jangan tertukar antara PTKP dan PKP. PTKP merupakan pengurang penghasilan neto untuk menentukan Penghasilan Kena Pajak, bukan pengurang langsung pajak yang harus dibayar."
 
