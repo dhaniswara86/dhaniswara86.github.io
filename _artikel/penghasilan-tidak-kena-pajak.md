@@ -43,10 +43,10 @@ hero_stats:
     label: "Tanggungan yang diperhitungkan"
 
 custom_css:
-  - /assets/css/ptkp.css?v=20260912-1
+  - /assets/css/ptkp.css?v=20260912-2
 
 custom_js:
-  - /assets/js/ptkp.js?v=20260912-1
+  - /assets/js/ptkp.js?v=20260912-2
 ---
 
 <div class="ptkp-utility">
