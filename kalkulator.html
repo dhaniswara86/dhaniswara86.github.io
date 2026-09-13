@@ -102,7 +102,7 @@
     .hero-stage{position:relative;min-height:660px;display:grid;place-items:center;isolation:isolate}
     .hero-cloud{position:absolute;z-index:-1;width:min(54vw,760px);height:min(44vw,620px);background:url("assets/img/mega-mendung-cirebon.webp") center/contain no-repeat;opacity:.80}
     .hero-mascot-wrap{position:relative;width:min(38vw,560px);height:620px;display:flex;align-items:flex-end;justify-content:center}
-    .hero-mascot{max-width:100%;max-height:100%;object-fit:contain;user-select:none;filter:drop-shadow(0 28px 24px rgba(27,45,74,.16))}
+    .hero-mascot{width:100%;height:100%;max-width:100%;max-height:100%;object-fit:contain;object-position:center bottom;user-select:none;filter:drop-shadow(0 28px 24px rgba(27,45,74,.16))}
     .hero-scroll{position:absolute;z-index:10;bottom:18px;left:50%;display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;background:rgba(255,255,255,.86);color:#7a8491;box-shadow:0 7px 24px rgba(25,45,75,.06);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font-size:11px;font-weight:700;letter-spacing:.035em;text-decoration:none;transform:translateX(-50%)}
     .hero-scroll-arrow{color:var(--blue);font-size:14px;animation:scrollHint 1.8s ease-in-out infinite}@keyframes scrollHint{0%,100%{transform:translateY(-1px);opacity:.62}50%{transform:translateY(4px);opacity:1}}
 
@@ -124,7 +124,7 @@
     .chapter-number{display:block;margin-bottom:24px;color:var(--blue);font-size:15px;font-weight:800;letter-spacing:.12em}.chapter-kicker{display:block;margin-bottom:12px;color:#8a929d;font-size:11px;font-weight:780;letter-spacing:.11em;text-transform:uppercase}
     .chapter-title{margin:0;color:#111318;font-size:clamp(58px,7vw,96px);font-weight:780;letter-spacing:-.07em;line-height:.9;text-transform:uppercase}.chapter-description{max-width:490px;margin:28px 0 0;color:#66707c;font-size:18px;line-height:1.6}
     .chapter-link{display:inline-flex;align-items:center;gap:8px;margin-top:28px;color:#111318;font-size:14px;font-weight:720;text-decoration:none}.chapter-link span{transition:translate .2s ease}.chapter-link:hover span{translate:3px -2px}
-    .chapter-visual{position:relative;min-height:560px;display:grid;place-items:center}.chapter-image{position:absolute;inset:auto 0 0;margin:auto;width:min(520px,90%);height:470px;object-fit:contain;filter:drop-shadow(0 28px 24px rgba(20,40,70,.16));opacity:.13;pointer-events:none}.chapter-mascot{position:absolute;z-index:5;width:clamp(142px,14vw,205px);max-height:285px;object-fit:contain;pointer-events:none;user-select:none;filter:drop-shadow(0 18px 18px rgba(25,42,68,.16));opacity:0;transform:translateY(28px) scale(.94);transition:opacity .72s var(--ease),transform .82s var(--ease)}.tool-chapter.is-visible .chapter-mascot{opacity:1;transform:translateY(0) scale(1)}.chapter-pph .chapter-mascot{right:-24px;bottom:16px}.chapter-ppn .chapter-mascot{left:-26px;bottom:2px;width:clamp(138px,13.5vw,195px)}.chapter-xml .chapter-mascot{right:-34px;bottom:-4px;width:clamp(145px,14vw,205px);filter:drop-shadow(0 20px 22px rgba(0,0,0,.34))}.chapter-government .chapter-mascot{left:-30px;bottom:-2px;width:clamp(145px,14vw,205px)}.chapter-refund .chapter-mascot{right:-25px;bottom:-4px;width:clamp(142px,13.5vw,195px)}
+    .chapter-visual{position:relative;min-height:560px;display:grid;place-items:center}.chapter-image{position:absolute;inset:auto 0 0;margin:auto;width:min(520px,90%);height:470px;object-fit:contain;filter:drop-shadow(0 28px 24px rgba(20,40,70,.16));opacity:.13;pointer-events:none}.chapter-mascot{position:absolute;z-index:5;width:clamp(142px,14vw,205px);max-height:285px;object-fit:contain;pointer-events:none;user-select:none;filter:drop-shadow(0 18px 18px rgba(25,42,68,.16));opacity:0;transform:translateY(28px);transition:opacity .72s var(--ease),transform .82s var(--ease)}.tool-chapter.is-visible .chapter-mascot{opacity:1;transform:translateY(0)}.chapter-pph .chapter-mascot{right:-24px;bottom:16px}.chapter-ppn .chapter-mascot{left:-26px;bottom:2px;width:clamp(138px,13.5vw,195px)}.chapter-xml .chapter-mascot{right:-34px;bottom:-4px;width:clamp(145px,14vw,205px);filter:drop-shadow(0 20px 22px rgba(0,0,0,.34))}.chapter-government .chapter-mascot{left:-30px;bottom:-2px;width:clamp(145px,14vw,205px)}.chapter-refund .chapter-mascot{right:-25px;bottom:-4px;width:clamp(142px,13.5vw,195px)}
 
     /* PPh21 */
     .chapter-pph{background:#f5f9ff}.calc-window{position:relative;z-index:2;width:min(520px,92%);padding:26px;border:1px solid #dfe8f3;border-radius:30px;background:rgba(255,255,255,.94);box-shadow:0 34px 75px rgba(29,64,110,.14)}
@@ -158,8 +158,8 @@
     /* Motion: no text blur */
     [data-reveal]{opacity:0;transform:translateY(30px);transition:opacity .72s var(--ease),transform .72s var(--ease)}
     [data-reveal="left"]{transform:translateX(-34px)}[data-reveal="right"]{transform:translateX(34px)}[data-reveal].is-visible{opacity:1;transform:translate(0,0)}
-    .hero-eyebrow,.hero-title,.hero-description,.hero-actions{opacity:0;transform:translateY(22px);animation:heroEnter .72s var(--ease) both}.hero-eyebrow{animation-delay:.08s}.hero-title{animation-delay:.17s}.hero-description{animation-delay:.27s}.hero-actions{animation-delay:.36s}.hero-mascot-wrap{opacity:0;transform:translateY(34px) scale(.97);animation:mascotEnter .9s var(--ease) .28s forwards}.hero-cloud{opacity:0;transform:scale(.97);animation:cloudEnter 1.05s var(--ease) .48s forwards,cloudBreath 8.5s ease-in-out 1.6s infinite}.hero-mascot{animation:mascotFloat 5.8s ease-in-out 1.4s infinite}
-    @keyframes heroEnter{to{opacity:1;transform:translateY(0)}}@keyframes mascotEnter{to{opacity:1;transform:translateY(0) scale(1)}}@keyframes cloudEnter{to{opacity:.8;transform:scale(1)}}@keyframes cloudBreath{0%,100%{scale:1;translate:0 0}50%{scale:1.02;translate:0 -5px}}@keyframes mascotFloat{0%,100%{translate:0 0}50%{translate:0 -8px}}
+    .hero-eyebrow,.hero-title,.hero-description,.hero-actions{opacity:0;transform:translateY(22px);animation:heroEnter .72s var(--ease) both}.hero-eyebrow{animation-delay:.08s}.hero-title{animation-delay:.17s}.hero-description{animation-delay:.27s}.hero-actions{animation-delay:.36s}.hero-mascot-wrap{opacity:0;transform:translateY(34px);animation:mascotEnter .9s var(--ease) .28s forwards}.hero-cloud{opacity:0;transform:scale(.97);animation:cloudEnter 1.05s var(--ease) .48s forwards,cloudBreath 8.5s ease-in-out 1.6s infinite}.hero-mascot{animation:mascotFloat 5.8s ease-in-out 1.4s infinite}
+    @keyframes heroEnter{to{opacity:1;transform:translateY(0)}}@keyframes mascotEnter{to{opacity:1;transform:translateY(0)}}@keyframes cloudEnter{to{opacity:.8;transform:scale(1)}}@keyframes cloudBreath{0%,100%{scale:1;translate:0 0}50%{scale:1.02;translate:0 -5px}}@keyframes mascotFloat{0%,100%{translate:0 0}50%{translate:0 -8px}}
     .tool-tab{opacity:0;transform:translateY(18px)}.tool-rail.is-visible .tool-tab{animation:tabEnter .55s var(--ease) forwards}.tool-rail.is-visible .tool-tab:nth-child(1){animation-delay:.02s}.tool-rail.is-visible .tool-tab:nth-child(2){animation-delay:.09s}.tool-rail.is-visible .tool-tab:nth-child(3){animation-delay:.16s}.tool-rail.is-visible .tool-tab:nth-child(4){animation-delay:.23s}.tool-rail.is-visible .tool-tab:nth-child(5){animation-delay:.30s}@keyframes tabEnter{to{opacity:1;transform:translateY(0)}}
     .calc-progress i{transform:scaleX(0)}.chapter-pph.is-visible .calc-progress i{animation:barGrow .9s var(--ease) .45s forwards}@keyframes barGrow{to{transform:scaleX(1)}}
     .invoice-row{opacity:0;transform:translateY(10px)}.chapter-ppn.is-visible .invoice-row{animation:rowEnter .48s var(--ease) forwards}.chapter-ppn.is-visible .invoice-row:nth-child(2){animation-delay:.18s}.chapter-ppn.is-visible .invoice-row:nth-child(3){animation-delay:.27s}.chapter-ppn.is-visible .invoice-row:nth-child(4){animation-delay:.36s}.chapter-ppn.is-visible .invoice-row:nth-child(5){animation-delay:.45s}@keyframes rowEnter{to{opacity:1;transform:translateY(0)}}
@@ -180,7 +180,7 @@
     @media(max-width:640px){
       .hero-title{font-size:49px}.hero-description{font-size:15px}.hero-stage{min-height:430px}.hero-mascot-wrap{height:420px}.hero-actions{align-items:stretch;flex-direction:column}.btn-primary,.btn-secondary{justify-content:center}
       .editorial-statement{padding:100px 20px}.statement-title{font-size:52px}.statement-note{margin-top:38px}
-      .tool-chapter{padding:90px 20px}.chapter-title{font-size:52px}.chapter-description{font-size:16px}.chapter-visual{min-height:500px;padding-bottom:112px}.chapter-mascot{right:auto!important;left:50%!important;bottom:0!important;width:145px;max-height:190px;transform:translate(-50%,28px) scale(.94)}.tool-chapter.is-visible .chapter-mascot{transform:translate(-50%,0) scale(1)}
+      .tool-chapter{padding:90px 20px}.chapter-title{font-size:52px}.chapter-description{font-size:16px}.chapter-visual{min-height:500px;padding-bottom:112px}.chapter-mascot{right:auto!important;left:50%!important;bottom:0!important;width:145px;max-height:190px;transform:translate(-50%,28px)}.tool-chapter.is-visible .chapter-mascot{transform:translate(-50%,0)}
       .calc-window,.invoice,.refund-route{width:100%}.invoice-mark{right:5px;bottom:-33px}.flow-visual{grid-template-columns:1fr;gap:10px}.flow-arrow{transform:rotate(90deg);font-size:22px}.chapter-xml.is-visible .flow-arrow{animation:none;opacity:1;transform:rotate(90deg)}.flow-node{min-height:155px}.xml-glow{width:100%;height:400px}
       .scope-section{padding:100px 20px}.scope-title{font-size:50px}.scope-item summary{grid-template-columns:38px 1fr 32px;padding:23px 0}.scope-name{font-size:28px}.scope-body{padding-left:52px}.contact-strip{padding:90px 20px}.contact-copy h2{font-size:52px}.footer-inner{align-items:flex-start;flex-direction:column}
     }
@@ -201,7 +201,7 @@
   <header class="site-nav" id="siteNav">
     <div class="nav-inner">
       <a class="nav-brand" href="index.html" aria-label="Kabayan — Beranda">
-        <img class="brand-logo" src="images/LogoASD.svg" alt="Logo Kabayan" />
+        <img class="brand-logo" src="images/LogoASD.svg" alt="Logo Kabayan"  width="1536" height="1024" />
         <span><strong>Kabayan</strong></span>
       </a>
       <nav class="desktop-menu" aria-label="Navigasi utama">
@@ -246,7 +246,7 @@
         </div>
         <div class="hero-stage" aria-hidden="true">
           <div class="hero-cloud"></div>
-          <div class="hero-mascot-wrap"><img class="hero-mascot" src="assets/img/kabayan-kalkulator.webp" alt="" /></div>
+          <div class="hero-mascot-wrap"><img class="hero-mascot" src="assets/img/kabayan-kalkulator.webp" alt=""  width="1122" height="1402" loading="eager" fetchpriority="high" decoding="async" /></div>
         </div>
       </div>
       <a class="hero-scroll" href="#statement" aria-label="Lanjut ke bagian berikutnya"><span>Jelajahi Kalkulator</span><span class="hero-scroll-arrow" aria-hidden="true">↓</span></a>
@@ -278,8 +278,8 @@
           <a class="chapter-link" data-link="pph21" href="kalkulator-pasal21.html">Buka kalkulator <span aria-hidden="true">↗</span></a>
         </div>
         <div class="chapter-visual" data-reveal="right">
-          <img class="chapter-image" src="assets/img/icon-pph-pasal-21.webp" alt="" aria-hidden="true" />
-          <img class="chapter-mascot" src="assets/img/kabayan-kalkulator.webp" alt="" aria-hidden="true" />
+          <img class="chapter-image" src="assets/img/icon-pph-pasal-21.webp" alt="" aria-hidden="true"  width="900" height="900" loading="lazy" decoding="async" />
+          <img class="chapter-mascot" src="assets/img/kabayan-kalkulator.webp" alt="" aria-hidden="true"  width="1122" height="1402" loading="lazy" decoding="async" />
           <div class="calc-window">
             <div class="calc-window-head"><span>PPh Pasal 21</span><span class="calc-status">Siap dihitung</span></div>
             <span class="calc-label">Contoh penghasilan bruto</span><strong class="calc-value" data-count="12000000">Rp 0</strong>
@@ -300,8 +300,8 @@
           <a class="chapter-link" data-link="ppn" href="kalkulator-ppn-kabayan.html">Buka kalkulator <span aria-hidden="true">↗</span></a>
         </div>
         <div class="chapter-visual" data-reveal="left">
-          <img class="chapter-image" src="assets/img/icon-ppn.webp" alt="" aria-hidden="true" />
-          <img class="chapter-mascot" src="assets/img/kabayan-formulir.webp" alt="" aria-hidden="true" />
+          <img class="chapter-image" src="assets/img/icon-ppn.webp" alt="" aria-hidden="true"  width="900" height="900" loading="lazy" decoding="async" />
+          <img class="chapter-mascot" src="assets/img/kabayan-formulir.webp" alt="" aria-hidden="true"  width="1122" height="1402" loading="lazy" decoding="async" />
           <div class="invoice">
             <div class="invoice-top"><span class="invoice-brand">FAKTUR / INVOICE</span><span class="invoice-badge">PPN</span></div>
             <div class="invoice-row"><span>Nilai transaksi</span><strong>Rp 100.000.000</strong></div>
@@ -324,7 +324,7 @@
         </div>
         <div class="chapter-visual" data-reveal="right">
           <div class="xml-glow"></div>
-          <img class="chapter-mascot" src="assets/img/kabayan-aplikasi.webp" alt="" aria-hidden="true" />
+          <img class="chapter-mascot" src="assets/img/kabayan-aplikasi.webp" alt="" aria-hidden="true"  width="1122" height="1402" loading="lazy" decoding="async" />
           <div class="flow-visual">
             <div class="flow-node"><small>01 / INPUT</small><strong>EXCEL</strong><div class="flow-lines"><span></span><span></span><span></span></div></div>
             <div class="flow-arrow">→</div>
@@ -345,8 +345,8 @@
           <a class="chapter-link" data-link="governmentTax" href="pajak-instansi-satu-pintu.html">Buka aplikasi <span aria-hidden="true">↗</span></a>
         </div>
         <div class="chapter-visual" data-reveal="left">
-          <img class="chapter-image" src="assets/img/icon-pajak-instansi-pemerintah.webp" alt="" aria-hidden="true" />
-          <img class="chapter-mascot" src="assets/img/kabayan-pengetahuan.webp" alt="" aria-hidden="true" />
+          <img class="chapter-image" src="assets/img/icon-pajak-instansi-pemerintah.webp" alt="" aria-hidden="true"  width="900" height="900" loading="lazy" decoding="async" />
+          <img class="chapter-mascot" src="assets/img/kabayan-pengetahuan.webp" alt="" aria-hidden="true"  width="1122" height="1402" loading="lazy" decoding="async" />
           <div class="decision-map">
             <div class="decision-step"><b>01</b><div><strong>Jenis Belanja</strong><small>Identifikasi transaksi</small></div><span class="decision-arrow">↓</span></div>
             <div class="decision-step"><b>02</b><div><strong>Profil Rekanan</strong><small>Status dan karakter pihak</small></div><span class="decision-arrow">↓</span></div>
@@ -366,8 +366,8 @@
           <a class="chapter-link" data-link="preliminaryRefund" href="kalkulator-pengembalian-pendahuluan.html">Buka kalkulator <span aria-hidden="true">↗</span></a>
         </div>
         <div class="chapter-visual" data-reveal="right">
-          <img class="chapter-image" src="assets/img/icon-pengembalian-pendahuluan.webp" alt="" aria-hidden="true" />
-          <img class="chapter-mascot" src="assets/img/kabayan-kalkulator.webp" alt="" aria-hidden="true" />
+          <img class="chapter-image" src="assets/img/icon-pengembalian-pendahuluan.webp" alt="" aria-hidden="true"  width="900" height="900" loading="lazy" decoding="async" />
+          <img class="chapter-mascot" src="assets/img/kabayan-kalkulator.webp" alt="" aria-hidden="true"  width="1122" height="1402" loading="lazy" decoding="async" />
           <div class="refund-route">
             <div class="route-head"><strong>Jalur Pengembalian</strong><span>Terpandu</span></div>
             <div class="route-line">
