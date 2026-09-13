@@ -2546,11 +2546,11 @@
 .hybrid-axis-h{height:1px;width:90%;left:5%}.hybrid-axis-v{width:1px;height:86%;top:7%}
 .hybrid-mascot-wrap{position:relative;width:min(38vw,560px);height:620px;display:flex;align-items:flex-end;justify-content:center}
 .hybrid-mascot{
-  max-width:100%;max-height:100%;object-fit:contain;user-select:none;
+  width:100%;height:100%;max-width:100%;max-height:100%;object-fit:contain;object-position:center bottom;user-select:none;
   filter:drop-shadow(0 28px 24px rgba(27,45,74,.16));
   transition:opacity .35s ease,transform .5s cubic-bezier(.2,.8,.2,1);
 }
-.hybrid-mascot.is-switching{opacity:0;transform:translateY(18px) scale(.965)}
+.hybrid-mascot.is-switching{opacity:0;transform:translateY(18px)}
 
 .hybrid-hero-wrap::after{
   content:"";
@@ -2837,8 +2837,6 @@
   0%,100%{scale:1;translate:0 0}
   50%{scale:1.022;translate:0 -5px}
 }
-  50%{translate:0 6px;rotate:-.3deg}
-}
 @keyframes hybridAxisBreathe{
   0%,100%{opacity:.46;scale:.97 1}
   50%{opacity:.82;scale:1 1}
@@ -3072,7 +3070,7 @@
   animation:kmAccentFlow 7s ease-in-out 1.1s infinite alternate;
 }
 .kabayan-motion .ed-hero .hybrid-mascot-wrap{
-  opacity:0;transform:translateY(50px) scale(.94);
+  opacity:0;transform:translateY(50px);
   animation:kmMascotEnter 1.12s var(--motion-ease) .32s forwards, kmMascotIdle 6s ease-in-out 1.7s infinite;
 }
 .kabayan-motion .ed-hero .hybrid-stage::before{
@@ -3099,7 +3097,7 @@
 
 /* Slider copy switch tetap lembut dan sedikit lebih sinematik. */
 .kabayan-motion .hybrid-copy.is-switching .hybrid-headline{transform:translateY(12px);opacity:0}
-.kabayan-motion .hybrid-mascot.is-switching{filter:blur(4px) drop-shadow(0 28px 24px rgba(27,45,74,.16));transform:translateY(22px) scale(.95);opacity:0}
+.kabayan-motion .hybrid-mascot.is-switching{filter:blur(4px) drop-shadow(0 28px 24px rgba(27,45,74,.16));transform:translateY(22px);opacity:0}
 
 /* =========================================================
    CATEGORY RAIL STAGGER
@@ -3319,7 +3317,7 @@
 .kabayan-motion .ed-final.motion-in .ed-final-visual::before{animation:kmFinalCloud 1.1s var(--motion-ease) .34s forwards,kmFinalCloudIdle 8s ease-in-out 1.7s infinite}
 @keyframes kmFinalCloud{to{opacity:.24;transform:translateX(-50%) translateY(0) scale(1)}}
 @keyframes kmFinalCloudIdle{0%,100%{translate:0 0}50%{translate:0 -7px}}
-.kabayan-motion .ed-final-visual img{opacity:0;transform:translateY(60px) scale(.92)}
+.kabayan-motion .ed-final-visual img{opacity:0;transform:translateY(60px)}
 .kabayan-motion .ed-final.motion-in .ed-final-visual img{animation:kmFinalMascot 1.05s var(--motion-ease) .46s forwards,kmFinalMascotIdle 6s ease-in-out 1.7s infinite}
 @keyframes kmFinalMascot{to{opacity:1;transform:none}}
 @keyframes kmFinalMascotIdle{0%,100%{translate:0 0}50%{translate:0 -8px}}
@@ -3575,7 +3573,7 @@
 <header class="site-nav">
 <div class="nav-inner nav-minimal-inner">
 <a aria-label="Kabayan — Beranda" class="nav-brand nav-minimal-brand" href="index.html">
-<img alt="Logo Kabayan" class="brand-logo" src="images/LogoASD.svg"/>
+<img alt="Logo Kabayan" class="brand-logo" width="1536" height="1024" src="images/LogoASD.svg"/>
 <span><strong>Kabayan</strong></span>
 </a>
 <nav aria-label="Navigasi utama" class="desktop-menu nav-minimal-menu">
@@ -3624,7 +3622,7 @@
 </div>
 <div aria-live="polite" class="hybrid-stage">
 <div class="hybrid-mascot-wrap">
-<img alt="Kabayan menunjukkan artikel pajak" class="hybrid-mascot" id="hybridMascot" src="assets/img/kabayan-pengetahuan.webp"/>
+<img alt="Kabayan menunjukkan artikel pajak" class="hybrid-mascot" id="hybridMascot" width="1122" height="1402" loading="eager" fetchpriority="high" decoding="async" src="assets/img/kabayan-pengetahuan.webp"/>
 </div>
 </div>
 </div>
@@ -3858,7 +3856,7 @@
 <a class="ed-final-button" href="jelajahi.html">Jelajahi Kabayan <span>↗</span></a>
 </div>
 <div aria-hidden="true" class="ed-final-visual">
-<img alt="" src="assets/img/kabayan-pengetahuan.webp"/>
+<img alt="" width="1122" height="1402" loading="lazy" decoding="async" src="assets/img/kabayan-pengetahuan.webp"/>
 </div>
 </div>
 </section>
@@ -4576,6 +4574,31 @@
 
   let activeIndex = 0;
   let autoplay = null;
+  let switchVersion = 0;
+  const preparedImages = new Map();
+
+  function prepareImage(src) {
+    if (!preparedImages.has(src)) {
+      const pending = (async () => {
+        const image = new Image();
+        image.decoding = 'async';
+        await new Promise((resolve, reject) => {
+          image.onload = resolve;
+          image.onerror = () => reject(new Error('Gambar tidak tersedia: ' + src));
+          image.src = src;
+        });
+        if (image.decode) await image.decode();
+        return image;
+      })();
+      preparedImages.set(src, pending);
+      pending.catch(() => preparedImages.delete(src));
+    }
+    return preparedImages.get(src);
+  }
+
+  function warmNextImage(index) {
+    prepareImage(sliderData[(index + 1) % sliderData.length].image).catch(() => {});
+  }
 
   sliderData.forEach((slide,index) => {
     const link = document.createElement('a');
@@ -4586,26 +4609,43 @@
     categories.appendChild(link);
   });
 
-  function activate(index){
+  async function activate(index){
     activeIndex = (index + sliderData.length) % sliderData.length;
-    const slide = sliderData[activeIndex];
-    categories.querySelectorAll('.hybrid-category').forEach((el,i) => el.classList.toggle('active',i === activeIndex));
+    const nextIndex = activeIndex;
+    const slide = sliderData[nextIndex];
+    const version = ++switchVersion;
+    // Keep the current image visible while the next asset loads.
+    mascot.classList.remove('is-switching');
+    if (copy) copy.classList.remove('is-switching');
+    let nextImage;
+    try {
+      nextImage = await prepareImage(slide.image);
+    } catch {
+      return;
+    }
+    if (version !== switchVersion) return;
     mascot.classList.add('is-switching');
     if (copy) copy.classList.add('is-switching');
-    window.setTimeout(() => {
-      mascot.src = slide.image;
-      mascot.alt = slide.alt;
-      headline.innerHTML = slide.headline;
-      description.textContent = slide.description;
-      eyebrow.textContent = slide.label;
-      primaryCta.innerHTML = `${slide.cta} <span>↗</span>`;
-      primaryCta.href = slide.href;
-      primaryCta.classList.toggle('is-yellow', slide.theme === 'yellow');
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    await new Promise(resolve => window.setTimeout(resolve, reduce ? 0 : 350));
+    if (version !== switchVersion) return;
+    mascot.width = nextImage.naturalWidth;
+    mascot.height = nextImage.naturalHeight;
+    mascot.src = slide.image;
+    mascot.alt = slide.alt;
+    headline.innerHTML = slide.headline;
+    description.textContent = slide.description;
+    eyebrow.textContent = slide.label;
+    primaryCta.innerHTML = `${slide.cta} <span>↗</span>`;
+    primaryCta.href = slide.href;
+    primaryCta.classList.toggle('is-yellow', slide.theme === 'yellow');
+    categories.querySelectorAll('.hybrid-category').forEach((el,i) => el.classList.toggle('active',i === nextIndex));
+    window.requestAnimationFrame(() => {
+      if (version !== switchVersion) return;
       mascot.classList.remove('is-switching');
-      window.requestAnimationFrame(() => {
-        if (copy) copy.classList.remove('is-switching');
-      });
-    },220);
+      if (copy) copy.classList.remove('is-switching');
+    });
+    warmNextImage(nextIndex);
   }
 
   function stopAutoplay(){ if (autoplay !== null) { window.clearInterval(autoplay); autoplay = null; } }
@@ -4618,6 +4658,9 @@
     if (event.key === 'ArrowLeft') { activate(activeIndex - 1); resetAutoplay(); }
     if (event.key === 'ArrowRight') { activate(activeIndex + 1); resetAutoplay(); }
   });
+  // Warm only the next slide, after the first hero image is ready.
+  if (mascot.complete && mascot.naturalWidth) warmNextImage(0);
+  else mascot.addEventListener('load', () => warmNextImage(0), {once:true});
   startAutoplay();
 })();
 </script>
