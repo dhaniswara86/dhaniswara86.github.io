@@ -11,6 +11,12 @@
 <meta property="og:url" content="https://dhaniswara86.id/buku.html"/>
 <meta property="og:type" content="website"/>
 <title>Buku Digital | Kabayan</title>
+<script>
+// Set the initial animation state before page content can paint.
+if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.documentElement.classList.add('motion-ready');
+}
+</script>
 <style>
 :root{
   --black:#000;
@@ -214,7 +220,7 @@ main{padding-top:var(--nav-height)}
 }
 .hero-mascot-wrap{position:relative;width:min(38vw,560px);height:620px;display:flex;align-items:flex-end;justify-content:center}
 .hero-mascot{
-  max-width:100%;max-height:100%;object-fit:contain;user-select:none;
+  width:100%;height:100%;max-width:100%;max-height:100%;object-fit:contain;object-position:center bottom;user-select:none;
   filter:drop-shadow(0 28px 24px rgba(27,45,74,.16));
 }
 .hero-scroll{
@@ -377,7 +383,7 @@ footer{background:#f5f5f7;color:#6e6e73}
 .motion-ready .hero-title,
 .motion-ready .hero-description,
 .motion-ready .hero-actions{opacity:0;transform:translateY(24px)}
-.motion-ready .hero-mascot{opacity:0;transform:translateY(34px) scale(.97)}
+.motion-ready .hero-mascot{opacity:0;transform:translateY(34px)}
 .motion-ready .hero-cloud{opacity:0;transform:translateY(12px) scale(.98)}
 .motion-ready .hero-eyebrow{animation:heroEnter .62s var(--ease) .08s forwards}
 .motion-ready .hero-title{animation:heroEnter .72s var(--ease) .16s forwards}
@@ -387,7 +393,7 @@ footer{background:#f5f5f7;color:#6e6e73}
 .motion-ready .hero-mascot{animation:mascotEnter .9s var(--ease) .34s forwards,mascotFloat 5.8s ease-in-out 1.35s infinite}
 @keyframes heroEnter{to{opacity:1;transform:translateY(0)}}
 @keyframes cloudEnter{to{opacity:.80;transform:translateY(0) scale(1)}}
-@keyframes mascotEnter{to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes mascotEnter{to{opacity:1;transform:translateY(0)}}
 @keyframes cloudBreath{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-5px) scale(1.02)}}
 @keyframes mascotFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
 
@@ -475,7 +481,7 @@ footer{background:#f5f5f7;color:#6e6e73}
 <header class="site-nav" id="siteNav">
   <div class="nav-inner">
     <a class="nav-brand" href="index.html" aria-label="Kabayan — Beranda">
-      <img class="brand-logo" src="images/LogoASD.svg" alt="Logo Kabayan"/>
+      <img class="brand-logo" src="images/LogoASD.svg" alt="Logo Kabayan" width="1536" height="1024"/>
       <span><strong>Kabayan</strong></span>
     </a>
     <nav class="desktop-menu" aria-label="Navigasi utama">
@@ -522,7 +528,7 @@ footer{background:#f5f5f7;color:#6e6e73}
       <div class="hero-stage" aria-label="Kabayan membawa buku pajak">
         <div class="hero-cloud" aria-hidden="true"></div>
         <div class="hero-mascot-wrap">
-          <img class="hero-mascot" src="assets/img/kabayan-buku.webp" alt="Kabayan membawa buku pajak"/>
+          <img class="hero-mascot" src="assets/img/kabayan-buku.webp" alt="Kabayan membawa buku pajak" width="1122" height="1402" loading="eager" fetchpriority="high" decoding="async"/>
         </div>
       </div>
     </div>
@@ -552,13 +558,13 @@ footer{background:#f5f5f7;color:#6e6e73}
       </div>
       <div class="featured-stack reveal from-right" aria-label="Tiga buku pilihan Kabayan">
         <a class="featured-book-link left" href="buku-detail.html?id=cermat-2126" aria-label="Cermat Pemotongan PPh Pasal 21/26">
-          <img src="images/mockup-cermat-2126.webp" alt="Mockup buku Cermat Pemotongan PPh Pasal 21/26"/>
+          <img src="images/mockup-cermat-2126.webp" alt="Mockup buku Cermat Pemotongan PPh Pasal 21/26" width="1122" height="1402" loading="lazy" decoding="async"/>
         </a>
         <a class="featured-book-link center" href="buku-detail.html?id=converter-xml-2126" aria-label="Converter Excel ke XML PPh Pasal 21/26">
-          <img src="images/mockup-converter-excel-xml-2126.webp" alt="Mockup buku Petunjuk Teknis Converter Excel ke XML Coretax Seri PPh Pasal 21/26"/>
+          <img src="images/mockup-converter-excel-xml-2126.webp" alt="Mockup buku Petunjuk Teknis Converter Excel ke XML Coretax Seri PPh Pasal 21/26" width="1122" height="1402" loading="lazy" decoding="async"/>
         </a>
         <a class="featured-book-link right" href="buku-detail.html?id=list-barang-jasa-faktur" aria-label="Kode Barang dan Jasa Era Coretax">
-          <img src="images/mockup-list-kode-barang-jasa.webp" alt="Mockup buku Kode Barang dan Jasa Era Coretax"/>
+          <img src="images/mockup-list-kode-barang-jasa.webp" alt="Mockup buku Kode Barang dan Jasa Era Coretax" width="1122" height="1402" loading="lazy" decoding="async"/>
         </a>
       </div>
     </div>
@@ -611,7 +617,7 @@ footer{background:#f5f5f7;color:#6e6e73}
       </div>
       <div class="closing-visual reveal from-right">
         <div class="closing-cloud" aria-hidden="true"></div>
-        <img class="closing-mascot" src="assets/img/kabayan-buku.webp" alt="Kabayan membawa buku"/>
+        <img class="closing-mascot" src="assets/img/kabayan-buku.webp" alt="Kabayan membawa buku" width="1122" height="1402" loading="lazy" decoding="async"/>
       </div>
     </div>
   </section>
@@ -630,9 +636,7 @@ footer{background:#f5f5f7;color:#6e6e73}
 <script>
 (() => {
   "use strict";
-  const body = document.body;
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!reduceMotion) body.classList.add('motion-ready');
 
   const nav = document.getElementById('siteNav');
   const progress = document.getElementById('pageProgressBar');
