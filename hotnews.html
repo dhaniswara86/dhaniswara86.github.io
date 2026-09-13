@@ -395,9 +395,12 @@ permalink: /hotnews.html
     .hero-mascot {
       position: relative;
       z-index: 3;
+      width: 100%;
+      height: 100%;
       max-width: 100%;
       max-height: 100%;
       object-fit: contain;
+      object-position: center bottom;
       user-select: none;
       filter: drop-shadow(0 28px 24px rgba(27, 47, 80, .14));
       animation: mascotFloat 5.5s ease-in-out infinite;
@@ -705,9 +708,9 @@ permalink: /hotnews.html
     .hero-description { animation-delay: .16s; }
     .hero-search { animation-delay: .24s; }
     .hero-count { animation-delay: .3s; }
-    .hero-mascot-wrap { opacity: 0; transform: translateY(40px) scale(.96); animation: mascotIn .9s .12s var(--ease) forwards; }
+    .hero-mascot-wrap { opacity: 0; transform: translateY(40px); animation: mascotIn .9s .12s var(--ease) forwards; }
     @keyframes heroIn { to { opacity: 1; transform: translateY(0); } }
-    @keyframes mascotIn { to { opacity: 1; transform: translateY(0) scale(1); } }
+    @keyframes mascotIn { to { opacity: 1; transform: translateY(0); } }
     .reveal { opacity: 0; transform: translateY(30px); transition: opacity .75s var(--ease), transform .75s var(--ease); }
     .reveal.is-visible { opacity: 1; transform: none; }
 
@@ -903,7 +906,7 @@ permalink: /hotnews.html
   <header class="site-nav" id="siteNav">
     <div class="nav-inner">
       <a class="nav-brand" href="{{ '/index.html' | relative_url }}">
-        <img class="brand-logo" src="{{ '/images/LogoASD.svg' | relative_url }}" alt="Logo dhaniswara86">
+        <img class="brand-logo" src="{{ '/images/LogoASD.svg' | relative_url }}" alt="Logo dhaniswara86" width="1536" height="1024">
         <span>Kabayan</span>
       </a>
 
@@ -958,7 +961,7 @@ permalink: /hotnews.html
         <div class="hero-stage" aria-hidden="true">
           <div class="hero-cloud"></div>
           <div class="hero-mascot-wrap">
-            <img class="hero-mascot" src="{{ '/assets/img/kabayan-berita.webp' | relative_url }}" alt="">
+            <img class="hero-mascot" src="{{ '/assets/img/kabayan-berita.webp' | relative_url }}" alt="" width="1122" height="1402" loading="eager" fetchpriority="high" decoding="async">
             <div class="hero-paper">
               <span class="paper-label"><span class="live-dot"></span>Kabayan Hot News</span>
               <strong class="paper-title">Pembaruan pajak yang perlu diketahui sekarang.</strong>
@@ -1102,7 +1105,7 @@ permalink: /hotnews.html
           <h2>Perubahan pajak. Lebih cepat terlihat.</h2>
           <a href="{{ '/artikel.html' | relative_url }}">Lanjutkan ke Artikel Kabayan ↗</a>
         </div>
-        <img class="closing-mascot reveal" src="{{ '/assets/img/kabayan-berita.webp' | relative_url }}" alt="Kabayan">
+        <img class="closing-mascot reveal" src="{{ '/assets/img/kabayan-berita.webp' | relative_url }}" alt="Kabayan" width="1122" height="1402" loading="lazy" decoding="async">
       </div>
     </section>
   </main>
