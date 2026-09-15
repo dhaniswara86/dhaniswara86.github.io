@@ -2030,11 +2030,12 @@
             </div>
           </div>
 
-          <div class="hero-companion hero-companion-reading reveal" aria-hidden="true">
+          {% assign hero_image = page.hero_image | default: '/assets/img/kabayan-membaca.webp' %}
+          <div class="hero-companion hero-companion-reading reveal">
             <img
               class="hero-kabayan hero-kabayan-reading"
-              src="{{ '/assets/img/kabayan-membaca.webp' | relative_url }}"
-              alt=""
+              src="{{ hero_image | relative_url }}"
+              alt="{{ page.hero_image_alt | default: 'Kabayan sedang membaca' | escape }}"
             >
           </div>
         </div>
