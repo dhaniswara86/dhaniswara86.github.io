@@ -5,6 +5,9 @@ render_mode: safe
 title: "Memahami Role Akses Coretax: Siapa Boleh Melakukan Apa?"
 hero_title: "Memahami Role Akses Coretax."
 hero_accent: "Siapa boleh melakukan apa?"
+hero_image: /assets/img/kabayan-bawakunci.webp
+hero_image_alt: "Kabayan membawa kunci besar"
+image: /assets/img/kabayan-bawakunci.webp
 
 excerpt: "Memahami fungsi role akses Coretax, hubungan dengan impersonate dan PIC, perbedaan drafter dan signer, direktori role, serta berbagai permasalahan akses yang sering terjadi."
 description: "Panduan konseptual untuk memahami role akses, impersonate, PIC, drafter, signer, pembagian kewenangan, direktori role, dan permasalahan akses di Coretax."
