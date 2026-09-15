@@ -9,7 +9,7 @@ hero_image: /assets/img/kabayan-bawakunci.webp
 hero_image_alt: "Kabayan membawa kunci besar"
 image: /assets/img/kabayan-bawakunci.webp
 
-excerpt: "Memahami fungsi role akses Coretax, hubungan dengan impersonate dan PIC, perbedaan drafter dan signer, direktori role, serta berbagai permasalahan akses yang sering terjadi."
+excerpt: "Memahami fungsi, impersonate dan PIC, perbedaan drafter dan signer, direktori role, serta permasalahan akses yang sering terjadi."
 description: "Panduan konseptual untuk memahami role akses, impersonate, PIC, drafter, signer, pembagian kewenangan, direktori role, dan permasalahan akses di Coretax."
 
 category: "Coretax"
@@ -28,7 +28,6 @@ tags:
 author: "Angga Sukma Dhaniswara"
 reading_time: "14 menit baca"
 
-# URL uji. Setelah versi V2 dipastikan baik, ganti dengan URL lama.
 permalink: /roleakses.html
 
 summary_label: "Ringkasan cepat"
