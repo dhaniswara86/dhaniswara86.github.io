@@ -4,6 +4,9 @@ layout: artikel-editorial
 title: "Kode Otorisasi DJP: Cara Pengajuan dan Pengecekan Masa Berlaku"
 hero_title: "Kode Otorisasi DJP:"
 hero_accent: "Cara Pengajuan dan Pengecekan Masa Berlaku."
+hero_image: /assets/img/kabayan-bawaballpoint.webp
+hero_image_alt: "Kabayan membawa ballpoint besar"
+image: /assets/img/kabayan-bawaballpoint.webp
 
 excerpt: "Untuk menandatangani dokumen perpajakan di Coretax, Wajib Pajak membutuhkan tanda tangan elektronik yang valid."
 description: "Panduan memahami fungsi Kode Otorisasi DJP, tata cara pengajuan dan pengecekan masa berlaku."
