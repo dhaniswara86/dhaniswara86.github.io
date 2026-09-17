@@ -12,8 +12,6 @@
 <meta property="og:title" content="Kabayan — Urusan Pajak. Satu Tempat.">
 <meta property="og:description" content="Temukan formulir, kalkulator, converter, referensi, aplikasi, dan materi perpajakan Kabayan.">
 <meta property="og:url" content="https://dhaniswara86.id/">
-<link rel="preload" as="image" href="assets/img/kabayan-pengetahuan-minimal.webp" type="image/webp" fetchpriority="high">
-<link rel="preload" as="image" href="assets/img/mega-mendung-cirebon.webp" type="image/webp">
 <style>
 :root{
   --ink:#0b0d12;
@@ -51,9 +49,8 @@ button,input{font:inherit}
 .desktop-menu a:hover,.desktop-menu a:focus-visible{color:#101722}
 .desktop-menu a:hover::after,.desktop-menu a:focus-visible::after{transform:scaleX(1);transform-origin:left}
 .nav-hotnews{display:inline-flex!important;align-items:center;gap:6px}
-.nav-hotnews-dot{position:relative;width:6px;height:6px;flex:0 0 auto;border-radius:50%;background:#ff5148}
-.nav-hotnews-dot::after{content:"";position:absolute;inset:-4px;border-radius:50%;background:rgba(255,81,72,.18);animation:hotPulse 2.2s ease-out infinite}
-@keyframes hotPulse{0%{opacity:.75;transform:scale(.55)}70%,100%{opacity:0;transform:scale(1.45)}}
+.nav-hotnews-dot{width:6px;height:6px;flex:0 0 auto;border-radius:50%;background:#ff5148;box-shadow:0 0 0 3px rgba(255,81,72,.12);animation:hotPulse 2.2s ease-out infinite}
+@keyframes hotPulse{0%{box-shadow:0 0 0 0 rgba(255,59,48,.28)}70%{box-shadow:0 0 0 7px rgba(255,59,48,0)}100%{box-shadow:0 0 0 0 rgba(255,59,48,0)}}
 .nav-actions{display:flex;align-items:center;gap:10px}
 .nav-cta{min-height:38px;display:inline-flex;align-items:center;gap:7px;padding:9px 15px;border:1px solid #0759df;border-radius:999px;background:#0759df;color:#fff;font-family:Roboto,"Segoe UI",Arial,sans-serif;font-size:11px;font-weight:650;text-decoration:none;box-shadow:0 7px 17px rgba(7,89,223,.14);transition:transform .22s ease,box-shadow .22s ease,background .22s ease}
 .nav-cta span{color:var(--yellow);font-size:12px;line-height:1}
@@ -93,7 +90,6 @@ main{padding-top:var(--nav-height)}
 .hero-scroll{position:absolute;z-index:4;left:50%;bottom:22px;display:flex;align-items:center;gap:8px;color:#596373;font-size:11px;font-weight:650;text-decoration:none;transform:translateX(-50%);animation:scrollCue 2.2s ease-in-out infinite;will-change:transform,opacity}
 .hero-scroll span:last-child{color:#d49e0a;font-size:15px}
 @keyframes scrollCue{0%,100%{opacity:.72;transform:translate(-50%,0)}50%{opacity:1;transform:translate(-50%,7px)}}
-.hero.is-paused .hero-cloud,.hero.is-paused .hero-mascot,.hero.is-paused .hero-scroll{animation-play-state:paused}
 
 .rooms{padding:110px 24px 118px;background:#f4f8fd}
 .section-inner{width:min(var(--max),100%);margin:0 auto}
@@ -119,11 +115,6 @@ main{padding-top:var(--nav-height)}
 .room-card.hot::after{background:#fff0ee;color:#df4439}
 .room-card.hot:hover{border-color:rgba(226,71,60,.35)}
 .room-card.hot:hover::after{background:#df4439;color:#fff}
-
-.goals{content-visibility:auto;contain-intrinsic-size:auto 1400px}
-.converter{content-visibility:auto;contain-intrinsic-size:auto 850px}
-.learning{content-visibility:auto;contain-intrinsic-size:auto 760px}
-.about{content-visibility:auto;contain-intrinsic-size:auto 560px}
 
 .goals{padding:120px 24px 32px;background:#f6f8fb}
 .goals-head{width:min(var(--max),100%);margin:0 auto 58px;display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,470px);align-items:end;gap:50px}
@@ -232,7 +223,7 @@ footer{background:#f5f7fa;color:#6f7781}
 <input aria-hidden="true" class="mobile-nav-checkbox" id="mobileNavToggle" type="checkbox">
 <header class="site-nav" id="siteNav">
   <div class="nav-inner">
-    <a class="nav-brand" href="index.html"><img class="brand-logo" src="images/logo-asd-compact.webp" width="96" height="64" decoding="async" alt="Logo dhaniswara86"><span><strong>Kabayan</strong></span></a>
+    <a class="nav-brand" href="index.html"><img class="brand-logo" src="images/LogoASD.svg" alt="Logo dhaniswara86"><span><strong>Kabayan</strong></span></a>
     <nav class="desktop-menu" aria-label="Navigasi utama">
       <a href="buku.html">Buku</a><a href="formulir.html">Formulir</a><a href="kalkulator.html">Kalkulator</a><a href="aplikasi.html">Aplikasi</a><a href="artikel.html">Artikel</a><a class="nav-hotnews" href="hotnews.html"><i class="nav-hotnews-dot" aria-hidden="true"></i>Hot News</a>
     </nav>
@@ -254,7 +245,7 @@ footer{background:#f5f7fa;color:#6f7781}
     </div>
     <div class="hero-stage" aria-hidden="true">
       <div class="hero-cloud"></div>
-      <div class="hero-mascot-wrap"><img class="hero-mascot" src="assets/img/kabayan-pengetahuan-minimal.webp" width="1198" height="1313" decoding="async" fetchpriority="high" alt="Kabayan menunjukkan sebuah ide"></div>
+      <div class="hero-mascot-wrap"><img class="hero-mascot" src="assets/img/kabayan-pengetahuan-minimal.webp" alt="Kabayan menunjukkan sebuah ide"></div>
     </div>
   </div>
   <a class="hero-scroll" href="#ruang"><span>Jelajahi Kabayan</span><span aria-hidden="true">↓</span></a>
@@ -267,14 +258,14 @@ footer{background:#f5f7fa;color:#6f7781}
       <p>Delapan ruang utama Kabayan dirancang untuk kebutuhan yang berbeda. Pilih langsung bila Anda sudah tahu yang dicari, atau lanjutkan ke bagian tujuan bila belum yakin harus mulai dari mana.</p>
     </div>
     <div class="room-grid reveal">
-      <a class="room-card" href="formulir.html"><span class="room-index">01 / ADMINISTRASI</span><div class="room-visual"><img src="assets/img/icon-ruang-formulir-320.webp" width="320" height="320" loading="lazy" decoding="async" alt="Ikon Formulir"></div><strong class="room-name">Formulir</strong><span class="room-note">Dokumen, PDF, Excel, dan form interaktif.</span></a>
-      <a class="room-card" href="kalkulator.html"><span class="room-index">02 / HITUNG</span><div class="room-visual"><img src="assets/img/icon-ruang-kalkulator-320.webp" width="320" height="320" loading="lazy" decoding="async" alt="Ikon Kalkulator"></div><strong class="room-name">Kalkulator</strong><span class="room-note">Hitung dan petakan kewajiban pajak.</span></a>
-      <a class="room-card" href="converter-xml-coretax.html"><span class="room-index">03 / CORETAX</span><div class="room-visual"><img src="assets/img/icon-ruang-converter-320.webp" width="320" height="320" loading="lazy" decoding="async" alt="Ikon Converter XML"></div><strong class="room-name">Converter</strong><span class="room-note">Excel menjadi XML Coretax.</span></a>
-      <a class="room-card" href="buku.html"><span class="room-index">04 / REFERENSI</span><div class="room-visual"><img src="assets/img/icon-ruang-buku-digital-320.webp" width="320" height="320" loading="lazy" decoding="async" alt="Ikon Buku Digital"></div><strong class="room-name">Buku Digital</strong><span class="room-note">Modul, e-book, dan petunjuk teknis.</span></a>
-      <a class="room-card" href="aplikasi.html"><span class="room-index">05 / PERANGKAT</span><div class="room-visual"><img src="assets/img/icon-ruang-aplikasi-320.webp" width="320" height="320" loading="lazy" decoding="async" alt="Ikon Aplikasi"></div><strong class="room-name">Aplikasi</strong><span class="room-note">Installer dan perangkat pendukung.</span></a>
-      <a class="room-card" href="artikel.html"><span class="room-index">06 / PENJELASAN</span><div class="room-visual"><img src="assets/img/icon-ruang-artikel-320.webp" width="320" height="320" loading="lazy" decoding="async" alt="Ikon Artikel"></div><strong class="room-name">Artikel</strong><span class="room-note">Regulasi dan prosedur yang lebih mudah dipahami.</span></a>
-      <a class="room-card hot" href="hotnews.html"><span class="room-index">07 / UPDATE</span><div class="room-visual"><img src="assets/img/icon-ruang-hot-news-320.webp" width="320" height="320" loading="lazy" decoding="async" alt="Ikon Hot News"></div><strong class="room-name">Hot News</strong><span class="room-note">Pembaruan perpajakan terbaru.</span></a>
-      <a class="room-card" href="https://dhaniswara86.id/saung-kabayan/"><span class="room-index">08 / SAUNG</span><div class="room-visual"><img src="assets/img/icon-ruang-saung-kabayan-320.webp" width="320" height="320" loading="lazy" decoding="async" alt="Ikon Saung Kabayan"></div><strong class="room-name">Saung Kabayan</strong><span class="room-note">Materi, video, checkpoint, dan sertifikat.</span></a>
+      <a class="room-card" href="formulir.html"><span class="room-index">01 / ADMINISTRASI</span><div class="room-visual"><img src="assets/img/icon-ruang-formulir.webp" alt="Ikon Formulir"></div><strong class="room-name">Formulir</strong><span class="room-note">Dokumen, PDF, Excel, dan form interaktif.</span></a>
+      <a class="room-card" href="kalkulator.html"><span class="room-index">02 / HITUNG</span><div class="room-visual"><img src="assets/img/icon-ruang-kalkulator.webp" alt="Ikon Kalkulator"></div><strong class="room-name">Kalkulator</strong><span class="room-note">Hitung dan petakan kewajiban pajak.</span></a>
+      <a class="room-card" href="converter-xml-coretax.html"><span class="room-index">03 / CORETAX</span><div class="room-visual"><img src="assets/img/icon-ruang-converter.webp" alt="Ikon Converter XML"></div><strong class="room-name">Converter</strong><span class="room-note">Excel menjadi XML Coretax.</span></a>
+      <a class="room-card" href="buku.html"><span class="room-index">04 / REFERENSI</span><div class="room-visual"><img src="assets/img/icon-ruang-buku-digital.webp" alt="Ikon Buku Digital"></div><strong class="room-name">Buku Digital</strong><span class="room-note">Modul, e-book, dan petunjuk teknis.</span></a>
+      <a class="room-card" href="aplikasi.html"><span class="room-index">05 / PERANGKAT</span><div class="room-visual"><img src="assets/img/icon-ruang-aplikasi.webp" alt="Ikon Aplikasi"></div><strong class="room-name">Aplikasi</strong><span class="room-note">Installer dan perangkat pendukung.</span></a>
+      <a class="room-card" href="artikel.html"><span class="room-index">06 / PENJELASAN</span><div class="room-visual"><img src="assets/img/icon-ruang-artikel.webp" alt="Ikon Artikel"></div><strong class="room-name">Artikel</strong><span class="room-note">Regulasi dan prosedur yang lebih mudah dipahami.</span></a>
+      <a class="room-card hot" href="hotnews.html"><span class="room-index">07 / UPDATE</span><div class="room-visual"><img src="assets/img/icon-ruang-hot-news.webp" alt="Ikon Hot News"></div><strong class="room-name">Hot News</strong><span class="room-note">Pembaruan perpajakan terbaru.</span></a>
+      <a class="room-card" href="https://dhaniswara86.id/saung-kabayan/"><span class="room-index">08 / SAUNG</span><div class="room-visual"><img src="assets/img/icon-ruang-saung-kabayan.webp" alt="Ikon Saung Kabayan"></div><strong class="room-name">Saung Kabayan</strong><span class="room-note">Materi, video, checkpoint, dan sertifikat.</span></a>
     </div>
   </div>
 </section>
@@ -287,38 +278,38 @@ footer{background:#f5f7fa;color:#6f7781}
 
   <article class="chapter chapter-admin reveal">
     <div class="chapter-copy"><div class="chapter-number">01 / ADMINISTRASI</div><h3>Selesaikan urusan pajak.</h3><p>Temukan formulir, alat hitung, dan converter untuk membantu menyiapkan dokumen serta data perpajakan dengan lebih praktis.</p><div class="chapter-links"><a href="formulir.html">Formulir</a><a href="kalkulator.html">Kalkulator</a><a href="converter-xml-coretax.html">Converter XML</a></div></div>
-    <div class="chapter-visual"><img src="assets/img/kabayan-formulir.webp" width="1122" height="1402" loading="lazy" decoding="async" alt="Kabayan Formulir"></div>
+    <div class="chapter-visual"><img src="assets/img/kabayan-formulir.webp" alt="Kabayan Formulir"></div>
   </article>
 
   <article class="chapter chapter-tools reveal">
     <div class="chapter-copy"><div class="chapter-number">02 / TOOLS</div><h3>Hitung. Validasi. Siapkan.</h3><p>Kalkulator, converter, dan aplikasi membantu pekerjaan teknis ketika data harus dihitung, diperiksa, atau disiapkan untuk sistem perpajakan.</p><div class="chapter-links"><a href="kalkulator.html">Kalkulator Pajak</a><a href="converter-xml-coretax.html">Converter XML</a><a href="aplikasi.html">Aplikasi</a></div></div>
-    <div class="chapter-visual"><div class="tools-stack"><img src="images/jelajahi-lineup-converter.webp" width="1254" height="1254" loading="lazy" decoding="async" alt="Visual Converter XML"><img src="assets/img/kabayan-kalkulator.webp" width="1122" height="1402" loading="lazy" decoding="async" alt="Kabayan Kalkulator"></div></div>
+    <div class="chapter-visual"><div class="tools-stack"><img src="images/jelajahi-lineup-converter.webp" alt="Visual Converter XML"><img src="assets/img/kabayan-kalkulator.webp" alt="Kabayan Kalkulator"></div></div>
   </article>
 </section>
 
 <section class="converter">
   <div class="converter-inner">
     <div class="reveal"><div class="converter-kicker">KABAYAN / CORETAX</div><h2>Excel.<span>Validasi.</span>XML.</h2><p>Salah satu alat khas Kabayan: siapkan data dari Excel, periksa struktur dan isinya, lalu bentuk file XML untuk kebutuhan Coretax tanpa memulai dari nol.</p><a class="converter-link" href="converter-xml-coretax.html">Buka Converter XML <span aria-hidden="true">↗</span></a></div>
-    <div class="converter-visual reveal"><div class="converter-flow"><div class="flow-node">Excel</div><div class="flow-arrow">→</div><div class="flow-node">Validasi</div><div class="flow-arrow">→</div><div class="flow-node">XML</div></div><img src="images/jelajahi-lineup-converter.webp" width="1254" height="1254" loading="lazy" decoding="async" alt="Mockup Converter XML Coretax"></div>
+    <div class="converter-visual reveal"><div class="converter-flow"><div class="flow-node">Excel</div><div class="flow-arrow">→</div><div class="flow-node">Validasi</div><div class="flow-arrow">→</div><div class="flow-node">XML</div></div><img src="images/jelajahi-lineup-converter.webp" alt="Mockup Converter XML Coretax"></div>
   </div>
 </section>
 
 <section class="goals" style="padding-top:30px">
   <article class="chapter chapter-learn reveal">
     <div class="chapter-copy"><div class="chapter-number">03 / BELAJAR</div><h3>Belajar dan pahami.</h3><p>Mulai dari buku digital dan artikel, lalu lanjutkan ke Saung Kabayan ketika membutuhkan materi yang lebih terstruktur.</p><div class="chapter-links"><a href="buku.html">Buku Digital</a><a href="artikel.html">Artikel</a><a href="https://dhaniswara86.id/saung-kabayan/">Saung Kabayan</a></div></div>
-    <div class="chapter-visual"><img src="assets/img/kabayan-buku.webp" width="1122" height="1402" loading="lazy" decoding="async" alt="Kabayan Buku"></div>
+    <div class="chapter-visual"><img src="assets/img/kabayan-buku.webp" alt="Kabayan Buku"></div>
   </article>
 
   <article class="chapter chapter-update reveal">
     <div class="chapter-copy"><div class="chapter-number">04 / UPDATE</div><h3>Ikuti perkembangan.</h3><p>Ketahui pembaruan Coretax, regulasi, layanan, dan isu perpajakan yang perlu segera diperhatikan tanpa harus mencari dari banyak tempat.</p><div class="chapter-links"><a href="hotnews.html">Hot News</a><a href="artikel.html">Artikel terbaru</a></div></div>
-    <div class="chapter-visual"><img src="assets/img/kabayan-berita.webp" width="1122" height="1402" loading="lazy" decoding="async" alt="Kabayan Berita"></div>
+    <div class="chapter-visual"><img src="assets/img/kabayan-berita.webp" alt="Kabayan Berita"></div>
   </article>
 </section>
 
 <section class="learning">
   <div class="learning-inner">
     <div class="learning-copy reveal"><div class="learning-kicker">SAUNG KABAYAN</div><h2>Belajar tidak harus sendirian.</h2><p>Masuk ke Saung Kabayan untuk pengalaman belajar yang lebih terarah dengan materi, video, checkpoint, dan sertifikat dalam satu ruang.</p><div class="learning-features"><span>Materi</span><span>Video</span><span>Checkpoint</span><span>Sertifikat</span></div><a class="learning-link" href="https://dhaniswara86.id/saung-kabayan/">Masuk Saung Kabayan <span aria-hidden="true">↗</span></a></div>
-    <div class="learning-visual reveal"><img src="assets/img/kabayan-pengetahuan.webp" width="1122" height="1402" loading="lazy" decoding="async" alt="Kabayan di Saung Kabayan"></div>
+    <div class="learning-visual reveal"><img src="assets/img/kabayan-pengetahuan.webp" alt="Kabayan di Saung Kabayan"></div>
   </div>
 </section>
 
@@ -347,27 +338,10 @@ footer{background:#f5f7fa;color:#6f7781}
     }
   };
 
-  let scrollFrame = 0;
-  const scheduleScrollUpdate = () => {
-    if (scrollFrame) return;
-    scrollFrame = window.requestAnimationFrame(() => {
-      updateScroll();
-      scrollFrame = 0;
-    });
-  };
-
   updateScroll();
-  window.addEventListener("scroll", scheduleScrollUpdate, { passive: true });
-  window.addEventListener("resize", scheduleScrollUpdate, { passive: true });
+  window.addEventListener("scroll", updateScroll, { passive: true });
+  window.addEventListener("resize", updateScroll, { passive: true });
   if (year) year.textContent = new Date().getFullYear();
-
-  const hero = document.querySelector(".hero");
-  if (hero && !reduceMotion && "IntersectionObserver" in window) {
-    const heroObserver = new IntersectionObserver(([entry]) => {
-      hero.classList.toggle("is-paused", !entry.isIntersecting);
-    }, { threshold: 0.01 });
-    heroObserver.observe(hero);
-  }
 
   const revealItems = Array.from(document.querySelectorAll(".reveal"));
   if (reduceMotion || !("IntersectionObserver" in window)) {
