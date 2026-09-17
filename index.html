@@ -24,7 +24,7 @@
   --soft:#f5f7fa;
   --line:#e7ebf0;
   --white:#fff;
-  --nav-height:78px;
+  --nav-height:64px;
   --max:1240px;
   --wide:1480px;
   --ease:cubic-bezier(.22,1,.36,1);
@@ -40,22 +40,22 @@ button,input{font:inherit}
 .mobile-nav-checkbox{position:fixed;width:1px;height:1px;margin:0;padding:0;opacity:0;pointer-events:none}
 .site-nav{position:fixed;z-index:1300;top:0;right:0;left:0;min-height:var(--nav-height);border-bottom:1px solid rgba(17,31,54,.07);background:rgba(255,255,255,.94);box-shadow:0 4px 18px rgba(25,44,72,.025);backdrop-filter:saturate(160%) blur(18px);-webkit-backdrop-filter:saturate(160%) blur(18px);transition:box-shadow .25s ease,background .25s ease,border-color .25s ease}
 .site-nav.is-scrolled{border-color:rgba(17,31,54,.1);background:rgba(255,255,255,.975);box-shadow:0 1px 0 rgba(12,18,28,.05),0 10px 32px rgba(21,35,57,.075)}
-.nav-inner{width:min(var(--wide),calc(100% - 64px));min-height:var(--nav-height);display:flex;align-items:center;gap:34px;margin:0 auto}
-.nav-brand{display:inline-flex;align-items:center;gap:12px;flex-shrink:0;color:#111318;font-family:Roboto,"Segoe UI",Arial,sans-serif;font-size:18px;font-weight:750;letter-spacing:-.035em;text-decoration:none}
-.brand-logo{width:auto;height:27px;max-width:none}
-.desktop-menu{display:flex;align-items:center;gap:clamp(24px,2vw,38px);margin-left:auto}
-.desktop-menu a{position:relative;padding:31px 0 29px;color:#4f5866;font-family:Roboto,"Segoe UI",Arial,sans-serif;font-size:14px;font-weight:550;line-height:1;text-decoration:none;white-space:nowrap;transition:color .22s ease}
-.desktop-menu a::after{content:"";position:absolute;right:0;bottom:20px;left:0;height:2px;border-radius:99px;background:var(--blue);transform:scaleX(0);transform-origin:right;transition:transform .26s var(--ease)}
+.nav-inner{width:min(var(--max),calc(100% - 48px));min-height:var(--nav-height);display:flex;align-items:center;gap:32px;margin:0 auto}
+.nav-brand{display:inline-flex;align-items:center;gap:9px;flex-shrink:0;color:#111318;font-family:Roboto,"Segoe UI",Arial,sans-serif;font-size:13px;font-weight:650;letter-spacing:-.02em;text-decoration:none}
+.brand-logo{width:auto;height:19px;max-width:none}
+.desktop-menu{display:flex;align-items:center;gap:clamp(20px,2.2vw,34px);margin-left:auto}
+.desktop-menu a{position:relative;padding:22px 0 20px;color:#4f5866;font-family:Roboto,"Segoe UI",Arial,sans-serif;font-size:12px;font-weight:540;line-height:1;text-decoration:none;white-space:nowrap;transition:color .22s ease}
+.desktop-menu a::after{content:"";position:absolute;right:0;bottom:14px;left:0;height:1.5px;border-radius:99px;background:var(--blue);transform:scaleX(0);transform-origin:right;transition:transform .26s var(--ease)}
 .desktop-menu a:hover,.desktop-menu a:focus-visible{color:#101722}
 .desktop-menu a:hover::after,.desktop-menu a:focus-visible::after{transform:scaleX(1);transform-origin:left}
 .nav-hotnews{display:inline-flex!important;align-items:center;gap:6px}
-.nav-hotnews-dot{width:7px;height:7px;flex:0 0 auto;border-radius:50%;background:#ff5148;box-shadow:0 0 0 4px rgba(255,81,72,.12);animation:hotPulse 2.2s ease-out infinite}
+.nav-hotnews-dot{width:6px;height:6px;flex:0 0 auto;border-radius:50%;background:#ff5148;box-shadow:0 0 0 3px rgba(255,81,72,.12);animation:hotPulse 2.2s ease-out infinite}
 @keyframes hotPulse{0%{box-shadow:0 0 0 0 rgba(255,59,48,.28)}70%{box-shadow:0 0 0 7px rgba(255,59,48,0)}100%{box-shadow:0 0 0 0 rgba(255,59,48,0)}}
 .nav-actions{display:flex;align-items:center;gap:10px}
-.nav-cta{min-height:44px;display:inline-flex;align-items:center;gap:9px;padding:10px 20px;border:1px solid #0759df;border-radius:999px;background:#0759df;color:#fff;font-family:Roboto,"Segoe UI",Arial,sans-serif;font-size:13px;font-weight:700;text-decoration:none;box-shadow:0 8px 20px rgba(7,89,223,.16);transition:transform .22s ease,box-shadow .22s ease,background .22s ease}
-.nav-cta span{color:var(--yellow);font-size:15px;line-height:1}
+.nav-cta{min-height:38px;display:inline-flex;align-items:center;gap:7px;padding:9px 15px;border:1px solid #0759df;border-radius:999px;background:#0759df;color:#fff;font-family:Roboto,"Segoe UI",Arial,sans-serif;font-size:11px;font-weight:650;text-decoration:none;box-shadow:0 7px 17px rgba(7,89,223,.14);transition:transform .22s ease,box-shadow .22s ease,background .22s ease}
+.nav-cta span{color:var(--yellow);font-size:12px;line-height:1}
 .nav-cta:hover,.nav-cta:focus-visible{background:#064fc7;transform:translateY(-1px);box-shadow:0 12px 26px rgba(7,89,223,.24)}
-.menu-toggle{width:44px;height:44px;display:none;place-items:center;padding:0;border:1px solid transparent;border-radius:50%;background:transparent;color:#111318;font-size:19px;user-select:none;touch-action:manipulation;cursor:pointer}
+.menu-toggle{width:38px;height:38px;display:none;place-items:center;padding:0;border:1px solid transparent;border-radius:50%;background:transparent;color:#111318;font-size:18px;user-select:none;touch-action:manipulation;cursor:pointer}
 .menu-toggle:hover{border-color:#e2e7ee;background:#f6f8fb}
 .menu-icon-close{display:none}
 #mobileNavToggle:checked~.site-nav .menu-icon-open{display:none}
@@ -197,12 +197,12 @@ footer{background:#f5f7fa;color:#6f7781}
   .converter-inner,.learning-inner{grid-template-columns:1fr}.converter-visual{min-height:480px}.learning-inner{padding:0 0 80px}.learning-visual{min-height:520px}
 }
 @media(max-width:900px){
-  .desktop-menu,.nav-cta{display:none}.menu-toggle{display:grid}.nav-inner{width:min(100% - 32px,var(--max));gap:18px}.nav-brand{font-size:17px}.brand-logo{height:25px}
+  .desktop-menu,.nav-cta{display:none}.menu-toggle{display:grid}.nav-inner{width:min(100% - 28px,var(--max))}
   .hero,.hero-shell{min-height:auto}.hero-shell{grid-template-columns:1fr;padding:70px 0}.hero-copy{padding:0 8px}.hero-stage{min-height:540px}.hero-mascot-wrap{width:min(72vw,490px);height:500px}.hero-cloud{width:min(90vw,680px);height:min(75vw,590px)}
   .rooms-head,.goals-head{grid-template-columns:1fr;gap:22px}.rooms-head p,.goals-head p{max-width:650px}
 }
 @media(max-width:640px){
-  :root{--nav-height:62px}
+  :root{--nav-height:58px}
   .hero-shell{width:calc(100% - 34px);padding-top:54px;padding-bottom:78px}.hero-title{font-size:clamp(55px,16.5vw,78px)}.hero-description{font-size:16px}.hero-stage{min-height:410px}.hero-mascot-wrap{width:min(83vw,400px);height:390px}.hero-cloud{width:100vw;height:95vw;opacity:.58}.hero-scroll{bottom:12px}
   .rooms{padding:88px 18px 96px}.rooms-head h2,.goals-head h2{font-size:56px}.room-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.room-card{min-height:270px;padding:14px 14px 58px;border-radius:19px}.room-card::after{right:14px;bottom:14px;width:36px;height:36px;font-size:18px}.room-index{min-height:25px;padding:5px 8px;font-size:8px}.room-visual{height:115px}.room-visual img{width:90px;height:90px}.room-name{font-size:18px}.room-note{padding-right:0;font-size:11px}
   .goals{padding:92px 14px 18px}.goals-head{margin-bottom:38px;padding:0 6px}.chapter{margin-bottom:14px;border-radius:26px}.chapter-copy{min-height:auto;padding:58px 28px}.chapter h3{font-size:55px}.chapter-visual{min-height:410px}.chapter-visual img{max-height:370px}.tools-stack{width:92%}
@@ -211,7 +211,7 @@ footer{background:#f5f7fa;color:#6f7781}
   .about{padding:100px 18px}.about h2{font-size:68px}.footer-inner{align-items:flex-start;flex-direction:column}.mobile-menu>a:not(.mobile-menu-cta){font-size:31px}
 }
 @media(max-width:440px){
-  .nav-brand{gap:9px;font-size:16px}.brand-logo{height:23px}.room-grid{grid-template-columns:1fr;gap:14px}.room-card{min-height:270px;padding:18px 18px 62px}.room-index{font-size:9px}.room-visual{height:120px}.room-visual img{width:98px;height:98px}.room-name{font-size:21px}.room-note{font-size:12px}.chapter h3{font-size:49px}.chapter-visual{min-height:360px}.chapter-visual img{max-height:330px}.learning-features{grid-template-columns:1fr}.about h2{font-size:61px}
+  .nav-brand span:last-child{display:none}.room-grid{grid-template-columns:1fr;gap:14px}.room-card{min-height:270px;padding:18px 18px 62px}.room-index{font-size:9px}.room-visual{height:120px}.room-visual img{width:98px;height:98px}.room-name{font-size:21px}.room-note{font-size:12px}.chapter h3{font-size:49px}.chapter-visual{min-height:360px}.chapter-visual img{max-height:330px}.learning-features{grid-template-columns:1fr}.about h2{font-size:61px}
 }
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}.hero-title,.hero-description,.hero-actions,.hero-stage{opacity:1;clip-path:none;transform:none}
