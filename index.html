@@ -71,14 +71,13 @@ main{padding-top:var(--nav-height)}
 .hero{position:relative;overflow:hidden;min-height:780px;background:linear-gradient(180deg,#fff 0%,#fff 73%,#f5f8fc 100%)}
 .hero-shell{position:relative;z-index:2;width:min(var(--wide),calc(100% - 48px));min-height:780px;margin:0 auto;display:grid;grid-template-columns:1.03fr .97fr;align-items:center;gap:2vw;padding:54px 0 76px}
 .hero-copy{padding-left:clamp(0px,2vw,28px)}
-.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;margin-bottom:23px;color:var(--blue);font-size:12px;font-weight:800;letter-spacing:.13em;text-transform:uppercase}
-.hero-eyebrow::before{content:"";width:28px;height:2px;background:var(--blue)}
 .hero-title{max-width:830px;margin:0;color:#080b11;font-size:clamp(64px,7.2vw,116px);font-weight:800;letter-spacing:-.078em;line-height:.89}
 .hero-title .accent{display:inline-block;background:linear-gradient(90deg,#0f4ca9 0%,#0d68db 37%,#1597df 67%,#a69b34 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .hero-description{max-width:650px;margin:30px 0 0;color:#5c6571;font-size:clamp(17px,1.3vw,20px);line-height:1.68}
 .hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
 .hero-primary,.hero-secondary{min-height:47px;display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:11px 18px;border-radius:999px;font-size:13px;font-weight:650;text-decoration:none}
-.hero-primary{background:#111318;color:#fff}
+.hero-primary{border:1px solid #e2ae22;background:linear-gradient(135deg,#ffdb69 0%,#f4c542 58%,#e9b72f 100%);color:#17140b;box-shadow:0 10px 25px rgba(199,146,14,.2);transition:transform .22s var(--ease),box-shadow .22s ease,filter .22s ease}
+.hero-primary:hover{transform:translateY(-2px);box-shadow:0 15px 32px rgba(199,146,14,.27);filter:saturate(1.04)}
 .hero-secondary{border:1px solid #dbe1e9;background:#fff;color:#222831}
 .hero-stage{position:relative;min-height:650px;display:grid;place-items:center;isolation:isolate}
 .hero-cloud{position:absolute;z-index:-2;width:min(58vw,790px);height:min(47vw,650px);background:url("assets/img/mega-mendung-cirebon.webp") center/contain no-repeat;opacity:.82;animation:cloudDrift 12s ease-in-out infinite}
@@ -93,7 +92,9 @@ main{padding-top:var(--nav-height)}
 .orbit-xml{left:7%;bottom:15%;transform:rotate(3deg);animation-delay:1.4s}
 .orbit-book{right:4%;bottom:13%;transform:rotate(-3deg);animation-delay:2s}
 @keyframes orbitFloat{0%,100%{margin-top:0}50%{margin-top:-9px}}
-.hero-scroll{position:absolute;z-index:4;left:50%;bottom:22px;display:flex;align-items:center;gap:8px;color:#727a86;font-size:11px;text-decoration:none;transform:translateX(-50%)}
+.hero-scroll{position:absolute;z-index:4;left:50%;bottom:22px;display:flex;align-items:center;gap:8px;color:#596373;font-size:11px;font-weight:650;text-decoration:none;transform:translateX(-50%);animation:scrollCue 2.2s ease-in-out infinite;will-change:transform,opacity}
+.hero-scroll span:last-child{color:#d49e0a;font-size:15px}
+@keyframes scrollCue{0%,100%{opacity:.72;transform:translate(-50%,0)}50%{opacity:1;transform:translate(-50%,7px)}}
 
 .rooms{padding:110px 24px 118px;background:#fff}
 .section-inner{width:min(var(--max),100%);margin:0 auto}
@@ -180,7 +181,6 @@ footer{background:#f5f7fa;color:#6f7781}
 
 .reveal{opacity:0;transform:translateY(34px);transition:opacity .75s ease,transform .9s var(--ease)}
 .reveal.is-visible{opacity:1;transform:none}
-.hero-eyebrow{opacity:0;transform:translateY(18px);animation:heroRise .7s var(--ease) .08s forwards}
 .hero-title{opacity:0;clip-path:inset(0 0 100% 0);transform:translateY(30px);animation:titleReveal 1s var(--ease) .16s forwards}
 .hero-description,.hero-actions{opacity:0;transform:translateY(22px);animation:heroRise .75s var(--ease) forwards}
 .hero-description{animation-delay:.38s}.hero-actions{animation-delay:.48s}
@@ -200,7 +200,7 @@ footer{background:#f5f7fa;color:#6f7781}
 }
 @media(max-width:640px){
   :root{--nav-height:58px}
-  .hero-shell{width:calc(100% - 34px);padding-top:54px;padding-bottom:64px}.hero-title{font-size:clamp(55px,16.5vw,78px)}.hero-description{font-size:16px}.hero-stage{min-height:410px}.hero-mascot-wrap{width:min(83vw,400px);height:390px}.hero-cloud{width:100vw;height:95vw}.hero-scroll{display:none}.orbit-card{padding:7px 9px;border-radius:13px;font-size:9px}.orbit-card img{width:28px;height:28px}.orbit-form{left:-2%;top:20%}.orbit-calc{right:-4%;top:31%}.orbit-xml{left:2%;bottom:9%}.orbit-book{right:-2%;bottom:11%}
+  .hero-shell{width:calc(100% - 34px);padding-top:54px;padding-bottom:78px}.hero-title{font-size:clamp(55px,16.5vw,78px)}.hero-description{font-size:16px}.hero-stage{min-height:410px}.hero-mascot-wrap{width:min(83vw,400px);height:390px}.hero-cloud{width:100vw;height:95vw}.hero-scroll{bottom:12px}.orbit-card{padding:7px 9px;border-radius:13px;font-size:9px}.orbit-card img{width:28px;height:28px}.orbit-form{left:-2%;top:20%}.orbit-calc{right:-4%;top:31%}.orbit-xml{left:2%;bottom:9%}.orbit-book{right:-2%;bottom:11%}
   .rooms{padding:88px 18px 96px}.rooms-head h2,.goals-head h2{font-size:56px}.room-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.room-card{min-height:250px;padding:17px}.room-visual{height:115px}.room-visual img{width:90px;height:90px}.room-name{font-size:18px}.room-note{font-size:11px}
   .goals{padding:92px 14px 18px}.goals-head{margin-bottom:38px;padding:0 6px}.chapter{margin-bottom:14px;border-radius:26px}.chapter-copy{min-height:auto;padding:58px 28px}.chapter h3{font-size:55px}.chapter-visual{min-height:410px}.chapter-visual img{max-height:370px}.tools-stack{width:92%}
   .converter{padding:92px 18px}.converter-inner{gap:42px}.converter h2{font-size:64px}.converter-visual{min-height:430px}.converter-flow{grid-template-columns:1fr;position:relative;inset:auto;gap:8px}.flow-node{min-height:72px}.flow-arrow{transform:rotate(90deg);justify-self:center}.converter-visual>img{margin-top:26px;width:100%}
@@ -211,7 +211,7 @@ footer{background:#f5f7fa;color:#6f7781}
   .nav-brand span:last-child{display:none}.room-grid{grid-template-columns:1fr 1fr}.room-card{min-height:230px}.room-visual{height:100px}.room-visual img{width:82px;height:82px}.chapter h3{font-size:49px}.chapter-visual{min-height:360px}.chapter-visual img{max-height:330px}.learning-features{grid-template-columns:1fr}.about h2{font-size:61px}.orbit-card small{display:none}
 }
 @media(prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}.hero-eyebrow,.hero-title,.hero-description,.hero-actions,.hero-stage{opacity:1;clip-path:none;transform:none}
+  html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}.hero-title,.hero-description,.hero-actions,.hero-stage{opacity:1;clip-path:none;transform:none}
 }
 </style>
 </head>
@@ -236,18 +236,13 @@ footer{background:#f5f7fa;color:#6f7781}
 <section class="hero">
   <div class="hero-shell">
     <div class="hero-copy">
-      <div class="hero-eyebrow">00 / JELAJAHI KABAYAN</div>
       <h1 class="hero-title">Semua urusan pajak.<br><span class="accent">Dalam satu tempat.</span></h1>
       <p class="hero-description">Mulai dari apa yang ingin Anda selesaikan. Kabayan membantu menemukan formulir, alat hitung, converter, referensi, aplikasi, dan Saung Kabayan yang tepat.</p>
       <div class="hero-actions"><a class="hero-primary" href="#ruang">Pilih Ruang <span aria-hidden="true">↓</span></a><a class="hero-secondary" href="#tujuan">Mulai dari Tujuan <span aria-hidden="true">↘</span></a></div>
     </div>
     <div class="hero-stage" aria-hidden="true">
       <div class="hero-cloud"></div>
-      <div class="hero-mascot-wrap"><img class="hero-mascot" src="assets/img/kabayan-pengetahuan.webp" alt=""></div>
-      <div class="orbit-card orbit-form"><img src="images/jelajahi-formulir.webp" alt=""><div>Formulir<small>Administrasi</small></div></div>
-      <div class="orbit-card orbit-calc"><img src="images/jelajahi-kalkulator.webp" alt=""><div>Kalkulator<small>Hitung</small></div></div>
-      <div class="orbit-card orbit-xml"><img src="images/jelajahi-converter.webp" alt=""><div>Converter<small>Coretax</small></div></div>
-      <div class="orbit-card orbit-book"><img src="images/jelajahi-buku-digital.webp" alt=""><div>Buku<small>Belajar</small></div></div>
+      <div class="hero-mascot-wrap"><img class="hero-mascot" src="assets/img/kabayan-pengetahuan-minimal.webp" alt="Kabayan menunjukkan sebuah ide"></div>
     </div>
   </div>
   <a class="hero-scroll" href="#ruang"><span>Jelajahi Kabayan</span><span aria-hidden="true">↓</span></a>
