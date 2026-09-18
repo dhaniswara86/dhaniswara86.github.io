@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#071a30">
+  <title>Peta Penghasilan SPT OP Coretax · Kabayan</title>
+  <meta name="description" content="Pemetaan interaktif penerimaan orang pribadi ke bagian SPT Tahunan PPh Orang Pribadi Coretax.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
+  <link rel="stylesheet" href="assets/comfort.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23071a30'/%3E%3Cpath d='M16 20h32v24H16z' fill='%23f4c542'/%3E%3Cpath d='M22 27h20M22 33h14M22 39h17' stroke='%23071a30' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
+</head>
+<body>
+  <header class="topbar"><div class="topbar-inner"><a class="brand" href="#top" aria-label="Peta Penghasilan Kabayan"><span class="brand-mark">K</span><span><strong>Kabayan</strong><small>Asisten SPT Orang Pribadi</small></span></a><label class="year-select">Tahun Pajak <select id="yearSelect"><option value="2025">2025</option><option value="2026">2026 · pratinjau</option></select></label></div></header>
+  <main id="top">
+    <section class="intro"><div class="intro-copy"><span class="eyebrow">Peta SPT OP Coretax</span><h1>Penghasilan ini masuk ke mana?</h1><p>Cari jenis penghasilan, tentukan pemiliknya, lalu lihat bagian Coretax yang perlu diisi.</p></div><div class="intro-actions"><button class="btn primary" id="openWizard">Buka panduan</button><button class="btn ghost-light" id="showMap">Peta lampiran</button></div></section>
+    <section class="search-card" aria-label="Pencarian penghasilan"><label class="search-box"><span aria-hidden="true">⌕</span><input id="searchInput" type="search" placeholder="Contoh: endorsement, warisan, kripto, jual rumah…" autocomplete="off"><button id="clearBtn" type="button" aria-label="Hapus pencarian">✕</button></label><div class="search-meta"><span id="resultCount">0 jenis penerimaan</span><span>Terakhir ditelaah: 18 September 2026</span></div></section>
+    <section class="family-strip" aria-label="Profil unit pajak keluarga"><div class="family-strip-icon">⌂</div><div class="family-strip-copy"><span>Profil unit pajak keluarga</span><strong id="familyProfileLabel">Belum diatur</strong><small id="familyProfileHint">Atur posisi dan status keluarga agar hasil menunjukkan SPT siapa serta cara penghitungannya.</small></div><div class="family-strip-actions"><button class="btn secondary" id="openFamilyProfile">Atur profil</button><button class="btn ledger-btn" id="openLedger">Rekap keluarga <span id="ledgerCount">0</span></button></div></section>
+    <section class="map-strip" id="mapStrip" hidden><div><strong>Pekerjaan</strong><span>L1 D + L1 E</span></div><b>·</b><div><strong>Usaha/profesi</strong><span>L3A/L3B</span></div><b>·</b><div><strong>Final</strong><span>L2 A</span></div><b>·</b><div><strong>Bukan objek</strong><span>L2 B</span></div><b>·</b><div><strong>Luar negeri</strong><span>L2 C</span></div></section>
+    <nav class="category-row" id="categoryRow" aria-label="Kategori penerimaan"></nav>
+    <section class="workspace"><aside class="panel list-panel" id="incomeList" aria-label="Daftar penerimaan"></aside><article class="panel detail-panel" id="detailPanel" aria-live="polite"></article></section>
+    <aside class="disclaimer"><span>⚠️</span><div><strong>Gunakan sebagai peta awal, bukan keputusan tanpa dokumen.</strong><p>Kesimpulan dapat berubah karena hubungan para pihak, status keluarga, jenis bukti potong, metode pembukuan, fasilitas, atau syarat pengecualian. Item bertanda “perlu telaah” sengaja tidak dipaksakan menjadi jawaban pasti.</p></div></aside>
+  </main>
+  <dialog id="wizardDialog" class="wizard-dialog"><form method="dialog" class="wizard-shell"><header><div><span class="step-label" id="wizardStepLabel">Langkah 1 dari 2</span><h2 id="wizardTitle">Penerimaan ini berasal dari mana?</h2></div><button class="icon-btn" value="cancel" aria-label="Tutup panduan">✕</button></header><div class="progress"><span id="wizardProgress"></span></div><div id="wizardBody" class="wizard-body"></div><footer><button type="button" class="btn secondary" id="wizardBack" hidden>Kembali</button><button class="btn text-btn" value="cancel">Tutup</button></footer></form></dialog>
+  <dialog id="familyDialog" class="wizard-dialog family-dialog"><form method="dialog" class="wizard-shell"><header><div><span class="step-label" id="familyStepLabel">Langkah 1 dari 3</span><h2 id="familyTitle">Posisi Anda dalam keluarga</h2></div><button class="icon-btn" value="cancel" aria-label="Tutup profil keluarga">✕</button></header><div class="progress"><span id="familyProgress"></span></div><div id="familyBody" class="wizard-body"></div><footer><button type="button" class="btn secondary" id="familyBack" hidden>Kembali</button><button type="button" class="btn text-btn danger-text" id="resetFamily" hidden>Hapus profil</button><button class="btn text-btn" value="cancel">Tutup</button></footer></form></dialog>
+  <dialog id="ledgerDialog" class="ledger-dialog"><div class="ledger-shell"><header><div><span class="step-label">Rekap penyusunan SPT</span><h2>Penghasilan keluarga</h2><p id="ledgerSubtitle">Tambahkan penghasilan untuk melihat konsistensi dan lampiran yang perlu diisi.</p></div><button class="icon-btn" id="closeLedger" aria-label="Tutup rekap keluarga">✕</button></header><div class="ledger-tabs" role="tablist"><button class="active" data-ledger-tab="records">Penghasilan</button><button data-ledger-tab="checks">Pemeriksaan <span id="checkCount">0</span></button><button data-ledger-tab="coretax">Ringkasan Coretax</button></div><div id="ledgerBody" class="ledger-body"></div><footer><button class="btn text-btn danger-text" id="clearLedger">Kosongkan rekap</button><button class="btn secondary" id="copyLedger">Salin ringkasan</button><button class="btn primary" id="printLedger">Cetak</button></footer></div></dialog>
+  <template id="emptyTemplate"><div class="empty-state"><span>⌕</span><strong>Belum ditemukan</strong><p>Coba kata lain atau pilih kategori “Semua”.</p></div></template>
+  <script src="data/incomes-2025.js"></script><script src="assets/app.js"></script>
+</body>
+</html>
