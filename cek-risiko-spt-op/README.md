@@ -4,6 +4,8 @@ Microsite asesmen mandiri berdurasi sekitar empat menit. Seluruh jawaban dan per
 
 Tampilan menggunakan sistem visual yang diselaraskan dengan halaman `formulir.html` Kabayan: navigasi transparan, tipografi editorial, aksen gradien biru, tombol pil, kartu minimalis, menu mobile, dan footer informasi.
 
+Setiap pertanyaan memiliki ikon garis kecil yang relevan dengan topiknya. Ikon ditanam langsung dalam JavaScript sehingga tidak memerlukan dependensi atau berkas gambar tambahan.
+
 ## Cara mengunggah
 
 1. Ekstrak folder `cek-risiko-spt-op`.

@@ -6,6 +6,25 @@
     help: "Tidak perlu memasukkan nominal. Pilih kondisi yang paling sesuai.",
   };
 
+  const questionIcons = {
+    profile_source: '<svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="12" rx="2"/><path d="M8 7V5h8v2M3 12h18M10 12v2h4v-2"/></svg>',
+    profile_family: '<svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M2.5 20c.4-4 2.2-6 5.5-6s5.1 2 5.5 6M13 16c.9-1 2.1-1.5 3.8-1.5 2.8 0 4.3 1.8 4.7 5.5"/></svg>',
+    income_complete: '<svg viewBox="0 0 24 24"><path d="M4 7h15a2 2 0 0 1 2 2v9H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h13"/><path d="M16 11h5v4h-5a2 2 0 0 1 0-4Z"/></svg>',
+    withholding: '<svg viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Z"/><path d="M14 3v6h6M8 15l2 2 5-5"/></svg>',
+    classification: '<svg viewBox="0 0 24 24"><path d="m3 12 9-9h7l2 2v7l-9 9Z"/><circle cx="16.5" cy="7.5" r="1"/><path d="m7 14 3 3"/></svg>',
+    bank_flow: '<svg viewBox="0 0 24 24"><path d="m3 9 9-5 9 5M5 10v7m4-7v7m6-7v7m4-7v7M3 20h18"/><path d="m8 13-2 2 2 2m8-4 2 2-2 2"/></svg>',
+    assets_growth: '<svg viewBox="0 0 24 24"><path d="m3 11 9-8 9 8v9H7v-9M16 4h4v4"/><path d="M10 15h4m-2-2v4"/></svg>',
+    economic_capacity: '<svg viewBox="0 0 24 24"><path d="M12 3v18M5 7h14M4 7l-3 6h6L4 7Zm16 0-3 6h6l-3-6ZM8 21h8"/></svg>',
+    debt: '<svg viewBox="0 0 24 24"><path d="M4 4h11l4 4v5M15 4v4h4M7 10h5M7 14h4"/><path d="M14 18h7m-3-3 3 3-3 3M4 4v16h8"/></svg>',
+    asset_continuity: '<svg viewBox="0 0 24 24"><path d="m4 11 8-7 8 7v9H7v-9"/><path d="M3 5v5h5M21 19v-5h-5M4 10a9 9 0 0 1 15-4m1 8a9 9 0 0 1-15 4"/></svg>',
+    foreign_assets: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 4 6 4 9s-1 6-4 9c-3-3-4-6-4-9s1-6 4-9Z"/><path d="M17 17h5m-2-2 2 2-2 2"/></svg>',
+    tax_credit: '<svg viewBox="0 0 24 24"><path d="M5 3h14v18l-3-2-4 2-4-2-3 2Z"/><path d="M8 8h7M8 12h4m2 3 2 2 4-5"/></svg>',
+    multi_employer: '<svg viewBox="0 0 24 24"><path d="M3 21V7h8v14M13 21V3h8v18M6 10h2m-2 4h2m-2 4h2m10-11h-2m2 4h-2m2 4h-2M2 21h20"/></svg>',
+    side_income: '<svg viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5M3 16l9 5 9-5"/><path d="M18 4v6m-3-3h6"/></svg>',
+    business_receipts: '<svg viewBox="0 0 24 24"><path d="M4 10v11h16V10M3 4h18l-1 6a3 3 0 0 1-4 1 3 3 0 0 1-4 0 3 3 0 0 1-4 0 3 3 0 0 1-4-1L3 4Z"/><path d="M8 21v-6h8v6"/></svg>',
+    family_unit: '<svg viewBox="0 0 24 24"><path d="M12 3c2 1.5 4.5 2.3 7 2.8v5.3c0 4.7-2.6 7.6-7 9.4-4.4-1.8-7-4.7-7-9.4V5.8C7.5 5.3 10 4.5 12 3Z"/><circle cx="12" cy="10" r="2"/><path d="M8.8 16c.4-2.1 1.4-3.2 3.2-3.2s2.8 1.1 3.2 3.2"/></svg>',
+  };
+
   const questions = {
     profile_source: {
       category: "PROFIL PESERTA",
@@ -244,6 +263,7 @@
     const percent = Math.round((current / ids.length) * 100);
 
     $("#question-category").textContent = q.category;
+    $("#question-icon").innerHTML = questionIcons[id] || questionIcons.income_complete;
     $("#question-text").textContent = q.text;
     $("#question-help").textContent = q.help;
     $("#question-counter").textContent = `Pertanyaan ${current} dari ${ids.length}`;
