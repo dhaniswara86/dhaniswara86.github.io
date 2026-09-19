@@ -6,6 +6,8 @@ Tampilan menggunakan sistem visual yang diselaraskan dengan halaman `formulir.ht
 
 Setiap pertanyaan memiliki ikon garis kecil yang relevan dengan topiknya. Ikon ditanam langsung dalam JavaScript sehingga tidak memerlukan dependensi atau berkas gambar tambahan.
 
+Logo pada header menggunakan aset Kabayan yang sama dengan halaman utama melalui referensi `../images/LogoASD.svg`.
+
 ## Cara mengunggah
 
 1. Ekstrak folder `cek-risiko-spt-op`.
