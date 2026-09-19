@@ -281,11 +281,8 @@
       .map(([id, answer]) => ({ id, answer, question: questions[id] }));
     const score = scored.reduce((sum, item) => sum + item.answer.score, 0);
     const critical = scored.some((item) => item.answer.critical);
-    const uncertain = Object.values(state.answers).filter((answer) => answer.uncertain).length;
-
     let level = "low";
     if (critical || score >= 15) level = "veryHigh";
-    else if (uncertain >= 5) level = "unknown";
     else if (score >= 9) level = "high";
     else if (score >= 4) level = "medium";
 
@@ -310,10 +307,6 @@
       title: "Sangat Tinggi", color: "#ad1028", tint: "#fdecef", icon: "assets/img/risiko-sangat-tinggi.webp",
       summary: "Terdapat red flag material yang perlu segera direkonsiliasi dan didukung dokumen yang memadai.",
     },
-    unknown: {
-      title: "Belum Dapat Dinilai", color: "#667085", tint: "#f0f2f5", icon: "assets/img/risiko-belum-dinilai.webp",
-      summary: "Beberapa informasi penting belum diperiksa. Lengkapi data terlebih dahulu agar tingkat risiko dapat dinilai dengan lebih tepat.",
-    },
   };
 
   function showResult() {
@@ -335,7 +328,9 @@
     $("#trigger-list").innerHTML = triggerTexts.map((text) => `<li>${text}</li>`).join("");
 
     const actions = [...new Set(triggers.map((item) => item.question.mitigation).filter(Boolean))];
-    if (result.level === "unknown") actions.unshift("Kumpulkan dokumen dan periksa kembali jawaban yang sebelumnya dipilih sebagai belum yakin.");
+    if (result.ranked.some((item) => item.answer.uncertain)) {
+      actions.unshift("Periksa dokumen atas jawaban yang masih belum yakin agar potensi risiko dapat dikonfirmasi.");
+    }
     if (!actions.length) actions.push(
       "Lakukan pemeriksaan akhir atas bukti potong dan penghasilan.",
       "Bandingkan daftar harta dengan SPT tahun sebelumnya.",

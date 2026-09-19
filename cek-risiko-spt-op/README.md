@@ -1,6 +1,6 @@
 # Cek Risiko Pelaporan SPT OP — Kabayan
 
-Microsite asesmen mandiri berdurasi sekitar empat menit. Seluruh jawaban dan perhitungan dijalankan di perangkat pengguna dan tidak dikirim ke server.
+Microsite asesmen mandiri berdurasi sekitar empat menit. Seluruh jawaban dan perhitungan dijalankan di perangkat pengguna dan tidak dikirim ke server. Hasil selalu ditempatkan pada salah satu dari empat tingkat potensi risiko: rendah, menengah, tinggi, atau sangat tinggi.
 
 ## Cara mengunggah
 
