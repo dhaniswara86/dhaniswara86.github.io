@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Asesmen singkat untuk mengenali area risiko pelaporan SPT Tahunan Orang Pribadi.">
+  <title>Cek Risiko Pelaporan SPT OP | Kabayan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="cek-risiko-spt.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="../" aria-label="Kembali ke halaman utama Kabayan">
+      <span class="brand-mark" aria-hidden="true">K</span>
+      <span><strong>Kabayan</strong><small>Belajar Pajak Lebih Mudah</small></span>
+    </a>
+    <span class="privacy-badge">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10V7a5 5 0 0 1 10 0v3m-11 0h12v10H6z"/></svg>
+      Jawaban tidak disimpan
+    </span>
+  </header>
+
+  <main class="app-shell">
+    <section id="start-screen" class="screen start-screen" aria-labelledby="start-title">
+      <div class="hero-copy">
+        <span class="eyebrow">ASESMEN MANDIRI SPT OP</span>
+        <h1 id="start-title">Kenali risiko pelaporan SPT Anda sebelum terlambat.</h1>
+        <p class="lead">Jawab pertanyaan singkat untuk menemukan bagian SPT yang perlu diperiksa, direkonsiliasi, atau dilengkapi dokumennya.</p>
+
+        <div class="start-meta" aria-label="Informasi asesmen">
+          <span><strong>± 4 menit</strong><small>Waktu pengerjaan</small></span>
+          <span><strong>Maks. 15</strong><small>Pertanyaan adaptif</small></span>
+          <span><strong>Tanpa data pribadi</strong><small>Privasi terjaga</small></span>
+        </div>
+
+        <button id="start-button" class="button button-primary" type="button">
+          Mulai pemeriksaan
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+        </button>
+        <p class="microcopy">Tidak meminta NPWP, NIK, nomor rekening, atau nominal penghasilan.</p>
+      </div>
+
+      <div class="hero-visual" aria-hidden="true">
+        <div class="risk-orbit orbit-one"></div>
+        <div class="risk-orbit orbit-two"></div>
+        <div class="shield-illustration">
+          <svg viewBox="0 0 160 180"><path class="shield" d="M80 8c22 17 44 25 68 29v49c0 45-26 71-68 88C38 157 12 131 12 86V37c24-4 46-12 68-29Z"/><path class="check" d="m49 91 20 20 43-47"/></svg>
+        </div>
+        <div class="floating-card card-a"><i></i><span>Penghasilan</span></div>
+        <div class="floating-card card-b"><i></i><span>Harta</span></div>
+        <div class="floating-card card-c"><i></i><span>Bukti potong</span></div>
+      </div>
+
+      <div class="notice">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10h.01"/></svg>
+        <p><strong>Catatan penting</strong> Hasil merupakan indikasi awal, bukan pemeriksaan pajak atau penetapan adanya pelanggaran.</p>
+      </div>
+    </section>
+
+    <section id="question-screen" class="screen question-screen" aria-live="polite" hidden>
+      <div class="question-topbar">
+        <button id="back-button" class="icon-button" type="button" aria-label="Kembali ke pertanyaan sebelumnya">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <div class="progress-wrap">
+          <div class="progress-label"><span id="question-counter">Pertanyaan 1</span><span>Maksimal 15</span></div>
+          <div class="progress-track" role="progressbar" aria-valuemin="1" aria-valuemax="15" aria-valuenow="1"><span id="progress-bar"></span></div>
+        </div>
+        <span class="time-chip">± 4 menit</span>
+      </div>
+
+      <article class="question-card">
+        <span id="question-category" class="question-category">PROFIL PESERTA</span>
+        <h2 id="question-text"></h2>
+        <p id="question-help" class="question-help"></p>
+        <div id="answer-list" class="answer-list" role="radiogroup" aria-labelledby="question-text"></div>
+      </article>
+
+      <p class="question-footnote">Pilih jawaban yang paling menggambarkan kondisi Anda saat ini.</p>
+    </section>
+
+    <section id="result-screen" class="screen result-screen" hidden>
+      <div id="result-hero" class="result-hero">
+        <div class="result-icon-wrap"><img id="result-icon" src="" alt=""></div>
+        <div>
+          <span class="eyebrow">HASIL ASESMEN</span>
+          <p class="result-kicker">Risiko pelaporan Anda</p>
+          <h1 id="result-level"></h1>
+          <p id="result-summary" class="result-summary"></p>
+        </div>
+      </div>
+
+      <div class="result-grid">
+        <article class="result-panel">
+          <div class="panel-heading">
+            <span class="panel-icon warning"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2.5 20h19L12 3Z"/><path d="M12 9v5m0 3h.01"/></svg></span>
+            <div><span>PERLU DIPERHATIKAN</span><h2>Faktor pemicu utama</h2></div>
+          </div>
+          <ul id="trigger-list" class="result-list"></ul>
+        </article>
+
+        <article class="result-panel">
+          <div class="panel-heading">
+            <span class="panel-icon action"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span>
+            <div><span>LANGKAH BERIKUTNYA</span><h2>Mitigasi yang disarankan</h2></div>
+          </div>
+          <ol id="action-list" class="result-list numbered"></ol>
+        </article>
+      </div>
+
+      <div class="result-note">
+        <strong>Red flag bukan otomatis pelanggaran.</strong>
+        <span>Pastikan setiap perbedaan didukung rekonsiliasi, dokumen, dan penjelasan yang konsisten.</span>
+      </div>
+
+      <div class="result-actions">
+        <button id="print-button" class="button button-secondary" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v7H6z"/></svg>
+          Cetak hasil
+        </button>
+        <button id="restart-button" class="button button-primary" type="button">Ulangi asesmen</button>
+      </div>
+      <p class="disclaimer">Asesmen ini bersifat edukatif dan tidak menggantikan pemeriksaan dokumen, konsultasi profesional, atau ketentuan perpajakan yang berlaku.</p>
+    </section>
+  </main>
+
+  <footer>© Kabayan · Edukasi perpajakan yang lebih mudah dipahami</footer>
+  <noscript>Aktifkan JavaScript agar asesmen dapat digunakan.</noscript>
+  <script src="cek-risiko-spt.js" defer></script>
+</body>
+</html>
