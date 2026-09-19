@@ -26,3 +26,7 @@ Ilustrasi utama menggunakan karakter `assets/img/kabayan-cek-risiko.webp` yang s
 ## Catatan integrasi
 
 Tautan logo pada header saat ini mengarah ke `../`. Ubah jika lokasi halaman utama Kabayan menggunakan struktur lain. Halaman tidak memerlukan database atau library JavaScript tambahan.
+
+## Penyesuaian tampilan
+
+Halaman awal menampilkan Kabayan tanpa lingkaran orbit dan kartu melayang Penghasilan, Harta, atau Bukti potong. Tombol “Mulai pemeriksaan” berwarna kuning Kabayan; tombol asesmen lainnya dan seluruh logika penilaian tidak berubah.
