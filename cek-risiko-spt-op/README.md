@@ -8,6 +8,8 @@ Setiap pertanyaan memiliki ikon garis kecil yang relevan dengan topiknya. Ikon d
 
 Logo pada header menggunakan aset Kabayan yang sama dengan halaman utama melalui referensi `../images/LogoASD.svg`.
 
+Ilustrasi utama menggunakan SVG komputer yang menampilkan formulir SPT, sehingga tetap tajam, ringan, dan tidak memerlukan aset gambar tambahan.
+
 ## Cara mengunggah
 
 1. Ekstrak folder `cek-risiko-spt-op`.
