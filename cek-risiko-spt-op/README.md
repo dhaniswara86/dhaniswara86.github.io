@@ -18,7 +18,7 @@ Ilustrasi utama menggunakan karakter `assets/img/kabayan-cek-risiko.webp` yang s
 
 ## Berkas utama
 
-- `index.html` — struktur halaman.
+- `index.html` — halaman utama (tersedia pula `indexcekrisiko.html` sebagai berkas kompatibilitas).
 - `cek-risiko-spt.css` — seluruh tampilan responsif.
 - `cek-risiko-spt.js` — pertanyaan, percabangan, skor, critical override, dan hasil.
 - `assets/img/` — ikon tingkat risiko.
