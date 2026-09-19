@@ -85,7 +85,7 @@ main{padding-top:var(--nav-height)}
 .hero-stage{position:relative;min-height:clamp(360px,66svh,590px);display:grid;place-items:center;isolation:isolate}
 .hero-cloud{position:absolute;z-index:-2;width:min(58vw,790px);height:min(47vw,650px);background:url("assets/img/mega-mendung-cirebon.webp") center/contain no-repeat;opacity:.72}
 .hero-mascot-wrap{position:relative;width:min(39vw,560px);height:clamp(350px,65svh,570px);display:flex;align-items:flex-end;justify-content:center}
-.hero-mascot{position:relative;z-index:3;max-width:100%;max-height:100%;object-fit:contain;user-select:none;animation:mascotFloat 7s ease-in-out infinite}
+.hero-mascot{position:relative;z-index:3;display:block;width:100%;height:100%;max-width:100%;max-height:100%;object-fit:contain;object-position:center bottom;user-select:none;animation:mascotFloat 7s ease-in-out infinite}
 .hero-scroll{position:absolute;z-index:4;left:50%;bottom:22px;display:flex;align-items:center;gap:8px;color:#596373;font-size:11px;font-weight:650;text-decoration:none;transform:translateX(-50%)}
 .hero-scroll span:last-child{color:#d49e0a;font-size:15px}
 .hero.is-paused .hero-mascot{animation-play-state:paused}
@@ -195,13 +195,13 @@ footer{background:#f5f7fa;color:#6f7781}
 }
 @media(max-width:900px){
   .desktop-menu,.nav-cta{display:none}.menu-toggle{display:grid}.nav-inner{width:min(100% - 28px,var(--max));justify-content:space-between}.nav-actions{margin-left:auto}
-  .hero,.hero-shell{min-height:auto}.hero-shell{grid-template-columns:1fr;gap:8px;padding:clamp(22px,4svh,38px) 0 54px}.hero-copy{padding:0 8px}.hero-title{max-width:760px;font-size:clamp(50px,7.5vw,68px);letter-spacing:-.06em;line-height:1.03}.hero-description{margin-top:18px}.hero-stage{min-height:clamp(240px,40svh,400px)}.hero-mascot-wrap{width:min(68vw,420px);height:clamp(225px,39svh,390px)}.hero-cloud{width:min(86vw,640px);height:min(70vw,550px)}
+  .hero,.hero-shell{min-height:auto}.hero-shell{grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto;align-items:start;gap:8px;padding:clamp(22px,4svh,38px) 0 54px}.hero-copy{position:relative;z-index:1;min-width:0;padding:0 8px}.hero-title{max-width:760px;font-size:clamp(50px,7.5vw,68px);letter-spacing:-.06em;line-height:1.03}.hero-description{margin-top:18px}.hero-stage{min-height:clamp(240px,40svh,400px)}.hero-mascot-wrap{width:min(68vw,420px);height:clamp(225px,39svh,390px)}.hero-cloud{width:min(86vw,640px);height:min(70vw,550px)}
   .chapter{grid-template-columns:1fr;min-height:0}.chapter-copy{min-height:0;padding:38px 36px 26px}.chapter h3{font-size:clamp(40px,6vw,60px)}.chapter-visual{min-height:clamp(220px,32svh,330px)}.chapter-visual img{max-height:clamp(205px,30svh,310px)}.converter-inner{gap:32px}.converter-visual{min-height:clamp(300px,42svh,430px)}.converter-visual>img{max-height:320px;object-fit:contain;margin-top:100px}.learning-inner{min-height:0;padding-bottom:32px}.learning-copy{padding:40px 0}.learning-visual{min-height:clamp(260px,34svh,400px)}.learning-visual img{max-height:clamp(235px,32svh,380px)}
   .rooms-head,.goals-head{grid-template-columns:1fr;gap:22px}.rooms-head p,.goals-head p{max-width:650px}
 }
 @media(max-width:640px){
   :root{--nav-height:58px}
-  .hero-shell{width:calc(100% - 34px);padding-top:clamp(16px,3svh,32px);padding-bottom:44px}.hero-title{font-size:clamp(38px,11.7vw,58px);letter-spacing:-.055em;line-height:1.04}.hero-description{margin-top:15px;font-size:15px;line-height:1.48}.hero-actions{margin-top:18px}.hero-stage{min-height:clamp(170px,31svh,300px)}.hero-mascot-wrap{width:min(73vw,300px);height:clamp(165px,30svh,290px)}.hero-cloud{width:88vw;height:73vw;opacity:.58}.hero-scroll{bottom:10px}
+  .hero-shell{width:calc(100% - 34px);padding-top:clamp(16px,3svh,32px);padding-bottom:44px}.hero-title{font-size:clamp(38px,11.7vw,58px);letter-spacing:-.055em;line-height:1.04}.hero-description{margin-top:15px;font-size:15px;line-height:1.48}.hero-actions{margin-top:18px}.hero-stage{min-width:0;min-height:clamp(170px,31svh,300px);overflow:clip}.hero-mascot-wrap{width:min(73vw,300px);height:clamp(165px,30svh,290px)}.hero-cloud{width:88vw;height:73vw;opacity:.58}.hero-scroll{bottom:10px}
   .rooms{padding:60px 18px 68px}.rooms-head h2,.goals-head h2{font-size:clamp(38px,9vw,52px);line-height:1.04}.room-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.room-card{min-height:270px;padding:14px 14px 58px;border-radius:19px}.room-card::after{right:14px;bottom:14px;width:36px;height:36px;font-size:18px}.room-index{min-height:25px;padding:5px 8px;font-size:8px}.room-visual{height:115px}.room-visual img{width:90px;height:90px}.room-name{font-size:18px}.room-note{padding-right:0;font-size:11px}
   .goals{padding:65px 14px 16px}.goals-head{margin-bottom:28px;padding:0 6px}.chapter{margin-bottom:14px;border-radius:26px}.chapter-copy{padding:32px 24px 23px}.chapter-number{margin-bottom:14px}.chapter h3{font-size:clamp(36px,9vw,49px);line-height:1.05}.chapter p{margin-top:16px;font-size:14px;line-height:1.55}.chapter-links{margin-top:20px}.chapter-visual{min-height:clamp(175px,29svh,275px)}.chapter-visual img{max-height:clamp(165px,27svh,260px)}.tools-stack{width:min(78%,340px)}.tools-stack img:first-child{transform:translateY(10px)}.tools-stack img:last-child{transform:translateY(4px)}
   .converter{padding:66px 18px}.converter-inner{gap:22px}.converter h2{font-size:clamp(45px,12vw,64px);line-height:1.05}.converter-visual{min-height:0;gap:12px}.converter-flow{grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr);position:relative;inset:auto;gap:5px}.flow-node{min-height:56px;padding:8px 4px;border-radius:12px;font-size:12px}.flow-arrow{transform:none;justify-self:center;font-size:16px}.converter-visual>img{margin-top:0;width:min(100%,390px);max-height:260px;object-fit:contain}
@@ -227,6 +227,20 @@ footer{background:#f5f7fa;color:#6f7781}
   .hero-description{line-height:1.43}
   .chapter-visual{min-height:clamp(145px,27svh,230px)}
   .chapter-visual img{max-height:clamp(135px,25svh,215px)}
+}
+
+/* Subtle spring reaction on entry: content stays visible; only transform is animated. */
+@keyframes kabayanScrollBounce {
+  0%   { transform:translate3d(0,7px,0); }
+  58%  { transform:translate3d(0,-3px,0); }
+  80%  { transform:translate3d(0,1px,0); }
+  100% { transform:translate3d(0,0,0); }
+}
+.room-card.is-bouncing,
+.chapter-visual > img.is-bouncing,
+.converter-visual > img.is-bouncing,
+.learning-visual img.is-bouncing {
+  animation:kabayanScrollBounce .48s ease-out;
 }
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition-duration:.01ms!important}
@@ -367,6 +381,25 @@ footer{background:#f5f7fa;color:#6f7781}
       hero.classList.toggle("is-paused", !entry.isIntersecting);
     }, { threshold: 0.01 });
     heroObserver.observe(hero);
+  }
+
+
+  // Motion feedback runs once when a visual enters view. Native scroll remains untouched.
+  if (!reduceMotion && 'IntersectionObserver' in window) {
+    const bounceTargets = document.querySelectorAll(
+      '.room-card, .chapter-visual > img, .converter-visual > img, .learning-visual img'
+    );
+    const bounceObserver = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        bounceObserver.unobserve(entry.target);
+        entry.target.classList.add('is-bouncing');
+        entry.target.addEventListener('animationend', () => {
+          entry.target.classList.remove('is-bouncing');
+        }, {once:true});
+      }
+    }, {threshold:0.12, rootMargin:'0px 0px -3% 0px'});
+    bounceTargets.forEach((target) => bounceObserver.observe(target));
   }
 
 })();
