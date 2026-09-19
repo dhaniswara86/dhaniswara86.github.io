@@ -341,6 +341,14 @@
   }
 
   $("#start-button").addEventListener("click", () => { showScreen("question"); renderQuestion(); });
+  $("#nav-start-button").addEventListener("click", () => { state.index = 0; state.answers = {}; showScreen("question"); renderQuestion(); });
+  $("#mobile-start-button").addEventListener("click", () => {
+    $("#mobileNavToggle").checked = false;
+    state.index = 0;
+    state.answers = {};
+    showScreen("question");
+    renderQuestion();
+  });
   $("#back-button").addEventListener("click", () => { if (state.index > 0) { state.index -= 1; renderQuestion(); } });
   $("#print-button").addEventListener("click", () => window.print());
   $("#restart-button").addEventListener("click", () => {
@@ -348,4 +356,15 @@
     state.answers = {};
     showScreen("start");
   });
+
+  $("#currentYear").textContent = new Date().getFullYear();
+  const nav = $(".site-nav");
+  const pageProgress = $(".page-progress span");
+  const updateChrome = () => {
+    nav.classList.toggle("is-scrolled", window.scrollY > 8);
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    pageProgress.style.width = `${max > 0 ? Math.min(100, (window.scrollY / max) * 100) : 0}%`;
+  };
+  window.addEventListener("scroll", updateChrome, { passive: true });
+  updateChrome();
 })();

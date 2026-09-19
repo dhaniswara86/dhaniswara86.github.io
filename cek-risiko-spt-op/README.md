@@ -2,6 +2,8 @@
 
 Microsite asesmen mandiri berdurasi sekitar empat menit. Seluruh jawaban dan perhitungan dijalankan di perangkat pengguna dan tidak dikirim ke server. Hasil selalu ditempatkan pada salah satu dari empat tingkat potensi risiko: rendah, menengah, tinggi, atau sangat tinggi.
 
+Tampilan menggunakan sistem visual yang diselaraskan dengan halaman `formulir.html` Kabayan: navigasi transparan, tipografi editorial, aksen gradien biru, tombol pil, kartu minimalis, menu mobile, dan footer informasi.
+
 ## Cara mengunggah
 
 1. Ekstrak folder `cek-risiko-spt-op`.

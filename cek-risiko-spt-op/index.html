@@ -5,28 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Asesmen singkat untuk mengenali potensi risiko pelaporan SPT Tahunan Orang Pribadi.">
   <title>Cek Risiko Pelaporan SPT OP | Kabayan</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="cek-risiko-spt.css">
 </head>
-<body>
-  <header class="site-header">
-    <a class="brand" href="../" aria-label="Kembali ke halaman utama Kabayan">
-      <span class="brand-mark" aria-hidden="true">K</span>
-      <span><strong>Kabayan</strong><small>Belajar Pajak Lebih Mudah</small></span>
-    </a>
-    <span class="privacy-badge">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10V7a5 5 0 0 1 10 0v3m-11 0h12v10H6z"/></svg>
-      Jawaban tidak disimpan
-    </span>
+<body id="top">
+  <div class="page-progress" aria-hidden="true"><span></span></div>
+  <input class="mobile-nav-checkbox" id="mobileNavToggle" type="checkbox" aria-hidden="true">
+  <header class="site-nav">
+    <div class="nav-inner">
+      <a class="nav-brand" href="../index.html" aria-label="Kembali ke beranda Kabayan">
+        <span class="brand-symbol" aria-hidden="true">K</span><span><strong>Kabayan</strong></span>
+      </a>
+      <nav class="desktop-menu" aria-label="Navigasi utama">
+        <a href="../buku.html">Buku</a><a href="../formulir.html">Formulir</a><a href="../kalkulator.html">Kalkulator</a><a aria-current="page" href="../aplikasi.html">Aplikasi</a><a href="../artikel.html">Artikel</a><a class="nav-hotnews" href="../hotnews.html"><span class="nav-hotnews-dot" aria-hidden="true"></span><span>Hot News</span></a>
+      </nav>
+      <div class="nav-actions">
+        <button class="nav-cta" id="nav-start-button" type="button">Mulai tes <span aria-hidden="true">↘</span></button>
+        <label class="menu-toggle" for="mobileNavToggle" aria-label="Buka atau tutup menu"><span class="menu-icon-open">☰</span><span class="menu-icon-close">×</span></label>
+      </div>
+    </div>
   </header>
+  <nav class="mobile-menu" aria-label="Navigasi mobile">
+    <div class="mobile-menu-head">Jelajahi Kabayan</div>
+    <a href="../buku.html"><span>01</span>Buku</a><a href="../formulir.html"><span>02</span>Formulir</a><a href="../kalkulator.html"><span>03</span>Kalkulator</a><a aria-current="page" href="../aplikasi.html"><span>04</span>Aplikasi</a><a href="../artikel.html"><span>05</span>Artikel</a><a href="../hotnews.html"><span>06</span>Hot News</a>
+    <button class="mobile-menu-cta" id="mobile-start-button" type="button"><b>Mulai asesmen</b><span aria-hidden="true">↘</span></button>
+  </nav>
 
   <main class="app-shell">
     <section id="start-screen" class="screen start-screen" aria-labelledby="start-title">
       <div class="hero-copy">
-        <span class="eyebrow">ASESMEN MANDIRI SPT OP</span>
-        <h1 id="start-title">Kenali potensi risiko pelaporan SPT Anda sejak awal.</h1>
+        <span class="eyebrow">01 / ASESMEN SPT OP</span>
+        <h1 id="start-title">SPT.<br><span class="hero-accent">Lebih Siap.</span></h1>
         <p class="lead">Jawab pertanyaan singkat untuk menemukan bagian SPT yang perlu diperiksa, direkonsiliasi, atau dilengkapi dokumennya.</p>
 
         <div class="start-meta" aria-label="Informasi asesmen">
@@ -126,7 +134,10 @@
     </section>
   </main>
 
-  <footer>© Kabayan · Edukasi perpajakan yang lebih mudah dipahami</footer>
+  <footer>
+    <div class="footer-notice"><strong>Perhatian:</strong> Hasil asesmen merupakan indikasi awal berdasarkan jawaban peserta. Red flag bukan otomatis pelanggaran dan tetap perlu diuji dengan dokumen serta ketentuan yang berlaku.</div>
+    <div class="footer-inner"><p>© <span id="currentYear"></span> Angga Sukma Dhaniswara.</p><div class="footer-links"><a href="../index.html">Beranda</a><a href="#top">Kembali ke atas</a></div></div>
+  </footer>
   <noscript>Aktifkan JavaScript agar asesmen dapat digunakan.</noscript>
   <script src="cek-risiko-spt.js" defer></script>
 </body>
