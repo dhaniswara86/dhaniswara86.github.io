@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="id">
+<html class="no-js" lang="id">
 <head>
 <meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
 <meta name="description" content="Koleksi buku digital dan modul pembelajaran perpajakan karya Angga Sukma Dhaniswara."/>
 <meta name="author" content="Angga Sukma Dhaniswara"/>
 <link rel="canonical" href="https://dhaniswara86.id/buku.html"/>
@@ -10,8 +10,10 @@
 <meta property="og:description" content="Koleksi buku digital, modul, panduan, dan referensi perpajakan Kabayan karya Angga Sukma Dhaniswara."/>
 <meta property="og:url" content="https://dhaniswara86.id/buku.html"/>
 <meta property="og:type" content="website"/>
+<meta property="og:image" content="https://dhaniswara86.id/assets/img/kabayan-buku.webp"/>
 <title>Buku Digital | Kabayan</title>
 <script>
+document.documentElement.classList.replace('no-js','js');
 // Set the initial animation state before page content can paint.
 if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   document.documentElement.classList.add('motion-ready');
@@ -31,33 +33,38 @@ if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   --yellow:#f7c948;
   --red:#ff3b30;
   --nav-height:64px;
-  --max-width:1280px;
+  --nav-offset:calc(var(--nav-height) + env(safe-area-inset-top));
+  --max-width:1240px;
   --ease:cubic-bezier(.22,1,.36,1);
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-offset) + 16px)}
 body{
   margin:0;
-  overflow-x:hidden;
   background:#fff;
   color:var(--near-black);
   font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Segoe UI",Arial,sans-serif;
   line-height:1.45;
   letter-spacing:-.015em;
 }
-body.menu-open{overflow:hidden}
+body.nav-open{overflow:hidden}
 a{color:inherit}
-img{display:block;max-width:100%}
+img{display:block;max-width:100%;height:auto}
 button,input{font:inherit}
 button{color:inherit}
+.skip-link{position:fixed;z-index:2000;top:calc(8px + env(safe-area-inset-top));left:max(12px,env(safe-area-inset-left));padding:10px 14px;border-radius:10px;background:#0b0d12;color:#fff;font-size:13px;font-weight:700;text-decoration:none;transform:translateY(-180%);transition:transform .2s ease}
+.skip-link:focus{transform:none}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid rgba(10,102,255,.38);outline-offset:3px}
+[id]{scroll-margin-top:calc(var(--nav-offset) + 16px)}
 
 /* scroll progress — same quiet motion language as index */
 .page-progress{
-  position:fixed;z-index:1300;top:0;left:0;width:100%;height:2px;
+  position:fixed;z-index:1600;top:0;left:0;width:100%;height:2px;
   pointer-events:none;background:transparent;
 }
 .page-progress span{
-  display:block;width:0;height:100%;background:linear-gradient(90deg,#0a66ff,#30a6d0,#d4b543);
+  display:block;width:100%;height:100%;background:linear-gradient(90deg,#0a66ff,#30a6d0,#d4b543);
+  transform:scaleX(0);
   transform-origin:left center;
 }
 
@@ -65,18 +72,18 @@ button{color:inherit}
    Minimal editorial navigation — aligned with index
    ========================================================= */
 .site-nav{
-  position:fixed;z-index:1000;top:0;right:0;left:0;
-  min-height:var(--nav-height);
-  background:rgba(255,255,255,.88);
-  border-bottom:0;
-  box-shadow:none;
+  position:fixed;z-index:1300;top:0;right:0;left:0;
+  min-height:var(--nav-offset);padding-top:env(safe-area-inset-top);
+  background:rgba(255,255,255,.94);
+  border-bottom:1px solid rgba(17,31,54,.07);
+  box-shadow:0 4px 18px rgba(25,44,72,.025);
   backdrop-filter:saturate(160%) blur(18px);
   -webkit-backdrop-filter:saturate(160%) blur(18px);
   transition:background .28s ease,box-shadow .28s ease;
 }
 .site-nav.is-scrolled{
-  background:rgba(255,255,255,.95);
-  box-shadow:0 1px 0 rgba(12,18,28,.06),0 8px 30px rgba(21,35,57,.045);
+  background:rgba(255,255,255,.975);
+  box-shadow:0 1px 0 rgba(12,18,28,.05),0 10px 32px rgba(21,35,57,.075);
 }
 .nav-inner{
   width:min(var(--max-width),calc(100% - 48px));min-height:var(--nav-height);
@@ -95,7 +102,7 @@ button{color:inherit}
 }
 .desktop-menu a::after{
   content:"";position:absolute;right:0;bottom:14px;left:0;height:1.5px;border-radius:99px;
-  background:#111318;transform:scaleX(0);transform-origin:right;transition:transform .26s var(--ease);
+  background:var(--blue);transform:scaleX(0);transform-origin:right;transition:transform .26s var(--ease);
 }
 .desktop-menu a:hover,.desktop-menu a[aria-current="page"]{color:#111318}
 .desktop-menu a:hover::after,.desktop-menu a[aria-current="page"]::after{transform:scaleX(1);transform-origin:left}
@@ -108,32 +115,25 @@ button{color:inherit}
 .nav-actions{display:flex;align-items:center;gap:10px}
 .nav-cta{
   min-height:38px;display:inline-flex;align-items:center;gap:7px;padding:9px 15px;
-  border:1px solid #111318;border-radius:999px;background:#111318;color:#fff;
+  border:1px solid #0759df;border-radius:999px;background:#0759df;color:#fff;
   font-size:11px;font-weight:650;letter-spacing:-.01em;text-decoration:none;
   transition:transform .22s ease,background .22s ease,box-shadow .22s ease;
 }
-.nav-cta span{font-size:12px;transition:translate .22s ease}
-.nav-cta:hover{background:#000;transform:translateY(-1px);box-shadow:0 9px 22px rgba(0,0,0,.13)}
+.nav-cta span{color:var(--yellow);font-size:12px;transition:translate .22s ease}
+.nav-cta:hover{background:#064fc7;transform:translateY(-1px);box-shadow:0 12px 26px rgba(7,89,223,.24)}
 .nav-cta:hover span{translate:2px -2px}
-.mobile-nav-checkbox{
-  position:fixed;
-  width:1px;height:1px;
-  margin:0;padding:0;
-  opacity:0;
-  pointer-events:none;
-}
 .menu-toggle{
-  width:38px;height:38px;display:none;place-items:center;padding:0;border:0;border-radius:50%;
+  width:38px;height:38px;display:none;place-items:center;padding:0;border:1px solid transparent;border-radius:50%;
   background:transparent;color:#111318;font-size:18px;cursor:pointer;touch-action:manipulation;
 }
 .menu-toggle{cursor:pointer;user-select:none;-webkit-user-select:none;touch-action:manipulation}
 .menu-toggle:hover{background:#f2f3f5}
 .mobile-menu{
   position:fixed;z-index:1250;
-  top:var(--nav-height);right:0;bottom:0;left:0;
-  height:calc(100dvh - var(--nav-height));
+  top:var(--nav-offset);right:0;bottom:0;left:0;
+  height:calc(100vh - var(--nav-offset));height:calc(100dvh - var(--nav-offset));
   display:block;overflow-y:auto;overscroll-behavior:contain;
-  padding:22px 24px max(30px,env(safe-area-inset-bottom));
+  padding:22px 24px 30px;padding:22px max(24px,env(safe-area-inset-right)) max(30px,env(safe-area-inset-bottom)) max(24px,env(safe-area-inset-left));
   background:rgba(255,255,255,.992);
   visibility:hidden;opacity:0;pointer-events:none;
   transform:translateY(-8px);
@@ -141,38 +141,34 @@ button{color:inherit}
   backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
   -webkit-overflow-scrolling:touch;
 }
-#mobileNavToggle:checked ~ .mobile-menu{
-  visibility:visible;opacity:1;pointer-events:auto;transform:translateY(0);
-}
+.mobile-menu[hidden]{display:none}
+.mobile-menu.is-open{visibility:visible;opacity:1;pointer-events:auto;transform:translateY(0)}
 .menu-icon-close{display:none}
-#mobileNavToggle:checked ~ .site-nav .menu-icon-open{display:none}
-#mobileNavToggle:checked ~ .site-nav .menu-icon-close{display:block}
-@supports selector(body:has(#mobileNavToggle:checked)){
-  body:has(#mobileNavToggle:checked){overflow:hidden}
-}
+.menu-toggle[aria-expanded="true"] .menu-icon-open{display:none}
+.menu-toggle[aria-expanded="true"] .menu-icon-close{display:block}
 .mobile-menu-head{
-  padding:9px 0 18px;border-bottom:1px solid #eceef2;color:#8a9099;
+  padding:9px 0 18px;border-bottom:1px solid #eceef2;color:#5f6976;
   font-size:10px;font-weight:750;letter-spacing:.12em;text-transform:uppercase;
 }
 .mobile-menu>a:not(.mobile-menu-cta){
   display:grid;grid-template-columns:34px 1fr;align-items:center;padding:17px 0;border-bottom:1px solid #eceef2;
   color:#111318;font-size:clamp(27px,8vw,38px);font-weight:680;letter-spacing:-.05em;line-height:1;text-decoration:none;
 }
-.mobile-menu>a:not(.mobile-menu-cta)>span{color:#9aa1aa;font-size:10px;font-weight:720;letter-spacing:.04em}
+.mobile-menu>a:not(.mobile-menu-cta)>span{color:#606b79;font-size:10px;font-weight:720;letter-spacing:.04em}
 .mobile-menu>a[aria-current="page"]{color:var(--blue)!important}
 .mobile-menu-cta{
   min-height:48px;display:flex!important;align-items:center;justify-content:space-between;margin-top:22px;
-  padding:12px 17px!important;border:0!important;border-radius:999px;background:#111318;color:#fff!important;
+  padding:12px 17px!important;border:0!important;border-radius:999px;background:#0759df;color:#fff!important;
   font-size:14px!important;font-weight:650!important;letter-spacing:-.015em!important;text-decoration:none;
 }
 .mobile-menu-cta b{font-weight:500}
-main{padding-top:var(--nav-height)}
+main{padding-top:var(--nav-offset)}
 
 /* =========================================================
    Hero — static child-page hero, same identity as index
    ========================================================= */
 .book-hero{
-  position:relative;overflow:hidden;min-height:calc(100svh - var(--nav-height));
+  position:relative;overflow:hidden;min-height:clamp(560px,72vh,760px);min-height:clamp(560px,72svh,760px);
   display:flex;align-items:center;background:#fff;
 }
 .book-hero::before{
@@ -187,7 +183,7 @@ main{padding-top:var(--nav-height)}
 }
 .hero-shell{
   position:relative;z-index:2;width:min(1480px,calc(100% - 48px));margin:0 auto;
-  min-height:calc(100svh - var(--nav-height));display:grid;grid-template-columns:minmax(0,1.04fr) minmax(0,1fr);align-items:center;gap:clamp(18px,3vw,54px);padding:clamp(22px,4svh,52px) 0 clamp(54px,6svh,76px);
+  min-height:clamp(560px,72vh,760px);min-height:clamp(560px,72svh,760px);display:grid;grid-template-columns:minmax(0,1.04fr) minmax(0,1fr);align-items:center;gap:clamp(18px,3vw,54px);padding:clamp(22px,4svh,52px) 0 clamp(54px,6svh,76px);
 }
 .hero-copy{padding-left:clamp(0px,2vw,28px)}
 .hero-eyebrow{
@@ -213,7 +209,7 @@ main{padding-top:var(--nav-height)}
 .btn-primary:hover{background:#f4be32;border-color:#f4be32;transform:translateY(-2px);box-shadow:0 16px 34px rgba(244,190,50,.28)}
 .btn-secondary{border:1px solid #d8e0eb;background:#fff;color:#15181e}
 .btn-secondary:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(20,35,55,.08)}
-.hero-stage{position:relative;width:100%;min-width:0;min-height:0;height:clamp(180px,calc(100svh - var(--nav-height) - 140px),650px);display:grid;place-items:center;isolation:isolate}
+.hero-stage{position:relative;width:100%;min-width:0;min-height:0;height:clamp(340px,58vh,600px);height:clamp(340px,58svh,600px);display:grid;place-items:center;isolation:isolate}
 .hero-cloud{
   position:absolute;z-index:-1;width:min(54vw,760px);height:min(44vw,95%);
   background:url("assets/img/mega-mendung-cirebon.webp") center/contain no-repeat;opacity:.80;
@@ -225,7 +221,7 @@ main{padding-top:var(--nav-height)}
 }
 .hero-scroll{
   position:absolute;z-index:10;bottom:18px;left:50%;display:inline-flex;align-items:center;gap:8px;
-  padding:7px 12px;border-radius:999px;background:rgba(255,255,255,.86);color:#7a8491;
+  padding:7px 12px;border-radius:999px;background:rgba(255,255,255,.92);color:#596373;
   box-shadow:0 7px 24px rgba(25,45,75,.06);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
   font-size:11px;font-weight:700;letter-spacing:.035em;text-decoration:none;transform:translateX(-50%);
 }
@@ -261,6 +257,7 @@ main{padding-top:var(--nav-height)}
 .chapter-link span{transition:translate .2s ease}
 .chapter-link:hover span{translate:3px -2px}
 .featured-stack{position:relative;min-height:600px;display:grid;place-items:center}
+.featured-loading{margin:0;color:#5f6976;font-size:14px}
 .featured-stack::before{
   content:"";position:absolute;width:560px;height:300px;bottom:38px;left:50%;border-radius:50%;
   background:radial-gradient(ellipse,rgba(10,102,255,.16),rgba(10,102,255,.04) 48%,transparent 72%);
@@ -276,14 +273,14 @@ main{padding-top:var(--nav-height)}
 /* =========================================================
    Catalog search + filter — editorial utility
    ========================================================= */
-.collection{padding:120px 24px 140px;background:#fff;scroll-margin-top:var(--nav-height)}
+.collection{padding:100px 24px 140px;background:#fff;scroll-margin-top:var(--nav-offset)}
 .collection-inner{width:min(1220px,100%);margin:0 auto}
 .collection-head{display:grid;grid-template-columns:.75fr 1.25fr;gap:60px;align-items:end;margin-bottom:62px}
 .collection-head .chapter-title{font-size:clamp(58px,7vw,94px)}
 .collection-intro{max-width:620px;margin-left:auto}
 .collection-intro p{margin:0;color:#666f7b;font-size:18px;line-height:1.6}
 .search-panel{margin-bottom:38px}
-.search-label{display:block;margin-bottom:12px;color:#8a9099;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.search-label{display:block;margin-bottom:12px;color:#5f6976;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
 .catalog-toolbar{display:flex;align-items:center;gap:18px}
 .search-box{position:relative;display:block;flex:1}
 .search-box>span{position:absolute;top:50%;left:22px;color:#7e8792;font-size:22px;transform:translateY(-50%);pointer-events:none}
@@ -291,18 +288,17 @@ main{padding-top:var(--nav-height)}
   width:100%;min-height:66px;padding:16px 22px 16px 58px;border:1px solid #dce2e9;border-radius:19px;
   background:#f8f9fb;color:#111318;outline:none;font-size:17px;transition:border .2s ease,background .2s ease,box-shadow .2s ease;
 }
-.search-input::placeholder{color:#9097a1}
+.search-input::placeholder{color:#68717d}
 .search-input:focus{border-color:#9fc4ff;background:#fff;box-shadow:0 0 0 5px rgba(10,102,255,.08)}
-.result-count{flex-shrink:0;margin:0;color:#8a9099;font-size:13px}
-.filters{display:flex;overflow-x:auto;gap:0;margin:0 0 54px;padding:0;border-top:1px solid #e8ecf1;border-bottom:1px solid #e8ecf1;scrollbar-width:none}
-.filters::-webkit-scrollbar{display:none}
+.result-count{flex-shrink:0;margin:0;color:#5f6976;font-size:13px}
+.filters{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:0;margin:0 0 54px;padding:0;border-top:1px solid #e8ecf1;border-bottom:1px solid #e8ecf1}
 .filter-button{
-  position:relative;min-width:150px;min-height:78px;display:grid;grid-template-columns:auto 1fr;align-content:center;gap:9px;
-  flex:1;padding:15px 20px;border:0;border-right:1px solid #e8ecf1;background:#fff;color:#737b86;
+  position:relative;min-width:0;min-height:78px;display:grid;grid-template-columns:auto 1fr;align-content:center;gap:9px;
+  flex:1;padding:15px 20px;border:0;border-right:1px solid #e8ecf1;background:#fff;color:#5f6976;
   cursor:pointer;text-align:left;font-size:13px;font-weight:700;white-space:nowrap;transition:background .2s ease,color .2s ease;
 }
 .filter-button:first-child{border-left:1px solid #e8ecf1}
-.filter-button::before{content:attr(data-number);color:#a1a8b2;font-size:10px;font-weight:800;letter-spacing:.05em}
+.filter-button::before{content:attr(data-number);color:#65707d;font-size:10px;font-weight:800;letter-spacing:.05em}
 .filter-button::after{
   content:"";position:absolute;right:20px;bottom:0;left:20px;height:3px;border-radius:999px 999px 0 0;
   background:var(--blue);transform:scaleX(0);transition:transform .25s var(--ease);
@@ -316,12 +312,13 @@ main{padding-top:var(--nav-height)}
    Dynamic book grid — keeps selectors used by buku.js
    ========================================================= */
 .book-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:54px 34px}
-.book-card{min-width:0;background:transparent;border-radius:0;box-shadow:none;overflow:visible;transition:none}
+.book-card{min-width:0;display:flex;flex-direction:column;background:transparent;border-radius:0;box-shadow:none;overflow:visible;transition:none}
 .book-card[hidden]{display:none}
 .book-visual{
   position:relative;height:420px;display:flex;align-items:center;justify-content:center;overflow:hidden;
   border:1px solid #e7ebf0;border-radius:24px;background:radial-gradient(circle at 50% 76%,rgba(10,102,255,.10),transparent 34%),linear-gradient(180deg,#fcfcfd,#f0f3f8);
 }
+.book-cover-link{width:100%;height:100%;display:flex;align-items:center;justify-content:center;border-radius:inherit;text-decoration:none}
 .book-visual::after{
   content:"";position:absolute;bottom:34px;left:50%;width:200px;height:34px;border-radius:50%;
   background:rgba(14,44,84,.13);filter:blur(16px);transform:translateX(-50%);
@@ -335,15 +332,16 @@ main{padding-top:var(--nav-height)}
   position:absolute;z-index:4;top:17px;left:17px;padding:6px 10px;border-radius:999px;background:#111318;color:#fff;
   font-size:10px;font-weight:760;letter-spacing:.03em;text-transform:uppercase;
 }
-.book-content{padding:22px 2px 0}
+.book-content{display:flex;flex:1;flex-direction:column;padding:22px 2px 0}
 .tags{display:flex;overflow:hidden;flex-wrap:wrap;gap:7px;max-height:50px;margin-bottom:15px}
 .tag{padding:5px 9px;border-radius:999px;background:#f1f3f6;color:#626a75;font-size:10px;font-weight:650;white-space:nowrap}
 .book-content h3{min-height:0;margin:0;color:#111318;font-size:25px;font-weight:720;letter-spacing:-.04em;line-height:1.08}
+.book-title-link{text-decoration:none}.book-title-link:hover{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
 .book-description{min-height:0;margin:14px 0 0;color:#68707b;font-size:14px;line-height:1.5}
-.book-meta{display:flex;flex-wrap:wrap;gap:7px 12px;margin-top:18px;padding-top:0;border-top:0;color:#9399a2;font-size:10px}
-.book-actions{display:flex;align-items:center;justify-content:flex-start;gap:18px;margin-top:20px}
+.book-meta{display:flex;flex-wrap:wrap;gap:7px 12px;margin-top:18px;padding-top:0;border-top:0;color:#626d7a;font-size:10px}
+.book-actions{display:flex;align-items:center;justify-content:flex-start;gap:10px 18px;margin-top:auto;padding-top:20px}
 .text-link,.download-button{
-  display:inline-flex;align-items:center;gap:5px;min-height:auto;padding:0;border:0;border-radius:0;background:transparent;
+  display:inline-flex;align-items:center;gap:5px;min-height:44px;padding:8px 0;border:0;border-radius:0;background:transparent;
   color:#111318;font-size:13px;font-weight:720;text-decoration:none;
 }
 .text-link::after{content:"↗";font-size:12px;transition:translate .2s ease}
@@ -360,9 +358,9 @@ main{padding-top:var(--nav-height)}
 .closing{padding:120px 24px;background:#0b66e8;color:#fff;overflow:hidden}
 .closing-inner{position:relative;width:min(1220px,100%);min-height:480px;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:50px;margin:0 auto}
 .closing-copy{position:relative;z-index:2}
-.closing-kicker{display:block;margin-bottom:20px;color:rgba(255,255,255,.68);font-size:11px;font-weight:800;letter-spacing:.13em;text-transform:uppercase}
+.closing-kicker{display:block;margin-bottom:20px;color:rgba(255,255,255,.92);font-size:11px;font-weight:800;letter-spacing:.13em;text-transform:uppercase}
 .closing h2{max-width:720px;margin:0;font-size:clamp(58px,7vw,100px);font-weight:780;letter-spacing:-.07em;line-height:.9}
-.closing p{max-width:520px;margin:28px 0 0;color:rgba(255,255,255,.78);font-size:18px;line-height:1.55}
+.closing p{max-width:520px;margin:28px 0 0;color:rgba(255,255,255,.94);font-size:18px;line-height:1.55}
 .closing-link{display:inline-flex;align-items:center;gap:8px;margin-top:30px;color:#fff;font-size:14px;font-weight:720;text-decoration:none}
 .closing-link span{transition:translate .2s ease}.closing-link:hover span{translate:3px -2px}
 .closing-visual{position:relative;height:440px;display:grid;place-items:end center}
@@ -383,14 +381,14 @@ footer{background:#f5f5f7;color:#6e6e73}
 .motion-ready .hero-title,
 .motion-ready .hero-description,
 .motion-ready .hero-actions{opacity:0;transform:translateY(24px)}
-.motion-ready .hero-mascot{opacity:0;transform:translateY(34px)}
+.motion-ready .hero-mascot-wrap{opacity:0;transform:translateY(34px)}
 .motion-ready .hero-cloud{opacity:0;transform:translateY(12px) scale(.98)}
 .motion-ready .hero-eyebrow{animation:heroEnter .62s var(--ease) .08s forwards}
 .motion-ready .hero-title{animation:heroEnter .72s var(--ease) .16s forwards}
 .motion-ready .hero-description{animation:heroEnter .72s var(--ease) .27s forwards}
 .motion-ready .hero-actions{animation:heroEnter .72s var(--ease) .36s forwards}
 .motion-ready .hero-cloud{animation:cloudEnter 1s var(--ease) .22s forwards,cloudBreath 8.5s ease-in-out 1.3s infinite}
-.motion-ready .hero-mascot{animation:mascotEnter .9s var(--ease) .34s forwards,mascotFloat 5.8s ease-in-out 1.35s infinite}
+.motion-ready .hero-mascot-wrap{animation:mascotEnter .9s var(--ease) .34s forwards,mascotFloat 5.8s ease-in-out 1.35s infinite}
 @keyframes heroEnter{to{opacity:1;transform:translateY(0)}}
 @keyframes cloudEnter{to{opacity:.80;transform:translateY(0) scale(1)}}
 @keyframes mascotEnter{to{opacity:1;transform:translateY(0)}}
@@ -431,34 +429,36 @@ footer{background:#f5f5f7;color:#6e6e73}
   .book-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:48px 30px}
 }
 @media(max-width:1050px){
-  .hero-stage{height:clamp(180px,calc(100svh - var(--nav-height) - 140px),570px)}
+  .hero-stage{height:clamp(300px,52vh,520px);height:clamp(300px,52svh,520px)}
   .hero-mascot-wrap{height:100%}
 }
 @media(max-width:900px){
-  .desktop-menu,.nav-cta{display:none}.menu-toggle{display:grid}.nav-inner{justify-content:space-between}.nav-actions{margin-left:auto}
+  .desktop-menu,.nav-cta{display:none}.menu-toggle{width:44px;height:44px;display:grid}.nav-inner{justify-content:space-between}.nav-actions{margin-left:auto}
   .hero-shell{grid-template-columns:minmax(0,1fr);align-content:center;gap:clamp(6px,1.6svh,14px);padding:clamp(18px,3svh,32px) 0 clamp(44px,6svh,62px)}.hero-copy{padding:0;min-width:0}.hero-title{font-size:clamp(41px,min(7.9vw,9svh),76px)}.hero-eyebrow{margin-bottom:13px}.hero-description{margin-top:17px;line-height:1.54}.hero-actions{margin-top:21px}
-  .hero-stage{height:clamp(105px,calc(100svh - var(--nav-height) - 435px),470px)}.hero-mascot-wrap{width:min(70vw,470px);height:100%}.hero-cloud{width:min(90vw,660px);height:min(75vw,95%)}
+  .hero-stage{height:clamp(220px,31vh,340px);height:clamp(220px,31svh,340px)}.hero-mascot-wrap{width:min(70vw,470px);height:100%}.hero-cloud{width:min(90vw,660px);height:min(75vw,95%)}
   .chapter-grid{grid-template-columns:1fr;gap:35px}.featured-stack{min-height:570px}
+  .filters{grid-template-columns:repeat(3,minmax(0,1fr));border-left:1px solid #e8ecf1}.filter-button:first-child{border-left:0}.filter-button:nth-child(n+4){border-top:1px solid #e8ecf1}
   .collection-head{grid-template-columns:1fr;gap:24px}.collection-intro{margin-left:0}
   .closing-inner{grid-template-columns:minmax(0,1fr)}.closing-copy{min-width:0}.closing-visual{height:390px}
 }
 @media(max-width:680px){
   .nav-inner{width:calc(100% - 30px)}
+  .site-nav,.mobile-menu{backdrop-filter:none;-webkit-backdrop-filter:none}.site-nav{background:rgba(255,255,255,.985)}
   .hero-shell{width:calc(100% - 34px);gap:7px;padding:clamp(12px,2.6svh,24px) 0 clamp(29px,4svh,42px)}.hero-eyebrow{margin-bottom:10px}.hero-description{margin-top:14px}.hero-actions{margin-top:18px;gap:9px}.hero-scroll{display:none}
-  .hero-title{font-size:clamp(37px,10.9vw,54px);letter-spacing:-.065em;line-height:.96}.hero-description{font-size:clamp(14px,3.9vw,16px);line-height:1.5}.hero-stage{height:max(clamp(85px,calc(100svh - var(--nav-height) - 465px),345px),clamp(230px,32svh,345px))}.hero-mascot-wrap{width:min(78vw,390px);height:100%}.hero-cloud{width:94vw;height:min(440px,95%)}
+  .hero-title{font-size:clamp(37px,10.9vw,54px);letter-spacing:-.065em;line-height:.96}.hero-description{font-size:clamp(14px,3.9vw,16px);line-height:1.5}.hero-stage{height:clamp(230px,32vh,330px);height:clamp(230px,32svh,330px)}.hero-mascot-wrap{width:min(78vw,390px);height:100%}.hero-cloud{width:94vw;height:min(440px,95%)}
   .btn-primary,.btn-secondary{padding:12px 17px;font-size:13px}
   .editorial-statement{padding:105px 20px}.statement-title{font-size:54px}.statement-note{margin-top:34px;margin-left:0;font-size:16px}
   .featured-section,.collection,.closing{padding-left:20px;padding-right:20px}.featured-section{padding-top:92px;padding-bottom:100px}
   .chapter-title,.collection-head .chapter-title{font-size:58px}.chapter-copy{font-size:16px}
   .featured-stack{min-height:455px}.featured-book-link{width:54%}.featured-book-link img{height:390px}.featured-book-link.left{left:-4%}.featured-book-link.right{right:-4%}
-  .collection{padding-top:95px;padding-bottom:110px}.catalog-toolbar{align-items:stretch;flex-direction:column}.result-count{padding-left:2px}
-  .filters{margin-right:-20px;margin-left:-20px;padding-left:20px}.filter-button{min-width:135px;flex:none}
+  .collection{padding-top:80px;padding-bottom:110px}.catalog-toolbar{align-items:stretch;flex-direction:column}.result-count{padding-left:2px}
+  .filters{grid-template-columns:repeat(2,minmax(0,1fr));border-left:1px solid #e8ecf1}.filter-button{min-width:0;min-height:66px}.filter-button:first-child{border-left:0}.filter-button:nth-child(n+3){border-top:1px solid #e8ecf1}
   .book-grid{grid-template-columns:1fr;gap:52px}.book-visual{height:430px}.book-visual img{height:380px}
   .closing{padding-top:95px;padding-bottom:80px}.closing h2{font-size:58px}.closing p{font-size:16px}.closing-visual{height:340px}.closing-mascot{max-width:340px;max-height:330px}
   .footer-inner{align-items:flex-start;flex-direction:column}
 }
 @media(max-width:440px){
-  .hero-title{font-size:clamp(34px,10.5vw,46px)}.hero-stage{height:max(clamp(85px,calc(100svh - var(--nav-height) - 490px),355px),clamp(230px,32svh,355px))}.hero-mascot-wrap{height:100%}
+  .nav-brand span:last-child{display:none}.hero-title{font-size:clamp(34px,10.5vw,46px)}.hero-stage{height:clamp(230px,32vh,310px);height:clamp(230px,32svh,310px)}.hero-mascot-wrap{height:100%}
   .hero-actions{align-items:stretch;flex-direction:column}.btn-primary,.btn-secondary{justify-content:center;width:100%}
   .statement-title{font-size:clamp(36px,11.5vw,48px);overflow-wrap:anywhere}.chapter-title,.collection-head .chapter-title{font-size:51px}
   .featured-stack{min-height:390px}.featured-book-link img{height:330px}
@@ -475,8 +475,9 @@ footer{background:#f5f5f7;color:#6e6e73}
   .hero-actions{margin-top:19px}
 }
 @media(max-width:900px) and (max-height:700px){
-  .hero-shell{padding-top:14px;padding-bottom:38px}
+  .book-hero,.hero-shell{min-height:auto}.hero-shell{padding-top:24px;padding-bottom:30px}
   .hero-title{font-size:clamp(37px,min(7.2vw,8.4svh),66px)}
+  .hero-stage{height:220px}
 }
 @media(max-width:680px) and (max-height:700px){
   .hero-shell{padding-top:12px;padding-bottom:24px}
@@ -487,23 +488,24 @@ footer{background:#f5f5f7;color:#6e6e73}
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{animation:none!important;transition:none!important}
-  .motion-ready .hero-eyebrow,.motion-ready .hero-title,.motion-ready .hero-description,.motion-ready .hero-actions,.motion-ready .hero-mascot,.motion-ready .hero-cloud,
+  .motion-ready .hero-eyebrow,.motion-ready .hero-title,.motion-ready .hero-description,.motion-ready .hero-actions,.motion-ready .hero-mascot-wrap,.motion-ready .hero-cloud,
   .motion-ready .reveal,.motion-ready .statement-line>span,.motion-ready .featured-book-link,.motion-ready .filter-button,.motion-ready .book-card,.motion-ready .closing-mascot,.motion-ready .closing-cloud{
     opacity:1!important;transform:none!important;
   }
   .motion-ready .featured-stack .center{transform:translateX(-50%)!important}
   .motion-ready .featured-stack .left{transform:rotate(-7deg) scale(.88)!important}.motion-ready .featured-stack .right{transform:rotate(7deg) scale(.88)!important}
 }
+@media(min-width:901px){.mobile-menu{display:none!important}}
 </style>
 
 </head>
 <body id="top">
-<input class="mobile-nav-checkbox" id="mobileNavToggle" type="checkbox" aria-label="Buka atau tutup menu navigasi"/>
+<a class="skip-link" href="#mainContent">Lewati ke konten utama</a>
 <div class="page-progress" aria-hidden="true"><span id="pageProgressBar"></span></div>
 <header class="site-nav" id="siteNav">
   <div class="nav-inner">
     <a class="nav-brand" href="index.html" aria-label="Kabayan — Beranda">
-      <img class="brand-logo" src="images/LogoASD.svg" alt="Logo Kabayan" width="1536" height="1024"/>
+      <img class="brand-logo" src="images/LogoASD.svg" alt="Logo Kabayan" width="96" height="64"/>
       <span><strong>Kabayan</strong></span>
     </a>
     <nav class="desktop-menu" aria-label="Navigasi utama">
@@ -515,16 +517,16 @@ footer{background:#f5f5f7;color:#6e6e73}
       <a class="nav-hotnews" href="hotnews.html"><span class="nav-hotnews-dot" aria-hidden="true"></span>Hot News</a>
     </nav>
     <div class="nav-actions">
-      <a class="nav-cta" href="#koleksi">Lihat Koleksi <span aria-hidden="true">↗</span></a>
-      <label class="menu-toggle" for="mobileNavToggle" aria-controls="mobileMenu" aria-label="Buka atau tutup menu">
+      <a class="nav-cta" href="https://dhaniswara86.id/saung-kabayan/">Saung Kabayan <span aria-hidden="true">↗</span></a>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-controls="mobileMenu" aria-expanded="false" aria-label="Buka menu">
         <span class="menu-icon-open" aria-hidden="true">☰</span>
         <span class="menu-icon-close" aria-hidden="true">×</span>
-      </label>
+      </button>
     </div>
   </div>
 </header>
 
-<nav class="mobile-menu" id="mobileMenu" aria-label="Navigasi mobile">
+<nav class="mobile-menu" id="mobileMenu" aria-label="Navigasi mobile" hidden>
   <div class="mobile-menu-head">Jelajahi Kabayan</div>
   <a href="buku.html" aria-current="page"><span>01</span>Buku</a>
   <a href="formulir.html"><span>02</span>Formulir</a>
@@ -532,10 +534,10 @@ footer{background:#f5f5f7;color:#6e6e73}
   <a href="aplikasi.html"><span>04</span>Aplikasi</a>
   <a href="artikel.html"><span>05</span>Artikel</a>
   <a href="hotnews.html"><span>06</span>Hot News</a>
-  <a class="mobile-menu-cta" href="buku.html#koleksi">Lihat koleksi buku <b>↗</b></a>
+  <a class="mobile-menu-cta" href="https://dhaniswara86.id/saung-kabayan/"><span>Saung Kabayan</span><b aria-hidden="true">↗</b></a>
 </nav>
 
-<main>
+<main id="mainContent">
   <section class="book-hero" id="home">
     <div class="hero-shell">
       <div class="hero-copy">
@@ -547,16 +549,53 @@ footer{background:#f5f5f7;color:#6e6e73}
           <a class="btn-secondary" href="index.html">Kembali ke Kabayan</a>
         </div>
       </div>
-      <div class="hero-stage" aria-label="Kabayan membawa buku pajak">
+      <div class="hero-stage" aria-hidden="true">
         <div class="hero-cloud" aria-hidden="true"></div>
         <div class="hero-mascot-wrap">
-          <img class="hero-mascot" src="assets/img/kabayan-buku.webp" alt="Kabayan membawa buku pajak" width="1122" height="1402" loading="eager" fetchpriority="high" decoding="async"/>
+          <img class="hero-mascot" src="assets/img/kabayan-buku.webp" alt="" width="1122" height="1402" loading="eager" fetchpriority="high" decoding="async"/>
         </div>
       </div>
     </div>
-    <a class="hero-scroll" href="#statement" aria-label="Lanjut ke koleksi buku">
+    <a class="hero-scroll" href="#koleksi" aria-label="Lanjut ke koleksi buku">
       <span>Jelajahi Buku</span><span class="hero-scroll-arrow" aria-hidden="true">↓</span>
     </a>
+  </section>
+
+  <section class="collection" id="koleksi" aria-labelledby="collectionTitle">
+    <div class="collection-inner">
+      <div class="collection-head">
+        <div class="reveal from-left">
+          <span class="chapter-number">01 / KOLEKSI</span>
+          <h2 class="chapter-title" id="collectionTitle">Temukan buku.</h2>
+        </div>
+        <div class="collection-intro reveal from-right">
+          <p>Gunakan pencarian atau pilih kategori untuk menemukan buku yang sesuai dengan topik dan kebutuhan pembelajaran Anda.</p>
+        </div>
+      </div>
+
+      <div class="search-panel reveal">
+        <label class="search-label" for="bookSearch">Cari di perpustakaan Kabayan</label>
+        <div class="catalog-toolbar">
+          <label class="search-box">
+            <span aria-hidden="true">⌕</span>
+            <input id="bookSearch" class="search-input" type="search" aria-label="Cari buku" placeholder="Cari judul, topik, atau kata kunci..." autocomplete="off"/>
+          </label>
+          <p class="result-count" id="resultCount" role="status" aria-live="polite" aria-atomic="true">Memuat koleksi…</p>
+        </div>
+      </div>
+
+      <div class="filters" aria-label="Filter kategori">
+        <button class="filter-button active" data-filter="all" data-number="01" type="button" aria-pressed="true">Semua</button>
+        <button class="filter-button" data-filter="coretax" data-number="02" type="button" aria-pressed="false">Coretax</button>
+        <button class="filter-button" data-filter="pph" data-number="03" type="button" aria-pressed="false">PPh</button>
+        <button class="filter-button" data-filter="ppn" data-number="04" type="button" aria-pressed="false">PPN</button>
+        <button class="filter-button" data-filter="xml" data-number="05" type="button" aria-pressed="false">XML</button>
+        <button class="filter-button" data-filter="djp-online" data-number="06" type="button" aria-pressed="false">DJP Online</button>
+      </div>
+
+      <div class="book-grid" id="bookGrid"><noscript>Aktifkan JavaScript untuk menampilkan katalog buku.</noscript></div>
+      <div class="no-results" id="noResults"><strong>Belum ketemu.</strong><span>Coba gunakan kata kunci lain atau pilih kategori yang berbeda.</span></div>
+    </div>
   </section>
 
   <section class="editorial-statement" id="statement">
@@ -573,59 +612,12 @@ footer{background:#f5f5f7;color:#6e6e73}
   <section class="featured-section" aria-labelledby="featuredTitle">
     <div class="section-shell chapter-grid">
       <div class="reveal from-left">
-        <span class="chapter-number">01 / PILIHAN KABAYAN</span>
+        <span class="chapter-number">02 / PILIHAN KABAYAN</span>
         <h2 class="chapter-title" id="featuredTitle">Mulai dari yang penting.</h2>
         <p class="chapter-copy">Beberapa panduan Kabayan yang dapat menjadi titik awal untuk memahami teknis perpajakan dan penggunaan Coretax secara lebih terstruktur.</p>
         <a class="chapter-link" href="#koleksi">Lihat seluruh koleksi <span aria-hidden="true">↘</span></a>
       </div>
-      <div class="featured-stack reveal from-right" aria-label="Tiga buku pilihan Kabayan">
-        <a class="featured-book-link left" href="buku-detail.html?id=cermat-2126" aria-label="Cermat Pemotongan PPh Pasal 21/26">
-          <img src="images/mockup-cermat-2126.webp" alt="Mockup buku Cermat Pemotongan PPh Pasal 21/26" width="1122" height="1402" loading="lazy" decoding="async"/>
-        </a>
-        <a class="featured-book-link center" href="buku-detail.html?id=converter-xml-2126" aria-label="Converter Excel ke XML PPh Pasal 21/26">
-          <img src="images/mockup-converter-excel-xml-2126.webp" alt="Mockup buku Petunjuk Teknis Converter Excel ke XML Coretax Seri PPh Pasal 21/26" width="1122" height="1402" loading="lazy" decoding="async"/>
-        </a>
-        <a class="featured-book-link right" href="buku-detail.html?id=list-barang-jasa-faktur" aria-label="Kode Barang dan Jasa Era Coretax">
-          <img src="images/mockup-list-kode-barang-jasa.webp" alt="Mockup buku Kode Barang dan Jasa Era Coretax" width="1122" height="1402" loading="lazy" decoding="async"/>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <section class="collection" id="koleksi">
-    <div class="collection-inner">
-      <div class="collection-head">
-        <div class="reveal from-left">
-          <span class="chapter-number">02 / KOLEKSI</span>
-          <h2 class="chapter-title">Temukan buku.</h2>
-        </div>
-        <div class="collection-intro reveal from-right">
-          <p>Gunakan pencarian atau pilih kategori untuk menemukan buku yang sesuai dengan topik dan kebutuhan pembelajaran Anda.</p>
-        </div>
-      </div>
-
-      <div class="search-panel reveal">
-        <label class="search-label" for="bookSearch">Cari di perpustakaan Kabayan</label>
-        <div class="catalog-toolbar">
-          <label class="search-box">
-            <span aria-hidden="true">⌕</span>
-            <input id="bookSearch" class="search-input" type="search" aria-label="Cari buku" placeholder="Cari judul, topik, atau kata kunci..."/>
-          </label>
-          <p class="result-count" id="resultCount">Memuat koleksi…</p>
-        </div>
-      </div>
-
-      <div class="filters" aria-label="Filter kategori">
-        <button class="filter-button active" data-filter="all" data-number="01" type="button">Semua</button>
-        <button class="filter-button" data-filter="coretax" data-number="02" type="button">Coretax</button>
-        <button class="filter-button" data-filter="pph" data-number="03" type="button">PPh</button>
-        <button class="filter-button" data-filter="ppn" data-number="04" type="button">PPN</button>
-        <button class="filter-button" data-filter="xml" data-number="05" type="button">XML</button>
-        <button class="filter-button" data-filter="djp-online" data-number="06" type="button">DJP Online</button>
-      </div>
-
-      <div class="book-grid" id="bookGrid"><noscript>Aktifkan JavaScript untuk menampilkan katalog buku.</noscript></div>
-      <div class="no-results" id="noResults"><strong>Belum ketemu.</strong><span>Coba gunakan kata kunci lain atau pilih kategori yang berbeda.</span></div>
+      <div class="featured-stack reveal from-right" id="featuredStack" aria-label="Tiga buku pilihan Kabayan"><p class="featured-loading">Memuat buku pilihan…</p></div>
     </div>
   </section>
 
@@ -668,7 +660,7 @@ footer{background:#f5f5f7;color:#6e6e73}
     if (nav) nav.classList.toggle('is-scrolled', y > 10);
     if (progress) {
       const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-      progress.style.width = Math.min(100, Math.max(0, (y / max) * 100)) + '%';
+      progress.style.transform = `scaleX(${Math.min(1, Math.max(0, y / max))})`;
     }
   }
   window.addEventListener('scroll', syncScrollUI, {passive:true});
@@ -680,6 +672,7 @@ footer{background:#f5f5f7;color:#6e6e73}
   if (year) year.textContent = new Date().getFullYear();
 
   if (reduceMotion || !('IntersectionObserver' in window)) {
+    document.documentElement.classList.remove('motion-ready');
     document.querySelectorAll('.reveal,.statement-line,.featured-stack,.filters,.book-card,.closing-visual').forEach(el => el.classList.add('is-visible'));
     return;
   }
