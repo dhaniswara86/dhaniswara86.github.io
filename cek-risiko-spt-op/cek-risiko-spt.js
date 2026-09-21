@@ -577,12 +577,11 @@
     const incomplete = activeIds.some((id) => !answers[id]);
 
     let level = "low";
-    if (counts.M >= 2 || (counts.M >= 1 && counts.R >= 1)) level = "veryHigh";
-    else if (counts.M >= 1 || counts.R >= 2) level = "high";
-    else if (counts.R >= 1 || counts.A >= 2 || counts.U >= 2) level = "medium";
-
-    const strongFinding = counts.M > 0 || counts.R > 0;
-    if ((essentialUnknown || userCoverageUnknown || limited || incomplete) && !strongFinding) level = "unknown";
+    if (counts.M >= 1 || counts.R >= 2) level = "high";
+    else if (
+      counts.R >= 1 || counts.A >= 2 || counts.U >= 2 ||
+      essentialUnknown || userCoverageUnknown || limited || incomplete
+    ) level = "medium";
 
     const ranked = items
       .filter((item) => severity[item.answer.flag] > 0)
@@ -602,25 +601,17 @@
   const footnote = $(".question-footnote");
 
   const levelInfo = {
-    unknown: {
-      title: "Belum Dapat Dinilai", color: "#59657b", tint: "#eef2f7", icon: "assets/img/risiko-belum-dinilai.webp",
-      summary: "Informasi yang tersedia belum cukup untuk menghasilkan tingkat risiko yang dapat diandalkan.",
-    },
     low: {
-      title: "Rendah", color: "#157463", tint: "#eaf6f2", icon: "assets/img/risiko-rendah.webp",
+      title: "Low Risk", color: "#157463", tint: "#eaf6f2", icon: "assets/img/risiko-rendah.webp",
       summary: "Jawaban menunjukkan kondisi relatif konsisten. Tetap lakukan pemeriksaan akhir terhadap dokumen sumber.",
     },
     medium: {
-      title: "Menengah", color: "#a46c0b", tint: "#fff6dc", icon: "assets/img/risiko-menengah.webp",
+      title: "Medium Risk", color: "#a46c0b", tint: "#fff6dc", icon: "assets/img/risiko-menengah.webp",
       summary: "Terdapat bagian yang belum diperiksa atau masih memerlukan perbaikan dan dokumen pendukung.",
     },
     high: {
-      title: "Tinggi", color: "#cf530c", tint: "#fff0e7", icon: "assets/img/risiko-tinggi.webp",
+      title: "High Risk", color: "#cf530c", tint: "#fff0e7", icon: "assets/img/risiko-tinggi.webp",
       summary: "Ditemukan ketidaksesuaian yang dapat memengaruhi kelengkapan atau ketepatan pelaporan SPT.",
-    },
-    veryHigh: {
-      title: "Sangat Tinggi", color: "#ad1028", tint: "#fdecef", icon: "assets/img/risiko-sangat-tinggi.webp",
-      summary: "Ditemukan beberapa ketidaksesuaian material yang perlu segera direkonsiliasi dan didukung dokumen.",
     },
   };
 

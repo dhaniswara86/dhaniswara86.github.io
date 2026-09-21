@@ -1,6 +1,6 @@
 # Cek Risiko Pelaporan SPT OP — Kabayan
 
-Microsite asesmen mandiri berdurasi sekitar empat menit. Seluruh jawaban dan perhitungan dijalankan di perangkat pengguna dan tidak dikirim ke server. Hasil terdiri atas rendah, menengah, tinggi, sangat tinggi, atau belum dapat dinilai jika informasi belum memadai.
+Microsite asesmen mandiri berdurasi sekitar empat menit. Seluruh jawaban dan perhitungan dijalankan di perangkat pengguna dan tidak dikirim ke server. Hasil terdiri atas tiga kategori: Low Risk, Medium Risk, dan High Risk.
 
 Sistem menggunakan bank pertanyaan adaptif. Setiap peserta hanya melihat pertanyaan yang relevan dengan profilnya, dengan batas maksimal 15 pertanyaan termasuk validasi akhir.
 
