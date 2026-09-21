@@ -71,20 +71,6 @@
       ],
       mitigation: "Periksa dan perbarui data Unit Keluarga sebelum menyampaikan SPT.",
     },
-    filing_status: {
-      category: "PROFIL PELAPORAN",
-      text: "Apa kondisi SPT yang sedang Anda periksa?",
-      help: "Pilih kondisi yang paling sesuai untuk tahun pajak ini.",
-      profile: true,
-      answers: [
-        a("SPT normal untuk pertama kali", "V", { value: "normal" }),
-        a("SPT pembetulan", "A", { value: "amendment" }),
-        a("SPT tahun sebelumnya belum disampaikan", "R", { value: "prior_unfiled" }),
-        a("Belum mengetahui status SPT", "U", { value: "unknown", essentialUnknown: true }),
-      ],
-      mitigation: "Periksa riwayat pelaporan dan pastikan jenis SPT yang akan disampaikan sudah tepat.",
-    },
-
     income_complete: {
       ...common,
       domain: "Kelengkapan penghasilan",
@@ -169,7 +155,6 @@
       ],
       mitigation: "Susun rekonsiliasi penghasilan, biaya hidup, cicilan, dan perubahan kekayaan.",
     },
-
     employee_multi: {
       category: "LANJUTAN · PEGAWAI",
       domain: "Beberapa pemberi kerja",
@@ -467,7 +452,7 @@
 
   const icons = {
     profile_source: "briefcase", profile_family: "family", family_obligation: "family",
-    family_unit_admin: "family", filing_status: "document", income_complete: "wallet",
+    family_unit_admin: "family", income_complete: "wallet",
     data_match: "document", classification: "tag", tax_credit: "document",
     asset_changes: "home", debt: "document", economic_capacity: "scale",
     employee_multi: "building", employee_move: "building", employee_other: "wallet",
@@ -519,7 +504,6 @@
       ids.push("family_obligation");
       if (answers.family_obligation?.value === "joined") ids.push("family_unit_admin");
     }
-    ids.push("filing_status");
     return ids;
   }
 
