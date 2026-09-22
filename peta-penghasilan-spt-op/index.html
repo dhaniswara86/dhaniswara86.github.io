@@ -32,30 +32,22 @@
     <section class="hero">
       <span class="kicker">SPT OP CORETAX</span>
       <h1>Penghasilan ini<br><span>masuk ke mana?</span></h1>
-      <p>Cari jenis penghasilan untuk melihat bagian, lampiran, dan kode yang perlu dipilih.</p>
-      <label class="search-field">
-        <span class="sr-only">Cari penghasilan</span>
-        <svg class="field-icon" aria-hidden="true"><use href="#i-search"></use></svg>
-        <input id="searchInput" type="search" placeholder="Cari: gaji, dividen, warisan, sewa, kripto…" autocomplete="off">
-        <button id="clearBtn" type="button">Hapus</button>
-      </label>
-      <div class="search-note"><span id="resultCount">0 jenis penghasilan</span><span>Ditelaah 22 September 2026</span></div>
-      <p class="context-jump">Sudah kawin? <a href="#positionTitle">Sesuaikan posisi perpajakan keluarga</a> setelah memilih jenis penghasilan.</p>
-    </section>
-
-    <nav class="category-row" id="categoryRow" aria-label="Kategori penghasilan"></nav>
-
-    <section class="workspace" aria-label="Hasil pencarian dan pemetaan">
-      <aside class="income-list" id="incomeList" aria-label="Daftar penghasilan"></aside>
-      <article class="detail" id="detailPanel" aria-live="polite"></article>
+      <p>Tentukan posisi perpajakan lebih dahulu, lalu cari jenis penghasilan untuk melihat lampiran dan kode yang tepat.</p>
+      <div class="journey" aria-label="Alur penggunaan">
+        <span class="journey-item active"><svg aria-hidden="true"><use href="#i-family"></use></svg><b>1</b> Tentukan posisi</span>
+        <span class="journey-line" aria-hidden="true"></span>
+        <span class="journey-item"><svg aria-hidden="true"><use href="#i-search"></use></svg><b>2</b> Cari penghasilan</span>
+        <span class="journey-line" aria-hidden="true"></span>
+        <span class="journey-item"><svg aria-hidden="true"><use href="#i-route"></use></svg><b>3</b> Ikuti petanya</span>
+      </div>
     </section>
 
     <section class="tax-position" aria-labelledby="positionTitle">
       <div class="position-heading">
-        <div class="heading-with-icon"><span class="heading-icon"><svg aria-hidden="true"><use href="#i-family"></use></svg></span><div><span class="section-label">KONTEKS PENGISIAN</span><h2 id="positionTitle">Posisi perpajakan Anda</h2></div></div>
-        <span class="session-note">Opsional · tidak disimpan</span>
+        <div class="heading-with-icon"><span class="heading-icon"><svg aria-hidden="true"><use href="#i-family"></use></svg></span><div><span class="section-label">LANGKAH 1</span><h2 id="positionTitle">Kenali posisi perpajakan Anda</h2></div></div>
+        <span class="session-note">Jawaban tidak disimpan</span>
       </div>
-      <p class="position-intro">Jawab berdasarkan fakta. Sistem yang menyimpulkan status KK, HB, PH, atau MT—Anda tidak perlu memilih istilah pajaknya.</p>
+      <p class="position-intro">Jawab berdasarkan kondisi sebenarnya. Pertanyaan berikutnya akan muncul bertahap dan sistem akan menyimpulkan status KK, HB, PH, atau MT.</p>
       <div class="position-grid">
         <label>Status perkawinan
           <select id="maritalSelect">
@@ -71,6 +63,7 @@
         </label>
         <label id="courtSeparationField" hidden>Ada putusan hakim hidup berpisah?
           <select id="courtSeparationSelect">
+            <option value="pending">Pilih jawaban</option>
             <option value="no">Tidak</option>
             <option value="yes">Ya</option>
             <option value="unsure">Tidak yakin</option>
@@ -78,6 +71,7 @@
         </label>
         <label id="separationAgreementField" hidden>Ada perjanjian pisah harta/penghasilan?
           <select id="separationAgreementSelect">
+            <option value="pending">Pilih jawaban</option>
             <option value="no">Tidak</option>
             <option value="yes">Ya</option>
             <option value="unsure">Tidak yakin</option>
@@ -85,6 +79,7 @@
         </label>
         <label id="separateElectionField" hidden>Istri memilih kewajiban pajak terpisah?
           <select id="separateElectionSelect">
+            <option value="pending">Pilih jawaban</option>
             <option value="no">Tidak</option>
             <option value="yes">Ya</option>
             <option value="unsure">Tidak yakin</option>
@@ -125,6 +120,28 @@
       <div class="position-result" id="positionResult" aria-live="polite"></div>
       <p class="coretax-help"><svg aria-hidden="true"><use href="#i-info"></use></svg><span><strong>Langkah tambahan di Coretax</strong> menunjukkan formulir atau pengaturan lain yang perlu diselesaikan selain lokasi penghasilan utama—misalnya L4 Bagian B untuk PH/MT atau pembaruan status DUK.</span></p>
       <p class="position-sources">Dasar posisi: <a href="https://jdih.kemenkeu.go.id/dok/uu-7-tahun-2021" target="_blank" rel="noopener">UU PPh sebagaimana diubah UU HPP</a> · <a href="https://pajak.go.id/coretaxpedia/data-unit-keluarga" target="_blank" rel="noopener">Panduan DUK DJP</a> · <a href="https://pajak.go.id/sites/default/files/2026-01/Formulir%20SPT%20Tahunan%20Orang%20Pribadi%202025.pdf" target="_blank" rel="noopener">Formulir SPT OP Tahun Pajak 2025</a></p>
+    </section>
+
+    <section class="search-section" aria-labelledby="searchTitle">
+      <div class="search-heading">
+        <span class="search-heading-icon"><svg aria-hidden="true"><use href="#i-search"></use></svg></span>
+        <div><span class="section-label">LANGKAH 2</span><h2 id="searchTitle">Cari jenis penghasilan</h2></div>
+      </div>
+      <p>Ketik sumber penghasilan atau pilih kategori. Hasilnya langsung muncul di bawah kolom pencarian.</p>
+      <label class="search-field">
+        <span class="sr-only">Cari penghasilan</span>
+        <svg class="field-icon" aria-hidden="true"><use href="#i-search"></use></svg>
+        <input id="searchInput" type="search" placeholder="Cari: gaji, dividen, warisan, sewa, kripto…" autocomplete="off">
+        <button id="clearBtn" type="button">Hapus</button>
+      </label>
+      <div class="search-note"><span id="resultCount">0 jenis penghasilan</span><span>Ditelaah 22 September 2026</span></div>
+    </section>
+
+    <nav class="category-row" id="categoryRow" aria-label="Kategori penghasilan"></nav>
+
+    <section class="workspace" aria-label="Hasil pencarian dan pemetaan">
+      <aside class="income-list" id="incomeList" aria-label="Daftar penghasilan"></aside>
+      <article class="detail" id="detailPanel" aria-live="polite"></article>
     </section>
 
     <aside class="disclaimer">

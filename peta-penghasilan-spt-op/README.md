@@ -11,7 +11,7 @@ Paket statis minimalis yang siap diunggah ke GitHub Pages.
 
 Tidak memerlukan proses build, database, login, atau penyimpanan profil.
 
-Versi ini mencakup pemetaan 62 jenis penghasilan untuk Tahun Pajak 2025. Status KK/HB/PH/MT disimpulkan dari fakta hukum yang dipilih pengguna, lalu diperiksa konsistensinya dengan NIK/NPWP dan DUK. Kondisi penghasilan istri dari satu pemberi kerja baru diperlakukan final setelah tiga syarat kumulatif dikonfirmasi. Semua pilihan hanya berlaku selama halaman dibuka dan tidak disimpan.
+Versi ini mencakup pemetaan 62 jenis penghasilan untuk Tahun Pajak 2025. Penentu posisi ditempatkan pada awal halaman dan menampilkan pertanyaan secara bertahap. Status KK/HB/PH/MT disimpulkan dari fakta hukum yang dipilih pengguna, lalu diperiksa konsistensinya dengan NIK/NPWP dan DUK. Kondisi penghasilan istri dari satu pemberi kerja baru diperlakukan final setelah tiga syarat kumulatif dikonfirmasi. Semua pilihan hanya berlaku selama halaman dibuka dan tidak disimpan.
 
 ## File yang diunggah
 

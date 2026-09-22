@@ -8,7 +8,7 @@
     roleField:$("#roleField"),courtField:$("#courtSeparationField"),agreementField:$("#separationAgreementField"),electionField:$("#separateElectionField"),husbandNpwpField:$("#husbandNpwpField"),wifeNpwpField:$("#wifeNpwpField"),dukField:$("#dukField"),wifeEmployeeField:$("#wifeEmployeeField"),wifeWithheldField:$("#wifeWithheldField"),wifeRelatedField:$("#wifeRelatedField"),positionResult:$("#positionResult")
   };
   let year="2025",category="Semua",selectedId="gaji",variants={};
-  let position={marital:"single",role:"husband",court:"no",agreement:"no",election:"no",husbandNpwp:"active",wifeNpwp:"active",duk:"unsure",wifeEmployee:"unsure",wifeWithheld:"unsure",wifeRelated:"unsure"};
+  let position={marital:"single",role:"husband",court:"pending",agreement:"pending",election:"pending",husbandNpwp:"active",wifeNpwp:"active",duk:"unsure",wifeEmployee:"unsure",wifeWithheld:"unsure",wifeRelated:"unsure"};
   const esc=(value)=>String(value??"").replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]));
   const items=()=>data.years[year].items;
   const confidence=(key)=>data.confidenceLabels[key]||data.confidenceLabels.review;
@@ -18,10 +18,13 @@
 
   function familyStatus(){
     if(position.marital!=="married")return{code:"SINGLE",certain:true};
+    if(position.court==="pending")return{code:"REVIEW",certain:false,reason:"Jawab pertanyaan mengenai putusan hakim untuk melanjutkan."};
     if(position.court==="unsure")return{code:"REVIEW",certain:false,reason:"Pastikan apakah terdapat putusan hakim mengenai hidup berpisah."};
     if(position.court==="yes")return{code:"HB",certain:true};
+    if(position.agreement==="pending")return{code:"REVIEW",certain:false,reason:"Jawab pertanyaan mengenai perjanjian pemisahan harta dan penghasilan untuk melanjutkan."};
     if(position.agreement==="unsure")return{code:"REVIEW",certain:false,reason:"Pastikan apakah terdapat perjanjian tertulis pemisahan harta dan penghasilan."};
     if(position.agreement==="yes")return{code:"PH",certain:true};
+    if(position.election==="pending")return{code:"REVIEW",certain:false,reason:"Jawab apakah istri memilih kewajiban perpajakan terpisah untuk menyelesaikan penentuan status."};
     if(position.election==="unsure")return{code:"REVIEW",certain:false,reason:"Pastikan apakah istri memilih menjalankan kewajiban perpajakan secara terpisah."};
     return{code:position.election==="yes"?"MT":"KK",certain:true};
   }
@@ -53,8 +56,8 @@
   }
 
   function renderPosition(){
-    const married=position.marital==="married",status=familyStatus(),askAgreement=married&&position.court==="no",askElection=askAgreement&&position.agreement==="no",askWifeIncome=married&&status.code==="KK";
-    els.roleField.hidden=!married;els.courtField.hidden=!married;els.agreementField.hidden=!askAgreement;els.electionField.hidden=!askElection;els.husbandNpwpField.hidden=!married;els.wifeNpwpField.hidden=!married;els.dukField.hidden=!married;els.wifeEmployeeField.hidden=!askWifeIncome;els.wifeWithheldField.hidden=!(askWifeIncome&&position.wifeEmployee==="yes");els.wifeRelatedField.hidden=!(askWifeIncome&&position.wifeEmployee==="yes");
+    const married=position.marital==="married",status=familyStatus(),askAgreement=married&&position.court==="no",askElection=askAgreement&&position.agreement==="no",resolved=married&&status.certain,askWifeIncome=resolved&&status.code==="KK";
+    els.roleField.hidden=!married;els.courtField.hidden=!married;els.agreementField.hidden=!askAgreement;els.electionField.hidden=!askElection;els.husbandNpwpField.hidden=!resolved;els.wifeNpwpField.hidden=!resolved;els.dukField.hidden=!resolved;els.wifeEmployeeField.hidden=!askWifeIncome;els.wifeWithheldField.hidden=!(askWifeIncome&&position.wifeEmployee==="yes");els.wifeRelatedField.hidden=!(askWifeIncome&&position.wifeEmployee==="yes");
     const info=positionInfo();
     els.positionResult.innerHTML=`<div class="result-lead"><span class="result-icon"><svg aria-hidden="true"><use href="#i-file"></use></svg></span><span><small>Kesimpulan status</small><strong><span class="status-code">${esc(info.code)}</span> ${esc(info.title)}</strong></span></div><div><small>Pelaporan</small><p>${esc(info.filing)}</p></div><div><small>Penghitungan</small><p>${esc(info.calculation)}</p></div><div><small>Langkah di Coretax</small><p class="position-extra">${esc(info.extra)}</p></div><p class="position-warning">${esc(info.warning)}</p>`;
   }
