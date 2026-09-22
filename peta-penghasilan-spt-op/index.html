@@ -6,6 +6,9 @@
   <meta name="theme-color" content="#ffffff">
   <title>Peta Penghasilan SPT OP Coretax · Kabayan</title>
   <meta name="description" content="Cari lokasi pengisian penghasilan orang pribadi pada SPT Tahunan PPh Orang Pribadi Coretax.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/peta.css">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%230a66ff'/%3E%3Cpath d='M18 18h28v28H18z' fill='white'/%3E%3Cpath d='M25 25h14M25 32h14M25 39h9' stroke='%230a66ff' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
 </head>
@@ -21,7 +24,7 @@
   <header class="site-nav">
     <div class="nav-inner">
       <a class="brand" href="#top"><strong>Kabayan</strong><span>Peta SPT OP</span></a>
-      <label class="year-field">Tahun Pajak<select id="yearSelect"><option value="2025">2025</option><option value="2026">2026 · pratinjau</option></select></label>
+      <label class="year-field">Tahun Pajak<select id="yearSelect"><option value="2025">2025</option></select></label>
     </div>
   </header>
 
@@ -36,14 +39,23 @@
         <input id="searchInput" type="search" placeholder="Cari: gaji, dividen, warisan, sewa, kripto…" autocomplete="off">
         <button id="clearBtn" type="button">Hapus</button>
       </label>
-      <div class="search-note"><span id="resultCount">0 jenis penghasilan</span><span>Ditelaah 18 September 2026</span></div>
+      <div class="search-note"><span id="resultCount">0 jenis penghasilan</span><span>Ditelaah 22 September 2026</span></div>
+      <p class="context-jump">Sudah kawin? <a href="#positionTitle">Sesuaikan posisi perpajakan keluarga</a> setelah memilih jenis penghasilan.</p>
+    </section>
+
+    <nav class="category-row" id="categoryRow" aria-label="Kategori penghasilan"></nav>
+
+    <section class="workspace" aria-label="Hasil pencarian dan pemetaan">
+      <aside class="income-list" id="incomeList" aria-label="Daftar penghasilan"></aside>
+      <article class="detail" id="detailPanel" aria-live="polite"></article>
     </section>
 
     <section class="tax-position" aria-labelledby="positionTitle">
       <div class="position-heading">
         <div class="heading-with-icon"><span class="heading-icon"><svg aria-hidden="true"><use href="#i-family"></use></svg></span><div><span class="section-label">KONTEKS PENGISIAN</span><h2 id="positionTitle">Posisi perpajakan Anda</h2></div></div>
-        <span class="session-note">Tidak disimpan</span>
+        <span class="session-note">Opsional · tidak disimpan</span>
       </div>
+      <p class="position-intro">Jawab berdasarkan fakta. Sistem yang menyimpulkan status KK, HB, PH, atau MT—Anda tidak perlu memilih istilah pajaknya.</p>
       <div class="position-grid">
         <label>Status perkawinan
           <select id="maritalSelect">
@@ -57,54 +69,69 @@
             <option value="wife">Istri</option>
           </select>
         </label>
-        <label id="familyStatusField" hidden>Status kewajiban
-          <select id="familyStatusSelect">
-            <option value="KK">KK · Gabung kepala keluarga</option>
-            <option value="HB">HB · Hidup berpisah</option>
-            <option value="PH">PH · Pisah harta/penghasilan</option>
-            <option value="MT">MT · Memilih terpisah</option>
-          </select>
-        </label>
-        <label>Administrasi NIK/NPWP
-          <select id="npwpSelect">
-            <option value="active">Punya dan aktif</option>
-            <option value="inactive">Belum punya/tidak aktif</option>
+        <label id="courtSeparationField" hidden>Ada putusan hakim hidup berpisah?
+          <select id="courtSeparationSelect">
+            <option value="no">Tidak</option>
+            <option value="yes">Ya</option>
             <option value="unsure">Tidak yakin</option>
           </select>
         </label>
-        <label id="wifeIncomeField" hidden>Penghasilan istri
-          <select id="wifeIncomeSelect">
-            <option value="unsure">Belum ditentukan</option>
-            <option value="one-employer">Hanya 1 pemberi kerja*</option>
-            <option value="other">Selain kondisi tersebut</option>
-            <option value="none">Tidak ada penghasilan</option>
+        <label id="separationAgreementField" hidden>Ada perjanjian pisah harta/penghasilan?
+          <select id="separationAgreementSelect">
+            <option value="no">Tidak</option>
+            <option value="yes">Ya</option>
+            <option value="unsure">Tidak yakin</option>
           </select>
         </label>
-        <label id="dukField" hidden>Status istri dalam DUK suami
+        <label id="separateElectionField" hidden>Istri memilih kewajiban pajak terpisah?
+          <select id="separateElectionSelect">
+            <option value="no">Tidak</option>
+            <option value="yes">Ya</option>
+            <option value="unsure">Tidak yakin</option>
+          </select>
+        </label>
+        <label id="husbandNpwpField" hidden>NPWP/NIK suami
+          <select id="husbandNpwpSelect">
+            <option value="active">Aktif</option>
+            <option value="inactive">Tidak aktif</option>
+            <option value="unsure">Tidak yakin</option>
+          </select>
+        </label>
+        <label id="wifeNpwpField" hidden>NPWP/NIK istri
+          <select id="wifeNpwpSelect">
+            <option value="active">Aktif</option>
+            <option value="inactive">Nonaktif</option>
+            <option value="none">Tidak memiliki NPWP sendiri</option>
+            <option value="unsure">Tidak yakin</option>
+          </select>
+        </label>
+        <label id="dukField" hidden>Istri terdaftar sebagai tanggungan DUK suami?
           <select id="dukSelect">
             <option value="unsure">Belum diperiksa</option>
-            <option value="dependent">Ya, sebagai tanggungan</option>
-            <option value="not-dependent">Tidak/bukan tanggungan</option>
+            <option value="dependent">Ya</option>
+            <option value="not-dependent">Tidak</option>
           </select>
         </label>
+        <label id="wifeEmployeeField" hidden>Penghasilan istri hanya sebagai pegawai dari 1 pemberi kerja?
+          <select id="wifeEmployeeSelect"><option value="unsure">Belum ditentukan</option><option value="yes">Ya</option><option value="no">Tidak</option><option value="none">Tidak ada penghasilan</option></select>
+        </label>
+        <label id="wifeWithheldField" hidden>Sudah dipotong PPh Pasal 21?
+          <select id="wifeWithheldSelect"><option value="unsure">Belum diperiksa</option><option value="yes">Ya</option><option value="no">Tidak</option></select>
+        </label>
+        <label id="wifeRelatedField" hidden>Pekerjaan terkait usaha/pekerjaan bebas keluarga?
+          <select id="wifeRelatedSelect"><option value="unsure">Belum diperiksa</option><option value="no">Tidak terkait</option><option value="yes">Ya, terkait</option></select>
+        </label>
       </div>
-      <p class="field-footnote" id="wifeIncomeNote" hidden>* Dan pekerjaan istri tidak terkait usaha atau pekerjaan bebas suami/anggota keluarga.</p>
       <div class="position-result" id="positionResult" aria-live="polite"></div>
       <p class="coretax-help"><svg aria-hidden="true"><use href="#i-info"></use></svg><span><strong>Langkah tambahan di Coretax</strong> menunjukkan formulir atau pengaturan lain yang perlu diselesaikan selain lokasi penghasilan utama—misalnya L4 Bagian B untuk PH/MT atau pembaruan status DUK.</span></p>
-      <p class="position-sources">Dasar posisi: <a href="https://jdih.kemenkeu.go.id/dok/uu-7-tahun-2021" target="_blank" rel="noopener">UU PPh sebagaimana diubah UU HPP</a> · <a href="https://pajak.go.id/coretaxpedia/data-unit-keluarga" target="_blank" rel="noopener">Panduan DUK DJP</a> · <a href="https://pajak.go.id/sites/default/files/2024-09/Buku%20Manual%20Coretax%202024%20-%2015%20Pelaporan%20SPT%20Tahunan%20PPh%20OP_0.pdf" target="_blank" rel="noopener">Manual SPT OP Coretax</a></p>
-    </section>
-
-    <nav class="category-row" id="categoryRow" aria-label="Kategori penghasilan"></nav>
-
-    <section class="workspace">
-      <aside class="income-list" id="incomeList" aria-label="Daftar penghasilan"></aside>
-      <article class="detail" id="detailPanel" aria-live="polite"></article>
+      <p class="position-sources">Dasar posisi: <a href="https://jdih.kemenkeu.go.id/dok/uu-7-tahun-2021" target="_blank" rel="noopener">UU PPh sebagaimana diubah UU HPP</a> · <a href="https://pajak.go.id/coretaxpedia/data-unit-keluarga" target="_blank" rel="noopener">Panduan DUK DJP</a> · <a href="https://pajak.go.id/sites/default/files/2026-01/Formulir%20SPT%20Tahunan%20Orang%20Pribadi%202025.pdf" target="_blank" rel="noopener">Formulir SPT OP Tahun Pajak 2025</a></p>
     </section>
 
     <aside class="disclaimer">
       <strong>Catatan</strong>
       <p>Peta ini membantu menemukan lokasi pengisian. Perlakuan akhir tetap bergantung pada fakta, bukti potong, dokumen, dan ketentuan yang berlaku.</p>
     </aside>
+    <footer class="site-footer"><strong>Kabayan</strong><span>Peta ini adalah alat bantu navigasi, bukan pengganti pemeriksaan dokumen dan ketentuan yang berlaku.</span></footer>
   </main>
 
   <template id="emptyTemplate"><div class="empty-state"><strong>Tidak ditemukan</strong><p>Coba kata pencarian lain atau pilih kategori Semua.</p></div></template>
