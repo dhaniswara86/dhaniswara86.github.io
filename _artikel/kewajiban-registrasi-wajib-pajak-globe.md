@@ -1,7 +1,7 @@
 ---
 layout: artikel-editorial
 title: "Siapa Wajib Mendaftar sebagai Wajib Pajak GloBE?"
-hero_title: "Masuk Grup Multinasional? Jangan Tunggu Pajak Tambahan Muncul untuk Registrasi WP GloBE"
+hero_title: "Masuk Grup Multinasional? Cek hal berikut. "
 description: "Panduan menentukan kewajiban registrasi Wajib Pajak GloBE, batas waktu sembilan bulan, data yang disiapkan, langkah Coretax, serta kewajiban setelah terdaftar berdasarkan PMK 136 Tahun 2024 dan PER-6/PJ/2026."
 excerpt: "Ambang EUR750 juta diuji pada tingkat grup. Jika syarat cakupan terpenuhi, entitas konstituen atau anggota grup usaha patungan di Indonesia wajib menambahkan status WP GloBE melalui Coretax."
 summary: "Registrasi WP GloBE bukan pembuatan NPWP baru dan tidak menunggu adanya pajak tambahan. Uji lebih dahulu apakah grup merupakan Grup PMN, apakah ambang EUR750 juta terpenuhi dalam sedikitnya dua dari empat tahun sebelumnya, dan apakah entitas Indonesia merupakan entitas konstituen atau anggota grup usaha patungan yang tidak dikecualikan."
