@@ -10,7 +10,7 @@ sidebar_note: "Untuk tahun pengenaan GloBE pertama yang berakhir 31 Desember 202
 hero_accent: "Cakupan · Registrasi · Coretax · Pelaporan"
 permalink: /kewajiban-registrasi-wajib-pajak-globe.html
 date: 2026-09-22 08:00:00 +0700
-date_modified: 2026-09-22 20:30:00 +0700
+date_modified: 2026-09-23 08:30:00 +0700
 author: "Angga Sukma Dhaniswara"
 category: "Pajak Internasional"
 tags:
@@ -126,7 +126,7 @@ custom_js:
 
 <h2 id="cek-indikatif">Cek indikatif kewajiban registrasi</h2>
 
-<div class="globe26-checker" data-globe-checker>
+<form class="globe26-checker" data-globe-checker novalidate>
   <div class="globe26-checker__intro">
     <span class="globe26-checker__pulse" aria-hidden="true"></span>
     <div>
@@ -164,14 +164,29 @@ custom_js:
   </fieldset>
 
   <div class="globe26-checker__actions">
-    <button type="button" data-checker-submit>Periksa hasil</button>
-    <button type="button" class="globe26-button-secondary" data-checker-reset>Ulangi</button>
+    <a class="globe26-button-primary" href="#globe26-checker-result" data-checker-submit>Lihat kesimpulan</a>
+    <button type="reset" class="globe26-button-secondary" data-checker-reset>Ulangi</button>
   </div>
 
-  <div class="globe26-checker__result" data-checker-result aria-live="polite" tabindex="-1">
-    <p>Pilih jawaban pada seluruh pertanyaan, lalu tekan “Periksa hasil”.</p>
+  <div id="globe26-checker-result" class="globe26-checker__result" data-checker-result aria-live="polite" aria-atomic="true" tabindex="-1">
+    <div class="globe26-result globe26-result--incomplete">
+      <p><strong>Jawaban belum lengkap.</strong> Pilih satu jawaban pada setiap pertanyaan. Kesimpulan akan muncul otomatis di area ini.</p>
+    </div>
+    <div class="globe26-result globe26-result--likely">
+      <p><strong>Terindikasi wajib registrasi.</strong> Tentukan akhir tahun pengenaan GloBE pertama, hitung tenggat sembilan bulan, lalu siapkan penambahan status melalui akun Coretax entitas Indonesia tersebut.</p>
+    </div>
+    <div class="globe26-result globe26-result--review">
+      <p><strong>Perlu analisis lanjutan.</strong> Lengkapi laporan konsolidasi, daftar entitas, bagan kepemilikan, dan analisis pengecualian sebelum menyimpulkan kewajiban registrasi.</p>
+    </div>
+    <div class="globe26-result globe26-result--excluded">
+      <p><strong>Periksa dasar pengecualian secara rinci.</strong> Pastikan seluruh unsur Pasal 3 PMK 136/2024 terpenuhi. Nama atau bentuk badan saja belum cukup untuk menyimpulkan pengecualian.</p>
+    </div>
+    <div class="globe26-result globe26-result--unlikely">
+      <p><strong>Belum terindikasi wajib registrasi berdasarkan jawaban ini.</strong> Simpan analisisnya dan lakukan pengujian ulang jika struktur grup, kepemilikan, omzet konsolidasi, atau status entitas berubah.</p>
+    </div>
   </div>
-</div>
+  <noscript><p class="globe26-noscript">JavaScript tidak aktif. Kesimpulan tetap ditampilkan secara otomatis oleh tampilan dasar setelah seluruh jawaban dipilih pada peramban modern.</p></noscript>
+</form>
 
 <p class="globe26-disclaimer">Alat ini bukan pendapat hukum atau penetapan DJP. Akuisisi, pelepasan, merger, pemecahan grup, tahun buku pendek, entitas tanpa laporan konsolidasi, usaha patungan, dan struktur kepemilikan melalui entitas yang dikecualikan memerlukan pengujian khusus.</p>
 
@@ -190,7 +205,12 @@ custom_js:
     <input id="globe26-year-end" type="date" value="2025-12-31" data-year-end>
     <button type="button" data-deadline-submit>Hitung tenggat</button>
   </div>
-  <div class="globe26-deadline__result" data-deadline-result aria-live="polite"></div>
+  <div class="globe26-deadline__result" data-deadline-result aria-live="polite">
+    <div class="globe26-deadline__item"><span>Penambahan status</span><strong>30 September 2026</strong></div>
+    <div class="globe26-deadline__item"><span>Pembayaran pajak tambahan</span><strong>31 Desember 2026</strong></div>
+    <div class="globe26-deadline__item"><span>SPT GloBE</span><strong>30 April 2027</strong></div>
+    <div class="globe26-deadline__item"><span>GIR/Notifikasi tahun pertama</span><strong>30 Juni 2027</strong></div>
+  </div>
 </div>
 
 <p>Bagi grup yang baru dibentuk, PMK 136/2024 memiliki aturan tersendiri: jika pada tahun pertama dan kedua grup baru tersebut telah mencapai ambang EUR750 juta, GloBE diterapkan pada tahun pajak ketiga. Restrukturisasi, penggabungan, dan pemecahan grup juga memiliki cara pengujian khusus. Karena itu, jangan menentukan “tahun pertama” hanya dari tahun berdirinya entitas Indonesia.</p>
