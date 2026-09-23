@@ -188,8 +188,13 @@
 .globe26-checker input { accent-color: var(--globe26-blue); }
 .globe26-checker__actions { display: flex; flex-wrap: wrap; gap: 0.65rem; margin-top: 1rem; }
 .globe26-checker button,
+.globe26-checker .globe26-button-primary,
 .globe26-deadline button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   min-height: 44px;
+  box-sizing: border-box;
   padding: 0.68rem 1rem;
   border: 0;
   border-radius: 999px;
@@ -197,17 +202,47 @@
   color: var(--globe26-white);
   font: inherit;
   font-weight: 750;
+  line-height: 1.2;
+  text-decoration: none;
   cursor: pointer;
 }
 .globe26-checker button:hover,
+.globe26-checker .globe26-button-primary:hover,
 .globe26-deadline button:hover { background: var(--globe26-blue-hover); }
 .globe26-checker .globe26-button-secondary { border: 1px solid var(--globe26-line); background: var(--globe26-white); color: var(--globe26-ink); }
-.globe26-checker__result { margin-top: 1rem; padding: 1rem; border-radius: 16px; background: var(--globe26-ink); color: var(--globe26-white); }
-.globe26-checker__result p { margin: 0; color: inherit; }
-.globe26-checker__result strong { color: var(--globe26-yellow); }
-.globe26-checker__result[data-status="likely"] { background: linear-gradient(135deg, #052d5d, #0063c6); }
-.globe26-checker__result[data-status="unlikely"] { background: #f1f1f3; color: var(--globe26-ink); }
-.globe26-checker__result[data-status="review"] { background: #3b2d04; }
+.globe26-checker__result { margin-top: 1rem; border-radius: 16px; scroll-margin-top: 7rem; }
+.globe26-result { display: none; padding: 1rem; border-radius: 16px; color: var(--globe26-white); }
+.globe26-result p { margin: 0; color: inherit; }
+.globe26-result strong { color: var(--globe26-yellow); }
+.globe26-result--incomplete { display: block; background: var(--globe26-ink); }
+.globe26-result--likely { background: linear-gradient(135deg, #052d5d, #0063c6); }
+.globe26-result--review { background: #3b2d04; }
+.globe26-result--excluded { background: #3b2d04; }
+.globe26-result--unlikely { border: 1px solid var(--globe26-line); background: #f1f1f3; color: var(--globe26-ink); }
+.globe26-result--unlikely strong { color: #075ea9; }
+
+/* JavaScript enhancement: only the matching result is exposed. */
+.globe26-checker__result[data-status] .globe26-result { display: none; }
+.globe26-checker__result[data-status="incomplete"] .globe26-result--incomplete,
+.globe26-checker__result[data-status="likely"] .globe26-result--likely,
+.globe26-checker__result[data-status="review"] .globe26-result--review,
+.globe26-checker__result[data-status="excluded"] .globe26-result--excluded,
+.globe26-checker__result[data-status="unlikely"] .globe26-result--unlikely { display: block; }
+
+/* CSS-native fallback: tetap bekerja ketika berkas JavaScript gagal dimuat. */
+.globe26-checker:not([data-js-ready]):has(input[name="globe26-mne"]:checked):has(input[name="globe26-threshold"]:checked):has(input[name="globe26-local"]:checked):has(input[name="globe26-excluded"]:checked) .globe26-result--incomplete { display: none; }
+
+.globe26-checker:not([data-js-ready]):has(input[name="globe26-mne"][value="yes"]:checked):has(input[name="globe26-threshold"][value="yes"]:checked):has(input[name="globe26-local"][value="yes"]:checked):has(input[name="globe26-excluded"][value="no"]:checked) .globe26-result--likely { display: block; }
+
+.globe26-checker:not([data-js-ready]):has(input[name="globe26-mne"]:checked):has(input[name="globe26-threshold"]:checked):has(input[name="globe26-local"]:checked):has(input[name="globe26-excluded"]:checked):has(input[value="unknown"]:checked) .globe26-result--review { display: block; }
+
+.globe26-checker:not([data-js-ready]):has(input[name="globe26-mne"][value="yes"]:checked):has(input[name="globe26-threshold"][value="yes"]:checked):has(input[name="globe26-local"][value="yes"]:checked):has(input[name="globe26-excluded"][value="yes"]:checked) .globe26-result--excluded { display: block; }
+
+.globe26-checker:not([data-js-ready]):has(input[name="globe26-mne"][value="no"]:checked):has(input[name="globe26-threshold"]:checked):has(input[name="globe26-local"]:checked):has(input[name="globe26-excluded"]:checked):not(:has(input[value="unknown"]:checked)) .globe26-result--unlikely,
+.globe26-checker:not([data-js-ready]):has(input[name="globe26-mne"]:checked):has(input[name="globe26-threshold"][value="no"]:checked):has(input[name="globe26-local"]:checked):has(input[name="globe26-excluded"]:checked):not(:has(input[value="unknown"]:checked)) .globe26-result--unlikely,
+.globe26-checker:not([data-js-ready]):has(input[name="globe26-mne"]:checked):has(input[name="globe26-threshold"]:checked):has(input[name="globe26-local"][value="no"]:checked):has(input[name="globe26-excluded"]:checked):not(:has(input[value="unknown"]:checked)) .globe26-result--unlikely { display: block; }
+
+.globe26-noscript { margin: 0.75rem 0 0; color: var(--globe26-gray); font-size: 0.84rem; }
 .globe26-disclaimer { color: var(--globe26-gray); font-size: 0.86rem; }
 
 .globe26-deadline {
@@ -281,6 +316,7 @@
 .globe26-sources__note { margin-bottom: 0; color: var(--globe26-gray); font-size: 0.86rem; }
 
 .globe26-checker button:focus-visible,
+.globe26-checker .globe26-button-primary:focus-visible,
 .globe26-deadline button:focus-visible,
 .globe26-deadline input:focus-visible,
 .globe26-checker input:focus-visible { outline: 3px solid var(--globe26-yellow); outline-offset: 3px; }
