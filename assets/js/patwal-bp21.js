@@ -27,9 +27,33 @@
 
   const money = n => new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',maximumFractionDigits:2}).format(Number(n||0));
   const num = v => {
-    if (typeof v === 'number') return v;
-    const s = String(v ?? '').trim().replace(/[^0-9,.-]/g,'').replace(/\.(?=\d{3}(?:\D|$))/g,'').replace(',','.');
-    const n = Number(s); return Number.isFinite(n) ? n : 0;
+    if (typeof v === 'number') return Number.isFinite(v) ? v : 0;
+    let s = String(v ?? '').trim().replace(/\s/g,'').replace(/[^0-9,.-]/g,'');
+    if (!s) return 0;
+
+    // Jika koma dan titik sama-sama ada, pemisah terakhir dianggap desimal hanya
+    // bila digit di belakangnya bukan 3. Untuk nominatif rupiah, pola 2,665,000
+    // atau 2.665.000 diperlakukan sebagai pemisah ribuan.
+    const commaCount = (s.match(/,/g) || []).length;
+    const dotCount = (s.match(/\./g) || []).length;
+    if (commaCount > 1 && dotCount === 0) s = s.replace(/,/g,'');
+    else if (dotCount > 1 && commaCount === 0) s = s.replace(/\./g,'');
+    else if (commaCount && dotCount) {
+      const lastComma = s.lastIndexOf(','), lastDot = s.lastIndexOf('.');
+      const decimalSep = lastComma > lastDot ? ',' : '.';
+      const thousandSep = decimalSep === ',' ? '.' : ',';
+      const decimals = s.length - Math.max(lastComma,lastDot) - 1;
+      if (decimals === 3) s = s.replace(/[.,]/g,'');
+      else { s = s.split(thousandSep).join(''); if (decimalSep === ',') s = s.replace(',','.'); }
+    } else if (commaCount === 1) {
+      const decimals = s.length - s.lastIndexOf(',') - 1;
+      s = decimals === 3 ? s.replace(',','') : s.replace(',','.');
+    } else if (dotCount === 1) {
+      const decimals = s.length - s.lastIndexOf('.') - 1;
+      if (decimals === 3) s = s.replace('.','');
+    }
+    const n = Number(s);
+    return Number.isFinite(n) ? n : 0;
   };
   const txt = v => String(v ?? '').trim();
   const digits = v => txt(v).replace(/\D/g,'');
@@ -57,9 +81,11 @@
 
   function parseWorkbook(arrayBuffer){
     if(typeof XLSX==='undefined') throw new Error('Library Excel belum termuat. Pastikan perangkat terhubung internet saat membuka halaman ini.');
-    const wb=XLSX.read(arrayBuffer,{type:'array',raw:false});
+    const wb=XLSX.read(arrayBuffer,{type:'array'});
     const ws=wb.Sheets[wb.SheetNames[0]];
-    const data=XLSX.utils.sheet_to_json(ws,{header:1,defval:'',raw:false});
+    // Gunakan nilai mentah Excel (raw) agar angka berformat #,##0 tidak berubah menjadi
+    // string seperti '2,665,000' yang dapat salah dibaca sebagai angka desimal.
+    const data=XLSX.utils.sheet_to_json(ws,{header:1,defval:'',raw:true});
     const hr=findHeaderRow(data); if(hr<0) throw new Error('Header nominatif tidak dikenali. Pastikan ada kolom Nama, NIK, Golongan, Nilai Kotor/Penghasilan, dan Pajak.');
     const cm=colMap(data[hr]);
     const required=['name','nik','grade','gross','tax'];
