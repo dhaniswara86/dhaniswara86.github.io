@@ -145,7 +145,7 @@
     if(all.length){ box.className='validation error'; box.innerHTML=`<b>Belum dapat generate XML.</b><br>${all.slice(0,8).map(xmlEscape).join('<br>')}${all.length>8?`<br>… dan ${all.length-8} error lain.`:''}`; }
     else if(mismatches){ box.className='validation'; box.innerHTML=`<b>Struktur valid, tetapi ada ${mismatches} baris dengan selisih PPh.</b> XML tetap dapat dibuat karena BP21 membawa bruto, deemed, dan tarif; telaah selisih sebelum diunggah.`; }
     else { box.className='validation success'; box.innerHTML='<b>Validasi selesai.</b> Semua baris siap dibuat menjadi XML BP21.'; }
-    $('downloadXml').disabled=all.length>0; $('downloadReconciliation').disabled=state.rows.length===0;
+    $('downloadXml').disabled=all.length>0; $('downloadBp21Xlsx').disabled=all.length>0; $('downloadReconciliation').disabled=state.rows.length===0;
   }
 
   function config(){ return {tin:digits($('tin').value),withholderTku:digits($('withholderTku').value),month:+$('month').value,year:+$('year').value,facility:$('facility').value,document:$('documentType').value,documentNumber:$('documentNumber').value.trim(),documentDate:iso($('documentDate').value),withholdingDate:iso($('withholdingDate').value)}; }
@@ -162,6 +162,71 @@
     const csv='\uFEFF'+[hdr,...rows].map(x=>x.map(csvCell).join(';')).join('\r\n'); download('Rekonsiliasi_Patwal_BP21.csv',csv,'text/csv;charset=utf-8');
   }
 
+
+  function excelDateFromIso(isoDate){
+    if(!isoDate) return '';
+    const [y,m,d]=isoDate.split('-').map(Number);
+    return new Date(Date.UTC(y,m-1,d));
+  }
+
+  async function downloadBp21Xlsx(){
+    updateValidation();
+    if($('downloadBp21Xlsx').disabled) return;
+    if(typeof XLSX==='undefined') throw new Error('Library Excel belum termuat.');
+    const c=config();
+    let wb;
+    try{
+      const res=await fetch('assets/templates/BP21%20Excel%20to%20XML%20v.4.xlsx');
+      if(!res.ok) throw new Error('Template BP21 tidak dapat dimuat.');
+      wb=XLSX.read(await res.arrayBuffer(),{type:'array',cellDates:true});
+    }catch(err){
+      alert('Gagal memuat template BP21 XLSX: '+err.message);
+      return;
+    }
+    const ws=wb.Sheets['DATA'];
+    if(!ws){ alert('Sheet DATA tidak ditemukan pada template BP21.'); return; }
+
+    // Hapus contoh data lama mulai baris 4 tanpa mengubah header/template.
+    const ref=XLSX.utils.decode_range(ws['!ref'] || 'A1:P9');
+    for(let R=3; R<=Math.max(ref.e.r, 2000); R++){
+      for(let C=0; C<=15; C++) delete ws[XLSX.utils.encode_cell({r:R,c:C})];
+    }
+
+    // NPWP Pemotong ditempatkan pada C1 mengikuti template asli.
+    ws['C1']={t:'s',v:c.tin};
+
+    // Tulis dataset final ke kolom B:P, baris 4 dst.
+    state.rows.forEach((r,i)=>{
+      const R=3+i;
+      const vals=[
+        c.month,c.year,r.nik,r.recipientTku,r.ptkp,c.facility,r.code,
+        r.gross,r.deemed,r.rate,c.document,c.documentNumber,
+        excelDateFromIso(c.documentDate),c.withholderTku,excelDateFromIso(c.withholdingDate)
+      ];
+      vals.forEach((v,j)=>{
+        const addr=XLSX.utils.encode_cell({r:R,c:1+j});
+        if(v instanceof Date){ ws[addr]={t:'d',v,z:'dd/mm/yyyy'}; }
+        else if(typeof v==='number'){ ws[addr]={t:'n',v}; }
+        else { ws[addr]={t:'s',v:String(v??'')}; }
+      });
+    });
+
+    const lastRow=3+state.rows.length;
+    ws['!ref']=`A1:Z${Math.max(lastRow,9)}`;
+    // Atur tipe kolom identitas sebagai teks agar digit panjang tidak berubah.
+    for(let R=3;R<lastRow;R++){
+      ['D','E','O'].forEach(col=>{ const a=col+(R+1); if(ws[a]){ws[a].t='s'; ws[a].v=String(ws[a].v??'');} });
+    }
+
+    const out=XLSX.write(wb,{bookType:'xlsx',type:'array',cellDates:true});
+    const blob=new Blob([out],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);
+    a.download=`BP21_Patwal_${c.year}_${String(c.month).padStart(2,'0')}.xlsx`;
+    document.body.appendChild(a); a.click();
+    setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},0);
+  }
+
   async function loadFile(file){
     try{ state.fileName=file.name; $('fileInfo').textContent=`Membaca ${file.name}…`; $('fileInfo').classList.remove('hidden'); state.rows=parseWorkbook(await file.arrayBuffer()); $('fileInfo').textContent=`${file.name} • ${state.rows.length} baris data ditemukan`; render(); }
     catch(e){ state.rows=[]; $('summaryCard').classList.add('hidden'); $('fileInfo').textContent='Gagal: '+e.message; $('fileInfo').classList.remove('hidden'); }
@@ -173,6 +238,7 @@
   const dz=$('dropZone'); ['dragenter','dragover'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.add('drag')})); ['dragleave','drop'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.remove('drag')})); dz.addEventListener('drop',e=>e.dataTransfer.files[0]&&loadFile(e.dataTransfer.files[0]));
   ['tin','withholderTku','month','year','facility','documentType','documentNumber','documentDate','withholdingDate'].forEach(id=>$(id).addEventListener('input',updateValidation));
   $('downloadXml').addEventListener('click',()=>{ updateValidation(); if($('downloadXml').disabled)return; const c=config(); download(`BP21_Patwal_${c.year}_${String(c.month).padStart(2,'0')}.xml`,buildXml(),'application/xml;charset=utf-8'); });
+  $('downloadBp21Xlsx').addEventListener('click',()=>downloadBp21Xlsx().catch(e=>alert(e.message)));
   $('downloadReconciliation').addEventListener('click',downloadCsv);
   $('resetBtn').addEventListener('click',()=>{state.rows=[];state.fileName='';$('fileInput').value='';$('fileInfo').classList.add('hidden');$('summaryCard').classList.add('hidden');});
 })();
