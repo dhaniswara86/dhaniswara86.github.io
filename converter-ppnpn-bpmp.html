@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DAFTAR PEMBAYARAN PENGHASILAN PPNPN | Kabayan</title>
+  <meta name="description" content="Ekstraksi DPP PPNPN PDF, rekonsiliasi PPh 21 TER, dan konversi ke XML BPMP Coretax." />
+  <link rel="stylesheet" href="assets/css/ppnpn-bpmp.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+</head>
+<body>
+<main class="shell">
+  <header class="hero">
+    <div class="brand">K</div>
+    <div>
+      <p class="eyebrow">KABAYAN • CORETAX TOOLS</p>
+      <h1>DAFTAR PEMBAYARAN PENGHASILAN PPNPN</h1>
+      <p class="subtitle">Ekstraksi DPP PPNPN, rekonsiliasi PPh 21 menurut TER, dan konversi ke XML BPMP Coretax.</p>
+    </div>
+  </header>
+
+  <section class="notice"><b>Privasi:</b> PDF diproses lokal di browser. Data tidak diunggah ke server Kabayan.</section>
+
+  <section class="card">
+    <div class="step"><span>1</span><div><b>Konfigurasi BPMP</b><small>Data umum yang digunakan pada XML Coretax.</small></div></div>
+    <div class="form-grid">
+      <label>NPWP Pemotong<input id="tin" inputmode="numeric" maxlength="16" placeholder="15–16 digit" /></label>
+      <label>ID TKU Pemotong<input id="withholderTku" inputmode="numeric" maxlength="22" placeholder="22 digit" /></label>
+      <label>Masa Pajak<select id="month"></select></label>
+      <label>Tahun Pajak<input id="year" type="number" min="2000" max="2100" /></label>
+      <label>Tanggal Pemotongan<input id="withholdingDate" type="date" /></label>
+      <label>Posisi/Jabatan default<input id="defaultPosition" value="PPNPN" /></label>
+    </div>
+    <p class="hint">Kode objek pajak: <code>21-100-01</code>. Status pegawai: <code>Resident</code>. NIK 16 digit digunakan sebagai <code>CounterpartTin</code>.</p>
+  </section>
+
+  <section class="card">
+    <div class="step"><span>2</span><div><b>Upload PDF DPP PPNPN</b><small>Contoh: DPP_WAMEN_JUNI_2026.pdf.</small></div></div>
+    <label class="drop" id="dropZone">
+      <input id="fileInput" type="file" accept="application/pdf,.pdf" hidden />
+      <span class="drop-icon">PDF</span>
+      <b>Pilih atau tarik PDF DPP PPNPN ke sini</b>
+      <small>Sistem mencoba membaca bulan, tahun, NIK, status pajak, bruto, PPh dipotong, kontrak, dan identitas satker.</small>
+    </label>
+    <div id="fileInfo" class="file-info hidden"></div>
+  </section>
+
+  <section id="metaCard" class="card hidden">
+    <div class="step"><span>3</span><div><b>Data PDF terdeteksi</b><small>Periksa hasil ekstraksi sebelum membuat XML.</small></div></div>
+    <div class="meta-grid">
+      <div><span>Satuan Kerja</span><strong id="metaSatker">—</strong></div>
+      <div><span>Anak Satker</span><strong id="metaAnak">—</strong></div>
+      <div><span>No. DPP</span><strong id="metaDpp">—</strong></div>
+      <div><span>Periode</span><strong id="metaPeriod">—</strong></div>
+    </div>
+  </section>
+
+  <section id="resultCard" class="card hidden">
+    <div class="step"><span>4</span><div><b>Rekonsiliasi BPMP</b><small>Semua field penting dapat dikoreksi langsung bila hasil baca PDF kurang tepat.</small></div></div>
+
+    <div class="kpis">
+      <div><span>Baris</span><strong id="kpiRows">0</strong></div>
+      <div><span>Total Bruto</span><strong id="kpiGross">Rp0</strong></div>
+      <div><span>PPh DPP</span><strong id="kpiSourceTax">Rp0</strong></div>
+      <div><span>PPh TER</span><strong id="kpiTerTax">Rp0</strong></div>
+      <div><span>Selisih</span><strong id="kpiDiff">Rp0</strong></div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>No</th><th>Nama</th><th>NIK</th><th>PTKP</th><th>Posisi</th>
+            <th class="num">Bruto</th><th>TER</th><th class="num">Tarif TER</th>
+            <th class="num">PPh DPP</th><th class="num">PPh TER</th><th class="num">Selisih</th>
+            <th>Fasilitas XML</th><th class="num">Tarif XML</th><th class="num">PPh XML</th><th class="num">Deviasi XML</th><th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="resultBody"></tbody>
+      </table>
+    </div>
+
+    <div id="validationBox" class="validation"></div>
+    <div class="actions">
+      <button id="downloadXml" class="btn primary" disabled>Unduh XML BPMP Coretax</button>
+      <button id="downloadCsv" class="btn secondary" disabled>Unduh Rekonsiliasi CSV</button>
+      <button id="resetBtn" class="btn ghost">Reset</button>
+    </div>
+    <p class="hint"><b>Logika selisih:</b> bila PPh DPP = PPh TER, fasilitas XML = <code>N/A</code>. Bila berbeda, fasilitas = <code>ECT</code> dan tarif XML dipilih maksimal 2 angka desimal agar PPh hasil XML sedekat mungkin dengan PPh DPP.</p>
+  </section>
+
+  <section class="card info-card">
+    <h2>Mapping status pajak</h2>
+    <div class="formula-grid">
+      <div><b>1000–1003</b><span>TK/0 – TK/3</span></div>
+      <div><b>1100–1103</b><span>K/0 – K/3</span></div>
+      <div><b>TER A</b><span>TK/0, TK/1, K/0, HB/0, HB/1</span></div>
+      <div><b>TER B</b><span>TK/2, TK/3, K/1, K/2, HB/2, HB/3</span></div>
+      <div><b>TER C</b><span>K/3</span></div>
+    </div>
+  </section>
+</main>
+<script src="assets/js/ppnpn-bpmp.js"></script>
+</body>
+</html>
