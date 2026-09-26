@@ -120,16 +120,16 @@
 
   function render(){
     $('summaryCard').classList.remove('hidden'); const body=$('resultBody'); body.innerHTML='';
-    let totalNom=0,totalCalc=0,totalDiff=0, structural=0, mismatch=0;
+    let totalGross=0,totalNom=0,totalCalc=0,totalDiff=0, structural=0, mismatch=0;
     state.rows.forEach((r,i)=>{
-      totalNom+=r.nomTax; totalCalc+=r.calcTax; totalDiff+=r.diff; structural+=r.errors.length?1:0; if(Math.abs(r.diff)>0.009)mismatch++;
+      totalGross+=r.gross; totalNom+=r.nomTax; totalCalc+=r.calcTax; totalDiff+=r.diff; structural+=r.errors.length?1:0; if(Math.abs(r.diff)>0.009)mismatch++;
       const status=r.errors.length?'<span class="badge err">Error</span>':Math.abs(r.diff)<=0.009?'<span class="badge ok">Sesuai</span>':'<span class="badge warn">Selisih</span>';
       const tr=document.createElement('tr');
       tr.innerHTML=`<td>${xmlEscape(r.no||i+1)}</td><td>${xmlEscape(r.name)}</td><td>${xmlEscape(r.nik)}</td><td>${xmlEscape(r.grade)}</td><td>${xmlEscape(r.ptkp||'-')}</td><td>${xmlEscape(r.code||'-')}</td><td class="num">${money(r.gross)}</td><td class="num">${r.rate===null?'-':r.rate+'%'}</td><td class="num">${money(r.nomTax)}</td><td class="num">${money(r.calcTax)}</td><td class="num">${money(r.diff)}</td><td>${status}${r.errors.length?'<br><small>'+xmlEscape(r.errors.join('; '))+'</small>':''}</td><td><input class="inline" data-i="${i}" value="${xmlEscape(r.recipientTku)}" maxlength="22" /></td>`;
       body.appendChild(tr);
     });
     body.querySelectorAll('input[data-i]').forEach(inp=>inp.addEventListener('input',e=>{ state.rows[+e.target.dataset.i].recipientTku=digits(e.target.value); updateValidation(); }));
-    $('kpiRows').textContent=state.rows.length; $('kpiNom').textContent=money(totalNom); $('kpiCalc').textContent=money(totalCalc); $('kpiDiff').textContent=money(totalDiff);
+    $('kpiRows').textContent=state.rows.length; $('kpiGross').textContent=money(totalGross); $('kpiNom').textContent=money(totalNom); $('kpiCalc').textContent=money(totalCalc); $('kpiDiff').textContent=money(totalDiff);
     updateValidation(mismatch,structural);
   }
 
