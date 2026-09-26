@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kabayan | Tukin Non-Desember → XML BPMP Coretax</title>
+  <meta name="description" content="Konversi kertas kerja Tukin selain Desember menjadi XML BPMP Coretax dengan rekonsiliasi PPh TER dan fasilitas lain otomatis bila terdapat selisih." />
+  <link rel="stylesheet" href="assets/css/tukin-bpmp.css" />
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+<main class="shell">
+  <header class="topbar">
+    <div class="brand-mark">K</div>
+    <div>
+      <p class="eyebrow">KABAYAN • CORETAX TOOLS</p>
+      <h1>Tukin selain Desember → XML BPMP</h1>
+      <p class="subtitle">Upload kertas kerja satker, lengkapi NIK & PTKP, sandingkan PPh Satker dengan TER, lalu generate XML Coretax.</p>
+    </div>
+  </header>
+
+  <section class="notice"><b>Privasi:</b> file Excel diproses lokal di browser dan tidak dikirim ke server.</section>
+
+  <section class="card">
+    <div class="step"><span>1</span><div><b>Konfigurasi BPMP</b><small>Data umum untuk seluruh baris bukti potong.</small></div></div>
+    <div class="form-grid">
+      <label>NPWP Pemotong<input id="tin" inputmode="numeric" maxlength="16" placeholder="15–16 digit" /></label>
+      <label>ID TKU Pemotong<input id="withholderTku" inputmode="numeric" maxlength="22" placeholder="22 digit" /></label>
+      <label>Masa Pajak<select id="month"></select></label>
+      <label>Tahun Pajak<input id="year" type="number" min="2000" max="2100" /></label>
+      <label>Tanggal Pemotongan<input id="withholdingDate" type="date" /></label>
+    </div>
+    <p class="hint">Kode objek pajak ditetapkan otomatis sebagai <code>21-100-01</code>. Status pegawai = <code>Resident</code>.</p>
+  </section>
+
+  <section class="card">
+    <div class="step"><span>2</span><div><b>Upload Kertas Kerja Tukin Satker</b><small>Format seperti “Tukin Wamenkes Mei.xlsx”.</small></div></div>
+    <label class="drop" id="dropZone">
+      <input id="fileInput" type="file" accept=".xlsx,.xls" hidden />
+      <span class="drop-icon">⇧</span>
+      <b>Pilih atau tarik file Excel Tukin ke sini</b>
+      <small>Kolom yang dibaca antara lain Nama, NIP, Jabatan, Tukin Neto, PPh, Jumlah Tukin Bruto, Bank, No Rekening, dan No SPM.</small>
+    </label>
+    <div id="fileInfo" class="file-info hidden"></div>
+  </section>
+
+  <section id="summaryCard" class="card hidden">
+    <div class="step"><span>3</span><div><b>Lengkapi NIK & PTKP lalu rekonsiliasi</b><small>NIK dan PTKP sengaja disediakan sebagai kolom input khusus.</small></div></div>
+    <div class="kpis">
+      <div><span>Baris</span><strong id="kpiRows">0</strong></div>
+      <div><span>PPh Satker</span><strong id="kpiSatker">Rp0</strong></div>
+      <div><span>PPh TER</span><strong id="kpiTer">Rp0</strong></div>
+      <div><span>Selisih</span><strong id="kpiDiff">Rp0</strong></div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>No</th><th>Nama</th><th>NIP</th><th>Jabatan</th>
+            <th>NIK <span class="required">*</span></th><th>PTKP <span class="required">*</span></th>
+            <th class="num">Bruto</th><th>TER</th><th class="num">Tarif TER</th>
+            <th class="num">PPh Satker</th><th class="num">PPh TER</th><th class="num">Selisih</th>
+            <th>Fasilitas XML</th><th class="num">Tarif XML</th><th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="resultBody"></tbody>
+      </table>
+    </div>
+
+    <div id="validationBox" class="validation"></div>
+    <div class="actions">
+      <button id="downloadXml" class="btn primary" disabled>Download XML BPMP Coretax</button>
+      <button id="downloadReconciliation" class="btn secondary" disabled>Download Rekonsiliasi CSV</button>
+      <button id="resetBtn" class="btn ghost">Reset</button>
+    </div>
+    <p class="hint"><b>Aturan:</b> bila PPh Satker = PPh TER, fasilitas XML = <code>N/A</code> dan tarif XML = tarif TER. Bila berbeda, fasilitas XML = <code>ECT</code> dan tarif XML disesuaikan agar PPh yang terbentuk sama dengan PPh Satker.</p>
+  </section>
+
+  <section class="card info-card">
+    <h2>Kategori TER</h2>
+    <div class="formula-grid">
+      <div><b>TER A</b><span>TK/0, TK/1, K/0, HB/0, HB/1</span></div>
+      <div><b>TER B</b><span>TK/2, TK/3, K/1, K/2, HB/2, HB/3</span></div>
+      <div><b>TER C</b><span>K/3</span></div>
+    </div>
+    <p class="hint">Batas dan tarif TER diambil dari formula pada template <code>BPMP Excel to XML v.3.xlsx</code>.</p>
+  </section>
+</main>
+<script src="assets/js/tukin-bpmp.js"></script>
+</body>
+</html>
