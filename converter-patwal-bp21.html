@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kabayan | Nominatif Patwal → XML BP21 Coretax</title>
+  <meta name="description" content="Konversi Daftar Nominatif Patwal menjadi XML BP21 Coretax dengan rekonsiliasi PPh menurut nominatif dan formula BP21." />
+  <link rel="stylesheet" href="assets/css/patwal-bp21.css" />
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand-mark" aria-hidden="true">K</div>
+      <div>
+        <p class="eyebrow">KABAYAN • CORETAX TOOLS</p>
+        <h1>Nominatif Patwal → XML BP21</h1>
+        <p class="subtitle">Validasi, hitung ulang PPh 21, sandingkan, lalu generate XML Coretax.</p>
+      </div>
+    </header>
+
+    <section class="notice">
+      <strong>Privasi:</strong> file Excel diproses lokal di browser. Data tidak dikirim ke server aplikasi.
+    </section>
+
+    <section class="card">
+      <div class="step"><span>1</span><div><b>Konfigurasi BP21</b><small>Isi data yang tidak tersedia di nominatif.</small></div></div>
+      <div class="form-grid">
+        <label>NPWP Pemotong
+          <input id="tin" inputmode="numeric" maxlength="16" placeholder="15–16 digit" />
+        </label>
+        <label>ID TKU Pemotong
+          <input id="withholderTku" inputmode="numeric" maxlength="22" placeholder="22 digit" />
+        </label>
+        <label>Masa Pajak
+          <select id="month"></select>
+        </label>
+        <label>Tahun Pajak
+          <input id="year" type="number" min="2000" max="2100" />
+        </label>
+        <label>Fasilitas
+          <select id="facility">
+            <option value="N/A">N/A — Tanpa fasilitas</option>
+            <option value="TaxExAr21">TaxExAr21</option>
+            <option value="DTP">DTP</option>
+            <option value="ETC">ETC</option>
+          </select>
+        </label>
+        <label>Jenis Dokumen Referensi
+          <select id="documentType">
+            <option value="PaymentProof">PaymentProof — Bukti Pembayaran</option>
+            <option value="StatementLetter">StatementLetter — Surat Pernyataan</option>
+            <option value="Contract">Contract — Kontrak</option>
+            <option value="CommercialInvoice">CommercialInvoice — Surat Tagihan</option>
+            <option value="TaxInvoice">TaxInvoice — Faktur Pajak</option>
+            <option value="Announchment">Announchment — sesuai XSD template</option>
+            <option value="DeedofEngangement">DeedofEngangement — sesuai XSD template</option>
+            <option value="DeedofGeneralMeetingStakeholder">DeedofGeneralMeetingStakeholder</option>
+            <option value="BankAccountNumber">BankAccountNumber</option>
+          </select>
+        </label>
+        <label>Nomor Dokumen Referensi
+          <input id="documentNumber" placeholder="Nomor dokumen dasar pemotongan" />
+        </label>
+        <label>Tanggal Dokumen
+          <input id="documentDate" type="date" />
+        </label>
+        <label>Tanggal Pemotongan
+          <input id="withholdingDate" type="date" />
+        </label>
+      </div>
+      <p class="hint">ID TKU penerima akan dibentuk otomatis dari NIK 16 digit + <code>000000</code>. Anda dapat mengubahnya di tabel hasil sebelum XML dibuat.</p>
+    </section>
+
+    <section class="card">
+      <div class="step"><span>2</span><div><b>Upload Daftar Nominatif Patwal</b><small>Format dikenali dari nama header, bukan posisi kolom tetap.</small></div></div>
+      <label class="drop" id="dropZone">
+        <input id="fileInput" type="file" accept=".xlsx,.xls" hidden />
+        <span class="drop-icon">⇧</span>
+        <b>Pilih atau tarik file Excel nominatif ke sini</b>
+        <small>Kolom minimal: Nama, NIK, Golongan, Status Kawin, Nilai Kotor/Penghasilan, Pajak.</small>
+      </label>
+      <div id="fileInfo" class="file-info hidden"></div>
+    </section>
+
+    <section id="summaryCard" class="card hidden">
+      <div class="step"><span>3</span><div><b>Rekonsiliasi PPh 21</b><small>PPh nominatif dibandingkan dengan formula BP21 berdasarkan golongan.</small></div></div>
+      <div class="kpis">
+        <div><span>Baris</span><strong id="kpiRows">0</strong></div>
+        <div><span>PPh Nominatif</span><strong id="kpiNom">Rp0</strong></div>
+        <div><span>PPh BP21</span><strong id="kpiCalc">Rp0</strong></div>
+        <div><span>Selisih</span><strong id="kpiDiff">Rp0</strong></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>No</th><th>Nama</th><th>NIK</th><th>Gol.</th><th>PTKP</th><th>Kode BP21</th>
+              <th class="num">Bruto</th><th class="num">Tarif</th><th class="num">PPh Nominatif</th>
+              <th class="num">PPh BP21</th><th class="num">Selisih</th><th>Status</th><th>ID TKU Penerima</th>
+            </tr>
+          </thead>
+          <tbody id="resultBody"></tbody>
+        </table>
+      </div>
+      <div id="validationBox" class="validation"></div>
+      <div class="actions">
+        <button id="downloadXml" class="btn primary" disabled>Download XML Coretax</button>
+        <button id="downloadReconciliation" class="btn secondary" disabled>Download Rekonsiliasi CSV</button>
+        <button id="resetBtn" class="btn ghost">Reset</button>
+      </div>
+      <p class="hint">XML hanya dapat dibuat jika tidak ada error struktural. Selisih PPh tetap ditampilkan sebagai peringatan agar dapat ditelaah sebelum unggah.</p>
+    </section>
+
+    <section class="card info-card">
+      <h2>Formula Patwal yang digunakan</h2>
+      <div class="formula-grid">
+        <div><b>Golongan I–II</b><span>21-402-04</span><strong>0%</strong></div>
+        <div><b>Golongan III</b><span>21-402-02</span><strong>5%</strong></div>
+        <div><b>Golongan IV</b><span>21-402-03</span><strong>15%</strong></div>
+      </div>
+      <p class="hint">Deemed = 100%. Formula rekonsiliasi: <code>Bruto × Deemed × Tarif</code>. Mapping XML mengikuti XSD/XML Map pada template “BP21 Excel to XML v.4.xlsx”.</p>
+    </section>
+  </main>
+  <script src="assets/js/patwal-bp21.js"></script>
+</body>
+</html>
