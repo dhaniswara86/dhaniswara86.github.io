@@ -91,6 +91,29 @@
     tableXml=tableXml.replace(/<calculatedColumnFormula>[\s\S]*?<\/calculatedColumnFormula>/, '');
 
     zip.file(sheetPath,sheetXml); zip.file(tablePath,tableXml);
+
+    // Template asli memiliki calcChain untuk formula TER pada baris contoh.
+    // Setelah baris contoh diganti dengan hasil konversi, referensi calcChain lama
+    // menjadi tidak valid dan Excel dapat menganggap workbook rusak/corrupt.
+    // Hapus calcChain beserta relasi dan ContentType-nya. XML Map BPMP tetap utuh.
+    zip.remove('xl/calcChain.xml');
+
+    const relPath='xl/_rels/workbook.xml.rels';
+    let relXml=await zip.file(relPath).async('string');
+    relXml=relXml.replace(/<Relationship[^>]+Type="http:\/\/schemas\.openxmlformats\.org\/officeDocument\/2006\/relationships\/calcChain"[^>]*\/>/g,'');
+    zip.file(relPath,relXml);
+
+    const ctPath='[Content_Types].xml';
+    let ctXml=await zip.file(ctPath).async('string');
+    ctXml=ctXml.replace(/<Override[^>]+PartName="\/xl\/calcChain\.xml"[^>]*\/>/g,'');
+    zip.file(ctPath,ctXml);
+
+    // Minta Excel menghitung ulang bila ada formula lain yang tersisa di workbook.
+    const wbPath='xl/workbook.xml';
+    let wbXml=await zip.file(wbPath).async('string');
+    wbXml=wbXml.replace(/<calcPr\b[^>]*\/>/, '<calcPr calcMode="auto" fullCalcOnLoad="1" forceFullCalc="1"/>');
+    zip.file(wbPath,wbXml);
+
     return await zip.generateAsync({type:'blob',mimeType:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',compression:'DEFLATE'});
   }
   async function downloadXlsx(){
