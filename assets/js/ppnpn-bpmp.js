@@ -285,9 +285,10 @@
       const lines=await extractPdf(file); pdfMeta=parseMeta(lines); rows=parseRows(lines,pdfMeta);
       if(pdfMeta.month) $('month').value=pdfMeta.month; if(pdfMeta.year) $('year').value=pdfMeta.year;
       $('metaSatker').textContent=pdfMeta.satker||'Tidak terdeteksi'; $('metaAnak').textContent=pdfMeta.anakSatker||'Tidak terdeteksi'; $('metaDpp').textContent=pdfMeta.dpp||'Tidak terdeteksi'; $('metaPeriod').textContent=(pdfMeta.month&&pdfMeta.year)?`${pdfMeta.month}/${pdfMeta.year}`:'Tidak terdeteksi';
-      $('metaCard').classList.remove('hidden'); $('resultCard').classList.remove('hidden');
-      $('fileInfo').textContent=`${file.name} • ${rows.length} baris penerima terdeteksi. Periksa tabel rekonsiliasi.`;
+      $('metaCard').classList.remove('hidden'); $('configCard').classList.remove('hidden'); $('resultCard').classList.remove('hidden');
+      $('fileInfo').textContent=`${file.name} • ${rows.length} baris penerima terdeteksi. Lanjutkan dengan melengkapi Data Pemotong.`;
       render();
+      setTimeout(()=>document.getElementById('configCard')?.scrollIntoView({behavior:'smooth',block:'start'}),120);
     }catch(err){ console.error(err); $('fileInfo').textContent='Gagal membaca PDF.'; alert('PDF tidak dapat diproses. Coba pastikan file bukan hasil scan gambar murni.'); }
   }
 
@@ -298,6 +299,7 @@
   ['dragleave','drop'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.remove('drag')}));
   dz.addEventListener('drop',e=>handleFile(e.dataTransfer.files[0]));
   ['tin','withholderTku','month','year','withholdingDate'].forEach(id=>$(id).addEventListener('change',()=>rows.length&&render()));
+  $('defaultPosition').addEventListener('change',()=>{ if(!rows.length) return; const v=$('defaultPosition').value||'PPNPN'; rows.forEach(r=>r.position=v); render(); });
   $('downloadXml').addEventListener('click',()=>download(`BPMP_PPNPN_${$('year').value}_${String($('month').value).padStart(2,'0')}.xml`,xml(),'application/xml;charset=utf-8'));
   $('downloadXlsx').addEventListener('click',downloadXlsx);
   $('downloadCsv').addEventListener('click',()=>download(`Rekonsiliasi_PPNPN_${$('year').value}_${String($('month').value).padStart(2,'0')}.csv`,`\ufeff${csv()}`,'text/csv;charset=utf-8'));
