@@ -51,6 +51,7 @@
   }
   function cellNum(ref,val,style=''){ const s=style?` s="${style}"`:''; return `<c r="${ref}"${s}><v>${Number(val)||0}</v></c>`; }
   async function xlsxBlob(){
+    const finalRows=exportRows();
     if(!window.JSZip) throw new Error('JSZip belum termuat.');
     const buf=await loadBpmpTemplate();
     const zip=await JSZip.loadAsync(buf);
@@ -58,14 +59,14 @@
     const tablePath='xl/tables/table1.xml';
     let sheetXml=await zip.file(sheetPath).async('string');
     let tableXml=await zip.file(tablePath).async('string');
-    const endRow=Math.max(5,4+rows.length);
+    const endRow=Math.max(5,4+finalRows.length);
     const serial=excelSerial($('withholdingDate').value);
     const month=Number($('month').value), year=Number($('year').value), tku=digits($('withholderTku').value), tin=digits($('tin').value);
 
     // NPWP pemotong B1, dipertahankan sebagai teks agar digit tidak berubah.
     sheetXml=sheetXml.replace(/<c r="B1"[^>]*>[\s\S]*?<\/c>/, cellInline('B1',tin,'3'));
 
-    const generated=rows.map((r,i)=>{
+    const generated=finalRows.map((r,i)=>{
       const rr=5+i;
       return `<row r="${rr}" spans="1:22" x14ac:dyDescent="0.25">`+
         cellNum(`B${rr}`,month)+cellNum(`C${rr}`,year)+
@@ -272,10 +273,14 @@
       </tr>`;
     }).join('');
 
-    body.querySelectorAll('input,select').forEach(el=>el.addEventListener('change',()=>{
-      const tr=el.closest('tr'), i=Number(tr.dataset.i), f=el.dataset.f;
-      rows[i][f]=(f==='gross'||f==='sourceTax')?parseMoney(el.value):el.value.trim(); render();
-    }));
+    body.querySelectorAll('input,select').forEach(el=>{
+      const commit=()=>{
+        const tr=el.closest('tr'), i=Number(tr.dataset.i), f=el.dataset.f;
+        rows[i][f]=(f==='gross'||f==='sourceTax')?parseMoney(el.value):String(el.value||'').trim();
+      };
+      el.addEventListener('input',commit);
+      el.addEventListener('change',()=>{ commit(); render(); });
+    });
 
     const totalGross=rows.reduce((s,r)=>s+(r.gross||0),0), totalSrc=rows.reduce((s,r)=>s+(r.sourceTax||0),0), totalTer=rows.reduce((s,r)=>s+r.terTax,0);
     $('kpiRows').textContent=rows.length; $('kpiGross').textContent=rupiah(totalGross); $('kpiSourceTax').textContent=rupiah(totalSrc); $('kpiTerTax').textContent=rupiah(totalTer); $('kpiDiff').textContent=rupiah(totalSrc-totalTer);
@@ -293,13 +298,33 @@
     return e;
   }
 
+  function syncRowsFromTable(){
+    const body=$('resultBody');
+    if(!body) return;
+    body.querySelectorAll('tr[data-i]').forEach(tr=>{
+      const i=Number(tr.dataset.i);
+      if(!Number.isInteger(i)||!rows[i]) return;
+      tr.querySelectorAll('input[data-f],select[data-f]').forEach(el=>{
+        const f=el.dataset.f;
+        rows[i][f]=(f==='gross'||f==='sourceTax')?parseMoney(el.value):String(el.value||'').trim();
+      });
+    });
+    // Selalu hitung ulang dari data mentah terbaru agar fasilitas ekspor tidak memakai state lama.
+    rows=rows.map(enrich);
+  }
+
+  function exportRows(){
+    syncRowsFromTable();
+    return rows.map(r=>enrich({...r}));
+  }
+
   function xml(){
     const tin=digits($('tin').value), tku=digits($('withholderTku').value), month=Number($('month').value), year=Number($('year').value), wd=$('withholdingDate').value;
-    const nodes=rows.map(r=>`    <MmPayroll>\n      <TaxPeriodMonth>${month}</TaxPeriodMonth>\n      <TaxPeriodYear>${year}</TaxPeriodYear>\n      <CounterpartOpt>Resident</CounterpartOpt>\n      <CounterpartPassport/>\n      <CounterpartTin>${esc(r.nik)}</CounterpartTin>\n      <StatusTaxExemption>${esc(r.ptkp)}</StatusTaxExemption>\n      <Position>${esc(r.position)}</Position>\n      <TaxCertificate>${r.facility}</TaxCertificate>\n      <TaxObjectCode>21-100-01</TaxObjectCode>\n      <Gross>${Math.round(r.gross)}</Gross>\n      <Rate>${r.xmlRate.toFixed(2)}</Rate>\n      <IDPlaceOfBusinessActivity>${tku}</IDPlaceOfBusinessActivity>\n      <WithholdingDate>${wd}</WithholdingDate>\n    </MmPayroll>`).join('\n');
+    const nodes=exportRows().map(r=>`    <MmPayroll>\n      <TaxPeriodMonth>${month}</TaxPeriodMonth>\n      <TaxPeriodYear>${year}</TaxPeriodYear>\n      <CounterpartOpt>Resident</CounterpartOpt>\n      <CounterpartPassport/>\n      <CounterpartTin>${esc(r.nik)}</CounterpartTin>\n      <StatusTaxExemption>${esc(r.ptkp)}</StatusTaxExemption>\n      <Position>${esc(r.position)}</Position>\n      <TaxCertificate>${r.facility}</TaxCertificate>\n      <TaxObjectCode>21-100-01</TaxObjectCode>\n      <Gross>${Math.round(r.gross)}</Gross>\n      <Rate>${r.xmlRate.toFixed(2)}</Rate>\n      <IDPlaceOfBusinessActivity>${tku}</IDPlaceOfBusinessActivity>\n      <WithholdingDate>${wd}</WithholdingDate>\n    </MmPayroll>`).join('\n');
     return `<?xml version="1.0" encoding="UTF-8"?>\n<MmPayrollBulk>\n  <TIN>${tin}</TIN>\n  <ListOfMmPayroll>\n${nodes}\n  </ListOfMmPayroll>\n</MmPayrollBulk>\n`;
   }
   function download(name,content,type){ const b=new Blob([content],{type}); const a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download=name; document.body.appendChild(a); a.click(); setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500); }
-  function csv(){ const h=['Nama','NIK','PTKP','Posisi','Bruto','Kategori TER','Tarif TER','PPh DPP','PPh TER','Selisih','Fasilitas XML','Tarif XML','PPh XML','Deviasi XML']; const q=v=>`"${String(v??'').replace(/"/g,'""')}"`; return [h,...rows.map(r=>[r.name,r.nik,r.ptkp,r.position,r.gross,`TER ${r.category}`,r.terRate,r.sourceTax,r.terTax,r.diff,r.facility,r.xmlRate,r.xmlTax,r.xmlDiff])].map(x=>x.map(q).join(';')).join('\n'); }
+  function csv(){ const finalRows=exportRows(); const h=['Nama','NIK','PTKP','Posisi','Bruto','Kategori TER','Tarif TER','PPh DPP','PPh TER','Selisih','Fasilitas XML','Tarif XML','PPh XML','Deviasi XML']; const q=v=>`"${String(v??'').replace(/"/g,'""')}"`; return [h,...finalRows.map(r=>[r.name,r.nik,r.ptkp,r.position,r.gross,`TER ${r.category}`,r.terRate,r.sourceTax,r.terTax,r.diff,r.facility,r.xmlRate,r.xmlTax,r.xmlDiff])].map(x=>x.map(q).join(';')).join('\n'); }
 
   async function handleFile(file){
     if(!file||file.type!=='application/pdf'&&!file.name.toLowerCase().endsWith('.pdf')) return alert('Pilih file PDF.');
