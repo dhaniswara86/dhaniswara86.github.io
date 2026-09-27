@@ -243,7 +243,7 @@
   function enrich(r){
     const rate=terRate(r.gross,r.ptkp); const terTax=taxByRate(r.gross,rate); const diff=(r.sourceTax||0)-terTax;
     let facility='N/A', xmlRate=rate, xmlTax=terTax, xmlDiff=0;
-    if(diff!==0){ facility='ECT'; const b=bestRate2(r.gross,r.sourceTax||0); xmlRate=b.rate; xmlTax=b.tax; xmlDiff=xmlTax-(r.sourceTax||0); }
+    if(diff!==0){ facility='ETC'; const b=bestRate2(r.gross,r.sourceTax||0); xmlRate=b.rate; xmlTax=b.tax; xmlDiff=xmlTax-(r.sourceTax||0); }
     const errors=[];
     if(!/^\d{16}$/.test(r.nik||'')) errors.push('NIK harus 16 digit');
     if(!PTKP_VALUES.includes(r.ptkp)) errors.push('PTKP tidak valid');
@@ -257,7 +257,7 @@
     const body=$('resultBody');
     body.innerHTML=rows.map((r,i)=>{
       const ptkpOpts=PTKP_VALUES.map(v=>`<option ${v===r.ptkp?'selected':''}>${v}</option>`).join('');
-      const status=r.errors.length?`<span class="pill bad">Error</span>`:r.diff===0?`<span class="pill ok">Sesuai</span>`:`<span class="pill warn">ECT</span>`;
+      const status=r.errors.length?`<span class="pill bad">Error</span>`:r.diff===0?`<span class="pill ok">Sesuai</span>`:`<span class="pill warn">ETC</span>`;
       return `<tr data-i="${i}">
         <td>${i+1}</td>
         <td><input class="cell-input name" data-f="name" value="${esc(r.name)}"></td>
