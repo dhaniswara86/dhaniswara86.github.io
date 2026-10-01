@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>SI-SEHAT | Tukin / Penghasilan Bulanan → BPMP</title>
+<meta name="description" content="Konversi Excel Tukin atau penghasilan bulanan menjadi XML BPMP Coretax dengan lookup NIK/PTKP dan rekonsiliasi TER.">
+<link rel="stylesheet" href="assets/css/app.css">
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script src="assets/data/employee-db.js"></script>
+</head>
+<body>
+<header class="site-nav"><div class="nav-inner"><a class="brand" href="si-sehat.html"><span class="brand-mark">S+</span><span>SI-SEHAT</span></a><div class="nav-note">Tukin / Penghasilan Bulanan → BPMP Coretax</div><a class="nav-cta" href="si-sehat.html">Kembali ke SI-SEHAT ↗</a></div></header>
+<main>
+<section class="hero"><div class="hero-inner">
+<div><div class="kicker">SI-SEHAT / BPMP</div><h1>Tukin bulanan.<span>Siap ke Coretax.</span></h1><p>Unggah Excel pembayaran, lengkapi data pemotong, lalu sistem mencocokkan NIK dan PTKP dari file sumber atau database pegawai, menghitung TER, dan membentuk XML BPMP.</p></div>
+<div class="hero-visual" aria-hidden="true"><div class="orb"></div><div class="hero-card"><strong>Excel → BPMP</strong><p>Auto-detect dua format sumber, lookup database lintas periode, rekonsiliasi TER, dan penyesuaian fasilitas ETC bila terdapat selisih.</p><div class="hero-metrics"><div><b>TER A/B/C</b><span>rekalkulasi otomatis</span></div><div><b>2 desimal</b><span>batas tarif XML</span></div></div></div></div>
+</div></section>
+
+<section class="workspace"><div class="workspace-inner">
+<section class="card">
+<div class="card-head"><div class="step"><span class="step-num">01</span><div><h2>Unggah Excel pembayaran</h2><p>Mendukung format WAMEN dan format Tukin PNS/DPK/Ajudan.</p></div></div><span class="badge blue">Diproses lokal</span></div>
+<div class="card-body">
+<label class="drop" id="dropZone"><input id="fileInput" type="file" accept=".xlsx,.xls" hidden><span class="drop-icon">⇧</span><div><b>Pilih atau tarik file Excel ke sini</b><small>Sistem otomatis mengenali header, membaca bruto dan PPh, lalu mencari NIK/PTKP yang belum tersedia.</small></div></label>
+<div id="fileInfo" class="file-info hidden"></div>
+<div class="db-strip" style="margin-top:14px"><div><b>Database NIK & PTKP bawaan</b><span id="dbInfo">Memuat _filexport_coretax.xlsx…</span></div><label class="db-upload">Ganti database<input id="dbFileInput" type="file" accept=".xlsx,.xls" hidden></label></div>
+</div></section>
+
+<section id="configCard" class="card hidden">
+<div class="card-head"><div class="step"><span class="step-num">02</span><div><h2>Data pemotong</h2><p>Diisi setelah Excel sumber berhasil dibaca.</p></div></div></div>
+<div class="card-body"><div class="form-grid">
+<label>NPWP Pemotong<input id="tin" inputmode="numeric" maxlength="16" placeholder="15–16 digit"></label>
+<label>ID TKU Pemotong<input id="withholderTku" inputmode="numeric" maxlength="22" placeholder="22 digit"></label>
+<label>Masa Pajak<select id="month"></select></label>
+<label>Tahun Pajak<input id="year" type="number" min="2000" max="2100"></label>
+<label>Tanggal Pemotongan<input id="withholdingDate" type="date"></label>
+</div><p class="note">Kode objek pajak ditetapkan <b>21-100-01</b>. Bila PPh sumber sesuai TER, fasilitas = <b>N/A</b>. Bila berbeda, fasilitas = <b>ETC</b> dan tarif XML dipilih maksimal 2 angka desimal agar hasil PPh paling mendekati PPh pada Excel sumber.</p></div>
+</section>
+
+<section id="resultCard" class="card hidden">
+<div class="card-head"><div class="step"><span class="step-num">03</span><div><h2>Rekonsiliasi & lookup pegawai</h2><p>NIK/PTKP dari Excel diprioritaskan; nilai yang kosong dilengkapi dari database.</p></div></div><span id="matchBadge" class="badge gray">0 pegawai</span></div>
+<div class="card-body">
+<div class="kpis">
+<div class="kpi"><span>Baris</span><strong id="kpiRows">0</strong></div>
+<div class="kpi"><span>Total bruto</span><strong id="kpiGross">Rp0</strong></div>
+<div class="kpi"><span>PPh sumber</span><strong id="kpiSource">Rp0</strong></div>
+<div class="kpi"><span>PPh TER</span><strong id="kpiTer">Rp0</strong></div>
+<div class="kpi"><span>Selisih</span><strong id="kpiDiff">Rp0</strong></div>
+</div>
+<div class="table-card"><div class="table-top"><h3>Hasil konversi BPMP</h3><p>Kolom NIK, PTKP, Bruto, dan PPh dapat dikoreksi sebelum XML dibuat.</p></div><div class="table-wrap"><table><thead><tr>
+<th>No</th><th>Nama</th><th>NIP</th><th>Jabatan</th><th>NIK</th><th>PTKP</th><th class="num">Bruto</th><th class="num">PPh Sumber</th><th>TER</th><th class="num">Tarif TER</th><th class="num">PPh TER</th><th class="num">Selisih</th><th>Fasilitas</th><th class="num">Tarif XML</th><th class="num">PPh XML</th><th>Status</th>
+</tr></thead><tbody id="resultBody"></tbody></table></div></div>
+<div id="validationBox" class="validation"></div>
+<div class="actions"><button id="downloadXml" class="btn primary" disabled>Unduh XML BPMP</button><button id="downloadCsv" class="btn secondary" disabled>Unduh Rekonsiliasi CSV</button><button id="resetBtn" class="btn ghost">Reset</button></div>
+</div></section>
+</div></section>
+</main>
+<footer><div class="footer-inner"><span>© Kabayan · SI-SEHAT.</span><a href="#top">Kembali ke atas ↑</a></div></footer>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
