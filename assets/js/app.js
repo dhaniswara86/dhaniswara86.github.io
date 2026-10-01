@@ -28,7 +28,18 @@ function lookup(r){
     if(!cand.length) cand=state.db.filter(x=>{let z=simpleName(x.name);return z&&name&&(z.includes(name)||name.includes(z))});
   }
   if(!cand.length)return null;
-  const rank=s=>s==='mei.'?5:s==='apr.impor'?4:s==='mar.impor'?3:s==='mar.impor2'?2:s==='feb.impor'?1:0;
+  const rank=s=>{
+    const R={
+      'NIK_PTKP_PPPK':20,
+      'NIK_PNS_ANAK_SATKER_32':19,
+      'NIK_PNS_BNI':18,
+      'NIK_PNS_BSI':18,
+      'NIK_CPNS_Mandiri':18,
+      'NIK_CPNS_BNI':18,
+      'mei.':5,'apr.impor':4,'mar.impor':3,'mar.impor2':2,'feb.impor':1
+    };
+    return R[s]||0;
+  };
   cand.sort((a,b)=>rank(b.sheet)-rank(a.sheet));
   let out={nik:'',ptkp:'',position:'',nikSource:'',ptkpSource:'',positionSource:''};
   for(const x of cand){
