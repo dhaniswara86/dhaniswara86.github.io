@@ -18,24 +18,45 @@ function ptkp(v){let s=nrm(v).replace(/\s/g,'');if(CODEMAP[s])return CODEMAP[s];
 function cat(p){p=ptkp(p);if(['TK/0','TK/1','K/0','HB/0','HB/1'].includes(p))return'A';if(['TK/2','TK/3','K/1','K/2','HB/2','HB/3'].includes(p))return'B';if(p==='K/3')return'C';return''}
 function ter(p,g){let c=cat(p);if(!c)return{cat:'',rate:null};for(const [u,r] of TER[c])if(g<=u)return{cat:c,rate:r};return{cat:c,rate:34}}
 const tax=(g,r)=>Math.round((+g||0)*(+r||0)/100);
-function nearestRate(g,target){
-  g=+g||0;
-  target=Math.round(+target||0);
-  if(g<=0)return{rate:0,tax:0,residual:target,exact:0};
-  const exact=target/g*100;
-  const scale=1e15;
-  const center=Math.round(exact*scale);
-  let best=null;
-  for(let k=-8;k<=8;k++){
-    const rate=(center+k)/scale;
-    const t=tax(g,rate);
-    const residual=target-t;
-    const score=Math.abs(residual);
-    if(!best || score<best.score || (score===best.score && Math.abs(rate-exact)<Math.abs(best.rate-exact))){
-      best={rate,tax:t,residual,score,exact};
+function exactRateForTax(g,target){
+  // Cari representasi desimal tarif (%) dengan digit sebanyak yang diperlukan
+  // sehingga pembulatan PPh menghasilkan tepat target rupiah.
+  const gross=BigInt(Math.round(+g||0));
+  const taxTarget=BigInt(Math.round(+target||0));
+  if(gross<=0n)return{rateStr:'0',tax:Number(taxTarget),residual:Number(taxTarget),digits:0};
+
+  let scale=1n; // 10^digits
+  let digitsCount=0;
+  while(true){
+    // Nilai pusat = target * 100 / gross.
+    // q adalah pembulatan terdekat dari nilai pusat pada skala decimal saat ini.
+    const numerator=taxTarget*100n*scale;
+    let q=numerator/gross;
+    const rem=numerator%gross;
+    if(rem*2n>=gross)q+=1n;
+
+    // Syarat Math.round(gross * rate / 100) === target untuk nilai positif:
+    // target - 0.5 <= gross*q/(100*scale) < target + 0.5
+    const lhs=2n*gross*q;
+    const low=(2n*taxTarget-1n)*100n*scale;
+    const high=(2n*taxTarget+1n)*100n*scale;
+
+    if(lhs>=low && lhs<high){
+      let raw=q.toString();
+      let rateStr;
+      if(digitsCount===0){
+        rateStr=raw;
+      }else{
+        raw=raw.padStart(digitsCount+1,'0');
+        rateStr=raw.slice(0,-digitsCount)+'.'+raw.slice(-digitsCount);
+        rateStr=rateStr.replace(/0+$/,'').replace(/\.$/,'');
+      }
+      return{rateStr,tax:Number(taxTarget),residual:0,digits:digitsCount};
     }
+
+    scale*=10n;
+    digitsCount++;
   }
-  return best;
 }
 function lookup(r){
   const nip=digits(r.nip), name=simpleName(r.name);
@@ -67,7 +88,36 @@ function lookup(r){
   }
   return out;
 }
-function recalc(r){let t=ter(r.ptkp,r.gross);r.terCat=t.cat;r.terRate=t.rate;r.terTax=t.rate==null?null:tax(r.gross,t.rate);r.diff=r.terTax==null?null:Math.round(r.sourceTax-r.terTax);r.mismatch=r.diff!=null&&r.diff!==0;r.facility=r.terTax==null?'':(r.mismatch?'ETC':'N/A');if(r.terTax==null){r.xmlRate=null;r.xmlTax=null;r.xmlResidual=null;return}if(r.mismatch){let q=nearestRate(r.gross,r.sourceTax);r.xmlRate=q.rate;r.xmlTax=q.tax;r.xmlResidual=q.residual}else{r.xmlRate=Math.round(r.terRate*100)/100;r.xmlTax=tax(r.gross,r.xmlRate);r.xmlResidual=Math.round(r.sourceTax-r.xmlTax)}}
+function recalc(r){
+  let t=ter(r.ptkp,r.gross);
+  r.terCat=t.cat;
+  r.terRate=t.rate;
+  r.terTax=t.rate==null?null:tax(r.gross,t.rate);
+  r.diff=r.terTax==null?null:Math.round(r.sourceTax-r.terTax);
+  r.mismatch=r.diff!=null&&r.diff!==0;
+  r.facility=r.terTax==null?'':(r.mismatch?'ETC':'N/A');
+
+  if(r.terTax==null){
+    r.xmlRateStr='';
+    r.xmlTax=null;
+    r.xmlResidual=null;
+    r.xmlRateDigits=null;
+    return;
+  }
+
+  if(r.mismatch){
+    const q=exactRateForTax(r.gross,r.sourceTax);
+    r.xmlRateStr=q.rateStr;
+    r.xmlTax=q.tax;
+    r.xmlResidual=q.residual;
+    r.xmlRateDigits=q.digits;
+  }else{
+    r.xmlRateStr=String(r.terRate);
+    r.xmlTax=r.sourceTax;
+    r.xmlResidual=0;
+    r.xmlRateDigits=(r.xmlRateStr.split('.')[1]||'').length;
+  }
+}
 function fillMissing(r){
   let l=lookup(r);
   if(!/^\d{16}$/.test(r.nik||'')&&l&&l.nik){r.nik=l.nik;r.nikSource=l.nikSource}
@@ -117,7 +167,7 @@ function render(){
 <td><select class="inline ptkp" data-i="${i}">${ptkpOptions(r.ptkp)}</select><span class="src">${xe(r.ptkpSource||'Belum ditemukan')}</span></td>
 <td class="num"><input class="inline money gross" data-i="${i}" value="${Math.round(r.gross)}"></td><td class="num"><input class="inline money tax" data-i="${i}" value="${Math.round(r.sourceTax)}"></td>
 <td>${r.terCat?'TER '+r.terCat:'-'}</td><td class="num">${r.terRate==null?'-':r.terRate.toFixed(2)+'%'}</td><td class="num">${r.terTax==null?'-':money(r.terTax)}</td><td class="num">${r.diff==null?'-':money(r.diff)}</td>
-<td>${r.facility?'<span class="badge '+(r.facility==='N/A'?'ok':'warn')+'">'+r.facility+'</span>':'-'}</td><td class="num">${r.xmlRate==null?'-':r.xmlRate.toFixed(15)+'%'}</td><td class="num">${r.xmlTax==null?'-':money(r.xmlTax)}</td><td>${status}${r.xmlResidual?'<br><span class="src">Deviasi XML '+money(Math.abs(r.xmlResidual))+'</span>':''}${errs.length?'<br><span class="src">'+xe(errs.join('; '))+'</span>':''}</td>`;
+<td>${r.facility?'<span class="badge '+(r.facility==='N/A'?'ok':'warn')+'">'+r.facility+'</span>':'-'}</td><td class="num">${!r.xmlRateStr?'-':r.xmlRateStr+'%'}</td><td class="num">${r.xmlTax==null?'-':money(r.xmlTax)}</td><td>${status}${r.xmlResidual?'<br><span class="src">Deviasi XML '+money(Math.abs(r.xmlResidual))+'</span>':''}${errs.length?'<br><span class="src">'+xe(errs.join('; '))+'</span>':''}</td>`;
 b.appendChild(tr)});
   b.querySelectorAll('.nik').forEach(x=>x.oninput=e=>{let r=state.rows[+e.target.dataset.i];r.nik=digits(e.target.value).slice(0,16);r.nikSource='Manual';e.target.value=r.nik;update()});
   b.querySelectorAll('.ptkp').forEach(x=>x.onchange=e=>{let r=state.rows[+e.target.dataset.i];r.ptkp=e.target.value;r.ptkpSource='Manual';render()});
@@ -130,7 +180,7 @@ function update(){
   let gross=0,src=0,terv=0,diff=0,matched=0,errs=cfgErrors(),etc=0;
   state.rows.forEach((r,i)=>{recalc(r);gross+=r.gross;src+=r.sourceTax;if(r.terTax!=null){terv+=r.terTax;diff+=r.diff||0}if(r.nik&&r.ptkp)matched++;if(r.facility==='ETC')etc++;rowErrors(r).forEach(x=>errs.push(`Baris ${i+1} ${r.name}: ${x}`))});
   $('kpiRows').textContent=state.rows.length;$('kpiGross').textContent=money(gross);$('kpiSource').textContent=money(src);$('kpiTer').textContent=money(terv);$('kpiDiff').textContent=money(diff);$('matchBadge').textContent=`${matched}/${state.rows.length} NIK+PTKP lengkap`;
-  let box=$('validationBox');if(errs.length){box.className='validation error';box.innerHTML='<b>Belum dapat membuat XML.</b><br>'+errs.slice(0,12).map(xe).join('<br>')+(errs.length>12?`<br>… dan ${errs.length-12} masalah lain.`:'')}else if(etc){box.className='validation';box.innerHTML=`<b>Data lengkap.</b> ${etc} baris menggunakan fasilitas <b>ETC</b> karena PPh sumber berbeda dari PPh TER. Tarif XML menggunakan presisi hingga 15 digit di belakang koma agar PPh XML paling mendekati PPh sumber.`}else{box.className='validation success';box.innerHTML='<b>Data lengkap.</b> Seluruh PPh sumber sesuai perhitungan TER.'}
+  let box=$('validationBox');if(errs.length){box.className='validation error';box.innerHTML='<b>Belum dapat membuat XML.</b><br>'+errs.slice(0,12).map(xe).join('<br>')+(errs.length>12?`<br>… dan ${errs.length-12} masalah lain.`:'')}else if(etc){box.className='validation';box.innerHTML=`<b>Data lengkap.</b> ${etc} baris menggunakan fasilitas <b>ETC</b> karena PPh sumber berbeda dari PPh TER. Tarif XML menggunakan digit desimal sebanyak yang diperlukan sampai PPh XML tepat sama dengan PPh sumber (selisih Rp0).`}else{box.className='validation success';box.innerHTML='<b>Data lengkap.</b> Seluruh PPh sumber sesuai perhitungan TER.'}
   $('downloadXml').disabled=errs.length>0;$('downloadCsv').disabled=!state.rows.length;
 }
 function conf(){return{tin:digits($('tin').value),tku:digits($('withholderTku').value),month:+$('month').value,year:+$('year').value,date:txt($('withholdingDate').value).slice(0,10)}}
@@ -146,7 +196,7 @@ function xml(){
       <TaxCertificate>${xe(r.facility)}</TaxCertificate>
       <TaxObjectCode>21-100-01</TaxObjectCode>
       <Gross>${Math.round(r.gross)}</Gross>
-      <Rate>${Number(r.xmlRate).toFixed(15)}</Rate>
+      <Rate>${xe(r.xmlRateStr)}</Rate>
       <IDPlaceOfBusinessActivity>${xe(c.tku)}</IDPlaceOfBusinessActivity>
       <WithholdingDate>${c.date}</WithholdingDate>
     </MmPayroll>`}).join('\n');
@@ -159,7 +209,7 @@ ${items}
 </MmPayrollBulk>
 `}
 function dl(name,content,type){let b=new Blob([content],{type}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},0)}
-function csv(){let h=['No','Nama','NIP','Jabatan','NIK','Sumber NIK','PTKP','Sumber PTKP','Bruto','PPh Sumber','Kategori TER','Tarif TER','PPh TER','Selisih','Fasilitas','Tarif XML','PPh XML','Deviasi XML'];let esc=v=>{let s=String(v??'');return/[;"\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s};let rows=state.rows.map(r=>{recalc(r);return[r.no,r.name,r.nip,r.position,r.nik,r.nikSource,r.ptkp,r.ptkpSource,r.gross,r.sourceTax,r.terCat,r.terRate,r.terTax,r.diff,r.facility,r.xmlRate,r.xmlTax,r.xmlResidual]});dl('Rekonsiliasi_BPMP.csv','\uFEFF'+[h,...rows].map(r=>r.map(esc).join(';')).join('\r\n'),'text/csv;charset=utf-8')}
+function csv(){let h=['No','Nama','NIP','Jabatan','NIK','Sumber NIK','PTKP','Sumber PTKP','Bruto','PPh Sumber','Kategori TER','Tarif TER','PPh TER','Selisih','Fasilitas','Tarif XML','PPh XML','Deviasi XML'];let esc=v=>{let s=String(v??'');return/[;"\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s};let rows=state.rows.map(r=>{recalc(r);return[r.no,r.name,r.nip,r.position,r.nik,r.nikSource,r.ptkp,r.ptkpSource,r.gross,r.sourceTax,r.terCat,r.terRate,r.terTax,r.diff,r.facility,r.xmlRateStr,r.xmlTax,r.xmlResidual]});dl('Rekonsiliasi_BPMP.csv','\uFEFF'+[h,...rows].map(r=>r.map(esc).join(';')).join('\r\n'),'text/csv;charset=utf-8')}
 async function loadSource(file){try{$('fileInfo').classList.remove('hidden');$('fileInfo').textContent='Membaca '+file.name+'…';let p=parseWorkbook(await file.arrayBuffer());state.rows=p.rows;state.fileName=file.name;$('fileInfo').textContent=`${file.name} • ${p.rows.length} baris • format ${p.format==='wamen'?'WAMEN':'Tukin tabel'} • sheet ${p.sheet}`;render()}catch(e){state.rows=[];$('configCard').classList.add('hidden');$('resultCard').classList.add('hidden');$('fileInfo').classList.remove('hidden');$('fileInfo').textContent='Gagal: '+e.message}}
 function parseDbWorkbook(ab){
   const wb=XLSX.read(ab,{type:'array'}), recs=[];
