@@ -18,30 +18,34 @@ function ptkp(v){let s=nrm(v).replace(/\s/g,'');if(CODEMAP[s])return CODEMAP[s];
 function cat(p){p=ptkp(p);if(['TK/0','TK/1','K/0','HB/0','HB/1'].includes(p))return'A';if(['TK/2','TK/3','K/1','K/2','HB/2','HB/3'].includes(p))return'B';if(p==='K/3')return'C';return''}
 function ter(p,g){let c=cat(p);if(!c)return{cat:'',rate:null};for(const [u,r] of TER[c])if(g<=u)return{cat:c,rate:r};return{cat:c,rate:34}}
 const tax=(g,r)=>Math.round((+g||0)*(+r||0)/100);
+function taxFromRateString(g,rateStr){
+  const gross=BigInt(Math.round(+g||0));
+  let s=String(rateStr??'').trim();
+  if(gross<=0n || !/^\d+(?:\.\d+)?$/.test(s))return null;
+  const parts=s.split('.');
+  const frac=parts[1]||'';
+  const scale=10n**BigInt(frac.length);
+  const rateInt=BigInt((parts[0]||'0')+frac);
+  const num=gross*rateInt;
+  const den=100n*scale;
+  return Number((2n*num+den)/(2n*den));
+}
 function exactRateForTax(g,target){
-  // Cari representasi desimal tarif (%) dengan digit sebanyak yang diperlukan
-  // sehingga pembulatan PPh menghasilkan tepat target rupiah.
   const gross=BigInt(Math.round(+g||0));
   const taxTarget=BigInt(Math.round(+target||0));
-  if(gross<=0n)return{rateStr:'0',tax:Number(taxTarget),residual:Number(taxTarget),digits:0};
+  if(gross<=0n)return{rateStr:'0',tax:0,residual:Number(taxTarget),digits:0,verified:false};
 
-  let scale=1n; // 10^digits
+  let scale=1n;
   let digitsCount=0;
   while(true){
-    // Nilai pusat = target * 100 / gross.
-    // q adalah pembulatan terdekat dari nilai pusat pada skala decimal saat ini.
     const numerator=taxTarget*100n*scale;
-    let q=numerator/gross;
+    let center=numerator/gross;
     const rem=numerator%gross;
-    if(rem*2n>=gross)q+=1n;
+    if(rem*2n>=gross)center+=1n;
 
-    // Syarat Math.round(gross * rate / 100) === target untuk nilai positif:
-    // target - 0.5 <= gross*q/(100*scale) < target + 0.5
-    const lhs=2n*gross*q;
-    const low=(2n*taxTarget-1n)*100n*scale;
-    const high=(2n*taxTarget+1n)*100n*scale;
-
-    if(lhs>=low && lhs<high){
+    for(let offset=-3n;offset<=3n;offset++){
+      const q=center+offset;
+      if(q<0n)continue;
       let raw=q.toString();
       let rateStr;
       if(digitsCount===0){
@@ -51,7 +55,16 @@ function exactRateForTax(g,target){
         rateStr=raw.slice(0,-digitsCount)+'.'+raw.slice(-digitsCount);
         rateStr=rateStr.replace(/0+$/,'').replace(/\.$/,'');
       }
-      return{rateStr,tax:Number(taxTarget),residual:0,digits:digitsCount};
+      const verifiedTax=taxFromRateString(Number(gross),rateStr);
+      if(verifiedTax===Number(taxTarget)){
+        return{
+          rateStr,
+          tax:verifiedTax,
+          residual:0,
+          digits:(rateStr.split('.')[1]||'').length,
+          verified:true
+        };
+      }
     }
 
     scale*=10n;
@@ -102,20 +115,23 @@ function recalc(r){
     r.xmlTax=null;
     r.xmlResidual=null;
     r.xmlRateDigits=null;
+    r.xmlVerified=false;
     return;
   }
 
   if(r.mismatch){
     const q=exactRateForTax(r.gross,r.sourceTax);
     r.xmlRateStr=q.rateStr;
-    r.xmlTax=q.tax;
-    r.xmlResidual=q.residual;
+    r.xmlTax=taxFromRateString(r.gross,q.rateStr);
+    r.xmlResidual=Math.round(r.sourceTax-r.xmlTax);
     r.xmlRateDigits=q.digits;
+    r.xmlVerified=q.verified===true && r.xmlResidual===0;
   }else{
     r.xmlRateStr=String(r.terRate);
     r.xmlTax=r.sourceTax;
     r.xmlResidual=0;
     r.xmlRateDigits=(r.xmlRateStr.split('.')[1]||'').length;
+    r.xmlVerified=true;
   }
 }
 function fillMissing(r){
@@ -161,13 +177,13 @@ function cfgErrors(){let e=[],tin=digits($('tin').value),tku=digits($('withholde
 function render(){
   $('configCard').classList.remove('hidden');$('resultCard').classList.remove('hidden');
   const b=$('resultBody');b.innerHTML='';
-  state.rows.forEach((r,i)=>{recalc(r);let errs=rowErrors(r),status=errs.length?'<span class="badge err">Belum lengkap</span>':r.mismatch?'<span class="badge warn">Selisih → ETC</span>':'<span class="badge ok">Sesuai</span>';let tr=document.createElement('tr');tr.innerHTML=`
+  state.rows.forEach((r,i)=>{recalc(r);let errs=rowErrors(r),status=errs.length?'<span class="badge err">Belum lengkap</span>':r.xmlResidual===0?(r.mismatch?'<span class="badge warn">ETC · XML cocok</span>':'<span class="badge ok">Sesuai</span>'):'<span class="badge err">XML belum cocok</span>';let tr=document.createElement('tr');tr.innerHTML=`
 <td>${xe(r.no||i+1)}</td><td class="name">${xe(r.name)}</td><td>${xe(r.nip)}</td><td class="position"><input class="inline pos" data-i="${i}" value="${xe(r.position)}"><span class="src">${xe(r.positionSource||'-')}</span></td>
 <td><input class="inline nik" data-i="${i}" maxlength="16" inputmode="numeric" value="${xe(r.nik)}"><span class="src">${xe(r.nikSource||'Belum ditemukan')}</span></td>
 <td><select class="inline ptkp" data-i="${i}">${ptkpOptions(r.ptkp)}</select><span class="src">${xe(r.ptkpSource||'Belum ditemukan')}</span></td>
 <td class="num"><input class="inline money gross" data-i="${i}" value="${Math.round(r.gross)}"></td><td class="num"><input class="inline money tax" data-i="${i}" value="${Math.round(r.sourceTax)}"></td>
 <td>${r.terCat?'TER '+r.terCat:'-'}</td><td class="num">${r.terRate==null?'-':r.terRate.toFixed(2)+'%'}</td><td class="num">${r.terTax==null?'-':money(r.terTax)}</td><td class="num">${r.diff==null?'-':money(r.diff)}</td>
-<td>${r.facility?'<span class="badge '+(r.facility==='N/A'?'ok':'warn')+'">'+r.facility+'</span>':'-'}</td><td class="num">${!r.xmlRateStr?'-':r.xmlRateStr+'%'}</td><td class="num">${r.xmlTax==null?'-':money(r.xmlTax)}</td><td>${status}${r.xmlResidual?'<br><span class="src">Deviasi XML '+money(Math.abs(r.xmlResidual))+'</span>':''}${errs.length?'<br><span class="src">'+xe(errs.join('; '))+'</span>':''}</td>`;
+<td>${r.facility?'<span class="badge '+(r.facility==='N/A'?'ok':'warn')+'">'+r.facility+'</span>':'-'}</td><td class="num">${!r.xmlRateStr?'-':r.xmlRateStr+'%'}</td><td class="num">${r.xmlTax==null?'-':money(r.xmlTax)}</td><td class="num">${r.xmlResidual==null?'-':money(r.xmlResidual)}</td><td>${status}${errs.length?'<br><span class="src">'+xe(errs.join('; '))+'</span>':''}</td>`;
 b.appendChild(tr)});
   b.querySelectorAll('.nik').forEach(x=>x.oninput=e=>{let r=state.rows[+e.target.dataset.i];r.nik=digits(e.target.value).slice(0,16);r.nikSource='Manual';e.target.value=r.nik;update()});
   b.querySelectorAll('.ptkp').forEach(x=>x.onchange=e=>{let r=state.rows[+e.target.dataset.i];r.ptkp=e.target.value;r.ptkpSource='Manual';render()});
@@ -177,9 +193,9 @@ b.appendChild(tr)});
   update();
 }
 function update(){
-  let gross=0,src=0,terv=0,diff=0,matched=0,errs=cfgErrors(),etc=0;
-  state.rows.forEach((r,i)=>{recalc(r);gross+=r.gross;src+=r.sourceTax;if(r.terTax!=null){terv+=r.terTax;diff+=r.diff||0}if(r.nik&&r.ptkp)matched++;if(r.facility==='ETC')etc++;rowErrors(r).forEach(x=>errs.push(`Baris ${i+1} ${r.name}: ${x}`))});
-  $('kpiRows').textContent=state.rows.length;$('kpiGross').textContent=money(gross);$('kpiSource').textContent=money(src);$('kpiTer').textContent=money(terv);$('kpiDiff').textContent=money(diff);$('matchBadge').textContent=`${matched}/${state.rows.length} NIK+PTKP lengkap`;
+  let gross=0,src=0,terv=0,xmlDiff=0,matched=0,errs=cfgErrors(),etc=0;
+  state.rows.forEach((r,i)=>{recalc(r);gross+=r.gross;src+=r.sourceTax;if(r.terTax!=null){terv+=r.terTax;xmlDiff+=r.xmlResidual||0}if(r.nik&&r.ptkp)matched++;if(r.facility==='ETC')etc++;rowErrors(r).forEach(x=>errs.push(`Baris ${i+1} ${r.name}: ${x}`));if(r.terTax!=null&&r.xmlResidual!==0)errs.push(`Baris ${i+1} ${r.name}: Selisih XML belum 0`)});
+  $('kpiRows').textContent=state.rows.length;$('kpiGross').textContent=money(gross);$('kpiSource').textContent=money(src);$('kpiTer').textContent=money(terv);$('kpiDiff').textContent=money(xmlDiff);$('matchBadge').textContent=`${matched}/${state.rows.length} NIK+PTKP lengkap`;
   let box=$('validationBox');if(errs.length){box.className='validation error';box.innerHTML='<b>Belum dapat membuat XML.</b><br>'+errs.slice(0,12).map(xe).join('<br>')+(errs.length>12?`<br>… dan ${errs.length-12} masalah lain.`:'')}else if(etc){box.className='validation';box.innerHTML=`<b>Data lengkap.</b> ${etc} baris menggunakan fasilitas <b>ETC</b> karena PPh sumber berbeda dari PPh TER. Tarif XML menggunakan digit desimal sebanyak yang diperlukan sampai PPh XML tepat sama dengan PPh sumber (selisih Rp0).`}else{box.className='validation success';box.innerHTML='<b>Data lengkap.</b> Seluruh PPh sumber sesuai perhitungan TER.'}
   $('downloadXml').disabled=errs.length>0;$('downloadCsv').disabled=!state.rows.length;
 }
@@ -209,7 +225,7 @@ ${items}
 </MmPayrollBulk>
 `}
 function dl(name,content,type){let b=new Blob([content],{type}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},0)}
-function csv(){let h=['No','Nama','NIP','Jabatan','NIK','Sumber NIK','PTKP','Sumber PTKP','Bruto','PPh Sumber','Kategori TER','Tarif TER','PPh TER','Selisih','Fasilitas','Tarif XML','PPh XML','Deviasi XML'];let esc=v=>{let s=String(v??'');return/[;"\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s};let rows=state.rows.map(r=>{recalc(r);return[r.no,r.name,r.nip,r.position,r.nik,r.nikSource,r.ptkp,r.ptkpSource,r.gross,r.sourceTax,r.terCat,r.terRate,r.terTax,r.diff,r.facility,r.xmlRateStr,r.xmlTax,r.xmlResidual]});dl('Rekonsiliasi_BPMP.csv','\uFEFF'+[h,...rows].map(r=>r.map(esc).join(';')).join('\r\n'),'text/csv;charset=utf-8')}
+function csv(){let h=['No','Nama','NIP','Jabatan','NIK','Sumber NIK','PTKP','Sumber PTKP','Bruto','PPh Sumber','Kategori TER','Tarif TER','PPh TER','Selisih TER','Fasilitas','Tarif XML','PPh XML','Selisih XML'];let esc=v=>{let s=String(v??'');return/[;"\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s};let rows=state.rows.map(r=>{recalc(r);return[r.no,r.name,r.nip,r.position,r.nik,r.nikSource,r.ptkp,r.ptkpSource,r.gross,r.sourceTax,r.terCat,r.terRate,r.terTax,r.diff,r.facility,r.xmlRateStr,r.xmlTax,r.xmlResidual]});dl('Rekonsiliasi_BPMP.csv','\uFEFF'+[h,...rows].map(r=>r.map(esc).join(';')).join('\r\n'),'text/csv;charset=utf-8')}
 async function loadSource(file){try{$('fileInfo').classList.remove('hidden');$('fileInfo').textContent='Membaca '+file.name+'…';let p=parseWorkbook(await file.arrayBuffer());state.rows=p.rows;state.fileName=file.name;$('fileInfo').textContent=`${file.name} • ${p.rows.length} baris • format ${p.format==='wamen'?'WAMEN':'Tukin tabel'} • sheet ${p.sheet}`;render()}catch(e){state.rows=[];$('configCard').classList.add('hidden');$('resultCard').classList.add('hidden');$('fileInfo').classList.remove('hidden');$('fileInfo').textContent='Gagal: '+e.message}}
 function parseDbWorkbook(ab){
   const wb=XLSX.read(ab,{type:'array'}), recs=[];
