@@ -82,6 +82,7 @@ function lookup(r){
   if(!cand.length)return null;
   const rank=s=>{
     const R={
+      'DATA_PEGAWAI_PNS':30,'DATA_PEGAWAI_PPPK':30,
       'NIK_PTKP_PPPK':20,
       'NIK_PNS_ANAK_SATKER_32':19,
       'NIK_PNS_BNI':18,
