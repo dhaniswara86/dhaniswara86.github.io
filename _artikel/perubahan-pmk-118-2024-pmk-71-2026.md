@@ -3,7 +3,7 @@ layout: artikel-editorial
 
 title: "Pengurangan Sanksi Pajak 2026: Perubahan PMK 71 dan Kebijakan KEP-239"
 hero_title: "Pengurangan Sanksi Pajak Berubah."
-hero_accent: "Apa yang baru?"
+hero_accent: "Apa bedanya aturan lama dan baru?"
 
 excerpt: "PMK 71 Tahun 2026 mengubah beberapa aturan keberatan dan pengurangan sanksi pajak. Simak perbedaan cara menghitung pembayaran, jenis sanksi, dan syarat permohonannya."
 description: "Panduan perbandingan PMK 118/2024 dan PMK 71/2026 serta rincian pengurangan sanksi menurut KEP-239/PJ/2026: objek, syarat, besaran 100%, 90%, 75%, 50%, 25%, dan tenggat."
@@ -21,7 +21,7 @@ tags:
 author: "Angga Sukma Dhaniswara"
 date: 2026-10-12
 date_modified: 2026-10-12
-reading_time: "16 menit baca"
+reading_time: "17 menit baca"
 legal_basis: "PMK 118/2024 s.t.d.d. PMK 71/2026; KEP-239/PJ/2026"
 permalink: /perubahan-pmk-118-2024-pmk-71-2026.html
 
@@ -82,6 +82,10 @@ sidebar_note: "Periksa jenis sanksi, dasar pasal, tanggal penerbitan SKP/STP, st
 <h2>Perubahan Utama: Pokok Pajak Diperhitungkan Lebih Dahulu</h2>
 <p>Pokok pajak adalah jumlah pajak yang tidak atau kurang dibayar sebagaimana tercantum dalam ketetapan atau tagihan terkait. Sanksi administratif adalah jumlah tambahan yang dikenakan berdasarkan ketentuan perpajakan.</p>
 <p>Dalam <strong>Pasal 23 ayat (6) PMK 118/2024</strong>, pembayaran yang dilakukan <em>sebelum bulan</em> pengajuan permohonan pengurangan atau penghapusan sanksi diperhitungkan secara proporsional antara pokok pajak dan sanksi. Adapun pembayaran pada <em>bulan yang sama</em> dengan pengajuan permohonan diperhitungkan untuk pokok pajak, sesuai ayat (7) lama.</p>
+<h3>Apakah aturan lama mewajibkan sanksi dilunasi seluruhnya?</h3>
+<p><strong>Tidak.</strong> Untuk permohonan pengurangan atau penghapusan sanksi yang diatur dalam Pasal 23, <strong>Pasal 23 ayat (5) huruf a PMK 118/2024 mensyaratkan pelunasan pokok pajak</strong> sebagaimana ditentukan dalam pasal tersebut, bukan pelunasan seluruh sanksi administratif. Karena itu, Wajib Pajak tidak harus membayar seluruh sanksi terlebih dahulu hanya untuk memenuhi syarat pelunasan pokok dalam permohonan tersebut.</p>
+<p>Namun, ada hal yang kerap luput: <strong>aturan lama tentang alokasi pembayaran dapat membuat sebagian uang yang sudah disetor dihitung sebagai pembayaran sanksi, bukan pokok pajak.</strong> Hal ini terjadi apabila pembayaran dilakukan sebelum bulan pengajuan permohonan. Jadi, meskipun Wajib Pajak merasa telah menyetor uang sejumlah pokok pajak, belum tentu seluruh uang tersebut diperhitungkan sebagai pelunasan pokok menurut mekanisme proporsional yang dahulu berlaku.</p>
+<blockquote class="callout-warning"><p><strong>Bedakan dua hal:</strong> kewajiban melunasi <em>pokok pajak</em> sebagai syarat permohonan dan aturan <em>pengalokasian pembayaran</em> yang menentukan berapa dari uang yang dibayar dianggap melunasi pokok maupun sanksi. PMK 118/2024 tidak mewajibkan seluruh sanksi lunas untuk mengajukan pengurangan sanksi.</p></blockquote>
 <p>Setelah diubah, <strong>Pasal 23 ayat (6) dan ayat (7)</strong> menetapkan urutan yang berbeda: pembayaran diperhitungkan terlebih dahulu untuk pokok pajak. Jika jumlah pembayaran melebihi pokok yang dimaksud, sisanya diperhitungkan terhadap sanksi administratif atau denda administratif PBB.</p>
 <blockquote><p><strong>Singkatnya:</strong> aturan baru tidak lagi membagi pembayaran sebelum bulan permohonan secara proporsional antara pokok dan sanksi.</p></blockquote>
 </section>
@@ -100,6 +104,7 @@ sidebar_note: "Periksa jenis sanksi, dasar pasal, tanggal penerbitan SKP/STP, st
 <tr><td><strong>Sisa sanksi yang dapat dimohonkan pengurangan</strong></td><td><strong>Rp20.000.000</strong></td><td><strong>Rp20.000.000</strong></td></tr>
 </tbody>
 </table>
+<p>Perhatikan pembayaran pertama Rp50 juta pada bulan Januari dalam kolom aturan lama. Dari pembayaran tersebut, hanya Rp35.714.286 yang dianggap untuk pokok pajak; sisanya Rp14.285.714 diperhitungkan untuk sanksi. Karena itu, pembayaran pada bulan Februari harus terlebih dahulu menutup sisa pokok Rp64.285.714. <strong>Ini adalah cara penghitungan menurut lampiran lama, bukan ketentuan yang mewajibkan seluruh sanksi dibayar.</strong></p>
 <p>Hasil akhirnya sama: pokok telah lunas dan terdapat sanksi tersisa Rp20 juta. <strong>Yang berubah adalah cara setiap pembayaran dialokasikan.</strong> Jadi, metode baru tidak berarti jumlah sanksi yang tersisa pasti lebih besar atau lebih kecil dalam semua keadaan.</p>
 <blockquote class="callout-example"><p><strong>Contoh lainnya dalam lampiran baru:</strong> jika pokok pajak Rp100 juta tetapi pembayaran baru Rp80 juta, permohonan tidak memenuhi persyaratan pelunasan pokok dan diterbitkan surat pengembalian. Dengan demikian, pembayaran yang didahulukan ke pokok tidak menghapus kewajiban memenuhi syarat permohonan.</p></blockquote>
 <p><small>Dasar: Pasal 23 ayat (5)–(9) dan Lampiran Huruf C bagian C.2 PMK 118/2024 sebagaimana diubah PMK 71/2026.</small></p>
