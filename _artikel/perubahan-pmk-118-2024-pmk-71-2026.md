@@ -3,7 +3,7 @@ layout: artikel-editorial
 
 title: "Aturan Pengurangan Sanksi Pajak Berubah: Ini Perbedaan PMK 118/2024 dan PMK 71/2026"
 hero_title: "Pengurangan Sanksi Pajak Berubah."
-hero_accent: "Apa bedanya aturan lama dan baru?"
+hero_accent: "Apa yang baru?"
 
 excerpt: "PMK 71 Tahun 2026 mengubah beberapa aturan keberatan dan pengurangan sanksi pajak. Simak perbedaan cara menghitung pembayaran, jenis sanksi, dan syarat permohonannya."
 description: "Penjelasan sederhana perbandingan PMK 118 Tahun 2024 dan PMK 71 Tahun 2026, meliputi alokasi pembayaran pokok pajak, pengurangan sanksi administratif, Pasal 21A, Pasal 27A, dan aturan peralihan."
