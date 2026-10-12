@@ -3,7 +3,7 @@ layout: artikel-editorial
 
 title: "Pengurangan Sanksi Pajak 2026: Perubahan PMK 71 dan Kebijakan KEP-239"
 hero_title: "Pengurangan Sanksi Pajak Berubah."
-hero_accent: "Apa bedanya aturan lama dan baru?"
+hero_accent: "Apa yang baru?"
 
 excerpt: "PMK 71 Tahun 2026 mengubah beberapa aturan keberatan dan pengurangan sanksi pajak. Simak perbedaan cara menghitung pembayaran, jenis sanksi, dan syarat permohonannya."
 description: "Panduan perbandingan PMK 118/2024 dan PMK 71/2026 serta rincian pengurangan sanksi menurut KEP-239/PJ/2026: objek, syarat, besaran 100%, 90%, 75%, 50%, 25%, dan tenggat."
