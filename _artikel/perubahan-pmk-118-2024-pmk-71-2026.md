@@ -6,7 +6,7 @@ hero_title: "Pengurangan Sanksi Pajak Berubah."
 hero_accent: "Apa bedanya aturan lama dan baru?"
 
 excerpt: "PMK 71 Tahun 2026 mengubah beberapa aturan keberatan dan pengurangan sanksi pajak. Simak perbedaan cara menghitung pembayaran, jenis sanksi, dan syarat permohonannya."
-description: "Penjelasan sederhana perbandingan PMK 118 Tahun 2024 dan PMK 71 Tahun 2026, meliputi alokasi pembayaran pokok pajak, pengurangan sanksi administratif, Pasal 21A, Pasal 27A, dan aturan peralihan."
+description: "Panduan perbandingan PMK 118/2024 dan PMK 71/2026 serta rincian pengurangan sanksi menurut KEP-239/PJ/2026: objek, syarat, besaran 100%, 90%, 75%, 50%, 25%, dan tenggat."
 
 category: "Regulasi Pajak"
 tags:
@@ -21,12 +21,12 @@ tags:
 author: "Angga Sukma Dhaniswara"
 date: 2026-10-12
 date_modified: 2026-10-12
-reading_time: "13 menit baca"
-legal_basis: "PMK 118/2024 s.t.d.d. PMK 71/2026; materi diseminasi KEP-239/PJ/2026"
+reading_time: "16 menit baca"
+legal_basis: "PMK 118/2024 s.t.d.d. PMK 71/2026; KEP-239/PJ/2026"
 permalink: /perubahan-pmk-118-2024-pmk-71-2026.html
 
 summary_label: "Intinya, apa yang berubah?"
-summary: "PMK 71/2026 mengubah pengalokasian pembayaran dan mengatur ruang lingkup pengurangan sanksi. Materi diseminasi KEP-239/PJ/2026 menjelaskan skema pengurangan 100%, 90%, 75%, 50%, atau 25% untuk kondisi dan periode tertentu—bukan untuk setiap Wajib Pajak."
+summary: "PMK 71/2026 mendahulukan alokasi pembayaran ke pokok pajak. KEP-239/PJ/2026 mengatur besaran pengurangan sanksi 100%, 90%, 75%, 50%, atau 25% menurut jenis sanksi dan persyaratannya. Permohonan kebijakan ini paling lambat 1 Oktober 2028."
 
 hero_links:
   - label: "Bandingkan aturannya"
@@ -38,7 +38,7 @@ hero_links:
   - label: "Permohonan yang sudah masuk"
     href: "#peralihan"
 
-sidebar_note: "Bagian PMK merujuk teks peraturan. Rincian program KEP-239/PJ/2026 dalam artikel dirangkum dari slide diseminasi 12 Oktober 2026; cek naskah KEP dan lampirannya sebelum mengajukan permohonan. Pengurangan tidak otomatis."
+sidebar_note: "Periksa jenis sanksi, dasar pasal, tanggal penerbitan SKP/STP, status keberatan, waktu pelunasan, serta lampiran yang sesuai pada KEP-239/PJ/2026. Besaran pengurangan tidak berlaku otomatis untuk semua sanksi."
 ---
 
 <div class="jk-article">
@@ -121,45 +121,55 @@ sidebar_note: "Bagian PMK merujuk teks peraturan. Rincian program KEP-239/PJ/202
 <p><small>Dasar: Pasal 27A PMK 118/2024 sebagaimana ditambahkan oleh Pasal I angka 5 PMK 71/2026.</small></p>
 </section>
 
-<section id="kep-dan-pmk">
-<h2>Setelah PMK 71, Ada Kebijakan KEP-239/PJ/2026. Apa Bedanya?</h2>
-<p><strong>PMK 71/2026</strong> mengubah aturan mengenai tata cara dan persyaratan, termasuk menyisipkan Pasal 27A. <strong>KEP-239/PJ/2026</strong>, menurut materi diseminasi DJP bertanggal 12 Oktober 2026, menjabarkan kebijakan pengurangan atau penghapusan sanksi administratif untuk kelompok kasus, periode, dan persyaratan tertentu. Jangan mencampurkan kedua aturan itu: persentase 100%, 90%, 75%, 50%, dan 25% yang tampil dalam slide <strong>bukan angka yang tercantum dalam Pasal 27A PMK</strong>.</p>
-<p>Materi diseminasi menjelaskan bahwa kebijakan tersebut diarahkan untuk mendorong pelaporan dan pembetulan SPT, pelunasan pokok atau utang pajak, dan peningkatan kepatuhan. Slide membagi kasusnya berdasarkan kegiatan administrasi, antara lain <strong>basis data perpajakan, pengawasan, pemeriksaan, dan penagihan</strong>. Masing-masing kelompok tidak mempunyai syarat dan jadwal yang selalu sama.</p>
-<blockquote class="callout-warning"><p><strong>Status sumber:</strong> rincian KEP-239 di bawah bersumber dari slide <em>PMK 71 Tahun 2026 dan KEP 239 2026</em> (diseminasi 12 Oktober 2026). Naskah lengkap KEP-239/PJ/2026 beserta lampiran A–D tidak diberikan bersama dokumen ini. Karena itu, tabel berikut merupakan panduan membaca materi diseminasi, <strong>bukan pengganti verifikasi keputusan dan lampiran resminya</strong>.</p></blockquote>
+<section id="kep-239">
+<h2>Dari Perubahan PMK ke Kebijakan Pengurangan Sanksi</h2>
+<p>Bayangkan ada dua Wajib Pajak yang sama-sama masih memiliki sanksi administratif. Yang pertama terlambat menyampaikan SPT Tahunan. Yang kedua menerima surat ketetapan setelah pemeriksaan. Walaupun keduanya mempunyai sanksi, cara memperoleh pengurangan tidak serta-merta sama. Jenis sanksi, tanggal diterbitkannya surat, waktu memenuhi kewajiban, dan status sengketa pajak perlu diperiksa terlebih dahulu.</p>
+<p>Di sinilah <strong>Keputusan Direktur Jenderal Pajak Nomor KEP-239/PJ/2026</strong> berperan. Keputusan yang <strong>ditetapkan pada 8 Oktober 2026</strong> ini diterbitkan untuk melaksanakan Pasal 27A PMK 118/2024 sebagaimana diubah dengan PMK 71/2026. Kebijakannya mencakup kelompok sanksi akibat keterlambatan penyampaian SPT, pembetulan SPT, keterlambatan pembayaran pajak, hasil pemeriksaan, tagihan yang sudah terbit sebelumnya, serta kasus tertentu terkait Program Pengungkapan Sukarela (PPS).</p>
+<p>KEP-239/PJ/2026 membagi ketentuan rinci dalam lampirannya menurut <strong>pengawasan kepatuhan Wajib Pajak (Lampiran A), pemeriksaan pajak (Lampiran B), penagihan pajak (Lampiran C), dan basis data perpajakan (Lampiran D)</strong>. Contoh kasusnya dijelaskan dalam Lampiran E. Pembagian ini penting: <strong>persentase pengurangan yang sama bisa memiliki syarat berbeda pada kelompok kasus berbeda.</strong></p>
+<p><small>Dasar: bagian Menimbang, Diktum KESATU, KEDUA, dan KELIMA serta Lampiran A–E KEP-239/PJ/2026.</small></p>
 </section>
 
 <section id="skema-kep">
-<h2>Apakah Sanksi Bisa Dikurangi Sampai 100 Persen?</h2>
-<p><strong>Materi diseminasi memuat besaran 100%, 90%, 75%, 50%, dan 25%.</strong> Akan tetapi, angka itu terkait dengan jenis sanksi, tindakan yang dilakukan Wajib Pajak, tanggal terbitnya SKP atau STP, serta batas waktu pelaporan atau pembayaran yang berbeda-beda. Dengan demikian, tabel persentase tidak boleh dibaca sebagai pilihan bebas bagi seluruh Wajib Pajak.</p>
-<h3>Contoh skema yang dijelaskan dalam slide</h3>
+<h2>Berapa Besar Sanksi yang Dapat Dikurangi?</h2>
+<p>KEP-239/PJ/2026 mengatur besaran pengurangan atau penghapusan <strong>100%, 90%, 75%, 50%, dan 25%</strong> dalam keadaan yang dirinci untuk setiap kelompok. Angka tersebut bukan tarif umum untuk semua denda dan bunga pajak.</p>
+<h3>Contoh pertama: terlambat melaporkan SPT Tahunan</h3>
+<p>Lampiran E memberikan contoh PT ABC yang mendapat Surat Tagihan Pajak (STP) dengan sanksi <strong>Rp1 juta</strong> berdasarkan Pasal 7 ayat (1) UU KUP karena terlambat menyampaikan SPT Tahunan PPh Tahun Pajak 2025. Untuk kondisi dalam contoh resmi, hasilnya berbeda menurut waktu penyampaian SPT:</p>
 <table>
-<thead><tr><th>Keadaan yang dijelaskan</th><th>Waktu atau syarat utama menurut slide</th><th>Besaran yang ditampilkan</th></tr></thead>
+<thead><tr><th>SPT disampaikan</th><th>Besaran pengurangan</th><th>Nilai pengurangan dari sanksi Rp1 juta</th></tr></thead>
 <tbody>
-<tr><td>SPT kurang bayar dilaporkan atau dibetulkan dan pajaknya disetor dalam program pada kelompok pengawasan</td><td>8 Oktober–31 Desember 2026; 1 Januari–31 Maret 2027; atau 1 April–30 Juni 2027</td><td>100%; 50%; atau 25%, sesuai periode</td></tr>
-<tr><td>Sanksi bunga atau denda terkait pemeriksaan atas ketetapan yang terbit dalam periode program</td><td>Pelunasan pokok dalam periode yang ditentukan; sejumlah skema menghitung tenggat dari tanggal penerbitan SKP/SKP PBB</td><td>100%, 50%, atau 25%, sesuai jenis sanksi dan waktu pelunasan</td></tr>
-<tr><td>Sanksi tertentu ketika pokok pajak sudah dilunasi sebelumnya, tetapi masih ada sanksi yang belum dibayar</td><td>Dalam kasus yang disebut slide, membayar 10% atau 25% sanksi pada periode yang ditentukan</td><td>Pengurangan 90% atau 75% atas sanksi sesuai skemanya</td></tr>
-<tr><td>Penagihan atas bunga Pasal 19 UU KUP dan denda PBB tertentu</td><td>Pelunasan pokok atau utang pajak dalam rentang waktu program yang ditentukan untuk masing-masing kelompok</td><td>100%, 50%, atau 25%, sesuai kondisi</td></tr>
+<tr><td>25 Oktober 2026</td><td>100%</td><td>Rp1.000.000</td></tr>
+<tr><td>2 Januari 2027</td><td>50%</td><td>Rp500.000</td></tr>
+<tr><td>4 Mei 2027</td><td>25%</td><td>Rp250.000</td></tr>
+<tr><td>1 Juli 2027</td><td>Tidak diberikan menurut skema contoh</td><td>Rp0</td></tr>
 </tbody>
 </table>
-<p>Contohnya, pada kelompok pengawasan slide menyebut pelaporan dan/atau pembetulan SPT normal maupun pembetulan yang berstatus kurang bayar, disertai pembayaran/penyetoran dalam periode 8 Oktober 2026 sampai 30 Juni 2027. Untuk kelompok ini, slide menampilkan pengurangan <strong>100%</strong> jika dilakukan pada 8 Oktober–31 Desember 2026, <strong>50%</strong> pada 1 Januari–31 Maret 2027, dan <strong>25%</strong> pada 1 April–30 Juni 2027. Ketentuan itu <strong>hanya berlaku pada ruang lingkup yang disebutkan slide</strong>, bukan otomatis untuk seluruh bunga dan denda pajak.</p>
-<p>Slide juga memuat skema lain, misalnya pelunasan sanksi sebagian pada keadaan ketika pokok pajak telah dilunasi. Dalam beberapa kelompok, pembayaran 10% dari sanksi dikaitkan dengan pengurangan 90%, sedangkan pembayaran 25% dikaitkan dengan pengurangan 75%. Tanggal terbit STP dan batas pembayaran tetap harus diperiksa pada kelompok kasus terkait.</p>
-<blockquote class="callout-example"><p><strong>Cara membaca angka 90%:</strong> jika suatu kasus memang termasuk dalam kelompok yang memperbolehkan pengurangan 90%, materi diseminasi mensyaratkan pembayaran sebagian sanksi sebesar 10% pada waktu yang ditentukan. Ini <strong>bukan</strong> ketentuan bahwa setiap Wajib Pajak cukup membayar 10% dari seluruh sanksinya untuk memperoleh penghapusan sisanya.</p></blockquote>
+<p>Contoh ini sesuai dengan Lampiran A untuk kelompok keterlambatan penyampaian SPT tertentu. Ruang lingkupnya antara lain SPT Tahunan PPh sampai dengan Tahun Pajak 2025 dan/atau SPT Masa sampai dengan Masa Pajak September 2026, dengan ketentuan status kurang bayar dan persyaratan lainnya. <strong>Tanggal yang menentukan pada contoh ini adalah penyampaian SPT, bukan sekadar tanggal mengajukan permohonan pengurangan.</strong></p>
+<h3>Contoh kedua: sanksi sudah terbit, SPT telanjur disampaikan sebelum program</h3>
+<p>Bagaimana jika SPT sudah disampaikan sebelum 8 Oktober 2026 dan sanksinya masih belum dibayar? Lampiran E juga memberikan contoh PT ABC yang dikenai sanksi Pasal 7 ayat (1) UU KUP sebesar Rp1 juta. Dalam kondisi yang dijelaskan pada contoh tersebut, pembayaran <strong>10% dari sanksi atau Rp100.000</strong> pada periode yang ditetapkan berkaitan dengan <strong>pengurangan 90% atau Rp900.000</strong>. Apabila memenuhi skema pembayaran <strong>25% atau Rp250.000</strong> pada periode berikutnya, pengurangannya <strong>75% atau Rp750.000</strong>.</p>
+<blockquote class="callout-warning"><p><strong>Jangan digeneralisasi.</strong> Skema 90% dan 75% tidak berarti setiap sanksi cukup dibayar 10% atau 25%. Lampiran keputusan menetapkan jenis sanksi, waktu penerbitan STP, kondisi sebelumnya, dan batas pembayaran masing-masing.</p></blockquote>
+<h3>Kasus pemeriksaan dan penagihan punya syarat sendiri</h3>
+<p>Untuk sanksi hasil pemeriksaan tertentu, Lampiran B antara lain mengatur pengurangan <strong>100%</strong> apabila pokok pajak dilunasi paling lambat satu bulan setelah penerbitan SKPKB, SKPKBT, atau SKP PBB terkait, sepanjang tidak melewati batas program yang ditetapkan. Dalam kelompok yang sama terdapat pengurangan <strong>50%</strong> atau <strong>25%</strong> untuk pembayaran pada rentang waktu setelahnya, sesuai rincian lampiran.</p>
+<p>Untuk tagihan lama, Lampiran C membedakan pula apakah ketetapan pajak terkait <strong>diajukan keberatan atau tidak</strong>. Pada jenis sanksi tertentu, yang dipersyaratkan untuk dilunasi adalah pokok pajak; pada kondisi lainnya disebut pelunasan <em>utang pajak</em>. Karena itu, perbedaan status keberatan tidak boleh diabaikan.</p>
+<h3>Wajib Pajak baru dan PKP baru</h3>
+<p>Lampiran D memberikan ketentuan bagi Wajib Pajak yang baru terdaftar atau Pengusaha Kena Pajak (PKP) yang baru dikukuhkan pada periode tertentu. Besaran pengurangan sanksi Pasal 7 ayat (1) serta Pasal 9 ayat (2a) dan ayat (2b) UU KUP mengikuti periode pendaftaran atau pengukuhan yang dirinci dalam lampiran, disertai persyaratan penyampaian SPT untuk periode pajak yang ditentukan. Dengan demikian, dasar menentukan kelompoknya di sini tidak hanya tanggal pelaporan, tetapi juga <strong>tanggal pendaftaran NPWP atau pengukuhan PKP</strong>.</p>
+<p><small>Dasar: Lampiran A, B, C, D, dan contoh pada Lampiran E KEP-239/PJ/2026.</small></p>
 </section>
 
 <section id="syarat-kep">
-<h2>Sebelum Mengajukan, Syarat Apa yang Harus Dicek?</h2>
-<p>Menurut slide, pemeriksaan permohonan dilakukan dalam dua tahap. <strong>Tahap pertama</strong> menilai persyaratan pokok berdasarkan Pasal 23 dan Pasal 24 PMK 118/2024 sebagaimana diubah PMK 71/2026, ditambah persyaratan dalam Diktum IV KEP-239/PJ/2026. <strong>Tahap kedua</strong> menilai apakah jenis sanksi, besaran pengurangan, dan persyaratan khusus cocok dengan kebijakan yang dijelaskan dalam lampiran keputusan.</p>
-<p>Slide menyoroti beberapa persyaratan tambahan: permohonan tidak sedang diajukan gugatan atau upaya hukum lainnya; adanya surat pernyataan bahwa sanksi timbul karena kekhilafan atau bukan karena kesalahan Wajib Pajak; dan pengurangan ditujukan pada <strong>sanksi administratif yang belum dibayar</strong>. Kecocokan ketentuan tersebut dengan setiap kasus harus diperiksa berdasarkan Diktum IV dan lampiran resmi KEP.</p>
-<table>
-<thead><tr><th>Hasil pemeriksaan menurut alur slide</th><th>Tindak lanjut</th></tr></thead>
-<tbody>
-<tr><td>Persyaratan tahap pertama tidak lengkap</td><td>Surat permohonan dikembalikan; tidak diterbitkan keputusan atas permohonan tersebut (rujukan slide: Pasal 26 PMK).</td></tr>
-<tr><td>Persyaratan tahap pertama lengkap</td><td>Dilanjutkan ke penelitian kelompok sanksi dan ketentuan khusus.</td></tr>
-<tr><td>Penelitian tahap kedua selesai</td><td>Keputusan dapat berupa mengabulkan seluruhnya, mengabulkan sebagian, atau menolak permohonan.</td></tr>
-</tbody>
-</table>
-<p><strong>Perhatikan tanggalnya.</strong> Dalam slide, periode tindakan seperti pembayaran atau pelaporan yang menjadi dasar program umumnya ditampilkan mulai <strong>8 Oktober 2026</strong> dengan batas berbeda menurut kategori, antara lain <strong>30 Juni 2027</strong> atau <strong>31 Desember 2027</strong>. Slide alur juga menyebut batas penyampaian permohonan KEP-239 paling lambat <strong>1 Oktober 2028</strong>. Ini merupakan jenis tenggat yang berbeda: batas pengajuan permohonan tidak sama dengan tenggat pembayaran/pelaporan untuk memperoleh suatu persentase pengurangan.</p>
-<p><small>Sumber bagian ini: materi diseminasi DJP tanggal 12 Oktober 2026, slide mengenai pokok perubahan PMK, ruang lingkup KEP-239, periode kebijakan, tabel kelompok basis data, pengawasan, pemeriksaan, penagihan, dan alur permohonan.</small></p>
+<h2>Bagaimana Cara Memenuhi Syarat Pengurangan Sanksi?</h2>
+<p>Meskipun suatu sanksi masuk dalam daftar kebijakan, pengurangannya tetap mensyaratkan permohonan. <strong>Diktum KETIGA KEP-239/PJ/2026 menetapkan batas penyampaian permohonan paling lambat 1 Oktober 2028.</strong> Batas ini berbeda dari tanggal pelaporan atau pelunasan yang menentukan besaran pengurangan.</p>
+<p>Diktum KEEMPAT juga mensyaratkan pemenuhan <strong>Pasal 23 dan Pasal 24 PMK 118/2024 sebagaimana diubah dengan PMK 71/2026</strong>, ditambah kondisi berikut:</p>
+<ol>
+<li>Wajib Pajak tidak mengajukan gugatan dan/atau upaya hukum lainnya, disertai surat pernyataan bermeterai; atau apabila pernah mengajukan, gugatan dan/atau upaya hukum tersebut telah dicabut, dengan melampirkan surat permohonan pencabutannya.</li>
+<li>Wajib Pajak menyampaikan surat pernyataan bermeterai bahwa sanksi administratif timbul karena kekhilafan atau bukan karena kesalahannya.</li>
+<li><strong>Pengurangan atau penghapusan hanya diberikan terhadap bagian sanksi administratif yang belum dibayar atau belum dilunasi.</strong></li>
+</ol>
+<p>Surat pernyataan ditandatangani oleh Wajib Pajak orang pribadi atau wakil Wajib Pajak badan, sesuai ketentuan keputusan. Contoh format surat tercantum dalam lampiran keputusan.</p>
+<blockquote class="callout-example"><p><strong>Contoh membedakan batas waktu:</strong> untuk sanksi Pasal 7 ayat (1) UU KUP sebagaimana contoh PT ABC, penyampaian SPT pada 25 Oktober 2026 termasuk periode pengurangan 100%. Namun, permohonan atas kebijakan KEP-239/PJ/2026 tetap memiliki batas tersendiri, yaitu 1 Oktober 2028. Mengajukan permohonan pada 2028 tidak mengubah tanggal pelaporan SPT yang menjadi dasar menentukan persentase.</p></blockquote>
+<p>Penelitian permohonan tetap mengikuti prosedur PMK 118/2024 sebagaimana diubah. Pemenuhan persyaratan formal harus diperiksa terlebih dahulu, kemudian jenis sanksi, besaran pengurangan, serta persyaratan khusus menurut kelompoknya. Bila syarat pengajuan tidak terpenuhi, berlaku mekanisme pengembalian permohonan yang diatur dalam PMK; jangan menyamakan pengembalian permohonan dengan keputusan penolakan setelah penelitian substansi.</p>
+<h3>Perhatikan juga kelompok PPS</h3>
+<p>KEP-239/PJ/2026 mencakup sanksi dalam surat ketetapan hasil pemeriksaan atas harta yang belum atau kurang diungkapkan menurut PMK 196/PMK.03/2021. Berbeda dari kebanyakan kelompok lainnya, Diktum KESATU huruf g menyebut <strong>periode penerbitan ketetapan 8 Oktober 2026 sampai 31 Desember 2027</strong> dan pelunasan pokok terkait sampai <strong>31 Desember 2027</strong>. Besaran pengurangannya mengikuti syarat khusus dalam Lampiran D, bukan otomatis mengikuti tabel SPT terlambat.</p>
+<p><small>Dasar: Diktum KESATU huruf g, KETIGA, KEEMPAT dan KELIMA serta lampiran KEP-239/PJ/2026.</small></p>
 </section>
 
 <section id="peralihan">
@@ -179,8 +189,8 @@ sidebar_note: "Bagian PMK merujuk teks peraturan. Rincian program KEP-239/PJ/202
 
 <section id="kesimpulan">
 <h2>Jadi, Apa yang Perlu Diperhatikan Wajib Pajak?</h2>
-<p>Perubahan PMK 118/2024 melalui PMK 71/2026 tidak menghapus persyaratan pengajuan permohonan. Materi diseminasi KEP-239/PJ/2026 juga memperlihatkan adanya kebijakan khusus dengan syarat, kelompok kasus, dan tenggat yang berbeda-beda. Ketika Wajib Pajak hendak mengajukan pengurangan atau penghapusan sanksi administratif, hal-hal yang perlu diperiksa antara lain <strong>jenis surat, dasar hukum sanksi, jumlah pokok pajak yang telah dibayar, dan status permohonannya</strong>.</p>
-<p>Hal baru yang paling terlihat adalah cara memperhitungkan pembayaran: <strong>pokok pajak didahulukan, dan kelebihan pembayaran baru diperhitungkan untuk sanksi</strong>. Namun, sanksi yang masih dapat menjadi objek permohonan tidak sama dengan sanksi yang pasti akan dihapuskan.</p>
+<p>Perubahan PMK 118/2024 melalui PMK 71/2026 tidak menghapus persyaratan pengajuan permohonan. KEP-239/PJ/2026 merinci kebijakan khusus dengan syarat, kelompok kasus, batas pembayaran dan tenggat permohonan yang berbeda-beda. Ketika Wajib Pajak hendak mengajukan pengurangan atau penghapusan sanksi administratif, hal-hal yang perlu diperiksa antara lain <strong>jenis surat, dasar hukum sanksi, jumlah pokok pajak yang telah dibayar, dan status permohonannya</strong>.</p>
+<p>Perubahan yang paling mudah dilihat adalah cara memperhitungkan pembayaran: <strong>pokok pajak didahulukan, dan kelebihan pembayaran baru diperhitungkan untuk sanksi</strong>. Namun, sanksi yang masih dapat menjadi objek permohonan tidak sama dengan sanksi yang pasti akan dihapuskan.</p>
 </section>
 
 <section id="dasar-hukum">
@@ -189,9 +199,9 @@ sidebar_note: "Bagian PMK merujuk teks peraturan. Rincian program KEP-239/PJ/202
 <li>Peraturan Menteri Keuangan Nomor 118 Tahun 2024 tentang Tata Cara Pembetulan, Keberatan, Pengurangan, Penghapusan, dan Pembatalan di Bidang Perpajakan.</li>
 <li>Peraturan Menteri Keuangan Nomor 71 Tahun 2026 tentang Perubahan atas PMK Nomor 118 Tahun 2024, khususnya Pasal I angka 1 sampai dengan angka 7 dan Pasal II.</li>
 <li>Lampiran Huruf C PMK Nomor 118 Tahun 2024 sebagaimana diganti dalam PMK Nomor 71 Tahun 2026, khususnya contoh penghitungan pada bagian C.2.</li>
-<li>Materi diseminasi <em>PMK 71 Tahun 2026 dan KEP 239 2026</em>, bertanggal 12 Oktober 2026 (sumber penjelasan skema KEP-239/PJ/2026). Naskah lengkap KEP beserta lampirannya perlu ditelaah tersendiri sebelum digunakan sebagai dasar operasional.</li>
+<li>Keputusan Direktur Jenderal Pajak Nomor KEP-239/PJ/2026 tentang Kebijakan Perpajakan Sehubungan dengan Pengurangan atau Penghapusan Sanksi Administratif, Diktum KESATU sampai dengan KEENAM dan Lampiran A–E (termasuk contoh kasus dan format surat).</li>
 </ol>
-<p><em>Catatan editorial: PMK 71/2026 menyatakan berlaku pada tanggal diundangkan. Tanggal pengundangan perlu dipastikan dari salinan pengundangan yang menampilkan tanggal lengkap sebelum tanggal efektif dicantumkan dalam artikel.</em></p>
+
 </section>
 
 </div>
