@@ -81,6 +81,41 @@ sidebar_note: "Besaran pengurangan bergantung pada jenis sanksi dan syarat yang 
 @media(max-width:760px){.kp239 .kp-head{padding:18px}.kp239 .kp-controls{grid-template-columns:1fr 1fr}.kp239 .kp-controls>div:first-child{grid-column:1/-1}.kp239 .kp-scroll{border:0;overflow:visible}.kp239 table{min-width:0;width:100%!important;display:block}.kp239 thead{display:none}.kp239 tbody{display:grid;gap:11px}.kp239 tr{display:block;border:1px solid var(--kp-line);border-radius:14px;padding:10px 13px;background:#fff!important}.kp239 td{display:grid;grid-template-columns:100px minmax(0,1fr);gap:10px;padding:7px 0!important;border-bottom:1px solid #eef0f3!important;min-width:0!important;overflow-wrap:anywhere}.kp239 td:last-child{border:0!important}.kp239 td:before{content:attr(data-label);font-size:11px;color:#667085;font-weight:700}.kp239 .kp-group{display:inline}.kp239 .kp-rate{font-size:15px}}
 @media(max-width:380px){.kp239 .kp-controls{grid-template-columns:1fr}.kp239 .kp-controls>div:first-child{grid-column:auto}.kp239 td{grid-template-columns:84px minmax(0,1fr)}}
 @media print{.kp239 .kp-controls,.kp239 .kp-tools{display:none}.kp239 .kp-scroll{overflow:visible}.kp239 table{min-width:0}.kp239 tbody tr[hidden]{display:table-row!important}}
+
+.kp239.kp-grouped-ready .kp-scroll{display:none!important}
+.kp239 .kp-grouped-results{display:grid;gap:18px;margin-top:12px}
+.kp239 .kp-case-card{border:1px solid #d9e3ef;border-radius:22px;overflow:hidden;background:#fff;box-shadow:0 1px 0 rgba(16,24,40,.02)}
+.kp239 .kp-case-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;padding:18px 22px;background:#f7faff;border-bottom:1px solid #e5edf8}
+.kp239 .kp-case-kind{font-size:14px;font-weight:800;color:#173a67;margin-bottom:4px}
+.kp239 .kp-case-ref{font-size:12px;color:#667085}
+.kp239 .kp-case-count{display:inline-flex;align-items:center;justify-content:center;min-width:76px;padding:8px 12px;border:1px solid #c8d8ef;border-radius:999px;background:#fff;font-size:12px;font-weight:750;color:#295b9e}
+.kp239 .kp-case-body{padding:18px 22px}
+.kp239 .kp-case-object{margin:0 0 14px}
+.kp239 .kp-case-object .kp-objek>strong{display:block;margin:0 0 10px;font-size:16px;line-height:1.45;color:#193a67}
+.kp239 .kp-case-object details{margin:10px 0;border:1px solid #d7e2f0;background:#fbfdff}
+.kp239 .kp-case-object summary{display:flex;justify-content:space-between;align-items:center;gap:10px;color:#1856a8;font-size:13px}
+.kp239 .kp-case-object summary::after{content:'+';font-size:26px;line-height:1;font-weight:500;color:#1856a8}
+.kp239 .kp-case-object details[open] summary::after{content:'−'}
+.kp239 .kp-case-main{display:grid;gap:16px}
+.kp239 .kp-case-shared,.kp239 .kp-case-selection,.kp239 .kp-case-output{border:1px solid #e3e8f0;border-radius:18px;padding:16px 18px;background:#fff}
+.kp239 .kp-case-subtitle{display:block;font-size:12px;font-weight:800;letter-spacing:.02em;text-transform:uppercase;color:#667085;margin:0 0 8px}
+.kp239 .kp-case-shared ul,.kp239 .kp-case-output ul{margin:0;padding-left:18px}
+.kp239 .kp-case-shared li,.kp239 .kp-case-output li{margin:0 0 6px;line-height:1.65}
+.kp239 .kp-case-selector{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.kp239 .kp-option-btn{border:1px solid #cfd9ea;background:#fff;border-radius:999px;padding:9px 12px;cursor:pointer;color:#193a67;font-size:13px;font-weight:700;line-height:1.35}
+.kp239 .kp-option-btn[aria-pressed="true"]{background:#0b57d0;border-color:#0b57d0;color:#fff;box-shadow:0 2px 6px rgba(11,87,208,.18)}
+.kp239 .kp-output-top{display:flex;flex-wrap:wrap;align-items:flex-end;gap:10px 16px;margin-bottom:10px}
+.kp239 .kp-output-rate{font-size:30px;font-weight:850;line-height:1;color:#0b57d0}
+.kp239 .kp-output-period{font-size:15px;font-weight:700;color:#23364d}
+.kp239 .kp-output-note{font-size:13px;color:#667085;margin-top:2px}
+.kp239 .kp-output-empty{color:#667085;font-style:italic}
+@media(max-width:760px){
+ .kp239 .kp-case-head,.kp239 .kp-case-body{padding:14px 15px}
+ .kp239 .kp-case-count{min-width:auto;padding:7px 10px}
+ .kp239 .kp-output-rate{font-size:24px}
+ .kp239 .kp-option-btn{width:100%;text-align:left;border-radius:14px}
+}
+
 </style>
 <section aria-label="Pencarian kebijakan pengurangan sanksi KEP 239 tahun 2026" class="kp239" id="tabel-interaktif-kep239">
 <div class="kp-head"><span class="kp-kicker">PANDUAN INTERAKTIF • KEP-239/PJ/2026</span>
@@ -404,42 +439,75 @@ sidebar_note: "Besaran pengurangan bergantung pada jenis sanksi dan syarat yang 
    head.append(headLeft);
    if(groupRows.length>1) head.append(el('span','kp-case-count',groupRows.length+' pilihan'));
    box.append(head);
+
+   const body=el('div','kp-case-body');
    const obj=el('div','kp-case-object');
    const cloned=first.cells[1].querySelector('.kp-objek')?.cloneNode(true)||first.cells[1].cloneNode(true);
-   // Clone of the explanation and legal-reference details remains interactive on its own.
-   obj.append(cloned);box.append(obj);
+   obj.append(cloned);
+   body.append(obj);
+
    const all=groupRows.map(conditionItems);
    const common=all[0].filter(x=>all.every(xs=>xs.includes(x)));
    const commonMeaning=cloned.textContent.toLowerCase();
    const nonRedundant=common.filter(x=>!(x.toLowerCase().includes('berstatus kurang bayar')&&commonMeaning.includes('status spt')&&commonMeaning.includes('kurang bayar')));
+
+   const main=el('div','kp-case-main');
    if(nonRedundant.length){
-    const shared=el('div','kp-case-common');
-    shared.append(el('strong','kp-case-subtitle','Syarat yang berlaku pada pilihan berikut'));
-    const ul=el('ul');nonRedundant.forEach(c=>ul.append(el('li','',c)));
-    shared.append(ul);box.append(shared);
+    const shared=el('div','kp-case-shared');
+    shared.append(el('span','kp-case-subtitle','Berlaku untuk semua pilihan'));
+    const ul=el('ul'); nonRedundant.forEach(c=>ul.append(el('li','',c)));
+    shared.append(ul); main.append(shared);
    }
-   const sec=el('div','kp-case-options');
-   sec.append(el('h4','kp-case-subtitle','Besaran pengurangan dan periode'));
-   const table2=el('table','kp-case-rate-table');
-   const thead=el('thead'),hrow=el('tr');
-   ['Pengurangan','Periode atau batas waktu','Ketentuan menurut periode'].forEach(t=>hrow.append(el('th','',t)));
-   thead.append(hrow);table2.append(thead);
-   const tbody=el('tbody');
+
+   const selection=el('div','kp-case-selection');
+   selection.append(el('span','kp-case-subtitle','Pilih periode atau tenggat yang sesuai'));
+   const selector=el('div','kp-case-selector');
+   const output=el('div','kp-case-output');
+   const outTitle=el('span','kp-case-subtitle','Hasil untuk pilihan Anda');
+   output.append(outTitle);
+   const outTop=el('div','kp-output-top');
+   const outRate=el('div','kp-output-rate');
+   const outPeriodWrap=el('div','kp-output-period-wrap');
+   const outPeriod=el('div','kp-output-period');
+   const outNote=el('div','kp-output-note','Besaran pengurangan dan syarat spesifik mengikuti pilihan periode/tenggat ini.');
+   outPeriodWrap.append(outPeriod); outPeriodWrap.append(outNote);
+   outTop.append(outRate); outTop.append(outPeriodWrap);
+   const outList=el('ul');
+   const outEmpty=el('div','kp-output-empty','Pilih salah satu opsi di atas untuk melihat rincian.');
+   output.append(outTop); output.append(outEmpty); output.append(outList);
+
+   function activate(idx){
+    selector.querySelectorAll('button').forEach((btn,i)=>btn.setAttribute('aria-pressed', i===idx ? 'true':'false'));
+    const row=groupRows[idx];
+    if(!row){outEmpty.style.display='block'; outRate.textContent=''; outPeriod.textContent=''; outList.innerHTML=''; return;}
+    outEmpty.style.display='none';
+    outRate.textContent=row.cells[2].textContent.trim();
+    outPeriod.textContent=row.cells[3].textContent.trim();
+    outList.innerHTML='';
+    const unique=all[idx].filter(x=>!common.includes(x));
+    if(unique.length){ unique.forEach(c=>outList.append(el('li','',c))); }
+    else { outList.append(el('li','', 'Tidak ada ketentuan tambahan selain yang berlaku untuk semua pilihan.')); }
+   }
+
    groupRows.forEach((row,index)=>{
-    const tr=el('tr');
-    tr.append(el('td','kp-case-rate',row.cells[2].textContent.trim()));
-    tr.append(el('td','kp-case-period',row.cells[3].textContent.trim()));
-    const other=all[index].filter(x=>!common.includes(x));
-    const td=el('td','kp-case-unique');
-    if(other.length){const ul=el('ul');other.forEach(c=>ul.append(el('li','',c)));td.append(ul)}
-    else td.append(el('span','kp-case-dash','Mengikuti syarat bersama di atas'));
-    tr.append(td);tbody.append(tr);
+    const btn=el('button','kp-option-btn');
+    btn.type='button';
+    btn.setAttribute('aria-pressed','false');
+    const rate=row.cells[2].textContent.trim();
+    const period=row.cells[3].textContent.trim().replace(/\s+/g,' ');
+    btn.textContent=rate+' · '+period;
+    btn.addEventListener('click',()=>activate(index));
+    selector.append(btn);
    });
-   table2.append(tbody);sec.append(table2);box.append(sec);
+   selection.append(selector);
+   main.append(selection);
+   main.append(output);
+   body.append(main);
+   box.append(body);
    result.append(box);
-   records.push({box,rows:groupRows});
+   records.push({box,rows:groupRows,activate});
+   activate(0);
   }
-  // Hide the legacy table only AFTER group cards have been built successfully.
   root.classList.add('kp-grouped-ready');
   function visible(){return rows.filter(row=>!row.hidden)}
   function update(){
