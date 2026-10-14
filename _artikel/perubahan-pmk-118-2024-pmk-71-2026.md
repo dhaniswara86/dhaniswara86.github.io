@@ -17,8 +17,8 @@ date_modified: 2026-10-14
 reading_time: "10 menit baca"
 legal_basis: "PMK 118/2024 s.t.d.d. PMK 71/2026; KEP-239/PJ/2026"
 permalink: /perubahan-pmk-118-2024-pmk-71-2026.html
-summary_label: "Intinya"
-summary: "Pengurangan sanksi tidak otomatis. Cari jenis persoalan pajak Anda, periksa periode dan syarat pembayarannya, lalu ajukan permohonan paling lambat 1 Oktober 2028 untuk kebijakan KEP-239/PJ/2026."
+summary_label: "Apa itu Program Pengurangan Sanksi Administrasi (PSA)?"
+summary: "PSA adalah kebijakan yang memungkinkan Wajib Pajak mengajukan pengurangan atau penghapusan sanksi administrasi perpajakan untuk jenis kasus tertentu. Besaran pengurangan bergantung pada jenis sanksi, waktu pemenuhan kewajiban, dan persyaratan yang berlaku. Fasilitas ini tidak diberikan otomatis; Wajib Pajak perlu memenuhi ketentuan dan mengajukan permohonan."
 hero_links:
   - label: "Cari besaran pengurangan"
     href: "#tabel-interaktif-kep239"
@@ -161,15 +161,6 @@ sidebar_note: "Besaran pengurangan bergantung pada jenis sanksi dan syarat yang 
 
 .psa-2026-article .kp239 .kp-prev-stp-scope{font-size:13px!important;line-height:1.65!important;margin:12px 0 0!important;color:#53657c!important}
 </style>
-<style>
-.psa-2026-article .psa-short-intro{margin:12px 0 18px;padding:17px 22px;border:1px solid #dce7f4;border-radius:16px;background:#f7faff;color:#334155}
-.psa-2026-article .psa-short-intro p{margin:0;font-size:15px;line-height:1.75}
-.psa-2026-article .psa-short-intro strong{color:#173a67}
-@media(max-width:760px){.psa-2026-article .psa-short-intro{padding:15px 16px}}
-</style>
-<section class="psa-short-intro" aria-label="Pengantar Program Penghapusan Sanksi">
-<p><strong>Apa itu Program Pengurangan Sanksi Administrasi (PSA)?</strong> PSA adalah kebijakan yang memungkinkan Wajib Pajak mengajukan pengurangan atau penghapusan sanksi administrasi perpajakan untuk jenis kasus tertentu. Besaran pengurangan bergantung pada jenis sanksi, waktu pemenuhan kewajiban, dan persyaratan yang berlaku. Fasilitas ini tidak diberikan otomatis; Wajib Pajak perlu memenuhi ketentuan dan mengajukan permohonan.</p>
-</section>
 <section aria-label="Pencarian kebijakan pengurangan sanksi KEP 239 tahun 2026" class="kp239" id="tabel-interaktif-kep239">
 <div class="kp-head"><span class="kp-kicker">PANDUAN INTERAKTIF • KEP-239/PJ/2026</span>
 <h3>Cari ketentuan PSA yang sesuai dengan kondisi Anda</h3></div>
