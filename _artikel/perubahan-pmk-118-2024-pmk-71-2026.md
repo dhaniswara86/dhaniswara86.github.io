@@ -24,8 +24,6 @@ hero_links:
     href: "#tabel-interaktif-kep239"
   - label: "Alur permohonan"
     href: "#alur-psa"
-  - label: "Syarat permohonan"
-    href: "#permohonan"
 sidebar_note: "Besaran pengurangan bergantung pada jenis sanksi dan syarat yang terpenuhi; pengurangan tidak berlaku otomatis."
 ---
 
@@ -393,51 +391,51 @@ sidebar_note: "Besaran pengurangan bergantung pada jenis sanksi dan syarat yang 
 
 
 
-<section id="alur-psa" class="kab-flow" aria-labelledby="kab-flow-title">
-<style>
-.kab-flow{--fnavy:#0b2a64;--fblue:#1862bc;--fline:#dfe5ef;--fmuted:#51627b;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;margin:56px 0;color:#172946}
-.kab-flow *{box-sizing:border-box}.kab-flow h2{margin:0 0 12px!important;padding:0!important;border:0!important;font-size:clamp(27px,3.5vw,42px)!important;letter-spacing:-.04em}.kab-flow h2:before{display:none!important}
-.kab-flow .kf-lead{font-size:15px;line-height:1.65;color:#475569;margin:0 0 18px}.kab-flow .kf-deadline{font-size:14px;background:#fff8de;border:1px solid #f5e19c;padding:12px 15px;border-radius:12px;margin:0 0 22px}.kab-flow .kf-stage{padding:17px;background:#f6f9fe;border:1px solid var(--fline);border-radius:17px;margin-bottom:12px}.kab-flow .kf-stage h3{font-size:17px!important;margin:0 0 13px!important;color:var(--fnavy)}.kab-flow .kf-stepgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;align-items:stretch}.kab-flow .kf-step{border:1px solid #d4deef;border-radius:12px;padding:12px 11px;background:white;font-size:13px;line-height:1.45;min-width:0}.kab-flow .kf-step strong{display:block;color:#0b2a64;font-size:14px;margin:3px 0}.kab-flow .kf-index{font-size:11px;color:#52719e;font-weight:800;letter-spacing:.05em}.kab-flow .kf-branch{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.kab-flow .kf-result{border-radius:12px;padding:13px 14px;font-size:13px;line-height:1.5}.kab-flow .kf-no{background:#fff2f0;border:1px solid #f8cec9}.kab-flow .kf-yes{background:#ecf9ef;border:1px solid #bfebcd}.kab-flow .kf-result strong{display:block;margin-bottom:4px}.kab-flow .kf-arrow{text-align:center;color:#456ca4;font-weight:700;margin:10px 0}.kab-flow .kf-outcomes{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}.kab-flow .kf-outcomes div{background:#fff;border:1px solid #cbd9ed;border-radius:12px;padding:13px;text-align:center;font-size:13px;font-weight:750;color:#0a3376}.kab-flow .kf-note{border-left:3px solid #3867ab;padding:12px 14px;background:#f2f6fd;color:#384f70;font-size:13px;margin-top:17px;line-height:1.65}.kab-flow .kf-time{margin-top:12px;font-size:13px;color:#2c3f59;line-height:1.6}
-@media(max-width:720px){.kab-flow .kf-stepgrid{grid-template-columns:1fr}.kab-flow .kf-branch{grid-template-columns:1fr}.kab-flow .kf-outcomes{grid-template-columns:1fr}.kab-flow .kf-stage{padding:13px}}
-@media print{.kab-flow .kf-stage,.kab-flow .kf-step{break-inside:avoid}}
-</style>
-<h2 id="kab-flow-title">Alur Permohonan: Dua Tahap Penelitian</h2>
-<p class="kf-lead">Bagan ini menjelaskan tindak lanjut permohonan pengurangan atau penghapusan sanksi administratif (PSA). Penelitian tahap pertama memeriksa persyaratan permohonan; penelitian tahap kedua menilai substansi kelayakan berdasarkan ketentuan yang berlaku.</p>
-<p class="kf-deadline"><strong>Batas pengajuan menurut KEP-239/PJ/2026: 1 Oktober 2028.</strong> Tenggat tersebut berbeda dengan batas penyampaian SPT, penerbitan surat, dan pembayaran yang menjadi syarat skema dalam tabel.</p>
-<div class="kf-stage"><h3>Tahap I · Pemeriksaan persyaratan permohonan</h3><div class="kf-stepgrid">
-<div class="kf-step"><span class="kf-index">01 · WAJIB PAJAK</span><strong>Ajukan permohonan PSA</strong>Melalui Portal Wajib Pajak; apabila tidak dapat secara elektronik, tersedia saluran lain sesuai Pasal 53–54 PMK 118/2024.</div>
-<div class="kf-step"><span class="kf-index">02 · PENELAAH</span><strong>Uji persyaratan umum</strong>Periksa Pasal 23 dan Pasal 24 PMK 118/2024 sebagaimana diubah PMK 71/2026, termasuk ketentuan permohonan pertama atau kedua.</div>
-<div class="kf-step"><span class="kf-index">03 · PENELAAH</span><strong>Uji persyaratan tambahan</strong>Periksa Diktum KEEMPAT KEP-239/PJ/2026, bukti pendukung, dan status gugatan atau upaya hukum lain.</div>
-</div><div class="kf-branch">
-<div class="kf-result kf-no"><strong>✕ Tidak memenuhi persyaratan</strong>Permohonan tidak dipertimbangkan; surat pengembalian disampaikan paling lama <b>1 bulan</b> sejak permohonan diterima. <b>Tidak diterbitkan surat keputusan PSA.</b> (Pasal 26 ayat (2)–(3)).</div>
-<div class="kf-result kf-yes"><strong>✓ Memenuhi persyaratan</strong>Permohonan dilanjutkan ke penelitian tahap II; lolos penelitian tahap I <b>bukan</b> berarti sanksi otomatis dikurangi.</div>
-</div></div>
-<div class="kf-arrow" aria-hidden="true">↓</div>
-<div class="kf-stage"><h3>Tahap II · Penelitian substansi dan besaran kebijakan</h3>
-<div class="kf-stepgrid"><div class="kf-step"><span class="kf-index">04 · JENIS SANKSI</span><strong>Cocokkan transaksi dan dokumen</strong>Teliti jenis sanksi, dasar hukum, masa pajak, tanggal dan nomor STP atau SKP. Gunakan Lampiran A–D sebagai rujukan tabel.</div>
-<div class="kf-step"><span class="kf-index">05 · BESARAN</span><strong>Periksa periode dan persentase</strong>Uji saat penyampaian SPT, penerbitan surat, pembayaran pokok atau bagian sanksi, dan besaran pengurangan sesuai baris tabel.</div>
-<div class="kf-step"><span class="kf-index">06 · SYARAT KHUSUS</span><strong>Uji bukti dan keadaan WP</strong>Penelitian dapat meminta dokumen atau keterangan tambahan, melakukan pembahasan, atau peninjauan (Pasal 28 PMK 118/2024).</div></div>
-<div class="kf-branch"><div class="kf-result kf-yes"><strong>✓ Ketentuan terpenuhi</strong>Terbit keputusan mengabulkan seluruhnya atau sebagian, sesuai hasil penelitian dan ruang lingkup permohonan.</div><div class="kf-result kf-no"><strong>✕ Ketentuan tidak terpenuhi</strong>Terbit keputusan menolak permohonan. <b>Berbeda dari surat pengembalian pada tahap I.</b></div></div>
-<div class="kf-outcomes"><div>Keputusan: Dikabulkan seluruhnya</div><div>Keputusan: Dikabulkan sebagian</div><div>Keputusan: Ditolak</div></div>
-<p class="kf-time"><strong>Batas keputusan:</strong> paling lama <b>6 bulan sejak permohonan diterima</b> (Pasal 29 ayat (1)). Jika tenggat terlampaui tanpa surat keputusan atau surat pengembalian sebagaimana ketentuan Pasal 29 ayat (3), permohonan dianggap dikabulkan dan keputusan diterbitkan paling lama <b>1 bulan</b> setelah tenggat tersebut berakhir.</p></div>
-<p class="kf-note"><strong>Penting:</strong> Alur ini merupakan penyajian ulang diagram DJP berdasarkan Pasal 26–29 PMK 118/2024 dan Diktum KEEMPAT serta Lampiran A–D KEP-239/PJ/2026. Istilah “Tahap I” dan “Tahap II” membantu menjelaskan fungsi penelitian; tidak berarti ada dua batas penyelesaian 6 bulan yang terpisah. Untuk permohonan kedua, perhatikan pula batas 3 bulan sejak keputusan pertama dikirim (Pasal 24 ayat (3)).</p>
+<section id="alur-psa" class="psa-checkflow psa-flow-detailed" aria-labelledby="psa-checkflow-heading">
+<h2 id="psa-checkflow-heading">Alur Pengajuan dan Penyelesaian Permohonan PSA</h2>
+<p>Pengurangan sanksi tidak diberikan otomatis setelah Wajib Pajak membayar pajak atau mengirim surat. Berdasarkan PMK 118/2024 sebagaimana diubah PMK 71/2026 dan KEP-239/PJ/2026, permohonan melewati <strong>penelitian persyaratan</strong> kemudian <strong>penelitian substansi</strong>. Berikut urutannya, mulai dari kewajiban Wajib Pajak hingga keputusan DJP.</p>
+<p class="psa-checkflow-deadline"><strong>Untuk skema KEP-239/PJ/2026, batas pengajuan permohonan adalah 1 Oktober 2028.</strong> Periode pelaporan, penerbitan surat, atau pelunasan yang menjadi syarat masing-masing skema dapat lebih awal.</p>
+<div class="psa-checkflow-panel" aria-label="Daftar periksa pengajuan permohonan">
+<h3>Tahap 1. Menyampaikan permohonan kepada Direktur Jenderal Pajak</h3>
+<p><strong>Bentuknya adalah surat permohonan tertulis dalam bahasa Indonesia</strong>, bukan sekadar mengirim permintaan penghapusan melalui pesan atau menyatakan keberatan secara lisan. Pasal 23 ayat (5) huruf b, c, dan e mengatur alasan dan jumlah sanksi menurut WP, satu surat permohonan untuk satu SKP/STP, dan penandatanganan oleh WP, wakil, atau kuasa. <strong>Contoh format surat</strong> tersedia pada <a href="https://jdih.kemenkeu.go.id/api/download/267fffcc-d586-4969-99a9-2922bf9c611c/2024pmkeuangan118.pdf" target="_blank" rel="noopener noreferrer">Lampiran Huruf C PMK 118/2024, bagian C.1 angka 1</a>. Alamat tujuan dalam format: Direktur Jenderal Pajak melalui KPP terkait. Ikuti tata cara penyampaian yang berlaku (Pasal 53–54) dan simpan bukti penerimaan.</p>
+<div class="psa-requirement-grid">
+<div><strong>Apa yang ditulis dalam surat?</strong><p>Identitas WP; nomor dan tanggal SKP atau STP; jumlah sanksi yang dimohonkan pengurangan/penghapusan menurut WP; alasan permohonan; serta tanda tangan yang berwenang. Gunakan format lampiran sebagai acuan rinci.</p></div>
+<div><strong>Dokumen apa yang disiapkan?</strong><p>Surat pajak terkait, bukti pelunasan pokok, dokumen untuk mendukung alasan dan skema pengurangan, serta surat pernyataan dan bukti terkait upaya hukum sesuai Diktum KEEMPAT. Dokumen spesifik menyesuaikan kasus.</p></div>
+</div>
+<h4>Checklist Wajib Pajak sebelum mengirim surat</h4>
+<label class="psa-checkflow-item"><input type="checkbox"><span><strong>Identifikasi surat dan sanksi.</strong> Periksa nomor, tanggal, jenis SKP/STP, masa/tahun pajak, dasar pasal, dan besaran sanksi yang belum dilunasi.</span></label>
+<label class="psa-checkflow-item"><input type="checkbox"><span><strong>Cocokkan kondisi dengan KEP-239.</strong> Perhatikan waktu pelaporan/pembayaran, jenis sanksi, besaran PSA, dan syarat khusus sesuai baris lampiran terkait.</span></label>
+<label class="psa-checkflow-item"><input type="checkbox"><span><strong>Periksa syarat Pasal 23.</strong> Status keberatan atau permohonan lain atas SKP/STP, pelunasan pokok pajak, satu permohonan per surat, dan status tindakan penagihan harus sesuai ketentuan.</span></label>
+<label class="psa-checkflow-item"><input type="checkbox"><span><strong>Periksa Pasal 24.</strong> Untuk pengurangan/penghapusan sanksi administratif, permohonan maksimal dua kali. Jika ini permohonan kedua, periksa batas tiga bulan sejak keputusan pertama dikirim dan pengecualiannya.</span></label>
+<label class="psa-checkflow-item"><input type="checkbox"><span><strong>Penuhi Diktum KEEMPAT KEP-239.</strong> Lampirkan pernyataan bermeterai tidak mengajukan gugatan/upaya hukum lain atau bukti pencabutannya sebagaimana relevan; pernyataan bermeterai sanksi timbul karena kekhilafan atau bukan kesalahan; dan pastikan sanksi yang dimohonkan masih belum dibayar.</span></label>
+<label class="psa-checkflow-item"><input type="checkbox"><span><strong>Lengkapi surat dan bukti.</strong> Gunakan contoh format Lampiran C PMK 118/2024, tanda tangani, siapkan lampiran yang diperlukan, lalu sampaikan lewat tata cara resmi dan simpan tanda terima.</span></label>
+<div class="psa-checkflow-progress" role="status" aria-live="polite"><span id="psa-checkflow-count">0 dari 6 langkah dicentang</span><div class="psa-checkflow-track"><div id="psa-checkflow-bar"></div></div></div>
+<button type="button" class="psa-checkflow-reset" id="psa-checkflow-reset">Kosongkan checklist</button>
+</div>
+<div class="psa-checkflow-panel psa-checkflow-procedure"><h3>Tahap 2. Penelitian Tahap I — apakah permohonan memenuhi syarat?</h3>
+<p><strong>Pasal 23</strong> mengatur persyaratan pokok, antara lain posisi upaya administratif atas surat pajak, pelunasan pokok, bentuk tertulis, satu permohonan per surat, dan tanda tangan. <strong>Pasal 24</strong> mengatur jumlah kesempatan mengajukan dan ketentuan permohonan kedua. <strong>Diktum KEEMPAT KEP-239</strong> menambahkan syarat mengenai upaya hukum, pernyataan kekhilafan/bukan kesalahan, dan sanksi yang masih belum dilunasi. Petugas meneliti kelengkapan serta persyaratan tersebut sesuai <strong>Pasal 26 PMK 118/2024</strong>.</p>
+<div class="psa-checkflow-outcomes"><div><strong>Jika TIDAK memenuhi</strong><p>Permohonan <strong>tidak dipertimbangkan</strong>, dikembalikan melalui surat paling lama <strong>1 bulan sejak diterima</strong>, dan <strong>tidak diterbitkan surat keputusan PSA</strong>. Ini berbeda dengan penolakan substansi. Kemungkinan mengajukan kembali mengikuti Pasal 26 ayat (4) dan batas program.</p></div><div><strong>Jika memenuhi</strong><p>Permohonan diteruskan ke penelitian Tahap II. Lolos persyaratan administrasi <strong>belum berarti permohonan dikabulkan</strong>.</p></div></div>
+</div>
+<div class="psa-checkflow-panel psa-checkflow-procedure"><h3>Tahap 3. Penelitian Tahap II — apakah kondisi WP memenuhi skema pengurangan?</h3>
+<p>Menurut <strong>Pasal 27–28 PMK 118/2024</strong>, DJP meneliti alasan pengajuan dan dokumen pendukung. Untuk kebijakan KEP-239, penelitian mencocokkan <strong>jenis sanksi, besaran pengurangan, waktu pemenuhan kewajiban, dan syarat khusus</strong> dalam Lampiran A–D; contoh penerapannya terdapat dalam Lampiran E. DJP dapat meminta data atau keterangan tambahan, mengundang pembahasan, maupun melakukan peninjauan sesuai ketentuan.</p>
+<p>Apabila diminta dokumen berdasarkan Pasal 28 ayat (3) huruf a, tenggat pemenuhannya <strong>15 hari kerja</strong> sejak surat permintaan dikirim. Untuk permintaan tambahan pada huruf b, <strong>5 hari kerja</strong>. Jika tidak memiliki dokumen, WP perlu menyatakan hal tersebut sebagaimana Pasal 28 ayat (6).</p>
+</div>
+<div class="psa-checkflow-panel psa-checkflow-procedure"><h3>Tahap 4. Penerbitan keputusan</h3>
+<p>Berdasarkan <strong>Pasal 29 PMK 118/2024</strong>, paling lama <strong>6 bulan sejak permohonan diterima</strong> DJP harus menerbitkan keputusan berdasarkan hasil penelitian. Kemungkinan hasilnya sebagai berikut.</p>
+<div class="psa-decision-grid"><div><strong>Mengabulkan seluruhnya</strong><p>Permohonan disetujui sepenuhnya sesuai keputusan yang diterbitkan.</p></div><div><strong>Mengabulkan sebagian</strong><p>Hanya sebagian sanksi yang disetujui untuk dikurangi atau dihapuskan.</p></div><div><strong>Menolak</strong><p>Permohonan dinilai tetapi tidak dikabulkan. Ini bukan surat pengembalian tahap I.</p></div></div>
+<p class="psa-checkflow-time"><strong>Jika tenggat terlampaui:</strong> Pasal 29 mengatur akibat hukum permohonan dianggap dikabulkan apabila persyaratan keadaan dalam pasal tersebut terpenuhi, serta kewajiban menerbitkan keputusan berikutnya. Jangan menyamakan mekanisme ini dengan pengembalian permohonan yang tidak memenuhi syarat.</p>
+</div>
+<p class="psa-checkflow-foot">Dasar: Pasal 23–24, 26–29 dan ketentuan penyampaian permohonan dalam PMK 118/2024 sebagaimana diubah PMK 71/2026; Diktum KETIGA–KELIMA dan Lampiran A–H KEP-239/PJ/2026. Surat pernyataan contoh: Lampiran F dan G; petikan persyaratan: Lampiran H. Checklist untuk edukasi, bukan penetapan hak PSA.</p>
 </section>
-
-<section id="permohonan">
-<h2>Sebelum Mengajukan, Periksa Empat Hal</h2>
-<ol>
-<li><strong>Jenis dan dasar sanksi.</strong> Periksa jenis sanksi, dasar pasal, nomor STP/SKP bila ada, serta masa pajaknya. Kode Lampiran A–D hanya menunjukkan sumber ketentuan.</li>
-<li><strong>Tanggal yang relevan.</strong> Bedakan tanggal SPT disampaikan, tanggal surat diterbitkan, batas pelunasan, serta tanggal permohonan. Tanggal yang digunakan tidak selalu sama untuk setiap skema.</li>
-<li><strong>Pokok dan sanksi yang masih terutang.</strong> Penuhi ketentuan pembayaran dalam Pasal 23–24 PMK 118/2024 sebagaimana diubah. Menurut Diktum KEEMPAT KEP-239, pengurangan hanya diberikan atas <strong>bagian sanksi yang belum dibayar</strong>.</li>
-<li><strong>Dokumen dan upaya hukum.</strong> Penuhi persyaratan umum PMK serta lampirkan pernyataan bermeterai bahwa sanksi timbul karena kekhilafan atau bukan karena kesalahan; nyatakan tidak mengajukan gugatan/upaya hukum lainnya atau buktikan pencabutannya, sesuai keadaan dan ketentuan KEP.</li>
-</ol>
-<p><strong>Batas permohonan menurut KEP-239/PJ/2026 adalah 1 Oktober 2028.</strong> Ini <em>bukan</em> perpanjangan otomatis tenggat penyampaian SPT atau pelunasan dalam tabel. Skema khusus PPS memiliki tenggat pelunasan tersendiri sampai 31 Desember 2027 sesuai ketentuan.</p>
-<p>Contoh formulir pernyataan terdapat dalam Lampiran F dan G; petikan syarat umum Pasal 23–24 tersedia dalam Lampiran H. Permohonan tetap diproses dan diputus menurut ketentuan yang berlaku.</p>
-</section>
-
+<script>(function(){function init(){var root=document.querySelector('.psa-checkflow');if(!root)return;var checks=[...root.querySelectorAll('.psa-checkflow-item input[type="checkbox"]')];var count=root.querySelector('#psa-checkflow-count');var bar=root.querySelector('#psa-checkflow-bar');function update(){var done=checks.filter(x=>x.checked).length;count.textContent=done+' dari '+checks.length+' langkah dicentang';bar.style.width=(100*done/checks.length)+'%'}checks.forEach(x=>x.addEventListener('change',update));var reset=root.querySelector('#psa-checkflow-reset');if(reset)reset.addEventListener('click',function(){checks.forEach(x=>x.checked=false);update()});update()}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init()})();</script>
 
 <section id="referensi">
 <h2>Rujukan Peraturan</h2>
-<p>PMK 118 Tahun 2024 sebagaimana diubah dengan PMK 71 Tahun 2026, khususnya Pasal 21A, Pasal 23–24, Pasal 26–29, Pasal 53–54, Pasal 27A, dan Pasal II perubahan; KEP-239/PJ/2026, Diktum KESATU–KELIMA beserta Lampiran A–H. Selalu gunakan naskah regulasi dan lampiran resmi sebagai rujukan akhir untuk keputusan permohonan.</p>
+<ul class="psa-source-links">
+<li><a href="https://www.jdih.kemenkeu.go.id/dok/pmk-118-tahun-2024" target="_blank" rel="noopener noreferrer"><strong>PMK Nomor 118 Tahun 2024</strong></a> — Tata cara permohonan, terutama Pasal 23–24, Pasal 26–29, dan Pasal 53–54. <small>JDIH Kementerian Keuangan (resmi).</small></li>
+<li><a href="https://jdih.kemenkeu.go.id/dok/pmk-71-tahun-2026/overview" target="_blank" rel="noopener noreferrer"><strong>PMK Nomor 71 Tahun 2026</strong></a> — Perubahan terhadap PMK 118/2024, antara lain Pasal 21A, Pasal 23, penambahan Pasal 27A, dan Pasal II. <small>JDIH Kementerian Keuangan (resmi).</small></li>
+<li><a href="https://perpajakan.ddtc.co.id/en/legal-resource/central-tax-regulations/keputusan-direktur-jenderal-pajak-kep-239pj2026" target="_blank" rel="noopener noreferrer"><strong>KEP-239/PJ/2026</strong></a> — Diktum KESATU–KELIMA serta Lampiran A–H, mencakup besaran, periode, syarat, contoh, dan format surat. <small>Salinan pada DDTC; tautan dokumen resmi DJP belum dapat saya pastikan.</small></li>
+</ul>
+<p class="psa-reference-note">Gunakan naskah peraturan dan lampiran asli sebagai dasar akhir dalam menentukan persyaratan dan menilai permohonan. Tabel serta checklist pada artikel ini hanya alat bantu edukasi.</p>
 </section>
 </div>
