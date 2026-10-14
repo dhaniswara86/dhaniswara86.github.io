@@ -284,15 +284,15 @@ sidebar_note: "Besaran pengurangan bergantung pada jenis sanksi dan syarat yang 
 <td data-label="Syarat khusus"><ul class="kp-bullet kp-condition-bullet"><li>STP diterbitkan pada 8 Oktober 2026–30 Juni 2027.</li><li>Bayar 25% dari sanksi administratif yang tercantum dalam STP.</li><li>Pembayaran dilakukan setelah satu bulan sejak STP diterbitkan.</li><li>Batas akhir pembayaran 30 Juni 2027.</li></ul></td><td data-label="Rujukan"><small>Lampiran A KEP-239/PJ/2026</small></td></tr>
 <tr data-group="A" data-issue="pembetulan" data-rates="90%" data-search="pembetulan spt bunga pasal 8 ayat 2 2a uu kup spt tahunan pph 2025 spt masa september 2026 kurang bayar bayar setor 8 oktober 2026 30 juni 2027 ">
 <td data-label="Jenis kasus"><strong>Pembetulan SPT</strong><small style="display:block;color:#687587;font-size:11px">Lampiran A</small></td>
-<td data-label="Objek dan dasar hukum"><div class="kp-objek kp-law-summary"><strong>Denda atau bunga atas pelaporan, pembetulan, atau pembayaran</strong><p class="kp-meaning-inline">Sanksi ini berupa denda atau bunga yang tercantum dalam STP atas pelaporan, pembetulan SPT, atau pembayaran pajak.</p><ul class="kp-main-facts"><li>Denda/bunga Pasal 7, Pasal 8, dan/atau Pasal 9 UU KUP ketika SPT atau pembetulan telah disampaikan sebelum 8 Okt 2026.</li></ul><details class="kp-law-details"><summary>Lihat dasar hukum sanksi</summary><div class="kp-law-content"><p class="kp-law-only"><strong>Dasar hukum:</strong> Pasal 7, Pasal 8, dan/atau Pasal 9 UU KUP.</p></div></details></div></td>
+<td data-label="Objek dan dasar hukum"><div class="kp-objek kp-law-summary"><strong>Sanksi atas SPT yang sudah disampaikan sebelumnya</strong><p class="kp-meaning-inline">Denda atau bunga atas keterlambatan pelaporan, pembetulan SPT, atau pembayaran pajak yang ditagih melalui STP.</p><ul class="kp-main-facts"><li>SPT atau pembetulan SPT telah disampaikan sebelum 8 Oktober 2026.</li></ul><details class="kp-law-details"><summary>Lihat dasar hukum sanksi</summary><div class="kp-law-content"><p class="kp-law-only"><strong>Dasar hukum:</strong> Pasal 7, Pasal 8, dan/atau Pasal 9 UU KUP.</p></div></details></div></td>
 <td data-label="Besaran"><strong class="kp-rate">90%</strong></td>
-<td data-label="Periode atau batas waktu">Bayar 10% sanksi pada 8 Oktober–31 Desember 2026; atau paling lambat 1 bulan sejak STP diterbitkan, tidak melewati 30 Juni 2027</td>
-<td data-label="Syarat khusus"><ul class="kp-bullet kp-condition-bullet"><li>SPT atau pembetulan SPT telah disampaikan sebelum 8 Oktober 2026.</li><li>Bayar 10% sanksi administratif paling lambat 31 Desember 2026 (untuk pembayaran dalam periode itu), atau paling lama satu bulan setelah STP diterbitkan, dengan batas akhir 30 Juni 2027.</li></ul></td><td data-label="Rujukan"><small>Lampiran A KEP-239/PJ/2026</small></td></tr><tr data-group="A" data-issue="pembetulan" data-rates="75%" data-search="pembetulan spt bunga pasal 8 ayat 2 2a uu kup spt tahunan pph 2025 spt masa september 2026 kurang bayar bayar setor 8 oktober 2026 30 juni 2027 ">
+<td data-label="Periode atau batas waktu">Bayar 10% dari sanksi</td>
+<td data-label="Syarat khusus"><ul class="kp-bullet kp-condition-bullet"><li>SPT atau pembetulan SPT telah disampaikan sebelum 8 Oktober 2026.</li><li>Bayar 10% dari sanksi pada 8 Oktober–31 Desember 2026, atau paling lambat 1 bulan sejak STP diterbitkan. Batas akhir 30 Juni 2027.</li></ul></td><td data-label="Rujukan"><small>Lampiran A KEP-239/PJ/2026</small></td></tr><tr data-group="A" data-issue="pembetulan" data-rates="75%" data-search="pembetulan spt bunga pasal 8 ayat 2 2a uu kup spt tahunan pph 2025 spt masa september 2026 kurang bayar bayar setor 8 oktober 2026 30 juni 2027 ">
 <td data-label="Jenis kasus"><strong>Pembetulan SPT</strong><small style="display:block;color:#687587;font-size:11px">Lampiran A</small></td>
-<td data-label="Objek dan dasar hukum"><div class="kp-objek kp-law-summary"><strong>Denda atau bunga atas pelaporan, pembetulan, atau pembayaran</strong><p class="kp-meaning-inline">Sanksi ini berupa denda atau bunga yang tercantum dalam STP atas pelaporan, pembetulan SPT, atau pembayaran pajak.</p><ul class="kp-main-facts"><li>Denda/bunga Pasal 7, Pasal 8, dan/atau Pasal 9 UU KUP ketika SPT atau pembetulan telah disampaikan sebelum 8 Okt 2026.</li></ul><details class="kp-law-details"><summary>Lihat dasar hukum sanksi</summary><div class="kp-law-content"><p class="kp-law-only"><strong>Dasar hukum:</strong> Pasal 7, Pasal 8, dan/atau Pasal 9 UU KUP.</p></div></details></div></td>
+<td data-label="Objek dan dasar hukum"><div class="kp-objek kp-law-summary"><strong>Sanksi atas SPT yang sudah disampaikan sebelumnya</strong><p class="kp-meaning-inline">Denda atau bunga atas keterlambatan pelaporan, pembetulan SPT, atau pembayaran pajak yang ditagih melalui STP.</p><ul class="kp-main-facts"><li>SPT atau pembetulan SPT telah disampaikan sebelum 8 Oktober 2026.</li></ul><details class="kp-law-details"><summary>Lihat dasar hukum sanksi</summary><div class="kp-law-content"><p class="kp-law-only"><strong>Dasar hukum:</strong> Pasal 7, Pasal 8, dan/atau Pasal 9 UU KUP.</p></div></details></div></td>
 <td data-label="Besaran"><strong class="kp-rate">75%</strong></td>
-<td data-label="Periode atau batas waktu">Bayar 25% sanksi setelah lewat 1 bulan sejak STP diterbitkan, paling lambat 30 Juni 2027</td>
-<td data-label="Syarat khusus"><ul class="kp-bullet kp-condition-bullet"><li>SPT atau pembetulan SPT telah disampaikan sebelum 8 Oktober 2026.</li><li>Bayar 25% sanksi administratif setelah satu bulan sejak STP diterbitkan, paling lambat 30 Juni 2027.</li></ul></td><td data-label="Rujukan"><small>Lampiran A KEP-239/PJ/2026</small></td></tr>
+<td data-label="Periode atau batas waktu">Bayar 25% dari sanksi</td>
+<td data-label="Syarat khusus"><ul class="kp-bullet kp-condition-bullet"><li>SPT atau pembetulan SPT telah disampaikan sebelum 8 Oktober 2026.</li><li>Bayar 25% dari sanksi setelah lewat 1 bulan sejak STP diterbitkan. Batas akhir 30 Juni 2027.</li></ul></td><td data-label="Rujukan"><small>Lampiran A KEP-239/PJ/2026</small></td></tr>
 <tr data-group="A" data-issue="bayar" data-rates="100%" data-search="a pengawasan kepatuhan bunga pasal 19 ayat (2) dan (3) uu kup. 100% pelunasan pokok 8 oktober–31 desember 2026; stp terbit 8 oktober 2026–30 juni 2027 persyaratan lainnya tetap mengikuti lampiran dan diktum keputusan. lampiran a, hlm. 6–10">
 <td data-label="Jenis kasus"><strong>Terlambat bayar/setor</strong><small style="display:block;color:#687587;font-size:11px">Lampiran A</small></td>
 <td data-label="Objek dan dasar hukum"><div class="kp-objek kp-law-summary"><strong>Bunga terkait angsuran atau penundaan pembayaran utang pajak</strong><p class="kp-meaning-inline">Sanksi ini berupa bunga yang terkait dengan persetujuan angsuran atau penundaan pembayaran utang pajak.</p><ul class="kp-main-facts"><li>Bunga Pasal 19 ayat (2) dan (3) UU KUP.</li></ul><details class="kp-law-details"><summary>Lihat dasar hukum sanksi</summary><div class="kp-law-content"><p class="kp-law-only"><strong>Dasar hukum:</strong> Pasal 19 ayat (2) dan ayat (3) UU KUP.</p></div></details></div></td>
@@ -531,6 +531,7 @@ sidebar_note: "Besaran pengurangan bergantung pada jenis sanksi dan syarat yang 
    const parsed=parseObjectCell(first.cells[1]);
    const allConditions=groupRows.map(conditionItems);
    const common=sameItems(allConditions);
+   const isPriorSptStp=first.dataset.issue==='pembetulan' && groupRows.length===2 && groupRows.some(r=>r.cells[2].textContent.trim()==='90%');
 
    const card=el('section','kp-case-card');
    card.dataset.issue=first.dataset.issue;
@@ -561,7 +562,7 @@ sidebar_note: "Besaran pengurangan bergantung pada jenis sanksi dan syarat yang 
      });
    }
    if(parsed.extras.length){
-     if(first.dataset.issue==='stp' && parsed.extras.length===1){
+     if((first.dataset.issue==='stp'||isPriorSptStp) && parsed.extras.length===1){
        coverage.append(el('div','kp-coverage-item',parsed.extras[0].textContent.trim()));
      } else {
        const ul=el('ul'); parsed.extras.forEach(li=>ul.append(li)); coverage.append(ul);
@@ -576,7 +577,7 @@ sidebar_note: "Besaran pengurangan bergantung pada jenis sanksi dan syarat yang 
    const center=el('div','kp-case-col kp-center');
    const isStpBunga=first.dataset.issue==='stp' && /Pasal 14 ayat \(3\)/.test(first.cells[1].textContent);
    const isStpDenda=first.dataset.issue==='stp' && /Pasal 14 ayat \(4\)/.test(first.cells[1].textContent);
-   center.append(el('h4','', groupRows.length===1 ? 'Periode atau batas waktu' : (isStpBunga ? 'Pilih waktu pelunasan pokok pajak' : (isStpDenda ? 'Pilih waktu pembayaran sanksi' : ((first.dataset.issue==='spt'||first.dataset.issue==='pembetulan'||(first.dataset.issue==='bayar'&&parsed.title.includes('keterlambatan bayar'))) ? 'Pilih periode penyampaian SPT' : 'Pilih periode atau tenggat waktu')))));
+   center.append(el('h4','', isPriorSptStp ? 'Pilih bagian sanksi yang dibayar' : groupRows.length===1 ? 'Periode atau batas waktu' : (isStpBunga ? 'Pilih waktu pelunasan pokok pajak' : (isStpDenda ? 'Pilih waktu pembayaran sanksi' : ((first.dataset.issue==='spt'||first.dataset.issue==='pembetulan'||(first.dataset.issue==='bayar'&&parsed.title.includes('keterlambatan bayar'))) ? 'Pilih periode penyampaian SPT' : 'Pilih periode atau tenggat waktu')))));
    const selector=el('div','kp-period-selector');
    const percent=el('div','kp-percent-block');
    percent.append(el('span','kp-percent-label','Besaran pengurangan'));
@@ -603,6 +604,14 @@ sidebar_note: "Besaran pengurangan bergantung pada jenis sanksi dan syarat yang 
      noteList.innerHTML=''; noteSingle.textContent='';
      const unique=allConditions[idx].filter(x=>!common.includes(x));
      const items=(first.dataset.issue==='bayar'&&parsed.title.includes('keterlambatan bayar')) ? [...unique, ...common.filter(t=>/dibayar atau disetor/i.test(t))] : (unique.length?unique:[...common]);
+     if(isPriorSptStp){
+       const rate=row.cells[2].textContent.trim();
+       const detail=(rate==='90%')
+         ? 'Bayar 10% dari sanksi pada 8 Oktober–31 Desember 2026, atau paling lambat 1 bulan setelah STP diterbitkan. Batas akhir 30 Juni 2027.'
+         : 'Bayar 25% dari sanksi setelah lewat 1 bulan sejak STP diterbitkan. Batas akhir 30 Juni 2027.';
+       noteList.style.display='none'; noteSingle.style.display='block'; noteSingle.textContent=detail;
+       return;
+     }
      if(items.length===1){
        noteList.style.display='none';
        noteSingle.style.display='block';
