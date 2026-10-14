@@ -402,19 +402,54 @@ sidebar_note: "Besaran pengurangan bergantung pada jenis sanksi dan syarat yang 
 <div><strong>Apa yang ditulis dalam surat?</strong><p>Identitas WP; nomor dan tanggal SKP atau STP; jumlah sanksi yang dimohonkan pengurangan/penghapusan menurut WP; alasan permohonan; serta tanda tangan yang berwenang. Gunakan format lampiran sebagai acuan rinci.</p></div>
 <div><strong>Dokumen apa yang disiapkan?</strong><p>Surat pajak terkait, bukti pelunasan pokok, dokumen untuk mendukung alasan dan skema pengurangan, serta surat pernyataan dan bukti terkait upaya hukum sesuai Diktum KEEMPAT. Dokumen spesifik menyesuaikan kasus.</p></div>
 </div>
-<h4>Checklist Wajib Pajak sebelum mengirim surat</h4>
-<label class="psa-checkflow-item"><input type="checkbox"><span><strong>Identifikasi surat dan sanksi.</strong> Periksa nomor, tanggal, jenis SKP/STP, masa/tahun pajak, dasar pasal, dan besaran sanksi yang belum dilunasi.</span></label>
-<label class="psa-checkflow-item"><input type="checkbox"><span><strong>Cocokkan kondisi dengan KEP-239.</strong> Perhatikan waktu pelaporan/pembayaran, jenis sanksi, besaran PSA, dan syarat khusus sesuai baris lampiran terkait.</span></label>
-<label class="psa-checkflow-item"><input type="checkbox"><span><strong>Periksa syarat Pasal 23.</strong> Status keberatan atau permohonan lain atas SKP/STP, pelunasan pokok pajak, satu permohonan per surat, dan status tindakan penagihan harus sesuai ketentuan.</span></label>
-<label class="psa-checkflow-item"><input type="checkbox"><span><strong>Periksa Pasal 24.</strong> Untuk pengurangan/penghapusan sanksi administratif, permohonan maksimal dua kali. Jika ini permohonan kedua, periksa batas tiga bulan sejak keputusan pertama dikirim dan pengecualiannya.</span></label>
-<label class="psa-checkflow-item"><input type="checkbox"><span><strong>Penuhi Diktum KEEMPAT KEP-239.</strong> Lampirkan pernyataan bermeterai tidak mengajukan gugatan/upaya hukum lain atau bukti pencabutannya sebagaimana relevan; pernyataan bermeterai sanksi timbul karena kekhilafan atau bukan kesalahan; dan pastikan sanksi yang dimohonkan masih belum dibayar.</span></label>
-<label class="psa-checkflow-item"><input type="checkbox"><span><strong>Lengkapi surat dan bukti.</strong> Gunakan contoh format Lampiran C PMK 118/2024, tanda tangani, siapkan lampiran yang diperlukan, lalu sampaikan lewat tata cara resmi dan simpan tanda terima.</span></label>
-<div class="psa-checkflow-progress" role="status" aria-live="polite"><span id="psa-checkflow-count">0 dari 6 langkah dicentang</span><div class="psa-checkflow-track"><div id="psa-checkflow-bar"></div></div></div>
-<button type="button" class="psa-checkflow-reset" id="psa-checkflow-reset">Kosongkan checklist</button>
+<div class="psa-tasks" id="psa-tasks" aria-label="Checklist persiapan permohonan PSA">
+ <div class="psa-tasks-heading"><div><h4>Checklist persiapan permohonan</h4><p>Centang setiap langkah yang telah Anda periksa. Daftar ini adalah alat bantu, bukan penetapan kelayakan PSA.</p></div><span class="psa-tasks-count" id="psa-checkflow-count" role="status" aria-live="polite">0 dari 6 selesai</span></div>
+ <div class="psa-tasks-progress" role="progressbar" aria-label="Progres checklist" aria-valuemin="0" aria-valuemax="6" aria-valuenow="0" id="psa-tasks-progress"><div id="psa-checkflow-bar"></div></div>
+ <div class="psa-tasks-list"><div class="psa-task" data-psa-task>
+  <input class="psa-task-input" type="checkbox" id="psa-task-1" aria-describedby="psa-task-help-1">
+  <label class="psa-task-label" for="psa-task-1">
+   <span class="psa-task-number" aria-hidden="true">01</span>
+   <span class="psa-task-copy"><strong>Identifikasi surat dan sanksi</strong><span id="psa-task-help-1">Periksa jenis dan tanggal SKP/STP, masa atau tahun pajak, dasar pengenaan serta sanksi yang belum dilunasi.</span></span>
+   <span class="psa-task-status" aria-hidden="true">Belum</span>
+  </label>
+ </div><div class="psa-task" data-psa-task>
+  <input class="psa-task-input" type="checkbox" id="psa-task-2" aria-describedby="psa-task-help-2">
+  <label class="psa-task-label" for="psa-task-2">
+   <span class="psa-task-number" aria-hidden="true">02</span>
+   <span class="psa-task-copy"><strong>Cocokkan skema KEP-239</strong><span id="psa-task-help-2">Pastikan jenis sanksi, waktu pemenuhan kewajiban, persentase pengurangan, dan syarat khusus sesuai lampiran yang relevan.</span></span>
+   <span class="psa-task-status" aria-hidden="true">Belum</span>
+  </label>
+ </div><div class="psa-task" data-psa-task>
+  <input class="psa-task-input" type="checkbox" id="psa-task-3" aria-describedby="psa-task-help-3">
+  <label class="psa-task-label" for="psa-task-3">
+   <span class="psa-task-number" aria-hidden="true">03</span>
+   <span class="psa-task-copy"><strong>Periksa persyaratan Pasal 23</strong><span id="psa-task-help-3">Teliti persyaratan permohonan, termasuk pelunasan pokok, status upaya administratif, dan satu permohonan untuk satu surat pajak.</span></span>
+   <span class="psa-task-status" aria-hidden="true">Belum</span>
+  </label>
+ </div><div class="psa-task" data-psa-task>
+  <input class="psa-task-input" type="checkbox" id="psa-task-4" aria-describedby="psa-task-help-4">
+  <label class="psa-task-label" for="psa-task-4">
+   <span class="psa-task-number" aria-hidden="true">04</span>
+   <span class="psa-task-copy"><strong>Periksa ketentuan Pasal 24</strong><span id="psa-task-help-4">Jika mengajukan permohonan kedua, periksa batas pengajuan dan ketentuan yang berlaku.</span></span>
+   <span class="psa-task-status" aria-hidden="true">Belum</span>
+  </label>
+ </div><div class="psa-task" data-psa-task>
+  <input class="psa-task-input" type="checkbox" id="psa-task-5" aria-describedby="psa-task-help-5">
+  <label class="psa-task-label" for="psa-task-5">
+   <span class="psa-task-number" aria-hidden="true">05</span>
+   <span class="psa-task-copy"><strong>Siapkan persyaratan tambahan KEP-239</strong><span id="psa-task-help-5">Lengkapi pernyataan mengenai upaya hukum dan kekhilafan atau bukan karena kesalahan serta pastikan sanksi yang dimohonkan belum dilunasi.</span></span>
+   <span class="psa-task-status" aria-hidden="true">Belum</span>
+  </label>
+ </div><div class="psa-task" data-psa-task>
+  <input class="psa-task-input" type="checkbox" id="psa-task-6" aria-describedby="psa-task-help-6">
+  <label class="psa-task-label" for="psa-task-6">
+   <span class="psa-task-number" aria-hidden="true">06</span>
+   <span class="psa-task-copy"><strong>Lengkapi dan sampaikan surat</strong><span id="psa-task-help-6">Gunakan contoh format Lampiran C PMK 118/2024, siapkan bukti pendukung, tanda tangani, dan simpan bukti penerimaan permohonan.</span></span>
+   <span class="psa-task-status" aria-hidden="true">Belum</span>
+  </label>
+ </div></div>
+ <div class="psa-tasks-footer"><span id="psa-task-summary">Belum ada langkah yang ditandai selesai.</span><button type="button" class="psa-checkflow-reset" id="psa-checkflow-reset">Reset checklist</button></div>
 </div>
-<div class="psa-checkflow-panel psa-checkflow-procedure"><h3>Tahap 2. Penelitian Tahap I — apakah permohonan memenuhi syarat?</h3>
-<p><strong>Pasal 23</strong> mengatur persyaratan pokok, antara lain posisi upaya administratif atas surat pajak, pelunasan pokok, bentuk tertulis, satu permohonan per surat, dan tanda tangan. <strong>Pasal 24</strong> mengatur jumlah kesempatan mengajukan dan ketentuan permohonan kedua. <strong>Diktum KEEMPAT KEP-239</strong> menambahkan syarat mengenai upaya hukum, pernyataan kekhilafan/bukan kesalahan, dan sanksi yang masih belum dilunasi. Petugas meneliti kelengkapan serta persyaratan tersebut sesuai <strong>Pasal 26 PMK 118/2024</strong>.</p>
-<div class="psa-checkflow-outcomes"><div><strong>Jika TIDAK memenuhi</strong><p>Permohonan <strong>tidak dipertimbangkan</strong>, dikembalikan melalui surat paling lama <strong>1 bulan sejak diterima</strong>, dan <strong>tidak diterbitkan surat keputusan PSA</strong>. Ini berbeda dengan penolakan substansi. Kemungkinan mengajukan kembali mengikuti Pasal 26 ayat (4) dan batas program.</p></div><div><strong>Jika memenuhi</strong><p>Permohonan diteruskan ke penelitian Tahap II. Lolos persyaratan administrasi <strong>belum berarti permohonan dikabulkan</strong>.</p></div></div>
 </div>
 <div class="psa-checkflow-panel psa-checkflow-procedure"><h3>Tahap 3. Penelitian Tahap II — apakah kondisi WP memenuhi skema pengurangan?</h3>
 <p>Menurut <strong>Pasal 27–28 PMK 118/2024</strong>, DJP meneliti alasan pengajuan dan dokumen pendukung. Untuk kebijakan KEP-239, penelitian mencocokkan <strong>jenis sanksi, besaran pengurangan, waktu pemenuhan kewajiban, dan syarat khusus</strong> dalam Lampiran A–D; contoh penerapannya terdapat dalam Lampiran E. DJP dapat meminta data atau keterangan tambahan, mengundang pembahasan, maupun melakukan peninjauan sesuai ketentuan.</p>
@@ -427,7 +462,42 @@ sidebar_note: "Besaran pengurangan bergantung pada jenis sanksi dan syarat yang 
 </div>
 <p class="psa-checkflow-foot">Dasar: Pasal 23–24, 26–29 dan ketentuan penyampaian permohonan dalam PMK 118/2024 sebagaimana diubah PMK 71/2026; Diktum KETIGA–KELIMA dan Lampiran A–H KEP-239/PJ/2026. Surat pernyataan contoh: Lampiran F dan G; petikan persyaratan: Lampiran H. Checklist untuk edukasi, bukan penetapan hak PSA.</p>
 </section>
-<script>(function(){function init(){var root=document.querySelector('.psa-checkflow');if(!root)return;var checks=[...root.querySelectorAll('.psa-checkflow-item input[type="checkbox"]')];var count=root.querySelector('#psa-checkflow-count');var bar=root.querySelector('#psa-checkflow-bar');function update(){var done=checks.filter(x=>x.checked).length;count.textContent=done+' dari '+checks.length+' langkah dicentang';bar.style.width=(100*done/checks.length)+'%'}checks.forEach(x=>x.addEventListener('change',update));var reset=root.querySelector('#psa-checkflow-reset');if(reset)reset.addEventListener('click',function(){checks.forEach(x=>x.checked=false);update()});update()}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init()})();</script>
+<script>
+(function () {
+  'use strict';
+  function initPSAChecklist() {
+    var root = document.getElementById('psa-tasks');
+    if (!root || root.dataset.initialized === 'true') return;
+    root.dataset.initialized = 'true';
+    var inputs = Array.prototype.slice.call(root.querySelectorAll('.psa-task-input'));
+    var count = root.querySelector('#psa-checkflow-count');
+    var progress = root.querySelector('#psa-tasks-progress');
+    var bar = root.querySelector('#psa-checkflow-bar');
+    var summary = root.querySelector('#psa-task-summary');
+    function sync() {
+      var completed = 0;
+      inputs.forEach(function (input) {
+        var card = input.closest('.psa-task');
+        var checked = input.checked;
+        if (checked) completed++;
+        card.classList.toggle('is-done', checked);
+        var label = card.querySelector('.psa-task-status');
+        if (label) label.textContent = checked ? 'Selesai' : 'Belum';
+      });
+      count.textContent = completed + ' dari ' + inputs.length + ' selesai';
+      progress.setAttribute('aria-valuenow', String(completed));
+      bar.style.width = (inputs.length ? completed / inputs.length * 100 : 0) + '%';
+      summary.textContent = completed === inputs.length ? 'Seluruh langkah sudah dicentang. Periksa kembali dokumennya sebelum mengajukan.' : (completed ? 'Lanjutkan langkah yang belum selesai.' : 'Belum ada langkah yang ditandai selesai.');
+    }
+    inputs.forEach(function (input) { input.addEventListener('change', sync); });
+    var reset = root.querySelector('#psa-checkflow-reset');
+    if (reset) reset.addEventListener('click', function () { inputs.forEach(function (input) { input.checked = false; }); sync(); });
+    sync();
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initPSAChecklist);
+  else initPSAChecklist();
+})();
+</script>
 
 <section id="referensi">
 <h2>Rujukan Peraturan</h2>
