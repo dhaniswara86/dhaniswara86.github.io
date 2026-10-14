@@ -20,7 +20,7 @@ tags:
 
 author: "Angga Sukma Dhaniswara"
 date: 2026-10-12
-date_modified: 2026-10-12
+date_modified: 2026-10-14
 reading_time: "32 menit baca"
 legal_basis: "PMK 118/2024 s.t.d.d. PMK 71/2026; KEP-239/PJ/2026"
 permalink: /perubahan-pmk-118-2024-pmk-71-2026.html
@@ -163,55 +163,321 @@ sidebar_note: "Periksa jenis sanksi, dasar pasal, tanggal penerbitan SKP/STP, st
 </section>
 
 
-<section id="rincian-lampiran-kep">
-<h2>Panduan Detail Lampiran KEP-239/PJ/2026: Pilih Kelompok yang Sesuai</h2>
-<p>Ketentuan mengenai besarnya pengurangan tidak cukup dibaca dari satu angka persentase. KEP-239/PJ/2026 membagi pengaturannya menjadi <strong>empat tabel kebijakan (Lampiran A sampai D)</strong>, contoh kasus (Lampiran E), contoh dua surat pernyataan (Lampiran F dan G), serta petikan ketentuan persyaratan dalam PMK (Lampiran H). Pada masing-masing kelompok, persentase yang sama dapat menggunakan syarat yang berbeda. Tabel berikut disusun mengikuti pembagian resmi lampiran tersebut.</p>
-<blockquote class="callout-warning"><p><strong>Cara membaca tabel:</strong> cari dahulu <em>dasar hukum sanksi</em> dan jenis SKP/STP, kemudian periksa tanggal surat diterbitkan, status keberatan, tindakan yang harus dilakukan, dan batas tanggalnya. Persentase berikut adalah besaran menurut <strong>kondisi yang tertulis</strong>, bukan potongan otomatis untuk semua tagihan.</p></blockquote>
-<h3>Lampiran A — Pengawasan Kepatuhan Wajib Pajak (halaman 6–10)</h3>
-<p>Kelompok ini meliputi sanksi atas keterlambatan SPT, pembetulan SPT, keterlambatan pembayaran/penyetoran, dan beberapa sanksi dalam STP.</p>
-<table><thead><tr><th>Objek dan dasar hukum</th><th>Besaran</th><th>Syarat khusus yang menentukan besaran</th></tr></thead><tbody>
-<tr><td>Denda keterlambatan SPT, Pasal 7 ayat (1) UU KUP; SPT Tahunan PPh sampai tahun pajak 2025 atau SPT Masa sampai September 2026, berstatus kurang bayar.</td><td>100% / 50% / 25%</td><td>SPT disampaikan masing-masing pada 8 Okt–31 Des 2026 / 1 Jan–31 Mar 2027 / 1 Apr–30 Jun 2027.</td></tr>
-<tr><td>Bunga pembetulan SPT, Pasal 8 ayat (2) dan (2a) UU KUP, untuk periode SPT yang ditentukan.</td><td>100% / 50% / 25%</td><td>Pembetulan SPT pada tiga periode di atas; pembetulan dan pembayaran/penyetoran harus memenuhi Diktum KESATU huruf b.</td></tr>
-<tr><td>Bunga keterlambatan pembayaran/penyetoran, Pasal 9 ayat (2a) dan (2b) UU KUP, atas SPT/periode yang ditentukan.</td><td>100% / 50% / 25%</td><td>Penyampaian SPT pada tiga periode di atas, serta pembayaran/penyetoran dalam rentang kebijakan sesuai Diktum KESATU huruf c.</td></tr>
-<tr><td>Bunga STP Pasal 14 ayat (3) UU KUP yang diterbitkan 8 Okt 2026–30 Jun 2027.</td><td>100% / 50% / 25%</td><td>Pokok dilunasi ≤1 bulan sejak STP terbit / setelah 1 hingga ≤2 bulan / setelah 2 bulan; seluruhnya tidak melampaui 30 Jun 2027.</td></tr>
-<tr><td>Denda STP Pasal 14 ayat (4) UU KUP yang diterbitkan 8 Okt 2026–30 Jun 2027.</td><td>90% / 75%</td><td>Untuk 90%: telah membayar 10% sanksi, paling lambat 31 Des 2026 untuk pembayaran pada periode yang disebutkan, atau paling lambat satu bulan sejak STP terbit dan tidak melewati 30 Jun 2027. Untuk 75%: telah membayar 25% sanksi setelah satu bulan sejak STP terbit, paling lambat 30 Jun 2027.</td></tr>
-<tr><td>Denda/bunga Pasal 7, Pasal 8, dan/atau Pasal 9 UU KUP ketika SPT atau pembetulan telah disampaikan sebelum 8 Okt 2026.</td><td>90% / 75%</td><td>Telah membayar 10% / 25% sanksi dalam jangka yang dirinci Lampiran A halaman 9–10, termasuk ketentuan relatif terhadap tanggal terbit STP.</td></tr>
-<tr><td>Bunga Pasal 19 ayat (2) dan (3) UU KUP.</td><td>100%</td><td>Pelunasan pokok PPh terutang pada 8 Okt–31 Des 2026; STP atas sanksinya diterbitkan 8 Okt 2026–30 Jun 2027.</td></tr>
-</tbody></table>
-<p><small>Dasar: Lampiran A KEP-239/PJ/2026, halaman 6–10; Diktum KESATU huruf a, b, c, dan f. Periode khusus tidak boleh ditukar antarkelompok.</small></p>
-<h3>Lampiran B — Pemeriksaan Pajak (halaman 11–12)</h3>
-<p>Untuk ketetapan hasil pemeriksaan, <strong>tanggal penerbitan ketetapan dan tanggal pelunasan pokok</strong> menjadi penentu penting.</p>
-<table><thead><tr><th>Objek dan dasar hukum</th><th>Besaran</th><th>Persyaratan khusus</th></tr></thead><tbody>
-<tr><td>Sanksi dalam SKPKB/SKPKBT/SKP PBB hasil pemeriksaan: Pasal 13 ayat (2) dan (3), Pasal 15 ayat (2), Pasal 17C ayat (5), Pasal 17D ayat (5) UU KUP dan/atau Pasal 10 ayat (3)–(4) UU PBB.</td><td>100%</td><td>Pokok dilunasi paling lambat 31 Des 2026 untuk ketetapan yang terbit 8 Okt–31 Des 2026; atau paling lambat satu bulan sejak ketetapan terbit, dengan batas akhir 30 Jun 2027.</td></tr>
-<tr><td>Jenis sanksi hasil pemeriksaan yang sama.</td><td>50%</td><td>Pokok lunas setelah satu bulan dan paling lama dua bulan sejak ketetapan terbit, paling lambat 30 Jun 2027.</td></tr>
-<tr><td>Jenis sanksi hasil pemeriksaan yang sama.</td><td>25%</td><td>Pokok lunas setelah dua bulan sejak ketetapan terbit, paling lambat 30 Jun 2027.</td></tr>
-<tr><td>Denda/bunga STP Pasal 7, Pasal 8, Pasal 9, dan/atau Pasal 14 ayat (4) UU KUP dalam kelompok pemeriksaan.</td><td>90% / 75%</td><td>Telah membayar masing-masing 10% / 25% sanksi dalam periode dan jangka waktu terhadap STP sebagaimana Lampiran B halaman 11–12.</td></tr>
-</tbody></table>
-<p><small>Dasar: Lampiran B dan Diktum KESATU huruf d KEP-239/PJ/2026. Untuk jenis surat yang berbeda, sesuaikan kembali dengan baris ketentuan masing-masing.</small></p>
-<h3>Lampiran C — Penagihan Pajak (halaman 13–21)</h3>
-<p>Dalam kelompok penagihan, keputusan membedakan <strong>ketetapan atau tagihan yang terbit sebelum 8 Oktober 2026</strong> dan <strong>STP/STP PBB yang terbit mulai 8 Oktober 2026 hingga 30 Juni 2027</strong>. Beberapa baris juga membedakan apakah ketetapan yang terkait diajukan keberatan.</p>
-<table><thead><tr><th>Kasus</th><th>Besaran</th><th>Persyaratan khusus</th></tr></thead><tbody>
-<tr><td>STP sebelum 8 Okt 2026: sanksi Pasal 7 ayat (1), Pasal 8 ayat (2)/(2a), dan/atau Pasal 9 ayat (2a)/(2b) UU KUP; baik ada maupun tidak ada keberatan pada ketetapan terkait.</td><td>90% / 75%</td><td>Membayar 10% sanksi pada 8 Okt–31 Des 2026 / membayar 25% sanksi pada 1 Jan–30 Jun 2027.</td></tr>
-<tr><td>STP sebelum 8 Okt 2026: denda Pasal 14 ayat (4) UU KUP, pada kondisi tidak diajukan keberatan.</td><td>90% / 75%</td><td>Membayar 10% / 25% sanksi dalam periode yang sama sebagaimana baris di atas.</td></tr>
-<tr><td>SKP/SKP PBB sebelum 8 Okt 2026 dan tidak diajukan keberatan: sanksi Pasal 13 ayat (2)/(3), Pasal 15 ayat (2), Pasal 17C ayat (5), Pasal 17D ayat (5) UU KUP dan/atau Pasal 10 ayat (3)/(4) UU PBB.</td><td>100% / 50% / 25%</td><td>Melunasi pokok pajak pada 8 Okt–31 Des 2026 / 1 Jan–31 Mar 2027 / 1 Apr–30 Jun 2027.</td></tr>
-<tr><td>Jenis sanksi SKP/SKP PBB sebelum 8 Okt 2026 sebagaimana baris di atas, dan pokok sudah lunas sebelum 8 Okt 2026.</td><td>90% / 75%</td><td>Membayar 10% sanksi pada 8 Okt–31 Des 2026 / membayar 25% pada 1 Jan–30 Jun 2027.</td></tr>
-<tr><td>STP/STP PBB sebelum 8 Okt 2026 tanpa keberatan terkait: Pasal 19 ayat (1) UU KUP dan/atau Pasal 11 ayat (3) UU PBB.</td><td>100% / 50% / 25%</td><td>Pokok pajak dilunasi pada 8 Okt–31 Des 2026 / 1 Jan–31 Mar 2027 / 1 Apr–30 Jun 2027.</td></tr>
-<tr><td>STP sebelum 8 Okt 2026 dan ketetapan terkait diajukan keberatan: sanksi Pasal 19 ayat (1)–(3) UU KUP.</td><td>100% / 50% / 25%</td><td><strong>Utang pajak</strong> dilunasi dalam tiga periode yang sama, bukan otomatis hanya pokok pajak.</td></tr>
-<tr><td>STP/STP PBB sebelum 8 Okt 2026 dan kewajiban yang disyaratkan sudah lunas sebelum 8 Okt 2026, untuk kelompok Pasal 19 UU KUP/Pasal 11 ayat (3) UU PBB tertentu.</td><td>90% / 75%</td><td>Membayar 10% / 25% sanksi pada periode 8 Okt–31 Des 2026 / 1 Jan–30 Jun 2027; status keberatan menentukan apakah yang harus lebih dahulu lunas adalah utang atau pokok pajak.</td></tr>
-<tr><td>STP/STP PBB yang terbit 8 Okt 2026–30 Jun 2027: sanksi Pasal 19 ayat (1)–(2) UU KUP dan/atau Pasal 11 ayat (3) UU PBB.</td><td>100% / 50% / 25%</td><td>Melunasi <strong>utang pajak jika ketetapan diajukan keberatan</strong>, atau <strong>pokok pajak jika tidak diajukan keberatan</strong>, masing-masing pada periode 8 Okt–31 Des 2026 / 1 Jan–31 Mar 2027 / 1 Apr–30 Jun 2027.</td></tr>
-<tr><td>STP/STP PBB yang terbit 8 Okt 2026–30 Jun 2027, apabila utang/pokok sesuai status keberatan telah lunas sebelum 8 Okt 2026.</td><td>90% / 75%</td><td>Membayar 10% / 25% sanksi dalam batas yang dirinci Lampiran C halaman 20–21, dengan pilihan batas akhir 31 Des 2026 atau jangka relatif dari terbit STP, maksimal 30 Jun 2027.</td></tr>
-</tbody></table>
-<blockquote class="callout-warning"><p><strong>Pokok pajak tidak selalu sama dengan utang pajak.</strong> Untuk beberapa skema dalam Lampiran C, status keberatan mengubah syarat pelunasan. Periksa secara khusus kolom “Keberatan” dan “Persyaratan Khusus” sebelum menentukan baris yang sesuai.</p></blockquote>
-<p><small>Dasar: Lampiran C KEP-239/PJ/2026 halaman 13–21; Diktum KESATU huruf e dan f.</small></p>
-<h3>Lampiran D — Basis Data Perpajakan dan Program Pengungkapan Sukarela (halaman 22–24)</h3>
-<table><thead><tr><th>Kelompok</th><th>Besaran</th><th>Persyaratan khusus</th></tr></thead><tbody>
-<tr><td>WP baru terdaftar atau PKP baru dikukuhkan, terkait sanksi Pasal 7 ayat (1) dan/atau Pasal 9 ayat (2a)/(2b) UU KUP atas periode SPT yang ditentukan.</td><td>100%</td><td>NPWP baru terdaftar/PKP baru dikukuhkan pada 8 Okt–31 Des 2026 dan menyampaikan SPT untuk Tahun Pajak 2025 dan sebelumnya atau Masa Pajak sampai September 2026.</td></tr>
-<tr><td>Kelompok baru terdaftar/dikukuhkan yang sama.</td><td>50%</td><td>Pendaftaran/pengukuhan pada 1 Jan–31 Mar 2027 dan penyampaian SPT untuk periode dimaksud.</td></tr>
-<tr><td>Kelompok baru terdaftar/dikukuhkan yang sama.</td><td>25%</td><td>Pendaftaran/pengukuhan pada 1 Apr–30 Jun 2027 dan penyampaian SPT untuk periode dimaksud.</td></tr>
-<tr><td>SKPKB/SKPKBT hasil pemeriksaan atas harta yang belum/kurang diungkapkan dalam Program Pengungkapan Sukarela (PPS), Pasal 13 ayat (2) dan/atau Pasal 15 ayat (2) UU KUP.</td><td>100% / 50% / 25%</td><td>Pokok lunas ≤1 bulan / setelah 1 sampai ≤2 bulan / setelah 2 bulan sejak SKPKB atau SKPKBT diterbitkan, dengan batas akhir 31 Des 2027. Surat diterbitkan pada 8 Okt 2026–31 Des 2027 sebagaimana Diktum KESATU huruf g.</td></tr>
-</tbody></table>
-<p><small>Dasar: Lampiran D halaman 22–24, Diktum KESATU huruf a, c, dan g.</small></p>
+<!-- KABAYAN: tabel interaktif KEP-239/PJ/2026. Tempel di konten artikel editorial. -->
+<style>
+.kp239{--kp-blue:#0a66d8;--kp-ink:#1d1d1f;--kp-line:#e4e7ec;--kp-muted:#667085;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color:var(--kp-ink);font-size:14px;line-height:1.55;max-width:100%;}
+.kp239 *{box-sizing:border-box}.kp239 .kp-head{padding:25px 26px;border-radius:22px;background:#f5f8ff;border:1px solid #e1eafb;margin:20px 0}.kp239 .kp-kicker{font-size:11px;font-weight:800;letter-spacing:.1em;color:var(--kp-blue)}.kp239 h3{font-family:inherit!important;margin:10px 0!important;font-size:clamp(21px,3vw,29px)!important;line-height:1.12!important}.kp239 p{font-family:inherit!important;font-size:14px!important;margin:8px 0!important;line-height:1.6!important}.kp239 .kp-facts{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.kp239 .kp-fact{border:1px solid #d8e3f7;border-radius:100px;padding:5px 11px;background:white;color:#334155;font-size:12px;font-weight:650}
+.kp239 .kp-alert{border-left:3px solid #d97706;padding:11px 14px;background:#fffbeb;margin:16px 0!important;color:#713f12}
+.kp239 .kp-controls{display:grid;grid-template-columns:minmax(185px,1.6fr) minmax(130px,1fr) minmax(120px,.7fr) auto;gap:9px;align-items:end;margin:20px 0 11px}.kp239 label{display:block;margin-bottom:5px;font-size:11px;font-weight:750;color:var(--kp-muted);font-family:inherit}.kp239 input,.kp239 select,.kp239 button{font:inherit!important;min-height:39px;border:1px solid #cfd6e1;border-radius:10px;padding:8px 10px;background:white;color:#212936;width:100%;}.kp239 input:focus,.kp239 select:focus{outline:2px solid #b7d4ff;outline-offset:1px}.kp239 button{width:auto;cursor:pointer;font-weight:700;white-space:nowrap}.kp239 .kp-tools{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:9px;margin-bottom:10px}.kp239 .kp-count{font-size:12px;color:var(--kp-muted)}.kp239 .kp-export{border-radius:20px;padding:6px 13px;min-height:31px;font-size:12px!important}
+.kp239 .kp-scroll{overflow-x:auto;border:1px solid var(--kp-line);border-radius:16px}.kp239 table{border-collapse:collapse!important;width:100%!important;min-width:760px;margin:0!important;table-layout:auto!important;font:inherit!important}.kp239 table thead{background:#f4f6fa}.kp239 th,.kp239 td{padding:13px 12px!important;border:0!important;border-bottom:1px solid var(--kp-line)!important;text-align:left!important;vertical-align:top;font:inherit!important;line-height:1.52!important}.kp239 th{font-weight:800!important;font-size:12px!important;color:#475467;white-space:nowrap}.kp239 tbody tr:last-child td{border-bottom:0!important}.kp239 tbody tr:nth-child(even){background:#fafbfc}.kp239 tbody tr[hidden]{display:none!important}.kp239 td:nth-child(1){min-width:130px}.kp239 td:nth-child(2){min-width:230px}.kp239 td:nth-child(3){min-width:100px}.kp239 td:nth-child(4){min-width:210px}.kp239 td:nth-child(5){min-width:230px}.kp239 .kp-pill{display:inline-flex;background:#e9f2ff;color:#0756b4;border-radius:7px;padding:2px 7px;font-weight:850;margin-right:4px}.kp239 .kp-group{font-weight:650;font-size:12px}.kp239 .kp-rate{color:#0756b4;font-weight:800}.kp239 small{font-size:11px;color:var(--kp-muted)}.kp239 .kp-none{display:none;padding:28px;text-align:center;color:#667085}.kp239 .kp-foot{font-size:12px!important;color:#667085}.kp239 details{border:1px solid var(--kp-line);border-radius:13px;padding:12px 15px;margin:11px 0}.kp239 summary{cursor:pointer;font-weight:750;font-size:13px}.kp239 details p{font-size:13px!important}
+@media(max-width:760px){.kp239 .kp-head{padding:18px}.kp239 .kp-controls{grid-template-columns:1fr 1fr}.kp239 .kp-controls>div:first-child{grid-column:1/-1}.kp239 .kp-scroll{border:0;overflow:visible}.kp239 table{min-width:0;width:100%!important;display:block}.kp239 thead{display:none}.kp239 tbody{display:grid;gap:11px}.kp239 tr{display:block;border:1px solid var(--kp-line);border-radius:14px;padding:10px 13px;background:#fff!important}.kp239 td{display:grid;grid-template-columns:100px minmax(0,1fr);gap:10px;padding:7px 0!important;border-bottom:1px solid #eef0f3!important;min-width:0!important;overflow-wrap:anywhere}.kp239 td:last-child{border:0!important}.kp239 td:before{content:attr(data-label);font-size:11px;color:#667085;font-weight:700}.kp239 .kp-group{display:inline}.kp239 .kp-rate{font-size:15px}}
+@media(max-width:380px){.kp239 .kp-controls{grid-template-columns:1fr}.kp239 .kp-controls>div:first-child{grid-column:auto}.kp239 td{grid-template-columns:84px minmax(0,1fr)}}
+@media print{.kp239 .kp-controls,.kp239 .kp-tools{display:none}.kp239 .kp-scroll{overflow:visible}.kp239 table{min-width:0}.kp239 tbody tr[hidden]{display:table-row!important}}
+</style>
+<section id="tabel-interaktif-kep239" class="kp239" aria-label="Pencarian kebijakan pengurangan sanksi KEP 239 tahun 2026">
+ <div class="kp-head"><span class="kp-kicker">PANDUAN INTERAKTIF • KEP-239/PJ/2026</span>
+ <h3>Cari Skema Pengurangan Sanksi</h3>
+ <p>Temukan ketentuan berdasarkan jenis sanksi, pasal, persentase, atau kelompok lampiran. Setiap baris menampilkan satu besaran dan satu periode yang sesuai; baca syarat dan rujukan resmi sebelum mengajukan permohonan.</p>
+ <div class="kp-facts"><span class="kp-fact">4 kelompok lampiran</span><span class="kp-fact">100% · 90% · 75% · 50% · 25%</span><span class="kp-fact">Batas permohonan: 1 Oktober 2028</span></div></div>
+ <p class="kp-alert"><strong>Perhatian:</strong> Pengurangan tidak otomatis. Syarat umum Pasal 23 dan 24 PMK 118/2024 sebagaimana diubah PMK 71/2026, syarat khusus dalam lampiran, dan kondisi sanksi yang belum dilunasi harus diperiksa. Tanggal pelunasan/pelaporan berpengaruh pada persentase.</p>
+ <div class="kp-controls"><div><label for="kp239-search">Cari kata kunci atau pasal</label><input id="kp239-search" type="search" placeholder="Contoh: Pasal 7, SKPKB, PPS, 31 Desember" autocomplete="off"></div><div><label for="kp239-group">Kelompok kebijakan</label><select id="kp239-group"><option value="">Semua lampiran</option><option value="A">A · Pengawasan</option><option value="B">B · Pemeriksaan</option><option value="C">C · Penagihan</option><option value="D">D · Basis Data/PPS</option></select></div><div><label for="kp239-rate">Besaran pengurangan</label><select id="kp239-rate"><option value="">Semua</option><option>100%</option><option>90%</option><option>75%</option><option>50%</option><option>25%</option></select></div><div><label>&nbsp;</label><button type="button" id="kp239-reset">Reset</button></div></div>
+ <div class="kp-tools"><span class="kp-count" id="kp239-count" role="status" aria-live="polite"></span><button type="button" class="kp-export" id="kp239-export">Unduh CSV hasil filter</button></div>
+ <div class="kp-scroll"><table id="kp239-table"><thead><tr><th scope="col">Lampiran</th><th scope="col">Objek dan dasar hukum</th><th scope="col">Besaran</th><th scope="col">Periode atau batas waktu</th><th scope="col">Syarat khusus</th><th scope="col">Rujukan</th></tr></thead><tbody>
+<tr data-group="A" data-rates="100%" data-search="a pengawasan kepatuhan denda keterlambatan spt, pasal 7 ayat (1) uu kup; spt tahunan pph sampai tahun pajak 2025 atau spt masa sampai september 2026, berstatus kurang bayar. 100% 8 oktober–31 desember 2026 spt terlambat disampaikan pada periode ini. lampiran a, hlm. 6–10">
+<td data-label="Lampiran"><span class="kp-pill">A</span> <span class="kp-group">Pengawasan Kepatuhan</span></td>
+<td data-label="Objek dan dasar hukum">Denda keterlambatan SPT, Pasal 7 ayat (1) UU KUP; SPT Tahunan PPh sampai tahun pajak 2025 atau SPT Masa sampai September 2026, berstatus kurang bayar.</td>
+<td data-label="Besaran"><strong class="kp-rate">100%</strong></td>
+<td data-label="Periode atau batas waktu">8 Oktober–31 Desember 2026</td>
+<td data-label="Syarat khusus">SPT terlambat disampaikan pada periode ini.</td><td data-label="Rujukan"><small>Lampiran A, hlm. 6–10</small></td></tr><tr data-group="A" data-rates="50%" data-search="a pengawasan kepatuhan denda keterlambatan spt, pasal 7 ayat (1) uu kup; spt tahunan pph sampai tahun pajak 2025 atau spt masa sampai september 2026, berstatus kurang bayar. 50% 1 januari–31 maret 2027 spt terlambat disampaikan pada periode ini. lampiran a, hlm. 6–10">
+<td data-label="Lampiran"><span class="kp-pill">A</span> <span class="kp-group">Pengawasan Kepatuhan</span></td>
+<td data-label="Objek dan dasar hukum">Denda keterlambatan SPT, Pasal 7 ayat (1) UU KUP; SPT Tahunan PPh sampai tahun pajak 2025 atau SPT Masa sampai September 2026, berstatus kurang bayar.</td>
+<td data-label="Besaran"><strong class="kp-rate">50%</strong></td>
+<td data-label="Periode atau batas waktu">1 Januari–31 Maret 2027</td>
+<td data-label="Syarat khusus">SPT terlambat disampaikan pada periode ini.</td><td data-label="Rujukan"><small>Lampiran A, hlm. 6–10</small></td></tr><tr data-group="A" data-rates="25%" data-search="a pengawasan kepatuhan denda keterlambatan spt, pasal 7 ayat (1) uu kup; spt tahunan pph sampai tahun pajak 2025 atau spt masa sampai september 2026, berstatus kurang bayar. 25% 1 april–30 juni 2027 spt terlambat disampaikan pada periode ini. lampiran a, hlm. 6–10">
+<td data-label="Lampiran"><span class="kp-pill">A</span> <span class="kp-group">Pengawasan Kepatuhan</span></td>
+<td data-label="Objek dan dasar hukum">Denda keterlambatan SPT, Pasal 7 ayat (1) UU KUP; SPT Tahunan PPh sampai tahun pajak 2025 atau SPT Masa sampai September 2026, berstatus kurang bayar.</td>
+<td data-label="Besaran"><strong class="kp-rate">25%</strong></td>
+<td data-label="Periode atau batas waktu">1 April–30 Juni 2027</td>
+<td data-label="Syarat khusus">SPT terlambat disampaikan pada periode ini.</td><td data-label="Rujukan"><small>Lampiran A, hlm. 6–10</small></td></tr>
+<tr data-group="A" data-rates="100%" data-search="a pengawasan kepatuhan bunga pembetulan spt, pasal 8 ayat (2) dan (2a) uu kup, untuk periode spt yang ditentukan. 100% 8 oktober–31 desember 2026 pembetulan spt dilakukan pada periode ini; pembayaran memenuhi diktum kesatu huruf b. lampiran a, hlm. 6–10">
+<td data-label="Lampiran"><span class="kp-pill">A</span> <span class="kp-group">Pengawasan Kepatuhan</span></td>
+<td data-label="Objek dan dasar hukum">Bunga pembetulan SPT, Pasal 8 ayat (2) dan (2a) UU KUP, untuk periode SPT yang ditentukan.</td>
+<td data-label="Besaran"><strong class="kp-rate">100%</strong></td>
+<td data-label="Periode atau batas waktu">8 Oktober–31 Desember 2026</td>
+<td data-label="Syarat khusus">Pembetulan SPT dilakukan pada periode ini; pembayaran memenuhi Diktum KESATU huruf b.</td><td data-label="Rujukan"><small>Lampiran A, hlm. 6–10</small></td></tr><tr data-group="A" data-rates="50%" data-search="a pengawasan kepatuhan bunga pembetulan spt, pasal 8 ayat (2) dan (2a) uu kup, untuk periode spt yang ditentukan. 50% 1 januari–31 maret 2027 pembetulan spt dilakukan pada periode ini; pembayaran memenuhi diktum kesatu huruf b. lampiran a, hlm. 6–10">
+<td data-label="Lampiran"><span class="kp-pill">A</span> <span class="kp-group">Pengawasan Kepatuhan</span></td>
+<td data-label="Objek dan dasar hukum">Bunga pembetulan SPT, Pasal 8 ayat (2) dan (2a) UU KUP, untuk periode SPT yang ditentukan.</td>
+<td data-label="Besaran"><strong class="kp-rate">50%</strong></td>
+<td data-label="Periode atau batas waktu">1 Januari–31 Maret 2027</td>
+<td data-label="Syarat khusus">Pembetulan SPT dilakukan pada periode ini; pembayaran memenuhi Diktum KESATU huruf b.</td><td data-label="Rujukan"><small>Lampiran A, hlm. 6–10</small></td></tr><tr data-group="A" data-rates="25%" data-search="a pengawasan kepatuhan bunga pembetulan spt, pasal 8 ayat (2) dan (2a) uu kup, untuk periode spt yang ditentukan. 25% 1 april–30 juni 2027 pembetulan spt dilakukan pada periode ini; pembayaran memenuhi diktum kesatu huruf b. lampiran a, hlm. 6–10">
+<td data-label="Lampiran"><span class="kp-pill">A</span> <span class="kp-group">Pengawasan Kepatuhan</span></td>
+<td data-label="Objek dan dasar hukum">Bunga pembetulan SPT, Pasal 8 ayat (2) dan (2a) UU KUP, untuk periode SPT yang ditentukan.</td>
+<td data-label="Besaran"><strong class="kp-rate">25%</strong></td>
+<td data-label="Periode atau batas waktu">1 April–30 Juni 2027</td>
+<td data-label="Syarat khusus">Pembetulan SPT dilakukan pada periode ini; pembayaran memenuhi Diktum KESATU huruf b.</td><td data-label="Rujukan"><small>Lampiran A, hlm. 6–10</small></td></tr>
+<tr data-group="A" data-rates="100%" data-search="a pengawasan kepatuhan bunga keterlambatan pembayaran/penyetoran, pasal 9 ayat (2a) dan (2b) uu kup, atas spt/periode yang ditentukan. 100% 8 oktober–31 desember 2026 spt disampaikan pada periode ini; pembayaran memenuhi diktum kesatu huruf c. lampiran a, hlm. 6–10">
+<td data-label="Lampiran"><span class="kp-pill">A</span> <span class="kp-group">Pengawasan Kepatuhan</span></td>
+<td data-label="Objek dan dasar hukum">Bunga keterlambatan pembayaran/penyetoran, Pasal 9 ayat (2a) dan (2b) UU KUP, atas SPT/periode yang ditentukan.</td>
+<td data-label="Besaran"><strong class="kp-rate">100%</strong></td>
+<td data-label="Periode atau batas waktu">8 Oktober–31 Desember 2026</td>
+<td data-label="Syarat khusus">SPT disampaikan pada periode ini; pembayaran memenuhi Diktum KESATU huruf c.</td><td data-label="Rujukan"><small>Lampiran A, hlm. 6–10</small></td></tr><tr data-group="A" data-rates="50%" data-search="a pengawasan kepatuhan bunga keterlambatan pembayaran/penyetoran, pasal 9 ayat (2a) dan (2b) uu kup, atas spt/periode yang ditentukan. 50% 1 januari–31 maret 2027 spt disampaikan pada periode ini; pembayaran memenuhi diktum kesatu huruf c. lampiran a, hlm. 6–10">
+<td data-label="Lampiran"><span class="kp-pill">A</span> <span class="kp-group">Pengawasan Kepatuhan</span></td>
+<td data-label="Objek dan dasar hukum">Bunga keterlambatan pembayaran/penyetoran, Pasal 9 ayat (2a) dan (2b) UU KUP, atas SPT/periode yang ditentukan.</td>
+<td data-label="Besaran"><strong class="kp-rate">50%</strong></td>
+<td data-label="Periode atau batas waktu">1 Januari–31 Maret 2027</td>
+<td data-label="Syarat khusus">SPT disampaikan pada periode ini; pembayaran memenuhi Diktum KESATU huruf c.</td><td data-label="Rujukan"><small>Lampiran A, hlm. 6–10</small></td></tr><tr data-group="A" data-rates="25%" data-search="a pengawasan kepatuhan bunga keterlambatan pembayaran/penyetoran, pasal 9 ayat (2a) dan (2b) uu kup, atas spt/periode yang ditentukan. 25% 1 april–30 juni 2027 spt disampaikan pada periode ini; pembayaran memenuhi diktum kesatu huruf c. lampiran a, hlm. 6–10">
+<td data-label="Lampiran"><span class="kp-pill">A</span> <span class="kp-group">Pengawasan Kepatuhan</span></td>
+<td data-label="Objek dan dasar hukum">Bunga keterlambatan pembayaran/penyetoran, Pasal 9 ayat (2a) dan (2b) UU KUP, atas SPT/periode yang ditentukan.</td>
+<td data-label="Besaran"><strong class="kp-rate">25%</strong></td>
+<td data-label="Periode atau batas waktu">1 April–30 Juni 2027</td>
+<td data-label="Syarat khusus">SPT disampaikan pada periode ini; pembayaran memenuhi Diktum KESATU huruf c.</td><td data-label="Rujukan"><small>Lampiran A, hlm. 6–10</small></td></tr>
+<tr data-group="A" data-rates="100%" data-search="a pengawasan kepatuhan bunga stp pasal 14 ayat (3) uu kup yang diterbitkan 8 okt 2026–30 jun 2027. 100% paling lama 1 bulan sejak stp terbit; tidak melewati 30 juni 2027 pokok pajak dilunasi dalam tenggat terkait. lampiran a, hlm. 6–10">
+<td data-label="Lampiran"><span class="kp-pill">A</span> <span class="kp-group">Pengawasan Kepatuhan</span></td>
+<td data-label="Objek dan dasar hukum">Bunga STP Pasal 14 ayat (3) UU KUP yang diterbitkan 8 Okt 2026–30 Jun 2027.</td>
+<td data-label="Besaran"><strong class="kp-rate">100%</strong></td>
+<td data-label="Periode atau batas waktu">Paling lama 1 bulan sejak STP terbit; tidak melewati 30 Juni 2027</td>
+<td data-label="Syarat khusus">Pokok pajak dilunasi dalam tenggat terkait.</td><td data-label="Rujukan"><small>Lampiran A, hlm. 6–10</small></td></tr><tr data-group="A" data-rates="50%" data-search="a pengawasan kepatuhan bunga stp pasal 14 ayat (3) uu kup yang diterbitkan 8 okt 2026–30 jun 2027. 50% setelah 1 bulan hingga paling lama 2 bulan sejak stp terbit; tidak melewati 30 juni 2027 pokok pajak dilunasi dalam tenggat terkait. lampiran a, hlm. 6–10">
+<td data-label="Lampiran"><span class="kp-pill">A</span> <span class="kp-group">Pengawasan Kepatuhan</span></td>
+<td data-label="Objek dan dasar hukum">Bunga STP Pasal 14 ayat (3) UU KUP yang diterbitkan 8 Okt 2026–30 Jun 2027.</td>
+<td data-label="Besaran"><strong class="kp-rate">50%</strong></td>
+<td data-label="Periode atau batas waktu">Setelah 1 bulan hingga paling lama 2 bulan sejak STP terbit; tidak melewati 30 Juni 2027</td>
+<td data-label="Syarat khusus">Pokok pajak dilunasi dalam tenggat terkait.</td><td data-label="Rujukan"><small>Lampiran A, hlm. 6–10</small></td></tr><tr data-group="A" data-rates="25%" data-search="a pengawasan kepatuhan bunga stp pasal 14 ayat (3) uu kup yang diterbitkan 8 okt 2026–30 jun 2027. 25% setelah 2 bulan sejak stp terbit; tidak melewati 30 juni 2027 pokok pajak dilunasi dalam tenggat terkait. lampiran a, hlm. 6–10">
+<td data-label="Lampiran"><span class="kp-pill">A</span> <span class="kp-group">Pengawasan Kepatuhan</span></td>
+<td data-label="Objek dan dasar hukum">Bunga STP Pasal 14 ayat (3) UU KUP yang diterbitkan 8 Okt 2026–30 Jun 2027.</td>
+<td data-label="Besaran"><strong class="kp-rate">25%</strong></td>
+<td data-label="Periode atau batas waktu">Setelah 2 bulan sejak STP terbit; tidak melewati 30 Juni 2027</td>
+<td data-label="Syarat khusus">Pokok pajak dilunasi dalam tenggat terkait.</td><td data-label="Rujukan"><small>Lampiran A, hlm. 6–10</small></td></tr>
+<tr data-group="A" data-rates="90%" data-search="a pengawasan kepatuhan denda stp pasal 14 ayat (4) uu kup yang diterbitkan 8 okt 2026–30 jun 2027. 90% paling lambat 31 desember 2026 atau paling lama 1 bulan sejak stp terbit, sesuai kondisi lampiran; tidak melewati 30 juni 2027 membayar 10% sanksi. wajib membayar bagian sanksi sesuai persentase yang dipersyaratkan. lampiran a, hlm. 6–10">
+<td data-label="Lampiran"><span class="kp-pill">A</span> <span class="kp-group">Pengawasan Kepatuhan</span></td>
+<td data-label="Objek dan dasar hukum">Denda STP Pasal 14 ayat (4) UU KUP yang diterbitkan 8 Okt 2026–30 Jun 2027.</td>
+<td data-label="Besaran"><strong class="kp-rate">90%</strong></td>
+<td data-label="Periode atau batas waktu">Paling lambat 31 Desember 2026 atau paling lama 1 bulan sejak STP terbit, sesuai kondisi lampiran; tidak melewati 30 Juni 2027</td>
+<td data-label="Syarat khusus">Membayar 10% sanksi. Wajib membayar bagian sanksi sesuai persentase yang dipersyaratkan.</td><td data-label="Rujukan"><small>Lampiran A, hlm. 6–10</small></td></tr><tr data-group="A" data-rates="75%" data-search="a pengawasan kepatuhan denda stp pasal 14 ayat (4) uu kup yang diterbitkan 8 okt 2026–30 jun 2027. 75% setelah 1 bulan sejak stp terbit, paling lambat 30 juni 2027 membayar 25% sanksi. wajib membayar bagian sanksi sesuai persentase yang dipersyaratkan. lampiran a, hlm. 6–10">
+<td data-label="Lampiran"><span class="kp-pill">A</span> <span class="kp-group">Pengawasan Kepatuhan</span></td>
+<td data-label="Objek dan dasar hukum">Denda STP Pasal 14 ayat (4) UU KUP yang diterbitkan 8 Okt 2026–30 Jun 2027.</td>
+<td data-label="Besaran"><strong class="kp-rate">75%</strong></td>
+<td data-label="Periode atau batas waktu">Setelah 1 bulan sejak STP terbit, paling lambat 30 Juni 2027</td>
+<td data-label="Syarat khusus">Membayar 25% sanksi. Wajib membayar bagian sanksi sesuai persentase yang dipersyaratkan.</td><td data-label="Rujukan"><small>Lampiran A, hlm. 6–10</small></td></tr>
+<tr data-group="A" data-rates="90%" data-search="a pengawasan kepatuhan denda/bunga pasal 7, pasal 8, dan/atau pasal 9 uu kup ketika spt atau pembetulan telah disampaikan sebelum 8 okt 2026. 90% mengikuti batas waktu pembayaran 10% sanksi dalam lampiran a, halaman 9–10 membayar 10% sanksi. spt atau pembetulan telah disampaikan sebelum 8 oktober 2026; periksa tanggal terbit stp. lampiran a, hlm. 6–10">
+<td data-label="Lampiran"><span class="kp-pill">A</span> <span class="kp-group">Pengawasan Kepatuhan</span></td>
+<td data-label="Objek dan dasar hukum">Denda/bunga Pasal 7, Pasal 8, dan/atau Pasal 9 UU KUP ketika SPT atau pembetulan telah disampaikan sebelum 8 Okt 2026.</td>
+<td data-label="Besaran"><strong class="kp-rate">90%</strong></td>
+<td data-label="Periode atau batas waktu">Mengikuti batas waktu pembayaran 10% sanksi dalam Lampiran A, halaman 9–10</td>
+<td data-label="Syarat khusus">Membayar 10% sanksi. SPT atau pembetulan telah disampaikan sebelum 8 Oktober 2026; periksa tanggal terbit STP.</td><td data-label="Rujukan"><small>Lampiran A, hlm. 6–10</small></td></tr><tr data-group="A" data-rates="75%" data-search="a pengawasan kepatuhan denda/bunga pasal 7, pasal 8, dan/atau pasal 9 uu kup ketika spt atau pembetulan telah disampaikan sebelum 8 okt 2026. 75% mengikuti batas waktu pembayaran 25% sanksi dalam lampiran a, halaman 9–10 membayar 25% sanksi. spt atau pembetulan telah disampaikan sebelum 8 oktober 2026; periksa tanggal terbit stp. lampiran a, hlm. 6–10">
+<td data-label="Lampiran"><span class="kp-pill">A</span> <span class="kp-group">Pengawasan Kepatuhan</span></td>
+<td data-label="Objek dan dasar hukum">Denda/bunga Pasal 7, Pasal 8, dan/atau Pasal 9 UU KUP ketika SPT atau pembetulan telah disampaikan sebelum 8 Okt 2026.</td>
+<td data-label="Besaran"><strong class="kp-rate">75%</strong></td>
+<td data-label="Periode atau batas waktu">Mengikuti batas waktu pembayaran 25% sanksi dalam Lampiran A, halaman 9–10</td>
+<td data-label="Syarat khusus">Membayar 25% sanksi. SPT atau pembetulan telah disampaikan sebelum 8 Oktober 2026; periksa tanggal terbit STP.</td><td data-label="Rujukan"><small>Lampiran A, hlm. 6–10</small></td></tr>
+<tr data-group="A" data-rates="100%" data-search="a pengawasan kepatuhan bunga pasal 19 ayat (2) dan (3) uu kup. 100% pelunasan pokok 8 oktober–31 desember 2026; stp terbit 8 oktober 2026–30 juni 2027 persyaratan lainnya tetap mengikuti lampiran dan diktum keputusan. lampiran a, hlm. 6–10">
+<td data-label="Lampiran"><span class="kp-pill">A</span> <span class="kp-group">Pengawasan Kepatuhan</span></td>
+<td data-label="Objek dan dasar hukum">Bunga Pasal 19 ayat (2) dan (3) UU KUP.</td>
+<td data-label="Besaran"><strong class="kp-rate">100%</strong></td>
+<td data-label="Periode atau batas waktu">Pelunasan pokok 8 Oktober–31 Desember 2026; STP terbit 8 Oktober 2026–30 Juni 2027</td>
+<td data-label="Syarat khusus">Persyaratan lainnya tetap mengikuti lampiran dan diktum keputusan.</td><td data-label="Rujukan"><small>Lampiran A, hlm. 6–10</small></td></tr>
+<tr data-group="B" data-rates="100%" data-search="b pemeriksaan pajak sanksi dalam skpkb/skpkbt/skp pbb hasil pemeriksaan: pasal 13 ayat (2) dan (3), pasal 15 ayat (2), pasal 17c ayat (5), pasal 17d ayat (5) uu kup dan/atau pasal 10 ayat (3)–(4) uu pbb. 100% paling lambat 31 desember 2026 atau paling lama 1 bulan sejak ketetapan diterbitkan, sesuai syarat lampiran; batas akhir 30 juni 2027 persyaratan lainnya tetap mengikuti lampiran dan diktum keputusan. lampiran b, hlm. 11–12">
+<td data-label="Lampiran"><span class="kp-pill">B</span> <span class="kp-group">Pemeriksaan Pajak</span></td>
+<td data-label="Objek dan dasar hukum">Sanksi dalam SKPKB/SKPKBT/SKP PBB hasil pemeriksaan: Pasal 13 ayat (2) dan (3), Pasal 15 ayat (2), Pasal 17C ayat (5), Pasal 17D ayat (5) UU KUP dan/atau Pasal 10 ayat (3)–(4) UU PBB.</td>
+<td data-label="Besaran"><strong class="kp-rate">100%</strong></td>
+<td data-label="Periode atau batas waktu">Paling lambat 31 Desember 2026 atau paling lama 1 bulan sejak ketetapan diterbitkan, sesuai syarat lampiran; batas akhir 30 Juni 2027</td>
+<td data-label="Syarat khusus">Persyaratan lainnya tetap mengikuti lampiran dan diktum keputusan.</td><td data-label="Rujukan"><small>Lampiran B, hlm. 11–12</small></td></tr>
+<tr data-group="B" data-rates="50%" data-search="b pemeriksaan pajak jenis sanksi hasil pemeriksaan yang sama. 50% setelah 1 bulan hingga paling lama 2 bulan sejak ketetapan terbit; batas akhir 30 juni 2027 persyaratan lainnya tetap mengikuti lampiran dan diktum keputusan. lampiran b, hlm. 11–12">
+<td data-label="Lampiran"><span class="kp-pill">B</span> <span class="kp-group">Pemeriksaan Pajak</span></td>
+<td data-label="Objek dan dasar hukum">Jenis sanksi hasil pemeriksaan yang sama.</td>
+<td data-label="Besaran"><strong class="kp-rate">50%</strong></td>
+<td data-label="Periode atau batas waktu">Setelah 1 bulan hingga paling lama 2 bulan sejak ketetapan terbit; batas akhir 30 Juni 2027</td>
+<td data-label="Syarat khusus">Persyaratan lainnya tetap mengikuti lampiran dan diktum keputusan.</td><td data-label="Rujukan"><small>Lampiran B, hlm. 11–12</small></td></tr>
+<tr data-group="B" data-rates="25%" data-search="b pemeriksaan pajak jenis sanksi hasil pemeriksaan yang sama. 25% setelah 2 bulan sejak ketetapan terbit; batas akhir 30 juni 2027 persyaratan lainnya tetap mengikuti lampiran dan diktum keputusan. lampiran b, hlm. 11–12">
+<td data-label="Lampiran"><span class="kp-pill">B</span> <span class="kp-group">Pemeriksaan Pajak</span></td>
+<td data-label="Objek dan dasar hukum">Jenis sanksi hasil pemeriksaan yang sama.</td>
+<td data-label="Besaran"><strong class="kp-rate">25%</strong></td>
+<td data-label="Periode atau batas waktu">Setelah 2 bulan sejak ketetapan terbit; batas akhir 30 Juni 2027</td>
+<td data-label="Syarat khusus">Persyaratan lainnya tetap mengikuti lampiran dan diktum keputusan.</td><td data-label="Rujukan"><small>Lampiran B, hlm. 11–12</small></td></tr>
+<tr data-group="B" data-rates="90%" data-search="b pemeriksaan pajak denda/bunga stp pasal 7, pasal 8, pasal 9, dan/atau pasal 14 ayat (4) uu kup dalam kelompok pemeriksaan. 90% mengikuti batas pembayaran 10% sanksi dalam lampiran b, halaman 11–12 membayar 10% sanksi. bagian sanksi dibayar sesuai ketentuan lampiran b. lampiran b, hlm. 11–12">
+<td data-label="Lampiran"><span class="kp-pill">B</span> <span class="kp-group">Pemeriksaan Pajak</span></td>
+<td data-label="Objek dan dasar hukum">Denda/bunga STP Pasal 7, Pasal 8, Pasal 9, dan/atau Pasal 14 ayat (4) UU KUP dalam kelompok pemeriksaan.</td>
+<td data-label="Besaran"><strong class="kp-rate">90%</strong></td>
+<td data-label="Periode atau batas waktu">Mengikuti batas pembayaran 10% sanksi dalam Lampiran B, halaman 11–12</td>
+<td data-label="Syarat khusus">Membayar 10% sanksi. Bagian sanksi dibayar sesuai ketentuan Lampiran B.</td><td data-label="Rujukan"><small>Lampiran B, hlm. 11–12</small></td></tr><tr data-group="B" data-rates="75%" data-search="b pemeriksaan pajak denda/bunga stp pasal 7, pasal 8, pasal 9, dan/atau pasal 14 ayat (4) uu kup dalam kelompok pemeriksaan. 75% mengikuti batas pembayaran 25% sanksi dalam lampiran b, halaman 11–12 membayar 25% sanksi. bagian sanksi dibayar sesuai ketentuan lampiran b. lampiran b, hlm. 11–12">
+<td data-label="Lampiran"><span class="kp-pill">B</span> <span class="kp-group">Pemeriksaan Pajak</span></td>
+<td data-label="Objek dan dasar hukum">Denda/bunga STP Pasal 7, Pasal 8, Pasal 9, dan/atau Pasal 14 ayat (4) UU KUP dalam kelompok pemeriksaan.</td>
+<td data-label="Besaran"><strong class="kp-rate">75%</strong></td>
+<td data-label="Periode atau batas waktu">Mengikuti batas pembayaran 25% sanksi dalam Lampiran B, halaman 11–12</td>
+<td data-label="Syarat khusus">Membayar 25% sanksi. Bagian sanksi dibayar sesuai ketentuan Lampiran B.</td><td data-label="Rujukan"><small>Lampiran B, hlm. 11–12</small></td></tr>
+<tr data-group="C" data-rates="90%" data-search="c penagihan pajak stp sebelum 8 okt 2026: sanksi pasal 7 ayat (1), pasal 8 ayat (2)/(2a), dan/atau pasal 9 ayat (2a)/(2b) uu kup; baik ada maupun tidak ada keberatan pada ketetapan terkait. 90% 8 oktober–31 desember 2026 membayar 10% sanksi. pembayaran bagian sanksi sesuai besaran yang disyaratkan. lampiran c, hlm. 13–21">
+<td data-label="Lampiran"><span class="kp-pill">C</span> <span class="kp-group">Penagihan Pajak</span></td>
+<td data-label="Objek dan dasar hukum">STP sebelum 8 Okt 2026: sanksi Pasal 7 ayat (1), Pasal 8 ayat (2)/(2a), dan/atau Pasal 9 ayat (2a)/(2b) UU KUP; baik ada maupun tidak ada keberatan pada ketetapan terkait.</td>
+<td data-label="Besaran"><strong class="kp-rate">90%</strong></td>
+<td data-label="Periode atau batas waktu">8 Oktober–31 Desember 2026</td>
+<td data-label="Syarat khusus">Membayar 10% sanksi. Pembayaran bagian sanksi sesuai besaran yang disyaratkan.</td><td data-label="Rujukan"><small>Lampiran C, hlm. 13–21</small></td></tr><tr data-group="C" data-rates="75%" data-search="c penagihan pajak stp sebelum 8 okt 2026: sanksi pasal 7 ayat (1), pasal 8 ayat (2)/(2a), dan/atau pasal 9 ayat (2a)/(2b) uu kup; baik ada maupun tidak ada keberatan pada ketetapan terkait. 75% 1 januari–30 juni 2027 membayar 25% sanksi. pembayaran bagian sanksi sesuai besaran yang disyaratkan. lampiran c, hlm. 13–21">
+<td data-label="Lampiran"><span class="kp-pill">C</span> <span class="kp-group">Penagihan Pajak</span></td>
+<td data-label="Objek dan dasar hukum">STP sebelum 8 Okt 2026: sanksi Pasal 7 ayat (1), Pasal 8 ayat (2)/(2a), dan/atau Pasal 9 ayat (2a)/(2b) UU KUP; baik ada maupun tidak ada keberatan pada ketetapan terkait.</td>
+<td data-label="Besaran"><strong class="kp-rate">75%</strong></td>
+<td data-label="Periode atau batas waktu">1 Januari–30 Juni 2027</td>
+<td data-label="Syarat khusus">Membayar 25% sanksi. Pembayaran bagian sanksi sesuai besaran yang disyaratkan.</td><td data-label="Rujukan"><small>Lampiran C, hlm. 13–21</small></td></tr>
+<tr data-group="C" data-rates="90%" data-search="c penagihan pajak stp sebelum 8 okt 2026: denda pasal 14 ayat (4) uu kup, pada kondisi tidak diajukan keberatan. 90% 8 oktober–31 desember 2026 membayar 10% sanksi. pembayaran bagian sanksi sesuai besaran yang disyaratkan. lampiran c, hlm. 13–21">
+<td data-label="Lampiran"><span class="kp-pill">C</span> <span class="kp-group">Penagihan Pajak</span></td>
+<td data-label="Objek dan dasar hukum">STP sebelum 8 Okt 2026: denda Pasal 14 ayat (4) UU KUP, pada kondisi tidak diajukan keberatan.</td>
+<td data-label="Besaran"><strong class="kp-rate">90%</strong></td>
+<td data-label="Periode atau batas waktu">8 Oktober–31 Desember 2026</td>
+<td data-label="Syarat khusus">Membayar 10% sanksi. Pembayaran bagian sanksi sesuai besaran yang disyaratkan.</td><td data-label="Rujukan"><small>Lampiran C, hlm. 13–21</small></td></tr><tr data-group="C" data-rates="75%" data-search="c penagihan pajak stp sebelum 8 okt 2026: denda pasal 14 ayat (4) uu kup, pada kondisi tidak diajukan keberatan. 75% 1 januari–30 juni 2027 membayar 25% sanksi. pembayaran bagian sanksi sesuai besaran yang disyaratkan. lampiran c, hlm. 13–21">
+<td data-label="Lampiran"><span class="kp-pill">C</span> <span class="kp-group">Penagihan Pajak</span></td>
+<td data-label="Objek dan dasar hukum">STP sebelum 8 Okt 2026: denda Pasal 14 ayat (4) UU KUP, pada kondisi tidak diajukan keberatan.</td>
+<td data-label="Besaran"><strong class="kp-rate">75%</strong></td>
+<td data-label="Periode atau batas waktu">1 Januari–30 Juni 2027</td>
+<td data-label="Syarat khusus">Membayar 25% sanksi. Pembayaran bagian sanksi sesuai besaran yang disyaratkan.</td><td data-label="Rujukan"><small>Lampiran C, hlm. 13–21</small></td></tr>
+<tr data-group="C" data-rates="100%" data-search="c penagihan pajak skp/skp pbb sebelum 8 okt 2026 dan tidak diajukan keberatan: sanksi pasal 13 ayat (2)/(3), pasal 15 ayat (2), pasal 17c ayat (5), pasal 17d ayat (5) uu kup dan/atau pasal 10 ayat (3)/(4) uu pbb. 100% 8 oktober–31 desember 2026 pelunasan pokok pajak pada periode ini. lampiran c, hlm. 13–21">
+<td data-label="Lampiran"><span class="kp-pill">C</span> <span class="kp-group">Penagihan Pajak</span></td>
+<td data-label="Objek dan dasar hukum">SKP/SKP PBB sebelum 8 Okt 2026 dan tidak diajukan keberatan: sanksi Pasal 13 ayat (2)/(3), Pasal 15 ayat (2), Pasal 17C ayat (5), Pasal 17D ayat (5) UU KUP dan/atau Pasal 10 ayat (3)/(4) UU PBB.</td>
+<td data-label="Besaran"><strong class="kp-rate">100%</strong></td>
+<td data-label="Periode atau batas waktu">8 Oktober–31 Desember 2026</td>
+<td data-label="Syarat khusus">Pelunasan pokok pajak pada periode ini.</td><td data-label="Rujukan"><small>Lampiran C, hlm. 13–21</small></td></tr><tr data-group="C" data-rates="50%" data-search="c penagihan pajak skp/skp pbb sebelum 8 okt 2026 dan tidak diajukan keberatan: sanksi pasal 13 ayat (2)/(3), pasal 15 ayat (2), pasal 17c ayat (5), pasal 17d ayat (5) uu kup dan/atau pasal 10 ayat (3)/(4) uu pbb. 50% 1 januari–31 maret 2027 pelunasan pokok pajak pada periode ini. lampiran c, hlm. 13–21">
+<td data-label="Lampiran"><span class="kp-pill">C</span> <span class="kp-group">Penagihan Pajak</span></td>
+<td data-label="Objek dan dasar hukum">SKP/SKP PBB sebelum 8 Okt 2026 dan tidak diajukan keberatan: sanksi Pasal 13 ayat (2)/(3), Pasal 15 ayat (2), Pasal 17C ayat (5), Pasal 17D ayat (5) UU KUP dan/atau Pasal 10 ayat (3)/(4) UU PBB.</td>
+<td data-label="Besaran"><strong class="kp-rate">50%</strong></td>
+<td data-label="Periode atau batas waktu">1 Januari–31 Maret 2027</td>
+<td data-label="Syarat khusus">Pelunasan pokok pajak pada periode ini.</td><td data-label="Rujukan"><small>Lampiran C, hlm. 13–21</small></td></tr><tr data-group="C" data-rates="25%" data-search="c penagihan pajak skp/skp pbb sebelum 8 okt 2026 dan tidak diajukan keberatan: sanksi pasal 13 ayat (2)/(3), pasal 15 ayat (2), pasal 17c ayat (5), pasal 17d ayat (5) uu kup dan/atau pasal 10 ayat (3)/(4) uu pbb. 25% 1 april–30 juni 2027 pelunasan pokok pajak pada periode ini. lampiran c, hlm. 13–21">
+<td data-label="Lampiran"><span class="kp-pill">C</span> <span class="kp-group">Penagihan Pajak</span></td>
+<td data-label="Objek dan dasar hukum">SKP/SKP PBB sebelum 8 Okt 2026 dan tidak diajukan keberatan: sanksi Pasal 13 ayat (2)/(3), Pasal 15 ayat (2), Pasal 17C ayat (5), Pasal 17D ayat (5) UU KUP dan/atau Pasal 10 ayat (3)/(4) UU PBB.</td>
+<td data-label="Besaran"><strong class="kp-rate">25%</strong></td>
+<td data-label="Periode atau batas waktu">1 April–30 Juni 2027</td>
+<td data-label="Syarat khusus">Pelunasan pokok pajak pada periode ini.</td><td data-label="Rujukan"><small>Lampiran C, hlm. 13–21</small></td></tr>
+<tr data-group="C" data-rates="90%" data-search="c penagihan pajak jenis sanksi skp/skp pbb sebelum 8 okt 2026 sebagaimana baris di atas, dan pokok sudah lunas sebelum 8 okt 2026. 90% 8 oktober–31 desember 2026 membayar 10% sanksi. pembayaran bagian sanksi pada periode ini. lampiran c, hlm. 13–21">
+<td data-label="Lampiran"><span class="kp-pill">C</span> <span class="kp-group">Penagihan Pajak</span></td>
+<td data-label="Objek dan dasar hukum">Jenis sanksi SKP/SKP PBB sebelum 8 Okt 2026 sebagaimana baris di atas, dan pokok sudah lunas sebelum 8 Okt 2026.</td>
+<td data-label="Besaran"><strong class="kp-rate">90%</strong></td>
+<td data-label="Periode atau batas waktu">8 Oktober–31 Desember 2026</td>
+<td data-label="Syarat khusus">Membayar 10% sanksi. Pembayaran bagian sanksi pada periode ini.</td><td data-label="Rujukan"><small>Lampiran C, hlm. 13–21</small></td></tr><tr data-group="C" data-rates="75%" data-search="c penagihan pajak jenis sanksi skp/skp pbb sebelum 8 okt 2026 sebagaimana baris di atas, dan pokok sudah lunas sebelum 8 okt 2026. 75% 1 januari–30 juni 2027 membayar 25% sanksi. pembayaran bagian sanksi pada periode ini. lampiran c, hlm. 13–21">
+<td data-label="Lampiran"><span class="kp-pill">C</span> <span class="kp-group">Penagihan Pajak</span></td>
+<td data-label="Objek dan dasar hukum">Jenis sanksi SKP/SKP PBB sebelum 8 Okt 2026 sebagaimana baris di atas, dan pokok sudah lunas sebelum 8 Okt 2026.</td>
+<td data-label="Besaran"><strong class="kp-rate">75%</strong></td>
+<td data-label="Periode atau batas waktu">1 Januari–30 Juni 2027</td>
+<td data-label="Syarat khusus">Membayar 25% sanksi. Pembayaran bagian sanksi pada periode ini.</td><td data-label="Rujukan"><small>Lampiran C, hlm. 13–21</small></td></tr>
+<tr data-group="C" data-rates="100%" data-search="c penagihan pajak stp/stp pbb sebelum 8 okt 2026 tanpa keberatan terkait: pasal 19 ayat (1) uu kup dan/atau pasal 11 ayat (3) uu pbb. 100% 8 oktober–31 desember 2026 pelunasan pokok pajak pada periode ini. lampiran c, hlm. 13–21">
+<td data-label="Lampiran"><span class="kp-pill">C</span> <span class="kp-group">Penagihan Pajak</span></td>
+<td data-label="Objek dan dasar hukum">STP/STP PBB sebelum 8 Okt 2026 tanpa keberatan terkait: Pasal 19 ayat (1) UU KUP dan/atau Pasal 11 ayat (3) UU PBB.</td>
+<td data-label="Besaran"><strong class="kp-rate">100%</strong></td>
+<td data-label="Periode atau batas waktu">8 Oktober–31 Desember 2026</td>
+<td data-label="Syarat khusus">Pelunasan pokok pajak pada periode ini.</td><td data-label="Rujukan"><small>Lampiran C, hlm. 13–21</small></td></tr><tr data-group="C" data-rates="50%" data-search="c penagihan pajak stp/stp pbb sebelum 8 okt 2026 tanpa keberatan terkait: pasal 19 ayat (1) uu kup dan/atau pasal 11 ayat (3) uu pbb. 50% 1 januari–31 maret 2027 pelunasan pokok pajak pada periode ini. lampiran c, hlm. 13–21">
+<td data-label="Lampiran"><span class="kp-pill">C</span> <span class="kp-group">Penagihan Pajak</span></td>
+<td data-label="Objek dan dasar hukum">STP/STP PBB sebelum 8 Okt 2026 tanpa keberatan terkait: Pasal 19 ayat (1) UU KUP dan/atau Pasal 11 ayat (3) UU PBB.</td>
+<td data-label="Besaran"><strong class="kp-rate">50%</strong></td>
+<td data-label="Periode atau batas waktu">1 Januari–31 Maret 2027</td>
+<td data-label="Syarat khusus">Pelunasan pokok pajak pada periode ini.</td><td data-label="Rujukan"><small>Lampiran C, hlm. 13–21</small></td></tr><tr data-group="C" data-rates="25%" data-search="c penagihan pajak stp/stp pbb sebelum 8 okt 2026 tanpa keberatan terkait: pasal 19 ayat (1) uu kup dan/atau pasal 11 ayat (3) uu pbb. 25% 1 april–30 juni 2027 pelunasan pokok pajak pada periode ini. lampiran c, hlm. 13–21">
+<td data-label="Lampiran"><span class="kp-pill">C</span> <span class="kp-group">Penagihan Pajak</span></td>
+<td data-label="Objek dan dasar hukum">STP/STP PBB sebelum 8 Okt 2026 tanpa keberatan terkait: Pasal 19 ayat (1) UU KUP dan/atau Pasal 11 ayat (3) UU PBB.</td>
+<td data-label="Besaran"><strong class="kp-rate">25%</strong></td>
+<td data-label="Periode atau batas waktu">1 April–30 Juni 2027</td>
+<td data-label="Syarat khusus">Pelunasan pokok pajak pada periode ini.</td><td data-label="Rujukan"><small>Lampiran C, hlm. 13–21</small></td></tr>
+<tr data-group="C" data-rates="100%" data-search="c penagihan pajak stp sebelum 8 okt 2026 dan ketetapan terkait diajukan keberatan: sanksi pasal 19 ayat (1)–(3) uu kup. 100% 8 oktober–31 desember 2026 pelunasan utang pajak, bukan hanya pokok pajak. lampiran c, hlm. 13–21">
+<td data-label="Lampiran"><span class="kp-pill">C</span> <span class="kp-group">Penagihan Pajak</span></td>
+<td data-label="Objek dan dasar hukum">STP sebelum 8 Okt 2026 dan ketetapan terkait diajukan keberatan: sanksi Pasal 19 ayat (1)–(3) UU KUP.</td>
+<td data-label="Besaran"><strong class="kp-rate">100%</strong></td>
+<td data-label="Periode atau batas waktu">8 Oktober–31 Desember 2026</td>
+<td data-label="Syarat khusus">Pelunasan utang pajak, bukan hanya pokok pajak.</td><td data-label="Rujukan"><small>Lampiran C, hlm. 13–21</small></td></tr><tr data-group="C" data-rates="50%" data-search="c penagihan pajak stp sebelum 8 okt 2026 dan ketetapan terkait diajukan keberatan: sanksi pasal 19 ayat (1)–(3) uu kup. 50% 1 januari–31 maret 2027 pelunasan utang pajak, bukan hanya pokok pajak. lampiran c, hlm. 13–21">
+<td data-label="Lampiran"><span class="kp-pill">C</span> <span class="kp-group">Penagihan Pajak</span></td>
+<td data-label="Objek dan dasar hukum">STP sebelum 8 Okt 2026 dan ketetapan terkait diajukan keberatan: sanksi Pasal 19 ayat (1)–(3) UU KUP.</td>
+<td data-label="Besaran"><strong class="kp-rate">50%</strong></td>
+<td data-label="Periode atau batas waktu">1 Januari–31 Maret 2027</td>
+<td data-label="Syarat khusus">Pelunasan utang pajak, bukan hanya pokok pajak.</td><td data-label="Rujukan"><small>Lampiran C, hlm. 13–21</small></td></tr><tr data-group="C" data-rates="25%" data-search="c penagihan pajak stp sebelum 8 okt 2026 dan ketetapan terkait diajukan keberatan: sanksi pasal 19 ayat (1)–(3) uu kup. 25% 1 april–30 juni 2027 pelunasan utang pajak, bukan hanya pokok pajak. lampiran c, hlm. 13–21">
+<td data-label="Lampiran"><span class="kp-pill">C</span> <span class="kp-group">Penagihan Pajak</span></td>
+<td data-label="Objek dan dasar hukum">STP sebelum 8 Okt 2026 dan ketetapan terkait diajukan keberatan: sanksi Pasal 19 ayat (1)–(3) UU KUP.</td>
+<td data-label="Besaran"><strong class="kp-rate">25%</strong></td>
+<td data-label="Periode atau batas waktu">1 April–30 Juni 2027</td>
+<td data-label="Syarat khusus">Pelunasan utang pajak, bukan hanya pokok pajak.</td><td data-label="Rujukan"><small>Lampiran C, hlm. 13–21</small></td></tr>
+<tr data-group="C" data-rates="90%" data-search="c penagihan pajak stp/stp pbb sebelum 8 okt 2026 dan kewajiban yang disyaratkan sudah lunas sebelum 8 okt 2026, untuk kelompok pasal 19 uu kup/pasal 11 ayat (3) uu pbb tertentu. 90% 8 oktober–31 desember 2026 membayar 10% sanksi. pembayaran bagian sanksi; status keberatan menentukan kewajiban yang harus lunas. lampiran c, hlm. 13–21">
+<td data-label="Lampiran"><span class="kp-pill">C</span> <span class="kp-group">Penagihan Pajak</span></td>
+<td data-label="Objek dan dasar hukum">STP/STP PBB sebelum 8 Okt 2026 dan kewajiban yang disyaratkan sudah lunas sebelum 8 Okt 2026, untuk kelompok Pasal 19 UU KUP/Pasal 11 ayat (3) UU PBB tertentu.</td>
+<td data-label="Besaran"><strong class="kp-rate">90%</strong></td>
+<td data-label="Periode atau batas waktu">8 Oktober–31 Desember 2026</td>
+<td data-label="Syarat khusus">Membayar 10% sanksi. Pembayaran bagian sanksi; status keberatan menentukan kewajiban yang harus lunas.</td><td data-label="Rujukan"><small>Lampiran C, hlm. 13–21</small></td></tr><tr data-group="C" data-rates="75%" data-search="c penagihan pajak stp/stp pbb sebelum 8 okt 2026 dan kewajiban yang disyaratkan sudah lunas sebelum 8 okt 2026, untuk kelompok pasal 19 uu kup/pasal 11 ayat (3) uu pbb tertentu. 75% 1 januari–30 juni 2027 membayar 25% sanksi. pembayaran bagian sanksi; status keberatan menentukan kewajiban yang harus lunas. lampiran c, hlm. 13–21">
+<td data-label="Lampiran"><span class="kp-pill">C</span> <span class="kp-group">Penagihan Pajak</span></td>
+<td data-label="Objek dan dasar hukum">STP/STP PBB sebelum 8 Okt 2026 dan kewajiban yang disyaratkan sudah lunas sebelum 8 Okt 2026, untuk kelompok Pasal 19 UU KUP/Pasal 11 ayat (3) UU PBB tertentu.</td>
+<td data-label="Besaran"><strong class="kp-rate">75%</strong></td>
+<td data-label="Periode atau batas waktu">1 Januari–30 Juni 2027</td>
+<td data-label="Syarat khusus">Membayar 25% sanksi. Pembayaran bagian sanksi; status keberatan menentukan kewajiban yang harus lunas.</td><td data-label="Rujukan"><small>Lampiran C, hlm. 13–21</small></td></tr>
+<tr data-group="C" data-rates="100%" data-search="c penagihan pajak stp/stp pbb yang terbit 8 okt 2026–30 jun 2027: sanksi pasal 19 ayat (1)–(2) uu kup dan/atau pasal 11 ayat (3) uu pbb. 100% 8 oktober–31 desember 2026 jika keberatan diajukan, lunasi utang pajak; jika tidak, lunasi pokok pajak. lampiran c, hlm. 13–21">
+<td data-label="Lampiran"><span class="kp-pill">C</span> <span class="kp-group">Penagihan Pajak</span></td>
+<td data-label="Objek dan dasar hukum">STP/STP PBB yang terbit 8 Okt 2026–30 Jun 2027: sanksi Pasal 19 ayat (1)–(2) UU KUP dan/atau Pasal 11 ayat (3) UU PBB.</td>
+<td data-label="Besaran"><strong class="kp-rate">100%</strong></td>
+<td data-label="Periode atau batas waktu">8 Oktober–31 Desember 2026</td>
+<td data-label="Syarat khusus">Jika keberatan diajukan, lunasi utang pajak; jika tidak, lunasi pokok pajak.</td><td data-label="Rujukan"><small>Lampiran C, hlm. 13–21</small></td></tr><tr data-group="C" data-rates="50%" data-search="c penagihan pajak stp/stp pbb yang terbit 8 okt 2026–30 jun 2027: sanksi pasal 19 ayat (1)–(2) uu kup dan/atau pasal 11 ayat (3) uu pbb. 50% 1 januari–31 maret 2027 jika keberatan diajukan, lunasi utang pajak; jika tidak, lunasi pokok pajak. lampiran c, hlm. 13–21">
+<td data-label="Lampiran"><span class="kp-pill">C</span> <span class="kp-group">Penagihan Pajak</span></td>
+<td data-label="Objek dan dasar hukum">STP/STP PBB yang terbit 8 Okt 2026–30 Jun 2027: sanksi Pasal 19 ayat (1)–(2) UU KUP dan/atau Pasal 11 ayat (3) UU PBB.</td>
+<td data-label="Besaran"><strong class="kp-rate">50%</strong></td>
+<td data-label="Periode atau batas waktu">1 Januari–31 Maret 2027</td>
+<td data-label="Syarat khusus">Jika keberatan diajukan, lunasi utang pajak; jika tidak, lunasi pokok pajak.</td><td data-label="Rujukan"><small>Lampiran C, hlm. 13–21</small></td></tr><tr data-group="C" data-rates="25%" data-search="c penagihan pajak stp/stp pbb yang terbit 8 okt 2026–30 jun 2027: sanksi pasal 19 ayat (1)–(2) uu kup dan/atau pasal 11 ayat (3) uu pbb. 25% 1 april–30 juni 2027 jika keberatan diajukan, lunasi utang pajak; jika tidak, lunasi pokok pajak. lampiran c, hlm. 13–21">
+<td data-label="Lampiran"><span class="kp-pill">C</span> <span class="kp-group">Penagihan Pajak</span></td>
+<td data-label="Objek dan dasar hukum">STP/STP PBB yang terbit 8 Okt 2026–30 Jun 2027: sanksi Pasal 19 ayat (1)–(2) UU KUP dan/atau Pasal 11 ayat (3) UU PBB.</td>
+<td data-label="Besaran"><strong class="kp-rate">25%</strong></td>
+<td data-label="Periode atau batas waktu">1 April–30 Juni 2027</td>
+<td data-label="Syarat khusus">Jika keberatan diajukan, lunasi utang pajak; jika tidak, lunasi pokok pajak.</td><td data-label="Rujukan"><small>Lampiran C, hlm. 13–21</small></td></tr>
+<tr data-group="C" data-rates="90%" data-search="c penagihan pajak stp/stp pbb yang terbit 8 okt 2026–30 jun 2027, apabila utang/pokok sesuai status keberatan telah lunas sebelum 8 okt 2026. 90% batas pembayaran 10% sanksi mengikuti lampiran c, halaman 20–21; paling lambat 31 desember 2026 atau tenggat relatif stp membayar 10% sanksi. status keberatan serta tanggal terbit stp menentukan batas yang tepat. lampiran c, hlm. 13–21">
+<td data-label="Lampiran"><span class="kp-pill">C</span> <span class="kp-group">Penagihan Pajak</span></td>
+<td data-label="Objek dan dasar hukum">STP/STP PBB yang terbit 8 Okt 2026–30 Jun 2027, apabila utang/pokok sesuai status keberatan telah lunas sebelum 8 Okt 2026.</td>
+<td data-label="Besaran"><strong class="kp-rate">90%</strong></td>
+<td data-label="Periode atau batas waktu">Batas pembayaran 10% sanksi mengikuti Lampiran C, halaman 20–21; paling lambat 31 Desember 2026 atau tenggat relatif STP</td>
+<td data-label="Syarat khusus">Membayar 10% sanksi. Status keberatan serta tanggal terbit STP menentukan batas yang tepat.</td><td data-label="Rujukan"><small>Lampiran C, hlm. 13–21</small></td></tr><tr data-group="C" data-rates="75%" data-search="c penagihan pajak stp/stp pbb yang terbit 8 okt 2026–30 jun 2027, apabila utang/pokok sesuai status keberatan telah lunas sebelum 8 okt 2026. 75% batas pembayaran 25% sanksi mengikuti lampiran c, halaman 20–21; paling lambat 30 juni 2027 membayar 25% sanksi. status keberatan serta tanggal terbit stp menentukan batas yang tepat. lampiran c, hlm. 13–21">
+<td data-label="Lampiran"><span class="kp-pill">C</span> <span class="kp-group">Penagihan Pajak</span></td>
+<td data-label="Objek dan dasar hukum">STP/STP PBB yang terbit 8 Okt 2026–30 Jun 2027, apabila utang/pokok sesuai status keberatan telah lunas sebelum 8 Okt 2026.</td>
+<td data-label="Besaran"><strong class="kp-rate">75%</strong></td>
+<td data-label="Periode atau batas waktu">Batas pembayaran 25% sanksi mengikuti Lampiran C, halaman 20–21; paling lambat 30 Juni 2027</td>
+<td data-label="Syarat khusus">Membayar 25% sanksi. Status keberatan serta tanggal terbit STP menentukan batas yang tepat.</td><td data-label="Rujukan"><small>Lampiran C, hlm. 13–21</small></td></tr>
+<tr data-group="D" data-rates="100%" data-search="d basis data &amp; pps wp baru terdaftar atau pkp baru dikukuhkan, terkait sanksi pasal 7 ayat (1) dan/atau pasal 9 ayat (2a)/(2b) uu kup atas periode spt yang ditentukan. 100% 8 oktober–31 desember 2026 pendaftaran atau pengukuhan dan penyampaian spt sesuai ketentuan. lampiran d, hlm. 22–24">
+<td data-label="Lampiran"><span class="kp-pill">D</span> <span class="kp-group">Basis Data &amp; PPS</span></td>
+<td data-label="Objek dan dasar hukum">WP baru terdaftar atau PKP baru dikukuhkan, terkait sanksi Pasal 7 ayat (1) dan/atau Pasal 9 ayat (2a)/(2b) UU KUP atas periode SPT yang ditentukan.</td>
+<td data-label="Besaran"><strong class="kp-rate">100%</strong></td>
+<td data-label="Periode atau batas waktu">8 Oktober–31 Desember 2026</td>
+<td data-label="Syarat khusus">Pendaftaran atau pengukuhan dan penyampaian SPT sesuai ketentuan.</td><td data-label="Rujukan"><small>Lampiran D, hlm. 22–24</small></td></tr>
+<tr data-group="D" data-rates="50%" data-search="d basis data &amp; pps kelompok baru terdaftar/dikukuhkan yang sama. 50% 1 januari–31 maret 2027 pendaftaran atau pengukuhan dan penyampaian spt sesuai ketentuan. lampiran d, hlm. 22–24">
+<td data-label="Lampiran"><span class="kp-pill">D</span> <span class="kp-group">Basis Data &amp; PPS</span></td>
+<td data-label="Objek dan dasar hukum">Kelompok baru terdaftar/dikukuhkan yang sama.</td>
+<td data-label="Besaran"><strong class="kp-rate">50%</strong></td>
+<td data-label="Periode atau batas waktu">1 Januari–31 Maret 2027</td>
+<td data-label="Syarat khusus">Pendaftaran atau pengukuhan dan penyampaian SPT sesuai ketentuan.</td><td data-label="Rujukan"><small>Lampiran D, hlm. 22–24</small></td></tr>
+<tr data-group="D" data-rates="25%" data-search="d basis data &amp; pps kelompok baru terdaftar/dikukuhkan yang sama. 25% 1 april–30 juni 2027 pendaftaran atau pengukuhan dan penyampaian spt sesuai ketentuan. lampiran d, hlm. 22–24">
+<td data-label="Lampiran"><span class="kp-pill">D</span> <span class="kp-group">Basis Data &amp; PPS</span></td>
+<td data-label="Objek dan dasar hukum">Kelompok baru terdaftar/dikukuhkan yang sama.</td>
+<td data-label="Besaran"><strong class="kp-rate">25%</strong></td>
+<td data-label="Periode atau batas waktu">1 April–30 Juni 2027</td>
+<td data-label="Syarat khusus">Pendaftaran atau pengukuhan dan penyampaian SPT sesuai ketentuan.</td><td data-label="Rujukan"><small>Lampiran D, hlm. 22–24</small></td></tr>
+<tr data-group="D" data-rates="100%" data-search="d basis data &amp; pps skpkb/skpkbt hasil pemeriksaan atas harta yang belum/kurang diungkapkan dalam program pengungkapan sukarela (pps), pasal 13 ayat (2) dan/atau pasal 15 ayat (2) uu kup. 100% paling lama 1 bulan sejak ketetapan terbit; batas akhir 31 desember 2027 pokok pajak dilunasi dalam tenggat; ketetapan diterbitkan 8 oktober 2026–31 desember 2027. lampiran d, hlm. 22–24">
+<td data-label="Lampiran"><span class="kp-pill">D</span> <span class="kp-group">Basis Data &amp; PPS</span></td>
+<td data-label="Objek dan dasar hukum">SKPKB/SKPKBT hasil pemeriksaan atas harta yang belum/kurang diungkapkan dalam Program Pengungkapan Sukarela (PPS), Pasal 13 ayat (2) dan/atau Pasal 15 ayat (2) UU KUP.</td>
+<td data-label="Besaran"><strong class="kp-rate">100%</strong></td>
+<td data-label="Periode atau batas waktu">Paling lama 1 bulan sejak ketetapan terbit; batas akhir 31 Desember 2027</td>
+<td data-label="Syarat khusus">Pokok pajak dilunasi dalam tenggat; ketetapan diterbitkan 8 Oktober 2026–31 Desember 2027.</td><td data-label="Rujukan"><small>Lampiran D, hlm. 22–24</small></td></tr><tr data-group="D" data-rates="50%" data-search="d basis data &amp; pps skpkb/skpkbt hasil pemeriksaan atas harta yang belum/kurang diungkapkan dalam program pengungkapan sukarela (pps), pasal 13 ayat (2) dan/atau pasal 15 ayat (2) uu kup. 50% setelah 1 bulan hingga paling lama 2 bulan sejak ketetapan terbit; batas akhir 31 desember 2027 pokok pajak dilunasi dalam tenggat; ketetapan diterbitkan 8 oktober 2026–31 desember 2027. lampiran d, hlm. 22–24">
+<td data-label="Lampiran"><span class="kp-pill">D</span> <span class="kp-group">Basis Data &amp; PPS</span></td>
+<td data-label="Objek dan dasar hukum">SKPKB/SKPKBT hasil pemeriksaan atas harta yang belum/kurang diungkapkan dalam Program Pengungkapan Sukarela (PPS), Pasal 13 ayat (2) dan/atau Pasal 15 ayat (2) UU KUP.</td>
+<td data-label="Besaran"><strong class="kp-rate">50%</strong></td>
+<td data-label="Periode atau batas waktu">Setelah 1 bulan hingga paling lama 2 bulan sejak ketetapan terbit; batas akhir 31 Desember 2027</td>
+<td data-label="Syarat khusus">Pokok pajak dilunasi dalam tenggat; ketetapan diterbitkan 8 Oktober 2026–31 Desember 2027.</td><td data-label="Rujukan"><small>Lampiran D, hlm. 22–24</small></td></tr><tr data-group="D" data-rates="25%" data-search="d basis data &amp; pps skpkb/skpkbt hasil pemeriksaan atas harta yang belum/kurang diungkapkan dalam program pengungkapan sukarela (pps), pasal 13 ayat (2) dan/atau pasal 15 ayat (2) uu kup. 25% setelah 2 bulan sejak ketetapan terbit; batas akhir 31 desember 2027 pokok pajak dilunasi dalam tenggat; ketetapan diterbitkan 8 oktober 2026–31 desember 2027. lampiran d, hlm. 22–24">
+<td data-label="Lampiran"><span class="kp-pill">D</span> <span class="kp-group">Basis Data &amp; PPS</span></td>
+<td data-label="Objek dan dasar hukum">SKPKB/SKPKBT hasil pemeriksaan atas harta yang belum/kurang diungkapkan dalam Program Pengungkapan Sukarela (PPS), Pasal 13 ayat (2) dan/atau Pasal 15 ayat (2) UU KUP.</td>
+<td data-label="Besaran"><strong class="kp-rate">25%</strong></td>
+<td data-label="Periode atau batas waktu">Setelah 2 bulan sejak ketetapan terbit; batas akhir 31 Desember 2027</td>
+<td data-label="Syarat khusus">Pokok pajak dilunasi dalam tenggat; ketetapan diterbitkan 8 Oktober 2026–31 Desember 2027.</td><td data-label="Rujukan"><small>Lampiran D, hlm. 22–24</small></td></tr>
+</tbody></table><div class="kp-none" id="kp239-none">Tidak ada hasil yang cocok. Coba kata kunci atau filter lain.</div></div>
+ <p class="kp-foot">Sumber: KEP-239/PJ/2026 Lampiran A–D (hlm. 6–24). Besaran dan periode dipisahkan dalam baris yang berbeda. Teks tabel merupakan ringkasan, bukan reproduksi penuh. Lampiran E berisi contoh penerapan; Lampiran F–H memuat format surat dan petikan persyaratan.</p>
+ <details><summary>Apa yang harus diperiksa sebelum mengajukan permohonan?</summary><p>Pastikan dasar hukum sanksi, nomor dan tanggal STP/SKP, masa atau tahun pajak, apakah sengketa/upaya hukum masih berlangsung, tanggal pembayaran pokok atau bagian sanksi, dan apakah sanksi yang dimohonkan belum dibayar. Perhatikan persyaratan pernyataan serta dokumen pendukung pada Diktum KEEMPAT dan Lampiran F–H. Permohonan kepada Direktur Jenderal Pajak diajukan paling lambat 1 Oktober 2028.</p></details>
+ <details><summary>Apakah pengurangan 90% berarti cukup bayar 10%?</summary><p>Tidak untuk semua kasus. Hanya baris tertentu mensyaratkan pembayaran sebagian sanksi; syarat lain, termasuk waktu penerbitan surat, pelunasan pokok atau utang pajak, keberatan, dan batas waktu tetap harus dipenuhi.</p></details>
 </section>
+<script>
+(function(){
+ function init(){
+ const root=document.getElementById('tabel-interaktif-kep239');if(!root||root.dataset.kpReady)return;root.dataset.kpReady='1';
+ const $=s=>root.querySelector(s),rows=[...root.querySelectorAll('tbody tr')];
+ const search=$('#kp239-search'),group=$('#kp239-group'),rate=$('#kp239-rate'),count=$('#kp239-count'),none=$('#kp239-none');
+ function filtered(){return rows.filter(row=>!row.hidden)}
+ function update(){const q=search.value.trim().toLocaleLowerCase('id');const g=group.value;const r=rate.value;let n=0;rows.forEach(row=>{const ok=(!q||row.dataset.search.includes(q))&&(!g||row.dataset.group===g)&&(!r||row.dataset.rates.split(' ').includes(r));row.hidden=!ok;if(ok)n++});count.textContent=n+' dari '+rows.length+' pilihan besaran dan periode ditampilkan';none.style.display=n?'none':'block'}
+ [search,group,rate].forEach(el=>el.addEventListener('input',update));$('#kp239-reset').addEventListener('click',()=>{search.value='';group.value='';rate.value='';update();search.focus()});
+ $('#kp239-export').addEventListener('click',()=>{const hdr=['Lampiran','Objek dan dasar hukum','Besaran','Periode atau batas waktu','Syarat khusus','Rujukan'];const data=filtered().map(row=>[...row.cells].map(cell=>cell.textContent.replace(/\s+/g,' ').trim()));const csv=[hdr,...data].map(vals=>vals.map(v=>'"'+v.replace(/"/g,'""')+'"').join(',')).join('\r\n');const url=URL.createObjectURL(new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='kabayan-kep239-hasil-pencarian.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)});
+ update();
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+
 <section id="contoh-lampiran-kep">
 <h2>Lampiran E: Contoh Perhitungan Resmi untuk Membaca Persentase</h2>
 <p>Lampiran E (halaman 25–43) memperlihatkan penerapan tabel kebijakan. Berikut sejumlah contoh dengan angka resmi yang membantu membedakan kasus; untuk jenis kasus lain gunakan bagian dan subcontoh yang bersesuaian pada Lampiran E.</p>
