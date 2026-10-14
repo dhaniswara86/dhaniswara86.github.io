@@ -87,6 +87,7 @@ sidebar_note: "Besaran pengurangan bergantung pada jenis sanksi dan syarat yang 
 <h3>Temukan Program Pengurangan Sanksi (PSA) yang cocok untuk Anda</h3></div>
 <div class="kp-controls"><div><label for="kp239-group">Jenis masalah</label><select id="kp239-group"><option value="">Semua masalah</option><option value="spt">Terlambat lapor SPT</option><option value="pembetulan">Pembetulan SPT</option><option value="bayar">Terlambat bayar/setor</option><option value="stp">Menerima STP</option><option value="skp">Menerima SKP hasil pemeriksaan</option><option value="lama">SKP/STP yang sudah terbit sebelumnya</option><option value="baru">Baru terdaftar / PKP baru</option><option value="pps">Terkait PPS</option></select></div><div class="kp-reset-wrap"><button id="kp239-reset" type="button">Reset filter</button></div></div>
 <div class="kp-tools"><span aria-live="polite" class="kp-count" id="kp239-count" role="status"></span><button class="kp-export" id="kp239-export" type="button">Unduh CSV hasil filter</button></div>
+<div class="kp-grouped-results" id="kp239-grouped-results" aria-label="Kelompok kasus dan pilihan pengurangan"></div>
 <div class="kp-scroll"><table id="kp239-table"><thead><tr><th scope="col">Jenis kasus</th><th scope="col">Objek dan dasar hukum</th><th scope="col">Besaran</th><th scope="col">Periode atau batas waktu</th><th scope="col">Syarat khusus</th><th scope="col">Rujukan</th></tr></thead><tbody>
 <tr data-group="A" data-issue="spt" data-rates="100%" data-search="a pengawasan kepatuhan denda keterlambatan spt, pasal 7 ayat (1) uu kup; spt tahunan pph sampai tahun pajak 2025 atau spt masa sampai september 2026, berstatus kurang bayar. 100% 8 oktober–31 desember 2026 spt terlambat disampaikan pada periode ini. lampiran a, hlm. 6–10">
 <td data-label="Jenis kasus"><strong>Terlambat lapor SPT</strong><small style="display:block;color:#687587;font-size:11px">Lampiran A</small></td>
@@ -369,14 +370,96 @@ sidebar_note: "Besaran pengurangan bergantung pada jenis sanksi dan syarat yang 
 <script>
 (function(){
  function init(){
- const root=document.getElementById('tabel-interaktif-kep239');if(!root||root.dataset.kpReady)return;root.dataset.kpReady='1';
- const $=s=>root.querySelector(s),rows=[...root.querySelectorAll('tbody tr')];
- const group=$('#kp239-group'),count=$('#kp239-count'),none=$('#kp239-none');
- function filtered(){return rows.filter(row=>!row.hidden)}
- function update(){const g=group.value;let n=0;rows.forEach(row=>{const ok=!g||row.dataset.issue===g;row.hidden=!ok;if(ok)n++});count.textContent=n+' dari '+rows.length+' pilihan besaran dan periode ditampilkan';none.style.display=n?'none':'block'}
- group.addEventListener('change',update);$('#kp239-reset').addEventListener('click',()=>{group.value='';update();group.focus()});
- $('#kp239-export').addEventListener('click',()=>{const hdr=['Jenis kasus','Objek dan dasar hukum','Besaran','Periode atau batas waktu','Syarat khusus','Rujukan'];const data=filtered().map(row=>[...row.cells].map(cell=>cell.textContent.replace(/\s+/g,' ').trim()));const csv=[hdr,...data].map(vals=>vals.map(v=>'"'+v.replace(/"/g,'""')+'"').join(',')).join('\r\n');const url=URL.createObjectURL(new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='kabayan-kep239-hasil-pencarian.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)});
- update();
+  const root=document.getElementById('tabel-interaktif-kep239');
+  if(!root||root.dataset.kpReady)return;
+  const table=root.querySelector('#kp239-table');
+  const rows=[...table.querySelectorAll('tbody tr')];
+  const issueSelect=root.querySelector('#kp239-group');
+  const count=root.querySelector('#kp239-count');
+  const result=root.querySelector('#kp239-grouped-results');
+  const noResult=root.querySelector('#kp239-none');
+  const groups=new Map();
+  // Only merge when the issue category AND full substantive object markup are identical.
+  // Different sanction objects, status and conditions remain separate.
+  rows.forEach((row)=>{
+   const cells=[...row.cells];
+   const key=row.dataset.issue+'|'+cells[1].innerHTML.trim();
+   if(!groups.has(key))groups.set(key,[]);
+   groups.get(key).push(row);
+  });
+  function el(tag,className,text){const x=document.createElement(tag);if(className)x.className=className;if(text!==undefined)x.textContent=text;return x}
+  function conditionItems(row){
+   const list=row.cells[4].querySelector('ul');
+   return list?[...list.children].filter(n=>n.matches('li')).map(n=>n.textContent.trim()):[row.cells[4].textContent.trim()].filter(Boolean);
+  }
+  const records=[];
+  for(const groupRows of groups.values()){
+   const first=groupRows[0];
+   const box=el('section','kp-case-card');
+   box.dataset.issue=first.dataset.issue;
+   const head=el('header','kp-case-head');
+   const headLeft=el('div','kp-case-heading');
+   headLeft.append(el('div','kp-case-kind',first.cells[0].querySelector('strong')?.textContent.trim()||first.cells[0].textContent.trim()));
+   headLeft.append(el('div','kp-case-ref',first.cells[5].textContent.trim()));
+   head.append(headLeft);
+   if(groupRows.length>1) head.append(el('span','kp-case-count',groupRows.length+' pilihan'));
+   box.append(head);
+   const obj=el('div','kp-case-object');
+   const cloned=first.cells[1].querySelector('.kp-objek')?.cloneNode(true)||first.cells[1].cloneNode(true);
+   // Clone of the explanation and legal-reference details remains interactive on its own.
+   obj.append(cloned);box.append(obj);
+   const all=groupRows.map(conditionItems);
+   const common=all[0].filter(x=>all.every(xs=>xs.includes(x)));
+   const commonMeaning=cloned.textContent.toLowerCase();
+   const nonRedundant=common.filter(x=>!(x.toLowerCase().includes('berstatus kurang bayar')&&commonMeaning.includes('status spt')&&commonMeaning.includes('kurang bayar')));
+   if(nonRedundant.length){
+    const shared=el('div','kp-case-common');
+    shared.append(el('strong','kp-case-subtitle','Syarat yang berlaku pada pilihan berikut'));
+    const ul=el('ul');nonRedundant.forEach(c=>ul.append(el('li','',c)));
+    shared.append(ul);box.append(shared);
+   }
+   const sec=el('div','kp-case-options');
+   sec.append(el('h4','kp-case-subtitle','Besaran pengurangan dan periode'));
+   const table2=el('table','kp-case-rate-table');
+   const thead=el('thead'),hrow=el('tr');
+   ['Pengurangan','Periode atau batas waktu','Ketentuan menurut periode'].forEach(t=>hrow.append(el('th','',t)));
+   thead.append(hrow);table2.append(thead);
+   const tbody=el('tbody');
+   groupRows.forEach((row,index)=>{
+    const tr=el('tr');
+    tr.append(el('td','kp-case-rate',row.cells[2].textContent.trim()));
+    tr.append(el('td','kp-case-period',row.cells[3].textContent.trim()));
+    const other=all[index].filter(x=>!common.includes(x));
+    const td=el('td','kp-case-unique');
+    if(other.length){const ul=el('ul');other.forEach(c=>ul.append(el('li','',c)));td.append(ul)}
+    else td.append(el('span','kp-case-dash','Mengikuti syarat bersama di atas'));
+    tr.append(td);tbody.append(tr);
+   });
+   table2.append(tbody);sec.append(table2);box.append(sec);
+   result.append(box);
+   records.push({box,rows:groupRows});
+  }
+  // Hide the legacy table only AFTER group cards have been built successfully.
+  root.classList.add('kp-grouped-ready');
+  function visible(){return rows.filter(row=>!row.hidden)}
+  function update(){
+   const value=issueSelect.value;
+   let choices=0,cases=0;
+   rows.forEach(row=>{row.hidden=!!value&&row.dataset.issue!==value;if(!row.hidden)choices++});
+   records.forEach(rec=>{let show=rec.rows.some(r=>!r.hidden);rec.box.hidden=!show;if(show)cases++});
+   count.textContent=cases+' kelompok kasus · '+choices+' pilihan besaran dan periode';
+   noResult.style.display=choices?'none':'block';
+  }
+  issueSelect.addEventListener('change',update);
+  root.querySelector('#kp239-reset').addEventListener('click',()=>{issueSelect.value='';update();issueSelect.focus()});
+  root.querySelector('#kp239-export').addEventListener('click',()=>{
+   const hdr=['Jenis kasus','Objek dan dasar hukum','Besaran','Periode atau batas waktu','Syarat khusus','Rujukan'];
+   const data=visible().map(row=>[...row.cells].map(cell=>cell.textContent.replace(/\s+/g,' ').trim()));
+   const csv=[hdr,...data].map(vals=>vals.map(v=>'"'+v.replace(/"/g,'""')+'"').join(',')).join('\r\n');
+   const url=URL.createObjectURL(new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}));
+   const a=document.createElement('a');a.href=url;a.download='kabayan-kep239-hasil-pencarian.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+  });
+  update();
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
