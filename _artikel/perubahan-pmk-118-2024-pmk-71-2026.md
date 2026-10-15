@@ -1,8 +1,8 @@
 ---
 layout: artikel-editorial
 title: "Program Pengurangan Sanksi Administrasi (PSA)"
-hero_title: "Program Pengurangan Sanksi Administrasi (PSA)"
-hero_accent: "Panduan interaktif dan alur permohonan."
+hero_title: "Program Pengurangan Sanksi Administrasi"
+hero_accent: "(PSA)."
 excerpt: "Cari skema pengurangan sanksi, pilih periode yang sesuai, lalu ikuti alur pengajuan permohonan PSA."
 description: "Panduan interaktif pengurangan sanksi administratif dan alur pengajuan serta penyelesaian permohonan PSA."
 category: "Regulasi Pajak"
@@ -18,13 +18,13 @@ reading_time: "10 menit baca"
 legal_basis: "PMK 118/2024 s.t.d.d. PMK 71/2026; KEP-239/PJ/2026"
 permalink: /perubahan-pmk-118-2024-pmk-71-2026.html
 summary_label: "Apa itu Program Pengurangan Sanksi Administrasi (PSA)?"
-summary: "PSA adalah kebijakan yang memungkinkan Wajib Pajak mengajukan pengurangan atau penghapusan sanksi administrasi perpajakan untuk jenis kasus tertentu. Besaran pengurangan bergantung pada jenis sanksi, waktu pemenuhan kewajiban, dan persyaratan yang berlaku. Fasilitas ini tidak diberikan otomatis; Wajib Pajak perlu memenuhi ketentuan dan mengajukan permohonan."
+summary: "PSA adalah kebijakan yang memungkinkan Wajib Pajak mengajukan pengurangan atau penghapusan sanksi administrasi perpajakan untuk jenis kasus tertentu. Besaran pengurangan bergantung pada jenis sanksi, waktu pemenuhan kewajiban, dan persyaratan yang berlaku. Fasilitas ini tidak diberikan otomatis, Wajib Pajak perlu memenuhi ketentuan dan mengajukan permohonan."
 hero_links:
   - label: "Cari besaran pengurangan"
     href: "#tabel-interaktif-kep239"
   - label: "Alur permohonan"
     href: "#alur-psa"
-sidebar_note: "Besaran pengurangan bergantung pada jenis sanksi dan syarat yang terpenuhi; pengurangan tidak berlaku otomatis."
+sidebar_note: "Besaran pengurangan bergantung pada jenis sanksi dan pemenuhan syarat yang ditetapkan. Pemberian pengurangan tidak berlaku otomatis."
 ---
 
 <link rel="stylesheet" href="{{ '/assets/css/psa-2026.css' | relative_url }}?v=20261014-1">
