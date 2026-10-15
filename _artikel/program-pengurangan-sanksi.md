@@ -18,7 +18,7 @@ reading_time: "10 menit baca"
 legal_basis: "PMK 118/2024 s.t.d.d. PMK 71/2026; KEP-239/PJ/2026"
 permalink: /program-pengurangan-sanksi.html
 summary_label: "Apa itu Program Pengurangan Sanksi Administrasi (PSA)?"
-summary: "PSA adalah kebijakan yang memungkinkan Wajib Pajak mengajukan pengurangan atau penghapusan sanksi administrasi perpajakan untuk jenis kasus tertentu. Besaran pengurangan bergantung pada jenis sanksi, waktu pemenuhan kewajiban, dan persyaratan yang berlaku. Fasilitas ini tidak diberikan otomatis; Wajib Pajak perlu memenuhi ketentuan dan mengajukan permohonan."
+summary: "PSA adalah kebijakan yang memungkinkan Wajib Pajak mengajukan pengurangan atau penghapusan sanksi administrasi perpajakan untuk jenis kasus tertentu. Besaran pengurangan bergantung pada jenis sanksi, waktu pemenuhan kewajiban, dan persyaratan yang berlaku. Fasilitas ini tidak diberikan otomatis, Wajib Pajak harus mengajukan permohonan dan memenuhi ketentuan yang ditetapkan."
 hero_links:
   - label: "Cari besaran pengurangan"
     href: "#tabel-interaktif-kep239"
