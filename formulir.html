@@ -121,7 +121,7 @@ footer{background:#f5f5f7;color:#6e6e73}.notice{width:min(1180px,calc(100% - 40p
 <div class="statement-inner reveal">
 <h2 class="statement-title"><span>Cari.</span><span>Pilih.</span><span>Gunakan.</span></h2>
 <p class="statement-note">Koleksi formulir disusun berdasarkan kebutuhan administrasi, bukan sekadar nama file. Tujuannya sederhana: dokumen yang dibutuhkan lebih cepat ditemukan dan langsung bisa digunakan.</p>
-<div class="statement-stats"><div class="stat"><strong>130</strong><span>Dokumen tersedia</span></div><div class="stat"><strong>13</strong><span>Kelompok kebutuhan</span></div><div class="stat"><strong>4</strong><span>Format akses</span></div></div>
+<div class="statement-stats"><div class="stat"><strong id="statTotalDocuments">130</strong><span>Dokumen tersedia</span></div><div class="stat"><strong id="statTotalGroups">13</strong><span>Kelompok kebutuhan</span></div><div class="stat"><strong>4</strong><span>Format akses</span></div></div>
 </div>
 </section>
 
@@ -1068,6 +1068,11 @@ footer{background:#f5f5f7;color:#6e6e73}.notice{width:min(1180px,calc(100% - 40p
   const categoryJumps = Array.from(document.querySelectorAll('.category-jump'));
   const totalFiles = document.querySelectorAll('.file-row').length;
   const totalFolders = folderCards.length;
+  // Statistik selalu mengikuti jumlah aktual setelah kelompok/berkas tambahan dimuat.
+  const statTotalDocuments = document.getElementById('statTotalDocuments');
+  const statTotalGroups = document.getElementById('statTotalGroups');
+  if(statTotalDocuments) statTotalDocuments.textContent = totalFiles.toLocaleString('id-ID');
+  if(statTotalGroups) statTotalGroups.textContent = totalFolders.toLocaleString('id-ID');
 
   const normalizeSearchText = (value) => String(value || '')
     .toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')
