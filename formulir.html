@@ -764,7 +764,8 @@ footer{background:#f5f5f7;color:#6e6e73}.notice{width:min(1180px,calc(100% - 40p
     {id:'folder-10', number:'10', short:'Pemeriksaan', title:'10. Pemeriksaan dan Kepatuhan', category:'pemeriksaan'},
     {id:'folder-11', number:'11', short:'Internasional & GloBE', title:'11. Pajak Internasional, P3B, dan GloBE', category:'internasional-globe'},
     {id:'folder-12', number:'12', short:'Fasilitas & Insentif', title:'12. Fasilitas dan Insentif Pajak', category:'fasilitas-insentif'},
-    {id:'folder-13', number:'13', short:'Bayar & Kembali', title:'13. Pembayaran, Penagihan, dan Pengembalian Pajak', category:'pembayaran-pengembalian'}
+    {id:'folder-13', number:'13', short:'Bayar & Kembali', title:'13. Pembayaran, Penagihan, dan Pengembalian Pajak', category:'pembayaran-pengembalian'},
+    {id:'folder-14', number:'14', short:'PSA', title:'14. Program Penghapusan Sanksi Administrasi (PSA)', category:'program-penghapusan-sanksi-administrasi'}
   ];
 
   const extensionRecords = [
@@ -797,6 +798,12 @@ footer{background:#f5f5f7;color:#6e6e73}.notice{width:min(1180px,calc(100% - 40p
     ]},
     {folder:'folder-7', title:'Surat Pernyataan Menghendaki Menjalankan Kewajiban Perpajakan Terpisah', files:[
       {type:'pdf', name:'surat-pernyataan-menghendaki-menjalankan-kewajiban-perpajakan-terpisah.pdf', url:'https://1drv.ms/b/c/256ee627553633e2/IQCRRPw34bDESqSarCUZsY6cAWctwi5yseNNefuPLDbTsk4?e=Wvqpcr&download=1'}
+    ]},
+    {folder:'folder-14', title:'Surat Pernyataan Sanksi Administratif Timbul Karena Kekhilafan atau Bukan Karena Kesahalan', files:[
+      {type:'pdf', name:'Surat Pernyataan Sanksi Administratif Timbul Karena Kekhilafan atau Bukan Karena Kesahalan.pdf', url:'https://1drv.ms/b/c/256ee627553633e2/IQB77ZK900JqTIPc9MmehADqAcKR9joOjvjBHO15MOPhzIA'}
+    ]},
+    {folder:'folder-14', title:'Surat Penyataan Tidak Mengajukan Gugatan dan Upaya Hukum Lainnya', files:[
+      {type:'pdf', name:'Surat Penyataan Tidak Mengajukan Gugatan dan Upaya Hukum Lainnya .pdf', url:'https://1drv.ms/b/c/256ee627553633e2/IQB77ZK900JqTIPc9MmehADqAcKR9joOjvjBHO15MOPhzIA?e=fab3dQ'}
     ]},
     {folder:'folder-6', title:'Format Pengungkapan Ketidakbenaran Pengisian Surat Pemberitahuan', files:[
       {type:'pdf', name:'format-pengungkapan-ketidakbenaran-pengisian-surat-pemberitahuan.pdf', url:'https://1drv.ms/b/c/256ee627553633e2/IQAwyj5IcPekQo8Xdtwx6ZHSAc8kGHUnGibd5ELhzP5m5rA?e=dhW0QM&download=1'}
@@ -958,8 +965,9 @@ footer{background:#f5f5f7;color:#6e6e73}.notice{width:min(1180px,calc(100% - 40p
     return button;
   }
 
-  function reorderExtensionButtons(host){
+  function reorderExtensionButtons(host, allowMultipleTypes = []){
     ['pdf','excel'].forEach(type => {
+      if(allowMultipleTypes.includes(type)) return;
       const buttons = Array.from(host.querySelectorAll(':scope > .file-button')).filter(button => extensionButtonType(button) === type);
       buttons.slice(0,-1).forEach(button => button.remove());
     });
@@ -1038,7 +1046,7 @@ footer{background:#f5f5f7;color:#6e6e73}.notice{width:min(1180px,calc(100% - 40p
         const alreadyPresent = Array.from(host.querySelectorAll('.file-button')).some(button => file.url ? button.href === new URL(file.url, document.baseURI).href : button.dataset.filename === file.name);
         if(!alreadyPresent) host.appendChild(createExtensionButton(file, record.title));
       });
-      reorderExtensionButtons(host);
+      reorderExtensionButtons(host, record.allowMultipleTypes || []);
     });
 
     document.querySelectorAll('.folder-card').forEach(folder => {
