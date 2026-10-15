@@ -1,8 +1,8 @@
 ---
 layout: artikel-editorial
 title: "Program Pengurangan Sanksi Administrasi (PSA)"
-hero_title: "Program Pengurangan Sanksi Administrasi (PSA)"
-hero_accent: "Panduan interaktif dan alur permohonan."
+hero_title: "Program Pengurangan Sanksi Administrasi"
+hero_accent: "(PSA)."
 excerpt: "Cari skema pengurangan sanksi, pilih periode yang sesuai, lalu ikuti alur pengajuan permohonan PSA."
 description: "Panduan interaktif pengurangan sanksi administratif dan alur pengajuan serta penyelesaian permohonan PSA."
 category: "Regulasi Pajak"
