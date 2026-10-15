@@ -1,8 +1,8 @@
 ---
 layout: artikel-editorial
 title: "Program Pengurangan Sanksi Administrasi (PSA)"
-hero_title: "Program Pengurangan Sanksi Administrasi"
-hero_accent: "(PSA)."
+hero_title: "Program Pengurangan Sanksi Administrasi (PSA)"
+hero_accent: "Panduan interaktif dan alur permohonan."
 excerpt: "Cari skema pengurangan sanksi, pilih periode yang sesuai, lalu ikuti alur pengajuan permohonan PSA."
 description: "Panduan interaktif pengurangan sanksi administratif dan alur pengajuan serta penyelesaian permohonan PSA."
 category: "Regulasi Pajak"
@@ -18,13 +18,13 @@ reading_time: "10 menit baca"
 legal_basis: "PMK 118/2024 s.t.d.d. PMK 71/2026; KEP-239/PJ/2026"
 permalink: /perubahan-pmk-118-2024-pmk-71-2026.html
 summary_label: "Apa itu Program Pengurangan Sanksi Administrasi (PSA)?"
-summary: "PSA adalah kebijakan yang memungkinkan Wajib Pajak mengajukan pengurangan atau penghapusan sanksi administrasi perpajakan untuk jenis kasus tertentu. Besaran pengurangan bergantung pada jenis sanksi, waktu pemenuhan kewajiban, dan persyaratan yang berlaku. Fasilitas ini tidak diberikan otomatis, Wajib Pajak perlu memenuhi ketentuan dan mengajukan permohonan."
+summary: "PSA adalah kebijakan yang memungkinkan Wajib Pajak mengajukan pengurangan atau penghapusan sanksi administrasi perpajakan untuk jenis kasus tertentu. Besaran pengurangan bergantung pada jenis sanksi, waktu pemenuhan kewajiban, dan persyaratan yang berlaku. Fasilitas ini tidak diberikan otomatis; Wajib Pajak perlu memenuhi ketentuan dan mengajukan permohonan."
 hero_links:
   - label: "Cari besaran pengurangan"
     href: "#tabel-interaktif-kep239"
   - label: "Alur permohonan"
     href: "#alur-psa"
-sidebar_note: "Besaran pengurangan bergantung pada jenis sanksi dan pemenuhan syarat yang ditetapkan. Pemberian pengurangan tidak berlaku otomatis."
+sidebar_note: "Besaran pengurangan bergantung pada jenis sanksi dan syarat yang terpenuhi; pengurangan tidak berlaku otomatis."
 ---
 
 <link rel="stylesheet" href="{{ '/assets/css/psa-2026.css' | relative_url }}?v=20261014-1">
@@ -442,11 +442,7 @@ sidebar_note: "Besaran pengurangan bergantung pada jenis sanksi dan pemenuhan sy
 <td data-label="Besaran"><strong class="kp-rate">25%</strong></td>
 <td data-label="Periode atau batas waktu">Setelah 2 bulan sejak ketetapan terbit; batas akhir 31 Desember 2027</td>
 <td data-label="Syarat khusus"><ul class="kp-bullet kp-condition-bullet"><li>SKPKB atau SKPKBT diterbitkan pada 8 Oktober 2026–31 Desember 2027.</li><li>Ketetapan berkaitan dengan hasil pemeriksaan harta PPS yang belum atau kurang diungkapkan.</li><li>Lunasi pokok pajak sesuai tenggat relatif sejak ketetapan terbit dengan tenggat: Setelah 2 bulan sejak ketetapan terbit; batas akhir 31 Desember 2027.</li><li>Batas akhir pelunasan pokok: 31 Desember 2027.</li></ul></td><td data-label="Rujukan"><small>Lampiran D KEP-239/PJ/2026</small></td></tr>
-</tbody></table></div></section><div class="kp-none" id="kp239-none">Tidak ada hasil untuk kombinasi filter ini. Silakan ubah pilihan Anda.</div>
-<p class="kp-foot">Sumber: KEP-239/PJ/2026 Lampiran A–D (hlm. 6–24). Besaran dan periode dipisahkan dalam baris yang berbeda. Tabel merupakan ringkasan untuk penelusuran awal, bukan penetapan kelayakan. Untuk kasus dengan syarat alternatif, baca redaksi lampiran resminya. Lampiran E berisi contoh penerapan; Lampiran F–H memuat format surat dan petikan persyaratan.</p>
-<details><summary>Apa yang harus diperiksa sebelum mengajukan permohonan?</summary><p>Pastikan dasar hukum sanksi, nomor dan tanggal STP/SKP, masa atau tahun pajak, apakah sengketa/upaya hukum masih berlangsung, tanggal pembayaran pokok atau bagian sanksi, dan apakah sanksi yang dimohonkan belum dibayar. Perhatikan persyaratan pernyataan serta dokumen pendukung pada Diktum KEEMPAT dan Lampiran F–H. Permohonan kepada Direktur Jenderal Pajak diajukan paling lambat 1 Oktober 2028.</p></details>
-<details><summary>Apakah pengurangan 90% berarti cukup bayar 10%?</summary><p>Tidak untuk semua kasus. Hanya baris tertentu mensyaratkan pembayaran sebagian sanksi; syarat lain, termasuk waktu penerbitan surat, pelunasan pokok atau utang pajak, keberatan, dan batas waktu tetap harus dipenuhi.</p></details>
-<script>
+</tbody></table></div></section><script>
 (function(){
  function init(){
   const root=document.getElementById('tabel-interaktif-kep239');
@@ -456,7 +452,7 @@ sidebar_note: "Besaran pengurangan bergantung pada jenis sanksi dan pemenuhan sy
   const issueSelect=root.querySelector('#kp239-group');
   const count=root.querySelector('#kp239-count');
   const result=root.querySelector('#kp239-grouped-results');
-  const noResult=root.querySelector('#kp239-none');
+
   const groups=new Map();
   rows.forEach((row)=>{
    const cells=[...row.cells];
@@ -603,7 +599,7 @@ sidebar_note: "Besaran pengurangan bergantung pada jenis sanksi dan pemenuhan sy
    rows.forEach(row=>{row.hidden=!!value&&row.dataset.issue!==value;if(!row.hidden)choices++});
    records.forEach(rec=>{const show=rec.rows.some(r=>!r.hidden); rec.card.hidden=!show; if(show)cases++});
    count.textContent=cases+' kelompok kasus · '+choices+' pilihan besaran dan periode';
-   noResult.style.display=choices?'none':'block';
+
   }
   issueSelect.addEventListener('change',update);
   root.querySelector('#kp239-reset').addEventListener('click',()=>{issueSelect.value='';update();issueSelect.focus()});
@@ -633,53 +629,53 @@ sidebar_note: "Besaran pengurangan bergantung pada jenis sanksi dan pemenuhan sy
 <div><strong>Apa yang ditulis dalam surat?</strong><p>Identitas WP; nomor dan tanggal SKP atau STP; jumlah sanksi yang dimohonkan pengurangan/penghapusan menurut WP; alasan permohonan; serta tanda tangan yang berwenang. Gunakan format lampiran sebagai acuan rinci.</p></div>
 <div><strong>Dokumen apa yang disiapkan?</strong><p>Surat pajak terkait, bukti pelunasan pokok, dokumen untuk mendukung alasan dan skema pengurangan, serta surat pernyataan dan bukti terkait upaya hukum sesuai Diktum KEEMPAT. Dokumen spesifik menyesuaikan kasus.</p></div>
 </div>
-<div class="psa-tasks" id="psa-tasks" aria-label="Checklist persiapan permohonan PSA">
- <div class="psa-tasks-heading"><div><h4>Checklist persiapan permohonan</h4><p>Centang setiap langkah yang telah Anda periksa. Daftar ini adalah alat bantu, bukan penetapan kelayakan PSA.</p></div><span class="psa-tasks-count" id="psa-checkflow-count" role="status" aria-live="polite">0 dari 6 selesai</span></div>
- <div class="psa-tasks-progress" role="progressbar" aria-label="Progres checklist" aria-valuemin="0" aria-valuemax="6" aria-valuenow="0" id="psa-tasks-progress"><div id="psa-checkflow-bar"></div></div>
- <div class="psa-tasks-list"><div class="psa-task" data-psa-task>
-  <input class="psa-task-input" type="checkbox" id="psa-task-1" aria-describedby="psa-task-help-1">
-  <label class="psa-task-label" for="psa-task-1">
-   <span class="psa-task-number" aria-hidden="true">01</span>
-   <span class="psa-task-copy"><strong>Identifikasi surat dan sanksi</strong><span id="psa-task-help-1">Periksa jenis dan tanggal SKP/STP, masa atau tahun pajak, dasar pengenaan serta sanksi yang belum dilunasi.</span></span>
-   <span class="psa-task-status" aria-hidden="true">Belum</span>
-  </label>
- </div><div class="psa-task" data-psa-task>
-  <input class="psa-task-input" type="checkbox" id="psa-task-2" aria-describedby="psa-task-help-2">
-  <label class="psa-task-label" for="psa-task-2">
-   <span class="psa-task-number" aria-hidden="true">02</span>
-   <span class="psa-task-copy"><strong>Cocokkan skema KEP-239</strong><span id="psa-task-help-2">Pastikan jenis sanksi, waktu pemenuhan kewajiban, persentase pengurangan, dan syarat khusus sesuai lampiran yang relevan.</span></span>
-   <span class="psa-task-status" aria-hidden="true">Belum</span>
-  </label>
- </div><div class="psa-task" data-psa-task>
-  <input class="psa-task-input" type="checkbox" id="psa-task-3" aria-describedby="psa-task-help-3">
-  <label class="psa-task-label" for="psa-task-3">
-   <span class="psa-task-number" aria-hidden="true">03</span>
-   <span class="psa-task-copy"><strong>Periksa persyaratan Pasal 23</strong><span id="psa-task-help-3">Teliti persyaratan permohonan, termasuk pelunasan pokok, status upaya administratif, dan satu permohonan untuk satu surat pajak.</span></span>
-   <span class="psa-task-status" aria-hidden="true">Belum</span>
-  </label>
- </div><div class="psa-task" data-psa-task>
-  <input class="psa-task-input" type="checkbox" id="psa-task-4" aria-describedby="psa-task-help-4">
-  <label class="psa-task-label" for="psa-task-4">
-   <span class="psa-task-number" aria-hidden="true">04</span>
-   <span class="psa-task-copy"><strong>Periksa ketentuan Pasal 24</strong><span id="psa-task-help-4">Jika mengajukan permohonan kedua, periksa batas pengajuan dan ketentuan yang berlaku.</span></span>
-   <span class="psa-task-status" aria-hidden="true">Belum</span>
-  </label>
- </div><div class="psa-task" data-psa-task>
-  <input class="psa-task-input" type="checkbox" id="psa-task-5" aria-describedby="psa-task-help-5">
-  <label class="psa-task-label" for="psa-task-5">
-   <span class="psa-task-number" aria-hidden="true">05</span>
-   <span class="psa-task-copy"><strong>Siapkan persyaratan tambahan KEP-239</strong><span id="psa-task-help-5">Lengkapi pernyataan mengenai upaya hukum dan kekhilafan atau bukan karena kesalahan serta pastikan sanksi yang dimohonkan belum dilunasi.</span></span>
-   <span class="psa-task-status" aria-hidden="true">Belum</span>
-  </label>
- </div><div class="psa-task" data-psa-task>
-  <input class="psa-task-input" type="checkbox" id="psa-task-6" aria-describedby="psa-task-help-6">
-  <label class="psa-task-label" for="psa-task-6">
-   <span class="psa-task-number" aria-hidden="true">06</span>
-   <span class="psa-task-copy"><strong>Lengkapi dan sampaikan surat</strong><span id="psa-task-help-6">Gunakan contoh format Lampiran C PMK 118/2024, siapkan bukti pendukung, tanda tangani, dan simpan bukti penerimaan permohonan.</span></span>
-   <span class="psa-task-status" aria-hidden="true">Belum</span>
-  </label>
- </div></div>
- <div class="psa-tasks-footer"><span id="psa-task-summary">Belum ada langkah yang ditandai selesai.</span><button type="button" class="psa-checkflow-reset" id="psa-checkflow-reset">Reset checklist</button></div>
+<div aria-label="Checklist persiapan permohonan PSA" class="psa-tasks" id="psa-tasks">
+<div class="psa-tasks-heading"><div><h4>Checklist persiapan permohonan</h4><p>Centang setiap langkah yang telah Anda periksa. Daftar ini adalah alat bantu, bukan penetapan kelayakan PSA.</p></div><span aria-live="polite" class="psa-tasks-count" id="psa-checkflow-count" role="status">0 dari 6 selesai</span></div>
+<div aria-label="Progres checklist" aria-valuemax="6" aria-valuemin="0" aria-valuenow="0" class="psa-tasks-progress" id="psa-tasks-progress" role="progressbar"><div id="psa-checkflow-bar"></div></div>
+<div class="psa-tasks-list"><div class="psa-task" data-psa-task="">
+<input aria-describedby="psa-task-help-1" class="psa-task-input" id="psa-task-1" type="checkbox"/>
+<label class="psa-task-label" for="psa-task-1">
+<span aria-hidden="true" class="psa-task-number">01</span>
+<span class="psa-task-copy"><strong>Identifikasi surat dan sanksi</strong><span id="psa-task-help-1">Siapkan identitas surat pajak, rincian sanksi, dan bukti pembayaran yang sudah ada.</span></span>
+<span aria-hidden="true" class="psa-task-status">Belum</span>
+</label>
+<details class="psa-task-details"><summary>Lihat rincian langkah dan dokumen</summary><ol><li>Catat jenis surat (STP, SKPKB, SKPKBT, atau SKP PBB), nomor, tanggal penerbitan, dan tahun atau masa pajaknya.</li><li>Catat jenis dan jumlah sanksi administratif secara terpisah dari pokok pajak atau utang pajak.</li><li>Cek apakah surat masih memiliki sanksi yang hendak dimohonkan pengurangan; cocokkan dengan saldo dan bukti pembayaran.</li><li>Periksa apakah surat terkait keberatan atau upaya hukum lain. Status ini dapat memengaruhi persyaratan pada kelompok tertentu.</li></ol><p class="psa-task-outcome">Hasil langkah: data surat dan rincian sanksi siap dicocokkan dengan ketentuan PSA.</p></details></div><div class="psa-task" data-psa-task="">
+<input aria-describedby="psa-task-help-2" class="psa-task-input" id="psa-task-2" type="checkbox"/>
+<label class="psa-task-label" for="psa-task-2">
+<span aria-hidden="true" class="psa-task-number">02</span>
+<span class="psa-task-copy"><strong>Cocokkan kasus dengan skema KEP-239</strong><span id="psa-task-help-2">Pilih kelompok kasus yang tepat dan cek batas waktu yang menentukan besaran pengurangan.</span></span>
+<span aria-hidden="true" class="psa-task-status">Belum</span>
+</label>
+<details class="psa-task-details"><summary>Lihat rincian langkah dan dokumen</summary><ol><li>Cocokkan jenis kasus pada Panduan Interaktif dengan kategori Lampiran A (pengawasan), B (hasil pemeriksaan), C (penagihan/surat yang sudah terbit), atau D (WP/PKP baru dan PPS).</li><li>Periksa apakah periode yang disyaratkan merujuk pada penyampaian SPT, pembayaran pokok pajak, pembayaran sebagian sanksi, atau tanggal terbit surat. Keempatnya tidak boleh tertukar.</li><li>Catat persentase pengurangan dan kewajiban yang harus dipenuhi, seperti pelunasan pokok atau pembayaran 10%/25% sanksi untuk skema tertentu.</li><li>Cocokkan tanggal pemenuhan kewajiban dengan batas yang tertera pada pilihan, termasuk tenggat akhir program yang relevan.</li></ol><p class="psa-task-outcome">Hasil langkah: satu skema pilihan beserta persentase, kewajiban, dan tanggal pemenuhannya.</p></details></div><div class="psa-task" data-psa-task="">
+<input aria-describedby="psa-task-help-3" class="psa-task-input" id="psa-task-3" type="checkbox"/>
+<label class="psa-task-label" for="psa-task-3">
+<span aria-hidden="true" class="psa-task-number">03</span>
+<span class="psa-task-copy"><strong>Periksa persyaratan Pasal 23</strong><span id="psa-task-help-3">Pastikan kewajiban pembayaran dan status keberatan, banding, gugatan, atau upaya hukum lain sesuai dengan skema yang dipilih.</span></span>
+<span aria-hidden="true" class="psa-task-status">Belum</span>
+</label>
+<details class="psa-task-details"><summary>Lihat rincian langkah dan dokumen</summary><ol><li>Pokok pajak atau utang pajak yang wajib dilunasi menurut skema pengurangan telah dibayar sesuai jumlah dan tenggat yang disyaratkan.</li><li>Tidak sedang diajukan keberatan atas ketetapan yang berkaitan dengan permohonan, jika skema PSA mensyaratkan tidak adanya keberatan.</li><li>Tidak sedang diajukan banding atas keputusan keberatan yang berkaitan dengan permohonan, jika keadaan tersebut dilarang oleh ketentuan yang digunakan.</li><li>Tidak sedang diajukan gugatan atas keputusan atau tindakan perpajakan terkait, jika ketentuan PSA mensyaratkannya.</li><li>Tidak sedang diajukan peninjauan kembali atas sengketa pajak terkait, jika kondisi tersebut termasuk persyaratan skema yang dipilih.</li><li>Apabila keberatan atau upaya hukum telah diajukan dan skema mensyaratkan pencabutan, pencabutan tersebut telah dilakukan dan dokumen pendukungnya tersedia.</li><li>Apabila skema memperbolehkan adanya keberatan, kewajiban pelunasan yang sesuai dengan status keberatan tersebut telah dipenuhi; bukan otomatis dianggap tidak memenuhi syarat.</li><li>Satu surat permohonan disiapkan untuk satu SKP/STP sesuai ketentuan, memuat alasan, nilai sanksi yang dimohonkan, dan tanda tangan pihak yang berwenang.</li></ol><p class="psa-task-outcome">Hasil langkah: status upaya hukum dan pemenuhan kewajiban dapat dinyatakan secara jelas serta didukung dokumen.</p></details></div><div class="psa-task" data-psa-task="">
+<input aria-describedby="psa-task-help-4" class="psa-task-input" id="psa-task-4" type="checkbox"/>
+<label class="psa-task-label" for="psa-task-4">
+<span aria-hidden="true" class="psa-task-number">04</span>
+<span class="psa-task-copy"><strong>Periksa ketentuan Pasal 24</strong><span id="psa-task-help-4">Tentukan apakah ini permohonan pertama atau permohonan berikutnya.</span></span>
+<span aria-hidden="true" class="psa-task-status">Belum</span>
+</label>
+<details class="psa-task-details"><summary>Lihat rincian langkah dan dokumen</summary><ol><li>Periksa apakah atas surat pajak yang sama pernah diajukan permohonan pengurangan atau penghapusan sanksi.</li><li>Jika belum pernah, lanjutkan pemeriksaan persyaratan permohonan pertama.</li><li>Jika sudah pernah, baca ketentuan permohonan kedua pada Pasal 24: pastikan kondisi yang membolehkan permohonan berikutnya dan batas pengajuannya.</li><li>Siapkan dokumen permohonan serta keputusan atau pemberitahuan sebelumnya jika ada.</li></ol><p class="psa-task-outcome">Hasil langkah: status permohonan pertama/kedua jelas dan ketentuan lanjutannya telah diperiksa.</p></details></div><div class="psa-task" data-psa-task="">
+<input aria-describedby="psa-task-help-5" class="psa-task-input" id="psa-task-5" type="checkbox"/>
+<label class="psa-task-label" for="psa-task-5">
+<span aria-hidden="true" class="psa-task-number">05</span>
+<span class="psa-task-copy"><strong>Siapkan persyaratan tambahan KEP-239</strong><span id="psa-task-help-5">Pastikan kondisi sanksi, upaya hukum, surat pernyataan, dan bukti pendukung telah memenuhi syarat skema PSA.</span></span>
+<span aria-hidden="true" class="psa-task-status">Belum</span>
+</label>
+<details class="psa-task-details"><summary>Lihat rincian langkah dan dokumen</summary><ol><li>Sanksi administratif yang dimohonkan belum dilunasi apabila skema mengharuskan sanksi masih terutang. Pembayaran pokok pajak dibedakan dari pembayaran sanksi.</li><li>Jika tidak sedang mengajukan keberatan, banding, gugatan, atau peninjauan kembali merupakan syarat skema, kondisi tersebut benar-benar terpenuhi dan dapat dinyatakan dalam surat pernyataan.</li><li>Jika sebelumnya telah mengajukan upaya hukum dan skema mewajibkan pencabutan, dokumen pencabutan atau bukti terkait telah disiapkan.</li><li>Jika skema memperbolehkan keberatan yang masih berlangsung, pelunasan pokok pajak atau utang pajak dilakukan mengikuti ketentuan khusus bagi kondisi tersebut.</li><li>Surat pernyataan mengenai kekhilafan atau bukan karena kesalahan Wajib Pajak, serta pernyataan tambahan dalam Diktum KEEMPAT dan Lampiran F–H, disiapkan sepanjang diwajibkan bagi kasusnya.</li><li>Bukti pembayaran, surat ketetapan atau tagihan, serta dokumen pendukung tanggal dan pemenuhan kewajiban telah dilampirkan.</li></ol><p class="psa-task-outcome">Hasil langkah: pernyataan dan bukti yang diwajibkan untuk kasus ini siap dilampirkan.</p></details></div><div class="psa-task" data-psa-task="">
+<input aria-describedby="psa-task-help-6" class="psa-task-input" id="psa-task-6" type="checkbox"/>
+<label class="psa-task-label" for="psa-task-6">
+<span aria-hidden="true" class="psa-task-number">06</span>
+<span class="psa-task-copy"><strong>Lengkapi dan sampaikan surat</strong><span id="psa-task-help-6">Susun surat permohonan tertulis, periksa tanda tangan, lalu simpan bukti penyampaian.</span></span>
+<span aria-hidden="true" class="psa-task-status">Belum</span>
+</label>
+<details class="psa-task-details"><summary>Lihat rincian langkah dan dokumen</summary><ol><li>Gunakan contoh surat pada Lampiran C PMK 118/2024 sebagai acuan dan sesuaikan dengan jenis permohonan.</li><li>Cantumkan identitas WP, rincian surat pajak, alasan permohonan, dan jumlah sanksi yang dimintakan pengurangan atau penghapusan.</li><li>Pastikan surat ditandatangani WP, wakil, atau kuasa yang memiliki kewenangan dan lampirkan dokumen pendukung yang relevan.</li><li>Sampaikan permohonan kepada Direktur Jenderal Pajak melalui saluran yang diatur, sebelum tenggat pengajuan untuk skema tersebut. Simpan tanda terima atau bukti pengiriman.</li><li>Pantau tindak lanjut permohonan dan tanggapi permintaan dokumen/keterangan tambahan dari DJP sesuai batas waktu yang ditentukan.</li></ol><p class="psa-task-outcome">Hasil langkah: surat telah disampaikan dan bukti penerimaannya tersimpan.</p></details></div></div>
+</div><div class="psa-tasks-footer"><span id="psa-task-summary">Belum ada langkah yang ditandai selesai.</span><button class="psa-checkflow-reset" id="psa-checkflow-reset" type="button">Reset checklist</button></div>
 </div>
 </div>
 <div class="psa-checkflow-panel psa-checkflow-procedure"><h3>Tahap 3. Penelitian Tahap II — apakah kondisi WP memenuhi skema pengurangan?</h3>
