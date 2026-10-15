@@ -1,8 +1,8 @@
 ---
 layout: artikel-editorial
 title: "Program Pengurangan Sanksi Administrasi (PSA)"
-hero_title: "Program Pengurangan Sanksi Administrasi"
-hero_accent: "(PSA)."
+hero_title: "Program Pengurangan Sanksi Administrasi (PSA)"
+hero_accent: "Panduan interaktif dan alur permohonan."
 excerpt: "Cari skema pengurangan sanksi, pilih periode yang sesuai, lalu ikuti alur pengajuan permohonan PSA."
 description: "Panduan interaktif pengurangan sanksi administratif dan alur pengajuan serta penyelesaian permohonan PSA."
 category: "Regulasi Pajak"
@@ -18,7 +18,7 @@ reading_time: "10 menit baca"
 legal_basis: "PMK 118/2024 s.t.d.d. PMK 71/2026; KEP-239/PJ/2026"
 permalink: /program-pengurangan-sanksi.html
 summary_label: "Apa itu Program Pengurangan Sanksi Administrasi (PSA)?"
-summary: "PSA adalah kebijakan yang memungkinkan Wajib Pajak mengajukan pengurangan atau penghapusan sanksi administrasi perpajakan untuk jenis kasus tertentu. Besaran pengurangan bergantung pada jenis sanksi, waktu pemenuhan kewajiban, dan persyaratan yang berlaku. Fasilitas ini tidak diberikan otomatis, Wajib Pajak harus mengajukan permohonan dan memenuhi persyaratan yang ditentukan."
+summary: "PSA adalah kebijakan yang memungkinkan Wajib Pajak mengajukan pengurangan atau penghapusan sanksi administrasi perpajakan untuk jenis kasus tertentu. Besaran pengurangan bergantung pada jenis sanksi, waktu pemenuhan kewajiban, dan persyaratan yang berlaku. Fasilitas ini tidak diberikan otomatis; Wajib Pajak perlu memenuhi ketentuan dan mengajukan permohonan."
 hero_links:
   - label: "Cari besaran pengurangan"
     href: "#tabel-interaktif-kep239"
@@ -177,7 +177,7 @@ sidebar_note: "Besaran pengurangan bergantung pada jenis sanksi dan syarat yang 
 <div class="kp-scroll"><table id="kp239-table"><thead><tr><th scope="col">Jenis kasus</th><th scope="col">Objek dan dasar hukum</th><th scope="col">Besaran</th><th scope="col">Periode atau batas waktu</th><th scope="col">Syarat khusus</th><th scope="col">Rujukan</th></tr></thead><tbody>
 <tr data-group="A" data-issue="spt" data-rates="100%" data-search="a pengawasan kepatuhan denda keterlambatan spt, pasal 7 ayat (1) uu kup; spt tahunan pph sampai tahun pajak 2025 atau spt masa sampai september 2026, berstatus kurang bayar. 100% 8 oktober–31 desember 2026 spt terlambat disampaikan pada periode ini. lampiran a, hlm. 6–10">
 <td data-label="Jenis kasus"><strong>Terlambat lapor SPT</strong><small style="display:block;color:#687587;font-size:11px">Lampiran A</small></td>
-<td data-label="Objek dan dasar hukum"><div class="kp-objek kp-law-summary"><strong>Denda keterlambatan pelaporan SPT</strong><p class="kp-meaning-inline">Denda ini muncul karena SPT Tahunan atau SPT Masa disampaikan melewati batas waktu pelaporan.</p><ul class="kp-main-facts"><li class="kp-spt-coverage"><strong>Cakupan SPT</strong><div><strong>SPT Tahunan PPh:</strong> sampai dengan Tahun Pajak 2025.</div><div><strong>SPT Masa:</strong> sampai dengan Masa Pajak September 2026.</div></li><li><strong>Status SPT:</strong> kurang bayar.</li></ul><div class="kp-law-inline"><p class="kp-law-only"><strong>Dasar hukum:</strong> Pasal 7 ayat (1) UU KUP.</p></div></div></td>
+<td data-label="Objek dan dasar hukum"><div class="kp-objek kp-law-summary"><strong>Denda keterlambatan lapor SPT</strong><p class="kp-meaning-inline">Denda ini dikenakan karena SPT Tahunan atau SPT Masa disampaikan setelah batas waktu pelaporan.</p><ul class="kp-main-facts"><li class="kp-spt-coverage"><strong>Cakupan SPT</strong><div><strong>SPT Tahunan PPh:</strong> sampai dengan Tahun Pajak 2025.</div><div><strong>SPT Masa:</strong> sampai dengan Masa Pajak September 2026.</div></li><li><strong>Status SPT:</strong> kurang bayar.</li></ul><div class="kp-law-inline"><p class="kp-law-only"><strong>Dasar hukum:</strong> Pasal 7 ayat (1) UU KUP.</p></div></div></td>
 <td data-label="Besaran"><strong class="kp-rate">100%</strong></td>
 <td data-label="Periode atau batas waktu">8 Oktober–31 Desember 2026</td>
 <td data-label="Syarat khusus"><ul class="kp-bullet kp-condition-bullet"><li>SPT yang terlambat disampaikan berstatus kurang bayar.</li><li>Penyampaian SPT dilakukan pada 8 Oktober–31 Desember 2026.</li></ul></td><td data-label="Rujukan"><small>Lampiran A KEP-239/PJ/2026</small></td></tr><tr data-group="A" data-issue="spt" data-rates="50%" data-search="a pengawasan kepatuhan denda keterlambatan spt, pasal 7 ayat (1) uu kup; spt tahunan pph sampai tahun pajak 2025 atau spt masa sampai september 2026, berstatus kurang bayar. 50% 1 januari–31 maret 2027 spt terlambat disampaikan pada periode ini. lampiran a, hlm. 6–10">
