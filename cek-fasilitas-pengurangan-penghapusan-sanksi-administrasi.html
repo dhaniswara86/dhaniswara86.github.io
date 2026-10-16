@@ -172,7 +172,7 @@ body{background:#fff}
 .cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .choice{position:relative;min-height:98px;align-items:center;background:#fff;border-color:#e4e5e9;border-radius:18px;padding:17px 18px;box-shadow:0 3px 12px rgba(9,35,66,.025)}
 .choice.selected{background:#f0f7ff;border-color:#0071e3;box-shadow:0 0 0 2px rgba(0,113,227,.08)}
-.choice .emoji{height:44px;width:44px;flex-basis:44px;background:#f3f7fc;border-radius:14px;font-size:23px}
+.choice .emoji{height:48px;width:48px;flex:0 0 48px;display:grid;place-items:center;background:linear-gradient(180deg,#f3f8ff,#eef4fb);border:1px solid #e4edf8;border-radius:16px;color:#0b64da;box-shadow:inset 0 1px 0 rgba(255,255,255,.9)}.emoji svg{width:24px;height:24px;display:block;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;fill:none}.choice.selected .emoji{background:linear-gradient(180deg,#ebf4ff,#e2efff);border-color:#b9d4fb;color:#0064d2}
 .choice strong{font-size:14px;color:#1d1d1f;font-weight:700;line-height:1.4}
 .choice small{font-size:12px;margin-top:4px;line-height:1.4;color:#77777c}
 .choice-check{display:none;position:absolute;right:13px;top:12px;width:22px;height:22px;align-items:center;justify-content:center;border-radius:50%;background:#0071e3;color:#fff;font-size:12px;font-weight:800}
@@ -363,10 +363,19 @@ a{text-decoration:none}
 </style><style id="psa-v10-icon-tune">
 .hero h1{line-height:.98}.ppn-kabayan-icon{max-width:min(410px,90%);max-height:390px}.hero p{max-width:700px}.wizard-note span[aria-hidden="true"]{font-weight:700}
 @media(max-width:900px){.ppn-kabayan-icon{max-width:min(320px,78%);max-height:300px}}
-</style><style id="psa-final-hero-fit">
-@media(min-width:901px){.hero h1{font-size:clamp(46px,5vw,72px);line-height:1.03}.hero h1 span{font-size:.74em;line-height:1.07;letter-spacing:-.046em;display:block;margin-top:10px}}
-@media(max-width:900px){.hero h1{font-size:clamp(40px,10vw,55px);line-height:1.035}.hero h1 span{display:block;font-size:.8em;line-height:1.065;letter-spacing:-.052em;margin-top:7px}}
-</style></head><body>
+</style>
+<style id="psa-month-year-v12">
+.month-year-field{display:block;margin-bottom:18px}
+.month-year-label{display:block;font-size:13px;font-weight:800;color:#374b6e;margin-bottom:10px}
+.month-year-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+.month-year-item{display:flex;flex-direction:column;gap:7px;min-width:0}
+.month-year-item label{font-size:12px;font-weight:700;color:#404f68}
+.month-year-item select{width:100%;min-height:52px;padding:12px 42px 12px 14px;border:1px solid #d0d5dd;border-radius:14px;color:#1d1d1f;background:#fff;outline:none;font-size:14px;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 24 24'%3E%3Cpath stroke='%23667085' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;background-size:18px}
+.month-year-item select:focus{border-color:#0071e3;box-shadow:0 0 0 4px rgba(0,113,227,.15)}
+.month-year-field>small{display:block;margin-top:9px;font-size:11px;color:#6e6e73;line-height:1.55}
+@media(max-width:560px){.month-year-grid{grid-template-columns:1fr;gap:13px}}
+</style>
+</head><body>
 <header class="site-header">
   <div class="nav-wrap">
     <a class="brand" href="index.html" aria-label="Kabayan — Kembali ke beranda">
@@ -761,6 +770,34 @@ function field(k,label,type='text',note='',opts=[]){const val=s[k]??'';let contr
 const select=(key,label,options,note='')=>field(key,label,'select',note,options);
 const date=(key,label,note='')=>field(key,label,'date',note);
 const money=(key,label,note='')=>field(key,label,'currency',note);
+
+// UI adapter for Masa Pajak. The engine continues to receive `s.sptPeriod` in YYYY-MM format.
+function monthYearPicker(){
+ const months=['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+ const current=/^\d{4}-(0[1-9]|1[0-2])$/.test(s.sptPeriod||'')?s.sptPeriod:'';
+ const yearSelected=s.sptPeriodYear||(current?current.slice(0,4):'');
+ const monthSelected=s.sptPeriodMonth||(current?current.slice(5,7):'');
+ const monthOptions=months.map((name,i)=>{const v=String(i+1).padStart(2,'0');return `<option value="${v}" ${monthSelected===v?'selected':''}>${name}</option>`;}).join('');
+ // Include every positive year up to 2035 so the picker does not exclude earlier periods allowed by the unchanged decision engine.
+ const years=[];
+ for(let yr=2035;yr>=1;yr--)years.push(String(yr).padStart(4,'0'));
+ if(yearSelected&&!years.includes(yearSelected))years.push(yearSelected);
+ years.sort((a,b)=>Number(b)-Number(a));
+ const yearOptions=years.map(v=>`<option value="${esc(v)}" ${yearSelected===v?'selected':''}>${esc(v)}</option>`).join('');
+ return `<div class="field full month-year-field">
+   <span class="month-year-label" id="labelMasaPajak">Masa Pajak</span>
+   <div class="month-year-grid">
+     <div class="month-year-item"><label for="f_sptPeriodMonth">Bulan Pajak</label>
+       <select id="f_sptPeriodMonth" data-field="sptPeriodMonth" aria-describedby="masaPajakNote"><option value="">— Pilih bulan —</option>${monthOptions}</select>
+     </div>
+     <div class="month-year-item"><label for="f_sptPeriodYear">Tahun Pajak</label>
+       <select id="f_sptPeriodYear" data-field="sptPeriodYear" aria-describedby="masaPajakNote"><option value="">— Pilih tahun —</option>${yearOptions}</select>
+     </div>
+   </div>
+   <small id="masaPajakNote">Pilih bulan dan tahun yang tercantum pada SPT. Untuk skema ini, cakupan sampai Masa Pajak September 2026.</small>
+   </div>`;
+}
+
 // Rupiah-friendly inputs are presentation only. The decision engine still receives integer strings.
 const numericOnly=v=>String(v??'').replace(/\D/g,'').replace(/^0+(?=\d)/,'');
 const formatInteger=v=>{const n=numericOnly(v);return n?new Intl.NumberFormat('id-ID').format(Number(n)):'';};
@@ -797,12 +834,19 @@ const asOptions=(l,map)=>l.map(id=>[id,map[id]||id]);
 const catChosen=()=>s.category&&E.CATS[s.category];
 const cardText=()=>s.category?(E.CATS[s.category]||'—'):routeLabel();
 const entryOptions=[
- ['spt','📝','Saya terlambat melaporkan atau membetulkan SPT','Termasuk keterlambatan pembayaran pajak'],
- ['stp','📄','Saya menerima Surat Tagihan Pajak (STP)','Denda, bunga, faktur pajak, atau penagihan'],
- ['skp','🔎','Saya menerima Surat Ketetapan Pajak (SKP)','Ketetapan hasil pemeriksaan atau terkait PPS'],
- ['newreg','🌱','Saya baru mendaftar NPWP atau dikukuhkan PKP','Periksa fasilitas khusus pendaftaran/pengukuhan'],
- ['pbb','🏠','Saya menerima surat terkait PBB','Khusus SKP/STP PBB yang menjadi kewenangan DJP']
+ ['spt','note','Saya terlambat melaporkan atau membetulkan SPT','Termasuk keterlambatan pembayaran pajak'],
+ ['stp','document','Saya menerima Surat Tagihan Pajak (STP)','Denda, bunga, faktur pajak, atau penagihan'],
+ ['skp','search','Saya menerima Surat Ketetapan Pajak (SKP)','Ketetapan hasil pemeriksaan atau terkait PPS'],
+ ['newreg','sprout','Saya baru mendaftar NPWP atau dikukuhkan PKP','Periksa fasilitas khusus pendaftaran/pengukuhan'],
+ ['pbb','home','Saya menerima surat terkait PBB','Khusus SKP/STP PBB yang menjadi kewenangan DJP']
 ];
+const entryIcons={
+ note:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4.75h5.6L18 9.15V19a1.75 1.75 0 0 1-1.75 1.75h-8.5A1.75 1.75 0 0 1 6 19V6.5A1.75 1.75 0 0 1 7.75 4.75Z"/><path d="M13.5 4.75V9.5H18"/><path d="M9 13.25h6"/><path d="M9 16.25h4.5"/></svg>`,
+ document:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4.75h5.6L18 9.15V19a1.75 1.75 0 0 1-1.75 1.75h-8.5A1.75 1.75 0 0 1 6 19V6.5A1.75 1.75 0 0 1 7.75 4.75Z"/><path d="M13.5 4.75V9.5H18"/><path d="M9 13h6"/><path d="M9 16h6"/></svg>`,
+ search:`<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="4.75"/><path d="M13.9 13.9 18.25 18.25"/><path d="M15.2 5.75H18"/><path d="M15.2 8.75H18"/></svg>`,
+ sprout:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19.5v-6.25"/><path d="M12 13.5c0-3.5 2.35-6 5.85-6 .1 3.9-2.25 6.35-5.85 6Z"/><path d="M12 14c0-2.95-1.95-5-4.85-5C7.05 12.3 9 14.35 12 14Z"/><path d="M9 19.5h6"/></svg>`,
+ home:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.75 10.75 12 5l7.25 5.75"/><path d="M6.75 9.95V19a1.25 1.25 0 0 0 1.25 1.25h8A1.25 1.25 0 0 0 17.25 19V9.95"/><path d="M10 20.25v-4.5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4.5"/></svg>`
+};
 const routeDocs={
  spt:['STP','NOT_ISSUED'],stp:['STP'],skp:['SKPKB','SKPKBT'],newreg:['STP','NOT_ISSUED'],pbb:['SKP_PBB','STP_PBB']
 };
@@ -812,7 +856,7 @@ const pbbArticles={SKP_PBB:['pbb10_3','pbb10_4'],STP_PBB:['pbb11_3']};
 const normalOrigin=[['normal','Bukan terkait pemeriksaan (pelaporan, faktur pajak, atau tagihan biasa)'],['audit','Terkait hasil pemeriksaan pajak'],['unknown','Belum diketahui']];
 const routeLabel=()=>entryOptions.find(x=>x[0]===s.entry)?.[2]||'—';
 function step0(){
- const card=([id,ico,title,sub])=>`<button type="button" class="choice ${s.entry===id?'selected':''}" data-entry="${id}" aria-pressed="${s.entry===id?'true':'false'}"><span class="emoji" aria-hidden="true">${ico}</span><span><strong>${esc(title)}</strong><small>${esc(sub)}</small></span><span class="choice-check" aria-hidden="true">✓</span></button>`;
+ const card=([id,ico,title,sub])=>`<button type="button" class="choice ${s.entry===id?'selected':''}" data-entry="${id}" aria-pressed="${s.entry===id?'true':'false'}"><span class="emoji" aria-hidden="true">${entryIcons[ico]||''}</span><span><strong>${esc(title)}</strong><small>${esc(sub)}</small></span><span class="choice-check" aria-hidden="true">✓</span></button>`;
  return `<div class="question-intro"><span class="question-index">01 · KONDISI ANDA</span><h3>Apa kondisi perpajakan Anda?</h3><p class="help">Tidak perlu menentukan kategori pengawasan atau penagihan. Pilih keadaan yang paling sesuai, lalu Kabayan akan menanyakan informasi untuk menentukan jalur hukum.</p></div><div class="cards entry-cards">${entryOptions.map(card).join('')}</div><div class="inline-note">Memiliki beberapa surat? Periksa satu surat per analisis. Pilihan di sini hanya menentukan pertanyaan, bukan kelayakan fasilitas.</div>`;
 }
 function resetForRoute(){
@@ -976,7 +1020,7 @@ function stepDetails(){
  if(hasSPT()){
    html+=select('sptType','SPT yang terkait',[['annual','SPT Tahunan PPh'],['monthly','SPT Masa']]);
    if(s.sptType==='annual')html+=field('sptYear','Tahun Pajak','number','Dibatasi Tahun Pajak 2025 dan sebelumnya.');
-   if(s.sptType==='monthly')html+=field('sptPeriod','Masa Pajak','month','Dibatasi sampai Masa Pajak September 2026.');
+   if(s.sptType==='monthly')html+=monthYearPicker();
    if(s.sptType){
     html+=select('sptStatus','Status SPT',[['kb','Kurang Bayar'],['other','Nihil / Lebih Bayar / status lain'],['unknown','Belum tahu']]);
     html+=date('actionDate',s.category==='amend'?'Tanggal pembetulan SPT':'Tanggal SPT disampaikan');
@@ -1176,7 +1220,7 @@ document.addEventListener('click',ev=>{
  const b=ev.target.closest('[data-entry]');
  if(b){s={entry:b.dataset.entry,category:'',sanctionPrior:'0',sanctionProgram:'0',sanctionTotal:'',applicationDate:'',sptType:'',sptStatus:'',sanctionState:'',principalConfirmed:'',docReady:''};render();}
 });
-document.addEventListener('change',ev=>{const c=ev.target;if(c.dataset.field){s[c.dataset.field]=c.dataset.rupiah==='1'?numericOnly(c.value):c.value;if(['routeDoc','routeArticle','routeIssueDate','routeOrigin','routeSptEvent','routeGovernment'].includes(c.dataset.field)) {
+document.addEventListener('change',ev=>{const c=ev.target;if(c.dataset.field){s[c.dataset.field]=c.dataset.rupiah==='1'?numericOnly(c.value):c.value;if(['sptPeriodMonth','sptPeriodYear'].includes(c.dataset.field)){s.sptPeriod=s.sptPeriodMonth&&s.sptPeriodYear?`${s.sptPeriodYear}-${s.sptPeriodMonth}`:'';}if(['routeDoc','routeArticle','routeIssueDate','routeOrigin','routeSptEvent','routeGovernment'].includes(c.dataset.field)) {
  if(c.dataset.field==='routeDoc'){s.routeArticle='';s.routeIssueDate='';s.routeOrigin='';}
  if(c.dataset.field==='routeIssueDate')s.routeOrigin='';
  if(c.dataset.field==='routeArticle')s.routeOrigin='';
@@ -1184,7 +1228,7 @@ document.addEventListener('change',ev=>{const c=ev.target;if(c.dataset.field){s[
 } if(['document','article','sptType','sptStatus','registerType','principalConfirmed','principalDate','actionDate','sanctionState','estimateChoice','paymentPath','stpLinked','objection','auctionCondition','submissionCount','docReady','lawsuit'].includes(c.dataset.field)){
  if(c.dataset.field==='document'){s.article='';s.principalConfirmed='';s.issueDate='';s.principalDate='';s.sanctionState='';s.stpLinked='';s.objection='';}
  if(c.dataset.field==='article'){s.principalConfirmed='';s.principalDate='';s.sanctionState='';s.partialDate='';s.sanctionTotal='';}
- if(c.dataset.field==='sptType'){s.sptYear='';s.sptPeriod='';s.sptStatus='';s.actionDate='';}
+ if(c.dataset.field==='sptType'){s.sptYear='';s.sptPeriod='';s.sptPeriodMonth='';s.sptPeriodYear='';s.sptStatus='';s.actionDate='';}
  if(c.dataset.field==='sanctionState'){s.sanctionTotal='';s.sanctionPrior='0';s.sanctionProgram='0';s.partialDate='';s.estimateChoice='';s.paymentPath='';s.paymentExampleLoaded=false;}
  if(c.dataset.field==='paymentPath'){s.sanctionProgram=c.value==='yes'?'':'0';s.partialDate='';}
  if(c.dataset.field==='principalConfirmed')s.principalDate='';
