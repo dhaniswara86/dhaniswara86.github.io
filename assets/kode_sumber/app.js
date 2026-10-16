@@ -33,53 +33,135 @@ function step0(){
  const c=([id,ico,title,sub])=>`<button type="button" class="choice ${s.category===id?'selected':''}" data-scenario="${id}" aria-pressed="${s.category===id?'true':'false'}"><span class="emoji" aria-hidden="true">${ico}</span><span><strong>${esc(title)}</strong><small>${esc(sub)}</small></span><span class="choice-check" aria-hidden="true">✓</span></button>`;
  return `<div class="question-intro"><span class="question-index">01 · PILIH KASUS</span><h3>Masalah pajak apa yang Anda alami?</h3><p class="help">Pilih kondisi yang paling mendekati situasi Anda. Rincian pasal dan surat akan diperiksa pada langkah berikutnya.</p></div><div class="cards">${main.map(c).join('')}</div><details class="more-cases" ${more.some(x=>x[0]===s.category)?'open':''}><summary>Kasus lainnya <span>STP khusus, PPS, PBB, atau NPWP/PKP baru</span></summary><div class="cards">${more.map(c).join('')}</div></details><div class="inline-note">Punya beberapa SKP/STP? Periksa satu surat setiap kali, sesuai ketentuan satu permohonan untuk satu surat.</div>`;
 }
-function step1(){let html=`<div class="question-intro"><span class="question-index">02 · RINCIAN KASUS</span><h3>Isi detail dokumen dan pembayaran</h3><p class="help">Salin tanggal dan pasal sesuai dokumen Anda. Hanya informasi yang benar-benar relevan yang perlu diisi.</p></div><div class="field-grid">`;
- html+=select('document','Dokumen yang terkait',asOptions(documents[s.category],docNames));
- html+=select('article','Dasar pengenaan sanksi',asOptions(articles[s.category],{...E.ARTICLE_LABEL,other:'Jenis sanksi lain / tidak diketahui'}));
- if(['late','amend','pay','newreg'].includes(s.category)){
-  html+=select('sptType','Jenis SPT',[['annual','SPT Tahunan PPh'],['monthly','SPT Masa']]);
-  html+=select('sptStatus','Status SPT',[['kb','Kurang Bayar'],['other','Nihil / Lebih Bayar / bukan KB'],['unknown','Belum tahu']]);
-  if(s.sptType==='annual')html+=field('sptYear','Tahun Pajak SPT Tahunan','number','Cakupan KEP: Tahun Pajak 2025 dan sebelumnya.');
-  if(s.sptType==='monthly')html+=field('sptPeriod','Masa Pajak SPT Masa (YYYY-MM)','month','Cakupan KEP: September 2026 dan sebelumnya.');
-  html+=date('actionDate',s.category==='amend'?'Tanggal pembetulan SPT':'Tanggal pelaporan SPT','Gunakan tanggal aktual; jika tanggal mendatang, hasil adalah simulasi.');
-  if(s.category==='newreg'){
-   html+=select('registerType','Peristiwa pendaftaran baru',[['NPWP','NPWP baru'],['PKP','Pengukuhan PKP baru']]);
-   html+=date('registrationDate','Tanggal terdaftar/dikukuhkan','Persentase skema khusus Lampiran D mengikuti tanggal registrasi/pengukuhan.');
+const hasSPT=()=>['late','amend','pay','newreg'].includes(s.category);
+const reqPrincipal=()=>!['7','14_4'].includes(s.article)||s.principalConfirmed!=='no_base';
+const needsPrincipalDate=()=>s.principalConfirmed==='yes'&&reqPrincipal() && !(
+ s.category==='stp144'||(s.category==='audit'&&s.document==='STP'&&['7','14_4'].includes(s.article)));
+const hasPartialPath=()=> s.category==='stp144'||
+ (s.category==='audit'&&s.document==='STP')||
+ (s.category==='old' ||s.category==='newstp')||
+ (['late','amend','pay'].includes(s.category)&&s.document==='STP');
+const conditionalFieldNames=['registrationDate','registerType','sptYear','sptPeriod','actionDate','sptType','sptStatus','issueDate','principalDate','taxKind','partialDate','sanctionTotal','sanctionPrior','sanctionProgram','allocationConfirmed','objection','stpLinked','previousDecision','previousCase','docApplication','docAffidavit','docLegalStatement','auction','auctionCondition','estimateChoice'];
+function syncDerived(){
+ if(!s.category)return;
+ const docs=documents[s.category]||[];
+ if(docs.length===1)s.document=docs[0];
+ if(s.document && !docs.includes(s.document))s.document='';
+ const pairs=E.PAIRS?.[s.category]?.[s.document]||[];const allowed=(articles[s.category]||[]).filter(a=>(pairs.includes(a)||(a==='other'&&pairs.length>1)));
+ if(allowed.length===1)s.article=allowed[0];
+ else if(s.article && !allowed.includes(s.article))s.article='';
+ if(s.document==='NOT_ISSUED'){s.issueDate='';s.sanctionState='unknown';s.stpLinked='unknown';s.objection='unknown';s.otherRemedy='unknown';}
+ if(s.stpLinked==='no'){s.objection='none';}else if(s.stpLinked==='unknown'){s.objection='unknown';}
+ if(s.auctionCondition==='no')s.auction='not_started';
+ else if(s.auctionCondition==='unknown')s.auction='unknown';
+ if(s.docReady==='no'||s.docReady==='unknown'){s.docApplication='unknown';s.docAffidavit='unknown';s.docLegalStatement='unknown';}
+ if(s.principalConfirmed!=='yes')s.principalDate='';
+ if(s.sanctionState==='fully'||s.sanctionState==='unpaid'||s.sanctionState==='unknown'){
+    s.sanctionPrior='0';s.sanctionProgram='0';s.partialDate='';s.allocationConfirmed='';s.paymentPath='';
+ }
+ if(s.sanctionState==='partial'&&(!hasPartialPath()||s.paymentPath!=='yes')){s.partialDate='';s.sanctionProgram='0';}
+ if(s.sanctionState==='unpaid'&&s.estimateChoice!=='yes')s.sanctionTotal='';
+ if(s.sanctionState!=='partial'&&s.sanctionState!=='unpaid')s.sanctionTotal='';
+ if(s.submissionCount!=='2'){s.previousDecision='';s.previousCase='';}
+}
+function step1(){
+ syncDerived();
+ let html=`<div class="question-intro"><span class="question-index">02 · DATA KASUS</span><h3>Isi fakta yang berkaitan dengan kasus Anda</h3><p class="help">Pertanyaan berikut berubah otomatis sesuai jawaban. Kolom yang tidak relevan tidak ditampilkan dan tidak digunakan dalam perhitungan.</p></div><div class="field-grid">`;
+ const docs=documents[s.category]||[];
+ if(docs.length>1)html+=select('document','Dokumen sanksi yang Anda miliki',asOptions(docs,docNames));
+ else html+=`<div class="field"><div class="fact-chip">Dokumen: ${esc(docNames[s.document]||'—')}</div></div>`;
+ if(!s.document){html+='</div><div class="inline-note">Pilih jenis dokumen terlebih dahulu untuk menampilkan pertanyaan berikutnya.</div>';return html;}
+ const valid=(E.PAIRS?.[s.category]?.[s.document]||[]);
+ const opts=(articles[s.category]||[]).filter(a=>valid.includes(a)||(a==='other'&&valid.length>1));
+ if(opts.length>1)html+=select('article','Pasal atau jenis sanksi',asOptions(opts,{...E.ARTICLE_LABEL,other:'Tidak tercantum / belum dapat dikenali'}),'Gunakan pasal yang tertera pada surat.');
+ else if(opts.length===1)html+=`<div class="field"><div class="fact-chip">Sanksi: ${esc(E.ARTICLE_LABEL[s.article]||'—')}</div></div>`;
+ if(!s.article){html+='</div><div class="inline-note">Pilih dasar pengenaan sanksi untuk melanjutkan pertanyaan khusus kasus ini.</div>';return html;}
+ if(hasSPT()){
+   html+=select('sptType','SPT yang terkait',[['annual','SPT Tahunan PPh'],['monthly','SPT Masa']]);
+   if(s.sptType==='annual')html+=field('sptYear','Tahun Pajak','number','Dibatasi Tahun Pajak 2025 dan sebelumnya.');
+   if(s.sptType==='monthly')html+=field('sptPeriod','Masa Pajak','month','Dibatasi sampai Masa Pajak September 2026.');
+   if(s.sptType){
+    html+=select('sptStatus','Status SPT',[['kb','Kurang Bayar'],['other','Nihil / Lebih Bayar / status lain'],['unknown','Belum tahu']]);
+    html+=date('actionDate',s.category==='amend'?'Tanggal pembetulan SPT':'Tanggal SPT disampaikan');
+   }
+   if(s.category==='newreg'){
+    html+=select('registerType','Jenis pendaftaran',[['NPWP','Pendaftaran NPWP'],['PKP','Pengukuhan PKP']]);
+    if(s.registerType)html+=date('registrationDate','Tanggal terdaftar atau dikukuhkan');
+   }
+ }
+ if(s.document!=='NOT_ISSUED')html+=date('issueDate','Tanggal surat diterbitkan');
+ const noBaseEligible=['7','14_4'].includes(s.article);
+ html+=select('principalConfirmed','Apakah pokok pajak yang menjadi dasar sanksi sudah lunas?',[
+  ['yes','Ya, sudah lunas'],['no','Belum lunas'],
+  ...(noBaseEligible?[['no_base','Tidak ada pokok pajak terkait sanksi ini']]:[]),
+  ['unknown','Belum dapat dipastikan']
+ ],'Pembayaran atas SKP/STP diperhitungkan terlebih dahulu ke pokok pajak (Pasal 23).');
+ if(needsPrincipalDate())html+=date('principalDate','Tanggal pokok/utang pajak dilunasi seluruhnya');
+ if(s.category==='newstp'&&s.article==='19_3')html+=select('taxKind','Jenis pajak pada pokok terutang',[['pph','Pajak Penghasilan'],['other','Selain PPh'],['unknown','Belum tahu']]);
+ if(s.document!=='NOT_ISSUED'){
+  html+=select('sanctionState','Status pembayaran sanksi yang dimohonkan',[['unpaid','Sanksi belum dibayar'],['partial','Sanksi sudah dibayar sebagian'],['fully','Sanksi sudah dibayar seluruhnya'],['unknown','Belum tahu']]);
+  if(s.sanctionState==='partial'){
+    html+='</div><h4 class="sublabel">Rincian sanksi yang sudah dibayar</h4><div class="field-grid">';
+    html+=money('sanctionTotal','Jumlah seluruh sanksi (Rp)');
+    html+=money('sanctionPrior','Pembayaran sanksi sebelum tindakan yang diuji (Rp)','Masukkan 0 bila belum ada pembayaran lebih awal.');
+    if(hasPartialPath()){
+      html+=select('paymentPath','Apakah ada pembayaran khusus 10% atau 25% untuk mengikuti program?', [['yes','Ya, sudah/akan dibayar untuk program'],['no','Tidak, hanya pembayaran sanksi sebelumnya'],['unknown','Belum tahu']]);
+      if(s.paymentPath==='yes'){
+      html+=money('sanctionProgram','Jumlah pembayaran sanksi dalam skema program (Rp)','Digunakan untuk menguji persyaratan 10% atau 25% apabila relevan.');
+      html+=date('partialDate','Tanggal pembayaran sebagian sanksi');
+      }
+    }
+    html+=select('allocationConfirmed','Apakah jumlah pembayaran sanksi telah dipastikan setelah alokasi ke pokok?',yesNoUnk);
+  }
+  if(s.sanctionState==='unpaid'){
+    html+=select('estimateChoice','Apakah ingin menghitung perkiraan nominal?',[['no','Tidak, tampilkan persentase saja'],['yes','Ya, tampilkan nilai rupiahnya']]);
+    if(s.estimateChoice==='yes')html+=money('sanctionTotal','Nilai sanksi yang belum dibayar (Rp)');
   }
  }
- if(s.document!=='NOT_ISSUED')html+=date('issueDate','Tanggal terbit SKP / STP','Isi sesuai tanggal yang tercetak pada surat.');
- if((s.category!=='audit'||s.document!=='STP')&&!(s.principalConfirmed==='no_base'&&['7','14_4'].includes(s.article)))html+=date('principalDate','Tanggal pelunasan pokok/utang pajak','Isi tanggal ketika pokok yang menjadi dasar sanksi telah dilunasi sepenuhnya.');
- if(s.category==='newstp' && s.article==='19_3')html+=select('taxKind','Jenis pajak atas pokok',[['pph','Pajak Penghasilan (PPh)'],['other','Bukan PPh'],['unknown','Belum pasti']]);
- if(['old','newstp','stp144','audit','late','amend','pay'].includes(s.category)){
-  html+='</div><h4 class="sublabel">Bagian sanksi (jika sudah dibayar sebagian)</h4><div class="field-grid">';
-  html+=money('sanctionTotal','Total nilai sanksi dalam surat (Rp)','Diperlukan untuk memvalidasi persis 10% atau 25%.');
-  html+=money('sanctionPrior','Sanksi dibayar sebelum tindakan yang diuji (Rp)','Masukkan 0 bila belum pernah dibayar.');
-  html+=money('sanctionProgram','Pembayaran sebagian sanksi pada tindakan yang diuji (Rp)','Diisi untuk skema khusus 90% atau 75%.');
-  html+=date('partialDate','Tanggal pembayaran sebagian sanksi','Diisi bila ada pembayaran untuk skema 90% / 75%.');
- }
- html+='</div><div class="inline-note"><b>Catatan hukum:</b> Persentase yang tercantum dalam tabel berlaku dengan syarat khusus masing-masing. Pada sanksi yang sudah dibayar sebagian, pengurangan hanya mengenai sanksi yang masih belum dibayar (Diktum Keempat huruf d).</div>';
+ html+='</div><div class="inline-note"><b>Ketentuan:</b> jawaban yang belum dapat dipastikan tidak akan diubah menjadi asumsi. Hasil persentase hanya muncul bila cocok dengan aturan dan persyaratan yang telah diverifikasi.</div>';
  return html;
 }
-function step2(){return `<div class="question-intro"><span class="question-index">03 · VERIFIKASI PERSYARATAN</span><h3>Periksa syarat permohonan</h3><p class="help">Jawab berdasarkan status yang benar. Pilih “Belum tahu” apabila suatu informasi belum dapat dipastikan.</p></div>
-  <h4 class="sublabel">Persyaratan materiil & status sengketa</h4><div class="field-grid">
-  ${select('principalConfirmed','Pokok yang menjadi dasar sanksi telah lunas?',[[...yesNoUnk[0]],['no_base','Tidak ada pokok yang menjadi dasar sanksi'],...yesNoUnk.slice(1)],'Pasal 23 ayat (5) huruf a. Pilihan tanpa pokok dibatasi kasus dengan sanksi independen dari jumlah pokok yang belum dibayar.')}
-  ${select('sanctionState','Status pembayaran seluruh sanksi',[['unpaid','Belum dibayar sama sekali'],['partial','Baru dibayar sebagian'],['fully','Sudah lunas seluruhnya'],['unknown','Tidak tahu']])}
-  ${s.sanctionState==='partial'?select('allocationConfirmed','Pembayaran telah dialokasikan lebih dahulu ke pokok dan sisa yang disebut benar-benar pembayaran sanksi?',yesNoUnk,'Pasal 23 ayat (6)–(7): pembayaran atas SKP/STP diperhitungkan ke pokok terlebih dahulu.'):''}
-  ${select('lawsuit','Gugatan / upaya hukum lainnya',[['none','Tidak pernah diajukan'],['withdrawn','Pernah diajukan, sudah dicabut'],['active','Sedang diajukan / masih berlangsung'],['unknown','Tidak diketahui']])}
-  ${select('objection','Keberatan atas SKP / SPPT yang terkait',[['none','Tidak pernah diajukan'],['approved_withdrawal','Pencabutan telah disetujui DJP'],['not_considered','Keberatan tidak dipertimbangkan'],['active','Sedang dalam proses keberatan'],['unknown','Belum tahu / ada kondisi lainnya']])}
-  ${select('otherRemedy','Permohonan pembatalan/pengurangan lain',[['none','Tidak ada permohonan lain'],['closed','Pernah ada, telah dicabut/selesai'],['active','Masih diproses'],['unknown','Belum dapat dipastikan']])}
-  ${select('auction','Penagihan terkait barang sitaan',[['not_started','Belum ada permohonan lelang/pemindahbukuan'],['started','Tahap permohonan lelang/pemindahbukuan telah terjadi'],['unknown','Belum tahu']])}
-  </div><h4 class="sublabel">Pengajuan & kelengkapan</h4><div class="field-grid">
-  ${date('applicationDate','Tanggal rencana/aktual permohonan','Batas program menurut KEP: 1 Oktober 2028.')}
-  ${select('submissionCount','Permohonan atas surat ini yang ke-', [['1','Pertama'],['2','Kedua'],['3','Ketiga atau lebih']])}
-  ${s.submissionCount==='2'?date('previousDecision','Tanggal keputusan permohonan pertama dikirim','Batas permohonan kedua: 3 bulan dari keputusan pertama, kecuali keadaan di luar kekuasaan WP.')+select('previousCase','Apakah terhadap surat yang sama?', [['yes','Ya, identitas surat sama'],['no','Tidak, surat berbeda'],['unknown','Belum diverifikasi']]):''}
-  ${select('docApplication','Surat permohonan Bahasa Indonesia, satu per surat, telah ditandatangani?',yesNoUnk)}
-  ${select('docAffidavit','Surat pernyataan kekhilafan/bukan kesalahan bermeterai telah disiapkan?',yesNoUnk)}
-  ${select('docLegalStatement','Pernyataan tidak menggugat bermeterai / dokumen pencabutan sesuai kondisi tersedia?',yesNoUnk)}
-  ${select('docReady','Kelengkapan berkas permohonan',[['yes','Sudah disiapkan dan diperiksa satu per satu'],['no','Belum lengkap'],['unknown','Belum diperiksa']],'Termasuk surat permohonan berbahasa Indonesia, satu surat per permohonan, pernyataan bermeterai, dan persyaratan gugatan sesuai kondisi.')}
-  </div><div class="callout"><b>Tidak sama dengan persetujuan DJP.</b> Sistem hanya memeriksa konsistensi data yang Anda nyatakan. Kebenaran dokumen dan kondisi hukum tetap harus diverifikasi dalam administrasi perpajakan.</div>`;}
+function step2(){
+ syncDerived();
+ let html=`<div class="question-intro"><span class="question-index">03 · SYARAT PERMOHONAN</span><h3>Periksa persyaratan yang masih relevan</h3><p class="help">Jawab sesuai fakta atau dokumen. Formulir tambahan baru muncul apabila diperlukan oleh jawaban Anda.</p></div><div class="field-grid">`;
+ if(['STP','STP_PBB'].includes(s.document)){
+   html+=select('stpLinked','Apakah STP ini terkait SKP atau SPPT yang diajukan keberatan?',[[ 'no','Tidak, STP berdiri sendiri/tidak terkait' ],['yes','Ya, STP terkait SKP/SPPT'],['unknown','Belum dapat dipastikan']]);
+ }
+ if(['SKPKB','SKPKBT','SKP_PBB','SKPKB_PPS'].includes(s.document)||s.stpLinked==='yes'){
+  html+=select('objection','Status keberatan atas SKP/SPPT terkait',[
+  ['none','Tidak pernah mengajukan keberatan'],['approved_withdrawal','Pencabutan telah disetujui DJP'],
+  ['not_considered','Keberatan tidak dipertimbangkan'],['decided','Keberatan sudah diputus'],
+  ['active','Sedang berlangsung'],['unknown','Tidak diketahui']]);
+ }
+ html+=select('otherRemedy','Apakah ada permohonan pengurangan/pembatalan lain atas surat terkait?',[
+  ['none','Tidak ada'],['closed','Pernah ada, sudah selesai/dicabut'],['active','Masih diajukan'],['unknown','Belum tahu']]);
+ html+=select('lawsuit','Status gugatan atau upaya hukum lainnya',[
+  ['none','Tidak mengajukan'],['withdrawn','Pernah diajukan dan dicabut'],['active','Masih berlangsung'],['unknown','Belum tahu']]);
+ html+=select('auctionCondition','Apakah perkara sudah masuk tindakan penagihan atas barang sitaan?',[
+  ['no','Tidak'],['yes','Ya'],['unknown','Belum tahu']]);
+ if(s.auctionCondition==='yes')html+=select('auction','Tahap yang sudah dilakukan',[
+  ['not_started','Belum ada permohonan lelang/pemindahbukuan'],['started','Sudah diajukan permohonan lelang/pemindahbukuan'],['unknown','Belum tahu']]);
+ html+='</div><h4 class="sublabel">Waktu dan berkas permohonan</h4><div class="field-grid">';
+ html+=date('applicationDate','Tanggal permohonan diajukan/direncanakan','Batas KEP-239 adalah 1 Oktober 2028, bukan batas pembayaran pokok.');
+ html+=select('submissionCount','Permohonan untuk surat yang sama',[['1','Permohonan pertama'],['2','Permohonan kedua'],['3','Ketiga atau lebih']]);
+ if(s.submissionCount==='2'){
+  html+=date('previousDecision','Tanggal keputusan atas permohonan pertama dikirim');
+  html+=select('previousCase','Apakah objek surat sama dengan pengajuan pertama?',[['yes','Ya'],['no','Tidak'],['unknown','Belum pasti']]);
+ }
+ html+=select('docReady','Apakah kelengkapan permohonan sudah disiapkan?',[
+  ['yes','Ya, saya akan memeriksa dokumennya'],['no','Belum lengkap'],['unknown','Belum diperiksa']]);
+ if(s.docReady==='yes'){
+  html+=select('docApplication','Surat permohonan berbahasa Indonesia, per satu surat, dan ditandatangani?',yesNoUnk);
+  html+=select('docAffidavit','Surat pernyataan kekhilafan/bukan kesalahan bermeterai?',yesNoUnk);
+  if(s.lawsuit==='none')html+=select('docLegalStatement','Surat pernyataan tidak menggugat bermeterai tersedia?',yesNoUnk);
+  else if(s.lawsuit==='withdrawn')html+=select('docLegalStatement','Dokumen permohonan pencabutan gugatan/upaya hukum lainnya tersedia?',yesNoUnk);
+  else s.docLegalStatement='unknown';
+ }
+ html+='</div><div class="inline-note">Alat bantu ini tidak memverifikasi berkas atau status sengketa langsung ke DJP dan tidak menerbitkan keputusan fasilitas.</div>';
+ return html;
+}
 function rupiah(n){return 'Rp'+Math.round(n).toLocaleString('id-ID');}
-function resultHTML(){let r=E.evaluate(s);last=r;
+function resultHTML(){let r=s.document==='NOT_ISSUED'?{status:'review',rate:null,matches:[],missing:[],issues:[],flags:['STP belum diterbitkan. Permohonan pengurangan sanksi menurut Pasal 23 memerlukan identitas SKP/STP terkait; sistem belum dapat memberi persentase.'],reason:'Dokumen penetapan/tagihan yang akan menjadi objek permohonan belum tersedia.',citations:[E.REF.P,E.REF.K]}:E.evaluate(s);last=r;
  const status={mapped:['Kondisi sesuai skema tertulis','mapped','Hasil simulasi berdasarkan jawaban Anda'],missing:['Informasi belum lengkap','review','Lengkapi seluruh data wajib sebelum sistem menentukan skema'],review:['Perlu verifikasi hukum','review','Tidak ada persentase yang diputuskan secara otomatis'],blocked:['Persyaratan tidak terpenuhi','blocked','Periksa hambatan yang disebutkan di bawah'],unmapped:['Tidak dapat ditentukan','review','Belum ditemukan aturan spesifik yang cocok']};
  let [ttl,css,sub]=status[r.status]; const based=(r.matches||[]).map(x=>`<div class="legalitem"><strong>${esc(x.id)}</strong> · ${esc(x.cite)}<div>${esc(x.why)}. ${esc(x.pages)}</div></div>`).join('');
  let nam=cardText();
@@ -93,15 +175,38 @@ function resultHTML(){let r=E.evaluate(s);last=r;
  <details class="sectionbox checklist-details"><summary>Checklist dokumen dan persyaratan akhir <span>9 hal untuk diperiksa</span></summary><div class="checklist-items">${['Pokok pajak yang menjadi dasar sanksi telah lunas sesuai Pasal 23','Periksa status keberatan, pembatalan dan gugatan/upaya hukum lain','Surat permohonan dalam bahasa Indonesia, satu permohonan per SKP/STP atau surat PBB','Surat pernyataan kekhilafan/bukan karena kesalahan ditandatangani di atas meterai','Surat pernyataan tidak menggugat bermeterai atau bukti pencabutan sesuai kasus','Sanksi yang dimohonkan masih belum dibayar; jumlah dan pembayaran sebagian direkonsiliasi','Permohonan pertama/kedua dan batas 3 bulan telah diperiksa','Pengajuan sebelum permohonan lelang/pemindahbukuan barang sitaan','Batas tindakan khusus dan batas pengajuan 1 Oktober 2028 dipenuhi'].map(item=>`<label class="message"><input type="checkbox" style="margin-top:4px;accent-color:#0071e3" aria-label="Periksa kelengkapan"> <span>${esc(item)}</span></label>`).join('')}</div></details>
  <div class="callout"><b>Penggunaan terbatas:</b> hasil adalah alat bantu edukasi berdasarkan kondisi yang diinput sendiri. Tidak memverifikasi data DJP, bukan surat keputusan pengurangan/penghapusan dan tidak menggantikan pemeriksaan Pasal 23–24. </div></div>`;
 }
-function render(){const labels=['Pilih kondisi','Detail dokumen','Syarat & prosedur','Hasil analisis'];$('step-label').textContent=`LANGKAH ${step+1} DARI 4 · ${labels[step]}`;$('step-text').textContent=step===0?'Pilih kondisi yang Anda alami':step===3?'Hasil pemetaan berdasarkan jawaban Anda':cardText();$('wizard-panel').dataset.step=String(step);$('stepper').setAttribute('aria-valuenow',String(step+1));$('stepper').innerHTML=labels.map((x,i)=>`<span class="${i<=step?'done':''}" title="${esc(x)}"></span>`).join('');$('body').innerHTML=[step0,step1,step2,resultHTML][step]();$('back').style.visibility=step===0?'hidden':'visible';$('next').textContent=step===0?'Lanjutkan →':step===1?'Periksa persyaratan →':step===2?'Lihat hasil saya →':'Periksa kasus baru ↻';$('next').disabled=step===0&&!catChosen();$('print').hidden=step!==3;$('copy').hidden=step!==3;$('footer-message').textContent=step===3?'Setiap hasil tetap memerlukan verifikasi dokumen di DJP':'Tidak ada data yang dikirim ke server dari halaman ini';}
+function render(){syncDerived();const labels=['Pilih kondisi','Detail dokumen','Syarat & prosedur','Hasil analisis'];$('step-label').textContent=`LANGKAH ${step+1} DARI 4 · ${labels[step]}`;$('step-text').textContent=step===0?'Pilih kondisi yang Anda alami':step===3?'Hasil pemetaan berdasarkan jawaban Anda':cardText();$('wizard-panel').dataset.step=String(step);$('stepper').setAttribute('aria-valuenow',String(step+1));$('stepper').innerHTML=labels.map((x,i)=>`<span class="${i<=step?'done':''}" title="${esc(x)}"></span>`).join('');$('body').innerHTML=[step0,step1,step2,resultHTML][step]();$('back').style.visibility=step===0?'hidden':'visible';$('next').textContent=step===0?'Lanjutkan →':step===1?'Periksa persyaratan →':step===2?'Lihat hasil saya →':'Periksa kasus baru ↻';$('next').disabled=step===0&&!catChosen();$('print').hidden=step!==3;$('copy').hidden=step!==3;$('footer-message').textContent=step===3?'Setiap hasil tetap memerlukan verifikasi dokumen di DJP':'Tidak ada data yang dikirim ke server dari halaman ini';}
 function resetCase(id){s={category:id,document:(documents[id]||[]).length===1?documents[id][0]:'',article:['late','amend','pay','stp143','stp144'].includes(id)?articles[id][0]:'',sanctionPrior:'0',sanctionProgram:'0',sanctionTotal:'',applicationDate:'',sptType:'',sptStatus:'',sanctionState:'',principalConfirmed:'',docReady:''};}
-function advance(){if(step===0&&!catChosen())return; if(step===3){step=0;resetCase('');}else step++;render();$('cek').scrollIntoView({behavior:'smooth',block:'start'});}
+function advance(){if(step===0&&!catChosen())return;
+ if(step===1||step===2){
+  const optional=['estimateChoice','sanctionTotal','paymentPath'];
+  const required=[...document.querySelectorAll('#body [data-field]')].filter(x=>!optional.includes(x.dataset.field));
+  const blank=required.filter(x=>!String(x.value).trim());
+  if(blank.length){let old=document.getElementById('step-errors');if(old)old.remove();
+    const note=document.createElement('div');note.id='step-errors';note.className='message review';
+    note.textContent='Lengkapi '+blank.length+' informasi yang masih kosong. Pilih “Belum tahu” apabila faktanya belum dapat dipastikan.';
+    document.getElementById('body').prepend(note);blank[0].focus();return;
+  }
+ }
+ if(step===3){step=0;resetCase('');}else if(step===1&&s.document==='NOT_ISSUED'){step=3;}else step++;render();$('cek').scrollIntoView({behavior:'smooth',block:'start'});}
 function backup(){if(step>0){step--;render();$('cek').scrollIntoView({behavior:'smooth',block:'start'});}}
 function copyText(){if(!last)return;let report=`KABAYAN | CEK KERINGANAN SANKSI PAJAK\nStatus: ${last.status}\nKategori: ${cardText()}\nPasal: ${E.ARTICLE_LABEL[s.article]||'-'}\nPersentase simulasi: ${last.rate===null?'TIDAK DITENTUKAN':last.rate+'%'}\nAlasan: ${last.reason}\nAturan: ${(last.matches||[]).map(x=>x.cite).join('; ')}\nCatatan: ${[...(last.flags||[]),...(last.issues||[])].join('; ')}\nBatas permohonan: 1 Oktober 2028.\nPanduan edukasi, bukan keputusan DJP.`;if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(report).then(()=>toast('Ringkasan disalin.')).catch(()=>fallbackCopy(report));}else fallbackCopy(report);}
 function fallbackCopy(v){let a=window.prompt('Salin ringkasan:',v);if(a!==null)toast('Ringkasan siap disalin.');}
 function toast(v){$('footer-message').textContent=v;}
 document.addEventListener('click',ev=>{const b=ev.target.closest('[data-scenario]');if(b){resetCase(b.dataset.scenario);render();}});
-document.addEventListener('change',ev=>{const c=ev.target;if(c.dataset.field){s[c.dataset.field]=c.value;if(['document','sptType','submissionCount','article','sanctionState'].includes(c.dataset.field))render();}});
+document.addEventListener('change',ev=>{const c=ev.target;if(c.dataset.field){s[c.dataset.field]=c.value;if(['document','article','sptType','sptStatus','registerType','principalConfirmed','sanctionState','estimateChoice','paymentPath','stpLinked','objection','auctionCondition','submissionCount','docReady','lawsuit'].includes(c.dataset.field)){
+ if(c.dataset.field==='document'){s.article='';s.principalConfirmed='';s.issueDate='';s.principalDate='';s.sanctionState='';s.stpLinked='';s.objection='';}
+ if(c.dataset.field==='article'){s.principalConfirmed='';s.principalDate='';s.sanctionState='';s.partialDate='';s.sanctionTotal='';}
+ if(c.dataset.field==='sptType'){s.sptYear='';s.sptPeriod='';s.sptStatus='';s.actionDate='';}
+ if(c.dataset.field==='sanctionState'){s.sanctionTotal='';s.sanctionPrior='0';s.sanctionProgram='0';s.partialDate='';s.estimateChoice='';s.paymentPath='';}
+ if(c.dataset.field==='paymentPath'){s.sanctionProgram='0';s.partialDate='';}
+ if(c.dataset.field==='principalConfirmed')s.principalDate='';
+ if(c.dataset.field==='stpLinked')s.objection='';
+ if(c.dataset.field==='auctionCondition')s.auction='';
+ if(c.dataset.field==='lawsuit')s.docLegalStatement='';
+ if(c.dataset.field==='docReady'){s.docApplication='';s.docAffidavit='';s.docLegalStatement='';}
+ render();
+ }}});
 document.addEventListener('input',ev=>{const c=ev.target;if(c.dataset.field)s[c.dataset.field]=c.value;});
 $('next').addEventListener('click',advance);$('back').addEventListener('click',backup);$('print').addEventListener('click',()=>window.print());$('copy').addEventListener('click',copyText);
 render();})();

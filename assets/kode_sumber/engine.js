@@ -10,6 +10,7 @@ const REF={
  'B':'KEP-239/PJ/2026, Lampiran B, hlm. 11–12 (pemeriksaan)',
  'C':'KEP-239/PJ/2026, Lampiran C, hlm. 13–21 (penagihan)',
  'D':'KEP-239/PJ/2026, Lampiran D, hlm. 22–24 (basis data/PPS)',
+ 'E':'KEP-239/PJ/2026, Lampiran E, hlm. 25–43 (contoh kasus resmi)',
  'K':'KEP-239/PJ/2026, Diktum Ketiga–Keempat, hlm. 4',
  'P':'PMK 118/2024 s.t.d.d. PMK 71/2026, Pasal 23 dan Pasal 24; petikan pada Lampiran H KEP-239/PJ/2026, hlm. 48–53',
  '21A':'PMK 71/2026, Pasal I angka 3 (Pasal 21A) dan angka 4 (Pasal 23)'
@@ -40,6 +41,20 @@ const doc=(s,vals)=>vals.includes(s.document);
 const dateStr=(s,field)=>validDate(s[field])?s[field]:null;
 const mainDate=(s)=>s.actionDate;
 const rule=(id,rate,src,why,pages,extra={})=>({id,rate,src,cite:REF[src],why,pages,...extra});
+// Explicit article/document gate: never let a handcrafted or stale UI payload bypass these pairs.
+const PAIRS={
+ late:{STP:['7'],NOT_ISSUED:['7']},amend:{STP:['8'],NOT_ISSUED:['8']},pay:{STP:['9'],NOT_ISSUED:['9']},
+ newreg:{STP:['7','9'],NOT_ISSUED:['7','9']},stp143:{STP:['14_3']},stp144:{STP:['14_4']},
+ pps:{SKPKB_PPS:['13_2','15_2']},
+ audit:{SKPKB:['13_2','13_3','15_2','17c','17d'],SKPKBT:['13_2','13_3','15_2','17c','17d'],SKP_PBB:['pbb10_3','pbb10_4'],STP:['7','8','9','14_4']},
+ old:{SKPKB:['13_2','13_3','15_2','17c','17d'],SKPKBT:['13_2','13_3','15_2','17c','17d'],SKP_PBB:['pbb10_3','pbb10_4'],STP:['7','8','9','14_4','19_1','19_2','19_3','25_9','27_5d','27_5f'],STP_PBB:['pbb11_3']},
+ newstp:{STP:['7','8','9','14_3','14_4','19_1','19_2','19_3','25_9','27_5d','27_5f'],STP_PBB:['pbb11_3']}
+};
+const PPS_EXAMPLES={
+ '2027-01-01|2027-01-31':100,'2027-01-01|2027-02-28':50,
+ '2027-01-01|2027-03-01':25,'2027-01-01|2027-12-31':25,
+ '2027-11-30|2027-12-31':100
+};
 function match(s){
  const results=[]; const put=(...args)=>results.push(rule(...args));
  const a=s.article, d=s.document, letter=s.issueDate, p=s.principalDate, t=s.actionDate, part=s.partialDate;
@@ -142,24 +157,26 @@ function partialAmountMatches(s,rate){
 function checkRequired(s){const missing=[];const req=(key,label)=>{if(s[key]===undefined||s[key]===null||s[key]==='')missing.push(label);};
  req('category','Jenis masalah');req('article','Pasal sanksi');req('document','Jenis surat/dokumen');
  if(!s.document)return missing;
+ if(!PAIRS[s.category] || !PAIRS[s.category][s.document] || !PAIRS[s.category][s.document].includes(s.article))return missing;
  if(['late','amend','pay','newreg'].includes(s.category)){
    req('sptType','Jenis SPT');req('sptStatus','Status SPT kurang bayar');if(s.sptType==='annual')req('sptYear','Tahun pajak');if(s.sptType==='monthly')req('sptPeriod','Masa pajak');req('actionDate','Tanggal pelaporan/pembetulan');
-   if(!(s.principalConfirmed==='no_base'&&['7','14_4'].includes(s.article)))req('principalDate','Tanggal pelunasan/pembayaran pokok');if(s.document==='STP')req('issueDate','Tanggal STP');
+   if(s.principalConfirmed==='yes'&&!(s.principalConfirmed==='no_base'&&['7','14_4'].includes(s.article)))req('principalDate','Tanggal pelunasan/pembayaran pokok');if(s.document==='STP')req('issueDate','Tanggal STP');
    if(s.category==='newreg'){req('registrationDate','Tanggal NPWP/PKP baru');req('registerType','NPWP atau PKP baru');}
    
  }
  if(['stp143','stp144','audit','old','newstp','pps'].includes(s.category))req('issueDate','Tanggal terbit SKP/STP');
- if(['stp143','audit','old','newstp','pps'].includes(s.category) && !(s.category==='audit'&&s.document==='STP'&&['7','14_4'].includes(s.article)) && !(s.principalConfirmed==='no_base'&&['7','14_4'].includes(s.article)))req('principalDate','Tanggal pelunasan pokok/utang pajak');
+ if(s.principalConfirmed==='yes'&&['stp143','audit','old','newstp','pps'].includes(s.category) && !(s.category==='audit'&&s.document==='STP'&&['7','14_4'].includes(s.article)) && !(s.principalConfirmed==='no_base'&&['7','14_4'].includes(s.article)))req('principalDate','Tanggal pelunasan pokok/utang pajak');
  if(['stp144'].includes(s.category)||['old','newstp','audit'].includes(s.category) && ['14_4','7','8','9'].includes(s.article) && s.document==='STP' || s.category==='newstp'&&s.principalDate&&s.principalDate<START) {
   // Only required if the case depends on partial sanction; otherwise leave out and return pending if no candidate.
   if(s.category==='stp144'){req('partialDate','Tanggal pembayaran sebagian sanksi');req('sanctionTotal','Jumlah sanksi');req('sanctionPrior','Sanksi telah dibayar sebelumnya (isi 0 jika belum)');req('sanctionProgram','Pembayaran sanksi tahap program');}
  }
+ if(['STP','STP_PBB'].includes(s.document))req('stpLinked','Status keterkaitan STP dengan SKP/SPPT');
  req('lawsuit','Status gugatan/upaya hukum');req('objection','Status keberatan atas SKP/SPPT terkait');req('otherRemedy','Status pengajuan pengurangan/pembatalan lain');req('auction','Status proses lelang/pemindahbukuan barang sitaan');req('principalConfirmed','Konfirmasi pokok pajak lunas');req('submissionCount','Pengajuan ke berapa');req('applicationDate','Tanggal pengajuan permohonan');
  if(s.submissionCount==='2')req('previousDecision','Tanggal surat keputusan permohonan pertama dikirim');
  if(s.submissionCount==='2')req('previousCase','Apakah objek surat sama dengan permohonan pertama');
  if(s.category==='newstp' && s.article==='19_3')req('taxKind','Jenis pajak atas pokok PPh');
  if(s.sanctionState==='partial')req('allocationConfirmed','Verifikasi alokasi pembayaran ke pokok lebih dahulu');
- req('docReady','Kelengkapan dokumen/persyaratan formal');req('docApplication','Surat permohonan satu surat');req('docAffidavit','Surat pernyataan kekhilafan bermeterai');req('docLegalStatement','Surat pernyataan non litigasi / pencabutan');req('sanctionState','Status sanksi sudah dibayar');
+ req('docReady','Kelengkapan dokumen/persyaratan formal');if(s.docReady==='yes'){req('docApplication','Surat permohonan satu surat');req('docAffidavit','Surat pernyataan kekhilafan bermeterai');if(!['active'].includes(s.lawsuit))req('docLegalStatement','Surat pernyataan non litigasi / pencabutan');}req('sanctionState','Status sanksi sudah dibayar');
  return missing;
 }
 function evaluate(s){
@@ -170,8 +187,24 @@ function evaluate(s){
  if(all.length)return {status:'missing',rate:null,matches:[],missing:all,issues,flags,reason:'Data wajib belum lengkap. Sistem belum melakukan pemilihan fasilitas.',citations:[...citations]};
  // Direct clear stop conditions, before searching a percentage.
  if(s.document==='SPPT_P2'||s.article==='pbb2')fail('PBB-P2 daerah bukan dokumen yang tercakup sebagai SKP/STP PBB dalam aturan ini.',REF['21A']);
+ if(!PAIRS[s.category] || !PAIRS[s.category][s.document] || !PAIRS[s.category][s.document].includes(s.article))fail('Jenis dokumen, kategori, dan pasal sanksi tidak merupakan kombinasi yang terpetakan pada tabel ketentuan. Pilih sesuai surat; sistem tidak menerka dasar hukum.',REF.K);
  if(['25_9','27_5d','27_5f'].includes(s.article))flag('Pengecualian untuk sanksi terkait Pasal 25 ayat (9) / Pasal 27 ayat (5d)/(5f) memerlukan pemeriksaan objek dan ketentuan peralihan; aplikasi tidak mengeluarkan persentase.',REF['21A']);
  if(s.sptType==='annual' && +s.sptYear>2025 || s.sptType==='monthly' && s.sptPeriod>'2026-09')fail('Masa/tahun pajak melampaui cakupan SPT yang ditetapkan dalam Diktum Kesatu huruf a–c.',REF.A);
+ if(['late','amend','pay','newreg'].includes(s.category)){
+   if(s.sptStatus==='other')fail('SPT tidak berstatus kurang bayar; skema SPT dalam Lampiran A/D yang dipilih mensyaratkan status kurang bayar.',REF.A);
+   if(s.sptStatus==='unknown')flag('Status SPT belum diketahui; belum dapat mencocokkan syarat kurang bayar.',REF.A);
+   if(validDate(s.actionDate) && !WITHIN(s.actionDate,START,END) && !(s.actionDate<START && s.category!=='newreg' && ['STP'].includes(s.document) && WITHIN(s.issueDate,START,END) && s.sanctionState==='partial'))fail('Tanggal pelaporan/pembetulan berada di luar 8 Oktober 2026–30 Juni 2027 pada skema yang dipilih.',REF.A);
+   if(['amend','pay','newreg'].includes(s.category) && s.principalConfirmed==='yes' && validDate(s.principalDate) && !WITHIN(s.principalDate,START,END))flag('Tanggal pembayaran pokok berada di luar periode program pada jalur ini, sehingga skema tidak dapat dipastikan.',REF.A);
+   if(['amend','pay'].includes(s.category) && validDate(s.actionDate) && validDate(s.principalDate) && quarter(s.actionDate)!==quarter(s.principalDate))flag('Tanggal pelaporan/pembetulan dan pelunasan berada pada periode tarif yang berlainan; lampiran belum cukup jelas untuk menentukan persentase dari salah satunya.',REF.A);
+ }
+ if(s.category==='newreg' && validDate(s.registrationDate) && !WITHIN(s.registrationDate,START,END))fail('Pendaftaran NPWP/pengukuhan PKP terjadi di luar periode yang diatur Lampiran D.',REF.D);
+ if(['stp143','stp144','audit','newstp'].includes(s.category) && validDate(s.issueDate) && !WITHIN(s.issueDate,START,END))fail('Surat terbit di luar periode penerbitan kelompok kasus yang dipilih; periksa kategori surat lama.',REF.K);
+ if(['stp143','audit','newstp'].includes(s.category) && validDate(s.principalDate) && s.principalDate>END)fail('Pelunasan pokok melewati batas 30 Juni 2027 pada skema ini.',REF.K);
+ if(s.category==='pps' && validDate(s.principalDate) && s.principalDate>PPS_END)fail('Pelunasan pokok PPS melewati 31 Desember 2027.',REF.D);
+ if(s.category==='pps' && validDate(s.issueDate) && !WITHIN(s.issueDate,START,PPS_END))fail('SKP PPS terbit di luar periode 8 Oktober 2026–31 Desember 2027.',REF.D);
+ if(s.category==='stp144' && validDate(s.partialDate) && s.partialDate>END)fail('Pembayaran sebagian sanksi melewati 30 Juni 2027.',REF.A);
+ if(s.category==='newreg' && s.registerType==='NPWP' && s.sptType==='monthly' && s.sptPeriod && !['2026-09'].includes(s.sptPeriod)){ /* period prior to Sep is also covered */ }
+
  if(s.applicationDate>APPLY_END)fail('Permohonan melewati 1 Oktober 2028.',REF.K);
  if(s.applicationDate<START)fail('Permohonan program dipilih sebelum KEP-239/PJ/2026 berlaku.',REF.K);
  if(s.submissionCount==='3')fail('Jumlah permohonan melebihi batas Pasal 24 PMK 118/2024.',REF.P);
@@ -190,6 +223,9 @@ function evaluate(s){
  if(s.lawsuit==='withdrawn')flag('Bukti permohonan pencabutan gugatan/upaya hukum harus diverifikasi.',REF.K);
  if(s.objection==='active')flag('Keberatan aktif: ada pengaturan pada Lampiran C, tetapi Pasal 23 membatasi kondisi keberatan. Kesesuaian harus diteliti secara hukum.',REF.P);
  if(s.objection==='unknown')flag('Status keberatan/permohonan dan persetujuan pencabutan belum dapat diverifikasi.',REF.P);
+ if(s.objection==='decided')flag('Keberatan telah diputus. Lampiran E membedakan sanksi dalam SKP dan STP terkait, sehingga perlu pemeriksaan objek sengketa dan akibat keputusan; tarif tidak ditentukan otomatis.',REF.E);
+ if(s.stpLinked==='unknown' && ['STP','STP_PBB'].includes(s.document))flag('Belum pasti apakah STP terkait SKP/SPPT yang menjadi objek keberatan. Pasal 23 ayat (3) perlu diuji.',REF.P);
+
  if(s.objection==='approved_withdrawal'||s.objection==='not_considered')flag('Bukti pencabutan yang disetujui atau keputusan tidak dipertimbangkan perlu diperiksa terhadap objek surat.',REF.P);
  if(s.otherRemedy==='active')flag('Terdapat permohonan pengurangan/pembatalan lain yang belum selesai; Pasal 23 wajib diteliti.',REF.P);
  if(s.otherRemedy==='unknown')flag('Belum diketahui apakah terdapat permohonan pengurangan/pembatalan lain.',REF.P);
@@ -206,10 +242,12 @@ function evaluate(s){
  if(s.docReady==='unknown')flag('Kelengkapan surat permohonan, pernyataan meterai, dan dokumen pendukung belum diverifikasi.',REF.K);
  if(s.sanctionState==='fully')fail('Sanksi sudah dibayar seluruhnya, sehingga tidak ada sanksi belum dibayar untuk diberi pengurangan.',REF.K);
  if(s.sanctionState==='unknown')flag('Status pembayaran sanksi belum dipastikan.',REF.K);
+ if(s.sanctionState==='partial' && s.paymentPath==='unknown')flag('Belum diketahui apakah pembayaran sebagian sanksi memenuhi skema khusus 10%/25%; persentase tidak dapat diputuskan.',REF.K);
  if(s.sanctionState==='partial' && s.allocationConfirmed!=='yes')flag('Perhitungan sebagian sanksi belum diverifikasi setelah pembayaran diperhitungkan terlebih dahulu ke pokok sesuai Pasal 23 ayat (6)–(7).',REF.P);
  if(s.sanctionState==='partial' && !(Number(s.sanctionTotal)>0))flag('Pembayaran sebagian sanksi wajib diikuti rincian sanksi dan jumlah yang sudah dibayar agar sisa objek permohonan terukur.',REF.K);
  if(s.sanctionState==='partial' && Number(s.sanctionPrior||0)===0 && Number(s.sanctionProgram||0)===0)flag('Status sebagian sanksi telah dibayar tidak cocok dengan jumlah pembayaran 0 rupiah.',REF.K);
  if(s.sanctionState==='unpaid' && (Number(s.sanctionPrior||0)>0 || Number(s.sanctionProgram||0)>0))flag('Status belum membayar sanksi bertentangan dengan isian pembayaran sebagian sanksi.',REF.K);
+ if(s.partialDate && s.applicationDate && s.partialDate>s.applicationDate)flag('Pembayaran sebagian sanksi berada setelah tanggal permohonan, sehingga belum bisa menjadi dasar pemenuhan syarat.',REF.P);
  if(s.issueDate && s.applicationDate && s.issueDate>s.applicationDate)flag('Tanggal SKP/STP lebih lambat daripada tanggal permohonan; permohonan belum dapat diverifikasi atas surat tersebut.',REF.P);
  if(s.sanctionTotal!=='' && s.sanctionTotal!==undefined){
   const total=Number(s.sanctionTotal), prior=Number(s.sanctionPrior||0), payment=Number(s.sanctionProgram||0);
@@ -224,6 +262,28 @@ function evaluate(s){
  if(s.category==='newreg'&&s.registrationDate>s.actionDate)flag('Tanggal pendaftaran/pengukuhan lebih lambat daripada tanggal SPT; urutan perlu diperiksa.',REF.D);
  if(s.issueDate && s.principalDate && ['audit','pps','stp143'].includes(s.category) && addMonths(s.issueDate,1)===null)flag('Tanggal jatuh tempo satu/dua bulan melibatkan akhir bulan yang tidak mempunyai tanggal sama; aplikasi tidak menentukan batas dengan asumsi sendiri.',REF[s.category==='pps'?'D':s.category==='audit'?'B':'A']);
  let matches=match(s);for(const x of matches)citations.add(x.cite);
+ // Lampiran D uses one/two months; Lampiran E's PPS examples conflict with anniversary-based counting.
+ // Only the *exact* official illustrations may be returned automatically until the calendar convention is confirmed.
+ if(s.category==='pps' && !issues.length){
+   const key=s.issueDate+'|'+s.principalDate;
+   const official=PPS_EXAMPLES[key];
+   if(s.article==='13_2' && official!==undefined && matches.length){
+     matches=[rule('D-g-PPS-E-exact',official,'E','Persentase mengikuti pasangan tanggal eksplisit pada contoh PPS Lampiran E, bukan generalisasi aritmetika bulan.','Lampiran E halaman 42–43')];
+     citations.add(REF.E);
+   } else if(matches.length){
+     flag('Metode batas 1/2 bulan PPS belum dapat direkonsiliasi antara Lampiran D dan contoh Lampiran E. Untuk tanggal ini jangan menentukan persentase tanpa konfirmasi hukum.',REF.D);
+   }
+ }
+ if(s.category==='newreg' && !issues.length){
+   const regQ=quarter(s.registrationDate),fileQ=quarter(s.actionDate);
+   if(regQ!==null && fileQ!==null && regQ!==fileQ){
+     if(s.registerType==='NPWP' && s.registrationDate==='2026-10-25' && s.actionDate==='2027-01-02' && matches.length){
+        matches=[rule('D-new-E-exact',50,'E','Contoh resmi NPWP 25 Oktober 2026 dan SPT 2 Januari 2027 memperoleh pengurangan 50%.','Lampiran E halaman 41')];
+        citations.add(REF.E);
+     }else flag('Tanggal registrasi dan pelaporan berada pada periode persentase berbeda. Contoh resmi tersedia untuk satu kombinasi khusus, bukan dasar menyamaratakan seluruh kombinasi.',REF.D);
+   }
+ }
+
  if(matches.length>1&&new Set(matches.map(x=>x.rate)).size>1)flag('Lebih dari satu skema berpotensi berlaku dan menghasilkan persentase berbeda. Aplikasi tidak memilih otomatis.',REF.D);
  let rate=matches.length===1?matches[0].rate:(matches.length>1&&new Set(matches.map(x=>x.rate)).size===1?matches[0].rate:null);
  // Reconcile potentially missing important facts and scenario mismatch.
@@ -246,5 +306,5 @@ function calculate(s,rate){const t=Number(s.sanctionTotal),p=Number(s.sanctionPr
 }
  return {base,payment:prog,relief:Math.min(eligible,base*rate/100),remaining:eligible-Math.min(eligible,base*rate/100),note:'Simulasi matematis atas sanksi yang belum dibayar. Nilai definitif mengikuti keputusan administrasi perpajakan.'};
 }
-return {START,END,YEAR_END,PPS_END,APPLY_END,REF,ARTICLE_LABEL,CATS,evaluate,match,addMonths,fmt,validDate,quarter};
+return {START,END,YEAR_END,PPS_END,APPLY_END,REF,ARTICLE_LABEL,CATS,PAIRS,evaluate,match,addMonths,fmt,validDate,quarter};
 });

@@ -1,0 +1,23 @@
+const assert=require('node:assert/strict');const E=require('./engine.js');
+const b={category:'late',article:'7',document:'STP',issueDate:'2026-10-12',sptType:'annual',sptYear:'2025',sptStatus:'kb',actionDate:'2026-10-25',principalConfirmed:'no_base',principalDate:'',stpLinked:'no',lawsuit:'none',objection:'none',otherRemedy:'none',auction:'not_started',submissionCount:'1',applicationDate:'2027-01-10',sanctionState:'unpaid',sanctionTotal:'1000000',sanctionPrior:'0',sanctionProgram:'0',docReady:'yes',docApplication:'yes',docAffidavit:'yes',docLegalStatement:'yes'};
+let total=0;
+function check(name,delta,status,rate=null){const r=E.evaluate({...b,...delta});assert.equal(r.status,status,name+': '+JSON.stringify({reason:r.reason,issues:r.issues,flags:r.flags,missing:r.missing}));assert.equal(r.rate,rate,name);total++;console.log('PASS',name,r.status,rate??'');}
+check('SPT terlambat E 100%',{},'mapped',100);
+check('Kesalahan pasal tidak boleh lolos',{category:'audit',article:'7',document:'SKPKB',issueDate:'2027-01-01',principalDate:'2027-02-01',principalConfirmed:'yes'},'blocked');
+check('SPT tidak KB',{sptStatus:'other'},'blocked');
+check('Tanggal permohonan setelah 1 Oktober 2028',{applicationDate:'2028-10-02'},'blocked');
+check('Sanksi telah lunas',{sanctionState:'fully'},'blocked');
+check('Pokok belum lunas',{principalConfirmed:'no',principalDate:''},'blocked');
+check('Bukan STP terbit',{document:'NOT_ISSUED',issueDate:'',stpLinked:''},'review');
+check('PPS E Jan1 bayar 1 Mar',{category:'pps',document:'SKPKB_PPS',article:'13_2',issueDate:'2027-01-01',principalDate:'2027-03-01',applicationDate:'2027-04-01',principalConfirmed:'yes'},'mapped',25);
+check('PPS E Nov30 bayar Dec31',{category:'pps',document:'SKPKB_PPS',article:'13_2',issueDate:'2027-11-30',principalDate:'2027-12-31',principalConfirmed:'yes',applicationDate:'2028-02-01'},'mapped',100);
+check('PPS tanggal lain ditahan',{category:'pps',document:'SKPKB_PPS',article:'13_2',issueDate:'2027-11-30',principalDate:'2027-12-30',principalConfirmed:'yes',applicationDate:'2028-02-01'},'review');
+check('WP baru kombinasi E 50%',{category:'newreg',registerType:'NPWP',registrationDate:'2026-10-25',article:'7',actionDate:'2027-01-02',principalConfirmed:'yes',principalDate:'2027-01-02'},'mapped',50);
+check('WP baru lintas kuartal lain ditahan',{category:'newreg',registerType:'NPWP',registrationDate:'2026-10-24',article:'7',actionDate:'2027-01-03',principalConfirmed:'yes',principalDate:'2027-01-03'},'review');
+check('Keberatan sudah diputus ditahan',{category:'old',document:'SKPKB',article:'13_2',issueDate:'2026-01-01',objection:'decided',principalConfirmed:'yes',principalDate:'2026-12-10'},'review');
+check('Skema 90% dengan nominal salah ditahan',{category:'stp144',document:'STP',article:'14_4',issueDate:'2026-10-12',principalConfirmed:'no_base',sanctionState:'partial',allocationConfirmed:'yes',sanctionTotal:'100000000',sanctionPrior:'0',sanctionProgram:'20000000',partialDate:'2026-12-31'},'review');
+check('Skema 90% tepat',{category:'stp144',document:'STP',article:'14_4',issueDate:'2026-10-12',principalConfirmed:'no_base',sanctionState:'partial',allocationConfirmed:'yes',sanctionTotal:'100000000',sanctionPrior:'0',sanctionProgram:'10000000',partialDate:'2026-12-31',paymentPath:'yes'},'mapped',90);
+check('STP terkait SKP belum jelas',{stpLinked:'unknown',objection:'unknown'},'review');
+check('Gugatan aktif',{lawsuit:'active'},'blocked');
+check('Tanggal pelaporan di luar program',{actionDate:'2027-07-01'},'blocked');
+console.log('TOTAL',total,'ALL PASS');
