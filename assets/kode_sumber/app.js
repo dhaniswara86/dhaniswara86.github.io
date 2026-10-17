@@ -115,6 +115,37 @@ function possiblePartialOptions(targetDate){
  }
  return list;
 }
+// UX-only presentation of candidate partial-payment patterns. The PSA legal engine
+// determines candidates: this layer cannot add rates or change legal eligibility.
+function partialGuidancePresentation(options, facts, targetDate){
+ if(!Array.isArray(options)||!options.length)return {kind:'none',main:null,others:[],evidence:null};
+ const p90=options.find(p=>p.pct===10 && p.relief===90);
+ const p75=options.find(p=>p.pct===25 && p.relief===75);
+ const official=facts.category==='stp144' && facts.document==='STP' && facts.article==='14_4' && facts.issueDate==='2026-10-12';
+ const jun=facts.category==='stp144' && facts.document==='STP' && facts.article==='14_4' && facts.issueDate==='2027-06-04';
+ let main=null, evidence=null;
+ if(official && targetDate==='2026-12-31' && p90){
+   main=p90;
+   evidence='KEP-239/PJ/2026, Lampiran E hlm. 28 huruf d, Contoh 1: STP terbit 12 Oktober 2026, pembayaran 31 Desember 2026 sebesar 10% untuk pengurangan 90%.';
+ } else if(official && ['2027-03-31','2027-06-30'].includes(targetDate) && p75){
+   main=p75;
+   evidence='KEP-239/PJ/2026, Lampiran E hlm. 28 huruf d, Contoh 1: pembayaran 31 Maret/30 Juni 2027 sebesar 25% untuk pengurangan 75%.';
+ } else if(jun && targetDate==='2027-06-30' && p90){
+   main=p90;
+   evidence='KEP-239/PJ/2026, Lampiran E hlm. 29 huruf d, Contoh 2: STP terbit 4 Juni 2027, pembayaran 30 Juni 2027 sebesar 10% untuk pengurangan 90%.';
+ } else if(p90 && targetDate>='2026-10-08' && targetDate<='2026-12-31'){
+   // An applicable rule in Lampiran A provides 90% for a 10% payment in this window.
+   // This is NOT a claim that the taxpayer's facts exactly match Lampiran E.
+   main=p90;
+   evidence='Skenario pembayaran 10%/pengurangan 90% berada dalam periode 8 Oktober–31 Desember 2026 menurut Lampiran A. Kecocokan contoh Lampiran E harus dilihat dari tanggal penerbitan STP.';
+ } else if(options.length===1){
+   main=options[0];
+ } else {
+   // Do not impose a priority when the reference example / time-window gives none.
+   return {kind:'compare',main:null,others:options,evidence:null};
+ }
+ return {kind:'main',main,others:options.filter(p=>p!==main),evidence};
+}
 function paymentGuidanceHTML(){
  if(!hasPartialPath())return '';
  const chosenDate=(s.paymentPath==='yes'?s.partialDate:plannedSpecialPaymentDate);
@@ -127,15 +158,27 @@ function paymentGuidanceHTML(){
  if(s.paymentPath==='yes'){const curr=new Date(),todayLocal=[curr.getFullYear(),String(curr.getMonth()+1).padStart(2,'0'),String(curr.getDate()).padStart(2,'0')].join('-');if(chosenDate>todayLocal)return '<p class="guidance-neutral">Tanggal pembayaran berada di masa depan, sehingga belum dapat disebut sudah dibayar. Jika masih rencana, pilih Belum dibayar.</p>';}
  const possibilities=possiblePartialOptions(chosenDate);
  if(!possibilities.length)return '<p class="guidance-neutral">Tidak ditemukan pola pembayaran 10%/25% yang secara tegas cocok dengan jalur dan tanggal ini. Sistem tidak memperkirakan persentase; periksa tanggal dan dasar hukumnya.</p>';
- const list=possibilities.map(p=>`<div class="guided-option"><div><b>Pembayaran ${p.pct}%</b><small>Skema pengurangan ${p.relief}% jika seluruh syarat dipenuhi</small></div><strong>${p.amount===null?esc(p.formula):'Rp'+p.amount.toLocaleString('id-ID')}</strong><small class="guide-legal">Didasarkan pada pola dalam ${esc(p.sources.join('; ')||'lampiran KEP-239/PJ/2026')}.</small></div>`).join('');
- return `<div class="guided-options">${possibilities.length>1?'<p class="guidance-neutral">Ada lebih dari satu pola yang tampak relevan. Kabayan tidak memilih yang paling menguntungkan; jumlah sebenarnya bergantung pada pembayaran dan bukti yang digunakan.</p>':''}${list}</div><small class="guidance-caveat">Simulasi bersyarat, bukan nominal yang wajib dibayar menurut ketetapan atau persetujuan fasilitas. Bukan bukti bahwa pembayaran telah dilakukan maupun persyaratan program sudah terpenuhi.</small>`;
+ const fmt=p=>p.amount===null?esc(p.formula):'Rp'+p.amount.toLocaleString('id-ID');
+ const single=(p,style='')=>`<div class="guided-option ${style}"><div><b>Simulasi pembayaran ${p.pct}%</b><small>Potensi pengurangan ${p.relief}% jika syarat yang relevan dipenuhi</small></div><strong>${fmt(p)}</strong><small class="guide-legal">Rujukan skema: ${esc(p.sources.join('; ')||'lampiran KEP-239/PJ/2026')}.</small></div>`;
+ const view=partialGuidancePresentation(possibilities,s,chosenDate);
+ const caveat='<small class="guidance-caveat">Angka ini adalah simulasi berdasarkan tanggal dan fakta yang dimasukkan. Alternatif tidak dijumlahkan. Belum merupakan pembayaran yang telah dilakukan, kepastian persetujuan DJP, atau nominal tagihan baru.</small>';
+ if(view.kind==='compare'){
+    const list=view.others.map(p=>single(p)).join('');
+    return `<div class="guided-presentation"><p class="guidance-neutral">Terdapat lebih dari satu pola yang memenuhi pemeriksaan awal, tetapi tidak ada satu pola yang dapat ditetapkan sebagai utama dari contoh resmi untuk kombinasi tanggal ini. Skema ditentukan oleh jumlah dan tanggal pembayaran yang benar-benar dilakukan serta ketentuan yang berlaku.</p><details class="guided-alternatives"><summary>Bandingkan ${view.others.length} skema pembayaran yang mungkin</summary><div class="guided-options">${list}</div></details>${caveat}</div>`;
+ }
+ const hasOfficial=view.evidence && view.evidence.startsWith('KEP-239/PJ/2026, Lampiran E');
+ const title=hasOfficial?'Skema yang dicontohkan KEP-239/PJ/2026':'Skema pembayaran yang sesuai periode';
+ const reasoning=view.evidence?`<p class="guided-evidence">${esc(view.evidence)}</p>`:'';
+ const alternatives=view.others.length?`<details class="guided-alternatives"><summary>Lihat alternatif skema lain (${view.others.length})</summary><p>Alternatif berikut adalah simulasi terpisah yang memenuhi pemeriksaan awal. Tidak berarti Anda harus membayar dua kali atau otomatis berhak memilih tarif mana pun.</p><div class="guided-options">${view.others.map(p=>single(p)).join('')}</div></details>`:'';
+ return `<div class="guided-presentation"><section class="guided-main" aria-label="Simulasi utama"><div class="guided-main-eyebrow">${esc(title)}</div>${single(view.main,'guided-option-primary')}${reasoning}</section>${alternatives}${caveat}</div>`;
 }
+
 function specialPaymentGuide(){
  if(!hasPartialPath())return '';
  const actual=s.paymentPath==='yes';
  const dateId=actual?'f_partialDate':'planned-special-payment-date';
  const dateField=actual?'':`<div class="field full"><label for="planned-special-payment-date">Kapan Anda berencana melakukan pembayaran?</label><input type="date" id="planned-special-payment-date" data-ui-plan-date="1" min="2026-10-08" max="2027-06-30" value="${esc(plannedSpecialPaymentDate)}"><small>Untuk simulasi waktu saja; tidak dicatat sebagai pembayaran yang telah dilakukan.</small></div>`;
- return `<section class="field full guided-special" aria-label="Panduan pembayaran khusus"><h4>Periksa jumlah pembayaran yang mungkin dipersyaratkan</h4><p>Besarnya ditentukan dari jenis sanksi, tanggal surat, dan waktu pembayaran menurut KEP-239. Anda tidak perlu memilih persentasenya sendiri.</p>${dateField}<div id="special-payment-guidance" aria-live="polite">${paymentGuidanceHTML()}</div></section>`;
+ return `<section class="field full guided-special" aria-label="Panduan pembayaran khusus"><h4>Periksa jumlah pembayaran yang mungkin dipersyaratkan</h4><p>Besarnya mengikuti ketentuan jenis sanksi dan waktu pembayaran dalam KEP-239. Jika tersedia beberapa skema, aplikasi menampilkan contoh resmi sebagai acuan dan menyediakan alternatif untuk diperiksa, bukan untuk dijumlahkan.</p>${dateField}<div id="special-payment-guidance" aria-live="polite">${paymentGuidanceHTML()}</div></section>`;
 }
 function refreshSpecialGuidance(){const box=$('special-payment-guidance');if(box)box.innerHTML=paymentGuidanceHTML();}
 
