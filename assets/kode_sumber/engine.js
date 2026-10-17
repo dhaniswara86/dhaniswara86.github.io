@@ -31,6 +31,8 @@ const CATS={
  pps:'SKP pemeriksaan terkait PPS',newreg:'WP atau PKP baru'
 };
 const WITHIN=(d,start,end)=>!!d&&d>=start&&d<=end;
+const validSPTPeriod=v=>typeof v==='string'&&/^\d{4}-(0[1-9]|1[0-2])$/.test(v)&&Number(v.slice(0,4))>=1;
+const validSPTYear=v=>/^[0-9]{4}$/.test(String(v??''))&&Number(v)>=1;
 const validDate=(v)=>{if(!/^\d{4}-\d\d-\d\d$/.test(v||''))return false;let dt=new Date(v+'T12:00:00Z');return !Number.isNaN(+dt)&&dt.toISOString().slice(0,10)===v;};
 const fmt=(d)=>validDate(d)?new Date(d+'T12:00:00Z').toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'}):'—';
 // If a legal deadline falls on e.g. day 31 of a month with fewer days, stop rather than inventing a rollover convention.
@@ -45,7 +47,7 @@ const rule=(id,rate,src,why,pages,extra={})=>({id,rate,src,cite:REF[src],why,pag
 const PAIRS={
  late:{STP:['7'],NOT_ISSUED:['7']},amend:{STP:['8'],NOT_ISSUED:['8']},pay:{STP:['9'],NOT_ISSUED:['9']},
  newreg:{STP:['7','9'],NOT_ISSUED:['7','9']},stp143:{STP:['14_3']},stp144:{STP:['14_4']},
- pps:{SKPKB_PPS:['13_2','15_2']},
+ pps:{SKPKB_PPS:['13_2','15_2'],SKPKBT_PPS:['13_2','15_2'],SKPKBT:['13_2','15_2']},
  audit:{SKPKB:['13_2','13_3','15_2','17c','17d'],SKPKBT:['13_2','13_3','15_2','17c','17d'],SKP_PBB:['pbb10_3','pbb10_4'],STP:['7','8','9','14_4']},
  old:{SKPKB:['13_2','13_3','15_2','17c','17d'],SKPKBT:['13_2','13_3','15_2','17c','17d'],SKP_PBB:['pbb10_3','pbb10_4'],STP:['7','8','9','14_4','19_1','19_2','19_3','25_9','27_5d','27_5f'],STP_PBB:['pbb11_3']},
  newstp:{STP:['7','8','9','14_3','14_4','19_1','19_2','19_3','25_9','27_5d','27_5f'],STP_PBB:['pbb11_3']}
@@ -58,7 +60,7 @@ const PPS_EXAMPLES={
 function match(s){
  const results=[]; const put=(...args)=>results.push(rule(...args));
  const a=s.article, d=s.document, letter=s.issueDate, p=s.principalDate, t=s.actionDate, part=s.partialDate;
- const sptOK=s.sptStatus==='kb' && (s.sptType==='annual'&&Number.isInteger(+s.sptYear)&&+s.sptYear<=2025&&+s.sptYear>=1 || s.sptType==='monthly'&&s.sptPeriod&&s.sptPeriod<='2026-09');
+ const sptOK=s.sptStatus==='kb' && (s.sptType==='annual'&&validSPTYear(s.sptYear)&&+s.sptYear<=2025 || s.sptType==='monthly'&&validSPTPeriod(s.sptPeriod)&&s.sptPeriod<='2026-09');
  const fileDateOK=WITHIN(t,START,END);
  const q=quarter(t);
  if(['late','amend','pay'].includes(s.category)){
@@ -184,6 +186,8 @@ function evaluate(s){
  const fail=(message,ref)=>{issues.push(message);if(ref)citations.add(ref);};
  const flag=(message,ref)=>{flags.push(message);if(ref)citations.add(ref);};
  Object.keys(s).forEach(k=>{if(k.toLowerCase().includes('date')||['previousDecision','registrationDate'].includes(k)){if(s[k] && !validDate(s[k]))fail('Format tanggal tidak sah pada '+k+'.');}});
+ if(s.sptType==='monthly' && s.sptPeriod && !validSPTPeriod(s.sptPeriod))fail('Masa pajak harus menggunakan format YYYY-MM dan bulan 01 sampai 12.',REF.A);
+ if(s.sptType==='annual' && s.sptYear && !validSPTYear(s.sptYear))fail('Tahun pajak harus terdiri atas empat digit tahun yang sah.',REF.A);
  if(all.length)return {status:'missing',rate:null,matches:[],missing:all,issues,flags,reason:'Data wajib belum lengkap. Sistem belum melakukan pemilihan fasilitas.',citations:[...citations]};
  // Direct clear stop conditions, before searching a percentage.
  if(s.document==='SPPT_P2'||s.article==='pbb2')fail('PBB-P2 daerah bukan dokumen yang tercakup sebagai SKP/STP PBB dalam aturan ini.',REF['21A']);
@@ -195,11 +199,14 @@ function evaluate(s){
    if(s.sptStatus==='unknown')flag('Status SPT belum diketahui; belum dapat mencocokkan syarat kurang bayar.',REF.A);
    if(validDate(s.actionDate) && !WITHIN(s.actionDate,START,END) && !(s.actionDate<START && s.category!=='newreg' && ['STP'].includes(s.document) && WITHIN(s.issueDate,START,END) && s.sanctionState==='partial'))fail('Tanggal pelaporan/pembetulan berada di luar 8 Oktober 2026–30 Juni 2027 pada skema yang dipilih.',REF.A);
    if(['amend','pay','newreg'].includes(s.category) && s.principalConfirmed==='yes' && validDate(s.principalDate) && !WITHIN(s.principalDate,START,END))flag('Tanggal pembayaran pokok berada di luar periode program pada jalur ini, sehingga skema tidak dapat dipastikan.',REF.A);
-   if(['amend','pay'].includes(s.category) && validDate(s.actionDate) && validDate(s.principalDate) && quarter(s.actionDate)!==quarter(s.principalDate))flag('Tanggal pelaporan/pembetulan dan pelunasan berada pada periode tarif yang berlainan; lampiran belum cukup jelas untuk menentukan persentase dari salah satunya.',REF.A);
+   // Lampiran A huruf b–c menentukan persentase berdasarkan tanggal pembetulan/pelaporan;
+   // tanggal pelunasan diuji TERPISAH pada rentang 8 Oktober 2026–30 Juni 2027.
+   // Perbedaan kuartal bukan alasan untuk menahan tarif.
  }
  if(s.category==='newreg' && validDate(s.registrationDate) && !WITHIN(s.registrationDate,START,END))fail('Pendaftaran NPWP/pengukuhan PKP terjadi di luar periode yang diatur Lampiran D.',REF.D);
  if(['stp143','stp144','audit','newstp'].includes(s.category) && validDate(s.issueDate) && !WITHIN(s.issueDate,START,END))fail('Surat terbit di luar periode penerbitan kelompok kasus yang dipilih; periksa kategori surat lama.',REF.K);
  if(['stp143','audit','newstp'].includes(s.category) && validDate(s.principalDate) && s.principalDate>END)fail('Pelunasan pokok melewati batas 30 Juni 2027 pada skema ini.',REF.K);
+ if(s.category==='pps' && ['SKPKBT_PPS','SKPKBT'].includes(s.document))flag('SKPKBT sehubungan dengan PPS disebut dalam Lampiran D, tetapi contoh dan rincian tarif untuk objek SKPKBT belum dipetakan secara meyakinkan. Persentase ditahan untuk verifikasi hukum.',REF.D);
  if(s.category==='pps' && validDate(s.principalDate) && s.principalDate>PPS_END)fail('Pelunasan pokok PPS melewati 31 Desember 2027.',REF.D);
  if(s.category==='pps' && validDate(s.issueDate) && !WITHIN(s.issueDate,START,PPS_END))fail('SKP PPS terbit di luar periode 8 Oktober 2026–31 Desember 2027.',REF.D);
  if(s.category==='stp144' && validDate(s.partialDate) && s.partialDate>END)fail('Pembayaran sebagian sanksi melewati 30 Juni 2027.',REF.A);
@@ -306,5 +313,52 @@ function calculate(s,rate){const t=Number(s.sanctionTotal),p=Number(s.sanctionPr
 }
  return {base,payment:prog,relief:Math.min(eligible,base*rate/100),remaining:eligible-Math.min(eligible,base*rate/100),note:'Simulasi matematis atas sanksi yang belum dibayar. Nilai definitif mengikuti keputusan administrasi perpajakan.'};
 }
-return {START,END,YEAR_END,PPS_END,APPLY_END,REF,ARTICLE_LABEL,CATS,PAIRS,evaluate,match,addMonths,fmt,validDate,quarter};
+
+// v18: One factual case may meet a rule in Lampiran A even if its STP was issued before 8 October 2026.
+// This only searches a second route; it is NOT a priority rule for overlapping legal entitlements.
+function assess(s){
+ const actual=evaluate(s);
+ // Isolate tariff from formal documents ONLY. This does not waive payments,
+ // litigation, objection, dates, sanction balance, allocation, or other substantive requirements.
+ const potentialInput={...s,docReady:'yes',docApplication:'yes',docAffidavit:'yes',docLegalStatement:'yes'};
+ let potential=evaluate(potentialInput);
+ const searched=[{category:s.category,result:potential}];
+ if(s.category==='old'&&s.document==='STP'&&['7','8','9'].includes(s.article) && s.routeOrigin!=='normal') {
+   potential={...potential,status:potential.status==='mapped'?'review':potential.status,rate:null,calculation:null,flags:[...(potential.flags||[]),'Asal STP lama belum dipastikan bukan hasil pemeriksaan. Jalur Lampiran A tidak digunakan otomatis sampai fakta asal surat dikonfirmasi.']};
+ }
+ if(s.document==='STP'&&s.issueDate&&s.issueDate<START&&WITHIN(s.actionDate,START,END)&&
+   ['7','8','9'].includes(s.article)&&s.category==='old'&&s.routeOrigin==='normal'){
+    const category={'7':'late','8':'amend','9':'pay'}[s.article];
+    const alt=evaluate({...potentialInput,category});
+    searched.push({category,result:alt});
+    // If Lampiran C also matches the facts, a legal overlap must be resolved, not ranked.
+    // If it has no matching rule, use only the independently proven Lampiran A case.
+    const oldMatched=(potential.matches||[]).length>0;
+    if(alt.status==='mapped'&&!oldMatched){
+      // Do not mask clear blocking facts identified by the original route.
+      if(potential.status==='blocked' && (potential.issues||[]).some(x=>!x.includes('kategori'))){
+        potential={...potential,flags:[...(potential.flags||[]),'Ada kandidat Lampiran A, namun hambatan pada jalur surat lama belum dituntaskan.']};
+      }else potential={...alt,flags:[...(alt.flags||[]),'STP lama diperiksa juga dengan Lampiran A berdasarkan tanggal penyampaian/pembetulan SPT; tidak diasumsikan bahwa tanggal STP otomatis menghapus jalur ini.']};
+    }else if(alt.status==='mapped'&&oldMatched){
+      potential={status:'review',rate:null,calculation:null,matches:[...(potential.matches||[]),...(alt.matches||[])],missing:[],issues:[],
+       flags:['Lampiran A dan Lampiran C sama-sama memiliki kandidat untuk surat ini. Perlu konfirmasi hubungan kedua skema; sistem tidak memilih persentase tertinggi.'],
+       reason:'Potensi fasilitas belum dapat diputuskan karena dua jalur bersinggungan.',citations:[REF.A,REF.C,REF.P]};
+    }else if(potential.status==='unmapped'||potential.status==='review'){
+      potential={...potential,flags:[...(potential.flags||[]),'Jalur Lampiran A juga diperiksa, tetapi belum cukup data atau syarat untuk menetapkan persentase.']};
+    }
+ }
+ // If the original application was not prepared, potential can still be mapped;
+ // readiness stays 'not ready' and never becomes proof of submission.
+ let readiness='perlu_verifikasi';
+ if(s.applicationStatus==='planned') readiness='belum_diajukan';
+ else if(s.docReady==='no') readiness='berkas_belum_lengkap';
+ else if(s.docReady==='unknown') readiness='berkas_belum_diperiksa';
+ else if(s.docReady==='yes'&&['no','unknown',''].includes(s.docApplication)||s.docReady==='yes'&&['no','unknown',''].includes(s.docAffidavit)||s.docReady==='yes'&&['no','unknown',''].includes(s.docLegalStatement))readiness='berkas_perlu_diperiksa';
+ else if(actual.status==='mapped'&&s.applicationStatus==='submitted') readiness='terindikasi_lengkap';
+ else if(actual.status==='blocked')readiness='ada_hambatan';
+ // Never claim approval or even proof of validity solely on self-reported data.
+ return {potential,actual,readiness,searched};
+}
+
+return {START,END,YEAR_END,PPS_END,APPLY_END,REF,ARTICLE_LABEL,CATS,PAIRS,evaluate,assess,match,addMonths,fmt,validDate,validSPTPeriod,validSPTYear,quarter};
 });
