@@ -402,7 +402,24 @@ a{text-decoration:none}
 #body .field label{line-height:1.5}
 @media(min-width:680px){#body select[data-field="docApplication"],#body select[data-field="docAffidavit"],#body select[data-field="docLegalStatement"]{font-size:12px}}
 @media(max-width:700px){#body .field select{font-size:13px}}
-</style></head><body>
+</style>
+<style id="psa-payment-guided-v15">
+.guided-special{border:1px solid #d7e6fa;border-radius:18px;background:linear-gradient(135deg,#f3f8ff,#fff);padding:18px 20px;margin:12px 0 22px;grid-column:1/-1}
+.guided-special h4{color:#0b376c;font-size:15px;margin:0 0 6px;line-height:1.5}
+.guided-special>p{font-size:12px;color:#536780;line-height:1.65;margin:0 0 17px}
+.guided-special .field{margin-bottom:12px}
+.guided-special .field input{background:#fff}
+.guided-options{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px;margin-top:12px}.guided-options>.guidance-neutral{grid-column:1/-1;margin:0}
+.guided-option{border:1px solid #d7e6f5;background:#fff;border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:7px;min-width:0}
+.guided-option b{color:#073b79;font-size:14px}
+.guided-option strong{color:#0b3a74;font-size:clamp(19px,2.3vw,26px);letter-spacing:-.03em;overflow-wrap:anywhere}
+.guided-option small{display:block;color:#64748b;font-size:11px;line-height:1.5}
+.guided-option .guide-legal{border-top:1px solid #eef1f6;margin-top:4px;padding-top:8px}
+.guidance-neutral{margin:12px 0 0;padding:14px 16px;border:1px solid #e2e8f2;border-radius:14px;background:#fff;color:#626e82;font-size:12px;line-height:1.65}
+.guidance-caveat{display:block;margin-top:12px;color:#7a6241;font-size:11px;line-height:1.65}
+@media(max-width:640px){.guided-special{padding:16px 15px}.guided-options{grid-template-columns:1fr}}
+</style>
+</head><body>
 <header class="site-header">
   <div class="nav-wrap">
     <a class="brand" href="index.html" aria-label="Kabayan — Kembali ke beranda">
@@ -804,6 +821,8 @@ const docNames={STP:'Surat Tagihan Pajak (STP)',NOT_ISSUED:'STP belum diterbitka
 const emptyCase=()=>({entry:'',routeDoc:'',routeArticle:'',routeIssueDate:'',routeOrigin:'',routeSptEvent:'',routeGovernment:'',category:'',sanctionPrior:'0',sanctionProgram:'0',sanctionTotal:'',sptType:'',article:'',document:'',issueDate:'',sptStatus:'',actionDate:'',principalDate:'',partialDate:'',applicationDate:'',applicationStatus:'',docReady:'',principalConfirmed:''});
 let step=0,s=emptyCase();
 let last=null;
+let plannedSpecialPaymentDate=''; // UI-only: never counted as a paid sanction or used by the legal engine
+
 function field(k,label,type='text',note='',opts=[]){const val=s[k]??'';let control='';if(type==='select'){control=`<select data-field="${k}" id="f_${k}"><option value="">— Pilih sesuai dokumen —</option>${opts.map(([v,n])=>`<option value="${esc(v)}" ${v===val?'selected':''}>${esc(n)}</option>`).join('')}</select>`;}else if(type==='currency'){control=`<input id="f_${k}" data-field="${k}" type="number" min="0" step="1" inputmode="numeric" value="${esc(val)}" placeholder="Nominal dalam rupiah">`;}else{control=`<input id="f_${k}" data-field="${k}" type="${type}" ${type==='date'?'min="1900-01-01" max="2035-12-31"':''} value="${esc(val)}" ${type==='number'?'min="1" max="2025"':''}>`;}return `<div class="field"><label for="f_${k}">${esc(label)}</label>${control}${note?`<small>${esc(note)}</small>`:''}</div>`;}
 const select=(key,label,options,note='')=>field(key,label,'select',note,options);
 const date=(key,label,note='')=>field(key,label,'date',note);
@@ -857,7 +876,7 @@ function balancePreview(){
 function balanceHTML(){const x=balancePreview();const special=Number(s.sanctionProgram||0);
  const hasSpecial=hasPartialPath()&&s.paymentPath==='yes'&&special>0&&!x.error&&Number(s.sanctionTotal)-Number(s.sanctionPrior)>=special;
  const after=hasSpecial?'Rp'+(Number(s.sanctionTotal)-Number(s.sanctionPrior)-special).toLocaleString('id-ID'):'—';
- return `<div class="field full"><div class="payment-balance" id="payment-balance" role="status" aria-live="polite"><div><span class="payment-balance-label">Sisa sanksi sebelum pembayaran khusus</span><strong id="payment-balance-number">${esc(x.text)}</strong></div><small>Otomatis: total sanksi − pembayaran sebelumnya. Perhitungan masih harus dicocokkan dengan alokasi pembayaran ke pokok pajak.</small><div class="balance-after-special" id="balance-after-special" ${hasSpecial?'':'hidden'}><span>Sisa setelah pembayaran khusus, sebelum fasilitas</span><strong id="balance-after-special-value">${esc(after)}</strong></div>${x.error?`<p class="payment-balance-error" id="payment-balance-error">${esc(x.error)}</p>`:`<p class="payment-balance-error" id="payment-balance-error" hidden></p>`}</div></div>`;}
+ return `<div class="field full"><div class="payment-balance" id="payment-balance" role="status" aria-live="polite"><div><span class="payment-balance-label">Sisa sanksi sebelum pembayaran program</span><strong id="payment-balance-number">${esc(x.text)}</strong></div><small>Otomatis: total sanksi − pembayaran sebelumnya. Perhitungan masih harus dicocokkan dengan alokasi pembayaran ke pokok pajak.</small><div class="balance-after-special" id="balance-after-special" ${hasSpecial?'':'hidden'}><span>Sisa setelah pembayaran khusus, sebelum fasilitas</span><strong id="balance-after-special-value">${esc(after)}</strong></div>${x.error?`<p class="payment-balance-error" id="payment-balance-error">${esc(x.error)}</p>`:`<p class="payment-balance-error" id="payment-balance-error" hidden></p>`}</div></div>`;}
 
 function refreshBalance(){const root=$('payment-balance');if(!root)return;const v=balancePreview();const n=$('payment-balance-number');if(n)n.textContent=v.text;
  const after=$('balance-after-special'),av=$('balance-after-special-value');
@@ -866,6 +885,54 @@ function refreshBalance(){const root=$('payment-balance');if(!root)return;const 
  after.hidden=!valid;if(valid&&av)av.textContent='Rp'+(total-prior-amount).toLocaleString('id-ID');}
  const warning=$('payment-balance-error');if(warning){warning.hidden=!v.error;warning.textContent=v.error;}}
 
+
+// A planning aid, not an eligibility decision. Queries the UNMODIFIED legal engine's
+// candidate matching against 10% and 25% separately, for the exact scenario/date.
+// The temporary probes never overwrite actual form facts or represent paid amounts.
+function possiblePartialOptions(targetDate){
+ if(!hasPartialPath()||!targetDate||!E.validDate(targetDate))return [];
+ const validBase=balancePreview();if(validBase.error)return [];
+ const sum=Number(s.sanctionTotal||0)-Number(s.sanctionPrior||0);
+ if(!Number.isSafeInteger(sum)||sum<=0)return [];
+ const variants=[{paidPct:10,reliefPct:90},{paidPct:25,reliefPct:75}];
+ const list=[];
+ for(const v of variants){
+  const trial={...s,sanctionState:'partial',sanctionTotal:'100000000',sanctionPrior:'0',sanctionProgram:String(v.paidPct*1000000),partialDate:targetDate};
+  const candidate=E.match(trial).filter(x=>x.rate===v.reliefPct);
+  if(candidate.length){
+    // Avoid rounding payment requirements upward/downward without any explicit rule.
+    // If no exact whole-rupiah amount exists, only show the formula.
+    const exact=sum*v.paidPct/100;
+    list.push({pct:v.paidPct,relief:v.reliefPct,amount:Number.isSafeInteger(exact)?exact:null,
+        formula:`${v.paidPct}% × Rp${sum.toLocaleString('id-ID')}`,
+        sources:[...new Set(candidate.map(x=>x.cite).filter(Boolean))]});
+  }
+ }
+ return list;
+}
+function paymentGuidanceHTML(){
+ if(!hasPartialPath())return '';
+ const chosenDate=(s.paymentPath==='yes'?s.partialDate:plannedSpecialPaymentDate);
+ const amount=balancePreview();
+ if(amount.error)return '<p class="guidance-neutral">Isi jumlah sanksi dan pembayaran sebelumnya terlebih dahulu agar pembayaran yang dipersyaratkan dapat dihitung.</p>';
+ if(s.sanctionState==='partial'&&s.allocationConfirmed!=='yes')return '<p class="guidance-neutral">Pastikan dahulu jumlah yang benar-benar sudah dialokasikan sebagai pembayaran sanksi. Tanpa itu, jumlah pembayaran yang dipersyaratkan belum aman dihitung.</p>';
+ if(!['yes','no_base'].includes(s.principalConfirmed))return '<p class="guidance-neutral">Status pelunasan pokok pajak belum memenuhi syarat untuk membuat simulasi pembayaran sebagian.</p>';
+ if(!chosenDate)return '<p class="guidance-neutral">Pilih tanggal pembayaran terlebih dahulu. Persentase dan tenggat tiap jalur berbeda.</p>';
+ if(!E.validDate(chosenDate))return '<p class="guidance-neutral">Tanggal pembayaran belum valid.</p>';
+ if(s.paymentPath==='yes'){const curr=new Date(),todayLocal=[curr.getFullYear(),String(curr.getMonth()+1).padStart(2,'0'),String(curr.getDate()).padStart(2,'0')].join('-');if(chosenDate>todayLocal)return '<p class="guidance-neutral">Tanggal pembayaran berada di masa depan, sehingga belum dapat disebut sudah dibayar. Jika masih rencana, pilih Belum dibayar.</p>';}
+ const possibilities=possiblePartialOptions(chosenDate);
+ if(!possibilities.length)return '<p class="guidance-neutral">Tidak ditemukan pola pembayaran 10%/25% yang secara tegas cocok dengan jalur dan tanggal ini. Sistem tidak memperkirakan persentase; periksa tanggal dan dasar hukumnya.</p>';
+ const list=possibilities.map(p=>`<div class="guided-option"><div><b>Pembayaran ${p.pct}%</b><small>Skema pengurangan ${p.relief}% jika seluruh syarat dipenuhi</small></div><strong>${p.amount===null?esc(p.formula):'Rp'+p.amount.toLocaleString('id-ID')}</strong><small class="guide-legal">Didasarkan pada pola dalam ${esc(p.sources.join('; ')||'lampiran KEP-239/PJ/2026')}.</small></div>`).join('');
+ return `<div class="guided-options">${possibilities.length>1?'<p class="guidance-neutral">Ada lebih dari satu pola yang tampak relevan. Kabayan tidak memilih yang paling menguntungkan; jumlah sebenarnya bergantung pada pembayaran dan bukti yang digunakan.</p>':''}${list}</div><small class="guidance-caveat">Simulasi bersyarat, bukan nominal yang wajib dibayar menurut ketetapan atau persetujuan fasilitas. Bukan bukti bahwa pembayaran telah dilakukan maupun persyaratan program sudah terpenuhi.</small>`;
+}
+function specialPaymentGuide(){
+ if(!hasPartialPath())return '';
+ const actual=s.paymentPath==='yes';
+ const dateId=actual?'f_partialDate':'planned-special-payment-date';
+ const dateField=actual?'':`<div class="field full"><label for="planned-special-payment-date">Kapan Anda berencana melakukan pembayaran?</label><input type="date" id="planned-special-payment-date" data-ui-plan-date="1" min="2026-10-08" max="2027-06-30" value="${esc(plannedSpecialPaymentDate)}"><small>Untuk simulasi waktu saja; tidak dicatat sebagai pembayaran yang telah dilakukan.</small></div>`;
+ return `<section class="field full guided-special" aria-label="Panduan pembayaran khusus"><h4>Periksa jumlah pembayaran yang mungkin dipersyaratkan</h4><p>Besarnya ditentukan dari jenis sanksi, tanggal surat, dan waktu pembayaran menurut KEP-239. Anda tidak perlu memilih persentasenya sendiri.</p>${dateField}<div id="special-payment-guidance" aria-live="polite">${paymentGuidanceHTML()}</div></section>`;
+}
+function refreshSpecialGuidance(){const box=$('special-payment-guidance');if(box)box.innerHTML=paymentGuidanceHTML();}
 
 const docApplicationOptions=[['yes','Ya, telah dibuat dan ditandatangani sesuai ketentuan'],['no','Belum memenuhi ketentuan'],['unknown','Belum diperiksa / belum dapat dipastikan']];
 const docStatementOptions=[['yes','Ya, telah dibuat, ditandatangani, dan dibubuhi meterai sesuai ketentuan'],['no','Belum memenuhi ketentuan'],['unknown','Belum diperiksa / belum dapat dipastikan']];
@@ -1082,34 +1149,45 @@ function stepDetails(){
  if(s.document!=='NOT_ISSUED'){
   html+=select('sanctionState','Apakah sanksi dalam surat ini sudah dibayar?',[['unpaid','Belum dibayar sama sekali'],['partial','Sebagian sudah dibayar'],['fully','Sudah dibayar seluruhnya'],['unknown','Belum tahu']]);
   if(s.sanctionState==='partial'){
-    html+='</div><div class="payment-section-head"><div><h4 class="sublabel">Berapa sanksi yang masih tersisa?</h4><p class="help">Gunakan angka dalam surat dan bukti pembayaran. Jangan masukkan pembayaran yang sama dua kali.</p></div><button type="button" class="payment-demo" id="loadPaymentDemo">Coba contoh angka</button></div><div class="field-grid">';
-    html+=moneySimple('sanctionTotal','Jumlah sanksi yang tercantum di surat (Rp)');
-    html+=moneySimple('sanctionPrior','Jumlah yang sudah dibayar sebelum pembayaran khusus program (Rp)','Isi hanya bagian pembayaran yang benar-benar sudah tercatat sebagai sanksi. Jangan hitung pembayaran khusus program dua kali.');
+    html+='</div><div class="payment-section-head"><div><h4 class="sublabel">Berapa sanksi yang belum dibayar?</h4><p class="help">Cukup masukkan jumlah dalam STP/SKP dan bagian sanksi yang sudah dibayar. Kabayan menghitung sisanya secara otomatis; periksa pembayaran pokok terlebih dahulu.</p></div><button type="button" class="payment-demo" id="loadPaymentDemo">Coba contoh angka</button></div><div class="field-grid">';
+    html+=moneySimple('sanctionTotal','Berapa jumlah sanksi dalam surat (Rp)?');
+    html+=moneySimple('sanctionPrior','Berapa sanksi yang sudah dibayar sebelumnya (Rp)?','Isi 0 jika belum ada pembayaran sanksi sebelum pembayaran khusus. Jangan masukkan pajak pokok atau pembayaran khusus dua kali.');
     html+=balanceHTML();
     if(s.paymentExampleLoaded)html+='<div class="field full payment-demo-note" id="demoNotice">Ini angka contoh, bukan data Anda. Ganti dengan nilai pada surat dan bukti pembayaran sebelum memakai hasil.</div>';
-    if(hasPartialPath()){
-      html+=`<div class="field full special-branch-label"><b>Pembayaran khusus untuk pengurangan sanksi</b><small>${esc(specialPaymentContext().note)} Persentase belum ditentukan; syarat pembayaran tetap harus diuji.</small></div>`;
-      html+=choiceRadio('paymentPath','Apakah Anda telah membayar 10% atau 25% khusus untuk mengikuti program?',[
-        ['yes','Sudah dibayar','Saya memiliki bukti pembayaran khusus tersebut.'],
-        ['no','Belum dibayar','Belum ada pembayaran 10%/25% untuk program.'],
-        ['unknown','Belum yakin','Saya perlu memeriksa bukti pembayaran dulu.']
-      ],'Skema 90%/75% pada ketentuan tertentu mensyaratkan pembayaran 10%/25%. Rencana membayar belum berarti syarat terpenuhi.');
-      if(s.paymentPath==='yes'){
-       html+=moneySimple('sanctionProgram','Berapa yang sudah dibayar khusus untuk program ini?','Jangan masukkan jumlah ini lagi pada kolom pembayaran sebelumnya.');
-       html+=date('partialDate','Tanggal pembayaran khusus program');
-      }else if(s.paymentPath==='no'){
-       html+='<div class="field full payment-neutral-note">Belum ada pembayaran khusus program. Kabayan tidak akan menganggap syarat pembayaran 10%/25% telah dipenuhi.</div>';
-      }
-    }
+    // Confirm allocation before computing any provisional amount under KEP-239.
     html+=choiceRadio('allocationConfirmed','Apakah uang yang sudah dibayar benar-benar dihitung sebagai pembayaran sanksi, bukan pajak pokok?',[
       ['yes','Ya, sudah saya pastikan','Saya telah memeriksa rincian pembayaran dan pelunasan pajak pokok.'],
       ['no','Belum, pembayaran masih untuk pajak pokok','Jumlah pembayaran sanksi di atas perlu diperiksa kembali.'],
       ['unknown','Belum tahu / perlu saya cek','Persentase tidak ditentukan sampai pembayaran ini dipastikan.']
     ],'Aturannya: uang yang dibayar dipakai melunasi pajak pokok lebih dahulu; sisanya baru dianggap membayar sanksi (Pasal 23 ayat (6)–(7)).');
+    if(hasPartialPath()){
+      html+=`<div class="field full special-branch-label"><b>Apakah diperlukan pembayaran sebagian untuk memperoleh pengurangan?</b><small>${esc(specialPaymentContext().note)} Besarnya dapat berbeda menurut tanggal. Pemeriksaan persyaratan tetap diperlukan.</small></div>`;
+      html+=choiceRadio('paymentPath','Apakah Anda sudah melakukan pembayaran tambahan sesuai skema pengurangan sanksi?',[
+        ['yes','Sudah dibayar','Saya memiliki bukti pembayaran.'],
+        ['no','Belum dibayar','Saya ingin melihat kemungkinan jumlah dan batas waktunya.'],
+        ['unknown','Belum yakin','Saya perlu memeriksa bukti pembayaran dahulu.']
+      ],'Pembayaran yang baru direncanakan bukan bukti pemenuhan syarat.');
+      if(s.paymentPath==='yes'){
+       html+=date('partialDate','Tanggal pembayaran tambahan yang sudah dilakukan');
+       html+=specialPaymentGuide();
+       html+=moneySimple('sanctionProgram','Jumlah yang benar-benar sudah dibayar tambahan (Rp)','Gunakan bukti pembayaran, bukan angka saran. Jangan masukkan lagi di pembayaran sebelumnya.');
+      }else if(s.paymentPath==='no'){
+       html+=specialPaymentGuide();
+      }else if(s.paymentPath==='unknown'){
+       html+='<div class="field full payment-neutral-note">Periksa dahulu bukti pembayaran Anda. Kabayan belum menghitung pembayaran tambahan sebagai syarat yang terpenuhi.</div>';
+      }
+    }
+
   }
   if(s.sanctionState==='unpaid'){
     html+=select('estimateChoice','Ingin melihat perkiraan pengurangan dalam rupiah?',[['no','Tidak, cukup persentasenya'],['yes','Ya, hitung juga rupiahnya']]);
-    if(s.estimateChoice==='yes')html+=moneySimple('sanctionTotal','Jumlah sanksi yang belum dibayar (Rp)');
+    if(s.estimateChoice==='yes'){
+       html+=moneySimple('sanctionTotal','Jumlah sanksi yang belum dibayar (Rp)');
+       if(hasPartialPath()){
+         html+='<div class="field full special-branch-label"><b>Simulasi pembayaran sebagian (belum dilakukan)</b><small>Kabayan memeriksa kemungkinan skema 10%/25% berdasarkan jalur dan tanggal. Ini belum memenuhi syarat pengurangan.</small></div>';
+         html+=specialPaymentGuide();
+       }
+    }
   }
  }
  html+='</div><div class="inline-note"><b>Ketentuan:</b> jawaban yang belum dapat dipastikan tidak akan diubah menjadi asumsi. Hasil persentase hanya muncul bila cocok dengan aturan dan persyaratan yang telah diverifikasi.</div>';
@@ -1222,7 +1300,7 @@ function render(){
  $('print').hidden=step!==4;$('copy').hidden=step!==4;
  $('footer-message').textContent=step===4?'Hasil wajib diuji kembali dengan dokumen sumber':'Informasi diolah lokal; tidak dikirim ke server oleh halaman ini';
 }
-function restartCase(){s=emptyCase();step=0;last=null;render();$('cek').scrollIntoView({behavior:'smooth',block:'start'});const first=$('body').querySelector('[data-entry]');if(first)first.focus({preventScroll:true});}
+function restartCase(){s=emptyCase();plannedSpecialPaymentDate='';step=0;last=null;render();$('cek').scrollIntoView({behavior:'smooth',block:'start'});const first=$('body').querySelector('[data-entry]');if(first)first.focus({preventScroll:true});}
 function resetCase(id){s={category:id,document:(documents[id]||[]).length===1?documents[id][0]:'',article:['late','amend','pay','stp143','stp144'].includes(id)?articles[id][0]:'',sanctionPrior:'0',sanctionProgram:'0',sanctionTotal:'',applicationDate:'',applicationStatus:'',sptType:'',sptStatus:'',sanctionState:'',principalConfirmed:'',docReady:''};}
 function advance(){
  if(step===0){if(!s.entry)return;step=1;}
@@ -1252,7 +1330,7 @@ function advance(){
     }
     if(hasPartialPath()&&s.paymentPath==='yes'){
       const amt=Number(s.sanctionProgram);
-      if(!(amt>0)||!s.partialDate){showPaymentError('Lengkapi jumlah dan tanggal pembayaran khusus yang benar-benar sudah dilakukan.');return;}
+      if(!(amt>0)||!s.partialDate){showPaymentError('Lengkapi jumlah dan tanggal pembayaran khusus yang benar-benar sudah dilakukan.');return;} const curr=new Date(),todayLocal=[curr.getFullYear(),String(curr.getMonth()+1).padStart(2,'0'),String(curr.getDate()).padStart(2,'0')].join('-');if(s.partialDate>todayLocal){showPaymentError('Tanggal pembayaran yang dinyatakan sudah dilakukan berada di masa depan. Jika masih rencana, pilih Belum dibayar.');return;}
       if(Number(s.sanctionPrior)+amt>=Number(s.sanctionTotal)){
         showPaymentError('Jumlah pembayaran sebelumnya dan pembayaran program harus lebih kecil daripada total sanksi yang dimohonkan.');return;
       }
@@ -1281,10 +1359,10 @@ document.addEventListener('click',ev=>{
    return;
  }
  const b=ev.target.closest('[data-entry]');
- if(b){s={entry:b.dataset.entry,category:'',sanctionPrior:'0',sanctionProgram:'0',sanctionTotal:'',applicationDate:'',applicationStatus:'',sptType:'',sptStatus:'',sanctionState:'',principalConfirmed:'',docReady:''};render();}
+ if(b){plannedSpecialPaymentDate='';s={entry:b.dataset.entry,category:'',sanctionPrior:'0',sanctionProgram:'0',sanctionTotal:'',applicationDate:'',applicationStatus:'',sptType:'',sptStatus:'',sanctionState:'',principalConfirmed:'',docReady:''};render();}
 });
-document.addEventListener('change',ev=>{const c=ev.target;if(c.dataset.field){s[c.dataset.field]=c.dataset.rupiah==='1'?numericOnly(c.value):c.value;if(['sptPeriodMonth','sptPeriodYear'].includes(c.dataset.field)){s.sptPeriod=s.sptPeriodMonth&&s.sptPeriodYear?`${s.sptPeriodYear}-${s.sptPeriodMonth}`:'';}if(['routeDoc','routeArticle','routeIssueDate','routeOrigin','routeSptEvent','routeGovernment'].includes(c.dataset.field)) {
- if(c.dataset.field==='routeDoc'){s.routeArticle='';s.routeIssueDate='';s.routeOrigin='';}
+document.addEventListener('change',ev=>{const c=ev.target;if(c.dataset.uiPlanDate==='1'){plannedSpecialPaymentDate=c.value;refreshSpecialGuidance();return;}if(c.dataset.field){s[c.dataset.field]=c.dataset.rupiah==='1'?numericOnly(c.value):c.value;if(['sptPeriodMonth','sptPeriodYear'].includes(c.dataset.field)){s.sptPeriod=s.sptPeriodMonth&&s.sptPeriodYear?`${s.sptPeriodYear}-${s.sptPeriodMonth}`:'';}if(['routeDoc','routeArticle','routeIssueDate','routeOrigin','routeSptEvent','routeGovernment'].includes(c.dataset.field)) {
+ if(c.dataset.field==='routeDoc'){plannedSpecialPaymentDate='';s.routeArticle='';s.routeIssueDate='';s.routeOrigin='';}
  if(c.dataset.field==='routeIssueDate')s.routeOrigin='';
  if(c.dataset.field==='routeArticle')s.routeOrigin='';
  render();return;
@@ -1292,8 +1370,8 @@ document.addEventListener('change',ev=>{const c=ev.target;if(c.dataset.field){s[
  if(c.dataset.field==='document'){s.article='';s.principalConfirmed='';s.issueDate='';s.principalDate='';s.sanctionState='';s.stpLinked='';s.objection='';}
  if(c.dataset.field==='article'){s.principalConfirmed='';s.principalDate='';s.sanctionState='';s.partialDate='';s.sanctionTotal='';}
  if(c.dataset.field==='sptType'){s.sptYear='';s.sptPeriod='';s.sptPeriodMonth='';s.sptPeriodYear='';s.sptStatus='';s.actionDate='';}
- if(c.dataset.field==='sanctionState'){s.sanctionTotal='';s.sanctionPrior='0';s.sanctionProgram='0';s.partialDate='';s.estimateChoice='';s.paymentPath='';s.paymentExampleLoaded=false;}
- if(c.dataset.field==='paymentPath'){s.sanctionProgram=c.value==='yes'?'':'0';s.partialDate='';}
+ if(c.dataset.field==='sanctionState'){plannedSpecialPaymentDate='';s.sanctionTotal='';s.sanctionPrior='0';s.sanctionProgram='0';s.partialDate='';s.estimateChoice='';s.paymentPath='';s.paymentExampleLoaded=false;}
+ if(c.dataset.field==='paymentPath'){plannedSpecialPaymentDate='';s.sanctionProgram=c.value==='yes'?'':'0';s.partialDate='';}
  if(c.dataset.field==='principalConfirmed')s.principalDate='';
  if(c.dataset.field==='stpLinked')s.objection='';
  if(c.dataset.field==='auctionCondition')s.auction='';
@@ -1306,9 +1384,9 @@ document.addEventListener('input',ev=>{
  const c=ev.target;if(!c.dataset.field)return;
  if(c.dataset.rupiah==='1'){
    const n=numericOnly(c.value);s[c.dataset.field]=n;
-   c.value=formatInteger(n);refreshBalance();
+   c.value=formatInteger(n);refreshBalance();refreshSpecialGuidance();
    if(['sanctionTotal','sanctionPrior','sanctionProgram'].includes(c.dataset.field)&&s.paymentExampleLoaded){s.paymentExampleLoaded=false;const note=$('demoNotice');if(note)note.hidden=true;}
- }else s[c.dataset.field]=c.value;
+ }else {s[c.dataset.field]=c.value;if(c.dataset.field==='partialDate')refreshSpecialGuidance();}
 });
 $('resetCase').addEventListener('click',()=>{const dlg=$('resetDialog');if(typeof dlg.showModal==='function'){dlg.showModal();$('cancelReset').focus();}else if(window.confirm('Mulai ulang? Semua isian dan hasil pemeriksaan saat ini akan dihapus.'))restartCase();});
 $('cancelReset').addEventListener('click',()=>{$('resetDialog').close();$('resetCase').focus();});
