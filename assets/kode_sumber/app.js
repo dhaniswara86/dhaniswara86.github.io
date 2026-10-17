@@ -489,16 +489,46 @@ function resultHTML(){const routing=resolveRoute();const assessment=routing.ok&&
  const based=(r.matches||[]).map(x=>`<div class="legalitem"><strong>${esc(x.id)}</strong> · ${esc(x.cite)}<div>${esc(x.why)}. ${esc(x.pages)}</div></div>`).join('');
  let nam=cardText();
  const msgs=[...(r.missing||[]).map(x=>({c:'review',m:'Belum diisi: '+x})),...(r.issues||[]).map(x=>({c:'blocked',m:x})),...(r.flags||[]).map(x=>({c:'review',m:x}))];
+ // UI-only summary. Never used to decide entitlement, readiness, or percent.
+ // Always show the core checklist; add special items only when facts trigger them.
+ const checklistItems=[
+   'Pokok pajak yang menjadi dasar sanksi telah lunas sesuai Pasal 23',
+   'Periksa status keberatan, pembatalan dan gugatan/upaya hukum lain',
+   'Surat permohonan dalam bahasa Indonesia, satu permohonan per SKP/STP atau surat PBB',
+   'Surat pernyataan kekhilafan/bukan karena kesalahan ditandatangani di atas meterai',
+   s.lawsuit==='withdrawn'?'Bukti pengajuan pencabutan gugatan atau upaya hukum lain disiapkan sesuai kasus':'Surat pernyataan tidak menggugat bermeterai atau bukti pencabutan sesuai kasus',
+   s.sanctionState==='partial'?'Sanksi yang dimohonkan belum seluruhnya dibayar; jumlah dan pembayaran sebagian direkonsiliasi':'Sanksi yang dimohonkan masih belum dibayar sesuai syarat fasilitas',
+   'Batas tindakan khusus dan batas pengajuan 1 Oktober 2028 dipenuhi'
+ ];
+ if(s.submissionCount==='2')checklistItems.push('Permohonan kedua dan batas 3 bulan sejak keputusan pertama telah diperiksa');
+ else if(s.submissionCount==='3')checklistItems.push('Permohonan ketiga atau lebih: periksa pembatasan jumlah pengajuan menurut ketentuan');
+ if(s.auctionCondition!=='no')checklistItems.push('Pengajuan dilakukan sebelum permohonan lelang/pemindahbukuan barang sitaan sesuai ketentuan');
+
  return `<div class="result-zone"><div class="res-head ${css}"><strong>${css==='mapped'?'✓':css==='blocked'?'✕':'!'} ${esc(ttl)}</strong>${r.status==='mapped'?`<div class="rate">${r.rate}% <small>${isSimulation?'estimasi pengurangan/penghapusan':'potensi pengurangan/penghapusan'}</small></div>`:`<h2>${esc(ttl)}</h2>`}<p>${esc(sub)}. ${esc(r.reason)}</p></div>
  ${simulationInfo}
+ <p class="psa-result-disclaimer">Hasil adalah simulasi berdasarkan data yang Anda masukkan, bukan keputusan DJP. Pemberian fasilitas tetap mengikuti persyaratan PMK 118/2024 sebagaimana diubah PMK 71/2026 serta KEP-239/PJ/2026.</p>
  <div class="sectionbox v18-readiness"><h4>Kesiapan permohonan (terpisah dari simulasi tarif)</h4><div class="inline-note"><strong>${esc(readinessLabel)}</strong><br>Hasil tarif potensial tidak membuktikan dokumen lengkap, pelunasan sudah dilakukan, atau permohonan disetujui DJP. Status berkas saat ini: ${esc(s.docReady==='yes'?'dinyatakan lengkap oleh pengisi (belum diverifikasi DJP)':s.docReady==='no'?'belum lengkap':'belum diperiksa')}.</div></div>
  <div class="factcols"><div class="tile"><small>Kategori peristiwa</small><strong>${esc(nam)}</strong></div><div class="tile"><small>Pasal sanksi</small><strong>${esc(E.ARTICLE_LABEL[s.article]||'—')}</strong></div><div class="tile"><small>Dokumen</small><strong>${esc(docNames[s.document]||s.document||'—')}</strong></div><div class="tile"><small>Batas permohonan program</small><strong>1 Oktober 2028</strong></div><div class="tile"><small>Status permohonan</small><strong>${s.applicationStatus==='submitted'?'Sudah disampaikan kepada DJP':s.applicationStatus==='planned'?'Belum disampaikan (masih rencana)':'Belum diketahui'}</strong></div><div class="tile"><small>${s.applicationStatus==='submitted'?'Tanggal penyampaian':'Rencana tanggal pengajuan'}</small><strong>${esc(s.applicationDate||'—')}</strong></div></div>
  ${r.calculation?`<div class="sectionbox"><h4>Estimasi Sanksi yang Berpotensi Dikurangi atau Dihapuskan</h4><div class="factcols"><div class="tile"><small>Dasar sanksi yang belum dibayar</small><strong>${rupiah(r.calculation.base)}</strong></div><div class="tile"><small>Potensi nominal pengurangan/penghapusan</small><strong>${rupiah(r.calculation.relief)}</strong></div></div><p class="smalltxt">${esc(r.calculation.note)}</p></div>`:''}
  ${msgs.length?`<div class="sectionbox"><h4>Alasan, data yang kurang, atau persyaratan yang perlu diperiksa</h4>${msgs.map(x=>`<div class="message ${x.c}">${esc(x.m)}</div>`).join('')}</div>`:''}
  <div class="sectionbox"><h4>Dasar keputusan mesin aturan</h4>${based||'<div class="inline-note">Tidak ada rule dengan seluruh persyaratan yang dapat dicocokkan secara pasti untuk skenario ini.</div>'}
  <details class="legal-detail"><summary>Tampilkan dasar hukum umum</summary>${r.citations.map(x=>`<div class="legalitem">${esc(x)}</div>`).join('')}</details></div>
- <details class="sectionbox checklist-details"><summary>Checklist dokumen dan persyaratan akhir <span>9 hal untuk diperiksa</span></summary><div class="checklist-items">${['Pokok pajak yang menjadi dasar sanksi telah lunas sesuai Pasal 23','Periksa status keberatan, pembatalan dan gugatan/upaya hukum lain','Surat permohonan dalam bahasa Indonesia, satu permohonan per SKP/STP atau surat PBB','Surat pernyataan kekhilafan/bukan karena kesalahan ditandatangani di atas meterai','Surat pernyataan tidak menggugat bermeterai atau bukti pencabutan sesuai kasus','Sanksi yang dimohonkan masih belum dibayar; jumlah dan pembayaran sebagian direkonsiliasi','Permohonan pertama/kedua dan batas 3 bulan telah diperiksa','Pengajuan sebelum permohonan lelang/pemindahbukuan barang sitaan','Batas tindakan khusus dan batas pengajuan 1 Oktober 2028 dipenuhi'].map(item=>`<label class="message"><input type="checkbox" style="margin-top:4px;accent-color:#0071e3" aria-label="Periksa kelengkapan"> <span>${esc(item)}</span></label>`).join('')}</div></details>
- <div class="callout"><b>Penggunaan terbatas:</b> hasil adalah alat bantu edukasi berdasarkan kondisi yang diinput sendiri. Tidak memverifikasi data DJP, bukan surat keputusan pengurangan/penghapusan dan tidak menggantikan pemeriksaan Pasal 23–24. </div></div>`;
+ <section class="sectionbox psa-next-steps" aria-labelledby="psa-next-steps-title">
+   <div class="psa-next-steps-intro">
+     <span class="psa-next-steps-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="13" height="17" rx="2"/><path d="M9 4.5V3.5h6v1M9 10l1.2 1.2L12.4 9M14 10h2M9 15l1.2 1.2 2.2-2.2M14 15h2"/></svg></span>
+     <div><h4 id="psa-next-steps-title">Apa yang perlu Anda lakukan selanjutnya?</h4>
+     <p>Hasil pemeriksaan awal sudah dapat dibaca tanpa membuka checklist. Gunakan panduan ini untuk menyiapkan permohonan sebelum disampaikan kepada DJP.</p></div>
+   </div>
+   <div class="psa-checklist-action">
+     <div><strong>Checklist dokumen dan persyaratan</strong><p>${checklistItems.length} poin panduan sesuai jawaban Anda. Tidak wajib dibuka untuk melihat simulasi.</p></div>
+     <button id="togglePsaChecklist" type="button" class="psa-checklist-button" aria-expanded="false" aria-controls="psaChecklistPanel"><span class="psa-checklist-button-text">Lihat checklist</span><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 14 0m-6-6 6 6-6 6"/></svg></button>
+   </div>
+   <div id="psaChecklistPanel" class="psa-checklist-panel" hidden>
+     <p class="psa-checklist-helper">Centang untuk catatan pribadi setelah Anda memeriksa setiap poin. Centang ini tidak mengubah hasil perhitungan atau berarti dokumen telah diverifikasi DJP. Pemeriksaan persyaratan tetap mengikuti ketentuan yang berlaku.</p>
+     <div class="checklist-items">${checklistItems.map(item=>`<label class="message"><input type="checkbox" class="psa-personal-check" style="margin-top:4px;accent-color:#0071e3" aria-label="Tandai telah diperiksa"> <span>${esc(item)}</span></label>`).join('')}</div>
+   </div>
+ </section>
+ </div></div>`;
 }
 function render(){
  if(step>=2 && s.category)syncDerived();
@@ -578,6 +608,17 @@ Jenis hasil: ${s.applicationStatus==='planned'?'SIMULASI BERSYARAT - belum diaju
 function fallbackCopy(v){let a=window.prompt('Salin ringkasan:',v);if(a!==null)toast('Ringkasan siap disalin.');}
 function toast(v){$('footer-message').textContent=v;}
 document.addEventListener('click',ev=>{
+ const toggle=ev.target.closest('#togglePsaChecklist');
+ if(toggle){
+  const panel=document.getElementById('psaChecklistPanel');
+  if(!panel)return;
+  const willOpen=panel.hidden;
+  panel.hidden=!willOpen;
+  toggle.setAttribute('aria-expanded',String(willOpen));
+  const caption=toggle.querySelector('.psa-checklist-button-text');
+  if(caption)caption.textContent=willOpen?'Tutup checklist':'Lihat checklist';
+  return;
+ }
  const demo=ev.target.closest('#loadPaymentDemo');
  if(demo){
    s.sanctionState='partial';s.sanctionTotal='100000000';s.sanctionPrior='10000000';s.paymentPath='no';
