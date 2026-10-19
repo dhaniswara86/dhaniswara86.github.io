@@ -489,6 +489,20 @@ a{text-decoration:none}
 .old-skp-plan .plan-important{margin-top:15px;border-left:3px solid #e3a326;padding:10px 12px;background:#fffaf0;border-radius:0 10px 10px 0;color:#6a5229;font-size:12px;line-height:1.6}
 .old-skp-plan .plan-source{margin-top:14px!important;font-size:11px!important;color:#6b7687!important}
 @media(max-width:700px){.old-skp-plan{padding:18px 15px}.old-skp-plan .plan-grid{grid-template-columns:1fr}}
+</style><style id="kabayan-psa-v22-safe-screening">
+.spt-precheck{grid-column:1/-1;display:grid;gap:14px;padding:18px 20px;border:1px solid #dbe6f4;border-radius:19px;background:linear-gradient(135deg,#f7fbff,#fff)}
+.spt-precheck h4{margin:0;font-size:17px;color:#133966;letter-spacing:-.025em}
+.spt-precheck p{margin:0;color:#61728d;font-size:13px;line-height:1.65}
+.spt-precheck .field{margin:0}.spt-precheck .field-grid{gap:16px}
+.spt-screen-message{grid-column:1/-1;border:1px solid #e5d6aa;border-radius:17px;padding:16px 18px;background:#fff9ed;color:#63491f;line-height:1.55}
+.spt-screen-message strong{display:block;margin-bottom:5px;color:#68441a}
+.spt-screen-message p{margin:0;font-size:14px}
+.spt-screen-message .screen-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}
+.spt-screen-message .screen-actions button{border-radius:100px;border:1px solid #c5d8f2;padding:11px 16px;background:#fff;color:#0059bd;font-weight:650;cursor:pointer}
+.spt-screen-message.screen-waiting{border-color:#dbe6f4;background:#f7fbff;color:#415873}
+.spt-screen-message.screen-waiting strong{color:#133966}
+.spt-precheck-summary{grid-column:1/-1;padding:14px 18px;border-radius:16px;border:1px solid #d5e9f8;background:#eff8ff;color:#16466e;font-size:14px}
+@media(max-width:650px){.spt-precheck{padding:14px}.spt-screen-message .screen-actions button{width:100%}}
 </style></head><body>
 <header class="site-header">
   <div class="nav-wrap">
@@ -981,12 +995,12 @@ const documents={late:['STP','NOT_ISSUED'],amend:['STP','NOT_ISSUED'],pay:['STP'
 const articles={late:['7'],amend:['8'],pay:['9'],stp143:['14_3'],stp144:['14_4'],audit:['13_2','13_3','15_2','17c','17d','pbb10_3','pbb10_4','7','8','9','14_4'],old:['7','8','9','14_4','13_2','13_3','15_2','17c','17d','pbb10_3','pbb10_4','19_1','19_2','19_3','pbb11_3'],newstp:['19_1','19_2','19_3','pbb11_3','7','8','9','14_3','14_4'],pps:['13_2','15_2'],newreg:['7','9']};
 for(const id of Object.keys(articles))articles[id].push('other');articles.old.push('25_9','27_5d','27_5f');articles.newstp.push('25_9','27_5d','27_5f');
 const docNames={STP:'Surat Tagihan Pajak (STP)',NOT_ISSUED:'STP belum diterbitkan',SKPKB:'SKP Kurang Bayar (SKPKB)',SKPKBT:'SKP Kurang Bayar Tambahan (SKPKBT)',SKP_PBB:'Surat Ketetapan Pajak PBB (SKP PBB)',STP_PBB:'Surat Tagihan Pajak PBB (STP PBB)',SKPKB_PPS:'SKPKB pemeriksaan PPS',SKPKBT_PPS:'SKPKBT pemeriksaan PPS'};
-const emptyCase=()=>({entry:'',routeDoc:'',routeArticle:'',routeIssueDate:'',routeOrigin:'',routeSptEvent:'',routeGovernment:'',category:'',sanctionPrior:'0',sanctionProgram:'0',sanctionTotal:'',sptType:'',article:'',document:'',issueDate:'',sptStatus:'',actionDate:'',principalDate:'',partialDate:'',applicationDate:'',applicationStatus:'',docReady:'',principalConfirmed:''});
+const emptyCase=()=>({entry:'',routeDoc:'',routeArticle:'',routeIssueDate:'',routeOrigin:'',routeSptEvent:'',routeGovernment:'',sptScreenStatus:'',category:'',sanctionPrior:'0',sanctionProgram:'0',sanctionTotal:'',sptType:'',article:'',document:'',issueDate:'',sptStatus:'',actionDate:'',principalDate:'',partialDate:'',applicationDate:'',applicationStatus:'',docReady:'',principalConfirmed:''});
 let step=0,s=emptyCase();
 let last=null;
 let plannedSpecialPaymentDate=''; // UI-only: never counted as a paid sanction or used by the legal engine
 
-function field(k,label,type='text',note='',opts=[]){const val=s[k]??'';let control='';if(type==='select'){control=`<select data-field="${k}" id="f_${k}"><option value="">— Pilih sesuai dokumen —</option>${opts.map(([v,n])=>`<option value="${esc(v)}" ${v===val?'selected':''}>${esc(n)}</option>`).join('')}</select>`;}else if(type==='currency'){control=`<input id="f_${k}" data-field="${k}" type="number" min="0" step="1" inputmode="numeric" value="${esc(val)}" placeholder="Nominal dalam rupiah">`;}else{const dateBounds=type==='date'?`min="1900-01-01" max="${k==='applicationDate'&&s.applicationStatus==='submitted'?localToday():'2035-12-31'}"`:'';control=`<input id="f_${k}" data-field="${k}" type="${type}" ${dateBounds} value="${esc(val)}" ${type==='number'?'min="1" max="2025"':''} ${k==='applicationDate'?'aria-describedby="applicationDateHelp applicationDateError"':''}>`;}const appDate=k==='applicationDate'?`<small id="applicationDateError" class="application-date-error" role="alert" hidden></small>`:'';return `<div class="field"><label for="f_${k}">${esc(label)}</label>${control}${note?`<small ${k==='applicationDate'?'id="applicationDateHelp"':''}>${esc(note)}</small>`:''}${appDate}</div>`;}
+function field(k,label,type='text',note='',opts=[]){const val=s[k]??'';let control='';if(type==='select'){control=`<select data-field="${k}" id="f_${k}"><option value="">— Pilih sesuai dokumen —</option>${opts.map(([v,n])=>`<option value="${esc(v)}" ${v===val?'selected':''}>${esc(n)}</option>`).join('')}</select>`;}else if(type==='currency'){control=`<input id="f_${k}" data-field="${k}" type="number" min="0" step="1" inputmode="numeric" value="${esc(val)}" placeholder="Nominal dalam rupiah">`;}else{const dateBounds=type==='date'?`min="1900-01-01" max="${k==='applicationDate'&&s.applicationStatus==='submitted'?localToday():'2035-12-31'}"`:'';control=`<input id="f_${k}" data-field="${k}" type="${type}" ${dateBounds} value="${esc(val)}" ${type==='number'?'min="1"':''} ${k==='applicationDate'?'aria-describedby="applicationDateHelp applicationDateError"':''}>`;}const appDate=k==='applicationDate'?`<small id="applicationDateError" class="application-date-error" role="alert" hidden></small>`:'';return `<div class="field"><label for="f_${k}">${esc(label)}</label>${control}${note?`<small ${k==='applicationDate'?'id="applicationDateHelp"':''}>${esc(note)}</small>`:''}${appDate}</div>`;}
 const select=(key,label,options,note='')=>field(key,label,'select',note,options);
 const date=(key,label,note='')=>field(key,label,'date',note);
 const money=(key,label,note='')=>field(key,label,'currency',note);
@@ -1168,6 +1182,31 @@ const skpArticles=['13_2','13_3','15_2','17c','17d'];
 const pbbArticles={SKP_PBB:['pbb10_3','pbb10_4'],STP_PBB:['pbb11_3']};
 const normalOrigin=[['normal','Bukan terkait pemeriksaan (pelaporan, faktur pajak, atau tagihan biasa)'],['audit','Terkait hasil pemeriksaan pajak'],['unknown','Belum diketahui']];
 const routeLabel=()=>entryOptions.find(x=>x[0]===s.entry)?.[2]||'—';
+// v22: UI-only filtering for Diktum KESATU a/b. This does not claim ineligibility for other KEP routes.
+function sptPrecheckGate(){
+ if(s.entry!=='spt'||!['late','amend'].includes(s.routeSptEvent))return {state:'not_applicable'};
+ if(!s.sptType)return {state:'waiting',reason:'Pilih jenis SPT terlebih dahulu.'};
+ if(s.sptType==='annual'){
+   if(!s.sptYear)return {state:'waiting',reason:'Isi Tahun Pajak sesuai SPT Tahunan PPh.'};
+   if(!E.validSPTYear(s.sptYear))return {state:'waiting',reason:'Tahun Pajak harus berupa empat digit yang sah.'};
+   if(Number(s.sptYear)>2025)return {state:'excluded',reason:'SPT Tahunan PPh setelah Tahun Pajak 2025 berada di luar cakupan Diktum KESATU huruf a/b.'};
+ }else if(s.sptType==='monthly'){
+   if(!s.sptPeriodMonth||!s.sptPeriodYear)return {state:'waiting',reason:'Pilih Bulan Pajak dan Tahun Pajak.'};
+   if(!E.validSPTPeriod(s.sptPeriod))return {state:'waiting',reason:'Masa Pajak belum valid. Pilih bulan dan tahun yang benar.'};
+   if(s.sptPeriod>'2026-09')return {state:'excluded',reason:'Masa Pajak setelah September 2026 berada di luar cakupan Diktum KESATU huruf a/b.'};
+ }else return {state:'waiting',reason:'Jenis SPT belum dikenali.'};
+ if(!s.sptScreenStatus)return {state:'waiting',reason:'Pilih status SPT yang dilaporkan atau dibetulkan.'};
+ if(['lb','nihil'].includes(s.sptScreenStatus))return {state:'excluded',reason:'Diktum KESATU huruf a/b mensyaratkan status SPT Kurang Bayar. Status '+(s.sptScreenStatus==='lb'?'Lebih Bayar':'Nihil')+' tidak termasuk jalur ini.'};
+ if(s.sptScreenStatus==='unknown')return {state:'waiting',reason:'Status SPT belum dapat dipastikan. Jangan memilih Kurang Bayar hanya untuk memperoleh hasil.'};
+ if(s.sptScreenStatus!=='kb')return {state:'waiting',reason:'Status SPT belum dikenali.'};
+ return {state:'ok'};
+}
+function precheckMessage(gate){
+ if(gate.state==='ok')return `<div class="spt-precheck-summary"><b>Termasuk cakupan awal huruf ${s.routeSptEvent==='late'?'a':'b'}.</b> Lanjutkan pemeriksaan tanggal tindakan, jenis surat, pembayaran dan syarat lainnya. Ini belum berarti fasilitas sudah diberikan.</div>`;
+ const excluded=gate.state==='excluded';
+ return `<div class="spt-screen-message ${excluded?'':'screen-waiting'}" role="status"><strong>${excluded?'Tidak termasuk jalur SPT yang dipilih':'Lengkapi penyaringan SPT'}</strong><p>${esc(gate.reason)} ${excluded?'Hasil ini bukan penolakan atas seluruh KEP-239/PJ/2026. Jika telah menerima STP/SKP, jalur surat tersebut tetap perlu diperiksa.':''}</p>${excluded?'<div class="screen-actions"><button type="button" data-switch-entry="stp">Saya memiliki STP — periksa jalur STP</button><button type="button" data-switch-entry="skp">Saya memiliki SKP — periksa jalur SKP</button><button type="button" data-switch-entry="">Pilih kondisi lain</button></div>':''}</div>`;
+}
+
 function step0(){
  const card=([id,ico,title,sub])=>`<button type="button" class="choice ${s.entry===id?'selected':''}" data-entry="${id}" aria-pressed="${s.entry===id?'true':'false'}"><span class="emoji" aria-hidden="true">${entryIcons[ico]||''}</span><span><strong>${esc(title)}</strong><small>${esc(sub)}</small></span><span class="choice-check" aria-hidden="true">✓</span></button>`;
  return `<div class="question-intro"><span class="question-index">01 · KONDISI ANDA</span><h3>Apa kondisi perpajakan Anda?</h3><p class="help">Tidak perlu menentukan kategori pengawasan atau penagihan. Pilih keadaan yang paling sesuai, lalu Kabayan akan menanyakan informasi untuk menentukan jalur hukum.</p></div><div class="cards entry-cards">${entryOptions.map(card).join('')}</div><div class="inline-note">Memiliki beberapa surat? Periksa satu surat per analisis. Pilihan di sini hanya menentukan pertanyaan, bukan kelayakan fasilitas.</div>`;
@@ -1233,16 +1272,32 @@ function applyRoute(){
  if(!r.ok){s.category='';s.document='';s.article='';s.issueDate='';return r;}
  // route is authoritative. Only recopy fields whose legal source changed.
  if([s.category,s.document,s.article,s.issueDate].join('|')!==[r.category,r.document,r.article,r.issueDate].join('|')){
-  const entry=s.entry,docs={routeDoc:s.routeDoc,routeArticle:s.routeArticle,routeIssueDate:s.routeIssueDate,routeOrigin:s.routeOrigin,routeSptEvent:s.routeSptEvent,routeGovernment:s.routeGovernment};
+  const entry=s.entry,docs={routeDoc:s.routeDoc,routeArticle:s.routeArticle,routeIssueDate:s.routeIssueDate,routeOrigin:s.routeOrigin,routeSptEvent:s.routeSptEvent,routeGovernment:s.routeGovernment},precheck={sptType:s.sptType,sptYear:s.sptYear,sptPeriod:s.sptPeriod,sptPeriodYear:s.sptPeriodYear,sptPeriodMonth:s.sptPeriodMonth,sptStatus:s.sptStatus,sptScreenStatus:s.sptScreenStatus};
   resetCase(r.category);
-  s.entry=entry;Object.assign(s,docs);
+  s.entry=entry;Object.assign(s,docs,precheck);
  }
  s.category=r.category;s.document=r.document;s.article=r.article;s.issueDate=r.issueDate;
  return r;
 }
 function stepRoute(){
- let html=`<div class="question-intro"><span class="question-index">02 · IDENTIFIKASI JALUR</span><h3>Kenali surat dan asal sanksi</h3><p class="help">Jawab sesuai surat yang diterima. Kabayan baru akan menampilkan pertanyaan mengenai pelunasan, pembayaran sebagian, dan prosedur setelah jalurnya dapat ditentukan.</p></div><div class="field-grid">`;
- if(s.entry==='spt')html+=select('routeSptEvent','Apa yang terjadi?', [['late','Terlambat/belum melaporkan SPT'],['amend','Membetulkan sendiri SPT'],['pay','Terlambat membayar/menyetor pajak']]);
+ let html=`<div class="question-intro"><span class="question-index">02 · IDENTIFIKASI JALUR</span><h3>${s.entry==='spt'?'Periksa SPT sebelum melihat surat':'Kenali surat dan asal sanksi'}</h3><p class="help">${s.entry==='spt'?'Pertanyaan awal menyaring cakupan fasilitas SPT. Jika tidak sesuai, Anda tetap dapat memeriksa jalur STP/SKP yang memiliki ketentuan tersendiri.':'Jawab sesuai surat yang diterima. Kabayan hanya menampilkan pertanyaan yang relevan setelah jalurnya dikenali.'}</p></div><div class="field-grid">`;
+ if(s.entry==='spt'){
+   html+=`<div class="field full">${select('routeSptEvent','1. Apa yang terjadi?',[['late','Terlambat/belum menyampaikan SPT'],['amend','Membetulkan SPT atas kemauan sendiri'],['pay','Terlambat membayar/menyetor pajak']])}</div>`;
+   if(['late','amend'].includes(s.routeSptEvent)){
+      html+='<section class="spt-precheck" aria-label="Penyaringan awal fasilitas SPT"><h4>Periksa apakah SPT termasuk cakupan program</h4><p>Ketentuan Diktum KESATU huruf a/b berlaku untuk Tahun Pajak dan Masa Pajak tertentu dengan status Kurang Bayar. Penyaringan ini hanya untuk jalur SPT, bukan semua fasilitas KEP.</p>';
+      html+=select('sptType','2. SPT yang dilaporkan atau dibetulkan',[['annual','SPT Tahunan PPh'],['monthly','SPT Masa']]);
+      if(s.sptType==='annual')html+=field('sptYear','3. Tahun Pajak yang dilaporkan','number','SPT Tahunan PPh sampai Tahun Pajak 2025 masuk cakupan periode jalur ini.');
+      if(s.sptType==='monthly')html+=monthYearPicker();
+      const periodReady=(s.sptType==='annual'&&!!s.sptYear)||(s.sptType==='monthly'&&!!s.sptPeriodMonth&&!!s.sptPeriodYear);
+      const dateGate=sptPrecheckGate();
+      if(periodReady&&E.validSPTYear(s.sptType==='annual'?s.sptYear:s.sptPeriodYear)&&(s.sptType==='annual'?Number(s.sptYear)<=2025:s.sptPeriod<='2026-09'))html+=select('sptScreenStatus','4. Status SPT '+(s.routeSptEvent==='amend'?'setelah pembetulan':'yang disampaikan'),[['kb','Kurang Bayar (KB)'],['lb','Lebih Bayar (LB)'],['nihil','Nihil'],['unknown','Belum tahu']]);
+      html+=precheckMessage(dateGate);
+      html+='</section>';
+      if(dateGate.state!=='ok'){html+='</div>';return html;}
+   } else if(s.routeSptEvent==='pay'){
+      html+='<div class="field full inline-note">Keterlambatan pembayaran menggunakan ketentuan huruf c. Status SPT dan pelunasan tetap diperiksa dalam fakta kasus; kegagalan jalur huruf a/b tidak otomatis menutup jalur ini.</div>';
+   } else {html+='</div>';return html;}
+ }
  if(s.entry==='pbb')html+=select('routeGovernment','Kewenangan penerbit surat PBB',[['djp','PBB dalam kewenangan DJP (misalnya PBB sektor perkebunan/pertambangan/perhutanan)'],['pemda','PBB-P2 yang dikelola Pemerintah Daerah'],['unknown','Belum diketahui']]);
  const options=routeDocs[s.entry]||[];
  if(options.length===1){s.routeDoc=options[0];html+=`<div class="field"><div class="fact-chip">Jenis dokumen: ${esc(docNames[s.routeDoc])}</div></div>`;}
@@ -1332,14 +1387,21 @@ function stepDetails(){
  let html=`<div class="question-intro"><span class="question-index">02 · DATA KASUS</span><h3>Isi fakta yang berkaitan dengan kasus Anda</h3><p class="help">Pertanyaan berikut berubah otomatis sesuai jawaban. Kolom yang tidak relevan tidak ditampilkan dan tidak digunakan dalam perhitungan.</p></div><div class="field-grid">`;
  html+=`<div class="field full"><div class="fact-chip route-summary"><b>${esc(E.CATS[s.category]||'—')}</b><small>${esc(docNames[s.document]||s.document)} · ${esc(E.ARTICLE_LABEL[s.article]||'—')} ${s.issueDate?'· Terbit '+esc(s.issueDate):''}</small><span>Ingin mengubah identifikasi surat? Pilih Kembali ke langkah 2.</span></div></div>`;
  if(hasSPT()||(s.category==='old'&&s.document==='STP'&&['7','8','9'].includes(s.article))){
-  if(s.category==='old')html+='<div class="field full inline-note"><b>Periksa juga tanggal SPT</b><br>Untuk STP lama, tanggal lapor atau pembetulan SPT dapat membuka jalur Lampiran A. Isi fakta SPT sesuai bukti agar dua jalur dapat diteliti.</div>';
-   html+=select('sptType','SPT yang terkait',[['annual','SPT Tahunan PPh'],['monthly','SPT Masa']]);
-   if(s.sptType==='annual')html+=field('sptYear','Tahun Pajak','number','Dibatasi Tahun Pajak 2025 dan sebelumnya.');
-   if(s.sptType==='monthly')html+=monthYearPicker();
-   if(s.sptType){
-    html+=select('sptStatus','Status SPT',[['kb','Kurang Bayar'],['other','Nihil / Lebih Bayar / status lain'],['unknown','Belum tahu']]);
-    html+=date('actionDate',s.category==='amend'?'Tanggal pembetulan SPT':'Tanggal SPT disampaikan');
-   }
+  const alreadyScreened=s.entry==='spt'&&['late','amend'].includes(s.routeSptEvent)&&sptPrecheckGate().state==='ok';
+  if(alreadyScreened){
+    const period=s.sptType==='annual'?'Tahun Pajak '+s.sptYear:'Masa Pajak '+s.sptPeriod;
+    html+=`<div class="field full spt-precheck-summary"><b>SPT sudah disaring:</b> ${esc(s.sptType==='annual'?'SPT Tahunan PPh':'SPT Masa')} · ${esc(period)} · Kurang Bayar. <small>Untuk mengubah jenis/periode/status SPT, kembali ke langkah identifikasi.</small></div>`;
+    html+=date('actionDate',s.routeSptEvent==='amend'?'Tanggal pembetulan SPT':'Tanggal SPT disampaikan');
+  }else{
+    if(s.category==='old')html+='<div class="field full inline-note"><b>Periksa juga tanggal SPT</b><br>Untuk STP lama, tanggal lapor atau pembetulan SPT dapat membuka jalur Lampiran A. Isi fakta SPT sesuai bukti agar dua jalur dapat diteliti.</div>';
+    html+=select('sptType','SPT yang terkait',[['annual','SPT Tahunan PPh'],['monthly','SPT Masa']]);
+    if(s.sptType==='annual')html+=field('sptYear','Tahun Pajak','number','Dibatasi Tahun Pajak 2025 dan sebelumnya.');
+    if(s.sptType==='monthly')html+=monthYearPicker();
+    if(s.sptType){
+     html+=select('sptStatus','Status SPT',[['kb','Kurang Bayar'],['other','Nihil / Lebih Bayar / status lain'],['unknown','Belum tahu']]);
+     html+=date('actionDate',s.category==='amend'?'Tanggal pembetulan SPT':'Tanggal SPT disampaikan');
+    }
+  }
    if(s.category==='newreg'){
     html+=select('registerType','Jenis pendaftaran',[['NPWP','Pendaftaran NPWP'],['PKP','Pengukuhan PKP']]);
     if(s.registerType)html+=date('registrationDate','Tanggal terdaftar atau dikukuhkan');
@@ -1550,14 +1612,14 @@ function render(){
  if(step>=2 && s.category)syncDerived();
  const labels=['Kondisi','Identifikasi surat','Fakta kasus','Persyaratan','Hasil'];
  $('step-label').textContent=`LANGKAH ${step+1} DARI 5 · ${labels[step]}`;
- $('step-text').textContent=step===0?'Pilih kondisi yang Anda alami':step===1?'Kenali surat dan asal sanksi':step===4?'Hasil berdasarkan data dan jalur yang terverifikasi':cardText();
+ $('step-text').textContent=step===0?'Pilih kondisi yang Anda alami':step===1?(s.entry==='spt'?'Periksa SPT dan asal sanksi':'Kenali surat dan asal sanksi'):step===4?'Hasil berdasarkan data dan jalur yang terverifikasi':cardText();
  $('wizard-panel').dataset.step=String(step);$('stepper').setAttribute('aria-valuenow',String(step+1));$('stepper').setAttribute('aria-valuemax','5');
  $('stepper').innerHTML=labels.map((x,i)=>`<span class="${i<=step?'done':''}" title="${esc(x)}"></span>`).join('');
  $('body').innerHTML=[step0,stepRoute,stepDetails,stepRequirements,resultHTML][step]();
  $('back').style.visibility=step===0?'hidden':'visible';
   $('resetCase').hidden=step===0||step===4;
  $('next').textContent=['Identifikasi surat →','Lanjut ke fakta kasus →','Periksa persyaratan →','Lihat hasil saya →','Periksa kasus baru ↻'][step];
- $('next').disabled=step===0&&!s.entry;
+ $('next').disabled=(step===0&&!s.entry)||(step===1&&s.entry==='spt'&&['late','amend'].includes(s.routeSptEvent)&&sptPrecheckGate().state!=='ok');
  $('print').hidden=step!==4;$('copy').hidden=step!==4;
  $('footer-message').textContent=step===4?'Hasil wajib diuji kembali dengan dokumen sumber':'Informasi diolah lokal; tidak dikirim ke server oleh halaman ini';
 }
@@ -1575,11 +1637,12 @@ function validateApplicationDateInline({focus=false}={}){
 function advance(){
  if(step===0){if(!s.entry)return;step=1;}
  else if(step===1){
+   if(s.entry==='spt'&&['late','amend'].includes(s.routeSptEvent)&&sptPrecheckGate().state!=='ok')return;
   const needed=[...document.querySelectorAll('#body [data-field]')];
   const blank=needed.filter(x=>!String(x.value).trim());
   if(blank.length){showMissing(blank);return;}
   const r=applyRoute();
-  if(!r.ok){step=4;}else if(s.document==='NOT_ISSUED'){step=4;}else step=2;
+  if(!r.ok){step=4;}else step=2;
  }
  else if(step===2||step===3){
   // UX guard: never advance a purportedly completed filing dated after today.
@@ -1642,18 +1705,22 @@ document.addEventListener('click',ev=>{
    render();
    return;
  }
- const b=ev.target.closest('[data-entry]');
- if(b){plannedSpecialPaymentDate='';s={entry:b.dataset.entry,category:'',sanctionPrior:'0',sanctionProgram:'0',sanctionTotal:'',applicationDate:'',applicationStatus:'',sptType:'',sptStatus:'',sanctionState:'',principalConfirmed:'',docReady:''};render();}
+ const other=ev.target.closest('[data-switch-entry]');
+  if(other){s=emptyCase();s.entry=other.dataset.switchEntry||'';step=s.entry?1:0;last=null;render();$('cek').scrollIntoView({behavior:'smooth',block:'start'});return;}
+  const b=ev.target.closest('[data-entry]');
+ if(b){plannedSpecialPaymentDate='';s=emptyCase();s.entry=b.dataset.entry;render();}
 });
 document.addEventListener('change',ev=>{const c=ev.target;if(c.dataset.uiPlanDate==='1'){plannedSpecialPaymentDate=c.value;refreshSpecialGuidance();return;}if(c.dataset.field){s[c.dataset.field]=c.dataset.rupiah==='1'?numericOnly(c.value):c.value;if(['sptPeriodMonth','sptPeriodYear'].includes(c.dataset.field)){s.sptPeriod=s.sptPeriodMonth&&s.sptPeriodYear?`${s.sptPeriodYear}-${s.sptPeriodMonth}`:'';}if(['routeDoc','routeArticle','routeIssueDate','routeOrigin','routeSptEvent','routeGovernment'].includes(c.dataset.field)) {
- if(c.dataset.field==='routeDoc'){plannedSpecialPaymentDate='';s.routeArticle='';s.routeIssueDate='';s.routeOrigin='';}
+ if(c.dataset.field==='routeSptEvent'){s.sptType='';s.sptYear='';s.sptPeriod='';s.sptPeriodMonth='';s.sptPeriodYear='';s.sptScreenStatus='';s.sptStatus='';s.routeDoc='';s.routeArticle='';s.routeIssueDate='';s.routeOrigin='';}
+  if(c.dataset.field==='routeDoc'){plannedSpecialPaymentDate='';s.routeArticle='';s.routeIssueDate='';s.routeOrigin='';}
  if(c.dataset.field==='routeIssueDate')s.routeOrigin='';
  if(c.dataset.field==='routeArticle')s.routeOrigin='';
  render();return;
-} if(['document','article','sptType','sptStatus','registerType','principalConfirmed','principalDate','actionDate','sanctionState','estimateChoice','paymentPath','stpLinked','objection','auctionCondition','submissionCount','docReady','lawsuit','applicationStatus'].includes(c.dataset.field)){
+} if(['document','article','sptType','sptStatus','sptScreenStatus','sptYear','sptPeriodMonth','sptPeriodYear','registerType','principalConfirmed','principalDate','actionDate','sanctionState','estimateChoice','paymentPath','stpLinked','objection','auctionCondition','submissionCount','docReady','lawsuit','applicationStatus'].includes(c.dataset.field)){
  if(c.dataset.field==='document'){s.article='';s.principalConfirmed='';s.issueDate='';s.principalDate='';s.sanctionState='';s.stpLinked='';s.objection='';}
  if(c.dataset.field==='article'){s.principalConfirmed='';s.principalDate='';s.sanctionState='';s.partialDate='';s.sanctionTotal='';}
- if(c.dataset.field==='sptType'){s.sptYear='';s.sptPeriod='';s.sptPeriodMonth='';s.sptPeriodYear='';s.sptStatus='';s.actionDate='';}
+ if(c.dataset.field==='sptType'){s.sptYear='';s.sptPeriod='';s.sptPeriodMonth='';s.sptPeriodYear='';s.sptStatus='';s.sptScreenStatus='';s.actionDate='';}
+  if(c.dataset.field==='sptScreenStatus')s.sptStatus=c.value==='kb'?'kb':c.value==='unknown'?'unknown':'other';
  if(c.dataset.field==='sanctionState'){plannedSpecialPaymentDate='';s.sanctionTotal='';s.sanctionPrior='0';s.sanctionProgram='0';s.partialDate='';s.estimateChoice='';s.paymentPath='';s.paymentExampleLoaded=false;}
  if(c.dataset.field==='paymentPath'){plannedSpecialPaymentDate='';s.sanctionProgram=c.value==='yes'?'':'0';s.partialDate='';}
  if(c.dataset.field==='principalConfirmed')s.principalDate='';
