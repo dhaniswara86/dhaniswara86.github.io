@@ -473,6 +473,22 @@ a{text-decoration:none}
 .guided-alternatives .guided-option{border-color:#e1e8f2}
 .guided-presentation>.guidance-caveat{color:#6d747e;margin:0;line-height:1.6}
 @media(max-width:700px){.guided-main{padding:13px}.guided-alternatives .guided-options{grid-template-columns:1fr}}
+</style><style id="psa-v21-conditional-skp">
+.old-skp-plan{margin:18px 0 22px;padding:23px 25px;border:1px solid #c9dffa;border-radius:22px;background:linear-gradient(135deg,#f2f8ff,#fff)}
+.old-skp-plan .plan-kicker{display:block;margin:0 0 9px;color:#095dc1;font-size:12px;font-weight:850;letter-spacing:.07em;text-transform:uppercase}
+.old-skp-plan h4{margin:0 0 10px;font-size:20px;line-height:1.3;color:#17375e}
+.old-skp-plan p{margin:0 0 15px;color:#4c6179;font-size:13px;line-height:1.65}
+.old-skp-plan .plan-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin-top:14px}
+.old-skp-plan .plan-card{border:1px solid #d5e3f5;background:#fff;border-radius:17px;padding:17px;min-width:0}
+.old-skp-plan .plan-card b{display:block;font-size:25px;color:#084b9c;line-height:1.25;margin-bottom:7px}
+.old-skp-plan .plan-card strong{display:block;color:#1f3655;font-size:14px}
+.old-skp-plan .plan-card small{display:block;color:#67798d;font-size:12px;line-height:1.5;margin-top:8px}
+.old-skp-plan .plan-card dl{margin:13px 0 0;border-top:1px solid #ecf0f6;padding-top:10px;display:grid;gap:8px}
+.old-skp-plan .plan-card dl div{display:flex;justify-content:space-between;gap:10px;font-size:12px}
+.old-skp-plan .plan-card dt{color:#64748b}.old-skp-plan .plan-card dd{margin:0;color:#112b4c;font-weight:800;text-align:right}
+.old-skp-plan .plan-important{margin-top:15px;border-left:3px solid #e3a326;padding:10px 12px;background:#fffaf0;border-radius:0 10px 10px 0;color:#6a5229;font-size:12px;line-height:1.6}
+.old-skp-plan .plan-source{margin-top:14px!important;font-size:11px!important;color:#6b7687!important}
+@media(max-width:700px){.old-skp-plan{padding:18px 15px}.old-skp-plan .plan-grid{grid-template-columns:1fr}}
 </style></head><body>
 <header class="site-header">
   <div class="nav-wrap">
@@ -682,6 +698,40 @@ function oldPartial(s,id,why,requireOldPrincipal=true){
  if(rate===null)return null;
  if(!partialAmountMatches(s,rate))return null;
  return rule(id,rate,'C',why+'; sebagian sanksi lama dibayar dalam periode tepat','Lampiran C hlm. 13–18');
+}
+// v21 — Simulasi hipotetis SKP LAMA dengan pokok LUNAS SEBELUM 8 Oktober 2026.
+// Skema bersyarat ini terpisah dari evaluate(): belum membayar 10%/25% tidak menjadi bukti sudah memenuhi syarat.
+// Mengambil hanya kandidat yang BENAR-BENAR dihasilkan match() untuk rule C-e-oldSKPpartial,
+// tanpa menyatakan pembayaran fiktif tersebut telah dilakukan.
+function planOldSKPPartial(s){
+ const docs={SKPKB:['13_2','13_3','15_2','17c','17d'],SKPKBT:['13_2','13_3','15_2','17c','17d'],SKP_PBB:['pbb10_3','pbb10_4']};
+ if(s.category!=='old'||!docs[s.document]?.includes(s.article))return null;
+ if(!validDate(s.issueDate)||s.issueDate>=START || !validDate(s.principalDate)||s.principalDate>=START || s.principalDate<s.issueDate)return null;
+ if(s.principalConfirmed!=='yes'||s.objection!=='none')return null;
+ // Jangan menggandakan/menggantikan pembayaran nyata: hanya simulasi ketika sanksi belum dibayar.
+ if(s.sanctionState!=='unpaid'||Number(s.sanctionPrior||0)!==0||Number(s.sanctionProgram||0)!==0||s.partialDate)return null;
+ if(s.applicationStatus!=='planned')return null;
+ if(!validDate(s.applicationDate)||s.applicationDate>APPLY_END)return null;
+ // Hambatan yang tegas menahan simulasi; berkas yang belum disiapkan tidak menghilangkan pola tarif hipotetis.
+ if(s.lawsuit!=='none'||s.otherRemedy!=='none'||s.auction!=='not_started')return null;
+ if(s.submissionCount!=='1')return null;
+ const totalRaw=String(s.sanctionTotal??'').trim();
+ const amountKnown=totalRaw!=='';
+ const total=amountKnown?Number(totalRaw):null;
+ if(amountKnown&&(!Number.isSafeInteger(total)||total<=0))return null;
+ const candidates=[{rate:90,part:10,probeDate:'2026-12-31',period:'8 Oktober–31 Desember 2026'},
+                   {rate:75,part:25,probeDate:'2027-06-30',period:'1 Januari–30 Juni 2027'}];
+ const options=[];
+ for(const c of candidates){
+  const probe={...s,sanctionState:'partial',sanctionTotal:'100000000',sanctionPrior:'0',sanctionProgram:String(c.part*1000000),partialDate:c.probeDate,allocationConfirmed:'yes'};
+  if(!match(probe).some(x=>x.id==='C-e-oldSKPpartial'&&x.rate===c.rate))continue;
+  const pay=amountKnown?total*c.part/100:null;
+  const relief=amountKnown?total*c.rate/100:null;
+  options.push({...c,payment:pay!==null&&Number.isSafeInteger(pay)?pay:null,
+                   reduction:relief!==null&&Number.isSafeInteger(relief)?relief:null});
+ }
+ if(!options.length)return null;
+ return {options,amountKnown,base:total,reference:'Diktum KESATU huruf e, Lampiran C hlm. 15; Lampiran E hlm. 37–38'};
 }
 function partialRule(s,issue,id,src,why,pages){
  if(!validDate(issue)||!WITHIN(s.partialDate,START,END)||!s.partialDate||s.partialDate<issue)return null;
@@ -904,7 +954,7 @@ function assess(s){
  return {potential,actual,readiness,searched};
 }
 
-return {START,END,YEAR_END,PPS_END,APPLY_END,REF,ARTICLE_LABEL,CATS,PAIRS,evaluate,assess,match,addMonths,fmt,validDate,validSPTPeriod,validSPTYear,quarter};
+return {START,END,YEAR_END,PPS_END,APPLY_END,REF,ARTICLE_LABEL,CATS,PAIRS,evaluate,assess,match,planOldSKPPartial,addMonths,fmt,validDate,validSPTPeriod,validSPTYear,quarter};
 });
 </script><script>(()=>{'use strict';
 const E=window.PSAEngine, $=id=>document.getElementById(id);
@@ -1397,6 +1447,16 @@ function stepRequirements(){
  return html;
 }
 function rupiah(n){return 'Rp'+Math.round(n).toLocaleString('id-ID');}
+function oldSKPPlanHTML(plan){
+ if(!plan)return '';
+ const rup=v=>v===null?'Perlu angka sanksi':rupiah(v);
+ const options=plan.options.map(o=>`<div class="plan-card"><b>${o.rate}% pengurangan</b><strong>Jika membayar ${o.part}% sanksi</strong><small>Periode pembayaran: ${esc(o.period)}</small><dl><div><dt>Pembayaran sebagian</dt><dd>${o.payment===null?(o.part+'% × sanksi'):rup(o.payment)}</dd></div><div><dt>Potensi pengurangan</dt><dd>${o.reduction===null?(o.rate+'% × sanksi'):rup(o.reduction)}</dd></div></dl></div>`).join('');
+ const noMoney=!plan.amountKnown?'<p>Untuk menampilkan nominal rupiah, kembali ke Fakta Kasus, pilih perkiraan nominal, lalu isi jumlah sanksi dalam SKP.</p>':'';
+ const caveat=s.applicationDate<'2027-01-01'
+  ?'Apabila memilih pembayaran pada 2027, rencana tanggal pengajuan yang lebih awal harus diubah: pembayaran yang menjadi syarat harus sudah dilakukan sebelum permohonan disampaikan.'
+  :'Pastikan tanggal permohonan tidak mendahului pembayaran sebagian sanksi yang disyaratkan.';
+ return `<section class="old-skp-plan" aria-label="Simulasi pengurangan sanksi SKP lama"><span class="plan-kicker">Simulasi bersyarat · Lampiran C</span><h4>Ada skema pengurangan untuk SKP lama ini</h4><p>SKP diterbitkan dan pokok pajak telah dilunasi sebelum 8 Oktober 2026. Ketentuan memuat pengurangan sanksi melalui pembayaran sebagian pada periode tertentu. <b>Ini pilihan skenario waktu, bukan dua pembayaran yang harus dilakukan.</b></p>${noMoney}<div class="plan-grid">${options}</div><div class="plan-important"><strong>Belum memenuhi syarat pembayaran.</strong> Anda menyatakan sanksi belum dibayar. Nilai di atas hanya simulasi apabila pembayaran benar-benar dilakukan tepat waktu, dihitung dengan benar setelah alokasi ke pokok, dan seluruh syarat lainnya dipenuhi. ${esc(caveat)}</div><p class="plan-source">Dasar: ${esc(plan.reference)}. Contoh Lampiran E memuat sanksi Pasal 13 ayat (2); cakupan Pasal 13 ayat (3) ditegaskan dalam tabel Lampiran C.</p></section>`;
+}
 function resultHTML(){const routing=resolveRoute();const assessment=routing.ok&&s.document!=='NOT_ISSUED'?E.assess(s):null;let r=!routing.ok?{status:'review',rate:null,matches:[],missing:[],issues:[],flags:[routing.reason],reason:'Jalur hukum belum dapat ditentukan dari dokumen dan fakta yang tersedia.',citations:[E.REF.K,E.REF.P]}:(s.category!==routing.category||s.document!==routing.document||s.article!==routing.article||s.issueDate!==routing.issueDate)?{status:'review',rate:null,matches:[],missing:[],issues:[],flags:['Identifikasi kasus berubah atau tidak konsisten. Ulangi pemetaan jalur sebelum menghitung.'],reason:'Validasi konsistensi jalur hukum gagal.',citations:[E.REF.K,E.REF.P]}:s.document==='NOT_ISSUED'?{status:'review',rate:null,matches:[],missing:[],issues:[],flags:['STP belum diterbitkan. Permohonan pengurangan sanksi menurut Pasal 23 memerlukan identitas SKP/STP terkait; sistem belum dapat memberi persentase.'],reason:'Dokumen penetapan/tagihan yang akan menjadi objek permohonan belum tersedia.',citations:[E.REF.P,E.REF.K]} :assessment.potential;
  // A stale special-payment input from another path cannot create an entitlement.
  if(s.sanctionState==='partial' && !hasPartialPath() && (s.paymentPath==='yes'||Number(s.sanctionProgram||0)>0||s.partialDate)){
@@ -1428,18 +1488,22 @@ function resultHTML(){const routing=resolveRoute();const assessment=routing.ok&&
  }else{
    r={...r,status:'missing',rate:null,calculation:null,missing:[...(r.missing||[]),'Status permohonan: sudah disampaikan atau baru direncanakan'],reason:'Status pengajuan belum dipilih.'};
  }
+ const oldSKPPlan = (r.status==='unmapped' && r.rate===null && !(r.issues||[]).length && routing.ok)
+   ? E.planOldSKPPartial(s) : null;
  last=r;
  const readiness=assessment?.readiness||'perlu_verifikasi';
  const readinessLabel={belum_diajukan:'Belum diajukan — simulasi rencana',berkas_belum_lengkap:'Dokumen belum lengkap',berkas_belum_diperiksa:'Dokumen belum diperiksa',berkas_perlu_diperiksa:'Dokumen perlu dilengkapi/diperiksa',terindikasi_lengkap:'Data menyatakan persyaratan telah dipenuhi (belum diverifikasi DJP)',ada_hambatan:'Ada hambatan administrasi yang harus diperiksa',perlu_verifikasi:'Perlu verifikasi administratif'}[readiness]||'Perlu verifikasi';
  last={...r,readiness};
  const status={mapped:['Potensi fasilitas terpetakan','mapped','Persentase hanya perkiraan bersyarat, bukan persetujuan DJP'],missing:['Informasi belum lengkap','review','Lengkapi seluruh data wajib sebelum sistem menentukan skema'],review:['Perlu verifikasi hukum','review','Tidak ada persentase yang diputuskan secara otomatis'],blocked:['Persyaratan tidak terpenuhi','blocked','Periksa hambatan yang disebutkan di bawah'],unmapped:['Tidak dapat ditentukan','review','Belum ditemukan aturan spesifik yang cocok']};
  let [ttl,css,sub]=status[r.status];
+ if(oldSKPPlan){ttl='Simulasi pengurangan tersedia';sub='Skema hukum dikenali, tetapi pembayaran sebagian sanksi belum dilakukan. Persentase di bawah adalah simulasi bersyarat, bukan fasilitas yang sudah diperoleh';}
  const isSimulation=s.applicationStatus==='planned';
  if(r.status==='mapped'&&isSimulation) ttl='Simulasi Potensi Fasilitas';
- const simulationInfo=isSimulation?`<div class="simulation-explainer" role="note"><div class="simulation-explainer-title">◷ Simulasi berdasarkan rencana Anda</div><p>Permohonan belum disampaikan kepada DJP. ${r.status==='mapped'?'Persentase dan nominal yang ditampilkan adalah estimasi bersyarat.':'Hasil saat ini belum dapat memastikan besaran fasilitas.'} <b>Rencana tindakan harus benar-benar dilaksanakan sesuai tenggat dan seluruh syarat perlu dipenuhi.</b> Simulasi bukan keputusan DJP atau bukti pengajuan.</p></div>`:'';
+ const simulationInfo=isSimulation?`<div class="simulation-explainer" role="note"><div class="simulation-explainer-title">◷ Simulasi berdasarkan rencana Anda</div><p>Permohonan belum disampaikan kepada DJP. ${r.status==='mapped'?'Persentase dan nominal yang ditampilkan adalah estimasi bersyarat.':oldSKPPlan?'Skema 90%/75% yang ditampilkan di bawah adalah simulasi jika pembayaran sebagian dan persyaratan lain dipenuhi.':'Hasil saat ini belum dapat memastikan besaran fasilitas.'} <b>Rencana tindakan harus benar-benar dilaksanakan sesuai tenggat dan seluruh syarat perlu dipenuhi.</b> Simulasi bukan keputusan DJP atau bukti pengajuan.</p></div>`:'';
  const based=(r.matches||[]).map(x=>`<div class="legalitem"><strong>${esc(x.id)}</strong> · ${esc(x.cite)}<div>${esc(x.why)}. ${esc(x.pages)}</div></div>`).join('');
  let nam=cardText();
- const msgs=[...(r.missing||[]).map(x=>({c:'review',m:'Belum diisi: '+x})),...(r.issues||[]).map(x=>({c:'blocked',m:x})),...(r.flags||[]).map(x=>({c:'review',m:x}))];
+ const msgs=[...(r.missing||[]).map(x=>({c:'review',m:'Belum diisi: '+x})),...(r.issues||[]).map(x=>({c:'blocked',m:x})),...(oldSKPPlan?[]:(r.flags||[])).map(x=>({c:'review',m:x}))];
+ const visibleReason=oldSKPPlan?'Lampiran C mengatur skema pembayaran sebagian sanksi SKP lama. Pembayaran belum dilakukan sehingga persentase aktual belum dapat ditetapkan.':r.reason;
  // UI-only summary. Never used to decide entitlement, readiness, or percent.
  // Always show the core checklist; add special items only when facts trigger them.
  const checklistItems=[
@@ -1455,14 +1519,15 @@ function resultHTML(){const routing=resolveRoute();const assessment=routing.ok&&
  else if(s.submissionCount==='3')checklistItems.push('Permohonan ketiga atau lebih: periksa pembatasan jumlah pengajuan menurut ketentuan');
  if(s.auctionCondition!=='no')checklistItems.push('Pengajuan dilakukan sebelum permohonan lelang/pemindahbukuan barang sitaan sesuai ketentuan');
 
- return `<div class="result-zone"><div class="res-head ${css}"><strong>${css==='mapped'?'✓':css==='blocked'?'✕':'!'} ${esc(ttl)}</strong>${r.status==='mapped'?`<div class="rate">${r.rate}% <small>${isSimulation?'estimasi pengurangan/penghapusan':'potensi pengurangan/penghapusan'}</small></div>`:`<h2>${esc(ttl)}</h2>`}<p>${esc(sub)}. ${esc(r.reason)}</p></div>
+ return `<div class="result-zone"><div class="res-head ${css}"><strong>${css==='mapped'?'✓':css==='blocked'?'✕':'!'} ${esc(ttl)}</strong>${r.status==='mapped'?`<div class="rate">${r.rate}% <small>${isSimulation?'estimasi pengurangan/penghapusan':'potensi pengurangan/penghapusan'}</small></div>`:`<h2>${esc(ttl)}</h2>`}<p>${esc(sub)}. ${esc(visibleReason)}</p></div>
  ${simulationInfo}
+ ${oldSKPPlanHTML(oldSKPPlan)}
  <p class="psa-result-disclaimer">Hasil adalah simulasi berdasarkan data yang Anda masukkan, bukan keputusan DJP. Pemberian fasilitas tetap mengikuti persyaratan PMK 118/2024 sebagaimana diubah PMK 71/2026 serta KEP-239/PJ/2026.</p>
  <div class="sectionbox v18-readiness"><h4>Kesiapan permohonan (terpisah dari simulasi tarif)</h4><div class="inline-note"><strong>${esc(readinessLabel)}</strong><br>Hasil tarif potensial tidak membuktikan dokumen lengkap, pelunasan sudah dilakukan, atau permohonan disetujui DJP. Status berkas saat ini: ${esc(s.docReady==='yes'?'dinyatakan lengkap oleh pengisi (belum diverifikasi DJP)':s.docReady==='no'?'belum lengkap':'belum diperiksa')}.</div></div>
  <div class="factcols"><div class="tile"><small>Kategori peristiwa</small><strong>${esc(nam)}</strong></div><div class="tile"><small>Pasal sanksi</small><strong>${esc(E.ARTICLE_LABEL[s.article]||'—')}</strong></div><div class="tile"><small>Dokumen</small><strong>${esc(docNames[s.document]||s.document||'—')}</strong></div><div class="tile"><small>Batas permohonan program</small><strong>1 Oktober 2028</strong></div><div class="tile"><small>Status permohonan</small><strong>${s.applicationStatus==='submitted'?'Sudah disampaikan kepada DJP':s.applicationStatus==='planned'?'Belum disampaikan (masih rencana)':'Belum diketahui'}</strong></div><div class="tile"><small>${s.applicationStatus==='submitted'?'Tanggal penyampaian':'Rencana tanggal pengajuan'}</small><strong>${esc(s.applicationDate||'—')}</strong></div></div>
  ${r.calculation?`<div class="sectionbox"><h4>Estimasi Sanksi yang Berpotensi Dikurangi atau Dihapuskan</h4><div class="factcols"><div class="tile"><small>Dasar sanksi yang belum dibayar</small><strong>${rupiah(r.calculation.base)}</strong></div><div class="tile"><small>Potensi nominal pengurangan/penghapusan</small><strong>${rupiah(r.calculation.relief)}</strong></div></div><p class="smalltxt">${esc(r.calculation.note)}</p></div>`:''}
  ${msgs.length?`<div class="sectionbox"><h4>Alasan, data yang kurang, atau persyaratan yang perlu diperiksa</h4>${msgs.map(x=>`<div class="message ${x.c}">${esc(x.m)}</div>`).join('')}</div>`:''}
- <div class="sectionbox"><h4>Dasar keputusan mesin aturan</h4>${based||'<div class="inline-note">Tidak ada rule dengan seluruh persyaratan yang dapat dicocokkan secara pasti untuk skenario ini.</div>'}
+ <div class="sectionbox"><h4>Dasar keputusan mesin aturan</h4>${based||(oldSKPPlan?'<div class="inline-note">Rule C-e-oldSKPpartial (Lampiran C hlm. 15) menghasilkan kandidat 90%/75% dalam simulasi hipotetis. Belum menjadi rule pembayaran aktual karena sanksi belum dibayar.</div>':'<div class="inline-note">Tidak ada rule dengan seluruh persyaratan yang dapat dicocokkan secara pasti untuk skenario ini.</div>')}
  <details class="legal-detail"><summary>Tampilkan dasar hukum umum</summary>${r.citations.map(x=>`<div class="legalitem">${esc(x)}</div>`).join('')}</details></div>
  <section class="sectionbox psa-next-steps" aria-labelledby="psa-next-steps-title">
    <div class="psa-next-steps-intro">
