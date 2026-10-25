@@ -494,6 +494,8 @@ footer{background:#f5f5f7;color:#6e6e73}
   .motion-ready .featured-stack .center{transform:translateX(-50%)!important}
   .motion-ready .featured-stack .left{transform:rotate(-7deg) scale(.88)!important}.motion-ready .featured-stack .right{transform:rotate(7deg) scale(.88)!important}
 }
+/* PSA 2026: supplemental catalog filter; original book scripts remain intact. */
+body.psa-filter-active #bookGrid .book-card:not([data-psa-book="true"]){display:none!important}
 </style>
 
 </head>
@@ -622,6 +624,7 @@ footer{background:#f5f5f7;color:#6e6e73}
         <button class="filter-button" data-filter="ppn" data-number="04" type="button">PPN</button>
         <button class="filter-button" data-filter="xml" data-number="05" type="button">XML</button>
         <button class="filter-button" data-filter="djp-online" data-number="06" type="button">DJP Online</button>
+         <button class="filter-button" data-filter="sanksi" data-number="07" type="button">Sanksi</button>
       </div>
 
       <div class="book-grid" id="bookGrid"><noscript>Aktifkan JavaScript untuk menampilkan katalog buku.</noscript></div>
@@ -655,6 +658,7 @@ footer{background:#f5f5f7;color:#6e6e73}
 
 <!-- Katalog tetap menggunakan data dan logic original. -->
 <script src="assets/js/buku.js"></script>
+  <script src="assets/js/psa-2026.js"></script>
 <script>
 (() => {
   "use strict";

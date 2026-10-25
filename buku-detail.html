@@ -1379,5 +1379,14 @@ body.mega-menu-open {
   }
 })();
 </script>
-<script src="assets/js/buku-detail.js"></script></body>
+<script>
+  // PSA is supplied by the extension below; all existing book IDs keep the original detail script.
+  if (new URLSearchParams(window.location.search).get("id") !== "psa-2026") {
+    const originalDetail = document.createElement("script");
+    originalDetail.src = "assets/js/buku-detail.js";
+    originalDetail.async = false;
+    document.body.appendChild(originalDetail);
+  }
+</script>
+<script src="assets/js/psa-2026.js"></script></body>
 </html>
